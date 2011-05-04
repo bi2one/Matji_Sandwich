@@ -10,6 +10,6 @@ public class MatjiStorageDataProvider {
     private MatjiStorageDataProvider() { }
 
     public MatjiStorageDataProvider getInstance(Context context) {
-	
+	return null;
     }
 }
