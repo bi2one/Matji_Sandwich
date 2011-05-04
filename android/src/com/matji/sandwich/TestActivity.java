@@ -40,7 +40,7 @@ public class TestActivity extends Activity implements Requestable {
 	Log.d("RESULT!!", "tag: " + tag);
     }
 
-    public void requestExceptionCallBack(MatjiException e) {
+    public void requestExceptionCallBack(int tag, MatjiException e) {
 	e.showToastMsg(getApplicationContext());
     }
 }

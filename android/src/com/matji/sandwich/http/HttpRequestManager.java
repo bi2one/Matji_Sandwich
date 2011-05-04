@@ -59,7 +59,7 @@ public class HttpRequestManager {
 
     private void onPostRequestData(int tag) {
 	if (lastOccuredException != null)
-	    ((Requestable)activity).requestExceptionCallBack(lastOccuredException);
+	    ((Requestable)activity).requestExceptionCallBack(tag, lastOccuredException);
 	else
 	    ((Requestable)activity).requestCallBack(tag, data);
     }
