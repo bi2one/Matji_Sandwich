@@ -1,4 +1,4 @@
 *.class
 R.java
-/bin/*
-/gen/*
+android/bin/*
+android/gen/*
