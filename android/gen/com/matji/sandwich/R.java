@@ -11,7 +11,6 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-<<<<<<< HEAD
         public static final int animationlist_loading_large=0x7f020000;
         public static final int circle_loading_01=0x7f020001;
         public static final int circle_loading_02=0x7f020002;
@@ -34,12 +33,6 @@ public final class R {
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int popup_loading=0x7f030001;
-=======
-        public static final int icon=0x7f020000;
-    }
-    public static final class layout {
-        public static final int main=0x7f030000;
->>>>>>> 2cdd41a902f08944b40d77cb825903776782b619
     }
     public static final class string {
         public static final int app_name=0x7f040000;

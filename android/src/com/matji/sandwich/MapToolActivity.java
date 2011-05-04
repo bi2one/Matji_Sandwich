@@ -12,4 +12,8 @@ public class MapToolActivity extends MapActivity{
 	setContentView(R.layout.main);
     }
 
+        protected boolean isRouteDisplayed() {
+	return true;
+    }
+
 }

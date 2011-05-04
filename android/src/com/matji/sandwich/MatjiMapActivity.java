@@ -7,6 +7,7 @@ import android.location.Location;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 
+import com.matji.sandwich.util.GpsManager;
 
 public class MatjiMapActivity extends MapActivity{
     //private constant
@@ -25,5 +26,9 @@ public class MatjiMapActivity extends MapActivity{
 
     private void setSmallmarker(Location loc){
 
+    }
+
+    protected boolean isRouteDisplayed() {
+	return true;
     }
 }

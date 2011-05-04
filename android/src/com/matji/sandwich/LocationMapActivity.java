@@ -12,4 +12,7 @@ public class LocationMapActivity extends MapActivity{
 	setContentView(R.layout.main);
     }
 
+    protected boolean isRouteDisplayed() {
+	return true;
+    }
 }
