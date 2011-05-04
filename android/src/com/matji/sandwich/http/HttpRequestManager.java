@@ -1,18 +1,68 @@
 package com.matji.sandwich.http;
 
 import android.os.AsyncTask;
+import android.app.Activity;
+import android.util.Log;
+import android.content.Context;
 
 import com.matji.sandwich.Requestable;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.http.request.HttpRequest;
+
+import java.util.ArrayList;
 
 public class HttpRequestManager {
-    Spinner spinner;
+    private Context context;
+    private Activity activity;
+    private Spinner spinner;
+    private HttpAsyncTask httpAsyncTask;
+    private ArrayList<MatjiData> data;
+    private HttpRequest request;
 
-    public HttpRequestManager() {
-	spinner = new NormalSpinner();
+    public HttpRequestManager(Context context, Requestable activity) {
+	spinner = new NormalSpinner(context, (Activity)activity);
+	this.context = context;
+	this.activity = (Activity)activity;
     }
     
-    public void request(HttpRequest request, Requestable activity) {
-	
+    public void request(HttpRequest request, int tag) {
+	this.request = request;
+	request.setContext(context);
+	httpAsyncTask = new HttpAsyncTask();
+	httpAsyncTask.execute(tag);
+    }
+
+    public void cancel() {
+	if (httpAsyncTask != null) {
+	    if (!httpAsyncTask.isCancelled()) {
+		httpAsyncTask.cancel(true);
+	    }
+	    httpAsyncTask = null;
+	}
+    }
+
+    private void onPreRequestData(int tag) {
+	Log.d("Request_Test", "pre request data!!");
+    }
+
+    private void onRequestData(int tag) {
+	Log.d("Request_Test", "on request data!!");
+	data = request.request();
+    }
+
+    private void onPostRequestData(int tag) {
+	Log.d("Request_Test", "post request data!!");
+	((Requestable)activity).requestCallBack(tag, data);
+    }
+
+    private void startSpinner() {
+	spinner.start();
+	// activity.addContentView(spinner, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+    }
+
+    private void stopSpinner() {
+	spinner.stop();
+	// spinner.setVisibility(View.GONE);
     }
 
     private class HttpAsyncTask extends AsyncTask<Integer, Integer, Integer> {
@@ -20,7 +70,8 @@ public class HttpRequestManager {
 
 	protected Integer doInBackground(Integer... params) {
 	    mId = params[0];
-	    return onRequestData(mId);
+	    onRequestData(mId);
+	    return mId;
 	}
 
 	protected void onCancelled() {
@@ -31,5 +82,12 @@ public class HttpRequestManager {
 	    stopSpinner();
 	    onPostRequestData(mId);
 	}
+
+	protected void onPreExecute() {
+	    startSpinner();
+	    onPreRequestData(mId);
+	}
+
+	protected void onProgressUpdate(Integer... values) { }
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	android:id="@+id/relativelayout_loading"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@android:color/transparent" >
+	<ProgressBar android:id="@+id/progress_loading"
+        android:indeterminateDrawable="@drawable/animationlist_loading_large"
+        android:indeterminateDuration="300"
+        android:layout_width="61dip"
+        android:layout_height="61dip" 
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"/>
+</RelativeLayout>

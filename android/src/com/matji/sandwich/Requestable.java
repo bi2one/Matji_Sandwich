@@ -1,3 +1,5 @@
+package com.matji.sandwich;
+
 import java.util.ArrayList;
 import com.matji.sandwich.data.MatjiData;
 
