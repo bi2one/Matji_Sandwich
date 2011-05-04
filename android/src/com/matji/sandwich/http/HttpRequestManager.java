@@ -8,6 +8,7 @@ import android.content.Context;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class HttpRequestManager {
     private HttpAsyncTask httpAsyncTask;
     private ArrayList<MatjiData> data;
     private HttpRequest request;
+    private MatjiException lastOccuredException = null;
 
     public HttpRequestManager(Context context, Requestable activity) {
 	spinner = new NormalSpinner(context, (Activity)activity);
@@ -27,6 +29,7 @@ public class HttpRequestManager {
     
     public void request(HttpRequest request, int tag) {
 	this.request = request;
+	this.lastOccuredException = null;
 	request.setContext(context);
 	httpAsyncTask = new HttpAsyncTask();
 	httpAsyncTask.execute(tag);
@@ -42,27 +45,31 @@ public class HttpRequestManager {
     }
 
     private void onPreRequestData(int tag) {
-	Log.d("Request_Test", "pre request data!!");
+	// Log.d("Request_Test", "pre request data!!");
     }
 
     private void onRequestData(int tag) {
-	Log.d("Request_Test", "on request data!!");
-	data = request.request();
+	// Log.d("Request_Test", "on request data!!");
+	try {
+	    data = request.request();
+	} catch(MatjiException e) {
+	    lastOccuredException = e;
+	}
     }
 
     private void onPostRequestData(int tag) {
-	Log.d("Request_Test", "post request data!!");
-	((Requestable)activity).requestCallBack(tag, data);
+	if (lastOccuredException != null)
+	    ((Requestable)activity).requestExceptionCallBack(lastOccuredException);
+	else
+	    ((Requestable)activity).requestCallBack(tag, data);
     }
 
     private void startSpinner() {
 	spinner.start();
-	// activity.addContentView(spinner, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
     }
 
     private void stopSpinner() {
 	spinner.stop();
-	// spinner.setVisibility(View.GONE);
     }
 
     private class HttpAsyncTask extends AsyncTask<Integer, Integer, Integer> {

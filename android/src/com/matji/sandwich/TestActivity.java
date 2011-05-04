@@ -12,6 +12,7 @@ import com.matji.sandwich.data.Simple;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.SimpleHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.exception.MatjiException;
 
 public class TestActivity extends Activity implements Requestable {
     HttpRequestManager manager;
@@ -37,5 +38,9 @@ public class TestActivity extends Activity implements Requestable {
 	Simple simpleData = (Simple)data.get(0);
 	Log.d("RESULT!!", simpleData.getContent());
 	Log.d("RESULT!!", "tag: " + tag);
+    }
+
+    public void requestExceptionCallBack(MatjiException e) {
+	e.showToastMsg(getApplicationContext());
     }
 }
