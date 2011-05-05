@@ -7,6 +7,8 @@ import android.content.Context;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.widget.Spinner;
+import com.matji.sandwich.widget.NormalSpinner;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.exception.MatjiException;
 

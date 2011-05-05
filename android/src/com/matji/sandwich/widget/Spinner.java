@@ -1,4 +1,4 @@
-package com.matji.sandwich.http;
+package com.matji.sandwich.widget;
 
 import android.widget.RelativeLayout;
 import android.content.Context;

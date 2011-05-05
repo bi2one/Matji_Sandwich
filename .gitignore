@@ -1,4 +1,5 @@
 *.class
 R.java
+classes.dex
 android/bin/*
 android/gen/*
