@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Post extends MatjiData{
 	private int id;
 	private int user_id;
-	private int stroe_id;
-	private int activity_id;
+	private String store_id;
+	private String activity_id;
 	private String post;
 	private int image_count;
 	private int like_count;
@@ -35,16 +35,16 @@ public class Post extends MatjiData{
 	public int getUser_id() {
 		return user_id;
 	}
-	public void setStroe_id(int stroe_id) {
-		this.stroe_id = stroe_id;
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
 	}
-	public int getStroe_id() {
-		return stroe_id;
+	public String getStore_id() {
+		return store_id;
 	}
-	public void setActivity_id(int activity_id) {
+	public void setActivity_id(String activity_id) {
 		this.activity_id = activity_id;
 	}
-	public int getActivity_id() {
+	public String getActivity_id() {
 		return activity_id;
 	}
 	public void setPost(String post) {
