@@ -12,26 +12,36 @@ import org.json.JSONObject;
 import org.json.JSONException;
 
 public class StoreDetailInfoParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getData(String data) throws MatjiException {
-	JSONArray jsonArray = validateData(data);
-	ArrayList<MatjiData> store_detail_infoList = new ArrayList<MatjiData>();
-
-	try{
-	    JSONObject element;
-	    for(int i=0 ; i < jsonArray.length() ; i++){
-		element = jsonArray.getJSONObject(i);
-		StoreDetailInfo store_detail_info = new StoreDetailInfo();
-		store_detail_info.setId(element.getInt("id"));
-		store_detail_info.setUser_id(element.getInt("user_id"));
-		store_detail_info.setStore_id(element.getInt("store_id"));
-		store_detail_info.setNote(element.getString("note"));
-		store_detail_info.setSequence(element.getInt("sequence"));
-		store_detail_infoList.add(store_detail_info);
-	    }
-	} catch(JSONException e){
-	    throw new JSONMatjiException();
-	}
+    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
+    	ArrayList<MatjiData> store_detail_infoList = new ArrayList<MatjiData>();
+    	JSONArray jsonArray;
+		try {
+			jsonArray = new JSONArray(data);
+			try{
+			    JSONObject element;
+			    for(int i=0 ; i < jsonArray.length() ; i++){
+				element = jsonArray.getJSONObject(i);
+				StoreDetailInfo store_detail_info = new StoreDetailInfo();
+				store_detail_info.setId(element.getInt("id"));
+				store_detail_info.setUser_id(element.getInt("user_id"));
+				store_detail_info.setStore_id(element.getInt("store_id"));
+				store_detail_info.setNote(element.getString("note"));
+				store_detail_info.setSequence(element.getInt("sequence"));
+				store_detail_infoList.add(store_detail_info);
+			    }
+			} catch(JSONException e){
+			    throw new JSONMatjiException();
+			}
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	return store_detail_infoList;
     }
+
+	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		String validData = validateData(data); 
+		return getRawData(validData);
+	}
 
 }

@@ -12,26 +12,36 @@ import org.json.JSONObject;
 import org.json.JSONException;
 
 public class CommentParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getData(String data) throws MatjiException {
-	JSONArray jsonArray = validateData(data);
-	ArrayList<MatjiData> commentList = new ArrayList<MatjiData>();
-
-	try{
-	    JSONObject element;
-	    for(int i=0 ; i < jsonArray.length() ; i++){
-		element = jsonArray.getJSONObject(i);
-		Comment comment = new Comment();
-		comment.setId(element.getInt("id"));
-		comment.setPost_id(element.getInt("post_id"));
-		comment.setUser_id(element.getInt("user_id"));
-		comment.setComment(element.getString("comment"));
-		comment.setFrom_where(element.getString("from_where"));
-		comment.setSequence(element.getInt("sequece"));
-		commentList.add(comment);
-	    }
-	} catch(JSONException e){
-	    throw new JSONMatjiException();
-	}
+    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
+    	ArrayList<MatjiData> commentList = new ArrayList<MatjiData>();
+    	JSONArray jsonArray;
+		try {
+			jsonArray = new JSONArray(data);
+			try{
+			    JSONObject element;
+			    for(int i=0 ; i < jsonArray.length() ; i++){
+				element = jsonArray.getJSONObject(i);
+				Comment comment = new Comment();
+				comment.setId(element.getInt("id"));
+				comment.setPost_id(element.getInt("post_id"));
+				comment.setUser_id(element.getInt("user_id"));
+				comment.setComment(element.getString("comment"));
+				//comment.setFrom_where(element.getString("from_where"));
+				comment.setSequence(element.getInt("sequence"));
+				commentList.add(comment);
+			    }
+			} catch(JSONException e){
+			    throw new JSONMatjiException();
+			}
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	return commentList;
     }
+
+    public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		String validData = validateData(data);
+		return getRawData(validData);
+	}
 }

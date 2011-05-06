@@ -12,27 +12,37 @@ import org.json.JSONObject;
 import org.json.JSONException;
 
 public class UserMileageParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getData(String data) throws MatjiException {
-	JSONArray jsonArray = validateData(data);
-	ArrayList<MatjiData> user_mileageList = new ArrayList<MatjiData>();
-
-	try{
-	    JSONObject element;
-	    for(int i=0 ; i < jsonArray.length() ; i++){
-		element = jsonArray.getJSONObject(i);
-		UserMileage user_mileage = new UserMileage();
-		user_mileage.setId(element.getInt("id"));
-		user_mileage.setUser_id(element.getInt("user_id"));
-		user_mileage.setTotal_point(element.getInt("total_point"));
-		user_mileage.setGrade(element.getString("grate"));
-		user_mileage.setSpecial_user(element.getInt("special_user"));
-		user_mileage.setBlacklist_user(element.getInt("blacklist_user"));
-		user_mileage.setSequence(element.getInt("sequence"));
-		user_mileageList.add(user_mileage);
-	    }
-	} catch(JSONException e){
-	    throw new JSONMatjiException();
-	}
+    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
+    	ArrayList<MatjiData> user_mileageList = new ArrayList<MatjiData>();
+    	JSONArray jsonArray;
+		try {
+			jsonArray = new JSONArray(data);
+			try{
+			    JSONObject element;
+			    for(int i=0 ; i < jsonArray.length() ; i++){
+				element = jsonArray.getJSONObject(i);
+				UserMileage user_mileage = new UserMileage();
+				user_mileage.setId(element.getInt("id"));
+				user_mileage.setUser_id(element.getInt("user_id"));
+				user_mileage.setTotal_point(element.getInt("total_point"));
+				user_mileage.setGrade(element.getString("grate"));
+				user_mileage.setSpecial_user(element.getInt("special_user"));
+				user_mileage.setBlacklist_user(element.getInt("blacklist_user"));
+				user_mileage.setSequence(element.getInt("sequence"));
+				user_mileageList.add(user_mileage);
+			    }
+			} catch(JSONException e){
+			    throw new JSONMatjiException();
+			}
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	return user_mileageList;
     }
+
+	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		String validData = validateData(data);
+		return getRawData(validData);
+	}
 }

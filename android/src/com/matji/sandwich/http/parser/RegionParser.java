@@ -12,28 +12,38 @@ import org.json.JSONException;
 import com.matji.sandwich.data.MatjiData;
 
 public class RegionParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getData(String data) throws MatjiException {
-	JSONArray jsonArray = validateData(data);
-	ArrayList<MatjiData> regionList = new ArrayList<MatjiData>();
-
-	try{
-	    JSONObject element;
-	    for(int i=0 ; i < jsonArray.length() ; i++){
-		element = jsonArray.getJSONObject(i);
-		Region region = new Region();
-		region.setId(element.getInt("id"));
-		region.setUser_id(element.getInt("user_id"));
-		region.setLat_sw(element.getLong("lat_sw"));
-		region.setLng_sw(element.getLong("lng_sw"));
-		region.setLat_ne(element.getLong("lat_ne"));
-		region.setLng_ne(element.getLong("lng_ne"));
-		region.setDescription(element.getString("description"));
-		region.setSequence(element.getInt("sequence"));
-		regionList.add(region);
-	    }
-	} catch(JSONException e){
-	    throw new JSONMatjiException();
-	}
+    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
+    	ArrayList<MatjiData> regionList = new ArrayList<MatjiData>();
+    	JSONArray jsonArray;
+		try {
+			jsonArray = new JSONArray(data);
+			try{
+			    JSONObject element;
+			    for(int i=0 ; i < jsonArray.length() ; i++){
+				element = jsonArray.getJSONObject(i);
+				Region region = new Region();
+				region.setId(element.getInt("id"));
+				region.setUser_id(element.getInt("user_id"));
+				region.setLat_sw(element.getLong("lat_sw"));
+				region.setLng_sw(element.getLong("lng_sw"));
+				region.setLat_ne(element.getLong("lat_ne"));
+				region.setLng_ne(element.getLong("lng_ne"));
+				region.setDescription(element.getString("description"));
+				region.setSequence(element.getInt("sequence"));
+				regionList.add(region);
+			    }
+			} catch(JSONException e){
+			    throw new JSONMatjiException();
+			}
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	return regionList;
     }
+
+	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		String validData = validateData(data);
+		return getRawData(validData);
+	}
 }

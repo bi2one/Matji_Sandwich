@@ -3,7 +3,7 @@ package com.matji.sandwich.data;
 public class AttachFile extends MatjiData{
 	private int id;
 	private int user_id;
-	private int store_id;
+	private String store_id;
 	private int post_id;
 	private String filename;
 	private String fullpath;
@@ -24,10 +24,10 @@ public class AttachFile extends MatjiData{
 	public int getUser_id() {
 		return user_id;
 	}
-	public void setStore_id(int store_id) {
+	public void setStore_id(String store_id) {
 		this.store_id = store_id;
 	}
-	public int getStore_id() {
+	public String getStore_id() {
 		return store_id;
 	}
 	public void setPost_id(int post_id) {

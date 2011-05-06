@@ -12,24 +12,34 @@ import org.json.JSONObject;
 import org.json.JSONException;
 
 public class FoodParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getData(String data) throws MatjiException {
-	JSONArray jsonArray = validateData(data);
+    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
 	ArrayList<MatjiData> foodList = new ArrayList<MatjiData>();
-
-	try{
-	    JSONObject element;
-	    for(int i=0 ; i < jsonArray.length() ; i++){
-		element = jsonArray.getJSONObject(i);
-		Food food = new Food();
-		food.setId(element.getInt("id"));
-		food.setName(element.getString("name"));
-		food.setLike_count(element.getInt("like_count"));
-		food.setSequence(element.getInt("sequence"));
-		foodList.add(food);
-	    }
-	} catch(JSONException e){
-	    throw new JSONMatjiException();
+	JSONArray jsonArray;
+	try {
+		jsonArray = new JSONArray(data);
+		try{
+		    JSONObject element;
+		    for(int i=0 ; i < jsonArray.length() ; i++){
+			element = jsonArray.getJSONObject(i);
+			Food food = new Food();
+			food.setId(element.getInt("id"));
+			//food.setName(element.getString("name"));
+			food.setLike_count(element.getInt("like_count"));
+			//food.setSequence(element.getInt("sequence"));
+			foodList.add(food);
+		    }
+		} catch(JSONException e){
+		    throw new JSONMatjiException();
+		}
+	} catch (JSONException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
 	}
 	return foodList;
     }
+
+	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		String validData = validateData(data);
+		return getRawData(validData);
+	}
 }

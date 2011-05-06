@@ -12,23 +12,34 @@ import org.json.JSONObject;
 import org.json.JSONException;
 
 public class FollowingParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getData(String data) throws MatjiException {
-	JSONArray jsonArray = validateData(data);
-	ArrayList<MatjiData> FollowingList = new ArrayList<MatjiData>();
-
-	try{
-	    JSONObject element;
-	    for(int i=0 ; i < jsonArray.length() ; i++){
-		element = jsonArray.getJSONObject(i);
-		Following following = new Following();
-		following.setId(element.getInt("id"));
-		following.setFollowing_user_id(element.getInt("following_user_id"));
-		following.setFollowed_user_id(element.getInt("followed_user_id"));
-		following.setSequence(element.getInt("sequence"));
-	    }
-	} catch(JSONException e){
-	    throw new JSONMatjiException();
+    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
+    	ArrayList<MatjiData> followingList = new ArrayList<MatjiData>();
+    	JSONArray jsonArray;
+	try {
+		jsonArray = new JSONArray(data);
+		try{
+		    JSONObject element;
+		    for(int i=0 ; i < jsonArray.length() ; i++){
+			element = jsonArray.getJSONObject(i);
+			Following following = new Following();
+			following.setId(element.getInt("id"));
+			following.setFollowing_user_id(element.getInt("following_user_id"));
+			following.setFollowed_user_id(element.getInt("followed_user_id"));
+			followingList.add(following);
+			//following.setSequence(element.getInt("sequence"));
+		    }
+		} catch(JSONException e){
+			throw new JSONMatjiException();
+		}
+	} catch (JSONException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
 	}
-	return FollowingList;
+	return followingList;
     }
+
+	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		String validData = validateData(data);
+		return getRawData(validData);
+	}
 }
