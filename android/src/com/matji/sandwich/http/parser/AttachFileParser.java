@@ -28,18 +28,16 @@ public class AttachFileParser extends MatjiDataParser{
 			attach_file.setPost_id(element.getInt("post_id"));
 			attach_file.setFilename(element.getString("filename"));
 			attach_file.setFullpath(element.getString("fullpath"));
-			//attach_file.setSequence(element.getInt("sequence"));
+			//attach_file.setSequence(element.getInt("sequence")); 없
 			attach_fileList.add(attach_file);
 		    }
 		} catch(JSONException e){
 		    throw new JSONMatjiException();
 		}
-
 	} catch (JSONException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	}
-
 	return attach_fileList;
     }
 

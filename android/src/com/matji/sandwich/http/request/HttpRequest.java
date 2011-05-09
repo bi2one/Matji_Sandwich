@@ -17,7 +17,6 @@ import android.net.NetworkInfo;
 import android.content.Context;
 
 public abstract class HttpRequest {
-    protected MatjiDataParser parser = null;
     protected Context context = null;
 
     public void setContext(Context context) {
@@ -25,10 +24,10 @@ public abstract class HttpRequest {
     }
 
     public abstract ArrayList<MatjiData> request() throws MatjiException;
+    public abstract void initParam();
+    //public void setStringHashtable(Hashtable<String, String> hashtable) { }
 
-    public void setStringHashtable(Hashtable<String, String> hashtable) { }
-
-    public void setObjectHashtable(Hashtable<String, Object> hashtable) { }
+    //public void setObjectHashtable(Hashtable<String, Object> hashtable) { }
     
     protected SimpleHttpResponse requestHttpResponseGet(String url, Map<String, String> header, Map<String, String> param)
     throws HttpConnectMatjiException {

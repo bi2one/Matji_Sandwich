@@ -23,7 +23,7 @@ public class MessageParser extends MatjiDataParser{
 				element = jsonArray.getJSONObject(i);
 				Message message = new Message();
 				message.setId(element.getInt("id"));
-				//message.setSent_user_id(element.getInt("sent_user_id"));
+				message.setSent_user_id((element.getJSONObject("sent_user")).getInt("sent_user_id"));
 				//message.setReceived_user_id(element.getInt("received_user_id"));
 				//message.setMessage(element.getString("message"));
 				//message.setSequence(element.getInt("sequence"));
