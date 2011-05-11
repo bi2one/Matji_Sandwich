@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.FoodParser;
+import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -13,18 +14,29 @@ import android.util.Log;
 
 public class FoodHttpRequest extends HttpRequest {
     private Hashtable<String, String> hashtable;
-    
+    private int page;
+    private int id;
+    private MatjiDataParser parser;
+
     public FoodHttpRequest() {
 	parser = new FoodParser();
 	hashtable = new Hashtable<String, String>();
+	initParam();
     }
 
-    public void setStringHashtable(Hashtable<String, String> hashtable) {
-	this.hashtable = hashtable;
+    private void setPage(int page){
+    	this.page = page;
+    }
+    
+    public void initParam() {
+    	page = 1;
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
-	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, hashtable);
+	hashtable.clear();
+	hashtable.put("page", page + "");
+
+	SimpleHttpResponse response = requestHttpResponseGet("https://ygmaster.net/foods/list.json?store_id=12296", null, hashtable);
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";

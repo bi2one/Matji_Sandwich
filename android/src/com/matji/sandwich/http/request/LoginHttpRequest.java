@@ -8,4 +8,9 @@ public class LoginHttpRequest extends HttpRequest{
     public ArrayList<MatjiData> request() {
 	return null;
     }
+
+	public void initParam() {
+		// TODO Auto-generated method stub
+		
+	}
 }

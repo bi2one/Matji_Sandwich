@@ -19,9 +19,13 @@ public class TestActivity extends Activity implements Requestable {
     
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	Log.d("RESULT!!", "11111");
 	setContentView(R.layout.main);
+	Log.d("RESULT!!", "22222");
 	manager = new HttpRequestManager(getApplicationContext(), this);
+	Log.d("RESULT!!", "33333");
 	request();
+	Log.d("RESULT!!", "444444");
     }
 
     private void request() {
@@ -30,7 +34,7 @@ public class TestActivity extends Activity implements Requestable {
 	table.put("member_id", "100000309");
 	table.put("order", "Store.count desc");
 	HttpRequest request = new SimpleHttpRequest();
-	request.setStringHashtable(table);
+	//request.setStringHashtable(table);
 	manager.request(request, 1);
     }
 
