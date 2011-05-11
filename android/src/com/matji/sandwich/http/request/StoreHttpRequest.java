@@ -43,6 +43,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void show(int store_id){
     	getHashtable.clear();
     	this.store_id = store_id;
+    	getHashtable.put("store_id", store_id + "");
     }
     
     
