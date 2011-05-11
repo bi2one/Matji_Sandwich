@@ -14,8 +14,9 @@ import android.util.Log;
 
 public class AttachFileHttpRequest extends HttpRequest {
     private Hashtable<String, String> hashtable;
-    private int page;
-    private int id;
+    private int post_id ;
+    private int store_id ;
+    private String action ;
     private MatjiDataParser parser;
     
     public AttachFileHttpRequest() {
@@ -24,25 +25,34 @@ public class AttachFileHttpRequest extends HttpRequest {
 	initParam();
     }
 
-    private void setPage(int page){
-    	this.page = page;
+    public void setStoreId(int store_id){
+    	this.store_id = store_id;
+    }
+
+    public void setPostId(int post_id){
+    	this.post_id = post_id;
     }
     
+    public void setAction(String action){
+    	this.action = action;
+    }
+
     public void initParam() {
-    	page = 0;
-    	id = 1;
+    	store_id = 0;
+    	post_id = 0;
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
 	hashtable.clear();
-	hashtable.put("page", page + "");
-	hashtable.put("id", id + "");
-
-	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, hashtable);
+	hashtable.put("store_id", store_id + "");
+	hashtable.put("post_id", post_id + "");
+	
+	SimpleHttpResponse response = requestHttpResponseGet(serverDomain + "attach_files/"+ action + ".json", null, hashtable);
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
 	
+	Log.d("asdfsaf",resultBody);
 	return parser.getData(resultBody);
     }
 }

@@ -18,13 +18,12 @@ import android.content.Context;
 
 public abstract class HttpRequest {
     protected Context context = null;
-
+    protected String serverDomain = "https://ygmaster.net/";
     public void setContext(Context context) {
 	this.context = context;
     }
 
     public abstract ArrayList<MatjiData> request() throws MatjiException;
-    public abstract void initParam();
     //public void setStringHashtable(Hashtable<String, String> hashtable) { }
 
     //public void setObjectHashtable(Hashtable<String, Object> hashtable) { }

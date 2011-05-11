@@ -14,8 +14,7 @@ import android.util.Log;
 
 public class AlarmHttpRequest extends HttpRequest {
     private Hashtable<String, String> hashtable;
-    private int page;
-    private int id;
+    private String action ;
     private MatjiDataParser parser;
 
     public AlarmHttpRequest() {
@@ -24,21 +23,17 @@ public class AlarmHttpRequest extends HttpRequest {
 	initParam();
     }
 
-    private void setPage(int page){
-    	this.page = page;
+    public void setAction(String action){
+    	this.action = action;
     }
-    
+
     public void initParam() {
-    	page = 0;
-    	id = 1;
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
 	hashtable.clear();
-	hashtable.put("page", page + "");
-	hashtable.put("id", id + "");
 
-	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, hashtable);
+	SimpleHttpResponse response = requestHttpResponseGet(serverDomain +"alarms/" + action + ".json", null, hashtable);
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
