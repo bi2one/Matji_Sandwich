@@ -13,34 +13,76 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class FoodHttpRequest extends HttpRequest {
-    private Hashtable<String, String> hashtable;
-    private int page;
-    private int id;
-    private MatjiDataParser parser;
+	private Hashtable<String, String> getHashtable;
+	private Hashtable<String, Object> postHashtable;
+	private MatjiDataParser parser;
+	private String action;
+	private String access_token;
+	private boolean isPost;
+	private int store_id;
+	private int store_food_id;
+	private String food_name;
 
-    public FoodHttpRequest() {
-	parser = new FoodParser();
-	hashtable = new Hashtable<String, String>();
-	initParam();
-    }
 
-    private void setPage(int page){
-    	this.page = page;
-    }
-    
-    public void initParam() {
-    	page = 1;
-    }
+	public FoodHttpRequest() {
+		access_token = "7f07cb18e1ccfc1d5493f08f32ac51a7d64b222d"; //임시
+		postHashtable = new Hashtable<String, Object>();
+		getHashtable = new Hashtable<String, String>();
+	}
 
-    public ArrayList<MatjiData> request() throws MatjiException {
-	hashtable.clear();
-	hashtable.put("page", page + "");
+	public void actionNew(int store_id, String food_name) {
+		this.isPost = true;
+		this.action = "new";
+		this.store_id = store_id;
+		this.food_name = food_name;
 
-	SimpleHttpResponse response = requestHttpResponseGet("https://ygmaster.net/foods/list.json?store_id=12296", null, hashtable);
+		postHashtable.clear();
+		postHashtable.put("store_id", store_id);
+		postHashtable.put("food_name", food_name);
+		postHashtable.put("access_token", access_token);
+	}
+
+	public void actionDelete(int store_food_id) {
+		this.isPost = true;
+		this.action = "delete";
+		this.store_food_id = store_food_id;
+		
+		postHashtable.clear();
+		postHashtable.put("store_food_id", store_food_id);
+		postHashtable.put("access_token", access_token);
+	}
+
+	public void actionLike(int store_food_id) {
+		this.isPost = true;
+		this.action = "like";
+		this.store_food_id = store_food_id;
+		
+		postHashtable.clear();
+		postHashtable.put("store_food_id", store_food_id);
+		postHashtable.put("access_token", access_token);
+	}
 	
-	String resultBody = response.getHttpResponseBodyAsString();
-	String resultCode = response.getHttpStatusCode() + "";
+	public void actionList(int store_id) {
+		this.isPost = false;
+		this.action = "list";
+		this.store_id = store_id;
+		
+		getHashtable.clear();
+		getHashtable.put("store_id", store_id + "");
+	}
 	
-	return parser.getData(resultBody);
-    }
+	public ArrayList<MatjiData> request() throws MatjiException {
+		SimpleHttpResponse response = 
+			(isPost) ? 
+					requestHttpResponsePost(serverDomain + "foods/" + action + ".json?", null, postHashtable)
+					:requestHttpResponseGet(serverDomain + "foods/" + action + ".json?", null, getHashtable); 
+
+		String resultBody = response.getHttpResponseBodyAsString();
+		String resultCode = response.getHttpStatusCode() + "";
+
+		Log.d("Check", "FoodHttpRequest resultBody: " + resultBody);
+		Log.d("Check", "FoodHttpRequest resultCode: " + resultCode);
+
+		return parser.getData(resultBody);
+	}
 }

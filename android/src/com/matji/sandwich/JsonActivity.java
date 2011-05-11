@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class JsonActivity extends Activity implements Requestable{
 	HttpRequestManager manager;
-		
+
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.main);

@@ -1,5 +1,7 @@
 package com.matji.sandwich.http.parser;
 
+import android.util.Log;
+
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
@@ -22,7 +24,7 @@ public abstract class MatjiDataParser {
 			int code = json.getInt("code");
 			
 			if(code==HttpUtility.HTTP_STATUS_OK){
-			    return json.getJSONArray("result").toString();
+			    return json.getString("result");
 			}else{
 				String message = json.getString("description");
 				throw new JSONCodeMatjiException(message);
