@@ -17,13 +17,37 @@ public class CommentHttpRequest extends HttpRequest {
 	private Hashtable<String, Object> postHashtable;
 	private MatjiDataParser parser;
 	private String action;
-	private String access_token;
 	private boolean isPost;
 	
 	public CommentHttpRequest() {
-		access_token = "7f07cb18e1ccfc1d5493f08f32ac51a7d64b222d"; //임시
 		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
+	}
+	
+	public void actionNew(int post_id, String comment, String from_where) {
+		isPost = true;
+		action = "new";
+		
+		postHashtable.clear();
+		postHashtable.put("post_id", post_id);
+		postHashtable.put("comment", comment);
+		postHashtable.put("from_where", from_where);
+		
+	}
+	
+	public void actionDelete(int post_id) {
+		isPost = true;
+		action = "delete";
+		
+		postHashtable.clear();
+		postHashtable.put("post_id", post_id);
+	}
+	
+	public void actionList(int comment_id) {
+		isPost = false;
+		
+		getHashtable.clear();
+		getHashtable.put("comment_id", comment_id + "");
 	}
 	
 	public ArrayList<MatjiData> request() throws MatjiException {

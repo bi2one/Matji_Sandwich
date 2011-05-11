@@ -17,10 +17,7 @@ public class FollowingHttpRequest extends HttpRequest {
 	private Hashtable<String, Object> postHashtable;
 	private MatjiDataParser parser;
 	private String action;
-	private String access_token;
 	private boolean isPost;
-	private int followed_user_id;
-	private int user_id;
 
 	public FollowingHttpRequest() {
 		parser = new FollowingParser();
@@ -30,9 +27,8 @@ public class FollowingHttpRequest extends HttpRequest {
 	}
 	
 	public void actionNew(int followed_user_id) {
-		this.isPost = true;
-		this.action = "new";
-		this.followed_user_id = followed_user_id;
+		isPost = true;
+		action = "new";
 		
 		postHashtable.clear();
 		postHashtable.put("followed_user_id", followed_user_id);
@@ -40,35 +36,31 @@ public class FollowingHttpRequest extends HttpRequest {
 	}
 	
 	public void actionDelete(int followed_user_id) {
-		this.isPost = true;
-		this.action = "delete";
-		this.followed_user_id = followed_user_id;
-		
+		isPost = true;
+		action = "delete";
+				
 		postHashtable.clear();
 		postHashtable.put("followed_user_id", followed_user_id);
 	}
 	
 	public void actionList() {
-		this.isPost = false;
-		this.action = "list";
+		isPost = false;
+		action = "list";
 		
 		getHashtable.clear();
 	}
 	
 	public void actionFollowingList(int user_id) {
-		this.isPost = false;
-		this.action = "following_list";
-		this.user_id = user_id;
+		isPost = false;
+		action = "following_list";
 	
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");
-
 	}
 	
 	public void actionFollowerList(int user_id) {
-		this.isPost = false;
-		this.action = "follower_list";
-		this.user_id = user_id;
+		isPost = false;
+		action = "follower_list";
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");

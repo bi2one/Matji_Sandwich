@@ -19,23 +19,16 @@ public class FoodHttpRequest extends HttpRequest {
 	private String action;
 	private String access_token;
 	private boolean isPost;
-	private int store_id;
-	private int store_food_id;
-	private String food_name;
-
 
 	public FoodHttpRequest() {
-		access_token = "7f07cb18e1ccfc1d5493f08f32ac51a7d64b222d"; //임시
 		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
 	}
 
 	public void actionNew(int store_id, String food_name) {
-		this.isPost = true;
-		this.action = "new";
-		this.store_id = store_id;
-		this.food_name = food_name;
-
+		isPost = true;
+		action = "new";
+		
 		postHashtable.clear();
 		postHashtable.put("store_id", store_id);
 		postHashtable.put("food_name", food_name);
@@ -43,9 +36,8 @@ public class FoodHttpRequest extends HttpRequest {
 	}
 
 	public void actionDelete(int store_food_id) {
-		this.isPost = true;
-		this.action = "delete";
-		this.store_food_id = store_food_id;
+		isPost = true;
+		action = "delete";
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
@@ -53,9 +45,8 @@ public class FoodHttpRequest extends HttpRequest {
 	}
 
 	public void actionLike(int store_food_id) {
-		this.isPost = true;
-		this.action = "like";
-		this.store_food_id = store_food_id;
+		isPost = true;
+		action = "like";
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
@@ -63,9 +54,8 @@ public class FoodHttpRequest extends HttpRequest {
 	}
 	
 	public void actionList(int store_id) {
-		this.isPost = false;
-		this.action = "list";
-		this.store_id = store_id;
+		isPost = false;
+		action = "list";
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
