@@ -18,7 +18,9 @@ import android.content.Context;
 
 public abstract class HttpRequest {
     protected Context context = null;
-
+    protected String serverDomain = "https://ygmaster.net/"; 
+//    protected String serverDomain = "http://14.63.213.202/"; 
+    
     public void setContext(Context context) {
 	this.context = context;
     }

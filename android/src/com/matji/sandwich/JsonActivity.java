@@ -17,31 +17,33 @@ import java.util.ArrayList;
 
 public class JsonActivity extends Activity implements Requestable{
 	HttpRequestManager manager;
-		
-    public void onCreate(Bundle savedInstanceState){
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.main);
-	manager = new HttpRequestManager(getApplicationContext(), this);
-	request();
-    }
 
-    private void request() {
-    	Hashtable<String, String> table = new Hashtable<String, String>();
-    	//table.put("page", "1");
-    	table.put("food_id", "1");
-    	HttpRequest request = new FoodHttpRequest();
-    	manager.request(request, 1);
-    }
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		manager = new HttpRequestManager(getApplicationContext(), this);
+		request();
+	}
 
-        public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-    	Food foodData = (Food)data.get(0);
-    	Log.d("RESULT!!", ""+foodData.getId());
-    	Log.d("RESULT!!", "tag: " + tag);
-        }
+	private void request() {
+//		Hashtable<String, String> table = new Hashtable<String, String>();
+		//table.put("page", "1");
+//		table.put("food_id", "1");
+		FoodHttpRequest request = new FoodHttpRequest();
+		request.actionNew(12296, "육개장!!!");
 
-        public void requestExceptionCallBack(int tag, MatjiException e) {
-    	e.showToastMsg(getApplicationContext());
-        }
+		manager.request(request, 1);
+	}
+
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		Food foodData = (Food)data.get(0);
+		Log.d("RESULT!!", ""+foodData.getId());
+		Log.d("RESULT!!", "tag: " + tag);
+	}
+
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.showToastMsg(getApplicationContext());
+	}
 }
 
 
