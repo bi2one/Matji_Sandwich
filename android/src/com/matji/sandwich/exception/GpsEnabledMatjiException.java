@@ -1,7 +1,9 @@
 package com.matji.sandwich.exception;
 
+import com.matji.sandwich.R;
+
 public class GpsEnabledMatjiException extends MatjiException {
     public GpsEnabledMatjiException() {
-	setToastMsg("GPS서비스를 사용할 수 있습니다");
+	super(R.string.exception_GpsEnabledMatjiException);
     }
 }

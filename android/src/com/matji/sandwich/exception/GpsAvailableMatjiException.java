@@ -1,7 +1,9 @@
 package com.matji.sandwich.exception;
 
+import com.matji.sandwich.R;
+
 public class GpsAvailableMatjiException extends MatjiException {
     public GpsAvailableMatjiException() {
-	setToastMsg("GPS가 정상작동 합니다");
+	super(R.string.exception_GpsAvailableMatjiException);
     }
 }

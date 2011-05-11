@@ -36,5 +36,19 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        /**  MatjiException 
+         */
+        public static final int exception_GpsAvailableMatjiException=0x7f040001;
+        public static final int exception_GpsEnabledMatjiException=0x7f040002;
+        public static final int exception_GpsOutOfServiceMatjiException=0x7f040003;
+        public static final int exception_GpsServiceNotPossibleMatjiException=0x7f040004;
+        public static final int exception_GpsTemporarilyUnavailableMatjiException=0x7f040005;
+        public static final int exception_HttpConnectMatjiException=0x7f040006;
+        public static final int exception_InterruptedMatjiException=0x7f040007;
+        public static final int exception_JSONCodeMatjiException=0x7f040009;
+        public static final int exception_JSONMatjiException=0x7f04000a;
+        public static final int exception_NotPossibleMatjiException=0x7f040008;
+        public static final int exception_NotSupportedMatjiException=0x7f04000b;
+        public static final int exception_UseNetworkGpsMatjiException=0x7f04000c;
     }
 }

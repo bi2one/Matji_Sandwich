@@ -4,27 +4,26 @@ import android.content.Context;
 import android.widget.Toast;
 
 public class MatjiException extends Exception {
-    private String toastMsg;
-    private String name;
+    private int msgRef;
 
-    protected void setToastMsg(String toastMsg) {
-	this.toastMsg = toastMsg;
+    public MatjiException(int msgRef) {
+	setMsg(msgRef);
     }
 
-    public String getToastMsg() {
-	return toastMsg;
+    protected void setMsg(int msgRef) {
+	this.msgRef = msgRef;
+    }
+
+    public int getMsg() {
+	return msgRef;
     }
 
     public void showToastMsg(Context context) {
-	Toast toast = Toast.makeText(context, getToastMsg(), Toast.LENGTH_SHORT);
+	Toast toast = Toast.makeText(context, getMsg(), Toast.LENGTH_SHORT);
 	toast.show();
     }
 
-    public String getName() {
-	return name;
-    }
-
-    protected void setName(String name) {
-	this.name = name;
+    public void performExceptionHandling(Context context) {
+	showToastMsg(context);
     }
 }

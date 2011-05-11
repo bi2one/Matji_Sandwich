@@ -1,7 +1,9 @@
 package com.matji.sandwich.exception;
 
+import com.matji.sandwich.R;
+
 public class NotSupportedMatjiException extends MatjiException {
     public NotSupportedMatjiException() {
-	setToastMsg("지원하지 않는 기능입니다");
+	super(R.string.exception_NotSupportedMatjiException);
     }
 }

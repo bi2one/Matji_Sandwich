@@ -1,7 +1,9 @@
 package com.matji.sandwich.exception;
 
+import com.matji.sandwich.R;
+
 public class InterruptedMatjiException extends MatjiException {
     public InterruptedMatjiException() {
-	setToastMsg("Interrupted Exception: 연산을 중지합니다");
+	super(R.string.exception_InterruptedMatjiException);
     }
 }
