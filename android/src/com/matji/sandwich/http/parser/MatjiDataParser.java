@@ -6,6 +6,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
 import com.matji.sandwich.exception.JSONCodeMatjiException;
+import com.matji.sandwich.http.request.HttpUtility;
 
 import java.util.ArrayList;
 
@@ -22,10 +23,10 @@ public abstract class MatjiDataParser {
 			
 			int code = json.getInt("code");
 			
-			if(code==200){
+			if(code==HttpUtility.HTTP_STATUS_OK){
 			    return json.getString("result");
 			}else{
-				String message = json.getString("message");
+				String message = json.getString("description");
 				throw new JSONCodeMatjiException(message);
 			}	
 			

@@ -13,31 +13,46 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class StoreHttpRequest extends HttpRequest {
-    private Hashtable<String, String> hashtable;
-    private int page;
-    private int id;
+    private Hashtable<String, String> getHashtable;
+    private Hashtable<String, Object> postHashtable;
     private MatjiDataParser parser;
+    private float lat_sw,lat_ne,lng_sw,lng_ne;
+    private boolean isPost;
+    private int store_id;
+    private String type;
 
     public StoreHttpRequest() {
 	parser = new StoreParser();
-	hashtable = new Hashtable<String, String>();
+	getHashtable = new Hashtable<String, String>();
 	initParam();
     }
 
-    private void setPage(int page){
-    	this.page = page;
+    public void count(float lat_sw, float lat_ne, float lng_sw, float lng_ne, String type){
+    	getHashtable.clear();
+    	this.isPost = false;
+    	this.lat_sw = lat_sw;
+    	this.lat_ne = lat_ne;
+    	this.lng_sw = lng_sw;
+    	this.lng_ne = lng_ne;
+    	getHashtable.put("lat_ne", lat_ne + "");
+    	getHashtable.put("lat_sw", lat_sw + "");
+    	getHashtable.put("lng_ne", lng_ne + "");
+    	getHashtable.put("lng_sw", lng_sw + "");
+    }
+
+    public void show(int store_id){
+    	getHashtable.clear();
+    	this.store_id = store_id;
     }
     
+    
     public void initParam() {
-    	page = 0;
-    	id = 1;
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
-	hashtable.clear();
-	hashtable.put("page", page + "");
-	hashtable.put("id", id + "");
-	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, hashtable);
+	getHashtable.clear();
+
+	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, getHashtable);
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
