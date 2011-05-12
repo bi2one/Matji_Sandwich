@@ -15,12 +15,10 @@ import android.util.Log;
 public class FollowingHttpRequest extends HttpRequest {
 	private Hashtable<String, String> getHashtable;
 	private Hashtable<String, Object> postHashtable;
-	private MatjiDataParser parser;
 	private String action;
 	private boolean isPost;
 
 	public FollowingHttpRequest() {
-		parser = new FollowingParser();
 		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
 		initParam();
@@ -67,6 +65,18 @@ public class FollowingHttpRequest extends HttpRequest {
 	}
 
 	public ArrayList<MatjiData> request() throws MatjiException {
+		MatjiDataParser parser = null;
+
+		if (action.equals("new") || action.equals("list") || action.equals("following_list") || action.equals("follower_list")) {
+			parser = new FollowingParser(action);
+		}
+		else if (action.equals("delete")) {
+			parser = new FollowingParser(action);
+		}
+		else { 
+			// TODO action ERROR
+		}
+		
 		SimpleHttpResponse response = 
 			(isPost) ?
 					requestHttpResponsePost(serverDomain + "followings/" + action + ".json?", null, postHashtable)

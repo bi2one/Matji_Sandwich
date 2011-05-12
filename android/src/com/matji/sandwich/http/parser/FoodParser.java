@@ -8,52 +8,29 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Food;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
+import com.matji.sandwich.json.MatjiJSONArray;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
 public class FoodParser extends MatjiDataParser{
-	private String action;
-
-	public FoodParser(String action) {
-		this.action = action;
-	}
-
 	public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
 		ArrayList<MatjiData> foodList = new ArrayList<MatjiData>();
-		JSONArray jsonArray;
-		Log.d("Matji", action);
+		MatjiJSONArray jsonArray;
 		try {
-			jsonArray = new JSONArray(data);
+			jsonArray = new MatjiJSONArray(data);
 			try{
-				JSONObject element;
-				if (action.equals("new")) {
+				MatjiJSONObject element;
+				for (int i = 0; i < jsonArray.length(); i++) {
+					element = jsonArray.getJSONObject(i);
 					foodList.clear();
-					Log.d("Matji", ""+jsonArray.length());
-					for (int i = 0; i < jsonArray.length(); i++) {
-						element = jsonArray.getJSONObject(i);
-						Food food = new Food();
-						food.setId(element.getInt("id"));
-						food.setName((element.getJSONObject("food")).getString("name"));
-						food.setLike_count(element.getInt("like_count"));
-						foodList.add(food);
-					}
+					Food food = new Food();
+					food.setId(element.getString("id"));
+					food.setName((element.getJSONObject("food")).getString("name"));
+//					food.setLike_count(element.getString("like_count"));
+					foodList.add(food);
 				}
-				else if (action.equals("delete")) {}
-				else if (action.equals("like")) {}
-				else if (action.equals("list")){
-					foodList.clear();
-					for (int i=0 ; i < jsonArray.length(); i++){
-						element = jsonArray.getJSONObject(i);
-						Food food = new Food();
-						food.setId(element.getInt("id"));
-						food.setName((element.getJSONObject("food")).getString("name"));
-						food.setLike_count(element.getInt("like_count"));
-						foodList.add(food);
-					}
-				}
-				else { /* ACTION ERROR ! */ }
 			} catch(JSONException e){
 				e.printStackTrace();
 				throw new JSONMatjiException();

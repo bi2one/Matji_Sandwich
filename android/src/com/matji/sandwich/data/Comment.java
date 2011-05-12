@@ -1,62 +1,87 @@
 package com.matji.sandwich.data;
 
+import java.util.ArrayList;
+
 public class Comment extends MatjiData{
-	private int id;
-	private int post_id;
-	private int user_id;
 	private String comment;
+	private String created_at;
+	private String sequence;
+	private String updated_at;
+	private String post_id;
+	private String id;
+	private String user_id;
 	private String from_where;
-	private int sequence;
-	private User user;
-	private Post post;
+	private ArrayList<User> user;
 	
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
-	}
-	public int getPost_id() {
-		return post_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-	public int getUser_id() {
-		return user_id;
-	}
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
 	public String getComment() {
 		return comment;
 	}
-	public void setFrom_where(String from_where) {
-		this.from_where = from_where;
-	}
-	public String getFrom_where() {
-		return from_where;
-	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setPost(Post post) {
-		this.post = post;
-	}
-	public Post getPost() {
-		return post;
+	
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
 	}
 	
+	public String getCreatedAt() {
+		return created_at;
+	}
+
+	public void setSequence(String sequence) {
+		this.sequence = sequence;
+	}
+
+	public String getSequence() {
+		return sequence;
+	}
+	
+	public void setUpdatedAt(String updated_at) {
+		this.updated_at = updated_at;
+	}
+
+	public String getUpdatedAt() {
+		return updated_at;
+	}
+
+	public void setPostId(String post_id) {
+		this.post_id = post_id;
+	}
+
+	public String getPostId() {
+		return post_id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setUserId(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getUserId() {
+		return user_id;
+	}
+
+	public void setFromWhere(String from_where) {
+		this.from_where = from_where;
+	}
+
+	public String getFromWhere() {
+		return from_where;
+	}
+
+	public void setUser(ArrayList<User> user) {
+		this.user = user;
+	}
+
+	public ArrayList<User> getUser() {
+		return user;
+	}
 }

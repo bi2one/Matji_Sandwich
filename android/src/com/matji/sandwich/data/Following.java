@@ -1,40 +1,58 @@
 package com.matji.sandwich.data;
 
 public class Following extends MatjiData{
-	private int id;
-	private int following_user_id;
-	private int followed_user_id;
-	private int sequence;
-	private User user;
-		
-	public void setId(int id) {
-		this.id = id;
+	private String created_at;
+	private String sequence;
+	private String following_user_id;
+	private String updated_at;
+	private String followed_user_id;
+	private String id;
+	
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
 	}
-	public int getId() {
-		return id;
+	
+	public String getCreatedAt() {
+		return created_at;
 	}
-	public void setFollowing_user_id(int following_user_id) {
-		this.following_user_id = following_user_id;
-	}
-	public int getFollowing_user_id() {
-		return following_user_id;
-	}
-	public void setFollowed_user_id(int followed_user_id) {
-		this.followed_user_id = followed_user_id;
-	}
-	public int getFollowed_user_id() {
-		return followed_user_id;
-	}
-	public void setSequence(int sequence) {
+	
+	public void setSequence(String sequence) {
 		this.sequence = sequence;
 	}
-	public int getSequence() {
+	
+	public String getSequence() {
 		return sequence;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	
+	public void setFollowingUserId(String following_user_id) {
+		this.following_user_id = following_user_id;
 	}
-	public User getUser() {
-		return user;
+	
+	public String getFollowingUserId() {
+		return following_user_id;
+	}
+
+	public void setUpdatedAt(String updated_at) {
+		this.updated_at = updated_at;
+	}
+	
+	public String getUpdatedAt() {
+		return updated_at;
+	}
+
+	public void setFollowedUserId(String followed_user_id) {
+		this.followed_user_id = followed_user_id;
+	}
+	
+	public String getFollowedUserId() {
+		return followed_user_id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
 	}
 }

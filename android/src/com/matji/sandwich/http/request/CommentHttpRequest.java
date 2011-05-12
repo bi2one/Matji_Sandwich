@@ -15,7 +15,6 @@ import android.util.Log;
 public class CommentHttpRequest extends HttpRequest {
 	private Hashtable<String, String> getHashtable;
 	private Hashtable<String, Object> postHashtable;
-	private MatjiDataParser parser;
 	private String action;
 	private boolean isPost;
 	
@@ -45,12 +44,15 @@ public class CommentHttpRequest extends HttpRequest {
 	
 	public void actionList(int comment_id) {
 		isPost = false;
-		
+		action = "list";
+
 		getHashtable.clear();
 		getHashtable.put("comment_id", comment_id + "");
 	}
 	
-	public ArrayList<MatjiData> request() throws MatjiException {
+	public ArrayList<MatjiData> request() throws MatjiException {	
+		CommentParser parser = new CommentParser(action);
+		
 		SimpleHttpResponse response = 
 			(isPost) ? 
 					requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)

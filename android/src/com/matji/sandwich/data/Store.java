@@ -3,9 +3,9 @@ package com.matji.sandwich.data;
 import java.util.ArrayList;
 
 public class Store extends MatjiData{
-	private int id;
+	private String id;
 	private String name;
-	private int reg_user_id;
+	private String reg_user_id;
 	private String tel;
 	private String address;
 	private String add_address;
@@ -13,12 +13,11 @@ public class Store extends MatjiData{
 	private String text;
 	private float lat;
 	private float lng;
-	private int tag_count;
-	private int post_count;
-	private int image_count;
-	private int like_count;
-	private int bookmark_count;
-	private int sequence;
+	private String tag_count;
+	private String post_count;
+	private String image_count;
+	private String like_count;
+	private String bookmark_count;
 	private ArrayList<Activity> activities;
 	private ArrayList<AttachFile> attach_files;
 	private ArrayList<Bookmark> bookmarks;
@@ -31,10 +30,10 @@ public class Store extends MatjiData{
 	private User user;
 	
 	
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	public void setName(String name) {
@@ -43,10 +42,10 @@ public class Store extends MatjiData{
 	public String getName() {
 		return name;
 	}
-	public void setReg_user_id(int reg_user_id) {
+	public void setReg_user_id(String reg_user_id) {
 		this.reg_user_id = reg_user_id;
 	}
-	public int getReg_user_id() {
+	public String getReg_user_id() {
 		return reg_user_id;
 	}
 	public void setTel(String tel) {
@@ -91,41 +90,35 @@ public class Store extends MatjiData{
 	public float getLng() {
 		return lng;
 	}
-	public void setTag_count(int tag_count) {
+	public void setTag_count(String tag_count) {
 		this.tag_count = tag_count;
 	}
-	public int getTag_count() {
+	public String getTag_count() {
 		return tag_count;
 	}
-	public void setPost_count(int post_count) {
+	public void setPost_count(String post_count) {
 		this.post_count = post_count;
 	}
-	public int getPost_count() {
+	public String getPost_count() {
 		return post_count;
 	}
-	public void setImage_count(int image_count) {
+	public void setImage_count(String image_count) {
 		this.image_count = image_count;
 	}
-	public int getImage_count() {
+	public String getImage_count() {
 		return image_count;
 	}
-	public void setLike_count(int like_count) {
+	public void setLike_count(String like_count) {
 		this.like_count = like_count;
 	}
-	public int getLike_count() {
+	public String getLike_count() {
 		return like_count;
 	}
-	public void setBookmark_count(int bookmark_count) {
+	public void setBookmark_count(String bookmark_count) {
 		this.bookmark_count = bookmark_count;
 	}
-	public int getBookmark_count() {
+	public String getBookmark_count() {
 		return bookmark_count;
-	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
 	}
 	public void setActivities(ArrayList<Activity> activities) {
 		this.activities = activities;
