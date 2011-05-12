@@ -20,20 +20,20 @@ public class FoodParser extends MatjiDataParser{
 			MatjiJSONObject element;
 			foodList.clear();
 			for (int i = 0; i < jsonArray.length(); i++) {
-				element = jsonArray.getJSONObject(i);
+				element = jsonArray.getMatjiJSONObject(i);
 				Food food = new Food();
-				food.setBlind(element.getString("blind"));
-				food.setCreatedAt(element.getString("created_at"));
-				food.setFoodId(element.getString("food_id"));
-				food.setId(element.getString("id"));
-				food.setLike(element.getString("like"));
 				food.setLikeCount(element.getString("like_count"));
-				food.setName((element.getMatjiJSONObject("food")).getString("name"));
+				food.setCreatedAt(element.getString("created_at"));
 				food.setSequence(element.getString("sequence"));
-				food.setStore((new StoreParser()).getData(element.getString("store")));
-				food.setStoreId(element.getString("store_id"));
+				food.setBlind(element.getString("blind"));
 				food.setUpdatedAt(element.getString("updated_at"));
+				food.setId(element.getString("id"));
+				food.setStoreId(element.getString("store_id"));
+				food.setStore((new StoreParser()).getData(element.getString("store")));
+				food.setLike(element.getString("like"));
 				food.setUserId(element.getString("user_id"));
+				food.setFoodId(element.getString("food_id"));
+				food.setName((element.getMatjiJSONObject("food")).getString("name"));
 				foodList.add(food);
 			}
 		} catch (JSONException e1) {
