@@ -15,9 +15,7 @@ import android.util.Log;
 public class FoodHttpRequest extends HttpRequest {
 	private Hashtable<String, String> getHashtable;
 	private Hashtable<String, Object> postHashtable;
-	private MatjiDataParser parser;
 	private String action;
-	private String access_token;
 	private boolean isPost;
 
 	public FoodHttpRequest() {
@@ -60,19 +58,20 @@ public class FoodHttpRequest extends HttpRequest {
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
 	}
-	
-	public ArrayList<MatjiData> request() throws MatjiException {
+
+	public ArrayList<MatjiData> request() throws MatjiException {		
+		MatjiDataParser parser = new FoodParser(action);
 		SimpleHttpResponse response = 
 			(isPost) ? 
 					requestHttpResponsePost(serverDomain + "foods/" + action + ".json?", null, postHashtable)
-					:requestHttpResponseGet(serverDomain + "foods/" + action + ".json?", null, getHashtable); 
+					:requestHttpResponseGet(serverDomain + "foods/" + action + ".json?", null, getHashtable);
 
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";
 
-		Log.d("Check", "FoodHttpRequest resultBody: " + resultBody);
-		Log.d("Check", "FoodHttpRequest resultCode: " + resultCode);
-
+		Log.d("Matji", "FoodHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "FoodHttpRequest resultCode: " + resultCode);
+	
 		return parser.getData(resultBody);
 	}
 }

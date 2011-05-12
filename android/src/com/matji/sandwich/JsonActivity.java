@@ -4,7 +4,7 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.data.*;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.AlarmHttpRequest;
+import com.matji.sandwich.http.request.FoodHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -18,26 +18,30 @@ import java.util.ArrayList;
 public class JsonActivity extends Activity implements Requestable{
 	HttpRequestManager manager;
 
-    public void onCreate(Bundle savedInstanceState){
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.main);
-	manager = new HttpRequestManager(getApplicationContext(), this);
-	request();
-    }
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		manager = new HttpRequestManager(getApplicationContext(), this);
+		request();
+	}
 
-    private void request() {
-    	AlarmHttpRequest request = new AlarmHttpRequest();
-    	request.actionList(1);
-    	manager.request(request, 1);
-    }
+	private void request() {
+		FoodHttpRequest request = new FoodHttpRequest();
+//		request.actionDelete(32);
+//		request.actionNew(12296, "TEST1");
+		request.actionList(12296);
+//		request.actionLike(32);		
+		manager.request(request, 1);
+	}
 
-        public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-    	Alarm foodData = (Alarm)data.get(0);
-    	Log.d("RESULT!!", ""+foodData.getId());
-    	Log.d("RESULT!!", "tag: " + tag);
-        }
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+//		Alarm foodData = (Alarm)data.get(0);
+//		Food foodData = (Food)data.get(0);
+//		Log.d("Matji", ""+foodData.getId());
+//		Log.d("Matji", "tag: " + tag);
+	}
 
-        public void requestExceptionCallBack(int tag, MatjiException e) {
-    	e.showToastMsg(getApplicationContext());
-        }
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.showToastMsg(getApplicationContext());
+	}
 }
