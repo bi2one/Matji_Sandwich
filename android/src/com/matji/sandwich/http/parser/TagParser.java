@@ -6,38 +6,36 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
+import com.matji.sandwich.json.MatjiJSONArray;
+import com.matji.sandwich.json.MatjiJSONObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.JSONException;
 
 public class TagParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
-    	ArrayList<MatjiData> tagList = new ArrayList<MatjiData>();
-    	JSONArray jsonArray;
-	try {
-	    jsonArray = new JSONArray(data);
-	    try{
-		JSONObject element;
-		for(int i=0 ; i < jsonArray.length() ; i++){
-		    element = jsonArray.getJSONObject(i);
-		    Tag tag = new Tag();
-		    tag.setId(element.getInt("id"));
-		    tag.setTag(element.getString("tag"));
-		    //tag.setSequence(element.getInt("sequence")); 없음 
-		    tagList.add(tag);
+	public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
+		ArrayList<MatjiData> tagList = new ArrayList<MatjiData>();
+		MatjiJSONArray jsonArray;
+		try {
+			jsonArray = new MatjiJSONArray(data);
+			MatjiJSONObject element;
+			for (int i=0 ; i < jsonArray.length(); i++) {
+				element = jsonArray.getMatjiJSONObject(i);
+				Tag tag = new Tag();
+				tag.setTag(element.getString("tag"));
+				tag.setCreated_at(element.getString("created_at"));
+				tag.setSequence(element.getString("sequence"));
+				tag.setUpdatedAt(element.getString("updated_at"));
+				tag.setId(element.getString("id"));
+				tagList.add(tag);
+			}
+		} catch (JSONException e1) {
+			e1.printStackTrace();
 		}
-	    } catch(JSONException e){
-		throw new JSONMatjiException();
-	    }
-	} catch (JSONException e1) {
-	    e1.printStackTrace();
+		return tagList;
 	}
-	return tagList;
-    }
 
-    public ArrayList<MatjiData> getData(String data) throws MatjiException {
-	String validData = validateData(data);
-	return getRawData(validData);
-    }
+	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		String validData = validateData(data);
+		return getRawData(validData);
+	}
 }

@@ -6,42 +6,34 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
+import com.matji.sandwich.json.MatjiJSONArray;
+import com.matji.sandwich.json.MatjiJSONObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.JSONException;
 
 public class CommentParser extends MatjiDataParser{
-	private String action;
-	
-	public CommentParser(String action) {
-		this.action = action;
-	}
-	
 	public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
 		ArrayList<MatjiData> commentList = new ArrayList<MatjiData>();
-		JSONArray jsonArray;
+		MatjiJSONArray jsonArray;
 		try {
-			jsonArray = new JSONArray(data);
-			try{
-				JSONObject element;
-				if (action.equals("new") || action.equals("list") ) {
-					for(int i=0 ; i < jsonArray.length() ; i++){
-						element = jsonArray.getJSONObject(i);
-						Comment comment = new Comment();
-						comment.setId(element.getInt("id"));
-						comment.setPost_id(element.getInt("post_id"));
-						comment.setUser_id(element.getInt("user_id"));
-						comment.setComment(element.getString("comment"));
-						comment.setFrom_where(element.getString("from_where"));
-						comment.setSequence(element.getInt("sequence"));
-						commentList.add(comment);
-					}
-				}
-			} catch(JSONException e){
-				throw new JSONMatjiException();
+			jsonArray = new MatjiJSONArray(data);
+			MatjiJSONObject element;
+			for (int i=0 ; i < jsonArray.length(); i++) {
+				element = jsonArray.getMatjiJSONObject(i);
+				Comment comment = new Comment();
+				comment.setComment(element.getString("comment"));
+				comment.setCreatedAt(element.getString("created_at"));
+				comment.setSequence(element.getString("sequence"));
+				comment.setUpdatedAt(element.getString("updated_at"));
+				comment.setPostId(element.getString("post_id"));
+				comment.setId(element.getString("id"));
+				comment.setUserId(element.getString("user_id"));
+				comment.setFromWhere(element.getString("from_where"));
+				comment.setUser((new UserParser()).getData(data));
+				commentList.add(comment);
 			}
-		} catch (JSONException e1) {
+		}
+		catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

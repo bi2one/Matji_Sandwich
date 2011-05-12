@@ -11,7 +11,7 @@ public class Comment extends MatjiData{
 	private String id;
 	private String user_id;
 	private String from_where;
-	private ArrayList<User> user;
+	private ArrayList<MatjiData> user;
 	
 	public void setComment(String comment) {
 		this.comment = comment;
@@ -77,11 +77,11 @@ public class Comment extends MatjiData{
 		return from_where;
 	}
 
-	public void setUser(ArrayList<User> user) {
+	public void setUser(ArrayList<MatjiData> user) {
 		this.user = user;
 	}
 
-	public ArrayList<User> getUser() {
+	public ArrayList<MatjiData> getUser() {
 		return user;
 	}
 }

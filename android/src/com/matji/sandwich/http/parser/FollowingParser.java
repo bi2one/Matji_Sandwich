@@ -18,15 +18,26 @@ public class FollowingParser extends MatjiDataParser{
 		try {
 			jsonArray = new MatjiJSONArray(data);
 			MatjiJSONObject element;
-			for(int i=0 ; i < jsonArray.length() ; i++){
+			for (int i=0 ; i < jsonArray.length(); i++) {
 				element = jsonArray.getMatjiJSONObject(i);
 				Following following = new Following();
 				following.setCreatedAt(element.getString("created_at"));
-				following.setFollowedUserId(element.getString("followed_user_id"));
-				following.setFollowingUserId(element.getString("following_user_id"));
-				following.setId(element.getString("id"));
 				following.setSequence(element.getString("sequence"));
+				following.setFollowingUserId(element.getString("following_user_id"));
 				following.setUpdatedAt(element.getString("updated_at"));
+				following.setFollowedUserId(element.getString("followed_user_id"));
+				following.setId(element.getString("id"));
+				following.setIntro(element.getString("intro"));
+				following.setTitle(element.getString("title"));
+				following.setNick(element.getString("nick"));
+				following.setFollowingCount(element.getString("following_count"));
+				following.setFollowerCount(element.getString("follower_count"));
+				following.setTagCount(element.getString("tag_count"));
+				following.setUserid(element.getString("userid"));
+				following.setFollowed(element.getString("followed"));
+				following.setPostCount(element.getString("post_count"));
+				following.setStoreCount(element.getString("store_count"));
+				following.setFollowing(element.getString("following"));
 				followingList.add(following);
 			}
 		} catch (JSONException e1) {
