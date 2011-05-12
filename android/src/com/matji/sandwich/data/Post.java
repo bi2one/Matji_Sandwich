@@ -21,7 +21,6 @@ public class Post extends MatjiData{
 	private ArrayList<AttachFile> attach_files;
 	private ArrayList<Comment> comments;
 	private ArrayList<Like> likes;
-	private ArrayList<PostTag> post_tags;
 	private ArrayList<Tag> tags;
 	public void setId(String id) {
 		this.id = id;
@@ -130,15 +129,6 @@ public class Post extends MatjiData{
 	}
 	public void addLike(Like like){
 		this.likes.add(like);
-	}
-	public void setPost_tags(ArrayList<PostTag> post_tags) {
-		this.post_tags = post_tags;
-	}
-	public ArrayList<PostTag> getPost_tags() {
-		return post_tags;
-	}
-	public void addPostTag(PostTag post_tag){
-		this.post_tags.add(post_tag);
 	}
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
