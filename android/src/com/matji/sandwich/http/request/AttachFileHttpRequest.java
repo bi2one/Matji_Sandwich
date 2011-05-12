@@ -1,6 +1,5 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.AttachFileParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
@@ -63,8 +62,8 @@ public class AttachFileHttpRequest extends HttpRequest {
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
     		(isPost) ? 
-    				requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)
-    				:requestHttpResponseGet(serverDomain + "comments/" + action + ".json?", null, getHashtable); 
+    				requestHttpResponsePost(serverDomain + "attach_files/" + action + ".json?", null, postHashtable)
+    				:requestHttpResponseGet(serverDomain + "attach_files/" + action + ".json?", null, getHashtable); 
     	
 	
    		String resultBody = response.getHttpResponseBodyAsString();

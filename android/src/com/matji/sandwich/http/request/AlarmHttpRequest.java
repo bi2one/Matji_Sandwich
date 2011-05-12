@@ -1,6 +1,5 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.AlarmParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
@@ -35,8 +34,8 @@ public class AlarmHttpRequest extends HttpRequest {
     public ArrayList<MatjiData> request() throws MatjiException {
 	SimpleHttpResponse response = 
 		(isPost) ? 
-				requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)
-				:requestHttpResponseGet(serverDomain + "comments/" + action + ".json?", null, getHashtable); 
+				requestHttpResponsePost(serverDomain + "alarms/" + action + ".json?", null, postHashtable)
+				:requestHttpResponseGet(serverDomain + "alarms/" + action + ".json?", null, getHashtable); 
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";

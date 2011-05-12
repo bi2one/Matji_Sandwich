@@ -3,48 +3,48 @@ package com.matji.sandwich.data;
 import java.util.ArrayList;
 
 public class Post extends MatjiData{
-	private int id;
-	private int user_id;
+	private String id;
+	private String user_id;
 	private String store_id;
 	private String activity_id;
 	private String post;
-	private int image_count;
-	private int like_count;
-	private int comment_count;
-	private int tag_count;
+	private String image_count;
+	private String like_count;
+	private String comment_count;
+	private String tag_count;
 	private float lat;
 	private float lng;
-	private String from_where;
-	private int sequence;
+	private String from_where;	
+	private String created_at;
+	private String updated_at;
 	private ArrayList<Activity> activities;
 	private ArrayList<AttachFile> attach_files;
 	private ArrayList<Comment> comments;
 	private ArrayList<Like> likes;
 	private ArrayList<PostTag> post_tags;
 	private ArrayList<Tag> tags;
-		
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUserId(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getUser_id() {
+	public String getUserId() {
 		return user_id;
 	}
-	public void setStore_id(String store_id) {
+	public void setStoreId(String store_id) {
 		this.store_id = store_id;
 	}
-	public String getStore_id() {
+	public String getStoreId() {
 		return store_id;
 	}
-	public void setActivity_id(String activity_id) {
+	public void setActivityId(String activity_id) {
 		this.activity_id = activity_id;
 	}
-	public String getActivity_id() {
+	public String getActivityId() {
 		return activity_id;
 	}
 	public void setPost(String post) {
@@ -53,28 +53,28 @@ public class Post extends MatjiData{
 	public String getPost() {
 		return post;
 	}
-	public void setImage_count(int image_count) {
+	public void setImageCount(String image_count) {
 		this.image_count = image_count;
 	}
-	public int getImage_count() {
+	public String getImageCount() {
 		return image_count;
 	}
-	public void setLike_count(int like_count) {
+	public void setLikeCount(String like_count) {
 		this.like_count = like_count;
 	}
-	public int getLike_count() {
+	public String getLikeCount() {
 		return like_count;
 	}
-	public void setComment_count(int comment_count) {
+	public void setCommentCount(String comment_count) {
 		this.comment_count = comment_count;
 	}
-	public int getComment_count() {
+	public String getCommentCount() {
 		return comment_count;
 	}
-	public void setTag_count(int tag_count) {
+	public void setTagCount(String tag_count) {
 		this.tag_count = tag_count;
 	}
-	public int getTag_count() {
+	public String getTagCount() {
 		return tag_count;
 	}
 	public void setLat(float lat) {
@@ -89,17 +89,11 @@ public class Post extends MatjiData{
 	public float getLng() {
 		return lng;
 	}
-	public void setFrom_where(String from_where) {
+	public void setFromWhere(String from_where) {
 		this.from_where = from_where;
 	}
-	public String getFrom_where() {
+	public String getFromWhere() {
 		return from_where;
-	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
 	}
 	public void setActivities(ArrayList<Activity> activities) {
 		this.activities = activities;
@@ -154,5 +148,17 @@ public class Post extends MatjiData{
 	}
 	public void addTag(Tag tag){
 		this.tags.add(tag);
+	}
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
+	}
+	public String getCreatedAt() {
+		return created_at;
+	}
+	public void setUpdatedAt(String updated_at) {
+		this.updated_at = updated_at;
+	}
+	public String getUpdatedAt() {
+		return updated_at;
 	}
 }

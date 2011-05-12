@@ -1,7 +1,6 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.PostParser;
-import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.*;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -32,20 +31,22 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("post_id", post_id + "");
     }
     
-    public void actionNew(String post){
+    public void actionNew(String post, String access_token){
     	isPost = true;
     	action = "new";
     	
     	postHashtable.clear();
     	postHashtable.put("post", post);
+    	postHashtable.put("access_token", access_token);
     }
     
-    public void actionDelete(int post_id){
+    public void actionDelete(int post_id, String access_token){
     	isPost = true;
     	action = "delete";
     	
     	postHashtable.clear();
     	postHashtable.put("post_id",post_id + "");
+    	postHashtable.put("access_token",access_token + "");
     }
     
     public void actionUnlike(int post_id){
@@ -110,14 +111,18 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public ArrayList<MatjiData> request() throws MatjiException {
+    	parser = new PostParser();
     	SimpleHttpResponse response = 
     		(isPost) ? 
-    				requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)
-    				:requestHttpResponseGet(serverDomain + "comments/" + action + ".json?", null, getHashtable); 
+    				requestHttpResponsePost(serverDomain + "posts/" + action + ".json?", null, postHashtable)
+    				:requestHttpResponseGet(serverDomain + "posts/" + action + ".json?", null, getHashtable); 
 	
     	String resultBody = response.getHttpResponseBodyAsString();
     	String resultCode = response.getHttpStatusCode() + "";
 
-    	return parser.getData(resultBody);
+    	Log.d("Check", "resultBody: " + resultBody);
+		Log.d("Check", "resultCode: " + resultCode);
+
+		return parser.getData(resultBody);
     }
 }

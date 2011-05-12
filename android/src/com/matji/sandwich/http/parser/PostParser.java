@@ -22,19 +22,18 @@ public class PostParser extends MatjiDataParser{
 		for(int i=0 ; i < jsonArray.length() ; i++){
 		    element = jsonArray.getJSONObject(i);
 		    Post post = new Post();
-		    post.setId(element.getInt("id"));
-		    post.setUser_id(element.getInt("user_id"));
-		    post.setStore_id(element.getString("store_id"));
-		    post.setActivity_id(element.getString("activity_id"));
+		    post.setId(element.getString("id"));
+		    post.setUserId(element.getString("user_id"));
+		    post.setStoreId(element.getString("store_id"));
+		    post.setActivityId(element.getString("activity_id"));
 		    post.setPost(element.getString("post"));
-		    post.setImage_count(element.getInt("image_count"));
-		    post.setLike_count(element.getInt("like_count"));
-		    post.setComment_count(element.getInt("comment_count"));
-		    post.setTag_count(element.getInt("tag_count"));
+		    post.setImageCount(element.getString("image_count"));
+		    post.setLikeCount(element.getString("like_count"));
+		    post.setCommentCount(element.getString("comment_count"));
+		    post.setTagCount(element.getString("tag_count"));
 		    post.setLat(element.getLong("lat"));
 		    post.setLng(element.getLong("lng"));
-		    post.setFrom_where(element.getString("from_where"));
-		    post.setSequence(element.getInt("sequence"));
+		    post.setFromWhere(element.getString("from_where"));
 		    postList.add(post);
 		}
 	    } catch(JSONException e){

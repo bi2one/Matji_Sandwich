@@ -22,21 +22,21 @@ public class StoreParser extends MatjiDataParser{
 			    for(int i=0 ; i < jsonArray.length() ; i++){
 				element = jsonArray.getJSONObject(i);
 				Store store = new Store();
-				store.setId(element.getInt("id"));
+				store.setId(element.getString("id"));
 				store.setName(element.getString("name"));
-				store.setReg_user_id(element.getInt("reg_user_id"));
+				store.setRegUserId(element.getString("reg_user_id"));
 				store.setTel(element.getString("tel"));
 				store.setAddress(element.getString("address"));
-				store.setAdd_address(element.getString("add_address"));
+				store.setAddAddress(element.getString("add_address"));
 				store.setWebsite(element.getString("website"));
 				store.setText(element.getString("cover"));
 				store.setLat(element.getLong("lat"));
 				store.setLng(element.getLong("lng"));
-				store.setTag_count(element.getInt("tag_count"));
-				store.setPost_count(element.getInt("post_count"));
-				store.setImage_count(element.getInt("image_count"));
-				store.setLike_count(element.getInt("like_count"));
-				store.setBookmark_count(element.getInt("bookmark_count"));
+				store.setTagCount(element.getString("tag_count"));
+				store.setPostCount(element.getString("post_count"));
+				store.setImageCount(element.getString("image_count"));
+				store.setLikeCount(element.getString("like_count"));
+				store.setBookmarkCount(element.getString("bookmark_count"));
 //				store.setSequence(element.getInt("sequence"));
 				storeList.add(store);
 			    }

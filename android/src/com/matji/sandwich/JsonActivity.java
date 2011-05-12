@@ -4,8 +4,7 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.data.*;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.FoodHttpRequest;
-import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.*;
 import com.matji.sandwich.exception.MatjiException;
 
 import android.app.Activity;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 
 public class JsonActivity extends Activity implements Requestable{
 	HttpRequestManager manager;
+    private String access_token="7f07cb18e1ccfc1d5493f08f32ac51a7d64b222d";
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -26,19 +26,18 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	private void request() {
-		FoodHttpRequest request = new FoodHttpRequest();
+		PostHttpRequest request = new PostHttpRequest();
 //		request.actionDelete(32);
 //		request.actionNew(12296, "TEST1");
-		request.actionList(12296);
+		request.actionDelete(16931, access_token);
 //		request.actionLike(32);		
 		manager.request(request, 1);
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-//		Alarm foodData = (Alarm)data.get(0);
-//		Food foodData = (Food)data.get(0);
-//		Log.d("Matji", ""+foodData.getId());
-//		Log.d("Matji", "tag: " + tag);
+		Post foodData = (Post)data.get(0);
+		Log.d("Matji", ""+foodData.getId());
+		Log.d("Matji", "tag: " + tag);
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {

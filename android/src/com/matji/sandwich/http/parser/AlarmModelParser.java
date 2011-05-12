@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
-public class AlarmParser extends MatjiDataParser{
+public class AlarmModelParser extends MatjiDataParser{
     public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
 	ArrayList<MatjiData> alarmList = new ArrayList<MatjiData>();
 	JSONArray jsonArray;
@@ -22,11 +22,10 @@ public class AlarmParser extends MatjiDataParser{
 		for(int i=0 ; i < jsonArray.length() ; i++){
 		    element = jsonArray.getJSONObject(i);
 		    Alarm alarm = new Alarm();
-		    alarm.setId(element.getInt("id"));
-		    alarm.setReceived_user_id(element.getInt("received_user_id"));
-		    alarm.setSent_user_id(element.getInt("sent_user_id"));
-		    alarm.setAlarm_type(element.getString("alarm_type"));
-		    alarm.setSequence(element.getInt("sequence"));
+		    alarm.setId(element.getString("id"));
+		    alarm.setReceivedUserId(element.getString("received_user_id"));
+		    alarm.setSentUserId(element.getString("sent_user_id"));
+		    alarm.setAlarmType(element.getString("alarm_type"));
 		    alarmList.add(alarm);
 		}
 	    } catch(JSONException e){

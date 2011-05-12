@@ -1,39 +1,38 @@
 package com.matji.sandwich.data;
 
 public class AttachFile extends MatjiData{
-	private int id;
-	private int user_id;
+	private String id;
+	private String user_id;
 	private String store_id;
-	private int post_id;
+	private String post_id;
 	private String filename;
 	private String fullpath;
-	private int sequence;
 	private User user;
 	private Store store;
 	private Post post;
 	
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUserId(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getUser_id() {
+	public String getUserId() {
 		return user_id;
 	}
-	public void setStore_id(String store_id) {
+	public void setStoreId(String store_id) {
 		this.store_id = store_id;
 	}
-	public String getStore_id() {
+	public String getStoreId() {
 		return store_id;
 	}
-	public void setPost_id(int post_id) {
+	public void setPostId(String post_id) {
 		this.post_id = post_id;
 	}
-	public int getPost_id() {
+	public String getPostId() {
 		return post_id;
 	}
 	public void setFilename(String filename) {
@@ -47,12 +46,6 @@ public class AttachFile extends MatjiData{
 	}
 	public String getFullpath() {
 		return fullpath;
-	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
 	}
 	public void setUser(User user) {
 		this.user = user;
@@ -72,5 +65,4 @@ public class AttachFile extends MatjiData{
 	public Post getPost() {
 		return post;
 	}
-	
 }

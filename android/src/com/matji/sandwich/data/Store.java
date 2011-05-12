@@ -3,38 +3,32 @@ package com.matji.sandwich.data;
 import java.util.ArrayList;
 
 public class Store extends MatjiData{
-	private int id;
+	private String id;
 	private String name;
-	private int reg_user_id;
+	private String reg_user_id;
 	private String tel;
 	private String address;
 	private String add_address;
 	private String website;
 	private String text;
+	private String cover;
 	private float lat;
 	private float lng;
-	private int tag_count;
-	private int post_count;
-	private int image_count;
-	private int like_count;
-	private int bookmark_count;
-	private int sequence;
-	private ArrayList<Activity> activities;
-	private ArrayList<AttachFile> attach_files;
-	private ArrayList<Bookmark> bookmarks;
-	private ArrayList<Like> likes;
-	private ArrayList<Post> posts;
-	private ArrayList<StoreFood> store_foods;
-	private ArrayList<StoreTag> store_tags;
-	private ArrayList<Tag> tags;
-	private ArrayList<Url> urls;
-	private User user;
+	private String tag_count;
+	private String post_count;
+	private String image_count;
+	private String like_count;
+	private String bookmark_count;
+	private String like;
+	private String bookmark;
+	private String note;
+	private String object;
+	private ArrayList<User> users;
 	
-	
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	public void setName(String name) {
@@ -43,10 +37,10 @@ public class Store extends MatjiData{
 	public String getName() {
 		return name;
 	}
-	public void setReg_user_id(int reg_user_id) {
+	public void setRegUserId(String reg_user_id) {
 		this.reg_user_id = reg_user_id;
 	}
-	public int getReg_user_id() {
+	public String getRegUserId() {
 		return reg_user_id;
 	}
 	public void setTel(String tel) {
@@ -61,10 +55,10 @@ public class Store extends MatjiData{
 	public String getAddress() {
 		return address;
 	}
-	public void setAdd_address(String add_address) {
+	public void setAddAddress(String add_address) {
 		this.add_address = add_address;
 	}
-	public String getAdd_address() {
+	public String getAddAddress() {
 		return add_address;
 	}
 	public void setWebsite(String website) {
@@ -91,127 +85,70 @@ public class Store extends MatjiData{
 	public float getLng() {
 		return lng;
 	}
-	public void setTag_count(int tag_count) {
+	public void setTagCount(String tag_count) {
 		this.tag_count = tag_count;
 	}
-	public int getTag_count() {
+	public String getTagCount() {
 		return tag_count;
 	}
-	public void setPost_count(int post_count) {
+	public void setPostCount(String post_count) {
 		this.post_count = post_count;
 	}
-	public int getPost_count() {
+	public String getPostCount() {
 		return post_count;
 	}
-	public void setImage_count(int image_count) {
+	public void setImageCount(String image_count) {
 		this.image_count = image_count;
 	}
-	public int getImage_count() {
+	public String getImageCount() {
 		return image_count;
 	}
-	public void setLike_count(int like_count) {
+	public void setLikeCount(String like_count) {
 		this.like_count = like_count;
 	}
-	public int getLike_count() {
+	public String getLikeCount() {
 		return like_count;
 	}
-	public void setBookmark_count(int bookmark_count) {
+	public void setBookmarkCount(String bookmark_count) {
 		this.bookmark_count = bookmark_count;
 	}
-	public int getBookmark_count() {
+	public String getBookmarkCount() {
 		return bookmark_count;
 	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
+	public void setCover(String cover) {
+		this.cover = cover;
 	}
-	public int getSequence() {
-		return sequence;
+	public String getCover() {
+		return cover;
 	}
-	public void setActivities(ArrayList<Activity> activities) {
-		this.activities = activities;
+	public void setLike(String like) {
+		this.like = like;
 	}
-	public ArrayList<Activity> getActivities() {
-		return activities;
+	public String getLike() {
+		return like;
 	}
-	public void addActivity(Activity activity){
-		this.activities.add(activity);
+	public void setBookmark(String bookmark) {
+		this.bookmark = bookmark;
 	}
-	public void setAttach_files(ArrayList<AttachFile> attach_files) {
-		this.attach_files = attach_files;
+	public String getBookmark() {
+		return bookmark;
 	}
-	public ArrayList<AttachFile> getAttach_files() {
-		return attach_files;
+	public void setNote(String note) {
+		this.note = note;
 	}
-	public void addAttachFile(AttachFile attach_file){
-		this.attach_files.add(attach_file);
+	public String getNote() {
+		return note;
 	}
-	public void setLikes(ArrayList<Like> likes) {
-		this.likes = likes;
+	public void setObject(String object) {
+		this.object = object;
 	}
-	public ArrayList<Like> getLikes() {
-		return likes;
+	public String getObject() {
+		return object;
 	}
-	public void addLike(Like like){
-		this.likes.add(like);
+	public void setUsers(ArrayList<User> users) {
+		this.users = users;
 	}
-	public void setPosts(ArrayList<Post> posts) {
-		this.posts = posts;
-	}
-	public ArrayList<Post> getPosts() {
-		return posts;
-	}
-	public void addPost(Post post){
-		this.posts.add(post);
-	}
-	public void setTags(ArrayList<Tag> tags) {
-		this.tags = tags;
-	}
-	public ArrayList<Tag> getTags() {
-		return tags;
-	}
-	public void addTag(Tag tag){
-		this.tags.add(tag);
-	}
-	public void setBookmarks(ArrayList<Bookmark> bookmarks) {
-		this.bookmarks = bookmarks;
-	}
-	public ArrayList<Bookmark> getBookmarks() {
-		return bookmarks;
-	}
-	public void addBookmark(Bookmark bookmark){
-		this.bookmarks.add(bookmark);
-	}
-	public void setStore_foods(ArrayList<StoreFood> store_foods) {
-		this.store_foods = store_foods;
-	}
-	public ArrayList<StoreFood> getStore_foods() {
-		return store_foods;
-	}
-	public void addStoreFood(StoreFood store_food){
-		this.store_foods.add(store_food);
-	}
-	public void setStore_tags(ArrayList<StoreTag> store_tags) {
-		this.store_tags = store_tags;
-	}
-	public ArrayList<StoreTag> getStore_tags() {
-		return store_tags;
-	}
-	public void addStoreTag(StoreTag store_tag){
-		this.store_tags.add(store_tag);
-	}
-	public void setUrls(ArrayList<Url> urls) {
-		this.urls = urls;
-	}
-	public ArrayList<Url> getUrls() {
-		return urls;
-	}
-	public void addUrl(Url url){
-		this.urls.add(url);
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public User getUser() {
-		return user;
+	public ArrayList<User> getUsers() {
+		return users;
 	}
 }
