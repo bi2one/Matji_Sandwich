@@ -17,87 +17,88 @@ public class PostHttpRequest extends HttpRequest {
     private Hashtable<String, Object> postHashtable;
     private MatjiDataParser parser;
     private boolean isPost;
-    private float lat_sw,lat_ne,lng_sw,lng_ne;
-    private int post_id;
-    private int store_id;
-    private int user_id;
-    private String post;
     private String action;
-    private String access_token;
     
     public PostHttpRequest() {
-	parser = new PostParser();
-	getHashtable = new Hashtable<String, String>();
-	postHashtable = new Hashtable<String, Object>();
-	initParam();
+		getHashtable = new Hashtable<String, String>();
+		postHashtable = new Hashtable<String, Object>();
     }
 
     public void actionShow(int post_id){
+    	isPost = false;
+    	action = "show";
+    	
     	getHashtable.clear();
-    	this.isPost = false;
-    	this.post_id = post_id;
     	getHashtable.put("post_id", post_id + "");
     }
     
     public void actionNew(String post){
+    	isPost = true;
+    	action = "new";
+    	
     	postHashtable.clear();
-    	this.isPost = true;
-    	this.post = post;
     	postHashtable.put("post", post);
     }
     
     public void actionDelete(int post_id){
+    	isPost = true;
+    	action = "delete";
+    	
     	postHashtable.clear();
-    	this.isPost = true;
-    	this.post_id = post_id;
     	postHashtable.put("post_id",post_id + "");
     }
     
     public void actionUnlike(int post_id){
+    	isPost = true;
+    	action = "unlike";
+    	
     	postHashtable.clear();
-    	this.isPost = true;
-    	this.post_id = post_id;
     	postHashtable.put("post_id", post_id + "");
     }
     
     public void actionLike(int post_id){
+    	isPost = true;
+    	action = "like";
+    	
     	postHashtable.clear();
-    	this.isPost = true;
-    	this.post_id = post_id;
     	postHashtable.put("post_id", post_id + "");
     }
     
     public void actionList(){
+    	isPost = false;
+    	action = "list";
+    	
     	getHashtable.clear();
-    	this.isPost = false;
     }
     
     public void actionStoreList(int store_id){
+    	isPost = false;
+    	action = "store_list";
+    	
     	getHashtable.clear();
-    	this.isPost = false;
-    	this.store_id = store_id;
     	getHashtable.put("store_id",store_id + "");
     }
     
     public void actionUserList(int user_id){
+    	isPost = false;
+    	action = "user_list";
+    	
     	getHashtable.clear();
-    	this.isPost = false;
-    	this.user_id = user_id;
     	getHashtable.put("user_id", user_id + "");
     }
     
     public void actionMyList(){
+    	isPost = false;
+    	action = "my_list";
+    	
     	getHashtable.clear();
-    	this.isPost = false;
     }
     
     public void actionNearbyList(float lat_ne, float lat_sw, float lng_sw, float lng_ne){
+    	isPost = false;
+    	action = "nearby_list";
+    	
     	getHashtable.clear();
-    	this.isPost = false;
-    	this.lat_ne = lat_ne;
-    	this.lat_sw = lat_sw;
-    	this.lng_ne = lng_ne;
-    	this.lng_sw = lng_sw;
     	getHashtable.put("lat_ne", lat_ne + "");
     	getHashtable.put("lat_sw", lat_sw + "");
     	getHashtable.put("lng_ne", lng_ne + "");
@@ -108,16 +109,15 @@ public class PostHttpRequest extends HttpRequest {
     	
     }
     
-    public void initParam() {
-    	lat_sw = lat_ne = lng_sw = lng_ne = 0;
-    }
-
     public ArrayList<MatjiData> request() throws MatjiException {
-    SimpleHttpResponse response = requestHttpResponseGet(serverDomain + "posts/" + action + ".json", null, getHashtable);
+    	SimpleHttpResponse response = 
+    		(isPost) ? 
+    				requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)
+    				:requestHttpResponseGet(serverDomain + "comments/" + action + ".json?", null, getHashtable); 
 	
-	String resultBody = response.getHttpResponseBodyAsString();
-	String resultCode = response.getHttpStatusCode() + "";
+    	String resultBody = response.getHttpResponseBodyAsString();
+    	String resultCode = response.getHttpStatusCode() + "";
 
-	return parser.getData(resultBody);
+    	return parser.getData(resultBody);
     }
 }

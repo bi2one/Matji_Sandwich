@@ -27,7 +27,7 @@ public class JsonActivity extends Activity implements Requestable{
 
     private void request() {
     	AlarmHttpRequest request = new AlarmHttpRequest();
-    	request.setAction("list");
+    	request.actionList(1);
     	manager.request(request, 1);
     }
 

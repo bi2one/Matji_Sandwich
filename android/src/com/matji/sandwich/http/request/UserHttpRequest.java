@@ -13,31 +13,41 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class UserHttpRequest extends HttpRequest {
-    private Hashtable<String, String> hashtable;
+	private Hashtable<String, String> getHashtable;
+	private Hashtable<String, Object> postHashtable;
     private MatjiDataParser parser;
+    private String action;
+    private boolean isPost;
 
     public UserHttpRequest() {
-	parser = new UserParser();
-	hashtable = new Hashtable<String, String>();
-	initParam();
+    	getHashtable = new Hashtable<String, String>();
+    	postHashtable = new Hashtable<String, Object>();
     }
 
-    private void setPage(int page){
+    public void actionList(){
+    	isPost = false;
+    	action = "list";
+    	
+    	getHashtable.clear();
     }
     
-    public void initParam() {
-
+    public void actionShow(int user_id){
+    	isPost = false;
+    	action = "show";
+    	
+    	getHashtable.clear();
+    	getHashtable.put("user_id", user_id + "");
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
-	hashtable.clear();
+    	SimpleHttpResponse response = 
+			(isPost) ? 
+					requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)
+					:requestHttpResponseGet(serverDomain + "comments/" + action + ".json?", null, getHashtable); 
 
-
-	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, hashtable);
+    	String resultBody = response.getHttpResponseBodyAsString();
+    	String resultCode = response.getHttpStatusCode() + "";
 	
-	String resultBody = response.getHttpResponseBodyAsString();
-	String resultCode = response.getHttpStatusCode() + "";
-	
-	return parser.getData(resultBody);
+    	return parser.getData(resultBody);
     }
 }

@@ -13,27 +13,30 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class AlarmHttpRequest extends HttpRequest {
-    private Hashtable<String, String> hashtable;
-    private String action ;
+	private Hashtable<String, String> getHashtable;
+	private Hashtable<String, Object> postHashtable;
+	private boolean isPost;
+	private String action ;
     private MatjiDataParser parser;
 
     public AlarmHttpRequest() {
-	parser = new AlarmParser();
-	hashtable = new Hashtable<String, String>();
-	initParam();
+    	getHashtable = new Hashtable<String, String>();
+    	postHashtable = new Hashtable<String, Object>();
     }
 
-    public void setAction(String action){
-    	this.action = action;
-    }
-
-    public void initParam() {
+    public void actionList(int user_id){
+    	isPost = false;
+    	action = "list";
+    	
+    	getHashtable.clear();
+    	getHashtable.put("user_id", user_id + "");
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
-	hashtable.clear();
-
-	SimpleHttpResponse response = requestHttpResponseGet(serverDomain +"alarms/" + action + ".json", null, hashtable);
+	SimpleHttpResponse response = 
+		(isPost) ? 
+				requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)
+				:requestHttpResponseGet(serverDomain + "comments/" + action + ".json?", null, getHashtable); 
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
