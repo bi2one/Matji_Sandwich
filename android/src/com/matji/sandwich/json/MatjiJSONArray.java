@@ -11,7 +11,7 @@ public class MatjiJSONArray extends JSONArray {
 		super(data);
 	}
 	
-	public MatjiJSONObject getJSONObject(int index) throws JSONException {
+	public MatjiJSONObject getMatjiJSONObject(int index) throws JSONException {
 		try {
 			return (MatjiJSONObject) super.getJSONObject(index);
 		} catch (JSONException e) {

@@ -34,6 +34,7 @@ public class FoodParser extends MatjiDataParser{
 				food.setStoreId(element.getString("store_id"));
 				food.setUpdatedAt(element.getString("updated_at"));
 				food.setUserId(element.getString("user_id"));
+				foodList.add(food);
 			}
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
