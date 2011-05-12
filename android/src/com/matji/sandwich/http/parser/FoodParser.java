@@ -20,7 +20,7 @@ public class FoodParser extends MatjiDataParser{
 			MatjiJSONObject element;
 			foodList.clear();
 			for (int i = 0; i < jsonArray.length(); i++) {
-				element = jsonArray.getJSONObject(i);
+				element = jsonArray.getMatjiJSONObject(i);
 				Food food = new Food();
 				food.setBlind(element.getString("blind"));
 				food.setCreatedAt(element.getString("created_at"));

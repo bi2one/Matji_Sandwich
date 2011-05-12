@@ -6,6 +6,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
+import com.matji.sandwich.json.MatjiJSONArray;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,13 +15,13 @@ import org.json.JSONException;
 public class PostParser extends MatjiDataParser{
     public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
     	ArrayList<MatjiData> postList = new ArrayList<MatjiData>();
-    	JSONArray jsonArray;
+    	MatjiJSONArray jsonArray;
 	try {
-	    jsonArray = new JSONArray(data);
-	    try{
-		JSONObject element;
+	    jsonArray = new MatjiJSONArray(data);
+	    JSONObject element;
+	    postList.clear();
 		for(int i=0 ; i < jsonArray.length() ; i++){
-		    element = jsonArray.getJSONObject(i);
+		    element = jsonArray.getMatjiJSONObject(i);
 		    Post post = new Post();
 		    post.setId(element.getString("id"));
 		    post.setUserId(element.getString("user_id"));
@@ -34,11 +35,10 @@ public class PostParser extends MatjiDataParser{
 		    post.setLat(element.getLong("lat"));
 		    post.setLng(element.getLong("lng"));
 		    post.setFromWhere(element.getString("from_where"));
+		    post.setCreatedAt(element.getString("created_at"));
+		    post.setUpdatedAt(element.getString("updated_at"));
 		    postList.add(post);
 		}
-	    } catch(JSONException e){
-		throw new JSONMatjiException();
-	    }
 	} catch (JSONException e1) {
 	    // TODO Auto-generated catch block
 	    e1.printStackTrace();

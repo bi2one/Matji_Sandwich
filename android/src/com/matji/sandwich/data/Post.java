@@ -17,11 +17,7 @@ public class Post extends MatjiData{
 	private String from_where;	
 	private String created_at;
 	private String updated_at;
-	private ArrayList<Activity> activities;
-	private ArrayList<AttachFile> attach_files;
-	private ArrayList<Comment> comments;
-	private ArrayList<Like> likes;
-	private ArrayList<Tag> tags;
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -93,51 +89,6 @@ public class Post extends MatjiData{
 	}
 	public String getFromWhere() {
 		return from_where;
-	}
-	public void setActivities(ArrayList<Activity> activities) {
-		this.activities = activities;
-	}
-	public ArrayList<Activity> getActivities() {
-		return activities;
-	}
-	public void addActivity(Activity activity){
-		this.activities.add(activity);
-	}
-	public void setAttach_files(ArrayList<AttachFile> attach_files) {
-		this.attach_files = attach_files;
-	}
-	public ArrayList<AttachFile> getAttach_files() {
-		return attach_files;
-	}
-	public void addAttachFile(AttachFile attach_file){
-		this.attach_files.add(attach_file);
-	}
-	public void setComments(ArrayList<Comment> comments) {
-		this.comments = comments;
-	}
-	public ArrayList<Comment> getComments() {
-		return comments;
-	}
-	public void addComment(Comment comment){
-		this.comments.add(comment);
-	}
-	public void setLikes(ArrayList<Like> likes) {
-		this.likes = likes;
-	}
-	public ArrayList<Like> getLikes() {
-		return likes;
-	}
-	public void addLike(Like like){
-		this.likes.add(like);
-	}
-	public void setTags(ArrayList<Tag> tags) {
-		this.tags = tags;
-	}
-	public ArrayList<Tag> getTags() {
-		return tags;
-	}
-	public void addTag(Tag tag){
-		this.tags.add(tag);
 	}
 	public void setCreatedAt(String created_at) {
 		this.created_at = created_at;

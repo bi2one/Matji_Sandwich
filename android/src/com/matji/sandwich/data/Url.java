@@ -1,5 +1,5 @@
 package com.matji.sandwich.data;
 
-public class Url {
-
+public class Url extends MatjiData{
+	
 }

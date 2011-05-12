@@ -23,7 +23,7 @@ public class Store extends MatjiData{
 	private String bookmark;
 	private String note;
 	private String object;
-	private ArrayList<User> users;
+	private ArrayList<MatjiData> user;
 
 	public void setId(String id) {
 		this.id = id;
@@ -118,36 +118,6 @@ public class Store extends MatjiData{
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
-	public void setTag_count(String tag_count) {
-		this.tag_count = tag_count;
-	}
-	public String getTag_count() {
-		return tag_count;
-	}
-	public void setPost_count(String post_count) {
-		this.post_count = post_count;
-	}
-	public String getPost_count() {
-		return post_count;
-	}
-	public void setImage_count(String image_count) {
-		this.image_count = image_count;
-	}
-	public String getImage_count() {
-		return image_count;
-	}
-	public void setLike_count(String like_count) {
-		this.like_count = like_count;
-	}
-	public String getLike_count() {
-		return like_count;
-	}
-	public void setBookmark_count(String bookmark_count) {
-		this.bookmark_count = bookmark_count;
-	}
-	public String getBookmark_count() {
-		return bookmark_count;
-	}
 	public String getCover() {
 		return cover;
 	}
@@ -175,10 +145,10 @@ public class Store extends MatjiData{
 	public String getObject() {
 		return object;
 	}
-	public void setUsers(ArrayList<User> users) {
-		this.users = users;
+	public void setUser(ArrayList<MatjiData> user) {
+		this.user = user;
 	}
-	public ArrayList<User> getUsers() {
-		return users;
+	public ArrayList<MatjiData> getUser() {
+		return user;
 	}
 }
