@@ -19,12 +19,27 @@ public class Store extends MatjiData{
 	private String image_count;
 	private String like_count;
 	private String bookmark_count;
+<<<<<<< HEAD
 	private String like;
 	private String bookmark;
 	private String note;
 	private String object;
 	private ArrayList<User> users;
 	
+=======
+	private ArrayList<Activity> activities;
+	private ArrayList<AttachFile> attach_files;
+	private ArrayList<Bookmark> bookmarks;
+	private ArrayList<Like> likes;
+	private ArrayList<Post> posts;
+	private ArrayList<StoreFood> store_foods;
+	private ArrayList<StoreTag> store_tags;
+	private ArrayList<Tag> tags;
+	private ArrayList<Url> urls;
+	private User user;
+	
+	
+>>>>>>> 88467ab63d62393296f800f10d9c821b9818c76b
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -37,10 +52,17 @@ public class Store extends MatjiData{
 	public String getName() {
 		return name;
 	}
+<<<<<<< HEAD
 	public void setRegUserId(String reg_user_id) {
 		this.reg_user_id = reg_user_id;
 	}
 	public String getRegUserId() {
+=======
+	public void setReg_user_id(String reg_user_id) {
+		this.reg_user_id = reg_user_id;
+	}
+	public String getReg_user_id() {
+>>>>>>> 88467ab63d62393296f800f10d9c821b9818c76b
 		return reg_user_id;
 	}
 	public void setTel(String tel) {
@@ -85,6 +107,7 @@ public class Store extends MatjiData{
 	public float getLng() {
 		return lng;
 	}
+<<<<<<< HEAD
 	public void setTagCount(String tag_count) {
 		this.tag_count = tag_count;
 	}
@@ -117,6 +140,91 @@ public class Store extends MatjiData{
 	}
 	public void setCover(String cover) {
 		this.cover = cover;
+=======
+	public void setTag_count(String tag_count) {
+		this.tag_count = tag_count;
+	}
+	public String getTag_count() {
+		return tag_count;
+	}
+	public void setPost_count(String post_count) {
+		this.post_count = post_count;
+	}
+	public String getPost_count() {
+		return post_count;
+	}
+	public void setImage_count(String image_count) {
+		this.image_count = image_count;
+	}
+	public String getImage_count() {
+		return image_count;
+	}
+	public void setLike_count(String like_count) {
+		this.like_count = like_count;
+	}
+	public String getLike_count() {
+		return like_count;
+	}
+	public void setBookmark_count(String bookmark_count) {
+		this.bookmark_count = bookmark_count;
+	}
+	public String getBookmark_count() {
+		return bookmark_count;
+	}
+	public void setActivities(ArrayList<Activity> activities) {
+		this.activities = activities;
+	}
+	public ArrayList<Activity> getActivities() {
+		return activities;
+	}
+	public void addActivity(Activity activity){
+		this.activities.add(activity);
+	}
+	public void setAttach_files(ArrayList<AttachFile> attach_files) {
+		this.attach_files = attach_files;
+	}
+	public ArrayList<AttachFile> getAttach_files() {
+		return attach_files;
+	}
+	public void addAttachFile(AttachFile attach_file){
+		this.attach_files.add(attach_file);
+	}
+	public void setLikes(ArrayList<Like> likes) {
+		this.likes = likes;
+	}
+	public ArrayList<Like> getLikes() {
+		return likes;
+	}
+	public void addLike(Like like){
+		this.likes.add(like);
+	}
+	public void setPosts(ArrayList<Post> posts) {
+		this.posts = posts;
+	}
+	public ArrayList<Post> getPosts() {
+		return posts;
+	}
+	public void addPost(Post post){
+		this.posts.add(post);
+	}
+	public void setTags(ArrayList<Tag> tags) {
+		this.tags = tags;
+	}
+	public ArrayList<Tag> getTags() {
+		return tags;
+	}
+	public void addTag(Tag tag){
+		this.tags.add(tag);
+	}
+	public void setBookmarks(ArrayList<Bookmark> bookmarks) {
+		this.bookmarks = bookmarks;
+	}
+	public ArrayList<Bookmark> getBookmarks() {
+		return bookmarks;
+	}
+	public void addBookmark(Bookmark bookmark){
+		this.bookmarks.add(bookmark);
+>>>>>>> 88467ab63d62393296f800f10d9c821b9818c76b
 	}
 	public String getCover() {
 		return cover;

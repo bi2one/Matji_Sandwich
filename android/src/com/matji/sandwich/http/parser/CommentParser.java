@@ -13,11 +13,11 @@ import org.json.JSONException;
 
 public class CommentParser extends MatjiDataParser{
 	private String action;
-
+	
 	public CommentParser(String action) {
 		this.action = action;
 	}
-
+	
 	public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
 		ArrayList<MatjiData> commentList = new ArrayList<MatjiData>();
 		JSONArray jsonArray;
@@ -25,7 +25,7 @@ public class CommentParser extends MatjiDataParser{
 			jsonArray = new JSONArray(data);
 			try{
 				JSONObject element;
-				if (action.equals("new") & action.equals("list")) {
+				if (action.equals("new") || action.equals("list") ) {
 					for(int i=0 ; i < jsonArray.length() ; i++){
 						element = jsonArray.getJSONObject(i);
 						Comment comment = new Comment();
@@ -38,7 +38,6 @@ public class CommentParser extends MatjiDataParser{
 						commentList.add(comment);
 					}
 				}
-				else if (action.equals("delete"));
 			} catch(JSONException e){
 				throw new JSONMatjiException();
 			}

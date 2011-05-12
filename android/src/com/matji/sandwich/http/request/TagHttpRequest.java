@@ -17,6 +17,7 @@ public class TagHttpRequest extends HttpRequest {
 	private Hashtable<String, Object> postHashtable;
 	private MatjiDataParser parser;
 	private String action;
+//	private boolean isPost;
 
 	public TagHttpRequest() {
 		postHashtable = new Hashtable<String, Object>();
@@ -47,14 +48,14 @@ public class TagHttpRequest extends HttpRequest {
 		action = "user_tag_list";
 		
 		getHashtable.clear();
-		getHashtable.put("store_id", user_id+ "");
+		getHashtable.put("user_id", user_id+ "");
 	}
 	
 	public void actionPostTagList(int post_id) {
 		action = "post_tag_list";
 		
 		getHashtable.clear();
-		getHashtable.put("store_id", post_id + "");
+		getHashtable.put("post_id", post_id + "");
 	}
 	
 	public ArrayList<MatjiData> request() throws MatjiException {

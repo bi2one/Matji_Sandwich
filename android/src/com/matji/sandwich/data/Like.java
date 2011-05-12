@@ -1,27 +1,27 @@
 package com.matji.sandwich.data;
 
 public class Like extends MatjiData{
-	private int id;
-	private int user_id;
-	private int foreign_key;
+	private String id;
+	private String user_id;
+	private String foreign_key;
 	private String object;
-	private int sequence;
-	public void setId(int id) {
+	
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getUser_id() {
+	public String getUser_id() {
 		return user_id;
 	}
-	public void setForeign_key(int foreign_key) {
+	public void setForeign_key(String foreign_key) {
 		this.foreign_key = foreign_key;
 	}
-	public int getForeign_key() {
+	public String getForeign_key() {
 		return foreign_key;
 	}
 	public void setObject(String object) {
@@ -29,11 +29,5 @@ public class Like extends MatjiData{
 	}
 	public String getObject() {
 		return object;
-	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
 	}
 }

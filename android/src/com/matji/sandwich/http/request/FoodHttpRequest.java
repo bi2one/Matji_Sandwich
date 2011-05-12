@@ -18,7 +18,7 @@ public class FoodHttpRequest extends HttpRequest {
 	private String action;
 	private boolean isPost;
 
-	public FoodHttpRequest() {
+	public FoodHttpRequest() {		
 		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
 	}
@@ -59,8 +59,21 @@ public class FoodHttpRequest extends HttpRequest {
 		getHashtable.put("store_id", store_id + "");
 	}
 
-	public ArrayList<MatjiData> request() throws MatjiException {		
-		MatjiDataParser parser = new FoodParser(action);
+	public ArrayList<MatjiData> request() throws MatjiException {
+		// LIKE 는 FOREIGN KEY가 옴. 필요하면 나중에 변경
+		MatjiDataParser parser = null;
+		if (action.equals("new") || action.equals("list")) {
+			parser = new FoodParser();
+		}
+		
+		else if (action.equals("delete") || action.equals("like")) {
+			parser = new FoodParser();
+		}
+		
+		else {
+			// TODO action ERROR
+		}
+
 		SimpleHttpResponse response = 
 			(isPost) ? 
 					requestHttpResponsePost(serverDomain + "foods/" + action + ".json?", null, postHashtable)
