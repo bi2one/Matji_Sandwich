@@ -13,7 +13,7 @@ public class MatjiJSONObject extends JSONObject {
 			return null;
 		}
 	}
-	public String getJSONString(String key) throws JSONException {
+	public String getString(String key) throws JSONException {
 		try {
 			return super.getString(key);
 		} catch (JSONException e) {
@@ -21,9 +21,9 @@ public class MatjiJSONObject extends JSONObject {
 			return null;
 		}
 	}
-	public JSONObject getJSONObject(String key) throws JSONException {
+	public MatjiJSONObject getMatjiJSONObject(String key) throws JSONException {
 		try {
-			return super.getJSONObject(key);
+			return (MatjiJSONObject) super.getJSONObject(key);
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return null;

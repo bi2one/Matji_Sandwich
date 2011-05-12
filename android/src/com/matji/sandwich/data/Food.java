@@ -6,10 +6,11 @@ public class Food extends MatjiData{
 	private String like_count;
 	private String created_at;
 	private String sequence;
+	private String blind;
 	private String updated_at;
 	private String id;
 	private String store_id;
-	private ArrayList<Store> store;
+	private ArrayList<MatjiData> store;
 	private String like;
 	private String user_id;
 	private String food_id;
@@ -39,6 +40,14 @@ public class Food extends MatjiData{
 		return sequence;
 	}
 
+	public void setBlind(String blind) {
+		this.blind = blind;
+	}
+
+	public String getBlind() {
+		return blind;
+	}	
+	
 	public void setUpdatedAt(String updated_at) {
 		this.updated_at = updated_at;
 	}
@@ -63,11 +72,11 @@ public class Food extends MatjiData{
 		return store_id;
 	}
 
-	public void setStore(ArrayList<Store> store) {
+	public void setStore(ArrayList<MatjiData> store) {
 		this.store = store;
 	}
 
-	public ArrayList<Store> getStore() {
+	public ArrayList<MatjiData> getStore() {
 		return store;
 	}
 
@@ -101,5 +110,5 @@ public class Food extends MatjiData{
 
 	public String getName() {
 		return name;
-	}	
+	}
 }
