@@ -12,8 +12,13 @@ public class Post extends MatjiData{
 	private String like_count;
 	private String comment_count;
 	private String tag_count;
+	private String like;
 	private float lat;
 	private float lng;
+	private float lat_sw;
+	private float lat_ne;
+	private float lng_sw;
+	private float lng_ne;
 	private String from_where;	
 	private String created_at;
 	private String updated_at;
@@ -101,5 +106,35 @@ public class Post extends MatjiData{
 	}
 	public String getUpdatedAt() {
 		return updated_at;
+	}
+	public void setLatSw(float lat_sw) {
+		this.lat_sw = lat_sw;
+	}
+	public float getLatSw() {
+		return lat_sw;
+	}
+	public void setLatNe(float lat_ne) {
+		this.lat_ne = lat_ne;
+	}
+	public float getLatNe() {
+		return lat_ne;
+	}
+	public void setLngSw(float lng_sw) {
+		this.lng_sw = lng_sw;
+	}
+	public float getLngSw() {
+		return lng_sw;
+	}
+	public void setLngNe(float lng_ne) {
+		this.lng_ne = lng_ne;
+	}
+	public float getLngNe() {
+		return lng_ne;
+	}
+	public void setLike(String like) {
+		this.like = like;
+	}
+	public String getLike() {
+		return like;
 	}
 }
