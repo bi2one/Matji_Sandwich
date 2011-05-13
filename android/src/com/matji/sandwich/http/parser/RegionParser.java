@@ -16,7 +16,7 @@ public class RegionParser extends MatjiDataParser {
 		region.setLatNe(getDouble(object, "lat_ne"));
 		region.setLngNe(getDouble(object, "lng_ne"));
 		region.setDescription(getString(object, "description"));
-		region.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		region.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		
 		return region;
 	}

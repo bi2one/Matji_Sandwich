@@ -15,9 +15,9 @@ public class BookmarkParser extends MatjiDataParser {
 		bookmark.setUserId(getInt(object, "user_id"));
 		bookmark.setForeignKey(getInt(object, "foreign_key"));
 		bookmark.setObject(getString(object, "object"));
-		bookmark.setUser((User) new UserParser().getRawObject(getString(object, "user")));
-		bookmark.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
-		bookmark.setRegion((Region) new RegionParser().getRawObject(getString(object, "region")));
+		bookmark.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		bookmark.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
+		bookmark.setRegion((Region) new RegionParser().getRawObject(getObject(object, "region") + ""));
 		
 		return bookmark;
 	}

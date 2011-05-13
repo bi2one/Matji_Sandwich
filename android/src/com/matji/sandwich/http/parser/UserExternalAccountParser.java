@@ -13,7 +13,7 @@ public class UserExternalAccountParser extends MatjiDataParser {
 		externalAccount.setUserId(getInt(object, "user_id"));
 		externalAccount.setService(getString(object, "service"));
 		externalAccount.setData(getString(object, "data"));
-		externalAccount.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		externalAccount.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		
 		return externalAccount;
 	}

@@ -17,9 +17,9 @@ public class StoreFoodParser extends MatjiDataParser {
 		storeFood.setStoreId(getInt(object, "store_id"));
 		storeFood.setLikeCount(getInt(object, "like_count"));
 		storeFood.setBlind(getBoolean(object, "blind"));
-		storeFood.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
-		storeFood.setFood((Food) new FoodParser().getRawObject(getString(object, "food")));
-		storeFood.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		storeFood.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
+		storeFood.setFood((Food) new FoodParser().getRawObject(getObject(object, "food") + ""));
+		storeFood.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		
 		return storeFood;
 	}

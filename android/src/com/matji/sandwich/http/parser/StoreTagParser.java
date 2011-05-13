@@ -16,8 +16,8 @@ public class StoreTagParser extends MatjiDataParser {
 		storeTag.setCount(getInt(object, "count"));
 		storeTag.setCreatedAt(getString(object, "created_at"));
 		storeTag.setUpdatedAt(getString(object, "updated_at"));
-		storeTag.setTag((Tag) new TagParser().getRawObject(getString(object, "tag")));
-		storeTag.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
+		storeTag.setTag((Tag) new TagParser().getRawObject(getObject(object, "tag") + ""));
+		storeTag.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
 
 		return storeTag;
 	}

@@ -14,8 +14,8 @@ public class LikeParser extends MatjiDataParser {
 		like.setUserId(getInt(object, "user_id"));
 		like.setForeignKey(getString(object, "foreign_key"));
 		like.setObject(getString(object, "object"));
-		like.setUser((User) new UserParser().getRawObject(getString(object, "user")));
-		like.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
+		like.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		like.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
 		like.setCreatedAt(getString(object, "created_at"));
 		like.setUpdatedAt(getString(object, "updated_at"));
 		

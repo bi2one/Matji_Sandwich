@@ -13,7 +13,7 @@ public class UserMileageParser extends MatjiDataParser {
 		mileage.setUserId(getInt(object, "user_id"));
 		mileage.setTotalPoint(getInt(object, "total_point"));
 		mileage.setGrade(getString(object, "grade"));
-		mileage.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		mileage.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 
 		return mileage;
 	}

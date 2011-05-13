@@ -15,8 +15,8 @@ public class PostTagParser extends MatjiDataParser {
 		postTag.setPostId(getInt(object, "post_id"));
 		postTag.setCreatedAt(getString(object, "created_at"));
 		postTag.setUpdatedAt(getString(object, "updated_at"));
-		postTag.setTag((Tag) new TagParser().getRawObject(getString(object, "tag")));
-		postTag.setPost((Post) new PostParser().getRawObject(getString(object, "post")));
+		postTag.setTag((Tag) new TagParser().getRawObject(getObject(object, "tag") + ""));
+		postTag.setPost((Post) new PostParser().getRawObject(getObject(object, "post") + ""));
 
 		return postTag;
 	}

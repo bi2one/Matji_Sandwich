@@ -16,8 +16,8 @@ public class CommentParser extends MatjiDataParser {
 		comment.setPostId(getInt(object, "post_id"));
 		comment.setId(getInt(object, "id"));
 		comment.setUserId(getInt(object, "user_id"));
-		comment.setUser((User) new UserParser().getRawObject(getString(object, "user")));
-		comment.setPost((Post) new PostParser().getRawObject(getString(object, "post")));
+		comment.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		comment.setPost((Post) new PostParser().getRawObject(getObject(object, "post") + ""));
 		comment.setFromWhere(getString(object, "from_where"));
 		
 		return comment;

@@ -14,8 +14,8 @@ public class StoreDetailInfoLogParser extends MatjiDataParser {
 		infoLog.setStoreId(getInt(object, "store_id"));
 		infoLog.setUserId(getInt(object, "user_id"));
 		infoLog.setStatus(getString(object, "status"));
-		infoLog.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
-		infoLog.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		infoLog.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
+		infoLog.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 
 		return infoLog;
 	}

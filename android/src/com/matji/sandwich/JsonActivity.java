@@ -2,8 +2,6 @@
 
 package com.matji.sandwich;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.matji.sandwich.data.*;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.*;
@@ -13,7 +11,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.Hashtable;
 import java.util.ArrayList;
 
 public class JsonActivity extends Activity implements Requestable{
@@ -43,12 +40,12 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		Food foodData = (Food)data.get(0);
+		StoreFood foodData = (StoreFood)data.get(0);
 		Log.d("Matji", "" + foodData.getId());
-		Log.d("Matji", "name: " +  foodData.getName());
-		Log.d("Matji", "created_at: " +  foodData.getCreatedAt());
-		Log.d("Matji", "like_count: " +  foodData.getLikeCount());
-		Log.d("Matji", "updated_at: " +  foodData.getUpdatedAt());
+//		Log.d("Matji", "name: " +  foodData.getFood().getName());
+//		Log.d("Matji", "created_at: " +  foodData.getCreatedAt());
+//		Log.d("Matji", "like_count: " +  foodData.getLikeCount());
+//		Log.d("Matji", "updated_at: " +  foodData.getUpdatedAt());
 
 	}
 

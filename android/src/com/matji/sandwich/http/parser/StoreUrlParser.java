@@ -14,8 +14,8 @@ public class StoreUrlParser extends MatjiDataParser {
 		storeUrl.setUserId(getInt(object, "user_id"));
 		storeUrl.setStoreId(getInt(object, "store_id"));
 		storeUrl.setUrl(getString(object, "url"));
-		storeUrl.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
-		storeUrl.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		storeUrl.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
+		storeUrl.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		
 		return storeUrl;
 	}

@@ -24,9 +24,9 @@ public class PostParser extends MatjiDataParser {
 		post.setFromWhere(getString(object, "from_where"));
 		post.setCreatedAt(getString(object, "created_at"));
 		post.setUpdatedAt(getString(object, "updated_at"));
-		post.setUser((User) new UserParser().getRawObject(getString(object, "user")));
-		post.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
-		post.setActivity((Activity) new ActivityParser().getRawObject(getString(object, "activity")));
+		post.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		post.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
+		post.setActivity((Activity) new ActivityParser().getRawObject(getObject(object, "activity") + ""));
 		
 		return post;
 	}

@@ -23,8 +23,8 @@ public class FollowingParser extends MatjiDataParser {
 		following.setUserid(getString(object, "userid"));
 		following.setPostCount(getInt(object, "post_count"));
 		following.setStoreCount(getInt(object, "store_count"));
-		following.setFollowingUser((User) new UserParser().getRawObject(getString(object, "following_user")));
-		following.setFollowedUser((User) new UserParser().getRawObject(getString(object, "followed_user")));
+		following.setFollowingUser((User) new UserParser().getRawObject(getObject(object, "following_user") + ""));
+		following.setFollowedUser((User) new UserParser().getRawObject(getObject(object, "followed_user") + ""));
 		
 		return following;
 	}

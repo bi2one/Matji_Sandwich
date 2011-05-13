@@ -13,8 +13,8 @@ public class StoreDetailInfoParser extends MatjiDataParser {
 		info.setId(getInt(object, "id"));
 		info.setUserId(getInt(object, "user_id"));
 		info.setStoreId(getInt(object, "store_id"));
-		info.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
-		info.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		info.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
+		info.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		return info;
 	}
 }

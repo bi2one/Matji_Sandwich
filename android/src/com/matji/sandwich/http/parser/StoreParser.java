@@ -27,7 +27,7 @@ public class StoreParser extends MatjiDataParser {
 		store.setLikeCount(getInt(object, "like_count"));
 		store.setBookmarkCount(getInt(object, "bookmark_count"));
 		store.setFile((AttachFile) new AttachFileParser().getRawObject(getString(object, "file")));
-		store.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		store.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		
 		return store;
 	}

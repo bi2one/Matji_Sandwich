@@ -17,9 +17,9 @@ public class AttachFileParser extends MatjiDataParser{
 		attachFile.setPostId(getInt(object, "post_id"));
 		attachFile.setFilename(getString(object, "filename"));
 		attachFile.setFullpath(getString(object, "fullpath"));
-		attachFile.setUser((User) new UserParser().getRawObject(getString(object, "user")));
-		attachFile.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
-		attachFile.setPost((Post) new PostParser().getRawObject(getString(object, "post")));
+		attachFile.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		attachFile.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
+		attachFile.setPost((Post) new PostParser().getRawObject(getObject(object, "post") + ""));
 		attachFile.setCreatedAt(getString(object, "created_at"));
 		attachFile.setUpdatedAt(getString(object, "updated_at"));
 		

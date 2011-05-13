@@ -21,8 +21,8 @@ public class UserParser extends MatjiDataParser {
 		user.setStoreCount(getInt(object, "store_count"));
 		user.setFollowingCount(getInt(object, "following_count"));
 		user.setFollowerCount(getInt(object, "follower_count"));
-		user.setExternalAccount((UserExternalAccount) new UserExternalAccountParser().getRawObject(getString(object, "external_account")));
-		user.setMileage((UserMileage) new UserMileageParser().getRawObject(getString(object, "mileage")));
+		user.setExternalAccount((UserExternalAccount) new UserExternalAccountParser().getRawObject(getObject(object, "external_account") + ""));
+		user.setMileage((UserMileage) new UserMileageParser().getRawObject(getObject(object, "mileage") + ""));
 
 		return user;
 	}

@@ -21,7 +21,7 @@ import org.json.*;
 
 public abstract class MatjiDataParser {
 	protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
-	
+
 	public String validateData(String data) throws MatjiException {
 		try {
 			JSONObject json = new JSONObject(data);
@@ -37,11 +37,13 @@ public abstract class MatjiDataParser {
 			throw new JSONMatjiException();
 		}
 	}
-	
+
 	protected MatjiData getRawObject(String data) throws MatjiException {
 		JsonObject jsonObject = null;
 		JsonElement jsonElement = null;
 
+		if (isNull(data)) return null;
+		
 		try {			
 			JsonParser parser = new JsonParser();
 			jsonElement = parser.parse(data);
@@ -49,7 +51,6 @@ public abstract class MatjiDataParser {
 			e.printStackTrace();
 			throw new JSONMatjiException();
 		}
-
 		if (!isObject(jsonElement)){
 			throw new JSONMatjiException();
 		}
@@ -57,7 +58,7 @@ public abstract class MatjiDataParser {
 		jsonObject = jsonElement.getAsJsonObject();
 
 		Log.d("Matji", "MatjiDataParser::getRawObject : Parse success");	
-		
+
 		return getMatjiData(jsonObject);
 	}
 
@@ -65,7 +66,10 @@ public abstract class MatjiDataParser {
 		ArrayList<MatjiData> matjiDataList = new ArrayList<MatjiData>();
 		JsonArray jsonArray = null;
 		JsonElement jsonElement = null;
-		try {			
+
+		if (isNull(data)) return null;
+
+		try {
 			JsonParser parser = new JsonParser();
 			jsonElement = parser.parse(data);
 		} catch (JsonParseException e) {
@@ -84,26 +88,33 @@ public abstract class MatjiDataParser {
 		}
 
 		Log.d("Matji", "MatjiDataParser::getRawObjects : Parse success");	
-		
+
 		return matjiDataList;
 	}
-	
+
 	public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
 		if (data == null) return null;
 		String validData = validateData(data);
 		return getRawObjects(validData);
 	}
-	
+
 	public MatjiData parseToMatjiData(String data) throws MatjiException{
 		if (data == null) return null;
 		String validData = validateData(data);
 		return getRawObject(validData);		
 	}
-	
+
 	protected boolean isNull(JsonElement element) {
 		if (element == null || element instanceof JsonNull) {
 			return true;
 		}
+		return false;
+	}
+	
+	protected boolean isNull(String data) {
+		// TODO
+		if (data == null) return true;
+		else if (data.equals("null") || data.equals("NULL") || data.equals("Null")) return true;
 		return false;
 	}
 
@@ -119,44 +130,46 @@ public abstract class MatjiDataParser {
 
 		return (element instanceof JsonObject) ? true : false;
 	}
-	
+
 	protected boolean isPrimitive(JsonElement element) {
 		if (isNull(element)) return false;
 
 		return (element instanceof JsonPrimitive) ? true : false;
 	}
-	
+
 	protected int getInt(JsonObject object, String key) {
 		JsonElement element = object.get(key);
+		
 		return (isPrimitive(element)) ? element.getAsInt() : 0;
 	}
-	
+
 	protected double getDouble(JsonObject object, String key) {
 		JsonElement element = object.get(key);			
-		
+
 		return (isPrimitive(element)) ? element.getAsDouble() : 0.0;
 	}
-	
+
 	protected boolean getBoolean(JsonObject object, String key) {
 		JsonElement element = object.get(key);			
-		
+
 		return (isPrimitive(element)) ? element.getAsBoolean() : false;
 	}
-	
+
 	protected String getString(JsonObject object, String key) {
 		JsonElement element = object.get(key);
+
 		return (isPrimitive(element)) ? element.getAsString() : null;
 	}
-	
+
 	protected JsonObject getObject(JsonObject object, String key) {
 		JsonElement element = object.get(key);
 
-		return (isObject(element)) ? null : element.getAsJsonObject();	
+		return (isObject(element)) ? element.getAsJsonObject() : null;	
 	}
-	
+
 	protected JsonArray getArray (JsonObject object, String key) {
 		JsonElement element = object.get(key);
 
-		return (isArray(element)) ? null : element.getAsJsonArray();
+		return (isArray(element)) ? element.getAsJsonArray() : null;
 	}	
 }
