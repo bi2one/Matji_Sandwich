@@ -62,7 +62,7 @@ public abstract class MatjiDataParser {
 	}
 
 	protected ArrayList<MatjiData> getRawObjects(String data) throws MatjiException {
-		ArrayList<MatjiData> foodList = new ArrayList<MatjiData>();
+		ArrayList<MatjiData> matjiDataList = new ArrayList<MatjiData>();
 		JsonArray jsonArray = null;
 		JsonElement jsonElement = null;
 		try {			
@@ -80,12 +80,12 @@ public abstract class MatjiDataParser {
 		jsonArray = jsonElement.getAsJsonArray();
 
 		for (int i = 0; i < jsonArray.size(); i++) {
-			foodList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
+			matjiDataList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
 		}
 
 		Log.d("Matji", "MatjiDataParser::getRawObjects : Parse success");	
 		
-		return foodList;
+		return matjiDataList;
 	}
 	
 	public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
@@ -116,49 +116,47 @@ public abstract class MatjiDataParser {
 
 	protected boolean isObject(JsonElement element) {
 		if (isNull(element)) return false;
-		
+
 		return (element instanceof JsonObject) ? true : false;
 	}
 	
 	protected boolean isPrimitive(JsonElement element) {
 		if (isNull(element)) return false;
-		
+
 		return (element instanceof JsonPrimitive) ? true : false;
 	}
 	
 	protected int getInt(JsonObject object, String key) {
-		JsonElement element = object.get(key);			
-
+		JsonElement element = object.get(key);
 		return (isPrimitive(element)) ? element.getAsInt() : 0;
 	}
 	
 	protected double getDouble(JsonObject object, String key) {
 		JsonElement element = object.get(key);			
-
+		
 		return (isPrimitive(element)) ? element.getAsDouble() : 0.0;
 	}
 	
 	protected boolean getBoolean(JsonObject object, String key) {
 		JsonElement element = object.get(key);			
-	
+		
 		return (isPrimitive(element)) ? element.getAsBoolean() : false;
 	}
 	
 	protected String getString(JsonObject object, String key) {
-		JsonElement element = object.get(key);			
-
+		JsonElement element = object.get(key);
 		return (isPrimitive(element)) ? element.getAsString() : null;
 	}
 	
 	protected JsonObject getObject(JsonObject object, String key) {
 		JsonElement element = object.get(key);
-		
+
 		return (isObject(element)) ? null : element.getAsJsonObject();	
 	}
 	
 	protected JsonArray getArray (JsonObject object, String key) {
 		JsonElement element = object.get(key);
-		
+
 		return (isArray(element)) ? null : element.getAsJsonArray();
 	}	
 }

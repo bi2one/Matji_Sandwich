@@ -43,9 +43,13 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		Food foodData = (Food)data.get(0);
-		Log.d("Matji", "" + foodData.getId());
-		Log.d("matji", "name: " +  foodData.getId());
+//		Food foodData = (Food)data.get(0);
+//		Log.d("Matji", "" + foodData.getId());
+//		Log.d("Matji", "name: " +  foodData.getName());
+//		Log.d("Matji", "created_at: " +  foodData.getCreatedAt());
+//		Log.d("Matji", "like_count: " +  foodData.getLikeCount());
+//		Log.d("Matji", "updated_at: " +  foodData.getUpdatedAt());
+
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
