@@ -3,10 +3,9 @@ package com.matji.sandwich.data;
 public class Notice extends MatjiData{
 	private String start_date;
 	private String created_at;
-	private String sequence;
 	private String updated_at;
 	private String subject;
-	private String id;
+	private int id;
 	private String content;
 	private String target;
 	private String end_date;
@@ -26,15 +25,6 @@ public class Notice extends MatjiData{
 	public String getCreatedAt() {
 		return created_at;
 	}
-	
-	public void setSequence(String sequence) {
-		this.sequence = sequence;
-	}
-	
-	public String getSequence() {
-		return sequence;
-	}
-	
 	public void setUpdatedAt(String updated_at) {
 		this.updated_at = updated_at;
 	}
@@ -51,11 +41,11 @@ public class Notice extends MatjiData{
 		return subject;
 	}
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	

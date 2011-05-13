@@ -3,30 +3,29 @@ package com.matji.sandwich.data;
 import java.util.ArrayList;
 
 public class Message extends MatjiData{
-	private String id;
-	private String sent_user_id;
-	private String received_user_id;
+	private int id;
+	private int sent_user_id;
+	private int received_user_id;
 	private String message;
-	private String sent_userid;
-	private String sent_user_nick;
-	private ArrayList<MatjiData> sent_user;
+	private User sent_user;
+	private User received_user;
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setSentUserId(String sent_user_id) {
+	public void setSentUserId(int sent_user_id) {
 		this.sent_user_id = sent_user_id;
 	}
-	public String getSentUserId() {
+	public int getSentUserId() {
 		return sent_user_id;
 	}
-	public void setReceivedUserId(String received_user_id) {
+	public void setReceivedUserId(int received_user_id) {
 		this.received_user_id = received_user_id;
 	}
-	public String getReceivedUserId() {
+	public int getReceivedUserId() {
 		return received_user_id;
 	}
 	public void setMessage(String message) {
@@ -35,22 +34,16 @@ public class Message extends MatjiData{
 	public String getMessage() {
 		return message;
 	}
-	public void setSentUsers(ArrayList<MatjiData> sent_user) {
+	public void setSentUser(User sent_user) {
 		this.sent_user = sent_user;
 	}
-	public ArrayList<MatjiData> getSentUsers() {
+	public User getSentUser() {
 		return sent_user;
 	}
-	public void setSentUserid(String sent_userid) {
-		this.sent_userid = sent_userid;
+	public void setReceivedUser(User received_user) {
+		this.received_user = received_user;
 	}
-	public String getSentUserid() {
-		return sent_userid;
-	}
-	public void setSentUserNick(String sent_user_nick) {
-		this.sent_user_nick = sent_user_nick;
-	}
-	public String getSentUserNick() {
-		return sent_user_nick;
+	public User getReceivedUser() {
+		return received_user;
 	}
 }

@@ -1,38 +1,38 @@
 package com.matji.sandwich.data;
 
 public class AttachFile extends MatjiData{
-	private String id;
-	private String user_id;
-	private String store_id;
-	private String post_id;
+	private int id;
+	private int user_id;
+	private int store_id;
+	private int post_id;
 	private String filename;
 	private String fullpath;
 	private User user;
 	private Store store;
 	private Post post;
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setUserId(String user_id) {
+	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return user_id;
 	}
-	public void setStoreId(String store_id) {
+	public void setStoreId(int store_id) {
 		this.store_id = store_id;
 	}
-	public String getStoreId() {
+	public int getStoreId() {
 		return store_id;
 	}
-	public void setPostId(String post_id) {
+	public void setPostId(int post_id) {
 		this.post_id = post_id;
 	}
-	public String getPostId() {
+	public int getPostId() {
 		return post_id;
 	}
 	public void setFilename(String filename) {

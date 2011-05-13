@@ -5,7 +5,6 @@ public class StoreDetailInfo extends MatjiData{
 	private int user_id;
 	private int store_id;
 	private String note;
-	private int sequence;
 	private Store store;
 	private User user;
 	
@@ -15,16 +14,16 @@ public class StoreDetailInfo extends MatjiData{
 	public int getId() {
 		return id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
-	public int getUser_id() {
+	public int getUserId() {
 		return user_id;
 	}
-	public void setStore_id(int store_id) {
+	public void setStoreId(int store_id) {
 		this.store_id = store_id;
 	}
-	public int getStore_id() {
+	public int getStoreId() {
 		return store_id;
 	}
 	public void setNote(String note) {
@@ -32,12 +31,6 @@ public class StoreDetailInfo extends MatjiData{
 	}
 	public String getNote() {
 		return note;
-	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
 	}
 	public void setStore(Store store) {
 		this.store = store;

@@ -2,44 +2,33 @@ package com.matji.sandwich.data;
 
 public class Following extends MatjiData{
 	private String created_at;
-	private String sequence;
-	private String following_user_id;
+	private int following_user_id;
 	private String updated_at;
-	private String followed_user_id;
-	private String id;
+	private int followed_user_id;
+	private int id;
 	private String intro;
 	private String title;
 	private String nick;
-	private String following_count;
-	private String follower_count;
-	private String tag_count;
+	private int following_count;
+	private int follower_count;
+	private int tag_count;
 	private String userid;
-	private String followed;
-	private String post_count;
-	private String store_count;
-	private String following;
+	private int post_count;
+	private int store_count;
+	private User following_user;
+	private User followed_user;
 	
 	public void setCreatedAt(String created_at) {
 		this.created_at = created_at;
 	}
-	
 	public String getCreatedAt() {
 		return created_at;
 	}
-	
-	public void setSequence(String sequence) {
-		this.sequence = sequence;
-	}
-	
-	public String getSequence() {
-		return sequence;
-	}
-	
-	public void setFollowingUserId(String following_user_id) {
+	public void setFollowingUserId(int following_user_id) {
 		this.following_user_id = following_user_id;
 	}
 	
-	public String getFollowingUserId() {
+	public int getFollowingUserId() {
 		return following_user_id;
 	}
 
@@ -51,107 +40,86 @@ public class Following extends MatjiData{
 		return updated_at;
 	}
 
-	public void setFollowedUserId(String followed_user_id) {
+	public void setFollowedUserId(int followed_user_id) {
 		this.followed_user_id = followed_user_id;
 	}
 	
-	public String getFollowedUserId() {
+	public int  getFollowedUserId() {
 		return followed_user_id;
 	}
-	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-
 	public String getIntro() {
 		return intro;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public String getTitle() {
 		return title;
 	}
-
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
-
 	public String getNick() {
 		return nick;
 	}
-
-	public void setFollowingCount(String following_count) {
+	public void setFollowingCount(int following_count) {
 		this.following_count = following_count;
 	}
-
-	public String getFollowingCount() {
+	public int getFollowingCount() {
 		return following_count;
 	}
-
-	public void setFollowerCount(String follower_count) {
+	public void setFollowerCount(int follower_count) {
 		this.follower_count = follower_count;
 	}
-
-	public String getFollowerCount() {
+	public int getFollowerCount() {
 		return follower_count;
 	}
-
-	public void setTagCount(String tag_count) {
+	public void setTagCount(int tag_count) {
 		this.tag_count = tag_count;
 	}
-
-	public String getTagCount() {
+	public int getTagCount() {
 		return tag_count;
 	}
-
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-
 	public String getUserid() {
 		return userid;
 	}
-
-	public void setFollowed(String followed) {
-		this.followed = followed;
-	}
-
-	public String getFollowed() {
-		return followed;
-	}
-
-	public void setPostCount(String post_count) {
+	public void setPostCount(int post_count) {
 		this.post_count = post_count;
 	}
-
-	public String getPostCount() {
+	public int getPostCount() {
 		return post_count;
 	}
-
-	public void setStoreCount(String store_count) {
+	public void setStoreCount(int store_count) {
 		this.store_count = store_count;
 	}
-
-	public String getStoreCount() {
+	public int getStoreCount() {
 		return store_count;
 	}
-
-	public void setFollowing(String following) {
-		this.following = following;
+	public void setFollowingUser(User following_user) {
+		this.following_user = following_user;
 	}
 
-	public String getFollowing() {
-		return following;
+	public User getFollowingUser() {
+		return following_user;
+	}
+
+	public void setFollowedUser(User followed_user) {
+		this.followed_user = followed_user;
+	}
+
+	public User getFollowedUser() {
+		return followed_user;
 	}
 }

@@ -1,16 +1,15 @@
 package com.matji.sandwich.data;
 
-import java.util.ArrayList;
-
 public class Comment extends MatjiData{
 	private String comment;
 	private String created_at;
 	private String sequence;
 	private String updated_at;
-	private String post_id;
-	private String id;
-	private String user_id;
-	private ArrayList<MatjiData> user;
+	private int post_id;
+	private int id;
+	private int user_id;
+	private User user;
+	private Post post;
 	private String from_where;
 	
 	public void setComment(String comment) {
@@ -45,27 +44,27 @@ public class Comment extends MatjiData{
 		return updated_at;
 	}
 
-	public void setPostId(String post_id) {
+	public void setPostId(int post_id) {
 		this.post_id = post_id;
 	}
 
-	public String getPostId() {
+	public int getPostId() {
 		return post_id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setUserId(String user_id) {
+	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return user_id;
 	}
 
@@ -76,12 +75,18 @@ public class Comment extends MatjiData{
 	public String getFromWhere() {
 		return from_where;
 	}
+	public void setPost(Post post) {
+		this.post = post;
+	}
+	public Post getPost() {
+		return post;
+	}
 
-	public void setUser(ArrayList<MatjiData> user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
-	public ArrayList<MatjiData> getUser() {
+	public User getUser() {
 		return user;
 	}
 }

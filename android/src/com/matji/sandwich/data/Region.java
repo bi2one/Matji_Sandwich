@@ -8,7 +8,7 @@ public class Region extends MatjiData{
 	private float lat_ne;
 	private float lng_ne;
 	private String description;
-	private int sequence;
+	private User user;
 	
 	public void setId(int id) {
 		this.id = id;
@@ -16,34 +16,34 @@ public class Region extends MatjiData{
 	public int getId() {
 		return id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
-	public int getUser_id() {
+	public int getUserId() {
 		return user_id;
 	}
-	public void setLat_sw(float lat_sw) {
+	public void setLatSw(float lat_sw) {
 		this.lat_sw = lat_sw;
 	}
-	public float getLat_sw() {
+	public float getLatSw() {
 		return lat_sw;
 	}
-	public void setLng_sw(float lng_sw) {
+	public void setLngSw(float lng_sw) {
 		this.lng_sw = lng_sw;
 	}
-	public float getLng_sw() {
+	public float getLngSw() {
 		return lng_sw;
 	}
-	public void setLat_ne(float lat_ne) {
+	public void setLatNe(float lat_ne) {
 		this.lat_ne = lat_ne;
 	}
-	public float getLat_ne() {
+	public float getLatNe() {
 		return lat_ne;
 	}
-	public void setLng_ne(float lng_ne) {
+	public void setLngNe(float lng_ne) {
 		this.lng_ne = lng_ne;
 	}
-	public float getLng_ne() {
+	public float getLngNe() {
 		return lng_ne;
 	}
 	public void setDescription(String description) {
@@ -52,10 +52,10 @@ public class Region extends MatjiData{
 	public String getDescription() {
 		return description;
 	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public int getSequence() {
-		return sequence;
+	public User getUser() {
+		return user;
 	}
 }
