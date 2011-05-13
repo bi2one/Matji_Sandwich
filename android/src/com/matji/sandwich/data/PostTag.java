@@ -1,29 +1,37 @@
 package com.matji.sandwich.data;
 
 public class PostTag extends MatjiData{
-	private String tag;
+	private int id;
+	private int tag_id;
+	private int post_id;
 	private String created_at;
-	private String sequence;
 	private String updated_at;
-	private String id;
+	private Tag tag;
+	private Post post;
 	
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getTag() {
-		return tag;
+	public int getId() {
+		return id;
 	}
-	public void setCreated_at(String created_at) {
+	public void setTagId(int tag_id) {
+		this.tag_id = tag_id;
+	}
+	public int getTagId() {
+		return tag_id;
+	}
+	public void setPostId(int post_id) {
+		this.post_id = post_id;
+	}
+	public int getPostId() {
+		return post_id;
+	}
+	public void setCreatedAt(String created_at) {
 		this.created_at = created_at;
 	}
 	public String getCreatedAt() {
 		return created_at;
-	}
-	public void setSequence(String sequence) {
-		this.sequence = sequence;
-	}
-	public String getSequence() {
-		return sequence;
 	}
 	public void setUpdatedAt(String updated_at) {
 		this.updated_at = updated_at;
@@ -31,10 +39,16 @@ public class PostTag extends MatjiData{
 	public String getUpdatedAt() {
 		return updated_at;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
-	public String getId() {
-		return id;
+	public Tag getTag() {
+		return tag;
+	}
+	public void setPost(Post post) {
+		this.post = post;
+	}
+	public Post getPost() {
+		return post;
 	}
 }

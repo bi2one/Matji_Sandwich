@@ -3,10 +3,10 @@ package com.matji.sandwich.data;
 public class Region extends MatjiData{
 	private int id;
 	private int user_id;
-	private float lat_sw;
-	private float lng_sw;
-	private float lat_ne;
-	private float lng_ne;
+	private double lat_sw;
+	private double lng_sw;
+	private double lat_ne;
+	private double lng_ne;
 	private String description;
 	private User user;
 	
@@ -22,28 +22,28 @@ public class Region extends MatjiData{
 	public int getUserId() {
 		return user_id;
 	}
-	public void setLatSw(float lat_sw) {
+	public void setLatSw(double lat_sw) {
 		this.lat_sw = lat_sw;
 	}
-	public float getLatSw() {
+	public double getLatSw() {
 		return lat_sw;
 	}
-	public void setLngSw(float lng_sw) {
+	public void setLngSw(double lng_sw) {
 		this.lng_sw = lng_sw;
 	}
-	public float getLngSw() {
+	public double getLngSw() {
 		return lng_sw;
 	}
-	public void setLatNe(float lat_ne) {
+	public void setLatNe(double lat_ne) {
 		this.lat_ne = lat_ne;
 	}
-	public float getLatNe() {
+	public double getLatNe() {
 		return lat_ne;
 	}
-	public void setLngNe(float lng_ne) {
+	public void setLngNe(double lng_ne) {
 		this.lng_ne = lng_ne;
 	}
-	public float getLngNe() {
+	public double getLngNe() {
 		return lng_ne;
 	}
 	public void setDescription(String description) {

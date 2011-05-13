@@ -1,29 +1,43 @@
 package com.matji.sandwich.data;
 
-public class StoreTag extends MatjiData {
-	private String tag;
-	private String created_at;
-	private String sequence;
+public class StoreTag extends MatjiData{
+	private int id;
+	private int tag_id;
+	private int store_id;
+	private int count;
+	private String create_at;
 	private String updated_at;
-	private String id;
-	
-	public void setTag(String tag) {
-		this.tag = tag;
+	private Tag tag;
+	private Store store;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getTag() {
-		return tag;
+	public int getId() {
+		return id;
 	}
-	public void setCreated_at(String created_at) {
-		this.created_at = created_at;
+	public void setTagId(int tag_id) {
+		this.tag_id = tag_id;
 	}
-	public String getCreatedAt() {
-		return created_at;
+	public int getTagId() {
+		return tag_id;
 	}
-	public void setSequence(String sequence) {
-		this.sequence = sequence;
+	public void setStoreId(int store_id) {
+		this.store_id = store_id;
 	}
-	public String getSequence() {
-		return sequence;
+	public int getStoreId() {
+		return store_id;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCreateAt(String create_at) {
+		this.create_at = create_at;
+	}
+	public String getCreateAt() {
+		return create_at;
 	}
 	public void setUpdatedAt(String updated_at) {
 		this.updated_at = updated_at;
@@ -31,10 +45,16 @@ public class StoreTag extends MatjiData {
 	public String getUpdatedAt() {
 		return updated_at;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
-	public String getId() {
-		return id;
+	public Tag getTag() {
+		return tag;
+	}
+	public void setStore(Store store) {
+		this.store = store;
+	}
+	public Store getStore() {
+		return store;
 	}
 }

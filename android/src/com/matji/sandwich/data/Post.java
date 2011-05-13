@@ -10,12 +10,8 @@ public class Post extends MatjiData{
 	private int like_count;
 	private int comment_count;
 	private int tag_count;
-	private float lat;
-	private float lng;
-	private float lat_sw;
-	private float lat_ne;
-	private float lng_sw;
-	private float lng_ne;
+	private double lat;
+	private double lng;
 	private String from_where;	
 	private String created_at;
 	private String updated_at;
@@ -29,16 +25,16 @@ public class Post extends MatjiData{
 	public String getPost() {
 		return post;
 	}
-	public void setLat(float lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
-	public float getLat() {
+	public double getLat() {
 		return lat;
 	}
-	public void setLng(float lng) {
+	public void setLng(double lng) {
 		this.lng = lng;
 	}
-	public float getLng() {
+	public double getLng() {
 		return lng;
 	}
 	public void setFromWhere(String from_where) {
@@ -58,30 +54,6 @@ public class Post extends MatjiData{
 	}
 	public String getUpdatedAt() {
 		return updated_at;
-	}
-	public void setLatSw(float lat_sw) {
-		this.lat_sw = lat_sw;
-	}
-	public float getLatSw() {
-		return lat_sw;
-	}
-	public void setLatNe(float lat_ne) {
-		this.lat_ne = lat_ne;
-	}
-	public float getLatNe() {
-		return lat_ne;
-	}
-	public void setLngSw(float lng_sw) {
-		this.lng_sw = lng_sw;
-	}
-	public float getLngSw() {
-		return lng_sw;
-	}
-	public void setLngNe(float lng_ne) {
-		this.lng_ne = lng_ne;
-	}
-	public float getLngNe() {
-		return lng_ne;
 	}
 	public void setId(int id) {
 		this.id = id;

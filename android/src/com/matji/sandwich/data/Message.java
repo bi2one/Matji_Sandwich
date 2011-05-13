@@ -1,7 +1,5 @@
 package com.matji.sandwich.data;
 
-import java.util.ArrayList;
-
 public class Message extends MatjiData{
 	private int id;
 	private int sent_user_id;
@@ -9,6 +7,8 @@ public class Message extends MatjiData{
 	private String message;
 	private User sent_user;
 	private User received_user;
+	private String created_at;
+	private String updated_at;
 	
 	public void setId(int id) {
 		this.id = id;
@@ -45,5 +45,17 @@ public class Message extends MatjiData{
 	}
 	public User getReceivedUser() {
 		return received_user;
+	}
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
+	}
+	public String getCreatedAt() {
+		return created_at;
+	}
+	public void setUpdatedAt(String updated_at) {
+		this.updated_at = updated_at;
+	}
+	public String getUpdatedAt() {
+		return updated_at;
 	}
 }

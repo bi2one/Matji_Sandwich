@@ -5,7 +5,6 @@ public class UserExternalAccount extends MatjiData{
 	private int user_id;
 	private String service;
 	private String data;
-	private int sequence;	
 	private User user;
 	
 	public void setId(int id) {
@@ -32,17 +31,10 @@ public class UserExternalAccount extends MatjiData{
 	public String getData() {
 		return data;
 	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
-	}
 	public void setUser(User user) {
 		this.user = user;
 	}
 	public User getUser() {
 		return user;
 	}
-	
 }

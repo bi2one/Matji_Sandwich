@@ -1,40 +1,47 @@
 package com.matji.sandwich.data;
 
 public class UserTag extends MatjiData{
-	private String tag;
+	private int id;
+	private int tag_id;
+	private int user_id;
+	private int count;
 	private String created_at;
-	private String sequence;
 	private String updated_at;
-	private String id;
 	
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getTag() {
-		return tag;
+	public int getId() {
+		return id;
 	}
-	public void setCreated_at(String created_at) {
+	public void setTagId(int tag_id) {
+		this.tag_id = tag_id;
+	}
+	public int getTagId() {
+		return tag_id;
+	}
+	public void setUserId(int user_id) {
+		this.user_id = user_id;
+	}
+	public int getUserId() {
+		return user_id;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCreatedAt(String created_at) {
 		this.created_at = created_at;
 	}
 	public String getCreatedAt() {
 		return created_at;
-	}
-	public void setSequence(String sequence) {
-		this.sequence = sequence;
-	}
-	public String getSequence() {
-		return sequence;
 	}
 	public void setUpdatedAt(String updated_at) {
 		this.updated_at = updated_at;
 	}
 	public String getUpdatedAt() {
 		return updated_at;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getId() {
-		return id;
 	}
 }
