@@ -2,7 +2,6 @@ package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.FollowingParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
-import com.matji.sandwich.http.parser.StringMessageParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -39,7 +38,7 @@ public class FollowingHttpRequest extends HttpRequest {
 	public void actionDelete(int followed_user_id) {
 		isPost = true;
 		action = "delete";
-		parser = new StringMessageParser();
+//		parser = new StringMessageParser();
 				
 		postHashtable.clear();
 		postHashtable.put("followed_user_id", followed_user_id);

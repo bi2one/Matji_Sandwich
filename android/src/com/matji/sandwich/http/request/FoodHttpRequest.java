@@ -3,7 +3,6 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.FoodParser;
 import com.matji.sandwich.http.parser.LikeParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
-import com.matji.sandwich.http.parser.StringMessageParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -40,7 +39,7 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionDelete(int store_food_id) {
 		isPost = true;
 		action = "delete";
-		parser = new StringMessageParser();
+//		parser = new StringMessageParser();
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
@@ -49,7 +48,7 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionUnlike(int store_food_id) {
 		isPost = true;
 		action = "unlike";
-		parser = new StringMessageParser();
+//		parser = new StringMessageParser();
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
