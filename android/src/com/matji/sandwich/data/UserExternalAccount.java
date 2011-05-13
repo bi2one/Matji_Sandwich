@@ -13,7 +13,7 @@ public class UserExternalAccount extends MatjiData{
 	public int getId() {
 		return id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
 	public int getUser_id() {

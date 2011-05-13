@@ -24,8 +24,8 @@ public class StoreFoodLogParser extends MatjiDataParser{
 		    element = jsonArray.getJSONObject(i);
 		    StoreFoodLog store_food_log = new StoreFoodLog();
 		    store_food_log.setId(element.getInt("id"));
-		    store_food_log.setStore_id(element.getInt("store_id"));
-		    store_food_log.setUser_id(element.getInt("user_id"));
+		    store_food_log.setStoreId(element.getInt("store_id"));
+		    store_food_log.setUserId(element.getInt("user_id"));
 		    store_food_log.setAction(element.getString("action"));
 		    store_food_log.setFood_name(element.getString("food_name"));
 		    store_food_log.setSequence(element.getInt("sequence"));

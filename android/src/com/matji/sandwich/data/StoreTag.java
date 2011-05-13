@@ -33,7 +33,7 @@ public class StoreTag extends MatjiData{
 	public int getCount() {
 		return count;
 	}
-	public void setCreateAt(String create_at) {
+	public void setCreatedAt(String create_at) {
 		this.create_at = create_at;
 	}
 	public String getCreateAt() {

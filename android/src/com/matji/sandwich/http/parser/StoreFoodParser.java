@@ -1,68 +1,26 @@
 package com.matji.sandwich.http.parser;
 
-import java.util.ArrayList;
-
 import com.google.gson.JsonObject;
+import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.JSONMatjiException;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONException;
-
-public class StoreFoodParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
-    	ArrayList<MatjiData> store_foodList = new ArrayList<MatjiData>();
-    	JSONArray jsonArray;
-	try {
-	    jsonArray = new JSONArray(data);
-	    try{
-		JSONObject element;
-		for(int i=0 ; i < jsonArray.length() ; i++){
-		    element = jsonArray.getJSONObject(i);
-		    StoreFood store_food = new StoreFood();
-		    store_food.setId(element.getInt("id"));
-		    store_food.setUser_id(element.getInt("user_id"));
-		    store_food.setFood_id(element.getInt("food_id"));
-		    store_food.setStore_id(element.getInt("store_id"));
-		    store_food.setLike_count(element.getInt("like_count"));
-		    store_food.setBlind(element.getInt("blind"));
-		    store_food.setSequence(element.getInt("sequence"));
-		    store_foodList.add(store_food);
-		}
-	    } catch(JSONException e){
-		throw new JSONMatjiException();
-	    }
-	} catch (JSONException e1) {
-	    // TODO Auto-generated catch block
-	    e1.printStackTrace();
-	}
-	return store_foodList;
-    }
-
-    public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
-	String validData = validateData(data);
-	return getRawData(validData);
-    }
-
-	@Override
-	protected ArrayList<MatjiData> getRawObjects(String data)
-			throws MatjiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected MatjiData getRawObject(String data) throws MatjiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected MatjiData getMatjiData(JsonObject object) {
-		// TODO Auto-generated method stub
-		return null;
+public class StoreFoodParser extends MatjiDataParser {
+	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
+		StoreFood storeFood = new StoreFood();
+		storeFood.setId(getInt(object, "id"));
+		storeFood.setUserId(getInt(object, "user_id"));
+		storeFood.setFoodId(getInt(object, "food_id"));
+		storeFood.setStoreId(getInt(object, "store_id"));
+		storeFood.setLikeCount(getInt(object, "like_count"));
+		storeFood.setBlind(getInt(object, "blind"));
+		storeFood.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
+		storeFood.setFood((Food) new FoodParser().getRawObject(getString(object, "food")));
+		storeFood.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		
+		return storeFood;
 	}
 }

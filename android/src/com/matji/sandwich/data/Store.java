@@ -2,7 +2,7 @@ package com.matji.sandwich.data;
 
 public class Store extends MatjiData{
 	private int id;
-	private int name;
+	private String name;
 	private int reg_user_id;
 	private String tel;
 	private String address;
@@ -74,10 +74,10 @@ public class Store extends MatjiData{
 	public int getId() {
 		return id;
 	}
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 	public void setRegUserId(int reg_user_id) {
