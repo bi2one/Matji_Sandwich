@@ -1,66 +1,24 @@
 package com.matji.sandwich.http.parser;
 
-import java.util.ArrayList;
-
 import com.google.gson.JsonObject;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Bookmark;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Region;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.JSONMatjiException;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONException;
-
-public class BookmarkParser extends MatjiDataParser{
-    public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
-    	ArrayList<MatjiData> bookmarkList = new ArrayList<MatjiData>();
-    	JSONArray jsonArray;
-	try {
-	    jsonArray = new JSONArray(data);
-	    try{
-		JSONObject element;
-		for(int i=0 ; i < jsonArray.length() ; i++){
-		    element = jsonArray.getJSONObject(i);
-		    Bookmark bookmark = new Bookmark();
-		    bookmark.setId(element.getInt("id"));
-		    bookmark.setUser_id(element.getInt("user_id"));
-		    bookmark.setForeign_key(element.getInt("foreign_key"));
-		    bookmark.setObject(element.getString("object"));
-		    bookmark.setSequence(element.getInt("sequence"));
-		    bookmarkList.add(bookmark);
-		}
-	    } catch(JSONException e){
-		throw new JSONMatjiException();
-	    }
-	} catch (JSONException e1) {
-	    // TODO Auto-generated catch block
-	    e1.printStackTrace();
-	}
-	return bookmarkList;
-    }
-
-    public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
-	String validData = validateData(data);
-	return getRawData(validData);
-    }
-
-	@Override
-	protected ArrayList<MatjiData> getRawObjects(String data)
-			throws MatjiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected MatjiData getRawObject(String data) throws MatjiException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected MatjiData getMatjiData(JsonObject object) {
-		// TODO Auto-generated method stub
-		return null;
+public class BookmarkParser extends MatjiDataParser {
+	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
+		Bookmark bookmark = new Bookmark();
+		bookmark.setId(getInt(object, "id"));
+		bookmark.setUserId(getInt(object, "user_id"));
+		bookmark.setForeignKey(getInt(object, "foreign_key"));
+		bookmark.setObject(getString(object, "object"));
+		bookmark.setUser((User) new UserParser().getRawObject(getString(object, "user")));
+		bookmark.setStore((Store) new StoreParser().getRawObject(getString(object, "store")));
+		bookmark.setRegion((Region) new RegionParser().getRawObject(getString(object, "region")));
+		
+		return bookmark;
 	}
 }

@@ -67,7 +67,7 @@ public class StoreParser extends MatjiDataParser{
 	}
 
 	@Override
-	protected MatjiData getRawObject(String data) throws MatjiException {
+	protected MatjiData getRawObject(String data) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,7 +3,6 @@ package com.matji.sandwich.data;
 public class Comment extends MatjiData{
 	private String comment;
 	private String created_at;
-	private String sequence;
 	private String updated_at;
 	private int post_id;
 	private int id;
@@ -26,14 +25,6 @@ public class Comment extends MatjiData{
 	
 	public String getCreatedAt() {
 		return created_at;
-	}
-
-	public void setSequence(String sequence) {
-		this.sequence = sequence;
-	}
-
-	public String getSequence() {
-		return sequence;
 	}
 	
 	public void setUpdatedAt(String updated_at) {

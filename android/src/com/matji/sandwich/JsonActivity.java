@@ -27,18 +27,15 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	private void request() {
-		// Code 0 일 때...
-		// Object 속에 Object 있을 땐 Array가 아니라 Object 1개만 옴..
-		// result가 Array가 아니라 Object 1개만 올때..
 		FoodHttpRequest request = new FoodHttpRequest();
 //		FollowingHttpRequest request = new FollowingHttpRequest();
 //		CommentHttpRequest request = new CommentHttpRequest();
 //		NoticeHttpRequest request = new NoticeHttpRequest();
 //		TagHttpRequest request = new TagHttpRequest();
-		request.actionList(12296);
+//		request.actionList(12296);
 //		request.actionList(16874);
 //		request.actionNew(16874, "테스트합니다 @Android", "ANDROID");
-//		request.actionNew(12296, "TEST3");
+		request.actionNew(12296, "육개장");
 //		request.actionDelete(16931);
 //		request.actionLike(32);		
 //		request.actionDelete(34);		
@@ -46,9 +43,9 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-//		Post foodData = (Post)data.get(0);
-//		Log.d("Matji", "" + foodData.getId());
-//		Log.d("Matji", "tag: " + tag);
+		Food foodData = (Food)data.get(0);
+		Log.d("Matji", "" + foodData.getId());
+		Log.d("matji", "name: " +  foodData.getName());
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {

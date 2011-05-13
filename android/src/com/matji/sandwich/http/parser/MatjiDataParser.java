@@ -1,9 +1,13 @@
 package com.matji.sandwich.http.parser;
 
+import android.util.Log;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -16,11 +20,9 @@ import java.util.ArrayList;
 import org.json.*;
 
 public abstract class MatjiDataParser {
-	protected abstract ArrayList<MatjiData> getRawObjects(String data) throws MatjiException;
-	protected abstract MatjiData getRawObject(String data) throws MatjiException;	
-	protected abstract MatjiData getMatjiData(JsonObject object);
+	protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
 	
-	public String validateData(String data) throws MatjiException{
+	public String validateData(String data) throws MatjiException {
 		try {
 			JSONObject json = new JSONObject(data);
 			int code = json.getInt("code");
@@ -34,6 +36,56 @@ public abstract class MatjiDataParser {
 		} catch (JSONException e) {
 			throw new JSONMatjiException();
 		}
+	}
+	
+	protected MatjiData getRawObject(String data) throws MatjiException {
+		JsonObject jsonObject = null;
+		JsonElement jsonElement = null;
+
+		try {			
+			JsonParser parser = new JsonParser();
+			jsonElement = parser.parse(data);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+			throw new JSONMatjiException();
+		}
+
+		if (!isObject(jsonElement)){
+			throw new JSONMatjiException();
+		}
+
+		jsonObject = jsonElement.getAsJsonObject();
+
+		Log.d("Matji", "MatjiDataParser::getRawObject : Parse success");	
+		
+		return getMatjiData(jsonObject);
+	}
+
+	protected ArrayList<MatjiData> getRawObjects(String data) throws MatjiException {
+		ArrayList<MatjiData> foodList = new ArrayList<MatjiData>();
+		JsonArray jsonArray = null;
+		JsonElement jsonElement = null;
+		try {			
+			JsonParser parser = new JsonParser();
+			jsonElement = parser.parse(data);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+			throw new JSONMatjiException();
+		}
+
+		if (!isArray(jsonElement)) {
+			throw new JSONMatjiException();
+		}
+
+		jsonArray = jsonElement.getAsJsonArray();
+
+		for (int i = 0; i < jsonArray.size(); i++) {
+			foodList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
+		}
+
+		Log.d("Matji", "MatjiDataParser::getRawObjects : Parse success");	
+		
+		return foodList;
 	}
 	
 	public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
