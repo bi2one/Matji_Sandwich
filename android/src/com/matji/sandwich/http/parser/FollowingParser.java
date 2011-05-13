@@ -2,6 +2,8 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Following;
 import com.matji.sandwich.exception.MatjiException;
@@ -18,7 +20,7 @@ public class FollowingParser extends MatjiDataParser{
 		try {
 			jsonArray = new MatjiJSONArray(data);
 			MatjiJSONObject element;
-			for (int i=0 ; i < jsonArray.length(); i++) {
+			for (int i = 0 ; i < jsonArray.length(); i++) {
 				element = jsonArray.getMatjiJSONObject(i);
 				Following following = new Following();
 				following.setCreatedAt(element.getString("created_at"));
@@ -44,6 +46,8 @@ public class FollowingParser extends MatjiDataParser{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		Log.d("Matji", "FollowingParser: Parsing success");
+		
 		return followingList;
 	}
 

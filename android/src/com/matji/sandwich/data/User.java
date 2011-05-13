@@ -1,7 +1,5 @@
 package com.matji.sandwich.data;
 
-import java.util.ArrayList;
-
 public class User extends MatjiData{
 	private String id;
 	private String userid;

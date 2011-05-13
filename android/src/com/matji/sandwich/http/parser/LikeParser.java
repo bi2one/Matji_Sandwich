@@ -22,11 +22,11 @@ public class LikeParser extends MatjiDataParser{
 		for(int i=0 ; i < jsonArray.length() ; i++){
 		    element = jsonArray.getJSONObject(i);
 		    Like like = new Like();
-		    like.setId(element.getInt("id"));
-		    like.setUser_id(element.getInt("user_id"));
-		    like.setForeign_key(element.getInt("foreign_key"));
-		    like.setObject(element.getString("object"));
-		    like.setSequence(element.getInt("sequence"));
+//		    like.setId(element.getInt("id"));
+//		    like.setUser_id(element.getInt("user_id"));
+//		    like.setForeign_key(element.getInt("foreign_key"));
+//		    like.setObject(element.getString("object"));
+//		    like.setSequence(element.getInt("sequence"));
 		    likeList.add(like);
 		}
 	    } catch(JSONException e){

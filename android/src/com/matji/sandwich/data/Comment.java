@@ -10,8 +10,8 @@ public class Comment extends MatjiData{
 	private String post_id;
 	private String id;
 	private String user_id;
-	private String from_where;
 	private ArrayList<MatjiData> user;
+	private String from_where;
 	
 	public void setComment(String comment) {
 		this.comment = comment;

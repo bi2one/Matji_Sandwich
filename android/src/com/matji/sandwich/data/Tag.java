@@ -16,7 +16,7 @@ public class Tag extends MatjiData{
 	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
-	public String getCreated_at() {
+	public String getCreatedAt() {
 		return created_at;
 	}
 	public void setSequence(String sequence) {

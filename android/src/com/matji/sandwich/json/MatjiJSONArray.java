@@ -2,20 +2,20 @@ package com.matji.sandwich.json;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.matji.sandwich.exception.JSONMatjiException;
 
 public class MatjiJSONArray extends JSONArray {
+
+	// TODO 나중에 수정 할 수 있으면 수정
 	public MatjiJSONArray(String data) throws JSONException {
 		super(data);
 	}
 	
-	public MatjiJSONObject getMatjiJSONObject(int index) throws JSONException {
+	public MatjiJSONObject getMatjiJSONObject(int index) {
 		try {
-			return (MatjiJSONObject) super.getJSONObject(index);
+			return new MatjiJSONObject(super.getJSONObject(index));
 		} catch (JSONException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
