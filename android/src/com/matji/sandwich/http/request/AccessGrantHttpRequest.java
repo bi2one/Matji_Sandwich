@@ -41,6 +41,6 @@ public class AccessGrantHttpRequest  extends HttpRequest {
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
 	
-	return parser.getData(resultBody);
+	return parser.parseToMatjiDataList(resultBody);
     }
 }

@@ -82,6 +82,6 @@ public class FollowingHttpRequest extends HttpRequest {
 		Log.d("Matji", "FollowingHttpRequest resultBody: " + resultBody);
 		Log.d("Matji", "FollowingHttpRequest resultCode: " + resultCode);
 
-		return parser.getData(resultBody);
+		return parser.parseToMatjiDataList(resultBody);
 	}
 }

@@ -2,6 +2,7 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
@@ -42,7 +43,7 @@ public class StoreParser extends MatjiDataParser{
 				store.setBookmark(element.getString("bookmark"));
 				store.setNote(element.getString("note"));
 				store.setObject(element.getString("object"));
-				store.setUser((new UserParser()).getData(element.getString("user")));
+				store.setUser((new UserParser()).parseToMatjiDataList(element.getString("user")));
 				storeList.add(store);
 			    }
 		} catch (JSONException e1) {
@@ -52,9 +53,28 @@ public class StoreParser extends MatjiDataParser{
 	return storeList;
     }
 
-	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+	public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
 		if (data == null) return null;
 		String validData = validateData(data);
 		return getRawData(validData);
+	}
+
+	@Override
+	protected ArrayList<MatjiData> getRawObjects(String data)
+			throws MatjiException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected MatjiData getRawObject(String data) throws MatjiException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected MatjiData getMatjiData(JsonObject object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

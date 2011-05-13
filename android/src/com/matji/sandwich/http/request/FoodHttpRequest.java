@@ -88,6 +88,6 @@ public class FoodHttpRequest extends HttpRequest {
 		Log.d("Matji", "FoodHttpRequest resultBody: " + resultBody);
 		Log.d("Matji", "FoodHttpRequest resultCode: " + resultCode);
 	
-		return parser.getData(resultBody);
+		return parser.parseToMatjiDataList(resultBody);
 	}
 }

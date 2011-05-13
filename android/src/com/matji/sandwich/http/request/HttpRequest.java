@@ -18,9 +18,9 @@ import android.content.Context;
 
 public abstract class HttpRequest {
     protected Context context = null;
-    protected String serverDomain = "https://ygmaster.net/"; 
+    protected String serverDomain = "http://api.matji.com/"; 
 //    protected String serverDomain = "http://14.63.213.202/"; 
-	protected String access_token = "7f07cb18e1ccfc1d5493f08f32ac51a7d64b222d"; //임시
+	protected String access_token = "60e515f4d7d563b870ccdc702bfcdf5df83abb5d"; //임시
     public void setContext(Context context) {
 	this.context = context;
     }

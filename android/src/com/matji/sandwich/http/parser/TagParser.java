@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
+import com.google.gson.JsonObject;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.exception.MatjiException;
@@ -38,8 +39,27 @@ public class TagParser extends MatjiDataParser{
 		return tagList;
 	}
 
-	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+	public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
 		String validData = validateData(data);
 		return getRawData(validData);
+	}
+
+	@Override
+	protected ArrayList<MatjiData> getRawObjects(String data)
+			throws MatjiException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected MatjiData getRawObject(String data) throws MatjiException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected MatjiData getMatjiData(JsonObject object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

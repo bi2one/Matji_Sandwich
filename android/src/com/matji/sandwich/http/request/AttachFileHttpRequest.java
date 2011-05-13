@@ -70,6 +70,6 @@ public class AttachFileHttpRequest extends HttpRequest {
    		String resultCode = response.getHttpStatusCode() + "";
 
    		Log.d("asdfsaf",resultBody);
-   		return parser.getData(resultBody);
+   		return parser.parseToMatjiDataList(resultBody);
     }
 }

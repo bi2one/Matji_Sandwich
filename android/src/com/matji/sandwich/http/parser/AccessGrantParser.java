@@ -2,6 +2,7 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AccessGrant;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -11,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
-public class AccessGrantParser extends MatjiDataParser{
+public class AccessGrantParser extends MatjiDataParser {
 	public ArrayList<MatjiData> getRawData(String data) throws MatjiException{
 		ArrayList<MatjiData> access_grantList = new ArrayList<MatjiData>();
 		JSONArray jsonArray;
@@ -41,8 +42,27 @@ public class AccessGrantParser extends MatjiDataParser{
 	return access_grantList;
 	}
 
-	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+	public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
 		String validData = validateData(data);
 		return getRawData(validData);
+	}
+
+	@Override
+	protected ArrayList<MatjiData> getRawObjects(String data)
+			throws MatjiException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected MatjiData getRawObject(String data) throws MatjiException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected MatjiData getMatjiData(JsonObject object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -123,6 +123,6 @@ public class PostHttpRequest extends HttpRequest {
     	Log.d("Check", "resultBody: " + resultBody);
 		Log.d("Check", "resultCode: " + resultCode);
 
-		return parser.getData(resultBody);
+		return parser.parseToMatjiDataList(resultBody);
     }
 }

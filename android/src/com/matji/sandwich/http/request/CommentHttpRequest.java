@@ -67,6 +67,6 @@ public class CommentHttpRequest extends HttpRequest {
 		Log.d("Matji", "CommentHttpRequest resultBody: " + resultBody);
 		Log.d("Matji", "CommentHttpRequest resultCode: " + resultCode);
 
-		return parser.getData(resultBody);
+		return parser.parseToMatjiDataList(resultBody);
 	}
 }
