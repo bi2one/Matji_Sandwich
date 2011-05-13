@@ -5,7 +5,6 @@ public class StoreUrl extends MatjiData{
 	private int user_id;
 	private int store_id;
 	private String url;
-	private int sequence;
 	private Store store;
 	private User user;
 	
@@ -32,12 +31,6 @@ public class StoreUrl extends MatjiData{
 	}
 	public String getUrl() {
 		return url;
-	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
 	}
 	public void setStore(Store store) {
 		this.store = store;

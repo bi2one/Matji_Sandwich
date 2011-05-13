@@ -10,8 +10,8 @@ public class Store extends MatjiData{
 	private String website;
 	private String text;
 	private String cover;
-	private float lat;
-	private float lng;
+	private double lat;
+	private double lng;
 	private int tag_count;
 	private int post_count;
 	private int image_count;
@@ -50,16 +50,16 @@ public class Store extends MatjiData{
 	public String getText() {
 		return text;
 	}
-	public void setLat(float lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
-	public float getLat() {
+	public double getLat() {
 		return lat;
 	}
-	public void setLng(float lng) {
+	public void setLng(double lng) {
 		this.lng = lng;
 	}
-	public float getLng() {
+	public double getLng() {
 		return lng;
 	}
 	public void setCover(String cover) {

@@ -27,23 +27,18 @@ public class Following extends MatjiData{
 	public void setFollowingUserId(int following_user_id) {
 		this.following_user_id = following_user_id;
 	}
-	
 	public int getFollowingUserId() {
 		return following_user_id;
 	}
-
 	public void setUpdatedAt(String updated_at) {
 		this.updated_at = updated_at;
 	}
-	
 	public String getUpdatedAt() {
 		return updated_at;
 	}
-
 	public void setFollowedUserId(int followed_user_id) {
 		this.followed_user_id = followed_user_id;
 	}
-	
 	public int  getFollowedUserId() {
 		return followed_user_id;
 	}
@@ -110,15 +105,12 @@ public class Following extends MatjiData{
 	public void setFollowingUser(User following_user) {
 		this.following_user = following_user;
 	}
-
 	public User getFollowingUser() {
 		return following_user;
 	}
-
 	public void setFollowedUser(User followed_user) {
 		this.followed_user = followed_user;
 	}
-
 	public User getFollowedUser() {
 		return followed_user;
 	}

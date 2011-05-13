@@ -1,7 +1,5 @@
 package com.matji.sandwich.data;
 
-import java.util.ArrayList;
-
 public class StoreFood extends MatjiData{
 	private int id;
 	private int user_id;
@@ -9,10 +7,9 @@ public class StoreFood extends MatjiData{
 	private int store_id;
 	private int like_count;
 	private int blind;
-	private int sequence;
-	private ArrayList<Like> likes;
 	private Store store;
 	private Food food;
+	private User user;
 	
 	public void setId(int id) {
 		this.id = id;
@@ -20,28 +17,28 @@ public class StoreFood extends MatjiData{
 	public int getId() {
 		return id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
-	public int getUser_id() {
+	public int getUserId() {
 		return user_id;
 	}
-	public void setFood_id(int food_id) {
+	public void setFoodId(int food_id) {
 		this.food_id = food_id;
 	}
-	public int getFood_id() {
+	public int getFoodId() {
 		return food_id;
 	}
-	public void setStore_id(int store_id) {
+	public void setStoreId(int store_id) {
 		this.store_id = store_id;
 	}
-	public int getStore_id() {
+	public int getStoreId() {
 		return store_id;
 	}
-	public void setLike_count(int like_count) {
+	public void setLikeCount(int like_count) {
 		this.like_count = like_count;
 	}
-	public int getLike_count() {
+	public int getLikeCount() {
 		return like_count;
 	}
 	public void setBlind(int blind) {
@@ -49,21 +46,6 @@ public class StoreFood extends MatjiData{
 	}
 	public int getBlind() {
 		return blind;
-	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}
-	public int getSequence() {
-		return sequence;
-	}
-	public void setLikes(ArrayList<Like> likes) {
-		this.likes = likes;
-	}
-	public ArrayList<Like> getLikes() {
-		return likes;
-	}
-	public void addLike(Like like){
-		this.likes.add(like);
 	}
 	public void setStore(Store store) {
 		this.store = store;
@@ -76,6 +58,12 @@ public class StoreFood extends MatjiData{
 	}
 	public Food getFood() {
 		return food;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public User getUser() {
+		return user;
 	}
 	
 }

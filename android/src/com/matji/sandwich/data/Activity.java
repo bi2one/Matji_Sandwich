@@ -10,7 +10,9 @@ public class Activity extends MatjiData{
 	private String object_complement_type;
 	private String object_complement_name;
 	private int object_complement_id;
-
+	private String created_at;
+	private String updated_at;
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -64,5 +66,17 @@ public class Activity extends MatjiData{
 	}
 	public int getObjectComplementId() {
 		return object_complement_id;
+	}
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
+	}
+	public String getCreatedAt() {
+		return created_at;
+	}
+	public void setUpdatedAt(String updated_at) {
+		this.updated_at = updated_at;
+	}
+	public String getUpdatedAt() {
+		return updated_at;
 	}
 }
