@@ -63,6 +63,18 @@ public abstract class HttpRequest {
 		baseHeader.putAll(header);
 	    }
 
+	    
+	    // 전역 파라미터 설정 
+	    if (postParam != null) {
+	    	postParam.put("access_token", access_token); // 토큰  
+	    	postParam.put("format", "json"); // 응답 포맷 
+	    }
+	    if (getParam != null) {
+	    	getParam.put("access_token", access_token);
+	    	getParam.put("format", "json");
+	    }
+	    
+	    
 	    if(method == HttpUtility.ASYNC_METHOD_POST) {
 		httpResponse = HttpUtility.getInstance().post(url, baseHeader, postParam);
 	    } else {

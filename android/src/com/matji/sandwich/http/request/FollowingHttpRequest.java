@@ -17,12 +17,14 @@ public class FollowingHttpRequest extends HttpRequest {
 	private Hashtable<String, String> getHashtable;
 	private Hashtable<String, Object> postHashtable;
 	private MatjiDataParser parser;
+	private String controller;
 	private String action;
 	private boolean isPost;
 
 	public FollowingHttpRequest() {
 		getHashtable = new Hashtable<String, String>();
 		postHashtable = new Hashtable<String, Object>();
+		controller = "followings";
 	}
 	
 	public void actionNew(int followed_user_id) {
@@ -67,14 +69,13 @@ public class FollowingHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");
-		postHashtable.put("access_token", access_token);
 	}
 
 	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(isPost) ?
-					requestHttpResponsePost(serverDomain + "followings/" + action + ".json?", null, postHashtable)
-					:requestHttpResponseGet(serverDomain + "followings/" + action + ".json?", null, getHashtable);
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";
