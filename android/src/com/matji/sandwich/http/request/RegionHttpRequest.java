@@ -13,36 +13,57 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class RegionHttpRequest extends HttpRequest {
-    private Hashtable<String, String> hashtable;
-    private int page;
-    private int id;
+	private Hashtable<String, String> getHashtable;
+	private Hashtable<String, Object> postHashtable;
     private MatjiDataParser parser;
-
+    private String action;
+    private String controller;
+    private boolean isPost;
+    
     public RegionHttpRequest() {
-	parser = new RegionParser();
-	hashtable = new Hashtable<String, String>();
-	initParam();
+    	getHashtable = new Hashtable<String, String>();
+    	postHashtable = new Hashtable<String, Object>();
+    	controller = "regions";
     }
 
-    private void setPage(int page){
-    	this.page = page;
+    public void actionBookmark(double lat_sw, double lat_ne, double lng_sw, double lng_ne, String description){
+    	isPost = true;
+    	action = "bookmark";
+    	
+    	postHashtable.clear();
+    	postHashtable.put("lat_sw",lat_sw);
+    	postHashtable.put("lat_ne",lat_ne);
+    	postHashtable.put("lng_sw",lng_sw);
+    	postHashtable.put("lng_ne",lng_ne);
     }
     
-    public void initParam() {
-    	page = 0;
-    	id = 1;
+    public void actionUnBookmark(int region_id){
+    	isPost = true;
+    	action = "unbookmark";
+    	
+    	postHashtable.clear();
+    	postHashtable.put("region_id", region_id);
     }
-
+    
+    public void actionBookmarkedList(){
+    	isPost = false;
+    	action = "bookmarked_list";
+    	
+    	getHashtable.clear();
+    }
+    
     public ArrayList<MatjiData> request() throws MatjiException {
-	hashtable.clear();
-	hashtable.put("page", page + "");
-	hashtable.put("id", id + "");
+		SimpleHttpResponse response = 
+			(isPost) ?
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 
-	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, hashtable);
-	
-	String resultBody = response.getHttpResponseBodyAsString();
-	String resultCode = response.getHttpStatusCode() + "";
-	
-	return parser.parseToMatjiDataList(resultBody);
+		String resultBody = response.getHttpResponseBodyAsString();
+		String resultCode = response.getHttpStatusCode() + "";
+
+		Log.d("Matji", "RegionHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "RegionHttpRequest resultCode: " + resultCode);
+
+		return parser.parseToMatjiDataList(resultBody);
     }
 }

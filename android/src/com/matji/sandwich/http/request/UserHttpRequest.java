@@ -17,10 +17,12 @@ public class UserHttpRequest extends HttpRequest {
     private MatjiDataParser parser;
     private String action;
     private boolean isPost;
-
+    private String controller;
+    
     public UserHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	controller = "users";
     }
 
     public void actionList(){
@@ -41,12 +43,15 @@ public class UserHttpRequest extends HttpRequest {
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
 			(isPost) ? 
-					requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)
-					:requestHttpResponseGet(serverDomain + "comments/" + action + ".json?", null, getHashtable); 
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
 
     	String resultBody = response.getHttpResponseBodyAsString();
     	String resultCode = response.getHttpStatusCode() + "";
-	
+
+    	Log.d("Matji", "UserHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "UserHttpRequest resultCode: " + resultCode);
+
     	return parser.parseToMatjiDataList(resultBody);
     }
 }

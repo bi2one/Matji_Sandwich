@@ -18,10 +18,12 @@ public class NoticeHttpRequest extends HttpRequest {
 	private MatjiDataParser parser;
 	private String action;
 	private boolean isPost;
-
+	private String controller;
+	
 	public NoticeHttpRequest() {
 		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
+		controller = "notices";
 	}
 
 	public void actionShow(int notice_id) {
@@ -48,14 +50,14 @@ public class NoticeHttpRequest extends HttpRequest {
 	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(isPost) ?
-					requestHttpResponsePost(serverDomain + "notices/" + action + ".json?", null, postHashtable)
-					:requestHttpResponseGet(serverDomain + "notices/" + action + ".json?", null, getHashtable);
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";
 		
-		Log.d("Matji", "FoodHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "FoodHttpRequest resultCode: " + resultCode);
+		Log.d("Matji", "NoticeHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "NoticeHttpRequest resultCode: " + resultCode);
 
 		return parser.parseToMatjiDataList(resultBody);
 	}

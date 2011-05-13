@@ -81,14 +81,14 @@ public class MessageHttpRequest extends HttpRequest {
     public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(isPost) ? 
-					requestHttpResponsePost(serverDomain + "foods/" + action + ".json?", null, postHashtable)
-					:requestHttpResponseGet(serverDomain + "foods/" + action + ".json?", null, getHashtable);
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
 
-	Log.d("Matji", "resultBody: " + resultBody);
-	Log.d("Matji", "resultCode: " + resultCode);
+	Log.d("Matji", "MessageresultBody: " + resultBody);
+	Log.d("Matji", "MessageresultCode: " + resultCode);
 	
 	return parser.parseToMatjiDataList(resultBody);
     }

@@ -17,11 +17,13 @@ public class TagHttpRequest extends HttpRequest {
 	private Hashtable<String, String> getHashtable;
 	private MatjiDataParser parser;
 	private String action;
-//	private boolean isPost; // tag 는 전부  GET 방식..
+	private String controller;
+	//	private boolean isPost; // tag 는 전부  GET 방식..
 
 	public TagHttpRequest() {
 //		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
+		controller = "tags";
 	}
 
 	public void actionShow(int tag_id) {
@@ -64,13 +66,13 @@ public class TagHttpRequest extends HttpRequest {
 	}
 	
 	public ArrayList<MatjiData> request() throws MatjiException {
-		SimpleHttpResponse response = requestHttpResponseGet(serverDomain + "tags/" + action + ".json?", null, getHashtable); 
+		SimpleHttpResponse response = requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
 
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";
 
-		Log.d("Matji", "FoodHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "FoodHttpRequest resultCode: " + resultCode);
+		Log.d("Matji", "TagHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "TagHttpRequest resultCode: " + resultCode);
 
 		return parser.parseToMatjiDataList(resultBody);
 	}

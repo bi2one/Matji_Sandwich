@@ -17,13 +17,15 @@ public class StoreHttpRequest extends HttpRequest {
     private MatjiDataParser parser;
     private String action;
     private boolean isPost;
-
+    private String controller;
+    
     public StoreHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	controller = "stores";
     }
 
-    public void actionCount(float lat_sw, float lat_ne, float lng_sw, float lng_ne, String type){
+    public void actionCount(double lat_sw, double lat_ne, double lng_sw, double lng_ne, String type){
     	isPost = false;
     	action="count";
     	
@@ -153,12 +155,15 @@ public class StoreHttpRequest extends HttpRequest {
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
 			(isPost) ? 
-					requestHttpResponsePost(serverDomain + "comments/" + action + ".json?", null, postHashtable)
-					:requestHttpResponseGet(serverDomain + "comments/" + action + ".json?", null, getHashtable); 
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
 	
     	String resultBody = response.getHttpResponseBodyAsString();
     	String resultCode = response.getHttpStatusCode() + "";
-	
+
+    	Log.d("Matji", "StoreHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "StoreHttpRequest resultCode: " + resultCode);
+
     	return parser.parseToMatjiDataList(resultBody);
     }
 }

@@ -17,10 +17,12 @@ public class PostHttpRequest extends HttpRequest {
     private MatjiDataParser parser;
     private boolean isPost;
     private String action;
+    private String controller;
     
     public PostHttpRequest() {
 		getHashtable = new Hashtable<String, String>();
 		postHashtable = new Hashtable<String, Object>();
+		controller = "posts";
     }
 
     public void actionShow(int post_id){
@@ -37,7 +39,6 @@ public class PostHttpRequest extends HttpRequest {
     	
     	postHashtable.clear();
     	postHashtable.put("post", post);
-    	postHashtable.put("access_token", access_token);
     }
     
     public void actionDelete(int post_id, String access_token){
@@ -46,7 +47,6 @@ public class PostHttpRequest extends HttpRequest {
     	
     	postHashtable.clear();
     	postHashtable.put("post_id",post_id + "");
-    	postHashtable.put("access_token",access_token + "");
     }
     
     public void actionUnlike(int post_id){
@@ -95,7 +95,7 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     }
     
-    public void actionNearbyList(float lat_ne, float lat_sw, float lng_sw, float lng_ne){
+    public void actionNearbyList(double lat_ne, double lat_sw, double lng_sw, double lng_ne){
     	isPost = false;
     	action = "nearby_list";
     	
@@ -114,14 +114,14 @@ public class PostHttpRequest extends HttpRequest {
     	parser = new PostParser();
     	SimpleHttpResponse response = 
     		(isPost) ? 
-    				requestHttpResponsePost(serverDomain + "posts/" + action + ".json?", null, postHashtable)
-    				:requestHttpResponseGet(serverDomain + "posts/" + action + ".json?", null, getHashtable); 
+    				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+    				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
 	
     	String resultBody = response.getHttpResponseBodyAsString();
     	String resultCode = response.getHttpStatusCode() + "";
 
-    	Log.d("Check", "resultBody: " + resultBody);
-		Log.d("Check", "resultCode: " + resultCode);
+    	Log.d("Matji", "PostresultresultBody: " + resultBody);
+		Log.d("Matji", "PostresultresultCode: " + resultCode);
 
 		return parser.parseToMatjiDataList(resultBody);
     }
