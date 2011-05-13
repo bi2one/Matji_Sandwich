@@ -1,6 +1,6 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.FoodParser;
+import com.matji.sandwich.http.parser.StoreFoodParser;
 import com.matji.sandwich.http.parser.LikeParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
@@ -29,7 +29,7 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionNew(int store_id, String food_name) {
 		isPost = true;
 		action = "new";
-		parser = new FoodParser(); 
+		parser = new StoreFoodParser(); 
 		
 		postHashtable.clear();
 		postHashtable.put("store_id", store_id);
@@ -66,7 +66,7 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionList(int store_id) {
 		isPost = false;
 		action = "list";
-		parser = new FoodParser(); 
+		parser = new StoreFoodParser(); 
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");

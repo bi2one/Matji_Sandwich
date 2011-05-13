@@ -64,8 +64,8 @@ public class CommentHttpRequest extends HttpRequest {
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";
 
-		Log.d("Matji", "resultBody: " + resultBody);
-		Log.d("Matji", "resultCode: " + resultCode);
+		Log.d("Matji", "CommentresultBody: " + resultBody);
+		Log.d("Matji", "CommentresultCode: " + resultCode);
 
 		return parser.parseToMatjiDataList(resultBody);
 	}

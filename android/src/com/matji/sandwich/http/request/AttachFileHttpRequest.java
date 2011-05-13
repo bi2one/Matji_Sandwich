@@ -17,10 +17,12 @@ public class AttachFileHttpRequest extends HttpRequest {
     private MatjiDataParser parser;
     private boolean isPost;
     private String action;
+    private String controller;
     
     public AttachFileHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	controller = "attach_files";
     }
 
     public void actionUpload(){
@@ -62,14 +64,16 @@ public class AttachFileHttpRequest extends HttpRequest {
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
     		(isPost) ? 
-    				requestHttpResponsePost(serverDomain + "attach_files/" + action + ".json?", null, postHashtable)
-    				:requestHttpResponseGet(serverDomain + "attach_files/" + action + ".json?", null, getHashtable); 
+    				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+    				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
     	
 	
    		String resultBody = response.getHttpResponseBodyAsString();
    		String resultCode = response.getHttpStatusCode() + "";
 
-   		Log.d("asdfsaf",resultBody);
-   		return parser.parseToMatjiDataList(resultBody);
+		Log.d("Matji", "AttachFileHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "AttachFileHttpRequest resultCode: " + resultCode);
+
+		return parser.parseToMatjiDataList(resultBody);
     }
 }

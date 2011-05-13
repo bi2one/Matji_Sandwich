@@ -18,10 +18,12 @@ public class MessageHttpRequest extends HttpRequest {
     private MatjiDataParser parser;
 	private String action;
     private boolean isPost;
-
+    private String controller;
+    
     public MessageHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	controller = "messages";
     }
     
     public void actionNew(String received_user_id, String message){
@@ -37,7 +39,6 @@ public class MessageHttpRequest extends HttpRequest {
     public void actionDelete(String message_id){
     	isPost = true;
     	action = "new";
-
     	
     	postHashtable.clear();
     	postHashtable.put("message_id", message_id);

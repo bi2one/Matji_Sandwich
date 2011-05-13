@@ -17,10 +17,12 @@ public class AlarmHttpRequest extends HttpRequest {
 	private boolean isPost;
 	private String action ;
     private MatjiDataParser parser;
+    private String controller;
 
     public AlarmHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	controller = "alarms";
     }
 
     public void actionList(int user_id){
@@ -34,11 +36,14 @@ public class AlarmHttpRequest extends HttpRequest {
     public ArrayList<MatjiData> request() throws MatjiException {
 	SimpleHttpResponse response = 
 		(isPost) ? 
-				requestHttpResponsePost(serverDomain + "alarms/" + action + ".json?", null, postHashtable)
-				:requestHttpResponseGet(serverDomain + "alarms/" + action + ".json?", null, getHashtable); 
+				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
+	
+	Log.d("Matji", "AlarmHttpRequest resultBody: " + resultBody);
+	Log.d("Matji", "AlarmHttpRequest resultCode: " + resultCode);
 	
 	return parser.parseToMatjiDataList(resultBody);
     }
