@@ -6,7 +6,7 @@ public class StoreFood extends MatjiData{
 	private int food_id;
 	private int store_id;
 	private int like_count;
-	private int blind;
+	private boolean blind;
 	private Store store;
 	private Food food;
 	private User user;
@@ -41,10 +41,10 @@ public class StoreFood extends MatjiData{
 	public int getLikeCount() {
 		return like_count;
 	}
-	public void setBlind(int blind) {
+	public void setBlind(boolean blind) {
 		this.blind = blind;
 	}
-	public int getBlind() {
+	public boolean getBlind() {
 		return blind;
 	}
 	public void setStore(Store store) {
