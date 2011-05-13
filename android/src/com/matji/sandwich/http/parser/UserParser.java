@@ -7,9 +7,8 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
 import com.matji.sandwich.json.MatjiJSONArray;
+import com.matji.sandwich.json.MatjiJSONObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.JSONException;
 
 public class UserParser extends MatjiDataParser{
@@ -19,7 +18,7 @@ public class UserParser extends MatjiDataParser{
 	try {
 	    jsonArray = new MatjiJSONArray(data);
 		userList.clear();
-	    JSONObject element;
+	    MatjiJSONObject element;
 		for(int i=0 ; i < jsonArray.length() ; i++){
 		    element = jsonArray.getMatjiJSONObject(i);
 		    User user = new User();

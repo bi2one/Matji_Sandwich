@@ -2,6 +2,8 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.exception.MatjiException;
@@ -18,7 +20,7 @@ public class CommentParser extends MatjiDataParser{
 		try {
 			jsonArray = new MatjiJSONArray(data);
 			MatjiJSONObject element;
-			for (int i=0 ; i < jsonArray.length(); i++) {
+			for (int i = 0 ; i < jsonArray.length(); i++) {
 				element = jsonArray.getMatjiJSONObject(i);
 				Comment comment = new Comment();
 				comment.setComment(element.getString("comment"));
@@ -28,8 +30,9 @@ public class CommentParser extends MatjiDataParser{
 				comment.setPostId(element.getString("post_id"));
 				comment.setId(element.getString("id"));
 				comment.setUserId(element.getString("user_id"));
+//				TODO
+//				comment.setUser((new UserParser()).getData(data));
 				comment.setFromWhere(element.getString("from_where"));
-				comment.setUser((new UserParser()).getData(data));
 				commentList.add(comment);
 			}
 		}
@@ -37,10 +40,13 @@ public class CommentParser extends MatjiDataParser{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		Log.d("Matji", "CommentParser: Parsing success");
+		
 		return commentList;
 	}
 
 	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		// TODO 임시
 		String validData = validateData(data);
 		return getRawData(validData);
 	}

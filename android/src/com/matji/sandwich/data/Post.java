@@ -1,7 +1,5 @@
 package com.matji.sandwich.data;
 
-import java.util.ArrayList;
-
 public class Post extends MatjiData{
 	private String id;
 	private String user_id;
@@ -138,3 +136,4 @@ public class Post extends MatjiData{
 		return like;
 	}
 }
+

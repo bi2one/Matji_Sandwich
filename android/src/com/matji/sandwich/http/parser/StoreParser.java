@@ -7,9 +7,8 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
 import com.matji.sandwich.json.MatjiJSONArray;
+import com.matji.sandwich.json.MatjiJSONObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.JSONException;
 
 public class StoreParser extends MatjiDataParser{
@@ -18,9 +17,9 @@ public class StoreParser extends MatjiDataParser{
 		MatjiJSONArray jsonArray;
 		try {
 				jsonArray = new MatjiJSONArray(data);
-				JSONObject element;
+				MatjiJSONObject element;
 				storeList.clear();
-				for(int i=0 ; i < jsonArray.length() ; i++){
+				for(int i=0 ; i < jsonArray.length(); i++){
 				element = jsonArray.getMatjiJSONObject(i);
 				Store store = new Store();
 				store.setId(element.getString("id"));
@@ -54,6 +53,7 @@ public class StoreParser extends MatjiDataParser{
     }
 
 	public ArrayList<MatjiData> getData(String data) throws MatjiException {
+		if (data == null) return null;
 		String validData = validateData(data);
 		return getRawData(validData);
 	}

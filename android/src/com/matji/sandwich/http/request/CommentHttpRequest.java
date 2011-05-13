@@ -14,8 +14,8 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class CommentHttpRequest extends HttpRequest {
-	private Hashtable<String, String> getHashtable;
 	private Hashtable<String, Object> postHashtable;
+	private Hashtable<String, String> getHashtable;
 	private MatjiDataParser parser;
 	private String action;
 	private boolean isPost;
@@ -28,30 +28,31 @@ public class CommentHttpRequest extends HttpRequest {
 	public void actionNew(int post_id, String comment, String from_where) {
 		isPost = true;
 		action = "new";
+		parser = new CommentParser();
 		
 		postHashtable.clear();
 		postHashtable.put("post_id", post_id);
 		postHashtable.put("comment", comment);
 		postHashtable.put("from_where", from_where);
-		parser = new CommentParser();
+		postHashtable.put("access_token", access_token);
 	}
 	
 	public void actionDelete(int post_id) {
 		isPost = true;
 		action = "delete";
+		parser = new StringMessageParser();
 		
 		postHashtable.clear();
 		postHashtable.put("post_id", post_id);
-		parser = new StringMessageParser();
 	}
 	
-	public void actionList(int comment_id) {
+	public void actionList(int post_id) {
 		isPost = false;
 		action = "list";
+		parser = new CommentParser();
 
 		getHashtable.clear();
-		getHashtable.put("comment_id", comment_id + "");
-		parser = new CommentParser();
+		getHashtable.put("post_id", post_id+ "");
 	}
 	
 	public ArrayList<MatjiData> request() throws MatjiException {		
@@ -63,8 +64,8 @@ public class CommentHttpRequest extends HttpRequest {
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";
 
-		Log.d("Check", "CommentHttpRequest resultBody: " + resultBody);
-		Log.d("Check", "CommentHttpRequest resultCode: " + resultCode);
+		Log.d("Matji", "CommentHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "CommentHttpRequest resultCode: " + resultCode);
 
 		return parser.getData(resultBody);
 	}

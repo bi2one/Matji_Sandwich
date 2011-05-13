@@ -13,14 +13,14 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class TagHttpRequest extends HttpRequest {
+//	private Hashtable<String, Object> postHashtable;
 	private Hashtable<String, String> getHashtable;
-	private Hashtable<String, Object> postHashtable;
 	private MatjiDataParser parser;
 	private String action;
-//	private boolean isPost;
+//	private boolean isPost; // tag 는 전부  GET 방식..
 
 	public TagHttpRequest() {
-		postHashtable = new Hashtable<String, Object>();
+//		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
 	}
 
@@ -29,12 +29,14 @@ public class TagHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("tag_id", tag_id + "");
+		parser = new TagParser();
 	}
 	
 	public void actionList() {
 		action = "list";
 		
 		getHashtable.clear();
+		parser = new TagParser();
 	}
 	
 	public void actionStoreTagList(int store_id) {
@@ -42,6 +44,7 @@ public class TagHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
+		parser = new TagParser();
 	}
 	
 	public void actionUserTagList(int user_id) {
@@ -49,6 +52,7 @@ public class TagHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id+ "");
+		parser = new TagParser();
 	}
 	
 	public void actionPostTagList(int post_id) {
@@ -56,6 +60,7 @@ public class TagHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("post_id", post_id + "");
+		parser = new TagParser();
 	}
 	
 	public ArrayList<MatjiData> request() throws MatjiException {
@@ -64,8 +69,8 @@ public class TagHttpRequest extends HttpRequest {
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";
 
-		Log.d("Check", "FoodHttpRequest resultBody: " + resultBody);
-		Log.d("Check", "FoodHttpRequest resultCode: " + resultCode);
+		Log.d("Matji", "FoodHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "FoodHttpRequest resultCode: " + resultCode);
 
 		return parser.getData(resultBody);
 	}

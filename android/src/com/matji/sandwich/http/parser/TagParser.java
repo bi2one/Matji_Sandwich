@@ -2,6 +2,8 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.exception.MatjiException;
@@ -18,7 +20,7 @@ public class TagParser extends MatjiDataParser{
 		try {
 			jsonArray = new MatjiJSONArray(data);
 			MatjiJSONObject element;
-			for (int i=0 ; i < jsonArray.length(); i++) {
+			for (int i = 0 ; i < jsonArray.length(); i++) {
 				element = jsonArray.getMatjiJSONObject(i);
 				Tag tag = new Tag();
 				tag.setTag(element.getString("tag"));
@@ -31,6 +33,8 @@ public class TagParser extends MatjiDataParser{
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}
+		Log.d("Matji", "TagParser: Parsing success");
+		
 		return tagList;
 	}
 

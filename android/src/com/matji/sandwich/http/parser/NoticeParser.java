@@ -2,6 +2,8 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Notice;
 import com.matji.sandwich.exception.MatjiException;
@@ -18,7 +20,7 @@ public class NoticeParser extends MatjiDataParser{
 		try {
 			jsonArray = new MatjiJSONArray(data);
 			MatjiJSONObject element;
-			for (int i=0 ; i < jsonArray.length(); i++) {
+			for (int i = 0 ; i < jsonArray.length(); i++) {
 				element = jsonArray.getMatjiJSONObject(i);
 				Notice notice = new Notice();
 				notice.setStartDate(element.getString("start_date"));
@@ -36,6 +38,8 @@ public class NoticeParser extends MatjiDataParser{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		Log.d("Matji", "NoticeParser: Parsing success");
+
 		return noticeList;
 	}
 

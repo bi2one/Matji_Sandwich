@@ -1,7 +1,9 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.FoodParser;
+import com.matji.sandwich.http.parser.LikeParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.StringMessageParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -13,8 +15,9 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class FoodHttpRequest extends HttpRequest {
-	private Hashtable<String, String> getHashtable;
 	private Hashtable<String, Object> postHashtable;
+	private Hashtable<String, String> getHashtable;
+	private MatjiDataParser parser;
 	private String action;
 	private boolean isPost;
 
@@ -26,6 +29,7 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionNew(int store_id, String food_name) {
 		isPost = true;
 		action = "new";
+		parser = new FoodParser(); 
 		
 		postHashtable.clear();
 		postHashtable.put("store_id", store_id);
@@ -36,15 +40,27 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionDelete(int store_food_id) {
 		isPost = true;
 		action = "delete";
+		parser = new StringMessageParser();
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
 		postHashtable.put("access_token", access_token);
 	}
-
+	
+	public void actionUnlike(int store_food_id) {
+		isPost = true;
+		action = "unlike";
+		parser = new StringMessageParser();
+		
+		postHashtable.clear();
+		postHashtable.put("store_food_id", store_food_id);
+		postHashtable.put("access_token", access_token);
+	}
+	
 	public void actionLike(int store_food_id) {
 		isPost = true;
 		action = "like";
+		parser = new LikeParser();
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
@@ -54,26 +70,13 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionList(int store_id) {
 		isPost = false;
 		action = "list";
+		parser = new FoodParser(); 
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
 	}
 
 	public ArrayList<MatjiData> request() throws MatjiException {
-		// LIKE 는 FOREIGN KEY가 옴. 필요하면 나중에 변경
-		MatjiDataParser parser = null;
-		if (action.equals("new") || action.equals("list")) {
-			parser = new FoodParser();
-		}
-		
-		else if (action.equals("delete") || action.equals("like")) {
-			parser = new FoodParser();
-		}
-		
-		else {
-			// TODO action ERROR
-		}
-
 		SimpleHttpResponse response = 
 			(isPost) ? 
 					requestHttpResponsePost(serverDomain + "foods/" + action + ".json?", null, postHashtable)
