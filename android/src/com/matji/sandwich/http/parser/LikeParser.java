@@ -7,7 +7,7 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
-public abstract class LikeParser extends MatjiDataParser {
+public class LikeParser extends MatjiDataParser {
 	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
 		Like like = new Like();
 		like.setId(getInt(object, "id"));
