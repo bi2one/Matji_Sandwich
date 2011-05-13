@@ -5,7 +5,6 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -13,36 +12,31 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class BookmarkHttpRequest extends HttpRequest {
-    private Hashtable<String, String> hashtable;
-    private int page;
-    private int id;
-    private MatjiDataParser parser;
-
+	private Hashtable<String, String> getHashtable;
+	private Hashtable<String, Object> postHashtable;
+	private MatjiDataParser parser;
+	private String action;
+	private boolean isPost;
+	private String controller;
+	
     public BookmarkHttpRequest() {
-	parser = new BookmarkParser();
-	hashtable = new Hashtable<String, String>();
-	initParam();
-    }
-
-    private void setPage(int page){
-    	this.page = page;
+    	getHashtable = new Hashtable<String, String>();
+    	postHashtable = new Hashtable<String, Object>();
+    	controller = "bookmarks";
     }
     
-    public void initParam() {
-    	page = 0;
-    	id = 1;
-    }
-
     public ArrayList<MatjiData> request() throws MatjiException {
-	hashtable.clear();
-	hashtable.put("page", page + "");
-	hashtable.put("id", id + "");
+    	SimpleHttpResponse response = 
+			(isPost) ? 
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
+
+		String resultBody = response.getHttpResponseBodyAsString();
+		String resultCode = response.getHttpStatusCode() + "";
 	
-	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, hashtable);
-	
-	String resultBody = response.getHttpResponseBodyAsString();
-	String resultCode = response.getHttpStatusCode() + "";
-	
-	return parser.parseToMatjiDataList(resultBody);
+		Log.d("Matji", "BookmarkHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "BookmarkHttpRequest resultCode: " + resultCode);
+
+		return parser.parseToMatjiDataList(resultBody);
     }
 }

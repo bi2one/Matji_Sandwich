@@ -7,7 +7,6 @@ import com.matji.sandwich.http.parser.StringMessageParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -20,10 +19,12 @@ public class FoodHttpRequest extends HttpRequest {
 	private MatjiDataParser parser;
 	private String action;
 	private boolean isPost;
-
+	private String controller;
+	
 	public FoodHttpRequest() {		
 		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
+		controller = "foods";
 	}
 
 	public void actionNew(int store_id, String food_name) {
@@ -34,7 +35,6 @@ public class FoodHttpRequest extends HttpRequest {
 		postHashtable.clear();
 		postHashtable.put("store_id", store_id);
 		postHashtable.put("food_name", food_name);
-		postHashtable.put("access_token", access_token);
 	}
 
 	public void actionDelete(int store_food_id) {
@@ -44,7 +44,6 @@ public class FoodHttpRequest extends HttpRequest {
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
-		postHashtable.put("access_token", access_token);
 	}
 	
 	public void actionUnlike(int store_food_id) {
@@ -54,7 +53,6 @@ public class FoodHttpRequest extends HttpRequest {
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
-		postHashtable.put("access_token", access_token);
 	}
 	
 	public void actionLike(int store_food_id) {
@@ -64,7 +62,6 @@ public class FoodHttpRequest extends HttpRequest {
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
-		postHashtable.put("access_token", access_token);
 	}
 	
 	public void actionList(int store_id) {
@@ -79,8 +76,8 @@ public class FoodHttpRequest extends HttpRequest {
 	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(isPost) ? 
-					requestHttpResponsePost(serverDomain + "foods/" + action + ".json?", null, postHashtable)
-					:requestHttpResponseGet(serverDomain + "foods/" + action + ".json?", null, getHashtable);
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";

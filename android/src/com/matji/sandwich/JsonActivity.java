@@ -34,8 +34,8 @@ public class JsonActivity extends Activity implements Requestable{
 //		TagHttpRequest request = new TagHttpRequest();
 //		request.actionList(12296);
 //		request.actionList(16874);
-//		request.actionNew(16874, "테스트합니다 @Android", "ANDROID");
-		request.actionNew(12296, "육개장");
+		request.actionList(12296);
+//		request.actionNew(12296, "육개장");
 //		request.actionDelete(16931);
 //		request.actionLike(32);		
 //		request.actionDelete(34);		
@@ -45,7 +45,7 @@ public class JsonActivity extends Activity implements Requestable{
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		Food foodData = (Food)data.get(0);
 		Log.d("Matji", "" + foodData.getId());
-		Log.d("matji", "name: " +  foodData.getName());
+		Log.d("matji", "name: " +  foodData.getId());
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {

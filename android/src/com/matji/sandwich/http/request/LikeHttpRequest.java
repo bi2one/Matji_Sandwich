@@ -13,35 +13,30 @@ import java.util.Hashtable;
 import android.util.Log;
 
 public class LikeHttpRequest extends HttpRequest {
-    private Hashtable<String, String> hashtable;
-    private int page;
-    private int id;
+    private Hashtable<String, String> getHashtable;
+    private Hashtable<String, Object> postHashtable;
     private MatjiDataParser parser;
+    private String action;
+    private boolean isPost;
+    private String controller;
     
     public LikeHttpRequest() {
-	parser = new LikeParser();
-	hashtable = new Hashtable<String, String>();
-	initParam();
-    }
-
-    private void setPage(int page){
-    	this.page = page;
-    }
-    
-    public void initParam() {
-    	page = 0;
-    	id = 1;
+    	postHashtable = new Hashtable<String, Object>();
+    	getHashtable = new Hashtable<String, String>();
+    	controller = "likes";
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
-	hashtable.clear();
-	hashtable.put("page", page + "");
-	hashtable.put("id", id + "");
-
-	SimpleHttpResponse response = requestHttpResponseGet("http://mapi.ygmaster.net/my_stores", null, hashtable);
+		SimpleHttpResponse response = 
+			(isPost) ? 
+					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
+					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 	
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
+
+	Log.d("Matji", "LikeHttpRequest resultBody: " + resultBody);
+	Log.d("Matji", "LikeHttpRequest resultCode: " + resultCode);
 	
 	return parser.parseToMatjiDataList(resultBody);
     }
