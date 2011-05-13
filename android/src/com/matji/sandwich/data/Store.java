@@ -1,11 +1,9 @@
 package com.matji.sandwich.data;
 
-import java.util.ArrayList;
-
 public class Store extends MatjiData{
-	private String id;
-	private String name;
-	private String reg_user_id;
+	private int id;
+	private int name;
+	private int reg_user_id;
 	private String tel;
 	private String address;
 	private String add_address;
@@ -14,35 +12,14 @@ public class Store extends MatjiData{
 	private String cover;
 	private float lat;
 	private float lng;
-	private String tag_count;
-	private String post_count;
-	private String image_count;
-	private String like_count;
-	private String bookmark_count;
-	private String like;
-	private String bookmark;
-	private String note;
-	private String object;
-	private ArrayList<MatjiData> user;
+	private int tag_count;
+	private int post_count;
+	private int image_count;
+	private int like_count;
+	private int bookmark_count;
+	private AttachFile file; 
+	private User user;
 
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setRegUserId(String reg_user_id) {
-		this.reg_user_id = reg_user_id;
-	}
-	public String getRegUserId() {
-		return reg_user_id;
-	}
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
@@ -85,70 +62,70 @@ public class Store extends MatjiData{
 	public float getLng() {
 		return lng;
 	}
-	public void setTagCount(String tag_count) {
-		this.tag_count = tag_count;
-	}
-	public String getTagCount() {
-		return tag_count;
-	}
-	public void setPostCount(String post_count) {
-		this.post_count = post_count;
-	}
-	public String getPostCount() {
-		return post_count;
-	}
-	public void setImageCount(String image_count) {
-		this.image_count = image_count;
-	}
-	public String getImageCount() {
-		return image_count;
-	}
-	public void setLikeCount(String like_count) {
-		this.like_count = like_count;
-	}
-	public String getLikeCount() {
-		return like_count;
-	}
-	public void setBookmarkCount(String bookmark_count) {
-		this.bookmark_count = bookmark_count;
-	}
-	public String getBookmarkCount() {
-		return bookmark_count;
-	}
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
 	public String getCover() {
 		return cover;
 	}
-	public void setLike(String like) {
-		this.like = like;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getLike() {
-		return like;
+	public int getId() {
+		return id;
 	}
-	public void setBookmark(String bookmark) {
-		this.bookmark = bookmark;
+	public void setName(int name) {
+		this.name = name;
 	}
-	public String getBookmark() {
-		return bookmark;
+	public int getName() {
+		return name;
 	}
-	public void setNote(String note) {
-		this.note = note;
+	public void setRegUserId(int reg_user_id) {
+		this.reg_user_id = reg_user_id;
 	}
-	public String getNote() {
-		return note;
+	public int getRegUserId() {
+		return reg_user_id;
 	}
-	public void setObject(String object) {
-		this.object = object;
+	public void setTagCount(int tag_count) {
+		this.tag_count = tag_count;
 	}
-	public String getObject() {
-		return object;
+	public int getTagCount() {
+		return tag_count;
 	}
-	public void setUser(ArrayList<MatjiData> user) {
+	public void setPostCount(int post_count) {
+		this.post_count = post_count;
+	}
+	public int getPostCount() {
+		return post_count;
+	}
+	public void setImageCount(int image_count) {
+		this.image_count = image_count;
+	}
+	public int getImageCount() {
+		return image_count;
+	}
+	public void setLikeCount(int like_count) {
+		this.like_count = like_count;
+	}
+	public int getLikeCount() {
+		return like_count;
+	}
+	public void setBookmarkCount(int bookmark_count) {
+		this.bookmark_count = bookmark_count;
+	}
+	public int getBookmarkCount() {
+		return bookmark_count;
+	}
+	public void setUser(User user) {
 		this.user = user;
 	}
-	public ArrayList<MatjiData> getUser() {
+	public User getUser() {
 		return user;
+	}
+	public void setFile(AttachFile file) {
+		this.file = file;
+	}
+	public AttachFile getFile() {
+		return file;
 	}
 }

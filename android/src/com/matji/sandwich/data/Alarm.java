@@ -1,28 +1,29 @@
 package com.matji.sandwich.data;
 
 public class Alarm extends MatjiData{
-	private String id;
-	private String received_user_id;
-	private String sent_user_id;
+	private int id;
+	private int received_user_id;
+	private int sent_user_id;
 	private String alarm_type;
-	private User user;
+	private User sent_user;
+	private User received_user;
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setReceivedUserId(String received_user_id) {
+	public void setReceivedUserId(int received_user_id) {
 		this.received_user_id = received_user_id;
 	}
-	public String getReceivedUserId() {
+	public int getReceivedUserId() {
 		return received_user_id;
 	}
-	public void setSentUserId(String sent_user_id) {
+	public void setSentUserId(int sent_user_id) {
 		this.sent_user_id = sent_user_id;
 	}
-	public String getSentUserId() {
+	public int getSentUserId() {
 		return sent_user_id;
 	}
 	public void setAlarmType(String alarm_type) {
@@ -31,11 +32,17 @@ public class Alarm extends MatjiData{
 	public String getAlarmType() {
 		return alarm_type;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setSentUser(User sent_user) {
+		this.sent_user = sent_user;
 	}
-	public User getUser() {
-		return user;
+	public User getSentUser() {
+		return sent_user;
+	}
+	public void setReceivedUser(User received_user) {
+		this.received_user = received_user;
+	}
+	public User getReceivedUser() {
+		return received_user;
 	}
 
 }
