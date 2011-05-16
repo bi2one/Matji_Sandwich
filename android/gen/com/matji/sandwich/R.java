@@ -84,18 +84,15 @@ containing a value of this type.
         public static final int icon=0x7f02000d;
     }
     public static final class id {
-        public static final int progress_loading=0x7f050003;
-        public static final int relativelayout_loading=0x7f050002;
-        public static final int textView1=0x7f050000;
-        public static final int textView2=0x7f050001;
         public static final int SwipeView=0x7f060001;
         public static final int TestListView=0x7f060002;
         public static final int TestListView2=0x7f060003;
         public static final int TestListView3=0x7f060004;
         public static final int layout_main=0x7f060000;
-        public static final int progress_loading=0x7f060006;
-        public static final int relativelayout_loading=0x7f060005;
->>>>>>> bf2f1cb4e0e39e910f755f4f889fea5fc8b96b40
+        public static final int progress_loading=0x7f060008;
+        public static final int relativelayout_loading=0x7f060007;
+        public static final int textView1=0x7f060005;
+        public static final int textView2=0x7f060006;
     }
     public static final class layout {
         public static final int flipper=0x7f030000;

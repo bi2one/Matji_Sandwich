@@ -4,16 +4,29 @@ import com.google.android.maps.GeoPoint;
 
 
 public class CoordinateRegion {
-	public CoordinateRegion(GeoPoint center) {
-		
+	private GeoPoint center;
+	private int latitudeSpan;
+	private int longitudeSpan;
+	
+	public CoordinateRegion(GeoPoint center, int latitudeSpan, int longitudeSpan) {
+		this.center = center;
+		this.latitudeSpan = latitudeSpan;
+		this.longitudeSpan = longitudeSpan;
 	}
-
+		
+	public int getLatitudeSpan(){
+		return latitudeSpan;
+	}
+	
+	public int getLongitudeSpan(){
+		return longitudeSpan;
+	}
+	
+	public GeoPoint getCenter(){
+		return center;
+	}
 	
 }
 
 	
 	
-	
-	
-// latitude, longitude
-// span 
