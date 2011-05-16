@@ -7,18 +7,27 @@ import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 
 public class Session {
-	private static Session session = null;
+	private volatile static Session session = null;
 	private CurrentUser currentUser;
 	private PreferenceProvider prefs;
 	private DBProvider dbfs;
+	
 	private Context context;
 	
 	private Session(Context context){
+		
 		this.context = context;
 	}
+	
 	public static Session getInstance(Context context){
-		if(session == null)
+		if(session == null) {
+		synchronized(Session.class) {
+		if(session == null) {
 			session = new Session(context);
+		}
+		}
+		}
+		
 		return session;
 	}
 	
