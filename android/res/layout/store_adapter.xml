@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	      android:orientation="vertical"
-	      android:layout_width="fill_parent"
-	      android:layout_height="100dp" >
-  <TextView
-      android:layout_height="100dp"
-      android:layout_width="fill_parent"
-      android:background="#fff"
-      android:id="@+id/store_adapter_name" />
-</LinearLayout>
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#fff">
+	<ImageView android:id="@+id/thumnail"
+		android:layout_width="100dp"
+		android:layout_height="70dp"
+		android:layout_margin="3dp"
+		android:layout_alignParentLeft="true"
+		android:background="#123"/>
+	<TextView android:id="@+id/store_adapter_name" 
+		android:layout_width="fill_parent"
+		android:layout_height="20dp"
+		android:paddingLeft="5dp"
+		android:layout_alignParentTop="true" 
+		android:layout_toRightOf="@id/thumnail" />
+	<TextView android:id="@+id/store_adapter_address" 
+		android:layout_width="fill_parent"
+		android:layout_height="55dp" 
+		android:paddingLeft="5dp"
+		android:layout_toRightOf="@id/thumnail"
+		android:layout_below="@id/store_adapter_name" />
+</RelativeLayout>

@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	      android:orientation="vertical"
-	      android:layout_width="fill_parent"
-	      android:layout_height="fill_parent"
-	      android:background="#f00"
-	      android:id="@+id/layout_main"
-	      >
-  <com.matji.sandwich.widget.SwipeView
-      android:id="@+id/SwipeView"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent">
-    <com.matji.sandwich.widget.StoreListView
-    	android:id="@+id/TestListView"
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent" />
-    <com.matji.sandwich.widget.StoreListView
-	android:id="@+id/TestListView2"
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent" />
-    <com.matji.sandwich.widget.StoreListView
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent" />
-  </com.matji.sandwich.widget.SwipeView>
-    
+	android:orientation="vertical" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" 
+	android:background="#fff"
+	android:id="@+id/layout_main">
+	<com.matji.sandwich.widget.SwipeView
+		android:id="@+id/SwipeView" 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<com.matji.sandwich.widget.StoreListView
+			android:id="@+id/TestListView" 
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+		<com.matji.sandwich.widget.StoreNearListView
+			android:id="@+id/TestListView2" 
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+	</com.matji.sandwich.widget.SwipeView>
+
 </LinearLayout>
-    <!-- <com.matji.sandwich.widget.TestListView -->
-    <!-- 	android:id="@+id/TestListView2" -->
-    <!-- 	android:background="#0F0" -->
-    <!-- 	android:layout_width="fill_parent" -->
-    <!-- 	android:layout_height="fill_parent" /> -->
-    <!-- <com.matji.sandwich.widget.TestListView -->
-    <!-- 	android:id="@+id/TestListView3" -->
-    <!-- 	android:background="#333" -->
-    <!-- 	android:layout_width="fill_parent" -->
-    <!-- 	android:layout_height="fill_parent" /> -->
+<!-- <com.matji.sandwich.widget.TestListView -->
+<!-- android:id="@+id/TestListView2" -->
+<!-- android:background="#0F0" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="fill_parent" /> -->
+<!-- <com.matji.sandwich.widget.TestListView -->
+<!-- android:id="@+id/TestListView3" -->
+<!-- android:background="#333" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="fill_parent" /> -->
 

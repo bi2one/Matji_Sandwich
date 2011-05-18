@@ -121,7 +121,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("limit", limit + "");
     }
 
-    public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne){
+    public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit){
     	isPost = false;
     	action = "nearby_list";
     	parser = new StoreParser();
@@ -131,6 +131,8 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("lat_ne", lat_ne + "");
     	getHashtable.put("lng_sw", lng_sw + "");
     	getHashtable.put("lng_ne", lng_ne + "");
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");    
     }
     
     public void actionBookmarkedList(){

@@ -24,38 +24,46 @@ import java.util.ArrayList;
 // import com.matji.android.v2.common.ImageDownloader;
 
 public class StoreAdapter extends MBaseAdapter {
-    public StoreAdapter(Context context) {
-	super(context);
-    }
-  	
-    public View getView(int position, View convertView, ViewGroup parent) {
-        StoreElement storeElement;
-	Store store = (Store)data.get(position);
+	public StoreAdapter(Context context) {
+		super(context);
+	}
 
-        // When convertView is not null, we can reuse it directly, there is no need
-        // to reinflate it. We only inflate a new View when the convertView supplied
-        // by ListView is null.
-        if (convertView == null) {
-            storeElement = new StoreElement();
-            convertView = getLayoutInflater().inflate(R.layout.store_adapter, null);
+	public View getView(int position, View convertView, ViewGroup parent) {
+		StoreElement storeElement;
+		Store store = (Store) data.get(position);
 
-            // Creates a ViewHolder and store references to the two children views
-            // we want to bind data to.
-            storeElement.name = (TextView)convertView.findViewById(R.id.store_adapter_name);
-            convertView.setTag(storeElement);
-        } else {
-            // Get the ViewHolder back to get fast access to the TextView
-            // and the ImageView.
-            storeElement = (StoreElement)convertView.getTag();
-        }
+		// When convertView is not null, we can reuse it directly, there is no
+		// need
+		// to reinflate it. We only inflate a new View when the convertView
+		// supplied
+		// by ListView is null.
+		if (convertView == null) {
+			storeElement = new StoreElement();
+			convertView = getLayoutInflater().inflate(R.layout.store_adapter, null);
+			// Creates a ViewHolder and store references to the two children
+			// views
+			// we want to bind data to.
+			storeElement.image = (ImageView) convertView.findViewById(R.id.thumnail);
+			storeElement.name = (TextView) convertView.findViewById(R.id.store_adapter_name);
+			storeElement.address = (TextView) convertView.findViewById(R.id.store_adapter_address);
+			convertView.setTag(storeElement);
+		} else {
+			// Get the ViewHolder back to get fast access to the TextView
+			// and the ImageView.
+			storeElement = (StoreElement) convertView.getTag();
+		}
 
-        // Bind the data efficiently with the holder.
-	Log.d("STORE", store.getName());
-	storeElement.name.setText(store.getName());
-        return convertView;
-    }
-    
-    private class StoreElement {
-        TextView name;
-    }
+		// Bind the data efficiently with the holder.
+		Log.d("STORE", store.getName());
+		Log.d("ADDRESS", store.getAddress());
+		storeElement.name.setText(store.getName());
+		storeElement.address.setText(store.getAddress());
+		return convertView;
+	}
+
+	private class StoreElement {
+		ImageView image;
+		TextView name;
+		TextView address;
+	}
 }

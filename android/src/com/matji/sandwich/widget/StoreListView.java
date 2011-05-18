@@ -18,35 +18,35 @@ import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
 public class StoreListView extends RequestableMListView {
-    private StoreHttpRequest storeRequest;
-    private int page = 1;
-    private final static int STORE_LIMIT = 10;
-    
-    public StoreListView(Context context, AttributeSet attrs) {
-	super(context, attrs, new StoreAdapter(context), STORE_LIMIT);
-	storeRequest = new StoreHttpRequest();
-    }
+	private StoreHttpRequest storeRequest;
+	private int page = 1;
+	private final static int STORE_LIMIT = 10;
 
-    public void start(Activity activity) {
-	super.start(activity);
-    }
+	public StoreListView(Context context, AttributeSet attrs) {
+		super(context, attrs, new StoreAdapter(context), STORE_LIMIT);
+		storeRequest = new StoreHttpRequest();
+	}
 
-    public void requestNext() {
-	storeRequest.actionList(page, STORE_LIMIT);
-	page++;
-	getHttpRequestManager().request(getActivity(), storeRequest, 0);
-    }
+	public void start(Activity activity) {
+		super.start(activity);
+	}
 
-    public void requestReload() {
-	page = 1;
-	requestNext();
-    }
+	public void requestNext() {
+		storeRequest.actionList(page, STORE_LIMIT);
+		page++;
+		getHttpRequestManager().request(getActivity(), storeRequest, 0);
+	}
 
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-	super.requestCallBack(tag, data);
-    }
-    
-    public void requestExceptionCallBack(int tag, MatjiException e) {
-	super.requestExceptionCallBack(tag, e);
-    }
+	public void requestReload() {
+		page = 1;
+		requestNext();
+	}
+
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		super.requestCallBack(tag, data);
+	}
+
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		super.requestExceptionCallBack(tag, e);
+	}
 }
