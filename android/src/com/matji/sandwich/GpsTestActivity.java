@@ -31,16 +31,12 @@ public class GpsTestActivity extends Activity implements MatjiLocationListener {
 	gpsManager.stop();
     }
 
-    public void onInitialLocationDelivered(Location location) {
-	Log.d("INIT_LOCATION", "lat: " + location.getLatitude() + ", lng: " + location.getLongitude());
-    }
-
     public void onLocationChanged(Location location) {
 	Toast.makeText(getApplicationContext(), "lat: " + location.getLatitude() + ", lng: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
 	Log.d("LOCATION", "lat: " + location.getLatitude() + ", lng: " + location.getLongitude());
     }
 
     public void onLocationExceptionDelivered(MatjiException e) {
-	e.showToastMsg(getApplicationContext());
+	e.performExceptionHandling(getApplicationContext());
     }
 }

@@ -30,8 +30,8 @@ public class JsonActivity extends Activity implements Requestable{
 //		NoticeHttpRequest request = new NoticeHttpRequest();
 		TagHttpRequest request = new TagHttpRequest();
 //		request.actionList(12296);
-//		request.actionList(16874);
-		request.actionShow(13720);
+		request.actionList(1);
+//		request.actionList(12296);
 //		request.actionNew(12296, "육개장");
 //		request.actionDelete(16931);
 //		request.actionLike(32);		
@@ -40,13 +40,13 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		Tag foodData = (Tag)data.get(0);
-		Log.d("Matji", "" + foodData.getId());
-//		Log.d("Matji", "name: " +  foodData.getFood().getName());
-//		Log.d("Matji", "created_at: " +  foodData.getCreatedAt());
-//		Log.d("Matji", "like_count: " +  foodData.getLikeCount());
-//		Log.d("Matji", "updated_at: " +  foodData.getUpdatedAt());
-
+//		StoreFood food = (StoreFood)data.get(0);
+//		Log.d("Matji", "" + food.getId());
+//		Log.d("Matji", "name: " +  food.getFood().getName());
+//		Log.d("Matji", "like_count: " +  food.getLikeCount());
+//		Log.d("Matji", "created_at: " + food.getFood().getCreatedAt());
+//		Comment comment = (Comment)data.get(0);
+//		Log.d("Matji", "" + comment.getComment());
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {

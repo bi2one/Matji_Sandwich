@@ -5,7 +5,6 @@ import com.matji.sandwich.http.parser.UserParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -62,6 +61,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionUpdate(){
     	
     }
+
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
 			(isPost) ? 

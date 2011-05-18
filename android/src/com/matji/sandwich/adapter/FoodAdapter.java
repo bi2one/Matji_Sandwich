@@ -3,7 +3,7 @@ package com.matji.sandwich.adapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FoodAdapter extends MatjiBaseAdapter{
+public class FoodAdapter extends MatjiBaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 	return null;
     }

@@ -5,7 +5,6 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -23,13 +22,13 @@ public class NoticeHttpRequest extends HttpRequest {
 	public NoticeHttpRequest() {
 		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
+		parser = new NoticeParser();
 		controller = "notices";
 	}
 
 	public void actionShow(int notice_id) {
 		isPost = false;
 		action = "show";
-		parser = new NoticeParser();
 		
 		getHashtable.clear();
 		getHashtable.put("notice_id", notice_id + "");
@@ -38,7 +37,6 @@ public class NoticeHttpRequest extends HttpRequest {
 	public void actionList() {
 		isPost = false;
 		action = "list";
-		parser = new NoticeParser();
 
 		getHashtable.clear();
 	}
