@@ -26,7 +26,7 @@ public class RegionHttpRequest extends HttpRequest {
     	controller = "regions";
     }
 
-    public void actionBookmark(double lat_sw, double lat_ne, double lng_sw, double lng_ne, String description){
+    public void actionBookmark(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String description){
     	isPost = true;
     	action = "bookmark";
     	parser = new RegionParser();

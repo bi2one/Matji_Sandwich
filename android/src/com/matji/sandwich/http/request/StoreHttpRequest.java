@@ -1,7 +1,7 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.BookmarkParser;
-import com.matji.sandwich.http.parser.CountParser;
+//import com.matji.sandwich.http.parser.CountParser;
 import com.matji.sandwich.http.parser.LikeParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.StoreParser;
@@ -28,10 +28,10 @@ public class StoreHttpRequest extends HttpRequest {
     	controller = "stores";
     }
 
-    public void actionCount(double lat_sw, double lat_ne, double lng_sw, double lng_ne, String type){
+    public void actionCount(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String type){
     	isPost = false;
     	action="count";
-    	parser = new CountParser();
+//    	parser = new CountParser();
     	
     	getHashtable.clear();
     	getHashtable.put("lat_ne", lat_ne + "");
@@ -50,7 +50,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("store_id", store_id + "");
     }
     
-    public void actionNew(String name, String address, float lat, float lng){
+    public void actionNew(String name, String address, int lat, int lng){
     	isPost = true;
     	action = "new";
     	parser = new StoreParser();
@@ -62,7 +62,7 @@ public class StoreHttpRequest extends HttpRequest {
     	postHashtable.put("lng", lng);
     }
     
-    public void actionModify(String name, String address, float lat, float lng, int store_id) {
+    public void actionModify(String name, String address, int lat, int lng, int store_id) {
     	isPost = true;
     	action = "modify";
     	parser = new StoreParser();
@@ -112,7 +112,6 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionList(int page, int limit){
-	parser = new StoreParser();
     	isPost = false;
     	action = "list";
     	parser = new StoreParser();
@@ -122,7 +121,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("limit", limit + "");
     }
 
-    public void actionNearbyList(float lat_sw, float lat_ne, float lng_sw, float lng_ne){
+    public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne){
     	isPost = false;
     	action = "nearby_list";
     	parser = new StoreParser();

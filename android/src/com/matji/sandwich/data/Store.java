@@ -12,8 +12,8 @@ public class Store extends MatjiData{
 	private String website;
 	private String text;
 	private String cover;
-	private double lat;
-	private double lng;
+	private int lat;
+	private int lng;
 	private int tag_count;
 	private int post_count;
 	private int image_count;

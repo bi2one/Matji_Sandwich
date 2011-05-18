@@ -10,8 +10,8 @@ public class Post extends MatjiData{
 	private int like_count;
 	private int comment_count;
 	private int tag_count;
-	private double lat;
-	private double lng;
+	private int lat;
+	private int lng;
 	private String from_where;	
 	private String created_at;
 	private String updated_at;
@@ -25,13 +25,13 @@ public class Post extends MatjiData{
 	public String getPost() {
 		return post;
 	}
-	public void setLat(double lat) {
+	public void setLat(int lat) {
 		this.lat = lat;
 	}
 	public double getLat() {
 		return lat;
 	}
-	public void setLng(double lng) {
+	public void setLng(int lng) {
 		this.lng = lng;
 	}
 	public double getLng() {

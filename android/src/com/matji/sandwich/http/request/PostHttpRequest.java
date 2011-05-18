@@ -105,7 +105,7 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     }
     
-    public void actionNearbyList(double lat_ne, double lat_sw, double lng_sw, double lng_ne){
+    public void actionNearbyList(int lat_ne, int lat_sw, int lng_sw, int lng_ne){
     	isPost = false;
     	action = "nearby_list";
     	

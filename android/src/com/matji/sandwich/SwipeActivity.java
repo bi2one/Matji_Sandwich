@@ -16,10 +16,10 @@ public class SwipeActivity extends Activity {
     }
 
     public void setContentView(int layoutRef) {
-	SwipeView.GestureListener gestureListener = new SwipeView.GestureListener();
+//	SwipeView.GestureListener gestureListener = new SwipeView.GestureListener();
 	super.setContentView(layoutRef);
 	swipeView = (SwipeView)findViewById(R.id.SwipeView);
-    	gestureDetector = new GestureDetector(this, gestureListener);
+    	//gestureDetector = new GestureDetector(this, gestureListener);
 	gestureDetector.setIsLongpressEnabled(false);
 	// swipeView.setOnTouchListener(gestureListener);
     }
