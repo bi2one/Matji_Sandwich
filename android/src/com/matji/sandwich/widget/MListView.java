@@ -18,12 +18,14 @@ import android.app.Activity;
 // import com.matji.sandwich.http.HttpRequestManager;
 // import com.matji.sandwich.Requestable;
 
-public class MListView extends ListView implements android.widget.AbsListView.OnScrollListener {
+public class MListView extends ListView {
     private Activity activity;
+    // private ListScrollRequestable scrollRequestable;
+    // private OnScrollListener scrollListener;
 
     public MListView(Context context, AttributeSet attrs) {
-	super(context, attrs, 0);
-	setOnScrollListener(this);
+	super(context, attrs);
+	// setOnScrollListener(this);
     }
 
     protected Activity getActivity() {
@@ -34,8 +36,8 @@ public class MListView extends ListView implements android.widget.AbsListView.On
     	this.activity = activity;
     }
 
-    public void onScrollStateChanged(AbsListView view, int scrollState) { }
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-	Log.d("aaa", "aaa");
-    }
+    // public void onScrollStateChanged(AbsListView view, int scrollState) { }
+    // public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+    // 	Log.d("aaa", "aaa");
+    // }
 }

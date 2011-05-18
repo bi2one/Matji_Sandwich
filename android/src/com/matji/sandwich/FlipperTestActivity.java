@@ -18,19 +18,10 @@ public class FlipperTestActivity extends Activity {
 	setContentView(R.layout.flipper);
 	Context context = getApplicationContext();
 
-	SwipeView sv = (SwipeView)findViewById(R.id.SwipeView);
 	StoreListView test = (StoreListView)findViewById(R.id.TestListView);
-	// TestListView test2 = (TestListView)findViewById(R.id.TestListView2);
-	// TestListView test3 = (TestListView)findViewById(R.id.TestListView3);
+	StoreListView test2 = (StoreListView)findViewById(R.id.TestListView2);
 
 	test.start(this);
-	// test2.start(this);
-	// test3.start(this);
-	// StoreListView addTest = new StoreListView(context, null);
-	// StoreListView addTest2 = new StoreListView(context, null);
-	// sv.addView(addTest);
-	// sv.addView(addTest2);
-	// addTest.start(this);
-	// addTest2.start(this);
+	test2.start(this);
     }
 }

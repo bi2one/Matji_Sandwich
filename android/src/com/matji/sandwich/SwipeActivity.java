@@ -15,23 +15,23 @@ public class SwipeActivity extends Activity {
 	super.onCreate(savedInstanceState);
     }
 
-    public void setContentView(int layoutRef) {
-	SwipeView.GestureListener gestureListener = new SwipeView.GestureListener();
-	super.setContentView(layoutRef);
-	swipeView = (SwipeView)findViewById(R.id.SwipeView);
-    	gestureDetector = new GestureDetector(this, gestureListener);
-	gestureDetector.setIsLongpressEnabled(false);
-	// swipeView.setOnTouchListener(gestureListener);
-    }
+    // public void setContentView(int layoutRef) {
+    // 	SwipeView.GestureListener gestureListener = new SwipeView.GestureListener();
+    // 	super.setContentView(layoutRef);
+    // 	swipeView = (SwipeView)findViewById(R.id.SwipeView);
+    // 	gestureDetector = new GestureDetector(this, gestureListener);
+    // 	gestureDetector.setIsLongpressEnabled(false);
+    // 	// swipeView.setOnTouchListener(gestureListener);
+    // }
 
-    public SwipeView getSwipeView() {
-	return swipeView;
-    }
+    // public SwipeView getSwipeView() {
+    // 	return swipeView;
+    // }
 
-    public boolean onTouchEvent(MotionEvent event) {
-	if (gestureDetector.onTouchEvent(event))
-	    return true;
-	else
-	    return false;
-    }
+    // public boolean onTouchEvent(MotionEvent event) {
+    // 	if (gestureDetector.onTouchEvent(event))
+    // 	    return true;
+    // 	else
+    // 	    return false;
+    // }
 }
