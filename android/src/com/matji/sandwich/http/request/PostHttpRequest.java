@@ -1,10 +1,10 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.*;
+import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.PostParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -22,12 +22,14 @@ public class PostHttpRequest extends HttpRequest {
     public PostHttpRequest() {
 		getHashtable = new Hashtable<String, String>();
 		postHashtable = new Hashtable<String, Object>();
+		parser = new PostParser();
 		controller = "posts";
     }
 
     public void actionShow(int post_id){
     	isPost = false;
     	action = "show";
+    	parser = new PostParser();
     	
     	getHashtable.clear();
     	getHashtable.put("post_id", post_id + "");
@@ -36,6 +38,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionNew(String post, String access_token){
     	isPost = true;
     	action = "new";
+    	parser = new PostParser();
     	
     	postHashtable.clear();
     	postHashtable.put("post", post);
@@ -44,6 +47,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionDelete(int post_id, String access_token){
     	isPost = true;
     	action = "delete";
+//
     	
     	postHashtable.clear();
     	postHashtable.put("post_id",post_id + "");
@@ -52,6 +56,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionUnlike(int post_id){
     	isPost = true;
     	action = "unlike";
+//    	
     	
     	postHashtable.clear();
     	postHashtable.put("post_id", post_id + "");
@@ -60,6 +65,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionLike(int post_id){
     	isPost = true;
     	action = "like";
+    	parser = new PostParser();
     	
     	postHashtable.clear();
     	postHashtable.put("post_id", post_id + "");
@@ -68,6 +74,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionList(){
     	isPost = false;
     	action = "list";
+    	parser = new PostParser();
     	
     	getHashtable.clear();
     }
@@ -75,6 +82,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionStoreList(int store_id){
     	isPost = false;
     	action = "store_list";
+    	parser = new PostParser();
     	
     	getHashtable.clear();
     	getHashtable.put("store_id",store_id + "");
@@ -83,6 +91,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionUserList(int user_id){
     	isPost = false;
     	action = "user_list";
+    	parser = new PostParser();
     	
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
@@ -91,6 +100,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionMyList(){
     	isPost = false;
     	action = "my_list";
+    	parser = new PostParser();
     	
     	getHashtable.clear();
     }
@@ -106,7 +116,7 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("lng_sw", lng_sw + "");
     }
     
-    public void actionRegionList(){
+    public void actionSearch() {
     	
     }
     

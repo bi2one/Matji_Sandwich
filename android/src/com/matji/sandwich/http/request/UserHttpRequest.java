@@ -1,10 +1,10 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.UserParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -28,16 +28,38 @@ public class UserHttpRequest extends HttpRequest {
     public void actionList(){
     	isPost = false;
     	action = "list";
-    	
+    	parser = new UserParser();
+
     	getHashtable.clear();
     }
     
     public void actionShow(int user_id){
     	isPost = false;
     	action = "show";
-    	
+    	parser = new UserParser();
+
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
+    }
+
+    public void actionMe() {
+    	
+    }
+    
+    public void actionAuthorize() {
+    	
+    }
+   
+    public void actionCreate() {
+    	
+    }
+    
+    public void actionProfile() {
+    	
+    }
+    
+    public void actionUpdate(){
+    	
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {

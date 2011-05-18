@@ -1,10 +1,11 @@
 package com.matji.sandwich.http.request;
 
+import com.matji.sandwich.http.parser.AlarmParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.AlarmParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -22,10 +23,12 @@ public class AlarmHttpRequest extends HttpRequest {
     public AlarmHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	parser = new AlarmParser();
     	controller = "alarms";
     }
 
     public void actionList(int user_id){
+    	parser = new AlarmParser();
     	isPost = false;
     	action = "list";
     	

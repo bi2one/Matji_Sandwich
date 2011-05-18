@@ -1,10 +1,11 @@
 package com.matji.sandwich.http.request;
 
+import com.matji.sandwich.http.parser.AttachFileParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.AttachFileParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -22,24 +23,28 @@ public class AttachFileHttpRequest extends HttpRequest {
     public AttachFileHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	parser = new AttachFileParser();
     	controller = "attach_files";
     }
 
     public void actionUpload(){
+    	parser = new AttachFileParser();
     	isPost = true;
     	action = "upload";
     	
     	postHashtable.clear();
     }
     
-    public void actionProfileUpload(){
-    	isPost = true;
-    	action = "profile_upload";
+    public void actionImage(){
+    	parser = new AttachFileParser();
+    	isPost = false;
+    	action = "image";
     	
-    	postHashtable.clear();
+    	getHashtable.clear();
     }
     
     public void actionList(){
+    	parser = new AttachFileParser();
     	isPost = false;
     	action = "list";
     	
@@ -47,6 +52,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionStoreList(int store_id){
+    	parser = new AttachFileParser();
     	isPost = false;
     	action = "store_list";
     	
@@ -55,12 +61,14 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionPostList(int post_id){
+    	parser = new AttachFileParser();
     	isPost =false;
     	action = "post_list";
     	
     	getHashtable.clear();
     	getHashtable.put("post_id", post_id + "");
     }
+    
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
     		(isPost) ? 

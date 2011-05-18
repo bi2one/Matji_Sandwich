@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<LinearLayout android:id="@+id/opt_general"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<EditText
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text="프로젝트명" />
+		<Button
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text="변경" />
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/opt_compiler"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<CheckBox
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text="최적화하기" />
+		<CheckBox
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text="경고 무시하기" />
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/opt_linker"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	
+	<RelativeLayout 
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_margin="30dip"
+		android:background="#123456">
+
+		<Button
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="10dip"
+		android:layout_marginRight="10dip"
+		android:layout_marginTop="1dip"
+        android:text="test1" />
+
+    	<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/ok"
+	    android:layout_alignParentRight="true"
+    	android:layout_alignParentLeft="true"
+        android:text="test2" />
+	</RelativeLayout>
+	
+	<RelativeLayout 
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_margin="30dip"
+		android:background="#123456">
+
+		<Button
+        android:id="@+id/ok2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="20dip"
+		android:layout_marginRight="20dip"
+        android:text="test1" />
+
+    	<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/ok2"
+	    android:layout_alignParentRight="true"
+    	android:layout_alignParentLeft="true"
+        android:text="test2" />
+	</RelativeLayout>
+	
+	</LinearLayout>
+</FrameLayout>

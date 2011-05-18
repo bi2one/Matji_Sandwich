@@ -5,7 +5,6 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -23,13 +22,14 @@ public class MessageHttpRequest extends HttpRequest {
     public MessageHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	parser = new MessageParser();
     	controller = "messages";
     }
     
     public void actionNew(String received_user_id, String message){
+    	parser = new MessageParser();
     	isPost = true;
     	action = "new";
-    	parser = new MessageParser();
     	
     	postHashtable.clear();
 		postHashtable.put("received_user_id",received_user_id);
@@ -37,43 +37,60 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionDelete(String message_id){
+    	parser = new MessageParser();
     	isPost = true;
     	action = "new";
     	
     	postHashtable.clear();
     	postHashtable.put("message_id", message_id);
     }
-    
-    
+
     public void actionShow(String message_id){
+    	parser = new MessageParser();
     	isPost = false;
     	action = "show";
-    	parser = new MessageParser();
     	
     	getHashtable.clear();
     	getHashtable.put("message_id", message_id);
     }
     
-    public void actionList(){
-    	isPost = false;
-    	action = "show";
+    public void actionTreadList(){
     	parser = new MessageParser();
+    	isPost = false;
+    	action = "thread_list";
     	
+    	getHashtable.clear();
+    }
+    
+    public void actionChat(String thread_id){
+    	parser = new MessageParser();
+    	isPost = true;
+    	action = "chat";
+    	
+    	postHashtable.clear();
+    	postHashtable.put("thread_id", thread_id);
+    }
+    
+    public void actionList(){
+    	parser = new MessageParser();
+    	isPost = false;
+    	action = "list";
+
     	getHashtable.clear();
     }
 
     public void actionReceivedList(){
+    	parser = new MessageParser();
     	isPost = false;
     	action = "received_list";
-    	parser = new MessageParser();
     	
     	getHashtable.clear();
     }
 
     public void actionSentList(){
+    	parser = new MessageParser();
     	isPost = false;
     	action = "sent_list";
-    	parser = new MessageParser();
     	
     	getHashtable.clear();
     }
