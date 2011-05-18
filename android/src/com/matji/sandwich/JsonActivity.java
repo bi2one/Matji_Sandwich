@@ -24,13 +24,12 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	private void request() {
-//		FoodHttpRequest request = new FoodHttpRequest();
+		FoodHttpRequest request = new FoodHttpRequest();
 //		FollowingHttpRequest request = new FollowingHttpRequest();
 //		CommentHttpRequest request = new CommentHttpRequest();
 //		NoticeHttpRequest request = new NoticeHttpRequest();
-		TagHttpRequest request = new TagHttpRequest();
-//		request.actionList(12296);
-//		request.actionList(1);
+//		TagHttpRequest request = new TagHttpRequest();
+		request.actionList(12296);
 //		request.actionList(12296);
 //		request.actionNew(12296, "육개장");
 //		request.actionDelete(16931);

@@ -23,29 +23,11 @@ import java.util.ArrayList;
 // import com.matji.android.v2.common.Constants;
 // import com.matji.android.v2.common.ImageDownloader;
 
-public class StoreAdapter extends BaseAdapter {
-    private LayoutInflater inflater;
-    private Context context;
-    private ArrayList<MatjiData> data;
-    
-    public StoreAdapter(Context context, ArrayList<MatjiData> data) {
-	inflater = LayoutInflater.from(context);
-	this.context = context;
-	this.data = data;
+public class StoreAdapter extends MBaseAdapter {
+    public StoreAdapter(Context context) {
+	super(context);
     }
   	
-    public int getCount() {
-	return data.size();
-    }
-   
-    public Object getItem(int position) {
-	return data.get(position);
-    }
-   
-    public long getItemId(int position) {
-	return position;
-    }
-   
     public View getView(int position, View convertView, ViewGroup parent) {
         StoreElement storeElement;
 	Store store = (Store)data.get(position);
@@ -55,7 +37,7 @@ public class StoreAdapter extends BaseAdapter {
         // by ListView is null.
         if (convertView == null) {
             storeElement = new StoreElement();
-            convertView = inflater.inflate(R.layout.store_adapter, null);
+            convertView = getLayoutInflater().inflate(R.layout.store_adapter, null);
 
             // Creates a ViewHolder and store references to the two children views
             // we want to bind data to.
@@ -68,7 +50,7 @@ public class StoreAdapter extends BaseAdapter {
         }
 
         // Bind the data efficiently with the holder.
-	// Log.d("aaaaaa", "" + store.getName());
+	Log.d("STORE", store.getName());
 	storeElement.name.setText(store.getName());
         return convertView;
     }

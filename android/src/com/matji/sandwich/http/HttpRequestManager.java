@@ -22,6 +22,7 @@ public class HttpRequestManager {
     private ArrayList<MatjiData> data;
     private HttpRequest request;
     private MatjiException lastOccuredException = null;
+    private boolean isRunning = false;
 
     public HttpRequestManager(Context context, Requestable requestable) {
 	this.context = context;
@@ -43,6 +44,10 @@ public class HttpRequestManager {
 	request.setContext(context);
 	httpAsyncTask = new HttpAsyncTask();
 	httpAsyncTask.execute(tag);
+    }
+
+    public boolean isRunning() {
+	return isRunning;
     }
     
     public void cancel() {
@@ -75,12 +80,14 @@ public class HttpRequestManager {
     }
 
     private void startSpinner() {
+	isRunning = true;
 	if (spinner != null) {
 	    spinner.start();
 	}
     }
 
     private void stopSpinner() {
+	isRunning = false;
 	if (spinner != null) {
 	    spinner.stop();
 	}
