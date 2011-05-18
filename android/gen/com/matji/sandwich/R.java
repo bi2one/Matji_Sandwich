@@ -27,12 +27,20 @@ public final class R {
         public static final int icon=0x7f02000d;
     }
     public static final class id {
-        public static final int progress_loading=0x7f050001;
-        public static final int relativelayout_loading=0x7f050000;
+        public static final int ok=0x7f050003;
+        public static final int ok2=0x7f050004;
+        public static final int opt_compiler=0x7f050001;
+        public static final int opt_general=0x7f050000;
+        public static final int opt_linker=0x7f050002;
+        public static final int progress_loading=0x7f050006;
+        public static final int relativelayout_loading=0x7f050005;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
-        public static final int popup_loading=0x7f030001;
+        public static final int c14_tabtest=0x7f030000;
+        public static final int main=0x7f030001;
+        public static final int popup_loading=0x7f030002;
+        public static final int testlistview=0x7f030003;
+        public static final int testtabview=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

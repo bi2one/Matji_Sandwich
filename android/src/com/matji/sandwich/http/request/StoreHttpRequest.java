@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.StoreParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -28,6 +29,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionCount(double lat_sw, double lat_ne, double lng_sw, double lng_ne, String type){
     	isPost = false;
     	action="count";
+    	parser = new StoreParser(); 
     	
     	getHashtable.clear();
     	getHashtable.put("lat_ne", lat_ne + "");
@@ -40,6 +42,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionShow(int store_id){
     	isPost = false;
     	action = "show";
+    	parser = new StoreParser(); 
     		
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
@@ -48,6 +51,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionNew(String name, String address, float lat, float lng){
     	isPost = true;
     	action = "new";
+    	parser = new StoreParser(); 
 
     	postHashtable.clear();
     	postHashtable.put("name", name);
@@ -59,6 +63,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionModify(String name, String address, float lat, float lng, int store_id){
     	isPost = true;
     	action = "modify";
+    	parser = new StoreParser(); 
     	
     	postHashtable.clear();
     	postHashtable.put("name", name);
@@ -71,7 +76,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionUnLike(int store_id){
     	isPost = true;
     	action = "unlike";
-    	
+//    	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
     }
@@ -79,7 +84,8 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionLike(int store_id){
     	isPost = true;
     	action = "like";
-    	
+    	parser = new StoreParser(); 
+  	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
     }
@@ -87,6 +93,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionBookmark(int store_id){
     	isPost = true;
     	action = "bookmark";
+    	parser = new StoreParser(); 
     	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
@@ -95,7 +102,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionUnBookmark(int store_id){
     	isPost = true;
     	action = "unbookmark";
-    	
+//    	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
     }
@@ -103,13 +110,15 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionList(){
     	isPost = false;
     	action = "list";
-    	
+    	parser = new StoreParser(); 
+  	
     	getHashtable.clear();
     }
 
     public void actionNearbyList(float lat_sw, float lat_ne, float lng_sw, float lng_ne){
     	isPost = false;
     	action = "nearby_list";
+    	parser = new StoreParser(); 
     	
     	getHashtable.clear();
     	getHashtable.put("lat_sw", lat_sw + "");
@@ -121,6 +130,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionBookmarkedList(int user_id){
     	isPost = false;
     	action = "bookmarked_list";
+    	parser = new StoreParser(); 
     	
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
@@ -129,6 +139,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionDetailList(int store_id){
     	isPost = false;
     	action = "detail_list";
+    	parser = new StoreParser(); 
     	
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
@@ -137,6 +148,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionDetailNew(int store_id, String note){
     	isPost = true;
     	action = "detail_new";
+    	parser = new StoreParser(); 
     	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
@@ -146,6 +158,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionRollbackDetail(int store_detail_info_id){
     	isPost = true;
     	action = "rollback_detail";
+    	parser = new StoreParser(); 
     		
     	postHashtable.clear();
     	postHashtable.put("store_detail_info_id", store_detail_info_id);

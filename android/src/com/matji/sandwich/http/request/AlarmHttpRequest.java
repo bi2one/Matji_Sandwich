@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.AlarmParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -26,6 +27,7 @@ public class AlarmHttpRequest extends HttpRequest {
     }
 
     public void actionList(int user_id){
+    	parser = new AlarmParser();
     	isPost = false;
     	action = "list";
     	

@@ -44,14 +44,6 @@ public class FollowingHttpRequest extends HttpRequest {
 		postHashtable.put("followed_user_id", followed_user_id);
 	}
 	
-	public void actionList() {
-		isPost = false;
-		action = "list";
-		parser = new FollowingParser();
-		
-		getHashtable.clear();
-	}
-	
 	public void actionFollowingList(int user_id) {
 		isPost = false;
 		action = "following_list";

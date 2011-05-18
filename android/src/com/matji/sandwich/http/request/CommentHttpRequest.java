@@ -27,10 +27,10 @@ public class CommentHttpRequest extends HttpRequest {
 	}
 	
 	public void actionNew(int post_id, String comment, String from_where) {
-		isPost = true;
-		action = "new";
 		parser = new CommentParser();
-		
+isPost = true;
+		action = "new";
+				
 		postHashtable.clear();
 		postHashtable.put("post_id", post_id);
 		postHashtable.put("comment", comment);
@@ -47,14 +47,22 @@ public class CommentHttpRequest extends HttpRequest {
 	}
 	
 	public void actionList(int post_id) {
+		parser = new CommentParser();
 		isPost = false;
 		action = "list";
-		parser = new CommentParser();
 
 		getHashtable.clear();
 		getHashtable.put("post_id", post_id+ "");
 	}
 	
+	public void actionShow(int comment_id) {
+		parser = new CommentParser();
+		isPost = false;
+		action = "show";
+		
+		getHashtable.clear();
+		getHashtable.put("comment_id", "" + comment_id);
+	}
 	public ArrayList<MatjiData> request() throws MatjiException {		
 		SimpleHttpResponse response = 
 			(isPost) ? 

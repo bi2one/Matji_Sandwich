@@ -29,6 +29,7 @@ public class RegionHttpRequest extends HttpRequest {
     public void actionBookmark(double lat_sw, double lat_ne, double lng_sw, double lng_ne, String description){
     	isPost = true;
     	action = "bookmark";
+    	parser = new RegionParser();
     	
     	postHashtable.clear();
     	postHashtable.put("lat_sw",lat_sw);
@@ -40,7 +41,7 @@ public class RegionHttpRequest extends HttpRequest {
     public void actionUnBookmark(int region_id){
     	isPost = true;
     	action = "unbookmark";
-    	
+//    	
     	postHashtable.clear();
     	postHashtable.put("region_id", region_id);
     }
@@ -48,7 +49,8 @@ public class RegionHttpRequest extends HttpRequest {
     public void actionBookmarkedList(){
     	isPost = false;
     	action = "bookmarked_list";
-    	
+      	parser = new RegionParser();
+      	
     	getHashtable.clear();
     }
     

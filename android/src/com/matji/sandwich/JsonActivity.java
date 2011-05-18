@@ -24,14 +24,14 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	private void request() {
-		FoodHttpRequest request = new FoodHttpRequest();
+//		FoodHttpRequest request = new FoodHttpRequest();
 //		FollowingHttpRequest request = new FollowingHttpRequest();
 //		CommentHttpRequest request = new CommentHttpRequest();
 //		NoticeHttpRequest request = new NoticeHttpRequest();
-//		TagHttpRequest request = new TagHttpRequest();
+		TagHttpRequest request = new TagHttpRequest();
 //		request.actionList(12296);
 //		request.actionList(16874);
-		request.actionList(12296);
+		request.actionShow(13720);
 //		request.actionNew(12296, "육개장");
 //		request.actionDelete(16931);
 //		request.actionLike(32);		
@@ -40,7 +40,7 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		StoreFood foodData = (StoreFood)data.get(0);
+		Tag foodData = (Tag)data.get(0);
 		Log.d("Matji", "" + foodData.getId());
 //		Log.d("Matji", "name: " +  foodData.getFood().getName());
 //		Log.d("Matji", "created_at: " +  foodData.getCreatedAt());

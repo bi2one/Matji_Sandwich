@@ -4,6 +4,7 @@ public class Message extends MatjiData{
 	private int id;
 	private int sent_user_id;
 	private int received_user_id;
+	private int thread_id;
 	private String message;
 	private User sent_user;
 	private User received_user;
@@ -57,5 +58,11 @@ public class Message extends MatjiData{
 	}
 	public String getUpdatedAt() {
 		return updated_at;
+	}
+	public void setThreadId(int thread_id) {
+		this.thread_id = thread_id;
+	}
+	public int getThreadId() {
+		return thread_id;
 	}
 }
