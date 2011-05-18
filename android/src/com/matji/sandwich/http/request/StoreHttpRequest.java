@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.StoreParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -100,11 +101,14 @@ public class StoreHttpRequest extends HttpRequest {
     	postHashtable.put("store_id", store_id);
     }
     
-    public void actionList(){
+    public void actionList(int page, int limit){
+	parser = new StoreParser();
     	isPost = false;
     	action = "list";
     	
     	getHashtable.clear();
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
     }
 
     public void actionNearbyList(float lat_sw, float lat_ne, float lng_sw, float lng_ne){
@@ -118,20 +122,24 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("lng_ne", lng_ne + "");
     }
     
-    public void actionBookmarkedList(int user_id){
+    public void actionBookmarkedList(int user_id, int page, int limit){
     	isPost = false;
     	action = "bookmarked_list";
     	
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
     }
     
-    public void actionDetailList(int store_id){
+    public void actionDetailList(int store_id, int page, int limit){
     	isPost = false;
     	action = "detail_list";
     	
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
     }
     
     public void actionDetailNew(int store_id, String note){
@@ -164,6 +172,7 @@ public class StoreHttpRequest extends HttpRequest {
     	Log.d("Matji", "StoreHttpRequest resultBody: " + resultBody);
 		Log.d("Matji", "StoreHttpRequest resultCode: " + resultCode);
 
+		// Log.d("PARSER!!!!", (parser == null) + "");
     	return parser.parseToMatjiDataList(resultBody);
     }
 }

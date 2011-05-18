@@ -40,39 +40,39 @@ public class TestListView extends MListView {
         // }
     // }
 
-    public static class GestureListener extends SimpleOnGestureListener {
-	private float downX;
+    // public static class GestureListener extends SimpleOnGestureListener {
+    // 	private float downX;
 	
-	public boolean onDown(MotionEvent e) {
-	    downX = e.getX();
-	    // Log.d("++++++", "down   :" + e.getX() + ", " + e.getY());
+    // 	public boolean onDown(MotionEvent e) {
+    // 	    downX = e.getX();
+    // 	    // Log.d("++++++", "down   :" + e.getX() + ", " + e.getY());
 	    
-	    return false;
-	}
+    // 	    return false;
+    // 	}
 
-	public boolean onSingleTapUp(MotionEvent e) {
-	    // Log.d("++++++", "up     :" + e.getX() + ", " + e.getY());
-	    return false;
-	}
+    // 	public boolean onSingleTapUp(MotionEvent e) {
+    // 	    // Log.d("++++++", "up     :" + e.getX() + ", " + e.getY());
+    // 	    return false;
+    // 	}
 	
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-	    // Log.d("======", "fling  :" + e1.getX() + ", " + e2.getY());
-	    return false;
-	}
+    // 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+    // 	    // Log.d("======", "fling  :" + e1.getX() + ", " + e2.getY());
+    // 	    return false;
+    // 	}
 	
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-	    // Log.d("======", "distance: " + ((downX - e2.getX()) + distanceX));
-	    // Log.d("======", "aaaaaaaa: " + distanceX);
-	    // e2좌표지점으로 view를 옮겨주는 작업이 필요함.
-	    // scrollBy((int)(downX - e2.getX()), 0);
-	    // Log.d("======", "start  : " + e1.getX() + ", " + e1.getY());
-	    // Log.d("======", "scroll :" + distanceX + ", " + distanceY);
-	    // Log.d("======", "down   : " + downEvent.getX() + ", " + downEvent.getY());
-	    // Log.d("======", "end    : " + e2.getX() + ", " + e2.getY());
-	    // Log.d("======", "=======================================");
-	    // Log.d("======", context.test);
+    // 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+    // 	    // Log.d("======", "distance: " + ((downX - e2.getX()) + distanceX));
+    // 	    // Log.d("======", "aaaaaaaa: " + distanceX);
+    // 	    // e2좌표지점으로 view를 옮겨주는 작업이 필요함.
+    // 	    // scrollBy((int)(downX - e2.getX()), 0);
+    // 	    // Log.d("======", "start  : " + e1.getX() + ", " + e1.getY());
+    // 	    // Log.d("======", "scroll :" + distanceX + ", " + distanceY);
+    // 	    // Log.d("======", "down   : " + downEvent.getX() + ", " + downEvent.getY());
+    // 	    // Log.d("======", "end    : " + e2.getX() + ", " + e2.getY());
+    // 	    // Log.d("======", "=======================================");
+    // 	    // Log.d("======", context.test);
 	    
-	    return false;
-	}
-    }
+    // 	    return false;
+    // 	}
+    // }
 }

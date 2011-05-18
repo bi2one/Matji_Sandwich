@@ -20,15 +20,15 @@ public class Session {
 	}
 	
 	public static Session getInstance(Context context){
-		if(session == null) {
+	    if(session == null) {
 		synchronized(Session.class) {
-		if(session == null) {
+		    if(session == null) {
 			session = new Session(context);
+		    }
 		}
-		}
-		}
+	    }
 		
-		return session;
+	    return session;
 	}
 	
 	public void login(){
