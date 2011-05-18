@@ -7,9 +7,11 @@ public class MatjiStorageDataProvider {
     private volatile MatjiStorageDataProvider provider;
     private Context context;
 
-    private MatjiStorageDataProvider() { }
+    private MatjiStorageDataProvider(Context context) {
+    	this.context = context;
+    }
 
     public MatjiStorageDataProvider getInstance(Context context) {
-	return null;
+    	return null;
     }
 }

@@ -4,10 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Hello World, StoreListActivity"
-    />
+    <TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/textView1" android:text="Hello World, StoreListActivity"></TextView>
+    <TextView android:text="이게 동작하는건가???" android:id="@+id/textView2" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 </LinearLayout>
 

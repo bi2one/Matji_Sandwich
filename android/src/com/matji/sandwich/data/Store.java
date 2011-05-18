@@ -1,5 +1,7 @@
 package com.matji.sandwich.data;
 
+import java.util.ArrayList;
+
 public class Store extends MatjiData{
 	private int id;
 	private String name;
@@ -19,7 +21,8 @@ public class Store extends MatjiData{
 	private int bookmark_count;
 	private AttachFile file; 
 	private User user;
-
+	private ArrayList<Tag> tags;
+	
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
@@ -127,5 +130,11 @@ public class Store extends MatjiData{
 	}
 	public AttachFile getFile() {
 		return file;
+	}
+	public void setTags(ArrayList<Tag> tags) {
+		this.tags = tags;
+	}
+	public ArrayList<Tag> getTags() {
+		return tags;
 	}
 }

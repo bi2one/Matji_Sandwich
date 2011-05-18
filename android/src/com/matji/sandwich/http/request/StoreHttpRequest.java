@@ -111,12 +111,15 @@ public class StoreHttpRequest extends HttpRequest {
     	postHashtable.put("store_id", store_id);
     }
     
-    public void actionList(){
+    public void actionList(int page, int limit){
+	parser = new StoreParser();
     	isPost = false;
     	action = "list";
     	parser = new StoreParser();
     	
     	getHashtable.clear();
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
     }
 
     public void actionNearbyList(float lat_sw, float lat_ne, float lng_sw, float lng_ne){
@@ -139,13 +142,15 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.clear();
     }
     
-    public void actionDetailList(int store_id){
+    public void actionDetailList(int store_id, int page, int limit){
     	isPost = false;
     	action = "detail_list";
     	parser = new StoreParser();
     	
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
     }
     
     public void actionDetailNew(int store_id, String note){
@@ -180,6 +185,7 @@ public class StoreHttpRequest extends HttpRequest {
     	Log.d("Matji", "StoreHttpRequest resultBody: " + resultBody);
 		Log.d("Matji", "StoreHttpRequest resultCode: " + resultCode);
 
+		// Log.d("PARSER!!!!", (parser == null) + "");
     	return parser.parseToMatjiDataList(resultBody);
     }
 }
