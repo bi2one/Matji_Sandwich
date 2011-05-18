@@ -5,7 +5,6 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -23,13 +22,13 @@ public class CommentHttpRequest extends HttpRequest {
 	public CommentHttpRequest() {
 		postHashtable = new Hashtable<String, Object>();
 		getHashtable = new Hashtable<String, String>();
+		parser = new CommentParser();
 		controller = "comments";
 	}
 	
 	public void actionNew(int post_id, String comment, String from_where) {
 		isPost = true;
 		action = "new";
-		parser = new CommentParser();
 		
 		postHashtable.clear();
 		postHashtable.put("post_id", post_id);
@@ -37,25 +36,23 @@ public class CommentHttpRequest extends HttpRequest {
 		postHashtable.put("from_where", from_where);
 	}
 	
-	public void actionDelete(int post_id) {
+	public void actionDelete(int comment_id) {
 		isPost = true;
 		action = "delete";
-//		parser = new StringMessageParser();
 		
 		postHashtable.clear();
-		postHashtable.put("post_id", post_id);
+		postHashtable.put("comment_id", comment_id);
 	}
 	
 	public void actionList(int post_id) {
 		isPost = false;
 		action = "list";
-		parser = new CommentParser();
 
 		getHashtable.clear();
 		getHashtable.put("post_id", post_id+ "");
 	}
 	
-	public ArrayList<MatjiData> request() throws MatjiException {		
+	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(isPost) ? 
 					requestHttpResponsePost(serverDomain + controller +"/" + action, null, postHashtable)

@@ -5,7 +5,6 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -23,13 +22,13 @@ public class MessageHttpRequest extends HttpRequest {
     public MessageHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	parser = new MessageParser();
     	controller = "messages";
     }
     
     public void actionNew(String received_user_id, String message){
     	isPost = true;
     	action = "new";
-    	parser = new MessageParser();
     	
     	postHashtable.clear();
 		postHashtable.put("received_user_id",received_user_id);
@@ -48,7 +47,6 @@ public class MessageHttpRequest extends HttpRequest {
     public void actionShow(String message_id){
     	isPost = false;
     	action = "show";
-    	parser = new MessageParser();
     	
     	getHashtable.clear();
     	getHashtable.put("message_id", message_id);
@@ -57,7 +55,6 @@ public class MessageHttpRequest extends HttpRequest {
     public void actionList(){
     	isPost = false;
     	action = "show";
-    	parser = new MessageParser();
     	
     	getHashtable.clear();
     }
@@ -65,7 +62,6 @@ public class MessageHttpRequest extends HttpRequest {
     public void actionReceivedList(){
     	isPost = false;
     	action = "received_list";
-    	parser = new MessageParser();
     	
     	getHashtable.clear();
     }
@@ -73,7 +69,6 @@ public class MessageHttpRequest extends HttpRequest {
     public void actionSentList(){
     	isPost = false;
     	action = "sent_list";
-    	parser = new MessageParser();
     	
     	getHashtable.clear();
     }

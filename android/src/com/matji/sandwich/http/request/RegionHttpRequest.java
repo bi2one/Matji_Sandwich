@@ -1,11 +1,10 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.RegionParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.RegionParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -23,6 +22,7 @@ public class RegionHttpRequest extends HttpRequest {
     public RegionHttpRequest() {
     	getHashtable = new Hashtable<String, String>();
     	postHashtable = new Hashtable<String, Object>();
+    	parser = new RegionParser();
     	controller = "regions";
     }
 
