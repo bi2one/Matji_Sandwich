@@ -7,7 +7,7 @@ import android.content.*;
 import android.util.Log;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.Requestable;
+import com.matji.sandwich.*;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
@@ -53,7 +53,11 @@ public class StoreListView extends RequestableMListView {
 	@Override
 	public void onItemClickEvent(int position) {
 		// TODO Auto-generated method stub
+		Log.d("Matji", "called onItemClickEvent");
 		Store store = (Store) getData(position);
-		Intent intent = getActivity().getIntent();
+		FlipperTestActivity activity = (FlipperTestActivity) getActivity();
+		Intent intent = new Intent(activity, StoreInfoActivity.class);
+		intent.putExtra("store", store);
+		activity.startActivity(intent);
 	}
 }

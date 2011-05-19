@@ -12,6 +12,7 @@
 		</activity>
 		<activity android:name="AlarmActivity"></activity>
 		<activity android:name="FlipperTestActivity"></activity>
+		<activity android:name="StoreInfoActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />
