@@ -133,6 +133,7 @@ public class HorizontalPager extends ViewGroup
 	
         final ViewConfiguration configuration = ViewConfiguration.get(getContext());
         mTouchSlop = configuration.getScaledTouchSlop();
+        // mTouchSlop = 70;
         mMaximumVelocity = configuration.getScaledMaximumFlingVelocity();
     }
 
@@ -376,7 +377,7 @@ public class HorizontalPager extends ViewGroup
 
         if (xMoved || yMoved) {
 
-            if (xMoved) {
+            if (xMoved && xDiff > yDiff) {
                 // Scroll if the user moved far enough along the X axis
                 mTouchState = TOUCH_STATE_SCROLLING;
                 enableChildrenCache();
@@ -420,7 +421,7 @@ public class HorizontalPager extends ViewGroup
 	     * will be false if being flinged.
 	     */
 	    if (!mScroller.isFinished()) {
-		mScroller.abortAnimation();
+	    	mScroller.abortAnimation();
 	    }
 
 	    // Remember where the motion event started

@@ -31,15 +31,19 @@ public class StoreListView extends RequestableMListView {
 	super.start(activity);
     }
 
-    public void requestNext() {
+    public void requestNext(int tag) {
 	storeRequest.actionList(page, STORE_LIMIT);
 	page++;
-	getHttpRequestManager().request(getActivity(), storeRequest, 0);
+	Log.d("===activity: ", (getActivity() == null) + "");
+	Log.d("===manager : ", (getHttpRequestManager() == null) + "");
+	
+	getHttpRequestManager().request(getActivity(), storeRequest, tag);
     }
 
-    public void requestReload() {
+    public void requestReload(int tag) {
+	getAdapterData().clear();
 	page = 1;
-	requestNext();
+	requestNext(tag);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {

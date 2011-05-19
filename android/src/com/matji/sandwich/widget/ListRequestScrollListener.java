@@ -50,7 +50,6 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
     public void onScrollStateChanged(AbsListView view, int scrollState) { }
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 	// Log.d("scroll: ", ((RequestableMListView)view).getVerticalScrollOffset() + "");
-
 	if (isSet &&
 	    !manager.isRunning() &&
 	    totalItemCount > 0 &&
@@ -60,32 +59,24 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
     }
 
     public boolean onTouch(View v, MotionEvent event) {
-	// Log.d("LIST@!!", listView.getVerticalScrollOffset() + "");
-	    switch(event.getAction()) {
-	    // case MotionEvent.ACTION_DOWN:
-	    // 	if (listView.getVerticalScrollOffset() == 0)
-	    // 	    downY = event.getY();
-	    // 	break;
-	    case MotionEvent.ACTION_MOVE:
-		// Log.d("!!!!!!", event.getY() - downY + "");
-		if (!refreshable && listView.getVerticalScrollOffset() == 0) {
-		    refreshable = true;
-	    	    downY = event.getY();
-		    return true;
-		} else if (refreshable) {
-		    int padding = (int)(event.getY() - downY);
-		    if (padding > REFRESH_VIEW_MAX_HEIGHT) padding = REFRESH_VIEW_MAX_HEIGHT;
-		    listView.setPadding(0, padding, 0, 0);
-		    return true;
-		} 
-		break;
-	    case MotionEvent.ACTION_UP:
-		listView.setPadding(0, 0, 0, 0);
-		refreshable = false;
-		break;
-	    }
+	// switch(event.getAction()) {
+	// case MotionEvent.ACTION_MOVE:
+	//     if (!refreshable && listView.getVerticalScrollOffset() == 0) {
+	// 	refreshable = true;
+	// 	downY = event.getY();
+	// 	return true;
+	//     } else if (refreshable) {
+	// 	int padding = (int)(event.getY() - downY);
+	// 	if (padding > REFRESH_VIEW_MAX_HEIGHT) padding = REFRESH_VIEW_MAX_HEIGHT;
+	// 	listView.setPadding(0, padding, 0, 0);
+	// 	return true;
+	//     } 
+	//     break;
+	// case MotionEvent.ACTION_UP:
+	//     listView.setPadding(0, 0, 0, 0);
+	//     refreshable = false;
+	//     break;
 	// }
-	    return false;
-	// return false;
+	return false;
     }
 }

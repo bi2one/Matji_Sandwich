@@ -22,29 +22,37 @@ import com.matji.sandwich.adapter.MBaseAdapter;
 
 import java.util.ArrayList;
 
-public abstract class RequestableMListView extends MListView implements ListScrollRequestable {
+public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
+										    PullToRefreshListView.OnRefreshListener {
     private ListRequestScrollListener scrollListener;
     private LayoutInflater inflater;
     private ArrayList<MatjiData> adapterData;
     private HttpRequestManager manager;
+    private View header;
     private int limit;
+    private MBaseAdapter adapter;
+    private static final int NEXT_REQUEST = 0;
+    private static final int FIRST_REQUEST = 1;
+    private static final int RELOAD_REQUEST = 2;
 
-    public abstract void requestNext();
-    public abstract void requestReload();
+    public abstract void requestNext(int tag);
+    public abstract void requestReload(int tag);
     
     public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
 	super(context, attrs);
+	this.adapter = adapter;
 	manager = new HttpRequestManager(context, this);
 	inflater = LayoutInflater.from(context);
-
+	
 	adapterData = new ArrayList<MatjiData>();
 	adapter.setData(adapterData);
 	setAdapter(adapter);
 
 	scrollListener = new ListRequestScrollListener(this, this, manager);
-	setOnScrollListener(scrollListener);
-	setOnTouchListener(scrollListener);
-	
+	// setOnScrollListener(scrollListener);
+	// setOnTouchListener(scrollListener);
+	setOnRefreshListener(this);
+
 	// addView(inflater.inflate(R.layout.list_reload, null),
 	// 	0,
 	// 	new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -66,7 +74,7 @@ public abstract class RequestableMListView extends MListView implements ListScro
 
     public void start(Activity activity) {
 	super.start(activity);
-	requestNext();
+	requestNext(FIRST_REQUEST);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
@@ -76,11 +84,21 @@ public abstract class RequestableMListView extends MListView implements ListScro
 	for (MatjiData d : data) {
 	    adapterData.add(d);
 	}
-	
-	((MBaseAdapter)getAdapter()).notifyDataSetChanged();
+
+	((MBaseAdapter)adapter).notifyDataSetChanged();
+	switch(tag) {
+	case RELOAD_REQUEST:
+	case FIRST_REQUEST:
+	    onRefreshComplete();
+	    break;
+	}
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
 	e.performExceptionHandling(getContext());
+    }
+
+    public void onRefresh() {
+	requestReload(RELOAD_REQUEST);
     }
 }
