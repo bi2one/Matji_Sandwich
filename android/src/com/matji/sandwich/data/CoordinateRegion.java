@@ -26,6 +26,14 @@ public class CoordinateRegion {
 		return center;
 	}
 	
+	public GeoPoint getSWGeoPoint(){
+		return new GeoPoint(center.getLatitudeE6() - latitudeSpan / 2, center.getLongitudeE6() - longitudeSpan / 2); 
+	}
+	
+	public GeoPoint getNEGeoPoint(){
+		return new GeoPoint(center.getLatitudeE6() + latitudeSpan / 2, center.getLongitudeE6() + longitudeSpan / 2);				
+	}
+	
 }
 
 	

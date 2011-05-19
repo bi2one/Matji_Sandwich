@@ -8,22 +8,21 @@ import com.matji.sandwich.data.provider.PreferenceProvider;
 
 public class Session {
 	private volatile static Session session = null;
-	private CurrentUser currentUser;
-	private PreferenceProvider prefs;
-	private DBProvider dbfs;
-	
+	private static CurrentUser currentUser;
+	private static PreferenceProvider prefs;
 	private Context context;
 	
 	private Session(Context context){
-		
 		this.context = context;
 	}
 	
-	public static Session getInstance(Context context){
+	public Session getInstance(Context context){
 		if(session == null) {
 		synchronized(Session.class) {
 		if(session == null) {
+			this.context = context;
 			session = new Session(context);
+			prefs = new PreferenceProvider();			
 		}
 		}
 		}
