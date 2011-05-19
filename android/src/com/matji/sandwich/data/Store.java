@@ -54,13 +54,13 @@ public class Store extends MatjiData{
 		return text;
 	}
 	public void setLat(double lat) {
-		this.lat = lat;
+		this.lat = (int) lat;
 	}
 	public double getLat() {
 		return lat;
 	}
 	public void setLng(double lng) {
-		this.lng = lng;
+		this.lng = (int) lng;
 	}
 	public double getLng() {
 		return lng;

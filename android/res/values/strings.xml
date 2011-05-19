@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Matji_Sandwich</string>
-
-  <!-- MatjiException -->
-  <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
-  <string name="exception_GpsEnabledMatjiException">GPS서비스를 사용할 수 있습니다</string>
-  <string name="exception_GpsOutOfServiceMatjiException">GPS서비스 지역에서 벗어났습니다</string>
-  <string name="exception_GpsServiceNotPossibleMatjiException">
-    GPS사용이 불가능합니다. 하늘을 볼 수 있거나, 네트워크가 안정적인 곳에서 다시 로딩해 주세요
-  </string>
-  <string name="exception_GpsTemporarilyUnavailableMatjiException">
-    내부 문제로, GPS를 일시적으로 중지합니다. 잠시만 기다려주세요
-  </string>
-  <string name="exception_HttpConnectMatjiException">
-    접속 상태가 불량합니다. 접속상태를 확인하세요
-  </string>
-  <string name="exception_InterruptedMatjiException">
-    Interrupted Exception: 연산을 중지합니다
-  </string>
-  <string name="exception_NotPossibleMatjiException">
-    일어날 수 없는 행동입니다
-  </string>
-  <string name="exception_JSONCodeMatjiException">
-    JSON리턴 결과가 올바르지 않습니다
-  </string>
-  <string name="exception_JSONMatjiException">
-    JSON Parsing Error
-  </string>
-  <string name="exception_NotSupportedMatjiException">
-    지원하지 않는 기능입니다
-  </string>
-  <string name="exception_UseNetworkGpsMatjiException">
-    GPS수신이 불안정합니다. 네트워크로 현재위치를 추정합니다
-  </string>
-
+	<string
+		name="app_name">
+		Matji_Sandwich </string>
+		
+	<!-- MatjiException -->
+	<string
+		name="exception_GpsAvailableMatjiException">
+		GPS가 정상작동 합니다 </string>
+	<string
+		name="exception_GpsEnabledMatjiException">
+		GPS서비스를 사용할 수 있습니다 </string>
+	<string
+		name="exception_GpsOutOfServiceMatjiException">
+		GPS서비스 지역에서 벗어났습니다 </string>
+	<string
+		name="exception_GpsServiceNotPossibleMatjiException">
+		GPS사용이 불가능합니다. 하늘을 볼 수 있거나, 네트워크가 안정적인 곳에서 다시 로딩해 주세요 </string>
+	<string
+		name="exception_GpsTemporarilyUnavailableMatjiException">
+		내부 문제로, GPS를 일시적으로 중지합니다. 잠시만 기다려주세요 </string>
+	<string
+		name="exception_HttpConnectMatjiException">
+		접속 상태가 불량합니다. 접속상태를 확인하세요 </string>
+	<string
+		name="exception_InterruptedMatjiException">
+		Interrupted Exception: 연산을 중지합니다 </string>
+	<string
+		name="exception_NotPossibleMatjiException">
+		일어날 수 없는 행동입니다 </string>
+	<string
+		name="exception_JSONCodeMatjiException">
+		JSON리턴 결과가 올바르지 않습니다 </string>
+	<string
+		name="exception_JSONMatjiException">
+		JSON Parsing Error </string>
+	<string
+		name="exception_NotSupportedMatjiException">
+		지원하지 않는 기능입니다 </string>
+	<string
+		name="exception_UseNetworkGpsMatjiException">
+		GPS수신이 불안정합니다. 네트워크로 현재위치를 추정합니다 </string>
+	<!-- store_info.xml -->
+	<string
+		name="store_info_like_store">
+		내가 좋아하는 맛집 </string>
 </resources>
