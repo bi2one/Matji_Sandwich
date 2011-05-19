@@ -8,6 +8,7 @@ import com.matji.sandwich.data.Tag;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -36,18 +37,19 @@ public class StoreInfoActivity extends Activity {
 		Button imageCountButton = (Button)findViewById(R.id.store_info_image_button);
 		Button tagCountButton = (Button)findViewById(R.id.store_info_tag_button);
 		Button urlButton = (Button)findViewById(R.id.store_info_url_button);
-		
-		likeCountText.setText(store.getLikeCount());
+
+		likeCountText.setText(String.valueOf(store.getLikeCount()));
 		addressText.setText(store.getAddress());
 		coverText.setText(store.getCover());
 		// TODO  테스트용
 		popularMenuText.setText("인기메뉴: TODO");
-		if (store.getTagCount() > 0) {
-			tagsText.setText("태그: " + tags.get(0).getTag());
-			for (int i = 0; i < ((tags.size() > 5) ? 5 : tags.size()); i++) {
-				tagsText.setText(tagsText.getText() + ", " + tags.get(i).getTag());
-			}
-		}
+		tagsText.setText("태그: " + tags.toString());
+//		if (store.getTagCount() > 0) {
+//			tagsText.setText("태그: " + tags.get(0).getTag());
+//			for (int i = 1; i < ((tags.size() > 5) ? 5 : tags.size()); i++) {
+//				tagsText.setText(tagsText.getText() + ", " + tags.get(i).getTag());
+//			}
+//		}
 		diggerText.setText("발굴자: " + store.getRegUserId() + "(일단 테스트를 위해 reg_user_id를 표시)");
 		postCountButton.setText("메모: " + store.getPostCount() + "개");
 		imageCountButton.setText("이미지: " + store.getImageCount() + "개");
