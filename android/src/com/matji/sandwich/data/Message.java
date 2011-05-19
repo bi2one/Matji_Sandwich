@@ -1,14 +1,64 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Message extends MatjiData{
 	private int id;
 	private int sent_user_id;
 	private int received_user_id;
+	private int thread_id;
 	private String message;
 	private User sent_user;
 	private User received_user;
 	private String created_at;
 	private String updated_at;
+
+	public Message() {
+		
+	}
+	
+	public Message(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Message> CREATOR = new Parcelable.Creator<Message>() {
+		public Message createFromParcel(Parcel in) {
+			return new Message(in);
+		}
+
+		public Message[] newArray(int size) {
+			return new Message[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(sent_user_id);
+		dest.writeInt(received_user_id);
+		dest.writeInt(thread_id);
+		dest.writeString(message);
+		dest.writeValue(sent_user);
+		dest.writeValue(received_user);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		sent_user_id = in.readInt();
+		received_user_id = in.readInt();
+		thread_id = in.readInt();
+		message = in.readString();
+		sent_user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		received_user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		created_at = in.readString();	
+		updated_at = in.readString();
+	}
 	
 	public void setId(int id) {
 		this.id = id;
@@ -57,5 +107,11 @@ public class Message extends MatjiData{
 	}
 	public String getUpdatedAt() {
 		return updated_at;
+	}
+	public void setThreadId(int thread_id) {
+		this.thread_id = thread_id;
+	}
+	public int getThreadId() {
+		return thread_id;
 	}
 }

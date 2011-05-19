@@ -1,6 +1,9 @@
 package com.matji.sandwich.data;
 
-public class Activity extends MatjiData{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Activity extends MatjiData {
 	private int id;
 	private String user_name;
 	private int user_id;
@@ -12,7 +15,57 @@ public class Activity extends MatjiData{
 	private int object_complement_id;
 	private String created_at;
 	private String updated_at;
+
+	public Activity() {
+		
+	}
 	
+	public Activity(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Activity> CREATOR = new Parcelable.Creator<Activity>() {
+		public Activity createFromParcel(Parcel in) {
+			return new Activity(in);
+		}
+
+		public Activity[] newArray(int size) {
+			return new Activity[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeString(user_name);
+		dest.writeInt(user_id);
+		dest.writeString(object_type);
+		dest.writeString(object_name);
+		dest.writeInt(object_id);
+		dest.writeString(object_complement_type);
+		dest.writeString(object_complement_name);		  
+		dest.writeInt(object_complement_id);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+	}	
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		user_name = in.readString();
+		user_id = in.readInt();
+		object_type = in.readString();
+		object_name = in.readString();
+		object_id = in.readInt();
+		object_complement_type = in.readString();
+		object_complement_name = in.readString();
+		object_complement_id = in.readInt();
+		created_at = in.readString();
+		updated_at = in.readString();
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}

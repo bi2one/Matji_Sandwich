@@ -16,18 +16,17 @@ public class Session {
 		this.context = context;
 	}
 	
-	public Session getInstance(Context context){
-		if(session == null) {
+
+	public static Session getInstance(Context context){
+	    if(session == null) {
 		synchronized(Session.class) {
-		if(session == null) {
-			this.context = context;
+		    if(session == null) {
 			session = new Session(context);
-			prefs = new PreferenceProvider();			
+		    }
 		}
-		}
-		}
+	    }
 		
-		return session;
+	    return session;
 	}
 	
 	public void login(){

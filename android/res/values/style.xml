@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="DefaultWrap">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+  
+  <style name="DefaultFill">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">fill_parent</item>
+  </style>
+  
+  <style name="DefaultLinearWrap" parent="DefaultWrap">
+  	<item name="android:orientation">vertical</item>
+  	<item name="android:padding">7dp</item>
+  </style>
+  <style name="DefaultLinearFill" parent="DefaultFill">
+  	<item name="android:orientation">vertical</item>
+  	<item name="android:padding">7dp</item>
+  </style>
+  
+  <style name="DefaultRelativeWrap" parent="DefaultWrap">
+  	<item name="android:padding">7dp</item>
+  </style>  
+  
+  <style name="DefaultRelativeFill" parent="DefaultFill">
+  	<item name="android:padding">7dp</item>
+  </style>  
+  
+  <!-- store_info.xml -->  
+  <style name="store_info_StoreImage">
+	<item name="android:layout_marginRight">7dp</item>
+	<item name="android:layout_marginBottom">7dp</item>
+  	<item name="android:layout_width">80dp</item>
+  	<item name="android:layout_height">80dp</item>
+  	<item name="android:scaleType">fitCenter</item>
+  </style>
+  
+  <style name="store_info_LikeStoreImage">
+  	<item name="android:layout_width">30dp</item>	
+  	<item name="android:layout_height">30dp</item>	
+  	<item name="android:scaleType">fitCenter</item>
+  	<item name="android:src">@drawable/profile_default_img</item>
+  </style>
+  
+  <style name="store_info_DefaultText" parent="DefaultWrap">
+  	<item name="android:textSize">13dp</item>
+  	<item name="android:padding">7dp</item>
+  </style>
+  
+  <style name="store_info_LikeStoreText" parent="store_info_DefaultText">
+  	<item name="android:text">@string/store_info_like_store</item>
+  </style>
+  
+  <style name="store_info_StoreAddress">
+  	<item name="android:textSize">16dp</item>
+  	<item name="android:textStyle">bold</item>
+  	<item name="android:layout_marginTop">7dp</item>
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">50dp</item>
+  </style>
+  
+  <style name="store_info_ButtonArea">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">wrap_content</item>
+  	<item name="android:paddingTop">7dp</item>
+  	<item name="android:paddingBottom">7dp</item>
+  	<item name="android:gravity">center_vertical|center_horizontal</item>
+  	<item name="android:layout_gravity">center_vertical|center_horizontal|center</item>
+  </style>  
+  
+  <style name="store_info_ScrapButton">
+  	<item name="android:layout_width">90dp</item>
+  	<item name="android:layout_height">34dp</item>
+  </style>
+  
+  <style name="store_info_DefaultButton">
+  	<item name="android:layout_width">65dp</item>
+  	<item name="android:layout_height">30dp</item>
+  	<item name="android:layout_marginLeft">7dp</item>
+  	<item name="android:layout_alignBaseline">@id/store_info_scrap_button</item>
+  </style>
+  
+  <style name="store_info_Cover">
+  	<item name="android:textSize">15dp</item>
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">90dp</item>
+  	<item name="android:padding">7dp</item>
+  </style>
+  
+  <style name="store_info_DetailItemArea">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">90dp</item>
+  	<item name="android:padding">7dp</item>
+  </style>
+  
+  <style name="store_info_DetailItem">
+  	<item name="android:textSize">14dp</item>
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">wrap_content</item>
+  </style>
+  
+  <style name="store_info_DetailInfoButton">
+  	<item name="android:textSize">16dp</item>
+  	<item name="android:layout_width">150dp</item>
+  	<item name="android:layout_height">50dp</item>
+  </style>
+  
+  <style name="store_info_TestButton">
+  	<item name="android:layout_width">150dp</item>
+  	<item name="android:layout_height">50dp</item>
+	<item name="android:textSize">16dp</item>
+  	<item name="android:textStyle">bold</item>
+  </style>
+
+  <!-- Variation on the Light theme that turns off the title -->
+  <style name="Theme.IOSched" parent="android:style/Theme.Light">
+    <!-- <item name="android:windowNoTitle">true</item> -->
+    <item name="android:windowContentOverlay">@null</item>
+  </style>  
+</resources>

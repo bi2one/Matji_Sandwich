@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Post extends MatjiData{
 	private int id;
 	private int user_id;
@@ -10,14 +13,76 @@ public class Post extends MatjiData{
 	private int like_count;
 	private int comment_count;
 	private int tag_count;
-	private double lat;
-	private double lng;
+	private int lat;
+	private int lng;
 	private String from_where;	
 	private String created_at;
 	private String updated_at;
 	private User user;
 	private Store store;
 	private Activity activity;
+
+	public Post() {
+		
+	}
+	
+	public Post(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Post> CREATOR = new Parcelable.Creator<Post>() {
+		public Post createFromParcel(Parcel in) {
+			return new Post(in);
+		}
+
+		public Post[] newArray(int size) {
+			return new Post[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(user_id);
+		dest.writeInt(store_id);
+		dest.writeInt(activity_id);
+		dest.writeString(post);
+		dest.writeInt(image_count);
+		dest.writeInt(like_count);
+		dest.writeInt(comment_count);
+		dest.writeInt(tag_count);
+		dest.writeInt(lat);
+		dest.writeInt(lng);
+		dest.writeString(from_where);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+		dest.writeValue(user);
+		dest.writeValue(store);
+		dest.writeValue(activity);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		user_id = in.readInt();
+		store_id = in.readInt();
+		activity_id = in.readInt();
+		post = in.readString();
+		image_count = in.readInt();
+		like_count = in.readInt();
+		comment_count = in.readInt();
+		tag_count = in.readInt();
+		lat = in.readInt();
+		lng = in.readInt();
+		from_where = in.readString();
+		created_at = in.readString();
+		updated_at = in.readString();
+		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
+		activity = Activity.class.cast(in.readValue(Activity.class.getClassLoader()));
+	}
 	
 	public void setPost(String post) {
 		this.post = post;
@@ -25,13 +90,13 @@ public class Post extends MatjiData{
 	public String getPost() {
 		return post;
 	}
-	public void setLat(double lat) {
+	public void setLat(int lat) {
 		this.lat = lat;
 	}
 	public double getLat() {
 		return lat;
 	}
-	public void setLng(double lng) {
+	public void setLng(int lng) {
 		this.lng = lng;
 	}
 	public double getLng() {
@@ -122,4 +187,3 @@ public class Post extends MatjiData{
 		return activity;
 	}
 }
-

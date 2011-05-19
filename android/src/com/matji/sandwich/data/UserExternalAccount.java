@@ -1,11 +1,52 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class UserExternalAccount extends MatjiData{
 	private int id;
 	private int user_id;
 	private String service;
 	private String data;
 	private User user;
+
+	public UserExternalAccount() {
+		
+	}
+	
+	public UserExternalAccount(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<UserExternalAccount> CREATOR = new Parcelable.Creator<UserExternalAccount>() {
+		public UserExternalAccount createFromParcel(Parcel in) {
+			return new UserExternalAccount(in);
+		}
+
+		public UserExternalAccount[] newArray(int size) {
+			return new UserExternalAccount[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(user_id);
+		dest.writeString(service);
+		dest.writeString(data);
+		dest.writeValue(user);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		user_id = in.readInt();
+		service = in.readString();
+		data = in.readString();
+		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+	}
 	
 	public void setId(int id) {
 		this.id = id;

@@ -29,7 +29,7 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionNew(int store_id, String food_name) {
 		isPost = true;
 		action = "new";
-		parser = new StoreFoodParser(); 
+		parser = new StoreFoodParser();
 		
 		postHashtable.clear();
 		postHashtable.put("store_id", store_id);
@@ -39,7 +39,7 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionDelete(int store_food_id) {
 		isPost = true;
 		action = "delete";
-//		parser = new StringMessageParser();
+		parser = new StoreFoodParser();
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
@@ -48,7 +48,7 @@ public class FoodHttpRequest extends HttpRequest {
 	public void actionUnlike(int store_food_id) {
 		isPost = true;
 		action = "unlike";
-//		parser = new StringMessageParser();
+		parser = new LikeParser();
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#fff">
+	<LinearLayout android:id="@+id/image"
+		android:layout_width="80dp"
+		android:layout_height="80dp"
+		android:layout_margin="3dp"
+		android:padding="3dp"	
+		android:layout_alignParentLeft="true">
+		<ImageView android:id="@+id/thumnail"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:src="@drawable/profile_default_img" />
+	</LinearLayout>
+	<LinearLayout 
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="85dp"
+		android:paddingTop="5dp"
+		android:layout_toRightOf="@id/image">
+		<TextView android:id="@+id/store_adapter_name" 
+			android:layout_width="fill_parent"
+			android:layout_height="30dp"
+			android:paddingLeft="5dp"
+			android:layout_alignParentTop="true"/> 
+		<TextView android:id="@+id/store_adapter_address" 
+			android:layout_width="fill_parent"
+			android:layout_height="55dp" 
+			android:paddingLeft="5dp"
+			android:layout_below="@id/store_adapter_name" />
+	</LinearLayout>
+</RelativeLayout>

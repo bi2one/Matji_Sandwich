@@ -2,6 +2,9 @@ package com.matji.sandwich.data;
 
 import java.util.ArrayList;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Store extends MatjiData{
 	private int id;
 	private String name;
@@ -12,16 +15,84 @@ public class Store extends MatjiData{
 	private String website;
 	private String text;
 	private String cover;
-	private double lat;
-	private double lng;
+	private int lat;
+	private int lng;
 	private int tag_count;
 	private int post_count;
 	private int image_count;
 	private int like_count;
 	private int bookmark_count;
 	private AttachFile file; 
-	private User user;
+	private User reg_user;
 	private ArrayList<Tag> tags;
+	private ArrayList<StoreFood> store_foods;
+	
+	public Store() {
+		
+	}
+	
+	public Store(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Store> CREATOR = new Parcelable.Creator<Store>() {
+		public Store createFromParcel(Parcel in) {
+			return new Store(in);
+		}
+
+		public Store[] newArray(int size) {
+			return new Store[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeString(name);
+		dest.writeInt(reg_user_id);
+		dest.writeString(tel);
+		dest.writeString(address);
+		dest.writeString(add_address);
+		dest.writeString(website);
+		dest.writeString(text);
+		dest.writeString(cover);
+		dest.writeInt(lat);
+		dest.writeInt(lng);
+		dest.writeInt(tag_count);
+		dest.writeInt(post_count);
+		dest.writeInt(image_count);
+		dest.writeInt(like_count);
+		dest.writeInt(bookmark_count);
+		dest.writeValue(file);
+		dest.writeValue(reg_user);
+		dest.writeTypedList(tags);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		name = in.readString();
+		reg_user_id = in.readInt();
+		tel = in.readString();
+		address = in.readString();
+		add_address = in.readString();
+		website = in.readString();
+		text = in.readString();
+		cover= in.readString();
+		lat = in.readInt();
+		lng = in.readInt();
+		tag_count = in.readInt();
+		post_count = in.readInt();
+		image_count = in.readInt();
+		like_count = in.readInt();
+		bookmark_count = in.readInt();
+		file = AttachFile.class.cast(in.readValue(AttachFile.class.getClassLoader()));
+		reg_user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		this.tags = new ArrayList<Tag>();
+		in.readTypedList(this.tags, Tag.CREATOR);
+	}
 	
 	public void setTel(String tel) {
 		this.tel = tel;
@@ -54,15 +125,15 @@ public class Store extends MatjiData{
 		return text;
 	}
 	public void setLat(double lat) {
-		this.lat = lat;
+	    this.lat = (int)(lat * 1E6);
 	}
-	public double getLat() {
+	public int getLat() {
 		return lat;
 	}
 	public void setLng(double lng) {
-		this.lng = lng;
+		this.lng = (int)(lng * 1E6);
 	}
-	public double getLng() {
+	public int getLng() {
 		return lng;
 	}
 	public void setCover(String cover) {
@@ -119,11 +190,11 @@ public class Store extends MatjiData{
 	public int getBookmarkCount() {
 		return bookmark_count;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setRegUser(User user) {
+		this.reg_user = user;
 	}
-	public User getUser() {
-		return user;
+	public User getRegUser() {
+		return reg_user;
 	}
 	public void setFile(AttachFile file) {
 		this.file = file;
