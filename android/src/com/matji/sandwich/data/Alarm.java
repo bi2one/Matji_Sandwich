@@ -1,5 +1,10 @@
 package com.matji.sandwich.data;
 
+import java.security.KeyStore.LoadStoreParameter;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Alarm extends MatjiData{
 	private int id;
 	private int received_user_id;
@@ -9,6 +14,50 @@ public class Alarm extends MatjiData{
 	private User received_user;
 	private String created_at;
 	private String updated_at;
+
+	public Alarm() {
+		
+	}
+	
+	public Alarm(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Alarm> CREATOR = new Parcelable.Creator<Alarm>() {
+		public Alarm createFromParcel(Parcel in) {
+			return new Alarm(in);
+		}
+
+		public Alarm[] newArray(int size) {
+			return new Alarm[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(received_user_id);
+		dest.writeInt(sent_user_id);
+		dest.writeString(alarm_type);
+		dest.writeValue(sent_user);
+		dest.writeValue(received_user);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		received_user_id = in.readInt();
+		sent_user_id = in.readInt();
+		alarm_type = in.readString();
+		sent_user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		received_user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		created_at = in.readString();
+		updated_at = in.readString();
+	}
 	
 	public void setId(int id) {
 		this.id = id;
@@ -58,5 +107,4 @@ public class Alarm extends MatjiData{
 	public String getUpdatedAt() {
 		return updated_at;
 	}
-
 }

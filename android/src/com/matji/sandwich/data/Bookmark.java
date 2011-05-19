@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Bookmark extends MatjiData{
 	private int id;
 	private int user_id;
@@ -10,6 +13,52 @@ public class Bookmark extends MatjiData{
 	private Region region;
 	private String created_at;
 	private String updated_at;
+	
+	public Bookmark() {
+		
+	}
+	
+	public Bookmark(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Bookmark> CREATOR = new Parcelable.Creator<Bookmark>() {
+		public Bookmark createFromParcel(Parcel in) {
+			return new Bookmark(in);
+		}
+
+		public Bookmark[] newArray(int size) {
+			return new Bookmark[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(user_id);
+		dest.writeInt(foreign_key);
+		dest.writeString(object);
+		dest.writeValue(user);
+		dest.writeValue(store);
+		dest.writeValue(region);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		user_id = in.readInt();
+		foreign_key = in.readInt();
+		object = in.readString();
+		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
+		region = Region.class.cast(in.readValue(Region.class.getClassLoader()));
+		created_at = in.readString();
+		updated_at = in.readString();
+	}
 	
 	public void setId(int id) {
 		this.id = id;

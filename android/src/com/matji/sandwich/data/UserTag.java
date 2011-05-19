@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class UserTag extends MatjiData{
 	private int id;
 	private int tag_id;
@@ -7,6 +10,46 @@ public class UserTag extends MatjiData{
 	private int count;
 	private String created_at;
 	private String updated_at;
+	
+	public UserTag() {
+		
+	}
+	
+	public UserTag(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<UserTag> CREATOR = new Parcelable.Creator<UserTag>() {
+		public UserTag createFromParcel(Parcel in) {
+			return new UserTag(in);
+		}
+
+		public UserTag[] newArray(int size) {
+			return new UserTag[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(tag_id);
+		dest.writeInt(user_id);
+		dest.writeInt(count);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		tag_id = in.readInt();
+		user_id = in.readInt();
+		count = in.readInt();
+		created_at = in.readString();
+		updated_at = in.readString();
+	}
 	
 	public void setId(int id) {
 		this.id = id;
