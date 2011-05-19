@@ -26,6 +26,12 @@ public class TestListView extends MListView {
 	this.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , arr));
     }
 
+	@Override
+	public void onItemClickEvent(int position) {
+		// TODO Auto-generated method stub
+		
+	}
+
     // protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         // int childLeft = 0;
 

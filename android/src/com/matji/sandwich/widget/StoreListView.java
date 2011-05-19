@@ -3,7 +3,7 @@ package com.matji.sandwich.widget;
 import android.app.Activity;
 import android.view.ViewGroup;
 import android.view.View;
-import android.content.Context;
+import android.content.*;
 import android.util.Log;
 import android.util.AttributeSet;
 
@@ -48,5 +48,12 @@ public class StoreListView extends RequestableMListView {
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		super.requestExceptionCallBack(tag, e);
+	}
+
+	@Override
+	public void onItemClickEvent(int position) {
+		// TODO Auto-generated method stub
+		Store store = (Store) getData(position);
+		Intent intent = getActivity().getIntent();
 	}
 }

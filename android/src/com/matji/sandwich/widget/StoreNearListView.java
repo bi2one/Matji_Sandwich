@@ -21,10 +21,10 @@ public class StoreNearListView extends RequestableMListView {
 	private StoreHttpRequest storeRequest;
 	private int page = 1;
 	private final static int STORE_LIMIT = 10;
-	private double lat_sw=37.3;
-	private double lat_ne=126.804;
-	private double lng_sw=37.4;
-	private double lng_ne=126.828;
+	private double lat_sw=36.3922;
+	private double lat_ne=126.8281;
+	private double lng_sw=36.3921;
+	private double lng_ne=126.8282;
 	
 	public StoreNearListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new StoreAdapter(context), STORE_LIMIT);
@@ -60,5 +60,11 @@ public class StoreNearListView extends RequestableMListView {
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		super.requestExceptionCallBack(tag, e);
+	}
+
+	@Override
+	public void onItemClickEvent(int position) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -23,25 +23,25 @@ public class Region extends MatjiData{
 		return user_id;
 	}
 	public void setLatSw(int lat_sw) {
-		this.lat_sw = lat_sw;
+		this.lat_sw = (int) lat_sw * 1000000;
 	}
 	public int getLatSw() {
 		return lat_sw;
 	}
 	public void setLngSw(int lng_sw) {
-		this.lng_sw = lng_sw;
+		this.lng_sw = (int) lng_sw * 1000000;
 	}
 	public int getLngSw() {
 		return lng_sw;
 	}
 	public void setLatNe(int lat_ne) {
-		this.lat_ne = lat_ne;
+		this.lat_ne = (int) lat_ne * 1000000;
 	}
 	public int getLatNe() {
 		return lat_ne;
 	}
 	public void setLngNe(int lng_ne) {
-		this.lng_ne = lng_ne;
+		this.lng_ne = (int) lng_ne * 1000000;
 	}
 	public int getLngNe() {
 		return lng_ne;

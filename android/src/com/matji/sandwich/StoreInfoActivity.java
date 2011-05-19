@@ -22,7 +22,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 
 	private void request() {
 		StoreHttpRequest request = new StoreHttpRequest();
-		request.actionShow(12296);
+		request.actionShow(227260);
 		manager.request(request, 1);
 	}
 

@@ -83,4 +83,8 @@ public abstract class RequestableMListView extends MListView implements ListScro
     public void requestExceptionCallBack(int tag, MatjiException e) {
 	e.performExceptionHandling(getContext());
     }
+    
+    protected MatjiData getData(int position) {
+    	return adapterData.get(position);
+    }
 }
