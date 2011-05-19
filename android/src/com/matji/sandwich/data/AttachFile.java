@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class AttachFile extends MatjiData{
 	private int id;
 	private int user_id;
@@ -12,6 +15,56 @@ public class AttachFile extends MatjiData{
 	private Post post;
 	private String created_at;
 	private String updated_at;
+	
+	public AttachFile() {
+		
+	}
+	
+	public AttachFile(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<AttachFile> CREATOR = new Parcelable.Creator<AttachFile>() {
+		public AttachFile createFromParcel(Parcel in) {
+			return new AttachFile(in);
+		}
+
+		public AttachFile[] newArray(int size) {
+			return new AttachFile[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(user_id);
+		dest.writeInt(store_id);
+		dest.writeInt(post_id);
+		dest.writeString(filename);
+		dest.writeString(fullpath);
+		dest.writeValue(user);
+		dest.writeValue(store);
+		dest.writeValue(post);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		user_id = in.readInt();
+		store_id= in.readInt();
+		post_id= in.readInt();
+		filename = in.readString();
+		fullpath = in.readString();
+		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
+		post = Post.class.cast(in.readValue(Post.class.getClassLoader()));
+		created_at = in.readString();
+		updated_at = in.readString();
+	}
 	
 	public void setId(int id) {
 		this.id = id;

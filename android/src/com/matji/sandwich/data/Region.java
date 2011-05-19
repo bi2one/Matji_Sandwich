@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Region extends MatjiData{
 	private int id;
 	private int user_id;
@@ -9,6 +12,50 @@ public class Region extends MatjiData{
 	private int lng_ne;
 	private String description;
 	private User user;
+	
+	public Region() {
+		
+	}
+	
+	public Region(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Region> CREATOR = new Parcelable.Creator<Region>() {
+		public Region createFromParcel(Parcel in) {
+			return new Region(in);
+		}
+
+		public Region[] newArray(int size) {
+			return new Region[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(user_id);
+		dest.writeInt(lat_sw);
+		dest.writeInt(lng_sw);
+		dest.writeInt(lat_ne);
+		dest.writeInt(lng_ne);
+		dest.writeString(description);
+		dest.writeValue(user);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		user_id = in.readInt();
+		lat_sw = in.readInt();
+		lng_sw = in.readInt();
+		lat_ne = in.readInt();
+		lng_ne = in.readInt();
+		description = in.readString();
+		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+	}
 	
 	public void setId(int id) {
 		this.id = id;
