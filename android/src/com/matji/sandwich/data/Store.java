@@ -23,8 +23,9 @@ public class Store extends MatjiData{
 	private int like_count;
 	private int bookmark_count;
 	private AttachFile file; 
-	private User user;
+	private User reg_user;
 	private ArrayList<Tag> tags;
+	private ArrayList<StoreFood> store_foods;
 	
 	public Store() {
 		
@@ -66,7 +67,7 @@ public class Store extends MatjiData{
 		dest.writeInt(like_count);
 		dest.writeInt(bookmark_count);
 		dest.writeValue(file);
-		dest.writeValue(user);
+		dest.writeValue(reg_user);
 		dest.writeTypedList(tags);
 	}
 
@@ -88,7 +89,7 @@ public class Store extends MatjiData{
 		like_count = in.readInt();
 		bookmark_count = in.readInt();
 		file = AttachFile.class.cast(in.readValue(AttachFile.class.getClassLoader()));
-		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		reg_user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		this.tags = new ArrayList<Tag>();
 		in.readTypedList(this.tags, Tag.CREATOR);
 	}
@@ -189,11 +190,11 @@ public class Store extends MatjiData{
 	public int getBookmarkCount() {
 		return bookmark_count;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setRegUser(User user) {
+		this.reg_user = user;
 	}
-	public User getUser() {
-		return user;
+	public User getRegUser() {
+		return reg_user;
 	}
 	public void setFile(AttachFile file) {
 		this.file = file;

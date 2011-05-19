@@ -13,23 +13,23 @@ import android.app.Activity;
 // import com.matji.sandwich.Requestable;
 
 public abstract class MListView extends ListView implements OnItemClickListener {
-    private Activity activity;
-    public abstract void onListItemClick(int position);
+	private Activity activity;
+	public abstract void onListItemClick(int position);
 
-    public MListView(Context context, AttributeSet attrs) {
-	super(context, attrs);
-	setOnItemClickListener(this);
-    }
+	public MListView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		setOnItemClickListener(this);
+	}
 
-    protected Activity getActivity() {
-	return activity;
-    }
+	protected Activity getActivity() {
+		return activity;
+	}
 
-    public void start(Activity activity) {
-	this.activity = activity;
-    }
+	public void start(Activity activity) {
+		this.activity = activity;
+	}
 
-    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-	onListItemClick(arg2);
-    }
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		onListItemClick(position - 1);
+	}
 }

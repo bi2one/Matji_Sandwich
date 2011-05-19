@@ -117,7 +117,6 @@ containing a value of this type.
         public static final int store_info_button_area=0x7f07001b;
         public static final int store_info_cover=0x7f070020;
         public static final int store_info_detail_item_area=0x7f070021;
-        public static final int store_info_digger=0x7f070024;
         public static final int store_info_image_button=0x7f070028;
         public static final int store_info_layout=0x7f070015;
         public static final int store_info_like_store=0x7f070018;
@@ -126,6 +125,7 @@ containing a value of this type.
         public static final int store_info_map_button=0x7f07001d;
         public static final int store_info_memo_button=0x7f070027;
         public static final int store_info_popular_menu=0x7f070022;
+        public static final int store_info_reg_user=0x7f070024;
         public static final int store_info_scrap_button=0x7f07001c;
         public static final int store_info_show_detail_info_button=0x7f070025;
         public static final int store_info_show_menu_info_button=0x7f070026;

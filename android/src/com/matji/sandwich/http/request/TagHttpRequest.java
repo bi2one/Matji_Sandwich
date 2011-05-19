@@ -35,7 +35,6 @@ public class TagHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("tag_id", tag_id + "");
-		parser = new TagParser();
 	}
 	
 	public void actionList() {
@@ -43,16 +42,15 @@ public class TagHttpRequest extends HttpRequest {
 		parser = new TagParser();
 		
 		getHashtable.clear();
-		parser = new TagParser();
 	}
 	
 	public void actionStoreTagList(int store_id) {
 		action = "store_tag_list";
-		parser = new StoreTagParser();
+//		parser = new StoreTagParser();
+		parser = new TagParser();
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
-		parser = new TagParser();
 	}
 	
 	public void actionUserTagList(int user_id) {
@@ -61,7 +59,6 @@ public class TagHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id+ "");
-		parser = new TagParser();
 	}
 	
 	public void actionPostTagList(int post_id) {
@@ -70,7 +67,6 @@ public class TagHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("post_id", post_id + "");
-		parser = new TagParser();
 	}
 	
 	public ArrayList<MatjiData> request() throws MatjiException {

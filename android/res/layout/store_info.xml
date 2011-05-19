@@ -92,7 +92,7 @@
 							android:layout_height="7dp" />
 						<TextView
 							style="@style/store_info_DetailItem"
-							android:id="@+id/store_info_digger"
+							android:id="@+id/store_info_reg_user"
 							android:textColor="#aaa"
 							android:layout_marginTop="7dp" />
 					</LinearLayout>

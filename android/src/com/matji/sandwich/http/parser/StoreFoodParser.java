@@ -7,6 +7,7 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.request.UserHttpRequest;
 
 public class StoreFoodParser extends MatjiDataParser {
 	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {

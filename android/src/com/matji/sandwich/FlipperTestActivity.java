@@ -13,13 +13,16 @@ import com.matji.sandwich.widget.SwipeView;
 import android.view.ViewGroup.LayoutParams;
 
 public class FlipperTestActivity extends Activity {
+	StoreListView test;
+	StoreNearListView test2;
+	
 	public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.flipper);
 	Context context = getApplicationContext();
 
-	StoreListView test = (StoreListView)findViewById(R.id.TestListView);
-	StoreNearListView test2 = (StoreNearListView)findViewById(R.id.TestListView2);
+	test = (StoreListView)findViewById(R.id.TestListView);
+	test2 = (StoreNearListView)findViewById(R.id.TestListView2);
 	
 	test.start(this);
 	test2.start(this);
