@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
   <string name="app_name">Matji_Sandwich</string>
 
   <!-- MatjiException -->
@@ -39,4 +40,8 @@
   <string name="pull_to_refresh_release_label">Release to refresh...</string>
   <string name="pull_to_refresh_refreshing_label">Loading...</string>
   <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
+
+  <string name="store_info_like_store">
+    내가 좋아하는 맛집
+  </string>
 </resources>

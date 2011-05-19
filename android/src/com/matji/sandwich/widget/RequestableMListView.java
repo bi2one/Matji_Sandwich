@@ -16,6 +16,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
 import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.adapter.MBaseAdapter;
@@ -29,14 +30,14 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
     private ArrayList<MatjiData> adapterData;
     private HttpRequestManager manager;
     private View header;
-    private int limit;
     private MBaseAdapter adapter;
-    private static final int NEXT_REQUEST = 0;
-    private static final int FIRST_REQUEST = 1;
-    private static final int RELOAD_REQUEST = 2;
-
-    public abstract void requestNext(int tag);
-    public abstract void requestReload(int tag);
+    
+    protected final int REQUEST_NEXT = 0;
+    protected final int REQUEST_RELOAD = 1;
+    
+    protected int page = 1;
+    protected int limit = 10;
+    public abstract HttpRequest request();
     
     public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
 	super(context, attrs);
@@ -49,16 +50,33 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	setAdapter(adapter);
 
 	scrollListener = new ListRequestScrollListener(this, this, manager);
-	// setOnScrollListener(scrollListener);
-	// setOnTouchListener(scrollListener);
+	setPullDownScrollListener(scrollListener);
+
 	setOnRefreshListener(this);
 
-	// addView(inflater.inflate(R.layout.list_reload, null),
-	// 	0,
-	// 	new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-	
 	this.limit = limit;
     }
+
+    public void initValue() {
+	adapterData.clear();
+	page = 1;
+    }
+
+    public void nextValue() {
+	page++;
+    }
+
+    public void requestNext() {
+	manager.request(getActivity(), request(), REQUEST_NEXT);
+	nextValue();
+    }
+
+    public void requestReload() {
+	initValue();
+	manager.request(getActivity(), request(), REQUEST_RELOAD);
+	nextValue();
+    }
+
 
     public int getVerticalScrollOffset() {
 	return computeVerticalScrollOffset();
@@ -74,7 +92,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 
     public void start(Activity activity) {
 	super.start(activity);
-	requestNext(FIRST_REQUEST);
+	requestNext();
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
@@ -86,12 +104,9 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	}
 
 	((MBaseAdapter)adapter).notifyDataSetChanged();
-	switch(tag) {
-	case RELOAD_REQUEST:
-	case FIRST_REQUEST:
+
+	if (adapterData.size() <= limit)
 	    onRefreshComplete();
-	    break;
-	}
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
@@ -99,6 +114,6 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
     }
 
     public void onRefresh() {
-	requestReload(RELOAD_REQUEST);
+	requestReload();
     }
 }

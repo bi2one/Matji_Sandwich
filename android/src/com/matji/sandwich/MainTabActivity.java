@@ -15,19 +15,13 @@ public class MainTabActivity extends TabActivity{
 	
 	tabHost = getTabHost();
 
-	LayoutInflater.from(this).inflate(R.layout.c14_tabtest, tabHost.getTabContentView(), true);
-	    
 	tabHost.addTab(tabHost.newTabSpec("tab2")
     		.setIndicator("ssfa")
-    		.setContent(R.id.opt_linker));
+    		.setContent(new Intent(this, FlipperTestActivity.class)));
 
-    tabHost.addTab(tabHost.newTabSpec("tab2")
-    		.setIndicator("ssfa")
-    		.setContent(R.id.opt_compiler));
-    
     tabHost.addTab(tabHost.newTabSpec("tab1")
 			.setIndicator("asdfasfd")
-			.setContent(R.id.opt_general));
+			.setContent(new Intent(this, AlarmActivity.class)));
 	
 	}
 }

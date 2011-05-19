@@ -49,6 +49,7 @@ public class PullToRefreshListView extends MListView implements OnScrollListener
     private int mRefreshViewHeight;
     private int mRefreshOriginalTopPadding;
     private int mLastMotionY;
+    private OnScrollListener pullDownListener;
 
     // public PullToRefreshListView(Context context) {
     //     super(context);
@@ -58,6 +59,10 @@ public class PullToRefreshListView extends MListView implements OnScrollListener
     public PullToRefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
+    }
+
+    public void setPullDownScrollListener(OnScrollListener l) {
+	pullDownListener = l;
     }
 
     // public PullToRefreshListView(Context context, AttributeSet attrs, int defStyle) {
@@ -107,7 +112,6 @@ public class PullToRefreshListView extends MListView implements OnScrollListener
         mRefreshState = TAP_TO_REFRESH;
 
         addHeaderView(mRefreshView);
-
         setOnScrollListener(this);
 
         measureView(mRefreshView);
@@ -353,6 +357,9 @@ public class PullToRefreshListView extends MListView implements OnScrollListener
                 && mRefreshState != REFRESHING) {
             setSelection(1);
         }
+
+	if (pullDownListener != null) 
+	    pullDownListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
     @Override

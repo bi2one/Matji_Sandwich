@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	  package="com.matji.sandwich"
-	  android:versionCode="1"
-	  android:versionName="1.0">
-  <application android:label="@string/app_name"
-	       android:icon="@drawable/icon">
-    <activity android:name="FlipperTextActivity"
-	      android:label="@string/app_name">
+
+package="com.matji.sandwich" 
+android:versionCode="1"
+android:versionName="1.0">
+  <application android:label="@string/app_name" android:icon="@drawable/icon">
+    <activity android:name="FlipperTestActivity"
+	      android:label="@string/app_name"
+	      android:theme="@style/Theme.IOSched" >
       <intent-filter>
 	<action android:name="android.intent.action.MAIN" />
 	<category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:name="AlarmActivity"></activity>
+    <!-- <activity android:name="FlipperTestActivity"></activity> -->
   </application>
+
 
   <uses-sdk android:minSdkVersion="7" />
   <uses-permission android:name="android.permission.INTERNET" />
