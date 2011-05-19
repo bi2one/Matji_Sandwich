@@ -3,11 +3,11 @@ package com.matji.sandwich.widget;
 import android.app.Activity;
 import android.view.ViewGroup;
 import android.view.View;
-import android.content.Context;
+import android.content.*;
 import android.util.Log;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.Requestable;
+import com.matji.sandwich.*;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
@@ -24,7 +24,7 @@ public class StoreListView extends RequestableMListView {
     public StoreListView(Context context, AttributeSet attrs) {
 	super(context, attrs, new StoreAdapter(context), 10);
 	storeRequest = new StoreHttpRequest();
-	page = 1;
+	setPage(1);
     }
 
     public void start(Activity activity) {
@@ -32,7 +32,7 @@ public class StoreListView extends RequestableMListView {
     }
 
     public HttpRequest request() {
-	storeRequest.actionList(page, limit);
+	storeRequest.actionList(getPage(), getLimit());
 	return storeRequest;
     }
 
@@ -42,5 +42,12 @@ public class StoreListView extends RequestableMListView {
     
     public void requestExceptionCallBack(int tag, MatjiException e) {
 	super.requestExceptionCallBack(tag, e);
+    }
+
+    public void onListItemClick(int position) {
+	Store store = (Store)(getAdapterData().get(position));
+	Intent intent = new Intent(getActivity(), StoreInfoActivity.class);
+	intent.putExtra("store", store);
+	getActivity().startActivity(intent);
     }
 }

@@ -31,12 +31,12 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
     private HttpRequestManager manager;
     private View header;
     private MBaseAdapter adapter;
+    private int page = 1;
+    private int limit = 10;
     
     protected final int REQUEST_NEXT = 0;
     protected final int REQUEST_RELOAD = 1;
     
-    protected int page = 1;
-    protected int limit = 10;
     public abstract HttpRequest request();
     
     public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
@@ -57,6 +57,22 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	this.limit = limit;
     }
 
+    protected void setPage(int page) {
+	this.page = page;
+    }
+
+    protected void setLimit(int limit) {
+	this.limit = limit;
+    }
+
+    protected int getPage() {
+	return page;
+    }
+
+    protected int getLimit() {
+	return limit;
+    }
+    
     public void initValue() {
 	adapterData.clear();
 	page = 1;
@@ -115,5 +131,9 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 
     public void onRefresh() {
 	requestReload();
+    
+    // protected MatjiData getData(int position) {
+    // 	return adapterData.get(position);
+    // }
     }
 }

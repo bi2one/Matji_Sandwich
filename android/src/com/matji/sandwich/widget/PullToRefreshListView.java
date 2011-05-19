@@ -24,7 +24,7 @@ import android.widget.AbsListView.OnScrollListener;
 import com.matji.sandwich.adapter.MBaseAdapter;
 import com.matji.sandwich.R;
 
-public class PullToRefreshListView extends MListView implements OnScrollListener {
+public abstract class PullToRefreshListView extends MListView implements OnScrollListener {
     private static final int TAP_TO_REFRESH = 1;
     private static final int PULL_TO_REFRESH = 2;
     private static final int RELEASE_TO_REFRESH = 3;

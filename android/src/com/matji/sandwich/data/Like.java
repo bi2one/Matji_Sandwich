@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Like extends MatjiData{
 	private int id;
 	private int user_id;
@@ -10,6 +13,52 @@ public class Like extends MatjiData{
 	private StoreFood store_food;
 	private String created_at;
 	private String updated_at;
+
+	public Like() {
+		
+	}
+	
+	public Like(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Like> CREATOR = new Parcelable.Creator<Like>() {
+		public Like createFromParcel(Parcel in) {
+			return new Like(in);
+		}
+
+		public Like[] newArray(int size) {
+			return new Like[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(user_id);
+		dest.writeString(foreign_key);
+		dest.writeString(object);
+		dest.writeValue(user);
+		dest.writeValue(store);
+		dest.writeValue(store_food);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		user_id = in.readInt();
+		foreign_key = in.readString();	
+		object = in.readString();	
+		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
+		store_food = StoreFood.class.cast(in.readValue(StoreFood.class.getClassLoader()));
+		created_at = in.readString();	
+		updated_at = in.readString();
+	}
 	
 	public void setId(int id) {
 		this.id = id;

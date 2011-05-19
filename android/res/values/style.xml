@@ -81,7 +81,7 @@
   	<item name="android:layout_alignBaseline">@id/store_info_scrap_button</item>
   </style>
   
-  <style name="store_info_DetailDescription">
+  <style name="store_info_Cover">
   	<item name="android:textSize">15dp</item>
   	<item name="android:layout_width">fill_parent</item>
   	<item name="android:layout_height">90dp</item>

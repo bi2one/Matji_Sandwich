@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Following extends MatjiData{
 	private String created_at;
 	private int following_user_id;
@@ -17,6 +20,64 @@ public class Following extends MatjiData{
 	private int store_count;
 	private User following_user;
 	private User followed_user;
+	
+	public Following() {
+		
+	}
+	
+	public Following(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<Following> CREATOR = new Parcelable.Creator<Following>() {
+		public Following createFromParcel(Parcel in) {
+			return new Following(in);
+		}
+
+		public Following[] newArray(int size) {
+			return new Following[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeString(created_at);
+		dest.writeInt(following_user_id);
+		dest.writeString(updated_at);
+		dest.writeInt(followed_user_id);
+		dest.writeInt(id);
+		dest.writeString(intro);
+		dest.writeString(title);
+		dest.writeString(nick);
+		dest.writeInt(following_count);
+		dest.writeInt(follower_count);
+		dest.writeString(userid);
+		dest.writeInt(post_count);
+		dest.writeInt(store_count);
+		dest.writeValue(following_user);
+		dest.writeValue(followed_user);
+	}
+
+	private void readFromParcel(Parcel in) {
+		created_at = in.readString();
+		following_user_id = in.readInt();		
+		updated_at = in.readString();
+		followed_user_id = in.readInt();
+		id = in.readInt();
+		intro = in.readString();
+		title = in.readString();
+		nick = in.readString();
+		following_count = in.readInt();
+		follower_count = in.readInt();
+		userid = in.readString();
+		post_count = in.readInt();
+		store_count = in.readInt();
+		following_user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		followed_user = User.class.cast(in.readValue(User.class.getClassLoader()));
+	}
 	
 	public void setCreatedAt(String created_at) {
 		this.created_at = created_at;

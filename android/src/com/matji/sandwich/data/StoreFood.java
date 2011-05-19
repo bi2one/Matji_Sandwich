@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class StoreFood extends MatjiData{
 	private int id;
 	private int user_id;
@@ -10,6 +13,52 @@ public class StoreFood extends MatjiData{
 	private Store store;
 	private Food food;
 	private User user;
+
+	public StoreFood() {
+		
+	}
+	
+	public StoreFood(Parcel in) {
+		readFromParcel(in);
+	}
+
+	public static final Parcelable.Creator<StoreFood> CREATOR = new Parcelable.Creator<StoreFood>() {
+		public StoreFood createFromParcel(Parcel in) {
+			return new StoreFood(in);
+		}
+
+		public StoreFood[] newArray(int size) {
+			return new StoreFood[size];
+		}
+	};
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int arg1) {
+		dest.writeInt(id);
+		dest.writeInt(user_id);
+		dest.writeInt(food_id);
+		dest.writeInt(store_id);
+		dest.writeInt(like_count);
+		dest.writeInt(blind ? 1 : 0);
+		dest.writeValue(store);
+		dest.writeValue(food);
+		dest.writeValue(user);
+	}
+
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		user_id = in.readInt();
+		food_id = in.readInt();
+		store_id = in.readInt();
+		like_count = in.readInt();
+		blind = in.readInt() != 0;
+		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
+		food = Food.class.cast(in.readValue(Food.class.getClassLoader()));
+		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+	}
 	
 	public void setId(int id) {
 		this.id = id;
