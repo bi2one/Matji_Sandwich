@@ -27,6 +27,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
