@@ -20,12 +20,10 @@
 			android:id="@+id/store_info_like_store"
 			android:layout_toRightOf="@id/store_info_like_store_image" />
 		<TextView
-			android:text="234"
 			style="@style/store_info_DefaultText"
 			android:id="@+id/store_info_like_store_count"
 			android:layout_toRightOf="@id/store_info_like_store" />
 		<TextView
-			android:text="인천광역시 중구 북성동3가 8-1"
 			style="@style/store_info_StoreAddress"
 			android:id="@+id/store_info_store_address"
 			android:layout_toRightOf="@id/store_info_store_image"
@@ -72,21 +70,18 @@
 				android:layout_height="fill_parent"
 				android:orientation="vertical">
 				<TextView
-					android:text="횡성 1++등급 한우만을 취급하는 곳으로 1인분에 3만원의 저렴한 가격으로 서비스를 하는 최고의  한우집이라고 친구가 그랬어"
 					android:background="#3f3"
-					style="@style/store_info_DetailDescription"
-					android:id="@+id/store_info_detail_description" />
+					style="@style/store_info_Cover"
+					android:id="@+id/store_info_cover" />
 				<LinearLayout
 					android:background="#33f"
 					style="@style/store_info_DetailItemArea"
 					android:id="@+id/store_info_detail_item_area"
 					android:orientation="vertical">
 					<TextView
-						android:text="인기메뉴: 김치찌개, 삼겹살, 된장찌개"
 						style="@style/store_info_DetailItem"
 						android:id="@+id/store_info_popular_menu" />
 					<TextView
-						android:text="태그: 한우, 20년, 삼겹살"
 						style="@style/store_info_DetailItem"
 						android:id="@+id/store_info_tag" />
 					<LinearLayout
@@ -96,7 +91,6 @@
 							android:layout_width="7dp"
 							android:layout_height="7dp" />
 						<TextView
-							android:text="발굴자: 불로초"
 							style="@style/store_info_DetailItem"
 							android:id="@+id/store_info_digger"
 							android:textColor="#aaa"
@@ -124,24 +118,20 @@
 					style="@style/store_info_ButtonArea"
 					android:padding="0dp">
 					<Button
-						android:text="메모: 10개"
 						android:background="#fff"
 						style="@style/store_info_TestButton"
 						android:id="@+id/store_info_memo_button" />
 					<Button
-						android:text="이미지: 10개"
 						android:background="#ddd"
 						style="@style/store_info_TestButton"
 						android:id="@+id/store_info_image_button"
 						android:layout_toRightOf="@id/store_info_memo_button" />
 					<Button
-						android:text="태그: 10개"
 						android:background="#ddd"
 						style="@style/store_info_TestButton"
 						android:id="@+id/store_info_tag_button"
 						android:layout_below="@id/store_info_memo_button" />
 					<Button
-						android:text="URL: 10개"
 						android:background="#fff"
 						style="@style/store_info_TestButton"
 						android:id="@+id/store_info_url_button"
