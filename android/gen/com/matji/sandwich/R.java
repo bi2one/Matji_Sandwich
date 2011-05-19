@@ -82,8 +82,10 @@ containing a value of this type.
         public static final int circle_loading_11=0x7f02000b;
         public static final int circle_loading_12=0x7f02000c;
         public static final int icon=0x7f02000d;
+        public static final int profile_default_img=0x7f02000e;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int SwipeView=0x7f060006;
         public static final int TestListView=0x7f060007;
         public static final int TestListView2=0x7f060008;
@@ -108,6 +110,52 @@ containing a value of this type.
         public static final int textView1=0x7f060009;
         public static final int textView2=0x7f06000a;
         public static final int thumnail=0x7f06000d;
+=======
+        public static final int SwipeView=0x7f070006;
+        public static final int TestListView=0x7f070007;
+        public static final int TestListView2=0x7f070008;
+        public static final int layout_main=0x7f070005;
+        public static final int list=0x7f070024;
+        public static final int list_view_row_comment=0x7f070025;
+        public static final int list_view_row_created_at=0x7f070029;
+        public static final int list_view_row_from_where=0x7f070026;
+        public static final int list_view_row_id=0x7f070028;
+        public static final int list_view_row_post_id=0x7f070027;
+        public static final int list_view_row_updated_at=0x7f07002a;
+        public static final int list_view_row_user_id=0x7f07002b;
+        public static final int ok=0x7f070003;
+        public static final int ok2=0x7f070004;
+        public static final int opt_compiler=0x7f070001;
+        public static final int opt_general=0x7f070000;
+        public static final int opt_linker=0x7f070002;
+        public static final int progress_loading=0x7f07000c;
+        public static final int relativelayout_loading=0x7f07000b;
+        public static final int store_adapter_name=0x7f07000d;
+        public static final int store_info_button_area=0x7f070014;
+        public static final int store_info_detail_description=0x7f070019;
+        public static final int store_info_detail_item_area=0x7f07001a;
+        public static final int store_info_digger=0x7f07001d;
+        public static final int store_info_image_button=0x7f070021;
+        public static final int store_info_layout=0x7f07000e;
+        public static final int store_info_like_store=0x7f070011;
+        public static final int store_info_like_store_count=0x7f070012;
+        public static final int store_info_like_store_image=0x7f070010;
+        public static final int store_info_map_button=0x7f070016;
+        public static final int store_info_memo_button=0x7f070020;
+        public static final int store_info_popular_menu=0x7f07001b;
+        public static final int store_info_scrap_button=0x7f070015;
+        public static final int store_info_show_detail_info_button=0x7f07001e;
+        public static final int store_info_show_menu_info_button=0x7f07001f;
+        public static final int store_info_store_address=0x7f070013;
+        public static final int store_info_store_image=0x7f07000f;
+        public static final int store_info_tag=0x7f07001c;
+        public static final int store_info_tag_button=0x7f070022;
+        public static final int store_info_tel_button=0x7f070017;
+        public static final int store_info_url_button=0x7f070023;
+        public static final int store_info_web_button=0x7f070018;
+        public static final int textView1=0x7f070009;
+        public static final int textView2=0x7f07000a;
+>>>>>>> f55d492ad215440178125c7259befc66678e6e76
     }
     public static final class layout {
         public static final int c14_tabtest=0x7f030000;
@@ -117,10 +165,18 @@ containing a value of this type.
         public static final int main=0x7f030004;
         public static final int popup_loading=0x7f030005;
         public static final int store_adapter=0x7f030006;
+<<<<<<< HEAD
         public static final int test_list=0x7f030007;
         public static final int test_list_view_row=0x7f030008;
         public static final int testlistview=0x7f030009;
         public static final int testtabview=0x7f03000a;
+=======
+        public static final int store_info=0x7f030007;
+        public static final int test_list=0x7f030008;
+        public static final int test_list_view_row=0x7f030009;
+        public static final int testlistview=0x7f03000a;
+        public static final int testtabview=0x7f03000b;
+>>>>>>> f55d492ad215440178125c7259befc66678e6e76
     }
     public static final class string {
         public static final int app_name=0x7f050000;
@@ -138,6 +194,32 @@ containing a value of this type.
         public static final int exception_NotPossibleMatjiException=0x7f050008;
         public static final int exception_NotSupportedMatjiException=0x7f05000b;
         public static final int exception_UseNetworkGpsMatjiException=0x7f05000c;
+        /**  store_info.xml 
+         */
+        public static final int store_info_like_store=0x7f05000d;
+    }
+    public static final class style {
+        public static final int DefaultFill=0x7f060001;
+        public static final int DefaultLinearFill=0x7f060003;
+        public static final int DefaultLinearWrap=0x7f060002;
+        public static final int DefaultRelativeFill=0x7f060005;
+        public static final int DefaultRelativeWrap=0x7f060004;
+        public static final int DefaultWrap=0x7f060000;
+        public static final int store_info_ButtonArea=0x7f06000b;
+        public static final int store_info_DefaultButton=0x7f06000d;
+        public static final int store_info_DefaultText=0x7f060008;
+        public static final int store_info_DetailDescription=0x7f06000e;
+        public static final int store_info_DetailInfoButton=0x7f060011;
+        public static final int store_info_DetailItem=0x7f060010;
+        public static final int store_info_DetailItemArea=0x7f06000f;
+        public static final int store_info_LikeStoreImage=0x7f060007;
+        public static final int store_info_LikeStoreText=0x7f060009;
+        public static final int store_info_ScrapButton=0x7f06000c;
+        public static final int store_info_StoreAddress=0x7f06000a;
+        /**  store_info.xml 
+         */
+        public static final int store_info_StoreImage=0x7f060006;
+        public static final int store_info_TestButton=0x7f060012;
     }
     public static final class styleable {
         /** Attributes that can be used with a com_deezapps_widget_HorizontalPager.

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
 	package="com.matji.sandwich" 
 	android:versionCode="1"
 	android:versionName="1.0">
@@ -13,6 +14,21 @@
 		<activity android:name="AlarmActivity"></activity>
 		<activity android:name="FlipperTestActivity"></activity>
 	</application>
+=======
+	  package="com.matji.sandwich"
+	  android:versionCode="1"
+	  android:versionName="1.0">
+  <application android:label="@string/app_name"
+	       android:icon="@drawable/icon">
+    <activity android:name="StoreInfoActivity"
+	      android:label="@string/app_name">
+      <intent-filter>
+	<action android:name="android.intent.action.MAIN" />
+	<category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+  </application>
+>>>>>>> f55d492ad215440178125c7259befc66678e6e76
 
 	<uses-sdk android:minSdkVersion="7" />
 	<uses-permission android:name="android.permission.INTERNET" />
