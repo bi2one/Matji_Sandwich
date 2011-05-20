@@ -29,52 +29,50 @@
 			android:layout_toRightOf="@id/store_info_store_image"
 			android:layout_below="@id/store_info_like_store_image" />
 		<LinearLayout
-			android:background="#0ff"
 			style="@style/store_info_ButtonArea"
 			android:id="@+id/store_info_button_area"
 			android:layout_below="@id/store_info_store_image">
 			<Button
+				android:background="#fff"
 				android:text="스크랩"
 				android:textSize="16dp"
-				android:background="#ff0"
 				android:textStyle="bold"
 				style="@style/store_info_ScrapButton"
 				android:id="@+id/store_info_scrap_button" />
 			<Button
+				android:background="#fff"
 				android:text="지도"
 				android:textSize="13dp"
-				android:background="#ff0"
 				android:textStyle="bold"
 				style="@style/store_info_DefaultButton"
 				android:id="@+id/store_info_map_button" />
 			<Button
+				android:background="#fff"
 				android:text="전화"
 				android:textSize="13dp"
-				android:background="#ff0"
 				android:textStyle="bold"
 				style="@style/store_info_DefaultButton"
 				android:id="@+id/store_info_tel_button" />
 			<Button
+				android:background="#fff"
 				android:text="웹"
 				android:textSize="13dp"
-				android:background="#ff0"
 				android:textStyle="bold"
 				style="@style/store_info_DefaultButton"
 				android:id="@+id/store_info_web_button" />
 		</LinearLayout>
 		<ScrollView
 			style="@style/DefaultFill"
+			android:scrollbars="none"
 			android:layout_below="@id/store_info_button_area">
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="fill_parent"
 				android:orientation="vertical">
 				<TextView
-					android:background="#3f3"
 					style="@style/store_info_Cover"
 					android:id="@+id/store_info_cover" />
 				<LinearLayout
-					android:background="#33f"
 					style="@style/store_info_DetailItemArea"
 					android:id="@+id/store_info_detail_item_area"
 					android:orientation="vertical">
@@ -98,23 +96,21 @@
 					</LinearLayout>
 				</LinearLayout>
 				<RelativeLayout
-					android:background="#f0f"
 					style="@style/store_info_ButtonArea">
 					<Button
+						android:background="#fff"
 						android:text="맛집정보 보기"
-						android:background="#ff0"
 						style="@style/store_info_DetailInfoButton"
 						android:id="@+id/store_info_show_detail_info_button" />
 					<Button
+						android:background="#fff"
 						android:text="메뉴 보기"
-						android:background="#ff0"
 						style="@style/store_info_DetailInfoButton"
 						android:id="@+id/store_info_show_menu_info_button"
 						android:layout_marginLeft="7dp"
 						android:layout_toRightOf="@id/store_info_show_detail_info_button" />
 				</RelativeLayout>
 				<RelativeLayout
-					android:background="#f66"
 					style="@style/store_info_ButtonArea"
 					android:padding="0dp">
 					<Button
@@ -122,12 +118,12 @@
 						style="@style/store_info_TestButton"
 						android:id="@+id/store_info_memo_button" />
 					<Button
-						android:background="#ddd"
+						android:background="#fff"
 						style="@style/store_info_TestButton"
 						android:id="@+id/store_info_image_button"
 						android:layout_toRightOf="@id/store_info_memo_button" />
 					<Button
-						android:background="#ddd"
+						android:background="#fff"
 						style="@style/store_info_TestButton"
 						android:id="@+id/store_info_tag_button"
 						android:layout_below="@id/store_info_memo_button" />

@@ -41,7 +41,16 @@
   <string name="pull_to_refresh_refreshing_label">Loading...</string>
   <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
 
+  <!-- default String... -->
+  <string name="default_string_tag">태그</string>
+  <string name="default_string_popular_food">인기메뉴</string>
+  <string name="default_string_reg_user">발굴자</string>
+  <string name="default_string_url">URL</string>
+  <string name="default_string_memo">메모</string>
+  <string name="default_string_image">이미지</string>
+  
+  <!-- StoreInfoActivity  -->
   <string name="store_info_like_store">
-    내가 좋아하는 맛집
+	    내가 좋아하는 맛집
   </string>
 </resources>

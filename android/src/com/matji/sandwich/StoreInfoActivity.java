@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
-import com.matji.sandwich.data.StoreTag;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
@@ -19,6 +18,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	private static final int STORE_FOOD_REQUEST_TAG = 1;
 	private static final int STORE_TAG_REQUEST_TAG = 2;
 	private static final int REG_USER_REQUEST= 3;
+	
 	private HttpRequestManager manager;
 	private HttpRequest request;
 	private Intent intent;
@@ -58,6 +60,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 		regUserRequest();
 
 		setStoreInfo();
+		
 	}
 
 	private void setStoreInfo() {
@@ -74,12 +77,15 @@ public class StoreInfoActivity extends Activity implements Requestable {
 
 		likeCountText.setText(String.valueOf(store.getLikeCount()));
 		addressText.setText(store.getAddress());
-		coverText.setText(store.getCover());		
+		coverText.setText(store.getCover());
+		tagsText.setText(getString(R.string.default_string_tag) + ": ");
+		popularMenuText.setText(getString(R.string.default_string_popular_food) + ": ");
+		regUserText.setText(getString(R.string.default_string_reg_user) + ": ");
 
-		postCountButton.setText("메모: " + store.getPostCount() + "개");
-		imageCountButton.setText("이미지: " + store.getImageCount() + "개");
-		tagCountButton.setText("태그: " + store.getTagCount() + "개");
-		urlButton.setText("URL: " + store.getWebsite() + "(테스트)");
+		postCountButton.setText(getString(R.string.default_string_memo) + ": " + store.getPostCount() + "개");
+		imageCountButton.setText(getString(R.string.default_string_image) + ": " + store.getImageCount() + "개");
+		tagCountButton.setText(getString(R.string.default_string_tag) + ": " + store.getTagCount() + "개");
+		urlButton.setText(getString(R.string.default_string_url) + ": " + store.getWebsite() + "(테스트)");
 	}
 
 	private void storeFoodsRequest() {
@@ -102,7 +108,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	}
 
 	private String toStringFromFoods(ArrayList<StoreFood> storeFoods) {
-		String result = "인기메뉴: ";
+		String result = getString(R.string.default_string_popular_food) + ": ";
 		for (int i = 0; i < storeFoods.size()-1; i++) {
 			// TODO 임시
 			result += storeFoods.get(i).getFood().getName() + ", ";
@@ -113,7 +119,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	}
 
 	private String toStringFromTags(ArrayList<Tag> tags) {
-		String result = "태그: ";
+		String result = getString(R.string.default_string_tag) + ": ";
 		for (int i = 0; i < tags.size()-1; i++) {
 			result += tags.get(i).getTag() + ", ";
 		}
@@ -139,7 +145,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 				break;
 			case REG_USER_REQUEST:
 				store.setRegUser((User)data.get(0));
-				regUserText.setText("발굴자: " + ((User)data.get(0)).getNick());
+				regUserText.setText(getString(R.string.default_string_reg_user) + ": " + ((User)data.get(0)).getNick());
 				break;
 
 			}
