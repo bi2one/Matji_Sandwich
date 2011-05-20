@@ -323,7 +323,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
         child.measure(childWidthSpec, childHeightSpec);
     }
 
-    @Override
+    
     public void onScroll(AbsListView view, int firstVisibleItem,
             int visibleItemCount, int totalItemCount) {
         // When the refresh view is completely visible, change the text to say
@@ -362,7 +362,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 	    pullDownListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
-    @Override
+    
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         mCurrentScrollState = scrollState;
     }
@@ -421,7 +421,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      */
     private class OnClickRefreshListener implements OnClickListener {
 
-        @Override
+        
         public void onClick(View v) {
             if (mRefreshState != REFRESHING) {
                 prepareForRefresh();

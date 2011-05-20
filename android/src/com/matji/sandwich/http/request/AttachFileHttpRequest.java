@@ -2,34 +2,28 @@ package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.AttachFileParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
-import com.matji.sandwich.http.parser.AttachFileParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class AttachFileHttpRequest extends HttpRequest {
-	private Hashtable<String, String> getHashtable;
-	private Hashtable<String, Object> postHashtable;
-    private MatjiDataParser parser;
-    private boolean isPost;
+	private MatjiDataParser parser;
     private String action;
     private String controller;
     
-    public AttachFileHttpRequest() {
-    	getHashtable = new Hashtable<String, String>();
-    	postHashtable = new Hashtable<String, Object>();
+    public AttachFileHttpRequest(Context context) {
+    	super(context);
     	parser = new AttachFileParser();
     	controller = "attach_files";
     }
 
     public void actionUpload(){
     	parser = new AttachFileParser();
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "upload";
     	
     	postHashtable.clear();
@@ -37,7 +31,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     
     public void actionImage(){
     	parser = new AttachFileParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "image";
     	
     	getHashtable.clear();
@@ -45,7 +39,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     
     public void actionList(){
     	parser = new AttachFileParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	
     	getHashtable.clear();
@@ -53,7 +47,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     
     public void actionStoreList(int store_id){
     	parser = new AttachFileParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
     	
     	getHashtable.clear();
@@ -62,7 +56,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     
     public void actionPostList(int post_id){
     	parser = new AttachFileParser();
-    	isPost =false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "post_list";
     	
     	getHashtable.clear();
@@ -71,7 +65,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
-    		(isPost) ? 
+    		(httpMethod == HttpMethod.HTTP_POST) ? 
     				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
     				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
     	

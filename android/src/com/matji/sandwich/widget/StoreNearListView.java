@@ -27,7 +27,7 @@ public class StoreNearListView extends RequestableMListView {
 	
     public StoreNearListView(Context context, AttributeSet attrs) {
 	super(context, attrs, new StoreAdapter(context), 10);
-	storeRequest = new StoreHttpRequest();
+	storeRequest = new StoreHttpRequest(context);
     }
 
     public void start(Activity activity) {

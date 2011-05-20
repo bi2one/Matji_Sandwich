@@ -208,4 +208,12 @@ public class Store extends MatjiData{
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
+
+	public void setStoreFoods(ArrayList<StoreFood> store_foods) {
+		this.store_foods = store_foods;
+	}
+
+	public ArrayList<StoreFood> getStoreFoods() {
+		return store_foods;
+	}
 }

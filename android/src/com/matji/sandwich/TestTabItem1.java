@@ -9,7 +9,7 @@ public class TestTabItem1 extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		TextView t = new TextView(this);
-		t.setText("탭1번");
+		t.setText("��踰�");
 		setContentView(t);
 	}
 }

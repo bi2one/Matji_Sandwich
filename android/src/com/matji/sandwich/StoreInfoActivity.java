@@ -76,10 +76,10 @@ public class StoreInfoActivity extends Activity implements Requestable {
 		addressText.setText(store.getAddress());
 		coverText.setText(store.getCover());		
 
-		postCountButton.setText("메모: " + store.getPostCount() + "개");
-		imageCountButton.setText("이미지: " + store.getImageCount() + "개");
-		tagCountButton.setText("태그: " + store.getTagCount() + "개");
-		urlButton.setText("URL: " + store.getWebsite() + "(테스트)");
+		postCountButton.setText("硫�え: " + store.getPostCount() + "媛�");
+		imageCountButton.setText("�대�吏� " + store.getImageCount() + "媛�");
+		tagCountButton.setText("��렇: " + store.getTagCount() + "媛�");
+		urlButton.setText("URL: " + store.getWebsite() + "(�����");
 	}
 
 	private void storeFoodsRequest() {
@@ -102,9 +102,9 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	}
 
 	private String toStringFromFoods(ArrayList<StoreFood> storeFoods) {
-		String result = "인기메뉴: ";
+		String result = "�멸린硫��: ";
 		for (int i = 0; i < storeFoods.size()-1; i++) {
-			// TODO 임시
+			// TODO ���
 			result += storeFoods.get(i).getFood().getName() + ", ";
 		}
 		result += storeFoods.get(storeFoods.size()-1).getFood().getName() + ", ";
@@ -113,7 +113,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	}
 
 	private String toStringFromTags(ArrayList<Tag> tags) {
-		String result = "태그: ";
+		String result = "��렇: ";
 		for (int i = 0; i < tags.size()-1; i++) {
 			result += tags.get(i).getTag() + ", ";
 		}
@@ -139,7 +139,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 				break;
 			case REG_USER_REQUEST:
 				store.setRegUser((User)data.get(0));
-				regUserText.setText("발굴자: " + ((User)data.get(0)).getNick());
+				regUserText.setText("諛�뎬�� " + ((User)data.get(0)).getNick());
 				break;
 
 			}

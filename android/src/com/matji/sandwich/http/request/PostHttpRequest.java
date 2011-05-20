@@ -5,29 +5,24 @@ import com.matji.sandwich.http.parser.PostParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class PostHttpRequest extends HttpRequest {
-    private Hashtable<String, String> getHashtable;
-    private Hashtable<String, Object> postHashtable;
     private MatjiDataParser parser;
-    private boolean isPost;
     private String action;
     private String controller;
     
-    public PostHttpRequest() {
-		getHashtable = new Hashtable<String, String>();
-		postHashtable = new Hashtable<String, Object>();
+    public PostHttpRequest(Context context) {
+    	super(context);
 		parser = new PostParser();
 		controller = "posts";
     }
 
     public void actionShow(int post_id){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "show";
     	parser = new PostParser();
     	
@@ -36,7 +31,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionNew(String post, String access_token){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	parser = new PostParser();
     	
@@ -45,7 +40,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionDelete(int post_id, String access_token){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "delete";
 //
     	
@@ -54,7 +49,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionUnlike(int post_id){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "unlike";
 //    	
     	
@@ -63,7 +58,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionLike(int post_id){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "like";
     	parser = new PostParser();
     	
@@ -72,7 +67,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionList(){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	parser = new PostParser();
     	
@@ -80,7 +75,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionStoreList(int store_id){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
     	parser = new PostParser();
     	
@@ -89,7 +84,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionUserList(int user_id){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "user_list";
     	parser = new PostParser();
     	
@@ -98,7 +93,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionMyList(){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "my_list";
     	parser = new PostParser();
     	
@@ -106,7 +101,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public void actionNearbyList(int lat_ne, int lat_sw, int lng_sw, int lng_ne){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "nearby_list";
     	
     	getHashtable.clear();
@@ -116,14 +111,18 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("lng_sw", lng_sw + "");
     }
     
-    public void actionSearch() {
+    public void actionSearch(String keyword) {
+    	httpMethod = HttpMethod.HTTP_GET;
+    	action = "search";
     	
+    	getHashtable.clear();
+    	getHashtable.put("q", keyword);
     }
     
     public ArrayList<MatjiData> request() throws MatjiException {
     	parser = new PostParser();
     	SimpleHttpResponse response = 
-    		(isPost) ? 
+    		(httpMethod == HttpMethod.HTTP_POST) ? 
     				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
     				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
 	

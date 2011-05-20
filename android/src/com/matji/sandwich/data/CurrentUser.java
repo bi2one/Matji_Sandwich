@@ -8,6 +8,7 @@ public class CurrentUser extends User{
 	}
 
 	public String getToken() {
+		token = "60e515f4d7d563b870ccdc702bfcdf5df83abb5d";
 		return token;
 	}
 		

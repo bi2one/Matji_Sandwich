@@ -45,7 +45,7 @@ public class HttpRequestManager {
 		requestPool.push(new RequestTagPair(request, tag));
 
 		this.lastOccuredException = null;
-		request.setContext(context);
+		//request.setContext(context);
 		httpAsyncTask = new HttpAsyncTask();
 		httpAsyncTask.execute(tag);
 	}

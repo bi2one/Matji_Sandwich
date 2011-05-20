@@ -5,30 +5,25 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class MessageHttpRequest extends HttpRequest {
-	private Hashtable<String, String> getHashtable;
-	private Hashtable<String, Object> postHashtable;
-    private MatjiDataParser parser;
-	private String action;
-    private boolean isPost;
-    private String controller;
+	private MatjiDataParser parser;
+	protected String action;
+    protected String controller;
     
-    public MessageHttpRequest() {
-    	getHashtable = new Hashtable<String, String>();
-    	postHashtable = new Hashtable<String, Object>();
+    public MessageHttpRequest(Context context) {
+    	super(context);
     	parser = new MessageParser();
     	controller = "messages";
     }
     
     public void actionNew(String received_user_id, String message){
     	parser = new MessageParser();
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	
     	postHashtable.clear();
@@ -38,7 +33,7 @@ public class MessageHttpRequest extends HttpRequest {
 
     public void actionDelete(String message_id){
     	parser = new MessageParser();
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	
     	postHashtable.clear();
@@ -47,7 +42,7 @@ public class MessageHttpRequest extends HttpRequest {
 
     public void actionShow(String message_id){
     	parser = new MessageParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "show";
     	
     	getHashtable.clear();
@@ -56,7 +51,7 @@ public class MessageHttpRequest extends HttpRequest {
     
     public void actionTreadList(){
     	parser = new MessageParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "thread_list";
     	
     	getHashtable.clear();
@@ -64,7 +59,7 @@ public class MessageHttpRequest extends HttpRequest {
     
     public void actionChat(String thread_id){
     	parser = new MessageParser();
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "chat";
     	
     	postHashtable.clear();
@@ -73,7 +68,7 @@ public class MessageHttpRequest extends HttpRequest {
     
     public void actionList(){
     	parser = new MessageParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
 
     	getHashtable.clear();
@@ -81,7 +76,7 @@ public class MessageHttpRequest extends HttpRequest {
 
     public void actionReceivedList(){
     	parser = new MessageParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "received_list";
     	
     	getHashtable.clear();
@@ -89,7 +84,7 @@ public class MessageHttpRequest extends HttpRequest {
 
     public void actionSentList(){
     	parser = new MessageParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "sent_list";
     	
     	getHashtable.clear();
@@ -97,7 +92,7 @@ public class MessageHttpRequest extends HttpRequest {
     
     public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
-			(isPost) ? 
+			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
 					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 	

@@ -2,34 +2,28 @@ package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.AlarmParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
-import com.matji.sandwich.http.parser.AlarmParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class AlarmHttpRequest extends HttpRequest {
-	private Hashtable<String, String> getHashtable;
-	private Hashtable<String, Object> postHashtable;
-	private boolean isPost;
-	private String action ;
     private MatjiDataParser parser;
-    private String controller;
-
-    public AlarmHttpRequest() {
-    	getHashtable = new Hashtable<String, String>();
-    	postHashtable = new Hashtable<String, Object>();
+    protected String action;
+    protected String controller;
+    
+    public AlarmHttpRequest(Context context) {
+    	super(context);
     	parser = new AlarmParser();
     	controller = "alarms";
     }
 
     public void actionList(int user_id){
     	parser = new AlarmParser();
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	
     	getHashtable.clear();
@@ -38,10 +32,10 @@ public class AlarmHttpRequest extends HttpRequest {
 
     public ArrayList<MatjiData> request() throws MatjiException {
 	SimpleHttpResponse response = 
-		(isPost) ? 
+		(httpMethod == HttpMethod.HTTP_POST) ? 
 				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
 				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
-	
+
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
 	

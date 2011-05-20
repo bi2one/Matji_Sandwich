@@ -6,28 +6,23 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class FoodHttpRequest extends HttpRequest {
-	private Hashtable<String, Object> postHashtable;
-	private Hashtable<String, String> getHashtable;
 	private MatjiDataParser parser;
 	private String action;
-	private boolean isPost;
 	private String controller;
 	
-	public FoodHttpRequest() {		
-		postHashtable = new Hashtable<String, Object>();
-		getHashtable = new Hashtable<String, String>();
+	public FoodHttpRequest(Context context) {	
+		super(context);
 		controller = "foods";
 	}
 
 	public void actionNew(int store_id, String food_name) {
-		isPost = true;
+		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
 		parser = new StoreFoodParser();
 		
@@ -37,7 +32,7 @@ public class FoodHttpRequest extends HttpRequest {
 	}
 
 	public void actionDelete(int store_food_id) {
-		isPost = true;
+		httpMethod = HttpMethod.HTTP_POST;
 		action = "delete";
 		parser = new StoreFoodParser();
 		
@@ -46,7 +41,7 @@ public class FoodHttpRequest extends HttpRequest {
 	}
 	
 	public void actionUnlike(int store_food_id) {
-		isPost = true;
+		httpMethod = HttpMethod.HTTP_POST;
 		action = "unlike";
 		parser = new LikeParser();
 		
@@ -55,7 +50,7 @@ public class FoodHttpRequest extends HttpRequest {
 	}
 	
 	public void actionLike(int store_food_id) {
-		isPost = true;
+		httpMethod = HttpMethod.HTTP_POST;
 		action = "like";
 		parser = new LikeParser();
 		
@@ -64,7 +59,7 @@ public class FoodHttpRequest extends HttpRequest {
 	}
 	
 	public void actionList(int store_id) {
-		isPost = false;
+		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
 		parser = new StoreFoodParser(); 
 		
@@ -74,7 +69,7 @@ public class FoodHttpRequest extends HttpRequest {
 
 	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
-			(isPost) ? 
+			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
 					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 
