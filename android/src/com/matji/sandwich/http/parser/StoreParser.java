@@ -6,6 +6,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.request.UserHttpRequest;
 
 public class StoreParser extends MatjiDataParser {
 	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
@@ -27,7 +28,7 @@ public class StoreParser extends MatjiDataParser {
 		store.setLikeCount(getInt(object, "like_count"));
 		store.setBookmarkCount(getInt(object, "bookmark_count"));
 		store.setFile((AttachFile) new AttachFileParser().getRawObject(getString(object, "file")));
-		store.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		store.setRegUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		
 		return store;
 	}

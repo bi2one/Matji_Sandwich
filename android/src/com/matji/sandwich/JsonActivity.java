@@ -35,7 +35,7 @@ public class JsonActivity extends Activity implements Requestable{
 //		request.actionDelete(16931);
 //		request.actionLike(32);		
 //		request.actionDelete(34);		
-		manager.request(request, 1);
+//		manager.request(request, 1);
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
