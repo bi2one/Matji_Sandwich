@@ -43,6 +43,8 @@ public class StoreHttpRequest extends HttpRequest {
     		
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
+//    	getHashtable.put("include", "tags,user,store_foods,attach_file");
+    	getHashtable.put("include", "attach_file,user,store_foods");
     }
     
     public void actionNew(String name, String address, int lat, int lng){

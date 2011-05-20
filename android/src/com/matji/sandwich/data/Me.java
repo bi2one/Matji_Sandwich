@@ -7,8 +7,8 @@ import android.os.Parcelable;
 
 public class Me extends MatjiData{
 	private User user;
-	private ArrayList<MatjiData> likes;
-	private ArrayList<MatjiData> bookmarks;
+	private ArrayList<Like> likes;
+	private ArrayList<Bookmark> bookmarks;
 	private String[] followings;
 	private String[] followers;
 	
@@ -54,12 +54,12 @@ public class Me extends MatjiData{
 	}
 
 	
-	public void setLikes(ArrayList<MatjiData> likes) {
+	public void setLikes(ArrayList<Like> likes) {
 		this.likes = likes;
 	}
 	
 	
-	public ArrayList<MatjiData> getLikes() {
+	public ArrayList<Like> getLikes() {
 		return likes;
 	}
 	
@@ -74,12 +74,12 @@ public class Me extends MatjiData{
 	}
 	
 	
-	public void setBookmarks(ArrayList<MatjiData> bookmarks) {
+	public void setBookmarks(ArrayList<Bookmark> bookmarks) {
 		this.bookmarks = bookmarks;
 	}
 	
 	
-	public ArrayList<MatjiData> getBookmarks() {
+	public ArrayList<Bookmark> getBookmarks() {
 		return bookmarks;
 	}
 	

@@ -1,14 +1,11 @@
 package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.data.UserExternalAccount;
-import com.matji.sandwich.data.UserMileage;
 import com.matji.sandwich.exception.MatjiException;
 
-public class UserParser extends MatjiDataParser {
-	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
+public class UserParser extends MatjiDataParser<User> {
+	protected User getMatjiData(JsonObject object) throws MatjiException {
 		User user = new User();
 		user.setId(getInt(object, "id"));
 		user.setUserid(getString(object, "userid"));
@@ -21,8 +18,8 @@ public class UserParser extends MatjiDataParser {
 		user.setStoreCount(getInt(object, "store_count"));
 		user.setFollowingCount(getInt(object, "following_count"));
 		user.setFollowerCount(getInt(object, "follower_count"));
-		user.setExternalAccount((UserExternalAccount) new UserExternalAccountParser().getRawObject(getObject(object, "external_account") + ""));
-		user.setMileage((UserMileage) new UserMileageParser().getRawObject(getObject(object, "mileage") + ""));
+		user.setExternalAccount(new UserExternalAccountParser().getRawObject(getObject(object, "external_account") + ""));
+		user.setMileage(new UserMileageParser().getRawObject(getObject(object, "mileage") + ""));
 
 		return user;
 	}

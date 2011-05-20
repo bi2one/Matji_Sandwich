@@ -1,12 +1,11 @@
 package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Notice;
 import com.matji.sandwich.exception.MatjiException;
 
-public class NoticeParser extends MatjiDataParser {
-	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
+public class NoticeParser extends MatjiDataParser<Notice> {
+	protected Notice getMatjiData(JsonObject object) throws MatjiException {
 		Notice notice = new Notice();
 		notice.setStartDate(getString(object, "start_date"));
 		notice.setCreatedAt(getString(object, "created_at"));

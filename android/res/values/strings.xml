@@ -50,7 +50,7 @@
   <string name="default_string_image">이미지</string>
   
   <!-- StoreInfoActivity  -->
-  <string name="store_info_like_store">
+  <string name="store_main_like_store">
 	    내가 좋아하는 맛집
   </string>
 </resources>

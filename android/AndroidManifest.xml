@@ -14,7 +14,7 @@
 		<activity android:name="StoreListActivity"></activity>
 		<activity android:name="StoreNearListActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
-		<activity android:name="StoreInfoActivity"></activity>
+		<activity android:name="StoreMainActivity"></activity>
 		<activity android:name="PostInfoActivity"></activity>
 	</application>
 
