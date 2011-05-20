@@ -11,7 +11,7 @@ import com.matji.sandwich.exception.*;
 import com.matji.sandwich.http.*;
 import com.matji.sandwich.http.request.*;
 
-public class Session<T> implements Requestable<T>{
+public class Session<T> implements Requestable<T> {
 	private volatile static Session session = null;
 	private static final int LOGIN = 0;
 	private static final int LOGOUT = 1;

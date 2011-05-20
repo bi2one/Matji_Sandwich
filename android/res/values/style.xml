@@ -39,6 +39,10 @@
   </style>  
   
   <!-- store_main.xml -->  
+  <style name="store_main_StoreMainHeader" parent="DefaultWidthFill">
+    <item name="android:padding">7dp</item>
+    <item name="android:layout_weight">1</item>
+  </style>
   <style name="store_main_StoreImage">
 	<item name="android:layout_marginRight">7dp</item>
 	<item name="android:layout_marginBottom">7dp</item>
@@ -71,6 +75,10 @@
   	<item name="android:layout_height">50dp</item>
   </style>
   
+  <style name="store_main_StoreMainContent" parent="DefaultWidthFill">
+  	<item name="android:layout_weight">1</item>
+  </style>
+  
   <style name="store_main_ButtonArea" parent="DefaultWidthFill">
   	<item name="android:orientation">horizontal</item>
   	<item name="android:paddingTop">7dp</item>
@@ -78,7 +86,7 @@
   	<item name="android:gravity">center_vertical|center_horizontal</item>
   	<item name="android:layout_gravity">center_vertical|center_horizontal|center</item>
   </style>  
-  
+    
   <style name="store_main_ScrapButton">
   	<item name="android:layout_width">90dp</item>
   	<item name="android:layout_height">34dp</item>
@@ -112,7 +120,15 @@
   	<item name="android:layout_width">140dp</item>
   	<item name="android:layout_height">35dp</item>
   </style>
-
+  
+  <style name="store_main_StoreMainFooter" parent="store_main_ButtonArea">
+  	<item name="android:layout_weight">1</item>
+  </style>
+  
+  <!-- main_map.xml -->
+  <style name="main_map_Button" parent="DefaultWrap">
+  	<item name="android:layout_gravity">left</item>
+  </style>
   <!-- Variation on the Light theme that turns off the title -->
   <style name="Theme.IOSched" parent="android:style/Theme.Light">
     <!-- <item name="android:windowNoTitle">true</item> -->

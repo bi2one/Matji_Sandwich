@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	<!-- bookmark ranking store post register gps -->
+	<LinearLayout
+		style="@style/DefaultWidthFill"
+		android:id="@+id/main_map_search_bar">
+		<Button
+			android:text="bookmark"
+			style="@style/main_map_Button"
+			android:id="@+id/main_map_bookmark_button" />
+		<Button
+			android:text="ranking"
+			style="@style/main_map_Button"
+			android:id="@+id/main_map_ranking_button" />
+		<Button
+			android:text="store"
+			style="@style/main_map_Button"
+			android:id="@+id/main_map_store_button" />
+		<Button
+			android:text="post"
+			style="@style/main_map_Button"
+			android:id="@+id/main_map_post_button" />
+	</LinearLayout>
+	<LinearLayout
+		style="@style/DefaultWidthFill"
+		android:id="@+id/main_map_register_gps_area">
+		<Button
+			android:text="register"
+			style="@style/main_map_Button"
+			android:id="@+id/main_map_register_button" />
+		<Button
+			android:text="gps"
+			style="@style/main_map_Button"
+			android:id="@+id/main_map_gps_button" />
+	</LinearLayout>
+</LinearLayout>
