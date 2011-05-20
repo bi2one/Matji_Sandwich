@@ -4,7 +4,7 @@ import java.text.*;
 import java.util.*;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.*;
 
 import android.content.Context;
 import android.text.format.DateFormat;
@@ -30,18 +30,25 @@ public class PostAdapter extends MBaseAdapter {
 		
 			postElement.image = (ImageView) convertView.findViewById(R.id.thumnail);
 			postElement.nick = (TextView) convertView.findViewById(R.id.post_adapter_nick);
+			postElement.storeName = (TextView)convertView.findViewById(R.id.post_adapter_store_name);
 			postElement.post = (TextView) convertView.findViewById(R.id.post_adapter_post);
 			postElement.dateAgo = (TextView) convertView.findViewById(R.id.post_adapter_created_at);
-			postElement.storeName = (TextView)convertView.findViewById(R.id.post_adapter_nick);
 			convertView.setTag(postElement);
 		} else {
 			postElement = (PostElement) convertView.getTag();
 		}
 		Log.d("Matji", post.getId() + "");
+		
+		
+		Store store = post.getStore();
+		if (store != null)
+			postElement.storeName.setText(" @" + store.getName());
+		else 
+			postElement.storeName.setText("");
+		
 		postElement.nick.setText(post.getUser().getNick());
 		postElement.post.setText(post.getPost());
 		postElement.dateAgo.setText(getAgoFromDate(post.getCreatedAt()));
-		postElement.storeName.setText(post.getStore().getName());
 		return convertView;
 	}
 	
@@ -67,7 +74,6 @@ public class PostAdapter extends MBaseAdapter {
 		
 	    return timestampWithTimeInterval(timeInterval);
 	}
-	
 	
 	
 	private String timestampWithTimeInterval(long timeInterval) {
