@@ -1,13 +1,12 @@
 package com.matji.sandwich.widget;
 
 import android.app.Activity;
-//import android.view.ViewGroup;
-//import android.view.View;
-import android.content.*;
-//import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.*;
+import com.matji.sandwich.StoreInfoActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;

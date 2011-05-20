@@ -66,12 +66,14 @@ public class PostHttpRequest extends HttpRequest {
     	postHashtable.put("post_id", post_id + "");
     }
     
-    public void actionList(){
-    	httpMethod = HttpMethod.HTTP_GET;
+    public void actionList(int page, int limit){
+    	httpMethod = HttpMethod.HTTP_GET;	
     	action = "list";
     	parser = new PostParser();
     	
     	getHashtable.clear();
+    	getHashtable.put("page", "" + page);
+    	getHashtable.put("limit", "" + limit);
     }
     
     public void actionStoreList(int store_id){

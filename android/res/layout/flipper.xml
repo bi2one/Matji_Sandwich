@@ -17,6 +17,10 @@
 	android:id="@+id/TestListView2" 
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent" />
+	<com.matji.sandwich.widget.PostListView
+	android:id="@+id/TestListView3" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" />
   </com.matji.sandwich.widget.SwipeView>
 
 </LinearLayout>
