@@ -37,7 +37,7 @@ public class PostAdapter extends MBaseAdapter {
 		Log.d("Matji", post.getId() +"");
 		postElement.nick.setText(post.getUpdatedAt());
 		postElement.post.setText(post.getPost());
-		postElement.dateAgo.setText(changeStringToDate(post.getCreatedAt()));
+		postElement.dateAgo.setText(post.getCreatedAt());
 		return convertView;
 	}
 
@@ -47,11 +47,5 @@ public class PostAdapter extends MBaseAdapter {
     	TextView post;
     	TextView dateAgo;
     }
-    
-    private int changeStringToDate(String string) {
-    	String date =string.substring(12,125).trim();
-    	int a = 9;
-    	
-    	return a;
-    }
+
 }
