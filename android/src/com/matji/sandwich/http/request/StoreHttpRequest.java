@@ -114,6 +114,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
+    	getHashtable.put("include", "attach_file,user");
     }
 
     public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit){
@@ -127,7 +128,9 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("lng_sw", lng_sw + "");
     	getHashtable.put("lng_ne", lng_ne + "");
     	getHashtable.put("page", page + "");
-    	getHashtable.put("limit", limit + "");    
+    	getHashtable.put("limit", limit + ""); 
+    	getHashtable.put("include", "attach_file,user");
+    	
     }
     
     public void actionBookmarkedList(){
@@ -136,6 +139,7 @@ public class StoreHttpRequest extends HttpRequest {
     	parser = new StoreParser();
 
     	getHashtable.clear();
+    	getHashtable.put("include", "attach_file,user");
     }
     
     public void actionDetailList(int store_id, int page, int limit){

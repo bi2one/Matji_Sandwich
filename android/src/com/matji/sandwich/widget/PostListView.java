@@ -2,12 +2,12 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.PostInfoActivity;
+import com.matji.sandwich.*;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.adapter.PostAdapter;
@@ -42,9 +42,11 @@ public class PostListView extends RequestableMListView {
 	    }
 
 	public void onListItemClick(int position) {
-		Post post = (Post)(getAdapterData().get(position));
-		Intent intent = new Intent(getActivity(), PostInfoActivity.class);
-		intent.putExtra("post", post);
-		getActivity().startActivity(intent);
+//		Post post = (Post)(getAdapterData().get(position));
+//		Intent intent = new Intent(getActivity(), PostInfoActivity.class);
+//		intent.putExtra("post", post);
+//		getActivity().startActivity(intent);
+		MainTabActivity tabAct = MainTabActivity.class.cast( getActivity().getParent());
+		tabAct.getTabHost().setCurrentTab(1);
 	}
 }
