@@ -163,6 +163,14 @@ containing a value of this type.
     }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int default_string_image=0x7f050016;
+        public static final int default_string_memo=0x7f050015;
+        public static final int default_string_popular_food=0x7f050012;
+        public static final int default_string_reg_user=0x7f050013;
+        /**  default String... 
+         */
+        public static final int default_string_tag=0x7f050011;
+        public static final int default_string_url=0x7f050014;
         /**  MatjiException 
          */
         public static final int exception_GpsAvailableMatjiException=0x7f050001;
@@ -183,7 +191,9 @@ containing a value of this type.
         public static final int pull_to_refresh_refreshing_label=0x7f05000f;
         public static final int pull_to_refresh_release_label=0x7f05000e;
         public static final int pull_to_refresh_tap_label=0x7f050010;
-        public static final int store_info_like_store=0x7f050011;
+        /**  StoreInfoActivity  
+         */
+        public static final int store_info_like_store=0x7f050017;
     }
     public static final class style {
         public static final int DefaultFill=0x7f060001;
