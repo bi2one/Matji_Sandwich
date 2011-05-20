@@ -3,12 +3,9 @@ package com.matji.sandwich.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.StoreTabActivity;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
 import com.matji.sandwich.http.request.StoreHttpRequest;
@@ -18,7 +15,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
 
-public class StoreListView extends RequestableMListView {
+public class StoreListView extends RequestableMListView<Store> {
     private StoreHttpRequest storeRequest;
     
     public StoreListView(Context context, AttributeSet attrs) {
@@ -37,7 +34,7 @@ public class StoreListView extends RequestableMListView {
 	return storeRequest;
     }
 
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+    public void requestCallBack(int tag, ArrayList<Store> data) {
 	super.requestCallBack(tag, data);
     }
     

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.app.Activity;
 import android.view.View;
 import android.view.LayoutInflater;
-import android.view.ViewGroup.LayoutParams;
 
 import com.matji.sandwich.R;
 

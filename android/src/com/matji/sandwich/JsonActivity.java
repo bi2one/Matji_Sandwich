@@ -2,18 +2,16 @@
 
 package com.matji.sandwich;
 
-import com.matji.sandwich.data.*;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.*;
 import com.matji.sandwich.exception.MatjiException;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.ArrayList;
 
-public class JsonActivity extends Activity implements Requestable{
+public class JsonActivity<T> extends Activity implements Requestable<T> {
 	HttpRequestManager manager;
 
 	public void onCreate(Bundle savedInstanceState){
@@ -24,7 +22,7 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	private void request() {
-		FoodHttpRequest request = new FoodHttpRequest(getApplicationContext());
+		StoreFoodHttpRequest request = new StoreFoodHttpRequest(getApplicationContext());
 //		FollowingHttpRequest request = new FollowingHttpRequest();
 //		CommentHttpRequest request = new CommentHttpRequest();
 //		NoticeHttpRequest request = new NoticeHttpRequest();
@@ -38,7 +36,7 @@ public class JsonActivity extends Activity implements Requestable{
 //		manager.request(request, 1);
 	}
 
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<T> data) {
 //		StoreFood food = (StoreFood)data.get(0);
 //		Log.d("Matji", "" + food.getId());
 //		Log.d("Matji", "name: " +  food.getFood().getName());

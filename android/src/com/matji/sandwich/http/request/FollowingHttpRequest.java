@@ -3,7 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.FollowingParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Following;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class FollowingHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
+	private MatjiDataParser<Following> parser;
 	private String controller;
 	private String action;
 
@@ -54,7 +54,7 @@ public class FollowingHttpRequest extends HttpRequest {
 		getHashtable.put("user_id", user_id + "");
 	}
 
-	public ArrayList<MatjiData> request() throws MatjiException {
+	public ArrayList<Following> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(httpMethod == HttpMethod.HTTP_POST) ?
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)

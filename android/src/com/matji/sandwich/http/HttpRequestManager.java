@@ -6,7 +6,6 @@ import android.util.Log;
 import android.content.Context;
 
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.widget.Spinner;
 import com.matji.sandwich.widget.NormalSpinner;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -147,15 +146,15 @@ public class HttpRequestManager {
 	}
 
 	private class DataTagPair {
-		private ArrayList<MatjiData> data;
+		private ArrayList<?> data;
 		private int tag;
 
-		public DataTagPair(ArrayList<MatjiData> data, int tag) {
+		public DataTagPair(ArrayList<?> data, int tag) {
 			this.data = data;
 			this.tag = tag;
 		}
 
-		public ArrayList<MatjiData> getData() {
+		public ArrayList<?> getData() {
 			return data;
 		}
 
@@ -163,6 +162,7 @@ public class HttpRequestManager {
 			return tag;
 		}
 	}
+	
 	private class RequestTagPair {
 		private HttpRequest request;
 		private int tag;

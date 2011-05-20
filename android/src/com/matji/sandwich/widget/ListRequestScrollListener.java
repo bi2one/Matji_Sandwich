@@ -1,38 +1,23 @@
 package com.matji.sandwich.widget;
 
-import android.app.Activity;
-import android.view.ViewGroup;
 import android.view.MotionEvent;
-import android.view.GestureDetector;
 import android.view.View.OnTouchListener;
 import android.view.View;
-import android.content.Context;
-import android.util.Log;
-import android.util.AttributeSet;
 import android.widget.AbsListView;
-import android.widget.ListView;
 
-import com.matji.sandwich.Requestable;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.adapter.StoreAdapter;
-import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.widget.RequestableMListView;
 
-import java.util.ArrayList;
-
 public class ListRequestScrollListener implements AbsListView.OnScrollListener, OnTouchListener {
-    private ListScrollRequestable requestable;
+    private ListScrollRequestable<?> requestable;
     private HttpRequestManager manager;
-    private RequestableMListView listView;
+    private RequestableMListView<?> listView;
     private boolean isSet;
     private float downY;
     private boolean refreshable;
     private static final int REFRESH_VIEW_MAX_HEIGHT = 100;
 
-    public ListRequestScrollListener(ListScrollRequestable requestable, RequestableMListView listView, HttpRequestManager manager) {
+    public ListRequestScrollListener(ListScrollRequestable<?> requestable, RequestableMListView<?> listView, HttpRequestManager manager) {
 	this.requestable = requestable;
 	this.listView = listView;
 	this.manager = manager;

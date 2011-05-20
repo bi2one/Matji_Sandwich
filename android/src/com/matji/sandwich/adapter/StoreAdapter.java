@@ -1,25 +1,14 @@
 package com.matji.sandwich.adapter;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
-import android.provider.MediaStore.Images;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 
-import java.util.ArrayList;
 // import com.matji.android.v2.common.Constants;
 // import com.matji.android.v2.common.ImageDownloader;
 

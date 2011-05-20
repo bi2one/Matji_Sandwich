@@ -13,7 +13,7 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.exception.MatjiException;
 
-public class TestActivity extends Activity implements Requestable {
+public class TestActivity<T> extends Activity implements Requestable<T> {
     HttpRequestManager manager;
     
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class TestActivity extends Activity implements Requestable {
 //	manager.request(request, 1);
     }
 
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+    public void requestCallBack(int tag, ArrayList<T> data) {
 	Simple simpleData = (Simple)data.get(0);
 	Log.d("RESULT!!", simpleData.getContent());
 	Log.d("RESULT!!", "tag: " + tag);

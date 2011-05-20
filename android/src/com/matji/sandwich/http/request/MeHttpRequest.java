@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.Log;
 
-import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Me;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.MeParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.session.Session;
 
-public class MeHttpRequest extends HttpRequest{
+public class MeHttpRequest extends HttpRequest {
 	private static final String appId = "eef9847b11";
 	private static final String appSecret = "ae8a062bd2a516970994057722bfbd";
 	private static final String redirectURI = "http://api.matji.com/callback"; 
 	
 	private String action;
-    private MatjiDataParser parser;
+    private MatjiDataParser<Me> parser;
 	
 	public MeHttpRequest(Context context){
 		super(context);
@@ -26,7 +26,7 @@ public class MeHttpRequest extends HttpRequest{
 	}
 	
 	
-    public ArrayList<MatjiData> request() throws MatjiException {
+    public ArrayList<Me> request() throws MatjiException {
     	SimpleHttpResponse response = (httpMethod == HttpMethod.HTTP_POST) ? 
     			requestHttpResponsePost(serverDomain + action , null, postHashtable)
     			:requestHttpResponseGet(serverDomain + action , null, getHashtable);

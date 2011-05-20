@@ -1,24 +1,17 @@
 package com.matji.sandwich.adapter;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
-
-import com.matji.sandwich.data.MatjiData;
 
 import java.util.ArrayList;
 
 public abstract class MBaseAdapter extends BaseAdapter {
     protected LayoutInflater inflater;
     protected Context context;
-    protected ArrayList<MatjiData> data;
+    protected ArrayList<?> data;
     
-    public MBaseAdapter(Context context, ArrayList<MatjiData> data) {
+    public MBaseAdapter(Context context, ArrayList<?> data) {
 	inflater = LayoutInflater.from(context);
 	this.context = context;
 	this.data = data;
@@ -33,7 +26,7 @@ public abstract class MBaseAdapter extends BaseAdapter {
 	return inflater;
     }
     
-    public void setData(ArrayList<MatjiData> data) {
+    public void setData(ArrayList<?> data) {
 	this.data = data;
     }
   	

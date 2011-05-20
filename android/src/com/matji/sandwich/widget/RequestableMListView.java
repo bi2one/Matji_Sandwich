@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 
 //import com.matji.sandwich.R;
 //import com.matji.sandwich.Requestable;
-import com.matji.sandwich.data.MatjiData;
 //import com.matji.sandwich.data.Store;
 //import com.matji.sandwich.adapter.StoreAdapter;
 //import com.matji.sandwich.http.request.StoreHttpRequest;
@@ -23,11 +22,11 @@ import com.matji.sandwich.adapter.MBaseAdapter;
 
 import java.util.ArrayList;
 
-public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
+public abstract class RequestableMListView<T> extends PullToRefreshListView implements ListScrollRequestable<T>,
 										    PullToRefreshListView.OnRefreshListener {
     private ListRequestScrollListener scrollListener;
 //	private LayoutInflater inflater;
-    private ArrayList<MatjiData> adapterData;
+    private ArrayList<T> adapterData;
     private HttpRequestManager manager;
 //    private View header;
     private MBaseAdapter adapter;
@@ -45,7 +44,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	manager = new HttpRequestManager(context, this);
 //	inflater = LayoutInflater.from(context);
 	
-	adapterData = new ArrayList<MatjiData>();
+	adapterData = new ArrayList<T>();
 	adapter.setData(adapterData);
 	setAdapter(adapter);
 
@@ -102,7 +101,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	return manager;
     }
 
-    protected ArrayList<MatjiData> getAdapterData() {
+    protected ArrayList<T> getAdapterData() {
 	return adapterData;
     }
 
@@ -111,11 +110,11 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	requestNext();
     }
 
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+    public void requestCallBack(int tag, ArrayList<T> data) {
 	if (data.size() == 0 || data.size() < limit)
 	    scrollListener.requestSetOff();
 	    
-	for (MatjiData d : data) {
+	for (T d : data) {
 	    adapterData.add(d);
 	}
 

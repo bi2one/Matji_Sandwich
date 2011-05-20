@@ -10,7 +10,7 @@ import com.matji.sandwich.http.request.UserHttpRequest;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MultipleRequestTest extends Activity implements Requestable {
+public class MultipleRequestTest<T> extends Activity implements Requestable<T> {
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.store_main);
@@ -25,6 +25,6 @@ public class MultipleRequestTest extends Activity implements Requestable {
 	manager.request(this, request2, 1);
     }
 
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) { }
+    public void requestCallBack(int tag, ArrayList<T> data) { }
     public void requestExceptionCallBack(int tag, MatjiException e) { }
 }

@@ -21,7 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
 
-import com.matji.sandwich.adapter.MBaseAdapter;
 import com.matji.sandwich.R;
 
 public abstract class PullToRefreshListView extends MListView implements OnScrollListener {

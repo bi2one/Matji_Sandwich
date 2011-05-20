@@ -3,7 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.UserParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class UserHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
+	private MatjiDataParser<User> parser;
     private String action;
     private String controller;
     
@@ -57,7 +57,7 @@ public class UserHttpRequest extends HttpRequest {
     	
     }
 
-    public ArrayList<MatjiData> request() throws MatjiException {
+    public ArrayList<User> request() throws MatjiException {
     	SimpleHttpResponse response = 
 			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)

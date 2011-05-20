@@ -3,7 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.AlarmParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Alarm;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class AlarmHttpRequest extends HttpRequest {
-    private MatjiDataParser parser;
+    private MatjiDataParser<Alarm> parser;
     protected String action;
     protected String controller;
     
@@ -30,7 +30,7 @@ public class AlarmHttpRequest extends HttpRequest {
     	getHashtable.put("user_id", user_id + "");
     }
 
-    public ArrayList<MatjiData> request() throws MatjiException {
+    public ArrayList<Alarm> request() throws MatjiException {
 	SimpleHttpResponse response = 
 		(httpMethod == HttpMethod.HTTP_POST) ? 
 				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)

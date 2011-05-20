@@ -2,7 +2,6 @@ package com.matji.sandwich;
 
 import java.util.*;
 
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -10,11 +9,10 @@ import com.matji.sandwich.http.request.StoreHttpRequest;
 
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class LViewActivity extends ListActivity implements Requestable{
+public class LViewActivity<T> extends ListActivity implements Requestable<T> {
 	HttpRequestManager manager;
 
 	public void onCreate(Bundle savedInstanceState){
@@ -33,7 +31,7 @@ public class LViewActivity extends ListActivity implements Requestable{
 //		manager.request(request, 1);
 	}
 	
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<T> data) {
 		String myData= "";
 		ArrayList<String> mArray = new ArrayList<String>();
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.testlistview, mArray));

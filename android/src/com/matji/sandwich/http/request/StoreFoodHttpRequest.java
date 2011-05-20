@@ -1,22 +1,21 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.StoreFoodParser;
-import com.matji.sandwich.http.parser.LikeParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.Log;
 
-public class FoodHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
+public class StoreFoodHttpRequest extends HttpRequest {
+	private MatjiDataParser<StoreFood> parser;
 	private String action;
 	private String controller;
 	
-	public FoodHttpRequest(Context context) {	
+	public StoreFoodHttpRequest(Context context) {	
 		super(context);
 		controller = "foods";
 	}
@@ -40,24 +39,6 @@ public class FoodHttpRequest extends HttpRequest {
 		postHashtable.put("store_food_id", store_food_id);
 	}
 	
-	public void actionUnlike(int store_food_id) {
-		httpMethod = HttpMethod.HTTP_POST;
-		action = "unlike";
-		parser = new LikeParser();
-		
-		postHashtable.clear();
-		postHashtable.put("store_food_id", store_food_id);
-	}
-	
-	public void actionLike(int store_food_id) {
-		httpMethod = HttpMethod.HTTP_POST;
-		action = "like";
-		parser = new LikeParser();
-		
-		postHashtable.clear();
-		postHashtable.put("store_food_id", store_food_id);
-	}
-	
 	public void actionList(int store_id) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
@@ -67,7 +48,7 @@ public class FoodHttpRequest extends HttpRequest {
 		getHashtable.put("store_id", store_id + "");
 	}
 
-	public ArrayList<MatjiData> request() throws MatjiException {
+	public ArrayList<StoreFood> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)

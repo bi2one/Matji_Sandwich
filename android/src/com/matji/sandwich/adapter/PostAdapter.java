@@ -8,9 +8,6 @@ import com.matji.sandwich.data.*;
 import com.matji.sandwich.widget.*;
 
 import android.content.Context;
-import android.text.format.DateFormat;
-import android.text.method.*;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;

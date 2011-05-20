@@ -1,7 +1,5 @@
 package com.matji.sandwich.data;
 
-import java.security.KeyStore.LoadStoreParameter;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 

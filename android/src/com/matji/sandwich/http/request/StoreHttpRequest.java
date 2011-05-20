@@ -1,12 +1,9 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.BookmarkParser;
-//import com.matji.sandwich.http.parser.CountParser;
-import com.matji.sandwich.http.parser.LikeParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.StoreParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
@@ -14,7 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class StoreHttpRequest extends HttpRequest {
-    private MatjiDataParser parser;
+    private MatjiDataParser<Store> parser;
     private String action;
     private String controller;
     
@@ -26,7 +23,6 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionCount(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String type){
     	httpMethod = HttpMethod.HTTP_GET;
     	action="count";
-//    	parser = new CountParser();
     	
     	getHashtable.clear();
     	getHashtable.put("lat_ne", lat_ne + "");
@@ -69,42 +65,6 @@ public class StoreHttpRequest extends HttpRequest {
     	postHashtable.put("address", address);
     	postHashtable.put("lat", lat);
     	postHashtable.put("lng", lng);
-    	postHashtable.put("store_id", store_id);
-    }
-    
-    public void actionUnLike(int store_id){
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "unlike";
-    	parser = new LikeParser();
-    	
-    	postHashtable.clear();
-    	postHashtable.put("store_id", store_id);
-    }
-    
-    public void actionLike(int store_id){
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "like";
-    	parser = new LikeParser();
-
-    	postHashtable.clear();
-    	postHashtable.put("store_id", store_id);
-    }
-    
-    public void actionBookmark(int store_id){
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "bookmark";
-    	parser = new BookmarkParser();
-    	
-    	postHashtable.clear();
-    	postHashtable.put("store_id", store_id);
-    }
-    
-    public void actionUnBookmark(int store_id){
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "unbookmark";
-    	parser = new BookmarkParser();
-    	
-    	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
     }
     
@@ -175,7 +135,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     
-    public ArrayList<MatjiData> request() throws MatjiException {
+    public ArrayList<Store> request() throws MatjiException {
     	SimpleHttpResponse response = 
 			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)

@@ -2,21 +2,23 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
-import android.app.*;
 import android.app.Activity;
-import android.content.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
+import android.content.Context;
+import android.content.Intent;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 
-import com.matji.sandwich.*;
-import com.matji.sandwich.data.*;
+import com.matji.sandwich.MainTabActivity;
+import com.matji.sandwich.PostInfoActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.PostAdapter;
+import com.matji.sandwich.data.Post;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
-public class PostListView extends RequestableMListView implements View.OnClickListener{
+public class PostListView extends RequestableMListView<Post> implements View.OnClickListener {
 	private PostHttpRequest postRequest;
 	
 	public PostListView(Context context, AttributeSet attrs) {
@@ -35,7 +37,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		return postRequest;
 	}
 
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<Post> data) {
 		super.requestCallBack(tag, data);
 	}
 	
@@ -44,7 +46,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	    }
 
 	public void onListItemClick(int position) {
-		MainTabActivity tabAct = MainTabActivity.class.cast( getActivity().getParent());
+		MainTabActivity tabAct = MainTabActivity.class.cast(getActivity().getParent());
 		tabAct.getTabHost().setCurrentTab(1);
 	}
 

@@ -1,6 +1,5 @@
 package com.matji.sandwich.dataprovider;
 
-import android.content.SharedPreferences;
 import android.content.Context;
 
 public class MatjiStorageDataProvider {
