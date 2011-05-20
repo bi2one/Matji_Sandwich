@@ -44,6 +44,7 @@ public class MeHttpRequest extends HttpRequest{
     public void actionMe() {
     	action = "me";
     	Session session = Session.getInstance(context);
+    	
     	if (session != null && session.getCurrentUser() != null)
     		getHashtable.put("access_token", session.getCurrentUser().getToken());   
     }

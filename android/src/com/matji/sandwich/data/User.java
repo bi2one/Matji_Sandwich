@@ -150,4 +150,10 @@ public class User extends MatjiData{
 	public UserMileage getMileage() {
 		return mileage;
 	}
+
+	public String getToken() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

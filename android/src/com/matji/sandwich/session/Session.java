@@ -1,15 +1,25 @@
 package com.matji.sandwich.session;
 
+import java.util.*;
+import android.app.Activity;
 import android.content.Context;
-import com.matji.sandwich.data.CurrentUser;
-import com.matji.sandwich.data.provider.PreferenceProvider;
 
-public class Session {
+import com.matji.sandwich.*;
+import com.matji.sandwich.data.*;
+import com.matji.sandwich.data.provider.PreferenceProvider;
+import com.matji.sandwich.exception.*;
+import com.matji.sandwich.http.*;
+import com.matji.sandwich.http.request.*;
+
+public class Session implements Requestable{
 	private volatile static Session session = null;
-	private static CurrentUser currentUser;
-	@SuppressWarnings("unused")
+	private static final int LOGIN = 0;
+	private static final int LOGOUT = 1;
+	
+	private static User currentUser;
+	private static String token;
+	
 	private static PreferenceProvider prefs;
-	@SuppressWarnings("unused")
 	private Context context;
 	
 	
@@ -25,9 +35,6 @@ public class Session {
 				if(session == null) {
 					session = new Session(context);
 					prefs = new PreferenceProvider(context);
-
-					// For test
-					currentUser = new CurrentUser();
 				}
 			}
 		}
@@ -39,32 +46,54 @@ public class Session {
 		return true;
 	}
 	
-	public boolean login(){
-		return true;
+	public void login(Activity activity, String userid, String password){
+		HttpRequestManager manager = new HttpRequestManager(context, this);
+		MeHttpRequest request = new MeHttpRequest(context);
+		request.actionAuthorize(userid, password);
+		manager.request(activity, request, LOGIN);
 	}
 	
 	public boolean logout(){
 		return true;
 	}
 	
-	public boolean isBookmarked(String object, int id){
-		return true;
-	}
-	
-	public boolean isFollowing(int user_id){
-		return true;
-	}
-	
-	public boolean isFollower(int user_id){
-		return true;
-	}
-	
+//	public boolean isBookmarked(String object, int id){
+//		return true;
+//	}
+//	
+//	public boolean isFollowing(int user_id){
+//		return true;
+//	}
+//	
+//	public boolean isFollower(int user_id){
+//		return true;
+//	}
+//	
 	public boolean isLogin(){
 		return (currentUser == null) ? false : true;	
 	}
 	
-	public CurrentUser getCurrentUser(){
+	public User getCurrentUser(){
 		return currentUser;
+	}
+	
+	
+	@Override
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		if (tag == LOGIN){
+				Me me = (Me)data.get(0);
+				token = me.getToken();
+				currentUser = me.getUser();
+		}
+		
+	}
+	@Override
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		if (tag == LOGIN){
+				currentUser =  null;
+				token = null;
+		}
+		
 	}
 	
 }

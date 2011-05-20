@@ -11,7 +11,7 @@ public class Me extends MatjiData{
 	private ArrayList<MatjiData> bookmarks;
 	private String[] followings;
 	private String[] followers;
-	
+	private String token;
 	
 	public Me() {
 		
@@ -103,5 +103,12 @@ public class Me extends MatjiData{
 		return followers;
 	}
 
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getToken() {
+		return token;
+	}
 
 }
