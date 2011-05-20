@@ -10,10 +10,21 @@
   	<item name="android:layout_height">fill_parent</item>
   </style>
   
+  <style name="DefaultWidthFill">
+    <item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">wrap_content</item>
+  </style>
+   
+  <style name="DefaultHeightFill">
+    <item name="android:layout_width">wrap_content</item>
+  	<item name="android:layout_height">fill_parent</item>
+  </style>
+  
   <style name="DefaultLinearWrap" parent="DefaultWrap">
   	<item name="android:orientation">vertical</item>
   	<item name="android:padding">7dp</item>
   </style>
+  
   <style name="DefaultLinearFill" parent="DefaultFill">
   	<item name="android:orientation">vertical</item>
   	<item name="android:padding">7dp</item>
@@ -60,10 +71,8 @@
   	<item name="android:layout_height">50dp</item>
   </style>
   
-  <style name="store_main_ButtonArea">
+  <style name="store_main_ButtonArea" parent="DefaultWidthFill">
   	<item name="android:orientation">horizontal</item>
-  	<item name="android:layout_width">fill_parent</item>
-  	<item name="android:layout_height">wrap_content</item>
   	<item name="android:paddingTop">7dp</item>
   	<item name="android:paddingBottom">7dp</item>
   	<item name="android:gravity">center_vertical|center_horizontal</item>
@@ -89,29 +98,19 @@
   	<item name="android:padding">7dp</item>
   </style>
   
-  <style name="store_main_DetailItemArea">
-  	<item name="android:layout_width">fill_parent</item>
-  	<item name="android:layout_height">90dp</item>
+  <style name="store_main_DetailItemArea" parent="DefaultWrap">
   	<item name="android:padding">7dp</item>
+  	<item name="android:layout_gravity">right</item>
   </style>
   
-  <style name="store_main_DetailItem">
+  <style name="store_main_DetailItem" parent="DefaultWrap">
   	<item name="android:textSize">14dp</item>
-  	<item name="android:layout_width">fill_parent</item>
-  	<item name="android:layout_height">wrap_content</item>
   </style>
   
   <style name="store_main_DetailInfoButton">
   	<item name="android:textSize">16dp</item>
-  	<item name="android:layout_width">150dp</item>
-  	<item name="android:layout_height">50dp</item>
-  </style>
-  
-  <style name="store_main_TestButton">
-  	<item name="android:layout_width">150dp</item>
-  	<item name="android:layout_height">50dp</item>
-	<item name="android:textSize">16dp</item>
-  	<item name="android:textStyle">bold</item>
+  	<item name="android:layout_width">140dp</item>
+  	<item name="android:layout_height">35dp</item>
   </style>
 
   <!-- Variation on the Light theme that turns off the title -->

@@ -51,6 +51,6 @@ public class StoreMainActivity extends Activity{
 		postCountButton.setText(getString(R.string.default_string_memo) + ": " + store.getPostCount() + "개");
 		imageCountButton.setText(getString(R.string.default_string_image) + ": " + store.getImageCount() + "개");
 		tagCountButton.setText(getString(R.string.default_string_tag) + ": " + store.getTagCount() + "개");
-		urlButton.setText(getString(R.string.default_string_url) + ": " + store.getWebsite() + "(테스트)");
+		urlButton.setText(getString(R.string.default_string_url));
 	}
 }

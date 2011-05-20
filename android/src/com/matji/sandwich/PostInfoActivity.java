@@ -29,16 +29,12 @@ public class PostInfoActivity extends Activity {
 		TextView likeCountText = (TextView) findViewById(R.id.store_main_like_store_count);
 		TextView addressText = (TextView) findViewById(R.id.store_main_store_address);
 		TextView coverText = (TextView) findViewById(R.id.store_main_cover);
-		TextView popularMenuText = (TextView) findViewById(R.id.store_main_popular_menu);
-		TextView tagsText = (TextView) findViewById(R.id.store_main_tag);
-		TextView diggerText = (TextView) findViewById(R.id.store_main_tag);
+		TextView RegUser = (TextView) findViewById(R.id.store_main_reg_user);
 		Button postCountButton = (Button)findViewById(R.id.store_main_memo_button);
 		Button imageCountButton = (Button)findViewById(R.id.store_main_image_button);
 		Button tagCountButton = (Button)findViewById(R.id.store_main_tag_button);
 		Button urlButton = (Button)findViewById(R.id.store_main_url_button);
 
-		// TODO  테스트용
-		popularMenuText.setText("인기메뉴: TODO");
 //		if (store.getTagCount() > 0) {
 //			tagsText.setText("태그: " + tags.get(0).getTag());
 //			for (int i = 1; i < ((tags.size() > 5) ? 5 : tags.size()); i++) {
