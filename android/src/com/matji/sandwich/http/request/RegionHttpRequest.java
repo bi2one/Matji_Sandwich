@@ -5,29 +5,24 @@ import com.matji.sandwich.http.parser.RegionParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class RegionHttpRequest extends HttpRequest {
-	private Hashtable<String, String> getHashtable;
-	private Hashtable<String, Object> postHashtable;
-    private MatjiDataParser parser;
+	private MatjiDataParser parser;
     private String action;
     private String controller;
-    private boolean isPost;
-    
-    public RegionHttpRequest() {
-    	getHashtable = new Hashtable<String, String>();
-    	postHashtable = new Hashtable<String, Object>();
+        
+    public RegionHttpRequest(Context context) {
+    	super(context);
     	parser = new RegionParser();
     	controller = "regions";
     }
 
     public void actionBookmark(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String description){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "bookmark";
     	parser = new RegionParser();
     	
@@ -39,7 +34,7 @@ public class RegionHttpRequest extends HttpRequest {
     }
     
     public void actionUnBookmark(int region_id){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "unbookmark";
 //    	
     	postHashtable.clear();
@@ -47,7 +42,7 @@ public class RegionHttpRequest extends HttpRequest {
     }
     
     public void actionBookmarkedList(){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "bookmarked_list";
       	parser = new RegionParser();
       	
@@ -56,7 +51,7 @@ public class RegionHttpRequest extends HttpRequest {
     
     public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
-			(isPost) ?
+			(httpMethod == HttpMethod.HTTP_POST) ?
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
 					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 

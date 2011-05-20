@@ -5,29 +5,24 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class NoticeHttpRequest extends HttpRequest {
-	private Hashtable<String, Object> postHashtable;
-	private Hashtable<String, String> getHashtable;
 	private MatjiDataParser parser;
 	private String action;
-	private boolean isPost;
 	private String controller;
 	
-	public NoticeHttpRequest() {
-		postHashtable = new Hashtable<String, Object>();
-		getHashtable = new Hashtable<String, String>();
+	public NoticeHttpRequest(Context context) {
+		super(context);
 		parser = new NoticeParser();
 		controller = "notices";
 	}
 
 	public void actionShow(int notice_id) {
-		isPost = false;
+		httpMethod = HttpMethod.HTTP_GET;
 		action = "show";
 		
 		getHashtable.clear();
@@ -35,7 +30,7 @@ public class NoticeHttpRequest extends HttpRequest {
 	}
 	
 	public void actionList() {
-		isPost = false;
+		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
 
 		getHashtable.clear();
@@ -47,7 +42,7 @@ public class NoticeHttpRequest extends HttpRequest {
 	
 	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
-			(isPost) ?
+			(httpMethod == HttpMethod.HTTP_POST) ?
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
 					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
 

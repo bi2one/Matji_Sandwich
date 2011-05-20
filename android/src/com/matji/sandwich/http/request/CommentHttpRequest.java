@@ -7,21 +7,17 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class CommentHttpRequest extends HttpRequest {
-	private Hashtable<String, Object> postHashtable;
-	private Hashtable<String, String> getHashtable;
 	private MatjiDataParser parser;
 	private String controller;
 	private String action;
-	private boolean isPost;
 	
-	public CommentHttpRequest() {
-		postHashtable = new Hashtable<String, Object>();
-		getHashtable = new Hashtable<String, String>();
+	public CommentHttpRequest(Context context) {
+		super(context);
 		parser = new CommentParser();
 		controller = "comments";
 	}
@@ -29,7 +25,7 @@ public class CommentHttpRequest extends HttpRequest {
 	public void actionNew(int post_id, String comment, String from_where) {
 
 		parser = new CommentParser();
-		isPost = true;
+		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
 				
 		postHashtable.clear();
@@ -39,7 +35,7 @@ public class CommentHttpRequest extends HttpRequest {
 	}
 	
 	public void actionDelete(int comment_id) {
-		isPost = true;
+		httpMethod = HttpMethod.HTTP_POST;
 		action = "delete";
 		
 		postHashtable.clear();
@@ -48,7 +44,7 @@ public class CommentHttpRequest extends HttpRequest {
 	
 	public void actionList(int post_id) {
 		parser = new CommentParser();
-		isPost = false;
+		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
 
 		getHashtable.clear();
@@ -58,7 +54,7 @@ public class CommentHttpRequest extends HttpRequest {
 
 	public void actionShow(int comment_id) {
 		parser = new CommentParser();
-		isPost = false;
+		httpMethod = HttpMethod.HTTP_GET;
 		action = "show";
 		
 		getHashtable.clear();
@@ -68,7 +64,7 @@ public class CommentHttpRequest extends HttpRequest {
 	public ArrayList<MatjiData> request() throws MatjiException {		
 
 		SimpleHttpResponse response = 
-			(isPost) ? 
+			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller +"/" + action, null, postHashtable)
 					:requestHttpResponseGet(serverDomain + controller +"/" + action, null, getHashtable); 
 

@@ -1,31 +1,25 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.PostTagParser;
-import com.matji.sandwich.http.parser.StoreTagParser;
 import com.matji.sandwich.http.parser.TagParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.UserTagParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class TagHttpRequest extends HttpRequest {
-//	private Hashtable<String, Object> postHashtable;
-	private Hashtable<String, String> getHashtable;
 	private MatjiDataParser parser;
 	private String action;
 	private String controller;
-	//	private boolean isPost; // tag 는 전부  GET 방식..?
+	//	private boolean isPost; // tag �����  GET 諛⑹�..?
 
-	public TagHttpRequest() {
-//		postHashtable = new Hashtable<String, Object>();
-		getHashtable = new Hashtable<String, String>();
-		
+	public TagHttpRequest(Context context) {
+		super(context);
 		controller = "tags";
 	}
 

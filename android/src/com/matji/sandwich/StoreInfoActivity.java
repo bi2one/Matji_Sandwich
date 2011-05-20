@@ -89,20 +89,20 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	}
 
 	private void storeFoodsRequest() {
-		request = new FoodHttpRequest();
+		request = new FoodHttpRequest(getApplicationContext());
 		((FoodHttpRequest) request).actionList(store.getId());
 		manager.request(this, request, 1);
 	}
 
 	private void tagsRequest() {
-		request = new TagHttpRequest();
+		request = new TagHttpRequest(getApplicationContext());
 		((TagHttpRequest) request).actionStoreTagList(store.getId());
 		manager.request(this, request, 2);
 	}
 
 
 	private void regUserRequest() {
-		request = new UserHttpRequest();
+		request = new UserHttpRequest(getApplicationContext());
 		((UserHttpRequest) request).actionShow(store.getRegUserId());
 		manager.request(this, request, 3);
 	}
@@ -110,7 +110,7 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	private String toStringFromFoods(ArrayList<StoreFood> storeFoods) {
 		String result = getString(R.string.default_string_popular_food) + ": ";
 		for (int i = 0; i < storeFoods.size()-1; i++) {
-			// TODO 임시
+			// TODO ���
 			result += storeFoods.get(i).getFood().getName() + ", ";
 		}
 		result += storeFoods.get(storeFoods.size()-1).getFood().getName() + ", ";

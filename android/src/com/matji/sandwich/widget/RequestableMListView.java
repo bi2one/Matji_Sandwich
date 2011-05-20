@@ -1,21 +1,21 @@
 package com.matji.sandwich.widget;
 
 import android.app.Activity;
-import android.view.ViewGroup;
-import android.view.View;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.LayoutInflater;
+//import android.view.ViewGroup;
+//import android.view.View;
+//import android.view.GestureDetector;
+//import android.view.MotionEvent;
+//import android.view.LayoutInflater;
 import android.content.Context;
-import android.util.Log;
+//import android.util.Log;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.Requestable;
+//import com.matji.sandwich.R;
+//import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.adapter.StoreAdapter;
-import com.matji.sandwich.http.request.StoreHttpRequest;
+//import com.matji.sandwich.data.Store;
+//import com.matji.sandwich.adapter.StoreAdapter;
+//import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.exception.MatjiException;
@@ -26,10 +26,10 @@ import java.util.ArrayList;
 public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
 										    PullToRefreshListView.OnRefreshListener {
     private ListRequestScrollListener scrollListener;
-    private LayoutInflater inflater;
+//	private LayoutInflater inflater;
     private ArrayList<MatjiData> adapterData;
     private HttpRequestManager manager;
-    private View header;
+//    private View header;
     private MBaseAdapter adapter;
     private int page = 1;
     private int limit = 10;
@@ -43,7 +43,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	super(context, attrs);
 	this.adapter = adapter;
 	manager = new HttpRequestManager(context, this);
-	inflater = LayoutInflater.from(context);
+//	inflater = LayoutInflater.from(context);
 	
 	adapterData = new ArrayList<MatjiData>();
 	adapter.setData(adapterData);

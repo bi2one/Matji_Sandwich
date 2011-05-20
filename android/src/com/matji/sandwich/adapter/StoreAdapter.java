@@ -54,8 +54,6 @@ public class StoreAdapter extends MBaseAdapter {
 		}
 
 		// Bind the data efficiently with the holder.
-		Log.d("STORE", store.getName());
-		Log.d("ADDRESS", store.getAddress());
 		storeElement.name.setText(store.getName());
 		storeElement.address.setText(store.getAddress());
 		return convertView;

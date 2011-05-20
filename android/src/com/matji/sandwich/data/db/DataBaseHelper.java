@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DataBaseHelper extends SQLiteOpenHelper{
 	private static String DB_PATH = "/data/data/com.matji.sandwich/databases/";
 	private static String DB_NAME = "matji.db";
+	
 	private SQLiteDatabase db;
 	private final Context context;	
 	

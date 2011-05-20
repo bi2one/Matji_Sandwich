@@ -8,28 +8,23 @@ import com.matji.sandwich.http.parser.StoreParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
 
+import android.content.Context;
 import android.util.Log;
 
 public class StoreHttpRequest extends HttpRequest {
-    private Hashtable<String, String> getHashtable;
-    private Hashtable<String, Object> postHashtable;
     private MatjiDataParser parser;
     private String action;
-    private boolean isPost;
     private String controller;
     
-    public StoreHttpRequest() {
-    	getHashtable = new Hashtable<String, String>();
-    	postHashtable = new Hashtable<String, Object>();
+    public StoreHttpRequest(Context context) {
+    	super(context);
     	controller = "stores";
     }
 
     public void actionCount(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String type){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action="count";
 //    	parser = new CountParser();
     	
@@ -42,7 +37,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
 
     public void actionShow(int store_id){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "show";
     	parser = new StoreParser(); 
     		
@@ -51,7 +46,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionNew(String name, String address, int lat, int lng){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	parser = new StoreParser();
 
@@ -63,7 +58,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionModify(String name, String address, int lat, int lng, int store_id) {
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "modify";
     	parser = new StoreParser();
 
@@ -76,7 +71,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionUnLike(int store_id){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "unlike";
     	parser = new LikeParser();
     	
@@ -85,7 +80,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionLike(int store_id){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "like";
     	parser = new LikeParser();
 
@@ -94,7 +89,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionBookmark(int store_id){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "bookmark";
     	parser = new BookmarkParser();
     	
@@ -103,7 +98,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionUnBookmark(int store_id){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "unbookmark";
     	parser = new BookmarkParser();
     	
@@ -112,7 +107,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionList(int page, int limit){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	parser = new StoreParser();
     	
@@ -122,7 +117,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
 
     public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "nearby_list";
     	parser = new StoreParser();
 
@@ -136,7 +131,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionBookmarkedList(){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "bookmarked_list";
     	parser = new StoreParser();
 
@@ -144,7 +139,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionDetailList(int store_id, int page, int limit){
-    	isPost = false;
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "detail_list";
     	parser = new StoreParser();
     	
@@ -155,7 +150,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionDetailNew(int store_id, String note){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "detail_new";
     	parser = new StoreParser();
     	
@@ -165,7 +160,7 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionRollbackDetail(int store_detail_info_id){
-    	isPost = true;
+    	httpMethod = HttpMethod.HTTP_POST;
     	action = "rollback_detail";
     	parser = new StoreParser();
     		
@@ -176,7 +171,7 @@ public class StoreHttpRequest extends HttpRequest {
     
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
-			(isPost) ? 
+			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
 					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
 	

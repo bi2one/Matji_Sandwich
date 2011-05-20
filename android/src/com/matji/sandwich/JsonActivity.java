@@ -1,4 +1,4 @@
-//이 곳은 JSON 테스트를 하는곳입니다.
+//��怨녹� JSON ����몃� ���怨녹����.
 
 package com.matji.sandwich;
 
@@ -24,14 +24,14 @@ public class JsonActivity extends Activity implements Requestable{
 	}
 
 	private void request() {
-		FoodHttpRequest request = new FoodHttpRequest();
+		FoodHttpRequest request = new FoodHttpRequest(getApplicationContext());
 //		FollowingHttpRequest request = new FollowingHttpRequest();
 //		CommentHttpRequest request = new CommentHttpRequest();
 //		NoticeHttpRequest request = new NoticeHttpRequest();
 //		TagHttpRequest request = new TagHttpRequest();
 		request.actionList(12296);
 //		request.actionList(12296);
-//		request.actionNew(12296, "육개장");
+//		request.actionNew(12296, "�↔���);
 //		request.actionDelete(16931);
 //		request.actionLike(32);		
 //		request.actionDelete(34);		

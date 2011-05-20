@@ -1,19 +1,18 @@
 package com.matji.sandwich.widget;
 
 import android.app.Activity;
-import android.view.ViewGroup;
-import android.view.View;
-import android.content.*;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.*;
+import com.matji.sandwich.StoreInfoActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.HttpRequestManager;
+//import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
@@ -23,7 +22,8 @@ public class StoreListView extends RequestableMListView {
     
     public StoreListView(Context context, AttributeSet attrs) {
 	super(context, attrs, new StoreAdapter(context), 10);
-	storeRequest = new StoreHttpRequest();
+	
+	storeRequest = new StoreHttpRequest(context);
 	setPage(1);
     }
 

@@ -13,7 +13,6 @@ import android.text.TextUtils;
 
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.CoordinateRegion;
-import com.matji.sandwich.data.Following;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Tag;
@@ -161,6 +160,10 @@ public class DBProvider {
 	
 	
 	public ArrayList<Store> loadStoresInRegion(CoordinateRegion region){
+		SQLiteDatabase db = dbHelper.getDatabase();
+		
+		Cursor c = db.rawQuery("", null);
+		
 		
 		return null;
 	}

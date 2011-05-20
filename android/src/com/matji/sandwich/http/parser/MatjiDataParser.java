@@ -21,7 +21,23 @@ import org.json.*;
 
 public abstract class MatjiDataParser {
 	protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
+	
+	public ArrayList<MatjiData> getMatjiDataList(JsonElement jsonElement) throws MatjiException{
+		if (!isArray(jsonElement)) {
+			throw new JSONMatjiException();
+		}
 
+		JsonArray jsonArray = jsonElement.getAsJsonArray();
+		ArrayList<MatjiData> matjiDataList = new ArrayList<MatjiData>();
+		for (int i = 0; i < jsonArray.size(); i++) {
+			matjiDataList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
+		}
+
+		Log.d("Matji", "MatjiDataParser::getRawObjects : Parse success");	
+		
+		return matjiDataList;
+	}
+	
 	public String validateData(String data) throws MatjiException {
 		try {
 			JSONObject json = new JSONObject(data);
@@ -63,8 +79,6 @@ public abstract class MatjiDataParser {
 	}
 
 	protected ArrayList<MatjiData> getRawObjects(String data) throws MatjiException {
-		ArrayList<MatjiData> matjiDataList = new ArrayList<MatjiData>();
-		JsonArray jsonArray = null;
 		JsonElement jsonElement = null;
 
 		if (isNull(data)) return null;
@@ -77,19 +91,7 @@ public abstract class MatjiDataParser {
 			throw new JSONMatjiException();
 		}
 
-		if (!isArray(jsonElement)) {
-			throw new JSONMatjiException();
-		}
-
-		jsonArray = jsonElement.getAsJsonArray();
-
-		for (int i = 0; i < jsonArray.size(); i++) {
-			matjiDataList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
-		}
-
-		Log.d("Matji", "MatjiDataParser::getRawObjects : Parse success");	
-
-		return matjiDataList;
+		return getMatjiDataList(jsonElement);
 	}
 
 	public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
