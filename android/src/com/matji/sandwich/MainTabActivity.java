@@ -15,12 +15,16 @@ public class MainTabActivity extends TabActivity{
 	
 	tabHost = getTabHost();
 
+    tabHost.addTab(tabHost.newTabSpec("tab3")
+			.setIndicator("지도")
+			.setContent(new Intent(this, MatjiMapActivity.class)));
+    
 	tabHost.addTab(tabHost.newTabSpec("tab2")
-    		.setIndicator("ssfa")
+    		.setIndicator("맛집")
     		.setContent(new Intent(this, FlipperTestActivity.class)));
-
+    
     tabHost.addTab(tabHost.newTabSpec("tab1")
-			.setIndicator("asdfasfd")
+			.setIndicator("알람")
 			.setContent(new Intent(this, AlarmActivity.class)));
 	}
 }

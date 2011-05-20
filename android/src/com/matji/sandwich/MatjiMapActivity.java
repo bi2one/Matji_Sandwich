@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.location.Location;
 
@@ -17,7 +18,7 @@ public class MatjiMapActivity extends MapActivity{
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.main);
+	setContentView(R.layout.main_map);
     }
 
     private void setMarker(Location loc){

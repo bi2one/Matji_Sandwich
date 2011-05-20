@@ -11,7 +11,7 @@ import com.matji.sandwich.exception.*;
 import com.matji.sandwich.http.*;
 import com.matji.sandwich.http.request.*;
 
-public class Session implements Requestable{
+public class Session<T> implements Requestable<T> {
 	private volatile static Session session = null;
 	private static final int LOGIN = 0;
 	private static final int LOGOUT = 1;
@@ -79,7 +79,7 @@ public class Session implements Requestable{
 	
 	
 	@Override
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<T> data) {
 		if (tag == LOGIN){
 				Me me = (Me)data.get(0);
 				token = me.getToken();
