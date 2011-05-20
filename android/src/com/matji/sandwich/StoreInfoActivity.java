@@ -83,20 +83,20 @@ public class StoreInfoActivity extends Activity implements Requestable {
 	}
 
 	private void storeFoodsRequest() {
-		request = new FoodHttpRequest();
+		request = new FoodHttpRequest(getApplicationContext());
 		((FoodHttpRequest) request).actionList(store.getId());
 		manager.request(this, request, 1);
 	}
 
 	private void tagsRequest() {
-		request = new TagHttpRequest();
+		request = new TagHttpRequest(getApplicationContext());
 		((TagHttpRequest) request).actionStoreTagList(store.getId());
 		manager.request(this, request, 2);
 	}
 
 
 	private void regUserRequest() {
-		request = new UserHttpRequest();
+		request = new UserHttpRequest(getApplicationContext());
 		((UserHttpRequest) request).actionShow(store.getRegUserId());
 		manager.request(this, request, 3);
 	}

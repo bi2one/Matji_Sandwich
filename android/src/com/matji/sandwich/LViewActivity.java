@@ -28,7 +28,7 @@ public class LViewActivity extends ListActivity implements Requestable{
 	}
 
 	private void request(){
-		StoreHttpRequest request = new StoreHttpRequest();
+		StoreHttpRequest request = new StoreHttpRequest(getApplicationContext());
 		request.actionList(1,1);
 //		manager.request(request, 1);
 	}
