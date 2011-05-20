@@ -22,6 +22,5 @@ public class MainTabActivity extends TabActivity{
     tabHost.addTab(tabHost.newTabSpec("tab1")
 			.setIndicator("asdfasfd")
 			.setContent(new Intent(this, AlarmActivity.class)));
-	
 	}
 }

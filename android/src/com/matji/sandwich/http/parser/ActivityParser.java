@@ -2,11 +2,10 @@ package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Activity;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 
-public class ActivityParser extends MatjiDataParser {
-	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
+public class ActivityParser extends MatjiDataParser<Activity> {
+	protected Activity getMatjiData(JsonObject object) throws MatjiException {
 		Activity activity = new Activity();
 		activity.setId(getInt(object, "id"));
 		activity.setUserName(getString(object, "user_name"));

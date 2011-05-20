@@ -1,14 +1,11 @@
 package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
-import com.matji.sandwich.data.AttachFile;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
-public class StoreParser extends MatjiDataParser {
-	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
+public class StoreParser extends MatjiDataParser<Store> {
+	protected Store getMatjiData(JsonObject object) throws MatjiException {
 		Store store = new Store();
 		store.setId(getInt(object, "id"));
 		store.setName(getString(object, "name"));
@@ -26,8 +23,10 @@ public class StoreParser extends MatjiDataParser {
 		store.setImageCount(getInt(object, "image_count"));
 		store.setLikeCount(getInt(object, "like_count"));
 		store.setBookmarkCount(getInt(object, "bookmark_count"));
-		store.setFile((AttachFile) new AttachFileParser().getRawObject(getString(object, "file")));
-		store.setRegUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		store.setFile(new AttachFileParser().getRawObject(getString(object, "file")));
+		store.setRegUser(new UserParser().getRawObject(getObject(object, "user") + ""));
+		store.setTags(new TagParser().getRawObjects(getArray(object, "tags") + ""));
+		store.setStoreFoods(new StoreFoodParser().getRawObjects(getArray(object, "store_foods") + ""));
 		
 		return store;
 	}

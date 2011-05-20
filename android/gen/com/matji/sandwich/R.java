@@ -94,14 +94,14 @@ containing a value of this type.
         public static final int TestListView3=0x7f070009;
         public static final int image=0x7f07000e;
         public static final int layout_main=0x7f070005;
-        public static final int list=0x7f070031;
-        public static final int list_view_row_comment=0x7f070032;
-        public static final int list_view_row_created_at=0x7f070036;
-        public static final int list_view_row_from_where=0x7f070033;
-        public static final int list_view_row_id=0x7f070035;
-        public static final int list_view_row_post_id=0x7f070034;
-        public static final int list_view_row_updated_at=0x7f070037;
-        public static final int list_view_row_user_id=0x7f070038;
+        public static final int list=0x7f07002f;
+        public static final int list_view_row_comment=0x7f070030;
+        public static final int list_view_row_created_at=0x7f070034;
+        public static final int list_view_row_from_where=0x7f070031;
+        public static final int list_view_row_id=0x7f070033;
+        public static final int list_view_row_post_id=0x7f070032;
+        public static final int list_view_row_updated_at=0x7f070035;
+        public static final int list_view_row_user_id=0x7f070036;
         public static final int name=0x7f070010;
         public static final int ok=0x7f070003;
         public static final int ok2=0x7f070004;
@@ -120,28 +120,26 @@ containing a value of this type.
         public static final int relativelayout_loading=0x7f07000c;
         public static final int store_adapter_address=0x7f07001a;
         public static final int store_adapter_name=0x7f070019;
-        public static final int store_info_button_area=0x7f070021;
-        public static final int store_info_cover=0x7f070026;
-        public static final int store_info_detail_item_area=0x7f070027;
-        public static final int store_info_image_button=0x7f07002e;
-        public static final int store_info_layout=0x7f07001b;
-        public static final int store_info_like_store=0x7f07001e;
-        public static final int store_info_like_store_count=0x7f07001f;
-        public static final int store_info_like_store_image=0x7f07001d;
-        public static final int store_info_map_button=0x7f070023;
-        public static final int store_info_memo_button=0x7f07002d;
-        public static final int store_info_popular_menu=0x7f070028;
-        public static final int store_info_reg_user=0x7f07002a;
-        public static final int store_info_scrap_button=0x7f070022;
-        public static final int store_info_show_detail_info_button=0x7f07002b;
-        public static final int store_info_show_menu_info_button=0x7f07002c;
-        public static final int store_info_store_address=0x7f070020;
-        public static final int store_info_store_image=0x7f07001c;
-        public static final int store_info_tag=0x7f070029;
-        public static final int store_info_tag_button=0x7f07002f;
-        public static final int store_info_tel_button=0x7f070024;
-        public static final int store_info_url_button=0x7f070030;
-        public static final int store_info_web_button=0x7f070025;
+        public static final int store_main_button_area=0x7f070021;
+        public static final int store_main_cover=0x7f070026;
+        public static final int store_main_detail_item_area=0x7f070027;
+        public static final int store_main_image_button=0x7f07002c;
+        public static final int store_main_layout=0x7f07001b;
+        public static final int store_main_like_store=0x7f07001e;
+        public static final int store_main_like_store_count=0x7f07001f;
+        public static final int store_main_like_store_image=0x7f07001d;
+        public static final int store_main_map_button=0x7f070023;
+        public static final int store_main_memo_button=0x7f07002b;
+        public static final int store_main_reg_user=0x7f070028;
+        public static final int store_main_scrap_button=0x7f070022;
+        public static final int store_main_show_detail_info_button=0x7f070029;
+        public static final int store_main_show_menu_info_button=0x7f07002a;
+        public static final int store_main_store_address=0x7f070020;
+        public static final int store_main_store_image=0x7f07001c;
+        public static final int store_main_tag_button=0x7f07002d;
+        public static final int store_main_tel_button=0x7f070024;
+        public static final int store_main_url_button=0x7f07002e;
+        public static final int store_main_web_button=0x7f070025;
         public static final int textView1=0x7f07000b;
         public static final int textView2=0x7f07000a;
         public static final int thumnail=0x7f07000f;
@@ -157,7 +155,7 @@ containing a value of this type.
         public static final int post_adapter=0x7f030007;
         public static final int pull_to_refresh_header=0x7f030008;
         public static final int store_adapter=0x7f030009;
-        public static final int store_info=0x7f03000a;
+        public static final int store_main=0x7f03000a;
         public static final int test_list=0x7f03000b;
         public static final int test_list_view_row=0x7f03000c;
         public static final int testlistview=0x7f03000d;
@@ -195,33 +193,34 @@ containing a value of this type.
         public static final int pull_to_refresh_tap_label=0x7f050010;
         /**  StoreInfoActivity  
          */
-        public static final int store_info_like_store=0x7f050017;
+        public static final int store_main_like_store=0x7f050017;
     }
     public static final class style {
         public static final int DefaultFill=0x7f060001;
-        public static final int DefaultLinearFill=0x7f060003;
-        public static final int DefaultLinearWrap=0x7f060002;
-        public static final int DefaultRelativeFill=0x7f060005;
-        public static final int DefaultRelativeWrap=0x7f060004;
+        public static final int DefaultHeightFill=0x7f060003;
+        public static final int DefaultLinearFill=0x7f060005;
+        public static final int DefaultLinearWrap=0x7f060004;
+        public static final int DefaultRelativeFill=0x7f060007;
+        public static final int DefaultRelativeWrap=0x7f060006;
+        public static final int DefaultWidthFill=0x7f060002;
         public static final int DefaultWrap=0x7f060000;
         /**  Variation on the Light theme that turns off the title 
          */
-        public static final int Theme_IOSched=0x7f060013;
-        public static final int store_info_ButtonArea=0x7f06000b;
-        public static final int store_info_Cover=0x7f06000e;
-        public static final int store_info_DefaultButton=0x7f06000d;
-        public static final int store_info_DefaultText=0x7f060008;
-        public static final int store_info_DetailInfoButton=0x7f060011;
-        public static final int store_info_DetailItem=0x7f060010;
-        public static final int store_info_DetailItemArea=0x7f06000f;
-        public static final int store_info_LikeStoreImage=0x7f060007;
-        public static final int store_info_LikeStoreText=0x7f060009;
-        public static final int store_info_ScrapButton=0x7f06000c;
-        public static final int store_info_StoreAddress=0x7f06000a;
-        /**  store_info.xml 
+        public static final int Theme_IOSched=0x7f060014;
+        public static final int store_main_ButtonArea=0x7f06000d;
+        public static final int store_main_Cover=0x7f060010;
+        public static final int store_main_DefaultButton=0x7f06000f;
+        public static final int store_main_DefaultText=0x7f06000a;
+        public static final int store_main_DetailInfoButton=0x7f060013;
+        public static final int store_main_DetailItem=0x7f060012;
+        public static final int store_main_DetailItemArea=0x7f060011;
+        public static final int store_main_LikeStoreImage=0x7f060009;
+        public static final int store_main_LikeStoreText=0x7f06000b;
+        public static final int store_main_ScrapButton=0x7f06000e;
+        public static final int store_main_StoreAddress=0x7f06000c;
+        /**  store_main.xml 
          */
-        public static final int store_info_StoreImage=0x7f060006;
-        public static final int store_info_TestButton=0x7f060012;
+        public static final int store_main_StoreImage=0x7f060008;
     }
     public static final class styleable {
         /** Attributes that can be used with a com_deezapps_widget_HorizontalPager.

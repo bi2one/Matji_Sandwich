@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.StoreInfoActivity;
+import com.matji.sandwich.StoreMainActivity;
+import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
@@ -46,7 +47,7 @@ public class StoreListView extends RequestableMListView {
 
     public void onListItemClick(int position) {
 	Store store = (Store)(getAdapterData().get(position));
-	Intent intent = new Intent(getActivity(), StoreInfoActivity.class);
+	Intent intent = new Intent(getActivity(), StoreTabActivity.class);
 	intent.putExtra("store", store);
 	getActivity().startActivity(intent);
     }

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<RelativeLayout
+		android:id="@+id/store_main_layout"
+		style="@style/DefaultRelativeFill">
+		<ImageView
+			style="@style/store_main_StoreImage"
+			android:id="@+id/store_main_store_image"
+			android:src="@drawable/profile_default_img" />
+		<ImageView
+			style="@style/store_main_LikeStoreImage"
+			android:id="@+id/store_main_like_store_image"
+			android:layout_toRightOf="@id/store_main_store_image" />
+		<TextView
+			style="@style/store_main_LikeStoreText"
+			android:id="@+id/store_main_like_store"
+			android:layout_toRightOf="@id/store_main_like_store_image" />
+		<TextView
+			style="@style/store_main_DefaultText"
+			android:id="@+id/store_main_like_store_count"
+			android:layout_toRightOf="@id/store_main_like_store" />
+		<TextView
+			style="@style/store_main_StoreAddress"
+			android:id="@+id/store_main_store_address"
+			android:layout_toRightOf="@id/store_main_store_image"
+			android:layout_below="@id/store_main_like_store_image" />
+		<LinearLayout
+			style="@style/store_main_ButtonArea"
+			android:id="@+id/store_main_button_area"
+			android:layout_below="@id/store_main_store_image">
+			<Button
+				android:background="#fff"
+				android:text="스크랩"
+				android:textSize="16dp"
+				android:textStyle="bold"
+				style="@style/store_main_ScrapButton"
+				android:id="@+id/store_main_scrap_button" />
+			<Button
+				android:background="#fff"
+				android:text="지도"
+				android:textSize="13dp"
+				android:textStyle="bold"
+				style="@style/store_main_DefaultButton"
+				android:id="@+id/store_main_map_button" />
+			<Button
+				android:background="#fff"
+				android:text="전화"
+				android:textSize="13dp"
+				android:textStyle="bold"
+				style="@style/store_main_DefaultButton"
+				android:id="@+id/store_main_tel_button" />
+			<Button
+				android:background="#fff"
+				android:text="웹"
+				android:textSize="13dp"
+				android:textStyle="bold"
+				style="@style/store_main_DefaultButton"
+				android:id="@+id/store_main_web_button" />
+		</LinearLayout>
+		<LinearLayout
+			style="@style/DefaultFill"
+			android:layout_below="@+id/store_main_button_area"
+			android:orientation="vertical">
+			<TextView
+				style="@style/store_main_Cover"
+				android:id="@+id/store_main_cover" />
+			<LinearLayout
+				style="@style/store_main_DetailItemArea"
+				android:id="@+id/store_main_detail_item_area">
+				<ImageView
+					android:layout_width="7dp"
+					android:layout_height="7dp" />
+				<TextView
+					style="@style/store_main_DetailItem"
+					android:id="@+id/store_main_reg_user"
+					android:textColor="#aaa"
+					android:layout_marginTop="7dp" />
+			</LinearLayout>
+			<LinearLayout
+				style="@style/store_main_ButtonArea">
+				<Button
+					android:background="#fff"
+					android:text="맛집정보 보기"
+					style="@style/store_main_DetailInfoButton"
+					android:id="@+id/store_main_show_detail_info_button" />
+				<Button
+					android:background="#fff"
+					android:text="메뉴 보기"
+					style="@style/store_main_DetailInfoButton"
+					android:id="@+id/store_main_show_menu_info_button"
+					android:layout_marginLeft="7dp" />
+			</LinearLayout>
+			<RelativeLayout
+				style="@style/store_main_ButtonArea"
+				android:padding="0dp">
+				<Button
+					android:background="#fff"
+					style="@style/store_main_DetailInfoButton"
+					android:id="@+id/store_main_memo_button" />
+				<Button
+					android:background="#fff"
+					style="@style/store_main_DetailInfoButton"
+					android:id="@+id/store_main_image_button"
+					android:layout_toRightOf="@id/store_main_memo_button" />
+				<Button
+					android:background="#fff"
+					style="@style/store_main_DetailInfoButton"
+					android:id="@+id/store_main_tag_button"
+					android:layout_below="@id/store_main_memo_button" />
+				<Button
+					android:background="#fff"
+					style="@style/store_main_DetailInfoButton"
+					android:id="@+id/store_main_url_button"
+					android:layout_below="@id/store_main_image_button"
+					android:layout_toRightOf="@id/store_main_tag_button" />
+			</RelativeLayout>
+		</LinearLayout>
+	</RelativeLayout>
+</LinearLayout>
