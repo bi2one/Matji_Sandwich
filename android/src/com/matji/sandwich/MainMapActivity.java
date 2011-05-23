@@ -21,7 +21,7 @@ import com.google.android.maps.MapView;
 
 import com.matji.sandwich.location.GpsManager;
 
-public class MatjiMapActivity extends MapActivity{
+public class MainMapActivity extends MapActivity{
 	//private constant
 	private GpsManager gpsmanager;
 	private MapView map;
