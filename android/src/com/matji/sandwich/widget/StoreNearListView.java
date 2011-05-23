@@ -36,7 +36,7 @@ public class StoreNearListView extends RequestableMListView {
 	return storeRequest;
     }
     
-    public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
+    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 	super.requestCallBack(tag, data);
     }
 

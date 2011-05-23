@@ -3,7 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.StoreFoodParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.StoreFood;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class StoreFoodHttpRequest extends HttpRequest {
-	private MatjiDataParser<StoreFood> parser;
+	private MatjiDataParser parser;
 	private String action;
 	private String controller;
 	
@@ -48,7 +48,7 @@ public class StoreFoodHttpRequest extends HttpRequest {
 		getHashtable.put("store_id", store_id + "");
 	}
 
-	public ArrayList<StoreFood> request() throws MatjiException {
+	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)

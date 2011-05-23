@@ -3,7 +3,7 @@ package com.matji.sandwich.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Post extends MatjiData{
+public class Post extends MatjiData {
 	private int id;
 	private int user_id;
 	private int store_id;

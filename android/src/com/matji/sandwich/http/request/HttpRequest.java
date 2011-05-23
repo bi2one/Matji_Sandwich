@@ -37,7 +37,7 @@ public abstract class HttpRequest {
 	}
 	
 	
-    public abstract ArrayList<? extends MatjiData> request() throws MatjiException;
+    public abstract ArrayList<MatjiData> request() throws MatjiException;
         
     protected SimpleHttpResponse requestHttpResponseGet(String url, Map<String, String> header, Map<String, String> param)
     throws HttpConnectMatjiException {

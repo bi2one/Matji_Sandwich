@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
 import com.matji.sandwich.exception.JSONCodeMatjiException;
@@ -16,16 +17,16 @@ import java.util.ArrayList;
 
 import org.json.*;
 
-public abstract class MatjiDataParser<T> {
-	protected abstract T getMatjiData(JsonObject object) throws MatjiException;
+public abstract class MatjiDataParser {
+	protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
 	
-	public ArrayList<T> getMatjiDataList(JsonElement jsonElement) throws MatjiException{
+	public ArrayList<MatjiData> getMatjiDataList(JsonElement jsonElement) throws MatjiException{
 		if (!isArray(jsonElement)) {
 			throw new JSONMatjiException();
 		}
 
 		JsonArray jsonArray = jsonElement.getAsJsonArray();
-		ArrayList<T> matjiDataList = new ArrayList<T>();
+		ArrayList<MatjiData> matjiDataList = new ArrayList<MatjiData>();
 		for (int i = 0; i < jsonArray.size(); i++) {
 			matjiDataList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
 		}
@@ -49,7 +50,7 @@ public abstract class MatjiDataParser<T> {
 		}
 	}
 
-	protected T getRawObject(String data) throws MatjiException {
+	protected MatjiData getRawObject(String data) throws MatjiException {
 		JsonObject jsonObject = null;
 		JsonElement jsonElement = null;
 
@@ -71,7 +72,7 @@ public abstract class MatjiDataParser<T> {
 		return getMatjiData(jsonObject);
 	}
 
-	protected ArrayList<T> getRawObjects(String data) throws MatjiException {
+	protected ArrayList<MatjiData> getRawObjects(String data) throws MatjiException {
 		JsonElement jsonElement = null;
 
 		if (isNull(data)) return null;
@@ -87,13 +88,13 @@ public abstract class MatjiDataParser<T> {
 		return getMatjiDataList(jsonElement);
 	}
 
-	public ArrayList<T> parseToMatjiDataList(String data) throws MatjiException {
+	public ArrayList<MatjiData> parseToMatjiDataList(String data) throws MatjiException {
 		if (data == null) return null;
 		String validData = validateData(data);
 		return getRawObjects(validData);
 	}
 
-	public T parseToMatjiData(String data) throws MatjiException{
+	public MatjiData parseToMatjiData(String data) throws MatjiException{
 		if (data == null) return null;
 		String validData = validateData(data);
 		return getRawObject(validData);		

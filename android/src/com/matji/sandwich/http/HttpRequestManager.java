@@ -147,15 +147,15 @@ public class HttpRequestManager {
 	}
 
 	private class DataTagPair {
-		private ArrayList<? extends MatjiData> data;
+		private ArrayList<MatjiData> data;
 		private int tag;
 
-		public DataTagPair(ArrayList<? extends MatjiData> data, int tag) {
+		public DataTagPair(ArrayList<MatjiData> data, int tag) {
 			this.data = data;
 			this.tag = tag;
 		}
 
-		public ArrayList<? extends MatjiData> getData() {
+		public ArrayList<MatjiData> getData() {
 			return data;
 		}
 

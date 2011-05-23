@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Notice;
 import com.matji.sandwich.exception.MatjiException;
 
-public class NoticeParser extends MatjiDataParser<Notice> {
+public class NoticeParser extends MatjiDataParser {
 	protected Notice getMatjiData(JsonObject object) throws MatjiException {
 		Notice notice = new Notice();
 		notice.setStartDate(getString(object, "start_date"));

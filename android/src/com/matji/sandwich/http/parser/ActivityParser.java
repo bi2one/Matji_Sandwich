@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Activity;
 import com.matji.sandwich.exception.MatjiException;
 
-public class ActivityParser extends MatjiDataParser<Activity> {
+public class ActivityParser extends MatjiDataParser {
 	protected Activity getMatjiData(JsonObject object) throws MatjiException {
 		Activity activity = new Activity();
 		activity.setId(getInt(object, "id"));

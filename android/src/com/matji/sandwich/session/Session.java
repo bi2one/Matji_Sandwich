@@ -79,7 +79,7 @@ public class Session implements Requestable {
 	
 	
 	@Override
-	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (tag == LOGIN){
 				Me me = (Me)data.get(0);
 				token = me.getToken();

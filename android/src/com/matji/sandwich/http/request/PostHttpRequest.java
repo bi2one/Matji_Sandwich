@@ -3,7 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.PostParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class PostHttpRequest extends HttpRequest {
-    private MatjiDataParser<Post> parser;
+    private MatjiDataParser parser;
     private String action;
     private String controller;
     
@@ -66,15 +66,15 @@ public class PostHttpRequest extends HttpRequest {
     	postHashtable.put("post_id", post_id + "");
     }
     
-    public void actionList(int page, int limit){
+    public void actionList(int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;	
     	action = "list";
     	parser = new PostParser();
     	
     	getHashtable.clear();
     	getHashtable.put("page", "" + page);
-    	getHashtable.put("limit", "" + limit);
-    	getHashtable.put("include", "user,store");
+    	getHashtable.put("limit", "" + limit);    	
+		getHashtable.put("include", "user,store");
     }
     
     public void actionStoreList(int store_id, int page, int limit){
@@ -133,7 +133,7 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("limit", limit+"");
     }
     
-    public ArrayList<Post> request() throws MatjiException {
+    public ArrayList<MatjiData> request() throws MatjiException {
     	parser = new PostParser();
     	SimpleHttpResponse response = 
     		(httpMethod == HttpMethod.HTTP_POST) ? 
