@@ -16,7 +16,8 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 PullToRefreshListView.OnRefreshListener {
 	private ListRequestScrollListener scrollListener;
 	//	private LayoutInflater inflater;
-	private ArrayList<? extends MatjiData> adapterData;
+//	private ArrayList<? extends MatjiData> adapterData;
+	private ArrayList<MatjiData> adapterData;
 	private HttpRequestManager manager;
 	//    private View header;
 	private MBaseAdapter adapter;
@@ -103,8 +104,10 @@ PullToRefreshListView.OnRefreshListener {
 	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
 		if (data.size() == 0 || data.size() < limit)
 			scrollListener.requestSetOff();
-		
-		adapterData = getListByT(data);
+		for (int i = 0; i < data.size(); i++) {
+			adapterData.add((MatjiData)data.get(i));
+		}
+//		adapterData = getListByT(data);
 
 		((MBaseAdapter)adapter).notifyDataSetChanged();
 
@@ -114,12 +117,12 @@ PullToRefreshListView.OnRefreshListener {
 	
 	
 	// function for wild card data
-	private <T> ArrayList<T> getListByT(ArrayList<T> list) {
-		ArrayList<T> tList = new ArrayList<T>(list);
-		for (T tData : list)
-			tList.add(tData);
-		return tList;
-	}
+//	private <T> ArrayList<T> getListByT(ArrayList<T> list) {
+//		ArrayList<T> tList = new ArrayList<T>(list);
+//		for (T tData : list)
+//			tList.add(tData);
+//		return tList;
+//	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getContext());

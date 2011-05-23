@@ -37,6 +37,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	public HttpRequest request() {
 		((PostHttpRequest) request).actionList(getPage(), getLimit());
+		Log.d("Matji", "PostListView :: line 40");
 		return request;
 	}
 
@@ -62,9 +63,11 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		case R.id.post_adapter_nick:
 			Post post = (Post)getAdapterData().get(Integer.parseInt((String)v.getTag()));
 			Log.d("-----", "" +  post.getUser().getNick());
-			Intent intent = new Intent(getActivity(), UserTabActivity.class);
+//			Intent intent = new Intent(getActivity(), UserTabActivity.class);
+			Intent intent = new Intent(getActivity(), PostInfoActivity.class);
 			Log.d("Matji", "Post_User: " + post.getUser());
-			intent.putExtra("user", post.getUser());
+//			intent.putExtra("user", post.getUser());
+			intent.putExtra("post", post);
 			getActivity().startActivity(intent);
 			
 			

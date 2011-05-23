@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -31,6 +32,7 @@ public class StoreListView extends RequestableMListView {
     }
 
     public HttpRequest request() {
+    	Log.d("Matji", "StoreListView :: line 35");
 	storeRequest.actionList(getPage(), getLimit());
 	return storeRequest;
     }
