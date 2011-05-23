@@ -23,6 +23,7 @@ public class MainTabActivity extends TabActivity{
 		       .setIndicator("맛집")
 		       .setContent(new Intent(this, StoreSliderActivity.class)));
     
+
 	tabHost.addTab(tabHost.newTabSpec("tab1")
 
 		       .setIndicator("설정")
