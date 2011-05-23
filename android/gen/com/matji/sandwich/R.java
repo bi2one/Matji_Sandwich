@@ -88,6 +88,7 @@ containing a value of this type.
         public static final int testroind=0x7f020011;
     }
     public static final class id {
+        public static final int ImageViewTest=0x7f070043;
         public static final int ListView1=0x7f070040;
         public static final int ListView2=0x7f070041;
         public static final int ListView3=0x7f070042;
@@ -99,14 +100,14 @@ containing a value of this type.
         public static final int cancel=0x7f070008;
         public static final int image=0x7f070016;
         public static final int layout_main=0x7f07003a;
-        public static final int list=0x7f070043;
-        public static final int list_view_row_comment=0x7f070044;
-        public static final int list_view_row_created_at=0x7f070048;
-        public static final int list_view_row_from_where=0x7f070045;
-        public static final int list_view_row_id=0x7f070047;
-        public static final int list_view_row_post_id=0x7f070046;
-        public static final int list_view_row_updated_at=0x7f070049;
-        public static final int list_view_row_user_id=0x7f07004a;
+        public static final int list=0x7f070044;
+        public static final int list_view_row_comment=0x7f070045;
+        public static final int list_view_row_created_at=0x7f070049;
+        public static final int list_view_row_from_where=0x7f070046;
+        public static final int list_view_row_id=0x7f070048;
+        public static final int list_view_row_post_id=0x7f070047;
+        public static final int list_view_row_updated_at=0x7f07004a;
+        public static final int list_view_row_user_id=0x7f07004b;
         public static final int main_map_bookmark_button=0x7f07000d;
         public static final int main_map_gps_button=0x7f070013;
         public static final int main_map_post_button=0x7f070010;

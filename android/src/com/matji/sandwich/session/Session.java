@@ -5,11 +5,12 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.matji.sandwich.*;
-import com.matji.sandwich.data.*;
+import com.matji.sandwich.data.User;
+import com.matji.sandwich.data.Me;
 import com.matji.sandwich.data.provider.PreferenceProvider;
-import com.matji.sandwich.exception.*;
-import com.matji.sandwich.http.*;
-import com.matji.sandwich.http.request.*;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.MeHttpRequest;
 
 public class Session<T> implements Requestable<T> {
 	private volatile static Session session = null;
