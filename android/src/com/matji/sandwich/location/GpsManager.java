@@ -23,8 +23,8 @@ import com.matji.sandwich.exception.UseNetworkGpsMatjiException;
 import com.matji.sandwich.exception.GpsServiceNotPossibleMatjiException;
 
 public class GpsManager implements LocationListener {
-    private final static long NET_PROVIDER_MIN_NOTIFICATION_INTERVAL = 1000 * 5; /* 1000 * 60 * 5; */
-    private final static long GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL = 1000;      /* 1000 * 5; */
+    private final static long NET_PROVIDER_MIN_NOTIFICATION_INTERVAL = 100; /* 1000 * 60 * 5; */
+    private final static long GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL = 50;      /* 1000 * 5; */
     
     private Context context;
     private MatjiLocationListener matjiListener;

@@ -35,6 +35,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		switch(v.getId()) {
 		case R.id.ok:
 			session.login(this, usernameField.getText().toString(), passwordField.getText().toString());
+			setResult(RESULT_OK);
 			break;
 		case R.id.cancel:
 			finish();
