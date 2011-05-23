@@ -53,4 +53,9 @@
   <string name="store_main_like_store">
 	    내가 좋아하는 맛집
   </string>
+
+  <!-- StoreSwipeActivity -->
+  <string name="all_store">전체 맛집</string>
+  <string name="near_store">주변 맛집</string>
+  <string name="all_memo">전체 메모</string>
 </resources>
