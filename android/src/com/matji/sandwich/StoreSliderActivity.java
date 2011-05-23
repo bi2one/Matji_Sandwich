@@ -63,7 +63,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
     public void onScroll(int scrollX) { }
 
     public void onViewScrollFinished(int currentPage) {
-	// Log.d("CURRENT", currentPage + "");
+	//Log.d("Matji", currentPage + "");
 	control.setCurrentPage(currentPage);
     }
 }

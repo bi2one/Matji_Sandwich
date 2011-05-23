@@ -1,18 +1,18 @@
 package com.matji.sandwich.session;
 
 import java.util.*;
+
 import android.app.Activity;
 import android.content.Context;
 
 import com.matji.sandwich.*;
-import com.matji.sandwich.data.User;
-import com.matji.sandwich.data.Me;
+import com.matji.sandwich.data.*;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.MeHttpRequest;
 
-public class Session<T> implements Requestable<T> {
+public class Session implements Requestable {
 	private volatile static Session session = null;
 	private static final int LOGIN = 0;
 	private static final int LOGOUT = 1;
@@ -80,7 +80,7 @@ public class Session<T> implements Requestable<T> {
 	
 	
 	@Override
-	public void requestCallBack(int tag, ArrayList<T> data) {
+	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
 		if (tag == LOGIN){
 				Me me = (Me)data.get(0);
 				token = me.getToken();
@@ -96,5 +96,5 @@ public class Session<T> implements Requestable<T> {
 		}
 		
 	}
-	
+
 }
