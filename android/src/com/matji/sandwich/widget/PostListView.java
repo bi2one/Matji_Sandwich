@@ -51,19 +51,14 @@ public class PostListView extends RequestableMListView<Post> implements View.OnC
 	}
 
 	
-	
-	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.post_adapter_nick:
 			Post post = (Post)getAdapterData().get(Integer.parseInt((String)v.getTag()));
-			Log.d("-----", "" +  post.getUser().getNick());
 			Intent intent = new Intent(getActivity(), PostInfoActivity.class);
 			intent.putExtra("post", post);
 			getActivity().startActivity(intent);
-			
-			
 			break;
 		case R.id.post_adapter_store_name:
 			Log.d("asdkasldkljad","2");
