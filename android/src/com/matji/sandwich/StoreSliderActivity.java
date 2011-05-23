@@ -28,27 +28,26 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
     private ImageView image;
     private Context mContext;
     private MatjiImageDownloader downloader;
-    
+
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.store_slider);
-	
 	mContext = getApplicationContext();
 	pagerControlStringRef = new int[] { R.string.all_store,
 					    R.string.near_store,
 					    R.string.all_memo,
 					    R.string.all_memo };
 	downloader = new MatjiImageDownloader();
-	
+
 	control = (PagerControl)findViewById(R.id.PagerControl);
 	swipeView = (SwipeView)findViewById(R.id.SwipeView);
 	view1 = (StoreListView)findViewById(R.id.ListView1);
 	view2 = (StoreNearListView)findViewById(R.id.ListView2);
 	view3 = (PostListView)findViewById(R.id.ListView3);
 	image = (ImageView)findViewById(R.id.ImageViewTest);
-	
-	downloader.downloadAttachFileImage(115, image);
-	
+
+	downloader.downloadUserImage(0, image);
+
 	view1.start(this);
 	view2.start(this);
 	view3.start(this);

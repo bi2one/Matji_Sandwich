@@ -36,6 +36,12 @@ public class UserHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
     }
+    
+    public void actionShow(int user_id, boolean requestPosts, boolean requestStores) {
+    	actionShow(user_id);
+    	if (requestPosts) getHashtable.put("include", "posts"); 
+    	if (requestStores) getHashtable.put("include", "stores"); 
+    }
 
     public void actionMe() {
     	

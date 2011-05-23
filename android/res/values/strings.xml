@@ -4,11 +4,11 @@
 
   <!-- map api key -->
   <!-- bizone: 0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw -->
+  <!-- mozziluv: 0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A -->
   <!-- release 0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg -->
 
   <!-- release!!!! -->
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
-
   <!-- development!!!! -->
   <string name="map_api_key">0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw</string>
 
@@ -62,6 +62,9 @@
   <string name="default_string_alarm">알람</string>
   <string name="default_string_search">검색</string>
   
+  
+  <!-- API Keys -->
+  <string name="api_key">0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A</string> <!-- mozziluv's API key -->
   
   <!-- StoreInfoActivity  -->
   <string name="store_main_like_store">

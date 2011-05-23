@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.*;
 
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -12,7 +13,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class LViewActivity<T> extends ListActivity implements Requestable<T> {
+public class LViewActivity extends ListActivity implements Requestable {
 	HttpRequestManager manager;
 
 	public void onCreate(Bundle savedInstanceState){
@@ -31,7 +32,7 @@ public class LViewActivity<T> extends ListActivity implements Requestable<T> {
 //		manager.request(request, 1);
 	}
 	
-	public void requestCallBack(int tag, ArrayList<T> data) {
+	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
 		String myData= "";
 		ArrayList<String> mArray = new ArrayList<String>();
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.testlistview, mArray));
@@ -47,5 +48,4 @@ public class LViewActivity<T> extends ListActivity implements Requestable<T> {
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.showToastMsg(getApplicationContext());
 	}
-
 }

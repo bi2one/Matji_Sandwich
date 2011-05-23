@@ -27,5 +27,10 @@ public class MainTabActivity extends TabActivity{
 	tabHost.addTab(tabHost.newTabSpec("tab1")
 		       .setIndicator(getString(R.string.default_string_alarm))
 		       .setContent(new Intent(this, AlarmActivity.class)));
+
+//	tabHost.addTab(tabHost.newTabSpec("tab1")
+//		       .setIndicator("마이페이지")
+//		       .setContent(new Intent(this, UserTabActivity.class)));
+
     }
 }

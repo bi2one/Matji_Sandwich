@@ -1,7 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.util.Log;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
@@ -31,8 +29,6 @@ public abstract class MatjiDataParser<T> {
 		for (int i = 0; i < jsonArray.size(); i++) {
 			matjiDataList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
 		}
-
-		Log.d("Matji", "MatjiDataParser::getRawObjects : Parse success");	
 		
 		return matjiDataList;
 	}
@@ -71,8 +67,6 @@ public abstract class MatjiDataParser<T> {
 		}
 
 		jsonObject = jsonElement.getAsJsonObject();
-
-		Log.d("Matji", "MatjiDataParser::getRawObject : Parse success");	
 
 		return getMatjiData(jsonObject);
 	}

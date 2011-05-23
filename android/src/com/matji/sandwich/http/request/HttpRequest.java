@@ -2,6 +2,7 @@ package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.HttpConnectMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -36,7 +37,7 @@ public abstract class HttpRequest {
 	}
 	
 	
-    public abstract ArrayList<?> request() throws MatjiException;
+    public abstract ArrayList<? extends MatjiData> request() throws MatjiException;
         
     protected SimpleHttpResponse requestHttpResponseGet(String url, Map<String, String> header, Map<String, String> param)
     throws HttpConnectMatjiException {
