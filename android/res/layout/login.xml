@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:padding="30dp">
+	<EditText android:id="@+id/username" 
+		android:layout_alignParentTop="true"
+		android:hint="username" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:singleLine="true" 
+		android:lines="1" /> 
+	<EditText android:id="@+id/password"  
+		android:layout_below="@id/username"
+		android:hint="password" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:singleLine="true" 
+		android:password="true"
+		android:lines="1" />
+	<LinearLayout style="@style/DefaultFill" 
+		android:layout_below="@id/password" 
+		android:orientation="horizontal" >
+		<Button android:id="@+id/ok" 
+			style="@style/DefaultWrap" 
+			android:layout_weight="1"
+			android:text="로그인" />
+		<Button android:id="@+id/cancel" 
+			style="@style/DefaultWrap" 
+			android:layout_below="@id/password" 
+			android:layout_weight="1"
+			android:text="취소" />
+	</LinearLayout>		
+</RelativeLayout>
