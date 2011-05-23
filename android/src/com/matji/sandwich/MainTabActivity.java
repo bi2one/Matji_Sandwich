@@ -22,10 +22,7 @@ public class MainTabActivity extends TabActivity{
     
 	tabHost.addTab(tabHost.newTabSpec("tab2")
 		       .setIndicator(getString(R.string.default_string_store))
-		       .setContent(new Intent(this, StoreSliderActivity.class)));    
-	tabHost.addTab(tabHost.newTabSpec("tab3")
-		       .setIndicator("마이페이지")
-		       .setContent(new Intent(this, UserTabActivity.class)));
+		       .setContent(new Intent(this, StoreSliderActivity.class)));
 
 	tabHost.addTab(tabHost.newTabSpec("tab4")
 		       .setIndicator("설정")
