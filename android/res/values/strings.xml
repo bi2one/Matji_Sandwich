@@ -49,6 +49,9 @@
   <string name="default_string_memo">메모</string>
   <string name="default_string_image">이미지</string>
   
+  <!-- API Keys -->
+  <string name="api_key">0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A</string> <!-- mozziluv's API key -->
+  
   <!-- StoreInfoActivity  -->
   <string name="store_main_like_store">
 	    내가 좋아하는 맛집

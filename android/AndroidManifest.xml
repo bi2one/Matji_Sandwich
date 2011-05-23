@@ -23,8 +23,8 @@
 	android:name="AlarmActivity"></activity>
     <activity
 	android:name="StoreSliderActivity"></activity>
-    <!-- <activity -->
-    <!-- 	android:name="StoreListActivity"></activity> -->
+    <activity
+    	android:name="StoreListActivity"></activity>
     <activity
 	android:name="StoreNearListActivity"></activity>
     <activity

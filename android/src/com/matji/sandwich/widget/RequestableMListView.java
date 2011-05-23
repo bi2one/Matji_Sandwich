@@ -1,138 +1,135 @@
 package com.matji.sandwich.widget;
 
 import android.app.Activity;
-//import android.view.ViewGroup;
-//import android.view.View;
-//import android.view.GestureDetector;
-//import android.view.MotionEvent;
-//import android.view.LayoutInflater;
 import android.content.Context;
-//import android.util.Log;
 import android.util.AttributeSet;
 
-//import com.matji.sandwich.R;
-//import com.matji.sandwich.Requestable;
-//import com.matji.sandwich.data.Store;
-//import com.matji.sandwich.adapter.StoreAdapter;
-//import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.adapter.MBaseAdapter;
 
 import java.util.ArrayList;
 
-public abstract class RequestableMListView<T> extends PullToRefreshListView implements ListScrollRequestable<T>,
-										    PullToRefreshListView.OnRefreshListener {
-    private ListRequestScrollListener scrollListener;
-//	private LayoutInflater inflater;
-    private ArrayList<T> adapterData;
-    private HttpRequestManager manager;
-//    private View header;
-    private MBaseAdapter adapter;
-    private int page = 1;
-    private int limit = 10;
-    
-    protected final int REQUEST_NEXT = 0;
-    protected final int REQUEST_RELOAD = 1;
-    
-    public abstract HttpRequest request();
-    
-    public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
-	super(context, attrs);
-	this.adapter = adapter;
-	manager = new HttpRequestManager(context, this);
-//	inflater = LayoutInflater.from(context);
-	
-	adapterData = new ArrayList<T>();
-	adapter.setData(adapterData);
-	setAdapter(adapter);
+public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
+PullToRefreshListView.OnRefreshListener {
+	private ListRequestScrollListener scrollListener;
+	//	private LayoutInflater inflater;
+	private ArrayList<? extends MatjiData> adapterData;
+	private HttpRequestManager manager;
+	//    private View header;
+	private MBaseAdapter adapter;
+	private int page = 1;
+	private int limit = 10;
 
-	scrollListener = new ListRequestScrollListener(this, this, manager);
-	setPullDownScrollListener(scrollListener);
+	protected final int REQUEST_NEXT = 0;
+	protected final int REQUEST_RELOAD = 1;
 
-	setOnRefreshListener(this);
+	public abstract HttpRequest request();
 
-	this.limit = limit;
-    }
+	public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
+		super(context, attrs);
+		this.adapter = adapter;
+		manager = new HttpRequestManager(context, this);
+		//	inflater = LayoutInflater.from(context);
 
-    protected void setPage(int page) {
-	this.page = page;
-    }
+		adapterData = new ArrayList<MatjiData>();
+		adapter.setData(adapterData);
+		setAdapter(adapter);
 
-    protected void setLimit(int limit) {
-	this.limit = limit;
-    }
+		scrollListener = new ListRequestScrollListener(this, this, manager);
+		setPullDownScrollListener(scrollListener);
 
-    protected int getPage() {
-	return page;
-    }
+		setOnRefreshListener(this);
 
-    protected int getLimit() {
-	return limit;
-    }
-    
-    public void initValue() {
-	adapterData.clear();
-	page = 1;
-    }
-
-    public void nextValue() {
-	page++;
-    }
-
-    public void requestNext() {
-	manager.request(getActivity(), request(), REQUEST_NEXT);
-	nextValue();
-    }
-
-    public void requestReload() {
-	initValue();
-	manager.request(getActivity(), request(), REQUEST_RELOAD);
-	nextValue();
-    }
-
-
-    public int getVerticalScrollOffset() {
-	return computeVerticalScrollOffset();
-    }
-
-    protected HttpRequestManager getHttpRequestManager() {
-	return manager;
-    }
-
-    protected ArrayList<T> getAdapterData() {
-	return adapterData;
-    }
-
-    public void start(Activity activity) {
-	super.start(activity);
-	requestNext();
-    }
-
-    public void requestCallBack(int tag, ArrayList<T> data) {
-	if (data.size() == 0 || data.size() < limit)
-	    scrollListener.requestSetOff();
-	    
-	for (T d : data) {
-	    adapterData.add(d);
+		this.limit = limit;
 	}
 
-	((MBaseAdapter)adapter).notifyDataSetChanged();
+	protected void setPage(int page) {
+		this.page = page;
+	}
 
-	if (adapterData.size() <= limit)
-	    onRefreshComplete();
-    }
+	protected void setLimit(int limit) {
+		this.limit = limit;
+	}
 
-    public void requestExceptionCallBack(int tag, MatjiException e) {
-	e.performExceptionHandling(getContext());
-    }
+	protected int getPage() {
+		return page;
+	}
 
-    public void onRefresh() {
-	requestReload();
-    
-    // protected MatjiData getData(int position) {
-    // 	return adapterData.get(position);
-    // }
-    }
+	protected int getLimit() {
+		return limit;
+	}
+
+	public void initValue() {
+		adapterData.clear();
+		page = 1;
+	}
+
+	public void nextValue() {
+		page++;
+	}
+
+	public void requestNext() {
+		manager.request(getActivity(), request(), REQUEST_NEXT);
+		nextValue();
+	}
+
+	public void requestReload() {
+		initValue();
+		manager.request(getActivity(), request(), REQUEST_RELOAD);
+		nextValue();
+	}
+
+
+	public int getVerticalScrollOffset() {
+		return computeVerticalScrollOffset();
+	}
+
+	protected HttpRequestManager getHttpRequestManager() {
+		return manager;
+	}
+
+	protected ArrayList<? extends MatjiData> getAdapterData() {
+		return adapterData;
+	}
+
+	public void start(Activity activity) {
+		super.start(activity);
+		requestNext();
+	}
+
+	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
+		if (data.size() == 0 || data.size() < limit)
+			scrollListener.requestSetOff();
+		
+		adapterData = getListByT(data);
+
+		((MBaseAdapter)adapter).notifyDataSetChanged();
+
+		if (adapterData.size() <= limit)
+			onRefreshComplete();
+	}
+	
+	
+	// function for wild card data
+	private <T> ArrayList<T> getListByT(ArrayList<T> list) {
+		ArrayList<T> tList = new ArrayList<T>(list);
+		for (T tData : list)
+			tList.add(tData);
+		return tList;
+	}
+
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.performExceptionHandling(getContext());
+	}
+
+	public void onRefresh() {
+		requestReload();
+
+		//		 protected MatjiData getData(int position) {
+		//		 	return adapterData.get(position);
+		//		 }
+	}
 }

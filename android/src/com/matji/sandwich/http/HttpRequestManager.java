@@ -9,6 +9,7 @@ import com.matji.sandwich.Requestable;
 import com.matji.sandwich.widget.Spinner;
 import com.matji.sandwich.widget.NormalSpinner;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
@@ -146,15 +147,15 @@ public class HttpRequestManager {
 	}
 
 	private class DataTagPair {
-		private ArrayList<?> data;
+		private ArrayList<? extends MatjiData> data;
 		private int tag;
 
-		public DataTagPair(ArrayList<?> data, int tag) {
+		public DataTagPair(ArrayList<? extends MatjiData> data, int tag) {
 			this.data = data;
 			this.tag = tag;
 		}
 
-		public ArrayList<?> getData() {
+		public ArrayList<? extends MatjiData> getData() {
 			return data;
 		}
 

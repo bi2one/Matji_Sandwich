@@ -1,58 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:layout_height="match_parent">
+
+	<com.google.android.maps.MapView
+		style="@style/DefaultFill"
+		android:id="@+id/main_map_map"
+		android:apiKey="0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A"
+		android:clickable="true" />
 	<!-- bookmark ranking store post register gps -->
-	<RelativeLayout
-		style="@style/DefaultWrap">
-		<RelativeLayout
-			style="@style/DefaultWrap"
-			android:id="@+id/main_map_search_area">
-			<EditText
-				android:hint="검색"
-				style="@style/main_map_SearchBar"
-				android:id="@+id/main_map_search_bar" />
-<!-- 			<Button -->
-<!-- 				style="@style/main_map_Button" -->
-<!-- 				android:text="Search" -->
-<!-- 				android:id="@+id/main_map_serach_button" -->
-<!-- 				android:layout_toRightOf="@id/main_map_search_bar"/> -->
-		</RelativeLayout>
-		<LinearLayout
-			style="@style/main_map_TopButtonArea"
-			android:id="@+id/main_map_top_button_area">
-			<Button
-				android:text="bookmark"
-				style="@style/main_map_Button"
-				android:id="@+id/main_map_bookmark_button" />
-			<Button
-				android:text="ranking"
-				style="@style/main_map_Button"
-				android:id="@+id/main_map_ranking_button" />
-			<Button
-				android:text="store"
-				style="@style/main_map_Button"
-				android:id="@+id/main_map_store_button" />
-			<Button
-				android:text="post"
-				style="@style/main_map_Button"
-				android:id="@+id/main_map_post_button" />
-		</LinearLayout>
-	</RelativeLayout>
-	<RelativeLayout
-		style="@style/DefaultWrap"
-		android:id="@+id/main_map_register_gps_area">
-		<Button
-			android:text="register"
-			style="@style/main_map_Button"
-			android:id="@+id/main_map_register_button"
-			android:layout_alignParentLeft="true" />
-		<Button
-			android:text="gps"
-			style="@style/main_map_Button"
-			android:id="@+id/main_map_gps_button"
-			android:layout_alignParentRight="true" />
-	</RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

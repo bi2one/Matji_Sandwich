@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.StoreTabActivity;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
 import com.matji.sandwich.http.request.StoreHttpRequest;
@@ -15,7 +16,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
 
-public class StoreListView extends RequestableMListView<Store> {
+public class StoreListView extends RequestableMListView {
     private StoreHttpRequest storeRequest;
     
     public StoreListView(Context context, AttributeSet attrs) {
@@ -34,7 +35,7 @@ public class StoreListView extends RequestableMListView<Store> {
 	return storeRequest;
     }
 
-    public void requestCallBack(int tag, ArrayList<Store> data) {
+    public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
 	super.requestCallBack(tag, data);
     }
     
@@ -43,7 +44,7 @@ public class StoreListView extends RequestableMListView<Store> {
     }
 
     public void onListItemClick(int position) {
-	Store store = (Store)(getAdapterData().get(position));
+	Store store = (Store) getAdapterData().get(position);
 	Intent intent = new Intent(getActivity(), StoreTabActivity.class);
 	intent.putExtra("store", store);
 	getActivity().startActivity(intent);

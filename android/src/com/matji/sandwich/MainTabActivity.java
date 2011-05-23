@@ -1,7 +1,5 @@
 package com.matji.sandwich;
 
-import com.matji.sandwich.MatjiMapActivity.MainMapActivity;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +24,7 @@ public class MainTabActivity extends TabActivity{
 		       .setContent(new Intent(this, StoreSliderActivity.class)));
     
 	tabHost.addTab(tabHost.newTabSpec("tab1")
-		       .setIndicator("알람")
-		       .setContent(new Intent(this, AlarmActivity.class)));
+		       .setIndicator("마이페이지")
+		       .setContent(new Intent(this, UserTabActivity.class)));
     }
 }
