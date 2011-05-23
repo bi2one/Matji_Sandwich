@@ -8,23 +8,24 @@ import android.widget.*;
 import android.widget.TabHost.OnTabChangeListener;
 
 public class MainTabActivity extends TabActivity{
-	TabHost tabHost;
+    TabHost tabHost;
 	
-	public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
+	setContentView(R.layout.main_tab);
 	
 	tabHost = getTabHost();
 
-    tabHost.addTab(tabHost.newTabSpec("tab3")
-			.setIndicator("지도")
-			.setContent(new Intent(this, MatjiMapActivity.class)));
+	tabHost.addTab(tabHost.newTabSpec("tab3")
+		       .setIndicator(getString(R.string.default_string_map))
+		       .setContent(new Intent(this, MainMapActivity.class)));
     
 	tabHost.addTab(tabHost.newTabSpec("tab2")
-    		.setIndicator("맛집")
-    		.setContent(new Intent(this, FlipperTestActivity.class)));
-    
-    tabHost.addTab(tabHost.newTabSpec("tab1")
-			.setIndicator("알람")
-			.setContent(new Intent(this, AlarmActivity.class)));
-	}
+		       .setIndicator(getString(R.string.default_string_store))
+		       .setContent(new Intent(this, StoreSliderActivity.class)));
+
+	tabHost.addTab(tabHost.newTabSpec("tab1")
+		       .setIndicator("설정")
+		       .setContent(new Intent(this, SettingActivity.class)));
+    }
 }

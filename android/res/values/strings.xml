@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
   <string name="app_name">Matji_Sandwich</string>
+
+  <!-- map api key -->
+  <!-- bizone: 0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw -->
+  <!-- mozziluv: 0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A -->
+  <!-- release 0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg -->
+
+  <!-- release!!!! -->
+  <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
+  <!-- development!!!! -->
+  <string name="map_api_key">0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw</string>
 
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -48,9 +57,22 @@
   <string name="default_string_url">URL</string>
   <string name="default_string_memo">메모</string>
   <string name="default_string_image">이미지</string>
+  <string name="default_string_map">지도</string>
+  <string name="default_string_store">맛집</string>
+  <string name="default_string_alarm">알람</string>
+  <string name="default_string_search">검색</string>
+  
+  
+  <!-- API Keys -->
+  <string name="api_key">0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A</string> <!-- mozziluv's API key -->
   
   <!-- StoreInfoActivity  -->
   <string name="store_main_like_store">
 	    내가 좋아하는 맛집
   </string>
+
+  <!-- StoreSwipeActivity -->
+  <string name="all_store">전체 맛집</string>
+  <string name="near_store">주변 맛집</string>
+  <string name="all_memo">전체 메모</string>
 </resources>

@@ -1,69 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.matji.sandwich"
-	android:versionCode="1"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.matji.sandwich" android:versionCode="1"
 	android:versionName="1.0">
-	<application
-		android:label="@string/app_name"
-		android:icon="@drawable/icon">
-		<uses-library
-			android:name="com.google.android.maps" />
-		<activity
-			android:name="MainTabActivity"
-			android:label="@string/app_name">
+	<application android:label="@string/app_name" android:icon="@drawable/icon">
+		<uses-library android:name="com.google.android.maps" />
+		<activity android:name="MainTabActivity" android:label="@string/app_name">
 			<intent-filter>
-				<action
-					android:name="android.intent.action.MAIN" />
-				<category
-					android:name="android.intent.category.LAUNCHER" />
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity
-			android:name="AlarmActivity"></activity>
-		<activity
-			android:name="FlipperTestActivity"></activity>
-		<activity
-			android:name="StoreListActivity"></activity>
-		<activity
-			android:name="StoreNearListActivity"></activity>
-		<activity
-			android:name="PostListActivity"></activity>
-		<activity
-			android:name="StoreTabActivity"
+		<activity android:name="AlarmActivity"></activity>
+		<activity android:name="LoginActivity"></activity>
+		<activity android:name="MainMapActivity"></activity>
+		<activity android:name="PostInfoActivity"></activity>
+		<activity android:name="PostListActivity"></activity>
+		<activity android:name="SettingActivity"></activity>
+		<activity android:name="StoreMainActivity"></activity>
+		<activity android:name="StoreMoreActivity"></activity>
+		<activity android:name="StoreNearListActivity"></activity>
+		<activity android:name="StoreSliderActivity"></activity>
+		<activity android:name="StoreTabActivity"
 			android:screenOrientation="portrait"></activity>
-		<activity
-			android:name="StoreMainActivity"></activity>
-		<activity
-			android:name="StoreMoreActivity"></activity>
-		<activity
-			android:name="PostInfoActivity"></activity>
-		<activity
-			android:name="MatjiMapActivity"></activity>
 	</application>
 
-	<uses-sdk
-		android:minSdkVersion="7" />
-	<uses-permission
-		android:name="android.permission.INTERNET" />
-	<uses-permission
-		android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission
-		android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission
-		android:name="android.permission.CAMERA" />
-	<uses-permission
-		android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission
-		android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission
-		android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-	<uses-permission
-		android:name="android.permission.CONTROL_LOCATION_UPDATES" />
-	<uses-permission
-		android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-	<uses-permission
-		android:name="android.permission.ACCESS_MOCK_LOCATION" />
-	<uses-permission
-		android:name="android.permission.CALL_PHONE" />
+	<uses-sdk android:minSdkVersion="7" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<uses-permission android:name="android.permission.CONTROL_LOCATION_UPDATES" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+	<uses-permission android:name="android.permission.CALL_PHONE" />
 </manifest> 

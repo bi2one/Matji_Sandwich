@@ -3,7 +3,9 @@ package com.matji.sandwich.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
 import com.matji.sandwich.http.request.StoreHttpRequest;
@@ -12,7 +14,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
 
-public class StoreNearListView extends RequestableMListView<Store> {
+public class StoreNearListView extends RequestableMListView {
     private StoreHttpRequest storeRequest;
     private double lat_sw=37.3;
     private double lat_ne=126.804;
@@ -30,10 +32,11 @@ public class StoreNearListView extends RequestableMListView<Store> {
 
     public HttpRequest request() {
 	storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, getPage(), getLimit());
+	Log.d("Matji", "StoreNearListView :: line 34");
 	return storeRequest;
     }
     
-    public void requestCallBack(int tag, ArrayList<Store> data) {
+    public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
 	super.requestCallBack(tag, data);
     }
 

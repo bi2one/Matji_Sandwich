@@ -9,15 +9,15 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.widget.RequestableMListView;
 
 public class ListRequestScrollListener implements AbsListView.OnScrollListener, OnTouchListener {
-    private ListScrollRequestable<?> requestable;
+    private ListScrollRequestable requestable;
     private HttpRequestManager manager;
-    private RequestableMListView<?> listView;
+    private RequestableMListView listView;
     private boolean isSet;
     private float downY;
     private boolean refreshable;
     private static final int REFRESH_VIEW_MAX_HEIGHT = 100;
 
-    public ListRequestScrollListener(ListScrollRequestable<?> requestable, RequestableMListView<?> listView, HttpRequestManager manager) {
+    public ListRequestScrollListener(ListScrollRequestable requestable, RequestableMListView listView, HttpRequestManager manager) {
 	this.requestable = requestable;
 	this.listView = listView;
 	this.manager = manager;

@@ -124,14 +124,4 @@
   <style name="store_main_StoreMainFooter" parent="store_main_ButtonArea">
   	<item name="android:layout_weight">1</item>
   </style>
-  
-  <!-- main_map.xml -->
-  <style name="main_map_Button" parent="DefaultWrap">
-  	<item name="android:layout_gravity">left</item>
-  </style>
-  <!-- Variation on the Light theme that turns off the title -->
-  <style name="Theme.IOSched" parent="android:style/Theme.Light">
-    <!-- <item name="android:windowNoTitle">true</item> -->
-    <item name="android:windowContentOverlay">@null</item>
-  </style>  
 </resources>
