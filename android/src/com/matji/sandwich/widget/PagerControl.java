@@ -42,9 +42,6 @@ public class PagerControl extends RelativeLayout {
 	prevText = (TextView)activity.findViewById(R.id.PagerControlPrevText);
 	nextText = (TextView)activity.findViewById(R.id.PagerControlNextText);
 	progressText = (TextView)activity.findViewById(R.id.PagerControlProgress);
-	// prevText.setText("test!!!");
-	// nextText.setText("tesssss");
-	// progressText.setText("1");
 	setCurrentPage(0);
     }
 

@@ -41,10 +41,15 @@
 	android:id="@+id/ListView2" 
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent" />
-	<com.matji.sandwich.widget.PostListView
+    <com.matji.sandwich.widget.PostListView
 	android:id="@+id/ListView3"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent" />
+    <ImageView
+	android:id="@+id/ImageViewTest"
+	android:layout_width="50dp"
+	android:background="#000"
+	android:layout_height="50dp" />
   </com.matji.sandwich.widget.SwipeView>
 
 </LinearLayout>
