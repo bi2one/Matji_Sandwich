@@ -24,7 +24,7 @@ public class MainTabActivity extends TabActivity{
     		.setContent(new Intent(this, FlipperTestActivity.class)));
     
     tabHost.addTab(tabHost.newTabSpec("tab1")
-			.setIndicator("알람")
-			.setContent(new Intent(this, AlarmActivity.class)));
+			.setIndicator("설정")
+			.setContent(new Intent(this, SettingActivity.class)));
 	}
 }

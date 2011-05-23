@@ -22,6 +22,8 @@
 		<activity
 			android:name="AlarmActivity"></activity>
 		<activity
+			android:name="LoginActivity"></activity>
+		<activity
 			android:name="FlipperTestActivity"></activity>
 		<activity
 			android:name="StoreListActivity"></activity>
@@ -40,6 +42,9 @@
 			android:name="PostInfoActivity"></activity>
 		<activity
 			android:name="MatjiMapActivity"></activity>
+		<activity
+			android:name="SettingActivity"></activity>
+
 	</application>
 
 	<uses-sdk
