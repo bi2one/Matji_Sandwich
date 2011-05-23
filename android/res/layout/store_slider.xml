@@ -28,6 +28,7 @@
 			android:layout_height="wrap_content" />
 	</com.matji.sandwich.widget.PagerControl>
 
+<<<<<<< HEAD
 
 
 	<com.matji.sandwich.widget.SwipeView
@@ -47,6 +48,32 @@
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent" />
 	</com.matji.sandwich.widget.SwipeView>
+=======
+  
+  
+  <com.matji.sandwich.widget.SwipeView
+      android:id="@+id/SwipeView" 
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent">
+    <com.matji.sandwich.widget.StoreListView
+	android:id="@+id/ListView1"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" />
+    <com.matji.sandwich.widget.StoreNearListView
+	android:id="@+id/ListView2" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" />
+    <com.matji.sandwich.widget.PostListView
+	android:id="@+id/ListView3"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" />
+    <ImageView
+	android:id="@+id/ImageViewTest"
+	android:layout_width="50dp"
+	android:background="#000"
+	android:layout_height="50dp" />
+  </com.matji.sandwich.widget.SwipeView>
+>>>>>>> 43c1258f7377e3883ec2b4e198baa768cdb5c062
 
 </LinearLayout>
 <!-- <com.matji.sandwich.widget.TestListView -->

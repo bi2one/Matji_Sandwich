@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -40,6 +41,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
+import android.net.http.AndroidHttpClient;
 
 /**
  * This helper class download images from the Internet and binds those with the provided ImageView.
@@ -54,6 +56,28 @@ public class ImageDownloader {
 
     public enum Mode { NO_ASYNC_TASK, NO_DOWNLOADED_DRAWABLE, CORRECT }
     private Mode mode = Mode.CORRECT;
+
+    /**
+     * Download the specified image from the Internet and binds it to the provided ImageView. The
+     * binding is immediate if the image is found in the cache and will be done asynchronously
+     * otherwise. A null bitmap will be associated to the ImageView if an error occurs.
+     *
+     * @param url The URL of the image to download.
+     * @param imageView The ImageView to bind the downloaded image to.
+     * @param params The HashTable for bind to url.
+     */
+    public void download(String url, HashMap<String, String> params, ImageView imageView) {
+	StringBuilder sb = new StringBuilder(url);
+	sb.append("?");
+
+	for (String key: params.keySet()) {
+	    sb.append(key + "=" + params.get(key) + "&");
+	}
+	Log.d("url!!!", sb.toString());
+
+	download(sb.toString(), imageView);
+    }
+    
     
     /**
      * Download the specified image from the Internet and binds it to the provided ImageView. The
@@ -168,9 +192,17 @@ public class ImageDownloader {
             HttpResponse response = client.execute(getRequest);
             final int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode != HttpStatus.SC_OK) {
-                Log.w("ImageDownloader", "Error " + statusCode +
-                        " while retrieving bitmap from " + url);
-                return null;
+		Header[] headers = response.getHeaders("Location");
+		
+		if (headers != null && headers.length != 0) {
+		    String newUrl = headers[headers.length - 1].getValue();
+		    // call again with new URL
+		    return downloadBitmap(newUrl);
+		} else {
+		    Log.w("ImageDownloader", "Error " + statusCode +
+			  " statusCode retrieving bitmap from " + url);
+		    return null;
+		}
             }
 
             final HttpEntity entity = response.getEntity();
