@@ -15,7 +15,7 @@ import com.matji.sandwich.session.Session;
 public class MeHttpRequest extends HttpRequest {
 	private static final String appId = "eef9847b11";
 	private static final String appSecret = "ae8a062bd2a516970994057722bfbd";
-	private static final String redirectURI = "http://api.matji.com/callback"; 
+	private static final String redirectURI = "http://api.matji.com/callback.json"; 
 	
 	private String action;
     private MatjiDataParser parser;

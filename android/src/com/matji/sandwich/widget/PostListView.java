@@ -54,8 +54,6 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	}
 
 	
-	
-	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
@@ -65,8 +63,6 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 			Intent intent = new Intent(getActivity(), UserTabActivity.class);
 			intent.putExtra("user", post.getUser());
 			getActivity().startActivity(intent);
-			
-			
 			break;
 		case R.id.post_adapter_store_name:
 			Log.d("asdkasldkljad","2");

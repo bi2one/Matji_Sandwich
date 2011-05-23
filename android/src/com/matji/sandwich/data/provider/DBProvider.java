@@ -17,6 +17,8 @@ import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.db.DataBaseHelper;
+import com.matji.sandwich.data.db.request.DBStoreRequest;
+
 
 public class DBProvider {
 	private static String STORE_TABLE_NAME = "matji_stores";
@@ -25,11 +27,11 @@ public class DBProvider {
 	private static String FOLLOWING_TABLE_NAME = "matji_followings";
 	private static String FOLLOWER_TABLE_NAME = "matji_followers";
 	
+	private static DBProvider dbProvider;
 	private DataBaseHelper dbHelper;
 	
-	public DBProvider(Context context) {
+	private DBProvider(Context context) {
 		this.dbHelper = new DataBaseHelper(context);
-		
 		
 		try {
 			dbHelper.createDataBase();		
@@ -42,6 +44,18 @@ public class DBProvider {
 		}catch(SQLException e) {
 			throw e;			
 		}
+	}
+	
+	
+	public static DBProvider getInstance(Context context){
+		if(dbProvider == null) {
+			synchronized(DBProvider.class) {
+				if(dbProvider == null) {
+					dbProvider = new DBProvider(context);
+				}
+			}
+		}
+		return dbProvider;		
 	}
 	
 	
@@ -161,11 +175,11 @@ public class DBProvider {
 	
 	public ArrayList<Store> loadStoresInRegion(CoordinateRegion region){
 		SQLiteDatabase db = dbHelper.getDatabase();
+		DBStoreRequest storeRequest = new DBStoreRequest(db);
 		
-		Cursor c = db.rawQuery("", null);
+		String sql= "";
 		
-		
-		return null;
+		return storeRequest.query(sql);
 	}
 	
 	
