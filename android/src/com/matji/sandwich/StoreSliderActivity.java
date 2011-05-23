@@ -32,7 +32,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.store_slider);
-	    
+	
 	mContext = getApplicationContext();
 	pagerControlStringRef = new int[] { R.string.all_store,
 					    R.string.near_store,
@@ -47,7 +47,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	view3 = (PostListView)findViewById(R.id.ListView3);
 	image = (ImageView)findViewById(R.id.ImageViewTest);
 	
-	downloader.downloadUserImage(0, image);
+	downloader.downloadAttachFileImage(115, image);
 	
 	view1.start(this);
 	view2.start(this);

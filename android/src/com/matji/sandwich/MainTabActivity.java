@@ -12,19 +12,20 @@ public class MainTabActivity extends TabActivity{
 	
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
+	setContentView(R.layout.main_tab);
 	
 	tabHost = getTabHost();
 
 	tabHost.addTab(tabHost.newTabSpec("tab3")
-		       .setIndicator("지도")
+		       .setIndicator(getString(R.string.default_string_map))
 		       .setContent(new Intent(this, MainMapActivity.class)));
     
 	tabHost.addTab(tabHost.newTabSpec("tab2")
-		       .setIndicator("맛집")
+		       .setIndicator(getString(R.string.default_string_store))
 		       .setContent(new Intent(this, StoreSliderActivity.class)));
     
 	tabHost.addTab(tabHost.newTabSpec("tab1")
-		       .setIndicator("알람")
+		       .setIndicator(getString(R.string.default_string_alarm))
 		       .setContent(new Intent(this, AlarmActivity.class)));
     }
 }
