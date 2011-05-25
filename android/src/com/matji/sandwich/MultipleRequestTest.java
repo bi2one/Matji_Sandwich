@@ -25,6 +25,6 @@ public class MultipleRequestTest extends Activity implements Requestable {
 	manager.request(this, request2, 1);
     }
 
-    public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) { }
+    public void requestCallBack(int tag, ArrayList<MatjiData> data) { }
     public void requestExceptionCallBack(int tag, MatjiException e) { }
 }

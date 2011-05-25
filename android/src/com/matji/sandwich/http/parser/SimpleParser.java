@@ -7,7 +7,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
 
-public class SimpleParser extends MatjiDataParser<MatjiData> {
+public class SimpleParser extends MatjiDataParser {
 	public ArrayList<MatjiData> getRawData(String data) throws MatjiException {
 		Simple simpleData = new Simple();
 	 	ArrayList<MatjiData> list = new ArrayList<MatjiData>();

@@ -3,7 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.TagParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class TagHttpRequest extends HttpRequest {
-	private MatjiDataParser<Tag> parser;
+	private MatjiDataParser parser;
 	private String action;
 	private String controller;
 	//	private boolean isPost; // tag �����  GET 諛⑹�..?
@@ -60,7 +60,7 @@ public class TagHttpRequest extends HttpRequest {
 		getHashtable.put("post_id", post_id + "");
 	}
 	
-	public ArrayList<Tag> request() throws MatjiException {
+	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
 
 		String resultBody = response.getHttpResponseBodyAsString();

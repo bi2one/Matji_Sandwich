@@ -2,9 +2,10 @@ package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Region;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
-public class RegionParser extends MatjiDataParser<Region> {
+public class RegionParser extends MatjiDataParser {
 	protected Region getMatjiData(JsonObject object) throws MatjiException {
 		Region region = new Region();
 		region.setId(getInt(object, "id"));
@@ -14,7 +15,7 @@ public class RegionParser extends MatjiDataParser<Region> {
 		region.setLatNe(getInt(object, "lat_ne"));
 		region.setLngNe(getInt(object, "lng_ne"));
 		region.setDescription(getString(object, "description"));
-		region.setUser(new UserParser().getRawObject(getObject(object, "user") + ""));
+		region.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		
 		return region;
 	}

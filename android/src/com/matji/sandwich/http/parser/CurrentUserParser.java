@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.matji.sandwich.data.CurrentUser;
 import com.matji.sandwich.exception.MatjiException;
 
-public class CurrentUserParser extends MatjiDataParser<CurrentUser> {
+public class CurrentUserParser extends MatjiDataParser {
 	protected CurrentUser getMatjiData(JsonObject object) throws MatjiException {
 		/*
 		Comment comment = new Comment();

@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.exception.MatjiException;
 
-public class TagParser extends MatjiDataParser<Tag> {
+public class TagParser extends MatjiDataParser {
 	protected Tag getMatjiData(JsonObject object) throws MatjiException {
 		Tag tag = new Tag();
 		tag.setTag(getString(object, "tag"));

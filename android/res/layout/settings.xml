@@ -4,7 +4,15 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 	<Button android:id="@+id/signin" 
+		android:layout_margin="20dp"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
+		android:layout_weight="1"
 		android:text="로그인"/>
+	<Button android:id="@+id/signup" 
+		android:layout_margin="20dp"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="회원가입"/>
 </LinearLayout>

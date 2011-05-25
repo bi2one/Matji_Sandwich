@@ -18,16 +18,17 @@ public class Session implements Requestable {
 	private static final int LOGIN = 0;
 	private static final int LOGOUT = 1;
 	
-	private static User currentUser;
-	private static String token;
+	private User currentUser;
+	private String token;
 	
-	private static PreferenceProvider prefs;
+	private PreferenceProvider prefs;
 	private Context context;
 	
 	
 	private Session(){}
 	private Session(Context context){
 		this.context = context;
+		this.prefs = new PreferenceProvider(context);
 	}
 	
 
@@ -36,7 +37,6 @@ public class Session implements Requestable {
 			synchronized(Session.class) {
 				if(session == null) {
 					session = new Session(context);
-					prefs = new PreferenceProvider(context);
 				}
 			}
 		}
@@ -75,27 +75,41 @@ public class Session implements Requestable {
 		return (currentUser == null) ? false : true;	
 	}
 	
-	public User getCurrentUser(){
-		return currentUser;
-	}
-	
 	
 	@Override
-	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (tag == LOGIN){
 				Me me = (Me)data.get(0);
 				token = me.getToken();
 				currentUser = me.getUser();
+		}else if (tag == LOGOUT){
+			
 		}
 		
 	}
-	@Override
+	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		if (tag == LOGIN){
 				currentUser =  null;
 				token = null;
+		}else if (tag == LOGOUT){
+			
 		}
 		
 	}
+
+	
+	public String getToken() {
+		return token;
+	}
+	
+	public PreferenceProvider getPreferenceProvider() {
+		return prefs;
+	}
+	
+	public User getCurrentUser(){
+		return currentUser;
+	}
+	
 
 }

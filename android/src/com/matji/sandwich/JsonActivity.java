@@ -37,7 +37,7 @@ public class JsonActivity extends Activity implements Requestable {
 //		manager.request(request, 1);
 	}
 
-	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 //		StoreFood food = (StoreFood)data.get(0);
 //		Log.d("Matji", "" + food.getId());
 //		Log.d("Matji", "name: " +  food.getFood().getName());

@@ -3,7 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.CommentParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.Comment;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class CommentHttpRequest extends HttpRequest {
-	private MatjiDataParser<Comment> parser;
+	private MatjiDataParser parser;
 	private String controller;
 	private String action;
 	
@@ -61,7 +61,7 @@ public class CommentHttpRequest extends HttpRequest {
 		getHashtable.put("comment_id", "" + comment_id);
 	}
 
-	public ArrayList<Comment> request() throws MatjiException {		
+	public ArrayList<MatjiData> request() throws MatjiException {		
 
 		SimpleHttpResponse response = 
 			(httpMethod == HttpMethod.HTTP_POST) ? 

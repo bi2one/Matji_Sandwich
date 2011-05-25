@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Food;
 import com.matji.sandwich.exception.MatjiException;
 
-public class FoodParser extends MatjiDataParser<Food> {
+public class FoodParser extends MatjiDataParser {
 	protected Food getMatjiData(JsonObject object) throws MatjiException {
 		Food food = new Food();
 		food.setLikeCount(getInt(object, "like_count"));

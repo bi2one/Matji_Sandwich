@@ -3,7 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.LikeParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.Like;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class LikeHttpRequest extends HttpRequest {
-	private MatjiDataParser<Like> parser;
+	private MatjiDataParser parser;
 	private String action;
 	private String controller;
 	
@@ -60,7 +60,7 @@ public class LikeHttpRequest extends HttpRequest {
     	postHashtable.put("store_id", store_id);
     }
 
-	public ArrayList<Like> request() throws MatjiException {
+	public ArrayList<MatjiData> request() throws MatjiException {
 		SimpleHttpResponse response = 
 			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.Log;
 
-import com.matji.sandwich.data.Me;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.MeParser;
@@ -18,7 +18,7 @@ public class MeHttpRequest extends HttpRequest {
 	private static final String redirectURI = "http://api.matji.com/callback.json"; 
 	
 	private String action;
-    private MatjiDataParser<Me> parser;
+    private MatjiDataParser parser;
 	
 	public MeHttpRequest(Context context){
 		super(context);
@@ -26,7 +26,7 @@ public class MeHttpRequest extends HttpRequest {
 	}
 	
 	
-    public ArrayList<Me> request() throws MatjiException {
+    public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = (httpMethod == HttpMethod.HTTP_POST) ? 
     			requestHttpResponsePost(serverDomain + action , null, postHashtable)
     			:requestHttpResponseGet(serverDomain + action , null, getHashtable);

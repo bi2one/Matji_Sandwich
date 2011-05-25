@@ -37,11 +37,10 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	public HttpRequest request() {
 		((PostHttpRequest) request).actionList(getPage(), getLimit());
-		Log.d("Matji", "PostListView :: line 40");
 		return request;
 	}
 
-	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		super.requestCallBack(tag, data);
 	}
 	
@@ -55,22 +54,15 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	}
 
 	
-	
-	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.post_adapter_nick:
 			Post post = (Post)getAdapterData().get(Integer.parseInt((String)v.getTag()));
 			Log.d("-----", "" +  post.getUser().getNick());
-//			Intent intent = new Intent(getActivity(), UserTabActivity.class);
-			Intent intent = new Intent(getActivity(), PostInfoActivity.class);
-			Log.d("Matji", "Post_User: " + post.getUser());
-//			intent.putExtra("user", post.getUser());
-			intent.putExtra("post", post);
+			Intent intent = new Intent(getActivity(), UserTabActivity.class);
+			intent.putExtra("user", post.getUser());
 			getActivity().startActivity(intent);
-			
-			
 			break;
 		case R.id.post_adapter_store_name:
 			Log.d("asdkasldkljad","2");

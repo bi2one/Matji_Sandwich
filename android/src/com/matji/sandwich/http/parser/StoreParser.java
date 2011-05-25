@@ -1,10 +1,17 @@
 package com.matji.sandwich.http.parser;
 
+import java.util.ArrayList;
+
 import com.google.gson.JsonObject;
+import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.StoreFood;
+import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
-public class StoreParser extends MatjiDataParser<Store> {
+public class StoreParser extends MatjiDataParser {
 	protected Store getMatjiData(JsonObject object) throws MatjiException {
 		Store store = new Store();
 		store.setId(getInt(object, "id"));
@@ -23,10 +30,24 @@ public class StoreParser extends MatjiDataParser<Store> {
 		store.setImageCount(getInt(object, "image_count"));
 		store.setLikeCount(getInt(object, "like_count"));
 		store.setBookmarkCount(getInt(object, "bookmark_count"));
-		store.setFile(new AttachFileParser().getRawObject(getString(object, "file")));
-		store.setRegUser(new UserParser().getRawObject(getObject(object, "user") + ""));
-		store.setTags(new TagParser().getRawObjects(getArray(object, "tags") + ""));
-		store.setStoreFoods(new StoreFoodParser().getRawObjects(getArray(object, "store_foods") + ""));
+		store.setFile((AttachFile) new AttachFileParser().getRawObject(getString(object, "file")));
+		store.setRegUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+
+		ArrayList<MatjiData> dataList = new TagParser().getRawObjects(getArray(object, "tags") + "");
+		ArrayList<Tag> tags = new ArrayList<Tag>(); 
+		if (dataList != null) {
+			for (MatjiData data : dataList)
+				tags.add((Tag) data);
+		}
+		store.setTags(tags);
+
+		dataList = new StoreFoodParser().getRawObjects(getArray(object, "store_foods") + "");
+		ArrayList<StoreFood> storeFoods = new ArrayList<StoreFood>();
+		if (dataList != null) {
+			for (MatjiData data : dataList)
+				storeFoods.add((StoreFood) data);
+		}
+		store.setStoreFoods(storeFoods);
 		
 		return store;
 	}

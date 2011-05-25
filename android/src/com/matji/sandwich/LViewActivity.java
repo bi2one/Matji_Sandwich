@@ -32,7 +32,7 @@ public class LViewActivity extends ListActivity implements Requestable {
 //		manager.request(request, 1);
 	}
 	
-	public void requestCallBack(int tag, ArrayList<? extends MatjiData> data) {
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		String myData= "";
 		ArrayList<String> mArray = new ArrayList<String>();
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.testlistview, mArray));
