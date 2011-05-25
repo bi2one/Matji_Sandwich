@@ -7,6 +7,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class MessageParser extends MatjiDataParser {
 	protected Message getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Message message = new Message();
 		message.setId(getInt(object, "id"));
 		message.setSentUserId(getInt(object, "sent_user_id"));

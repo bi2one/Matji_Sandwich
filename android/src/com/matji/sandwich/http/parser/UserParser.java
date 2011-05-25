@@ -8,6 +8,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class UserParser extends MatjiDataParser {
 	protected User getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		User user = new User();
 		user.setId(getInt(object, "id"));
 		user.setUserid(getString(object, "userid"));

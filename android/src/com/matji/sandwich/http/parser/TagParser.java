@@ -6,6 +6,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class TagParser extends MatjiDataParser {
 	protected Tag getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Tag tag = new Tag();
 		tag.setTag(getString(object, "tag"));
 		tag.setCreatedAt(getString(object, "created_at"));

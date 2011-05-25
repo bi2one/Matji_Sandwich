@@ -7,32 +7,58 @@ import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Me;
-import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class MeParser extends MatjiDataParser {
 	protected Me getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Me me = new Me();
 		
-		me.setUser((User) new UserParser().getMatjiData(getObject(object, "user")));
+		MatjiData matjiData = null;
+		ArrayList<MatjiData> matjiDataList = null;
+		/* Set User */
+		UserParser userParser = new UserParser();
+		matjiData = userParser.getMatjiData(getObject(object, "user"));
+		if (matjiData != null)
+			me.setUser((User)matjiData);
 		
-		ArrayList<MatjiData> dataList = new BookmarkParser().getMatjiDataList(getObject(object, "bookmarks"));
-		ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
-		for (MatjiData data : dataList) {
-			bookmarks.add((Bookmark) data);
+		/* Set Bookmarks */
+		BookmarkParser bookmarkParser = new BookmarkParser();
+		matjiDataList = bookmarkParser.getMatjiDataList(getObject(object, "bookmarks"));
+		if (matjiDataList != null){
+			ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
+			for (MatjiData data : matjiDataList) {
+				bookmarks.add((Bookmark) data);
+			}
+			me.setBookmarks(bookmarks);
 		}
-		me.setBookmarks(bookmarks);
 
-		dataList = new LikeParser().getMatjiDataList(getObject(object, "likes"));
-		ArrayList<Like> likes = new ArrayList<Like>();
-		for (MatjiData data : dataList) {
-			likes.add((Like) data);
+		/* Set Likes */
+		LikeParser likeParser = new LikeParser();
+		matjiDataList = likeParser.getMatjiDataList(getObject(object, "likes"));
+		if (matjiDataList != null){
+			ArrayList<Like> likes = new ArrayList<Like>();
+			for (MatjiData data : matjiDataList) {
+				likes.add((Like) data);
+			}
+			me.setLikes(likes);
 		}
-		me.setLikes(likes);
 
-		me.setFollowers(getString(object, "followers").split(","));
-		me.setFollowings(getString(object, "followings").split(","));
+		/* Set Follow */
+		String followers = getString(object, "followers");
+		String followings = getString(object, "followings");
+		if (followers != null)
+			me.setFollowers(followers.split(","));
+		if (followings != null)
+			me.setFollowings(followings.split(","));
+		
+		/* Set Access token */
+		String token = getString(object, "access_token");
+		if (token != null)
+			me.setToken(token);
+		
 		
 		return me;
 	}

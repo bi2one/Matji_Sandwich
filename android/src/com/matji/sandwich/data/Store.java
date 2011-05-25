@@ -1,11 +1,13 @@
 package com.matji.sandwich.data;
 
+import java.io.*;
 import java.util.ArrayList;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Store extends MatjiData{
+public class Store extends MatjiData implements Serializable{
+	private static final long serialVersionUID = 2258168334454587964L;
 	private int id;
 	private String name;
 	private int reg_user_id;
@@ -68,7 +70,7 @@ public class Store extends MatjiData{
 		dest.writeInt(bookmark_count);
 		dest.writeValue(file);
 		dest.writeValue(reg_user);
-		dest.writeTypedList(tags);
+		//dest.writeTypedList(tags);
 	}
 
 	private void readFromParcel(Parcel in) {

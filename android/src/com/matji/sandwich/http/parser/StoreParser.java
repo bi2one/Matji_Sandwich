@@ -13,6 +13,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class StoreParser extends MatjiDataParser {
 	protected Store getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Store store = new Store();
 		store.setId(getInt(object, "id"));
 		store.setName(getString(object, "name"));

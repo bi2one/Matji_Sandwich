@@ -82,9 +82,10 @@ public class HttpRequestManager {
 		// Log.d("Request_Test", "on request data!!");
 		try {
 			synchronized(Stack.class) {
+				Log.d("Matji", "Yaho");
 				RequestTagPair pair = requestPool.pop();
 				dataPool.push(new DataTagPair(pair.getRequest().request(), pair.getTag()));
-				Log.d("Matji", pair.getRequest().toString() + "");
+				
 			}
 		} catch(MatjiException e) {
 			lastOccuredException = e;
@@ -92,8 +93,10 @@ public class HttpRequestManager {
 	}
 
 	private void onPostRequestData(int tag) {
-		if (lastOccuredException != null)
+		
+		if (lastOccuredException != null){
 			requestable.requestExceptionCallBack(tag, lastOccuredException);
+		}
 		else {
 			synchronized(Stack.class) {
 				DataTagPair pair = dataPool.pop();

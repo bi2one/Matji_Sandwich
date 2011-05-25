@@ -6,6 +6,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class NoticeParser extends MatjiDataParser {
 	protected Notice getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Notice notice = new Notice();
 		notice.setStartDate(getString(object, "start_date"));
 		notice.setCreatedAt(getString(object, "created_at"));

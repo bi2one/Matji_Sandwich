@@ -7,7 +7,7 @@ import com.matji.sandwich.http.request.UserHttpRequest;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.os.*;
 import android.widget.TabHost;
 
 public class UserTabActivity extends TabActivity {
@@ -25,14 +25,13 @@ public class UserTabActivity extends TabActivity {
 		tabHost = getTabHost();
 		intent = getIntent();
 		user = intent.getParcelableExtra("user");
-		
 		createIntent();
 		setTabHost();
 	}
 
 	private void createIntent() {
 		mainIntent = new Intent(this, UserMainActivity.class);
-		mainIntent.putExtra("user", user);
+		mainIntent.putExtra("user", (Parcelable)user);
 		myStoreIntent = new Intent(this, StoreMoreActivity.class);
 		myPostIntent = new Intent(this, StoreMoreActivity.class);
 		myImageIntent = new Intent(this, StoreMoreActivity.class);

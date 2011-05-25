@@ -6,6 +6,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class CountParser extends MatjiDataParser {
 	protected Count getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Count count = new Count();
 		count.setCount(getInt(object, "count"));
 		

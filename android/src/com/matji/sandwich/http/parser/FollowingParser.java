@@ -7,6 +7,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class FollowingParser extends MatjiDataParser {
 	protected Following getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Following following = new Following();
 		following.setCreatedAt(getString(object, "created_at"));
 		following.setFollowingUserId(getInt(object, "following_user_id"));

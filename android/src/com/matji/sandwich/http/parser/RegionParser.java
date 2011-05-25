@@ -7,6 +7,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class RegionParser extends MatjiDataParser {
 	protected Region getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Region region = new Region();
 		region.setId(getInt(object, "id"));
 		region.setUserId(getInt(object, "user_id"));

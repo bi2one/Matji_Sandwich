@@ -7,6 +7,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class AlarmParser extends MatjiDataParser {
 	protected Alarm getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Alarm alarm = new Alarm();
 		alarm.setId(getInt(object, "id"));
 		alarm.setReceivedUserId(getInt(object, "received_user_id"));

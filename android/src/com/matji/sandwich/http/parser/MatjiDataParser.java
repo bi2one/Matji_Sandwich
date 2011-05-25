@@ -22,7 +22,7 @@ public abstract class MatjiDataParser {
 	
 	public ArrayList<MatjiData> getMatjiDataList(JsonElement jsonElement) throws MatjiException{
 		if (!isArray(jsonElement)) {
-			throw new JSONMatjiException();
+			return new ArrayList<MatjiData>();
 		}
 
 		JsonArray jsonArray = jsonElement.getAsJsonArray();

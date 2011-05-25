@@ -3,6 +3,7 @@ package com.matji.sandwich.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.*;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -18,37 +19,38 @@ import com.matji.sandwich.exception.MatjiException;
 import java.util.ArrayList;
 
 public class StoreListView extends RequestableMListView {
-    private StoreHttpRequest storeRequest;
-    
-    public StoreListView(Context context, AttributeSet attrs) {
-	super(context, attrs, new StoreAdapter(context), 10);
-	
-	storeRequest = new StoreHttpRequest(context);
-	setPage(1);
+	    private StoreHttpRequest storeRequest;
+	    
+	    public StoreListView(Context context, AttributeSet attrs) {
+		super(context, attrs, new StoreAdapter(context), 10);
+		
+		storeRequest = new StoreHttpRequest(context);
+		setPage(1);
     }
 
     public void start(Activity activity) {
-	super.start(activity);
+    	super.start(activity);
     }
 
     public HttpRequest request() {
     	Log.d("Matji", "StoreListView :: line 35");
-	storeRequest.actionList(getPage(), getLimit());
-	return storeRequest;
+		storeRequest.actionList(getPage(), getLimit());
+		return storeRequest;
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-	super.requestCallBack(tag, data);
+    	super.requestCallBack(tag, data);
     }
     
     public void requestExceptionCallBack(int tag, MatjiException e) {
-	super.requestExceptionCallBack(tag, e);
+    	super.requestExceptionCallBack(tag, e);
     }
 
     public void onListItemClick(int position) {
-	Store store = (Store) getAdapterData().get(position);
-	Intent intent = new Intent(getActivity(), StoreTabActivity.class);
-	intent.putExtra("store", store);
-	getActivity().startActivity(intent);
+		Store store = (Store) getAdapterData().get(position);
+		Intent intent = new Intent(getActivity(), StoreTabActivity.class);
+		
+		intent.putExtra("store", (Parcelable)store);
+		getActivity().startActivity(intent);
     }
 }

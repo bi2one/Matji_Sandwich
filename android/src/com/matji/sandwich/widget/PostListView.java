@@ -1,10 +1,12 @@
 package com.matji.sandwich.widget;
 
+import java.io.*;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.*;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -61,7 +63,10 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 			Post post = (Post)getAdapterData().get(Integer.parseInt((String)v.getTag()));
 			Log.d("-----", "" +  post.getUser().getNick());
 			Intent intent = new Intent(getActivity(), UserTabActivity.class);
-			intent.putExtra("user", post.getUser());
+			
+			
+			// User casting 임시
+			intent.putExtra("user", (Parcelable)post.getUser());
 			getActivity().startActivity(intent);
 			break;
 		case R.id.post_adapter_store_name:

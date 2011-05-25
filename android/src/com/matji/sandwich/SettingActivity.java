@@ -1,32 +1,66 @@
 package com.matji.sandwich;
 
-import android.app.ListActivity;
+import com.matji.sandwich.session.*;
+
+import android.app.*;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.*;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class SettingActivity extends ListActivity implements OnClickListener {
-	private Button signin;
+public class SettingActivity extends Activity { 
 	LinearLayout layout;
-	Button btn;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.settings);
-
-		signin = (Button) findViewById(R.id.signin);
-		signin.setTag("SignIn");
-		signin.setOnClickListener(this);
+		setContentView(R.layout.settings);		
 	}
-
-	public void onClick(View v) {
-		if (v.getTag().toString().equals("SignIn")) {
-			Intent intent = new Intent(this, LoginActivity.class);
-			startActivityForResult(intent, 1);
-		} else
-			layout.removeView(v);
+	
+	protected void onResume(){
+		super.onResume();
+		configureViews();
 	}
+	
+	
+	private void configureViews(){
+		Session session = Session.getInstance(this);
+		
+		Button signin = (Button) findViewById(R.id.signin);
+		Button signout = (Button) findViewById(R.id.signout);
+		Button signup = (Button) findViewById(R.id.signup);
+		
+		if (session.getToken() == null){
+			Log.d("=====", "No token");
+			signin.setVisibility(Button.VISIBLE);
+			signout.setVisibility(Button.GONE);
+		}else {
+			Log.d("=====", "token");
+			signin.setVisibility(Button.GONE);
+			signout.setVisibility(Button.VISIBLE);
+			signup.setVisibility(Button.GONE);
+		}
+	}
+	
+	
+	
+	protected void onPause(){
+		super.onPause();
+	}
+	
+	public void loginButtonClicked(View v){
+
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivityForResult(intent, 1);
+	}
+	
+	public void logoutButtonClicked(View v){
+		Session session = Session.getInstance(this);
+		session.logout();
+		
+		configureViews();
+	}
+	
 }

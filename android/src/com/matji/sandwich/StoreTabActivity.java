@@ -4,7 +4,8 @@ import com.matji.sandwich.data.Store;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.os.*;
+import android.util.*;
 import android.widget.TabHost;
 
 public class StoreTabActivity extends TabActivity{
@@ -18,8 +19,8 @@ public class StoreTabActivity extends TabActivity{
 	intent = getIntent();
 	store = intent.getParcelableExtra("store");
 	Intent mainIntent = new Intent(this, StoreMainActivity.class);
-	mainIntent.putExtra("store", store); 
-
+	mainIntent.putExtra("store", (Parcelable)store);
+	
 	tabHost = getTabHost();
 	
 	tabHost.addTab(tabHost.newTabSpec("main")

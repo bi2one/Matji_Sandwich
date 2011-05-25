@@ -42,6 +42,26 @@ public class UserHttpRequest extends HttpRequest {
     	if (requestPosts) getHashtable.put("include", "posts"); 
     	if (requestStores) getHashtable.put("include", "stores"); 
     }
+    
+    public void actionRankingList() {
+    	httpMethod = HttpMethod.HTTP_GET;
+    	action = "ranking_list";
+    	parser = new UserParser();
+    	
+    	getHashtable.clear();
+    }
+    
+    public void actionNearByRankingList(int lat_sw, int lat_ne, int lng_sw, int lng_ne) {
+    	httpMethod = HttpMethod.HTTP_GET;
+    	action = "nearby_ranking_list";
+    	parser = new UserParser();
+    	
+    	getHashtable.clear();
+    	getHashtable.put("lat_ne", lat_ne + "");
+    	getHashtable.put("lat_sw", lat_sw + "");
+    	getHashtable.put("lng_ne", lng_ne + "");
+    	getHashtable.put("lng_sw", lng_sw + "");
+    }
 
     public void actionMe() {
     	

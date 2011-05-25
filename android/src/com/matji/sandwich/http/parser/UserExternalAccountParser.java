@@ -7,6 +7,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class UserExternalAccountParser extends MatjiDataParser {
 	protected UserExternalAccount getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		UserExternalAccount externalAccount = new UserExternalAccount();
 		externalAccount.setId(getInt(object, "id"));
 		externalAccount.setUserId(getInt(object, "user_id"));

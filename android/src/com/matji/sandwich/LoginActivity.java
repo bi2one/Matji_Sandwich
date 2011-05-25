@@ -11,40 +11,35 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.util.Log;
 
-public class LoginActivity extends Activity implements OnClickListener {
-	private EditText usernameField;
-	private EditText passwordField;
-	private Button okButton;
-	private Button cancelButton;
+public class LoginActivity extends Activity implements Loginable {
 	 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.login);
+				
+	}
+	
+	public void loginButtonClicked(View v){
+		EditText usernameField = (EditText)findViewById(R.id.username);
+		EditText passwordField = (EditText)findViewById(R.id.password);
+		Session session = Session.getInstance(this);						
+		session.login(this, usernameField.getText().toString(), passwordField.getText().toString());
+	}
+	
+	public void cancelButtonClicked(View v){
+		finish();
 		
-		usernameField = (EditText)findViewById(R.id.username);
-		passwordField = (EditText)findViewById(R.id.password);
-		okButton = (Button)findViewById(R.id.ok);
-		cancelButton = (Button)findViewById(R.id.cancel);
-		
-		okButton.setOnClickListener(this);
-		cancelButton.setOnClickListener(this);		
 	}
 
-	public void onClick(View v) {
-		Session session = Session.getInstance(this);
-		Intent intent = getIntent();
-		switch(v.getId()) {
-		case R.id.ok:
-			session.login(this, usernameField.getText().toString(), passwordField.getText().toString());
-			intent.putExtra("username", usernameField.getText().toString());
-			intent.putExtra("password", passwordField.getText().toString());
-			setResult(RESULT_OK,intent);
-			finish();
-			break;
-		case R.id.cancel:
-			finish();
-			break;
-		}
+	/* Loginable Interface methods */
+	public void loginCompleted(){
+		setResult(RESULT_OK);
+		finish();		
 	}
+	
+	public void loginFailed(){
+		// show toast -> id, pw 확인해라 
+	}
+	
 }
