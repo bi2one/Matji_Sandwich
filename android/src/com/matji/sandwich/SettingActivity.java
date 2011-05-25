@@ -25,7 +25,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		if (v.getTag().toString().equals("SignIn")) {
 			Intent intent = new Intent(this, LoginActivity.class);
-			startActivityForResult(intent, 200);
+			startActivityForResult(intent, 1);
 		} else
 			layout.removeView(v);
 	}
