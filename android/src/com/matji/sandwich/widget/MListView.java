@@ -21,11 +21,11 @@ public abstract class MListView extends ListView implements OnItemClickListener 
 		setOnItemClickListener(this);
 	}
 
-	protected Activity getActivity() {
+	public Activity getActivity() {
 		return activity;
 	}
 
-	public void start(Activity activity) {
+	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
 

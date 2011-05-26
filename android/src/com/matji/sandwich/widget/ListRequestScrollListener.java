@@ -21,7 +21,7 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
 	this.requestable = requestable;
 	this.listView = listView;
 	this.manager = manager;
-	isSet = true;
+	isSet = false;
     }
 
     public void requestSetOff() {

@@ -5,27 +5,29 @@ import android.content.Context;
 import android.app.Activity;
 import android.view.View;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import com.matji.sandwich.R;
 
 public class Spinner extends RelativeLayout {
-    protected Context context = null;
-    protected Activity activity = null;
+    protected Context mContext = null;
+    protected Activity mActivity = null;
 
-    public Spinner(Context context, Activity activity) {
-	super(context);
-	this.context = context;
-	this.activity = activity;
-	LayoutInflater.from(context).inflate(R.layout.popup_loading, this, true);
-	activity.addContentView(this, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-	setVisibility(View.GONE);
+    public Spinner(Context context) {
+		super(context);
+		this.mContext = context;
+		LayoutInflater.from(mContext).inflate(R.layout.popup_loading, this, true);
     }
 
-    public void start() {
-	setVisibility(View.VISIBLE);
+    public void start(Activity activity) {
+    	if (this.getParent() == null){
+    		activity.addContentView(this, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+    	}
+    	setVisibility(View.VISIBLE);
     }
     
     public void stop() {
-	setVisibility(View.GONE);
+    	ViewGroup vGroup = (ViewGroup)this.getParent();
+    	vGroup.removeView(this);
     }
 }

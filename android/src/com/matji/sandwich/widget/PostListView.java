@@ -32,10 +32,10 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		setPage(1);
 	}
 
-	public void start(Activity activity) {
-		super.start(activity);
-		
-	}
+//	public void start(Activity activity) {
+//		super.start(activity);
+//		
+//	}
 
 	public HttpRequest request() {
 		((PostHttpRequest) request).actionList(getPage(), getLimit());
@@ -63,14 +63,11 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 			Post post = (Post)getAdapterData().get(Integer.parseInt((String)v.getTag()));
 			Intent intent = new Intent(getActivity(), UserTabActivity.class);
 			
-			
-			// User casting 임시
 			intent.putExtra("user", (Parcelable)post.getUser());
 			getActivity().startActivity(intent);
 			break;
 			
 		case R.id.post_adapter_store_name:
-			Log.d("asdkasldkljad","2");
 			break;
 		}
 		
