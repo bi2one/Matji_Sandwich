@@ -6,9 +6,7 @@ import android.os.Parcelable;
 public class Simple extends MatjiData {
     private String content;
 
-    public Simple() {
-    	
-    }
+    public Simple() {}
     
 	public Simple(Parcel in) {
 		readFromParcel(in);

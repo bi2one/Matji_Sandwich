@@ -3,26 +3,81 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:padding="7dp">
+	<!-- TODO  style, layout, etc .. -->
+	<RelativeLayout
+		style="@style/DefaultWrap">
+		<ImageView
+			android:scaleType="fitCenter"
+			android:layout_width="70dp"
+			android:layout_height="70dp"
+			android:layout_marginRight="7dp"
+			style="@style/DefaultWrap"
+			android:id="@+id/user_main_user_image" />
+		<TextView
+			android:textSize="16dp"
+			android:textStyle="bold"
+			android:layout_marginBottom="7dp"
+			style="@style/DefaultWrap"
+			android:id="@+id/user_main_title"
+			android:layout_toRightOf="@id/user_main_user_image" />
+		<ImageView
+			android:src="@drawable/profile_default_img"
+			android:scaleType="fitCenter"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_marginRight="7dp"
+			style="@style/DefaultWrap"
+			android:id="@+id/user_main_grade_image"
+			android:layout_toRightOf="@id/user_main_user_image"
+			android:layout_below="@id/user_main_title" />
+		<TextView
+			android:textStyle="bold"
+			android:layout_alignBaseline="@id/user_main_grade_image"
+			style="@style/DefaultWrap"
+			android:id="@+id/user_main_grade"
+			android:layout_toRightOf="@id/user_main_grade_image"
+			android:layout_below="@id/user_main_title" />
+		<Button
+			android:layout_marginTop="7dp"
+			style="@style/DefaultWrap"
+			android:layout_width="fill_parent"
+			android:layout_height="60dp"
+			android:id="@+id/user_main_follow_button"
+			android:layout_below="@id/user_main_user_image" />
+	</RelativeLayout>
 	<TextView
 		style="@style/DefaultWrap"
-		android:id="@+id/user_main_nick"/>
+		android:id="@+id/user_main_follower_count" />
 	<TextView
 		style="@style/DefaultWrap"
-		android:id="@+id/user_main_email"/>
+		android:id="@+id/user_main_following_count" />
 	<TextView
 		style="@style/DefaultWrap"
-		android:id="@+id/user_main_userid"/>
+		android:id="@+id/user_main_intro" />
 	<TextView
 		style="@style/DefaultWrap"
-		android:id="@+id/user_main_intro"/>
-	<TextView
+		android:id="@+id/user_main_blogging" />
+	<Button
 		style="@style/DefaultWrap"
-		android:id="@+id/user_main_title"/>
-	<TextView
+		android:id="@+id/user_main_gotoblog_button" />
+	<Button
 		style="@style/DefaultWrap"
-		android:id="@+id/user_main_follower_count"/>
-	<TextView
+		android:id="@+id/user_main_fork_store_view_button" />
+	<Button
 		style="@style/DefaultWrap"
-		android:id="@+id/user_main_following_count"/>
+		android:id="@+id/user_main_activity_area_view_button" />
+	<Button
+		style="@style/DefaultWrap"
+		android:id="@+id/user_main_post_view_button" />
+	<Button
+		style="@style/DefaultWrap"
+		android:id="@+id/user_main_image_view_button" />
+	<Button
+		style="@style/DefaultWrap"
+		android:id="@+id/user_main_tag_view_button" />
+	<Button
+		style="@style/DefaultWrap"
+		android:id="@+id/user_main_url_view_button" />
 </LinearLayout>

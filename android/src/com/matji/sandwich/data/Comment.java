@@ -14,9 +14,7 @@ public class Comment extends MatjiData{
 	private Post post;
 	private String from_where;
 	
-	public Comment() {
-		
-	}
+	public Comment() {}
 	
 	public Comment(Parcel in) {
 		readFromParcel(in);

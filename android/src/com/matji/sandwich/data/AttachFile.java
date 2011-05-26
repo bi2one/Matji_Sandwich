@@ -16,9 +16,7 @@ public class AttachFile extends MatjiData{
 	private String created_at;
 	private String updated_at;
 	
-	public AttachFile() {
-		
-	}
+	public AttachFile() {}
 	
 	public AttachFile(Parcel in) {
 		readFromParcel(in);

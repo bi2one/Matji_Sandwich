@@ -40,9 +40,8 @@
   
   <!-- store_main.xml -->  
   <style name="store_main_StoreMainHeader" parent="DefaultWidthFill">
-    <item name="android:padding">7dp</item>
-    <item name="android:layout_weight">1</item>
   </style>
+  
   <style name="store_main_StoreImage">
 	<item name="android:layout_marginRight">7dp</item>
 	<item name="android:layout_marginBottom">7dp</item>
@@ -76,25 +75,23 @@
   </style>
   
   <style name="store_main_StoreMainContent" parent="DefaultWidthFill">
-  	<item name="android:layout_weight">1</item>
   </style>
   
-  <style name="store_main_ButtonArea" parent="DefaultWidthFill">
+  <style name="store_main_ButtonArea" parent="DefaultFill">
   	<item name="android:orientation">horizontal</item>
   	<item name="android:paddingTop">7dp</item>
-  	<item name="android:paddingBottom">7dp</item>
   	<item name="android:gravity">center_vertical|center_horizontal</item>
   	<item name="android:layout_gravity">center_vertical|center_horizontal|center</item>
   </style>  
     
   <style name="store_main_ScrapButton">
   	<item name="android:layout_width">90dp</item>
-  	<item name="android:layout_height">34dp</item>
+  	<item name="android:layout_height">38dp</item>
   </style>
   
   <style name="store_main_DefaultButton">
   	<item name="android:layout_width">65dp</item>
-  	<item name="android:layout_height">30dp</item>
+  	<item name="android:layout_height">34dp</item>
   	<item name="android:layout_marginLeft">7dp</item>
   	<item name="android:layout_alignBaseline">@id/store_main_scrap_button</item>
   </style>
@@ -118,10 +115,9 @@
   <style name="store_main_DetailInfoButton">
   	<item name="android:textSize">16dp</item>
   	<item name="android:layout_width">140dp</item>
-  	<item name="android:layout_height">35dp</item>
+  	<item name="android:layout_height">40dp</item>
   </style>
   
   <style name="store_main_StoreMainFooter" parent="store_main_ButtonArea">
-  	<item name="android:layout_weight">1</item>
   </style>
 </resources>

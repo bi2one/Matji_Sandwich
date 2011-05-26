@@ -13,9 +13,7 @@ public class Alarm extends MatjiData{
 	private String created_at;
 	private String updated_at;
 
-	public Alarm() {
-		
-	}
+	public Alarm() {}
 	
 	public Alarm(Parcel in) {
 		readFromParcel(in);

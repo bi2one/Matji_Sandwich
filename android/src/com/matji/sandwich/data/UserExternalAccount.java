@@ -10,9 +10,7 @@ public class UserExternalAccount extends MatjiData{
 	private String data;
 	private User user;
 
-	public UserExternalAccount() {
-		
-	}
+	public UserExternalAccount() {}
 	
 	public UserExternalAccount(Parcel in) {
 		readFromParcel(in);

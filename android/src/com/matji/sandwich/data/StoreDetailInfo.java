@@ -11,9 +11,7 @@ public class StoreDetailInfo extends MatjiData{
 	private Store store;
 	private User user;
 	
-	public StoreDetailInfo() {
-		
-	}
+	public StoreDetailInfo() {}
 	
 	public StoreDetailInfo(Parcel in) {
 		readFromParcel(in);

@@ -3,10 +3,10 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:padding="7dp">
 	<LinearLayout
 		style="@style/store_main_StoreMainHeader"
-		android:id="@+id/store_main_header_wrap"
 		android:orientation="vertical">
 		<RelativeLayout
 			style="@style/DefaultWidthFill"
@@ -37,28 +37,24 @@
 			style="@style/store_main_ButtonArea"
 			android:id="@+id/store_main_header_button">
 			<Button
-				android:background="#fff"
 				android:text="스크랩"
 				android:textSize="16dp"
 				android:textStyle="bold"
 				style="@style/store_main_ScrapButton"
 				android:id="@+id/store_main_scrap_button" />
 			<Button
-				android:background="#fff"
 				android:text="지도"
 				android:textSize="13dp"
 				android:textStyle="bold"
 				style="@style/store_main_DefaultButton"
 				android:id="@+id/store_main_map_button" />
 			<Button
-				android:background="#fff"
 				android:text="전화"
 				android:textSize="13dp"
 				android:textStyle="bold"
 				style="@style/store_main_DefaultButton"
 				android:id="@+id/store_main_tel_button" />
 			<Button
-				android:background="#fff"
 				android:text="웹"
 				android:textSize="13dp"
 				android:textStyle="bold"
@@ -81,46 +77,38 @@
 			<TextView
 				style="@style/store_main_DetailItem"
 				android:id="@+id/store_main_reg_user"
-				android:textColor="#aaa"
-				android:layout_marginTop="7dp" />
+				android:textColor="#aaa" />
 		</LinearLayout>
 		<LinearLayout
 			style="@style/store_main_ButtonArea">
 			<Button
-				android:background="#fff"
 				android:text="맛집정보 보기"
 				style="@style/store_main_DetailInfoButton"
-				android:id="@+id/store_main_show_detail_info_button" />
+				android:id="@+id/store_main_show_store_info_view_button" />
 			<Button
-				android:background="#fff"
 				android:text="메뉴 보기"
 				style="@style/store_main_DetailInfoButton"
-				android:id="@+id/store_main_show_menu_info_button"
+				android:id="@+id/store_main_menu_view_button"
 				android:layout_marginLeft="7dp" />
 		</LinearLayout>
 	</LinearLayout>
 	<RelativeLayout
-		style="@style/store_main_ButtonArea"
-		android:padding="0dp">
+		style="@style/store_main_StoreMainFooter">
 		<Button
-			android:background="#fff"
 			style="@style/store_main_DetailInfoButton"
-			android:id="@+id/store_main_memo_button" />
+			android:id="@+id/store_main_memo_view_button" />
 		<Button
-			android:background="#fff"
 			style="@style/store_main_DetailInfoButton"
-			android:id="@+id/store_main_image_button"
-			android:layout_toRightOf="@id/store_main_memo_button" />
+			android:id="@+id/store_main_image_view_button"
+			android:layout_toRightOf="@id/store_main_memo_view_button" />
 		<Button
-			android:background="#fff"
 			style="@style/store_main_DetailInfoButton"
-			android:id="@+id/store_main_tag_button"
-			android:layout_below="@id/store_main_memo_button" />
+			android:id="@+id/store_main_tag_view_button"
+			android:layout_below="@id/store_main_memo_view_button" />
 		<Button
-			android:background="#fff"
 			style="@style/store_main_DetailInfoButton"
 			android:id="@+id/store_main_url_button"
-			android:layout_below="@id/store_main_image_button"
-			android:layout_toRightOf="@id/store_main_tag_button" />
+			android:layout_below="@id/store_main_image_view_button"
+			android:layout_toRightOf="@id/store_main_tag_view_button" />
 	</RelativeLayout>
 </LinearLayout>

@@ -46,7 +46,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	view3 = (PostListView)findViewById(R.id.ListView3);
 	image = (ImageView)findViewById(R.id.ImageViewTest);
 
-	downloader.downloadUserImage(0, image);
+	downloader.downloadUserImage(100000006, image);
 
 	view1.start(this);
 	view2.start(this);

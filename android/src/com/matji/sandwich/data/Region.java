@@ -13,9 +13,7 @@ public class Region extends MatjiData{
 	private String description;
 	private User user;
 	
-	public Region() {
-		
-	}
+	public Region() {}
 	
 	public Region(Parcel in) {
 		readFromParcel(in);

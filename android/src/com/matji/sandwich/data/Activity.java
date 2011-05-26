@@ -16,10 +16,8 @@ public class Activity extends MatjiData {
 	private String created_at;
 	private String updated_at;
 
-	public Activity() {
-		
-	}
-	
+	public Activity() {}
+
 	public Activity(Parcel in) {
 		readFromParcel(in);
 	}

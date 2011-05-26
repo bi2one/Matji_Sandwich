@@ -14,9 +14,7 @@ public class Like extends MatjiData{
 	private String created_at;
 	private String updated_at;
 
-	public Like() {
-		
-	}
+	public Like() {}
 	
 	public Like(Parcel in) {
 		readFromParcel(in);
