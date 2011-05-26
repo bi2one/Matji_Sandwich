@@ -1,5 +1,7 @@
 package com.matji.sandwich.http.parser;
 
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.UserTag;
 import com.matji.sandwich.exception.MatjiException;
@@ -16,6 +18,7 @@ public class UserTagParser extends MatjiDataParser {
 		userTag.setCreatedAt(getString(object, "created_at"));
 		userTag.setUpdatedAt(getString(object, "updated_at"));
 
+		Log.d("Matji", "UserTagParser END");
 		return userTag;
 	}
 }

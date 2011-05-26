@@ -1,5 +1,7 @@
 package com.matji.sandwich.http.parser;
 
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Alarm;
 import com.matji.sandwich.data.User;
@@ -19,6 +21,7 @@ public class AlarmParser extends MatjiDataParser {
 		alarm.setCreatedAt(getString(object, "created_at"));
 		alarm.setUpdatedAt(getString(object, "updated_at"));
 		
+		Log.d("Matji", "AlarmParser END");
 		return alarm;
 	}
 }
