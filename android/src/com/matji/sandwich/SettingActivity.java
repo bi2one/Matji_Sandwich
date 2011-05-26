@@ -36,6 +36,7 @@ public class SettingActivity extends Activity {
 			Log.d("=====", "No token");
 			signin.setVisibility(Button.VISIBLE);
 			signout.setVisibility(Button.GONE);
+			signup.setVisibility(Button.VISIBLE);
 		}else {
 			Log.d("=====", "token");
 			signin.setVisibility(Button.GONE);
