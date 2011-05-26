@@ -1,9 +1,12 @@
 package com.matji.sandwich.data;
 
+import java.io.*;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User extends MatjiData{
+public class User extends MatjiData implements Serializable{
+	private static final long serialVersionUID = 3938226042478924177L;
 	private int id;
 	private String userid;
 	private String nick;

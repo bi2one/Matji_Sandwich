@@ -7,6 +7,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class UserMileageParser extends MatjiDataParser {
 	protected UserMileage getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		UserMileage mileage = new UserMileage();
 		mileage.setId(getInt(object, "id"));
 		mileage.setUserId(getInt(object, "user_id"));

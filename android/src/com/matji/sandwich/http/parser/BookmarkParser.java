@@ -9,6 +9,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class BookmarkParser extends MatjiDataParser {
 	protected Bookmark getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Bookmark bookmark = new Bookmark();
 		bookmark.setId(getInt(object, "id"));
 		bookmark.setUserId(getInt(object, "user_id"));

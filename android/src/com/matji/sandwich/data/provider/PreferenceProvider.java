@@ -1,14 +1,13 @@
 package com.matji.sandwich.data.provider;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.NotSerializableException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashMap;
+
+import android.app.*;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.*;
+import android.util.*;
 
 public class PreferenceProvider {
 	private final static String PRIMITIVE_PREFERENCE_NAME = "app_primitive_preference";
@@ -37,14 +36,29 @@ public class PreferenceProvider {
 	@SuppressWarnings("unchecked")
 	private HashMap<String, Object> getSharedObjectPreferences(){
 		HashMap<String, Object> hmap = null;
-		
-		try{ 
-			FileInputStream fis = context.openFileInput(OBJECT_PREFERENCE_NAME);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			hmap = (HashMap<String, Object>)ois.readObject();
-			ois.close();
-			fis.close();
-		}catch(Throwable e){}
+		FileInputStream fis = null;
+			try {
+				fis = context.openFileInput(OBJECT_PREFERENCE_NAME);
+			}catch (FileNotFoundException e){
+				hmap = new HashMap<String, Object>();
+				Log.d("PreferenceProvider", "Object Preference file not found.");
+			}
+			try {
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				hmap = (HashMap<String, Object>)ois.readObject();
+				if (hmap == null)
+					hmap = new HashMap<String, Object>();
+				ois.close();
+				fis.close();
+				Log.d("PreferenceProvider", "Object read completely");
+				
+			}catch(Throwable e){
+				hmap = new HashMap<String, Object>();
+				Log.d("PreferenceProvider", "Object Preference file founded. But is wrong.");
+			}
+			
+			
+			Log.d("PreferenceProvider", (hmap == null)?"18": "야어ㅑㅁㄴ어ㅐ먀어먀ㅐ");
 		
 		return hmap;
 	}
@@ -66,7 +80,8 @@ public class PreferenceProvider {
 	}
 	
 	public void setInt(String key, int value){
-		sharedPref.edit().putInt(key, value);		
+		sharedPref.edit().putInt(key, value);
+		sharedPref.edit().commit();
 	}
 	
 	public void setBoolean(String key, boolean value){
@@ -75,6 +90,11 @@ public class PreferenceProvider {
 
 	public void setString(String key, String value){
 		sharedPref.edit().putString(key, value);
+		sharedPref.edit().commit();		
+	}
+	
+	public void remove(String key){
+		sharedPref.edit().remove(key);
 	}
 
 	public void setObject(String key, Object obj) throws NotSerializableException{
@@ -84,6 +104,9 @@ public class PreferenceProvider {
 			throw new NotSerializableException();
 		}
 	}
+	
+	
+	
 	
 	public boolean commit(){
 		boolean success = false;

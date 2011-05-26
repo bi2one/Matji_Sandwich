@@ -9,6 +9,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class StoreFoodParser extends MatjiDataParser {
 	protected StoreFood getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		StoreFood storeFood = new StoreFood();
 		storeFood.setId(getInt(object, "id"));
 		storeFood.setUserId(getInt(object, "user_id"));

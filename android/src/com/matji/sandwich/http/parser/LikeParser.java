@@ -8,6 +8,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class LikeParser extends MatjiDataParser {
 	protected Like getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Like like = new Like();
 		like.setId(getInt(object, "id"));
 		like.setUserId(getInt(object, "user_id"));

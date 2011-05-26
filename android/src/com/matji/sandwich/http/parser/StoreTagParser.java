@@ -8,6 +8,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class StoreTagParser extends MatjiDataParser {
 	protected StoreTag getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		StoreTag storeTag = new StoreTag();
 		storeTag.setId(getInt(object, "id"));
 		storeTag.setTagId(getInt(object, "tag_id"));

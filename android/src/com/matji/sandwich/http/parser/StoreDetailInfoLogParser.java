@@ -8,6 +8,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class StoreDetailInfoLogParser extends MatjiDataParser {
 	protected StoreDetailInfoLog getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		StoreDetailInfoLog infoLog = new StoreDetailInfoLog();
 		infoLog.setId(getInt(object, "id"));
 		infoLog.setStoreId(getInt(object, "store_id"));

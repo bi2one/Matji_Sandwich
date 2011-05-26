@@ -1,5 +1,6 @@
 package com.matji.sandwich.session;
 
+import java.io.*;
 import java.util.*;
 
 import android.app.Activity;
@@ -16,19 +17,22 @@ import com.matji.sandwich.http.request.MeHttpRequest;
 public class Session implements Requestable {
 	private volatile static Session session = null;
 	private static final int LOGIN = 0;
-	private static final int LOGOUT = 1;
+	private static final String keyForCurrentUser = "CurrentUser";
+	private static final String keyForAccessToken = "AccessToken";
 	
-	private User currentUser;
-	private String token;
+	private User mCurrentUser;
+	private String mToken;
 	
-	private PreferenceProvider prefs;
-	private Context context;
+	private PreferenceProvider mPrefs;
+	private Context mContext;
+	private HttpRequestManager mManager;
+	private Loginable mLoginableActivity;
 	
 	
 	private Session(){}
 	private Session(Context context){
-		this.context = context;
-		this.prefs = new PreferenceProvider(context);
+		this.mContext = context;
+		this.mPrefs = new PreferenceProvider(context);
 	}
 	
 
@@ -48,11 +52,12 @@ public class Session implements Requestable {
 		return true;
 	}
 	
-	public void login(Activity activity, String userid, String password){
-		HttpRequestManager manager = new HttpRequestManager(context, this);
-		MeHttpRequest request = new MeHttpRequest(context);
+	public void login(Loginable loginableActivity, String userid, String password){
+		this.mLoginableActivity = loginableActivity;
+		mManager = new HttpRequestManager(mContext, this);
+		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionAuthorize(userid, password);
-		manager.request(activity, request, LOGIN);
+		mManager.request((Activity)loginableActivity, request, LOGIN);
 	}
 	
 	public boolean logout(){
@@ -72,7 +77,7 @@ public class Session implements Requestable {
 //	}
 //	
 	public boolean isLogin(){
-		return (currentUser == null) ? false : true;	
+		return (mCurrentUser == null) ? false : true;	
 	}
 	
 	
@@ -80,36 +85,46 @@ public class Session implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (tag == LOGIN){
 				Me me = (Me)data.get(0);
-				token = me.getToken();
-				currentUser = me.getUser();
-		}else if (tag == LOGOUT){
-			
+				Log.d("sadadad", "Token is " + me.getToken());
+				
+				try {
+					mPrefs.setObject(keyForCurrentUser, me.getUser());
+				} catch (NotSerializableException e) {
+					e.printStackTrace();
+				}
+				mPrefs.setString(keyForAccessToken, me.getToken());
+				// To do :
+				// Follow
+				// Like
+				// Bookmark write to Database in background thread
+				//
+				mLoginableActivity.loginCompleted();
 		}
 		
 	}
 	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		if (tag == LOGIN){
-				currentUser =  null;
-				token = null;
-		}else if (tag == LOGOUT){
-			
+				mPrefs.clear();
+				
+				mLoginableActivity.loginFailed();
 		}
-		
 	}
 
 	
 	public String getToken() {
-		return token;
+		return mPrefs.getString(keyForAccessToken, null);
 	}
 	
 	public PreferenceProvider getPreferenceProvider() {
-		return prefs;
+		return mPrefs;
 	}
 	
 	public User getCurrentUser(){
-		return currentUser;
+		Object obj = mPrefs.getObject(keyForCurrentUser);
+		if (obj == null)
+			return null;
+		
+		return (User)obj;
 	}
-	
-
 }

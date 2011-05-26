@@ -3,43 +3,43 @@ package com.matji.sandwich;
 import com.matji.sandwich.session.Session;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Button;
+import android.util.Log;
 
-public class LoginActivity extends Activity implements OnClickListener {
-	private EditText usernameField;
-	private EditText passwordField;
-	private Button okButton;
-	private Button cancelButton;
+public class LoginActivity extends Activity implements Loginable {
 	 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.login);
+				
+	}
+	
+	public void loginButtonClicked(View v){
+		EditText usernameField = (EditText)findViewById(R.id.username);
+		EditText passwordField = (EditText)findViewById(R.id.password);
+		Session session = Session.getInstance(this);						
+		session.login(this, usernameField.getText().toString(), passwordField.getText().toString());
+	}
+	
+	public void cancelButtonClicked(View v){
+		finish();
 		
-		usernameField = (EditText)findViewById(R.id.username);
-		passwordField = (EditText)findViewById(R.id.password);
-		okButton = (Button)findViewById(R.id.ok);
-		cancelButton = (Button)findViewById(R.id.cancel);
-		
-		okButton.setOnClickListener(this);
-		cancelButton.setOnClickListener(this);		
 	}
 
-	public void onClick(View v) {
-		Session session = Session.getInstance(this);
-		switch(v.getId()) {
-		case R.id.ok:
-			session.login(this, usernameField.getText().toString(), passwordField.getText().toString());
-			setResult(RESULT_OK);
-			break;
-		case R.id.cancel:
-			finish();
-			break;
-		}
+	/* Loginable Interface methods */
+	public void loginCompleted(){
+		setResult(RESULT_OK);
+		finish();		
 	}
+	
+	public void loginFailed(){
+		// show toast -> id, pw 확인해라 
+	}
+	
 }

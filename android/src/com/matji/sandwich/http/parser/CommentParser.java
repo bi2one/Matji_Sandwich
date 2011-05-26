@@ -8,6 +8,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class CommentParser extends MatjiDataParser {
 	protected Comment getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Comment comment = new Comment();
 		comment.setComment(getString(object, "comment"));
 		comment.setCreatedAt(getString(object, "created_at"));

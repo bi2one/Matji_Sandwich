@@ -6,6 +6,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class ActivityParser extends MatjiDataParser {
 	protected Activity getMatjiData(JsonObject object) throws MatjiException {
+		if (object == null) return null;
+		
 		Activity activity = new Activity();
 		activity.setId(getInt(object, "id"));
 		activity.setUserName(getString(object, "user_name"));
