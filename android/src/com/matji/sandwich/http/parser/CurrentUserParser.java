@@ -1,5 +1,7 @@
 package com.matji.sandwich.http.parser;
 
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.CurrentUser;
 import com.matji.sandwich.exception.MatjiException;
@@ -22,6 +24,8 @@ public class CurrentUserParser extends MatjiDataParser {
 		return comment;
 		*/
 		CurrentUser currentUser = new CurrentUser();
+
+		Log.d("Matji", "CurrentUserParser END");
 		return currentUser;
 	}
 }

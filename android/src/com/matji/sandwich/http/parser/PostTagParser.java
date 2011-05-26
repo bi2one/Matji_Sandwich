@@ -1,5 +1,7 @@
 package com.matji.sandwich.http.parser;
 
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.PostTag;
@@ -19,6 +21,7 @@ public class PostTagParser extends MatjiDataParser {
 		postTag.setTag((Tag) new TagParser().getRawObject(getObject(object, "tag") + ""));
 		postTag.setPost((Post) new PostParser().getRawObject(getObject(object, "post") + ""));
 
+		Log.d("Matji", "PostTagParser END");
 		return postTag;
 	}
 }

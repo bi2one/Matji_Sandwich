@@ -1,5 +1,7 @@
 package com.matji.sandwich.http.parser;
 
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Activity;
 import com.matji.sandwich.exception.MatjiException;
@@ -19,6 +21,7 @@ public class ActivityParser extends MatjiDataParser {
 		activity.setObjectComplementName(getString(object, "object_complement_name"));
 		activity.setObjectComplementId(getInt(object, "object_complement_id"));
 		
+		Log.d("Matji", "ActivityParser END");
 		return activity;
 	}
 }

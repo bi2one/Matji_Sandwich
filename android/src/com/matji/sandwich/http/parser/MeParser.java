@@ -2,6 +2,8 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
@@ -59,7 +61,7 @@ public class MeParser extends MatjiDataParser {
 		if (token != null)
 			me.setToken(token);
 		
-		
+		Log.d("Matji", "MeParser END");
 		return me;
 	}
 }

@@ -1,5 +1,7 @@
 package com.matji.sandwich.http.parser;
 
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreTag;
@@ -20,6 +22,7 @@ public class StoreTagParser extends MatjiDataParser {
 		storeTag.setTag((Tag) new TagParser().getRawObject(getObject(object, "tag") + ""));
 		storeTag.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
 
+		Log.d("Matji", "StoreTagParser END");
 		return storeTag;
 	}
 }
