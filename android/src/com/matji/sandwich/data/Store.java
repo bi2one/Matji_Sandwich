@@ -27,9 +27,7 @@ public class Store extends MatjiData{
 	private ArrayList<Tag> tags;
 	private ArrayList<StoreFood> store_foods;
 	
-	public Store() {
-		
-	}
+	public Store() {}
 	
 	public Store(Parcel in) {
 		readFromParcel(in);

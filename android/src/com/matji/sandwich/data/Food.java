@@ -10,9 +10,7 @@ public class Food extends MatjiData{
 	private int id;
 	private String name;
 
-	public Food() {
-		
-	}
+	public Food() {}
 	
 	public Food(Parcel in) {
 		readFromParcel(in);

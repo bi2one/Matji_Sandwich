@@ -13,9 +13,7 @@ public class Me extends MatjiData{
 	private String[] followers;
 	private String token;
 	
-	public Me() {
-		
-	}
+	public Me() {}
 	
 	public Me(Parcel in) {
 		readFromParcel(in);

@@ -14,9 +14,7 @@ public class StoreFood extends MatjiData{
 	private Food food;
 	private User user;
 
-	public StoreFood() {
-		
-	}
+	public StoreFood() {}
 	
 	public StoreFood(Parcel in) {
 		readFromParcel(in);

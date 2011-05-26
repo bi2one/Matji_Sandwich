@@ -44,16 +44,16 @@ public class UserTabActivity extends TabActivity {
 				.setIndicator("메인")
 				.setContent(mainIntent));
 		tabHost.addTab(tabHost.newTabSpec("my_store")
-				.setIndicator("내 맛집")
+				.setIndicator("메뉴")
 				.setContent(new Intent(this, StoreMoreActivity.class)));
 		tabHost.addTab(tabHost.newTabSpec("my_post")
-				.setIndicator("내 메모")
+				.setIndicator("메모")
 				.setContent(new Intent(this, StoreMoreActivity.class)));
 		tabHost.addTab(tabHost.newTabSpec("my_image")
-				.setIndicator("내 이미지")
+				.setIndicator("이미지")
 				.setContent(new Intent(this, StoreMoreActivity.class)));
 		tabHost.addTab(tabHost.newTabSpec("more")
-				.setIndicator("More")
+				.setIndicator("설정")
 				.setContent(new Intent(this, StoreMoreActivity.class)));	
 	}
 }

@@ -147,7 +147,6 @@ public class StoreHttpRequest extends HttpRequest {
     	Log.d("Matji", "StoreHttpRequest resultBody: " + resultBody);
 		Log.d("Matji", "StoreHttpRequest resultCode: " + resultCode);
 
-		// Log.d("PARSER!!!!", (parser == null) + "");
     	return parser.parseToMatjiDataList(resultBody);
     }
 }

@@ -22,9 +22,7 @@ public class Post extends MatjiData {
 	private Store store;
 	private Activity activity;
 
-	public Post() {
-		
-	}
+	public Post() {}
 	
 	public Post(Parcel in) {
 		readFromParcel(in);

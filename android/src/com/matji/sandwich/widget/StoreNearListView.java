@@ -32,7 +32,6 @@ public class StoreNearListView extends RequestableMListView {
 
     public HttpRequest request() {
 	storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, getPage(), getLimit());
-	Log.d("Matji", "StoreNearListView :: line 34");
 	return storeRequest;
     }
     

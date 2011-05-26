@@ -4,24 +4,34 @@ import android.widget.ImageView;
 import java.util.HashMap;
 
 public class MatjiImageDownloader {
-    private static final String URL_USER_IMAGE = "http://api.matji.com/v2/users/profile";
-    private static final String URL_ATTACH_FILE_IMAGE = "http://api.matji.com/v2/attach_files/image";
+	private static final String URL_USER_IMAGE = "http://api.matji.com/users/profile";
+	private static final String URL_ATTACH_FILE_IMAGE = "http://api.matji.com/v2/attach_files/image";
+	public static final String IMAGE_SSMALL = "ss";
+	public static final String IMAGE_SMALL = "s";
+	public static final String IMAGE_MEDIUM = "m";
+	public static final String IMAGE_LARGE = "l";
+	public static final String IMAGE_XLARGE = "xl";
 
-    private ImageDownloader downloader;
+	private ImageDownloader downloader;
 
-    public MatjiImageDownloader() {
-	downloader = new ImageDownloader();
-    }
-    
-    public void downloadUserImage(int userId, ImageView imageView) {
-	HashMap<String, String> params = new HashMap<String, String>();
-	params.put("user_id", userId + "");
-	downloader.download(URL_USER_IMAGE, params, imageView);
-    }
+	public MatjiImageDownloader() {
+		downloader = new ImageDownloader();
+	}
 
-    public void downloadAttachFileImage(int attachFileId, ImageView imageView) {
-	HashMap<String, String> params = new HashMap<String, String>();
-	params.put("attach_file_id", attachFileId + "");
-	downloader.download(URL_ATTACH_FILE_IMAGE, params, imageView);
-    }
+	public void downloadUserImage(int userId, ImageView imageView) {
+		downloadUserImage(userId, IMAGE_SSMALL, imageView);
+	}
+	
+	public void downloadUserImage(int userId, String imageSize, ImageView imageView) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("user_id", userId + "");
+		params.put("size", imageSize);
+		downloader.download(URL_USER_IMAGE, params, imageView);
+	}
+
+	public void downloadAttachFileImage(int attachFileId, ImageView imageView) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("attach_file_id", attachFileId + "");
+		downloader.download(URL_ATTACH_FILE_IMAGE, params, imageView);
+	}
 }

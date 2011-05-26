@@ -14,9 +14,7 @@ public class Bookmark extends MatjiData{
 	private String created_at;
 	private String updated_at;
 	
-	public Bookmark() {
-		
-	}
+	public Bookmark() {}
 	
 	public Bookmark(Parcel in) {
 		readFromParcel(in);

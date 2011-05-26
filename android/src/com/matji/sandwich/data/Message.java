@@ -14,9 +14,7 @@ public class Message extends MatjiData{
 	private String created_at;
 	private String updated_at;
 
-	public Message() {
-		
-	}
+	public Message() {}
 	
 	public Message(Parcel in) {
 		readFromParcel(in);

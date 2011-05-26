@@ -21,9 +21,7 @@ public class Following extends MatjiData{
 	private User following_user;
 	private User followed_user;
 	
-	public Following() {
-		
-	}
+	public Following() {}
 	
 	public Following(Parcel in) {
 		readFromParcel(in);

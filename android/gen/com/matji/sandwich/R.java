@@ -88,26 +88,26 @@ containing a value of this type.
         public static final int testroind=0x7f020011;
     }
     public static final class id {
-        public static final int ImageViewTest=0x7f07003a;
-        public static final int ListView1=0x7f070037;
-        public static final int ListView2=0x7f070038;
-        public static final int ListView3=0x7f070039;
-        public static final int PagerControl=0x7f070032;
-        public static final int PagerControlNextText=0x7f070035;
-        public static final int PagerControlPrevText=0x7f070033;
-        public static final int PagerControlProgress=0x7f070034;
-        public static final int SwipeView=0x7f070036;
+        public static final int ImageViewTest=0x7f070039;
+        public static final int ListView1=0x7f070036;
+        public static final int ListView2=0x7f070037;
+        public static final int ListView3=0x7f070038;
+        public static final int PagerControl=0x7f070031;
+        public static final int PagerControlNextText=0x7f070034;
+        public static final int PagerControlPrevText=0x7f070032;
+        public static final int PagerControlProgress=0x7f070033;
+        public static final int SwipeView=0x7f070035;
         public static final int cancel=0x7f070008;
         public static final int image=0x7f07000e;
         public static final int layout_main=0x7f07000b;
-        public static final int list=0x7f07003b;
-        public static final int list_view_row_comment=0x7f07003c;
-        public static final int list_view_row_created_at=0x7f070040;
-        public static final int list_view_row_from_where=0x7f07003d;
-        public static final int list_view_row_id=0x7f07003f;
-        public static final int list_view_row_post_id=0x7f07003e;
-        public static final int list_view_row_updated_at=0x7f070041;
-        public static final int list_view_row_user_id=0x7f070042;
+        public static final int list=0x7f07003a;
+        public static final int list_view_row_comment=0x7f07003b;
+        public static final int list_view_row_created_at=0x7f07003f;
+        public static final int list_view_row_from_where=0x7f07003c;
+        public static final int list_view_row_id=0x7f07003e;
+        public static final int list_view_row_post_id=0x7f07003d;
+        public static final int list_view_row_updated_at=0x7f070040;
+        public static final int list_view_row_user_id=0x7f070041;
         public static final int map_view=0x7f07000a;
         public static final int name=0x7f070010;
         public static final int ok=0x7f070003;
@@ -130,37 +130,45 @@ containing a value of this type.
         public static final int signin=0x7f07001a;
         public static final int store_adapter_address=0x7f07001c;
         public static final int store_adapter_name=0x7f07001b;
-        public static final int store_main_cover=0x7f070029;
-        public static final int store_main_detail_item_area=0x7f07002a;
-        public static final int store_main_header=0x7f07001e;
-        public static final int store_main_header_button=0x7f070024;
-        public static final int store_main_header_wrap=0x7f07001d;
-        public static final int store_main_image_button=0x7f07002f;
-        public static final int store_main_like_store=0x7f070021;
-        public static final int store_main_like_store_count=0x7f070022;
-        public static final int store_main_like_store_image=0x7f070020;
-        public static final int store_main_map_button=0x7f070026;
-        public static final int store_main_memo_button=0x7f07002e;
-        public static final int store_main_reg_user=0x7f07002b;
-        public static final int store_main_scrap_button=0x7f070025;
-        public static final int store_main_show_detail_info_button=0x7f07002c;
-        public static final int store_main_show_menu_info_button=0x7f07002d;
-        public static final int store_main_store_address=0x7f070023;
-        public static final int store_main_store_image=0x7f07001f;
-        public static final int store_main_tag_button=0x7f070030;
-        public static final int store_main_tel_button=0x7f070027;
-        public static final int store_main_url_button=0x7f070031;
-        public static final int store_main_web_button=0x7f070028;
+        public static final int store_main_cover=0x7f070028;
+        public static final int store_main_detail_item_area=0x7f070029;
+        public static final int store_main_header=0x7f07001d;
+        public static final int store_main_header_button=0x7f070023;
+        public static final int store_main_image_view_button=0x7f07002e;
+        public static final int store_main_like_store=0x7f070020;
+        public static final int store_main_like_store_count=0x7f070021;
+        public static final int store_main_like_store_image=0x7f07001f;
+        public static final int store_main_map_button=0x7f070025;
+        public static final int store_main_memo_view_button=0x7f07002d;
+        public static final int store_main_menu_view_button=0x7f07002c;
+        public static final int store_main_reg_user=0x7f07002a;
+        public static final int store_main_scrap_button=0x7f070024;
+        public static final int store_main_show_store_info_view_button=0x7f07002b;
+        public static final int store_main_store_address=0x7f070022;
+        public static final int store_main_store_image=0x7f07001e;
+        public static final int store_main_tag_view_button=0x7f07002f;
+        public static final int store_main_tel_button=0x7f070026;
+        public static final int store_main_url_button=0x7f070030;
+        public static final int store_main_web_button=0x7f070027;
         public static final int textView1=0x7f070009;
         public static final int textView2=0x7f070005;
         public static final int thumnail=0x7f07000f;
-        public static final int user_main_email=0x7f070044;
-        public static final int user_main_follower_count=0x7f070048;
-        public static final int user_main_following_count=0x7f070049;
-        public static final int user_main_intro=0x7f070046;
-        public static final int user_main_nick=0x7f070043;
-        public static final int user_main_title=0x7f070047;
-        public static final int user_main_userid=0x7f070045;
+        public static final int user_main_activity_area_view_button=0x7f07004d;
+        public static final int user_main_blogging=0x7f07004a;
+        public static final int user_main_follow_button=0x7f070046;
+        public static final int user_main_follower_count=0x7f070047;
+        public static final int user_main_following_count=0x7f070048;
+        public static final int user_main_fork_store_view_button=0x7f07004c;
+        public static final int user_main_gotoblog_button=0x7f07004b;
+        public static final int user_main_grade=0x7f070045;
+        public static final int user_main_grade_image=0x7f070044;
+        public static final int user_main_image_view_button=0x7f07004f;
+        public static final int user_main_intro=0x7f070049;
+        public static final int user_main_post_view_button=0x7f07004e;
+        public static final int user_main_tag_view_button=0x7f070050;
+        public static final int user_main_title=0x7f070043;
+        public static final int user_main_url_view_button=0x7f070051;
+        public static final int user_main_user_image=0x7f070042;
         public static final int username=0x7f070006;
     }
     public static final class layout {
@@ -186,26 +194,29 @@ containing a value of this type.
         public static final int user_main=0x7f030013;
     }
     public static final class string {
-        public static final int all_memo=0x7f050020;
+        public static final int all_memo=0x7f050026;
         /**  StoreSwipeActivity 
          */
-        public static final int all_store=0x7f05001e;
+        public static final int all_store=0x7f050024;
         /**  API Keys 
          */
-        public static final int api_key=0x7f05001c;
+        public static final int api_key=0x7f05001f;
         public static final int app_name=0x7f050000;
-        public static final int default_string_alarm=0x7f05001a;
-        public static final int default_string_image=0x7f050017;
-        public static final int default_string_map=0x7f050018;
-        public static final int default_string_memo=0x7f050016;
+        public static final int default_string_alarm=0x7f05001b;
+        public static final int default_string_follow=0x7f05001d;
+        public static final int default_string_image=0x7f050018;
+        public static final int default_string_map=0x7f050019;
+        public static final int default_string_memo=0x7f050017;
+        public static final int default_string_not_reg_user=0x7f050014;
         public static final int default_string_popular_food=0x7f050013;
-        public static final int default_string_reg_user=0x7f050014;
-        public static final int default_string_search=0x7f05001b;
-        public static final int default_string_store=0x7f050019;
+        public static final int default_string_reg_user=0x7f050015;
+        public static final int default_string_search=0x7f05001c;
+        public static final int default_string_store=0x7f05001a;
         /**  default String... 
          */
         public static final int default_string_tag=0x7f050012;
-        public static final int default_string_url=0x7f050015;
+        public static final int default_string_unfollow=0x7f05001e;
+        public static final int default_string_url=0x7f050016;
         /**  MatjiException 
          */
         public static final int exception_GpsAvailableMatjiException=0x7f050002;
@@ -229,7 +240,7 @@ containing a value of this type.
  development!!!! 
          */
         public static final int map_api_key=0x7f050001;
-        public static final int near_store=0x7f05001f;
+        public static final int near_store=0x7f050025;
         /**  pull_to_refresh 
          */
         public static final int pull_to_refresh_pull_label=0x7f05000e;
@@ -237,9 +248,14 @@ containing a value of this type.
         public static final int pull_to_refresh_release_label=0x7f05000f;
         public static final int pull_to_refresh_tap_label=0x7f050011;
         /**  mozziluv's API key 
- StoreInfoActivity  
+ StoreMainActivity  
          */
-        public static final int store_main_like_store=0x7f05001d;
+        public static final int store_main_like_store=0x7f050020;
+        public static final int user_main_follower=0x7f050022;
+        public static final int user_main_following=0x7f050023;
+        /**  UserMainActivity 
+         */
+        public static final int user_main_not_found_intro=0x7f050021;
     }
     public static final class style {
         public static final int DefaultFill=0x7f060001;

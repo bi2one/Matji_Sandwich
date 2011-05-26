@@ -10,9 +10,7 @@ public class UserMileage extends MatjiData{
 	private String grade;
 	private User user;
 
-	public UserMileage() {
-		
-	}
+	public UserMileage() {}
 	
 	public UserMileage(Parcel in) {
 		readFromParcel(in);

@@ -11,9 +11,7 @@ public class StoreDetailInfoLog extends MatjiData{
 	private Store store;
 	private User user;
 
-	public StoreDetailInfoLog() {
-		
-	}
+	public StoreDetailInfoLog() {}
 	
 	public StoreDetailInfoLog(Parcel in) {
 		readFromParcel(in);

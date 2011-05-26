@@ -12,9 +12,7 @@ public class PostTag extends MatjiData{
 	private Tag tag;
 	private Post post;
 	
-	public PostTag() {
-		
-	}
+	public PostTag() {}
 	
 	public PostTag(Parcel in) {
 		readFromParcel(in);

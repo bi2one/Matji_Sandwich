@@ -7,7 +7,7 @@ public class Count extends MatjiData{
 	private int count;
 	
 	public Count() {
-		
+		this.count = 0;
 	}
 	
 	public Count(Parcel in) {

@@ -30,9 +30,9 @@ public class PostInfoActivity extends Activity {
 		TextView addressText = (TextView) findViewById(R.id.store_main_store_address);
 		TextView coverText = (TextView) findViewById(R.id.store_main_cover);
 		TextView RegUser = (TextView) findViewById(R.id.store_main_reg_user);
-		Button postCountButton = (Button)findViewById(R.id.store_main_memo_button);
-		Button imageCountButton = (Button)findViewById(R.id.store_main_image_button);
-		Button tagCountButton = (Button)findViewById(R.id.store_main_tag_button);
+		Button postCountButton = (Button)findViewById(R.id.store_main_memo_view_button);
+		Button imageCountButton = (Button)findViewById(R.id.store_main_image_view_button);
+		Button tagCountButton = (Button)findViewById(R.id.store_main_tag_view_button);
 		Button urlButton = (Button)findViewById(R.id.store_main_url_button);
 
 //		if (store.getTagCount() > 0) {

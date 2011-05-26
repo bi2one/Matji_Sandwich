@@ -9,9 +9,7 @@ public class Tag extends MatjiData{
 	private String updated_at;
 	private int id;
 
-	public Tag() {
-		
-	}
+	public Tag() {}
 	
 	public Tag(Parcel in) {
 		readFromParcel(in);

@@ -11,9 +11,7 @@ public class UserTag extends MatjiData{
 	private String created_at;
 	private String updated_at;
 	
-	public UserTag() {
-		
-	}
+	public UserTag() {}
 	
 	public UserTag(Parcel in) {
 		readFromParcel(in);

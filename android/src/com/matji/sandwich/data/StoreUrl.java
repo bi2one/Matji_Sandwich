@@ -11,9 +11,7 @@ public class StoreUrl extends MatjiData{
 	private Store store;
 	private User user;
 
-	public StoreUrl() {
-		
-	}
+	public StoreUrl() {}
 	
 	public StoreUrl(Parcel in) {
 		readFromParcel(in);

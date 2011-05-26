@@ -13,9 +13,7 @@ public class StoreTag extends MatjiData{
 	private Tag tag;
 	private Store store;
 	
-	public StoreTag() {
-		
-	}
+	public StoreTag() {}
 	
 	public StoreTag(Parcel in) {
 		readFromParcel(in);

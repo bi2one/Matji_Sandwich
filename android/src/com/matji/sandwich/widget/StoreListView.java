@@ -32,7 +32,6 @@ public class StoreListView extends RequestableMListView {
     }
 
     public HttpRequest request() {
-    	Log.d("Matji", "StoreListView :: line 35");
 	storeRequest.actionList(getPage(), getLimit());
 	return storeRequest;
     }

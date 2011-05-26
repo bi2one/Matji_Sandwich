@@ -42,7 +42,6 @@ public class PostHttpRequest extends HttpRequest {
     public void actionDelete(int post_id, String access_token){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "delete";
-//
     	
     	postHashtable.clear();
     	postHashtable.put("post_id",post_id + "");
@@ -51,7 +50,6 @@ public class PostHttpRequest extends HttpRequest {
     public void actionUnlike(int post_id){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "unlike";
-//    	
     	
     	postHashtable.clear();
     	postHashtable.put("post_id", post_id + "");
@@ -143,8 +141,8 @@ public class PostHttpRequest extends HttpRequest {
     	String resultBody = response.getHttpResponseBodyAsString();
     	String resultCode = response.getHttpStatusCode() + "";
 
-    	Log.d("Matji", "PostresultresultBody: " + resultBody);
-		Log.d("Matji", "PostresultresultCode: " + resultCode);
+    	Log.d("Matji", "PostHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "PostHttpRequest resultCode: " + resultCode);
 
 		return parser.parseToMatjiDataList(resultBody);
     }

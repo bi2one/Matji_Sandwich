@@ -13,9 +13,7 @@ public class Notice extends MatjiData{
 	private String target;
 	private String end_date;
 	
-	public Notice() {
-		
-	}
+	public Notice() {}
 	
 	public Notice(Parcel in) {
 		readFromParcel(in);

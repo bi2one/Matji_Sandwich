@@ -59,11 +59,11 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		switch(v.getId()){
 		case R.id.post_adapter_nick:
 			Post post = (Post)getAdapterData().get(Integer.parseInt((String)v.getTag()));
-			Log.d("-----", "" +  post.getUser().getNick());
 			Intent intent = new Intent(getActivity(), UserTabActivity.class);
 			intent.putExtra("user", post.getUser());
 			getActivity().startActivity(intent);
 			break;
+			
 		case R.id.post_adapter_store_name:
 			Log.d("asdkasldkljad","2");
 			break;
