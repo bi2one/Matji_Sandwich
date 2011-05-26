@@ -20,9 +20,6 @@ public class Session implements Requestable {
 	private static final String keyForCurrentUser = "CurrentUser";
 	private static final String keyForAccessToken = "AccessToken";
 	
-	private User mCurrentUser;
-	private String mToken;
-	
 	private PreferenceProvider mPrefs;
 	private Context mContext;
 	private HttpRequestManager mManager;
@@ -61,7 +58,8 @@ public class Session implements Requestable {
 	}
 	
 	public boolean logout(){
-		return true;
+		mPrefs.clear();
+		return mPrefs.commit();
 	}
 	
 //	public boolean isBookmarked(String object, int id){
@@ -77,15 +75,12 @@ public class Session implements Requestable {
 //	}
 //	
 	public boolean isLogin(){
-		return (mCurrentUser == null) ? false : true;	
+		return (mPrefs.getObject(keyForCurrentUser) == null) ? false : true;	
 	}
 	
-	
-	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (tag == LOGIN){
 				Me me = (Me)data.get(0);
-				Log.d("sadadad", "Token is " + me.getToken());
 				
 				try {
 					mPrefs.setObject(keyForCurrentUser, me.getUser());
@@ -93,6 +88,9 @@ public class Session implements Requestable {
 					e.printStackTrace();
 				}
 				mPrefs.setString(keyForAccessToken, me.getToken());
+				boolean success = mPrefs.commit();
+				Log.d("Login", (success == true) ? "success to login" : "failed to login");
+				
 				// To do :
 				// Follow
 				// Like
@@ -105,8 +103,6 @@ public class Session implements Requestable {
 	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		if (tag == LOGIN){
-				mPrefs.clear();
-				
 				mLoginableActivity.loginFailed();
 		}
 	}
