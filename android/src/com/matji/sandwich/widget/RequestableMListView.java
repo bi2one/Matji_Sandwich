@@ -97,7 +97,7 @@ PullToRefreshListView.OnRefreshListener {
 
 	public void start(Activity activity) {
 		super.start(activity);
-		requestNext();
+		//requestNext();
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
