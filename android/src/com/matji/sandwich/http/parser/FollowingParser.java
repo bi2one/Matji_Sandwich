@@ -9,6 +9,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class FollowingParser extends MatjiDataParser {
 	protected Following getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "FollowingParser START");
 		if (object == null) return null;
 		
 		Following following = new Following();

@@ -10,6 +10,8 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class UserParser extends MatjiDataParser {
 	protected User getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "UserParser START");
+
 		if (object == null) return null;
 		
 		User user = new User();

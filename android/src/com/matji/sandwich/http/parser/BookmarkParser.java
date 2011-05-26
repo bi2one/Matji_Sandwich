@@ -11,6 +11,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class BookmarkParser extends MatjiDataParser {
 	protected Bookmark getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "BookmarkParser START");
 		if (object == null) return null;
 		
 		Bookmark bookmark = new Bookmark();

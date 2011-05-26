@@ -11,6 +11,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class AttachFileParser extends MatjiDataParser {
 	protected AttachFile getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "AttachFileParser START");
 		if (object == null) return null;
 		
 		AttachFile attachFile = new AttachFile();

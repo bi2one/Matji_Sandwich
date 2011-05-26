@@ -11,6 +11,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class PostParser extends MatjiDataParser {
 	protected Post getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "PostParser START");
 		if (object == null) return null;
 		
 		Post post = new Post();

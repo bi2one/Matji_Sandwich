@@ -11,6 +11,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class StoreFoodParser extends MatjiDataParser {
 	protected StoreFood getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "StoreFoodParser START");
 		if (object == null) return null;
 		
 		StoreFood storeFood = new StoreFood();

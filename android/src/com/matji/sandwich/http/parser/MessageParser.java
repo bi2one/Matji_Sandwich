@@ -9,6 +9,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class MessageParser extends MatjiDataParser {
 	protected Message getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "MessageParser START");
 		if (object == null) return null;
 		
 		Message message = new Message();

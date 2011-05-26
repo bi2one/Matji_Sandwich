@@ -10,6 +10,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class CommentParser extends MatjiDataParser {
 	protected Comment getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "CommentParser START");
 		if (object == null) return null;
 		
 		Comment comment = new Comment();

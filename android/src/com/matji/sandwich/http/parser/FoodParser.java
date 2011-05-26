@@ -8,6 +8,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class FoodParser extends MatjiDataParser {
 	protected Food getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "FoodParser START");
 		if (object == null) return null;
 		
 		Food food = new Food();

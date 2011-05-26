@@ -8,6 +8,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class ActivityParser extends MatjiDataParser {
 	protected Activity getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "ActivityParser START");
 		if (object == null) return null;
 		
 		Activity activity = new Activity();

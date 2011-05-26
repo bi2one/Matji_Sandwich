@@ -8,6 +8,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class CurrentUserParser extends MatjiDataParser {
 	protected CurrentUser getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "CurrentUserParser START");
 		if (object == null) return null; 
 		/*
 		Comment comment = new Comment();

@@ -9,6 +9,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class RegionParser extends MatjiDataParser {
 	protected Region getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "RegionParser START");
 		if (object == null) return null;
 		
 		Region region = new Region();

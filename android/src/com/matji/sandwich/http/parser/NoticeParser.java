@@ -8,6 +8,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class NoticeParser extends MatjiDataParser {
 	protected Notice getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "NoticeParser START");
 		if (object == null) return null;
 		
 		Notice notice = new Notice();

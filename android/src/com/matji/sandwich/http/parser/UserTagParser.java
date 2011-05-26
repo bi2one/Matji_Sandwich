@@ -8,6 +8,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class UserTagParser extends MatjiDataParser {
 	protected UserTag getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "UserTagParser START");
 		if (object == null) return null;
 		
 		UserTag userTag = new UserTag();

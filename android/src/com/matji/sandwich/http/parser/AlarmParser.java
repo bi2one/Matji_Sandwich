@@ -9,6 +9,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class AlarmParser extends MatjiDataParser {
 	protected Alarm getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "AlarmParser START");
 		if (object == null) return null;
 		
 		Alarm alarm = new Alarm();

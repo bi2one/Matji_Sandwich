@@ -14,6 +14,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class MeParser extends MatjiDataParser {
 	protected Me getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "MeParser START");
 		if (object == null) return null;
 		
 		Me me = new Me();

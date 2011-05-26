@@ -10,6 +10,7 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class LikeParser extends MatjiDataParser {
 	protected Like getMatjiData(JsonObject object) throws MatjiException {
+		Log.d("Matji", "LikeParser START");
 		if (object == null) return null;
 		
 		Like like = new Like();
