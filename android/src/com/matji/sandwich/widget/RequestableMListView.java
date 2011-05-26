@@ -3,6 +3,7 @@ package com.matji.sandwich.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -72,14 +73,26 @@ PullToRefreshListView.OnRefreshListener {
 	}
 
 	public void requestNext() {
+		Log.d("refresh" , "requestNext()");
+		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
 		manager.request(getActivity(), request(), REQUEST_NEXT);
 		nextValue();
 	}
 
+	
 	public void requestReload() {
+		Log.d("refresh", "requestReload()");
+		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
 		initValue();
 		manager.request(getActivity(), request(), REQUEST_RELOAD);
 		nextValue();
+	}
+	
+	
+	public void requestConditionally(){
+		if (adapterData == null || adapterData.size() == 0){
+			requestReload();
+		}
 	}
 
 
@@ -95,23 +108,30 @@ PullToRefreshListView.OnRefreshListener {
 		return adapterData;
 	}
 
-	public void start(Activity activity) {
-		super.start(activity);
-		//requestNext();
-	}
+//	public void setActivity(Activity activity) {
+//		super.setActivity(activity);
+//		// requestNext();
+//	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		if (data.size() == 0 || data.size() < limit)
+		
+		if (data.size() == 0 || data.size() < limit){
 			scrollListener.requestSetOff();
+		}else{
+			scrollListener.requestSetOn();
+		}
+		
 		for (int i = 0; i < data.size(); i++) {
 			adapterData.add(data.get(i));
 		}
-		//		adapterData = getListByT(data);
+		//	adapterData = getListByT(data);
 
 		((MBaseAdapter)adapter).notifyDataSetChanged();
 
-		if (adapterData.size() <= limit)
+		if (adapterData.size() <= limit){
+			Log.d("refresh", "Will invoke onRefreshComplete()");
 			onRefreshComplete();
+		}
 	}
 
 
@@ -127,7 +147,9 @@ PullToRefreshListView.OnRefreshListener {
 		e.performExceptionHandling(getContext());
 	}
 
+	
 	public void onRefresh() {
+		Log.d("refresh", "OnRefresh!!!!");
 		requestReload();
 
 		//		 protected MatjiData getData(int position) {

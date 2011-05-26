@@ -1,15 +1,20 @@
 package com.matji.sandwich;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
+import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.StoreListView;
 import com.matji.sandwich.widget.PagerControl;
 import com.matji.sandwich.widget.StoreNearListView;
@@ -27,17 +32,25 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
     private PagerControl control;
     private ImageView image;
     private Context mContext;
-    private MatjiImageDownloader downloader;
-
+    private MatjiImageDownloader mDownloader;
+    private int mCurrentPage;
+    private ArrayList<View> mContentViews;
+    
+    
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.store_slider);
 	mContext = getApplicationContext();
+	mContentViews = new ArrayList<View>();
+	mCurrentPage = 0;
+	mDownloader = new MatjiImageDownloader();	
+	
 	pagerControlStringRef = new int[] { R.string.all_store,
 					    R.string.near_store,
 					    R.string.all_memo,
 					    R.string.all_memo };
-	downloader = new MatjiImageDownloader();
+	
+
 
 	control = (PagerControl)findViewById(R.id.PagerControl);
 	swipeView = (SwipeView)findViewById(R.id.SwipeView);
@@ -45,14 +58,20 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	view2 = (StoreNearListView)findViewById(R.id.ListView2);
 	view3 = (PostListView)findViewById(R.id.ListView3);
 	image = (ImageView)findViewById(R.id.ImageViewTest);
+	
+	mContentViews.add(view1);
+	mContentViews.add(view2);
+	mContentViews.add(view3);
+	
+	mDownloader.downloadUserImage(100000006, image);
 
-	downloader.downloadUserImage(100000006, image);
-
-	view1.start(this);
-	view2.start(this);
-	view3.start(this);
-	control.start(this);
-
+	view1.setActivity(this);
+	view1.requestReload();
+	view2.setActivity(this);
+	view3.setActivity(this);
+	
+	
+	control.start(this);	
 	control.setNumPages(swipeView.getChildCount());
 	control.setViewNames(pagerControlStringRef);
 
@@ -62,7 +81,20 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
     public void onScroll(int scrollX) { }
 
     public void onViewScrollFinished(int currentPage) {
-	// Log.d("CURRENT", currentPage + "");
-	control.setCurrentPage(currentPage);
+    	if (mCurrentPage != currentPage){
+    		Log.d("refresh", "pageChanged!");
+    		
+    		try {
+	    		mCurrentPage = currentPage;
+	    		control.setCurrentPage(currentPage);
+	        	View view = mContentViews.get(currentPage);
+	        	if (view instanceof RequestableMListView){
+	        		RequestableMListView listView = (RequestableMListView)view;
+	        		listView.requestConditionally();
+	        	}
+	        	
+    		}catch (IndexOutOfBoundsException e){ e.printStackTrace(); }
+    	}
+    	
     }
 }

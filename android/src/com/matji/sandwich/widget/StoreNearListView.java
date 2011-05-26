@@ -26,9 +26,9 @@ public class StoreNearListView extends RequestableMListView {
 	storeRequest = new StoreHttpRequest(context);
     }
 
-    public void start(Activity activity) {
-	super.start(activity);
-    }
+//    public void start(Activity activity) {
+//	super.start(activity);
+//    }
 
     public HttpRequest request() {
 	storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, getPage(), getLimit());

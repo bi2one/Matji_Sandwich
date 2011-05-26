@@ -381,7 +381,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
     }
 
     public void onRefresh() {
-        // Log.d(TAG, "onRefresh");
+        Log.d("refresh", "onRefresh");
 
         if (mOnRefreshListener != null) {
             mOnRefreshListener.onRefresh();
@@ -393,6 +393,8 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param lastUpdated Last updated at.
      */
     public void onRefreshComplete(CharSequence lastUpdated) {
+    	Log.d("refresh", "onRefreshComplete(latUpdated)");
+    	
         setLastUpdated(lastUpdated);
         onRefreshComplete();
     }
@@ -401,7 +403,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * Resets the list to a normal state after a refresh.
      */
     public void onRefreshComplete() {
-        Log.d(TAG, "onRefreshComplete");
+        Log.d("refresh", "onRefreshComplete");
 
         resetHeader();
 

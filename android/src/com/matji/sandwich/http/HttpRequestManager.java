@@ -23,6 +23,7 @@ public class HttpRequestManager {
 	private Stack<RequestTagPair> requestPool;
 	private Stack<DataTagPair> dataPool;
 	private MatjiException lastOccuredException = null;
+	private Activity mParentActivity;
 	private boolean isRunning = false;
 
 	public HttpRequestManager(Context context, Requestable requestable) {
@@ -41,7 +42,9 @@ public class HttpRequestManager {
 	// }
 
 	public void request(Activity parentActivity, HttpRequest request, int tag) {
-		spinner = getSpinner(parentActivity);
+		this.mParentActivity = parentActivity;
+		
+		spinner = getSpinner();
 		requestPool.push(new RequestTagPair(request, tag));
 
 		this.lastOccuredException = null;
@@ -50,11 +53,11 @@ public class HttpRequestManager {
 		httpAsyncTask.execute(tag);
 	}
 
-	private Spinner getSpinner(Activity parentActivity) {
+	private Spinner getSpinner() {
 		if (spinner == null){
 			synchronized(NormalSpinner.class) {
 				if (spinner == null) {
-					spinner = new NormalSpinner(context, parentActivity);
+					spinner = new NormalSpinner(context);
 				}
 			}
 		}
@@ -109,7 +112,8 @@ public class HttpRequestManager {
 		if (!requestPool.empty()) {
 			isRunning = true;
 			if (spinner != null) {
-				spinner.start();
+				Log.d("refresh", "Start spinner");
+				spinner.start(mParentActivity);
 			}
 		}
 	}
@@ -118,6 +122,7 @@ public class HttpRequestManager {
 		if (requestPool.empty()) {
 			isRunning = false;
 			if (spinner != null) {
+				Log.d("refresh", "Stop spinner");
 				spinner.stop();
 			}
 		}
