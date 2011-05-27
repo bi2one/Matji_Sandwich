@@ -2,8 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
@@ -14,7 +12,6 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class MeParser extends MatjiDataParser {
 	protected Me getMatjiData(JsonObject object) throws MatjiException {
-		Log.d("Matji", "MeParser START");
 		if (object == null) return null;
 		
 		Me me = new Me();
@@ -62,7 +59,6 @@ public class MeParser extends MatjiDataParser {
 		if (token != null)
 			me.setToken(token);
 		
-		Log.d("Matji", "MeParser END");
 		return me;
 	}
 }

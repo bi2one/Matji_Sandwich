@@ -3,9 +3,7 @@ package com.matji.sandwich;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.*;
 import android.widget.*;
-import android.widget.TabHost.OnTabChangeListener;
 
 public class MainTabActivity extends TabActivity{
     TabHost tabHost;

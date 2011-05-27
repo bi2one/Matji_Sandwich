@@ -1,7 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.UserExternalAccount;
@@ -10,8 +8,6 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class UserParser extends MatjiDataParser {
 	protected User getMatjiData(JsonObject object) throws MatjiException {
-		Log.d("Matji", "UserParser START");
-
 		if (object == null) return null;
 		
 		User user = new User();
@@ -31,7 +27,6 @@ public class UserParser extends MatjiDataParser {
 		user.setExternalAccount((UserExternalAccount) new UserExternalAccountParser().getRawObject(getObject(object, "external_account") + ""));
 		user.setMileage((UserMileage) new UserMileageParser().getRawObject(getObject(object, "mileage") + ""));
 
-		Log.d("Matji", "UserParser END");
 		return user;
 	}
 }

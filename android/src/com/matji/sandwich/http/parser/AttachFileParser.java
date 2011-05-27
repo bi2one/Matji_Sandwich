@@ -1,7 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Post;
@@ -11,7 +9,6 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class AttachFileParser extends MatjiDataParser {
 	protected AttachFile getMatjiData(JsonObject object) throws MatjiException {
-		Log.d("Matji", "AttachFileParser START");
 		if (object == null) return null;
 		
 		AttachFile attachFile = new AttachFile();
@@ -27,7 +24,6 @@ public class AttachFileParser extends MatjiDataParser {
 		attachFile.setCreatedAt(getString(object, "created_at"));
 		attachFile.setUpdatedAt(getString(object, "updated_at"));
 
-		Log.d("Matji", "AttachFileParser END");
 		return attachFile;		
 	}
 }

@@ -83,7 +83,8 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("store_id",store_id + "");
     	getHashtable.put("page", page+"");
-    	getHashtable.put("limit", limit+"");
+    	getHashtable.put("limit", limit+"");  	
+		getHashtable.put("include", "user,store");
     }
     
     public void actionUserList(int user_id, int page, int limit){
@@ -94,7 +95,8 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
     	getHashtable.put("page", page+"");
-    	getHashtable.put("limit", limit+"");
+    	getHashtable.put("limit", limit+"");  	
+		getHashtable.put("include", "user,store");
     }
     
     public void actionMyList(int page , int limit){

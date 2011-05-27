@@ -209,7 +209,17 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
                 applyHeaderPadding(event);
                 break;
         }
-        return super.onTouchEvent(event);
+        
+        boolean flag = false;
+        try{
+        	flag = super.onTouchEvent(event);
+        }catch(Throwable e){
+        	e.printStackTrace();
+        	flag = true;
+        }
+        
+        
+        return flag;
     }
 
     private void applyHeaderPadding(MotionEvent ev) {

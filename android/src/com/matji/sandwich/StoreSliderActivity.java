@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.ViewGroup.LayoutParams;
-import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
@@ -21,7 +16,6 @@ import com.matji.sandwich.widget.StoreNearListView;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
 
 public class StoreSliderActivity extends Activity implements OnScrollListener {
     private int[] pagerControlStringRef;
@@ -30,9 +24,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
     private StoreNearListView view2;
     private PostListView view3;
     private PagerControl control;
-    private ImageView image;
     private Context mContext;
-    private MatjiImageDownloader mDownloader;
     private int mCurrentPage;
     private ArrayList<View> mContentViews;
     
@@ -43,12 +35,10 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	mContext = getApplicationContext();
 	mContentViews = new ArrayList<View>();
 	mCurrentPage = 0;
-	mDownloader = new MatjiImageDownloader();	
 	
 	pagerControlStringRef = new int[] { R.string.all_store,
 					    R.string.near_store,
-					    R.string.all_memo,
-					    R.string.all_memo };
+					    R.string.all_memo};
 	
 
 
@@ -57,13 +47,10 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	view1 = (StoreListView)findViewById(R.id.ListView1);
 	view2 = (StoreNearListView)findViewById(R.id.ListView2);
 	view3 = (PostListView)findViewById(R.id.ListView3);
-	image = (ImageView)findViewById(R.id.ImageViewTest);
 	
 	mContentViews.add(view1);
 	mContentViews.add(view2);
 	mContentViews.add(view3);
-	
-	mDownloader.downloadUserImage(100000006, image);
 
 	view1.setActivity(this);
 	view1.requestReload();

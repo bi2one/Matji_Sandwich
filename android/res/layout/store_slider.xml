@@ -44,13 +44,7 @@
 	android:id="@+id/ListView3"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent" />
-    <ImageView
-	android:id="@+id/ImageViewTest"
-	android:layout_width="50dp"
-	android:background="#000"
-	android:layout_height="50dp" />
   </com.matji.sandwich.widget.SwipeView>
-
 </LinearLayout>
 <!-- <com.matji.sandwich.widget.TestListView -->
 <!-- android:id="@+id/TestListView2" -->

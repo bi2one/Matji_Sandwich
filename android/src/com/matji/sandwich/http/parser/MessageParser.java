@@ -1,7 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.data.User;
@@ -9,7 +7,6 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class MessageParser extends MatjiDataParser {
 	protected Message getMatjiData(JsonObject object) throws MatjiException {
-		Log.d("Matji", "MessageParser START");
 		if (object == null) return null;
 		
 		Message message = new Message();
@@ -23,7 +20,6 @@ public class MessageParser extends MatjiDataParser {
 		message.setCreatedAt(getString(object, "created_at"));
 		message.setUpdatedAt(getString(object, "updated_at"));
 
-		Log.d("Matji", "MessageParser END");
 		return message;
 	}
 }

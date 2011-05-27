@@ -34,7 +34,7 @@
 				android:layout_below="@id/store_main_like_store_image" />
 		</RelativeLayout>
 		<LinearLayout
-			style="@style/store_main_ButtonArea"
+			style="@style/main_ButtonArea"
 			android:id="@+id/store_main_header_button">
 			<Button
 				android:text="스크랩"
@@ -80,14 +80,14 @@
 				android:textColor="#aaa" />
 		</LinearLayout>
 		<LinearLayout
-			style="@style/store_main_ButtonArea">
+			style="@style/main_ButtonArea">
 			<Button
 				android:text="맛집정보 보기"
-				style="@style/store_main_DetailInfoButton"
+				style="@style/main_DetailInfoButton"
 				android:id="@+id/store_main_show_store_info_view_button" />
 			<Button
 				android:text="메뉴 보기"
-				style="@style/store_main_DetailInfoButton"
+				style="@style/main_DetailInfoButton"
 				android:id="@+id/store_main_menu_view_button"
 				android:layout_marginLeft="7dp" />
 		</LinearLayout>
@@ -95,18 +95,18 @@
 	<RelativeLayout
 		style="@style/store_main_StoreMainFooter">
 		<Button
-			style="@style/store_main_DetailInfoButton"
+			style="@style/main_DetailInfoButton"
 			android:id="@+id/store_main_memo_view_button" />
 		<Button
-			style="@style/store_main_DetailInfoButton"
+			style="@style/main_DetailInfoButton"
 			android:id="@+id/store_main_image_view_button"
 			android:layout_toRightOf="@id/store_main_memo_view_button" />
 		<Button
-			style="@style/store_main_DetailInfoButton"
+			style="@style/main_DetailInfoButton"
 			android:id="@+id/store_main_tag_view_button"
 			android:layout_below="@id/store_main_memo_view_button" />
 		<Button
-			style="@style/store_main_DetailInfoButton"
+			style="@style/main_DetailInfoButton"
 			android:id="@+id/store_main_url_button"
 			android:layout_below="@id/store_main_image_view_button"
 			android:layout_toRightOf="@id/store_main_tag_view_button" />
