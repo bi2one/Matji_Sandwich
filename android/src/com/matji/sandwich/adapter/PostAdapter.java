@@ -35,7 +35,6 @@ public class PostAdapter extends MBaseAdapter {
 			postElement.dateAgo = (TextView) convertView.findViewById(R.id.post_adapter_created_at);
 			convertView.setTag(postElement);
 			
-			
 			PostListView postListView = (PostListView)parent;
 			postElement.nick.setOnClickListener(postListView);
 			postElement.storeName.setOnClickListener(postListView);
