@@ -120,6 +120,8 @@ containing a value of this type.
         public static final int post_adapter_nick=0x7f070011;
         public static final int post_adapter_post=0x7f070013;
         public static final int post_adapter_store_name=0x7f070012;
+        public static final int post_buttons=0x7f070055;
+        public static final int post_field=0x7f070054;
         public static final int progress_loading=0x7f07000d;
         public static final int pull_to_refresh_image=0x7f070016;
         public static final int pull_to_refresh_progress=0x7f070015;
@@ -155,6 +157,7 @@ containing a value of this type.
         public static final int textView1=0x7f070009;
         public static final int textView2=0x7f070005;
         public static final int thumnail=0x7f07000f;
+        public static final int upload_image=0x7f070056;
         public static final int user_main_activity_area_view_button=0x7f07004f;
         public static final int user_main_blogging=0x7f07004c;
         public static final int user_main_follow_button=0x7f070048;
@@ -172,6 +175,7 @@ containing a value of this type.
         public static final int user_main_url_view_button=0x7f070053;
         public static final int user_main_user_image=0x7f070044;
         public static final int username=0x7f070006;
+        public static final int write_complete=0x7f070057;
     }
     public static final class layout {
         public static final int c14_tabtest=0x7f030000;
@@ -194,6 +198,7 @@ containing a value of this type.
         public static final int testlistview=0x7f030011;
         public static final int testtabview=0x7f030012;
         public static final int user_main=0x7f030013;
+        public static final int write_post=0x7f030014;
     }
     public static final class string {
         public static final int all_memo=0x7f050026;

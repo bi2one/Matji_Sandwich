@@ -88,7 +88,6 @@ public class HttpRequestManager {
 				Log.d("Matji", "Yaho");
 				RequestTagPair pair = requestPool.pop();
 				dataPool.push(new DataTagPair(pair.getRequest().request(), pair.getTag()));
-				
 			}
 		} catch(MatjiException e) {
 			lastOccuredException = e;

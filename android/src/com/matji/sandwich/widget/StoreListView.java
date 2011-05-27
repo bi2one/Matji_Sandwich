@@ -28,10 +28,6 @@ public class StoreListView extends RequestableMListView {
 		setPage(1);
     }
 
-//    public void setActivity(Activity activity) {
-//    	super.start(activity);
-//    }
-
     public HttpRequest request() {
 		storeRequest.actionList(getPage(), getLimit());
 		return storeRequest;

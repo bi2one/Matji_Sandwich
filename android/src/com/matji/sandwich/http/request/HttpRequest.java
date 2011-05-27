@@ -73,12 +73,13 @@ public abstract class HttpRequest {
 
 	    Session session = Session.getInstance(context);
 	    if (postParam != null) {
-	    	if (session != null && session.isLogin())  
-	    		postParam.put("access_token", session.getCurrentUser().getToken());   
+	    	if (session != null && session.isLogin()) {
+	    		postParam.put("access_token", session.getToken());
+	    	}
 	    	postParam.put("format", "json"); 
 	    }else if (getParam != null) {
 	    	if (session != null && session.isLogin())
-	    		getParam.put("access_token", session.getCurrentUser().getToken());
+	    		//getParam.put("access_token", session.getCurrentUser().getToken());
 	    	getParam.put("format", "json");
 	    }
 	    
