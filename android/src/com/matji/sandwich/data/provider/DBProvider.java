@@ -27,7 +27,7 @@ public class DBProvider {
 	private static String FOLLOWING_TABLE_NAME = "matji_followings";
 	private static String FOLLOWER_TABLE_NAME = "matji_followers";
 	
-	private static DBProvider dbProvider;
+	private volatile static DBProvider dbProvider;
 	private DataBaseHelper dbHelper;
 	
 	private DBProvider(Context context) {
@@ -249,10 +249,13 @@ public class DBProvider {
 		return true;
 	}
 	
-	public boolean insertFollowings(ArrayList<String> followings){
-		Iterator<String> iter = followings.iterator();
+	public boolean insertFollowings(String[] followings){
 		String followingUId;
-		while ((followingUId = iter.next()) != null){
+		int index = 0;
+		int count = followings.length;
+		
+		for (index = 0; index < count; index++){
+			followingUId = followings[index];
 			insertFollowing(Integer.parseInt(followingUId));
 		}
 		return true;
@@ -276,10 +279,12 @@ public class DBProvider {
 		return true;
 	}
 	
-	public boolean insertFollowers(ArrayList<String> followers){
-		Iterator<String> iter = followers.iterator();
+	public boolean insertFollowers(String[] followers){
 		String followerUId;
-		while ((followerUId = iter.next()) != null){
+		int index = 0;
+		int count = followers.length;
+		for (index = 0; index < count; index++){
+			followerUId = followers[index];
 			insertFollower(Integer.parseInt(followerUId));
 		}
 		return true;
@@ -292,5 +297,5 @@ public class DBProvider {
 		return true;
 	}
 	
-	
+
 }
