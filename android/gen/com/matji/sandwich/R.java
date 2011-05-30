@@ -88,26 +88,18 @@ containing a value of this type.
         public static final int testroind=0x7f020011;
     }
     public static final class id {
-        public static final int ImageViewTest=0x7f07003b;
-        public static final int ListView1=0x7f070038;
-        public static final int ListView2=0x7f070039;
-        public static final int ListView3=0x7f07003a;
-        public static final int PagerControl=0x7f070033;
-        public static final int PagerControlNextText=0x7f070036;
-        public static final int PagerControlPrevText=0x7f070034;
-        public static final int PagerControlProgress=0x7f070035;
-        public static final int SwipeView=0x7f070037;
+        public static final int ListView1=0x7f070039;
+        public static final int ListView2=0x7f07003a;
+        public static final int ListView3=0x7f07003b;
+        public static final int PagerControl=0x7f070034;
+        public static final int PagerControlNextText=0x7f070037;
+        public static final int PagerControlPrevText=0x7f070035;
+        public static final int PagerControlProgress=0x7f070036;
+        public static final int SwipeView=0x7f070038;
         public static final int cancel=0x7f070008;
         public static final int image=0x7f07000e;
         public static final int layout_main=0x7f07000b;
         public static final int list=0x7f07003c;
-        public static final int list_view_row_comment=0x7f07003d;
-        public static final int list_view_row_created_at=0x7f070041;
-        public static final int list_view_row_from_where=0x7f07003e;
-        public static final int list_view_row_id=0x7f070040;
-        public static final int list_view_row_post_id=0x7f07003f;
-        public static final int list_view_row_updated_at=0x7f070042;
-        public static final int list_view_row_user_id=0x7f070043;
         public static final int map_view=0x7f07000a;
         public static final int name=0x7f070010;
         public static final int ok=0x7f070003;
@@ -120,6 +112,8 @@ containing a value of this type.
         public static final int post_adapter_nick=0x7f070011;
         public static final int post_adapter_post=0x7f070013;
         public static final int post_adapter_store_name=0x7f070012;
+        public static final int post_buttons=0x7f070055;
+        public static final int post_field=0x7f070054;
         public static final int progress_loading=0x7f07000d;
         public static final int pull_to_refresh_image=0x7f070016;
         public static final int pull_to_refresh_progress=0x7f070015;
@@ -152,26 +146,29 @@ containing a value of this type.
         public static final int store_main_tel_button=0x7f070028;
         public static final int store_main_url_button=0x7f070032;
         public static final int store_main_web_button=0x7f070029;
+        public static final int store_post_list_view=0x7f070033;
         public static final int textView1=0x7f070009;
         public static final int textView2=0x7f070005;
         public static final int thumnail=0x7f07000f;
-        public static final int user_main_activity_area_view_button=0x7f07004f;
-        public static final int user_main_blogging=0x7f07004c;
-        public static final int user_main_follow_button=0x7f070048;
-        public static final int user_main_follower_count=0x7f070049;
-        public static final int user_main_following_count=0x7f07004a;
-        public static final int user_main_fork_store_view_button=0x7f07004e;
-        public static final int user_main_gotoblog_button=0x7f07004d;
-        public static final int user_main_grade=0x7f070047;
-        public static final int user_main_grade_image=0x7f070046;
-        public static final int user_main_image_view_button=0x7f070051;
-        public static final int user_main_intro=0x7f07004b;
-        public static final int user_main_post_view_button=0x7f070050;
-        public static final int user_main_tag_view_button=0x7f070052;
-        public static final int user_main_title=0x7f070045;
-        public static final int user_main_url_view_button=0x7f070053;
-        public static final int user_main_user_image=0x7f070044;
+        public static final int user_main_activity_area_view_button=0x7f070048;
+        public static final int user_main_blogging=0x7f070045;
+        public static final int user_main_follow_button=0x7f070041;
+        public static final int user_main_follower_count=0x7f070042;
+        public static final int user_main_following_count=0x7f070043;
+        public static final int user_main_fork_store_view_button=0x7f070047;
+        public static final int user_main_gotoblog_button=0x7f070046;
+        public static final int user_main_grade=0x7f070040;
+        public static final int user_main_grade_image=0x7f07003f;
+        public static final int user_main_image_view_button=0x7f07004a;
+        public static final int user_main_intro=0x7f070044;
+        public static final int user_main_post_view_button=0x7f070049;
+        public static final int user_main_tag_view_button=0x7f07004b;
+        public static final int user_main_title=0x7f07003e;
+        public static final int user_main_url_view_button=0x7f07004c;
+        public static final int user_main_user_image=0x7f07003d;
+        public static final int user_post_list_view=0x7f07004d;
         public static final int username=0x7f070006;
+        public static final int write_complete=0x7f070057;
     }
     public static final class layout {
         public static final int c14_tabtest=0x7f030000;
@@ -188,12 +185,13 @@ containing a value of this type.
         public static final int settings=0x7f03000b;
         public static final int store_adapter=0x7f03000c;
         public static final int store_main=0x7f03000d;
-        public static final int store_slider=0x7f03000e;
-        public static final int test_list=0x7f03000f;
-        public static final int test_list_view_row=0x7f030010;
+        public static final int store_post=0x7f03000e;
+        public static final int store_slider=0x7f03000f;
+        public static final int test_list=0x7f030010;
         public static final int testlistview=0x7f030011;
         public static final int testtabview=0x7f030012;
         public static final int user_main=0x7f030013;
+        public static final int user_post=0x7f030014;
     }
     public static final class string {
         public static final int all_memo=0x7f050026;
@@ -268,23 +266,25 @@ containing a value of this type.
         public static final int DefaultRelativeWrap=0x7f060006;
         public static final int DefaultWidthFill=0x7f060002;
         public static final int DefaultWrap=0x7f060000;
-        public static final int store_main_ButtonArea=0x7f06000f;
-        public static final int store_main_Cover=0x7f060012;
-        public static final int store_main_DefaultButton=0x7f060011;
-        public static final int store_main_DefaultText=0x7f06000b;
-        public static final int store_main_DetailInfoButton=0x7f060015;
-        public static final int store_main_DetailItem=0x7f060014;
-        public static final int store_main_DetailItemArea=0x7f060013;
-        public static final int store_main_LikeStoreImage=0x7f06000a;
-        public static final int store_main_LikeStoreText=0x7f06000c;
-        public static final int store_main_ScrapButton=0x7f060010;
-        public static final int store_main_StoreAddress=0x7f06000d;
-        public static final int store_main_StoreImage=0x7f060009;
-        public static final int store_main_StoreMainContent=0x7f06000e;
+        /**  everywhere used style 
+         */
+        public static final int main_ButtonArea=0x7f060008;
+        public static final int main_DetailInfoButton=0x7f060009;
+        public static final int store_main_Cover=0x7f060013;
+        public static final int store_main_DefaultButton=0x7f060012;
+        public static final int store_main_DefaultText=0x7f06000d;
+        public static final int store_main_DetailItem=0x7f060015;
+        public static final int store_main_DetailItemArea=0x7f060014;
+        public static final int store_main_LikeStoreImage=0x7f06000c;
+        public static final int store_main_LikeStoreText=0x7f06000e;
+        public static final int store_main_ScrapButton=0x7f060011;
+        public static final int store_main_StoreAddress=0x7f06000f;
+        public static final int store_main_StoreImage=0x7f06000b;
+        public static final int store_main_StoreMainContent=0x7f060010;
         public static final int store_main_StoreMainFooter=0x7f060016;
         /**  store_main.xml 
          */
-        public static final int store_main_StoreMainHeader=0x7f060008;
+        public static final int store_main_StoreMainHeader=0x7f06000a;
     }
     public static final class styleable {
         /** Attributes that can be used with a com_deezapps_widget_HorizontalPager.

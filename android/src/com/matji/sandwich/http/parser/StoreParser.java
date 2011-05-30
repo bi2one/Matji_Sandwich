@@ -2,8 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.MatjiData;
@@ -53,7 +51,6 @@ public class StoreParser extends MatjiDataParser {
 		}
 		store.setStoreFoods(storeFoods);
 		
-		Log.d("Matji", "StoreParser END");
 		return store;
 	}
 }

@@ -199,8 +199,4 @@ public class User extends MatjiData implements Serializable{
 		return mileage;
 	}
 
-	public String getToken() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

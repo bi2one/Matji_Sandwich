@@ -30,7 +30,7 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("post_id", post_id + "");
     }
     
-    public void actionNew(String post, String access_token){
+    public void actionNew(String post) {
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	parser = new PostParser();
@@ -83,7 +83,8 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("store_id",store_id + "");
     	getHashtable.put("page", page+"");
-    	getHashtable.put("limit", limit+"");
+    	getHashtable.put("limit", limit+"");  	
+		getHashtable.put("include", "user,store");
     }
     
     public void actionUserList(int user_id, int page, int limit){
@@ -94,7 +95,8 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
     	getHashtable.put("page", page+"");
-    	getHashtable.put("limit", limit+"");
+    	getHashtable.put("limit", limit+"");  	
+		getHashtable.put("include", "user,store");
     }
     
     public void actionMyList(int page , int limit){
@@ -132,7 +134,6 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     public ArrayList<MatjiData> request() throws MatjiException {
-    	parser = new PostParser();
     	SimpleHttpResponse response = 
     		(httpMethod == HttpMethod.HTTP_POST) ? 
     				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)

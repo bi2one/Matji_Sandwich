@@ -85,10 +85,9 @@ public class HttpRequestManager {
 		// Log.d("Request_Test", "on request data!!");
 		try {
 			synchronized(Stack.class) {
-				Log.d("Matji", "Yaho");
+				Log.d("Matji", "HttpRequestManager :: line 85");
 				RequestTagPair pair = requestPool.pop();
 				dataPool.push(new DataTagPair(pair.getRequest().request(), pair.getTag()));
-				
 			}
 		} catch(MatjiException e) {
 			lastOccuredException = e;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWidthFill">
+	<RelativeLayout
+		style="@style/DefaultWidthFill"
+		android:id="@+id/post_main_content">
+		<ImageView
+			style="@style/DefaultWrap"
+			android:id="@+id/post_main_user_image" />
+		<TextView
+			style="@style/DefaultWidthFill"
+			android:id="@+id/post_main_user_id" />
+		<TextView
+			style="@style/DefaultWidthFill"
+			android:id="@+id/post_main_store_name" />
+		<TextView
+			style="@style/DefaultWidthFill"
+			android:id="@+id/post_main_post" />
+	</RelativeLayout>
+	<RelativeLayout
+		style="@style/DefaultFill"
+		android:id="@+id/post_main_comment_list">
+	</RelativeLayout>
+</LinearLayout>

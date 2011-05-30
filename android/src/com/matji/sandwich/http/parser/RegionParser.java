@@ -1,7 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Region;
 import com.matji.sandwich.data.User;
@@ -21,7 +19,6 @@ public class RegionParser extends MatjiDataParser {
 		region.setDescription(getString(object, "description"));
 		region.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
 		
-		Log.d("Matji", "RegionParser END");
 		return region;
 	}
 }

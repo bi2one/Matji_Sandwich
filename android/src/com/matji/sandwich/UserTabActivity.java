@@ -1,30 +1,30 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.UserHttpRequest;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.os.*;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.TabHost;
 
 public class UserTabActivity extends TabActivity {
 	TabHost tabHost;
 	Intent intent;
 	Intent mainIntent;
-	Intent myStoreIntent;
-	Intent myPostIntent;
-	Intent myImageIntent;
+	Intent menuIntent;
+	Intent postIntent;
+	Intent imageIntent;
 	Intent moreIntent;
 	User user;
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		
 		tabHost = getTabHost();
 		intent = getIntent();
 		user = intent.getParcelableExtra("user");
+		
 		createIntent();
 		setTabHost();
 	}
@@ -32,9 +32,10 @@ public class UserTabActivity extends TabActivity {
 	private void createIntent() {
 		mainIntent = new Intent(this, UserMainActivity.class);
 		mainIntent.putExtra("user", (Parcelable)user);
-		myStoreIntent = new Intent(this, StoreMoreActivity.class);
-		myPostIntent = new Intent(this, StoreMoreActivity.class);
-		myImageIntent = new Intent(this, StoreMoreActivity.class);
+		menuIntent = new Intent(this, StoreMoreActivity.class);
+		postIntent = new Intent(this, UserPostActivity.class);
+		postIntent.putExtra("user_id", user.getId());
+		imageIntent = new Intent(this, StoreMoreActivity.class);
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 	}
 	
@@ -44,15 +45,15 @@ public class UserTabActivity extends TabActivity {
 				.setContent(mainIntent));
 		tabHost.addTab(tabHost.newTabSpec("my_store")
 				.setIndicator("메뉴")
-				.setContent(new Intent(this, StoreMoreActivity.class)));
+				.setContent(menuIntent));
 		tabHost.addTab(tabHost.newTabSpec("my_post")
 				.setIndicator("메모")
-				.setContent(new Intent(this, StoreMoreActivity.class)));
+				.setContent(postIntent));
 		tabHost.addTab(tabHost.newTabSpec("my_image")
 				.setIndicator("이미지")
-				.setContent(new Intent(this, StoreMoreActivity.class)));
+				.setContent(imageIntent));
 		tabHost.addTab(tabHost.newTabSpec("more")
 				.setIndicator("설정")
-				.setContent(new Intent(this, StoreMoreActivity.class)));	
+				.setContent(moreIntent));
 	}
 }

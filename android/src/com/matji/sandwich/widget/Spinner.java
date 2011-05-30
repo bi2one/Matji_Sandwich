@@ -28,6 +28,8 @@ public class Spinner extends RelativeLayout {
     
     public void stop() {
     	ViewGroup vGroup = (ViewGroup)this.getParent();
-    	vGroup.removeView(this);
+    	if (vGroup != null){
+        	vGroup.removeView(this);
+    	}
     }
 }
