@@ -79,8 +79,7 @@ public class Session implements Requestable {
 				}
 				
 				mPrefs.setString(keyForAccessToken, me.getToken());
-				boolean success = mPrefs.commit();
-				Log.d("Login", (success == true) ? "success to login" : "failed to login");
+				mPrefs.commit();
 				
 				DBProvider dbProvider = DBProvider.getInstance(mContext);
 				
@@ -93,7 +92,7 @@ public class Session implements Requestable {
 				dbProvider.insertLikes(me.getLikes());
 				dbProvider.insertFollowers(me.getFollowers());
 				dbProvider.insertFollowings(me.getFollowings());
-				
+
 				mLoginableActivity.loginCompleted();
 		}
 		
