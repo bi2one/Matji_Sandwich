@@ -26,14 +26,14 @@ public class Session implements Requestable {
 	private HttpRequestManager mManager;
 	private Loginable mLoginableActivity;
 	
-	
 	private Session(){}
+	
 	private Session(Context context){
 		this.mContext = context;
 		this.mPrefs = new PreferenceProvider(context);
 	}
 	
-
+	
 	public static Session getInstance(Context context){
 		if(session == null) {
 			synchronized(Session.class) {
@@ -77,6 +77,7 @@ public class Session implements Requestable {
 				} catch (NotSerializableException e) {
 					e.printStackTrace();
 				}
+				
 				mPrefs.setString(keyForAccessToken, me.getToken());
 				boolean success = mPrefs.commit();
 				Log.d("Login", (success == true) ? "success to login" : "failed to login");
