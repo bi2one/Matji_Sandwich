@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.*;
 
 public class MainTabActivity extends TabActivity{
-    TabHost tabHost;
+    private TabHost tabHost;
 	
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);

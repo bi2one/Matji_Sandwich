@@ -42,13 +42,16 @@ public class CommentHttpRequest extends HttpRequest {
 		postHashtable.put("comment_id", comment_id);
 	}
 	
-	public void actionList(int post_id) {
+	public void actionList(int post_id, int page, int limit) {
 		parser = new CommentParser();
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
 
 		getHashtable.clear();
 		getHashtable.put("post_id", post_id+ "");
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");  	
+		getHashtable.put("include", "user");
 	}
 	
 

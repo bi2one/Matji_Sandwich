@@ -1,22 +1,59 @@
 package com.matji.sandwich.adapter;
 
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.Comment;
+import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.http.util.TimeStamp;
+import com.matji.sandwich.widget.CommentListView;
+
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class CommentAdapter extends MatjiBaseAdapter {
-    public View getView(int position, View convertView, ViewGroup parent) {
-	return null;
-    }
+public class CommentAdapter extends MBaseAdapter {  
+	MatjiImageDownloader downloader;
+	
+	public CommentAdapter(Context context) {
+		super(context);
+		downloader = new MatjiImageDownloader();
+	}
 
-    public long getItemId(int position) {
-	return 0;
-    }
+	public View getView(int position, View convertView, ViewGroup parent) {
+		CommentElement commentElement;
+		Comment comment = (Comment) data.get(position);
 
-    public Object getItem(int position) {
-	return null;
-    }
+		if (convertView == null) {
+			commentElement = new CommentElement();
+			convertView = getLayoutInflater().inflate(R.layout.comment_adapter, null);
 
-    public int getCount() {
-	return 0;
-    }
+			commentElement.image = (ImageView) convertView.findViewById(R.id.thumnail);
+			commentElement.nick = (TextView) convertView.findViewById(R.id.comment_adapter_nick);
+			commentElement.comment = (TextView) convertView.findViewById(R.id.comment_adapter_comment);
+			commentElement.dateAgo = (TextView) convertView.findViewById(R.id.comment_adapter_created_at);
+			convertView.setTag(commentElement);
+
+			CommentListView commentListView = (CommentListView)parent;
+			commentElement.nick.setOnClickListener(commentListView);
+		} else {
+			commentElement = (CommentElement) convertView.getTag();
+		}
+
+		commentElement.nick.setTag(position+"");
+
+		downloader.downloadAttachFileImage(comment.getUser().getId(), MatjiImageDownloader.IMAGE_SSMALL, commentElement.image);
+		commentElement.nick.setText(comment.getUser().getNick());
+		commentElement.comment.setText(comment.getComment());
+		commentElement.dateAgo.setText(TimeStamp.getAgoFromDate(comment.getCreatedAt()));
+	
+		return convertView;
+	}
+
+	private class CommentElement {
+		ImageView image;
+		TextView nick;
+		TextView comment;
+		TextView dateAgo;
+	}
 }

@@ -1,8 +1,8 @@
 package com.matji.sandwich.widget;
 
+import android.app.TabActivity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
@@ -10,7 +10,7 @@ import com.matji.sandwich.http.request.PostHttpRequest;
 public class UserPostListView extends PostListView {
 	private HttpRequest request;
 	private int user_id;
-		
+
 	public UserPostListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		request = new PostHttpRequest(context);
@@ -26,12 +26,10 @@ public class UserPostListView extends PostListView {
 		((PostHttpRequest) request).actionUserList(user_id, getPage(), getLimit());
 		return request;
 	}
-
+	
 	@Override
-	public void onListItemClick(int position) {
-		Log.d("Matji", "UserPostListView:: OnListItemClick!");
+	protected void gotoUserPage(int position) {
+		TabActivity act = (TabActivity) getActivity().getParent();
+		act.getTabHost().setCurrentTab(0);
 	}
-
-	@Override
-	protected void gotoUserPage(int position){}
 }

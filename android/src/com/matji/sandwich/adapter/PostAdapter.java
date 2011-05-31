@@ -1,12 +1,10 @@
 package com.matji.sandwich.adapter;
 
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import java.util.Date;
-
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.http.util.TimeStamp;
 import com.matji.sandwich.widget.PostListView;
 
 import android.content.Context;
@@ -16,8 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PostAdapter extends MBaseAdapter {
+	MatjiImageDownloader downloader;
+
     public PostAdapter(Context context) {
     	super(context);
+    	downloader = new MatjiImageDownloader();
     }
 	
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -43,7 +44,6 @@ public class PostAdapter extends MBaseAdapter {
 			postElement = (PostElement) convertView.getTag();
 		}
 		
-		
 				
 		Store store = post.getStore();
 		if (store != null)
@@ -54,103 +54,12 @@ public class PostAdapter extends MBaseAdapter {
 		postElement.nick.setTag(position+"");
 		postElement.storeName.setTag(position+"");
 		
+		downloader.downloadUserImage(post.getUser().getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.image);
 		postElement.nick.setText(post.getUser().getNick());
 		postElement.post.setText(post.getPost());
-		postElement.dateAgo.setText(getAgoFromDate(post.getCreatedAt()));
+		postElement.dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
 		return convertView;
 	}
-	
-	private String getAgoFromDate(String dateString){
-		dateString = dateString.replace('T', ' ');
-		dateString = dateString.replaceAll("Z", "");
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = null;		
-		try {
-			date = (Date)format.parse(dateString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Date now = new Date();
-		long nowSeconds = now.getTime() / 1000;
-	    long postSeconds = date.getTime() / 1000;
-	    
-	    
-	    long timeInterval = nowSeconds - postSeconds;
-		
-	    return timestampWithTimeInterval(timeInterval);
-	}
-	
-	
-	private String timestampWithTimeInterval(long timeInterval) {
-	    long x = 0;
-		long time = timeInterval;
-		String timestampText;
-		String year = "year ago";
-		String years = "years ago";
-		String month = "month ago";
-		String months = "months ago";
-		String week = "week ago";
-		String weeks = "weeks ago";
-		String day = "day ago";
-		String days = "days ago";
-		String hour = "hour ago";
-		String hours = "hours ago";
-		String min = "min ago";
-		String sec = "sec ago";
-		
-		if ((x = time / 31104000) > 0) { // year
-			if (x == 1) {
-				timestampText = x + " " + year; // singular
-			} else {
-				timestampText = x + " " + years;	// plural
-			}
-		} else {
-			if ((x = time / 2592000) > 0) { // month
-				if (x == 1) {
-					timestampText = x+ " " + month; // singular
-				} else {
-					timestampText = x+ " " + months; // plural
-				}
-			} else {
-				if ((x = time / 604800) > 0) { // week
-					if (x == 1) {
-						timestampText = x+ " " + week; // singular
-					} else {
-						timestampText = x+ " " + weeks; // plural
-					}
-				} else {
-					if ((x = time / 86400) > 0) { // day
-						if (x == 1) {
-							timestampText = x+ " " + day; // singular
-						} else {
-							timestampText = x+ " " + days; // plural
-						}
-					} else {
-						if ((x = time / 3600) > 0) { // hour
-							if (x == 1) {
-								timestampText = x+ " " + hour; // singular
-							} else {
-								timestampText = x+ " " + hours; // plural
-							}
-						} else {
-							if ((x = time / 60) > 0) { // min
-								timestampText = x+ " " + min;
-							} else { // sec
-								timestampText = time+ " " + sec;
-							}
-						}
-					}
-				}
-			}
-		}		
-		
-		return timestampText;
-	}
-
-	
 	
     private class PostElement {
     	ImageView image;
@@ -159,9 +68,4 @@ public class PostAdapter extends MBaseAdapter {
     	TextView post;
     	TextView dateAgo;
     }
-
-
-
-		
-
 }

@@ -7,19 +7,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.http.util.MatjiImageDownloader;
 
 // import com.matji.android.v2.common.Constants;
 // import com.matji.android.v2.common.ImageDownloader;
 
 public class StoreAdapter extends MBaseAdapter {
+	MatjiImageDownloader downloader;
+	
 	public StoreAdapter(Context context) {
 		super(context);
+		downloader = new MatjiImageDownloader();
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		StoreElement storeElement;
-		Store store = (Store) data.get(position);
+		Store store = (Store) data.get(position);	
 
 		// When convertView is not null, we can reuse it directly, there is no
 		// need
@@ -43,8 +48,14 @@ public class StoreAdapter extends MBaseAdapter {
 		}
 
 		// Bind the data efficiently with the holder.
+		AttachFile file = store.getFile();
+		if (file != null) {
+			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeElement.image);
+		}
+		
 		storeElement.name.setText(store.getName());
 		storeElement.address.setText(store.getAddress());
+		
 		return convertView;
 	}
 

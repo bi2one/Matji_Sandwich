@@ -32,9 +32,18 @@ public class StoreParser extends MatjiDataParser {
 		store.setImageCount(getInt(object, "image_count"));
 		store.setLikeCount(getInt(object, "like_count"));
 		store.setBookmarkCount(getInt(object, "bookmark_count"));
-		store.setFile((AttachFile) new AttachFileParser().getRawObject(getString(object, "file")));
-		store.setRegUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		
+		/* Set AttachFile */
+		AttachFileParser afParser = new AttachFileParser();
+		AttachFile file = (AttachFile)afParser.getMatjiData(getObject(object, "attach_file"));
+		store.setFile(file);
+		
+		/* Set User */
+		UserParser userParser = new UserParser();
+		User user = (User)userParser.getMatjiData(getObject(object, "user"));
+		store.setRegUser(user);
 
+		
 		ArrayList<MatjiData> dataList = new TagParser().getRawObjects(getArray(object, "tags") + "");
 		ArrayList<Tag> tags = new ArrayList<Tag>(); 
 		if (dataList != null) {

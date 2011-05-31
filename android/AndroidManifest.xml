@@ -3,7 +3,7 @@
 	android:versionName="1.0">
 	<application android:label="@string/app_name" android:icon="@drawable/icon">
 		<uses-library android:name="com.google.android.maps" />
-		<activity android:name="WritePostActivity" android:label="@string/app_name">
+		<activity android:name="MainTabActivity" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -16,7 +16,7 @@
 		<activity android:name="StoreSliderActivity"></activity>
 		<activity android:name="StoreNearListActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
-		<activity android:name="PostInfoActivity"></activity>
+		<activity android:name="PostMainActivity"></activity>
 		<activity android:name="StoreTabActivity"
 			android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreMainActivity"></activity>
@@ -26,6 +26,7 @@
 			android:screenOrientation="portrait"></activity>
 		<activity android:name="UserMainActivity"></activity>
 		<activity android:name="UserPostActivity"></activity>
+		<activity android:name="WritePostActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

@@ -1,8 +1,8 @@
 package com.matji.sandwich.widget;
 
+import android.app.TabActivity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
@@ -25,13 +25,11 @@ public class StorePostListView extends PostListView {
 	public HttpRequest request() {
 		((PostHttpRequest) request).actionStoreList(store_id, getPage(), getLimit());
 		return request;
-	}	
-	
-	@Override
-	public void onListItemClick(int position) {
-		Log.d("Matji", "StorePostListView:: OnListItemClick!");
 	}
 
 	@Override
-	protected void gotoStorePage(int position){}
+	protected void gotoStorePage(int position) {
+		TabActivity act = (TabActivity) getActivity().getParent();
+		act.getTabHost().setCurrentTab(0);
+	}
 }

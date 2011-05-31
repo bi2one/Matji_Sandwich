@@ -133,10 +133,10 @@ public class Post extends MatjiData {
 	public void setStoreId(int store_id) {
 		this.store_id = store_id;
 	}
-	public int getStore_id() {
+	public int getStoreId() {
 		return store_id;
 	}
-	public void setActivity_id(int activity_id) {
+	public void setActivityId(int activity_id) {
 		this.activity_id = activity_id;
 	}
 	public int getActivity_id() {
@@ -145,25 +145,25 @@ public class Post extends MatjiData {
 	public void setImageCount(int image_count) {
 		this.image_count = image_count;
 	}
-	public int getImage_count() {
+	public int getImageCount() {
 		return image_count;
 	}
 	public void setLikeCount(int like_count) {
 		this.like_count = like_count;
 	}
-	public int getLike_count() {
+	public int getLikeCount() {
 		return like_count;
 	}
 	public void setCommentCount(int comment_count) {
 		this.comment_count = comment_count;
 	}
-	public int getComment_count() {
+	public int getCommentCount() {
 		return comment_count;
 	}
 	public void setTagCount(int tag_count) {
 		this.tag_count = tag_count;
 	}
-	public int getTag_count() {
+	public int getTagCount() {
 		return tag_count;
 	}
 	public void setUser(User user) {
