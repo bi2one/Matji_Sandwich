@@ -9,6 +9,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<activity android:name="WritePostActivity"></activity>
 		<activity android:name="AlarmActivity"></activity>
 		<activity android:name="LoginActivity"></activity>
 		<activity android:name="MainMapActivity"></activity>
