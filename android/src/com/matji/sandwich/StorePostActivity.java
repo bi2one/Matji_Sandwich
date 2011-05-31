@@ -14,7 +14,7 @@ public class StorePostActivity extends Activity {
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.store_post);
+		setContentView(R.layout.activity_store_post);
 		
 		intent = getIntent();
 		store_id = intent.getIntExtra("store_id", 0);

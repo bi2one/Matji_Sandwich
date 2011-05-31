@@ -1,12 +1,12 @@
 package com.matji.sandwich.data;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Store extends MatjiData implements Serializable{
+public class Store extends MatjiData implements Serializable {
 	private static final long serialVersionUID = 2258168334454587964L;
 	private int id;
 	private String name;

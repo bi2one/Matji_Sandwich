@@ -1,33 +1,16 @@
 package com.matji.sandwich;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 import android.location.Location;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
-import com.google.android.maps.GeoPoint;
+
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
-import com.google.android.maps.Projection;
 
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.location.GpsManager;
@@ -50,7 +33,7 @@ public class MainMapActivity extends MapActivity implements MatjiLocationListene
     
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.main_map);
+	setContentView(R.layout.activity_main_map);
 	mMapView = (MapView)findViewById(R.id.map_view);
 	mMapController = mMapView.getController();
 

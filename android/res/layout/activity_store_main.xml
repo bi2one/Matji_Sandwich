@@ -13,8 +13,7 @@
 			android:id="@+id/store_main_header">
 			<ImageView
 				style="@style/store_main_StoreImage"
-				android:id="@+id/store_main_store_image"
-				android:src="@drawable/profile_default_img" />
+				android:id="@+id/store_main_store_image" />
 			<ImageView
 				style="@style/store_main_LikeStoreImage"
 				android:id="@+id/store_main_like_store_image"

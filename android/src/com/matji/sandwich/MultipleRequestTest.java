@@ -13,7 +13,7 @@ import android.os.Bundle;
 public class MultipleRequestTest extends Activity implements Requestable {
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.store_main);
+	setContentView(R.layout.activity_store_main);
 
 	HttpRequestManager manager = new HttpRequestManager(getApplicationContext(), this);
 	UserHttpRequest request = new UserHttpRequest(getApplicationContext());

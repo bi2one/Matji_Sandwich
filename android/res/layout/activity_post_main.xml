@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	<include
+		layout="@layout/adapter_post"
+		android:id="@+id/post_main_post" />
+	<TextView
+		android:background="#fff"
+		style="@style/DefaultWidthFill"
+		android:id="@+id/post_main_tag_area" />
+<!-- 	<com.matji.sandwich.widget.GalleryView -->
+<!-- 		style="@style/DefaultWrap" /> -->
+	<com.matji.sandwich.widget.CommentListView
+		style="@style/DefaultFill"
+		android:id="@+id/post_main_comment_list_view" />
+</LinearLayout>

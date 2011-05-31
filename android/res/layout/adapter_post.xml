@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#fff">
+	<LinearLayout
+		android:id="@+id/image"
+		android:layout_width="50dp"
+		android:layout_height="50dp"
+		android:layout_margin="3dp"
+		android:padding="3dp"
+		android:layout_alignParentLeft="true">
+		<ImageView
+			android:id="@+id/thumnail"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/name"
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingTop="5dp"
+		android:paddingLeft="5dp"
+		android:layout_toRightOf="@id/image">
+		<TextView
+			android:id="@+id/post_adapter_nick"
+			android:clickable="true"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#000"
+			android:layout_alignParentTop="true" />
+		<TextView
+			android:id="@+id/post_adapter_store_name"
+			android:clickable="true"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#000" />
+	</LinearLayout>
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/image"
+		android:layout_below="@id/name"
+		android:paddingLeft="5dp">
+		<TextView
+			android:id="@+id/post_adapter_post"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textColor="#000"
+			android:layout_below="@id/post_adapter_nick" />
+		<TextView
+			android:id="@+id/post_adapter_created_at"
+			android:layout_width="fill_parent"
+			android:layout_height="30dp"
+			android:textColor="#000"
+			android:layout_below="@id/post_adapter_post" />
+	</LinearLayout>
+</RelativeLayout>

@@ -13,7 +13,7 @@ public class UserPostActivity extends Activity {
     
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.user_post);
+		setContentView(R.layout.activity_user_post);
 		
 		intent = getIntent();
 		user_id = intent.getIntExtra("user_id", 0);

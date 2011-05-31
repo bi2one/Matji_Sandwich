@@ -17,7 +17,7 @@
 		<activity android:name="StoreSliderActivity"></activity>
 		<activity android:name="StoreNearListActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
-		<activity android:name="PostInfoActivity"></activity>
+		<activity android:name="PostMainActivity"></activity>
 		<activity android:name="StoreTabActivity"
 			android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreMainActivity"></activity>
@@ -27,6 +27,7 @@
 			android:screenOrientation="portrait"></activity>
 		<activity android:name="UserMainActivity"></activity>
 		<activity android:name="UserPostActivity"></activity>
+		<activity android:name="WritePostActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />
