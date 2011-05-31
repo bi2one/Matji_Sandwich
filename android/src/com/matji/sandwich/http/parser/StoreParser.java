@@ -43,8 +43,9 @@ public class StoreParser extends MatjiDataParser {
 		User user = (User)userParser.getMatjiData(getObject(object, "user"));
 		store.setRegUser(user);
 
-		
-		ArrayList<MatjiData> dataList = new TagParser().getRawObjects(getArray(object, "tags") + "");
+		/* Set Tags */
+		TagParser tagParser = new TagParser();
+		ArrayList<MatjiData> dataList = tagParser.getMatjiDataList(getArray(object, "tags"));
 		ArrayList<Tag> tags = new ArrayList<Tag>(); 
 		if (dataList != null) {
 			for (MatjiData data : dataList)
@@ -52,7 +53,9 @@ public class StoreParser extends MatjiDataParser {
 		}
 		store.setTags(tags);
 
-		dataList = new StoreFoodParser().getRawObjects(getArray(object, "store_foods") + "");
+		/* Set Store Foods */
+		StoreFoodParser storeFoodParser = new StoreFoodParser();
+		dataList = storeFoodParser.getMatjiDataList(getArray(object, "store_foods"));
 		ArrayList<StoreFood> storeFoods = new ArrayList<StoreFood>();
 		if (dataList != null) {
 			for (MatjiData data : dataList)

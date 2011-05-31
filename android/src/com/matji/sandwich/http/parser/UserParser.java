@@ -1,6 +1,10 @@
 package com.matji.sandwich.http.parser;
 
+import java.util.ArrayList;
+
 import com.google.gson.JsonObject;
+import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.UserExternalAccount;
 import com.matji.sandwich.data.UserMileage;
@@ -26,6 +30,16 @@ public class UserParser extends MatjiDataParser {
 		user.setFollowed(getBoolean(object, "followed"));
 		user.setExternalAccount((UserExternalAccount) new UserExternalAccountParser().getRawObject(getObject(object, "external_account") + ""));
 		user.setMileage((UserMileage) new UserMileageParser().getRawObject(getObject(object, "mileage") + ""));
+		
+		/* Set Attach Files */
+		AttachFileParser attachFileParser = new AttachFileParser();
+		ArrayList<MatjiData> dataList = attachFileParser.getMatjiDataList(getArray(object, "attach_files"));
+		ArrayList<AttachFile> attach_files = new ArrayList<AttachFile>(); 
+		if (dataList != null) {
+			for (MatjiData data : dataList)
+				attach_files.add((AttachFile) data);
+		}
+		user.setAttchFiles(attach_files);
 
 		return user;
 	}

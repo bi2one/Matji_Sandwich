@@ -49,7 +49,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.comment_adapter_nick:
+		case R.id.thumnail:case R.id.comment_adapter_nick:
 			gotoUserPage(Integer.parseInt((String)v.getTag()));
 			break;
 		}	

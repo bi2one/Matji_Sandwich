@@ -1,5 +1,6 @@
 package com.matji.sandwich;
 
+import com.matji.sandwich.GridGalleryActivity.AttachFileType;
 import com.matji.sandwich.data.Store;
 
 import android.app.TabActivity;
@@ -9,14 +10,21 @@ import android.os.Parcelable;
 import android.widget.TabHost;
 
 public class StoreTabActivity extends TabActivity{
-	TabHost tabHost;
-	Intent intent;
-	Intent mainIntent;
-	Intent postIntent;
-	Intent menuIntent;
-	Intent imageIntent;
-	Intent moreIntent;
-	Store store;
+	private TabHost tabHost;
+	private Intent intent;
+	private Intent mainIntent;
+	private Intent postIntent;
+	private Intent menuIntent;
+	private Intent imageIntent;
+	private Intent moreIntent;
+	private Store store;
+
+	public static final int MAIN_PAGE = 0;
+	public static final int MEMO_PAGE = 1;
+	public static final int MENU_PAGE = 2;
+	public static final int IMAGE_PAGE = 3;
+	public static final int MORE_PAGE = 4;
+	
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -35,7 +43,9 @@ public class StoreTabActivity extends TabActivity{
 		postIntent = new Intent(this, StorePostActivity.class);
 		postIntent.putExtra("store_id", store.getId());
 		menuIntent = new Intent(this, StoreMoreActivity.class);
-		imageIntent = new Intent(this, StoreMoreActivity.class);
+		imageIntent = new Intent(this, GridGalleryActivity.class);
+		imageIntent.putExtra(GridGalleryActivity.ATTACH_FILE_TYPE, AttachFileType.STORES);
+		imageIntent.putExtra("store_id", store.getId());
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 	}
 
@@ -57,4 +67,3 @@ public class StoreTabActivity extends TabActivity{
 				.setContent(moreIntent));
 	}
 }
-

@@ -1,27 +1,26 @@
 package com.matji.sandwich;
 
-import java.io.ObjectOutputStream.PutField;
-
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 
 import android.app.Activity;
+import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 public class StoreMainActivity extends Activity{
+	private TabHost tabHost;
 	private Intent intent;
-	private Intent galleryIntent;
 	private Store store;
 	private MatjiImageDownloader downloader;
 
@@ -38,12 +37,13 @@ public class StoreMainActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_main);		
+
+		tabHost = ((TabActivity) getParent()).getTabHost();
 		intent = getIntent();
 		store = (Store) intent.getParcelableExtra("store");
 		downloader = new MatjiImageDownloader();
 
 		initStoreInfo();
-		initIntent();
 		initListener();
 	}
 
@@ -86,20 +86,25 @@ public class StoreMainActivity extends Activity{
 		urlsViewButton.setText(getString(R.string.default_string_url));
 	}
 
-	private void initIntent() {
-//		galleryIntent = new Intent(this, SlideGalleryActivity.class);
-		galleryIntent = new Intent(this, GridGalleryActivity.class);
+	private void initListener() {
+		ButtonClickListener btnListener = new ButtonClickListener();
+		postsViewButton.setOnClickListener(btnListener);
+		imagesViewButton.setOnClickListener(btnListener);
 	}
 
-	private void initListener() {
-		imagesViewButton.setOnClickListener(new OnClickListener() {
+	class ButtonClickListener implements OnClickListener {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub				
-				galleryIntent.putExtra("store_id", store.getId());
-				startActivity(galleryIntent);
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch(v.getId()) {
+			case R.id.store_main_memo_view_button:
+				tabHost.setCurrentTab(StoreTabActivity.MEMO_PAGE);
+				break;
+			case R.id.store_main_image_view_button:
+				tabHost.setCurrentTab(StoreTabActivity.IMAGE_PAGE);
+				break;
 			}
-		});
+		}
 	}
 }

@@ -15,7 +15,6 @@ import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
@@ -56,7 +55,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.post_adapter_nick:
+		case R.id.thumnail: case R.id.post_adapter_nick:
 			gotoUserPage(Integer.parseInt((String)v.getTag()));
 			break;
 

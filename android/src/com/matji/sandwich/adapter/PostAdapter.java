@@ -38,6 +38,7 @@ public class PostAdapter extends MBaseAdapter {
 			convertView.setTag(postElement);
 			
 			PostListView postListView = (PostListView)parent;
+			postElement.image.setOnClickListener(postListView);
 			postElement.nick.setOnClickListener(postListView);
 			postElement.storeName.setOnClickListener(postListView);
 			
@@ -52,6 +53,7 @@ public class PostAdapter extends MBaseAdapter {
 		else 
 			postElement.storeName.setText("");
 		
+		postElement.image.setTag(position+"");
 		postElement.nick.setTag(position+"");
 		postElement.storeName.setTag(position+"");
 		

@@ -68,7 +68,8 @@ public class Store extends MatjiData implements Serializable {
 		dest.writeInt(bookmark_count);
 		dest.writeValue(file);
 		dest.writeValue(reg_user);
-		//dest.writeTypedList(tags);
+		dest.writeTypedList(tags);
+		dest.writeTypedList(store_foods);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -90,8 +91,10 @@ public class Store extends MatjiData implements Serializable {
 		bookmark_count = in.readInt();
 		file = AttachFile.class.cast(in.readValue(AttachFile.class.getClassLoader()));
 		reg_user = User.class.cast(in.readValue(User.class.getClassLoader()));
-		this.tags = new ArrayList<Tag>();
-		in.readTypedList(this.tags, Tag.CREATOR);
+		tags = new ArrayList<Tag>();
+		in.readTypedList(tags, Tag.CREATOR);
+		store_foods = new ArrayList<StoreFood>();
+		in.readTypedList(store_foods, StoreFood.CREATOR);
 	}
 	
 	public void setTel(String tel) {

@@ -37,11 +37,13 @@ public class CommentAdapter extends MBaseAdapter {
 			convertView.setTag(commentElement);
 
 			CommentListView commentListView = (CommentListView)parent;
+			commentElement.image.setOnClickListener(commentListView);
 			commentElement.nick.setOnClickListener(commentListView);
 		} else {
 			commentElement = (CommentElement) convertView.getTag();
 		}
 
+		commentElement.image.setTag(position+"");
 		commentElement.nick.setTag(position+"");
 
 		/* Set User */

@@ -4,6 +4,7 @@ import android.app.TabActivity;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
@@ -30,6 +31,6 @@ public class StorePostListView extends PostListView {
 	@Override
 	protected void gotoStorePage(int position) {
 		TabActivity act = (TabActivity) getActivity().getParent();
-		act.getTabHost().setCurrentTab(0);
+		act.getTabHost().setCurrentTab(StoreTabActivity.MAIN_PAGE);
 	}
 }

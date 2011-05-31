@@ -1,6 +1,7 @@
 package com.matji.sandwich.data;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -22,6 +23,7 @@ public class User extends MatjiData implements Serializable{
 	private boolean followed;
 	private UserExternalAccount external_account;
 	private UserMileage mileage;
+	private ArrayList<AttachFile> attach_files;
 
 	public User() {}
 
@@ -59,6 +61,7 @@ public class User extends MatjiData implements Serializable{
 		dest.writeInt(followed ? 1 : 0);
 		dest.writeValue(external_account);
 		dest.writeValue(mileage);
+		dest.writeTypedList(attach_files);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -77,6 +80,8 @@ public class User extends MatjiData implements Serializable{
 		followed = in.readInt() != 0;
 		external_account = UserExternalAccount.class.cast(in.readValue(UserExternalAccount.class.getClassLoader()));
 		mileage = UserMileage.class.cast(in.readValue(UserMileage.class.getClassLoader()));
+		attach_files = new ArrayList<AttachFile>();
+		in.readTypedList(attach_files, AttachFile.CREATOR);
 	}
 
 	public void setId(int id) {
@@ -199,4 +204,11 @@ public class User extends MatjiData implements Serializable{
 		return mileage;
 	}
 
+	public void setAttchFiles(ArrayList<AttachFile> attach_files) {
+		this.attach_files = attach_files;
+	}
+	
+	public ArrayList<AttachFile> getAttachFiles() {
+		return attach_files;
+	}
 }
