@@ -27,6 +27,9 @@
 		<activity android:name="UserMainActivity"></activity>
 		<activity android:name="UserPostActivity"></activity>
 		<activity android:name="WritePostActivity"></activity>
+		<activity android:name="SlideGalleryActivity"></activity>
+		<activity android:name="GridGalleryActivity"></activity>
+		<activity android:name="ImageSliderActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

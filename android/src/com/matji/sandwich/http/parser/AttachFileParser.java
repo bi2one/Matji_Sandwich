@@ -24,6 +24,6 @@ public class AttachFileParser extends MatjiDataParser {
 		attachFile.setCreatedAt(getString(object, "created_at"));
 		attachFile.setUpdatedAt(getString(object, "updated_at"));
 
-		return attachFile;		
+		return attachFile;
 	}
 }
