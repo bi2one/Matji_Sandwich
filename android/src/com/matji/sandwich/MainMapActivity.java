@@ -23,7 +23,6 @@ import android.location.Location;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
@@ -33,7 +32,7 @@ import com.google.android.maps.Projection;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
-import com.matji.sandwich.overlay.HelloItemizedOverlay;
+import com.matji.sandwich.overlay.StoreItemizedOverlay;
 
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class MainMapActivity extends MapActivity implements MatjiLocationListene
     private MapController mMapController;
     private Location prevLocation;
     private List<Overlay> mapOverlays;
-    private HelloItemizedOverlay itemizedOverlay;
+    private StoreItemizedOverlay itemizedOverlay;
     
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
@@ -77,8 +76,8 @@ public class MainMapActivity extends MapActivity implements MatjiLocationListene
 	mMapController.animateTo(geopoint);
 	
 	mapOverlays = mMapView.getOverlays();
-        itemizedOverlay = new HelloItemizedOverlay(getResources().getDrawable(R.drawable.icon));
-	OverlayItem overlayitem = new OverlayItem(geopoint, "", "");
+        itemizedOverlay = new StoreItemizedOverlay(mContext);
+	OverlayItem overlayitem = new OverlayItem(geopoint, "test", "test2");
 	itemizedOverlay.addOverlay(overlayitem);
 	mapOverlays.add(itemizedOverlay);
 	

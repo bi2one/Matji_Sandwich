@@ -15,6 +15,7 @@ import com.matji.sandwich.widget.PagerControl;
 import com.matji.sandwich.widget.StoreNearListView;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.SwipeView;
+import com.matji.sandwich.widget.BaseViewContainer;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 
 public class StoreSliderActivity extends Activity implements OnScrollListener {
@@ -39,8 +40,6 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	pagerControlStringRef = new int[] { R.string.all_store,
 					    R.string.near_store,
 					    R.string.all_memo};
-	
-
 
 	control = (PagerControl)findViewById(R.id.PagerControl);
 	swipeView = (SwipeView)findViewById(R.id.SwipeView);
@@ -56,9 +55,8 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	view1.requestReload();
 	view2.setActivity(this);
 	view3.setActivity(this);
-	
-	
-	control.start(this);	
+
+	control.start(this);
 	control.setNumPages(swipeView.getChildCount());
 	control.setViewNames(pagerControlStringRef);
 
@@ -69,18 +67,17 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 
     public void onViewScrollFinished(int currentPage) {
     	if (mCurrentPage != currentPage){
-    		Log.d("refresh", "pageChanged!");
+	    Log.d("refresh", "pageChanged!");
     		
-    		try {
-	    		mCurrentPage = currentPage;
-	    		control.setCurrentPage(currentPage);
-	        	View view = mContentViews.get(currentPage);
-	        	if (view instanceof RequestableMListView){
-	        		RequestableMListView listView = (RequestableMListView)view;
-	        		listView.requestConditionally();
-	        	}
-	        	
-    		}catch (IndexOutOfBoundsException e){ e.printStackTrace(); }
+	    try {
+		mCurrentPage = currentPage;
+		control.setCurrentPage(currentPage);
+		View view = mContentViews.get(currentPage);
+		if (view instanceof RequestableMListView){
+		    RequestableMListView listView = (RequestableMListView) view;
+		    listView.requestConditionally();
+		}
+	    }catch (IndexOutOfBoundsException e){ e.printStackTrace(); }
     	}
     	
     }

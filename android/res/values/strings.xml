@@ -10,8 +10,9 @@
   <!-- release!!!! -->
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
-  <string name="map_api_key">0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A</string>
-
+  <string name="map_api_key">
+    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
+  </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
   <string name="exception_GpsEnabledMatjiException">GPS서비스를 사용할 수 있습니다</string>

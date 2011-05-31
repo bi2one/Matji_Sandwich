@@ -19,10 +19,6 @@ import android.view.Gravity;
 
 import com.matji.sandwich.R;
 
-/**
- * User: jeanguy@gmail.com
- * Date: Aug 11, 2010
- */
 public class PagerControl extends RelativeLayout {
     private int numPages, currentPage, position;
     private int fadeDelay, fadeDuration;

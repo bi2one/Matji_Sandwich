@@ -28,23 +28,27 @@ PullToRefreshListView.OnRefreshListener {
 
 	public abstract HttpRequest request();
 
-	public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
-		super(context, attrs);
-		this.adapter = adapter;
-		manager = new HttpRequestManager(context, this);
-		//	inflater = LayoutInflater.from(context);
+    public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
+	super(context, attrs);
+	this.adapter = adapter;
+	manager = new HttpRequestManager(context, this);
+	//	inflater = LayoutInflater.from(context);
 
-		adapterData = new ArrayList<MatjiData>();
-		adapter.setData(adapterData);
-		setAdapter(adapter);
+	// if (container != null)
+	//     addHeaderView(container.getRootView());
 
-		scrollListener = new ListRequestScrollListener(this, this, manager);
-		setPullDownScrollListener(scrollListener);
+	
+	adapterData = new ArrayList<MatjiData>();
+	adapter.setData(adapterData);
+	setAdapter(adapter);
 
-		setOnRefreshListener(this);
+	scrollListener = new ListRequestScrollListener(this, this, manager);
+	setPullDownScrollListener(scrollListener);
 
-		this.limit = limit;
-	}
+	setOnRefreshListener(this);
+
+	this.limit = limit;
+    }
 
 	protected void setPage(int page) {
 		this.page = page;
