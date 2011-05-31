@@ -1,10 +1,7 @@
 package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
-import com.matji.sandwich.data.Activity;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class PostParser extends MatjiDataParser {
@@ -25,9 +22,18 @@ public class PostParser extends MatjiDataParser {
 		post.setFromWhere(getString(object, "from_where"));
 		post.setCreatedAt(getString(object, "created_at"));
 		post.setUpdatedAt(getString(object, "updated_at"));
-		post.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
-		post.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
-		post.setActivity((Activity) new ActivityParser().getRawObject(getObject(object, "activity") + ""));
+		
+		/* Set User */
+		UserParser userParser = new UserParser();
+		post.setUser(userParser.getMatjiData(getObject(object, "user")));
+		
+		/* Set Store */
+		StoreParser storeParser = new StoreParser();
+		post.setStore(storeParser.getMatjiData(getObject(object, "store")));
+		
+		/* Set Activity */
+		ActivityParser activityParser = new ActivityParser();
+		post.setActivity(activityParser.getMatjiData(getObject(object, "activity")));
 		
 		return post;
 	}

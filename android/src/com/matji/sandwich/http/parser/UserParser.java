@@ -6,8 +6,6 @@ import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.data.UserExternalAccount;
-import com.matji.sandwich.data.UserMileage;
 import com.matji.sandwich.exception.MatjiException;
 
 public class UserParser extends MatjiDataParser {
@@ -28,12 +26,18 @@ public class UserParser extends MatjiDataParser {
 		user.setFollowerCount(getInt(object, "follower_count"));
 		user.setFollowing(getBoolean(object, "following"));
 		user.setFollowed(getBoolean(object, "followed"));
-		user.setExternalAccount((UserExternalAccount) new UserExternalAccountParser().getRawObject(getObject(object, "external_account") + ""));
-		user.setMileage((UserMileage) new UserMileageParser().getRawObject(getObject(object, "mileage") + ""));
+		
+		/* Set User External Account */
+		UserExternalAccountParser ueaParser = new UserExternalAccountParser();
+		user.setExternalAccount(ueaParser.getMatjiData(getObject(object, "external_account")));
+		
+		/* Set User Mileage */
+		UserMileageParser umParser = new UserMileageParser();
+		user.setMileage(umParser.getMatjiData(getObject(object, "mileage")));
 		
 		/* Set Attach Files */
-		AttachFileParser attachFileParser = new AttachFileParser();
-		ArrayList<MatjiData> dataList = attachFileParser.getMatjiDataList(getArray(object, "attach_files"));
+		AttachFileParser afParser = new AttachFileParser();
+		ArrayList<MatjiData> dataList = afParser.getMatjiDataList(getArray(object, "attach_files"));
 		ArrayList<AttachFile> attach_files = new ArrayList<AttachFile>(); 
 		if (dataList != null) {
 			for (MatjiData data : dataList)

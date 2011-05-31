@@ -1,9 +1,7 @@
 package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreDetailInfoLog;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class StoreDetailInfoLogParser extends MatjiDataParser {
@@ -15,8 +13,14 @@ public class StoreDetailInfoLogParser extends MatjiDataParser {
 		infoLog.setStoreId(getInt(object, "store_id"));
 		infoLog.setUserId(getInt(object, "user_id"));
 		infoLog.setStatus(getString(object, "status"));
-		infoLog.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
-		infoLog.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		
+		/* Set Store */
+		StoreParser storeParser = new StoreParser();
+		infoLog.setStore(storeParser.getMatjiData(getObject(object, "store")));
+		
+		/* Set User*/
+		UserParser userParser = new UserParser();
+		infoLog.setUser(userParser.getMatjiData(getObject(object, "user")));
 
 		return infoLog;
 	}

@@ -2,8 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Comment;
-import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class CommentParser extends MatjiDataParser {
@@ -17,8 +15,14 @@ public class CommentParser extends MatjiDataParser {
 		comment.setPostId(getInt(object, "post_id"));
 		comment.setId(getInt(object, "id"));
 		comment.setUserId(getInt(object, "user_id"));
-		comment.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
-		comment.setPost((Post) new PostParser().getRawObject(getObject(object, "post") + ""));
+		
+		/* Set User */
+		UserParser userParser = new UserParser();
+		comment.setUser(userParser.getMatjiData(getObject(object, "user")));
+		
+		/* Set Post */
+		PostParser postParser = new PostParser();
+		comment.setPost(postParser.getMatjiData(getObject(object, "post")));
 		comment.setFromWhere(getString(object, "from_where"));
 		
 		return comment;

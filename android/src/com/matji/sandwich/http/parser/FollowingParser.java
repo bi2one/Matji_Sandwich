@@ -2,7 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Following;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class FollowingParser extends MatjiDataParser {
@@ -24,8 +23,11 @@ public class FollowingParser extends MatjiDataParser {
 		following.setUserid(getString(object, "userid"));
 		following.setPostCount(getInt(object, "post_count"));
 		following.setStoreCount(getInt(object, "store_count"));
-		following.setFollowingUser((User) new UserParser().getRawObject(getObject(object, "following_user") + ""));
-		following.setFollowedUser((User) new UserParser().getRawObject(getObject(object, "followed_user") + ""));
+		
+		/* Set Follow User */
+		UserParser userParser = new UserParser();
+		following.setFollowingUser(userParser.getMatjiData(getObject(object, "following_user")));
+		following.setFollowedUser(userParser.getMatjiData(getObject(object, "followed_user")));
 
 		return following;
 	}
