@@ -48,8 +48,7 @@ public class GridImageAdapter extends BaseAdapter {
 		
 		downloader.downloadAttachFileImage(attachFileIds[position], MatjiImageDownloader.IMAGE_MEDIUM, image);
 		image.setLayoutParams(new GridView.LayoutParams(150, 150));
-		image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		image.setBackgroundColor(Color.WHITE);
+		image.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		return image;
 	}
 }

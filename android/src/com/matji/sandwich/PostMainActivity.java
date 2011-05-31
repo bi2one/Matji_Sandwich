@@ -14,19 +14,16 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.http.util.TimeStamp;
 import com.matji.sandwich.widget.CommentListView;
+import com.matji.sandwich.widget.PostViewContainer;
+import com.matji.sandwich.widget.ViewContainer;
 
 public class PostMainActivity extends Activity {
 	private Intent intent;
 	private Post post;
 	private User user;
 	private Store store;
-	private MatjiImageDownloader downloader;
 
-	private ImageView thumnail;
-	private TextView nick;
-	private TextView storeName;
-	private TextView content;
-	private TextView dateAgo;
+	private PostViewContainer header;
 	private TextView tags;
 	private CommentListView commentListView;
 
@@ -37,30 +34,18 @@ public class PostMainActivity extends Activity {
 		post = (Post) intent.getParcelableExtra("post");
 		user = post.getUser();
 		store = post.getStore();
-		downloader = new MatjiImageDownloader();
 		
 		setPostInfo();
 	}
 
 	private void setPostInfo() {
-		thumnail = (ImageView) findViewById(R.id.thumnail);
-		nick = (TextView) findViewById(R.id.post_adapter_nick);
-		storeName = (TextView) findViewById(R.id.post_adapter_store_name);
-		content = (TextView) findViewById(R.id.post_adapter_post);
-		dateAgo = (TextView) findViewById(R.id.post_adapter_created_at);
+		header = new PostViewContainer(this, post, user, store);
+
+		//TODO
 		tags = (TextView) findViewById(R.id.post_main_tag_area);
 		commentListView = (CommentListView) findViewById(R.id.post_main_comment_list_view);
 
-		downloader.downloadUserImage(user.getId(), thumnail);
-		nick.setText(user.getNick());
-		
-		if (store != null)
-			storeName.setText(" @" + store.getName());
-		else 
-			storeName.setText("");
-		content.setText(post.getPost());
-		dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
-
+		commentListView.addHeaderView(header);
 		//		TODO
 		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);

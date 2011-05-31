@@ -49,12 +49,6 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	mContentViews.add(view1);
 	mContentViews.add(view2);
 	mContentViews.add(view3);
-
-
-	// header example
-	view1.addHeaderView(new BaseViewContainer(mContext, "abcde"));
-	view1.addHeaderView(new BaseViewContainer(mContext, "eeeee"));
-
 	
 	view1.setActivity(this);
 	view1.requestReload();
