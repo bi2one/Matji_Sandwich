@@ -66,9 +66,6 @@
   <string name="default_string_follow">Follow</string>
   <string name="default_string_unfollow">Unfollow</string>
   
-  <!-- API Keys -->
-  <string name="api_key">0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A</string> <!-- mozziluv's API key -->
-  
   <!-- StoreMainActivity  -->
   <string name="store_main_like_store">
 	    내가 좋아하는 맛집

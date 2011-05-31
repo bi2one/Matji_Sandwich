@@ -29,7 +29,6 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
     private int mCurrentPage;
     private ArrayList<View> mContentViews;
     
-    
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_store_slider);
@@ -51,6 +50,12 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	mContentViews.add(view2);
 	mContentViews.add(view3);
 
+
+	// header example
+	view1.addHeaderView(new BaseViewContainer(mContext, "abcde"));
+	view1.addHeaderView(new BaseViewContainer(mContext, "eeeee"));
+
+	
 	view1.setActivity(this);
 	view1.requestReload();
 	view2.setActivity(this);
