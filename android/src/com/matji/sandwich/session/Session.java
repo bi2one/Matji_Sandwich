@@ -9,6 +9,7 @@ import android.util.*;
 
 import com.matji.sandwich.*;
 import com.matji.sandwich.data.*;
+import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -62,18 +63,7 @@ public class Session implements Requestable {
 		return mPrefs.commit();
 	}
 	
-//	public boolean isBookmarked(String object, int id){
-//		return true;
-//	}
-//	
-//	public boolean isFollowing(int user_id){
-//		return true;
-//	}
-//	
-//	public boolean isFollower(int user_id){
-//		return true;
-//	}
-//	
+	
 	public boolean isLogin(){
 		return (mPrefs.getObject(keyForCurrentUser) == null) ? false : true;	
 	}
@@ -88,14 +78,20 @@ public class Session implements Requestable {
 					e.printStackTrace();
 				}
 				mPrefs.setString(keyForAccessToken, me.getToken());
-				boolean success = mPrefs.commit();
-				Log.d("Login", (success == true) ? "success to login" : "failed to login");
+				mPrefs.commit();
 				
-				// To do :
-				// Follow
-				// Like
-				// Bookmark write to Database in background thread
-				//
+				DBProvider dbProvider = DBProvider.getInstance(mContext);
+				
+				dbProvider.deleteBookmarks();
+				dbProvider.deleteLikes();
+				dbProvider.deleteFollowers();
+				dbProvider.deleteFollowings();
+				
+				dbProvider.insertBookmarks(me.getBookmarks());
+				dbProvider.insertLikes(me.getLikes());
+				dbProvider.insertFollowers(me.getFollowers());
+				dbProvider.insertFollowings(me.getFollowings());
+
 				mLoginableActivity.loginCompleted();
 		}
 		

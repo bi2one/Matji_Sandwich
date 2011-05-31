@@ -18,6 +18,8 @@ public class MeParser extends MatjiDataParser {
 		
 		MatjiData matjiData = null;
 		ArrayList<MatjiData> matjiDataList = null;
+		
+		
 		/* Set User */
 		UserParser userParser = new UserParser();
 		matjiData = userParser.getMatjiData(getObject(object, "user"));
@@ -26,7 +28,7 @@ public class MeParser extends MatjiDataParser {
 		
 		/* Set Bookmarks */
 		BookmarkParser bookmarkParser = new BookmarkParser();
-		matjiDataList = bookmarkParser.getMatjiDataList(getObject(object, "bookmarks"));
+		matjiDataList = bookmarkParser.getMatjiDataList(getArray(object, "bookmarks"));
 		if (matjiDataList != null){
 			ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
 			for (MatjiData data : matjiDataList) {
@@ -37,7 +39,7 @@ public class MeParser extends MatjiDataParser {
 
 		/* Set Likes */
 		LikeParser likeParser = new LikeParser();
-		matjiDataList = likeParser.getMatjiDataList(getObject(object, "likes"));
+		matjiDataList = likeParser.getMatjiDataList(getArray(object, "likes"));
 		if (matjiDataList != null){
 			ArrayList<Like> likes = new ArrayList<Like>();
 			for (MatjiData data : matjiDataList) {
@@ -49,6 +51,8 @@ public class MeParser extends MatjiDataParser {
 		/* Set Follow */
 		String followers = getString(object, "followers");
 		String followings = getString(object, "followings");
+		
+		
 		if (followers != null)
 			me.setFollowers(followers.split(","));
 		if (followings != null)
