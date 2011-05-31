@@ -2,11 +2,13 @@ package com.matji.sandwich.adapter;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Comment;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.http.util.TimeStamp;
 import com.matji.sandwich.widget.CommentListView;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,7 +28,7 @@ public class CommentAdapter extends MBaseAdapter {
 
 		if (convertView == null) {
 			commentElement = new CommentElement();
-			convertView = getLayoutInflater().inflate(R.layout.comment_adapter, null);
+			convertView = getLayoutInflater().inflate(R.layout.adapter_comment, null);
 
 			commentElement.image = (ImageView) convertView.findViewById(R.id.thumnail);
 			commentElement.nick = (TextView) convertView.findViewById(R.id.comment_adapter_nick);
@@ -42,8 +44,10 @@ public class CommentAdapter extends MBaseAdapter {
 
 		commentElement.nick.setTag(position+"");
 
-		downloader.downloadAttachFileImage(comment.getUser().getId(), MatjiImageDownloader.IMAGE_SSMALL, commentElement.image);
-		commentElement.nick.setText(comment.getUser().getNick());
+		/* Set User */
+		User user = comment.getUser();
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, commentElement.image);
+		commentElement.nick.setText(user.getNick());
 		commentElement.comment.setText(comment.getComment());
 		commentElement.dateAgo.setText(TimeStamp.getAgoFromDate(comment.getCreatedAt()));
 	

@@ -3,6 +3,7 @@ package com.matji.sandwich.adapter;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.http.util.TimeStamp;
 import com.matji.sandwich.widget.PostListView;
@@ -27,7 +28,7 @@ public class PostAdapter extends MBaseAdapter {
 		
 		if (convertView == null) {
 			postElement = new PostElement();
-			convertView = getLayoutInflater().inflate(R.layout.post_adapter, null);
+			convertView = getLayoutInflater().inflate(R.layout.adapter_post, null);
 			
 			postElement.image = (ImageView) convertView.findViewById(R.id.thumnail);
 			postElement.nick = (TextView) convertView.findViewById(R.id.post_adapter_nick);
@@ -44,7 +45,7 @@ public class PostAdapter extends MBaseAdapter {
 			postElement = (PostElement) convertView.getTag();
 		}
 		
-				
+		/* Set Store */
 		Store store = post.getStore();
 		if (store != null)
 			postElement.storeName.setText(" @" + store.getName());
@@ -54,10 +55,13 @@ public class PostAdapter extends MBaseAdapter {
 		postElement.nick.setTag(position+"");
 		postElement.storeName.setTag(position+"");
 		
-		downloader.downloadUserImage(post.getUser().getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.image);
-		postElement.nick.setText(post.getUser().getNick());
+		/* Set User */
+		User user = post.getUser();
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.image);
+		postElement.nick.setText(user.getNick());
 		postElement.post.setText(post.getPost());
 		postElement.dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
+
 		return convertView;
 	}
 	

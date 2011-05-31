@@ -22,7 +22,7 @@ public class WritePostActivity extends Activity implements Requestable {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.write_post);
+		setContentView(R.layout.activity_write_post);
 		postField = (EditText) findViewById(R.id.post_field);
 		manager = new HttpRequestManager(getApplicationContext(), this);
 

@@ -31,7 +31,7 @@ public class StoreMainActivity extends Activity{
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.store_main);		
+		setContentView(R.layout.activity_store_main);		
 		intent = getIntent();
 		store = (Store) intent.getParcelableExtra("store");
 		downloader = new MatjiImageDownloader();
@@ -56,8 +56,7 @@ public class StoreMainActivity extends Activity{
 		if (file != null) {
 			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeImage);
 		} else {
-			Log.d("Matji", "Call");
-			Drawable defaultImage = getResources().getDrawable(R.drawable.profile_default_img);
+			Drawable defaultImage = getResources().getDrawable(R.drawable.img_profile_default);
 			storeImage.setImageDrawable(defaultImage);
 		}
 		

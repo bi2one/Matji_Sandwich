@@ -23,7 +23,6 @@
 			android:id="@+id/user_main_title"
 			android:layout_toRightOf="@id/user_main_user_image" />
 		<ImageView
-			android:src="@drawable/profile_default_img"
 			android:scaleType="fitCenter"
 			android:layout_width="20dp"
 			android:layout_height="20dp"

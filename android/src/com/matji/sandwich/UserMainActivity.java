@@ -25,7 +25,7 @@ public class UserMainActivity extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.user_main);
+		setContentView(R.layout.activity_user_main);
 
 		intent = getIntent();
 		user = intent.getParcelableExtra("user");

@@ -16,7 +16,7 @@ public class LoginActivity extends Activity implements Loginable {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.login);
+		setContentView(R.layout.activity_login);
 
 	}
 

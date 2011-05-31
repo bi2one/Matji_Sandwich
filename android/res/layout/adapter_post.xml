@@ -14,8 +14,7 @@
 		<ImageView
 			android:id="@+id/thumnail"
 			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:background="@drawable/profile_default_img" />
+			android:layout_height="fill_parent" />
 	</LinearLayout>
 	<LinearLayout
 		android:id="@+id/name"
@@ -26,12 +25,18 @@
 		android:paddingLeft="5dp"
 		android:layout_toRightOf="@id/image">
 		<TextView
-			android:id="@+id/comment_adapter_nick"
+			android:id="@+id/post_adapter_nick"
 			android:clickable="true"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#000"
 			android:layout_alignParentTop="true" />
+		<TextView
+			android:id="@+id/post_adapter_store_name"
+			android:clickable="true"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#000" />
 	</LinearLayout>
 	<LinearLayout
 		android:orientation="vertical"
@@ -41,16 +46,16 @@
 		android:layout_below="@id/name"
 		android:paddingLeft="5dp">
 		<TextView
-			android:id="@+id/comment_adapter_comment"
+			android:id="@+id/post_adapter_post"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:textColor="#000"
-			android:layout_below="@id/comment_adapter_nick" />
+			android:layout_below="@id/post_adapter_nick" />
 		<TextView
-			android:id="@+id/comment_adapter_created_at"
+			android:id="@+id/post_adapter_created_at"
 			android:layout_width="fill_parent"
 			android:layout_height="30dp"
 			android:textColor="#000"
-			android:layout_below="@id/comment_adapter_comment" />
+			android:layout_below="@id/post_adapter_post" />
 	</LinearLayout>
 </RelativeLayout>

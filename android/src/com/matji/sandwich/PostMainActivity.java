@@ -32,7 +32,7 @@ public class PostMainActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.post_main);		
+		setContentView(R.layout.activity_post_main);		
 		intent = getIntent();
 		post = (Post) intent.getParcelableExtra("post");
 		user = post.getUser();

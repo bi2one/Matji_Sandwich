@@ -1,6 +1,7 @@
 package com.matji.sandwich.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ public class StoreAdapter extends MBaseAdapter {
 		// by ListView is null.
 		if (convertView == null) {
 			storeElement = new StoreElement();
-			convertView = getLayoutInflater().inflate(R.layout.store_adapter, null);
+			convertView = getLayoutInflater().inflate(R.layout.adapter_store, null);
 			// Creates a ViewHolder and store references to the two children
 			// views
 			// we want to bind data to.
@@ -51,8 +52,10 @@ public class StoreAdapter extends MBaseAdapter {
 		AttachFile file = store.getFile();
 		if (file != null) {
 			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeElement.image);
+		} else {			
+			Drawable defaultImage = context.getResources().getDrawable(R.drawable.img_profile_default);
+			storeElement.image.setImageDrawable(defaultImage);
 		}
-		
 		storeElement.name.setText(store.getName());
 		storeElement.address.setText(store.getAddress());
 		

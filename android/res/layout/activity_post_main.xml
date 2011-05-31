@@ -5,7 +5,7 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 	<include
-		layout="@layout/post_adapter"
+		layout="@layout/adapter_post"
 		android:id="@+id/post_main_post" />
 	<TextView
 		android:background="#fff"

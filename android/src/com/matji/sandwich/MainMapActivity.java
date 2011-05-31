@@ -32,7 +32,7 @@ public class MainMapActivity extends MapActivity implements MatjiLocationListene
     
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.main_map);
+	setContentView(R.layout.activity_main_map);
 	mMapView = (MapView)findViewById(R.id.map_view);
 	mMapController = mMapView.getController();
 
