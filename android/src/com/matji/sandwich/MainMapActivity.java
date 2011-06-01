@@ -3,6 +3,8 @@ package com.matji.sandwich;
 import android.content.Context;
 import android.os.Bundle;
 import android.location.Location;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -16,56 +18,56 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.overlay.StoreItemizedOverlay;
+import com.matji.sandwich.map.MatjiMapView;
+import com.matji.sandwich.map.MatjiMapCenterListener;
 
 import java.util.List;
 
-public class MainMapActivity extends MapActivity implements MatjiLocationListener {
+public class MainMapActivity extends MapActivity implements MatjiLocationListener, MatjiMapCenterListener {
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
     
     private Context mContext;
     private GpsManager mGpsManager;
-    private MapView mMapView;
+    private MatjiMapView mMapView;
     private MapController mMapController;
     private Location prevLocation;
     private List<Overlay> mapOverlays;
-    private StoreItemizedOverlay itemizedOverlay;
+    private StoreItemizedOverlay storeItemizedOverlay;
     
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main_map);
-	mMapView = (MapView)findViewById(R.id.map_view);
+	mMapView = (MatjiMapView)findViewById(R.id.map_view);
 	mMapController = mMapView.getController();
+	mMapView.setMapCenterListener(this);
 
 	mContext = getApplicationContext();
 
 	mGpsManager = new GpsManager(mContext, this);
+
+        storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
     }
 
     protected void onResume() {
 	super.onResume();
 	mGpsManager.start();
+	mMapView.startMapCenterThread();
     }
 
     protected void onPause() {
 	super.onPause();
 	mGpsManager.stop();
+	mMapView.stopMapCenterThread();
     }
 
     private void setCenter(Location loc) {
 	int geoLat = (int)(loc.getLatitude() * 1E6);
 	int geoLng = (int)(loc.getLongitude() * 1E6);
-	GeoPoint geopoint = new GeoPoint(geoLat, geoLng);
-	mMapController.animateTo(geopoint);
-	
-	mapOverlays = mMapView.getOverlays();
-        itemizedOverlay = new StoreItemizedOverlay(mContext);
-	OverlayItem overlayitem = new OverlayItem(geopoint, "test", "test2");
-	itemizedOverlay.addOverlay(overlayitem);
-	mapOverlays.add(itemizedOverlay);
-	
-	mMapController.setCenter(geopoint);
+	GeoPoint geoPoint = new GeoPoint(geoLat, geoLng);
+	mMapController.animateTo(geoPoint);
 	mMapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
+	// storeItemizedOverlay.addOverlay(geoPoint);
     }
 
     public void onLocationChanged(Location location) {
@@ -84,11 +86,37 @@ public class MainMapActivity extends MapActivity implements MatjiLocationListene
 	e.performExceptionHandling(mContext);
     }
 
+    public void onMapCenterChanged(GeoPoint point) {
+	Runnable runnable = new MapRunnable(point);
+	runOnUiThread(runnable);
+    }
+
     protected boolean isRouteDisplayed() {
     	return true;
     }
 
-    
+    public class MapRunnable implements Runnable {
+	private GeoPoint point;
+	
+	public MapRunnable(GeoPoint point) {
+	    this.point = point;
+	}
+
+	public void run() {
+	    storeItemizedOverlay.addOverlay(point);
+	    mMapView.postInvalidate();
+	}
+    }
+
+    // public boolean dispatchTouchEvent(MotionEvent event) {
+    // 	boolean result = super.dispatchTouchEvent(event);
+    // 	if (event.getAction() == MotionEvent.ACTION_UP) {
+    // 	    // Log.d("======", mMapView.getMapCenter().toString());
+    // 	    storeItemizedOverlay.addOverlay(mMapView.getMapCenter());
+    // 	}
+    // 	return result;
+    // }
+
     // 	e = (EditText) findViewById(R.id.main_map_search_bar);
     // 	Button b = (Button) findViewById(R.id.main_map_gps_button);
     // 	b.requestFocus();
