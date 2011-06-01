@@ -54,9 +54,11 @@
   <!-- default String... -->
   <string name="default_string_tag">태그</string>
   <string name="default_string_popular_food">인기메뉴</string>
-  <string name="default_string_not_reg_user">미발굴 맛집</string>
+  <string name="default_string_not_exist_reg_user">미발굴 맛집</string>
+  <string name="default_string_not_exist_owner_user">미발굴 맛집</string>
   <string name="default_string_reg_user">발굴자</string>
-  <string name="default_string_url">URL</string>
+  <string name="default_string_owner_user">주인장</string>
+  <string name="default_string_url">관련 URL</string>
   <string name="default_string_memo">메모</string>
   <string name="default_string_image">이미지</string>
   <string name="default_string_map">지도</string>
@@ -64,18 +66,26 @@
   <string name="default_string_alarm">알람</string>
   <string name="default_string_search">검색</string>
   <string name="default_string_follow">Follow</string>
-  <string name="default_string_unfollow">Unfollow</string>
+  <string name="default_string_unfollow">unFollow</string>
   
   <!-- StoreMainActivity  -->
-  <string name="store_main_like_store">
-	    내가 좋아하는 맛집
-  </string>
+  <string name="store_main_like_store">내가 좋아하는 맛집</string>
+  <string name="store_main_scrap">스크랩</string>
+  <string name="store_main_bookmark">Bookmark</string>
+  <string name="store_main_unbookmark">unBookmark</string>
+  <string name="store_main_map">지도</string>
+  <string name="store_main_phone">전화</string>
+  <string name="store_main_web">웹</string>
+  <string name="store_main_info_view">맛집정보 보기</string>
+  <string name="store_main_menu_view">메뉴 보기</string>
   
   <!-- UserMainActivity -->
   <string name="user_main_not_found_intro">소개가 없습니다.</string>
   <string name="user_main_follower">follower</string>
   <string name="user_main_following">following</string>
-  
+  <string name="default_string_jjim_store">찜한 맛집</string>
+  <string name="default_string_">찜한 맛집</string>
+
   <!-- StoreSwipeActivity -->
   <string name="all_store">전체 맛집</string>
   <string name="near_store">주변 맛집</string>

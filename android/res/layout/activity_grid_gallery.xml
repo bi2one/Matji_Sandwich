@@ -4,13 +4,6 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<GridView
-		android:id="@+id/grid_gallery"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:numColumns="auto_fit"
-		android:verticalSpacing="5dp"
-		android:horizontalSpacing="5dp"
-		android:columnWidth="96dp"
-		android:stretchMode="columnWidth"
-		android:gravity="center" />
+		style="@style/grid_gallery_GridItem"
+		android:id="@+id/grid_gallery"/>
 </LinearLayout>

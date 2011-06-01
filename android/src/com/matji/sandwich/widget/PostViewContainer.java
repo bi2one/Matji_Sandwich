@@ -24,6 +24,7 @@ public class PostViewContainer extends ViewContainer {
 	private TextView content;
 	private TextView dateAgo;
 
+	// TODO 태그도 추가
 	public PostViewContainer(Context context, Post post, User user, Store store) {
 		super(context, R.layout.adapter_post);
 		this.post = post;
