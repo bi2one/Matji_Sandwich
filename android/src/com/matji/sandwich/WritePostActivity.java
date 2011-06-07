@@ -51,6 +51,7 @@ public class WritePostActivity extends Activity implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch(tag) {
 			case POST_WRITE_REQUEST:
+				setResult(RESULT_OK);
 				finish();
 				break;
 		}
