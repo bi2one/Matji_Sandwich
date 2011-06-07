@@ -208,6 +208,14 @@ public class DBProvider {
 		return true;
 	}
 
+	public boolean deleteBookmark(int id, String object) {
+		SQLiteDatabase db = dbHelper.getDatabase();
+		db.delete(BOOKMARK_TABLE_NAME, "object_id = " + id + " AND object = '" + object + "'", null);
+		
+		return true;
+		
+	}
+	
 	public boolean deleteBookmarks() {
 		SQLiteDatabase db = dbHelper.getDatabase();
 		db.delete(BOOKMARK_TABLE_NAME, null, null);

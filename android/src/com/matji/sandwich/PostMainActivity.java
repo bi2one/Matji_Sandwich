@@ -43,9 +43,8 @@ public class PostMainActivity extends Activity {
 		header = new PostViewContainer(this, post, user, store);
 
 		//TODO
-		tags = (TextView) findViewById(R.id.post_main_tag_area);
+//		tags = (TextView) findViewById(R.id.post_main_tag_area);
 		commentListView = (CommentListView) findViewById(R.id.post_main_comment_list_view);
-
 		commentListView.addHeaderView(header);
 		//		TODO
 		commentListView.setPostId(post.getId());

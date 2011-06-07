@@ -5,7 +5,6 @@
 	android:layout_height="match_parent"
 	android:background="#fff">
 	<com.matji.sandwich.widget.SwipeView
-		android:id="@+id/SwipeView"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent" />
+		style="@style/DefaultFill"
+		android:id="@+id/SwipeView" />
 </LinearLayout>
