@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content">
+		<ImageView
+			style="@style/user_main_Image"
+			android:id="@+id/user_main_image" />
+		<TextView
+			style="@style/user_main_Grade"
+			android:id="@+id/user_main_grade"
+			android:layout_toRightOf="@id/user_main_image" />
+		<TextView
+			style="@style/user_main_Title"
+			android:id="@+id/user_main_title"
+			android:layout_toRightOf="@id/user_main_image"
+			android:layout_below="@id/user_main_grade" />
+		<TextView
+			style="@style/user_main_Intro"
+			android:id="@+id/user_main_intro"
+			android:layout_toRightOf="@id/user_main_image"
+			android:layout_below="@id/user_main_title" />
+</RelativeLayout>
