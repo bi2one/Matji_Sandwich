@@ -213,7 +213,6 @@ public class DBProvider {
 		db.delete(BOOKMARK_TABLE_NAME, "object_id = " + id + " AND object = '" + object + "'", null);
 		
 		return true;
-		
 	}
 	
 	public boolean deleteBookmarks() {
@@ -223,6 +222,10 @@ public class DBProvider {
 		return true;
 	}
 
+	public boolean isExistLike(int id, String object) {
+		return getRecordNums(LIKE_TABLE_NAME, "object_id =  " + id + " AND object = " + "'" + object + "'") > 0;
+	}
+	
 	public boolean insertLike(Like like) {
 		SQLiteDatabase db = dbHelper.getDatabase();
 		ContentValues cv = new ContentValues();
@@ -230,7 +233,6 @@ public class DBProvider {
 		cv.put("object_id", like.getForeignKey());
 
 		return db.insert(LIKE_TABLE_NAME, null, cv) != -1;
-
 	}
 
 	public boolean insertLikes(ArrayList<Like> likes) {
@@ -240,7 +242,14 @@ public class DBProvider {
 
 		return true;
 	}
-
+	
+	public boolean deleteLike(int id, String object) {
+		SQLiteDatabase db = dbHelper.getDatabase();
+		db.delete(LIKE_TABLE_NAME, "object_id = " + id + " AND object = '" + object + "'", null);
+		
+		return true;
+	}
+	
 	public boolean deleteLikes() {
 		SQLiteDatabase db = dbHelper.getDatabase();
 		db.delete(LIKE_TABLE_NAME, null, null);
@@ -248,6 +257,10 @@ public class DBProvider {
 		return true;
 	}
 
+	public boolean isExistFollowing(int id) {
+		return getRecordNums(FOLLOWING_TABLE_NAME, "following_user_id =  " + id) > 0;
+	}
+	
 	public boolean insertFollowing(int followingUId) {
 		SQLiteDatabase db = dbHelper.getDatabase();
 
@@ -274,6 +287,13 @@ public class DBProvider {
 		return true;
 	}
 
+	public boolean deleteFollowing(int followingUId) {
+		SQLiteDatabase db = dbHelper.getDatabase();
+		db.delete(FOLLOWING_TABLE_NAME, "following_user_id = " + followingUId, null);
+		
+		return true;
+	}
+	
 	public boolean deleteFollowings() {
 		SQLiteDatabase db = dbHelper.getDatabase();
 		db.delete(FOLLOWING_TABLE_NAME, null, null);
@@ -281,6 +301,10 @@ public class DBProvider {
 		return true;
 	}
 
+	public boolean isExistFollower(int id) {
+		return getRecordNums(FOLLOWER_TABLE_NAME, "followed_user_id =  " + id) > 0;
+	}
+	
 	public boolean insertFollower(int followerUId) {
 		SQLiteDatabase db = dbHelper.getDatabase();
 
@@ -305,7 +329,14 @@ public class DBProvider {
 		}
 		return true;
 	}
-
+	
+	public boolean deleteFollower(int followerUId) {
+		SQLiteDatabase db = dbHelper.getDatabase();
+		db.delete(FOLLOWER_TABLE_NAME, "followed_user_id= " + followerUId, null);
+		
+		return true;
+	}
+	
 	public boolean deleteFollowers() {
 		SQLiteDatabase db = dbHelper.getDatabase();
 		db.delete(FOLLOWER_TABLE_NAME, null, null);

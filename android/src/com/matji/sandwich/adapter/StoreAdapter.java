@@ -54,7 +54,7 @@ public class StoreAdapter extends MBaseAdapter {
 		if (file != null) {
 			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeElement.image);
 		} else {			
-			Drawable defaultImage = context.getResources().getDrawable(R.drawable.img_profile_default);
+			Drawable defaultImage = context.getResources().getDrawable(R.drawable.img_matji_default);
 			storeElement.image.setImageDrawable(defaultImage);
 		}
 		storeElement.name.setText(store.getName());

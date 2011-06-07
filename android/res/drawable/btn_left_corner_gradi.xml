@@ -4,8 +4,10 @@
 	<item
 		android:state_pressed="true">
 		<shape>
-			<solid
-				android:color="@color/pressed2" />
+			<gradient
+				android:startColor="@color/pressed1"
+				android:endColor="@color/pressed2"
+				android:angle="270" />
 			<stroke
 				android:width="1px"
 				android:color="#dddddd" />
@@ -18,8 +20,10 @@
 	<item
 		android:state_focused="true">
 		<shape>
-			<solid
-				android:color="@color/focused2" />
+			<gradient
+				android:endColor="@color/focused1"
+				android:startColor="@color/focused2"
+				android:angle="270" />
 			<stroke
 				android:width="1px"
 				android:color="#dddddd" />
@@ -31,8 +35,10 @@
 
 	<item>
 		<shape>
-			<solid
-				android:color="@color/default2" />
+			<gradient
+				android:endColor="@color/default1"
+				android:startColor="@color/default2"
+				android:angle="270" />
 			<stroke
 				android:width="1px"
 				android:color="#dddddd" />

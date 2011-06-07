@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Like extends MatjiData{
 	private int id;
 	private int user_id;
-	private String foreign_key;
+	private int foreign_key;
 	private String object;
 	private User user;
 	private Store store;
@@ -37,7 +37,7 @@ public class Like extends MatjiData{
 	public void writeToParcel(Parcel dest, int arg1) {
 		dest.writeInt(id);
 		dest.writeInt(user_id);
-		dest.writeString(foreign_key);
+		dest.writeInt(foreign_key);
 		dest.writeString(object);
 		dest.writeValue(user);
 		dest.writeValue(store);
@@ -49,7 +49,7 @@ public class Like extends MatjiData{
 	private void readFromParcel(Parcel in) {
 		id = in.readInt();
 		user_id = in.readInt();
-		foreign_key = in.readString();	
+		foreign_key = in.readInt();	
 		object = in.readString();	
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
@@ -70,10 +70,10 @@ public class Like extends MatjiData{
 	public int getUserId() {
 		return user_id;
 	}
-	public void setForeignKey(String foreign_key) {
+	public void setForeignKey(int foreign_key) {
 		this.foreign_key = foreign_key;
 	}
-	public String getForeignKey() {
+	public int getForeignKey() {
 		return foreign_key;
 	}
 	public void setObject(String object) {

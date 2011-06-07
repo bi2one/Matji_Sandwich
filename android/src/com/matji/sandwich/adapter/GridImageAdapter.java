@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -45,6 +46,8 @@ public class GridImageAdapter extends BaseAdapter {
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView image = new ImageView(context);
+		Drawable drawable = context.getResources().getDrawable(R.drawable.img_matji_default);
+		image.setBackgroundDrawable(drawable);
 		
 		downloader.downloadAttachFileImage(attachFileIds[position], MatjiImageDownloader.IMAGE_MEDIUM, image);
 		image.setLayoutParams(new GridView.LayoutParams(150, 150));
