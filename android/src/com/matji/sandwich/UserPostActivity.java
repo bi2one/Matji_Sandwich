@@ -9,7 +9,7 @@ import android.os.Bundle;
 public class UserPostActivity extends Activity {
 	private Intent intent;
 	private int user_id;		
-	private UserPostListView view;
+	private UserPostListView listView;
     
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -18,9 +18,9 @@ public class UserPostActivity extends Activity {
 		intent = getIntent();
 		user_id = intent.getIntExtra("user_id", 0);
 		
-		view = (UserPostListView) findViewById(R.id.user_post_list_view);
-		view.setUserId(user_id);
-		view.setActivity(this);
-		view.requestReload();
+		listView = (UserPostListView) findViewById(R.id.user_post_list_view);
+		listView.setUserId(user_id);
+		listView.setActivity(this);
+		listView.requestReload();
 	}
 }

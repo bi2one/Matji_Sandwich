@@ -12,6 +12,7 @@
 		android:padding="3dp"
 		android:layout_alignParentLeft="true">
 		<ImageView
+			android:background="@drawable/img_matji_default"
 			android:id="@+id/thumnail"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"

@@ -107,7 +107,7 @@ PullToRefreshListView.OnRefreshListener {
 		return manager;
 	}
 
-	protected ArrayList<? extends MatjiData> getAdapterData() {
+	protected ArrayList<MatjiData> getAdapterData() {
 		return adapterData;
 	}
 

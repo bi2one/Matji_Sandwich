@@ -4,14 +4,14 @@
 
   <!-- map api key -->
   <!-- bizone: 0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw -->
-  <!-- mozziluv: 0pX3qXUw7p4rsjEUxOG8rAmsnF1d8Rl9g1awN7A -->
+  <!-- mozzliuv: 0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg -->
   <!-- release 0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg -->
 
   <!-- release!!!! -->
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
+  	0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
   </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -55,7 +55,6 @@
   <string name="default_string_tag">태그</string>
   <string name="default_string_popular_food">인기메뉴</string>
   <string name="default_string_not_exist_reg_user">미발굴 맛집</string>
-  <string name="default_string_not_exist_owner_user">미발굴 맛집</string>
   <string name="default_string_reg_user">발굴자</string>
   <string name="default_string_owner_user">주인장</string>
   <string name="default_string_url">관련 URL</string>
@@ -65,13 +64,13 @@
   <string name="default_string_store">맛집</string>
   <string name="default_string_alarm">알람</string>
   <string name="default_string_search">검색</string>
-  <string name="default_string_follow">Follow</string>
-  <string name="default_string_unfollow">unFollow</string>
+  <string name="default_string_number_of">개</string>
   
   <!-- StoreMainActivity  -->
-  <string name="store_main_like_store">내가 좋아하는 맛집</string>
+  <string name="store_main_unlike_store">내가 좋아하는 맛집</string>
+  <string name="store_main_like_store">좋아요</string>
   <string name="store_main_scrap">스크랩</string>
-  <string name="store_main_bookmark">Bookmark</string>
+  <string name="store_main_bookmark">스크랩</string>
   <string name="store_main_unbookmark">unBookmark</string>
   <string name="store_main_map">지도</string>
   <string name="store_main_phone">전화</string>
@@ -81,10 +80,12 @@
   
   <!-- UserMainActivity -->
   <string name="user_main_not_found_intro">소개가 없습니다.</string>
+  <string name="user_main_follow">Follow</string>
+  <string name="user_main_unfollow">unFollow</string>
+  <string name="user_main_brandnew">BrandNew follows you.</string>
   <string name="user_main_follower">follower</string>
   <string name="user_main_following">following</string>
   <string name="default_string_jjim_store">찜한 맛집</string>
-  <string name="default_string_">찜한 맛집</string>
 
   <!-- StoreSwipeActivity -->
   <string name="all_store">전체 맛집</string>
