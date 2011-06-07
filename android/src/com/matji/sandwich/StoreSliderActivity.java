@@ -31,6 +31,7 @@ import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.BaseViewContainer;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
+import com.matji.sandwich.widget.PullToRefreshListView.*;
 
 public class StoreSliderActivity extends Activity implements OnScrollListener {
 	private int[] pagerControlStringRef;
@@ -42,6 +43,12 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	private Context mContext;
 	private int mCurrentPage;
 	private ArrayList<View> mContentViews;
+<<<<<<< HEAD
+=======
+	
+	public static final int LOGIN_ACTIVITY = 1;
+	public static final int WRITE_POST_ACTIVITY = 2;
+>>>>>>> 51ab304f12a9189b5192a42d2f08d4226a9012b3
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +57,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 		mContentViews = new ArrayList<View>();
 		mCurrentPage = 0;
 
+<<<<<<< HEAD
 		pagerControlStringRef = new int[] { R.string.all_store,
 				R.string.near_store,
 				R.string.all_memo};
@@ -59,6 +67,15 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 		view1 = (StoreListView)findViewById(R.id.ListView1);
 		view2 = (StoreNearListView)findViewById(R.id.ListView2);
 		view3 = (PostListView)findViewById(R.id.ListView3);
+=======
+		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store, R.string.all_memo };
+
+		control = (PagerControl) findViewById(R.id.PagerControl);
+		swipeView = (SwipeView) findViewById(R.id.SwipeView);
+		view1 = (StoreListView) findViewById(R.id.ListView1);
+		view2 = (StoreNearListView) findViewById(R.id.ListView2);
+		view3 = (PostListView) findViewById(R.id.ListView3);
+>>>>>>> 51ab304f12a9189b5192a42d2f08d4226a9012b3
 
 		mContentViews.add(view1);
 		mContentViews.add(view2);
@@ -76,16 +93,25 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 		swipeView.addOnScrollListener(this);
 	}
 
+<<<<<<< HEAD
 	public void onScroll(int scrollX) { }
 
 	public void onViewScrollFinished(int currentPage) {
 		if (mCurrentPage != currentPage){
+=======
+	public void onScroll(int scrollX) {
+	}
+
+	public void onViewScrollFinished(int currentPage) {
+		if (mCurrentPage != currentPage) {
+>>>>>>> 51ab304f12a9189b5192a42d2f08d4226a9012b3
 			Log.d("refresh", "pageChanged!");
 
 			try {
 				mCurrentPage = currentPage;
 				control.setCurrentPage(currentPage);
 				View view = mContentViews.get(currentPage);
+<<<<<<< HEAD
 				if (view instanceof RequestableMListView){
 					RequestableMListView listView = (RequestableMListView) view;
 					listView.requestConditionally();
@@ -130,4 +156,54 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	public static void onRefresh() {
 		onRefresh();
 	}
+=======
+				if (view instanceof RequestableMListView) {
+					RequestableMListView listView = (RequestableMListView) view;
+					listView.requestConditionally();
+				}
+			} catch (IndexOutOfBoundsException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case LOGIN_ACTIVITY:
+			if (resultCode == RESULT_OK) {
+				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+			}
+			break;
+		case WRITE_POST_ACTIVITY:
+			if (resultCode == RESULT_OK) {
+				view3.onRefresh();
+			}
+			break;
+		}
+	}
+
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Session session = Session.getInstance(this);
+		switch (item.getItemId()) {
+		case R.id.posting:
+			if (session.getToken() == null) {
+				startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
+			} else {
+				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+			}
+			return true;
+		}
+		return false;
+	}
+>>>>>>> 51ab304f12a9189b5192a42d2f08d4226a9012b3
 }

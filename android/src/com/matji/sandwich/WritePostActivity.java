@@ -51,7 +51,11 @@ public class WritePostActivity extends Activity implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch(tag) {
 			case POST_WRITE_REQUEST:
+<<<<<<< HEAD
 				StoreSliderActivity.onRefresh();
+=======
+				setResult(RESULT_OK);
+>>>>>>> 51ab304f12a9189b5192a42d2f08d4226a9012b3
 				finish();
 				break;
 		}
