@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.*;
-import android.content.*;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuInflater;
+import android.content.Intent;
+import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.matji.sandwich.session.*;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.StoreListView;
 import com.matji.sandwich.widget.PagerControl;
@@ -18,7 +22,7 @@ import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.BaseViewContainer;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
-import com.matji.sandwich.widget.PullToRefreshListView.*;
+import com.matji.sandwich.widget.PullToRefreshListView.OnRefreshListener;
 
 public class StoreSliderActivity extends Activity implements OnScrollListener {
 	private int[] pagerControlStringRef;
