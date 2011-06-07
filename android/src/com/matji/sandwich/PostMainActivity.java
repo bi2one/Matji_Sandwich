@@ -3,7 +3,7 @@ package com.matji.sandwich;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +13,7 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.http.util.TimeStamp;
+import com.matji.sandwich.session.*;
 import com.matji.sandwich.widget.CommentListView;
 import com.matji.sandwich.widget.PostViewContainer;
 import com.matji.sandwich.widget.ViewContainer;
@@ -51,4 +52,6 @@ public class PostMainActivity extends Activity {
 		commentListView.setActivity(this);
 		commentListView.requestReload();
 	}
+	
+
 }

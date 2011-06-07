@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.View;
-import android.content.Context;
+import android.view.*;
+import android.content.*;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.matji.sandwich.session.*;
 import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.StoreListView;
 import com.matji.sandwich.widget.PagerControl;
@@ -79,5 +80,37 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	    }catch (IndexOutOfBoundsException e){ e.printStackTrace(); }
     	}
     	
+    }
+    
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	super.onCreateOptionsMenu(menu);
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.menu, menu);
+    	return true;
+    }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	switch(requestCode) {
+    	case 1:
+    		if(resultCode == RESULT_OK) {
+    			startActivity(new Intent(getApplicationContext(), WritePostActivity.class));
+    		}
+    		break;
+    	}
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	Session session = Session.getInstance(this);
+    	switch (item.getItemId()) {
+    	case R.id.posting:
+    		if(session.getToken() == null) {
+        		startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class),1);
+    		} else {
+        		startActivity(new Intent(getApplicationContext(), WritePostActivity.class));
+    		}
+    		return true;
+    	}
+    	return false;
     }
 }

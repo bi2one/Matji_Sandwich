@@ -64,4 +64,11 @@ public class SettingActivity extends Activity {
 		configureViews();
 	}
 	
+	public void signupButtonClicked(View v){
+
+		Intent intent = new Intent(this, SignUpActivity.class);
+		startActivityForResult(intent, 1);
+	}
+	
+	
 }
