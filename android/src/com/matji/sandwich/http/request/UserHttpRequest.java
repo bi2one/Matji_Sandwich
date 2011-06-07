@@ -27,7 +27,7 @@ public class UserHttpRequest extends HttpRequest {
 
 		getHashtable.clear();
 	}
-
+	
 	public void actionShow(int user_id){
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "show";

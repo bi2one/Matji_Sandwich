@@ -1,67 +1,113 @@
 package com.matji.sandwich;
 
-import com.matji.sandwich.session.*;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.data.User;
 
-import android.app.*;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.*;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class SettingActivity extends Activity { 
-	LinearLayout layout;
+public class SettingActivity extends Activity implements OnClickListener {
+	private Button signin;
+	private Button signout; 
+	private Button signup;
+	private TextView profile;
+	private TextView notifications;
+	private TextView messages;
+	private TextView notices;
+	private Session session;
+	private User user;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_settings);		
+		setContentView(R.layout.activity_settings);
+		session = Session.getInstance(this);
+		user = session.getCurrentUser();
+
 	}
-	
-	protected void onResume(){
+
+	protected void onResume() {
 		super.onResume();
 		configureViews();
 	}
-	
-	
-	private void configureViews(){
-		Session session = Session.getInstance(this);
+
+	private void configureViews() {
+
+		signin = (Button) findViewById(R.id.signin);
+		signout = (Button) findViewById(R.id.signout);
+		signup = (Button) findViewById(R.id.signup);
+		profile = (TextView) findViewById(R.id.profile);
+		notifications = (TextView) findViewById(R.id.notifications);
+		messages = (TextView) findViewById(R.id.messages);
+		notices = (TextView) findViewById(R.id.notices);
+		profile.setOnClickListener(this);
+		notifications.setOnClickListener(this);
+		messages.setOnClickListener(this);
+		notices.setOnClickListener(this);
 		
-		Button signin = (Button) findViewById(R.id.signin);
-		Button signout = (Button) findViewById(R.id.signout);
-		Button signup = (Button) findViewById(R.id.signup);
-		
-		if (session.getToken() == null){
-			Log.d("=====", "No token");
+ 		if (session.getToken() == null) {
 			signin.setVisibility(Button.VISIBLE);
 			signout.setVisibility(Button.GONE);
 			signup.setVisibility(Button.VISIBLE);
-		}else {
-			Log.d("=====", "token");
+			profile.setVisibility(TextView.GONE);
+			notifications.setVisibility(TextView.GONE);
+			messages.setVisibility(TextView.GONE);
+		} else {
 			signin.setVisibility(Button.GONE);
 			signout.setVisibility(Button.VISIBLE);
 			signup.setVisibility(Button.GONE);
+			profile.setVisibility(TextView.VISIBLE);
+			notifications.setVisibility(TextView.VISIBLE);
+			messages.setVisibility(TextView.VISIBLE);
 		}
 	}
-	
-	
-	
-	protected void onPause(){
+
+	protected void onPause() {
 		super.onPause();
 	}
-	
-	public void loginButtonClicked(View v){
 
+	public void loginButtonClicked(View v) {
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivityForResult(intent, 1);
 	}
-	
-	public void logoutButtonClicked(View v){
+
+	public void logoutButtonClicked(View v) {
 		Session session = Session.getInstance(this);
 		session.logout();
-		
 		configureViews();
 	}
-	
+
+	public void signupButtonClicked(View v) {
+		Intent intent = new Intent(this, SignUpActivity.class);
+		startActivityForResult(intent, 1);
+	}
+
+	public void onClick(View v) {
+		switch(v.getId()) {
+		case R.id.profile :
+			Intent profileIntent = new Intent(this, UserTabActivity.class);
+			profileIntent.putExtra("user", (Parcelable)user);
+			startActivity(profileIntent);
+			break;
+		case R.id.notifications :
+			Intent notificationIntent = new Intent(this, UserTabActivity.class);
+			notificationIntent.putExtra("user", (Parcelable)user);
+			startActivity(notificationIntent);
+			break;
+		case R.id.messages :
+			Intent messageIntent = new Intent(this, UserTabActivity.class);
+			messageIntent.putExtra("user", (Parcelable)user);
+			startActivity(messageIntent);
+			break;
+		case R.id.notices :
+			Intent noticesIntent = new Intent(this, NoticeActivity.class);
+			startActivity(noticesIntent);
+			break;
+		}
+	}
 }

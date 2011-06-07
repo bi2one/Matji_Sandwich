@@ -37,11 +37,11 @@ public class TimeStamp {
 		String min = "min ago";
 		String sec = "sec ago";
 		Date now = new Date();
-		long nowSeconds = now.getTime() / 1000;
-		long postSeconds = date.getTime() / 1000;
+		long nowSeconds = now.getTime() /1000;
+		long postSeconds = date.getTime() /1000;
 		long time = nowSeconds - postSeconds;
 
-		if ((x = time / 31536000) > 0) { // year
+		if ((x = time / 31104000) > 0) { // year
 			if (x == 1) {
 				timestampText = x + " " + year; // singular
 			} else {

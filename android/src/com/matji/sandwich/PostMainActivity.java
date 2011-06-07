@@ -3,8 +3,6 @@ package com.matji.sandwich;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
 import android.widget.TextView;
 
 import com.matji.sandwich.data.Post;
@@ -46,4 +44,6 @@ public class PostMainActivity extends Activity {
 		commentListView.setActivity(this);
 		commentListView.requestReload();
 	}
+	
+
 }

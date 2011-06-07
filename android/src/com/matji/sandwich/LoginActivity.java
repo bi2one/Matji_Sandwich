@@ -34,7 +34,7 @@ public class LoginActivity extends Activity implements Loginable {
 
 	/* Loginable Interface methods */
 	public void loginCompleted() {
-		setResult(RESULT_OK);
+		this.setResult(RESULT_OK);
 		finish();
 	}
 
