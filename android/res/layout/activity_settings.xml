@@ -1,25 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/setting_layout" 
-	style="@style/DefaultFill">
-	<Button android:id="@+id/signin"
-		android:onClick="loginButtonClicked"
-		android:visibility="gone"		
-		android:layout_margin="20dp"
+	style="@style/DefaultFill"		
+	android:padding="20dp">
+
+	<RelativeLayout android:id="@+id/user" 
+		style="@style/DefaultWidthFill">
+		<TextView android:id="@+id/profile" 
+			style="@style/DefaultWrap" 
+			android:visibility="gone"
+			android:text="My Profile" />
+		<TextView android:id="@+id/notifications"
+			style="@style/DefaultWrap"
+			android:visibility="gone" 
+			android:layout_below="@id/profile" 
+			android:paddingTop="10dp"
+			android:paddingBottom="10dp"
+			android:text="Notifications" />
+		<TextView android:id="@+id/messages" 
+			style="@style/DefaultWrap" 
+			android:visibility="gone"
+			android:layout_below="@id/notifications" 
+			android:text="Messages" />
+	</RelativeLayout>
+
+	<RelativeLayout android:id="@+id/settings"
 		style="@style/DefaultWidthFill"
-		android:layout_weight="1"
-		android:text="로그인"/>
-	<Button android:id="@+id/signout"
+		android:layout_below="@id/user"			
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp">
+		<TextView android:id="@+id/notices"
+			style="@style/DefaultWidthFill" 
+			android:text="Notices"/>
+		<TextView android:id="@+id/sync"
+			style="@style/DefaultWidthFill" 
+			android:text="Sync"
+			android:layout_below="@id/notices"/>
+		<TextView android:id="@+id/manual"
+			style="@style/DefaultWidthFill" 
+			android:text="manual"
+			android:layout_below="@id/sync"/>
+		<TextView android:id="@+id/version"
+			style="@style/DefaultWidthFill" 
+			android:text="Version"
+			android:layout_below="@id/manual"/>
+		<TextView android:id="@+id/about"
+			style="@style/DefaultWidthFill" 
+			android:text="About"
+			android:layout_below="@id/version"/>
+	</RelativeLayout>
+
+	<LinearLayout android:id="@+id/buttn" 
 		style="@style/DefaultWidthFill"
-		android:onClick="logoutButtonClicked"
-		android:visibility="gone"		
-		android:layout_margin="20dp"
-		android:layout_weight="1"
-		android:text="로그아웃"/>
-	<Button android:id="@+id/signup" 
-		style="@style/DefaultWidthFill"
-		android:onClick="signupButtonClicked"
-		android:layout_margin="20dp"
-		android:layout_weight="1"
-		android:text="회원가입"/>
-</LinearLayout>
+		android:layout_below="@id/settings">
+		<Button android:id="@+id/signin" 
+			style="@style/DefaultWidthFill" 
+			android:onClick="loginButtonClicked"
+			android:layout_weight="1"
+			android:text="로그인" 
+			android:layout_alignParentLeft="true" />
+		<Button android:id="@+id/signout" 
+			style="@style/DefaultWidthFill"
+			android:onClick="logoutButtonClicked" 
+			android:layout_weight="1" 
+			android:text="로그아웃" />
+		<Button android:id="@+id/signup" 
+			style="@style/DefaultWidthFill"
+			android:onClick="signupButtonClicked" 
+			android:layout_weight="1" 
+			android:text="회원가입"
+			android:layout_alignParentRight="true" />
+	</LinearLayout>
+</RelativeLayout>

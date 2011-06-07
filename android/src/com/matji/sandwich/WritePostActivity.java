@@ -6,6 +6,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.widget.*;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -51,12 +52,11 @@ public class WritePostActivity extends Activity implements Requestable {
 		switch(tag) {
 			case POST_WRITE_REQUEST:
 				finish();
-				break;	
+				break;
 		}
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
 	}
-
 }

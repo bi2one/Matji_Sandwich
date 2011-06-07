@@ -19,6 +19,7 @@
 		<activity android:name="AlarmActivity"></activity>
 		<activity android:name="LoginActivity"></activity>
 		<activity android:name="MainMapActivity"></activity>
+		<activity android:name="NoticeActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
 		<activity android:name="PostMainActivity"></activity>
 		<activity android:name="SettingActivity"></activity>

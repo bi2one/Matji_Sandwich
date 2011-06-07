@@ -89,7 +89,6 @@
 		<LinearLayout
 			style="@style/DefaultWidthFill">
 			<TextView
-			android:text
 				style="@style/store_main_User"
 				android:id="@+id/store_main_reg_user" />
 			<TextView
