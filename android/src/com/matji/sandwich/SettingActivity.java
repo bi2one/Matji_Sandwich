@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.*;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -26,8 +27,6 @@ public class SettingActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-		session = Session.getInstance(this);
-		user = session.getCurrentUser();
 
 	}
 
@@ -37,7 +36,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 	}
 
 	private void configureViews() {
-
+		session = Session.getInstance(this);
 		signin = (Button) findViewById(R.id.signin);
 		signout = (Button) findViewById(R.id.signout);
 		signup = (Button) findViewById(R.id.signup);
@@ -77,7 +76,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 	}
 
 	public void logoutButtonClicked(View v) {
-		Session session = Session.getInstance(this);
+		session = Session.getInstance(this);
 		session.logout();
 		configureViews();
 	}
@@ -91,6 +90,8 @@ public class SettingActivity extends Activity implements OnClickListener {
 		switch(v.getId()) {
 		case R.id.profile :
 			Intent profileIntent = new Intent(this, UserTabActivity.class);
+			session = Session.getInstance(this);
+			user = session.getCurrentUser();
 			profileIntent.putExtra("user", (Parcelable)user);
 			startActivity(profileIntent);
 			break;

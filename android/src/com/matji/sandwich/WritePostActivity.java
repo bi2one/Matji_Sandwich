@@ -29,7 +29,11 @@ public class WritePostActivity extends Activity implements Requestable {
 
 	}
 
-	public void imageButtonClicked(View v) {
+	public void imgButtonClicked(View v) {
+		
+	}
+	
+	public void mapButtonClicked(View v) {
 		
 	}
 
