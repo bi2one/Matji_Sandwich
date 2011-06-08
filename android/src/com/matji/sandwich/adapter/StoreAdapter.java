@@ -1,25 +1,32 @@
 package com.matji.sandwich.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.util.Log;
+    
 import com.matji.sandwich.R;
+import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.http.util.MatjiImageDownloader;
 
 // import com.matji.android.v2.common.Constants;
 // import com.matji.android.v2.common.ImageDownloader;
 
 public class StoreAdapter extends MBaseAdapter {
+	MatjiImageDownloader downloader;
+	
 	public StoreAdapter(Context context) {
 		super(context);
+		downloader = new MatjiImageDownloader();
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		StoreElement storeElement;
-		Store store = (Store) data.get(position);
+		Store store = (Store) data.get(position);	
 
 		// When convertView is not null, we can reuse it directly, there is no
 		// need
@@ -28,7 +35,7 @@ public class StoreAdapter extends MBaseAdapter {
 		// by ListView is null.
 		if (convertView == null) {
 			storeElement = new StoreElement();
-			convertView = getLayoutInflater().inflate(R.layout.store_adapter, null);
+			convertView = getLayoutInflater().inflate(R.layout.adapter_store, null);
 			// Creates a ViewHolder and store references to the two children
 			// views
 			// we want to bind data to.
@@ -43,8 +50,16 @@ public class StoreAdapter extends MBaseAdapter {
 		}
 
 		// Bind the data efficiently with the holder.
+		AttachFile file = store.getFile();
+		if (file != null) {
+			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeElement.image);
+		} else {			
+			Drawable defaultImage = context.getResources().getDrawable(R.drawable.img_matji_default);
+			storeElement.image.setImageDrawable(defaultImage);
+		}
 		storeElement.name.setText(store.getName());
 		storeElement.address.setText(store.getAddress());
+		
 		return convertView;
 	}
 

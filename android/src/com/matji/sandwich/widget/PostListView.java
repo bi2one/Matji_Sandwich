@@ -8,7 +8,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.matji.sandwich.MainTabActivity;
+import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
@@ -42,33 +42,37 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	}
 
 	public void onListItemClick(int position) {
-		MainTabActivity tabAct = MainTabActivity.class.cast(getActivity().getParent());
-		tabAct.getTabHost().setCurrentTab(1);
+		Post post = (Post) getAdapterData().get(position);
+		Intent intent = new Intent(getActivity(), PostMainActivity.class);
+
+		intent.putExtra("post", (Parcelable) post);
+		getActivity().startActivity(intent);
 	}
 
 
 	public void onClick(View v) {
+		int position = Integer.parseInt((String)v.getTag());
+		Post post = (Post) getAdapterData().get(position);
+
 		switch(v.getId()){
-		case R.id.post_adapter_nick:
-			gotoUserPage(Integer.parseInt((String)v.getTag()));
+		case R.id.thumnail: case R.id.post_adapter_nick:
+			gotoUserPage(post);
 			break;
 
 		case R.id.post_adapter_store_name:
-			gotoStorePage(Integer.parseInt((String)v.getTag()));
+			gotoStorePage(post);
 			break;
 		}	
 	}
 	
-	protected void gotoUserPage(int position) {
-		Post post = (Post)getAdapterData().get(position);
+	protected void gotoUserPage(Post post) {
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
 
 		intent.putExtra("user", (Parcelable)post.getUser());
 		getActivity().startActivity(intent);
 	}	
 	
-	protected void gotoStorePage(int position) {
-		Post post = (Post)getAdapterData().get(position);
+	protected void gotoStorePage(Post post) {
 		Intent intent = new Intent(getActivity(), StoreTabActivity.class);
 
 		intent.putExtra("store", (Parcelable)post.getStore());

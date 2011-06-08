@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultFill"
+	android:padding="20dp">
+	
+	<EditText android:id="@+id/post_field"
+		style="@style/DefaultWidthFill"
+		android:lines="4"
+		android:gravity="top"
+		android:text="text"
+		android:imeOptions="flagNoExtractUi" />
+	<EditText android:id="@+id/tags_field"
+		style="@style/DefaultWidthFill"
+		android:layout_below="@id/post_field"
+		android:lines="1"
+		android:text="tags"/>
+	<LinearLayout android:id="@+id/post_buttons"
+		style="@style/DefaultWidthFill"
+		android:layout_below="@id/tags_field">
+		<Button android:id="@+id/upload_image"
+			style="@style/DefaultWrap" 
+			android:onClick="imageButtonClicked"
+			android:layout_weight="1"
+			android:text="Img" />
+		<Button android:id="@+id/map"
+			style="@style/DefaultWrap"
+			android:layout_weight="1"
+			 android:text="Map" />
+		<Button android:id="@+id/twitter"
+			style="@style/DefaultWrap" 
+			android:layout_weight="1"
+			android:text="T" />
+		<Button android:id="@+id/facebook"
+			style="@style/DefaultWrap" 
+			android:layout_weight="1"
+			android:text="F" />
+	</LinearLayout>
+	<Button android:id="@+id/write_complete"
+		style="@style/DefaultWrap" 
+		android:layout_below="@id/post_buttons"
+		android:layout_alignParentRight="true"
+		android:onClick="postButtonClicked"
+		android:layout_weight="1"
+		android:text="Send" />
+</RelativeLayout>

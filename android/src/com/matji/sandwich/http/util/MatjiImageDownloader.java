@@ -30,8 +30,13 @@ public class MatjiImageDownloader {
 	}
 
 	public void downloadAttachFileImage(int attachFileId, ImageView imageView) {
+		downloadAttachFileImage(attachFileId, IMAGE_SSMALL, imageView);
+	}	
+	
+	public void downloadAttachFileImage(int attachFileId, String imageSize, ImageView imageView) {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("attach_file_id", attachFileId + "");
+		params.put("size", imageSize);
 		downloader.download(URL_ATTACH_FILE_IMAGE, params, imageView);
 	}
 }

@@ -1,7 +1,6 @@
 package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.UserExternalAccount;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -14,7 +13,10 @@ public class UserExternalAccountParser extends MatjiDataParser {
 		externalAccount.setUserId(getInt(object, "user_id"));
 		externalAccount.setService(getString(object, "service"));
 		externalAccount.setData(getString(object, "data"));
-		externalAccount.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
+		
+		/* Set User */
+		UserParser userParser = new UserParser();
+		externalAccount.setUser(userParser.getMatjiData(getObject(object, "user")));
 
 		return externalAccount;
 	}

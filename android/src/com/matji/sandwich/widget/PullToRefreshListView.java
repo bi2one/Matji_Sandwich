@@ -24,6 +24,7 @@ import android.widget.AbsListView.OnScrollListener;
 import com.matji.sandwich.R;
 
 public abstract class PullToRefreshListView extends MListView implements OnScrollListener {
+    private static final boolean IS_PULL_REFRESH = false;
     private static final int TAP_TO_REFRESH = 1;
     private static final int PULL_TO_REFRESH = 2;
     private static final int RELEASE_TO_REFRESH = 3;
@@ -48,6 +49,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
     private int mRefreshViewHeight;
     private int mRefreshOriginalTopPadding;
     private int mLastMotionY;
+    private int mBaseIndex;
     private OnScrollListener pullDownListener;
 
     // public PullToRefreshListView(Context context) {
@@ -111,7 +113,13 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
         mRefreshState = TAP_TO_REFRESH;
 
         addHeaderView(mRefreshView);
-        setOnScrollListener(this);
+	
+	setOnScrollListener(this);
+	if (IS_PULL_REFRESH) {
+	    mBaseIndex = 1;
+	} else {
+	    mBaseIndex = 0;
+	}
 
         measureView(mRefreshView);
         mRefreshViewHeight = mRefreshView.getMeasuredHeight();
@@ -119,14 +127,14 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 
     @Override
     protected void onAttachedToWindow() {
-        setSelection(1);
+	setSelection(mBaseIndex);
     }
 
     @Override
     public void setAdapter(ListAdapter adapter) {
         super.setAdapter(adapter);
 
-        setSelection(1);
+	setSelection(mBaseIndex);
     }
 
     /**
@@ -161,27 +169,30 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param duration Duration of the scroll animation in milliseconds.
      */
     private void scrollListBy(int distance, int duration) {
-        try {
-            Method method = ListView.class.getMethod("smoothScrollBy",
-                    Integer.TYPE, Integer.TYPE);
-            method.invoke(this, distance + 1, duration);
-        } catch (NoSuchMethodException e) {
-            // If smoothScrollBy is not available (< 2.2)
-        	setSelection(1);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        } catch (IllegalAccessException e) {
-            System.err.println("unexpected " + e);
-        } catch (InvocationTargetException e) {
-            System.err.println("unexpected " + e);
-        }
+	if (IS_PULL_REFRESH) {
+	    try {
+		Method method = ListView.class.getMethod("smoothScrollBy",
+							 Integer.TYPE, Integer.TYPE);
+		method.invoke(this, distance + 1, duration);
+	    } catch (NoSuchMethodException e) {
+		// If smoothScrollBy is not available (< 2.2)
+		setSelection(mBaseIndex);
+	    } catch (IllegalArgumentException e) {
+		throw e;
+	    } catch (IllegalAccessException e) {
+		System.err.println("unexpected " + e);
+	    } catch (InvocationTargetException e) {
+		System.err.println("unexpected " + e);
+	    }
+	}
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        final int y = (int) event.getY();
+	if (IS_PULL_REFRESH) {
+	    final int y = (int) event.getY();
 
-        switch (event.getAction()) {
+	    switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
                 if (!isVerticalScrollBarEnabled()) {
                     setVerticalScrollBarEnabled(true);
@@ -189,8 +200,8 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 
                 if (getFirstVisiblePosition() == 0 && mRefreshState != REFRESHING) {
                     if (mRefreshView.getBottom() > mRefreshViewHeight
-                            || mRefreshView.getTop() >= 0
-                            && mRefreshState == RELEASE_TO_REFRESH) {
+			|| mRefreshView.getTop() >= 0
+			&& mRefreshState == RELEASE_TO_REFRESH) {
                         // Initiate the refresh
                         mRefreshState = REFRESHING;
                         prepareForRefresh();
@@ -198,7 +209,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
                     } else if (mRefreshView.getBottom() < mRefreshViewHeight) {
                         // Abort refresh and scroll down below the refresh view
                         resetHeader();
-                        setSelection(1);
+			setSelection(mBaseIndex);
                     }
                 }
                 break;
@@ -208,7 +219,8 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
             case MotionEvent.ACTION_MOVE:
                 applyHeaderPadding(event);
                 break;
-        }
+	    }
+	}
         
         boolean flag = false;
         try{
@@ -217,7 +229,6 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
         	e.printStackTrace();
         	flag = true;
         }
-        
         
         return flag;
     }
@@ -337,37 +348,39 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
             int visibleItemCount, int totalItemCount) {
         // When the refresh view is completely visible, change the text to say
         // "Release to refresh..." and flip the arrow drawable.
-        if (mCurrentScrollState == SCROLL_STATE_TOUCH_SCROLL
+	if (IS_PULL_REFRESH) {
+	    if (mCurrentScrollState == SCROLL_STATE_TOUCH_SCROLL
                 && mRefreshState != REFRESHING) {
-            if (firstVisibleItem == 0) {
-                mRefreshViewImage.setVisibility(View.VISIBLE);
-                if ((mRefreshView.getBottom() > mRefreshViewHeight + 20
-                        || mRefreshView.getTop() >= 0)
+		if (firstVisibleItem == 0) {
+		    mRefreshViewImage.setVisibility(View.VISIBLE);
+		    if ((mRefreshView.getBottom() > mRefreshViewHeight + 20
+			 || mRefreshView.getTop() >= 0)
                         && mRefreshState != RELEASE_TO_REFRESH) {
-                    mRefreshViewText.setText(R.string.pull_to_refresh_release_label);
-                    mRefreshViewImage.clearAnimation();
-                    mRefreshViewImage.startAnimation(mFlipAnimation);
-                    mRefreshState = RELEASE_TO_REFRESH;
-                } else if (mRefreshView.getBottom() < mRefreshViewHeight + 20
-                        && mRefreshState != PULL_TO_REFRESH) {
-                    mRefreshViewText.setText(R.string.pull_to_refresh_pull_label);
-                    if (mRefreshState != TAP_TO_REFRESH) {
-                        mRefreshViewImage.clearAnimation();
-                        mRefreshViewImage.startAnimation(mReverseFlipAnimation);
-                    }
-                    mRefreshState = PULL_TO_REFRESH;
-                }
-            } else {
-                mRefreshViewImage.setVisibility(View.GONE);
-                resetHeader();
-            }
-        } else if (mCurrentScrollState == SCROLL_STATE_FLING
-                && firstVisibleItem == 0
-                && mRefreshState != REFRESHING) {
-            setSelection(1);
-        }
+			mRefreshViewText.setText(R.string.pull_to_refresh_release_label);
+			mRefreshViewImage.clearAnimation();
+			mRefreshViewImage.startAnimation(mFlipAnimation);
+			mRefreshState = RELEASE_TO_REFRESH;
+		    } else if (mRefreshView.getBottom() < mRefreshViewHeight + 20
+			       && mRefreshState != PULL_TO_REFRESH) {
+			mRefreshViewText.setText(R.string.pull_to_refresh_pull_label);
+			if (mRefreshState != TAP_TO_REFRESH) {
+			    mRefreshViewImage.clearAnimation();
+			    mRefreshViewImage.startAnimation(mReverseFlipAnimation);
+			}
+			mRefreshState = PULL_TO_REFRESH;
+		    }
+		} else {
+		    mRefreshViewImage.setVisibility(View.GONE);
+		    resetHeader();
+		}
+	    } else if (mCurrentScrollState == SCROLL_STATE_FLING
+		       && firstVisibleItem == 0
+		       && mRefreshState != REFRESHING) {
+		setSelection(mBaseIndex);
+	    }
+	}
 
-	if (pullDownListener != null) 
+	if (pullDownListener != null)
 	    pullDownListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
@@ -421,7 +434,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
         // the next item.
         if (mRefreshView.getBottom() > 0) {
             invalidateViews();
-            setSelection(1);
+	    setSelection(mBaseIndex);
         }
     }
 

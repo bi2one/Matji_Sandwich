@@ -1,9 +1,7 @@
 package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
-import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.PostTag;
-import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.exception.MatjiException;
 
 public class PostTagParser extends MatjiDataParser {
@@ -16,8 +14,14 @@ public class PostTagParser extends MatjiDataParser {
 		postTag.setPostId(getInt(object, "post_id"));
 		postTag.setCreatedAt(getString(object, "created_at"));
 		postTag.setUpdatedAt(getString(object, "updated_at"));
-		postTag.setTag((Tag) new TagParser().getRawObject(getObject(object, "tag") + ""));
-		postTag.setPost((Post) new PostParser().getRawObject(getObject(object, "post") + ""));
+		
+		/* Set Tag */
+		TagParser tagParser = new TagParser();
+		postTag.setTag(tagParser.getMatjiData(getObject(object, "tag")));
+		
+		/* Set Post */
+		PostParser postParser = new PostParser();
+		postTag.setPost(postParser.getMatjiData(getObject(object, "post")));
 
 		return postTag;
 	}

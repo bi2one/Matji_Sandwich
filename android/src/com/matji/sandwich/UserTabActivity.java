@@ -1,5 +1,6 @@
 package com.matji.sandwich;
 
+import com.matji.sandwich.GridGalleryActivity.AttachFileType;
 import com.matji.sandwich.data.User;
 
 import android.app.TabActivity;
@@ -9,15 +10,21 @@ import android.os.Parcelable;
 import android.widget.TabHost;
 
 public class UserTabActivity extends TabActivity {
-	TabHost tabHost;
-	Intent intent;
-	Intent mainIntent;
-	Intent menuIntent;
-	Intent postIntent;
-	Intent imageIntent;
-	Intent moreIntent;
-	User user;
+	private TabHost tabHost;
+	private Intent intent;
+	private Intent mainIntent;
+	private Intent menuIntent;
+	private Intent postIntent;
+	private Intent imageIntent;
+	private Intent moreIntent;
+	private User user;
 
+	public static final int MAIN_PAGE = 0;
+	public static final int MENU_PAGE = 1;
+	public static final int MEMO_PAGE = 2;
+	public static final int IMAGE_PAGE = 3;
+	public static final int SETTING_PAGE = 4;
+	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
@@ -35,7 +42,9 @@ public class UserTabActivity extends TabActivity {
 		menuIntent = new Intent(this, StoreMoreActivity.class);
 		postIntent = new Intent(this, UserPostActivity.class);
 		postIntent.putExtra("user_id", user.getId());
-		imageIntent = new Intent(this, StoreMoreActivity.class);
+		imageIntent = new Intent(this, GridGalleryActivity.class);
+		imageIntent.putExtra(GridGalleryActivity.ATTACH_FILE_TYPE, AttachFileType.USERS);
+		imageIntent.putExtra("user_id", user.getId());
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 	}
 	

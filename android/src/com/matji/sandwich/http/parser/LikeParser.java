@@ -2,8 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Like;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class LikeParser extends MatjiDataParser {
@@ -13,10 +11,17 @@ public class LikeParser extends MatjiDataParser {
 		Like like = new Like();
 		like.setId(getInt(object, "id"));
 		like.setUserId(getInt(object, "user_id"));
-		like.setForeignKey(getString(object, "foreign_key"));
+		like.setForeignKey(getInt(object, "foreign_key"));
 		like.setObject(getString(object, "object"));
-		like.setUser((User) new UserParser().getRawObject(getObject(object, "user") + ""));
-		like.setStore((Store) new StoreParser().getRawObject(getObject(object, "store") + ""));
+		
+		/* Set User */
+		UserParser userParser = new UserParser();
+		like.setUser(userParser.getMatjiData(getObject(object, "user")));
+		
+		/* Set Store */
+		StoreParser storeParser = new StoreParser();
+		like.setStore(storeParser.getMatjiData(getObject(object, "store")));
+
 		like.setCreatedAt(getString(object, "created_at"));
 		like.setUpdatedAt(getString(object, "updated_at"));
 

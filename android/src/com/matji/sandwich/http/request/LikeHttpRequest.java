@@ -69,8 +69,8 @@ public class LikeHttpRequest extends HttpRequest {
 		String resultBody = response.getHttpResponseBodyAsString();
 		String resultCode = response.getHttpStatusCode() + "";
 
-		Log.d("Matji", "FoodHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "FoodHttpRequest resultCode: " + resultCode);
+		Log.d("Matji", "LikeHttpRequest resultBody: " + resultBody);
+		Log.d("Matji", "LikeHttpRequest resultCode: " + resultCode);
 	
 		return parser.parseToMatjiDataList(resultBody);
 	}

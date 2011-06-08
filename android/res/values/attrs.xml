@@ -4,6 +4,10 @@
     <declare-styleable name="com.deezapps.widget.HorizontalPager">
         <attr name="pageWidth" format="dimension" />
     </declare-styleable>
+    
+    <declare-styleable name="Theme">
+        <attr name="android:galleryItemBackground" />
+    </declare-styleable>
 
     <declare-styleable name="com.deezapps.widget.PagerControl">
         <attr name="barColor"        format="color" />

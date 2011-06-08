@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultFill"
+	android:padding="10dp" >
+	<EditText android:id="@+id/name"
+		style="@style/DefaultWidthFill" 
+		android:singleLine="true"
+		android:lines="1"
+		android:text="name"/>
+	<EditText android:id="@+id/email"
+		style="@style/DefaultWidthFill" 
+		android:layout_below="@id/name"
+		android:singleLine="true"
+		android:lines="1"
+		android:text="email"/>
+	<EditText android:id="@+id/username"
+		style="@style/DefaultWidthFill"
+		android:layout_below="@id/email" 
+		android:singleLine="true"
+		android:lines="1"
+		android:text="username"/>
+	<EditText android:id="@+id/password"
+		style="@style/DefaultWidthFill"
+		android:layout_below="@id/username" 
+		android:singleLine="true"
+		android:lines="1"
+		android:password="true" 
+		android:hint="password"/>
+	<LinearLayout android:id="@+id/signup_buttons"
+		style="@style/DefaultWidthFill"
+		android:layout_below="@id/password">
+		<Button android:id="@+id/ok" 
+				style="@style/DefaultWrap"
+				android:onClick="signupButtonClicked" 
+				android:layout_weight="1"
+				android:text="회원가입" />
+		<Button android:id="@+id/cancel" 
+				style="@style/DefaultWrap"
+				android:onClick="cancelButtonClicked" 
+				android:layout_weight="1"
+				android:text="취소" />		
+	</LinearLayout>
+</RelativeLayout>
