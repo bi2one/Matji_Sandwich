@@ -4,15 +4,12 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.*;
 import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.StoreListView;
 import com.matji.sandwich.widget.PagerControl;
@@ -66,10 +63,11 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 		swipeView.addOnScrollListener(this);
 	}
 
-	public void onScroll(int scrollX) { }
+	public void onScroll(int scrollX) {
+	}
 
 	public void onViewScrollFinished(int currentPage) {
-		if (mCurrentPage != currentPage){
+		if (mCurrentPage != currentPage) {
 			Log.d("refresh", "pageChanged!");
 
 			try {
