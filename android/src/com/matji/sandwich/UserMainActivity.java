@@ -12,7 +12,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.*;
@@ -21,7 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class UserMainActivity extends Activity implements Requestable {
+public class UserMainActivity extends MainActivity implements Requestable {
 	private Intent intent;
 	private User user;
 	private MatjiImageDownloader downloader;
@@ -31,12 +30,20 @@ public class UserMainActivity extends Activity implements Requestable {
 	private Session session;
 	private DBProvider dbProvider;
 
-	private TextView title;
-	private TextView grade;
+	private TextView gradeText;
+	private TextView titleText;
+	private TextView introText;
 	private Button followButton;
-	private TextView followerCount;
-	private TextView followingCount;
-	private TextView intro;
+	private TextView followerCountText;
+	private TextView followingCountText;
+	private Button jjimStoreButton;
+	private Button activityAreaButton;
+	private Button memoButton;
+	private Button imageButton;
+	private Button tagButton;
+	private Button urlButton;
+	private Button sentMessageButton;
+	private Button recievedMessageButton;
 
 	private static final int FOLLOW_REQUEST = 1;
 	private static final int UN_FOLLOW_REQUEST = 2;
@@ -45,36 +52,48 @@ public class UserMainActivity extends Activity implements Requestable {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_main);
 
+		initInfo();
+	}
+
+	public void initInfo() {
 		intent = getIntent();
 		user = intent.getParcelableExtra("user");
 		downloader = new MatjiImageDownloader();
 
 		manager = new HttpRequestManager(this, this);
 		session = Session.getInstance(this);
-		dbProvider = DBProvider.getInstance(this);
-
-		initUserInfo();
-	}
-
-	private void initUserInfo() {
-		title = (TextView) findViewById(R.id.user_main_title);		
-		grade = (TextView) findViewById(R.id.user_main_grade);
+		dbProvider = DBProvider.getInstance(this);		
+		
+		gradeText = (TextView) findViewById(R.id.user_main_grade);
+		titleText = (TextView) findViewById(R.id.user_main_title);		
 		followButton = (Button) findViewById(R.id.user_main_follow_btn);
-		followerCount = (TextView) findViewById(R.id.user_main_follower_count);
-		followingCount = (TextView) findViewById(R.id.user_main_following_count);
-		intro = (TextView) findViewById(R.id.user_main_intro);
+		followerCountText = (TextView) findViewById(R.id.user_main_follower_count);
+		followingCountText = (TextView) findViewById(R.id.user_main_following_count);
+		introText = (TextView) findViewById(R.id.user_main_intro);
+		jjimStoreButton = (Button) findViewById(R.id.user_main_jjim_store_btn);
+		activityAreaButton = (Button) findViewById(R.id.user_main_activity_area_btn);
+		memoButton = (Button) findViewById(R.id.user_main_memo_btn);
+		imageButton = (Button) findViewById(R.id.user_main_image_btn);
+		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
+		urlButton = (Button) findViewById(R.id.user_main_url_btn);
+		sentMessageButton = (Button) findViewById(R.id.user_main_sent_message_btn);
+		recievedMessageButton = (Button) findViewById(R.id.user_main_recieved_message_btn);
 
-		title.setText(user.getTitle());
-
-		setUserInfo();
-	}
-
-	private void setUserInfo() {
 		/* Set User Image */
 		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_main_image));
-		/* set Grade */
-		grade.setText("다이아몬드"); // TODO
-		intro.setText(getIntroStr());
+		titleText.setText(user.getTitle());
+
+		/* Set Intro */
+		String intro = (user.getIntro() == null) ? getString(R.string.user_main_not_found_intro) : user.getIntro();
+		introText.setText(intro);
+
+		setInfo();
+	}
+
+	public void setInfo() {
+		/* Set Grade */
+		gradeText.setText("다이아몬드"); // TODO		
+
 		if (session.isLogin()) {
 			if (dbProvider.isExistFollowing(user.getId())) {
 				followButton.setText(getString(R.string.user_main_unfollow));
@@ -84,20 +103,16 @@ public class UserMainActivity extends Activity implements Requestable {
 		} else {
 			followButton.setText(getString(R.string.user_main_follow));
 		}
-		followerCount.setText(getFollowerCountStr());
-		followingCount.setText(getFollowingCountStr());
-	}
-
-	private String getIntroStr() {
-		return (user.getIntro() == null) ? getString(R.string.user_main_not_found_intro) : user.getIntro();
-	}	
-
-	private String getFollowerCountStr() {
-		return getString(R.string.user_main_follower) + ": " + user.getFollowerCount();
-	}	
-
-	private String getFollowingCountStr() {
-		return getString(R.string.user_main_following) + ": " + user.getFollowingCount();
+		followerCountText.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
+		followingCountText.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
+		jjimStoreButton.setText(getCountNumberOf(R.string.user_main_jjim_store, user.getStoreCount()));
+		activityAreaButton.setText(getString(R.string.user_main_activity_area) + ": 한국");
+		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
+		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getAttachFiles().size()));
+		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
+		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
+		sentMessageButton.setText(getCountNumberOf(R.string.default_string_sent_message, 0));
+		recievedMessageButton.setText(getCountNumberOf(R.string.default_string_recieved_message,0));
 	}
 
 	private void followRequest() {
@@ -123,7 +138,7 @@ public class UserMainActivity extends Activity implements Requestable {
 	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub
-		setUserInfo();
+		setInfo();
 	}
 
 	@Override
@@ -173,5 +188,4 @@ public class UserMainActivity extends Activity implements Requestable {
 	public void onUrlButtonClicked(View view) {
 
 	}
-
 }

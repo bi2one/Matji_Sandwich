@@ -6,7 +6,6 @@ import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.Me;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
@@ -15,23 +14,20 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.BookmarkHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
-import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 
-import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-public class StoreMainActivity extends Activity implements Requestable {
+public class StoreMainActivity extends MainActivity implements Requestable {
 	private TabHost tabHost;
 	private Intent intent;
 	private Store store;
@@ -62,7 +58,10 @@ public class StoreMainActivity extends Activity implements Requestable {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_main);
+		initInfo();
+	}
 
+	public void initInfo() {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		intent = getIntent();
 		store = (Store) intent.getParcelableExtra("store");
@@ -72,10 +71,6 @@ public class StoreMainActivity extends Activity implements Requestable {
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);
 
-		initStoreInfo();
-	}
-
-	private void initStoreInfo() {
 		storeImage = (ImageView) findViewById(R.id.store_main_image);
 		likeButton = (Button) findViewById(R.id.store_main_like_btn);
 		likeCountText = (TextView) findViewById(R.id.store_main_like_count);
@@ -111,10 +106,10 @@ public class StoreMainActivity extends Activity implements Requestable {
 			ownerUserText.setText(string);
 		}
 		
-		setStoreInfo();
+		setInfo();
 	}
 
-	private void setStoreInfo() {
+	public void setInfo() {
 		/* Set StoreImage */
 		AttachFile file = store.getFile();
 		if (file != null) {
@@ -144,26 +139,10 @@ public class StoreMainActivity extends Activity implements Requestable {
 		likeCountText.setText(store.getLikeCount()+"");
 
 		/* Set ETC Button String */
-		postButton.setText(getPostBtnStr());
-		imageButton.setText(getImageBtnStr());
-		tagButton.setText(getTagBtnStr());	
-		urlButton.setText(getUrlBtnStr());
-	}
-
-	private String getPostBtnStr() {
-		return getString(R.string.default_string_memo) + ": " + store.getPostCount() + getString(R.string.default_string_number_of);
-	}
-
-	private String getImageBtnStr() {
-		return getString(R.string.default_string_image) + ": " + store.getPostCount() + getString(R.string.default_string_number_of);
-	}
-
-	private String getTagBtnStr() {
-		return getString(R.string.default_string_tag) + ": " + store.getTagCount() + getString(R.string.default_string_number_of);
-	}
-
-	private String getUrlBtnStr() {
-		return getString(R.string.default_string_url);
+		postButton.setText(getCountNumberOf(R.string.default_string_memo, store.getPostCount()));
+		imageButton.setText(getCountNumberOf(R.string.default_string_image, store.getImageCount()));
+		tagButton.setText(getCountNumberOf(R.string.default_string_tag, store.getTagCount()));	
+		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
 	}
 
 	private void bookmarkRequest() {
@@ -206,7 +185,7 @@ public class StoreMainActivity extends Activity implements Requestable {
 	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub
-		setStoreInfo();
+		setInfo();
 	}
 
 	@Override
