@@ -65,6 +65,8 @@
   <string name="default_string_alarm">알람</string>
   <string name="default_string_search">검색</string>
   <string name="default_string_number_of">개</string>
+  <string name="default_string_sent_message">보낸 쪽지</string>
+  <string name="default_string_recieved_message">받은 쪽지</string>
   
   <!-- StoreMainActivity  -->
   <string name="store_main_unlike_store">내가 좋아하는 맛집</string>
@@ -85,7 +87,8 @@
   <string name="user_main_brandnew">BrandNew follows you.</string>
   <string name="user_main_follower">follower</string>
   <string name="user_main_following">following</string>
-  <string name="default_string_jjim_store">찜한 맛집</string>
+  <string name="user_main_jjim_store">찜한 맛집</string>
+  <string name="user_main_activity_area">활동지역</string>
 
   <!-- StoreSwipeActivity -->
   <string name="all_store">전체 맛집</string>
