@@ -36,14 +36,18 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private Button followButton;
 	private TextView followerCountText;
 	private TextView followingCountText;
+	
+	private Button followerButton;
+	private Button followingButton;
+	
 	private Button jjimStoreButton;
-	private Button activityAreaButton;
+//	private Button activityAreaButton;
 	private Button memoButton;
-	private Button imageButton;
-	private Button tagButton;
-	private Button urlButton;
-	private Button sentMessageButton;
-	private Button recievedMessageButton;
+//	private Button imageButton;
+//	private Button tagButton;
+//	private Button urlButton;
+//	private Button sentMessageButton;
+//	private Button recievedMessageButton;
 
 	private static final int FOLLOW_REQUEST = 1;
 	private static final int UN_FOLLOW_REQUEST = 2;
@@ -70,14 +74,17 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		followerCountText = (TextView) findViewById(R.id.user_main_follower_count);
 		followingCountText = (TextView) findViewById(R.id.user_main_following_count);
 		introText = (TextView) findViewById(R.id.user_main_intro);
+		
+		followerButton = (Button) findViewById(R.id.user_main_follower_btn);
+		followingButton = (Button) findViewById(R.id.user_main_following_btn);
 		jjimStoreButton = (Button) findViewById(R.id.user_main_jjim_store_btn);
-		activityAreaButton = (Button) findViewById(R.id.user_main_activity_area_btn);
+//		activityAreaButton = (Button) findViewById(R.id.user_main_activity_area_btn);
 		memoButton = (Button) findViewById(R.id.user_main_memo_btn);
-		imageButton = (Button) findViewById(R.id.user_main_image_btn);
-		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
-		urlButton = (Button) findViewById(R.id.user_main_url_btn);
-		sentMessageButton = (Button) findViewById(R.id.user_main_sent_message_btn);
-		recievedMessageButton = (Button) findViewById(R.id.user_main_recieved_message_btn);
+//		imageButton = (Button) findViewById(R.id.user_main_image_btn);
+//		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
+//		urlButton = (Button) findViewById(R.id.user_main_url_btn);
+//		sentMessageButton = (Button) findViewById(R.id.user_main_sent_message_btn);
+//		recievedMessageButton = (Button) findViewById(R.id.user_main_recieved_message_btn);
 
 		/* Set User Image */
 		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_main_image));
@@ -105,14 +112,16 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		}
 		followerCountText.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
 		followingCountText.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
+		followerButton.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
+		followingButton.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
 		jjimStoreButton.setText(getCountNumberOf(R.string.user_main_jjim_store, user.getStoreCount()));
-		activityAreaButton.setText(getString(R.string.user_main_activity_area) + ": 한국");
+//		activityAreaButton.setText(getString(R.string.user_main_activity_area) + ": 한국");
 		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
-		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getAttachFiles().size()));
-		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
-		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
-		sentMessageButton.setText(getCountNumberOf(R.string.default_string_sent_message, 0));
-		recievedMessageButton.setText(getCountNumberOf(R.string.default_string_recieved_message,0));
+//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getAttachFiles().size()));
+//		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
+//		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
+//		sentMessageButton.setText(getCountNumberOf(R.string.default_string_sent_message, 0));
+//		recievedMessageButton.setText(getCountNumberOf(R.string.default_string_recieved_message,0));
 	}
 
 	private void followRequest() {
@@ -164,28 +173,35 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onBlogButtonClicked(View view) {
-
 	}
 
+	public void onFollowerButtonClicked(View view) {
+		
+	}
+
+	public void onFollowingButtonClicked(View view) {
+		
+	}
+		
 	public void onJjimStoreButtonClicked(View view) {
 
 	}
 
-	public void onActivityAreaButtonClicked(View view) {
-	}
+//	public void onActivityAreaButtonClicked(View view) {
+//	}
 
 	public void onMemoButtonClicked(View view) {
 	}
 
-	public void onImageButtonClicked(View view) {
-
-	}
-
-	public void onTagButtonClicked(View view) {
-
-	}
-
-	public void onUrlButtonClicked(View view) {
-
-	}
+//	public void onImageButtonClicked(View view) {
+//
+//	}
+//
+//	public void onTagButtonClicked(View view) {
+//
+//	}
+//
+//	public void onUrlButtonClicked(View view) {
+//
+//	}
 }

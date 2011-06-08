@@ -30,7 +30,7 @@ public class NoticeActivity extends Activity implements Requestable {
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		Notice notice = (Notice)data.get(0);
+//		Notice notice = (Notice)data.get(0);
 		
 	}
 
