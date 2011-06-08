@@ -8,7 +8,6 @@ import android.view.*;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.ImageView;
 
 import com.matji.sandwich.session.*;
 import com.matji.sandwich.widget.RequestableMListView;
@@ -17,9 +16,7 @@ import com.matji.sandwich.widget.PagerControl;
 import com.matji.sandwich.widget.StoreNearListView;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.SwipeView;
-import com.matji.sandwich.widget.BaseViewContainer;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
-import com.matji.sandwich.widget.PullToRefreshListView.*;
 
 public class StoreSliderActivity extends Activity implements OnScrollListener {
 	private int[] pagerControlStringRef;
@@ -31,7 +28,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	private Context mContext;
 	private int mCurrentPage;
 	private ArrayList<View> mContentViews;
-	
+
 	public static final int LOGIN_ACTIVITY = 1;
 	public static final int WRITE_POST_ACTIVITY = 2;
 
@@ -77,6 +74,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 				mCurrentPage = currentPage;
 				control.setCurrentPage(currentPage);
 				View view = mContentViews.get(currentPage);
+
 				if (view instanceof RequestableMListView) {
 					RequestableMListView listView = (RequestableMListView) view;
 					listView.requestConditionally();
