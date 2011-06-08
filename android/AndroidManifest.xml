@@ -22,6 +22,7 @@
 		<activity android:name="NoticeActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
 		<activity android:name="PostMainActivity"></activity>
+		<activity android:name="PostSliderActivity"></activity>
 		<activity android:name="SettingActivity"></activity>
 		<activity android:name="SignUpActivity"></activity>
 		<activity android:name="StoreSliderActivity"></activity>
