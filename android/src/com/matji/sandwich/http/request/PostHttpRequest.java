@@ -17,14 +17,14 @@ public class PostHttpRequest extends HttpRequest {
     
     public PostHttpRequest(Context context) {
     	super(context);
-		parser = new PostParser();
+		parser = new PostParser(context);
 		controller = "posts";
     }
 
     public void actionShow(int post_id){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "show";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("post_id", post_id + "");
@@ -33,7 +33,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionNew(String post, String tags) {
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	postHashtable.clear();
     	postHashtable.put("post", post);
@@ -59,7 +59,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionLike(int post_id){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "like";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	postHashtable.clear();
     	postHashtable.put("post_id", post_id + "");
@@ -68,7 +68,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionList(int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;	
     	action = "list";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("page", "" + page);
@@ -79,7 +79,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionStoreList(int store_id, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("store_id",store_id + "");
@@ -91,7 +91,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionUserList(int user_id, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "user_list";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
@@ -103,7 +103,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionMyList(int page , int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "my_list";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("page", page+"");

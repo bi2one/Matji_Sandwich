@@ -1,10 +1,16 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.exception.MatjiException;
 
 public class CommentParser extends MatjiDataParser {
+	public CommentParser(Context context) {
+		super(context);
+	}
+
 	protected Comment getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -17,11 +23,11 @@ public class CommentParser extends MatjiDataParser {
 		comment.setUserId(getInt(object, "user_id"));
 		
 		/* Set User */
-		UserParser userParser = new UserParser();
+		UserParser userParser = new UserParser(context);
 		comment.setUser(userParser.getMatjiData(getObject(object, "user")));
 		
 		/* Set Post */
-		PostParser postParser = new PostParser();
+		PostParser postParser = new PostParser(context);
 		comment.setPost(postParser.getMatjiData(getObject(object, "post")));
 		comment.setFromWhere(getString(object, "from_where"));
 		

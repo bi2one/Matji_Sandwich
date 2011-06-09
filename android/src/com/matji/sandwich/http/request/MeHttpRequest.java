@@ -22,7 +22,7 @@ public class MeHttpRequest extends HttpRequest {
 	
 	public MeHttpRequest(Context context){
 		super(context);
-		parser = new MeParser();
+		parser = new MeParser(context);
 	}
 	
 	

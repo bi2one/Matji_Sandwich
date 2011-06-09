@@ -1,10 +1,16 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.StoreUrl;
 import com.matji.sandwich.exception.MatjiException;
 
 public class StoreUrlParser extends MatjiDataParser {
+	public StoreUrlParser(Context context) {
+		super(context);
+	}
+
 	protected StoreUrl getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -15,11 +21,11 @@ public class StoreUrlParser extends MatjiDataParser {
 		storeUrl.setUrl(getString(object, "url"));
 		
 		/* Set Store */
-		StoreParser storeParser = new StoreParser();
+		StoreParser storeParser = new StoreParser(context);
 		storeUrl.setStore(storeParser.getMatjiData(getObject(object, "store")));
 		
 		/* Set User */
-		UserParser userParser = new UserParser();
+		UserParser userParser = new UserParser(context);
 		storeUrl.setUser(userParser.getMatjiData(getObject(object, "user")));
 
 		return storeUrl;

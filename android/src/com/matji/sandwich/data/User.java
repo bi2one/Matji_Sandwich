@@ -23,8 +23,8 @@ public class User extends MatjiData implements Serializable{
 	private boolean followed;
 	private UserExternalAccount external_account;
 	private UserMileage mileage;
+	private Post post;
 	private ArrayList<AttachFile> attach_files;
-	private ArrayList<Post> posts;
 	private ArrayList<Store> stores;
 
 	public User() {}
@@ -63,8 +63,8 @@ public class User extends MatjiData implements Serializable{
 		dest.writeInt(followed ? 1 : 0);
 		dest.writeValue(external_account);
 		dest.writeValue(mileage);
+		dest.writeValue(post);
 		dest.writeTypedList(attach_files);
-		dest.writeTypedList(posts);
 		dest.writeTypedList(stores);
 	}
 
@@ -84,10 +84,9 @@ public class User extends MatjiData implements Serializable{
 		followed = in.readInt() != 0;
 		external_account = UserExternalAccount.class.cast(in.readValue(UserExternalAccount.class.getClassLoader()));
 		mileage = UserMileage.class.cast(in.readValue(UserMileage.class.getClassLoader()));
+		post = Post.class.cast(in.readValue(Post.class.getClassLoader()));
 		attach_files = new ArrayList<AttachFile>();
 		in.readTypedList(attach_files, AttachFile.CREATOR);
-		posts = new ArrayList<Post>();
-		in.readTypedList(posts, Post.CREATOR);
 		stores = new ArrayList<Store>();
 		in.readTypedList(stores, Store.CREATOR);
 	}
@@ -212,6 +211,14 @@ public class User extends MatjiData implements Serializable{
 		return mileage;
 	}
 
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+	
 	public void setAttchFiles(ArrayList<AttachFile> attach_files) {
 		this.attach_files = attach_files;
 	}
@@ -220,14 +227,6 @@ public class User extends MatjiData implements Serializable{
 		return attach_files;
 	}
 
-	public void setPosts(ArrayList<Post> posts) {
-		this.posts = posts;
-	}
-
-	public ArrayList<Post> getPosts() {
-		return posts;
-	}
-	
 	public void setStores(ArrayList<Store> stores) {
 		this.stores = stores;
 	}

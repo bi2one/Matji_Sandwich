@@ -1,10 +1,16 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Notice;
 import com.matji.sandwich.exception.MatjiException;
 
 public class NoticeParser extends MatjiDataParser {
+	public NoticeParser(Context context) {
+		super(context);
+	}
+
 	protected Notice getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		

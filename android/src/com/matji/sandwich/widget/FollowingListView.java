@@ -6,36 +6,51 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.StoreTabActivity;
-import com.matji.sandwich.UserMainActivity;
 import com.matji.sandwich.UserTabActivity;
-import com.matji.sandwich.adapter.UserAdapter;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.UserHttpRequest;
 
-public class UserListView extends RequestableMListView implements View.OnClickListener {
+public class FollowingListView extends UserListView implements View.OnClickListener {
 	private HttpRequest request;
 	private Context context;
-
-	public UserListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new UserAdapter(context), 10);
+	private int user_id;
+	private FollowingListType listType;
+	
+	public FollowingListView(Context context, AttributeSet attrs) {
+		super(context, attrs);
 		this.context = context;
-		request = new UserHttpRequest(context);
+		request = new FollowingHttpRequest(context);
 
 		setPage(1);
 	}
+	
+	public void setUserId(int user_id) {
+		this.user_id = user_id;
+	}
+	
+	public void setListType(FollowingListType type) {
+		this.listType = type;
+	}
 
 	public HttpRequest request() {
-		((UserHttpRequest) request).actionList(getPage(), getLimit(), true, true);
+		switch(listType) {
+		case FOLLOWER:
+			((FollowingHttpRequest) request).actionFollowerList(user_id, getPage(), getLimit(), true);
+			break;
+		case FOLLOWING:
+			((FollowingHttpRequest) request).actionFollowingList(user_id, getPage(), getLimit(), true);
+			break;
+		}
 		return request;
 	}
 
 	public void onListItemClick(int position) {
 		User user = (User) getAdapterData().get(position);
-		Intent intent = new Intent(getActivity(), UserMainActivity.class);
+		Intent intent = new Intent(getActivity(), UserTabActivity.class);
 
 		intent.putExtra("user", (Parcelable) user);
 		getActivity().startActivity(intent);

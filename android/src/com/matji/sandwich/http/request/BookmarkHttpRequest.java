@@ -23,7 +23,7 @@ public class BookmarkHttpRequest extends HttpRequest {
     public void actionBookmark(int store_id){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "bookmark";
-    	parser = new BookmarkParser();
+    	parser = new BookmarkParser(context);
     	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
@@ -32,7 +32,7 @@ public class BookmarkHttpRequest extends HttpRequest {
     public void actionUnBookmark(int store_id){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "unbookmark";
-    	parser = new BookmarkParser();
+    	parser = new BookmarkParser(context);
     	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);

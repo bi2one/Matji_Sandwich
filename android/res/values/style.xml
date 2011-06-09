@@ -58,7 +58,7 @@
   	<item name="android:layout_weight">1</item>
   </style>
   
-  <style name="store_main_Image">
+  <style name="store_main_Thumnail">
   	<item name="android:background">@drawable/img_matji_default</item>
 	<item name="android:layout_width">100dp</item>
 	<item name="android:layout_height">100dp</item>
@@ -147,7 +147,7 @@
   
   
   <!-- cell_user.xml --> 
-  <style name="user_cell_Image">
+  <style name="user_cell_Thumnail">
   	<item name="android:background">@drawable/img_matji_default</item>
 	<item name="android:layout_width">70dp</item>
 	<item name="android:layout_height">70dp</item>

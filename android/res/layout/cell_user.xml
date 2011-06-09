@@ -4,20 +4,20 @@
   android:layout_width="wrap_content"
   android:layout_height="wrap_content">
 		<ImageView
-			style="@style/user_cell_Image"
-			android:id="@+id/user_cell_image" />
+			style="@style/user_cell_Thumnail"
+			android:id="@+id/user_cell_thumnail" />
 		<TextView
 			style="@style/user_cell_Grade"
 			android:id="@+id/user_cell_grade"
-			android:layout_toRightOf="@id/user_cell_image" />
+			android:layout_toRightOf="@id/user_cell_thumnail" />
 		<TextView
 			style="@style/user_cell_Title"
 			android:id="@+id/user_cell_title"
-			android:layout_toRightOf="@id/user_cell_image"
+			android:layout_toRightOf="@id/user_cell_thumnail"
 			android:layout_below="@id/user_cell_grade" />
 		<TextView
 			style="@style/user_cell_Intro"
 			android:id="@+id/user_cell_intro"
-			android:layout_toRightOf="@id/user_cell_image"
+			android:layout_toRightOf="@id/user_cell_thumnail"
 			android:layout_below="@id/user_cell_title" />
 </RelativeLayout>

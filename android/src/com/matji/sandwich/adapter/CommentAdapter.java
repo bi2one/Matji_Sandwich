@@ -29,7 +29,7 @@ public class CommentAdapter extends MBaseAdapter {
 			commentElement = new CommentElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_comment, null);
 
-			commentElement.image = (ImageView) convertView.findViewById(R.id.thumnail);
+			commentElement.image = (ImageView) convertView.findViewById(R.id.comment_adapter_thumnail);
 			commentElement.nick = (TextView) convertView.findViewById(R.id.comment_adapter_nick);
 			commentElement.comment = (TextView) convertView.findViewById(R.id.comment_adapter_comment);
 			commentElement.dateAgo = (TextView) convertView.findViewById(R.id.comment_adapter_created_at);

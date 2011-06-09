@@ -1,10 +1,16 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.exception.MatjiException;
 
 public class MessageParser extends MatjiDataParser {
+	public MessageParser(Context context) {
+		super(context);
+	}
+
 	protected Message getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -16,7 +22,7 @@ public class MessageParser extends MatjiDataParser {
 		message.setMessage(getString(object, "message"));
 		
 		/* Set Sent User */
-		UserParser userParser = new UserParser();
+		UserParser userParser = new UserParser(context);
 		message.setSentUser(userParser.getMatjiData(getObject(object, "sent_user")));
 		
 		/* Set Received User*/

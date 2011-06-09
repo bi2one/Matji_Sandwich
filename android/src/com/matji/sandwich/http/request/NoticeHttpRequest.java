@@ -17,7 +17,7 @@ public class NoticeHttpRequest extends HttpRequest {
 	
 	public NoticeHttpRequest(Context context) {
 		super(context);
-		parser = new NoticeParser();
+		parser = new NoticeParser(context);
 		controller = "notices";
 	}
 

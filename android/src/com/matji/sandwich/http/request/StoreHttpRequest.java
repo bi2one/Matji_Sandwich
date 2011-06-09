@@ -35,7 +35,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionShow(int store_id){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "show";
-    	parser = new StoreParser(); 
+    	parser = new StoreParser(context); 
     		
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
@@ -45,7 +45,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionNew(String name, String address, int lat, int lng){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
-    	parser = new StoreParser();
+    	parser = new StoreParser(context);
 
     	postHashtable.clear();
     	postHashtable.put("name", name);
@@ -57,7 +57,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionModify(String name, String address, int lat, int lng, int store_id) {
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "modify";
-    	parser = new StoreParser();
+    	parser = new StoreParser(context);
 
     	postHashtable.clear();
     	postHashtable.put("name", name);
@@ -70,7 +70,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionList(int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
-    	parser = new StoreParser();
+    	parser = new StoreParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("page", page + "");
@@ -81,7 +81,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "nearby_list";
-    	parser = new StoreParser();
+    	parser = new StoreParser(context);
 
     	getHashtable.clear();
     	getHashtable.put("lat_sw", lat_sw + "");
@@ -97,7 +97,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionBookmarkedList(){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "bookmarked_list";
-    	parser = new StoreParser();
+    	parser = new StoreParser(context);
 
     	getHashtable.clear();
     	getHashtable.put("include", "attach_file,user");
@@ -106,7 +106,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionDetailList(int store_id, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "detail_list";
-    	parser = new StoreParser();
+    	parser = new StoreParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
@@ -117,7 +117,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionDetailNew(int store_id, String note){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "detail_new";
-    	parser = new StoreParser();
+    	parser = new StoreParser(context);
     	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
@@ -127,7 +127,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionRollbackDetail(int store_detail_info_id){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "rollback_detail";
-    	parser = new StoreParser();
+    	parser = new StoreParser(context);
     		
     	postHashtable.clear();
     	postHashtable.put("store_detail_info_id", store_detail_info_id);

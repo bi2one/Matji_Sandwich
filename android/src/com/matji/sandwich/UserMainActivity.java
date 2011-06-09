@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
@@ -11,6 +12,7 @@ import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.FollowingListView;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -25,7 +27,6 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private TabHost tabHost;
 	private Intent intent;
 	private User user;
-	private MatjiImageDownloader downloader;
 
 	private HttpRequestManager manager;
 	private HttpRequest request;
@@ -71,7 +72,6 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		intent = getIntent();
 		user = intent.getParcelableExtra("user");
-		downloader = new MatjiImageDownloader();
 
 		manager = new HttpRequestManager(this, this);
 		session = Session.getInstance(this);
@@ -97,12 +97,10 @@ public class UserMainActivity extends MainActivity implements Requestable {
 //		recievedMessageButton = (Button) findViewById(R.id.user_main_recieved_message_btn);
 
 		/* Set User Image */
-		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_cell_image));
+		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_cell_thumnail));
+		
 		titleText.setText(user.getTitle());
-
-		/* Set Intro */
-		String intro = (user.getIntro() == null) ? getString(R.string.user_main_not_found_intro) : user.getIntro();
-		introText.setText(intro);
+		introText.setText(user.getIntro());
 
 		setInfo();
 	}
@@ -167,8 +165,8 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onFollowButtonClicked(View view) {
-		followButton.setClickable(false);
 		if (session.isLogin()){
+			followButton.setClickable(false);
 			if (session.getCurrentUser().getId() != user.getId()) {
 				if (dbProvider.isExistFollowing(user.getId())) {
 					dbProvider.deleteFollowing(user.getId());
@@ -187,11 +185,19 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onFollowerButtonClicked(View view) {
+		Intent intent = new Intent(this, FollowingActivity.class);
+		intent.putExtra("user_id", user.getId());
+		intent.putExtra("type", FollowingListType.FOLLOWER);
 		
+		startActivity(intent);
 	}
 
 	public void onFollowingButtonClicked(View view) {
+		Intent intent = new Intent(this, FollowingActivity.class);
+		intent.putExtra("user_id", user.getId());
+		intent.putExtra("type", FollowingListType.FOLLOWING);
 		
+		startActivity(intent);
 	}
 		
 	public void onJjimStoreButtonClicked(View view) {
