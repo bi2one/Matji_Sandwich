@@ -120,3 +120,4 @@ public class PostSliderActivity extends Activity implements OnScrollListener {
 		}
 		return false;
 	}
+}
