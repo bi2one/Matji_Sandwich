@@ -74,7 +74,7 @@ public class GridGalleryActivity extends Activity implements Requestable {
 		return request;
 	}
 
-	@Override
+	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub		
 		/* Set AttachFile ID */
@@ -108,7 +108,7 @@ public class GridGalleryActivity extends Activity implements Requestable {
 		});
 	}
 
-	@Override
+
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(this);
 	}

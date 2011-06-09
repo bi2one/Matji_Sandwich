@@ -21,7 +21,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	private SwipeView swipeView;
 	private StoreListView view1;
 	private StoreNearListView view2;
-	private PostListView view3;
+	//private PostListView view3;
 	private PagerControl control;
 	private Context mContext;
 	private int mCurrentPage;
@@ -34,22 +34,22 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 		mContentViews = new ArrayList<View>();
 		mCurrentPage = 0;
 
-		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store, R.string.all_memo };
+		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store}; //, R.string.all_memo };
 
 		control = (PagerControl) findViewById(R.id.PagerControl);
 		swipeView = (SwipeView) findViewById(R.id.SwipeView);
 		view1 = (StoreListView) findViewById(R.id.ListView1);
 		view2 = (StoreNearListView) findViewById(R.id.ListView2);
-		view3 = (PostListView) findViewById(R.id.ListView3);
+		//view3 = (PostListView) findViewById(R.id.ListView3);
 
 		mContentViews.add(view1);
 		mContentViews.add(view2);
-		mContentViews.add(view3);
+		//mContentViews.add(view3);
 
 		view1.setActivity(this);
 		view1.requestReload();
 		view2.setActivity(this);
-		view3.setActivity(this);
+		//view3.setActivity(this);
 
 		control.start(this);
 		control.setNumPages(swipeView.getChildCount());

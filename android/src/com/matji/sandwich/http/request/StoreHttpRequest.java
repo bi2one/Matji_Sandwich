@@ -39,8 +39,7 @@ public class StoreHttpRequest extends HttpRequest {
     		
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
-//    	getHashtable.put("include", "tags,user,store_foods,attach_file");
-    	getHashtable.put("include", "attach_file,user,store_foods");
+    	getHashtable.put("include", "attach_file,user,store_foods,tags");
     }
     
     public void actionNew(String name, String address, int lat, int lng){
@@ -76,7 +75,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user");
+    	getHashtable.put("include", "attach_file,user,tags");
     }
 
     public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit){

@@ -71,7 +71,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener 
 		dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
 	}
 
-	@Override
+	
 	public void onClick(View view) {
 		switch(view.getId()) {
 		case R.id.thumnail: case R.id.post_adapter_nick:

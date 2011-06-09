@@ -94,4 +94,9 @@
   <string name="all_store">전체 맛집</string>
   <string name="near_store">주변 맛집</string>
   <string name="all_memo">전체 메모</string>
+  
+  <!--  PostSwipeActivity -->
+  <string name="all_post">실시간 메모</string>
+  <string name="near_post">주변 메모</string>
+  
 </resources>

@@ -47,7 +47,7 @@ public class SlideGalleryActivity extends Activity implements Requestable {
 		return request;
 	}
 
-	@Override
+
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub		
 		attachFileIds = new int[data.size()];
@@ -67,7 +67,7 @@ public class SlideGalleryActivity extends Activity implements Requestable {
 		});
 	}
 
-	@Override
+
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(this);
 	}

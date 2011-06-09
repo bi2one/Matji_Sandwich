@@ -23,5 +23,5 @@ public class PostNearListView extends PostListView {
 		postRequest.actionNearbyList(lat_ne, lat_sw, lng_sw, lng_ne, getPage(), getLimit());
 		return postRequest;
 	}
-	
+
 }
