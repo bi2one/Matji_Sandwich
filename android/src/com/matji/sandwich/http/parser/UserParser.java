@@ -2,23 +2,52 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
+import com.matji.sandwich.R;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class UserParser extends MatjiDataParser {
+	public UserParser(Context context) {
+		super(context);
+	}
+
 	protected User getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
-		
+
 		User user = new User();
 		user.setId(getInt(object, "id"));
 		user.setUserid(getString(object, "userid"));
 		user.setNick(getString(object, "nick"));
 		user.setEmail(getString(object, "email"));
-		user.setTitle(getString(object, "title"));
-		user.setIntro(getString(object, "intro"));
+
+		/* Set Title */
+		String tmp = getString(object, "title");
+		if (tmp == null) {
+			user.setTitle(context.getString(R.string.default_string_title));
+		} else {
+			if (!tmp.equals("")) {
+				user.setTitle(tmp);
+			} else {
+				user.setTitle(context.getString(R.string.default_string_title));	
+			}
+		}
+
+		/* Set Intro */
+		tmp = getString(object, "intro");
+		if (tmp == null) {
+			user.setTitle(context.getString(R.string.default_string_intro));
+		} else {
+			if (!tmp.equals("")) {
+				user.setTitle(tmp);
+			} else {
+				user.setTitle(context.getString(R.string.default_string_intro));	
+			}
+		}
 		user.setPostCount(getInt(object, "post_count"));
 		user.setTagCount(getInt(object, "tag_count"));
 		user.setStoreCount(getInt(object, "store_count"));
@@ -26,17 +55,21 @@ public class UserParser extends MatjiDataParser {
 		user.setFollowerCount(getInt(object, "follower_count"));
 		user.setFollowing(getBoolean(object, "following"));
 		user.setFollowed(getBoolean(object, "followed"));
-		
+
 		/* Set User External Account */
-		UserExternalAccountParser ueaParser = new UserExternalAccountParser();
+		UserExternalAccountParser ueaParser = new UserExternalAccountParser(context);
 		user.setExternalAccount(ueaParser.getMatjiData(getObject(object, "external_account")));
-		
+
 		/* Set User Mileage */
-		UserMileageParser umParser = new UserMileageParser();
+		UserMileageParser umParser = new UserMileageParser(context);
 		user.setMileage(umParser.getMatjiData(getObject(object, "mileage")));
-		
+
+		/* Set Post */
+		PostParser postParser = new PostParser(context);
+		user.setPost(postParser.getMatjiData(getObject(object, "post")));
+
 		/* Set Attach Files */
-		AttachFileParser afParser = new AttachFileParser();
+		AttachFileParser afParser = new AttachFileParser(context);
 		ArrayList<MatjiData> dataList = afParser.getMatjiDataList(getArray(object, "attach_files"));
 		ArrayList<AttachFile> attach_files = new ArrayList<AttachFile>(); 
 		if (dataList != null) {

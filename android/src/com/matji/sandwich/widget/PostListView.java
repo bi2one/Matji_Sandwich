@@ -55,7 +55,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		Post post = (Post) getAdapterData().get(position);
 
 		switch(v.getId()){
-		case R.id.thumnail: case R.id.post_adapter_nick:
+		case R.id.post_adapter_thumnail: case R.id.post_adapter_nick:
 			gotoUserPage(post);
 			break;
 

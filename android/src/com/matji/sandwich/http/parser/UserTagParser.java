@@ -1,10 +1,16 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.UserTag;
 import com.matji.sandwich.exception.MatjiException;
 
 public class UserTagParser extends MatjiDataParser {
+	public UserTagParser(Context context) {
+		super(context);
+	}
+	
 	protected UserTag getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		

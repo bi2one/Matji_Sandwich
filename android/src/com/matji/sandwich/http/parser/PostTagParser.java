@@ -1,10 +1,16 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.PostTag;
 import com.matji.sandwich.exception.MatjiException;
 
 public class PostTagParser extends MatjiDataParser {
+	public PostTagParser(Context context) {
+		super(context);
+	}
+
 	protected PostTag getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -16,11 +22,11 @@ public class PostTagParser extends MatjiDataParser {
 		postTag.setUpdatedAt(getString(object, "updated_at"));
 		
 		/* Set Tag */
-		TagParser tagParser = new TagParser();
+		TagParser tagParser = new TagParser(context);
 		postTag.setTag(tagParser.getMatjiData(getObject(object, "tag")));
 		
 		/* Set Post */
-		PostParser postParser = new PostParser();
+		PostParser postParser = new PostParser(context);
 		postTag.setPost(postParser.getMatjiData(getObject(object, "post")));
 
 		return postTag;

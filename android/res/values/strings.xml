@@ -53,6 +53,8 @@
 
   <!-- default String... -->
   <string name="default_string_tag">태그</string>
+  <string name="default_string_title">의 맛집기행</string>
+  <string name="default_string_intro">소개가 없습니다.</string>
   <string name="default_string_popular_food">인기메뉴</string>
   <string name="default_string_not_exist_reg_user">미발굴 맛집</string>
   <string name="default_string_reg_user">발굴자</string>
@@ -81,7 +83,6 @@
   <string name="store_main_menu_view">메뉴 보기</string>
   
   <!-- UserMainActivity -->
-  <string name="user_main_not_found_intro">소개가 없습니다.</string>
   <string name="user_main_follow">Follow</string>
   <string name="user_main_unfollow">unFollow</string>
   <string name="user_main_brandnew">BrandNew follows you.</string>

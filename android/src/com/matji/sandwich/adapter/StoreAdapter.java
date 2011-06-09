@@ -39,7 +39,7 @@ public class StoreAdapter extends MBaseAdapter {
 			// Creates a ViewHolder and store references to the two children
 			// views
 			// we want to bind data to.
-			storeElement.image = (ImageView) convertView.findViewById(R.id.thumnail);
+			storeElement.image = (ImageView) convertView.findViewById(R.id.store_adapter_thumnail);
 			storeElement.name = (TextView) convertView.findViewById(R.id.store_adapter_name);
 			storeElement.address = (TextView) convertView.findViewById(R.id.store_adapter_address);
 			convertView.setTag(storeElement);

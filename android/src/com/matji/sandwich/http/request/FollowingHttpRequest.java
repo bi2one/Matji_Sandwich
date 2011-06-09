@@ -2,6 +2,7 @@ package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.FollowingParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.UserParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -18,13 +19,13 @@ public class FollowingHttpRequest extends HttpRequest {
 
 	public FollowingHttpRequest(Context context) {
 		super(context);
-		parser = new FollowingParser();
 		controller = "followings";
 	}
 	
 	public void actionNew(int followed_user_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
+		parser = new FollowingParser(context);
 		
 		postHashtable.clear();
 		postHashtable.put("followed_user_id", followed_user_id);
@@ -33,25 +34,45 @@ public class FollowingHttpRequest extends HttpRequest {
 	public void actionDelete(int followed_user_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "delete";
+		parser = new FollowingParser(context);
+		
 				
 		postHashtable.clear();
 		postHashtable.put("followed_user_id", followed_user_id);
 	}
 	
-	public void actionFollowingList(int user_id) {
+	public void actionFollowingList(int user_id, int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "following_list";
-	
-		getHashtable.clear();
-		getHashtable.put("user_id", user_id + "");
-	}
-	
-	public void actionFollowerList(int user_id) {
-		httpMethod = HttpMethod.HTTP_GET;
-		action = "follower_list";
+		parser = new UserParser(context);
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");
+		getHashtable.put("page", page+"");
+		getHashtable.put("limit", limit+"");
+	}
+	
+	public void actionFollowingList(int user_id, int page, int limit, boolean requestPost) {
+		actionFollowingList(user_id, page, limit);
+		
+		getHashtable.put("include", "post");
+	}
+	
+	public void actionFollowerList(int user_id, int page, int limit) {
+		httpMethod = HttpMethod.HTTP_GET;
+		action = "follower_list";
+		parser = new UserParser(context);
+		
+		getHashtable.clear();
+		getHashtable.put("user_id", user_id + "");
+		getHashtable.put("page", page+"");
+		getHashtable.put("limit", limit+"");
+	}	
+	
+	public void actionFollowerList(int user_id, int page, int limit, boolean requestPost) {
+		actionFollowerList(user_id, page, limit);
+		
+		getHashtable.put("include", "post");
 	}
 
 	public ArrayList<MatjiData> request() throws MatjiException {

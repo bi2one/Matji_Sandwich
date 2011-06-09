@@ -23,7 +23,7 @@ public class LikeHttpRequest extends HttpRequest {
 	public void actionFoodUnlike(int store_food_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "unlike";
-		parser = new LikeParser();
+		parser = new LikeParser(context);
 		controller = "foods";
 		
 		postHashtable.clear();
@@ -33,7 +33,7 @@ public class LikeHttpRequest extends HttpRequest {
 	public void actionFoodLike(int store_food_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "like";
-		parser = new LikeParser();
+		parser = new LikeParser(context);
 		controller = "foods";
 			
 		postHashtable.clear();
@@ -43,7 +43,7 @@ public class LikeHttpRequest extends HttpRequest {
     public void actionStoreUnLike(int store_id){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "unlike";
-    	parser = new LikeParser();
+    	parser = new LikeParser(context);
     	controller = "stores";
     	
     	postHashtable.clear();
@@ -53,7 +53,7 @@ public class LikeHttpRequest extends HttpRequest {
     public void actionStoreLike(int store_id){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "like";
-    	parser = new LikeParser();
+    	parser = new LikeParser(context);
     	controller = "stores";
 
     	postHashtable.clear();

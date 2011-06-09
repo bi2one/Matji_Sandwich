@@ -17,12 +17,12 @@ public class AlarmHttpRequest extends HttpRequest {
     
     public AlarmHttpRequest(Context context) {
     	super(context);
-    	parser = new AlarmParser();
+    	parser = new AlarmParser(context);
     	controller = "alarms";
     }
 
     public void actionList(int user_id){
-    	parser = new AlarmParser();
+    	parser = new AlarmParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	

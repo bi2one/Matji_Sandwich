@@ -45,7 +45,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener 
 	}
 
 	private void initPostData() {		
-		thumnail = (ImageView) getRootView().findViewById(R.id.thumnail);
+		thumnail = (ImageView) getRootView().findViewById(R.id.post_adapter_thumnail);
 		nick = (TextView) getRootView().findViewById(R.id.post_adapter_nick);
 		storeName = (TextView) getRootView().findViewById(R.id.post_adapter_store_name);
 		content = (TextView) getRootView().findViewById(R.id.post_adapter_post);
@@ -74,7 +74,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener 
 	
 	public void onClick(View view) {
 		switch(view.getId()) {
-		case R.id.thumnail: case R.id.post_adapter_nick:
+		case R.id.post_adapter_thumnail: case R.id.post_adapter_nick:
 			gotoUserPage(post);
 			break;
 		case R.id.post_adapter_store_name:
