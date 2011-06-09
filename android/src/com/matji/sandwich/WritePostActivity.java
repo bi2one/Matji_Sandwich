@@ -1,17 +1,17 @@
 package com.matji.sandwich;
 
-import java.util.*;
+import java.util.ArrayList;
 
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.PostHttpRequest;
-import com.matji.sandwich.widget.*;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class WritePostActivity extends Activity implements Requestable {
 	private static final int POST_WRITE_REQUEST = 1;
@@ -29,7 +29,11 @@ public class WritePostActivity extends Activity implements Requestable {
 
 	}
 
-	public void imageButtonClicked(View v) {
+	public void imgButtonClicked(View v) {
+		
+	}
+	
+	public void mapButtonClicked(View v) {
 		
 	}
 

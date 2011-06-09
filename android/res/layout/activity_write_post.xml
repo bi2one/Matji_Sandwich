@@ -19,19 +19,22 @@
 		android:layout_below="@id/tags_field">
 		<Button android:id="@+id/upload_image"
 			style="@style/DefaultWrap" 
-			android:onClick="imageButtonClicked"
+			android:onClick="imgButtonClicked"
 			android:layout_weight="1"
 			android:text="Img" />
 		<Button android:id="@+id/map"
 			style="@style/DefaultWrap"
+			android:onClick="mapButtonClicked"
 			android:layout_weight="1"
-			 android:text="Map" />
+			android:text="Map" />
 		<Button android:id="@+id/twitter"
 			style="@style/DefaultWrap" 
+			android:onClick="tButtonClicked"
 			android:layout_weight="1"
 			android:text="T" />
 		<Button android:id="@+id/facebook"
-			style="@style/DefaultWrap" 
+			style="@style/DefaultWrap"
+			android:onClick="fbButtonClicked" 
 			android:layout_weight="1"
 			android:text="F" />
 	</LinearLayout>
