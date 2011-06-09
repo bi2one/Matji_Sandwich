@@ -34,6 +34,10 @@ public abstract class MListView extends ListView implements OnItemClickListener 
     public void addHeaderView(ViewContainer container) {
 	addHeaderView(container.getRootView());
     }
+    
+    public LinearLayout getHeaderViewContainer(){
+    	return header;
+    }
 
     public Activity getActivity() {
 	return activity;
