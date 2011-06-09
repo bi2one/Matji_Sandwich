@@ -1,58 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:background="#fff"
-	android:id="@+id/layout_main">
-	<com.matji.sandwich.widget.PagerControl
-		android:id="@+id/PagerControl"
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" 
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#fff">
+
+ 	<com.matji.sandwich.widget.PagerControl
+		android:id="@+id/PagerControl" 
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<TextView
-			android:id="@+id/PagerControlPrevText"
-			android:layout_alignParentLeft="true"
+		<TextView android:id="@+id/PagerControlPrevText"
+			android:layout_alignParentLeft="true" 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
-		<TextView
-			android:id="@+id/PagerControlProgress"
-			android:layout_alignParentLeft="true"
+		<TextView android:id="@+id/PagerControlProgress"
+			android:layout_alignParentLeft="true" 
 			android:gravity="center"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content" />
-		<TextView
-			android:id="@+id/PagerControlNextText"
-			android:layout_alignParentRight="true"
+		<TextView android:id="@+id/PagerControlNextText"
+			android:layout_alignParentRight="true" 
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 	</com.matji.sandwich.widget.PagerControl>
-  
-  <com.matji.sandwich.widget.SwipeView
-      android:id="@+id/SwipeView" 
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent">
-    <com.matji.sandwich.widget.PostListView
-	android:id="@+id/ListView1"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent" />
-    <com.matji.sandwich.widget.PostNearListView
-	android:id="@+id/ListView2" 
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent" />
-    <!-- <com.matji.sandwich.widget.PostListView
-	android:id="@+id/ListView3"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent" /> -->
-  </com.matji.sandwich.widget.SwipeView>
+
+	<com.matji.sandwich.widget.SwipeView
+		android:id="@+id/SwipeView" 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<com.matji.sandwich.widget.PostListView
+			android:id="@+id/ListView1" 
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+		<com.matji.sandwich.widget.PostNearListView
+			android:id="@+id/ListView2" 
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+	</com.matji.sandwich.widget.SwipeView>
 </LinearLayout>
-<!-- <com.matji.sandwich.widget.TestListView -->
-<!-- android:id="@+id/TestListView2" -->
-<!-- android:background="#0F0" -->
-<!-- android:layout_width="fill_parent" -->
-<!-- android:layout_height="fill_parent" /> -->
-<!-- <com.matji.sandwich.widget.TestListView -->
-<!-- android:id="@+id/TestListView3" -->
-<!-- android:background="#333" -->
-<!-- android:layout_width="fill_parent" -->
-<!-- android:layout_height="fill_parent" /> -->

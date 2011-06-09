@@ -1,66 +1,66 @@
 package com.matji.sandwich;
 
-import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.*;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.content.Intent;
 
-import com.matji.sandwich.session.*;
-import com.matji.sandwich.widget.PostNearListView;
-import com.matji.sandwich.widget.RequestableMListView;
-import com.matji.sandwich.widget.PagerControl;
-import com.matji.sandwich.widget.PostListView;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.SwipeView;
+import com.matji.sandwich.widget.PostListView;
+import com.matji.sandwich.widget.PostNearListView;
+import com.matji.sandwich.widget.PagerControl;
+import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
+
+import java.util.ArrayList;
 
 public class PostSliderActivity extends Activity implements OnScrollListener {
 	private int[] pagerControlStringRef;
 	private SwipeView swipeView;
 	private PostListView view1;
 	private PostNearListView view2;
-	private PostListView view3;
-	private PagerControl control;
 	private Context mContext;
-	private int mCurrentPage;
 	private ArrayList<View> mContentViews;
-
+	private int mCurrentPage;
+	private PagerControl control;
 	public static final int LOGIN_ACTIVITY = 1;
 	public static final int WRITE_POST_ACTIVITY = 2;
 
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_slider);
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
 		mCurrentPage = 0;
-
-		pagerControlStringRef = new int[] { R.string.all_post, R.string.near_post};
+		
+		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store, R.string.all_memo };
 
 		control = (PagerControl) findViewById(R.id.PagerControl);
 		swipeView = (SwipeView) findViewById(R.id.SwipeView);
 		view1 = (PostListView) findViewById(R.id.ListView1);
 		view2 = (PostNearListView) findViewById(R.id.ListView2);
-		//view3 = (PostListView) findViewById(R.id.ListView3);
-
+		
 		mContentViews.add(view1);
 		mContentViews.add(view2);
-		mContentViews.add(view3);
-
+		
 		view1.setActivity(this);
 		view1.requestReload();
 		view2.setActivity(this);
-		//view3.setActivity(this);
-
+		
 		control.start(this);
 		control.setNumPages(swipeView.getChildCount());
 		control.setViewNames(pagerControlStringRef);
 
 		swipeView.addOnScrollListener(this);
 	}
-
+	
 	public void onScroll(int scrollX) {
 	}
 
@@ -81,7 +81,6 @@ public class PostSliderActivity extends Activity implements OnScrollListener {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,7 +100,7 @@ public class PostSliderActivity extends Activity implements OnScrollListener {
 			break;
 		case WRITE_POST_ACTIVITY:
 			if (resultCode == RESULT_OK) {
-				((PostListView)mContentViews.get(mCurrentPage)).onRefresh();
+				view1.onRefresh();
 			}
 			break;
 		}
