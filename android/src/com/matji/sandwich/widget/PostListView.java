@@ -20,17 +20,17 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
 public class PostListView extends RequestableMListView implements View.OnClickListener {
-	private HttpRequest request;
+	private PostHttpRequest postRequest;
 
 	public PostListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new PostAdapter(context), 10);
-		request = new PostHttpRequest(context);
+		postRequest = new PostHttpRequest(context);
 		setPage(1);
 	}
 
 	public HttpRequest request() {
-		((PostHttpRequest) request).actionList(getPage(), getLimit());
-		return request;
+		postRequest.actionList(getPage(), getLimit());
+		return postRequest;
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
