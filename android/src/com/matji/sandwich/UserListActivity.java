@@ -7,6 +7,6 @@ public class UserListActivity extends ListActivity{
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_user_lst);
+	setContentView(R.layout.activity_user_list);
     }
 }

@@ -23,7 +23,7 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	private SwipeView swipeView;
 	private StoreListView view1;
 	private StoreNearListView view2;
-	private PostListView view3;
+	//private PostListView view3;
 	private PagerControl control;
 	private Context mContext;
 	private int mCurrentPage;
@@ -39,22 +39,22 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 		mContentViews = new ArrayList<View>();
 		mCurrentPage = 0;
 
-		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store, R.string.all_memo };
+		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store}; //, R.string.all_memo };
 
 		control = (PagerControl) findViewById(R.id.PagerControl);
 		swipeView = (SwipeView) findViewById(R.id.SwipeView);
 		view1 = (StoreListView) findViewById(R.id.ListView1);
 		view2 = (StoreNearListView) findViewById(R.id.ListView2);
-		view3 = (PostListView) findViewById(R.id.ListView3);
+		//view3 = (PostListView) findViewById(R.id.ListView3);
 
 		mContentViews.add(view1);
 		mContentViews.add(view2);
-		mContentViews.add(view3);
+		//mContentViews.add(view3);
 
 		view1.setActivity(this);
 		view1.requestReload();
 		view2.setActivity(this);
-		view3.setActivity(this);
+		//view3.setActivity(this);
 
 		control.start(this);
 		control.setNumPages(swipeView.getChildCount());
@@ -86,41 +86,41 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 
 	}
 
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu, menu);
-		return true;
-	}
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		super.onCreateOptionsMenu(menu);
+//		MenuInflater inflater = getMenuInflater();
+//		inflater.inflate(R.menu.menu, menu);
+//		return true;
+//	}
 
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		switch (requestCode) {
-		case LOGIN_ACTIVITY:
-			if (resultCode == RESULT_OK) {
-				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
-			}
-			break;
-		case WRITE_POST_ACTIVITY:
-			if (resultCode == RESULT_OK) {
-				view3.onRefresh();
-			}
-			break;
-		}
-	}
-
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Session session = Session.getInstance(this);
-		switch (item.getItemId()) {
-		case R.id.posting:
-			if (session.getToken() == null) {
-				startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
-			} else {
-				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
-			}
-			return true;
-		}
-		return false;
-	}
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+//		switch (requestCode) {
+//		case LOGIN_ACTIVITY:
+//			if (resultCode == RESULT_OK) {
+//				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+//			}
+//			break;
+//		case WRITE_POST_ACTIVITY:
+//			if (resultCode == RESULT_OK) {
+//				view3.onRefresh();
+//			}
+//			break;
+//		}
+//	}
+//
+//
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		Session session = Session.getInstance(this);
+//		switch (item.getItemId()) {
+//		case R.id.posting:
+//			if (session.getToken() == null) {
+//				startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
+//			} else {
+//				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 }

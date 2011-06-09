@@ -111,7 +111,7 @@ public class PostHttpRequest extends HttpRequest {
     }
     
     
-    public void actionNearbyList(int lat_ne, int lat_sw, int lng_sw, int lng_ne, int page, int limit){
+    public void actionNearbyList(double lat_ne, double lat_sw, double lng_sw, double lng_ne, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "nearby_list";
     	

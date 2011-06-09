@@ -1,5 +1,124 @@
 package com.matji.sandwich;
 
-public class PostSliderActivity {
+import java.util.ArrayList;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.*;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
+import com.matji.sandwich.session.*;
+import com.matji.sandwich.widget.PostNearListView;
+import com.matji.sandwich.widget.RequestableMListView;
+import com.matji.sandwich.widget.PagerControl;
+import com.matji.sandwich.widget.PostListView;
+import com.matji.sandwich.widget.SwipeView;
+import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
+
+public class PostSliderActivity extends Activity implements OnScrollListener {
+	private int[] pagerControlStringRef;
+	private SwipeView swipeView;
+	private PostListView view1;
+	private PostNearListView view2;
+	private PostListView view3;
+	private PagerControl control;
+	private Context mContext;
+	private int mCurrentPage;
+	private ArrayList<View> mContentViews;
+
+	public static final int LOGIN_ACTIVITY = 1;
+	public static final int WRITE_POST_ACTIVITY = 2;
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_post_slider);
+		mContext = getApplicationContext();
+		mContentViews = new ArrayList<View>();
+		mCurrentPage = 0;
+
+		pagerControlStringRef = new int[] { R.string.all_post, R.string.near_post};
+
+		control = (PagerControl) findViewById(R.id.PagerControl);
+		swipeView = (SwipeView) findViewById(R.id.SwipeView);
+		view1 = (PostListView) findViewById(R.id.ListView1);
+		view2 = (PostNearListView) findViewById(R.id.ListView2);
+		//view3 = (PostListView) findViewById(R.id.ListView3);
+
+		mContentViews.add(view1);
+		mContentViews.add(view2);
+		mContentViews.add(view3);
+
+		view1.setActivity(this);
+		view1.requestReload();
+		view2.setActivity(this);
+		//view3.setActivity(this);
+
+		control.start(this);
+		control.setNumPages(swipeView.getChildCount());
+		control.setViewNames(pagerControlStringRef);
+
+		swipeView.addOnScrollListener(this);
+	}
+
+	public void onScroll(int scrollX) {
+	}
+
+	public void onViewScrollFinished(int currentPage) {
+		if (mCurrentPage != currentPage) {
+			Log.d("refresh", "pageChanged!");
+
+			try {
+				mCurrentPage = currentPage;
+				control.setCurrentPage(currentPage);
+				View view = mContentViews.get(currentPage);
+
+				if (view instanceof RequestableMListView) {
+					RequestableMListView listView = (RequestableMListView) view;
+					listView.requestConditionally();
+				}
+			} catch (IndexOutOfBoundsException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case LOGIN_ACTIVITY:
+			if (resultCode == RESULT_OK) {
+				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+			}
+			break;
+		case WRITE_POST_ACTIVITY:
+			if (resultCode == RESULT_OK) {
+				((PostListView)mContentViews.get(mCurrentPage)).onRefresh();
+			}
+			break;
+		}
+	}
+
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Session session = Session.getInstance(this);
+		switch (item.getItemId()) {
+		case R.id.posting:
+			if (session.getToken() == null) {
+				startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
+			} else {
+				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+			}
+			return true;
+		}
+		return false;
+	}
 }
