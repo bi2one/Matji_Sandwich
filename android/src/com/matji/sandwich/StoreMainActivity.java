@@ -7,6 +7,7 @@ import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
@@ -21,6 +22,7 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,6 +45,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	private TextView likeCountText;
 	private TextView addressText;
 	private TextView coverText;
+	private TextView tagText;
 	private TextView regUserText;
 	private TextView ownerUserText;
 	private Button scrapButton;
@@ -61,6 +64,13 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		initInfo();
 	}
 
+	public void onResume() {
+		super.onResume();
+		
+		likeButton.setClickable(true);
+		scrapButton.setClickable(true);
+	}
+	
 	public void initInfo() {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		intent = getIntent();
@@ -76,6 +86,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		likeCountText = (TextView) findViewById(R.id.store_main_like_count);
 		addressText = (TextView) findViewById(R.id.store_main_address);
 		coverText = (TextView) findViewById(R.id.store_main_cover);
+		tagText = (TextView) findViewById(R.id.store_main_tag);
 		regUserText = (TextView) findViewById(R.id.store_main_reg_user);
 		ownerUserText = (TextView) findViewById(R.id.store_main_owner_user);
 		scrapButton = (Button) findViewById(R.id.store_main_scrap_btn);
@@ -86,7 +97,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 		addressText.setText(store.getAddress());
 		coverText.setText(store.getCover());
-		
+		tagText.setText(tagListToCSV(store.getTags()));
 		/* Set RegUser */
 		User regUser = store.getRegUser();
 		String string;
@@ -97,7 +108,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			string = getString(R.string.default_string_reg_user) + ": " + regUser.getNick();
 			regUserText.setText(string);
 		}		
-		
+
 		/* Set Owner User */
 		//		User ownerUser = store.getOwnerUser();
 		User ownerUser = store.getRegUser();
@@ -105,7 +116,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			string = getString(R.string.default_string_owner_user) + ": " + regUser.getNick();
 			ownerUserText.setText(string);
 		}
-		
+
 		setInfo();
 	}
 
@@ -125,7 +136,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			} else {
 				likeButton.setText(getString(R.string.store_main_like_store));
 			}
-			
+
 			if (dbProvider.isExistBookmark(store.getId(), "Store")) {
 				scrapButton.setText(getString(R.string.store_main_unbookmark));
 			} else {
@@ -195,6 +206,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onLikeButtonClicked(View view) {
+		likeButton.setClickable(false);
+
 		if (session.isLogin()){
 			if (dbProvider.isExistLike(store.getId(), "Store")){
 				dbProvider.deleteLike(store.getId(), "Store");
@@ -212,6 +225,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onScrapButtonClicked(View view) {
+		scrapButton.setClickable(false);
+		
 		if (session.isLogin()){
 			if (dbProvider.isExistBookmark(store.getId(), "Store")){
 
@@ -263,5 +278,16 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 	public void onUrlButtonClicked(View view) {
 
+	}
+
+	public String tagListToCSV(ArrayList<Tag> tags) {
+		String result = "";
+		if (tags.size() > 0) {
+			for (int i = 0; i < tags.size() - 1; i++) {
+				result += tags.get(i).getTag() + ", ";
+			}
+			result += tags.get(tags.size()-1).getTag();
+		}
+		return result;
 	}
 }

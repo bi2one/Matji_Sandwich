@@ -20,14 +20,23 @@ public class UserHttpRequest extends HttpRequest {
 		controller = "users";
 	}
 
-	public void actionList(){
+	public void actionList(int page, int limit){
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
 		parser = new UserParser();
 
 		getHashtable.clear();
+		getHashtable.put("page", page+"");
+		getHashtable.put("limit", limit+"");
 	}
-	
+
+	public void actionList(int page, int limit, boolean requestPosts, boolean requestStores, boolean requestFiles) {
+		actionList(page, limit);
+		if (requestPosts) getHashtable.put("include", "posts"); 
+		if (requestStores) getHashtable.put("include", "stores"); 
+		if (requestFiles) getHashtable.put("include", "attach_files"); 
+	}
+
 	public void actionShow(int user_id){
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "show";
@@ -43,7 +52,7 @@ public class UserHttpRequest extends HttpRequest {
 		if (requestStores) getHashtable.put("include", "stores"); 
 		if (requestFiles) getHashtable.put("include", "attach_files"); 
 	}
-	
+
 	public void actionRankingList() {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "ranking_list";

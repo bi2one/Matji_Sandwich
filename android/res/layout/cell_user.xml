@@ -4,20 +4,20 @@
   android:layout_width="wrap_content"
   android:layout_height="wrap_content">
 		<ImageView
-			style="@style/user_main_Image"
-			android:id="@+id/user_main_image" />
+			style="@style/user_cell_Image"
+			android:id="@+id/user_cell_image" />
 		<TextView
-			style="@style/user_main_Grade"
-			android:id="@+id/user_main_grade"
-			android:layout_toRightOf="@id/user_main_image" />
+			style="@style/user_cell_Grade"
+			android:id="@+id/user_cell_grade"
+			android:layout_toRightOf="@id/user_cell_image" />
 		<TextView
-			style="@style/user_main_Title"
-			android:id="@+id/user_main_title"
-			android:layout_toRightOf="@id/user_main_image"
-			android:layout_below="@id/user_main_grade" />
+			style="@style/user_cell_Title"
+			android:id="@+id/user_cell_title"
+			android:layout_toRightOf="@id/user_cell_image"
+			android:layout_below="@id/user_cell_grade" />
 		<TextView
-			style="@style/user_main_Intro"
-			android:id="@+id/user_main_intro"
-			android:layout_toRightOf="@id/user_main_image"
-			android:layout_below="@id/user_main_title" />
+			style="@style/user_cell_Intro"
+			android:id="@+id/user_cell_intro"
+			android:layout_toRightOf="@id/user_cell_image"
+			android:layout_below="@id/user_cell_title" />
 </RelativeLayout>

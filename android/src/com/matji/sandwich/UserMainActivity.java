@@ -12,15 +12,17 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 
+import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.*;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 public class UserMainActivity extends MainActivity implements Requestable {
+	private TabHost tabHost;
 	private Intent intent;
 	private User user;
 	private MatjiImageDownloader downloader;
@@ -34,6 +36,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private TextView titleText;
 	private TextView introText;
 	private Button followButton;
+	private TextView followMessageText;
 	private TextView followerCountText;
 	private TextView followingCountText;
 	
@@ -59,7 +62,13 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		initInfo();
 	}
 
+	public void onResume() {
+		super.onResume();
+		followButton.setClickable(true);		
+	}
+	
 	public void initInfo() {
+		tabHost = ((TabActivity) getParent()).getTabHost();
 		intent = getIntent();
 		user = intent.getParcelableExtra("user");
 		downloader = new MatjiImageDownloader();
@@ -68,12 +77,13 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);		
 		
-		gradeText = (TextView) findViewById(R.id.user_main_grade);
-		titleText = (TextView) findViewById(R.id.user_main_title);		
+		gradeText = (TextView) findViewById(R.id.user_cell_grade);
+		titleText = (TextView) findViewById(R.id.user_cell_title);
+		introText = (TextView) findViewById(R.id.user_cell_intro);
 		followButton = (Button) findViewById(R.id.user_main_follow_btn);
+		followMessageText = (TextView) findViewById(R.id.user_main_follow_message);
 		followerCountText = (TextView) findViewById(R.id.user_main_follower_count);
 		followingCountText = (TextView) findViewById(R.id.user_main_following_count);
-		introText = (TextView) findViewById(R.id.user_main_intro);
 		
 		followerButton = (Button) findViewById(R.id.user_main_follower_btn);
 		followingButton = (Button) findViewById(R.id.user_main_following_btn);
@@ -87,7 +97,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 //		recievedMessageButton = (Button) findViewById(R.id.user_main_recieved_message_btn);
 
 		/* Set User Image */
-		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_main_image));
+		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_cell_image));
 		titleText.setText(user.getTitle());
 
 		/* Set Intro */
@@ -157,6 +167,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onFollowButtonClicked(View view) {
+		followButton.setClickable(false);
 		if (session.isLogin()){
 			if (session.getCurrentUser().getId() != user.getId()) {
 				if (dbProvider.isExistFollowing(user.getId())) {
@@ -184,13 +195,13 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 		
 	public void onJjimStoreButtonClicked(View view) {
-
 	}
 
 //	public void onActivityAreaButtonClicked(View view) {
 //	}
 
 	public void onMemoButtonClicked(View view) {
+		tabHost.setCurrentTab(UserTabActivity.MEMO_PAGE);
 	}
 
 //	public void onImageButtonClicked(View view) {
