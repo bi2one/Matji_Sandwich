@@ -127,8 +127,7 @@
   	<item name="android:layout_width">wrap_content</item>
   	<item name="android:layout_height">wrap_content</item>
   	<item name="android:padding">1dp</item>
-  	<item name="android:textSize">15dp</item>
-  	<item name="android:textStyle">bold</item>
+  	<item name="android:textSize">12dp</item>
   </style>
   
   <style name="store_main_User">
@@ -146,11 +145,9 @@
   	<item name="android:textStyle">bold</item>
   </style>
   
-  <!-- activity_user_main.xml -->  
-  <style name="user_main_Cell" parent="Cell">
-  </style>
   
-  <style name="user_main_Image">
+  <!-- cell_user.xml --> 
+  <style name="user_cell_Image">
   	<item name="android:background">@drawable/img_matji_default</item>
 	<item name="android:layout_width">70dp</item>
 	<item name="android:layout_height">70dp</item>
@@ -159,7 +156,7 @@
 	<item name="android:scaleType">centerCrop</item>
   </style>
 
-  <style name="user_main_Grade" parent="DefaultWrap">
+  <style name="user_cell_Grade" parent="DefaultWrap">
   	<item name="android:textSize">11dp</item>
   	<item name="android:textStyle">bold</item>
   	<item name="android:textColor">#aaaaff</item>
@@ -167,13 +164,16 @@
   	<item name="android:drawablePadding">3dp</item>
   </style>
   
-  <style name="user_main_Title" parent="DefaultWrap">
+  <style name="user_cell_Title" parent="DefaultWrap">
   	<item name="android:textSize">16dp</item>
   	<item name="android:textStyle">bold</item>
   	<item name="android:textColor">#333333</item>
   </style>
   
-  <style name="user_main_Intro" parent="DefaultWrap">
+  <style name="user_cell_Intro" parent="DefaultWrap">
+  </style>
+  <!-- activity_user_main.xml -->  
+  <style name="user_main_Cell" parent="Cell">
   </style>
   
   <style name="user_main_FollowButton" parent="DefaultWidthFill">

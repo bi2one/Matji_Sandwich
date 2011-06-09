@@ -67,25 +67,12 @@
 		<TextView
 			style="@style/store_main_Cover"
 			android:id="@+id/store_main_cover" />
-		<RelativeLayout
-			style="@style/DefaultWidthFill">
-			<ImageView
-				style="@style/store_main_MenuAndTagImage"
-				android:id="@+id/store_main_popular_menu_image" />
-			<TextView
-				style="@style/store_main_MenuAndTag"
-				android:id="@+id/store_main_popular_menu"
-				android:layout_toRightOf="@id/store_main_popular_menu_image" />
-			<ImageView
-				style="@style/store_main_MenuAndTagImage"
-				android:id="@+id/store_main_tag_image"
-				android:layout_below="@id/store_main_popular_menu_image" />
-			<TextView
-				style="@style/store_main_MenuAndTag"
-				android:id="@+id/store_main_tag"
-				android:layout_below="@id/store_main_popular_menu"
-				android:layout_toRightOf="@id/store_main_tag_image" />
-		</RelativeLayout>
+		<TextView
+			style="@style/store_main_MenuAndTag"
+			android:id="@+id/store_main_popular_menu" />
+		<TextView
+			style="@style/store_main_MenuAndTag"
+			android:id="@+id/store_main_tag" />
 		<LinearLayout
 			style="@style/DefaultWidthFill">
 			<TextView

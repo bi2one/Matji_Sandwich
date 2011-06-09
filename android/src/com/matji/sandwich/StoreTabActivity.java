@@ -20,8 +20,8 @@ public class StoreTabActivity extends TabActivity{
 	private Store store;
 
 	public static final int MAIN_PAGE = 0;
-	public static final int MEMO_PAGE = 1;
-	public static final int MENU_PAGE = 2;
+	public static final int MENU_PAGE = 1;
+	public static final int MEMO_PAGE = 2;
 	public static final int IMAGE_PAGE = 3;
 	public static final int MORE_PAGE = 4;
 	
@@ -53,12 +53,12 @@ public class StoreTabActivity extends TabActivity{
 		tabHost.addTab(tabHost.newTabSpec("main")
 				.setIndicator("메인")
 				.setContent(mainIntent));
-		tabHost.addTab(tabHost.newTabSpec("memo")
-				.setIndicator("메모")
-				.setContent(postIntent));
 		tabHost.addTab(tabHost.newTabSpec("menu")
 				.setIndicator("메뉴")
 				.setContent(menuIntent));
+		tabHost.addTab(tabHost.newTabSpec("memo")
+				.setIndicator("메모")
+				.setContent(postIntent));
 		tabHost.addTab(tabHost.newTabSpec("image")
 				.setIndicator("이미지")
 				.setContent(imageIntent));

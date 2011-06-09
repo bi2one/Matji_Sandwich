@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#fff">
+	<LinearLayout
+		style="DefaultWrap">
+		<include
+			android:id="@+id/user_adapter_user_cell"
+			layout="@layout/cell_user" />
+		<include
+			android:id="@+id/user_adapter_post"
+			layout="@layout/adapter_post" />
+	</LinearLayout>
+	<ImageView
+		style="@style/DefaultHeightFill"
+		android:layout_weight="1"
+		android:src="@drawable/img_arrow02" />
+</LinearLayout>
