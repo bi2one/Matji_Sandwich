@@ -182,13 +182,13 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		store.setLikeCount(store.getLikeCount() - 1);
 	}
 
-	@Override
+	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub
 		setInfo();
 	}
 
-	@Override
+	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		// TODO Auto-generated method stub
 		e.showToastMsg(getApplicationContext());

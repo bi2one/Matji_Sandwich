@@ -5,7 +5,7 @@ import java.util.*;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.*;
+
 
 import com.matji.sandwich.*;
 import com.matji.sandwich.data.*;
@@ -46,9 +46,11 @@ public class Session implements Requestable {
 	    return session;
 	}
 	
+	
 	public boolean sessionValidate(){
 		return true;
 	}
+	
 	
 	public void login(Loginable loginableActivity, String userid, String password){
 		this.mLoginableActivity = loginableActivity;
@@ -58,12 +60,24 @@ public class Session implements Requestable {
 		mManager.request((Activity)loginableActivity, request, LOGIN);
 	}
 	
+	
 	public boolean logout(){
 		mPrefs.clear();
+		removePrivateDataFromDatabase();
 		return mPrefs.commit();
 	}
 	
 	
+	private void removePrivateDataFromDatabase(){
+		DBProvider dbProvider = DBProvider.getInstance(mContext);
+		
+		dbProvider.deleteBookmarks();
+		dbProvider.deleteLikes();
+		dbProvider.deleteFollowers();
+		dbProvider.deleteFollowings();
+		
+	}
+
 	public boolean isLogin(){
 		return (mPrefs.getObject(keyForCurrentUser) == null) ? false : true;	
 	}
@@ -81,13 +95,9 @@ public class Session implements Requestable {
 				mPrefs.setString(keyForAccessToken, me.getToken());
 				mPrefs.commit();
 				
-				DBProvider dbProvider = DBProvider.getInstance(mContext);
+				removePrivateDataFromDatabase();
 				
-				dbProvider.deleteBookmarks();
-				dbProvider.deleteLikes();
-				dbProvider.deleteFollowers();
-				dbProvider.deleteFollowings();
-				
+				DBProvider dbProvider = DBProvider.getInstance(mContext);				
 				dbProvider.insertBookmarks(me.getBookmarks());
 				dbProvider.insertLikes(me.getLikes());
 				dbProvider.insertFollowers(me.getFollowers());

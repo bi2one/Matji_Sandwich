@@ -69,13 +69,13 @@ public class ImageSliderActivity extends Activity implements OnScrollListener {
 		}
 	}
 
-	@Override
+	
 	public void onScroll(int scrollX) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	
 	public void onViewScrollFinished(int currentPage) {
 		if (this.currentPage != currentPage) {
 			this.currentPage = currentPage;
