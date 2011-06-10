@@ -93,10 +93,13 @@
   <!-- StoreSwipeActivity -->
   <string name="all_store">전체 맛집</string>
   <string name="near_store">주변 맛집</string>
-  <string name="all_memo">전체 메모</string>
+  <string name="search_store">맛집 검색</string>
+  <string name="bookmarked_store">내맛집</string>
   
   <!--  PostSwipeActivity -->
   <string name="all_post">실시간 메모</string>
   <string name="near_post">주변 메모</string>
+  <string name="search_post">메모 검색</string>
+  <string name="my_post">내메모</string>
   
 </resources>

@@ -40,11 +40,15 @@
 	android:id="@+id/ListView2" 
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent" />
-    <!-- <com.matji.sandwich.widget.PostListView
+    <com.matji.sandwich.widget.StoreSearchView
 	android:id="@+id/ListView3"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent" /> -->
-  </com.matji.sandwich.widget.SwipeView>
+	android:layout_height="fill_parent" />
+<!-- 	<com.matji.sandwich.widget.StoreBookmarkedListView
+	android:id="@+id/ListView4"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" />
+ -->  </com.matji.sandwich.widget.SwipeView>
 </LinearLayout>
 <!-- <com.matji.sandwich.widget.TestListView -->
 <!-- android:id="@+id/TestListView2" -->

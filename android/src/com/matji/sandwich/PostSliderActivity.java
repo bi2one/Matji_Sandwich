@@ -14,6 +14,8 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.PostNearListView;
+import com.matji.sandwich.widget.PostSearchView;
+import com.matji.sandwich.widget.MyPostListView;
 import com.matji.sandwich.widget.PagerControl;
 import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
@@ -25,6 +27,8 @@ public class PostSliderActivity extends Activity implements OnScrollListener {
 	private SwipeView swipeView;
 	private PostListView view1;
 	private PostNearListView view2;
+	private PostSearchView view3;
+	private MyPostListView view4;
 	private Context mContext;
 	private ArrayList<View> mContentViews;
 	private int mCurrentPage;
@@ -40,19 +44,25 @@ public class PostSliderActivity extends Activity implements OnScrollListener {
 		mContentViews = new ArrayList<View>();
 		mCurrentPage = 0;
 		
-		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store, R.string.all_memo };
+		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store, R.string.search_post, R.string.my_post};
 
 		control = (PagerControl) findViewById(R.id.PagerControl);
 		swipeView = (SwipeView) findViewById(R.id.SwipeView);
 		view1 = (PostListView) findViewById(R.id.ListView1);
 		view2 = (PostNearListView) findViewById(R.id.ListView2);
+		view3 = (PostSearchView) findViewById(R.id.ListView3);
+		view4 = (MyPostListView) findViewById(R.id.ListView4);
 		
 		mContentViews.add(view1);
 		mContentViews.add(view2);
+		mContentViews.add(view3);
+		mContentViews.add(view4);
 		
 		view1.setActivity(this);
 		view1.requestReload();
 		view2.setActivity(this);
+		view3.setActivity(this);
+		view4.setActivity(this);
 		
 		control.start(this);
 		control.setNumPages(swipeView.getChildCount());
