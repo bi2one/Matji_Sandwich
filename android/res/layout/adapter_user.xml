@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
+	android:padding="7dp"
 	android:background="#fff">
 	<LinearLayout
-		style="DefaultWrap">
+		style="@style/DefaultWrap"
+		android:orientation="vertical">
 		<include
 			android:id="@+id/user_adapter_user_cell"
 			layout="@layout/cell_user" />
-		<include
+		<TextView
+			style="@style/DefaultWrap"
 			android:id="@+id/user_adapter_post"
-			layout="@layout/adapter_post" />
+			android:layout_marginLeft="77dp"/>
 	</LinearLayout>
 	<ImageView
-		style="@style/DefaultHeightFill"
-		android:layout_weight="1"
+		style="@style/DefaultWrap"
+		android:layout_alignParentRight="true"
+		android:layout_centerInParent="true"
 		android:src="@drawable/img_arrow02" />
-</LinearLayout>
+</RelativeLayout>

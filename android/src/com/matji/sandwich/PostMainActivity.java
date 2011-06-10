@@ -2,6 +2,8 @@ package com.matji.sandwich;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.data.Post;
@@ -19,7 +21,7 @@ public class PostMainActivity extends MainActivity {
 	private PostViewContainer header;
 	private TextView tagsText;
 	private CommentListView commentListView;
-
+		
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_main);
@@ -29,6 +31,7 @@ public class PostMainActivity extends MainActivity {
 	
 	public void onResume() {
 		super.onResume();
+		
 		setInfo();
 	}
 	
@@ -40,17 +43,16 @@ public class PostMainActivity extends MainActivity {
 		
 		header = new PostViewContainer(this, post, user, store);
 		commentListView = (CommentListView) findViewById(R.id.post_main_comment_list_view);
-		commentListView.addHeaderView(header);
 		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);
-		
-		setInfo();
 	}
 
 	public void setInfo() {
 		//TODO
 //		tags = (TextView) findViewById(R.id.post_main_tag_area);
-		//		TODO
-		commentListView.requestReload();
+		
+		commentListView.getHeaderViewContainer().removeView(header.getRootView());
+		commentListView.addHeaderView(header);
+		commentListView.requestReload();		
 	}
 }

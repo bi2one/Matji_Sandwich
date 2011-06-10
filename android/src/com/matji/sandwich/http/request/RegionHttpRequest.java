@@ -17,14 +17,14 @@ public class RegionHttpRequest extends HttpRequest {
         
     public RegionHttpRequest(Context context) {
     	super(context);
-    	parser = new RegionParser();
+    	parser = new RegionParser(context);
     	controller = "regions";
     }
 
     public void actionBookmark(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String description){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "bookmark";
-    	parser = new RegionParser();
+    	parser = new RegionParser(context);
     	
     	postHashtable.clear();
     	postHashtable.put("lat_sw",lat_sw);
@@ -44,7 +44,7 @@ public class RegionHttpRequest extends HttpRequest {
     public void actionBookmarkedList(){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "bookmarked_list";
-      	parser = new RegionParser();
+      	parser = new RegionParser(context);
       	
     	getHashtable.clear();
     }

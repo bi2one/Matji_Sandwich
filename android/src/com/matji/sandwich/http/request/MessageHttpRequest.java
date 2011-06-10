@@ -17,12 +17,12 @@ public class MessageHttpRequest extends HttpRequest {
     
     public MessageHttpRequest(Context context) {
     	super(context);
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	controller = "messages";
     }
     
     public void actionNew(String received_user_id, String message){
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	
@@ -32,7 +32,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionDelete(String message_id){
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	
@@ -41,7 +41,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionShow(String message_id){
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "show";
     	
@@ -50,7 +50,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionTreadList(){
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "thread_list";
     	
@@ -58,7 +58,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionChat(String thread_id){
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "chat";
     	
@@ -67,7 +67,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionList(){
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
 
@@ -75,7 +75,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionReceivedList(){
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "received_list";
     	
@@ -83,7 +83,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionSentList(){
-    	parser = new MessageParser();
+    	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "sent_list";
     	

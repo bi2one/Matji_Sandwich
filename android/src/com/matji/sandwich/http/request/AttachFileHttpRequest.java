@@ -17,12 +17,12 @@ public class AttachFileHttpRequest extends HttpRequest {
     
     public AttachFileHttpRequest(Context context) {
     	super(context);
-    	parser = new AttachFileParser();
+    	parser = new AttachFileParser(context);
     	controller = "attach_files";
     }
 
     public void actionUpload(){
-    	parser = new AttachFileParser();
+    	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "upload";
     	
@@ -30,7 +30,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionImage(){
-    	parser = new AttachFileParser();
+    	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "image";
     	
@@ -38,7 +38,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionList(){
-    	parser = new AttachFileParser();
+    	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	
@@ -46,7 +46,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionStoreList(int store_id){
-    	parser = new AttachFileParser();
+    	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
     	
@@ -55,7 +55,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionPostList(int post_id){
-    	parser = new AttachFileParser();
+    	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "post_list";
     	

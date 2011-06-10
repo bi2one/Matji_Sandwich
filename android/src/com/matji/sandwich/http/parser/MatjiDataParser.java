@@ -1,5 +1,7 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
@@ -19,6 +21,11 @@ import org.json.*;
 
 public abstract class MatjiDataParser {
 	protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
+	public Context context;
+	
+	public MatjiDataParser(Context context) {
+		this.context = context;
+	}
 	
 	public ArrayList<MatjiData> getMatjiDataList(JsonElement jsonElement) throws MatjiException{
 		if (!isArray(jsonElement)) {

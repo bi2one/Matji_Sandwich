@@ -31,7 +31,7 @@ public class PostAdapter extends MBaseAdapter {
 			postElement = new PostElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_post, null);
 			
-			postElement.image = (ImageView) convertView.findViewById(R.id.thumnail);
+			postElement.image = (ImageView) convertView.findViewById(R.id.post_adapter_thumnail);
 			postElement.nick = (TextView) convertView.findViewById(R.id.post_adapter_nick);
 			postElement.storeName = (TextView)convertView.findViewById(R.id.post_adapter_store_name);
 			postElement.post = (TextView) convertView.findViewById(R.id.post_adapter_post);

@@ -33,7 +33,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	private TabHost tabHost;
 	private Intent intent;
 	private Store store;
-	private MatjiImageDownloader downloader;
 
 	private HttpRequestManager manager;
 	private HttpRequest request;
@@ -75,13 +74,12 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		intent = getIntent();
 		store = (Store) intent.getParcelableExtra("store");
-		downloader = new MatjiImageDownloader();
 
 		manager = new HttpRequestManager(this, this);
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);
 
-		storeImage = (ImageView) findViewById(R.id.store_main_image);
+		storeImage = (ImageView) findViewById(R.id.store_main_thumnail);
 		likeButton = (Button) findViewById(R.id.store_main_like_btn);
 		likeCountText = (TextView) findViewById(R.id.store_main_like_count);
 		addressText = (TextView) findViewById(R.id.store_main_address);
@@ -206,9 +204,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onLikeButtonClicked(View view) {
-		likeButton.setClickable(false);
-
 		if (session.isLogin()){
+			likeButton.setClickable(false);
 			if (dbProvider.isExistLike(store.getId(), "Store")){
 				dbProvider.deleteLike(store.getId(), "Store");
 				// api request
@@ -225,9 +222,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onScrapButtonClicked(View view) {
-		scrapButton.setClickable(false);
-		
 		if (session.isLogin()){
+			scrapButton.setClickable(false);
 			if (dbProvider.isExistBookmark(store.getId(), "Store")){
 
 				dbProvider.deleteBookmark(store.getId(), "Store");

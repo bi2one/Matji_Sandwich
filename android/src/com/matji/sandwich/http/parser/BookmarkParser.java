@@ -1,10 +1,16 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.exception.MatjiException;
 
 public class BookmarkParser extends MatjiDataParser {
+	public BookmarkParser(Context context) {
+		super(context);
+	}
+
 	protected Bookmark getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -15,15 +21,15 @@ public class BookmarkParser extends MatjiDataParser {
 		bookmark.setObject(getString(object, "object"));
 		
 		/* Set User */
-		UserParser userParser = new UserParser();
+		UserParser userParser = new UserParser(context);
 		bookmark.setUser(userParser.getMatjiData(getObject(object, "user")));
 		
 		/* Set Store */
-		StoreParser storeParser = new StoreParser();
+		StoreParser storeParser = new StoreParser(context);
 		bookmark.setStore(storeParser.getMatjiData(getObject(object, "store")));
 		
 		/* Set Region */
-		RegionParser regionParser = new RegionParser();
+		RegionParser regionParser = new RegionParser(context);
 		bookmark.setRegion(regionParser.getMatjiData(getObject(object, "region")));
 
 		return bookmark;

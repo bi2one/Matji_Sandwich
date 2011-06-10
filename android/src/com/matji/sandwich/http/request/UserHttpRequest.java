@@ -23,16 +23,15 @@ public class UserHttpRequest extends HttpRequest {
 	public void actionList(int page, int limit){
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
-		parser = new UserParser();
+		parser = new UserParser(context);
 
 		getHashtable.clear();
 		getHashtable.put("page", page+"");
 		getHashtable.put("limit", limit+"");
 	}
 
-	public void actionList(int page, int limit, boolean requestPosts, boolean requestStores, boolean requestFiles) {
+	public void actionList(int page, int limit, boolean requestStores, boolean requestFiles) {
 		actionList(page, limit);
-		if (requestPosts) getHashtable.put("include", "posts"); 
 		if (requestStores) getHashtable.put("include", "stores"); 
 		if (requestFiles) getHashtable.put("include", "attach_files"); 
 	}
@@ -40,15 +39,14 @@ public class UserHttpRequest extends HttpRequest {
 	public void actionShow(int user_id){
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "show";
-		parser = new UserParser();
+		parser = new UserParser(context);
 
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");
 	}
 
-	public void actionShow(int user_id, boolean requestPosts, boolean requestStores, boolean requestFiles) {
+	public void actionShow(int user_id, boolean requestStores, boolean requestFiles) {
 		actionShow(user_id);
-		if (requestPosts) getHashtable.put("include", "posts"); 
 		if (requestStores) getHashtable.put("include", "stores"); 
 		if (requestFiles) getHashtable.put("include", "attach_files"); 
 	}
@@ -56,7 +54,7 @@ public class UserHttpRequest extends HttpRequest {
 	public void actionRankingList() {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "ranking_list";
-		parser = new UserParser();
+		parser = new UserParser(context);
 
 		getHashtable.clear();
 	}
@@ -64,7 +62,7 @@ public class UserHttpRequest extends HttpRequest {
 	public void actionNearByRankingList(int lat_sw, int lat_ne, int lng_sw, int lng_ne) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "nearby_ranking_list";
-		parser = new UserParser();
+		parser = new UserParser(context);
 
 		getHashtable.clear();
 		getHashtable.put("lat_ne", lat_ne + "");

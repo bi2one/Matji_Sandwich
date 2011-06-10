@@ -1,10 +1,16 @@
 package com.matji.sandwich.http.parser;
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Following;
 import com.matji.sandwich.exception.MatjiException;
 
 public class FollowingParser extends MatjiDataParser {
+	public FollowingParser(Context context) {
+		super(context);
+	}
+
 	protected Following getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -25,7 +31,7 @@ public class FollowingParser extends MatjiDataParser {
 		following.setStoreCount(getInt(object, "store_count"));
 		
 		/* Set Follow User */
-		UserParser userParser = new UserParser();
+		UserParser userParser = new UserParser(context);
 		following.setFollowingUser(userParser.getMatjiData(getObject(object, "following_user")));
 		following.setFollowedUser(userParser.getMatjiData(getObject(object, "followed_user")));
 
