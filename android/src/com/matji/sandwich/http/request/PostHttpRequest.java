@@ -115,7 +115,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionNearbyList(double lat_ne, double lat_sw, double lng_sw, double lng_ne, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "nearby_list";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("lat_ne", lat_ne + "");
@@ -130,7 +130,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionSearch(String keyword, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "search";
-    	parser = new PostParser();
+    	parser = new PostParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("q", keyword);

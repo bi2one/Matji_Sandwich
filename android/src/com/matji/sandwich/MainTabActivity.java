@@ -33,6 +33,8 @@ public class MainTabActivity extends TabActivity {
 	tabHost.addTab(tabHost.newTabSpec("tab4")
 		       .setIndicator("설정")
 		       .setContent(new Intent(this, SettingActivity.class)));
+	
+	
     }
     
 

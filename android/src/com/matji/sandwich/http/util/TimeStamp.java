@@ -21,8 +21,6 @@ public class TimeStamp {
 		Date date = null;	
 		try {
 			date = getDateInTimeZone((Date)format.parse(dateString), TimeZone.getDefault().getID());
-			
-			Log.d("sadfasf",date+"");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

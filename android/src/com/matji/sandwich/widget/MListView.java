@@ -16,6 +16,7 @@ import com.matji.sandwich.R;
 public abstract class MListView extends ListView implements OnItemClickListener {
     private Activity activity;
     private LinearLayout header;
+    
     public abstract void onListItemClick(int position);
 
     public MListView(Context context, AttributeSet attrs) {
@@ -52,4 +53,5 @@ public abstract class MListView extends ListView implements OnItemClickListener 
 	    onListItemClick(position - 1);
 	}
     }
+
 }

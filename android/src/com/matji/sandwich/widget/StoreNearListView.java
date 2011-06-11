@@ -18,7 +18,6 @@ public class StoreNearListView extends StoreListView {
 		storeRequest = new StoreHttpRequest(context);
 	}
 
-	@Override
 	public HttpRequest request() {
 		storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, getPage(), getLimit());
 		return storeRequest;
