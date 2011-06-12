@@ -56,9 +56,9 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 		view2.setTag(R.string.title, getResources().getText(R.string.all_store).toString());
 		view3.setTag(R.string.title, getResources().getText(R.string.near_store).toString());
 		
-		mContentViews.add(view3);
 		mContentViews.add(view1);
 		mContentViews.add(view2);
+		mContentViews.add(view3);
 		
 		view1.setActivity(this);
 		view2.setActivity(this);
