@@ -52,9 +52,9 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 		view3 = (StoreNearListView) findViewById(R.id.ListView3);
 		
 		
-		view3.setTag(R.string.title, getResources().getText(R.string.search_store).toString());
-		view1.setTag(R.string.title, getResources().getText(R.string.all_store).toString());
-		view2.setTag(R.string.title, getResources().getText(R.string.near_store).toString());
+		view1.setTag(R.string.title, getResources().getText(R.string.search_store).toString());
+		view2.setTag(R.string.title, getResources().getText(R.string.all_store).toString());
+		view3.setTag(R.string.title, getResources().getText(R.string.near_store).toString());
 		
 		mContentViews.add(view3);
 		mContentViews.add(view1);
