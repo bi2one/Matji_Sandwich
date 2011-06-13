@@ -25,7 +25,7 @@ public class SharedMatjiData {
 	}
 	
 	public void push(MatjiData data) {
-		Log.d("Matji", "PUSH" + data.toString());
+		Log.d("Matji", "PUSH");
 		stack.push(data);
 	}
 	
