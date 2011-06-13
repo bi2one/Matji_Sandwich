@@ -25,19 +25,18 @@ public class SharedMatjiData {
 	}
 	
 	public void push(MatjiData data) {
-		Log.d("Matji", "PUSH" + data.toString());
+		Log.d("Matji", "PUSH");
 		stack.push(data);
 	}
 	
 	public MatjiData pop() {
+		Log.d("Matji", "POP");
 		return stack.pop();
 	}
 	
 	public MatjiData top() {
 		MatjiData data = stack.lastElement();
 		Log.d("Matji", "TOP" + data.toString());
-		
-
 		return stack.lastElement();
 	}
 }

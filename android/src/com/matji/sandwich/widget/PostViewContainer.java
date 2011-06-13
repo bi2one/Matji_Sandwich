@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
@@ -85,14 +86,11 @@ public class PostViewContainer extends ViewContainer implements OnClickListener 
 
 	protected void gotoUserPage(Post post) {
 		Intent intent = new Intent(context, UserTabActivity.class);
-		intent.putExtra("user", (Parcelable)post.getUser());
-		context.startActivity(intent);
+		((BaseActivity) context).startActivityWithMatjiData(intent, post.getUser());
 	}	
 
 	protected void gotoStorePage(Post post) {
 		Intent intent = new Intent(context, StoreTabActivity.class);
-
-		intent.putExtra("store", (Parcelable)post.getStore());
-		context.startActivity(intent);
+		((BaseActivity) context).startActivityWithMatjiData(intent, post.getStore());
 	}
 }
