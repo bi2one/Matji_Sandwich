@@ -1,9 +1,7 @@
 package com.matji.sandwich;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.location.LocationListener;
 import android.location.Location;
 import android.widget.Toast;
 

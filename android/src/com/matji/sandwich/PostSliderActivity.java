@@ -68,8 +68,6 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		view2.setActivity(this);
 		view3.setActivity(this);
 		
-		initPages();
-		
 		swipeView.addOnScrollListener(this);
 	}
 	
@@ -83,6 +81,8 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 			// add private lists
 			addPrivateStoreList();
 			privateMode = true;
+		} else {
+			initPages();
 		}
 	}
 

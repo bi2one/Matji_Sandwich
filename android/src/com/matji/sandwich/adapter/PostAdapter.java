@@ -9,7 +9,6 @@ import com.matji.sandwich.http.util.TimeStamp;
 import com.matji.sandwich.widget.PostListView;
 
 import android.content.Context;
-import android.util.*;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;

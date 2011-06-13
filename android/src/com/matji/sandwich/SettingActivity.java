@@ -4,11 +4,9 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.*;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;

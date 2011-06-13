@@ -2,7 +2,6 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 public class IntroActivity extends BaseActivity {

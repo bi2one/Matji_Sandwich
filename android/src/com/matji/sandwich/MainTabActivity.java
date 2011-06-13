@@ -1,13 +1,9 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
-import com.matji.sandwich.session.*;
 
-import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.*;
-import android.view.*;
 import android.widget.TabHost;
 
 public class MainTabActivity extends BaseTabActivity {

@@ -13,7 +13,6 @@ import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.UserHttpRequest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -67,7 +66,7 @@ public class GridGalleryActivity extends BaseActivity implements Requestable {
 			((AttachFileHttpRequest) request).actionStoreList(id);
 			break;
 		case USERS:
-			((UserHttpRequest) request).actionShow(id, false, true);
+			((UserHttpRequest) request).actionShow(id);
 			break;
 		}
 

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -66,22 +65,22 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 		view2.setActivity(this);
 		view3.setActivity(this);
 		
-		initPages();
-		
 		swipeView.addOnScrollListener(this);		
 		
 	}
 
 	public void onResume(){
 		super.onResume();
-		if(session.getToken() == null && privateMode == true){
+		if (session.getToken() == null && privateMode == true){
 			// remove private lists
 			removePrivateStoreList();
 			privateMode = false;
-		}else if (session.getToken() != null && privateMode == false) {
+		} else if (session.getToken() != null && privateMode == false) {
 			// add private lists
 			addPrivateStoreList();
 			privateMode = true;
+		} else {
+			initPages();
 		}
 	}
 	

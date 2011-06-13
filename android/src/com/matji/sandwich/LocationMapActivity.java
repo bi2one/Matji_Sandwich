@@ -1,9 +1,7 @@
 package com.matji.sandwich;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-import com.google.android.maps.MapActivity;
 import com.matji.sandwich.base.BaseMapActivity;
 
 public class LocationMapActivity extends BaseMapActivity {

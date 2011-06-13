@@ -63,5 +63,4 @@ public class BaseMapActivity extends MapActivity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

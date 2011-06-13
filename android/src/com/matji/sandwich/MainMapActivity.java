@@ -3,16 +3,10 @@ package com.matji.sandwich;
 import android.content.Context;
 import android.os.Bundle;
 import android.location.Location;
-import android.util.Log;
-import android.view.MotionEvent;
 
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapView;
-
-import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.exception.MatjiException;

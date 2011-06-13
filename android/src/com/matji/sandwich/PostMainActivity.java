@@ -1,6 +1,5 @@
 package com.matji.sandwich;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -11,7 +10,6 @@ import com.matji.sandwich.widget.CommentListView;
 import com.matji.sandwich.widget.PostViewContainer;
 
 public class PostMainActivity extends MainActivity {
-	private Intent intent;
 	private Post post;
 	private User user;
 	private Store store;
@@ -34,7 +32,6 @@ public class PostMainActivity extends MainActivity {
 	}
 	
 	public void initInfo() {
-		intent = getIntent();
 		post = (Post) SharedMatjiData.getInstance().top();
 		user = post.getUser();
 		store = post.getStore();

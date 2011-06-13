@@ -1,17 +1,13 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.app.Activity;
 import android.content.Intent;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
-import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.SwipeView;
 
 public class ImageSliderActivity extends BaseActivity implements OnScrollListener {

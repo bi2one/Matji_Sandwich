@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.Notice;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.*;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 public class NoticeActivity extends BaseActivity implements Requestable {
