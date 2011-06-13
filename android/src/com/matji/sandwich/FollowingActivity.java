@@ -31,4 +31,8 @@ public class FollowingActivity extends BaseActivity {
 		listView.setActivity(this);
 		listView.requestReload();
 	}
+	
+	public void finish() {
+		super.finishWithMatjiData();
+	}
 }

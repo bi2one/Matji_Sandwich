@@ -30,14 +30,13 @@ public class SharedMatjiData {
 	}
 	
 	public MatjiData pop() {
+		Log.d("Matji", "POP");
 		return stack.pop();
 	}
 	
 	public MatjiData top() {
 		MatjiData data = stack.lastElement();
 		Log.d("Matji", "TOP" + data.toString());
-		
-
 		return stack.lastElement();
 	}
 }
