@@ -108,6 +108,7 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
+    	getHashtable.put("include", "user");
     }
     
     
@@ -129,11 +130,13 @@ public class PostHttpRequest extends HttpRequest {
     public void actionSearch(String keyword, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "search";
+    	parser = new PostParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("q", keyword);
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
+    	getHashtable.put("include", "user");
     }
     
     public ArrayList<MatjiData> request() throws MatjiException {

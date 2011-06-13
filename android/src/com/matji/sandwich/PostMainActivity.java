@@ -19,7 +19,7 @@ public class PostMainActivity extends MainActivity {
 	private PostViewContainer header;
 	private TextView tagsText;
 	private CommentListView commentListView;
-
+		
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_main);
@@ -27,28 +27,28 @@ public class PostMainActivity extends MainActivity {
 		initInfo();		
 	}
 	
-//	public void onResume() {
-//		super.onResume();
-//		setInfo();
-//	}
+	public void onResume() {
+		super.onResume();
+		
+		setInfo();
+	}
 	
 	public void initInfo() {
 		intent = getIntent();
-		post = (Post) intent.getParcelableExtra("post");
+		post = (Post) SharedMatjiData.getInstance().top();
 		user = post.getUser();
 		store = post.getStore();
 		
 		header = new PostViewContainer(this, post, user, store);
 		commentListView = (CommentListView) findViewById(R.id.post_main_comment_list_view);
-		commentListView.addHeaderView(header);
 		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);
 		commentListView.requestReload();
 	}
 
 	public void setInfo() {
-		//TODO
-//		tags = (TextView) findViewById(R.id.post_main_tag_area);
-//		commentListView.requestReload();
+		commentListView.getHeaderViewContainer().removeView(header.getRootView());
+		commentListView.addHeaderView(header);
+		commentListView.requestReload();
 	}
 }

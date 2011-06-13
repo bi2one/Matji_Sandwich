@@ -14,6 +14,7 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
+import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
@@ -23,7 +24,7 @@ import com.matji.sandwich.map.MatjiMapCenterListener;
 
 import java.util.List;
 
-public class MainMapActivity extends MapActivity implements MatjiLocationListener, MatjiMapCenterListener {
+public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener, MatjiMapCenterListener {
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
     

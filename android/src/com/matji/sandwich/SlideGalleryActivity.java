@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import com.matji.sandwich.adapter.GridImageAdapter;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -19,7 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Gallery;
 
-public class SlideGalleryActivity extends Activity implements Requestable {
+public class SlideGalleryActivity extends BaseActivity implements Requestable {
 	private Intent intent; 
 	private HttpRequest request;
 	private HttpRequestManager manager;

@@ -119,6 +119,7 @@ public class ImageDownloader {
         }
 
         if (cancelPotentialDownload(url, imageView)) {
+        	Log.d("ImageDownloader", "Image download from web , url : " + url);
             switch (mode) {
                 case NO_ASYNC_TASK:
                     Bitmap bitmap = downloadBitmap(url);
@@ -362,9 +363,14 @@ public class ImageDownloader {
     private static final int DELAY_BEFORE_PURGE = 10 * 1000; // in milliseconds
 
     // Hard cache, with a fixed maximum capacity and a life duration
-    private final HashMap<String, Bitmap> sHardBitmapCache =
+    private static final HashMap<String, Bitmap> sHardBitmapCache =
         new LinkedHashMap<String, Bitmap>(HARD_CACHE_CAPACITY / 2, 0.75f, true) {
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         protected boolean removeEldestEntry(LinkedHashMap.Entry<String, Bitmap> eldest) {
             if (size() > HARD_CACHE_CAPACITY) {
                 // Entries push-out of hard reference cache are transferred to soft reference cache
@@ -374,7 +380,8 @@ public class ImageDownloader {
                 return false;
         }
     };
-
+    
+    
     // Soft cache for bitmaps kicked out of hard cache
     private final static ConcurrentHashMap<String, SoftReference<Bitmap>> sSoftBitmapCache =
         new ConcurrentHashMap<String, SoftReference<Bitmap>>(HARD_CACHE_CAPACITY / 2);
@@ -395,6 +402,7 @@ public class ImageDownloader {
         if (bitmap != null) {
             synchronized (sHardBitmapCache) {
                 sHardBitmapCache.put(url, bitmap);
+                Log.d("ImageDownloader", "Bitmap added to HardBitmapCache, size is " + sHardBitmapCache.size());
             }
         }
     }
@@ -406,6 +414,7 @@ public class ImageDownloader {
     private Bitmap getBitmapFromCache(String url) {
         // First try the hard reference cache
         synchronized (sHardBitmapCache) {
+        	Log.d("ImageDownloader", "HardBitMapCache Size : " + sHardBitmapCache.size());
             final Bitmap bitmap = sHardBitmapCache.get(url);
             if (bitmap != null) {
                 // Bitmap found in hard cache
@@ -437,7 +446,8 @@ public class ImageDownloader {
      * efficiency reasons, the cache will automatically be cleared after a certain inactivity delay.
      */
     public void clearCache() {
-        sHardBitmapCache.clear();
+    	Log.d("ImageDownloader", "ClearCache!!");
+        //sHardBitmapCache.clear();
         sSoftBitmapCache.clear();
     }
 

@@ -1,17 +1,16 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.GridGalleryActivity.AttachFileType;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.Store;
 
-import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.widget.TabHost;
 
-public class StoreTabActivity extends TabActivity{
+public class StoreTabActivity extends BaseTabActivity {
 	private TabHost tabHost;
-	private Intent intent;
 	private Intent mainIntent;
 	private Intent postIntent;
 	private Intent menuIntent;
@@ -30,8 +29,7 @@ public class StoreTabActivity extends TabActivity{
 		super.onCreate(savedInstanceState);
 
 		tabHost = getTabHost();
-		intent = getIntent();
-		store = intent.getParcelableExtra("store");
+		store = (Store) (SharedMatjiData.getInstance().top());
 
 		createIntent();
 		setTabHost();
@@ -39,7 +37,6 @@ public class StoreTabActivity extends TabActivity{
 
 	private void createIntent() {
 		mainIntent = new Intent(this, StoreMainActivity.class);
-		mainIntent.putExtra("store", (Parcelable)store);
 		postIntent = new Intent(this, StorePostActivity.class);
 		postIntent.putExtra("store_id", store.getId());
 		menuIntent = new Intent(this, StoreMoreActivity.class);
@@ -68,13 +65,6 @@ public class StoreTabActivity extends TabActivity{
 	}
 	
 	public void finish() {
-		Intent data = new Intent();
-		data.putExtra("store", (Parcelable) store);
-	    setResult(RESULT_OK, data);
-	    super.finish();
-	}
-	
-	protected void syncStore(Store store) {
-		this.store = store;
+		super.finishWithMatjiData();
 	}
 }

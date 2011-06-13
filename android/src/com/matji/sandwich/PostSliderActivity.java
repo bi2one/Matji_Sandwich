@@ -1,7 +1,8 @@
 package com.matji.sandwich;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
@@ -10,59 +11,111 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.content.Intent;
 
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.PostViewContainer;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.PostNearListView;
+import com.matji.sandwich.widget.PostSearchView;
+import com.matji.sandwich.widget.MyPostListView;
 import com.matji.sandwich.widget.PagerControl;
 import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
-import com.matji.sandwich.widget.ViewContainer;
 
-import java.util.ArrayList;
+public class PostSliderActivity extends BaseActivity implements OnScrollListener {
 
-public class PostSliderActivity extends Activity implements OnScrollListener {
-	private int[] pagerControlStringRef;
 	private SwipeView swipeView;
-	private PostListView view1;
-	private PostNearListView view2;
+	private PostSearchView view1;
+	private PostListView view2;
+	private PostNearListView view3;
+	private MyPostListView view4;
 	private Context mContext;
 	private ArrayList<View> mContentViews;
 	private int mCurrentPage;
 	private PagerControl control;
+	private Session session;
+	private boolean privateMode;
+	private static final int mDefaultPage = 1;
+	
 	public static final int LOGIN_ACTIVITY = 1;
 	public static final int WRITE_POST_ACTIVITY = 2;
 
-	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_slider);
+		session = Session.getInstance(this);
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
-		mCurrentPage = 0;
-		
-		pagerControlStringRef = new int[] { R.string.all_store, R.string.near_store, R.string.all_memo };
-
+		privateMode = false;
+			
 		control = (PagerControl) findViewById(R.id.PagerControl);
-		swipeView = (SwipeView) findViewById(R.id.SwipeView);
-		view1 = (PostListView) findViewById(R.id.ListView1);
-		view2 = (PostNearListView) findViewById(R.id.ListView2);
+		control.setContentViews(mContentViews);
 		
+		swipeView = (SwipeView) findViewById(R.id.SwipeView);
+		view1 = (PostSearchView) findViewById(R.id.ListView1);
+		view2 = (PostListView) findViewById(R.id.ListView2);
+		view3 = (PostNearListView) findViewById(R.id.ListView3);
+		
+		view1.setTag(R.string.title, getResources().getText(R.string.search_post).toString());
+		view2.setTag(R.string.title, getResources().getText(R.string.all_post).toString());
+		view3.setTag(R.string.title, getResources().getText(R.string.near_post).toString());
+
 		mContentViews.add(view1);
 		mContentViews.add(view2);
+		mContentViews.add(view3);
 		
 		view1.setActivity(this);
-		view1.requestReload();
 		view2.setActivity(this);
+		view3.setActivity(this);
 		
-		control.start(this);
-		control.setNumPages(swipeView.getChildCount());
-		control.setViewNames(pagerControlStringRef);
-
+		initPages();
+		
 		swipeView.addOnScrollListener(this);
 	}
 	
+	public void onResume() {
+		super.onResume();
+		if(session.getToken() == null && privateMode == true){
+			// remove private lists
+			removePrivateStoreList();
+			privateMode = false;
+		}else if (session.getToken() != null && privateMode == false) {
+			// add private lists
+			addPrivateStoreList();
+			privateMode = true;
+		}
+	}
+
+	private void initPages(){
+		mCurrentPage = mDefaultPage;
+		
+		control.start(this);
+		control.setNumPages(mContentViews.size());
+		control.setCurrentPage(mCurrentPage);
+		swipeView.setCurrentPage(mCurrentPage);
+		((RequestableMListView)mContentViews.get(mCurrentPage)).requestConditionally();
+	}
+	
+	private void addPrivateStoreList() {
+		if (view4 == null) {
+			view4 = new MyPostListView(this, null);
+			Session session = Session.getInstance(mContext);
+			view4.setUserId(session.getCurrentUser().getId());
+			view4.setTag(R.string.title, getResources().getString(R.string.my_post).toString());
+			view4.setActivity(this);
+		}
+		swipeView.addView(view4);
+		mContentViews.add(view4);
+		
+		initPages();
+	}
+
+	private void removePrivateStoreList() {
+		swipeView.removeViewInLayout(view4);
+		mContentViews.remove(view4);
+		initPages();
+	}
+
 	public void onScroll(int scrollX) {
 	}
 

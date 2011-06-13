@@ -22,6 +22,7 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,7 +31,6 @@ import android.widget.TextView;
 
 public class StoreMainActivity extends MainActivity implements Requestable {
 	private TabHost tabHost;
-	private Intent intent;
 	private Store store;
 
 	private HttpRequestManager manager;
@@ -71,8 +71,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	
 	public void initInfo() {
 		tabHost = ((TabActivity) getParent()).getTabHost();
-		intent = getIntent();
-		store = (Store) intent.getParcelableExtra("store");
+		store = (Store) SharedMatjiData.getInstance().top();
 
 		manager = new HttpRequestManager(this, this);
 		session = Session.getInstance(this);
@@ -151,7 +150,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		imageButton.setText(getCountNumberOf(R.string.default_string_image, store.getImageCount()));
 		tagButton.setText(getCountNumberOf(R.string.default_string_tag, store.getTagCount()));	
 		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
-		((StoreTabActivity)getParent()).syncStore(store);
 	}
 
 	private void bookmarkRequest() {

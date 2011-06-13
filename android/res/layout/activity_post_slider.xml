@@ -28,12 +28,16 @@
 		android:id="@+id/SwipeView" 
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
-		<com.matji.sandwich.widget.PostListView
+		<com.matji.sandwich.widget.PostSearchView
 			android:id="@+id/ListView1" 
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent" />
-		<com.matji.sandwich.widget.PostNearListView
+		<com.matji.sandwich.widget.PostListView
 			android:id="@+id/ListView2" 
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+		<com.matji.sandwich.widget.PostNearListView
+			android:id="@+id/ListView3" 
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent" />
 	</com.matji.sandwich.widget.SwipeView>

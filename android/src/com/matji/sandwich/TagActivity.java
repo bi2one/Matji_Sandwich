@@ -1,10 +1,11 @@
 package com.matji.sandwich;
 
-import android.app.Activity;
+import com.matji.sandwich.base.BaseActivity;
+
 import android.os.Bundle;
 import android.widget.*;
 
-public class TagActivity extends Activity{
+public class TagActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 

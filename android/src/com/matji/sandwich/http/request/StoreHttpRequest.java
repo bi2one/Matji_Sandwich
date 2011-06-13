@@ -20,6 +20,18 @@ public class StoreHttpRequest extends HttpRequest {
     	controller = "stores";
     }
 
+    public void actionSearch(String keyword, int page, int limit) {
+    	httpMethod = HttpMethod.HTTP_GET;
+    	action = "search";
+    	parser = new StoreParser(context);
+    	
+    	getHashtable.clear();
+    	getHashtable.put("q",keyword);
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + ""); 
+    	getHashtable.put("include", "attach_file,user,tag");
+    }
+    
     public void actionCount(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String type){
     	httpMethod = HttpMethod.HTTP_GET;
     	action="count";
@@ -90,19 +102,22 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("lng_ne", lng_ne + "");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user");
+    	getHashtable.put("include", "attach_file,user,tag");
     	
     }
     
-    public void actionBookmarkedList(){
+    public void actionBookmarkedList(int user_id, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "bookmarked_list";
     	parser = new StoreParser(context);
 
     	getHashtable.clear();
-    	getHashtable.put("include", "attach_file,user");
+    	getHashtable.put("user_id", user_id+ "");
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
+    	getHashtable.put("include", "attach_file,user,tag");
     }
-    
+
     public void actionDetailList(int store_id, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "detail_list";

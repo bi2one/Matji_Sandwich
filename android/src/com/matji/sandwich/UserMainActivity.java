@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 public class UserMainActivity extends MainActivity implements Requestable {
 	private TabHost tabHost;
-	private Intent intent;
 	private User user;
 
 	private HttpRequestManager manager;
@@ -43,14 +42,9 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private Button followingButton;
 	
 	private Button jjimStoreButton;
-//	private Button activityAreaButton;
 	private Button memoButton;
-//	private Button imageButton;
-//	private Button tagButton;
-//	private Button urlButton;
-//	private Button sentMessageButton;
-//	private Button recievedMessageButton;
-
+	
+	/* request tags */
 	private static final int FOLLOW_REQUEST = 1;
 	private static final int UN_FOLLOW_REQUEST = 2;
 
@@ -63,13 +57,13 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	public void onResume() {
 		super.onResume();
+		
 		followButton.setClickable(true);		
 	}
 	
 	public void initInfo() {
 		tabHost = ((TabActivity) getParent()).getTabHost();
-		intent = getIntent();
-		user = intent.getParcelableExtra("user");
+		user = (User) SharedMatjiData.getInstance().top();
 
 		manager = new HttpRequestManager(this, this);
 		session = Session.getInstance(this);

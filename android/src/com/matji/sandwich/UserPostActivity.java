@@ -1,12 +1,13 @@
 package com.matji.sandwich;
 
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.UserPostListView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class UserPostActivity extends Activity {
+public class UserPostActivity extends BaseActivity {
 	private Intent intent;
 	private int user_id;		
 	private UserPostListView listView;

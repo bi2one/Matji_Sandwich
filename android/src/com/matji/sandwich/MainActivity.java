@@ -1,10 +1,9 @@
 package com.matji.sandwich;
 
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 
-import android.app.Activity;
-
-public abstract class MainActivity extends Activity {
+public abstract class MainActivity extends BaseActivity {
 	protected MatjiImageDownloader downloader = new MatjiImageDownloader();
 	
 	public abstract void initInfo();

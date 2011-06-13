@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -13,6 +12,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.PostAdapter;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.exception.MatjiException;
@@ -45,8 +45,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		Post post = (Post) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), PostMainActivity.class);
 
-		intent.putExtra("post", (Parcelable) post);
-		getActivity().startActivity(intent);
+		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post);
 	}
 
 
@@ -67,15 +66,11 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	
 	protected void gotoUserPage(Post post) {
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
-
-		intent.putExtra("user", (Parcelable)post.getUser());
-		getActivity().startActivity(intent);
+		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getUser());
 	}	
 	
 	protected void gotoStorePage(Post post) {
 		Intent intent = new Intent(getActivity(), StoreTabActivity.class);
-
-		intent.putExtra("store", (Parcelable)post.getStore());
-		getActivity().startActivity(intent);
+		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getStore());
 	}
 }

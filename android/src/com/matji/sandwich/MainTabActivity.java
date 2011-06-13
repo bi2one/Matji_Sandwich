@@ -1,5 +1,6 @@
 package com.matji.sandwich;
 
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.session.*;
 
 import android.app.TabActivity;
@@ -9,7 +10,7 @@ import android.util.*;
 import android.view.*;
 import android.widget.TabHost;
 
-public class MainTabActivity extends TabActivity {
+public class MainTabActivity extends BaseTabActivity {
     private TabHost tabHost;
 	
     public void onCreate(Bundle savedInstanceState){
@@ -34,8 +35,4 @@ public class MainTabActivity extends TabActivity {
 		       .setIndicator("설정")
 		       .setContent(new Intent(this, SettingActivity.class)));
     }
-    
-
-
-
 }

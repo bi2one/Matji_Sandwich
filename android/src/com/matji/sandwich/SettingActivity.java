@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
 
 import android.app.Activity;
@@ -13,7 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class SettingActivity extends Activity implements OnClickListener {
+public class SettingActivity extends BaseActivity implements OnClickListener {
 	private Button signin;
 	private Button signout; 
 	private Button signup;

@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.android.maps.MapActivity;
+import com.matji.sandwich.base.BaseMapActivity;
 
-public class LocationMapActivity extends MapActivity{
+public class LocationMapActivity extends BaseMapActivity {
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);

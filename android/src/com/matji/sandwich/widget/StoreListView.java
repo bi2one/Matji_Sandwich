@@ -2,19 +2,17 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.StoreSliderActivity;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 
 public class StoreListView extends RequestableMListView {
 	private HttpRequest request;
-	private int nowPosition;
 
 	public StoreListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new StoreAdapter(context), 10);
@@ -29,15 +27,11 @@ public class StoreListView extends RequestableMListView {
 	}
 
 	public void onListItemClick(int position) {
-		nowPosition = position;
-		Store store = (Store) getAdapterData().get(nowPosition);
+		Store store = (Store) getAdapterData().get(position);
+		
 		Intent intent = new Intent(getActivity(), StoreTabActivity.class);
 
-		intent.putExtra("store", (Parcelable) store);
-		getActivity().startActivityForResult(intent, StoreSliderActivity.STORE_TAB);
-	}
-	
-	public void syncStore(Store store) {
-		getAdapterData().set(nowPosition, store);
+		BaseActivity act = (BaseActivity)getActivity();
+		act.startActivityWithMatjiData(intent, store);		
 	}
 }

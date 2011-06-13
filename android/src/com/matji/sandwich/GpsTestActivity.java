@@ -7,11 +7,12 @@ import android.location.LocationListener;
 import android.location.Location;
 import android.widget.Toast;
 
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 
-public class GpsTestActivity extends Activity implements MatjiLocationListener {
+public class GpsTestActivity extends BaseActivity implements MatjiLocationListener {
     private GpsManager gpsManager;
     
     public void onCreate(Bundle savedInstanceState) {

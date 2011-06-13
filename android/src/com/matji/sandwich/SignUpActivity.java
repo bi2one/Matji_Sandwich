@@ -1,11 +1,13 @@
 package com.matji.sandwich;
 
+import com.matji.sandwich.base.BaseActivity;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class SignUpActivity extends Activity {
+public class SignUpActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		

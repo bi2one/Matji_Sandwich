@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.GridGalleryActivity.AttachFileType;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
 
 import android.app.TabActivity;
@@ -9,7 +10,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.widget.TabHost;
 
-public class UserTabActivity extends TabActivity {
+public class UserTabActivity extends BaseTabActivity {
 	private TabHost tabHost;
 	private Intent intent;
 	private Intent mainIntent;
@@ -30,7 +31,7 @@ public class UserTabActivity extends TabActivity {
 		
 		tabHost = getTabHost();
 		intent = getIntent();
-		user = intent.getParcelableExtra("user");
+		user = (User) SharedMatjiData.getInstance().top();
 		
 		createIntent();
 		setTabHost();
@@ -38,7 +39,6 @@ public class UserTabActivity extends TabActivity {
 
 	private void createIntent() {
 		mainIntent = new Intent(this, UserMainActivity.class);
-		mainIntent.putExtra("user", (Parcelable)user);
 		menuIntent = new Intent(this, StoreMoreActivity.class);
 		postIntent = new Intent(this, UserPostActivity.class);
 		postIntent.putExtra("user_id", user.getId());
@@ -72,9 +72,6 @@ public class UserTabActivity extends TabActivity {
 	
 
 	public void finish() {
-		Intent data = new Intent();
-		data.putExtra("user", (Parcelable) user);
-	    setResult(RESULT_OK, data);
-	    super.finish();
+	    super.finishWithMatjiData();
 	}
 }

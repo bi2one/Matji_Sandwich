@@ -1,9 +1,10 @@
 package com.matji.sandwich;
 
-import android.app.Activity;
+import com.matji.sandwich.base.BaseActivity;
+
 import android.os.Bundle;
 
-public class UrlActivity extends Activity{
+public class UrlActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
