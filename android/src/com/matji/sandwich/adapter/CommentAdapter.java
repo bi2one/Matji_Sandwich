@@ -8,6 +8,7 @@ import com.matji.sandwich.http.util.TimeStamp;
 import com.matji.sandwich.widget.CommentListView;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,7 +25,6 @@ public class CommentAdapter extends MBaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		CommentElement commentElement;
 		Comment comment = (Comment) data.get(position);
-
 		if (convertView == null) {
 			commentElement = new CommentElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_comment, null);

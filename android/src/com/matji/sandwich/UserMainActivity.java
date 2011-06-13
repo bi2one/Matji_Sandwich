@@ -10,9 +10,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.FollowingListView;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -130,6 +128,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 //		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
 //		sentMessageButton.setText(getCountNumberOf(R.string.default_string_sent_message, 0));
 //		recievedMessageButton.setText(getCountNumberOf(R.string.default_string_recieved_message,0));
+		((UserTabActivity)getParent()).syncUser(user);
 	}
 
 	private void followRequest() {

@@ -82,7 +82,7 @@ public class HttpRequestManager {
     }
 
     private void onRequestData(int tag) {
-	// Log.d("Request_Test", "on request data!!");
+
 	try {
 	    synchronized(Stack.class) {
 		RequestTagPair pair = requestPool.pop();
@@ -91,9 +91,11 @@ public class HttpRequestManager {
 	} catch(MatjiException e) {
 	    lastOccuredException = e;
 	}
+	 Log.d("refresh", "on request data!!");
     }
 
     private void onPostRequestData(int tag) {
+    	
 	if (lastOccuredException != null){
 	    requestable.requestExceptionCallBack(tag, lastOccuredException);
 	} else {
@@ -102,6 +104,7 @@ public class HttpRequestManager {
 		requestable.requestCallBack(pair.getTag(), pair.getData());
 	    }
 	}
+	
     }
 
     private void startSpinner() {
@@ -128,8 +131,10 @@ public class HttpRequestManager {
 	protected int mId = 0;
 
 	protected Integer doInBackground(Integer... params) {
-	    mId = params[0];
+		Log.d("refresh", "doin " + params.length);
+		mId = params[0];
 	    onRequestData(mId);
+	    Log.d("refresh", "doin end");
 	    return mId;
 	}
 
@@ -138,8 +143,10 @@ public class HttpRequestManager {
 	}
 
 	protected void onPostExecute(Integer result) {
+		Log.d("refresh", "onPostExecute");
 	    stopSpinner();
 	    onPostRequestData(mId);
+	    Log.d("refresh", "onPostExecute end");
 	}
 
 	protected void onPreExecute() {

@@ -23,14 +23,14 @@ public class PostMainActivity extends MainActivity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_main);
-		
-		initInfo();
+
+		initInfo();		
 	}
 	
-	public void onResume() {
-		super.onResume();
-		setInfo();
-	}
+//	public void onResume() {
+//		super.onResume();
+//		setInfo();
+//	}
 	
 	public void initInfo() {
 		intent = getIntent();
@@ -43,14 +43,12 @@ public class PostMainActivity extends MainActivity {
 		commentListView.addHeaderView(header);
 		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);
-		
-		setInfo();
+		commentListView.requestReload();
 	}
 
 	public void setInfo() {
 		//TODO
 //		tags = (TextView) findViewById(R.id.post_main_tag_area);
-		//		TODO
-		commentListView.requestReload();
+//		commentListView.requestReload();
 	}
 }

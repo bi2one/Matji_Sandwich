@@ -11,14 +11,15 @@ import com.matji.sandwich.UserMainActivity;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.UserAdapter;
 import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.UserHttpRequest;
 
 public class UserListView extends RequestableMListView implements View.OnClickListener {
 	private HttpRequest request;
 	private Context context;
+	private int nowPosition;
 
 	public UserListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new UserAdapter(context), 10);
@@ -34,7 +35,8 @@ public class UserListView extends RequestableMListView implements View.OnClickLi
 	}
 
 	public void onListItemClick(int position) {
-		User user = (User) getAdapterData().get(position);
+		nowPosition = position;
+		User user = (User) getAdapterData().get(nowPosition);
 		Intent intent = new Intent(getActivity(), UserMainActivity.class);
 
 		intent.putExtra("user", (Parcelable) user);
@@ -70,5 +72,9 @@ public class UserListView extends RequestableMListView implements View.OnClickLi
 
 		intent.putExtra("store", (Parcelable)post.getStore());
 		getActivity().startActivity(intent);
+	}
+	
+	public void syncStore(Store store) {
+		getAdapterData().set(nowPosition, store);
 	}
 }

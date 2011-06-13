@@ -65,4 +65,16 @@ public class UserTabActivity extends TabActivity {
 				.setIndicator("설정")
 				.setContent(moreIntent));
 	}
+	
+	protected void syncUser(User user) {
+		this.user = user;
+	}
+	
+
+	public void finish() {
+		Intent data = new Intent();
+		data.putExtra("user", (Parcelable) user);
+	    setResult(RESULT_OK, data);
+	    super.finish();
+	}
 }

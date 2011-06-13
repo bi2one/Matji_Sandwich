@@ -66,4 +66,15 @@ public class StoreTabActivity extends TabActivity{
 				.setIndicator("More")
 				.setContent(moreIntent));
 	}
+	
+	public void finish() {
+		Intent data = new Intent();
+		data.putExtra("store", (Parcelable) store);
+	    setResult(RESULT_OK, data);
+	    super.finish();
+	}
+	
+	protected void syncStore(Store store) {
+		this.store = store;
+	}
 }

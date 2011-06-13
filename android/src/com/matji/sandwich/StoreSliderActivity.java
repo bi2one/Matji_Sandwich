@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.*;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.StoreListView;
 import com.matji.sandwich.widget.PagerControl;
 import com.matji.sandwich.widget.StoreNearListView;
-import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 
@@ -26,6 +27,11 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 	private Context mContext;
 	private int mCurrentPage;
 	private ArrayList<View> mContentViews;
+	
+	private static final int STORE_LIST = 0;
+	private static final int STORE_NEAR_LIST = 1;
+	
+	public static final int STORE_TAB = 1;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,4 +87,20 @@ public class StoreSliderActivity extends Activity implements OnScrollListener {
 
 	}
 
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch(requestCode) {
+		case STORE_TAB:
+			if (resultCode == RESULT_OK) {
+				switch (mCurrentPage) {
+				case STORE_LIST:
+					((StoreListView) mContentViews.get(mCurrentPage)).syncStore((Store) data.getParcelableExtra("store"));
+					break;
+				case STORE_NEAR_LIST:
+					((StoreNearListView) mContentViews.get(mCurrentPage)).syncStore((Store) data.getParcelableExtra("store"));
+					break;
+				}
+			}
+		}
+	}
 }

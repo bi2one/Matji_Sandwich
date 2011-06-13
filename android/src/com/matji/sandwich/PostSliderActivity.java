@@ -11,12 +11,14 @@ import android.view.MenuInflater;
 import android.content.Intent;
 
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.PostViewContainer;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.PostNearListView;
 import com.matji.sandwich.widget.PagerControl;
 import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
+import com.matji.sandwich.widget.ViewContainer;
 
 import java.util.ArrayList;
 
