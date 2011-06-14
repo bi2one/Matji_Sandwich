@@ -2,8 +2,8 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
-import android.os.Bundle;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.MenuItem;
@@ -23,7 +23,6 @@ import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 
 public class PostSliderActivity extends BaseActivity implements OnScrollListener {
-
 	private SwipeView swipeView;
 	private PostSearchView view1;
 	private PostListView view2;
@@ -35,14 +34,17 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	private PagerControl control;
 	private Session session;
 	private boolean privateMode;
-	private static final int mDefaultPage = 1;
 	
+	private static final int mDefaultPage = 1;
 	public static final int LOGIN_ACTIVITY = 1;
 	public static final int WRITE_POST_ACTIVITY = 2;
 
-	public void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_slider);
+		
 		session = Session.getInstance(this);
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
@@ -69,6 +71,11 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		view3.setActivity(this);
 		
 		swipeView.addOnScrollListener(this);
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 	
 	public void onResume() {

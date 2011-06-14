@@ -5,9 +5,6 @@ import com.matji.sandwich.http.util.MatjiImageDownloader;
 
 public abstract class MainActivity extends BaseActivity {
 	protected MatjiImageDownloader downloader = new MatjiImageDownloader();
-	
-	public abstract void initInfo();
-	public abstract void setInfo();
 
 	public String getCount(int id, int count) {
 		return getString(id) + ": " + count;

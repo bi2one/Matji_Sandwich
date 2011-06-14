@@ -39,10 +39,11 @@ public class GridGalleryActivity extends BaseActivity implements Requestable {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_grid_gallery);
-
+		
 		intent = getIntent();
 		type = (AttachFileType) intent.getSerializableExtra(ATTACH_FILE_TYPE);
 		switch (type) {
@@ -60,6 +61,11 @@ public class GridGalleryActivity extends BaseActivity implements Requestable {
 		manager.request(this, request(), IMAGE_REQUEST);
 	}
 
+	@Override
+	protected String usedTitleBar() {
+		return null;
+	}
+
 	public HttpRequest request() {
 		switch (type) {
 		case STORES:
@@ -75,7 +81,6 @@ public class GridGalleryActivity extends BaseActivity implements Requestable {
 
 	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		// TODO Auto-generated method stub		
 		/* Set AttachFile ID */
 		switch (type) {
 		case STORES:

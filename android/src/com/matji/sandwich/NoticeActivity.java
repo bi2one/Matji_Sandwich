@@ -14,12 +14,20 @@ public class NoticeActivity extends BaseActivity implements Requestable {
 	private static final int NOTICE_REQUEST = 1 ;
 	HttpRequestManager manager;
 	private NoticeHttpRequest noticeHttpRequest;
-	
-	public void onCreate(Bundle savedInstanceState){
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
 		manager = new HttpRequestManager(getApplicationContext(), this);
-		request();
+		request();		
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return "NoticeActivity";
 	}
 	
 	private void request() {

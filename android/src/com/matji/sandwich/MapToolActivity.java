@@ -5,14 +5,19 @@ import android.os.Bundle;
 import com.matji.sandwich.base.BaseMapActivity;
 
 public class MapToolActivity extends BaseMapActivity {
-    /** Called when the activity is first created. */
-    public void onCreate(Bundle savedInstanceState){
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.main);
-    }
-
-        protected boolean isRouteDisplayed() {
-	return true;
-    }
-
+	@Override
+	protected void onCreate(Bundle icicle) {
+		// TODO Auto-generated method stub
+		super.onCreate(icicle);
+		setContentView(R.layout.main);
+	}
+	
+	@Override
+	protected String usedTitleBar() {
+		return null;
+	}
+	
+	protected boolean isRouteDisplayed() {
+		return true;
+	}
 }

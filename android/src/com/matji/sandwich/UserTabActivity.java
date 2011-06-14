@@ -22,18 +22,20 @@ public class UserTabActivity extends BaseTabActivity {
 	public static final int MEMO_PAGE = 2;
 	public static final int IMAGE_PAGE = 3;
 	public static final int SETTING_PAGE = 4;
-	
-	public void onCreate(Bundle savedInstanceState){
+
+	public void finish() {
+	    super.finishWithMatjiData();
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_tab);
 		
 		tabHost = getTabHost();
 		user = (User) SharedMatjiData.getInstance().top();
 		
-		createIntent();
-		setTabHost();
-	}
-
-	private void createIntent() {
 		mainIntent = new Intent(this, UserMainActivity.class);
 		storeListIntent = new Intent(this, UserStoreListActivity.class);
 		storeListIntent.putExtra("user_id", user.getId());
@@ -43,9 +45,7 @@ public class UserTabActivity extends BaseTabActivity {
 		imageIntent.putExtra(GridGalleryActivity.ATTACH_FILE_TYPE, AttachFileType.USERS);
 		imageIntent.putExtra("user_id", user.getId());
 		moreIntent = new Intent(this, StoreMoreActivity.class);
-	}
-	
-	private void setTabHost() {
+
 		tabHost.addTab(tabHost.newTabSpec("main")
 				.setIndicator("메인")
 				.setContent(mainIntent));
@@ -63,12 +63,9 @@ public class UserTabActivity extends BaseTabActivity {
 				.setContent(moreIntent));
 	}
 	
-	protected void syncUser(User user) {
-		this.user = user;
+	@Override
+	protected String usedTitleBar() {
+		return "UserTabActivity";
 	}
-	
 
-	public void finish() {
-	    super.finishWithMatjiData();
-	}
 }

@@ -2,8 +2,8 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
 	android:id="@+id/layout_main">
 	<TabHost
 		style="@style/DefaultFill"
@@ -13,11 +13,12 @@
 			<TabWidget
 				style="@style/DefaultWidthFill"
 				android:id="@android:id/tabs"
-				android:layout_alignParentTop="true" />
+				android:layout_alignParentBottom="true" />
 			<FrameLayout
 				style="@style/DefaultFill"
 				android:id="@android:id/tabcontent"
-				android:layout_below="@android:id/tabs" />
+				android:layout_above="@android:id/tabs"
+				android:layout_weight="1" />
 		</RelativeLayout>
 	</TabHost>
 </LinearLayout>

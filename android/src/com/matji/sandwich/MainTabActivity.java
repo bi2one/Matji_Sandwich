@@ -7,28 +7,34 @@ import android.os.Bundle;
 import android.widget.TabHost;
 
 public class MainTabActivity extends BaseTabActivity {
-    private TabHost tabHost;
-	
-    public void onCreate(Bundle savedInstanceState){
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_main_tab);
-	
-	tabHost = getTabHost();
+	private TabHost tabHost;
 
-	tabHost.addTab(tabHost.newTabSpec("tab1")
-		       .setIndicator(getString(R.string.default_string_map))
-		       .setContent(new Intent(this, MainMapActivity.class)));
-    
-	tabHost.addTab(tabHost.newTabSpec("tab2")
-		       .setIndicator(getString(R.string.default_string_store))
-		       .setContent(new Intent(this, StoreSliderActivity.class)));
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_tab);
+		tabHost = getTabHost();
 
-	tabHost.addTab(tabHost.newTabSpec("tab3")
-		       .setIndicator(getString(R.string.default_string_memo))
-		       .setContent(new Intent(this, PostSliderActivity.class)));
+		tabHost.addTab(tabHost.newTabSpec("tab1")
+				.setIndicator(getString(R.string.default_string_map))
+				.setContent(new Intent(this, MainMapActivity.class)));
 
-	tabHost.addTab(tabHost.newTabSpec("tab4")
-		       .setIndicator("설정")
-		       .setContent(new Intent(this, SettingActivity.class)));
-    }
+		tabHost.addTab(tabHost.newTabSpec("tab2")
+				.setIndicator(getString(R.string.default_string_store))
+				.setContent(new Intent(this, StoreSliderActivity.class)));
+
+		tabHost.addTab(tabHost.newTabSpec("tab3")
+				.setIndicator(getString(R.string.default_string_memo))
+				.setContent(new Intent(this, PostSliderActivity.class)));
+
+		tabHost.addTab(tabHost.newTabSpec("tab4")
+				.setIndicator("설정")
+				.setContent(new Intent(this, SettingActivity.class)));
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return "MainTabActivity";
+	}
 }

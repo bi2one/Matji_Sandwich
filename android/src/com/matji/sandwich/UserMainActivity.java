@@ -48,20 +48,12 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private static final int FOLLOW_REQUEST = 1;
 	private static final int UN_FOLLOW_REQUEST = 2;
 
-	public void onCreate(Bundle savedInstanceState){
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_main);
-
-		initInfo();
-	}
-
-	public void onResume() {
-		super.onResume();
-
-		followButton.setClickable(true);		
-	}
-
-	public void initInfo() {
+		
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		user = (User) SharedMatjiData.getInstance().top();
 		manager = new HttpRequestManager(this, this);
@@ -96,7 +88,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		setInfo();
 	}
 
-	public void setInfo() {
+	private void setInfo() {
 		/* Set Grade */
 		gradeText.setText("다이아몬드"); // TODO		
 
@@ -121,8 +113,20 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		//		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
 		//		sentMessageButton.setText(getCountNumberOf(R.string.default_string_sent_message, 0));
 		//		recievedMessageButton.setText(getCountNumberOf(R.string.default_string_recieved_message,0));
-		((UserTabActivity)getParent()).syncUser(user);
+
 	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
+	}
+	
+	public void onResume() {
+		super.onResume();
+
+		followButton.setClickable(true);		
+	}
+
 
 	private void followRequest() {
 		if (request == null || !(request instanceof FollowingHttpRequest)) {

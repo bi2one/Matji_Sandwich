@@ -3,8 +3,8 @@ package com.matji.sandwich;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.FollowingListView;
 
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 
 public class FollowingActivity extends BaseActivity {
 	private Intent intent;
@@ -16,10 +16,12 @@ public class FollowingActivity extends BaseActivity {
 		FOLLOWER, FOLLOWING
 	}
 	
-	public void onCreate(Bundle savedInstanceState){
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_following);
-		
+
 		intent = getIntent();
 		user_id = intent.getIntExtra("user_id", 0);
 		type = (FollowingListType) intent.getSerializableExtra("type");
@@ -29,5 +31,10 @@ public class FollowingActivity extends BaseActivity {
 		listView.setListType(type);
 		listView.setActivity(this);
 		listView.requestReload();
+	}
+	
+	@Override
+	protected String usedTitleBar() {
+		return "FollowingActivity";
 	}
 }

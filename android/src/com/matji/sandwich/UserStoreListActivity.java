@@ -11,10 +11,12 @@ public class UserStoreListActivity extends BaseActivity {
 	private int user_id;		
 	private UserStoreListView listView;
     
-	public void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_store);
-		
+
 		intent = getIntent();
 		user_id = intent.getIntExtra("user_id", 0);
 		
@@ -22,5 +24,10 @@ public class UserStoreListActivity extends BaseActivity {
 		listView.setUserId(user_id);
 		listView.setActivity(this);
 		listView.requestReload();
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 }

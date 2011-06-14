@@ -18,11 +18,12 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 	private SwipeView swipeView;
 	private MatjiImageDownloader downloader;
 
-
-	public void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image_slider);
-
+		
 		intent = getIntent();
 		attachFileIds = intent.getIntArrayExtra("attach_file_ids");
 		position = intent.getIntExtra("position", 0);
@@ -35,6 +36,11 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 		initImageView();
 		swipeView.setCurrentPage(currentPage);
 		setImage(currentPage);
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 
 	private void initImageView() {

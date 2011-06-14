@@ -7,10 +7,16 @@ import android.view.View;
 import android.widget.EditText;
 
 public class SignUpActivity extends BaseActivity {
-	public void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_signup);
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 	
 	public void signupButtonClicked(View v){
@@ -24,5 +30,4 @@ public class SignUpActivity extends BaseActivity {
 	public void cancelButtonClicked(View v) {
 		finish();
 	}
-	
 }

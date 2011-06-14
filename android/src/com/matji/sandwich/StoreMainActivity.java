@@ -19,6 +19,7 @@ import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 
 import android.app.TabActivity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -54,20 +55,13 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	public final static int BOOKMARK_REQUEST = 1;
 	public final static int UN_BOOKMARK_REQUEST = 2;
 
-	public void onCreate(Bundle savedInstanceState){
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_main);
-		initInfo();
-	}
-
-	public void onResume() {
-		super.onResume();
 		
-		likeButton.setClickable(true);
-		scrapButton.setClickable(true);
-	}
-	
-	public void initInfo() {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		store = (Store) SharedMatjiData.getInstance().top();
 
@@ -114,7 +108,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		setInfo();
 	}
 
-	public void setInfo() {
+	private void setInfo() {
 		/* Set StoreImage */
 		AttachFile file = store.getFile();
 		if (file != null) {
@@ -148,6 +142,18 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		imageButton.setText(getCountNumberOf(R.string.default_string_image, store.getImageCount()));
 		tagButton.setText(getCountNumberOf(R.string.default_string_tag, store.getTagCount()));	
 		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
+	}
+
+	public void onResume() {
+		super.onResume();
+
+		likeButton.setClickable(true);
+		scrapButton.setClickable(true);
 	}
 
 	private void bookmarkRequest() {
@@ -187,15 +193,13 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		store.setLikeCount(store.getLikeCount() - 1);
 	}
 
-	
+
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		// TODO Auto-generated method stub
 		setInfo();
 	}
 
-	
+
 	public void requestExceptionCallBack(int tag, MatjiException e) {
-		// TODO Auto-generated method stub
 		e.showToastMsg(getApplicationContext());
 	}
 
@@ -253,7 +257,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onMenuViewButtonClicked(View view) {
-
+		tabHost.setCurrentTab(StoreTabActivity.MENU_PAGE);
 	}
 
 	public void onMemoButtonClicked(View view) {
@@ -265,11 +269,15 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onTagButtonClicked(View view) {
-
+		Intent intent = new Intent(this, StoreTagListActivity.class);
+		intent.putExtra("store_id", store.getId());
+		startActivity(intent);
 	}
 
 	public void onUrlButtonClicked(View view) {
-
+		Intent intent = new Intent(this, StoreUrlListActivity.class);
+		intent.putExtra("store_id", store.getId());
+		startActivity(intent);
 	}
 
 	public String tagListToCSV(ArrayList<Tag> tags) {

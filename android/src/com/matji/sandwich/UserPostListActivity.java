@@ -10,8 +10,10 @@ public class UserPostListActivity extends BaseActivity {
 	private Intent intent;
 	private int user_id;		
 	private UserPostListView listView;
-    
-	public void onCreate(Bundle savedInstanceState) {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_post);
 		
@@ -22,5 +24,10 @@ public class UserPostListActivity extends BaseActivity {
 		listView.setUserId(user_id);
 		listView.setActivity(this);
 		listView.requestReload();
+	}
+	
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 }

@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 
 public class StoreSearchView extends StoreListView {
 	private StoreHttpRequest storeRequest;
-	private String keyword = "긴자";
+	private String keyword = "완차이";
 	
 	public StoreSearchView(Context context, AttributeSet attrs) {
 		super(context, attrs);

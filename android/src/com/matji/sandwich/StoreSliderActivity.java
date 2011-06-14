@@ -2,9 +2,9 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
-import android.os.Bundle;
 import android.view.View;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -33,42 +33,49 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 	private Session session;
 	private boolean privateMode;
 	private final static int mDefaultPage = 1;
-	
-	public void onCreate(Bundle savedInstanceState) {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_slider);
+		
 		session = Session.getInstance(this);
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
 		privateMode = false;
-		
+
 		//pagerControlStringRef = new int[] {R.string.search_store, R.string.all_store, R.string.near_store}; 
 
 		control = (PagerControl) findViewById(R.id.PagerControl);
 		control.setContentViews(mContentViews);
-		
+
 		swipeView = (SwipeView) findViewById(R.id.SwipeView);
 		view1 = (StoreSearchView) findViewById(R.id.ListView1);
 		view2 = (StoreListView) findViewById(R.id.ListView2);
 		view3 = (StoreNearListView) findViewById(R.id.ListView3);
-		
-		
+
+
 		view1.setTag(R.string.title, getResources().getText(R.string.search_store).toString());
 		view2.setTag(R.string.title, getResources().getText(R.string.all_store).toString());
 		view3.setTag(R.string.title, getResources().getText(R.string.near_store).toString());
-		
+
 		mContentViews.add(view1);
 		mContentViews.add(view2);
 		mContentViews.add(view3);
-		
+
 		view1.setActivity(this);
 		view2.setActivity(this);
 		view3.setActivity(this);
-		
-		swipeView.addOnScrollListener(this);		
-		
+
+		swipeView.addOnScrollListener(this);
 	}
 
+	@Override
+	protected String usedTitleBar() {
+		return null;
+	}
+	
 	public void onResume(){
 		super.onResume();
 		if (session.getToken() == null && privateMode == true){
@@ -83,11 +90,11 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 			initPages();
 		}
 	}
-	
-	
+
+
 	private void initPages(){
 		mCurrentPage = mDefaultPage;
-		
+
 		control.start(this);
 		control.setNumPages(mContentViews.size());
 		control.setCurrentPage(mCurrentPage);
@@ -108,8 +115,8 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 
 		initPages();
 	}
-	
-	
+
+
 	private void removePrivateStoreList () {
 		swipeView.removeViewInLayout(view4);
 		mContentViews.remove(view4);
