@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.StoreDetailInfoParser;
 import com.matji.sandwich.http.parser.StoreParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
@@ -121,12 +122,13 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionDetailList(int store_id, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "detail_list";
-    	parser = new StoreParser(context);
+    	parser = new StoreDetailInfoParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
+    	getHashtable.put("include", "user");
     }
     
     public void actionDetailNew(int store_id, String note){

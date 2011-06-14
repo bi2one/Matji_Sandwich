@@ -30,6 +30,9 @@
 		<activity android:name="StoreNearListActivity"></activity>
 		<activity android:name="StoreTabActivity" android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreMainActivity"></activity>
+		<activity android:name="StoreDetailInfoTabActivity" android:screenOrientation="portrait"></activity>
+		<activity android:name="StoreNoteListActivity"></activity>
+		<activity android:name="StoreDefaultInfoActivity"></activity>
 		<activity android:name="StoreMenuActivity"></activity>
 		<activity android:name="StorePostListActivity"></activity>
 		<activity android:name="StoreMoreActivity"></activity>

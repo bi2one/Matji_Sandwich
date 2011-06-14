@@ -7,6 +7,8 @@ public class StoreDetailInfo extends MatjiData{
 	private int id;
 	private int user_id;
 	private int store_id;
+	private String created_at;
+	private String updated_at;
 	private String note;
 	private Store store;
 	private User user;
@@ -35,6 +37,8 @@ public class StoreDetailInfo extends MatjiData{
 		dest.writeInt(id);
 		dest.writeInt(user_id);
 		dest.writeInt(store_id);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
 		dest.writeString(note);
 		dest.writeValue(store);
 		dest.writeValue(user);
@@ -44,6 +48,8 @@ public class StoreDetailInfo extends MatjiData{
 		id = in.readInt();
 		user_id = in.readInt();
 		store_id = in.readInt();
+		created_at = in.readString();
+		updated_at = in.readString();
 		note = in.readString();
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
@@ -85,5 +91,20 @@ public class StoreDetailInfo extends MatjiData{
 	public User getUser() {
 		return user;
 	}
-	
+
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
+	}
+
+	public String getCreatedAt() {
+		return created_at;
+	}
+
+	public void setUpdatedAt(String updated_at) {
+		this.updated_at = updated_at;
+	}
+
+	public String getUpdatedAt() {
+		return updated_at;
+	}
 }

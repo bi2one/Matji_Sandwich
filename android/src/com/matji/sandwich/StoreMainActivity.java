@@ -253,7 +253,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onInfoViewButtonClicked(View view) {
-
+		Intent intent = new Intent(this, StoreDetailInfoTabActivity.class);
+		startActivity(intent);
 	}
 
 	public void onMenuViewButtonClicked(View view) {
