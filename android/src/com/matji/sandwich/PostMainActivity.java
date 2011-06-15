@@ -30,7 +30,7 @@ public class PostMainActivity extends MainActivity {
 		user = post.getUser();
 		store = post.getStore();
 		
-		header = new PostViewContainer(this, post, user, store);
+		header = new PostViewContainer(this, this, post, user, store);
 		commentListView = (CommentListView) findViewById(R.id.post_main_comment_list);
 		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);
@@ -40,7 +40,7 @@ public class PostMainActivity extends MainActivity {
 	private void setInfo() {
 		commentListView.getHeaderViewContainer().removeView(header.getRootView());
 		commentListView.addHeaderView(header);
-		commentListView.requestReload();		
+		commentListView.requestReload();
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public abstract class MListView extends ListView implements OnItemClickListener 
 	private Activity activity;
 	private LinearLayout header;
 	public abstract void onListItemClick(int position);
-	public static final int FADING_EDGE_LENGTH = DisplayUtil.DPFromPixel(10);
+	public static final int FADING_EDGE_LENGTH = DisplayUtil.PixelFromDP(10);
 
 	public MListView(Context context, AttributeSet attrs) {
 		super(context, attrs);

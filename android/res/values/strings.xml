@@ -71,6 +71,7 @@
   <string name="default_string_sent_message">보낸 쪽지</string>
   <string name="default_string_recieved_message">받은 쪽지</string>
   <string name="default_string_write_note">영업시간, 에약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
+  <string name="default_string_recent_post">등록한 메모가 없습니다.</string>
   
   <!-- grade -->
   <string name="grade_point">활동점수:</string>

@@ -34,21 +34,4 @@ public class MainTabActivity extends BaseTabActivity {
 				.setIndicator("설정")
 				.setContent(new Intent(this, SettingActivity.class)));
 	}
-
-//	@Override
-//	protected String usedTitleBar() {
-//		return "MainTabActivity";
-//	}
-//
-//	@Override
-//	protected boolean setTitleBarButton(Button button) {
-//		button.setText("Info");
-//		return true;
-//	}
-//
-//	@Override
-//	protected void onTitleBarItemClicked(View view) {
-//		// TODO Auto-generated method stub
-//	}
-
 }

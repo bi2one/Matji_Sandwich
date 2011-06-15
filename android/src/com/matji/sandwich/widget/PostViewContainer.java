@@ -1,5 +1,6 @@
 package com.matji.sandwich.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -21,6 +22,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener 
 	private MatjiImageDownloader downloader;
 
 	private Context context;
+	private Activity activity;
 	private Post post;
 	private User user;
 	private Store store;
@@ -30,11 +32,13 @@ public class PostViewContainer extends ViewContainer implements OnClickListener 
 	private TextView storeName;
 	private TextView content;
 	private TextView dateAgo;
+	private SlideGalleryView gallery;	
 
 	// TODO 태그도 추가
-	public PostViewContainer(Context context, Post post, User user, Store store) {
-		super(context, R.layout.adapter_post);
+	public PostViewContainer(Context context, Activity activity, Post post, User user, Store store) {
+		super(context, R.layout.header_post);
 		this.context = context;
+		this.activity = activity;
 		this.post = post;
 		this.user = user;
 		this.store = store;
@@ -50,8 +54,9 @@ public class PostViewContainer extends ViewContainer implements OnClickListener 
 		storeName = (TextView) getRootView().findViewById(R.id.post_adapter_store_name);
 		content = (TextView) getRootView().findViewById(R.id.post_adapter_post);
 		dateAgo = (TextView) getRootView().findViewById(R.id.post_adapter_created_at);
+		gallery = (SlideGalleryView) getRootView().findViewById(R.id.header_post_gallery);
+		
 		downloader.downloadUserImage(user.getId(), thumnail);
-
 		nick.setText(user.getNick());
 
 		if (store != null)
@@ -63,11 +68,15 @@ public class PostViewContainer extends ViewContainer implements OnClickListener 
 		thumnail.setOnClickListener(this);
 		nick.setOnClickListener(this);
 		storeName.setOnClickListener(this);
-		
+
+		gallery.setActivity(activity);
+		gallery.setPostId(post.getId());
+
 		setPostData();
 	}
 	
 	private void setPostData() {
+		gallery.refresh();
 		dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
 	}
 

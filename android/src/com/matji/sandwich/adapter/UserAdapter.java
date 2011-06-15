@@ -3,7 +3,6 @@ package com.matji.sandwich.adapter;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.widget.UserListView;
 
 import android.content.Context;
 import android.view.View;
@@ -44,6 +43,8 @@ public class UserAdapter extends MBaseAdapter {
 		userElement.intro.setText(user.getIntro());
 		if (user.getPost() != null) {
 			userElement.post.setText(user.getPost().getPost());
+		} else {
+			userElement.post.setText(context.getString(R.string.default_string_recent_post));
 		}
 		
 		//TODO add recent post

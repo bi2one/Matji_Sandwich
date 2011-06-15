@@ -46,7 +46,7 @@
 		<activity android:name="UserPostListActivity"></activity>
 		<activity android:name="FollowingActivity" android:screenOrientation="portrait"></activity>
 		<activity android:name="WritePostActivity"></activity>
-		<activity android:name="SlideGalleryActivity"></activity>
+		<activity android:name="widget.SlideGalleryActivity"></activity>
 		<activity android:name="GridGalleryActivity"></activity>
 		<activity android:name="ImageSliderActivity"></activity>
 		<activity android:name="WritePostActivity"></activity>

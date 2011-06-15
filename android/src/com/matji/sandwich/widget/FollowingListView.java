@@ -39,10 +39,10 @@ public class FollowingListView extends UserListView implements View.OnClickListe
 	public HttpRequest request() {
 		switch(listType) {
 		case FOLLOWER:
-			((FollowingHttpRequest) request).actionFollowerList(user_id, getPage(), getLimit(), true);
+			((FollowingHttpRequest) request).actionFollowerList(user_id, getPage(), getLimit());
 			break;
 		case FOLLOWING:
-			((FollowingHttpRequest) request).actionFollowingList(user_id, getPage(), getLimit(), true);
+			((FollowingHttpRequest) request).actionFollowingList(user_id, getPage(), getLimit());
 			break;
 		}
 		return request;

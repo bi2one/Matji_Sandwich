@@ -50,11 +50,6 @@ public class FollowingHttpRequest extends HttpRequest {
 		getHashtable.put("user_id", user_id + "");
 		getHashtable.put("page", page+"");
 		getHashtable.put("limit", limit+"");
-	}
-	
-	public void actionFollowingList(int user_id, int page, int limit, boolean requestPost) {
-		actionFollowingList(user_id, page, limit);
-		
 		getHashtable.put("include", "post");
 	}
 	
