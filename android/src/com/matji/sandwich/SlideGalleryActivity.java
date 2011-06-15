@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.Gallery;
 
 public class SlideGalleryActivity extends BaseActivity implements Requestable {
@@ -40,11 +41,6 @@ public class SlideGalleryActivity extends BaseActivity implements Requestable {
 		manager = new HttpRequestManager(this, this);
 		g = (Gallery) findViewById(R.id.slide_gallery);
 		manager.request(this, request(), IMAGE_REQUEST);
-	}
-
-	@Override
-	protected String usedTitleBar() {
-		return null;
 	}
 
 	public HttpRequest request() {
@@ -75,5 +71,22 @@ public class SlideGalleryActivity extends BaseActivity implements Requestable {
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(this);
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "SlideGalleryActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

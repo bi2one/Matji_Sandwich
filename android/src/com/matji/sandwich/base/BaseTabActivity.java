@@ -8,25 +8,17 @@ import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 public abstract class BaseTabActivity extends TabActivity {
-	protected abstract String usedTitleBar();
-	
 	@Override
 	public void setContentView(int layoutResID) {
-		// TODO Auto-generated method stub
-		String titleText = usedTitleBar();
-		if (titleText != null) {
-			requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-			super.setContentView(layoutResID);
-			getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
-			TextView titleView = (TextView) findViewById(R.id.title);
-			titleView.setText(titleText);
-		} else {
-			super.setContentView(layoutResID);
-		}
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		super.setContentView(layoutResID);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
 	}
 
 	public void finishWithMatjiData() {

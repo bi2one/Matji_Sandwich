@@ -5,6 +5,8 @@ import com.matji.sandwich.widget.StoreTagListView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class StoreTagListActivity extends BaseActivity {
 	private Intent intent;
@@ -27,7 +29,19 @@ public class StoreTagListActivity extends BaseActivity {
 	}
 
 	@Override
-	protected String usedTitleBar() {
+	protected String titleBarText() {
 		return "StoreTagListActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

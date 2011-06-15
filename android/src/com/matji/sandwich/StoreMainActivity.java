@@ -54,11 +54,11 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	/* request tags */
 	public final static int BOOKMARK_REQUEST = 1;
 	public final static int UN_BOOKMARK_REQUEST = 2;
-
+	public final static int LIKE_REQUEST = 3;
+	public final static int UN_LIKE_REQUEST = 4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_main);
 		
@@ -83,9 +83,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		tagButton = (Button) findViewById(R.id.store_main_tag_btn);
 		urlButton = (Button) findViewById(R.id.store_main_url_btn);
 
-		addressText.setText(store.getAddress());
-		coverText.setText(store.getCover());
-		tagText.setText(tagListToCSV(store.getTags()));
 		/* Set RegUser */
 		User regUser = store.getRegUser();
 		String string;
@@ -109,6 +106,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	private void setInfo() {
+		store = (Store) SharedMatjiData.getInstance().top();
+		
 		/* Set StoreImage */
 		AttachFile file = store.getFile();
 		if (file != null) {
@@ -118,6 +117,10 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			storeImage.setImageDrawable(defaultImage);
 		}
 
+		addressText.setText(store.getAddress());
+		coverText.setText(store.getCover());
+		tagText.setText(tagListToCSV(store.getTags()));
+		
 		if (session.isLogin()) {
 			if (dbProvider.isExistLike(store.getId(), "Store")) {
 				likeButton.setText(getString(R.string.store_main_unlike_store));
@@ -143,17 +146,11 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		tagButton.setText(getCountNumberOf(R.string.default_string_tag, store.getTagCount()));	
 		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
 	}
-
-	@Override
-	protected String usedTitleBar() {
-		return null;
-	}
-
+	
 	public void onResume() {
 		super.onResume();
-
-		likeButton.setClickable(true);
-		scrapButton.setClickable(true);
+		
+		setInfo();
 	}
 
 	private void bookmarkRequest() {
@@ -163,6 +160,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		((BookmarkHttpRequest) request).actionBookmark(store.getId());
 		manager.request(this, request, BOOKMARK_REQUEST);
 		store.setBookmarkCount(store.getBookmarkCount() + 1);
+		User me = session.getCurrentUser();
+		me.setStoreCount(me.getStoreCount() + 1);
 	}
 
 	private void unbookmarkReuqest() {
@@ -172,6 +171,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		((BookmarkHttpRequest) request).actionUnBookmark(store.getId());
 		manager.request(this, request, UN_BOOKMARK_REQUEST);
 		store.setBookmarkCount(store.getBookmarkCount() - 1);
+		User me = session.getCurrentUser();
+		me.setStoreCount(me.getStoreCount() - 1);
 	}
 
 	private void likeRequest() {
@@ -179,7 +180,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			request = new LikeHttpRequest(this);
 		}
 		((LikeHttpRequest) request).actionStoreLike(store.getId());
-		manager.request(this, request, BOOKMARK_REQUEST);
+		manager.request(this, request, LIKE_REQUEST);
 		store.setLikeCount(store.getLikeCount() + 1);
 	}
 
@@ -189,12 +190,23 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		}
 
 		((LikeHttpRequest) request).actionStoreUnLike(store.getId());
-		manager.request(this, request, BOOKMARK_REQUEST);
+		manager.request(this, request, UN_LIKE_REQUEST);
 		store.setLikeCount(store.getLikeCount() - 1);
 	}
 
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		switch (tag) {
+		case BOOKMARK_REQUEST:
+			scrapButton.setClickable(true);
+		case UN_BOOKMARK_REQUEST:
+			scrapButton.setClickable(true);
+		case LIKE_REQUEST:
+			likeButton.setClickable(true);
+		case UN_LIKE_REQUEST:
+			likeButton.setClickable(true);
+		}
+
 		setInfo();
 	}
 
@@ -290,5 +302,22 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			result += tags.get(tags.size()-1).getTag();
 		}
 		return result;
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "StoreMainActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

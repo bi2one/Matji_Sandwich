@@ -3,7 +3,9 @@ package com.matji.sandwich.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.maps.MapActivity;
@@ -11,24 +13,47 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.data.MatjiData;
 
-public abstract class BaseMapActivity extends MapActivity {	
-	protected abstract String usedTitleBar();
+public abstract class BaseMapActivity extends MapActivity {
+	protected abstract String titleBarText();
+	protected abstract boolean setTitleBarButton(Button button);
+	protected abstract void onTitleBarItemClicked(View view);
 
 	@Override
 	public void setContentView(int layoutResID) {
-		// TODO Auto-generated method stub
-		String titleText = usedTitleBar();
-		if (titleText != null) {
+		if (this.getParent() == null){
 			requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 			super.setContentView(layoutResID);
 			getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
-			TextView titleView = (TextView) findViewById(R.id.title);
-			titleView.setText(titleText);
-		} else {
+		}else{
 			super.setContentView(layoutResID);
 		}
 	}
 
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		Activity act = (this.getParent() == null)? this: this.getParent();
+		
+		String titleBarText = titleBarText();
+		TextView titleBarView = (TextView) act.findViewById(R.id.title);
+		titleBarView.setText(titleBarText);
+		
+		final Button titleBarButton = (Button) act.findViewById(R.id.title_btn);
+		if (setTitleBarButton(titleBarButton)){
+			titleBarButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					onTitleBarItemClicked(titleBarButton);
+				}
+			});
+			titleBarButton.setVisibility(Button.VISIBLE);
+		}else{			
+			titleBarButton.setVisibility(Button.GONE);
+		}		
+	}
 	
 	public void finishWithMatjiData() {
 

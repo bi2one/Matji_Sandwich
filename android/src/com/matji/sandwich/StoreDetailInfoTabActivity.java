@@ -10,7 +10,6 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	private Intent defaultIntent;
 	private Intent noteIntent;
 	private TabHost tabHost;
-	private int store_id;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +28,21 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 				.setContent(noteIntent));
 	}
 	
-	@Override
-	protected String usedTitleBar() {
-		// TODO Auto-generated method stub
-		return "StoreDetailInfoActivity";
-	}
+//	@Override
+//	protected String usedTitleBar() {
+//		// TODO Auto-generated method stub
+//		return "StoreDetailInfoActivity";
+//	}
+//	
+//	@Override
+//	protected boolean setTitleBarButton(Button button) {
+//		button.setText("Info");
+//		return true;
+//	}
+//
+//	@Override
+//	protected void onTitleBarItemClicked(View view) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

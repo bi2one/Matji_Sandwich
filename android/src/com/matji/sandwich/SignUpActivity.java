@@ -4,6 +4,7 @@ import com.matji.sandwich.base.BaseActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class SignUpActivity extends BaseActivity {
@@ -12,11 +13,6 @@ public class SignUpActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_signup);
-	}
-
-	@Override
-	protected String usedTitleBar() {
-		return null;
 	}
 	
 	public void signupButtonClicked(View v){
@@ -29,5 +25,22 @@ public class SignUpActivity extends BaseActivity {
 	
 	public void cancelButtonClicked(View v) {
 		finish();
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "SignUpActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -5,6 +5,8 @@ import com.matji.sandwich.widget.UserStoreListView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class UserStoreListActivity extends BaseActivity {
 	private Intent intent;
@@ -27,7 +29,19 @@ public class UserStoreListActivity extends BaseActivity {
 	}
 
 	@Override
-	protected String usedTitleBar() {
-		return null;
+	protected String titleBarText() {
+		return "UserStoreListActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

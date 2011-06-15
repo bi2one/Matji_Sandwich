@@ -163,8 +163,21 @@
   <style name="user_cell_Grade" parent="DefaultWrap">
   	<item name="android:textSize">11dp</item>
   	<item name="android:textStyle">bold</item>
-  	<item name="android:textColor">#aaaaff</item>
+  	<item name="android:textColor">#00f5ff</item>
   	<item name="android:drawableLeft">@drawable/icon_jewel_01diamond</item>
+  	<item name="android:drawablePadding">3dp</item>
+  </style>
+  
+  <style name="user_cell_PointText" parent="DefaultWrap">
+  	<item name="android:textSize">11dp</item>
+  	<item name="android:textStyle">bold</item>
+  	<item name="android:drawablePadding">3dp</item>
+  </style>
+  
+  <style name="user_cell_Point" parent="DefaultWrap">
+  	<item name="android:textSize">11dp</item>
+  	<item name="android:textStyle">bold</item>
+  	<item name="android:textColor">#ff4400</item>
   	<item name="android:drawablePadding">3dp</item>
   </style>
   

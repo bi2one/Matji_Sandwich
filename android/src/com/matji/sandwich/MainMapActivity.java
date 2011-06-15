@@ -3,7 +3,15 @@ package com.matji.sandwich;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
+<<<<<<< HEAD
 import android.util.Log;
+=======
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+>>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
@@ -55,7 +63,11 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
     }
 
+<<<<<<< HEAD
     protected void onResume() {
+=======
+	protected void onResume() {
+>>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
 		super.onResume();
 		mGpsManager.start();
 		mMapView.startMapCenterThread();
@@ -146,6 +158,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		public void run() {
 			loadStoresOnMap();
 		}
+<<<<<<< HEAD
 		
 		
 		private void loadStoresOnMap(){
@@ -167,6 +180,28 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    
 
     }
+=======
+	}
+	
+	@Override
+	protected String titleBarText() {
+		return "MainMapActivity";
+	}
+	
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		button.setText("Test");
+		return true;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		Log.d("Clicked", "Clicked");
+		
+	}
+>>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
 
 
 	@Override
