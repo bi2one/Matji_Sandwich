@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
+import com.matji.sandwich.http.util.DisplayUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +12,9 @@ public class MainTabActivity extends BaseTabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		DisplayUtil.setContext(getApplicationContext());
+		
 		setContentView(R.layout.activity_main_tab);
 		tabHost = getTabHost();
 

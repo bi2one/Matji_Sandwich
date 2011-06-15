@@ -50,6 +50,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
 		privateMode = false;
+		mCurrentPage = mDefaultPage;
 			
 		control = (PagerControl) findViewById(R.id.PagerControl);
 		control.setContentViews(mContentViews);
@@ -89,9 +90,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		}
 	}
 
-	private void initPages(){
-		mCurrentPage = mDefaultPage;
-		
+	private void initPages(){		
 		control.start(this);
 		control.setNumPages(mContentViews.size());
 		control.setCurrentPage(mCurrentPage);
