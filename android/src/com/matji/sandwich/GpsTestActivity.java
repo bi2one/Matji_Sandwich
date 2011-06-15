@@ -27,6 +27,7 @@ public class GpsTestActivity extends BaseActivity implements MatjiLocationListen
 	gpsManager.start();
     }
 
+    
     protected void onPause() {
 	super.onPause();
 	gpsManager.stop();

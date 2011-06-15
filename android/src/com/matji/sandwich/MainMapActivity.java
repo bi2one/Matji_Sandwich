@@ -1,32 +1,35 @@
 package com.matji.sandwich;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.location.Location;
 import android.util.Log;
-import android.view.MotionEvent;
-
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapView;
-
-import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
-
 import com.matji.sandwich.base.BaseMapActivity;
+import com.matji.sandwich.data.CoordinateRegion;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.overlay.StoreItemizedOverlay;
 import com.matji.sandwich.map.MatjiMapView;
 import com.matji.sandwich.map.MatjiMapCenterListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener, MatjiMapCenterListener {
+public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener, MatjiMapCenterListener, Requestable{
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
+    private static final int MAX_STORE_COUNT = 60;
+    private static final int NEARBY_STORE = 1;
     
     private Context mContext;
     private GpsManager mGpsManager;
@@ -35,80 +38,137 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private Location prevLocation;
     private List<Overlay> mapOverlays;
     private StoreItemizedOverlay storeItemizedOverlay;
-    
+    private ArrayList<MatjiData> stores;
+	private HttpRequestManager mRequestManager;
+
+
     public void onCreate(Bundle savedInstanceState){
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_main_map);
-	mMapView = (MatjiMapView)findViewById(R.id.map_view);
-	mMapController = mMapView.getController();
-	mMapView.setMapCenterListener(this);
-
-	mContext = getApplicationContext();
-
-	mGpsManager = new GpsManager(mContext, this);
-
-        storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_map);
+		mMapView = (MatjiMapView)findViewById(R.id.map_view);
+		mMapController = mMapView.getController();
+		mMapView.setMapCenterListener(this);
+		mContext = getApplicationContext();
+		mGpsManager = new GpsManager(mContext, this);
+		mRequestManager = new HttpRequestManager(mContext, this);
+		storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
     }
 
     protected void onResume() {
-	super.onResume();
-	mGpsManager.start();
-	mMapView.startMapCenterThread();
+		super.onResume();
+		mGpsManager.start();
+		mMapView.startMapCenterThread();
     }
 
     protected void onPause() {
-	super.onPause();
-	mGpsManager.stop();
-	mMapView.stopMapCenterThread();
+		super.onPause();
+		mGpsManager.stop();
+		mMapView.stopMapCenterThread();
     }
 
     private void setCenter(Location loc) {
-	int geoLat = (int)(loc.getLatitude() * 1E6);
-	int geoLng = (int)(loc.getLongitude() * 1E6);
-	GeoPoint geoPoint = new GeoPoint(geoLat, geoLng);
-	mMapController.animateTo(geoPoint);
-	mMapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
-	// storeItemizedOverlay.addOverlay(geoPoint);
+		int geoLat = (int)(loc.getLatitude() * 1E6);
+		int geoLng = (int)(loc.getLongitude() * 1E6);
+		GeoPoint geoPoint = new GeoPoint(geoLat, geoLng);
+		mMapController.animateTo(geoPoint);
+		mMapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
+		// storeItemizedOverlay.addOverlay(geoPoint);
     }
 
     public void onLocationChanged(Location location) {
-	if (prevLocation != null) {
-	    if (prevLocation.getAccuracy() <= location.getAccuracy()) {
-		mGpsManager.stop();
-		return;
-	    }
-	}
-    
-	prevLocation = location;
-	setCenter(prevLocation);
+		if (prevLocation != null) {
+		    if (prevLocation.getAccuracy() <= location.getAccuracy()) {
+			mGpsManager.stop();
+			return;
+		    }
+		}
+	    
+		prevLocation = location;
+		setCenter(prevLocation);
     }
 
     public void onLocationExceptionDelivered(MatjiException e) {
-	e.performExceptionHandling(mContext);
+    	e.performExceptionHandling(mContext);
     }
 
     public void onMapCenterChanged(GeoPoint point) {
-	Runnable runnable = new MapRunnable(point);
-	runOnUiThread(runnable);
+    	Runnable runnable = new MapRunnable(this);
+		runOnUiThread(runnable);
     }
 
-    protected boolean isRouteDisplayed() {
+      
+    
+	private void drawOverlays(){
+		storeItemizedOverlay.getOverlayItems().clear();
+		
+		for (MatjiData storeData : stores){
+		    Store store = (Store)storeData;
+		    
+		    storeItemizedOverlay.addOverlay(store);
+		}
+		
+		mMapView.postInvalidate();
+	}
+
+	
+	
+    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		Log.d("Matji", "callback");
+		// TODO Auto-generated method stub
+		switch (tag) {
+		case NEARBY_STORE:
+			stores = data;
+			drawOverlays();
+			break;		
+		}
+	}
+	
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+    
+	protected boolean isRouteDisplayed() {
     	return true;
     }
 
-    public class MapRunnable implements Runnable {
-	private GeoPoint point;
+    
+    public class MapRunnable implements Runnable{
+    	private Activity mActivity;
+    	
+		public MapRunnable(Activity activity) {
+			this.mActivity = activity;
+		}
 	
-	public MapRunnable(GeoPoint point) {
-	    this.point = point;
-	}
+		
+		public void run() {
+			loadStoresOnMap();
+		}
+		
+		
+		private void loadStoresOnMap(){
+		    StoreHttpRequest request = new StoreHttpRequest(mContext);
+		    CoordinateRegion cr = new CoordinateRegion(mMapView.getMapCenter(), mMapView.getLatitudeSpan(), mMapView.getLongitudeSpan());
+		    GeoPoint swPoint = cr.getSWGeoPoint();
+		    GeoPoint nePoint = cr.getNEGeoPoint();
+		    
+		    double lat_sw = (double)(swPoint.getLatitudeE6()) / (double)1E6;
+		    double lng_sw = (double)(swPoint.getLongitudeE6()) / (double)1E6;
+		    double lat_ne = (double)(nePoint.getLatitudeE6()) / (double)1E6;
+		    double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
+		    
+		    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
+		    mRequestManager.request(mActivity, request, NEARBY_STORE);
+	    }
+		
+	    
+	    
 
-	public void run() {
-	    storeItemizedOverlay.addOverlay(point);
-	    mMapView.postInvalidate();
-	}
     }
 
+    
+	
     // public boolean dispatchTouchEvent(MotionEvent event) {
     // 	boolean result = super.dispatchTouchEvent(event);
     // 	if (event.getAction() == MotionEvent.ACTION_UP) {

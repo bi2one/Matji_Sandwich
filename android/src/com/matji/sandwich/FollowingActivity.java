@@ -4,7 +4,6 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.FollowingListView;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 
 public class FollowingActivity extends BaseActivity {

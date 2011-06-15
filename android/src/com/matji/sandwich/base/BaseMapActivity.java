@@ -9,7 +9,11 @@ import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.data.MatjiData;
 
 public class BaseMapActivity extends MapActivity {
+	
+	
+	
 	public void finishWithMatjiData() {
+
 		// TODO Auto-generated method stub
 		SharedMatjiData.getInstance().pop();
 		super.finish();

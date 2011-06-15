@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.util.Log;
 
 public class BaseTabActivity extends TabActivity {
+	
 	public void finishWithMatjiData() {
 		// TODO Auto-generated method stub
 		SharedMatjiData.getInstance().pop();

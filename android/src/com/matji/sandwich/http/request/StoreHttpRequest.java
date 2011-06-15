@@ -100,9 +100,10 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("lat_ne", lat_ne + "");
     	getHashtable.put("lng_sw", lng_sw + "");
     	getHashtable.put("lng_ne", lng_ne + "");
+    	getHashtable.put("order", "like_count DESC,reg_user_id ASC");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user,tag");
+    	getHashtable.put("include", "attach_file,user,tags");
     	
     }
     
@@ -115,7 +116,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("user_id", user_id+ "");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user,tag");
+    	getHashtable.put("include", "attach_file,user,tags");
     }
 
     public void actionDetailList(int store_id, int page, int limit){

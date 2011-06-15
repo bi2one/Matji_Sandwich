@@ -35,4 +35,6 @@ public class MainTabActivity extends BaseTabActivity {
 		       .setIndicator("설정")
 		       .setContent(new Intent(this, SettingActivity.class)));
     }
+    
+    
 }
