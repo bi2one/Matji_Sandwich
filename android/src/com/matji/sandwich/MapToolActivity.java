@@ -1,12 +1,8 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-<<<<<<< HEAD
-=======
 import android.view.View;
 import android.widget.Button;
-
->>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
 import com.matji.sandwich.base.BaseMapActivity;
 
 public class MapToolActivity extends BaseMapActivity {

@@ -52,7 +52,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	}
 
 
-	@Override
+	
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
 		Post post = (Post) getAdapterData().get(position);

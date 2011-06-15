@@ -42,8 +42,6 @@ public class GpsTestActivity extends BaseActivity implements MatjiLocationListen
 		e.performExceptionHandling(getApplicationContext());
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	protected String titleBarText() {
 		return "GpsTestActivity";
@@ -60,5 +58,4 @@ public class GpsTestActivity extends BaseActivity implements MatjiLocationListen
 		// TODO Auto-generated method stub
 		
 	}
->>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
 }

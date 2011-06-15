@@ -43,7 +43,7 @@ public abstract class BaseListActivity extends ListActivity {
 		final Button titleBarButton = (Button) act.findViewById(R.id.title_btn);
 		if (setTitleBarButton(titleBarButton)){
 			titleBarButton.setOnClickListener(new View.OnClickListener() {
-				@Override
+				
 				public void onClick(View arg0) {
 					onTitleBarItemClicked(titleBarButton);
 				}

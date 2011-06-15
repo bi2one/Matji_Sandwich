@@ -3,24 +3,17 @@ package com.matji.sandwich;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
-<<<<<<< HEAD
-import android.util.Log;
-=======
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
->>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
-import com.google.android.maps.Overlay;
-import android.os.Bundle;
+//import com.google.android.maps.Overlay;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.CoordinateRegion;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.StoreHttpRequest;
@@ -31,7 +24,7 @@ import com.matji.sandwich.map.MatjiMapView;
 import com.matji.sandwich.map.MatjiMapCenterListener;
 
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.List;
 
 
 public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener, MatjiMapCenterListener, Requestable{
@@ -45,7 +38,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private MatjiMapView mMapView;
     private MapController mMapController;
     private Location prevLocation;
-    private List<Overlay> mapOverlays;
+    //private List<Overlay> mapOverlays;
     private StoreItemizedOverlay storeItemizedOverlay;
     private ArrayList<MatjiData> stores;
 	private HttpRequestManager mRequestManager;
@@ -63,11 +56,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
     }
 
-<<<<<<< HEAD
-    protected void onResume() {
-=======
 	protected void onResume() {
->>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
 		super.onResume();
 		mGpsManager.start();
 		mMapView.startMapCenterThread();
@@ -158,8 +147,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		public void run() {
 			loadStoresOnMap();
 		}
-<<<<<<< HEAD
-		
+
 		
 		private void loadStoresOnMap(){
 		    StoreHttpRequest request = new StoreHttpRequest(mContext);
@@ -180,34 +168,24 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    
 
     }
-=======
-	}
-	
+
+
 	@Override
 	protected String titleBarText() {
+		// TODO Auto-generated method stub
 		return "MainMapActivity";
 	}
-	
+
 	@Override
 	protected boolean setTitleBarButton(Button button) {
 		// TODO Auto-generated method stub
-		button.setText("Test");
-		return true;
+		return false;
 	}
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
-		Log.d("Clicked", "Clicked");
 		
-	}
->>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
-
-
-	@Override
-	protected String usedTitleBar() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
     

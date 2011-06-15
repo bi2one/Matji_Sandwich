@@ -174,13 +174,13 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 
 
-	@Override
+	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		setInfo();
 	}
 
 
-	@Override
+	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.showToastMsg(getApplicationContext());
 	}

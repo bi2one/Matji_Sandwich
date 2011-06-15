@@ -9,6 +9,7 @@
 		<TextView android:id="@+id/profile" 
 			style="@style/DefaultWidthFill"
 			android:background="#e2e2e2" 
+			android:padding="5dp"
 			android:visibility="gone"
 			android:text="My Profile" />
 		<TextView android:id="@+id/notifications"

@@ -41,12 +41,12 @@ public abstract class BaseMapActivity extends MapActivity {
 		TextView titleBarView = (TextView) act.findViewById(R.id.title);
 		titleBarView.setText(titleBarText);
 		
-		final Button titleBarButton = (Button) act.findViewById(R.id.title_btn);
+		Button titleBarButton = (Button) act.findViewById(R.id.title_btn);
 		if (setTitleBarButton(titleBarButton)){
 			titleBarButton.setOnClickListener(new View.OnClickListener() {
-				@Override
+			
 				public void onClick(View arg0) {
-					onTitleBarItemClicked(titleBarButton);
+					onTitleBarItemClicked(arg0);
 				}
 			});
 			titleBarButton.setVisibility(Button.VISIBLE);

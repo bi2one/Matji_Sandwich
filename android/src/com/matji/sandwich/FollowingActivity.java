@@ -2,13 +2,11 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.FollowingListView;
-import android.os.Bundle;
-<<<<<<< HEAD
+
 import android.content.Intent;
-=======
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
->>>>>>> e71624aacaf456a4885c664beb0095e175f3625d
 
 public class FollowingActivity extends BaseActivity {
 	private Intent intent;

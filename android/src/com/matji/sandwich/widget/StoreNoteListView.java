@@ -37,7 +37,7 @@ public class StoreNoteListView extends RequestableMListView implements OnClickLi
 	@Override
 	public void onListItemClick(int position) {}
 
-	@Override
+
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
 		StoreDetailInfo info = (StoreDetailInfo) getAdapterData().get(position);
