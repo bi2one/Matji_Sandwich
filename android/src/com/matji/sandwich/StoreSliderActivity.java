@@ -37,7 +37,6 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_slider);
 		
@@ -45,7 +44,7 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
 		privateMode = false;
-
+		mCurrentPage = mDefaultPage;
 		//pagerControlStringRef = new int[] {R.string.search_store, R.string.all_store, R.string.near_store}; 
 
 		control = (PagerControl) findViewById(R.id.PagerControl);
@@ -89,8 +88,6 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 
 
 	private void initPages(){
-		mCurrentPage = mDefaultPage;
-
 		control.start(this);
 		control.setNumPages(mContentViews.size());
 		control.setCurrentPage(mCurrentPage);

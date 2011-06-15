@@ -5,6 +5,7 @@
 	<color name="pressed2">#40474f</color>
 	<color name="focused1">#959ca4</color>
 	<color name="focused2">#646d79</color>
-	<color name="default1">#eeeeee</color>
+	<color name="default1">#eeeeee</color>	
 	<color name="default2">#ffffff</color>
+	<color name="LTGRAY">#ffcccccc</color>
 </resources>
