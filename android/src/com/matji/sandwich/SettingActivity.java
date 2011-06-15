@@ -6,19 +6,17 @@ import com.matji.sandwich.data.User;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SettingActivity extends BaseActivity implements OnClickListener {
+public class SettingActivity extends BaseActivity {
 	private Button signin;
 	private Button signout; 
 	private Button signup;
-	private TextView profile;
-	private TextView notifications;
-	private TextView messages;
-	private TextView notices;
 	private Session session;
 	private User user;
 
@@ -39,29 +37,33 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 		signin = (Button) findViewById(R.id.signin);
 		signout = (Button) findViewById(R.id.signout);
 		signup = (Button) findViewById(R.id.signup);
-		profile = (TextView) findViewById(R.id.profile);
-		notifications = (TextView) findViewById(R.id.notifications);
-		messages = (TextView) findViewById(R.id.messages);
-		notices = (TextView) findViewById(R.id.notices);
-		profile.setOnClickListener(this);
-		notifications.setOnClickListener(this);
-		messages.setOnClickListener(this);
-		notices.setOnClickListener(this);
+		
+//		TextView profile = (TextView) findViewById(R.id.profile);
+//		TextView notifications = (TextView) findViewById(R.id.notifications);
+//		TextView messages = (TextView) findViewById(R.id.messages);
+//		TextView notices = (TextView) findViewById(R.id.notices);
+		LinearLayout ll = (LinearLayout)findViewById(R.id.user_settings);
+		
 		
  		if (session.getToken() == null) {
 			signin.setVisibility(Button.VISIBLE);
 			signout.setVisibility(Button.GONE);
 			signup.setVisibility(Button.VISIBLE);
-			profile.setVisibility(TextView.GONE);
-			notifications.setVisibility(TextView.GONE);
-			messages.setVisibility(TextView.GONE);
+			ll.setVisibility(View.GONE);
+//			
+//			profile.setVisibility(TextView.GONE);
+//			notifications.setVisibility(TextView.GONE);
+//			messages.setVisibility(TextView.GONE);
+			
 		} else {
 			signin.setVisibility(Button.GONE);
 			signout.setVisibility(Button.VISIBLE);
 			signup.setVisibility(Button.GONE);
-			profile.setVisibility(TextView.VISIBLE);
-			notifications.setVisibility(TextView.VISIBLE);
-			messages.setVisibility(TextView.VISIBLE);
+			ll.setVisibility(View.VISIBLE);
+//			
+//			profile.setVisibility(TextView.VISIBLE);
+//			notifications.setVisibility(TextView.VISIBLE);
+//			messages.setVisibility(TextView.VISIBLE);
 		}
 	}
 
@@ -85,31 +87,48 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 		startActivityForResult(intent, 1);
 	}
 
-	public void onClick(View v) {
-		switch(v.getId()) {
-		case R.id.profile :
-			Intent profileIntent = new Intent(this, UserTabActivity.class);
-			session = Session.getInstance(this);
-			user = session.getCurrentUser();
-			startActivityWithMatjiData(profileIntent, user);
-			break;
-		case R.id.notifications :
-			Intent notificationIntent = new Intent(this, UserTabActivity.class);
-			user = session.getCurrentUser();
-			startActivityWithMatjiData(notificationIntent, user);
-			break;
-		case R.id.messages :
-			Intent messageIntent = new Intent(this, UserTabActivity.class);
-			user = session.getCurrentUser();
-			startActivityWithMatjiData(messageIntent, user);
-			break;
-		case R.id.notices :
-			Intent noticesIntent = new Intent(this, NoticeActivity.class);
-			startActivity(noticesIntent);
-			break;
-		}
+	
+	public void onProfileButtonClicked(View view){
+		Intent profileIntent = new Intent(this, UserTabActivity.class);
+		session = Session.getInstance(this);
+		user = session.getCurrentUser();
+		startActivityWithMatjiData(profileIntent, user);		
+	}
+	
+	public void onNotificationsButtonClicked(View view){
+		Intent notificationIntent = new Intent(this, UserTabActivity.class);
+		user = session.getCurrentUser();
+		startActivityWithMatjiData(notificationIntent, user);	
+	}
+	
+	public void onMessagesButtonClicked(View view){
+		Intent messageIntent = new Intent(this, UserTabActivity.class);
+		user = session.getCurrentUser();
+		startActivityWithMatjiData(messageIntent, user);	
+	}
+	
+	public void onNoticesButtonClicked(View view){
+		Intent noticesIntent = new Intent(this, NoticeActivity.class);
+		startActivity(noticesIntent);
+	}
+	
+	
+	public void onSyncButtonClicked(View view){
+		Log.d("Button", "Sync Clicked");
+	}
+	
+	public void onAboutButtonClicked(View view){
+		Log.d("Button", "About Clicked");
+	}
+	
+	public void onManualButtonClicked(View view){
+		Log.d("Button", "Manual Clicked");
 	}
 
+	public void onVersionButtonClicked(View view){
+		Log.d("Button", "Version Clicked");
+	}
+	
 	@Override
 	protected String titleBarText() {
 		return "SettingActivity";
