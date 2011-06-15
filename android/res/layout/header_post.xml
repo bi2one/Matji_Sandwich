@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#fff"
+	android:orientation="vertical">
+	<include
+		android:id="@+id/header_post_post_cell"
+		layout="@layout/adapter_post" />
+	<com.matji.sandwich.widget.SlideGalleryView
+		style="@style/DefaultWidthFill"
+		android:id="@+id/header_post_gallery" />
+</LinearLayout>
