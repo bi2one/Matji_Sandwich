@@ -52,6 +52,11 @@
   	<item name="android:drawableRight">@drawable/img_arrow02</item>
   </style>
   
+  <style name="SettingButton" parent="ETCButton">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">wrap_content</item>
+  </style>
+  
   <!-- title_bar.xml -->
   <style name="WindowTitleBackground" parent="android:WindowTitleBackground">    
 	<item name="android:background">@android:color/transparent</item>        
