@@ -31,11 +31,6 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.activity_settings);
 	}
 
-	@Override
-	protected String usedTitleBar() {
-		return null;
-	}
-
 	protected void onResume() {
 		super.onResume();
 		configureViews();
@@ -115,5 +110,22 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 			startActivity(noticesIntent);
 			break;
 		}
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "SettingActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

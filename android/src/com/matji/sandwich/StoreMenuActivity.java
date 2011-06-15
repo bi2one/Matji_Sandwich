@@ -5,6 +5,8 @@ import com.matji.sandwich.widget.StoreMenuListView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class StoreMenuActivity extends BaseActivity {
 	private Intent intent;
@@ -24,9 +26,21 @@ public class StoreMenuActivity extends BaseActivity {
 		listView.setActivity(this);
 		listView.requestReload();
 	}
+	
+	@Override
+	protected String titleBarText() {
+		return "StoreMenuActivity";
+	}
 
 	@Override
-	protected String usedTitleBar() {
-		return null;
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

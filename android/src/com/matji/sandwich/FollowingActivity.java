@@ -5,6 +5,8 @@ import com.matji.sandwich.widget.FollowingListView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class FollowingActivity extends BaseActivity {
 	private Intent intent;
@@ -34,7 +36,19 @@ public class FollowingActivity extends BaseActivity {
 	}
 	
 	@Override
-	protected String usedTitleBar() {
+	protected String titleBarText() {
 		return "FollowingActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

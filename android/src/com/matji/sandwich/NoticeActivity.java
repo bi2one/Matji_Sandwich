@@ -9,6 +9,8 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.*;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class NoticeActivity extends BaseActivity implements Requestable {
 	private static final int NOTICE_REQUEST = 1 ;
@@ -23,11 +25,6 @@ public class NoticeActivity extends BaseActivity implements Requestable {
 
 		manager = new HttpRequestManager(getApplicationContext(), this);
 		request();		
-	}
-
-	@Override
-	protected String usedTitleBar() {
-		return "NoticeActivity";
 	}
 	
 	private void request() {
@@ -44,5 +41,22 @@ public class NoticeActivity extends BaseActivity implements Requestable {
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.showToastMsg(getApplicationContext());
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "NoticeActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

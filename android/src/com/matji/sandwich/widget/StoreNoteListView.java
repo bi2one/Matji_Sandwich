@@ -1,11 +1,16 @@
 package com.matji.sandwich.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.matji.sandwich.R;
+import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.NoteAdapter;
+import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.StoreDetailInfo;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 
@@ -33,5 +38,19 @@ public class StoreNoteListView extends RequestableMListView implements OnClickLi
 	public void onListItemClick(int position) {}
 
 	@Override
-	public void onClick(View v) {}
+	public void onClick(View v) {
+		int position = Integer.parseInt((String)v.getTag());
+		StoreDetailInfo info = (StoreDetailInfo) getAdapterData().get(position);
+
+		switch(v.getId()){
+		case R.id.post_adapter_thumnail: case R.id.post_adapter_nick:
+			gotoUserPage(info);
+			break;
+		}
+	}
+	
+	protected void gotoUserPage(StoreDetailInfo info) {
+		Intent intent = new Intent(getActivity(), UserTabActivity.class);
+		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, info.getUser());
+	}	
 }

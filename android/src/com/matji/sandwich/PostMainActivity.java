@@ -1,6 +1,8 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.matji.sandwich.data.Post;
@@ -42,13 +44,31 @@ public class PostMainActivity extends MainActivity {
 	}
 
 	@Override
-	protected String usedTitleBar() {
-		return "PostMainActivity";
-	}
-
 	public void onResume() {
 		super.onResume();
 		
 		setInfo();
+	}
+
+	@Override
+	public void finish() {
+		super.finishWithMatjiData();
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "PostMainActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

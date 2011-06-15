@@ -3,6 +3,9 @@ package com.matji.sandwich;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
@@ -47,11 +50,6 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
 	}
 
-	@Override
-	protected String usedTitleBar() {
-		return null;
-	}
-	
 	protected void onResume() {
 		super.onResume();
 		mGpsManager.start();
@@ -109,6 +107,25 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 			storeItemizedOverlay.addOverlay(point);
 			mMapView.postInvalidate();
 		}
+	}
+	
+	@Override
+	protected String titleBarText() {
+		return "MainMapActivity";
+	}
+	
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		button.setText("Test");
+		return true;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		Log.d("Clicked", "Clicked");
+		
 	}
 
 	// public boolean dispatchTouchEvent(MotionEvent event) {

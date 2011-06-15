@@ -28,19 +28,23 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		setPage(1);
 	}
 
+	@Override
 	public HttpRequest request() {
 		postRequest.actionList(getPage(), getLimit());
 		return postRequest;
 	}
 
+	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		super.requestCallBack(tag, data);
 	}
 
+	@Override
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		super.requestExceptionCallBack(tag, e);
 	}
 
+	@Override
 	public void onListItemClick(int position) {
 		Post post = (Post) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), PostMainActivity.class);
@@ -48,6 +52,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	}
 
 
+	@Override
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
 		Post post = (Post) getAdapterData().get(position);

@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -59,11 +60,6 @@ public class GridGalleryActivity extends BaseActivity implements Requestable {
 		manager = new HttpRequestManager(this, this);
 		g = (GridView) findViewById(R.id.grid_gallery);
 		manager.request(this, request(), IMAGE_REQUEST);
-	}
-
-	@Override
-	protected String usedTitleBar() {
-		return null;
 	}
 
 	public HttpRequest request() {
@@ -122,5 +118,22 @@ public class GridGalleryActivity extends BaseActivity implements Requestable {
 		viewerIntent.putExtra("attach_file_ids", attachFileIds);
 		viewerIntent.putExtra("position", position);
 		startActivity(viewerIntent);
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "GridGalleryActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,6 +1,8 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.content.Intent;
@@ -36,11 +38,6 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 		initImageView();
 		swipeView.setCurrentPage(currentPage);
 		setImage(currentPage);
-	}
-
-	@Override
-	protected String usedTitleBar() {
-		return null;
 	}
 
 	private void initImageView() {
@@ -84,5 +81,22 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 			this.currentPage = currentPage;
 			setImage(currentPage);
 		}
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "ImageSliderActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

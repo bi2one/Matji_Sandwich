@@ -11,6 +11,14 @@
 			android:id="@+id/user_cell_grade"
 			android:layout_toRightOf="@id/user_cell_thumnail" />
 		<TextView
+			style="@style/user_cell_PointText"
+			android:id="@+id/user_cell_point_text"
+			android:layout_toRightOf="@id/user_cell_grade" />
+		<TextView
+			style="@style/user_cell_Point"
+			android:id="@+id/user_cell_point"
+			android:layout_toRightOf="@id/user_cell_point_text" />
+		<TextView
 			style="@style/user_cell_Title"
 			android:id="@+id/user_cell_title"
 			android:layout_toRightOf="@id/user_cell_thumnail"

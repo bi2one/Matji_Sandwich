@@ -65,8 +65,20 @@ public class StoreTabActivity extends BaseTabActivity {
 		super.finishWithMatjiData();
 	}
 
-	@Override
-	protected String usedTitleBar() {
-		return "StoreTabActivity";
-	}
+//	@Override
+//	protected String usedTitleBar() {
+//		return "StoreTabActivity";
+//	}
+//	
+//	@Override
+//	protected boolean setTitleBarButton(Button button) {
+//		button.setText("Info");
+//		return true;
+//	}
+//
+//	@Override
+//	protected void onTitleBarItemClicked(View view) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

@@ -71,6 +71,10 @@
   <string name="default_string_recieved_message">받은 쪽지</string>
   <string name="default_string_write_note">영업시간, 에약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
   
+  <!-- grade -->
+  <string name="grade_point">활동점수:</string>
+  <string name="grade_diamond">다이아몬드</string>
+  
   <!-- StoreMainActivity  -->
   <string name="store_main_unlike_store">내가 좋아하는 맛집</string>
   <string name="store_main_like_store">좋아요</string>

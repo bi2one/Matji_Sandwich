@@ -1,6 +1,8 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -29,10 +31,22 @@ public class StoreDefaultInfoActivity extends BaseActivity {
 		tel.setText(store.getTel());
 		website.setText(store.getWebsite());
 	}
-	
+
 	@Override
-	protected String usedTitleBar() {
+	protected String titleBarText() {
 		// TODO Auto-generated method stub
-		return null;
+		return "StoreDefaultInfoActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

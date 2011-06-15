@@ -5,6 +5,8 @@ import com.matji.sandwich.widget.StorePostListView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class StorePostListActivity extends BaseActivity {
 	private Intent intent;
@@ -23,9 +25,21 @@ public class StorePostListActivity extends BaseActivity {
 		listView.setActivity(this);
 		listView.requestReload();		
 	}
-	
+
 	@Override
-	protected String usedTitleBar() {
-		return null;
+	protected String titleBarText() {
+		return "StorePostListActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

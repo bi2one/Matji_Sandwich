@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.Button;
 import android.content.Intent;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -71,11 +72,6 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		view3.setActivity(this);
 		
 		swipeView.addOnScrollListener(this);
-	}
-
-	@Override
-	protected String usedTitleBar() {
-		return null;
 	}
 	
 	public void onResume() {
@@ -181,5 +177,22 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "PostSliderActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

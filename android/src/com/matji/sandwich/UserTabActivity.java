@@ -6,6 +6,8 @@ import com.matji.sandwich.data.User;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 
 public class UserTabActivity extends BaseTabActivity {
@@ -63,9 +65,20 @@ public class UserTabActivity extends BaseTabActivity {
 				.setContent(moreIntent));
 	}
 	
-	@Override
-	protected String usedTitleBar() {
-		return "UserTabActivity";
-	}
-
+//	@Override
+//	protected String usedTitleBar() {
+//		return "UserTabActivity";
+//	}
+//	
+//	@Override
+//	protected boolean setTitleBarButton(Button button) {
+//		button.setText("Info");
+//		return true;
+//	}
+//
+//	@Override
+//	protected void onTitleBarItemClicked(View view) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

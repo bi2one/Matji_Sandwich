@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.view.View;
+import android.widget.Button;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,11 +72,6 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 		swipeView.addOnScrollListener(this);
 	}
 
-	@Override
-	protected String usedTitleBar() {
-		return null;
-	}
-	
 	public void onResume(){
 		super.onResume();
 		if (session.getToken() == null && privateMode == true){
@@ -144,5 +140,22 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 			}
 		}
 
+	}
+
+	@Override
+	protected String titleBarText() {
+		return "StoreSliderActivity";
+	}
+
+	@Override
+	protected boolean setTitleBarButton(Button button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void onTitleBarItemClicked(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }
