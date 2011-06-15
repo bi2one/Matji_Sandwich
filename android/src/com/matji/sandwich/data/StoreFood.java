@@ -112,5 +112,4 @@ public class StoreFood extends MatjiData{
 	public User getUser() {
 		return user;
 	}
-	
 }

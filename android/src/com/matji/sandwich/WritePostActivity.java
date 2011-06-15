@@ -19,16 +19,23 @@ public class WritePostActivity extends BaseActivity implements Requestable {
 	private PostHttpRequest postHttpRequest;
 	EditText postField;
 	EditText tagsField;
-	
-	public void onCreate(Bundle savedInstanceState) {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_write_post);
+		
 		postField = (EditText) findViewById(R.id.post_field);
 		tagsField = (EditText) findViewById(R.id.tags_field);
 		manager = new HttpRequestManager(getApplicationContext(), this);
-
 	}
-
+	
+	@Override
+	protected String usedTitleBar() {
+		// TODO
+		return "WritePostActivity";
+	}
+	
 	public void imgButtonClicked(View v) {
 		
 	}
@@ -51,7 +58,7 @@ public class WritePostActivity extends BaseActivity implements Requestable {
 		}
 		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
 	}
-	
+
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch(tag) {
 			case POST_WRITE_REQUEST:
@@ -60,7 +67,7 @@ public class WritePostActivity extends BaseActivity implements Requestable {
 				break;
 		}
 	}
-
+	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
 	}

@@ -3,16 +3,17 @@ package com.matji.sandwich;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.UserPostListView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class UserPostActivity extends BaseActivity {
+public class UserPostListActivity extends BaseActivity {
 	private Intent intent;
 	private int user_id;		
 	private UserPostListView listView;
-    
-	public void onCreate(Bundle savedInstanceState) {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_post);
 		
@@ -23,5 +24,10 @@ public class UserPostActivity extends BaseActivity {
 		listView.setUserId(user_id);
 		listView.setActivity(this);
 		listView.requestReload();
+	}
+	
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 }

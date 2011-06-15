@@ -39,13 +39,15 @@ public class StoreFoodHttpRequest extends HttpRequest {
 		postHashtable.put("store_food_id", store_food_id);
 	}
 	
-	public void actionList(int store_id) {
+	public void actionList(int store_id, int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
 		parser = new StoreFoodParser(context); 
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
+		getHashtable.put("page", page + "");
+		getHashtable.put("limit", limit + "");
 	}
 
 	public ArrayList<MatjiData> request() throws MatjiException {

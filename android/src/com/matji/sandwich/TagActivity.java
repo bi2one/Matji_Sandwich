@@ -1,17 +1,25 @@
 package com.matji.sandwich;
 
+import android.app.Activity;
+import android.widget.TextView;
+
 import com.matji.sandwich.base.BaseActivity;
 
-import android.os.Bundle;
-import android.widget.*;
-
 public class TagActivity extends BaseActivity {
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
+	@Override
+	protected void onChildTitleChanged(Activity childActivity,
+			CharSequence title) {
+		// TODO Auto-generated method stub
+		super.onChildTitleChanged(childActivity, title);
 
 		TextView textview = new TextView(this);
 		textview.setText("sadfasdfas");
+
 		setContentView(textview);
-		
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 }

@@ -43,7 +43,6 @@
   </style>
   
   <!-- everywhere used style -->
-  
   <style name="ETCButton">
   	<item name="android:layout_width">150dp</item>
   	<item name="android:layout_height">40dp</item>
@@ -51,6 +50,11 @@
   	<item name="android:textSize">16dp</item>
   	<item name="android:gravity">left|center</item>
   	<item name="android:drawableRight">@drawable/img_arrow02</item>
+  </style>
+  
+  <!-- title_bar.xml -->
+  <style name="WindowTitleBackground" parent="android:WindowTitleBackground">    
+	<item name="android:background">@android:color/transparent</item>        
   </style>
   
   <!-- activity_store_main.xml -->
@@ -61,7 +65,7 @@
   <style name="store_main_Thumnail">
   	<item name="android:background">@drawable/img_matji_default</item>
 	<item name="android:layout_width">100dp</item>
-	<item name="android:layout_height">100dp</item>
+	<item name="android:layout_height">90dp</item>
 	<item name="android:layout_marginRight">6dp</item>
 	<item name="android:layout_marginBottom">6dp</item>
 	<item name="android:scaleType">centerCrop</item>

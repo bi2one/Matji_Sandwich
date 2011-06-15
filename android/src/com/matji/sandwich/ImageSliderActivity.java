@@ -1,17 +1,13 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.app.Activity;
 import android.content.Intent;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
-import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.SwipeView;
 
 public class ImageSliderActivity extends BaseActivity implements OnScrollListener {
@@ -22,11 +18,12 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 	private SwipeView swipeView;
 	private MatjiImageDownloader downloader;
 
-
-	public void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image_slider);
-
+		
 		intent = getIntent();
 		attachFileIds = intent.getIntArrayExtra("attach_file_ids");
 		position = intent.getIntExtra("position", 0);
@@ -39,6 +36,11 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 		initImageView();
 		swipeView.setCurrentPage(currentPage);
 		setImage(currentPage);
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 
 	private void initImageView() {

@@ -72,11 +72,11 @@ public class PostHttpRequest extends HttpRequest {
     	
     	getHashtable.clear();
     	getHashtable.put("page", "" + page);
-    	getHashtable.put("limit", "" + limit);    	
-		getHashtable.put("include", "user,store");
-    }
+    	getHashtable.put("limit", "" + limit);
+    	getHashtable.put("include", "user,store");
+    }    
     
-    public void actionStoreList(int store_id, int page, int limit){
+    public void actionStoreList(int store_id, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
     	parser = new PostParser(context);
@@ -84,9 +84,9 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("store_id",store_id + "");
     	getHashtable.put("page", page+"");
-    	getHashtable.put("limit", limit+"");  	
-		getHashtable.put("include", "user,store");
-    }
+    	getHashtable.put("limit", limit+"");
+    	getHashtable.put("include", "user,store");
+    }    
     
     public void actionUserList(int user_id, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
@@ -96,8 +96,8 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("user_id", user_id + "");
     	getHashtable.put("page", page+"");
-    	getHashtable.put("limit", limit+"");  	
-		getHashtable.put("include", "user,store");
+    	getHashtable.put("limit", limit+"");
+    	getHashtable.put("include", "user,store");
     }
     
     public void actionMyList(int page , int limit){
@@ -108,9 +108,8 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
-    	getHashtable.put("include", "user");
+    	getHashtable.put("include", "user,store");
     }
-    
     
     public void actionNearbyList(double lat_ne, double lat_sw, double lng_sw, double lng_ne, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
@@ -124,9 +123,9 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("lng_sw", lng_sw + "");
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
-    	getHashtable.put("include", "user");
+    	getHashtable.put("include", "user,store");
     }
-    
+
     public void actionSearch(String keyword, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "search";
@@ -136,7 +135,7 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("q", keyword);
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
-    	getHashtable.put("include", "user");
+    	getHashtable.put("include", "user,store");
     }
     
     public ArrayList<MatjiData> request() throws MatjiException {

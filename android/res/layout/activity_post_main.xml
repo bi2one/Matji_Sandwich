@@ -6,5 +6,5 @@
 	android:orientation="vertical">
 	<com.matji.sandwich.widget.CommentListView
 		style="@style/DefaultFill"
-		android:id="@+id/post_main_comment_list_view" />
+		android:id="@+id/post_main_comment_list" />
 </LinearLayout>

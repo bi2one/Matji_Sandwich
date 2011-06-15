@@ -1,15 +1,33 @@
 package com.matji.sandwich.base;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.data.MatjiData;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Window;
+import android.widget.TextView;
 
-
-public class BaseActivity extends Activity {
-   
+public abstract class BaseActivity extends Activity {
+	protected abstract String usedTitleBar();
+	
+	@Override
+	public void setContentView(int layoutResID) {
+		// TODO Auto-generated method stub
+		String titleText = usedTitleBar();
+		if (titleText != null) {
+			requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+			super.setContentView(layoutResID);
+			getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
+			TextView titleView = (TextView) findViewById(R.id.title);
+			titleView.setText(titleText);
+		} else {
+			super.setContentView(layoutResID);
+		}
+	}
+		
 	public void finishWithMatjiData() {
 		// TODO Auto-generated method stub
 		SharedMatjiData.getInstance().pop();
@@ -38,7 +56,7 @@ public class BaseActivity extends Activity {
 		Log.d("Matji", "START ACTIVITY WITH");
 		// TODO Auto-generated method stub
 		SharedMatjiData.getInstance().push(data);
-		super.startActivity(intent);
+		super.startActivity(intent);		
 	}
 
 	public void startActivityForResultWithMatjiData(Intent intent, int requestCode, MatjiData data) {

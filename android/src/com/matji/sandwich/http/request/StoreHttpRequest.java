@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.StoreDetailInfoParser;
 import com.matji.sandwich.http.parser.StoreParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
@@ -29,7 +30,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("q",keyword);
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user,tag");
+    	getHashtable.put("include", "attach_file,user,tag,store_foods");
     }
     
     public void actionCount(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String type){
@@ -51,7 +52,7 @@ public class StoreHttpRequest extends HttpRequest {
     		
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
-    	getHashtable.put("include", "attach_file,user,store_foods,tags");
+    	getHashtable.put("include", "attach_file,user,tags,store_foods");
     }
     
     public void actionNew(String name, String address, int lat, int lng){
@@ -87,7 +88,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user,tags");
+    	getHashtable.put("include", "attach_file,user,tags,store_foods");
     }
 
     public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit){
@@ -103,7 +104,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("order", "like_count DESC,reg_user_id ASC");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user,tags");
+    	getHashtable.put("include", "attach_file,user,tag,store_foods");
     	
     }
     
@@ -116,18 +117,19 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("user_id", user_id+ "");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user,tags");
+    	getHashtable.put("include", "attach_file,user,tag,store_foods");
     }
 
     public void actionDetailList(int store_id, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "detail_list";
-    	parser = new StoreParser(context);
+    	parser = new StoreDetailInfoParser(context);
     	
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
+    	getHashtable.put("include", "user");
     }
     
     public void actionDetailNew(int store_id, String note){

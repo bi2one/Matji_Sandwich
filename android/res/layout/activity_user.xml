@@ -6,5 +6,5 @@
 	android:orientation="vertical">
 	<com.matji.sandwich.widget.UserPostListView
 		style="@style/DefaultFill"
-		android:id="@+id/user_post_list_view" />
+		android:id="@+id/user_post_list" />
 </LinearLayout>

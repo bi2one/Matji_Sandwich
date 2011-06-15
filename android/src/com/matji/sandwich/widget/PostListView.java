@@ -44,7 +44,6 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	public void onListItemClick(int position) {
 		Post post = (Post) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), PostMainActivity.class);
-
 		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post);
 	}
 

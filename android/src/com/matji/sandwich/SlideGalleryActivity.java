@@ -11,7 +11,6 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,16 +30,21 @@ public class SlideGalleryActivity extends BaseActivity implements Requestable {
 	private static final int IMAGE_REQUEST = 0;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);intent = getIntent();
 		setContentView(R.layout.activity_slide_gallery);
-
-		intent = getIntent();
+		
 		store_id = intent.getIntExtra("store_id", 0);
 		request = new AttachFileHttpRequest(this);
 		manager = new HttpRequestManager(this, this);
 		g = (Gallery) findViewById(R.id.slide_gallery);
 		manager.request(this, request(), IMAGE_REQUEST);
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 
 	public HttpRequest request() {

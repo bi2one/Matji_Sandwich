@@ -37,38 +37,29 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private TextView followMessageText;
 	private TextView followerCountText;
 	private TextView followingCountText;
-	
+
 	private Button followerButton;
 	private Button followingButton;
-	
+
 	private Button jjimStoreButton;
 	private Button memoButton;
-	
+
 	/* request tags */
 	private static final int FOLLOW_REQUEST = 1;
 	private static final int UN_FOLLOW_REQUEST = 2;
 
-	public void onCreate(Bundle savedInstanceState){
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_main);
-
-		initInfo();
-	}
-
-	public void onResume() {
-		super.onResume();
 		
-		followButton.setClickable(true);		
-	}
-	
-	public void initInfo() {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		user = (User) SharedMatjiData.getInstance().top();
-
 		manager = new HttpRequestManager(this, this);
 		session = Session.getInstance(this);
-		dbProvider = DBProvider.getInstance(this);		
-		
+		dbProvider = DBProvider.getInstance(this);
+
 		gradeText = (TextView) findViewById(R.id.user_cell_grade);
 		titleText = (TextView) findViewById(R.id.user_cell_title);
 		introText = (TextView) findViewById(R.id.user_cell_intro);
@@ -76,28 +67,28 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		followMessageText = (TextView) findViewById(R.id.user_main_follow_message);
 		followerCountText = (TextView) findViewById(R.id.user_main_follower_count);
 		followingCountText = (TextView) findViewById(R.id.user_main_following_count);
-		
+
 		followerButton = (Button) findViewById(R.id.user_main_follower_btn);
 		followingButton = (Button) findViewById(R.id.user_main_following_btn);
 		jjimStoreButton = (Button) findViewById(R.id.user_main_jjim_store_btn);
-//		activityAreaButton = (Button) findViewById(R.id.user_main_activity_area_btn);
+		//		activityAreaButton = (Button) findViewById(R.id.user_main_activity_area_btn);
 		memoButton = (Button) findViewById(R.id.user_main_memo_btn);
-//		imageButton = (Button) findViewById(R.id.user_main_image_btn);
-//		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
-//		urlButton = (Button) findViewById(R.id.user_main_url_btn);
-//		sentMessageButton = (Button) findViewById(R.id.user_main_sent_message_btn);
-//		recievedMessageButton = (Button) findViewById(R.id.user_main_recieved_message_btn);
+		//		imageButton = (Button) findViewById(R.id.user_main_image_btn);
+		//		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
+		//		urlButton = (Button) findViewById(R.id.user_main_url_btn);
+		//		sentMessageButton = (Button) findViewById(R.id.user_main_sent_message_btn);
+		//		recievedMessageButton = (Button) findViewById(R.id.user_main_recieved_message_btn);
 
 		/* Set User Image */
 		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_cell_thumnail));
-		
+
 		titleText.setText(user.getTitle());
 		introText.setText(user.getIntro());
 
 		setInfo();
 	}
 
-	public void setInfo() {
+	private void setInfo() {
 		/* Set Grade */
 		gradeText.setText("다이아몬드"); // TODO		
 
@@ -115,15 +106,27 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		followerButton.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
 		followingButton.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
 		jjimStoreButton.setText(getCountNumberOf(R.string.user_main_jjim_store, user.getStoreCount()));
-//		activityAreaButton.setText(getString(R.string.user_main_activity_area) + ": 한국");
+		//		activityAreaButton.setText(getString(R.string.user_main_activity_area) + ": 한국");
 		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
-//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getAttachFiles().size()));
-//		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
-//		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
-//		sentMessageButton.setText(getCountNumberOf(R.string.default_string_sent_message, 0));
-//		recievedMessageButton.setText(getCountNumberOf(R.string.default_string_recieved_message,0));
-		((UserTabActivity)getParent()).syncUser(user);
+		//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getAttachFiles().size()));
+		//		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
+		//		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
+		//		sentMessageButton.setText(getCountNumberOf(R.string.default_string_sent_message, 0));
+		//		recievedMessageButton.setText(getCountNumberOf(R.string.default_string_recieved_message,0));
+
 	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
+	}
+	
+	public void onResume() {
+		super.onResume();
+
+		followButton.setClickable(true);		
+	}
+
 
 	private void followRequest() {
 		if (request == null || !(request instanceof FollowingHttpRequest)) {
@@ -145,13 +148,13 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		user.setFollowerCount(user.getFollowerCount() - 1);
 	}
 
-	
+
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub
 		setInfo();
 	}
 
-	
+
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		// TODO Auto-generated method stub
 		e.showToastMsg(getApplicationContext());
@@ -159,8 +162,8 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	public void onFollowButtonClicked(View view) {
 		if (session.isLogin()){
-			followButton.setClickable(false);
 			if (session.getCurrentUser().getId() != user.getId()) {
+				followButton.setClickable(false);
 				if (dbProvider.isExistFollowing(user.getId())) {
 					dbProvider.deleteFollowing(user.getId());
 					// api request
@@ -181,7 +184,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		Intent intent = new Intent(this, FollowingActivity.class);
 		intent.putExtra("user_id", user.getId());
 		intent.putExtra("type", FollowingListType.FOLLOWER);
-		
+
 		startActivity(intent);
 	}
 
@@ -189,29 +192,30 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		Intent intent = new Intent(this, FollowingActivity.class);
 		intent.putExtra("user_id", user.getId());
 		intent.putExtra("type", FollowingListType.FOLLOWING);
-		
+
 		startActivity(intent);
 	}
-		
+
 	public void onJjimStoreButtonClicked(View view) {
+		tabHost.setCurrentTab(UserTabActivity.JJIM_STORE_PAGE);
 	}
 
-//	public void onActivityAreaButtonClicked(View view) {
-//	}
+	//	public void onActivityAreaButtonClicked(View view) {
+	//	}
 
 	public void onMemoButtonClicked(View view) {
 		tabHost.setCurrentTab(UserTabActivity.MEMO_PAGE);
 	}
 
-//	public void onImageButtonClicked(View view) {
-//
-//	}
-//
-//	public void onTagButtonClicked(View view) {
-//
-//	}
-//
-//	public void onUrlButtonClicked(View view) {
-//
-//	}
+	//	public void onImageButtonClicked(View view) {
+	//
+	//	}
+	//
+	//	public void onTagButtonClicked(View view) {
+	//
+	//	}
+	//
+	//	public void onUrlButtonClicked(View view) {
+	//
+	//	}
 }

@@ -4,11 +4,8 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.*;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,10 +22,16 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 	private Session session;
 	private User user;
 
-	public void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
+	}
 
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 
 	protected void onResume() {
@@ -93,18 +96,17 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 			Intent profileIntent = new Intent(this, UserTabActivity.class);
 			session = Session.getInstance(this);
 			user = session.getCurrentUser();
-			profileIntent.putExtra("user", (Parcelable)user);
-			startActivity(profileIntent);
+			startActivityWithMatjiData(profileIntent, user);
 			break;
 		case R.id.notifications :
 			Intent notificationIntent = new Intent(this, UserTabActivity.class);
-			notificationIntent.putExtra("user", (Parcelable)user);
-			startActivity(notificationIntent);
+			user = session.getCurrentUser();
+			startActivityWithMatjiData(notificationIntent, user);
 			break;
 		case R.id.messages :
 			Intent messageIntent = new Intent(this, UserTabActivity.class);
-			messageIntent.putExtra("user", (Parcelable)user);
-			startActivity(messageIntent);
+			user = session.getCurrentUser();
+			startActivityWithMatjiData(messageIntent, user);
 			break;
 		case R.id.notices :
 			Intent noticesIntent = new Intent(this, NoticeActivity.class);

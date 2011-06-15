@@ -2,12 +2,12 @@ package com.matji.sandwich;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.location.Location;
 import android.util.Log;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
+import android.os.Bundle;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.CoordinateRegion;
 import com.matji.sandwich.data.MatjiData;
@@ -24,6 +24,7 @@ import com.matji.sandwich.map.MatjiMapCenterListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener, MatjiMapCenterListener, Requestable{
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
@@ -166,6 +167,13 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    
 
     }
+
+
+	@Override
+	protected String usedTitleBar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     
 	

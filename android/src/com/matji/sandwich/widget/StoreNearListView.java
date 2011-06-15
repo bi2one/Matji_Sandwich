@@ -3,7 +3,6 @@ package com.matji.sandwich.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 

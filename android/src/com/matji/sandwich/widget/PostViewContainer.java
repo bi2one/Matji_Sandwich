@@ -2,7 +2,6 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;

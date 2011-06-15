@@ -28,12 +28,7 @@ public class UserHttpRequest extends HttpRequest {
 		getHashtable.clear();
 		getHashtable.put("page", page+"");
 		getHashtable.put("limit", limit+"");
-	}
-
-	public void actionList(int page, int limit, boolean requestStores, boolean requestFiles) {
-		actionList(page, limit);
-		if (requestStores) getHashtable.put("include", "stores"); 
-		if (requestFiles) getHashtable.put("include", "attach_files"); 
+		getHashtable.put("include", "stores,attach_files"); 
 	}
 
 	public void actionShow(int user_id){
@@ -43,12 +38,7 @@ public class UserHttpRequest extends HttpRequest {
 
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");
-	}
-
-	public void actionShow(int user_id, boolean requestStores, boolean requestFiles) {
-		actionShow(user_id);
-		if (requestStores) getHashtable.put("include", "stores"); 
-		if (requestFiles) getHashtable.put("include", "attach_files"); 
+		getHashtable.put("include", "stores,attach_files");
 	}
 
 	public void actionRankingList() {

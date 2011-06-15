@@ -1,13 +1,20 @@
 package com.matji.sandwich;
 
+import android.app.Activity;
+
 import com.matji.sandwich.base.BaseActivity;
 
-import android.app.Activity;
-import android.os.Bundle;
-
 public class StoreMoreActivity extends BaseActivity {
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
+	@Override
+	protected void onChildTitleChanged(Activity childActivity,
+			CharSequence title) {
+		// TODO Auto-generated method stub
+		super.onChildTitleChanged(childActivity, title);
 		setContentView(R.layout.main);
+	}
+
+	@Override
+	protected String usedTitleBar() {
+		return null;
 	}
 }

@@ -1,22 +1,20 @@
 package com.matji.sandwich.adapter;
 
-import android.view.View;
-import android.view.ViewGroup;
+import com.matji.sandwich.data.StoreFood;
 
-public class FoodAdapter extends MatjiBaseAdapter {
-    public View getView(int position, View convertView, ViewGroup parent) {
-	return null;
-    }
+import android.content.Context;
 
-    public long getItemId(int position) {
-	return 0;
-    }
+public class FoodAdapter extends DefaultAdapter {
 
-    public Object getItem(int position) {
-	return null;
-    }
+	public FoodAdapter(Context context) {
+		super(context);
+	}
 
-    public int getCount() {
-	return 0;
-    }
+	@Override
+	protected String getText(int position) {
+		// TODO Auto-generated method stub
+
+		StoreFood storeFood = (StoreFood) data.get(position);
+		return storeFood.getFood().getName();
+	}
 }

@@ -30,7 +30,7 @@ public class UserListView extends RequestableMListView implements View.OnClickLi
 	}
 
 	public HttpRequest request() {
-		((UserHttpRequest) request).actionList(getPage(), getLimit(), true, true);
+		((UserHttpRequest) request).actionList(getPage(), getLimit());
 		return request;
 	}
 

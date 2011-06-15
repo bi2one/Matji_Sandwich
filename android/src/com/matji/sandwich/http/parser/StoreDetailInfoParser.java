@@ -18,6 +18,9 @@ public class StoreDetailInfoParser extends MatjiDataParser {
 		info.setId(getInt(object, "id"));
 		info.setUserId(getInt(object, "user_id"));
 		info.setStoreId(getInt(object, "store_id"));
+		info.setCreatedAt(getString(object, "created_at"));
+		info.setUpdatedAt(getString(object, "updated_at"));
+		info.setNote(getString(object, "note"));
 		
 		/* Set Store */
 		StoreParser storeParser = new StoreParser(context);

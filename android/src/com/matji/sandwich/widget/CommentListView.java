@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.CommentAdapter;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -58,8 +58,6 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	protected void gotoUserPage(int position) { 
 		Comment comment = (Comment)getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
-
-		intent.putExtra("user", (Parcelable)comment.getUser());
-		getActivity().startActivity(intent);
+		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, comment.getUser());
 	}
 }

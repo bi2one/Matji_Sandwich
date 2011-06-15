@@ -1,20 +1,22 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.session.Session;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 public class LoginActivity extends BaseActivity implements Loginable {
-	private HttpRequestManager manager;
-	public void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+	}
 
+	protected String usedTitleBar() {
+		return "LoginActivity";
 	}
 
 	public void loginButtonClicked(View v) {
@@ -38,5 +40,6 @@ public class LoginActivity extends BaseActivity implements Loginable {
 	public void loginFailed() {
 		// show toast -> id, pw 확인해라
 	}
+
 
 }
