@@ -2,8 +2,8 @@
 <RelativeLayout
 	android:id="@+id/header"
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="wrap_content"
-	android:layout_width="fill_parent"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
 	android:background="#d4e9a9">
 	<TextView
 		android:id="@+id/title"
@@ -21,7 +21,9 @@
 		android:id="@+id/title_btn"
 		android:layout_width="wrap_content"
 		android:layout_height="35dp"
+		android:layout_margin="5dp"
 		android:textSize="16dp"
 		android:visibility="gone"
-		android:layout_alignParentRight="true" />
+		android:layout_alignParentRight="true"
+		android:gravity="center" />
 </RelativeLayout>
