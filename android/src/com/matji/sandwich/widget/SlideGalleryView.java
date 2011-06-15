@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
+import com.matji.sandwich.ImageSliderActivity;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.adapter.SlideImageAdapter;
 import com.matji.sandwich.data.AttachFile;
@@ -10,9 +11,11 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.util.DisplayUtil;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +30,8 @@ public class SlideGalleryView extends Gallery implements Requestable {
 
 	private int[] attachFileIds;
 	private int post_id;
-	private static final int IMAGE_REQUEST = 0;
+	private static final int SPACING = DisplayUtil.PixelFromDP(1);
+	private static final int IMAGE_REQUEST = 1;
 
 	
 	public SlideGalleryView(Context context, AttributeSet attr) {
@@ -36,6 +40,7 @@ public class SlideGalleryView extends Gallery implements Requestable {
 		
 		request = new AttachFileHttpRequest(context);
 		manager = new HttpRequestManager(context, this);
+		setSpacing(SPACING);
 	}
 
 	public void setPostId(int post_id) {
@@ -71,12 +76,19 @@ public class SlideGalleryView extends Gallery implements Requestable {
 		setAdapter(adapter);
 		setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				Log.d("Matji", "onItemClick | SlideGalleryView");
+				callImageViewer(position);
 			}
 		});
 	}
-
+	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(context);
+	}
+	
+	public void callImageViewer(int position) { 
+		Intent viewerIntent = new Intent(activity, ImageSliderActivity.class);
+		viewerIntent.putExtra("attach_file_ids", attachFileIds);
+		viewerIntent.putExtra("position", position);
+		activity.startActivity(viewerIntent);
 	}
 }
