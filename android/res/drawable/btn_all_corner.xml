@@ -9,6 +9,9 @@
 			<stroke
 				android:width="1px"
 				android:color="#dddddd" />
+			<corners
+				android:radius="3dp"
+				/>
 		</shape>
 	</item>
 
@@ -20,6 +23,9 @@
 			<stroke
 				android:width="1px"
 				android:color="#dddddd" />
+			<corners
+				android:radius="3dp"
+				/>
 		</shape>
 	</item>
 
@@ -30,6 +36,9 @@
 			<stroke
 				android:width="1px"
 				android:color="#dddddd" />
+			<corners
+				android:radius="3dp"
+				 />
 		</shape>
 	</item>
 </selector>

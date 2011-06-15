@@ -53,6 +53,7 @@
   </style>
   
   <style name="SettingButton" parent="ETCButton">
+  	<item name="android:background">@drawable/btn_right_angle</item>
   	<item name="android:layout_width">fill_parent</item>
   	<item name="android:layout_height">wrap_content</item>
   </style>

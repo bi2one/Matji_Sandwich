@@ -2,75 +2,131 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/setting_layout" 
 	style="@style/DefaultFill"		
-	android:padding="20dp">
+	android:padding="10dp">
 
-	<RelativeLayout android:id="@+id/user" 
-		style="@style/DefaultWidthFill">
-		<Button android:id="@+id/profile" 
-			style="@style/DefaultWidthFill"
-			android:background="@drawable/btn_top_left_corner"
-			android:padding="5dp"
-			android:visibility="gone"
-			android:text="My Profile" />
-		<Button android:id="@+id/notifications"
-			style="@style/DefaultWrap"
-			android:visibility="gone" 
-			android:layout_below="@id/profile" 
-			android:paddingTop="10dp"
-			android:paddingBottom="10dp"
-			android:text="Notifications" />
-		<Button android:id="@+id/messages" 
-			style="@style/DefaultWrap" 
-			android:visibility="gone"
-			android:layout_below="@id/notifications" 
-			android:text="Messages" />
-	</RelativeLayout>
+	<ScrollView
+		style="@style/DefaultFill"
+		android:fadingEdgeLength="5dp">
+		
+		<!-- Wrapper -->
+		<LinearLayout
+			android:orientation="vertical"
+			style="@style/DefaultFill">
+			
+			<!-- User Section -->
+			<LinearLayout
+				android:layout_marginBottom="20dp"
+				android:orientation="vertical"
+				android:visibility="gone" 
+				android:id="@+id/user_settings" 
+				style="@style/DefaultWidthFill">
+				
+				<Button android:id="@+id/profile" 
+					style="@style/SettingButton"
+					android:background="@drawable/btn_top_corner"
+					android:padding="10dp"
+					android:onClick="onProfileButtonClicked"
+					android:text="My Profile" />
+				<Button android:id="@+id/notifications"
+					style="@style/SettingButton"
+					android:onClick="onProfileButtonClicked"
+					android:padding="10dp"
+					android:text="Notifications" />
+				<Button android:id="@+id/messages" 
+					style="@style/SettingButton"
+					android:padding="10dp"
+					android:onClick="onNotificationsButtonClicked"
+					android:background="@drawable/btn_bottom_corner" 
+					android:text="Messages" />
+			</LinearLayout>
+	
+			<!-- Notice Section -->
+			<LinearLayout 
+				android:layout_marginBottom="20dp"
+				android:orientation="vertical"
+				style="@style/DefaultWidthFill">
+				<Button android:id="@+id/notices"
+					android:padding="10dp"
+					style="@style/SettingButton"
+					android:background="@drawable/btn_all_corner"
+					android:onClick="onNoticesButtonClicked"			 
+					android:text="Notices"/>
+			</LinearLayout>
+			
+			
+			<!-- Sync Section -->
+			<LinearLayout 
+				android:layout_marginBottom="20dp"
+				android:orientation="vertical"
+				style="@style/DefaultWidthFill">
+				<Button android:id="@+id/sync"
+						android:padding="10dp"
+						style="@style/SettingButton" 
+						android:background="@drawable/btn_all_corner"
+						android:onClick="onSyncButtonClicked"
+						android:text="Sync"/>
+			</LinearLayout>
+			
+			<!-- Default Section -->
+			<LinearLayout 
+				android:layout_marginBottom="20dp"
+				android:orientation="vertical"
+				style="@style/DefaultWidthFill">
+				
+				<Button android:id="@+id/manual"
+					android:padding="10dp"
+					style="@style/SettingButton"
+					android:background="@drawable/btn_top_corner"
+					android:onClick="onManualButtonClicked" 
+					android:text="manual"/>
+					
+				<Button android:id="@+id/version"
+					android:padding="10dp"
+					style="@style/SettingButton" 
+					android:onClick="onVersionButtonClicked"
+					android:text="Version"/>
+					
+				
+				<RelativeLayout
+					style="@style/SettingButton"
+					android:padding="10dp"
+					android:background="@drawable/btn_bottom_corner"
+					android:onClick="onAboutButtonClicked">
+					<TextView android:id="@+id/about"
+						style="@style/DefaultWrap"
+						android:text="About"/>
+					<TextView
+						style="@style/DefaultWrap"
+						android:layout_marginLeft="80dp"						
+						android:text="BananaWiki"/>
+				</RelativeLayout>	 
+						
+			</LinearLayout>
+		
+			<LinearLayout android:id="@+id/login_settings"
+				style="@style/DefaultWidthFill">
+								
+				<Button android:id="@+id/signin" 
+					style="@style/DefaultWidthFill" 
+					android:onClick="loginButtonClicked"
+					android:layout_weight="1"
+					android:text="로그인" 
+					android:layout_alignParentLeft="true" />
+				<Button android:id="@+id/signout" 
+					style="@style/DefaultWidthFill"
+					android:onClick="logoutButtonClicked" 
+					android:layout_weight="1" 
+					android:text="로그아웃" />
+				<Button android:id="@+id/signup" 
+					style="@style/DefaultWidthFill"
+					android:onClick="signupButtonClicked" 
+					android:layout_weight="1" 
+					android:text="회원가입"
+					android:layout_alignParentRight="true" />
+			</LinearLayout>
+		</LinearLayout>
+	
+	</ScrollView>
 
-	<RelativeLayout android:id="@+id/settings"
-		style="@style/DefaultWidthFill"
-		android:layout_below="@id/user"			
-		android:paddingTop="10dp"
-		android:paddingBottom="10dp">
-		<Button android:id="@+id/notices"
-			style="@style/DefaultWidthFill" 
-			android:text="Notices"/>
-		<Button android:id="@+id/sync"
-			style="@style/DefaultWidthFill" 
-			android:text="Sync"
-			android:layout_below="@id/notices"/>
-		<Button android:id="@+id/manual"
-			style="@style/DefaultWidthFill" 
-			android:text="manual"
-			android:layout_below="@id/sync"/>
-		<Button android:id="@+id/version"
-			style="@style/DefaultWidthFill" 
-			android:text="Version"
-			android:layout_below="@id/manual"/>
-		<Button android:id="@+id/about"
-			style="@style/DefaultWidthFill" 
-			android:text="About"
-			android:layout_below="@id/version"/>
-	</RelativeLayout>
-
-	<LinearLayout android:id="@+id/buttn" 
-		style="@style/DefaultWidthFill"
-		android:layout_below="@id/settings">
-		<Button android:id="@+id/signin" 
-			style="@style/DefaultWidthFill" 
-			android:onClick="loginButtonClicked"
-			android:layout_weight="1"
-			android:text="로그인" 
-			android:layout_alignParentLeft="true" />
-		<Button android:id="@+id/signout" 
-			style="@style/DefaultWidthFill"
-			android:onClick="logoutButtonClicked" 
-			android:layout_weight="1" 
-			android:text="로그아웃" />
-		<Button android:id="@+id/signup" 
-			style="@style/DefaultWidthFill"
-			android:onClick="signupButtonClicked" 
-			android:layout_weight="1" 
-			android:text="회원가입"
-			android:layout_alignParentRight="true" />
-	</LinearLayout>
+	
 </RelativeLayout>
