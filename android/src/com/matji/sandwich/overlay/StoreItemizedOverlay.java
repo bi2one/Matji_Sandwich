@@ -102,7 +102,6 @@ public class StoreItemizedOverlay extends ItemizedOverlay<OverlayItem>
 		    }
 	    }
 	    
-	    Log.d("Matji", store.getName() + ", " + tagText);
 	    
 	    StoreOverlayItem overlayitem = new StoreOverlayItem(point, store.getName(), tagText, store.getLikeCount());
 	    mOverlays.add(overlayitem);

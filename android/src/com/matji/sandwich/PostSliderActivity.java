@@ -140,12 +140,12 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		}
 	}
 
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu, menu);
-		return true;
-	}
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		super.onCreateOptionsMenu(menu);
+//		MenuInflater inflater = getMenuInflater();
+//		inflater.inflate(R.menu.menu, menu);
+//		return true;
+//	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -164,19 +164,19 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	}
 
 
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Session session = Session.getInstance(this);
-		switch (item.getItemId()) {
-		case R.id.posting:
-			if (session.getToken() == null) {
-				startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
-			} else {
-				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
-			}
-			return true;
-		}
-		return false;
-	}
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		Session session = Session.getInstance(this);
+//		switch (item.getItemId()) {
+//		case R.id.posting:
+//			if (session.getToken() == null) {
+//				startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
+//			} else {
+//				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	protected String titleBarText() {
@@ -186,12 +186,18 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	@Override
 	protected boolean setTitleBarButton(Button button) {
 		// TODO Auto-generated method stub
-		return false;
+		button.setText("Write");
+		return true;
 	}
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
+		if (session.getToken() == null) {
+			startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
+		} else {
+			startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+		}
 		
 	}
 }

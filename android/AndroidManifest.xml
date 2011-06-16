@@ -43,11 +43,13 @@
 		<activity android:name="UserStoreListActivity"></activity>
 		<activity android:name="UserPostListActivity"></activity>
 		<activity android:name="FollowingActivity" android:screenOrientation="portrait"></activity>
-		<activity android:name="WritePostActivity"></activity>
+		
+		<activity android:name="WritePostActivity"
+                  android:windowSoftInputMode="adjustResize"></activity>
+                  
 		<activity android:name="widget.SlideGalleryActivity"></activity>
 		<activity android:name="GridGalleryActivity"></activity>
 		<activity android:name="ImageSliderActivity"></activity>
-		<activity android:name="WritePostActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

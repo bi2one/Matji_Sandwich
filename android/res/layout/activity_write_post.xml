@@ -1,48 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/contentWrapper"
 	style="@style/DefaultFill"
-	android:padding="20dp">
+	android:orientation="vertical">
 	
-	<EditText android:id="@+id/post_field"
+	<RelativeLayout android:id="@+id/post_footer"
+			style="@style/DefaultWidthFill"
+			android:layout_alignParentBottom="true">
+		<LinearLayout android:id="@+id/post_buttons"
+			style="@style/DefaultWidthFill"
+			android:background="#e2e2e2">
+			<Button android:id="@+id/upload_image"
+				style="@style/DefaultWrap" 
+				android:onClick="onImgButtonClicked"
+				android:layout_weight="1"
+				android:text="Img" />
+			<Button android:id="@+id/map"
+				style="@style/DefaultWrap"
+				android:onClick="onMapButtonClicked"
+				android:layout_weight="1"
+				android:text="Map" />
+			<Button android:id="@+id/tag"
+				style="@style/DefaultWrap"
+				android:onClick="onTagButtonClicked"
+				android:layout_weight="1"
+				android:text="Tag" />			
+			<Button android:id="@+id/twitter"
+				style="@style/DefaultWrap" 
+				android:onClick="onTwitterButtonClicked"
+				android:layout_weight="1"
+				android:text="T" />
+			<Button android:id="@+id/facebook"
+				style="@style/DefaultWrap"
+				android:onClick="onFacebookButtonClicked" 
+				android:layout_weight="1"
+				android:text="F" />
+		</LinearLayout>
+		<!-- android:layout_height="100dp" -->
+		<LinearLayout style="@style/DefaultWidthFill"
+			android:layout_below="@id/post_buttons">
+			<LinearLayout android:id="@+id/post_footer_content"
+					style="@style/DefaultWidthFill"
+					android:visibility="gone">
+			</LinearLayout>
+		</LinearLayout>
+		
+	</RelativeLayout>
+	
+	 <EditText android:id="@+id/tags_field"
 		style="@style/DefaultWidthFill"
-		android:lines="4"
-		android:gravity="top"
-		android:text="text"
-		android:imeOptions="flagNoExtractUi" />
-	<EditText android:id="@+id/tags_field"
-		style="@style/DefaultWidthFill"
-		android:layout_below="@id/post_field"
+		android:layout_above="@id/post_footer"
 		android:lines="1"
-		android:text="tags"/>
-	<LinearLayout android:id="@+id/post_buttons"
-		style="@style/DefaultWidthFill"
-		android:layout_below="@id/tags_field">
-		<Button android:id="@+id/upload_image"
-			style="@style/DefaultWrap" 
-			android:onClick="imgButtonClicked"
-			android:layout_weight="1"
-			android:text="Img" />
-		<Button android:id="@+id/map"
-			style="@style/DefaultWrap"
-			android:onClick="mapButtonClicked"
-			android:layout_weight="1"
-			android:text="Map" />
-		<Button android:id="@+id/twitter"
-			style="@style/DefaultWrap" 
-			android:onClick="tButtonClicked"
-			android:layout_weight="1"
-			android:text="T" />
-		<Button android:id="@+id/facebook"
-			style="@style/DefaultWrap"
-			android:onClick="fbButtonClicked" 
-			android:layout_weight="1"
-			android:text="F" />
-	</LinearLayout>
-	<Button android:id="@+id/write_complete"
+		android:visibility="gone"
+		android:text=""/>
+		
+	<EditText android:id="@+id/post_field"
+		style="@style/DefaultFill"
+		android:layout_above="@id/tags_field"
+		android:text=""/>
+		
+	
+	
+	<!-- <Button android:id="@+id/write_complete"
 		style="@style/DefaultWrap" 
-		android:layout_below="@id/post_buttons"
 		android:layout_alignParentRight="true"
 		android:onClick="postButtonClicked"
 		android:layout_weight="1"
-		android:text="Send" />
-</RelativeLayout>
+		android:text="Send" /> -->
+</com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

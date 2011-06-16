@@ -115,7 +115,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	
 	
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		Log.d("Matji", "callback");
+
 		// TODO Auto-generated method stub
 		switch (tag) {
 		case NEARBY_STORE:
