@@ -10,6 +10,6 @@
 	android:drawable="@drawable/kr_7" /> 
 	focused -->
 	<item
-		android:drawable="@drawable/btn_scrap1" />
+		android:drawable="@drawable/btn_scrap_default" />
 	<!-- default -->
 </selector>

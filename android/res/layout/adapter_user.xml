@@ -21,5 +21,5 @@
 		style="@style/DefaultWrap"
 		android:layout_alignParentRight="true"
 		android:layout_centerInParent="true"
-		android:src="@drawable/img_arrow02" />
+		android:src="@drawable/img_moresign01" />
 </RelativeLayout>

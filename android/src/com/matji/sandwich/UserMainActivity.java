@@ -14,6 +14,7 @@ import com.matji.sandwich.session.Session;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -106,7 +107,9 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		gradeText.setText(getString(R.string.grade_diamond)); // TODO	
 		if (me) {
 			// TODO mileage
-			pointText1.setCompoundDrawablesWithIntrinsicBounds(R.drawable.img_dot, 0, 0, 0);
+			Drawable classify = getResources().getDrawable(R.drawable.img_classify);
+			classify.setBounds(0, 0, classify.getIntrinsicWidth(), classify.getIntrinsicHeight());
+			pointText1.setCompoundDrawables(classify, null, null, null);
 			pointText1.setText(getString(R.string.grade_point));
 			pointText2.setText("1234");
 		}

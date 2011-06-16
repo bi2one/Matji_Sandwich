@@ -16,8 +16,10 @@ import com.matji.sandwich.http.util.DisplayUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Gallery;
@@ -30,7 +32,8 @@ public class SlideGalleryView extends Gallery implements Requestable {
 
 	private int[] attachFileIds;
 	private int post_id;
-	private static final int SPACING = DisplayUtil.PixelFromDP(1);
+	private static final int SPACING = DisplayUtil.PixelFromDP(10);
+	private static final int PADDING = DisplayUtil.PixelFromDP(10);
 	private static final int IMAGE_REQUEST = 1;
 
 	
@@ -40,7 +43,9 @@ public class SlideGalleryView extends Gallery implements Requestable {
 		
 		request = new AttachFileHttpRequest(context);
 		manager = new HttpRequestManager(context, this);
+		setPadding(PADDING, PADDING, PADDING, PADDING);
 		setSpacing(SPACING);
+		setGravity(Gravity.TOP);
 	}
 
 	public void setPostId(int post_id) {
@@ -79,6 +84,7 @@ public class SlideGalleryView extends Gallery implements Requestable {
 				callImageViewer(position);
 			}
 		});
+		
 	}
 	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
