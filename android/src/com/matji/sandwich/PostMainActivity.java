@@ -34,7 +34,6 @@ public class PostMainActivity extends MainActivity {
 		commentListView = (CommentListView) findViewById(R.id.post_main_comment_list);
 		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);
-		commentListView.requestReload();		
 	}
 
 	private void setInfo() {

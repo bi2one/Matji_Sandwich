@@ -13,6 +13,7 @@
 		<TextView
 			style="@style/user_cell_PointText"
 			android:id="@+id/user_cell_point_text"
+			android:drawablePadding="3dp"
 			android:layout_toRightOf="@id/user_cell_grade" />
 		<TextView
 			style="@style/user_cell_Point"
