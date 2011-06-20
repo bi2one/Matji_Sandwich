@@ -1,7 +1,6 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,7 +37,6 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 		initImageView();
 		swipeView.setCurrentPage(currentPage);
 		setImage(currentPage);
-		Log.d("Matji", attachFileIds.length+"");
 	}
 
 	private void initImageView() {

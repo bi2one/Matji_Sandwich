@@ -15,6 +15,7 @@
 		<TextView
 			style="@style/DefaultWrap"
 			android:id="@+id/user_adapter_post"
+			android:singleLine="true"
 			android:layout_marginLeft="77dp"/>
 	</LinearLayout>
 	<ImageView

@@ -34,8 +34,9 @@ public class UserAdapter extends MBaseAdapter {
 			userElement.title = (TextView) convertView.findViewById(R.id.user_cell_title);
 			userElement.intro = (TextView) convertView.findViewById(R.id.user_cell_intro);
 			userElement.post = (TextView) convertView.findViewById(R.id.user_adapter_post);
+			
+			convertView.findViewById(R.id.user_cell_point_text).setVisibility(View.GONE);
 			convertView.setTag(userElement);
-//			UserListView userListView = (UserListView) parent;
 		} else {
 			userElement = (UserElement) convertView.getTag();
 		}
