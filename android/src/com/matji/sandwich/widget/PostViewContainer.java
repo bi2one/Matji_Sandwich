@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -47,9 +48,14 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	private TextView dateAgo;
 	private ImageView[] preview;
 
+	private int[] imageIds = {
+			R.id.header_post_preview1,
+			R.id.header_post_preview2,
+			R.id.header_post_preview3
+	};
+
 	private static final int ATTACH_FILE_IDS_REQUEST = 1;
-	private static final int NUMBER_OF_PREVIEW = 3;
-	
+
 	private static final int THUMNAIL_SIZE = DisplayUtil.PixelFromDP(78);
 	private static final int MARGIN_THUMNAIL = DisplayUtil.PixelFromDP(11);
 	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
@@ -70,14 +76,14 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 		downloader = new MatjiImageDownloader();
 		manager = new HttpRequestManager(activity, this);
 		request = new AttachFileHttpRequest(activity);
-		
+
 		dateAgo = (TextView) getRootView().findViewById(R.id.header_post_created_at);
-		
+
 		/* Set Previews */
-		preview = new ImageView[NUMBER_OF_PREVIEW];
-		preview[0] = (ImageView) getRootView().findViewById(R.id.header_post_preview1);
-		preview[1] = (ImageView) getRootView().findViewById(R.id.header_post_preview2);
-		preview[2] = (ImageView) getRootView().findViewById(R.id.header_post_preview3);
+		preview = new ImageView[imageIds.length];
+		for (int i = 0; i < preview.length; i++) {
+			preview[i] = (ImageView) getRootView().findViewById(imageIds[i]);
+		}
 
 		ImageView thumnail = (ImageView) getRootView().findViewById(R.id.header_post_thumnail);
 		TextView nick = (TextView) getRootView().findViewById(R.id.header_post_nick);
@@ -93,13 +99,13 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 		else 
 			storeName.setText("");
 		content.setText(post.getPost());
-		
+
 
 		ArrayList<Tag> tags = post.getTags();
 		String tagResult = "태그: ";
 		if (tags.size() > 0) {
 			TextView tag = (TextView) getRootView().findViewById(R.id.header_post_tag);
-			
+
 			tagResult += tags.get(0).getTag();
 			for (int i = 1; i < tags.size(); i++) {
 				tagResult += ", " + tags.get(i).getTag();
@@ -107,7 +113,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 			tag.setText(tagResult);
 			tag.setVisibility(TextView.VISIBLE);
 		}
-		
+
 		int paddingLeft = THUMNAIL_SIZE + MARGIN_THUMNAIL;
 		previews.setPadding(paddingLeft, 0, 0, 0);
 
@@ -117,7 +123,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 		int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels - paddingLeft;
 
 		for (int i = 0; i < preview.length; i++) {
-			preview[i].setMaxWidth(remainScreenWidth/3 - MARGIN_PREVIEWS*2);
+			preview[i].setMaxWidth(remainScreenWidth/imageIds.length - MARGIN_PREVIEWS*2);
 			preview[i].setLayoutParams(params);
 			preview[i].setOnClickListener(this);
 		}
@@ -142,15 +148,12 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 		case R.id.header_post_store_name:
 			gotoStorePage(post);
 			break;
-		case R.id.header_post_preview1:
-			callImageViewer(0);
-			break;
-		case R.id.header_post_preview2:
-			callImageViewer(1);
-			break;
-		case R.id.header_post_preview3:
-			callImageViewer(2);
-			break;
+		}
+
+		for (int i = 0; i < imageIds.length; i++) {
+			if (view.getId() == imageIds[i]) {
+				callImageViewer(i);			
+			}
 		}
 	}
 
@@ -173,11 +176,12 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	}
 
 	public HttpRequest attachFileIdsRequestSet() {
-		((AttachFileHttpRequest) request).actionPostList(post.getId(), 1, 3);
+		((AttachFileHttpRequest) request).actionPostList(post.getId(), 1, 10);
 		return request;
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		Log.d("Matji", data.size()+"");
 		switch (tag) {
 		case ATTACH_FILE_IDS_REQUEST:
 			/* Set AttachFile ID */
@@ -185,7 +189,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 			for (int i = 0; i < data.size(); i++) {
 				attachFileIds[i] = ((AttachFile) data.get(i)).getId();
 			}
-			
+
 			for (int i = 0; i < ((data.size() > preview.length) ? preview.length : data.size()); i++) {
 				downloader.downloadAttachFileImage(attachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, preview[i]);
 				preview[i].setVisibility(View.VISIBLE);

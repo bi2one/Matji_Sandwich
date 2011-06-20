@@ -12,8 +12,6 @@ public class TagAdapter extends DefaultAdapter {
 
 	@Override
 	protected String getText(int position) {
-		// TODO Auto-generated method stub
-
 		Tag tag = (Tag) data.get(position);
 		return tag.getTag();
 	}

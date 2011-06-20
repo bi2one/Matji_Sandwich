@@ -7,6 +7,7 @@ import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
@@ -43,6 +44,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	private TextView likeCountText;
 	private TextView addressText;
 	private TextView coverText;
+	private TextView foodText;
 	private TextView tagText;
 	private TextView regUserText;
 	private TextView ownerUserText;
@@ -62,7 +64,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_main);
-		
+
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		store = (Store) SharedMatjiData.getInstance().top();
 
@@ -75,6 +77,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		likeCountText = (TextView) findViewById(R.id.store_main_like_count);
 		addressText = (TextView) findViewById(R.id.store_main_address);
 		coverText = (TextView) findViewById(R.id.store_main_cover);
+		foodText = (TextView) findViewById(R.id.store_main_popular_menu);
 		tagText = (TextView) findViewById(R.id.store_main_tag);
 		regUserText = (TextView) findViewById(R.id.store_main_reg_user);
 		ownerUserText = (TextView) findViewById(R.id.store_main_owner_user);
@@ -101,6 +104,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		if (ownerUser != null) {
 			string = getString(R.string.default_string_owner_user) + ": " + regUser.getNick();
 			ownerUserText.setText(string);
+		} else {
+			ownerUserText.setVisibility(TextView.GONE);
 		}
 
 		setInfo();
@@ -108,7 +113,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 	private void setInfo() {
 		store = (Store) SharedMatjiData.getInstance().top();
-		
+
 		/* Set StoreImage */
 		AttachFile file = store.getFile();
 		if (file != null) {
@@ -120,8 +125,9 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 		addressText.setText(store.getAddress());
 		coverText.setText(store.getCover());
+		foodText.setText(foodListToCSV(store.getStoreFoods()));
 		tagText.setText(tagListToCSV(store.getTags()));
-		
+
 		if (session.isLogin()) {
 			if (dbProvider.isExistLike(store.getId(), "Store")) {
 				likeButton.setText(getString(R.string.store_main_unlike_store));
@@ -147,10 +153,10 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		tagButton.setText(getCountNumberOf(R.string.default_string_tag, store.getTagCount()));	
 		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
 	}
-	
+
 	public void onResume() {
 		super.onResume();
-		
+
 		setInfo();
 	}
 
@@ -285,7 +291,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	public void onTagButtonClicked(View view) {
 		Intent intent = new Intent(this, TagListActivity.class);
 		intent.putExtra("id", store.getId());
-
 		intent.putExtra("type", ModelType.STORE);
 		startActivity(intent);
 	}
@@ -299,12 +304,42 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	public String tagListToCSV(ArrayList<Tag> tags) {
 		String result = "";
 		if (tags.size() > 0) {
-			result += tags.get(0); 
-			for (int i = 0; i < tags.size() - 1; i++) {
-				result += ", " + tags.get(i).getTag();
+			int i;
+			for (i = 0; i < tags.size(); i++) {
+				if (tags.get(i) != null) {
+					result += tags.get(i).getTag();
+					break;
+				}
+			}
+			
+			for (; i < tags.size(); i++) {
+				if (tags.get(i) != null) {
+					result += ", " + tags.get(i).getTag();
+				}
 			}
 		}
-		
+
+		return result;
+	}
+
+	public String foodListToCSV(ArrayList<StoreFood> foods) {
+		String result = "";
+		if (foods.size() > 0) {
+			int i;
+			for (i = 0; i < foods.size(); i++) {
+				if (foods.get(i).getFood() != null) {
+					result += foods.get(i).getFood().getName();
+					break;
+				}
+			}
+			
+			for (; i < foods.size(); i++) {
+				if (foods.get(i).getFood() != null) {
+					result += ", " + foods.get(i).getFood().getName();
+				}
+			}
+		}
+
 		return result;
 	}
 
@@ -322,6 +357,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

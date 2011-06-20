@@ -28,6 +28,7 @@ public class Store extends MatjiData implements Serializable {
 	private User reg_user;
 	private ArrayList<Tag> tags;
 	private ArrayList<StoreFood> store_foods;
+	private ArrayList<Food> foods;
 	
 	public Store() {}
 	
@@ -70,6 +71,7 @@ public class Store extends MatjiData implements Serializable {
 		dest.writeValue(reg_user);
 		dest.writeTypedList(tags);
 		dest.writeTypedList(store_foods);
+		dest.writeTypedList(foods);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -95,6 +97,8 @@ public class Store extends MatjiData implements Serializable {
 		in.readTypedList(tags, Tag.CREATOR);
 		store_foods = new ArrayList<StoreFood>();
 		in.readTypedList(store_foods, StoreFood.CREATOR);
+		foods = new ArrayList<Food>();
+		in.readTypedList(foods, Food.CREATOR);
 	}
 	
 	public void setTel(String tel) {
@@ -218,5 +222,13 @@ public class Store extends MatjiData implements Serializable {
 
 	public ArrayList<StoreFood> getStoreFoods() {
 		return store_foods;
+	}
+
+	public void setFoods(ArrayList<Food> foods) {
+		this.foods = foods;
+	}
+
+	public ArrayList<Food> getFoods() {
+		return foods;
 	}
 }

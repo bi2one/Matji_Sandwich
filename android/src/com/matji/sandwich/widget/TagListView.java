@@ -15,7 +15,6 @@ public class TagListView extends RequestableMListView {
 
 	public TagListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new TagAdapter(context), 10);
-
 		request = new TagHttpRequest(context);
 		setPage(1);
 	}
@@ -32,8 +31,10 @@ public class TagListView extends RequestableMListView {
 		switch (type) {
 		case STORE:
 			((TagHttpRequest) request).actionStoreTagList(id, getPage(), getLimit());
+			break;
 		case USER:
 			((TagHttpRequest) request).actionUserTagList(id, getPage(), getLimit());
+			break;
 		}
 		
 		return request;

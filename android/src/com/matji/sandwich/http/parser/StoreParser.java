@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
@@ -21,7 +22,7 @@ public class StoreParser extends MatjiDataParser {
 
 	protected Store getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
-		
+
 		Store store = new Store();
 		store.setId(getInt(object, "id"));
 		store.setName(getString(object, "name"));
@@ -39,12 +40,12 @@ public class StoreParser extends MatjiDataParser {
 		store.setImageCount(getInt(object, "image_count"));
 		store.setLikeCount(getInt(object, "like_count"));
 		store.setBookmarkCount(getInt(object, "bookmark_count"));
-		
+
 		/* Set AttachFile */
 		AttachFileParser afParser = new AttachFileParser(context);
 		AttachFile file = (AttachFile)afParser.getMatjiData(getObject(object, "attach_file"));
 		store.setFile(file);
-		
+
 		/* Set User */
 		UserParser userParser = new UserParser(context);
 		User user = (User)userParser.getMatjiData(getObject(object, "user"));
@@ -70,8 +71,22 @@ public class StoreParser extends MatjiDataParser {
 		}
 		store.setStoreFoods(storeFoods);
 
+		FoodParser foodParser = new FoodParser(context);
+		dataList = foodParser.getMatjiDataList(getArray(object, "foods"));
+		// TODO 그냥 ArrayList<Food>를 Store 모델에 추가하거나, 더 간단한 알고리즘을 사용하도록 수정해야 할 듯
+		if (dataList != null){
+			for (MatjiData data : dataList) {
+				for (StoreFood storeFood : storeFoods) {
+					Food food = (Food) data;
+					if (storeFood.getFoodId() == food.getId()) {
+						storeFood.setFood(food);
+					}
+				}
+			}
+		}
+
 		Log.d("Parser", "StoreParser:: called getMatjiData");
-		
+
 		return store;
 	}
 }
