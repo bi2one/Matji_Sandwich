@@ -1,9 +1,14 @@
 package com.matji.sandwich.http.parser;
 
+import java.util.ArrayList;
+
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.exception.MatjiException;
 
 public class PostParser extends MatjiDataParser {
@@ -36,10 +41,22 @@ public class PostParser extends MatjiDataParser {
 		/* Set Store */
 		StoreParser storeParser = new StoreParser(context);
 		post.setStore(storeParser.getMatjiData(getObject(object, "store")));
-		
+
 		/* Set Activity */
 		ActivityParser activityParser = new ActivityParser(context);
-		post.setActivity(activityParser.getMatjiData(getObject(object, "activity")));
+		post.setActivity(activityParser.getMatjiData(getObject(object, "activity")));		
+
+		/* Set Tags */
+		TagParser tagParser = new TagParser(context);
+		ArrayList<MatjiData> dataList = tagParser.getMatjiDataList(getArray(object, "tags"));
+		ArrayList<Tag> tags = new ArrayList<Tag>(); 
+		if (dataList != null) {
+			for (MatjiData data : dataList)
+				tags.add((Tag) data);
+		}
+		post.setTags(tags);
+
+		Log.d("Parser", "PostParser:: called getMatjiData");
 		
 		return post;
 	}

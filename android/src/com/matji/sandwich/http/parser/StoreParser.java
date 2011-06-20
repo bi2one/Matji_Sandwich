@@ -3,6 +3,7 @@ package com.matji.sandwich.http.parser;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AttachFile;
@@ -68,6 +69,8 @@ public class StoreParser extends MatjiDataParser {
 				storeFoods.add((StoreFood) data);
 		}
 		store.setStoreFoods(storeFoods);
+
+		Log.d("Parser", "StoreParser:: called getMatjiData");
 		
 		return store;
 	}

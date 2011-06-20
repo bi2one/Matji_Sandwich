@@ -16,13 +16,11 @@ import com.matji.sandwich.http.request.HttpRequest;
 
 public class FollowingListView extends UserListView implements View.OnClickListener {
 	private HttpRequest request;
-	private Context context;
 	private int user_id;
 	private FollowingListType listType;
 	
 	public FollowingListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		this.context = context;
 		request = new FollowingHttpRequest(context);
 
 		setPage(1);

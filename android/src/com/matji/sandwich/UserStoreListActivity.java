@@ -23,7 +23,7 @@ public class UserStoreListActivity extends BaseActivity {
 		user_id = intent.getIntExtra("user_id", 0);
 		
 		listView = (UserStoreListView) findViewById(R.id.user_store_list);
-		listView.setUserId(user_id);
+		listView.setId(user_id);
 		listView.setActivity(this);
 		listView.requestReload();
 	}

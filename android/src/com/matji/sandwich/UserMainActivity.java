@@ -5,16 +5,17 @@ import java.util.ArrayList;
 import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.data.UserMileage;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.util.ModelType;
 import com.matji.sandwich.session.Session;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +27,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private TabHost tabHost;
 	private User user;
 	private boolean me;
-	
+
 	private HttpRequestManager manager;
 	private HttpRequest request;
 	private Session session;
@@ -38,15 +39,16 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private TextView titleText;
 	private TextView introText;
 	private Button followButton;
-	private TextView followMessageText;
-	private TextView followerCountText;
-	private TextView followingCountText;
+	private TextView followingYouText;
+	private TextView blogText;
+	private TextView ownerText;
 
 	private Button followerButton;
 	private Button followingButton;
-
 	private Button jjimStoreButton;
 	private Button memoButton;
+	private Button tagButton;
+	private Button imageButton;
 
 	/* request tags */
 	private static final int FOLLOW_REQUEST = 1;
@@ -54,28 +56,26 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_main);
-		
+
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		manager = new HttpRequestManager(this, this);
 		session = Session.getInstance(this);
-		
+
 		user = (User) SharedMatjiData.getInstance().top();
+		dbProvider = DBProvider.getInstance(this);
 
 		if (session.isLogin()) {
 			me = (user.getId() == session.getCurrentUser().getId());
 		}
-		
+
 		if (me) {
 			// TODO
 			SharedMatjiData.getInstance().pop();
 			SharedMatjiData.getInstance().push(session.getCurrentUser());
 			user = (User) SharedMatjiData.getInstance().top();
-		}
-		
-		dbProvider = DBProvider.getInstance(this);
+		}		
 
 		gradeText = (TextView) findViewById(R.id.user_cell_grade);
 		pointText1 = (TextView) findViewById(R.id.user_cell_point_text);
@@ -83,40 +83,59 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		titleText = (TextView) findViewById(R.id.user_cell_title);
 		introText = (TextView) findViewById(R.id.user_cell_intro);
 		followButton = (Button) findViewById(R.id.user_main_follow_btn);
-		followMessageText = (TextView) findViewById(R.id.user_main_follow_message);
-		followerCountText = (TextView) findViewById(R.id.user_main_follower_count);
-		followingCountText = (TextView) findViewById(R.id.user_main_following_count);
+		followingYouText = (TextView) findViewById(R.id.user_main_following_you);
+		blogText = (TextView) findViewById(R.id.user_main_blog);
+		ownerText = (TextView) findViewById(R.id.user_main_owner);
 
 		followerButton = (Button) findViewById(R.id.user_main_follower_btn);
 		followingButton = (Button) findViewById(R.id.user_main_following_btn);
 		jjimStoreButton = (Button) findViewById(R.id.user_main_jjim_store_btn);
-		//		activityAreaButton = (Button) findViewById(R.id.user_main_activity_area_btn);
 		memoButton = (Button) findViewById(R.id.user_main_memo_btn);
-		//		imageButton = (Button) findViewById(R.id.user_main_image_btn);
-		//		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
-		//		urlButton = (Button) findViewById(R.id.user_main_url_btn);
-		//		sentMessageButton = (Button) findViewById(R.id.user_main_sent_message_btn);
-		//		recievedMessageButton = (Button) findViewById(R.id.user_main_recieved_message_btn);
-		
-		setInfo();
+		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
+		imageButton = (Button) findViewById(R.id.user_main_image_btn);		
 	}
 
 	private void setInfo() {
 		/* Set Grade */
-		gradeText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_jewel_01diamond, 0, 0, 0);
-		gradeText.setText(getString(R.string.grade_diamond)); // TODO	
-		if (me) {
-			// TODO mileage
-			Drawable classify = getResources().getDrawable(R.drawable.img_classify);
-			classify.setBounds(0, 0, classify.getIntrinsicWidth(), classify.getIntrinsicHeight());
-			pointText1.setCompoundDrawables(classify, null, null, null);
-			pointText1.setText(getString(R.string.grade_point));
-			pointText2.setText("1234");
+		UserMileage mileage = user.getMileage();
+		String grade = "E";
+		int totalPoint = 0;
+
+		if (mileage != null) {
+			grade = mileage.getGrade();
+			totalPoint = mileage.getTotalPoint();
+		}
+
+		if (grade.equals("E")) {
+			gradeText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_jewel_01diamond, 0, 0, 0);
+			gradeText.setText(getString(R.string.grade_diamond) + "E");
+		} else if (grade.equals("D")) {
+			gradeText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_jewel_01diamond, 0, 0, 0);
+			gradeText.setText(getString(R.string.grade_diamond) + "D");
+		} else if (grade.equals("C")) {
+			gradeText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_jewel_01diamond, 0, 0, 0);
+			gradeText.setText(getString(R.string.grade_diamond) + "C");
+		} else if (grade.equals("B")) {
+			gradeText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_jewel_01diamond, 0, 0, 0);
+			gradeText.setText(getString(R.string.grade_diamond) + "B");
+		} else if (grade.equals("A")) {
+			gradeText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_jewel_01diamond, 0, 0, 0);
+			gradeText.setText(getString(R.string.grade_diamond) + "A");
+		}
+
+		pointText1.setText(getString(R.string.grade_point));
+		pointText2.setText(" " + totalPoint);
+
+		if (dbProvider.isExistFollower(user.getId())) {
+			followingYouText.setText(user.getNick() + getString(R.string.user_main_following_you));
+			followingYouText.setVisibility(TextView.VISIBLE);
+		} else {
+			followingYouText.setVisibility(TextView.GONE);
 		}
 
 		/* Set User Image */
 		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_cell_thumnail));
-		
+
 		if (session.isLogin()) {
 			if (dbProvider.isExistFollowing(user.getId())) {
 				followButton.setText(getString(R.string.user_main_unfollow));
@@ -128,21 +147,18 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		}
 		titleText.setText(user.getTitle());
 		introText.setText(user.getIntro());
-		followerCountText.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
-		followingCountText.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
+
+		blogText.setText(user.getNick() + getString(R.string.user_main_not_exist_blog));
+
 		followerButton.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
 		followingButton.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
 		jjimStoreButton.setText(getCountNumberOf(R.string.user_main_jjim_store, user.getStoreCount()));
-		//		activityAreaButton.setText(getString(R.string.user_main_activity_area) + ": 한국");
 		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
-		//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getAttachFiles().size()));
-		//		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
-		//		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
-		//		sentMessageButton.setText(getCountNumberOf(R.string.default_string_sent_message, 0));
-		//		recievedMessageButton.setText(getCountNumberOf(R.string.default_string_recieved_message,0));
-
+		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
+		//TODO
+//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.get));
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -176,14 +192,10 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		me.setFollowingCount(me.getFollowingCount() - 1);
 	}
 
-
-	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		setInfo();
 	}
 
-
-	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.showToastMsg(getApplicationContext());
 	}
@@ -228,11 +240,19 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		tabHost.setCurrentTab(UserTabActivity.JJIM_STORE_PAGE);
 	}
 
-	//	public void onActivityAreaButtonClicked(View view) {
-	//	}
-
 	public void onMemoButtonClicked(View view) {
 		tabHost.setCurrentTab(UserTabActivity.MEMO_PAGE);
+	}
+	
+	public void onTagButtonClicked(View view) {
+		Intent intent = new Intent(this, TagListActivity.class);
+		intent.putExtra("id", user.getId());
+		intent.putExtra("type", ModelType.USER);
+		startActivity(intent);
+	}
+	
+	public void onImageButtonClicked(View view) {
+		tabHost.setCurrentTab(UserTabActivity.IMAGE_PAGE);
 	}
 
 	@Override
@@ -249,18 +269,6 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	//	public void onImageButtonClicked(View view) {
-	//
-	//	}
-	//
-	//	public void onTagButtonClicked(View view) {
-	//
-	//	}
-	//
-	//	public void onUrlButtonClicked(View view) {
-	//
-	//	}
+	}
 }

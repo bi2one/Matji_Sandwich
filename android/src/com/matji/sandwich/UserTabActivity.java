@@ -1,13 +1,11 @@
 package com.matji.sandwich;
 
-import com.matji.sandwich.GridGalleryActivity.AttachFileType;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.http.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TabHost;
 
 public class UserTabActivity extends BaseTabActivity {
@@ -43,9 +41,11 @@ public class UserTabActivity extends BaseTabActivity {
 		storeListIntent.putExtra("user_id", user.getId());
 		postListIntent = new Intent(this, UserPostListActivity.class);
 		postListIntent.putExtra("user_id", user.getId());
-		imageIntent = new Intent(this, GridGalleryActivity.class);
-		imageIntent.putExtra(GridGalleryActivity.ATTACH_FILE_TYPE, AttachFileType.USERS);
-		imageIntent.putExtra("user_id", user.getId());
+		imageIntent = new Intent(this, ImageListActivity.class);
+//		imageIntent = new Intent(this, GridGalleryActivity.class);
+//		imageIntent.putExtra(GridGalleryActivity.ATTACH_FILE_TYPE, AttachFileType.USERS);
+		imageIntent.putExtra("id", user.getId());
+		imageIntent.putExtra("type", ModelType.USER);
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 
 		tabHost.addTab(tabHost.newTabSpec("main")

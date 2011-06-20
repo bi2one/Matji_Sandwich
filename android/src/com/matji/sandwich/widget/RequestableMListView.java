@@ -107,6 +107,10 @@ PullToRefreshListView.OnRefreshListener {
 		return manager;
 	}
 
+	protected MBaseAdapter getMBaseAdapter() {
+		return adapter;
+	}
+	
 	protected ArrayList<MatjiData> getAdapterData() {
 		return adapterData;
 	}
@@ -117,7 +121,6 @@ PullToRefreshListView.OnRefreshListener {
 //	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		
 		if (data.size() == 0 || data.size() < limit){
 			scrollListener.requestSetOff();
 		}else{

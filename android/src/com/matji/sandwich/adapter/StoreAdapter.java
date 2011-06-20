@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.util.Log;
     
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.AttachFile;

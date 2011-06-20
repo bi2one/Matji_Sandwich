@@ -7,5 +7,9 @@
 	<color name="focused2">#646d79</color>
 	<color name="default1">#eeeeee</color>	
 	<color name="default2">#ffffff</color>
-	<color name="LTGRAY">#ffcccccc</color>
+	<color name="LIGHT_GRAY">#ffcccccc</color>
+	<color name="GRAY">#bfbfbf</color>
+	<color name="GRAY2">#adadad</color>
+	<color name="SKYBLUE">#b0e2ff</color>
+	<color name="DARK_ORANGE">#c30</color>
 </resources>

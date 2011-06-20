@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.parser;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AttachFile;
@@ -36,7 +37,9 @@ public class AttachFileParser extends MatjiDataParser {
 		
 		attachFile.setCreatedAt(getString(object, "created_at"));
 		attachFile.setUpdatedAt(getString(object, "updated_at"));
-
+		
+		Log.d("AttachFileParser", "Parser:: called getMatjiData");
+		
 		return attachFile;
 	}
 }

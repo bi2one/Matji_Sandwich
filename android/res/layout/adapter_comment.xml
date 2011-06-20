@@ -12,7 +12,7 @@
 		android:padding="3dp"
 		android:layout_alignParentLeft="true">
 		<ImageView
-		  	android:background="@drawable/img_matji_default"
+			android:background="@drawable/img_matji_default"
 			android:id="@+id/comment_adapter_thumnail"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
@@ -50,8 +50,10 @@
 		<TextView
 			android:id="@+id/comment_adapter_created_at"
 			android:layout_width="fill_parent"
-			android:layout_height="30dp"
-			android:textColor="#000"
+			android:layout_height="wrap_content"
+			android:textSize="11dp"
+			android:textColor="@color/GRAY"			
+			android:padding="5dp"
 			android:layout_below="@id/comment_adapter_comment" />
 	</LinearLayout>
 </RelativeLayout>

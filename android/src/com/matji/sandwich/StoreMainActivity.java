@@ -16,6 +16,7 @@ import com.matji.sandwich.http.request.BookmarkHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.http.util.ModelType;
 import com.matji.sandwich.session.Session;
 
 import android.app.TabActivity;
@@ -282,8 +283,10 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onTagButtonClicked(View view) {
-		Intent intent = new Intent(this, StoreTagListActivity.class);
-		intent.putExtra("store_id", store.getId());
+		Intent intent = new Intent(this, TagListActivity.class);
+		intent.putExtra("id", store.getId());
+
+		intent.putExtra("type", ModelType.STORE);
 		startActivity(intent);
 	}
 
@@ -296,11 +299,12 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	public String tagListToCSV(ArrayList<Tag> tags) {
 		String result = "";
 		if (tags.size() > 0) {
+			result += tags.get(0); 
 			for (int i = 0; i < tags.size() - 1; i++) {
-				result += tags.get(i).getTag() + ", ";
+				result += ", " + tags.get(i).getTag();
 			}
-			result += tags.get(tags.size()-1).getTag();
 		}
+		
 		return result;
 	}
 

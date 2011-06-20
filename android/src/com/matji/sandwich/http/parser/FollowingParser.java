@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.parser;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Following;
@@ -35,6 +36,8 @@ public class FollowingParser extends MatjiDataParser {
 		following.setFollowingUser(userParser.getMatjiData(getObject(object, "following_user")));
 		following.setFollowedUser(userParser.getMatjiData(getObject(object, "followed_user")));
 
+		Log.d("Parser", "FollowingParser:: called getMatjiData");
+		
 		return following;
 	}
 }

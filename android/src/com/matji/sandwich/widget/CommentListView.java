@@ -37,14 +37,6 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		return request;
 	}
 
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		super.requestCallBack(tag, data);
-	}
-
-	public void requestExceptionCallBack(int tag, MatjiException e) {
-		super.requestExceptionCallBack(tag, e);
-	}
-
 	public void onListItemClick(int position) {}
 
 	public void onClick(View v) {

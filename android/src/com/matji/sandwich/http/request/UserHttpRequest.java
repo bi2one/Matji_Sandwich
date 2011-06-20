@@ -28,7 +28,7 @@ public class UserHttpRequest extends HttpRequest {
 		getHashtable.clear();
 		getHashtable.put("page", page+"");
 		getHashtable.put("limit", limit+"");
-		getHashtable.put("include", "stores,attach_files"); 
+		getHashtable.put("include", "stores,attach_files,user_mileage"); 
 	}
 
 	public void actionShow(int user_id){
@@ -38,7 +38,7 @@ public class UserHttpRequest extends HttpRequest {
 
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");
-		getHashtable.put("include", "stores,attach_files");
+		getHashtable.put("include", "stores,attach_files,user_mileage");
 	}
 
 	public void actionRankingList() {

@@ -18,12 +18,10 @@ import com.matji.sandwich.http.request.UserHttpRequest;
 
 public class UserListView extends RequestableMListView implements View.OnClickListener {
 	private HttpRequest request;
-	private Context context;
 	private int nowPosition;
 
 	public UserListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new UserAdapter(context), 10);
-		this.context = context;
 		request = new UserHttpRequest(context);
 
 		setPage(1);

@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultWidthFill"
-	android:orientation="vertical">
-	<include
-		android:id="@+id/header_post_post_cell"
-		layout="@layout/adapter_post" />
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#fff">
+	<RelativeLayout
+		style="@style/DefaultWrap"
+		android:id="@+id/header_post_post_wrap">
+		<ImageView
+			android:background="@drawable/img_matji_default"
+			android:id="@+id/header_post_thumnail"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_margin="6dp"
+			android:layout_alignParentLeft="true"
+			android:scaleType="centerCrop" />
+		<LinearLayout
+			android:id="@+id/header_post_names"
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingTop="5dp"
+			android:paddingLeft="5dp"
+			android:layout_toRightOf="@id/header_post_thumnail">
+			<TextView
+				android:id="@+id/header_post_nick"
+				android:clickable="true"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/GRAY2" />
+			<TextView
+				android:id="@+id/header_post_store_name"
+				android:clickable="true"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#000" />
+		</LinearLayout>
+		<TextView
+			android:id="@+id/header_post_post"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/header_post_thumnail"
+			android:layout_below="@id/header_post_names"
+			android:paddingLeft="5dp"
+			android:paddingRight="15dp"
+			android:textColor="#000" />
+		<TextView
+			style="@style/DefaultWrap"
+			android:id="@+id/header_post_tag"
+			android:layout_toRightOf="@id/header_post_thumnail"
+			android:layout_below="@id/header_post_post"
+			android:paddingLeft="5dp"
+			android:paddingRight="5dp"
+			android:visibility="gone" />
+	</RelativeLayout>
 	<LinearLayout
 		android:background="#ffffff"
 		android:id="@+id/header_post_previews"
+		android:layout_below="@id/header_post_post_wrap"
 		style="@style/DefaultWidthFill">
 		<ImageView
 			style="@style/header_post_Preview"
@@ -20,4 +69,13 @@
 			style="@style/header_post_Preview"
 			android:id="@+id/header_post_preview3" />
 	</LinearLayout>
-</LinearLayout>
+	<TextView
+		android:id="@+id/header_post_created_at"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/header_post_previews"
+		android:layout_marginLeft="61dp"
+		android:textSize="11dp"
+		android:padding="5dp"
+		android:textColor="@color/GRAY" />
+</RelativeLayout>
