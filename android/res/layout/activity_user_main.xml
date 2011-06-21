@@ -17,35 +17,31 @@
 			android:layout_below="@id/user_main_user_cell"
 			android:onClick="onFollowButtonClicked" />
 		<TextView
-			style="@style/user_main_FollowMessage"
-			android:id="@+id/user_main_follow_message"
+			style="@style/user_main_FollowingYou"
+			android:id="@+id/user_main_following_you"
 			android:layout_below="@id/user_main_follow_btn"
 			android:visibility="gone" />
-		<TextView
-			style="@style/user_main_Count"
-			android:id="@+id/user_main_follower_count"
-			android:layout_below="@id/user_main_follow_message" />
-		<TextView
-			style="@style/user_main_Count"
-			android:id="@+id/user_main_following_count"
-			android:layout_toRightOf="@id/user_main_follower_count"
-			android:layout_below="@id/user_main_follow_message" />
 	</RelativeLayout>
 
 	<!-- User Info Cell -->
 	<LinearLayout
-		style="@style/user_main_Cell">
+		style="@style/user_main_Cell"
+		android:orientation="vertical">
+		<LinearLayout
+			style="@style/DefaultWidthFill">
+			<TextView
+				style="@style/user_main_InfoText"
+				android:id="@+id/user_main_blog" />
+			<Button
+				style="@style/user_main_BlogButton"
+				android:id="@+id/user_main_blog_btn"
+				android:visibility="gone"
+				android:onClick="onBlogButtonClicked" />
+		</LinearLayout>
 		<TextView
 			style="@style/user_main_InfoText"
-			android:id="@+id/user_main_blog" />
-		<Button
-			style="@style/user_main_BlogButton"
-			android:id="@+id/user_main_blog_btn"
-			android:visibility="gone"
-			android:onClick="onBlogButtonClicked" />
-		<TextView
-			style="@style/user_main_InfoText"
-			android:id="@+id/user_main_is_owner" />
+			android:id="@+id/user_main_owner"
+			android:visibility="gone" />
 	</LinearLayout>
 
 	<!-- Detail View ButttonCell -->
@@ -63,69 +59,30 @@
 			android:layout_toRightOf="@id/user_main_follower_btn"
 			android:onClick="onFollowingButtonClicked" />
 		<Button
-			android:background="@drawable/btn_bottom_left_corner"
+			android:background="@drawable/btn_rectangle"
 			style="@style/ETCButton"
 			android:id="@+id/user_main_jjim_store_btn"
 			android:layout_below="@id/user_main_follower_btn"
 			android:onClick="onJjimStoreButtonClicked" />
 		<Button
-			android:background="@drawable/btn_bottom_right_corner"
+			android:background="@drawable/btn_rectangle"
 			style="@style/ETCButton"
 			android:id="@+id/user_main_memo_btn"
 			android:layout_below="@id/user_main_following_btn"
 			android:layout_toRightOf="@id/user_main_jjim_store_btn"
 			android:onClick="onMemoButtonClicked" />
-		<!-- 디자인에는 있지만.. -->
-		<!-- <Button -->
-		<!-- android:background="@drawable/btn_top_left_corner" -->
-		<!-- style="@style/ETCButton" -->
-		<!-- android:id="@+id/user_main_jjim_store_btn" -->
-		<!-- android:onClick="onJjimStoreButtonClicked" /> -->
-		<!-- <Button -->
-		<!-- android:background="@drawable/btn_top_right_corner" -->
-		<!-- style="@style/ETCButton" -->
-		<!-- android:id="@+id/user_main_activity_area_btn" -->
-		<!-- android:layout_toRightOf="@id/user_main_jjim_store_btn" -->
-		<!-- android:onClick="onActivityAreaButtonClicked" /> -->
-		<!-- <Button -->
-		<!-- android:background="@drawable/btn_right_angle" -->
-		<!-- style="@style/ETCButton" -->
-		<!-- android:id="@+id/user_main_memo_btn" -->
-		<!-- android:layout_below="@id/user_main_jjim_store_btn" -->
-		<!-- android:onClick="onMemoButtonClicked" /> -->
-		<!-- <Button -->
-		<!-- android:background="@drawable/btn_right_angle" -->
-		<!-- style="@style/ETCButton" -->
-		<!-- android:id="@+id/user_main_image_btn" -->
-		<!-- android:layout_toRightOf="@id/user_main_memo_btn" -->
-		<!-- android:layout_below="@id/user_main_activity_area_btn" -->
-		<!-- android:onClick="onImageButtonClicked" /> -->
-		<!-- <Button -->
-		<!-- android:background="@drawable/btn_bottom_left_corner" -->
-		<!-- style="@style/ETCButton" -->
-		<!-- android:id="@+id/user_main_tag_btn" -->
-		<!-- android:layout_below="@id/user_main_memo_btn" -->
-		<!-- android:onClick="onTagButtonClicked" /> -->
-		<!-- <Button -->
-		<!-- android:background="@drawable/btn_bottom_right_corner" -->
-		<!-- style="@style/ETCButton" -->
-		<!-- android:id="@+id/user_main_url_btn" -->
-		<!-- android:layout_toRightOf="@id/user_main_tag_btn" -->
-		<!-- android:layout_below="@id/user_main_image_btn" -->
-		<!-- android:onClick="onUrlButtonClicked" /> -->
+		<Button
+			android:background="@drawable/btn_bottom_left_corner"
+			style="@style/ETCButton"
+			android:id="@+id/user_main_tag_btn"
+			android:layout_below="@id/user_main_jjim_store_btn"
+			android:onClick="onTagButtonClicked" />
+		<Button
+			android:background="@drawable/btn_bottom_right_corner"
+			style="@style/ETCButton"
+			android:id="@+id/user_main_image_btn"
+			android:layout_below="@id/user_main_jjim_store_btn"
+			android:layout_toRightOf="@id/user_main_tag_btn"
+			android:onClick="onImageButtonClicked" />
 	</RelativeLayout>
-	<!-- 디자인에는 있지만.. -->
-	<!-- <LinearLayout -->
-	<!-- style="@style/user_main_Cell"> -->
-	<!-- <Button -->
-	<!-- android:background="@drawable/btn_left_corner" -->
-	<!-- style="@style/ETCButton" -->
-	<!-- android:id="@+id/user_main_recieved_message_btn" -->
-	<!-- android:onClick="onUrlButtonClicked" /> -->
-	<!-- <Button -->
-	<!-- android:background="@drawable/btn_right_corner" -->
-	<!-- style="@style/ETCButton" -->
-	<!-- android:id="@+id/user_main_sent_message_btn" -->
-	<!-- android:onClick="onUrlButtonClicked" /> -->
-	<!-- </LinearLayout> -->
 </LinearLayout>

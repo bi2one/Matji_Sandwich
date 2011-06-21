@@ -1,12 +1,11 @@
 package com.matji.sandwich;
 
-import com.matji.sandwich.GridGalleryActivity.AttachFileType;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.http.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TabHost;
 
 public class StoreTabActivity extends BaseTabActivity {
@@ -37,13 +36,11 @@ public class StoreTabActivity extends BaseTabActivity {
 		postIntent.putExtra("store_id", store.getId());
 		menuIntent = new Intent(this, StoreMenuActivity.class);
 		menuIntent.putExtra("store_id", store.getId());
-		imageIntent = new Intent(this, GridGalleryActivity.class);
-		imageIntent.putExtra(GridGalleryActivity.ATTACH_FILE_TYPE, AttachFileType.STORES);
-		imageIntent.putExtra("store_id", store.getId());
+		imageIntent = new Intent(this, ImageListActivity.class);
+		imageIntent.putExtra("id", store.getId());
+		imageIntent.putExtra("type", ModelType.STORE);
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 		
-		Log.d("Matji", store.getId()+"");
-		Log.d("Matji", store.getStoreFoods().size()+"");
 		tabHost.addTab(tabHost.newTabSpec("main")
 				.setIndicator("메인")
 				.setContent(mainIntent));

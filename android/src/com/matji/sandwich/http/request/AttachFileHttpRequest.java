@@ -45,22 +45,37 @@ public class AttachFileHttpRequest extends HttpRequest {
     	getHashtable.clear();
     }
     
-    public void actionStoreList(int store_id){
+    public void actionStoreList(int store_id, int page, int limit){
     	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
     	
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");
     }
     
-    public void actionPostList(int post_id){
+    public void actionPostList(int post_id, int page, int limit){
     	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "post_list";
     	
     	getHashtable.clear();
     	getHashtable.put("post_id", post_id + "");
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");
+    }
+    
+    public void actionUserList(int user_id, int page, int limit) {
+    	parser = new AttachFileParser(context);
+    	httpMethod = HttpMethod.HTTP_GET;
+    	action = "user_list";
+    	
+    	getHashtable.clear();
+    	getHashtable.put("user_id", user_id + "");
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");
     }
     
     public ArrayList<MatjiData> request() throws MatjiException {

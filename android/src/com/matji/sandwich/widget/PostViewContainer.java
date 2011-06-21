@@ -7,9 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +23,7 @@ import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -49,11 +48,16 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	private TextView dateAgo;
 	private ImageView[] preview;
 
+	private int[] imageIds = {
+			R.id.header_post_preview1,
+			R.id.header_post_preview2,
+			R.id.header_post_preview3
+	};
+
 	private static final int ATTACH_FILE_IDS_REQUEST = 1;
-	private static final int NUMBER_OF_PREVIEW = 3;
-	
-	private static final int THUMNAIL_SIZE = DisplayUtil.PixelFromDP(80);
-	private static final int MARGIN_THUMNAIL = DisplayUtil.PixelFromDP(3);
+
+	private static final int THUMNAIL_SIZE = DisplayUtil.PixelFromDP(78);
+	private static final int MARGIN_THUMNAIL = DisplayUtil.PixelFromDP(11);
 	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
 
 	// TODO 태그도 추가
@@ -72,19 +76,20 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 		downloader = new MatjiImageDownloader();
 		manager = new HttpRequestManager(activity, this);
 		request = new AttachFileHttpRequest(activity);
-		
-		dateAgo = (TextView) getRootView().findViewById(R.id.post_adapter_created_at);
-		
-		/* Set Previews */
-		preview = new ImageView[NUMBER_OF_PREVIEW];
-		preview[0] = (ImageView) getRootView().findViewById(R.id.header_post_preview1);
-		preview[1] = (ImageView) getRootView().findViewById(R.id.header_post_preview2);
-		preview[2] = (ImageView) getRootView().findViewById(R.id.header_post_preview3);
 
-		ImageView thumnail = (ImageView) getRootView().findViewById(R.id.post_adapter_thumnail);
-		TextView nick = (TextView) getRootView().findViewById(R.id.post_adapter_nick);
-		TextView storeName = (TextView) getRootView().findViewById(R.id.post_adapter_store_name);
-		TextView content = (TextView) getRootView().findViewById(R.id.post_adapter_post);
+		dateAgo = (TextView) getRootView().findViewById(R.id.header_post_created_at);
+
+		/* Set Previews */
+		preview = new ImageView[imageIds.length];
+		for (int i = 0; i < preview.length; i++) {
+			preview[i] = (ImageView) getRootView().findViewById(imageIds[i]);
+		}
+
+		ImageView thumnail = (ImageView) getRootView().findViewById(R.id.header_post_thumnail);
+		TextView nick = (TextView) getRootView().findViewById(R.id.header_post_nick);
+		TextView storeName = (TextView) getRootView().findViewById(R.id.header_post_store_name);
+		TextView content = (TextView) getRootView().findViewById(R.id.header_post_post);
+		LinearLayout previews = (LinearLayout) getRootView().findViewById(R.id.header_post_previews);
 
 		downloader.downloadUserImage(user.getId(), thumnail);
 		nick.setText(user.getNick());
@@ -95,13 +100,21 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 			storeName.setText("");
 		content.setText(post.getPost());
 
-		thumnail.setOnClickListener(this);
-		nick.setOnClickListener(this);
-		storeName.setOnClickListener(this);
+
+		ArrayList<Tag> tags = post.getTags();
+		String tagResult = "태그: ";
+		if (tags.size() > 0) {
+			TextView tag = (TextView) getRootView().findViewById(R.id.header_post_tag);
+
+			tagResult += tags.get(0).getTag();
+			for (int i = 1; i < tags.size(); i++) {
+				tagResult += ", " + tags.get(i).getTag();
+			}
+			tag.setText(tagResult);
+			tag.setVisibility(TextView.VISIBLE);
+		}
 
 		int paddingLeft = THUMNAIL_SIZE + MARGIN_THUMNAIL;
-		
-		LinearLayout previews = (LinearLayout) getRootView().findViewById(R.id.header_post_previews);
 		previews.setPadding(paddingLeft, 0, 0, 0);
 
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -109,13 +122,15 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 
 		int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels - paddingLeft;
 
-		Log.d("Matji", paddingLeft + "," + remainScreenWidth);
 		for (int i = 0; i < preview.length; i++) {
-			preview[i].setMaxWidth(remainScreenWidth/3 - MARGIN_PREVIEWS/2);
+			preview[i].setMaxWidth(remainScreenWidth/imageIds.length - MARGIN_PREVIEWS*2);
 			preview[i].setLayoutParams(params);
 			preview[i].setOnClickListener(this);
 		}
 
+		thumnail.setOnClickListener(this);
+		nick.setOnClickListener(this);
+		storeName.setOnClickListener(this);
 		setPostData();
 	}
 
@@ -127,22 +142,18 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 
 	public void onClick(View view) {
 		switch(view.getId()) {
-		case R.id.post_adapter_thumnail: case R.id.post_adapter_nick:
+		case R.id.header_post_thumnail: case R.id.header_post_nick:
 			gotoUserPage(post);
 			break;
-		case R.id.post_adapter_store_name:
+		case R.id.header_post_store_name:
 			gotoStorePage(post);
 			break;
-		case R.id.header_post_preview1:
-			Log.d("Matij", "AA");
-			callImageViewer(0);
-			break;
-		case R.id.header_post_preview2:
-			callImageViewer(1);
-			break;
-		case R.id.header_post_preview3:
-			callImageViewer(2);
-			break;
+		}
+
+		for (int i = 0; i < imageIds.length; i++) {
+			if (view.getId() == imageIds[i]) {
+				callImageViewer(i);			
+			}
 		}
 	}
 
@@ -165,11 +176,12 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	}
 
 	public HttpRequest attachFileIdsRequestSet() {
-		((AttachFileHttpRequest) request).actionPostList(post.getId());
+		((AttachFileHttpRequest) request).actionPostList(post.getId(), 1, 10);
 		return request;
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		Log.d("Matji", data.size()+"");
 		switch (tag) {
 		case ATTACH_FILE_IDS_REQUEST:
 			/* Set AttachFile ID */
@@ -177,7 +189,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 			for (int i = 0; i < data.size(); i++) {
 				attachFileIds[i] = ((AttachFile) data.get(i)).getId();
 			}
-			
+
 			for (int i = 0; i < ((data.size() > preview.length) ? preview.length : data.size()); i++) {
 				downloader.downloadAttachFileImage(attachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, preview[i]);
 				preview[i].setVisibility(View.VISIBLE);

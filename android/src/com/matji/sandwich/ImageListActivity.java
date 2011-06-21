@@ -1,29 +1,31 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.widget.UserStoreListView;
+import com.matji.sandwich.http.util.ModelType;
+import com.matji.sandwich.widget.ImageListView;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class UserStoreListActivity extends BaseActivity {
+public class ImageListActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_user_store);
+		setContentView(R.layout.activity_image);
 
-		int user_id = getIntent().getIntExtra("user_id", 0);
-
-		UserStoreListView listView = (UserStoreListView) findViewById(R.id.user_store_list);
-		listView.setUserId(user_id);
+		int id = getIntent().getIntExtra("id", 0);
+		ModelType type = (ModelType) getIntent().getSerializableExtra("type");
+		ImageListView listView = (ImageListView) findViewById(R.id.image_list_view);
+		listView.setId(id);
+		listView.setType(type);
 		listView.setActivity(this);
 		listView.requestReload();
 	}
 
 	@Override
 	protected String titleBarText() {
-		return "UserStoreListActivity";
+		return "ImageListActivity";
 	}
 
 	@Override
@@ -35,6 +37,5 @@ public class UserStoreListActivity extends BaseActivity {
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
-		
 	}
 }

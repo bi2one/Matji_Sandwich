@@ -1,29 +1,25 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.widget.StoreTagListView;
+import com.matji.sandwich.http.util.ModelType;
+import com.matji.sandwich.widget.TagListView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class StoreTagListActivity extends BaseActivity {
-	private Intent intent;
-	private int store_id;
-	private StoreTagListView listView;
+public class TagListActivity extends BaseActivity {
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_store_tag);
+		setContentView(R.layout.activity_tag);
 
-		intent = getIntent();
-		store_id = intent.getIntExtra("store_id", 0);
-		
-		listView = (StoreTagListView) findViewById(R.id.store_tag_list);
-		listView.setUserId(store_id);
+		int id = getIntent().getIntExtra("id", 0);
+		ModelType type = (ModelType) getIntent().getSerializableExtra("type");
+		TagListView listView = (TagListView) findViewById(R.id.tag_list);
+		listView.setId(id);
+		listView.setModelType(type);
 		listView.setActivity(this);
 		listView.requestReload();
 	}

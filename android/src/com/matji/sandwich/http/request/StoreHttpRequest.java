@@ -30,7 +30,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("q",keyword);
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user,tag,store_foods");
+    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
     }
     
     public void actionCount(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String type){
@@ -52,7 +52,7 @@ public class StoreHttpRequest extends HttpRequest {
     		
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
-    	getHashtable.put("include", "attach_file,user,tags,store_foods");
+    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
     }
     
     public void actionNew(String name, String address, int lat, int lng){
@@ -88,7 +88,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user,tags,store_foods");
+    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
     }
 
     public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit){
@@ -104,7 +104,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("order", "like_count DESC,reg_user_id ASC");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user,tag,store_foods");
+    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
     	
     }
     
@@ -117,7 +117,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("user_id", user_id+ "");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user,tag,store_foods");
+    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
     }
 
     public void actionDetailList(int store_id, int page, int limit){

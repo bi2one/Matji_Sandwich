@@ -30,15 +30,18 @@ public class PostAdapter extends MBaseAdapter {
 			postElement = new PostElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_post, null);
 			
-			postElement.image = (ImageView) convertView.findViewById(R.id.post_adapter_thumnail);
+			postElement.thumnail = (ImageView) convertView.findViewById(R.id.post_adapter_thumnail);
 			postElement.nick = (TextView) convertView.findViewById(R.id.post_adapter_nick);
 			postElement.storeName = (TextView)convertView.findViewById(R.id.post_adapter_store_name);
 			postElement.post = (TextView) convertView.findViewById(R.id.post_adapter_post);
 			postElement.dateAgo = (TextView) convertView.findViewById(R.id.post_adapter_created_at);
+			postElement.commentCount = (TextView) convertView.findViewById(R.id.post_adapter_comment_count);
+			postElement.imageCount = (TextView) convertView.findViewById(R.id.post_adapter_image_count);
+			postElement.tagCount = (TextView) convertView.findViewById(R.id.post_adapter_tag_count);
 			convertView.setTag(postElement);
 			
 			PostListView postListView = (PostListView)parent;
-			postElement.image.setOnClickListener(postListView);
+			postElement.thumnail.setOnClickListener(postListView);
 			postElement.nick.setOnClickListener(postListView);
 			postElement.storeName.setOnClickListener(postListView);
 			
@@ -53,25 +56,31 @@ public class PostAdapter extends MBaseAdapter {
 		else 
 			postElement.storeName.setText("");
 		
-		postElement.image.setTag(position+"");
+		postElement.thumnail.setTag(position+"");
 		postElement.nick.setTag(position+"");
 		postElement.storeName.setTag(position+"");
 		
 		/* Set User */
 		User user = post.getUser();
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.image);
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.thumnail);
 		postElement.nick.setText(user.getNick());
 		postElement.post.setText(post.getPost());
 		postElement.dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
-
+		postElement.commentCount.setText(post.getCommentCount() + "");
+		postElement.imageCount.setText(post.getImageCount() + "");
+		postElement.tagCount.setText(post.getTagCount() + "");
+		
 		return convertView;
 	}
 	
     private class PostElement {
-    	ImageView image;
+    	ImageView thumnail;
     	TextView nick;
     	TextView storeName;
     	TextView post;
     	TextView dateAgo;
+    	TextView commentCount;
+    	TextView imageCount;
+    	TextView tagCount;
     }
 }

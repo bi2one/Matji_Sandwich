@@ -62,6 +62,7 @@
   <string name="default_string_owner_user">주인장</string>
   <string name="default_string_url">관련 URL</string>
   <string name="default_string_memo">메모</string>
+  <string name="default_string_comment">댓글</string>
   <string name="default_string_image">이미지</string>
   <string name="default_string_map">지도</string>
   <string name="default_string_store">맛집</string>
@@ -74,7 +75,7 @@
   <string name="default_string_recent_post">등록한 메모가 없습니다.</string>
   
   <!-- grade -->
-  <string name="grade_point">활동점수:</string>
+  <string name="grade_point">활동점수 :</string>
   <string name="grade_diamond">다이아몬드</string>
   
   <!-- StoreMainActivity  -->
@@ -92,11 +93,12 @@
   <!-- UserMainActivity -->
   <string name="user_main_follow">Follow</string>
   <string name="user_main_unfollow">unFollow</string>
-  <string name="user_main_brandnew">BrandNew follows you.</string>
+  <string name="user_main_following_you">follows you.</string>
   <string name="user_main_follower">follower</string>
   <string name="user_main_following">following</string>
   <string name="user_main_jjim_store">찜한 맛집</string>
   <string name="user_main_activity_area">활동지역</string>
+  <string name="user_main_not_exist_blog">님은 블로그를 운영하고 있지 않습니다.</string>
 
   <!-- StoreDetailInfoTabActivity  -->
   <string name="store_detail_info_default">맛집 기본 정보</string>

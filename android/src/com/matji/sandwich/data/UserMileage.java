@@ -42,7 +42,7 @@ public class UserMileage extends MatjiData{
 		id = in.readInt();
 		user_id = in.readInt();
 		total_point = in.readInt();
-		grade = in.readString();
+		grade =	in.readString(); 
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
 	}
 	

@@ -1,7 +1,5 @@
 package com.matji.sandwich.widget;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -13,9 +11,7 @@ import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
@@ -33,25 +29,13 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		postRequest.actionList(getPage(), getLimit());
 		return postRequest;
 	}
-
-	@Override
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		super.requestCallBack(tag, data);
-	}
-
-	@Override
-	public void requestExceptionCallBack(int tag, MatjiException e) {
-		super.requestExceptionCallBack(tag, e);
-	}
-
+	
 	@Override
 	public void onListItemClick(int position) {
 		Post post = (Post) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), PostMainActivity.class);
 		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post);
 	}
-
-
 	
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());

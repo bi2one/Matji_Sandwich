@@ -46,12 +46,14 @@ public class TagHttpRequest extends HttpRequest {
 		getHashtable.put("limit", limit + "");
 	}
 	
-	public void actionUserTagList(int user_id) {
+	public void actionUserTagList(int user_id, int page, int limit) {
 		action = "user_tag_list";
 		parser = new TagParser(context);
 		
 		getHashtable.clear();
-		getHashtable.put("user_id", user_id+ "");
+		getHashtable.put("user_id", user_id+ "");		
+		getHashtable.put("page", page+ "");
+		getHashtable.put("limit", limit+ "");
 	}
 	
 	public void actionPostTagList(int post_id) {

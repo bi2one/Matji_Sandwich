@@ -3,6 +3,7 @@ package com.matji.sandwich.http.parser;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.R;
@@ -62,7 +63,7 @@ public class UserParser extends MatjiDataParser {
 
 		/* Set User Mileage */
 		UserMileageParser umParser = new UserMileageParser(context);
-		user.setMileage(umParser.getMatjiData(getObject(object, "mileage")));
+		user.setMileage(umParser.getMatjiData(getObject(object, "user_mileage")));
 
 		/* Set Post */
 		PostParser postParser = new PostParser(context);
@@ -78,6 +79,8 @@ public class UserParser extends MatjiDataParser {
 		}
 		user.setAttchFiles(attach_files);
 
+		Log.d("Parser", "UserParser:: called getMatjiData");
+		
 		return user;
 	}
 }

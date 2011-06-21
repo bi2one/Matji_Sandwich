@@ -5,5 +5,4 @@ import com.matji.sandwich.Requestable;
 public interface ListScrollRequestable extends Requestable {
     public void requestNext();
     public void requestReload();
-    
 }

@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.parser;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Count;
@@ -17,6 +18,8 @@ public class CountParser extends MatjiDataParser {
 		Count count = new Count();
 		count.setCount(getInt(object, "count"));
 
+		Log.d("CountParser", "Parser:: called getMatjiData");
+		
 		return count;
 	}
 }

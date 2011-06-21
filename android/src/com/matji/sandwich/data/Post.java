@@ -1,5 +1,7 @@
 package com.matji.sandwich.data;
 
+import java.util.ArrayList;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -21,6 +23,7 @@ public class Post extends MatjiData {
 	private User user;
 	private Store store;
 	private Activity activity;
+	private ArrayList<Tag> tags;
 
 	public Post() {}
 	
@@ -60,6 +63,7 @@ public class Post extends MatjiData {
 		dest.writeValue(user);
 		dest.writeValue(store);
 		dest.writeValue(activity);
+		dest.writeTypedList(tags);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -80,6 +84,8 @@ public class Post extends MatjiData {
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
 		activity = Activity.class.cast(in.readValue(Activity.class.getClassLoader()));
+		tags = new ArrayList<Tag>();
+		in.readTypedList(tags, Tag.CREATOR);
 	}
 	
 	public void setPost(String post) {
@@ -183,5 +189,13 @@ public class Post extends MatjiData {
 	}
 	public Activity getActivity() {
 		return activity;
+	}
+
+	public void setTags(ArrayList<Tag> tags) {
+		this.tags = tags;
+	}
+
+	public ArrayList<Tag> getTags() {
+		return tags;
 	}
 }

@@ -35,8 +35,7 @@ public class SharedMatjiData {
 	}
 	
 	public MatjiData top() {
-		MatjiData data = stack.lastElement();
-		Log.d("Matji", "TOP" + data.toString());
+		Log.d("Matji", "TOP");
 		return stack.lastElement();
 	}
 }

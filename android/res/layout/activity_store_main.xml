@@ -18,7 +18,6 @@
 			android:layout_toRightOf="@id/store_main_thumnail"
 			android:onClick="onLikeButtonClicked" />
 		<TextView
-			android:background="@drawable/selector"
 			style="@style/store_main_LikeCount"
 			android:id="@+id/store_main_like_count"
 			android:layout_toRightOf="@id/store_main_like_btn"

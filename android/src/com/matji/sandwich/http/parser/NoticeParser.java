@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.parser;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Notice;
@@ -23,6 +24,8 @@ public class NoticeParser extends MatjiDataParser {
 		notice.setContent(getString(object, "content"));
 		notice.setTarget(getString(object, "target"));
 		notice.setEndDate(getString(object, "end_date"));
+
+		Log.d("Parser", "NoticeParser:: called getMatjiData");
 		
 		return notice;
 	}
