@@ -23,8 +23,8 @@ PullToRefreshListView.OnRefreshListener {
 	private int page = 1;
 	private int limit = 10;
 
-	protected final int REQUEST_NEXT = 0;
-	protected final int REQUEST_RELOAD = 1;
+	protected final static int REQUEST_NEXT = 0;
+	protected final static int REQUEST_RELOAD = 1;
 
 	public abstract HttpRequest request();
 

@@ -21,6 +21,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 	protected abstract void onTitleBarItemClicked(View view);
 
 	public void didEnterForeGround(){
+		Log.d("LifeCycle", "ENTER");
 		Session session  = Session.getInstance(this);
 		if (session.isLogin()){
 			session.sessionValidate(null, this);

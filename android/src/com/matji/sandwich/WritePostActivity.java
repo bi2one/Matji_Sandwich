@@ -1,9 +1,7 @@
 package com.matji.sandwich;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -27,8 +25,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Images;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
@@ -40,10 +36,10 @@ import android.widget.Toast;
 
 public class WritePostActivity extends BaseMapActivity implements Requestable, RelativeLayoutThatDetectsSoftKeyboard.Listener, MatjiLocationListener {
 	private static final int POST_WRITE_REQUEST = 1;
-    private static final int LAT_SPAN = (int)(0.005 * 1E6);
-    private static final int LNG_SPAN = (int)(0.005 * 1E6);
-    private static final int THUMBNAIL_SIZE = 128;
-    private int TAKE_CAMERA = 1;					// 카메라 리턴 코드값 설정
+	private static final int LAT_SPAN = (int)(0.005 * 1E6);
+	private static final int LNG_SPAN = (int)(0.005 * 1E6);
+	private static final int THUMBNAIL_SIZE = 128;
+	private int TAKE_CAMERA = 1;					// 카메라 리턴 코드값 설정
 	private int TAKE_GALLERY = 2;				// 앨범선택에 대한 리턴 코드값 설정
 	static final String[] IMAGE_PROJECTION = {      
 		MediaStore.Images.ImageColumns.DATA, 
@@ -68,11 +64,11 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private LinearLayout thumbnailsContainer;
 	private Context mContext;
 
-        @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
-		
+
 		setContentView(R.layout.activity_write_post);
 
 		mapView = (MapView) findViewById(R.id.post_user_map);
@@ -84,7 +80,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 
 		uploadImages = new ArrayList<String>();
 		thumbImages = new ArrayList<Bitmap>();
-		
+
 		manager = new HttpRequestManager(mContext, this);
 		session = Session.getInstance(this);
 		mGpsManager = new GpsManager(mContext, this);
@@ -278,13 +274,13 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		return BitmapFactory.decodeFile(imagePath, options);
 	}
 
-	
+
 	@SuppressWarnings("unused")
 	private Bitmap getOriginalImage(String imagePath){
 		return getOriginalImage(imagePath, 1);
 	}
-	
-	
+
+
 	private Uri getUriFromRealPath(String realPath){
 		File file = new File(realPath);
 		return Uri.fromFile(file);
@@ -293,7 +289,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 
 	private void invalidateThumbToContainerView(){
 		thumbnailsContainer.removeAllViews();
-		
+
 		int index = 0;
 		for (Bitmap bm : thumbImages){
 			LayoutParams params = new LinearLayout.LayoutParams(THUMBNAIL_SIZE, THUMBNAIL_SIZE);
@@ -310,31 +306,31 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 					thumbnailsContainer.removeView(v);
 				}
 			});
-			
+
 			thumbnailsContainer.addView(iv);
 			index++;
 		}
 	}	
-	
-	
+
+
 	private void removeUploadImage(int index){
 		thumbImages.remove(index);
 		uploadImages.remove(index);
-		
+
 		invalidateThumbToContainerView();
 	}
-	
-	
+
+
 	private void addUploadImage(String imageRealPath){
 		if (!uploadImages.contains(imageRealPath)){
 			uploadImages.add(imageRealPath);
 			thumbImages.add(getThumbnailImage(imageRealPath, THUMBNAIL_SIZE, THUMBNAIL_SIZE));
-			
+
 			invalidateThumbToContainerView();
 		}
 	}
-	
-	
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == RESULT_OK){
@@ -344,16 +340,15 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 				final Uri uriImages = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;        
 				//final Uri uriImagesthum = MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI;
 				try{
+					final Cursor cursorImages = getContentResolver().query(uriImages, IMAGE_PROJECTION, null, null, null);
+					if(cursorImages != null && cursorImages.moveToLast()){         
+						imageRealPath = cursorImages.getString(0);
+						cursorImages.close();
+					} 
+				}catch(Exception e){}
 
-				 final Cursor cursorImages = getContentResolver().query(uriImages, IMAGE_PROJECTION, null, null, null);
-				     if(cursorImages != null && cursorImages.moveToLast()){         
-				    	 imageRealPath = cursorImages.getString(0);
-				    	 cursorImages.close();
-				     } 
-				 }catch(Exception e){}
-				 
-				 addUploadImage(imageRealPath);
-				 
+				addUploadImage(imageRealPath);
+
 			}else if(requestCode == TAKE_GALLERY){
 				String imageRealPath = null;
 				Uri currImageURI = data.getData();

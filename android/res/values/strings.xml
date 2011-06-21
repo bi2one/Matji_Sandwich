@@ -63,6 +63,10 @@
   <string name="default_string_url">관련 URL</string>
   <string name="default_string_memo">메모</string>
   <string name="default_string_comment">댓글</string>
+  <string name="default_string_like">Like</string>
+  <string name="default_string_unlike">Unlike</string>
+  <string name="default_string_number_of_person">person</string>
+  <string name="default_string_like_this">like this.</string>
   <string name="default_string_image">이미지</string>
   <string name="default_string_map">지도</string>
   <string name="default_string_store">맛집</string>
@@ -81,6 +85,11 @@
   <string name="default_string_near_store">Store</string>
   <string name="default_string_configure">설정</string>
   
+  <!-- alarm -->
+  <string name="alarm_following_you">is now following you.</string>
+  <string name="alarm_commented_post">commented on your post.</string>
+  <string name="alarm_like_post">likes your post.</string>
+  
   <!-- grade -->
   <string name="grade_point">활동점수 :</string>
   <string name="grade_diamond">다이아몬드</string>
@@ -90,7 +99,7 @@
   <string name="store_main_like_store">좋아요</string>
   <string name="store_main_scrap">스크랩</string>
   <string name="store_main_bookmark">스크랩</string>
-  <string name="store_main_unbookmark">unBookmark</string>
+  <string name="store_main_unbookmark">Unbookmark</string>
   <string name="store_main_map">지도</string>
   <string name="store_main_phone">전화</string>
   <string name="store_main_web">웹</string>

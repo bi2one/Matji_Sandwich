@@ -21,13 +21,14 @@ public class AlarmHttpRequest extends HttpRequest {
     	controller = "alarms";
     }
 
-    public void actionList(int user_id){
+    public void actionList(int page, int limit) {
     	parser = new AlarmParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	
     	getHashtable.clear();
-    	getHashtable.put("user_id", user_id + "");
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {

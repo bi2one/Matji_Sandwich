@@ -1,25 +1,28 @@
 package com.matji.sandwich;
 
-
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.widget.AlarmListView;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.matji.sandwich.base.BaseActivity;
-
 public class AlarmActivity extends BaseActivity {
+	private AlarmListView listView;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-	}
+		setContentView(R.layout.activity_alarm);
 
+		listView = (AlarmListView) findViewById(R.id.alarm_list);
+		listView.setActivity(this);
+		listView.requestReload();
+	}
+	
 	@Override
 	protected String titleBarText() {
-		// TODO Auto-generated method stub
-		return "AlarmActivity";
+		return "StoreMenuActivity";
 	}
 
 	@Override

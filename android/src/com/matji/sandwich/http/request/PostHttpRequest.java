@@ -28,6 +28,7 @@ public class PostHttpRequest extends HttpRequest {
     	
     	getHashtable.clear();
     	getHashtable.put("post_id", post_id + "");
+    	getHashtable.put("include", "user,store,tags");
     }
     
     public void actionNew(String post, String tags, String from_where) {
@@ -47,23 +48,6 @@ public class PostHttpRequest extends HttpRequest {
     	
     	postHashtable.clear();
     	postHashtable.put("post_id",post_id + "");
-    }
-    
-    public void actionUnlike(int post_id){
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "unlike";
-    	
-    	postHashtable.clear();
-    	postHashtable.put("post_id", post_id + "");
-    }
-    
-    public void actionLike(int post_id){
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "like";
-    	parser = new PostParser(context);
-    	
-    	postHashtable.clear();
-    	postHashtable.put("post_id", post_id + "");
     }
     
     public void actionList(int page, int limit) {

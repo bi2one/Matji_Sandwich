@@ -58,6 +58,26 @@ public class LikeHttpRequest extends HttpRequest {
 
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
+    }    
+    
+    public void actionPostUnLike(int post_id){
+    	httpMethod = HttpMethod.HTTP_POST;
+    	action = "unlike";
+    	parser = new LikeParser(context);
+    	controller = "posts";
+
+    	postHashtable.clear();
+    	postHashtable.put("post_id", post_id);
+    }
+    
+    public void actionPostLike(int post_id){
+    	httpMethod = HttpMethod.HTTP_POST;
+    	action = "like";
+    	parser = new LikeParser(context);
+    	controller = "posts";
+
+    	postHashtable.clear();
+    	postHashtable.put("post_id", post_id);
     }
 
 	public ArrayList<MatjiData> request() throws MatjiException {

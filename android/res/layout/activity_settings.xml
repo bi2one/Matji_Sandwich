@@ -29,13 +29,13 @@
 					android:text="My Profile" />
 				<Button android:id="@+id/notifications"
 					style="@style/SettingButton"
-					android:onClick="onProfileButtonClicked"
+					android:onClick="onNotificationsButtonClicked"
 					android:padding="10dp"
 					android:text="Notifications" />
 				<Button android:id="@+id/messages" 
 					style="@style/SettingButton"
 					android:padding="10dp"
-					android:onClick="onNotificationsButtonClicked"
+					android:onClick="onMessagesButtonClicked"
 					android:background="@drawable/btn_bottom_corner" 
 					android:text="Messages" />
 			</LinearLayout>

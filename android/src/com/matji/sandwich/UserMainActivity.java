@@ -163,8 +163,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	public void onResume() {
 		super.onResume();
 
-		setInfo();
-		followButton.setClickable(true);		
+		setInfo();	
 	}
 
 
@@ -193,6 +192,11 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		switch (tag) {
+		case FOLLOW_REQUEST: case UN_FOLLOW_REQUEST:
+			followButton.setClickable(true);
+		}
+
 		setInfo();
 	}
 
@@ -202,8 +206,8 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	public void onFollowButtonClicked(View view) {
 		if (session.isLogin()){
+			followButton.setClickable(false);
 			if (session.getCurrentUser().getId() != user.getId()) {
-				followButton.setClickable(false);
 				if (dbProvider.isExistFollowing(user.getId())) {
 					dbProvider.deleteFollowing(user.getId());
 					// api request
