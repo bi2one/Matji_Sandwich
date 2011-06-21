@@ -311,13 +311,13 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 				Log.d("Matji", "GALLERY : " + imageRealPath);
 
 				uploadImages.add(imageRealPath);
-				thumbImages.add(getThumbnailImage(imageUri, dstWidth, dstHeight));
+//				thumbImages.add(getThumbnailImage(imageUri, dstWidth, dstHeight));
 			}else if(requestCode == TAKE_GALLERY){
 				String imageRealPath = null;
 				Uri currImageURI = data.getData();
 				imageRealPath = getRealPathFromURI(currImageURI);
 				uploadImages.add(imageRealPath);
-				thumbImages.add();
+//				thumbImages.add();
 				//Log.d("Matji", "GALLERY : " + imageRealPath);
 
 				//getUriFromRealPath(imageRealPath);

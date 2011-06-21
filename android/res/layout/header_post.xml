@@ -3,6 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
+	android:paddingBottom="3dp"
 	android:background="#fff">
 	<RelativeLayout
 		style="@style/DefaultWrap"
@@ -55,7 +56,6 @@
 			android:visibility="gone" />
 	</RelativeLayout>
 	<LinearLayout
-		android:background="#ffffff"
 		android:id="@+id/header_post_previews"
 		android:layout_below="@id/header_post_post_wrap"
 		style="@style/DefaultWidthFill">
@@ -76,6 +76,25 @@
 		android:layout_below="@id/header_post_previews"
 		android:layout_marginLeft="61dp"
 		android:textSize="11dp"
-		android:padding="5dp"
+		android:paddingRight="5dp"
+		android:paddingLeft="5dp"
 		android:textColor="@color/GRAY" />
+	<LinearLayout
+		style="@style/DefaultWrap"
+		android:id="@+id/header_post_like_this_wrap"
+		android:layout_below="@id/header_post_created_at"
+		android:visibility="gone"
+		android:paddingLeft="3dp">
+		<TextView
+			android:id="@+id/header_post_number_of_person"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/DODGER_BLUE" />
+		<TextView
+			android:id="@+id/header_post_like_this"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/LIGHT_GRAY"
+			android:text="@string/default_string_like_this" />
+	</LinearLayout>
 </RelativeLayout>

@@ -92,26 +92,25 @@ public class SettingActivity extends BaseActivity {
 		Intent profileIntent = new Intent(this, UserTabActivity.class);
 		session = Session.getInstance(this);
 		user = session.getCurrentUser();
-		startActivityWithMatjiData(profileIntent, user);		
+		startActivityWithMatjiData(profileIntent, user);
 	}
 	
 	public void onNotificationsButtonClicked(View view){
-		Intent notificationIntent = new Intent(this, UserTabActivity.class);
+		Intent notificationIntent = new Intent(this, AlarmActivity.class);
 		user = session.getCurrentUser();
-		startActivityWithMatjiData(notificationIntent, user);	
+		startActivityWithMatjiData(notificationIntent, user);
 	}
 	
 	public void onMessagesButtonClicked(View view){
 		Intent messageIntent = new Intent(this, UserTabActivity.class);
 		user = session.getCurrentUser();
-		startActivityWithMatjiData(messageIntent, user);	
+		startActivityWithMatjiData(messageIntent, user);
 	}
 	
 	public void onNoticesButtonClicked(View view){
 		Intent noticesIntent = new Intent(this, NoticeActivity.class);
 		startActivity(noticesIntent);
 	}
-	
 	
 	public void onSyncButtonClicked(View view){
 		Log.d("Button", "Sync Clicked");

@@ -11,19 +11,21 @@
 	<LinearLayout
 		android:id="@+id/header_post_button_area"
 		android:layout_width="fill_parent"
-		android:layout_height="60dp"
+		android:layout_height="wrap_content"
 		android:background="#fff">
 		<Button
 			style="@style/DefaultWrap"
 			android:layout_margin="7dp"
-			android:text="가나다" />
+			android:text="@string/default_string_comment"
+			android:onClick="onCommentButtonClicked" />
 		<Button
 			style="@style/DefaultWrap"
 			android:layout_margin="7dp"
-			android:text="가나다" />
+			android:id="@+id/post_main_like_btn"
+			android:text="@string/default_string_like"
+			android:onClick="onLikeButtonClicked" />
 		<Button
 			style="@style/DefaultWrap"
-			android:layout_margin="7dp"
-			android:text="가나다" />
+			android:layout_margin="7dp" />
 	</LinearLayout>
 </LinearLayout>

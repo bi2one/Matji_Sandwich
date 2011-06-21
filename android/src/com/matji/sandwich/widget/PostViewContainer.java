@@ -46,6 +46,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	private Store store;
 
 	private TextView dateAgo;
+	private TextView numberOfPerson;
 	private ImageView[] preview;
 
 	private int[] imageIds = {
@@ -76,8 +77,11 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 		downloader = new MatjiImageDownloader();
 		manager = new HttpRequestManager(activity, this);
 		request = new AttachFileHttpRequest(activity);
-
+		
 		dateAgo = (TextView) getRootView().findViewById(R.id.header_post_created_at);
+		
+		numberOfPerson = (TextView) getRootView().findViewById(R.id.header_post_number_of_person);
+		numberOfPerson.setText(post.getLikeCount()+"");
 
 		/* Set Previews */
 		preview = new ImageView[imageIds.length];
@@ -99,7 +103,6 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 		else 
 			storeName.setText("");
 		content.setText(post.getPost());
-
 
 		ArrayList<Tag> tags = post.getTags();
 		String tagResult = "태그: ";
@@ -131,14 +134,20 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 		thumnail.setOnClickListener(this);
 		nick.setOnClickListener(this);
 		storeName.setOnClickListener(this);
-		setPostData();
-	}
-
-	private void setPostData() {
-		dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
 		attachFileIdsRequest();
+		setInfo();
 	}
 
+	public void setInfo() {
+		dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
+		
+		if (post.getLikeCount() > 0) {
+			numberOfPerson.setText(post.getLikeCount() + context.getString(R.string.default_string_number_of_person) + " ");
+			getRootView().findViewById(R.id.header_post_like_this_wrap).setVisibility(View.VISIBLE);
+		} else {
+			getRootView().findViewById(R.id.header_post_like_this_wrap).setVisibility(View.GONE);
+		}
+	}
 
 	public void onClick(View view) {
 		switch(view.getId()) {

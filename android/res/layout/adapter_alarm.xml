@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:padding="7dp"
+	android:background="#fff">
+	<ImageView
+		android:layout_width="40dp"
+		android:layout_height="40dp"
+		android:scaleType="centerCrop"
+		android:layout_marginRight="7dp"
+		android:layout_marginBottom="7dp"
+		android:id="@+id/alarm_adapter_thumnail" />
+	<TextView
+		style="@style/DefaultWrap"
+		android:id="@+id/alarm_adapter_nick"
+		android:textColor="@color/DODGER_BLUE"
+		android:layout_gravity="center_vertical" />
+	<TextView
+		style="@style/DefaultWrap"
+		android:id="@+id/alarm_adapter_message"
+		android:textColor="@color/BLACK"
+		android:singleLine="true" 
+		android:layout_gravity="center_vertical" />
+</LinearLayout>
