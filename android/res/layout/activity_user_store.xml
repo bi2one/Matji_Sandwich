@@ -4,7 +4,7 @@
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
-	<com.matji.sandwich.widget.UserStoreListView
+	<com.matji.sandwich.widget.StoreBookmarkedListView
 		style="@style/DefaultWidthFill"
-		android:id="@+id/user_store_list" />
+		android:id="@+id/store_bookmarked_list" />
 </LinearLayout>

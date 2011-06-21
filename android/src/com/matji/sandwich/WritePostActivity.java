@@ -97,9 +97,9 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 		} else {
 			if(!tagsField.getText().toString().trim().equals("")) {
 				postHttpRequest.actionNew(postField.getText().toString().trim()
-						,tagsField.getText().toString().trim());							
+						,tagsField.getText().toString().trim(), "ANDROID");							
 			} else {
-				postHttpRequest.actionNew(postField.getText().toString().trim(),"");
+				postHttpRequest.actionNew(postField.getText().toString().trim(),"", "ANDROID");
 			}
 		}
 		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
@@ -180,8 +180,5 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 		}else {
 			postFooterContentLayout.setVisibility(View.GONE);
 		}
-	}
-	
-	
-	
+	}	
 }
