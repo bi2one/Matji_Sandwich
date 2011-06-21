@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.google.android.maps.GeoPoint;
@@ -81,7 +80,6 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		if (prevLocation != null) {
 		    if (prevLocation.getAccuracy() <= location.getAccuracy()) {
 			mGpsManager.stop();
-			return;
 		    }
 		}
 	    
@@ -189,6 +187,8 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	}
 
     
+	
+	
 	
     // public boolean dispatchTouchEvent(MotionEvent event) {
     // 	boolean result = super.dispatchTouchEvent(event);

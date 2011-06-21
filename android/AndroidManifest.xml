@@ -44,6 +44,7 @@
 		<activity android:name="FollowingActivity" android:screenOrientation="portrait"></activity>
 		<activity android:name="TagListActivity" android:screenOrientation="portrait"></activity>
 		<activity android:name="WritePostActivity"
+				  android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize"></activity>
 		<activity android:name="WriteCommentActivity"
                   android:windowSoftInputMode="adjustResize"></activity>
