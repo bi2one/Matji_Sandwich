@@ -260,4 +260,16 @@
   	<item name="android:stretchMode">columnWidth</item>
   	<item name="android:gravity">center</item>
   </style>
+
+  <!-- activity_main_map.xml -->
+  <style name="main_map_searchBox" parent="DefaultWrap">
+    <item name="android:layout_width">120dp</item>
+    <item name="android:singleLine">true</item>
+  </style>
+
+  <style name="main_map_commonButton" parent="DefaultWrap">
+    <item name="android:layout_width">50dp</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textSize">10dp</item>
+  </style>
 </resources>

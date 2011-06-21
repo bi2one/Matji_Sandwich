@@ -3,6 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.FileUploadProgressListener;
 import com.matji.sandwich.exception.HttpConnectMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -16,10 +17,10 @@ import android.net.NetworkInfo;
 import android.util.*;
 import android.content.Context;
 
-
 enum HttpMethod { HTTP_POST, HTTP_GET }
 
 public abstract class HttpRequest {
+    private FileUploadProgressListener progressListener;
     protected Context context = null;
     protected String serverDomain = "http://api.matji.com/";
     
@@ -48,6 +49,10 @@ public abstract class HttpRequest {
     protected SimpleHttpResponse requestHttpResponsePost(String url, Map<String, String> header, Map<String, Object> param)
     throws HttpConnectMatjiException {
 	return requestHttpResponse(url, header, param, null, HttpUtility.ASYNC_METHOD_POST);
+    }
+
+    public void setFileUploadProgressListener(FileUploadProgressListener listener) {
+	progressListener = listener;
     }
     
     private SimpleHttpResponse requestHttpResponse(String url,
@@ -84,7 +89,10 @@ public abstract class HttpRequest {
 	    
 	    
 	    if(method == HttpUtility.ASYNC_METHOD_POST) {
-		httpResponse = HttpUtility.getInstance().post(url, baseHeader, postParam);
+		HttpUtility utility = HttpUtility.getInstance();
+		utility.setFileUploadProgressListener(progressListener);
+		httpResponse = utility.post(url, baseHeader, postParam);
+		utility.removeFileUploadProgressListener();
 	    } else {
 		httpResponse = HttpUtility.getInstance().get(url, baseHeader, getParam);
 	    }

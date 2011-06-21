@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-  	0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
+    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
   </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -75,8 +75,15 @@
   <string name="default_string_number_of">개</string>
   <string name="default_string_sent_message">보낸 쪽지</string>
   <string name="default_string_recieved_message">받은 쪽지</string>
-  <string name="default_string_write_note">영업시간, 에약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
+  <string name="default_string_write_note">영업시간, 예약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
   <string name="default_string_recent_post">등록한 메모가 없습니다.</string>
+  <string name="default_string_bookmark">Bookmark</string>
+  <string name="default_string_ranking">Ranking</string>
+  <string name="default_string_post">Post</string>
+  <string name="default_string_register">Register</string>
+  <string name="default_string_current_position">GPS</string>
+  <string name="default_string_near_store">Store</string>
+  <string name="default_string_configure">설정</string>
   
   <!-- alarm -->
   <string name="alarm_following_you">is now following you.</string>
@@ -113,16 +120,16 @@
   <string name="store_detail_info_default">맛집 기본 정보</string>
   <string name="store_detail_info_note">맛집 노트</string>
 
-  <!-- StoreSwipeActivity -->
+  <!-- StoreSliderActivity -->
   <string name="all_store">전체 맛집</string>
   <string name="near_store">주변 맛집</string>
   <string name="search_store">맛집 검색</string>
   <string name="bookmarked_store">내맛집</string>
   
-  <!--  PostSwipeActivity -->
+  <!--  PostSliderActivity -->
   <string name="all_post">실시간 메모</string>
   <string name="near_post">주변 메모</string>
   <string name="search_post">메모 검색</string>
   <string name="my_post">내메모</string>
-  
+
 </resources>

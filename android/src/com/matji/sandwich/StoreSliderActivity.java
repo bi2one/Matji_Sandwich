@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.view.View;
 import android.widget.Button;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -20,8 +21,9 @@ import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.session.Session;
 
 public class StoreSliderActivity extends BaseActivity implements OnScrollListener {
-
-	private SwipeView swipeView;
+        public static final int INDEX_NEAR_STORE = 2;
+        
+        private SwipeView swipeView;
 	private StoreSearchView view1;
 	private StoreListView view2;
 	private StoreNearListView view3;
@@ -30,10 +32,11 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 	private Context mContext;
 	private int mCurrentPage;
 	private ArrayList<View> mContentViews;
+        private Intent initIntent;
 
 	private Session session;
 	private boolean privateMode;
-	private final static int mDefaultPage = 1;
+	private int mDefaultPage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,6 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
 		privateMode = false;
-		mCurrentPage = mDefaultPage;
 		//pagerControlStringRef = new int[] {R.string.search_store, R.string.all_store, R.string.near_store}; 
 
 		control = (PagerControl) findViewById(R.id.PagerControl);
@@ -73,6 +75,10 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 
 	public void onResume(){
 		super.onResume();
+		mDefaultPage = session.getPreferenceProvider().getInt(Session.STORE_SLIDER_INDEX, 1);
+		session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, 1);
+		mCurrentPage = mDefaultPage;
+		
 		if (session.getToken() == null && privateMode == true){
 			// remove private lists
 			removePrivateStoreList();

@@ -27,6 +27,8 @@ import android.os.Message;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.matji.sandwich.FileUploadProgressListener;
+
 /**
  * 
  * @author meinside@skcomms.co.kr
@@ -85,6 +87,7 @@ final public class HttpUtility
 
 	private volatile static HttpUtility httpUtility = null;
 	private static HashMap<String, AsyncHttpTask> asyncTaskPool = null;
+        private FileUploadProgressListener progressListener;
 
 	//default connection values
 	private static int connectionTimeoutMillis = 10000;
@@ -115,7 +118,7 @@ final public class HttpUtility
 	 */
 	public static HttpUtility getInstance()
 	{
-		if(httpUtility == null)
+	    if(httpUtility == null)
 		{
 			synchronized(HttpUtility.class)
 			{
@@ -128,6 +131,14 @@ final public class HttpUtility
 		}
 		
 		return httpUtility;
+	}
+
+        public void setFileUploadProgressListener(FileUploadProgressListener listener) {
+	    progressListener = listener;
+	}
+
+        public void removeFileUploadProgressListener() {
+	    progressListener = null;
 	}
 	
 	/**
@@ -427,12 +438,16 @@ final public class HttpUtility
 							dos.writeBytes("Content-Type: " + getMimeType(file) + "\r\n\r\n");
 							
 							FileInputStream fis = new FileInputStream((File)value);
+							
+							int totalSize = fis.available();
 							byte[] buffer = new byte[FILE_BUFFER_SIZE];
 							
 							int bytesRead = 0;
 							while((bytesRead = fis.read(buffer, 0, FILE_BUFFER_SIZE)) > 0)
 							{
 								dos.write(buffer, 0, bytesRead);
+								if (progressListener != null)
+								    progressListener.onFileWritten(totalSize, bytesRead);
 							}
 							fis.close();
 						}
