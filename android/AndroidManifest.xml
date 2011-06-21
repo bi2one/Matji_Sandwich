@@ -40,11 +40,14 @@
 		<activity android:name="StoreUrlListActivity" android:screenOrientation="portrait"></activity>
 		<activity android:name="UserTabActivity" android:screenOrientation="portrait"></activity>
 		<activity android:name="UserMainActivity"></activity>
-		<activity android:name="UserStoreListActivity"></activity>
+		<activity android:name="StoreBookmarkedListActivity"></activity>
 		<activity android:name="UserPostListActivity"></activity>
 		<activity android:name="FollowingActivity" android:screenOrientation="portrait"></activity>
 		<activity android:name="TagListActivity" android:screenOrientation="portrait"></activity>
 		<activity android:name="WritePostActivity"
+				  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustResize"></activity>
+		<activity android:name="WriteCommentActivity"
                   android:windowSoftInputMode="adjustResize"></activity>
 		<activity android:name="widget.SlideGalleryActivity"></activity>
 		<activity android:name="GridGalleryActivity"></activity>

@@ -41,7 +41,6 @@ import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -75,6 +74,7 @@ public class HorizontalPager extends ViewGroup
     private int pageWidthSpec, pageWidth;
 
     private boolean mFirstLayout = true;
+    private boolean mTouchScollEnabled = true;
 
     private int mCurrentPage;
     private int mNextPage = INVALID_SCREEN;
@@ -130,7 +130,7 @@ public class HorizontalPager extends ViewGroup
     private void init() {
         mScroller = new Scroller(getContext());
         mCurrentPage = 0;
-	
+        
         final ViewConfiguration configuration = ViewConfiguration.get(getContext());
         mTouchSlop = configuration.getScaledTouchSlop();
         // mTouchSlop = 70;
@@ -154,7 +154,6 @@ public class HorizontalPager extends ViewGroup
     public void setCurrentPage(int currentPage) {
         mCurrentPage = Math.max(0, Math.min(currentPage, getChildCount()));
         scrollTo(getScrollXForPage(mCurrentPage), 0);
-        invalidate();
     }
 
     public int getPageWidth() {
@@ -175,8 +174,10 @@ public class HorizontalPager extends ViewGroup
         return (whichPage * pageWidth) - pageWidthPadding();
     }
 
+    
     @Override
 	public void computeScroll() {
+    	
         if (mScroller.computeScrollOffset()) {
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             postInvalidate();
@@ -189,7 +190,7 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	protected void dispatchDraw(Canvas canvas) {
-
+    	
         // ViewGroup.dispatchDraw() supports many features we don't need:
         // clip to padding, layout animation, animation listener, disappearing
         // children, etc. The following implementation attempts to fast-track
@@ -217,6 +218,7 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    	
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         pageWidth = pageWidthSpec == SPEC_UNDEFINED ? getMeasuredWidth() : pageWidthSpec;
@@ -235,6 +237,7 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+    	
         int childLeft = 0;
 
         final int count = getChildCount();
@@ -250,6 +253,7 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	public boolean requestChildRectangleOnScreen(View child, Rect rectangle, boolean immediate) {
+    	
         int screen = indexOfChild(child);
         if (screen != mCurrentPage || !mScroller.isFinished()) {
             return true;
@@ -259,6 +263,7 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	protected boolean onRequestFocusInDescendants(int direction, Rect previouslyFocusedRect) {
+    	
         int focusableScreen;
         if (mNextPage != INVALID_SCREEN) {
             focusableScreen = mNextPage;
@@ -271,6 +276,7 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	public boolean dispatchUnhandledMove(View focused, int direction) {
+    	
         if (direction == View.FOCUS_LEFT) {
             if (getCurrentPage() > 0) {
                 snapToPage(getCurrentPage() - 1);
@@ -287,6 +293,7 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	public void addFocusables(ArrayList<View> views, int direction) {
+    	
         getChildAt(mCurrentPage).addFocusables(views, direction);
         if (direction == View.FOCUS_LEFT) {
             if (mCurrentPage > 0) {
@@ -301,8 +308,9 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-        //Log.d(TAG, "onInterceptTouchEvent::action=" + ev.getAction());
-
+        //Log.d("Matji", "onInterceptTouchEvent::action=" + ev.getAction());
+        if (mTouchScollEnabled == false) return super.onInterceptTouchEvent(ev);
+        
         /*
          * This method JUST determines whether we want to intercept the motion.
          * If we return true, onTouchEvent will be called and we do the actual
@@ -316,7 +324,7 @@ public class HorizontalPager extends ViewGroup
          */
         final int action = ev.getAction();
         if ((action == MotionEvent.ACTION_MOVE) && (mTouchState != TOUCH_STATE_REST)) {
-            Log.d(TAG, "onInterceptTouchEvent::shortcut=true");
+            //Log.d(TAG, "onInterceptTouchEvent::shortcut=true");
             return true;
         }
 
@@ -405,6 +413,8 @@ public class HorizontalPager extends ViewGroup
 
     @Override
 	public boolean onTouchEvent(MotionEvent ev) {
+    	if (mTouchScollEnabled == false) return super.onTouchEvent(ev);
+    	
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
@@ -485,7 +495,7 @@ public class HorizontalPager extends ViewGroup
         snapToPage(whichPage);
     }
 
-    void snapToPage(int whichPage) {
+    public void snapToPage(int whichPage) {
         enableChildrenCache();
 
         boolean changingPages = whichPage != mCurrentPage;
@@ -590,7 +600,15 @@ public class HorizontalPager extends ViewGroup
         mListeners.remove(listener);
     }
 
-    /**
+    public void setTouchScollEnabled(boolean touchScollEnabled) {
+		this.mTouchScollEnabled = touchScollEnabled;
+	}
+
+	public boolean isTouchScollEnabled() {
+		return mTouchScollEnabled;
+	}
+
+	/**
      * Implement to receive events on scroll position and page snaps.
      */
     public static interface OnScrollListener {

@@ -132,7 +132,8 @@ PullToRefreshListView.OnRefreshListener {
 		}
 		//	adapterData = getListByT(data);
 
-		((MBaseAdapter)adapter).notifyDataSetChanged();
+		if (data.size() > 0)
+			((MBaseAdapter)adapter).notifyDataSetChanged();
 
 		if (adapterData.size() <= limit){
 			Log.d("refresh", "Will invoke onRefreshComplete()");

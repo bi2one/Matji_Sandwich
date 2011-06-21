@@ -6,9 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.MenuItem;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.widget.Button;
 import android.content.Intent;
 

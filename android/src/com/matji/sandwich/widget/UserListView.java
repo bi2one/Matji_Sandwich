@@ -55,7 +55,7 @@ public class UserListView extends RequestableMListView implements View.OnClickLi
 		//		case R.id.post_adapter_store_name:
 		//			gotoStorePage(recentPost);
 		//			break;
-		//		}	
+		//		}
 	}
 
 	protected void gotoUserPage(Post post) {

@@ -37,7 +37,7 @@ public class UserTabActivity extends BaseTabActivity {
 		user = (User) SharedMatjiData.getInstance().top();
 		
 		mainIntent = new Intent(this, UserMainActivity.class);
-		storeListIntent = new Intent(this, UserStoreListActivity.class);
+		storeListIntent = new Intent(this, StoreBookmarkedListActivity.class);
 		storeListIntent.putExtra("user_id", user.getId());
 		postListIntent = new Intent(this, UserPostListActivity.class);
 		postListIntent.putExtra("user_id", user.getId());

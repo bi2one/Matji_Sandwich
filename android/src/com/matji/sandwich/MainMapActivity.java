@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.google.android.maps.GeoPoint;
@@ -81,12 +80,11 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onLocationChanged(Location location) {
-	if (prevLocation != null) {
-	    if (prevLocation.getAccuracy() <= location.getAccuracy()) {
-		mGpsManager.stop();
-		return;
-	    }
-	}
+		if (prevLocation != null) {
+		    if (prevLocation.getAccuracy() <= location.getAccuracy()) {
+			mGpsManager.stop();
+		    }
+		}
 	    
 	prevLocation = location;
 	setCenter(prevLocation);
@@ -179,10 +177,48 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mMapView.stopMapCenterThread();
 	Session session = Session.getInstance(this);
 	session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, StoreSliderActivity.INDEX_NEAR_STORE);
-	Log.d("near!!", StoreSliderActivity.INDEX_NEAR_STORE + "");
-	
+
 	Intent tabIntent = new Intent(mContext, MainTabActivity.class);
 	tabIntent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_STORE);
 	startActivity(tabIntent);
     }
+	
+    // public boolean dispatchTouchEvent(MotionEvent event) {
+    // 	boolean result = super.dispatchTouchEvent(event);
+    // 	if (event.getAction() == MotionEvent.ACTION_UP) {
+    // 	    // Log.d("======", mMapView.getMapCenter().toString());
+    // 	    storeItemizedOverlay.addOverlay(mMapView.getMapCenter());
+    // 	}
+    // 	return result;
+    // }
+
+    // 	e = (EditText) findViewById(R.id.main_map_search_bar);
+    // 	Button b = (Button) findViewById(R.id.main_map_gps_button);
+    // 	b.requestFocus();
+    // 	//		e.setOnFocusChangeListener(new MyFocusChangeListener());
+    // }
+
+    // private void setMarker(Location loc){
+
+    // }
+
+    // private void setSmallmarker(Location loc){
+
+    // }
+
+    // class MyFocusChangeListener implements OnFocusChangeListener {
+    // 	public void onFocusChange(View v, boolean hasFocus) {
+    // 	    // TODO Auto-generated method stub
+    // 	    if(hasFocus) {
+    // 		Log.d("Matji", hasFocus + "");
+    // 		((EditText) v).setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+    // 	    }
+    // 	    else {
+    // 		Log.d("Matji", hasFocus + "");
+    // 		((EditText) v).setLayoutParams(new RelativeLayout.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT));
+    // 	    }
+
+    // 	}
+		
+    // }
 }

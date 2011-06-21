@@ -20,14 +20,15 @@ public class Session implements Requestable {
 	    
     
 	private volatile static Session session = null;
-	private static final int LOGIN = 0;
+	private static final int AUTHORIZE = 0;
+	
 	private static final String keyForCurrentUser = "CurrentUser";
 	private static final String keyForAccessToken = "AccessToken";
 	
 	private PreferenceProvider mPrefs;
 	private Context mContext;
 	private HttpRequestManager mManager;
-	private Loginable mLoginableActivity;
+	private Loginable mLoginable;
 	
 	private Session(){}
 	
@@ -50,17 +51,21 @@ public class Session implements Requestable {
 	}
 	
 	
-	public boolean sessionValidate(){
-		return true;
+	public void sessionValidate(Loginable loginable, Activity activity){
+		this.mLoginable = loginable;
+		mManager = new HttpRequestManager(mContext, this);
+		MeHttpRequest request = new MeHttpRequest(mContext);
+		request.actionMe();
+		mManager.request(activity, request, AUTHORIZE);
 	}
 	
 	
-	public void login(Loginable loginableActivity, String userid, String password){
-		this.mLoginableActivity = loginableActivity;
+	public void login(Loginable loginable, Activity activity, String userid, String password){
+		this.mLoginable = loginable;
 		mManager = new HttpRequestManager(mContext, this);
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionAuthorize(userid, password);
-		mManager.request((Activity)loginableActivity, request, LOGIN);
+		mManager.request(activity, request, AUTHORIZE);
 	}
 	
 	
@@ -86,7 +91,7 @@ public class Session implements Requestable {
 	}
 	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		if (tag == LOGIN){
+		if (tag == AUTHORIZE){
 				Me me = (Me)data.get(0);
 				
 				try {
@@ -106,14 +111,16 @@ public class Session implements Requestable {
 				dbProvider.insertFollowers(me.getFollowers());
 				dbProvider.insertFollowings(me.getFollowings());
 
-				mLoginableActivity.loginCompleted();
+				if (mLoginable != null)
+					mLoginable.loginCompleted();
 		}
 		
 	}
 	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
-		if (tag == LOGIN){
-				mLoginableActivity.loginFailed();
+		if (tag == AUTHORIZE){
+			if (mLoginable != null)
+				mLoginable.loginFailed();
 		}
 	}
 

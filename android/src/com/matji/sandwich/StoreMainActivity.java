@@ -312,7 +312,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 				}
 			}
 			
-			for (; i < tags.size(); i++) {
+			for (i = i+1; i < tags.size(); i++) {
 				if (tags.get(i) != null) {
 					result += ", " + tags.get(i).getTag();
 				}
@@ -333,7 +333,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 				}
 			}
 			
-			for (; i < foods.size(); i++) {
+			for (i = i+1; i < foods.size(); i++) {
 				if (foods.get(i).getFood() != null) {
 					result += ", " + foods.get(i).getFood().getName();
 				}

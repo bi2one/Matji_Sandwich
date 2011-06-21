@@ -5,6 +5,25 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 	<com.matji.sandwich.widget.CommentListView
-		style="@style/DefaultFill"
+		style="@style/DefaultWidthFill"
+		android:layout_weight="1"
 		android:id="@+id/post_main_comment_list" />
+	<LinearLayout
+		android:id="@+id/header_post_button_area"
+		android:layout_width="fill_parent"
+		android:layout_height="60dp"
+		android:background="#fff">
+		<Button
+			style="@style/DefaultWrap"
+			android:layout_margin="7dp"
+			android:text="가나다" />
+		<Button
+			style="@style/DefaultWrap"
+			android:layout_margin="7dp"
+			android:text="가나다" />
+		<Button
+			style="@style/DefaultWrap"
+			android:layout_margin="7dp"
+			android:text="가나다" />
+	</LinearLayout>
 </LinearLayout>
