@@ -41,7 +41,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
-import android.net.http.AndroidHttpClient;
+import com.matji.sandwich.ImageDownloadMessageListener;
 
 /**
  * This helper class download images from the Internet and binds those with the provided ImageView.
@@ -52,10 +52,15 @@ import android.net.http.AndroidHttpClient;
  * A local cache of downloaded images is maintained internally to improve performance.
  */
 public class ImageDownloader {
+	public static final int START = 0;
+	public static final int RUNNING = 1;
+	public static final int END = 2;
+	
     private static final String LOG_TAG = "ImageDownloader";
 
     public enum Mode { NO_ASYNC_TASK, NO_DOWNLOADED_DRAWABLE, CORRECT }
     private Mode mode = Mode.CORRECT;
+    private ImageDownloadMessageListener listener;
 
     /**
      * Download the specified image from the Internet and binds it to the provided ImageView. The
@@ -78,6 +83,9 @@ public class ImageDownloader {
 	download(sb.toString(), imageView);
     }
     
+    public void setMessageListener(ImageDownloadMessageListener listener) {
+    	this.listener = listener;
+    }
     
     /**
      * Download the specified image from the Internet and binds it to the provided ImageView. The
@@ -131,6 +139,7 @@ public class ImageDownloader {
                     imageView.setMinimumHeight(156);
                     BitmapDownloaderTask task = new BitmapDownloaderTask(imageView);
                     task.execute(url);
+               
                     break;
 
                 case CORRECT:
@@ -290,6 +299,8 @@ public class ImageDownloader {
          */
         @Override
         protected void onPostExecute(Bitmap bitmap) {
+        	ImageView imageView = null;
+        	
             if (isCancelled()) {
                 bitmap = null;
             }
@@ -297,7 +308,7 @@ public class ImageDownloader {
             addBitmapToCache(url, bitmap);
 
             if (imageViewReference != null) {
-                ImageView imageView = imageViewReference.get();
+                imageView = imageViewReference.get();
                 BitmapDownloaderTask bitmapDownloaderTask = getBitmapDownloaderTask(imageView);
                 // Change bitmap only if this process is still associated with it
                 // Or if we don't use any bitmap to task association (NO_DOWNLOADED_DRAWABLE mode)
@@ -305,6 +316,8 @@ public class ImageDownloader {
                     imageView.setImageBitmap(bitmap);
                 }
             }
+            
+            if (listener != null) listener.onMessageDelivered(END, imageView);
         }
     }
 

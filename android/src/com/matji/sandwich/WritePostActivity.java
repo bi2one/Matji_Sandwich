@@ -46,12 +46,11 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
     private int TAKE_CAMERA = 1;					// 카메라 리턴 코드값 설정
 	private int TAKE_GALLERY = 2;				// 앨범선택에 대한 리턴 코드값 설정
 	static final String[] IMAGE_PROJECTION = {      
-		 MediaStore.Images.ImageColumns.DATA, 
-		 MediaStore.Images.Thumbnails.DATA
-		};
+		MediaStore.Images.ImageColumns.DATA, 
+		MediaStore.Images.Thumbnails.DATA
+	};
 	private ArrayList<String> uploadImages;
 	private ArrayList<Bitmap> thumbImages;
-	
 	private HttpRequestManager manager;
 	private PostHttpRequest postHttpRequest;
 	private Session session;
@@ -68,21 +67,21 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private MapView mapView;
 	private LinearLayout thumbnailsContainer;
 	private Context mContext;
-	
-	@Override
+
+        @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
 		
 		setContentView(R.layout.activity_write_post);
-		
+
 		mapView = (MapView) findViewById(R.id.post_user_map);
 		postField = (EditText) findViewById(R.id.post_field);
 		tagsField = (EditText) findViewById(R.id.tags_field);
 		footerSwipeView = (SwipeView)findViewById(R.id.post_footer_content_swipe_view);
 		footerSwipeView.setTouchScollEnabled(false);
 		thumbnailsContainer = (LinearLayout) findViewById(R.id.thumb_images_container);
-		
+
 		uploadImages = new ArrayList<String>();
 		thumbImages = new ArrayList<Bitmap>();
 		
@@ -90,39 +89,39 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		session = Session.getInstance(this);
 		mGpsManager = new GpsManager(mContext, this);
 		mGpsManager.start();
-		
+
 		contentWrapper = (RelativeLayoutThatDetectsSoftKeyboard)findViewById(R.id.contentWrapper);
 		contentWrapper.setListener(this);
-		
+
 		postFooterContentLayout = (LinearLayout)findViewById(R.id.post_footer_content);
 	}
-	
-	
+
+
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
 		mGpsManager.stop();
 	}
-	
+
 	private void hideKeyboard(){
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);	
 	}
-	
+
 	private void showKeyboard(View view){
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(view, 0);
 	}
-	
+
 	public void onImgButtonClicked(View v) {
 		hideKeyboard();
 		tagsField.setVisibility(View.GONE);
 		footerSwipeView.snapToPage(0);
-	
+
 	}
-	
-	
+
+
 	public void onMapButtonClicked(View v) {
 		hideKeyboard();
 		tagsField.setVisibility(View.GONE);
@@ -136,9 +135,9 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		} else {
 			if(!tagsField.getText().toString().trim().equals("")) {
 				postHttpRequest.actionNew(postField.getText().toString().trim()
-						,tagsField.getText().toString().trim());							
+						,tagsField.getText().toString().trim(), "ANDROID");							
 			} else {
-				postHttpRequest.actionNew(postField.getText().toString().trim(),"");
+				postHttpRequest.actionNew(postField.getText().toString().trim(),"", "ANDROID");
 			}
 		}
 		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
@@ -146,9 +145,9 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		me.setPostCount(me.getPostCount() + 1);
 	}
 
-	
+
 	public void onTagButtonClicked(View v){
-		
+
 		if (tagsField.getVisibility() == View.GONE){
 			tagsField.setVisibility(View.VISIBLE);
 			tagsField.requestFocus();
@@ -160,26 +159,26 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			showKeyboard(postField);
 		}
 	}
-	
-	
+
+
 	public void onTwitterButtonClicked(View v){
-		
+
 	}
-	
+
 	public void onFacebookButtonClicked(View w){
-		
+
 	}
-	
-	
+
+
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch(tag) {
-			case POST_WRITE_REQUEST:
-				setResult(RESULT_OK);
-				finish();
-				break;
+		case POST_WRITE_REQUEST:
+			setResult(RESULT_OK);
+			finish();
+			break;
 		}
 	}
-	
+
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
 	}
@@ -202,46 +201,46 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		onPostButtonClicked(view);		
 	}
 
-	
+
 	public void onSoftKeyboardShown(boolean isShowing) {
 		// TODO Auto-generated method stub
 		if (isShowing){
-	    	contentHeightWithoutKeyboard = contentWrapper.getHeight();
+			contentHeightWithoutKeyboard = contentWrapper.getHeight();
 		}else {
 			contentHeightWithKeyboard = contentWrapper.getHeight();
 		}
-		
+
 		if (keyboardHeight <= 0 && contentHeightWithoutKeyboard > 0 && contentHeightWithKeyboard > 0)
 			keyboardHeight = contentHeightWithoutKeyboard - contentHeightWithKeyboard;
-			
+
 		if (!isShowing){
 			postFooterContentLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, keyboardHeight));
-			
+
 			postFooterContentLayout.setVisibility(View.VISIBLE);
-			
+
 		}else {
 			postFooterContentLayout.setVisibility(View.GONE);
 		}
 	}
 
 
-    private void setCenter(Location loc) {
+	private void setCenter(Location loc) {
 		int geoLat = (int)(loc.getLatitude() * 1E6);
 		int geoLng = (int)(loc.getLongitude() * 1E6);
 		GeoPoint geoPoint = new GeoPoint(geoLat, geoLng);
 		mapView.getController().animateTo(geoPoint);
 		mapView.getController().zoomToSpan(LAT_SPAN, LNG_SPAN);
-    }
+	}
 
 	public void onLocationChanged(Location location) {
 		// TODO Auto-generated method stub
-	
+
 		if (prevLocation != null) {
-		    if (prevLocation.getAccuracy() <= location.getAccuracy()) {
-		    		mGpsManager.stop();
-		    }
+			if (prevLocation.getAccuracy() <= location.getAccuracy()) {
+				mGpsManager.stop();
+			}
 		}
-		
+
 		prevLocation = location;
 		setCenter(location);
 	}
@@ -249,9 +248,9 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 
 	public void onLocationExceptionDelivered(MatjiException e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 
 	public void onSelectPhotoButtonClicked(View v) {
 		Intent intent = new Intent();
@@ -259,26 +258,26 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		intent.setType("image/*");
 		startActivityForResult(intent, TAKE_GALLERY);
 	}
-	
-	
+
+
 	public void onTakePhotoButtonClicked(View v) {
 		Intent intent = new Intent();
-        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+		intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 		startActivityForResult(intent, TAKE_CAMERA);
 	}
-	
+
 	private Bitmap getThumbnailImage(String imagePath, int dstWidth, int dstHeight){
 		Bitmap src = getOriginalImage(imagePath, 8);
 		return Bitmap.createScaledBitmap(src, dstWidth, dstHeight, true);	
 	}
-	
-	
+
+
 	private Bitmap getOriginalImage(String imagePath, int inSampleSize){
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inSampleSize = inSampleSize;
 		return BitmapFactory.decodeFile(imagePath, options);
 	}
-	
+
 	
 	@SuppressWarnings("unused")
 	private Bitmap getOriginalImage(String imagePath){
@@ -286,13 +285,12 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	}
 	
 	
-	@SuppressWarnings("unused")
 	private Uri getUriFromRealPath(String realPath){
 		File file = new File(realPath);
 		return Uri.fromFile(file);
 	}
-	
-	
+
+
 	private void invalidateThumbToContainerView(){
 		thumbnailsContainer.removeAllViews();
 		
@@ -340,12 +338,13 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == RESULT_OK){
-			
+
 			if(requestCode == TAKE_CAMERA){
 				String imageRealPath = null;
 				final Uri uriImages = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;        
 				//final Uri uriImagesthum = MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI;
 				try{
+
 				 final Cursor cursorImages = getContentResolver().query(uriImages, IMAGE_PROJECTION, null, null, null);
 				     if(cursorImages != null && cursorImages.moveToLast()){         
 				    	 imageRealPath = cursorImages.getString(0);
@@ -363,15 +362,14 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			}
 		}
 	}
-    
-	
+
+
 	private String getRealPathFromURI(Uri contentUri){
 		String [] proj={MediaStore.Images.Media.DATA};
 		Cursor cursor = managedQuery( contentUri, proj, null, null, null); 
 		int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 		cursor.moveToFirst();
 		return cursor.getString(column_index);
-		
+
 	}
-	
 }
