@@ -1,25 +1,16 @@
 package com.matji.sandwich.widget;
 
-import android.view.ViewGroup;
-import android.view.View;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-// import android.view.View.OnTouchListener;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.content.Context;
-import android.util.Log;
 import android.util.AttributeSet;
-import android.widget.Scroller;
-import android.widget.Scroller;
 
 public class SwipeView extends HorizontalPager {
     // private GestureDetector gestureDetector;
-    private Context context;
-    private Scroller scroller;
+    private Context mContext;
+    //private Scroller scroller;
 
     public SwipeView(Context context, AttributeSet attrs) {
 	super(context, attrs, 0);
-	this.context = getContext();
+	this.mContext = getContext();
 	// gestureDetector = new GestureDetector(new GestureListener());
 	// scroller = new Scroller(context);
     }

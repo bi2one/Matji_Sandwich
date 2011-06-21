@@ -6,7 +6,7 @@ import com.google.android.maps.GeoPoint;
 import android.os.AsyncTask;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
+
 
 public class MatjiMapView extends MapView {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
@@ -60,8 +60,6 @@ public class MatjiMapView extends MapView {
 	
 	protected Integer doInBackground(Integer... params) {
 	    GeoPoint newMapCenter;
-	    int count = 0;
-	    boolean delayed = false;
 	    while(!stopFlag) {
 		if (listener != null) {
 		    threadSleep(MAP_CENTER_UPDATE_TICK);
