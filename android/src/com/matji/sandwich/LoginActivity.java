@@ -18,8 +18,9 @@ public class LoginActivity extends BaseActivity implements Loginable {
 	public void loginButtonClicked(View v) {
 		EditText usernameField = (EditText) findViewById(R.id.username);
 		EditText passwordField = (EditText) findViewById(R.id.password);
+		
 		Session session = Session.getInstance(this);
-		session.login(this, usernameField.getText().toString(), passwordField.getText().toString());
+		session.login(this, this, usernameField.getText().toString(), passwordField.getText().toString());
 	}
 
 	public void cancelButtonClicked(View v) {

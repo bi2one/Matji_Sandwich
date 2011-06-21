@@ -16,6 +16,8 @@
 		android:text="New Title"
 		android:background="#a5c639"
 		android:layout_margin="5dp"
+		android:paddingRight="5dp"
+		android:paddingLeft="5dp"
 		android:gravity="center" />
 	<Button
 		android:id="@+id/title_btn"

@@ -30,6 +30,7 @@ public class AlarmParser extends MatjiDataParser {
 		
 		alarm.setCreatedAt(getString(object, "created_at"));
 		alarm.setUpdatedAt(getString(object, "updated_at"));
+		alarm.setForeignKey(getInt(object, "foreign_key"));
 
 		Log.d("Parser", "AlarmParser:: called getMatjiData");
 		

@@ -204,13 +204,9 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
-		case BOOKMARK_REQUEST:
+		case BOOKMARK_REQUEST: case UN_BOOKMARK_REQUEST:
 			scrapButton.setClickable(true);
-		case UN_BOOKMARK_REQUEST:
-			scrapButton.setClickable(true);
-		case LIKE_REQUEST:
-			likeButton.setClickable(true);
-		case UN_LIKE_REQUEST:
+		case LIKE_REQUEST: case UN_LIKE_REQUEST:
 			likeButton.setClickable(true);
 		}
 
@@ -244,7 +240,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		if (session.isLogin()){
 			scrapButton.setClickable(false);
 			if (dbProvider.isExistBookmark(store.getId(), "Store")){
-
 				dbProvider.deleteBookmark(store.getId(), "Store");
 				// api request
 				unbookmarkReuqest();

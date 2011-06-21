@@ -12,7 +12,8 @@ public class Alarm extends MatjiData{
 	private User received_user;
 	private String created_at;
 	private String updated_at;
-
+	private int foreign_key;
+	
 	public Alarm() {}
 	
 	public Alarm(Parcel in) {
@@ -42,6 +43,7 @@ public class Alarm extends MatjiData{
 		dest.writeValue(received_user);
 		dest.writeString(created_at);
 		dest.writeString(updated_at);
+		dest.writeInt(foreign_key);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -53,6 +55,7 @@ public class Alarm extends MatjiData{
 		received_user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		created_at = in.readString();
 		updated_at = in.readString();
+		foreign_key = in.readInt();
 	}
 	
 	public void setId(int id) {
@@ -102,5 +105,13 @@ public class Alarm extends MatjiData{
 	}
 	public String getUpdatedAt() {
 		return updated_at;
+	}
+
+	public void setForeignKey(int foreign_key) {
+		this.foreign_key = foreign_key;
+	}
+
+	public int getForeignKey() {
+		return foreign_key;
 	}
 }

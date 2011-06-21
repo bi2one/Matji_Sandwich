@@ -94,7 +94,7 @@
 			android:id="@+id/header_post_like_this"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="@color/LIGHT_GRAY"
+			android:textColor="@color/BLACK"
 			android:text="@string/default_string_like_this" />
 	</LinearLayout>
 </RelativeLayout>
