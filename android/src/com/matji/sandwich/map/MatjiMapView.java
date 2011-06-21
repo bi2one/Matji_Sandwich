@@ -21,8 +21,10 @@ public class MatjiMapView extends MapView {
     }
 
     public void startMapCenterThread() {
-	asyncTask = new MapAsyncTask();
-	asyncTask.execute(0);
+	if (asyncTask == null) {
+	    asyncTask = new MapAsyncTask();
+	    asyncTask.execute(0);
+	}
     }
 				 
     public void stopMapCenterThread() {

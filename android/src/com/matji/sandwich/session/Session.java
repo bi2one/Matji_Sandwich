@@ -16,6 +16,9 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.MeHttpRequest;
 
 public class Session implements Requestable {
+        public static final String STORE_SLIDER_INDEX = "StoreSliderActivity.index";
+	    
+    
 	private volatile static Session session = null;
 	private static final int LOGIN = 0;
 	private static final String keyForCurrentUser = "CurrentUser";
