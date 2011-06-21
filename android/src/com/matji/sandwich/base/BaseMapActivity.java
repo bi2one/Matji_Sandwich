@@ -11,13 +11,46 @@ import android.widget.TextView;
 import com.google.android.maps.MapActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
+import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.session.Session;
 
-public abstract class BaseMapActivity extends MapActivity {
+public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener{
 	protected abstract String titleBarText();
 	protected abstract boolean setTitleBarButton(Button button);
 	protected abstract void onTitleBarItemClicked(View view);
 
+	public void didEnterForeGround(){
+		Session session  = Session.getInstance(this);
+		if (session.isLogin()){
+			session.sessionValidate(null, this);
+		}
+	}
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		Log.d("LifeCycle", "onRestart at " + this.getClass());
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		Log.d("LifeCycle", "onPause at " + this.getClass());
+		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
+		
+	}
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		Log.d("LifeCycle", "onStop at " + this.getClass());
+		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
+	}
+	
 	@Override
 	public void setContentView(int layoutResID) {
 		if (this.getParent() == null){
@@ -32,8 +65,12 @@ public abstract class BaseMapActivity extends MapActivity {
 	
 	@Override
 	protected void onResume() {
+		
 		// TODO Auto-generated method stub
 		super.onResume();
+		
+		Log.d("LifeCycle", "onResume at " + this.getClass());
+		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
 		
 		Activity act = (this.getParent() == null)? this: this.getParent();
 		

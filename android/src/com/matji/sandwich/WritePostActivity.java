@@ -34,6 +34,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private static final int POST_WRITE_REQUEST = 1;
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
+    private static final int THUMBNAIL_SIZE = 128;
     private int TAKE_CAMERA = 1;					// 카메라 리턴 코드값 설정
 	private int TAKE_GALLERY = 2;				// 앨범선택에 대한 리턴 코드값 설정
 	static final String[] IMAGE_PROJECTION = {      
@@ -50,7 +52,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private ArrayList<String> uploadImages;
 	private ArrayList<Bitmap> thumbImages;
 	
-	HttpRequestManager manager;
+	private HttpRequestManager manager;
 	private PostHttpRequest postHttpRequest;
 	private Session session;
 	private int keyboardHeight;
@@ -65,10 +67,13 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private Location prevLocation;
 	private MapView mapView;
 	private LinearLayout thumbnailsContainer;
+	private Context mContext;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mContext = getApplicationContext();
+		
 		setContentView(R.layout.activity_write_post);
 		
 		mapView = (MapView) findViewById(R.id.post_user_map);
@@ -81,9 +86,9 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		uploadImages = new ArrayList<String>();
 		thumbImages = new ArrayList<Bitmap>();
 		
-		manager = new HttpRequestManager(getApplicationContext(), this);
+		manager = new HttpRequestManager(mContext, this);
 		session = Session.getInstance(this);
-		mGpsManager = new GpsManager(getApplicationContext(), this);
+		mGpsManager = new GpsManager(mContext, this);
 		mGpsManager.start();
 		
 		contentWrapper = (RelativeLayoutThatDetectsSoftKeyboard)findViewById(R.id.contentWrapper);
@@ -239,9 +244,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		
 		prevLocation = location;
 		setCenter(location);
-		
 	}
-
 
 
 	public void onLocationExceptionDelivered(MatjiException e) {
@@ -249,7 +252,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		
 	}
 	
-	
+
 	public void onSelectPhotoButtonClicked(View v) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -276,11 +279,14 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		return BitmapFactory.decodeFile(imagePath, options);
 	}
 	
+	
+	@SuppressWarnings("unused")
 	private Bitmap getOriginalImage(String imagePath){
 		return getOriginalImage(imagePath, 1);
 	}
 	
 	
+	@SuppressWarnings("unused")
 	private Uri getUriFromRealPath(String realPath){
 		File file = new File(realPath);
 		return Uri.fromFile(file);
@@ -288,8 +294,47 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	
 	
 	private void invalidateThumbToContainerView(){
+		thumbnailsContainer.removeAllViews();
 		
+		int index = 0;
+		for (Bitmap bm : thumbImages){
+			LayoutParams params = new LinearLayout.LayoutParams(THUMBNAIL_SIZE, THUMBNAIL_SIZE);
+			ImageView iv = new ImageView(mContext);
+			iv.setPadding(5, 0, 5, 0);
+			iv.setLayoutParams(params);
+			iv.setImageBitmap(bm);
+			iv.setTag(new Integer(index));
+			iv.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					int index = ((Integer)v.getTag()).intValue();
+					removeUploadImage(index);
+					thumbnailsContainer.removeView(v);
+				}
+			});
+			
+			thumbnailsContainer.addView(iv);
+			index++;
+		}
 	}	
+	
+	
+	private void removeUploadImage(int index){
+		thumbImages.remove(index);
+		uploadImages.remove(index);
+		
+		invalidateThumbToContainerView();
+	}
+	
+	
+	private void addUploadImage(String imageRealPath){
+		if (!uploadImages.contains(imageRealPath)){
+			uploadImages.add(imageRealPath);
+			thumbImages.add(getThumbnailImage(imageRealPath, THUMBNAIL_SIZE, THUMBNAIL_SIZE));
+			
+			invalidateThumbToContainerView();
+		}
+	}
 	
 	
 	@Override
@@ -308,20 +353,13 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 				     } 
 				 }catch(Exception e){}
 				 
-				 Log.d("Matji", "GALLERY : " + imageRealPath);
+				 addUploadImage(imageRealPath);
 				 
-				 uploadImages.add(imageRealPath);
-				 thumbImages.add(getThumbnailImage(imageUri, dstWidth, dstHeight));
 			}else if(requestCode == TAKE_GALLERY){
 				String imageRealPath = null;
 				Uri currImageURI = data.getData();
 				imageRealPath = getRealPathFromURI(currImageURI);
-				uploadImages.add(imageRealPath);
-				thumbImages.add();
-				//Log.d("Matji", "GALLERY : " + imageRealPath);
-				
-				//getUriFromRealPath(imageRealPath);
-				
+				addUploadImage(imageRealPath);
 			}
 		}
 	}

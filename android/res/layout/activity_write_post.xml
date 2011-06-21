@@ -50,20 +50,25 @@
 							style="@style/DefaultFill">
 							<RelativeLayout
 								style="@style/DefaultFill">
-								<LinearLayout android:id="@+id/thumb_images_container"
-										style="@style/DefaultFill">								
-										
-								</LinearLayout>
 								<Button android:id="@+id/select_photo_button"
 										style="@style/DefaultWidthFill"
-										android:layout_below="@id/thumb_images_container"
+										android:layout_alignParentBottom="true"
 										android:text="Select a Photo"
 										android:onClick="onSelectPhotoButtonClicked"></Button> 
 								<Button android:id="@+id/take_photo_button"
 										style="@style/DefaultWidthFill"
-										android:layout_below="@id/select_photo_button"
+										android:layout_above="@id/select_photo_button"
 										android:text="Take a photo"
 										android:onClick="onTakePhotoButtonClicked"></Button>
+								<HorizontalScrollView style="@style/DefaultWidthFill">
+									<LinearLayout android:id="@+id/thumb_images_container"
+											style="@style/DefaultWrap"
+											android:paddingTop="10dp"
+											android:paddingBottom="10dp"
+											android:paddingLeft="5dp"
+											android:paddingRight="5dp">
+									</LinearLayout>
+								</HorizontalScrollView>
 							</RelativeLayout>
 							<com.google.android.maps.MapView 
 									android:id="@+id/post_user_map"
