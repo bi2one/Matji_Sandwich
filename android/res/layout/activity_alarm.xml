@@ -5,7 +5,6 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<com.matji.sandwich.widget.AlarmListView
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
+		style="@style/DefaultFill"
 		android:id="@+id/alarm_list" />
 </LinearLayout>

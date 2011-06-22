@@ -123,11 +123,11 @@ public class UserMainActivity extends MainActivity implements Requestable {
 			gradeText.setText(getString(R.string.grade_diamond) + "A");
 		}
 
-		pointText1.setText(getString(R.string.grade_point));
+		pointText1.setText(R.string.grade_point);
 		pointText2.setText(" " + totalPoint);
 
 		if (dbProvider.isExistFollower(user.getId())) {
-			followingYouText.setText(user.getNick() + getString(R.string.user_main_following_you));
+			followingYouText.setText(user.getNick() + " " + getString(R.string.user_main_following_you));
 			followingYouText.setVisibility(TextView.VISIBLE);
 		} else {
 			followingYouText.setVisibility(TextView.GONE);
@@ -138,12 +138,12 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 		if (session.isLogin()) {
 			if (dbProvider.isExistFollowing(user.getId())) {
-				followButton.setText(getString(R.string.user_main_unfollow));
+				followButton.setText(R.string.user_main_unfollow);
 			} else {
-				followButton.setText(getString(R.string.user_main_follow));
+				followButton.setText(R.string.user_main_follow);
 			}
 		} else {
-			followButton.setText(getString(R.string.user_main_follow));
+			followButton.setText(R.string.user_main_follow);
 		}
 		titleText.setText(user.getTitle());
 		introText.setText(user.getIntro());
@@ -195,6 +195,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		switch (tag) {
 		case FOLLOW_REQUEST: case UN_FOLLOW_REQUEST:
 			followButton.setClickable(true);
+			break;
 		}
 
 		setInfo();
@@ -206,8 +207,8 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	public void onFollowButtonClicked(View view) {
 		if (session.isLogin()){
-			followButton.setClickable(false);
 			if (session.getCurrentUser().getId() != user.getId()) {
+				followButton.setClickable(false);
 				if (dbProvider.isExistFollowing(user.getId())) {
 					dbProvider.deleteFollowing(user.getId());
 					// api request
@@ -218,6 +219,8 @@ public class UserMainActivity extends MainActivity implements Requestable {
 					followRequest();
 				}
 			}
+		} else {
+			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 		}
 	}
 

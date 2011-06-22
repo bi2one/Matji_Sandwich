@@ -22,6 +22,7 @@ public class StoreDetailInfoParser extends MatjiDataParser {
 		info.setCreatedAt(getString(object, "created_at"));
 		info.setUpdatedAt(getString(object, "updated_at"));
 		info.setNote(getString(object, "note"));
+		info.setAgo(getLong(object, "ago"));
 		
 		/* Set Store */
 		StoreParser storeParser = new StoreParser(context);

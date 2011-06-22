@@ -18,7 +18,7 @@ public class TagListActivity extends BaseActivity {
 		int id = getIntent().getIntExtra("id", 0);
 		ModelType type = (ModelType) getIntent().getSerializableExtra("type");
 		TagListView listView = (TagListView) findViewById(R.id.tag_list);
-		listView.setId(id);
+		listView.setModelId(id);
 		listView.setModelType(type);
 		listView.setActivity(this);
 		listView.requestReload();

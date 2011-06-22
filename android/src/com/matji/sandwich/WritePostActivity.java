@@ -10,7 +10,6 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
@@ -129,7 +128,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	}
 
 	public void onPostButtonClicked(View v) {
-		if (session.isLogin() == false) return;
+		if (!session.isLogin()) return;
 		
 		postHttpRequest = new PostHttpRequest(getApplicationContext());
 		if(postField.getText().toString().trim().equals("")) {
@@ -373,7 +372,6 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == RESULT_OK){
-
 			if(requestCode == TAKE_CAMERA){
 				String imageRealPath = null;
 				final Uri uriImages = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;        

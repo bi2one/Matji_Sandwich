@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.NoticeAdapter;
@@ -16,6 +17,7 @@ import com.matji.sandwich.http.request.NoticeHttpRequest;
 public class NoticeListView extends RequestableMListView {
 	private HttpRequest request;
 	private Context context;
+	private NoticeAdapter adapter;
 
 	public NoticeListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new NoticeAdapter(context), 10);
@@ -24,6 +26,7 @@ public class NoticeListView extends RequestableMListView {
 		setPage(1);
 	}
 
+	@Override
 	public HttpRequest request() {
 		if (request == null || !(request instanceof NoticeHttpRequest)) {
 			request = new NoticeHttpRequest(getActivity());
@@ -32,11 +35,6 @@ public class NoticeListView extends RequestableMListView {
 		((NoticeHttpRequest) request).actionList(getPage(), getLimit());
 
 		return request;
-	}
-
-	public void onListItemClick(int position) {
-		Log.d("Matji", "ListItemClicked");
-		((NoticeAdapter) getMBaseAdapter()).extendNotice(position);
 	}
 
 	@Override
@@ -64,5 +62,10 @@ public class NoticeListView extends RequestableMListView {
 		}
 
 		super.requestCallBack(tag, data);
+	}
+
+	@Override
+	public void onListItemClick(int position) {
+//		Log.d("Matji", find)+"");
 	}
 }

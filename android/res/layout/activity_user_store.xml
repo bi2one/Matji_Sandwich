@@ -5,6 +5,6 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 	<com.matji.sandwich.widget.StoreBookmarkedListView
-		style="@style/DefaultWidthFill"
+		style="@style/DefaultFill"
 		android:id="@+id/store_bookmarked_list" />
 </LinearLayout>

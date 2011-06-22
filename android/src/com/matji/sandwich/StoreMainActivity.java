@@ -130,19 +130,19 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 		if (session.isLogin()) {
 			if (dbProvider.isExistLike(store.getId(), "Store")) {
-				likeButton.setText(getString(R.string.store_main_unlike_store));
+				likeButton.setText(R.string.store_main_unlike_store);
 			} else {
-				likeButton.setText(getString(R.string.store_main_like_store));
+				likeButton.setText(R.string.store_main_like_store);
 			}
 
 			if (dbProvider.isExistBookmark(store.getId(), "Store")) {
-				scrapButton.setText(getString(R.string.store_main_unbookmark));
+				scrapButton.setText(R.string.store_main_unbookmark);
 			} else {
-				scrapButton.setText(getString(R.string.store_main_bookmark));
+				scrapButton.setText(R.string.store_main_bookmark);
 			}
 		} else {
-			likeButton.setText(getString(R.string.store_main_like_store));
-			scrapButton.setText(getString(R.string.store_main_bookmark));
+			likeButton.setText(R.string.store_main_like_store);
+			scrapButton.setText(R.string.store_main_bookmark);
 		}
 
 		likeCountText.setText(store.getLikeCount()+"");
@@ -233,6 +233,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 				// api request
 				likeRequest();
 			}
+		} else {
+			startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
 
@@ -251,6 +253,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 				// api request
 				bookmarkRequest();
 			}
+		} else {
+			startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
 

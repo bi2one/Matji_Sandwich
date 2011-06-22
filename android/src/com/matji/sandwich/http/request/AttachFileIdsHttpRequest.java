@@ -3,55 +3,31 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.AttachFileParser;
 import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
+import com.matji.sandwich.adapter.ImageAdapter;
+import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.AttachFileIds;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.Log;
 
-public class AttachFileHttpRequest extends HttpRequest {
+public class AttachFileIdsHttpRequest extends HttpRequest {
 	private MatjiDataParser parser;
     private String action;
     private String controller;
+    private int capacity;
     
-    public AttachFileHttpRequest(Context context) {
+    public AttachFileIdsHttpRequest(Context context, int capacity) {
     	super(context);
+    	this.capacity = capacity;
     	parser = new AttachFileParser(context);
     	controller = "attach_files";
     }
-    
-    public void actionUpload(File imageFile, int postId){
-    	parser = new AttachFileParser(context);
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "upload";
-    	
-    	postHashtable.clear();
-    	
-    	postHashtable.put("upload_file", imageFile);
-    	postHashtable.put("post_id", postId + "");
-    	
-    }
-    
-    public void actionImage(){
-    	parser = new AttachFileParser(context);
-    	httpMethod = HttpMethod.HTTP_GET;
-    	action = "image";
-    	
-    	getHashtable.clear();
-    }
-    
-    public void actionList(){
-    	parser = new AttachFileParser(context);
-    	httpMethod = HttpMethod.HTTP_GET;
-    	action = "list";
-    	
-    	getHashtable.clear();
-    }
-    
-    public void actionStoreList(int store_id, int page, int limit){
+
+    public void actionStoreList(int store_id, int page, int limit) {
     	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
@@ -62,24 +38,24 @@ public class AttachFileHttpRequest extends HttpRequest {
     	getHashtable.put("limit", limit+"");
     }
     
-    public void actionPostList(int post_id, int page, int limit){
+    public void actionPostList(int store_id, int page, int limit) {
     	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
-    	action = "post_list";
+    	action = "post_id";
     	
     	getHashtable.clear();
-    	getHashtable.put("post_id", post_id + "");
+    	getHashtable.put("post_id", store_id + "");
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
     }
     
-    public void actionUserList(int user_id, int page, int limit) {
+    public void actionUserList(int store_id, int page, int limit) {
     	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "user_list";
     	
     	getHashtable.clear();
-    	getHashtable.put("user_id", user_id + "");
+    	getHashtable.put("user_id", store_id + "");
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
     }
@@ -97,6 +73,25 @@ public class AttachFileHttpRequest extends HttpRequest {
 		Log.d("Matji", "AttachFileHttpRequest resultBody: " + resultBody);
 		Log.d("Matji", "AttachFileHttpRequest resultCode: " + resultCode);
 
-		return parser.parseToMatjiDataList(resultBody);
+		ArrayList<MatjiData> attachFiles = parser.parseToMatjiDataList(resultBody);
+		ArrayList<MatjiData> result = new ArrayList<MatjiData>();
+		
+		for (int i = 0; i < attachFiles.size(); i = i+capacity){
+			int[] ids = new int[capacity];
+			
+			for (int j = 0; j < ids.length; j++){
+				ids[j] = ImageAdapter.IMAGE_IS_NULL;
+			}
+			
+			for (int j = 0; (j < ids.length) && (i + j < attachFiles.size()); j++) {
+				ids[j] = ((AttachFile) attachFiles.get(i + j)).getId();
+			}
+			
+			AttachFileIds attachFileIds = new AttachFileIds();
+			attachFileIds.setIds(ids);
+			result.add(attachFileIds);
+		}
+
+		return result;
     }
 }
