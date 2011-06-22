@@ -364,6 +364,9 @@ final public class HttpUtility
 		return null;
 	}
 
+    public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters) {
+	return post(url, headerValues, postParameters, 0);
+    }
 	/**
 	 * 
 	 * @param url
@@ -371,7 +374,7 @@ final public class HttpUtility
 	 * @param postParameters
 	 * @return
 	 */
-	public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters)
+    public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters, int tag)
 	{
 		//open connection
 		HttpURLConnection connection = null;
@@ -447,7 +450,7 @@ final public class HttpUtility
 							{
 								dos.write(buffer, 0, bytesRead);
 								if (progressListener != null)
-								    progressListener.onFileWritten(totalSize, bytesRead);
+								    progressListener.onFileWritten(tag, totalSize, bytesRead);
 							}
 							fis.close();
 						}
@@ -973,7 +976,7 @@ final public class HttpUtility
 				response = HttpUtility.this.get((String)params[2], (Map<String, String>)params[3], (Map<String, String>)params[4]);
 				break;
 			case ASYNC_METHOD_POST:
-				response = HttpUtility.this.post((String)params[2], (Map<String, String>)params[3], (Map<String, Object>)params[4]);
+			    response = HttpUtility.this.post((String)params[2], (Map<String, String>)params[3], (Map<String, Object>)params[4]);
 				break;
 			case ASYNC_METHOD_POSTBYTES:
 				response = HttpUtility.this.postBytes((String)params[2], (Map<String, String>)params[3], (byte[])params[4], (String)params[5]);

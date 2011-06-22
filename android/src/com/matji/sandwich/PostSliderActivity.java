@@ -21,6 +21,12 @@ import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 
 public class PostSliderActivity extends BaseActivity implements OnScrollListener {
+        public static final int INDEX_NEAR_POST = 2;
+	public static final int LOGIN_ACTIVITY = 1;
+	public static final int WRITE_POST_ACTIVITY = 2;
+    
+        private static final int mDefaultPage = 1;
+    
 	private SwipeView swipeView;
 	private PostSearchView view1;
 	private PostListView view2;
@@ -33,10 +39,6 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	private Session session;
 	private boolean privateMode;
 	
-	private static final int mDefaultPage = 1;
-	public static final int LOGIN_ACTIVITY = 1;
-	public static final int WRITE_POST_ACTIVITY = 2;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -47,7 +49,6 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
 		privateMode = false;
-		mCurrentPage = mDefaultPage;
 			
 		control = (PagerControl) findViewById(R.id.PagerControl);
 		control.setContentViews(mContentViews);
@@ -74,6 +75,9 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	
 	public void onResume() {
 		super.onResume();
+		mCurrentPage = session.getPreferenceProvider().getInt(Session.POST_SLIDER_INDEX, mDefaultPage);
+		session.getPreferenceProvider().setInt(Session.POST_SLIDER_INDEX, mDefaultPage);
+		
 		if(session.getToken() == null && privateMode == true){
 			// remove private lists
 			removePrivateStoreList();

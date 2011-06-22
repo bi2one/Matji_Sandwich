@@ -20,6 +20,7 @@ import android.content.Context;
 enum HttpMethod { HTTP_POST, HTTP_GET }
 
 public abstract class HttpRequest {
+    private int tag;
     private FileUploadProgressListener progressListener;
     protected Context context = null;
     protected String serverDomain = "http://api.matji.com/";
@@ -40,7 +41,7 @@ public abstract class HttpRequest {
 	
 	
     public abstract ArrayList<MatjiData> request() throws MatjiException;
-        
+
     protected SimpleHttpResponse requestHttpResponseGet(String url, Map<String, String> header, Map<String, String> param)
     throws HttpConnectMatjiException {
 	return requestHttpResponse(url, header, null, param, HttpUtility.ASYNC_METHOD_GET);
@@ -91,7 +92,7 @@ public abstract class HttpRequest {
 	    if(method == HttpUtility.ASYNC_METHOD_POST) {
 		HttpUtility utility = HttpUtility.getInstance();
 		utility.setFileUploadProgressListener(progressListener);
-		httpResponse = utility.post(url, baseHeader, postParam);
+		httpResponse = utility.post(url, baseHeader, postParam, tag);
 		utility.removeFileUploadProgressListener();
 	    } else {
 		httpResponse = HttpUtility.getInstance().get(url, baseHeader, getParam);
@@ -104,5 +105,13 @@ public abstract class HttpRequest {
 	    throw new HttpConnectMatjiException();
 	else
 	    return httpResponse;
+    }
+
+    public void setTag(int tag) {
+	this.tag = tag;
+    }
+
+    public int getTag() {
+	return tag;
     }
 }
