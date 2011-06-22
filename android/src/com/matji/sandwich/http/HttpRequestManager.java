@@ -20,16 +20,19 @@ public class HttpRequestManager {
     private Requestable requestable;
     private volatile static Spinner spinner;
     private HttpAsyncTask httpAsyncTask;
-    private Stack<RequestTagPair> requestPool;
+    // private Stack<RequestTagPair> requestPool;
     private Stack<DataTagPair> dataPool;
     private MatjiException lastOccuredException = null;
     private Activity mParentActivity;
     private boolean isRunning = false;
 
+    private Stack<HttpRequest> requestPool;
+    
     public HttpRequestManager(Context context, Requestable requestable) {
 	this.context = context;
 	this.requestable = requestable;
-	requestPool = new Stack<RequestTagPair>();
+	requestPool = new Stack<HttpRequest>();
+	// requestPool = new Stack<RequestTagPair>();
 	dataPool = new Stack<DataTagPair>();
     }
 
@@ -43,9 +46,11 @@ public class HttpRequestManager {
 
     public void request(Activity parentActivity, HttpRequest request, int tag) {
 	this.mParentActivity = parentActivity;
-		
+
 	spinner = getSpinner();
-	requestPool.push(new RequestTagPair(request, tag));
+	request.setTag(tag);
+	// requestPool.push(new RequestTagPair(request, tag));
+	requestPool.push(request);
 
 	this.lastOccuredException = null;
 	//request.setContext(context);
@@ -82,11 +87,10 @@ public class HttpRequestManager {
     }
 
     private void onRequestData(int tag) {
-
 	try {
 	    synchronized(Stack.class) {
-		RequestTagPair pair = requestPool.pop();
-		dataPool.push(new DataTagPair(pair.getRequest().request(), pair.getTag()));
+		HttpRequest request = requestPool.pop();
+		dataPool.push(new DataTagPair(request.request(), request.getTag()));
 	    }
 	} catch(MatjiException e) {
 	    lastOccuredException = e;
@@ -175,21 +179,21 @@ public class HttpRequestManager {
 	}
     }
 	
-    private class RequestTagPair {
-	private HttpRequest request;
-	private int tag;
+    // private class RequestTagPair {
+    // 	private HttpRequest request;
+    // 	private int tag;
 
-	public RequestTagPair(HttpRequest request, int tag) {
-	    this.request = request;
-	    this.tag = tag;
-	}
+    // 	public RequestTagPair(HttpRequest request, int tag) {
+    // 	    this.request = request;
+    // 	    this.tag = tag;
+    // 	}
 
-	public HttpRequest getRequest() {
-	    return request;
-	}
+    // 	public HttpRequest getRequest() {
+    // 	    return request;
+    // 	}
 
-	public int getTag() {
-	    return tag;
-	}
-    }    
+    // 	public int getTag() {
+    // 	    return tag;
+    // 	}
+    // }
 }

@@ -10,8 +10,8 @@ import android.util.Log;
 
 public class MainTabActivity extends BaseTabActivity {
     public static final String IF_INDEX = "index";
-    public static final String IF_STORE_INDEX = "storeindex";
     public static final int IV_INDEX_STORE = 1;
+    public static final int IV_INDEX_POST = 2;
 	
     private TabHost tabHost;
     

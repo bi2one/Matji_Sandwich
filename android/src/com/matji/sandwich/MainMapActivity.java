@@ -43,7 +43,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private StoreItemizedOverlay storeItemizedOverlay;
     private ArrayList<MatjiData> stores;
     private HttpRequestManager mRequestManager;
-
+    private Session session;
 
     public void onCreate(Bundle savedInstanceState){
 	super.onCreate(savedInstanceState);
@@ -55,6 +55,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mGpsManager = new GpsManager(mContext, this);
 	mRequestManager = new HttpRequestManager(mContext, this);
 	storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
+	session = Session.getInstance(this);
 
 	mGpsManager.start();
 	mMapView.startMapCenterThread();
@@ -173,14 +174,28 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onNearStoreClick(View v) {
-	mGpsManager.stop();
-	mMapView.stopMapCenterThread();
-	Session session = Session.getInstance(this);
 	session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, StoreSliderActivity.INDEX_NEAR_STORE);
 
 	Intent tabIntent = new Intent(mContext, MainTabActivity.class);
 	tabIntent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_STORE);
 	startActivity(tabIntent);
+    }
+
+    public void onNearPostClick(View v) {
+	session.getPreferenceProvider().setInt(Session.POST_SLIDER_INDEX, PostSliderActivity.INDEX_NEAR_POST);
+
+	Intent tabIntent = new Intent(mContext, MainTabActivity.class);
+	tabIntent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
+	startActivity(tabIntent);
+    }
+
+    public void onCurrentPositionClick(View v) {
+	mGpsManager.start();
+    }
+
+    public void onStoreRegisterClick(View v) {
+	// Intent storeRegisterIntent = new Intent(mContext, StoreRegisterActivity.class);
+	// startActivity(storeRegisterIntent);
     }
 	
     // public boolean dispatchTouchEvent(MotionEvent event) {

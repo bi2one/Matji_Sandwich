@@ -22,6 +22,7 @@ import com.matji.sandwich.session.Session;
 
 public class StoreSliderActivity extends BaseActivity implements OnScrollListener {
         public static final int INDEX_NEAR_STORE = 2;
+	private static final int mDefaultPage = 1;
         
         private SwipeView swipeView;
 	private StoreSearchView view1;
@@ -36,7 +37,6 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 
 	private Session session;
 	private boolean privateMode;
-	private int mDefaultPage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +75,8 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 
 	public void onResume(){
 		super.onResume();
-		mDefaultPage = session.getPreferenceProvider().getInt(Session.STORE_SLIDER_INDEX, 1);
-		session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, 1);
-		mCurrentPage = mDefaultPage;
+		mCurrentPage = session.getPreferenceProvider().getInt(Session.STORE_SLIDER_INDEX, mDefaultPage);
+		session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, mDefaultPage);
 		
 		if (session.getToken() == null && privateMode == true){
 			// remove private lists
