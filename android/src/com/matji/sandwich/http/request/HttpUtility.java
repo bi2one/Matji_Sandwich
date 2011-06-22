@@ -365,7 +365,7 @@ final public class HttpUtility
 	}
 
     public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters) {
-	post(url, headerValues, postParameters, 0);
+	return post(url, headerValues, postParameters, 0);
     }
 	/**
 	 * 
