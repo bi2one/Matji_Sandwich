@@ -5,7 +5,7 @@ import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.TimeStamp;
+import com.matji.sandwich.http.util.TimeUtil;
 import com.matji.sandwich.widget.PostListView;
 
 import android.content.Context;
@@ -65,7 +65,8 @@ public class PostAdapter extends MBaseAdapter {
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.thumnail);
 		postElement.nick.setText(user.getNick());
 		postElement.post.setText(post.getPost());
-		postElement.dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
+//		postElement.dateAgo.setText(TimeUtil.getAgoFromDate(post.getCreatedAt()));
+		postElement.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
 		postElement.commentCount.setText(post.getCommentCount() + "");
 		postElement.imageCount.setText(post.getImageCount() + "");
 		postElement.tagCount.setText(post.getTagCount() + "");

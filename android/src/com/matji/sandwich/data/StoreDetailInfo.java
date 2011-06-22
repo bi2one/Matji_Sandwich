@@ -12,6 +12,7 @@ public class StoreDetailInfo extends MatjiData{
 	private String note;
 	private Store store;
 	private User user;
+	private long ago;
 	
 	public StoreDetailInfo() {}
 	
@@ -42,6 +43,7 @@ public class StoreDetailInfo extends MatjiData{
 		dest.writeString(note);
 		dest.writeValue(store);
 		dest.writeValue(user);
+		dest.writeLong(ago);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -53,6 +55,7 @@ public class StoreDetailInfo extends MatjiData{
 		note = in.readString();
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
+		ago = in.readLong();
 	}
 	
 	public void setId(int id) {
@@ -106,5 +109,13 @@ public class StoreDetailInfo extends MatjiData{
 
 	public String getUpdatedAt() {
 		return updated_at;
+	}
+
+	public void setAgo(long ago) {
+		this.ago = ago;
+	}
+
+	public long getAgo() {
+		return ago;
 	}
 }

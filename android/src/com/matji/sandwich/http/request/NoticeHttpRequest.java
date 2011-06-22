@@ -29,11 +29,13 @@ public class NoticeHttpRequest extends HttpRequest {
 		getHashtable.put("notice_id", notice_id + "");
 	}
 	
-	public void actionList() {
+	public void actionList(int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
 
 		getHashtable.clear();
+		getHashtable.put("page", page+"");
+		getHashtable.put("limit", limit+"");
 	}
 	
 	public void actionBadge(int last_notice_id, int last_alarm_id) {

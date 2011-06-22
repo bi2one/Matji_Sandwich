@@ -4,7 +4,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.TimeStamp;
+import com.matji.sandwich.http.util.TimeUtil;
 import com.matji.sandwich.widget.CommentListView;
 
 import android.content.Context;
@@ -50,7 +50,7 @@ public class CommentAdapter extends MBaseAdapter {
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, commentElement.image);
 		commentElement.nick.setText(user.getNick());
 		commentElement.comment.setText(comment.getComment());
-		commentElement.dateAgo.setText(TimeStamp.getAgoFromDate(comment.getCreatedAt()));
+		commentElement.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()));
 	
 		return convertView;
 	}

@@ -4,7 +4,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.StoreDetailInfo;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.TimeStamp;
+import com.matji.sandwich.http.util.TimeUtil;
 import com.matji.sandwich.widget.StoreNoteListView;
 
 import android.content.Context;
@@ -56,7 +56,7 @@ public class NoteAdapter extends MBaseAdapter {
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, noteElement.image);
 		noteElement.nick.setText(user.getNick());
 		noteElement.note.setText(info.getNote());
-		noteElement.dateAgo.setText(TimeStamp.getAgoFromDate(info.getCreatedAt()));
+		noteElement.dateAgo.setText(TimeUtil.getAgoFromSecond(info.getAgo()));
 
 		return convertView;
 	}

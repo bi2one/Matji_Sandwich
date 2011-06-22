@@ -84,7 +84,11 @@
   <string name="default_string_current_position">GPS</string>
   <string name="default_string_near_store">Store</string>
   <string name="default_string_configure">설정</string>
-  
+
+  <!-- target --> 
+  <string name="target_android">ANDROID</string>
+  <string name="target_common">COMMON</string>
+     
   <!-- alarm -->
   <string name="alarm_following_you">is now following you.</string>
   <string name="alarm_commented_post">commented on your post.</string>

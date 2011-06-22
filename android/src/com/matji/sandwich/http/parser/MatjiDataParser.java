@@ -150,6 +150,12 @@ public abstract class MatjiDataParser {
 		JsonElement element = object.get(key);			
 
 		return (isPrimitive(element)) ? element.getAsDouble() : 0.0;
+	}	
+	
+	protected long getLong(JsonObject object, String key) {
+		JsonElement element = object.get(key);			
+
+		return (isPrimitive(element)) ? element.getAsLong() : 0;
 	}
 
 	protected boolean getBoolean(JsonObject object, String key) {
