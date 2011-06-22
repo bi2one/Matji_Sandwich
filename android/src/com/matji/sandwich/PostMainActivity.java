@@ -156,7 +156,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		post.setLikeCount(post.getLikeCount() - 1);
 	}
 
-	@Override
+	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub
 		switch (tag) {
@@ -169,7 +169,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		setInfo();
 	}
 
-	@Override
+
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		// TODO Auto-generated method stub
 		e.showToastMsg(getApplicationContext());

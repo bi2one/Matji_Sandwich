@@ -63,7 +63,7 @@ public class AlarmListView extends RequestableMListView implements View.OnClickL
 		}
 	}
 
-	@Override
+	
 	public void onClick(View v) {
 		int position = Integer.parseInt((String) v.getTag());
 

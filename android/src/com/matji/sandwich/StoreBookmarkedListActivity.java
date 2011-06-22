@@ -14,7 +14,7 @@ public class StoreBookmarkedListActivity extends BaseActivity {
 		setContentView(R.layout.activity_user_store);
 
 		int user_id = getIntent().getIntExtra("user_id", 0);
-
+		
 		StoreBookmarkedListView listView = (StoreBookmarkedListView) findViewById(R.id.store_bookmarked_list);
 		listView.setUserId(user_id);
 		listView.setActivity(this);

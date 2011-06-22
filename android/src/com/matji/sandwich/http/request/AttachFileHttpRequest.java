@@ -5,6 +5,8 @@ import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
+
+import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -21,12 +23,16 @@ public class AttachFileHttpRequest extends HttpRequest {
     	controller = "attach_files";
     }
 
-    public void actionUpload(){
+    public void actionUpload(File imageFile, int postId){
     	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "upload";
     	
     	postHashtable.clear();
+    	
+    	postHashtable.put("upload_file", imageFile);
+    	postHashtable.put("post_id", postId + "");
+    	
     }
     
     public void actionImage(){

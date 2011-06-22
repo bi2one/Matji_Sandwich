@@ -14,7 +14,6 @@ import java.util.Map;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.*;
 import android.content.Context;
 
 enum HttpMethod { HTTP_POST, HTTP_GET }

@@ -7,9 +7,10 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.User;
+import com.matji.sandwich.data.Post;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
@@ -36,6 +37,7 @@ import android.widget.Toast;
 
 public class WritePostActivity extends BaseMapActivity implements Requestable, RelativeLayoutThatDetectsSoftKeyboard.Listener, MatjiLocationListener {
 	private static final int POST_WRITE_REQUEST = 1;
+	private static final int IMAGE_UPLOAD_REQUEST = 2;
 	private static final int LAT_SPAN = (int)(0.005 * 1E6);
 	private static final int LNG_SPAN = (int)(0.005 * 1E6);
 	private static final int THUMBNAIL_SIZE = 128;
@@ -63,6 +65,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private MapView mapView;
 	private LinearLayout thumbnailsContainer;
 	private Context mContext;
+	private int uploadImageIndex;
+	private int postId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +129,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	}
 
 	public void onPostButtonClicked(View v) {
+		if (session.isLogin() == false) return;
+		
 		postHttpRequest = new PostHttpRequest(getApplicationContext());
 		if(postField.getText().toString().trim().equals("")) {
 			Toast.makeText(getApplicationContext(), "Writing Content!", Toast.LENGTH_SHORT).show();
@@ -137,11 +143,31 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			}
 		}
 		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
-		User me = session.getCurrentUser();
-		me.setPostCount(me.getPostCount() + 1);
+//		User me = session.getCurrentUser();
+//		me.setPostCount(me.getPostCount() + 1);
+		
 	}
 
-
+	
+	private void startUploadImage(){
+		uploadImageIndex = 0;
+		uploadImage(uploadImageIndex);
+	}
+	
+	
+	private void uploadImage(int index){
+		if (index >= uploadImages.size()) return;
+		
+//		File file = new File(uploadImages.get(index));
+//		
+//		
+//		AttachFileHttpRequest request = new AttachFileHttpRequest(mContext);
+//		request.setFileUploadProgressListener(this);
+//		
+//		request.actionUpload(file, postId);
+	}
+	
+	
 	public void onTagButtonClicked(View v){
 
 		if (tagsField.getVisibility() == View.GONE){
@@ -169,8 +195,20 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch(tag) {
 		case POST_WRITE_REQUEST:
-			setResult(RESULT_OK);
-			finish();
+			if (uploadImages.size() > 0 && data != null && data.size() > 0){
+				postId = ((Post)(data.get(0))).getId();
+				startUploadImage();
+			}
+
+			break;
+		case IMAGE_UPLOAD_REQUEST:
+			++uploadImageIndex;
+			if (uploadImageIndex >= uploadImages.size()){
+				setResult(RESULT_OK);
+				finish();
+			}else {
+				uploadImage(uploadImageIndex);
+			}
 			break;
 		}
 	}
@@ -281,6 +319,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	}
 
 
+	@SuppressWarnings("unused")
 	private Uri getUriFromRealPath(String realPath){
 		File file = new File(realPath);
 		return Uri.fromFile(file);

@@ -38,7 +38,7 @@
 				android:layout_weight="1"
 				android:text="F" />
 		</LinearLayout>
-		<!-- android:layout_height="100dp" -->
+		
 		<LinearLayout style="@style/DefaultWidthFill"
 			android:layout_below="@id/post_buttons">
 			<LinearLayout android:id="@+id/post_footer_content"
@@ -70,12 +70,20 @@
 									</LinearLayout>
 								</HorizontalScrollView>
 							</RelativeLayout>
-							<com.google.android.maps.MapView 
-									android:id="@+id/post_user_map"
-									style="@style/DefaultFill"
-									android:apiKey="@string/map_api_key"
-									android:enabled="true"
-		      						android:clickable="true"></com.google.android.maps.MapView> 
+							<RelativeLayout
+								style="@style/DefaultFill"
+								android:padding="5dp">
+								<com.google.android.maps.MapView 
+										android:id="@+id/post_user_map"
+										style="@style/DefaultFill"
+										
+										android:apiKey="@string/map_api_key"
+										android:enabled="true"
+			      						android:clickable="true"></com.google.android.maps.MapView>
+			      				<Button style="@style/DefaultWrap"
+			      						android:text="GPS"
+			      				></Button>
+		      				</RelativeLayout> 
 					</com.matji.sandwich.widget.SwipeView>
 					
 					
