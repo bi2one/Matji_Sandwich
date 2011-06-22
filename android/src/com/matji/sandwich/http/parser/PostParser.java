@@ -33,6 +33,7 @@ public class PostParser extends MatjiDataParser {
 		post.setFromWhere(getString(object, "from_where"));
 		post.setCreatedAt(getString(object, "created_at"));
 		post.setUpdatedAt(getString(object, "updated_at"));
+		post.setAgo(getLong(object, "ago"));
 		
 		/* Set User */
 		UserParser userParser = new UserParser(context);

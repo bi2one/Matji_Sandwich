@@ -31,7 +31,7 @@ import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.DisplayUtil;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.TimeStamp;
+import com.matji.sandwich.http.util.TimeUtil;
 
 public class PostViewContainer extends ViewContainer implements OnClickListener, Requestable {
 	private MatjiImageDownloader downloader;
@@ -139,7 +139,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	}
 
 	public void setInfo() {
-		dateAgo.setText(TimeStamp.getAgoFromDate(post.getCreatedAt()));
+		dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
 		
 		if (post.getLikeCount() > 0) {
 			numberOfPerson.setText(post.getLikeCount() + context.getString(R.string.default_string_number_of_person) + " ");

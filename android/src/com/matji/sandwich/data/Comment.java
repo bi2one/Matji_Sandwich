@@ -13,6 +13,7 @@ public class Comment extends MatjiData{
 	private User user;
 	private Post post;
 	private String from_where;
+	private long ago;
 	
 	public Comment() {}
 	
@@ -44,6 +45,7 @@ public class Comment extends MatjiData{
 		dest.writeValue(user);
 		dest.writeValue(post);
 		dest.writeString(from_where);
+		dest.writeLong(ago);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -56,6 +58,7 @@ public class Comment extends MatjiData{
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		post = Post.class.cast(in.readValue(Post.class.getClassLoader()));
 		from_where = in.readString();
+		ago = in.readLong();
 	}
 	
 	public void setComment(String comment) {
@@ -111,5 +114,13 @@ public class Comment extends MatjiData{
 	}
 	public User getUser() {
 		return user;
+	}
+
+	public void setAgo(long ago) {
+		this.ago = ago;
+	}
+
+	public long getAgo() {
+		return ago;
 	}
 }

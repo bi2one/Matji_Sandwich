@@ -8,21 +8,19 @@ import android.view.View;
 import android.widget.Button;
 
 public class AlarmActivity extends BaseActivity {
-	private AlarmListView listView;
-    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_alarm);
 
-		listView = (AlarmListView) findViewById(R.id.alarm_list);
+		AlarmListView listView = (AlarmListView) findViewById(R.id.alarm_list);
 		listView.setActivity(this);
 		listView.requestReload();
 	}
 	
 	@Override
 	protected String titleBarText() {
-		return "StoreMenuActivity";
+		return "AlarmActivity";
 	}
 
 	@Override

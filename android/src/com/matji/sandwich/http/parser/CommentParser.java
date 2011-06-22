@@ -22,6 +22,7 @@ public class CommentParser extends MatjiDataParser {
 		comment.setPostId(getInt(object, "post_id"));
 		comment.setId(getInt(object, "id"));
 		comment.setUserId(getInt(object, "user_id"));
+		comment.setAgo(getInt(object, "ago"));
 		
 		/* Set User */
 		UserParser userParser = new UserParser(context);

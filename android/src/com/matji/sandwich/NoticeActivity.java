@@ -1,47 +1,23 @@
 package com.matji.sandwich;
 
-import java.util.ArrayList;
-
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.*;
+import com.matji.sandwich.widget.NoticeListView;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class NoticeActivity extends BaseActivity implements Requestable {
-	private static final int NOTICE_REQUEST = 1 ;
-	HttpRequestManager manager;
-	private NoticeHttpRequest noticeHttpRequest;
-
+public class NoticeActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_notice);
 
-		manager = new HttpRequestManager(getApplicationContext(), this);
-		request();		
+		NoticeListView listView = (NoticeListView) findViewById(R.id.notice_list);
+		listView.setActivity(this);
+		listView.requestReload();
 	}
 	
-	private void request() {
-		noticeHttpRequest = new NoticeHttpRequest(getApplicationContext());
-		noticeHttpRequest.actionList();
-		manager.request(this, noticeHttpRequest, NOTICE_REQUEST);
-	}
-
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-//		Notice notice = (Notice)data.get(0);
-		
-	}
-
-
-	public void requestExceptionCallBack(int tag, MatjiException e) {
-		e.showToastMsg(getApplicationContext());
-	}
-
 	@Override
 	protected String titleBarText() {
 		return "NoticeActivity";
