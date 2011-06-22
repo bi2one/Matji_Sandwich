@@ -80,7 +80,7 @@
   <string name="default_string_bookmark">Bookmark</string>
   <string name="default_string_ranking">Ranking</string>
   <string name="default_string_post">Post</string>
-  <string name="default_string_register">Register</string>
+  <string name="default_string_store_register">Register</string>
   <string name="default_string_current_position">GPS</string>
   <string name="default_string_near_store">Store</string>
   <string name="default_string_configure">설정</string>
