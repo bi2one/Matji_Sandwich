@@ -13,8 +13,8 @@ import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.session.Session;
 
 public class MeHttpRequest extends HttpRequest {
-	private static final String appId = "eef9847b11";
-	private static final String appSecret = "ae8a062bd2a516970994057722bfbd";
+	private static final String appId = "180d68e304";
+	private static final String appSecret = "ec04ba2a0b8ed62f3a99a896aed2aa";
 	private static final String redirectURI = "http://api.matji.com/callback.json"; 
 	
 	private String action;
