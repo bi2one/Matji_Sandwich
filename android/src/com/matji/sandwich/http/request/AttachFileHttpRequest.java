@@ -26,7 +26,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     public void actionUpload(File imageFile, int postId){
     	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_POST;
-    	action = "upload";
+    	action = "upload.json";
     	
     	postHashtable.clear();
     	

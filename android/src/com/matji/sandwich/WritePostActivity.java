@@ -1,6 +1,9 @@
 package com.matji.sandwich;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.google.android.maps.GeoPoint;
@@ -25,7 +28,9 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
@@ -35,7 +40,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class WritePostActivity extends BaseMapActivity implements Requestable, RelativeLayoutThatDetectsSoftKeyboard.Listener, MatjiLocationListener {
+public class WritePostActivity extends BaseMapActivity implements Requestable, RelativeLayoutThatDetectsSoftKeyboard.Listener, MatjiLocationListener, FileUploadProgressListener {
 	private static final int POST_WRITE_REQUEST = 1;
 	private static final int IMAGE_UPLOAD_REQUEST = 2;
 	private static final int LAT_SPAN = (int)(0.005 * 1E6);
@@ -158,13 +163,34 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private void uploadImage(int index){
 		if (index >= uploadImages.size()) return;
 		
-//		File file = new File(uploadImages.get(index));
-//		
-//		
-//		AttachFileHttpRequest request = new AttachFileHttpRequest(mContext);
-//		manager.request(this, request, IMAGE_UPLOAD_REQUEST);
-//		
-//		request.actionUpload(file, postId);
+		String path = Environment.getExternalStorageDirectory().toString();
+		File file = new File(path, "uploadimage.jpg");
+		
+		Bitmap bmp = getOriginalImage(uploadImages.get(index), 4);
+		FileOutputStream out;
+		
+		try {
+			out = new FileOutputStream(file);
+			bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+			out.flush();
+			out.close();
+			
+			AttachFileHttpRequest request = new AttachFileHttpRequest(mContext);
+			request.setFileUploadProgressListener(this);
+			request.actionUpload(file, postId);
+			manager.request(this, request, IMAGE_UPLOAD_REQUEST);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 	
 	
@@ -198,6 +224,9 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			if (uploadImages.size() > 0 && data != null && data.size() > 0){
 				postId = ((Post)(data.get(0))).getId();
 				startUploadImage();
+			}else {
+				Log.d("Matji", "Upload failed");
+			
 			}
 
 			break;
@@ -405,5 +434,12 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		cursor.moveToFirst();
 		return cursor.getString(column_index);
 
+	}
+
+
+	public void onFileWritten(int tag, int totalBytes, int readBytes) {
+		// TODO Auto-generated method stub
+		Log.d("Matji", "total : "+ totalBytes + "  writeBytes: " + readBytes);
+		
 	}
 }
