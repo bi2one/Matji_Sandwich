@@ -389,6 +389,7 @@ final public class HttpUtility
 			connection.setUseCaches(getUseCaches());
 			connection.setConnectTimeout(getConnectionTimeout());
 			connection.setReadTimeout(getReadTimeout());
+			connection.setRequestProperty("Accept", "text/html,application/json,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 		}
 		catch(Exception e)
 		{
@@ -422,23 +423,32 @@ final public class HttpUtility
 				DataOutputStream dos = null;
 				if(fileExists)
 				{
-					String boundary = "__boundary_" + Calendar.getInstance().getTimeInMillis() + "__";
-					connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+					String boundary = "01asfasf290481209";
+					String startBoundary = "--" + boundary + "\r\n";
+					String endBoundary = "\r\n";
+					String finalEndBoundary = "\r\n--" + boundary + "--\r\n";
 					
+					
+					connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+ 					
+ 					
 					dos = new DataOutputStream(connection.getOutputStream());
 	
 					for(String key: postParameters.keySet())
 					{
 
-						dos.writeBytes("\r\n");
-						dos.writeBytes("--" + boundary + "\r\n");
+						//dos.writeBytes("\r\n");
+						dos.writeBytes(startBoundary);
 						
 						Object value = postParameters.get(key);
 						if(value.getClass() == File.class)
 						{
+							
+							// File send
 							File file = (File)value;							
 							dos.writeBytes("Content-Disposition: form-data; name=\"" + key + "\"; filename=\"" + file.getName() + "\"\r\n");
-							dos.writeBytes("Content-Type: " + getMimeType(file) + "\r\n\r\n");
+							dos.writeBytes("Content-Type: " + getMimeType(file) + "\r\n");
+							dos.writeBytes("Content-Transfer-Encoding: binary\r\n\r\n");
 							
 							FileInputStream fis = new FileInputStream((File)value);
 							
@@ -456,15 +466,17 @@ final public class HttpUtility
 						}
 						else
 						{
-							dos.writeBytes("Content-Disposition: form-data; name=\"" + key + "\"\r\n");
-							dos.writeBytes("Content-Type: text/plain\r\n\r\n");
+							// String data send
+							dos.writeBytes("Content-Disposition: form-data; name=\"" + key + "\"\r\n\r\n");
 							dos.writeBytes(value.toString());
 						}
 						
+						dos.writeBytes(endBoundary);
+						
 					}
 					
-					dos.writeBytes("\r\n--" + boundary + "--\r\n");
-
+					dos.writeBytes(finalEndBoundary);
+					
 				}
 				else
 				{
