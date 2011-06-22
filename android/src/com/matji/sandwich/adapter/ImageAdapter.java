@@ -1,6 +1,6 @@
 package com.matji.sandwich.adapter;
 
-import com.matji.sandwich.ImageDownloadMessageListener;
+
 import com.matji.sandwich.R;
 import com.matji.sandwich.http.util.DisplayUtil;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
