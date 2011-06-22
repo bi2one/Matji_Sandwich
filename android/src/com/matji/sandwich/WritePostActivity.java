@@ -162,7 +162,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 //		
 //		
 //		AttachFileHttpRequest request = new AttachFileHttpRequest(mContext);
-//		request.setFileUploadProgressListener(this);
+//		manager.request(this, request, IMAGE_UPLOAD_REQUEST);
 //		
 //		request.actionUpload(file, postId);
 	}

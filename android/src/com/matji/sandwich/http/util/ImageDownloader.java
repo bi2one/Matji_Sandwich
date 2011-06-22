@@ -41,7 +41,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
-import com.matji.sandwich.ImageDownloadMessageListener;
+
 
 /**
  * This helper class download images from the Internet and binds those with the provided ImageView.
@@ -60,7 +60,7 @@ public class ImageDownloader {
 
     public enum Mode { NO_ASYNC_TASK, NO_DOWNLOADED_DRAWABLE, CORRECT }
     private Mode mode = Mode.CORRECT;
-    private ImageDownloadMessageListener listener;
+    
 
     /**
      * Download the specified image from the Internet and binds it to the provided ImageView. The
@@ -83,9 +83,6 @@ public class ImageDownloader {
 	download(sb.toString(), imageView);
     }
     
-    public void setMessageListener(ImageDownloadMessageListener listener) {
-    	this.listener = listener;
-    }
     
     /**
      * Download the specified image from the Internet and binds it to the provided ImageView. The
@@ -317,7 +314,7 @@ public class ImageDownloader {
                 }
             }
             
-            if (listener != null) listener.onMessageDelivered(END, imageView);
+            
         }
     }
 

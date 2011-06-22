@@ -3,7 +3,7 @@ package com.matji.sandwich.http.util;
 import android.widget.ImageView;
 import java.util.HashMap;
 
-import com.matji.sandwich.ImageDownloadMessageListener;
+
 
 public class MatjiImageDownloader {
 	private static final String URL_USER_IMAGE = "http://api.matji.com/users/profile";
@@ -42,7 +42,4 @@ public class MatjiImageDownloader {
 		downloader.download(URL_ATTACH_FILE_IMAGE, params, imageView);
 	}
 
-    public void setMessageListener(ImageDownloadMessageListener listener) {
-    	downloader.setMessageListener(listener);
-    }
 }
