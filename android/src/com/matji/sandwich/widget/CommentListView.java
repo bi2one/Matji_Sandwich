@@ -31,6 +31,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	public void addComment(Comment comment) {
 		getAdapterData().add(comment);
 		((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
+		Log.d("Matji", "A");
 	}
 	
 	public HttpRequest request() {

@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class StoreBookmarkedListActivity extends BaseActivity {
+public class UserStoreListActivity extends BaseActivity {
+	private StoreBookmarkedListView listView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -15,12 +17,18 @@ public class StoreBookmarkedListActivity extends BaseActivity {
 
 		int user_id = getIntent().getIntExtra("user_id", 0);
 		
-		StoreBookmarkedListView listView = (StoreBookmarkedListView) findViewById(R.id.store_bookmarked_list);
+		listView = (StoreBookmarkedListView) findViewById(R.id.store_bookmarked_list);
 		listView.setUserId(user_id);
 		listView.setActivity(this);
 		listView.requestReload();
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		listView.dataRefresh();
+	}
+	
 	@Override
 	protected String titleBarText() {
 		return "UserStoreListActivity";

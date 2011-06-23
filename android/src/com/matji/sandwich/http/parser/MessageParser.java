@@ -18,7 +18,7 @@ public class MessageParser extends MatjiDataParser {
 		Message message = new Message();
 		message.setId(getInt(object, "id"));
 		message.setSentUserId(getInt(object, "sent_user_id"));
-		message.setReceivedUserId(getInt(object, "sent_user_id"));
+		message.setReceivedUserId(getInt(object, "received_user_id"));
 		message.setThreadId(getInt(object, "thread_id"));
 		message.setMessage(getString(object, "message"));
 		

@@ -27,6 +27,11 @@ public class UserPostListActivity extends BaseActivity {
 		listView.setActivity(this);
 		listView.requestReload();
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		listView.dataRefresh();
+	}
 	
 	@Override
 	protected String titleBarText() {

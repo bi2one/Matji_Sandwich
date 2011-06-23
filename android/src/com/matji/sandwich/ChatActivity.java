@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Message;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MessageHttpRequest;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.ChatView;
 
 import android.content.Context;
@@ -21,7 +23,8 @@ import android.widget.Toast;
 
 public class ChatActivity extends BaseActivity implements Requestable {
 	private HttpRequestManager manager;
-
+	
+	private Message message;
 	private int user_id;
 	private ChatView listView;
 
@@ -32,18 +35,22 @@ public class ChatActivity extends BaseActivity implements Requestable {
 		setContentView(R.layout.activity_chat);
 
 		manager = new HttpRequestManager(this, this);
-
-		int thread_id = getIntent().getIntExtra("thread_id", -1);
-		user_id = getIntent().getIntExtra("user_id", 0);
+		message = (Message) SharedMatjiData.getInstance().top();
+		User me = Session.getInstance(this).getCurrentUser();
+		user_id = (message.getSentUserId() == me.getId()) ? message.getReceivedUserId() : message.getSentUserId();
 		listView = (ChatView) findViewById(R.id.chat);
-		listView.setThreadId(thread_id);
+		listView.setThreadId(message.getThreadId());
 		listView.setActivity(this);
 		listView.requestReload();
 	}
 
 	@Override
+	public void finish() {
+		super.finishWithMatjiData();
+	}
+	@Override
 	protected String titleBarText() {
-		return "MessageThreadListActivity";
+		return "ChatActivity";
 	}
 
 	@Override
@@ -85,7 +92,10 @@ public class ChatActivity extends BaseActivity implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
 		case MESSAGE_NEW:
-			if (data != null) listView.addMessage((Message) data.get(0));
+			Message recentMessage = (Message) data.get(0); 
+			message.setMessage(recentMessage.getMessage());
+			message.setAgo(recentMessage.getAgo());
+			if (data != null) listView.addMessage(recentMessage);
 			break;
 		}
 	}

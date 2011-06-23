@@ -106,11 +106,11 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		switch (requestCode) {
 		case WRITE_COMMENT_ACTIVITY:
 			if (resultCode == RESULT_OK) {
-				Comment comment = (Comment) data.getParcelableExtra("comment");
-				if (comment != null) {
-					commentListView.addComment(comment);
-				}
-				
+//				Comment comment = (Comment) data.getParcelableExtra("comment");
+//				if (comment != null) {
+//					commentListView.addComment(comment);
+//				}
+//				
 				post.setCommentCount(post.getCommentCount() + 1);
 			}
 		}

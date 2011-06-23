@@ -100,7 +100,6 @@ import com.matji.sandwich.adapter.ChatAdapter;
 import com.matji.sandwich.adapter.MBaseAdapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ChatView extends PullToRefreshListView implements ListScrollRequestable, PullToRefreshListView.OnRefreshListener {
 	private ChatRequestScrollListener scrollListener;
@@ -111,11 +110,12 @@ public class ChatView extends PullToRefreshListView implements ListScrollRequest
 	private int thread_id;
 
 	private int page = 1;
-	private int limit = 20;
-	
+//	private int limit = 20;
+	private int limit = 30;
+
 	protected final static int REQUEST_NEXT = 0;
 	protected final static int REQUEST_RELOAD = 1;
-	
+
 	public ChatView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.adapter = new ChatAdapter(context);
@@ -137,8 +137,8 @@ public class ChatView extends PullToRefreshListView implements ListScrollRequest
 	public void addMessage(Message message) {
 		adapterData.add(message);
 		adapter.notifyDataSetChanged();
-	}	
-	
+	}
+
 	public HttpRequest request() {	
 		((MessageHttpRequest) request).actionChat(thread_id, page, limit);
 		return request;
@@ -147,7 +147,7 @@ public class ChatView extends PullToRefreshListView implements ListScrollRequest
 	public void setThreadId(int thread_id) {
 		this.thread_id = thread_id;
 	}
-	
+
 	public void initValue() {
 		adapterData.clear();
 		page = 1;
@@ -188,20 +188,16 @@ public class ChatView extends PullToRefreshListView implements ListScrollRequest
 		} else {
 			setTranscriptMode(TRANSCRIPT_MODE_ALWAYS_SCROLL);
 		}
-		
+
 		if (data.size() == 0 || data.size() < limit){
 			scrollListener.requestSetOff();
 		}else{
 			scrollListener.requestSetOn();
 		}
 
-		Collections.reverse(adapterData);
-		
 		for (int i = 0; i < data.size(); i++) {
-			adapterData.add((Message) data.get(i));
+			adapterData.add(0, (Message) data.get(i));
 		}
-		
-		Collections.reverse(adapterData);
 
 		if (data.size() > 0)
 			adapter.notifyDataSetChanged();
@@ -211,7 +207,7 @@ public class ChatView extends PullToRefreshListView implements ListScrollRequest
 			onRefreshComplete();
 		}
 	}
-	
+
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getContext());
 	}
@@ -221,7 +217,7 @@ public class ChatView extends PullToRefreshListView implements ListScrollRequest
 		Log.d("refresh", "OnRefresh!!!!");
 		requestReload();
 	}
-	
+
 	@Override
 	public void onListItemClick(int position) {
 		// TODO Auto-generated method stub
