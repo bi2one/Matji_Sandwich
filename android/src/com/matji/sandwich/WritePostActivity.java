@@ -143,8 +143,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			String tagText = tagsField.getText().toString().trim();
 			double lat = (double)mapView.getMapCenter().getLatitudeE6() / (double)1E6;
 			double lng = (double)mapView.getMapCenter().getLongitudeE6() / (double)1E6;
-			postHttpRequest.actionNew(postField.getText().toString().trim()
-					,tagsField.getText().toString().trim(), "ANDROID", lat, lng);							
+			postHttpRequest.actionNew(postField.getText().toString().trim(),
+									  tagText, "ANDROID", lat, lng);							
 		}
 		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
 //		User me = session.getCurrentUser();
@@ -298,7 +298,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		// TODO Auto-generated method stub
 
 		if (prevLocation != null) {
-			if (prevLocation.getAccuracy() <= location.getAccuracy()) {
+			if (prevLocation.getAccuracy() >= location.getAccuracy()) {
 				mGpsManager.stop();
 			}
 		}
