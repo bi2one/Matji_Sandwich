@@ -82,6 +82,7 @@
   	<item name="android:layout_width">150dp</item>
   	<item name="android:layout_height">30dp</item>
   	<item name="android:layout_marginLeft">3dp</item>
+  	<item name="android:text">@string/store_main_like_store</item>
   	<item name="android:textSize">11dp</item>
   	<item name="android:textStyle">bold</item>
   	<item name="android:drawablePadding">4dp</item>
@@ -107,6 +108,7 @@
   <style name="store_main_ScrapButton">
   	<item name="android:layout_width">100dp</item>
   	<item name="android:layout_height">25dp</item>
+  	<item name="android:text">@string/store_main_bookmark</item>
   	<item name="android:textSize">12dp</item>
   	<item name="android:textStyle">bold</item>
   	<item name="android:textColor">#fff</item>

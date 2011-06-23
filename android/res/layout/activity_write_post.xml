@@ -82,6 +82,7 @@
 			      						android:clickable="true"></com.google.android.maps.MapView>
 			      				<Button style="@style/DefaultWrap"
 			      						android:text="GPS"
+			      						android:onClick="onGPSButtonClicked"
 			      				></Button>
 		      				</RelativeLayout> 
 					</com.matji.sandwich.widget.SwipeView>

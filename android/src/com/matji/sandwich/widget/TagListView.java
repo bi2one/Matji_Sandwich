@@ -19,7 +19,7 @@ public class TagListView extends RequestableMListView {
 		setPage(1);
 	}
 
-	public void setId(int id) {
+	public void setModelId(int id) {
 		this.id = id;
 	}
 	

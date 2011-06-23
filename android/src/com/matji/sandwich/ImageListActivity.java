@@ -17,7 +17,7 @@ public class ImageListActivity extends BaseActivity {
 		int id = getIntent().getIntExtra("id", 0);
 		ModelType type = (ModelType) getIntent().getSerializableExtra("type");
 		ImageListView listView = (ImageListView) findViewById(R.id.image_list_view);
-		listView.setId(id);
+		listView.setModelId(id);
 		listView.setType(type);
 		listView.setActivity(this);
 		listView.requestReload();

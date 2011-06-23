@@ -56,6 +56,7 @@
   <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
 
   <!-- default String... -->
+  <string name="default_string_delete">삭제</string>
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">의 맛집기행</string>
   <string name="default_string_intro">소개가 없습니다.</string>

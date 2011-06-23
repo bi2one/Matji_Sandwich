@@ -3,6 +3,7 @@ package com.matji.sandwich.base;
 public class ActivityEnterForeGroundDetector{
 	public enum ActivityState {NONDETERMIND, ONRESUME, ONSTOP, ONPAUSE} ;
 	private static ActivityState state;
+	private static boolean enabled;
 	private static volatile ActivityEnterForeGroundDetector activityPref;
 	
 	
@@ -13,7 +14,7 @@ public class ActivityEnterForeGroundDetector{
 			synchronized(ActivityEnterForeGroundDetector.class) {
 				if (activityPref == null) {
 					activityPref = new ActivityEnterForeGroundDetector();
-					
+					enabled = true;
 					state = ActivityState.NONDETERMIND;
 				}
 			}
@@ -22,7 +23,7 @@ public class ActivityEnterForeGroundDetector{
 	}
 
 	public void setState(ActivityState activityState, ActivityEnterForeGroundListener listener) {
-		if (state == ActivityState.ONSTOP && activityState == ActivityState.ONRESUME)
+		if (enabled && state == ActivityState.ONSTOP && activityState == ActivityState.ONRESUME)
 			listener.didEnterForeGround();
 		
 		state = activityState;
@@ -33,7 +34,13 @@ public class ActivityEnterForeGroundDetector{
 	}
 	
 	
+	public boolean getEnabled() {
+		return enabled;
+	}
 	
+	public void setEnabled(boolean ena){
+		enabled = ena;
+	}
 	
 //	private void didEnterForeGround(){
 //		Log.d("LifeCycle", "Activity did enter foreground!!!!");

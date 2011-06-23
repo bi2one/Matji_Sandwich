@@ -158,7 +158,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 			break;
 		case WRITE_POST_ACTIVITY:
 			if (resultCode == RESULT_OK) {
-				view1.onRefresh();
+				((RequestableMListView)mContentViews.get(mCurrentPage)).requestReload();
 			}
 			break;
 		}
@@ -194,7 +194,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
-		if (session.getToken() == null) {
+		if (!session.isLogin()) {
 			startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
 		} else {
 			startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);

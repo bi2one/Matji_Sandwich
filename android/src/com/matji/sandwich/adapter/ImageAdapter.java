@@ -1,7 +1,7 @@
 package com.matji.sandwich.adapter;
 
-
 import com.matji.sandwich.R;
+import com.matji.sandwich.data.AttachFileIds;
 import com.matji.sandwich.http.util.DisplayUtil;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.widget.ImageListView;
@@ -19,13 +19,11 @@ public class ImageAdapter extends MBaseAdapter {
 
 	public static final int IMAGE_IS_NULL = -1;
 	private static final int MARGIN = DisplayUtil.DPFromPixel(5);
-	private int[] imageIds = 
-	{
+	private int[] imageIds = {
 			R.id.image_adapter_image1,
 			R.id.image_adapter_image2,
 			R.id.image_adapter_image3,
 	};	
-
 
 	public ImageAdapter(Context context) {
 		super(context);
@@ -37,7 +35,7 @@ public class ImageAdapter extends MBaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageElement imageElement;
 
-		int[] attach_file_ids = (int[]) data.get(position);
+		AttachFileIds attachFileIds = (AttachFileIds) data.get(position);
 
 		if (convertView == null) {
 			imageElement = new ImageElement();
@@ -56,13 +54,13 @@ public class ImageAdapter extends MBaseAdapter {
 
 
 		for (int i = 0; i < imageIds.length; i++) {
-			if (attach_file_ids[i] == IMAGE_IS_NULL) {
+			if (attachFileIds.getIds()[i] == IMAGE_IS_NULL) {
 				imageElement.images[i].setImageDrawable(null);
 				imageElement.images[i].setOnClickListener(null);
 			}else {
 				imageElement.images[i].setTag((position * imageIds.length + i)+"");
 				imageElement.images[i].setAnimation(null);
-				downloader.downloadAttachFileImage(attach_file_ids[i], MatjiImageDownloader.IMAGE_MEDIUM, imageElement.images[i]);
+				downloader.downloadAttachFileImage(attachFileIds.getIds()[i], MatjiImageDownloader.IMAGE_MEDIUM, imageElement.images[i]);
 			}
 		}
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
+import com.matji.sandwich.base.ActivityEnterForeGroundDetector;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
@@ -101,6 +102,13 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		postFooterContentLayout = (LinearLayout)findViewById(R.id.post_footer_content);
 	}
 
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		ActivityEnterForeGroundDetector.getInstance().setEnabled(true);
+	}
 
 	@Override
 	protected void onPause() {
@@ -134,18 +142,17 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	}
 
 	public void onPostButtonClicked(View v) {
-		if (session.isLogin() == false) return;
+		if (!session.isLogin()) return;
 		
 		postHttpRequest = new PostHttpRequest(getApplicationContext());
 		if(postField.getText().toString().trim().equals("")) {
 			Toast.makeText(getApplicationContext(), "Writing Content!", Toast.LENGTH_SHORT).show();
 		} else {
-			if(!tagsField.getText().toString().trim().equals("")) {
-				postHttpRequest.actionNew(postField.getText().toString().trim()
-						,tagsField.getText().toString().trim(), "ANDROID");							
-			} else {
-				postHttpRequest.actionNew(postField.getText().toString().trim(),"", "ANDROID");
-			}
+			String tagText = tagsField.getText().toString().trim();
+			double lat = (double)mapView.getMapCenter().getLatitudeE6() / (double)1E6;
+			double lng = (double)mapView.getMapCenter().getLongitudeE6() / (double)1E6;
+			postHttpRequest.actionNew(postField.getText().toString().trim(),
+									  tagText, "ANDROID", lat, lng);							
 		}
 		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
 //		User me = session.getCurrentUser();
@@ -171,7 +178,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		
 		try {
 			out = new FileOutputStream(file);
-			bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+			bmp.compress(Bitmap.CompressFormat.JPEG, 80, out);
 			out.flush();
 			out.close();
 			
@@ -225,8 +232,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 				postId = ((Post)(data.get(0))).getId();
 				startUploadImage();
 			}else {
-				Log.d("Matji", "Upload failed");
-			
+				setResult(RESULT_OK);
+				finish();
 			}
 
 			break;
@@ -299,7 +306,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		// TODO Auto-generated method stub
 
 		if (prevLocation != null) {
-			if (prevLocation.getAccuracy() <= location.getAccuracy()) {
+			if (prevLocation.getAccuracy() >= location.getAccuracy()) {
 				mGpsManager.stop();
 			}
 		}
@@ -315,7 +322,13 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	}
 
 
+	public void onGPSButtonClicked(View v){
+		mGpsManager.start();
+	}
+	
+	
 	public void onSelectPhotoButtonClicked(View v) {
+		ActivityEnterForeGroundDetector.getInstance().setEnabled(false);
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_GET_CONTENT);
 		intent.setType("image/*");
@@ -402,7 +415,6 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == RESULT_OK){
-
 			if(requestCode == TAKE_CAMERA){
 				String imageRealPath = null;
 				final Uri uriImages = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;        

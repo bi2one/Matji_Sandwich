@@ -7,6 +7,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.matji.sandwich.exception.GpsOutOfServiceMatjiException;
 import com.matji.sandwich.exception.GpsTemporarilyUnavailableMatjiException;
 import com.matji.sandwich.exception.GpsAvailableMatjiException;
@@ -23,7 +25,7 @@ public class GpsManager implements LocationListener {
     private LocationManager locationManager;
     private String majorProvider;
     private boolean gpsPerformed;
-    private final static int minDistanceForNotifyInMeters = 10;
+    private final static int minDistanceForNotifyInMeters = 0;
     
     public GpsManager(Context context, MatjiLocationListener matjiListener) {
 	this.context = context;
@@ -49,26 +51,43 @@ public class GpsManager implements LocationListener {
     }
 
     private void notifyLastKnownLocation() {
-	Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-	if (loc == null)
-	    loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-	notifyLocationChanged(loc);
+		Location gpsLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		Location netLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		Location lastLoc = null;
+		
+		
+		if (gpsLoc != null && netLoc != null){
+			if (gpsLoc.getTime() > netLoc.getTime()){
+				lastLoc = gpsLoc;
+			}else {
+				lastLoc = netLoc;
+			}
+		
+		}else if (gpsLoc != null){
+			lastLoc = gpsLoc;	
+		}else if (netLoc != null){
+			lastLoc = netLoc;
+		}
+		
+		if (lastLoc != null){
+			lastLoc.setAccuracy(1000);
+			notifyLocationChanged(lastLoc);
+		}
     }
 
     private void requestLocationUpdatesGps() throws MatjiException {
-	majorProvider = LocationManager.GPS_PROVIDER;
-	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-					       GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
-	locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-					       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
+		majorProvider = LocationManager.GPS_PROVIDER;
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+						       GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+						       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
     }
 
     private void requestLocationUpdatesNetwork() throws MatjiException {
-	majorProvider = LocationManager.NETWORK_PROVIDER;
-	matjiListener.onLocationExceptionDelivered(new UseNetworkGpsMatjiException());
-	locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-					       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
+		majorProvider = LocationManager.NETWORK_PROVIDER;
+		matjiListener.onLocationExceptionDelivered(new UseNetworkGpsMatjiException());
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+						       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
     }
 
     private void notifyLocationChanged(Location loc) {
@@ -114,6 +133,7 @@ public class GpsManager implements LocationListener {
     }
 
     public void onLocationChanged(Location location) {
+    	Log.d("GPS", location.getProvider().toString() + " ; Accuracy is " +location.getAccuracy());
 		if (!gpsPerformed && location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
 		    gpsPerformed = true;
 		    // Log.d("LOCATION_CHANGED", "gps_provider");
