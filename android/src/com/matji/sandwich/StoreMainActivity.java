@@ -23,6 +23,7 @@ import com.matji.sandwich.session.Session;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -100,7 +101,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 		/* Set Owner User */
 		//		User ownerUser = store.getOwnerUser();
-		User ownerUser = store.getRegUser();
+		User ownerUser = null;
 		if (ownerUser != null) {
 			string = getString(R.string.default_string_owner_user) + ": " + regUser.getNick();
 			ownerUserText.setText(string);
@@ -255,15 +256,23 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onMapButtonClicked(View view) {
-
 	}
 
 	public void onPhoneButtonClicked(View view) {
-
+		if (store.getTel() != null) {
+			try {
+				startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + store.getTel())));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void onWebButtonClicked(View view) {
-
+		if (!store.getWebsite().equals("")) {
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(store.getWebsite()));
+			startActivity(intent);
+		}
 	}
 
 	public void onInfoViewButtonClicked(View view) {
