@@ -41,6 +41,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class WritePostActivity extends BaseMapActivity implements Requestable, RelativeLayoutThatDetectsSoftKeyboard.Listener, MatjiLocationListener, FileUploadProgressListener {
+	private static final int STORE_ID_IS_NULL = -1;
 	private static final int POST_WRITE_REQUEST = 1;
 	private static final int IMAGE_UPLOAD_REQUEST = 2;
 	private static final int LAT_SPAN = (int)(0.005 * 1E6);
@@ -72,12 +73,14 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private Context mContext;
 	private int uploadImageIndex;
 	private int postId;
+	private int storeId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
-
+		storeId = getIntent().getIntExtra("store_id", STORE_ID_IS_NULL);
+		
 		setContentView(R.layout.activity_write_post);
 
 		mapView = (MapView) findViewById(R.id.post_user_map);
@@ -138,19 +141,21 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		
 		postHttpRequest = new PostHttpRequest(getApplicationContext());
 		if(postField.getText().toString().trim().equals("")) {
-			Toast.makeText(getApplicationContext(), "Writing Content!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
 		} else {
-			if(!tagsField.getText().toString().trim().equals("")) {
-				postHttpRequest.actionNew(postField.getText().toString().trim()
-						,tagsField.getText().toString().trim(), "ANDROID");							
+			String tagText = tagsField.getText().toString().trim();
+			double lat = (double)mapView.getMapCenter().getLatitudeE6() / (double)1E6;
+			double lng = (double)mapView.getMapCenter().getLongitudeE6() / (double)1E6;
+			if (storeId == STORE_ID_IS_NULL) {
+				postHttpRequest.actionNew(postField.getText().toString().trim(),
+						  tagText, "ANDROID", lat, lng);
 			} else {
-				postHttpRequest.actionNew(postField.getText().toString().trim(),"", "ANDROID");
+				postHttpRequest.actionNew(postField.getText().toString().trim(),
+						  tagText, "ANDROID", storeId);
 			}
+			
+			manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
 		}
-		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
-//		User me = session.getCurrentUser();
-//		me.setPostCount(me.getPostCount() + 1);
-		
 	}
 
 	
@@ -225,8 +230,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 				postId = ((Post)(data.get(0))).getId();
 				startUploadImage();
 			}else {
-				Log.d("Matji", "Upload failed");
-			
+				setResult(RESULT_OK);
+				finish();
 			}
 
 			break;
@@ -299,7 +304,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		// TODO Auto-generated method stub
 
 		if (prevLocation != null) {
-			if (prevLocation.getAccuracy() <= location.getAccuracy()) {
+			if (prevLocation.getAccuracy() >= location.getAccuracy()) {
 				mGpsManager.stop();
 			}
 		}
@@ -315,6 +320,11 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	}
 
 
+	public void onGPSButtonClicked(View v){
+		mGpsManager.start();
+	}
+	
+	
 	public void onSelectPhotoButtonClicked(View v) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_GET_CONTENT);

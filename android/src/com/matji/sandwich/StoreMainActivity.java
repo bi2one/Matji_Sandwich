@@ -219,7 +219,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onLikeButtonClicked(View view) {
-		if (session.isLogin()){
+		if (loginRequired()) {
 			likeButton.setClickable(false);
 			if (dbProvider.isExistLike(store.getId(), "Store")){
 				dbProvider.deleteLike(store.getId(), "Store");
@@ -233,13 +233,11 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 				// api request
 				likeRequest();
 			}
-		} else {
-			startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
 
 	public void onScrapButtonClicked(View view) {
-		if (session.isLogin()){
+		if (loginRequired()) {
 			scrapButton.setClickable(false);
 			if (dbProvider.isExistBookmark(store.getId(), "Store")){
 				dbProvider.deleteBookmark(store.getId(), "Store");
@@ -253,8 +251,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 				// api request
 				bookmarkRequest();
 			}
-		} else {
-			startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
 

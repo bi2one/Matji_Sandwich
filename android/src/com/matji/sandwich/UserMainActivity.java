@@ -145,6 +145,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		} else {
 			followButton.setText(R.string.user_main_follow);
 		}
+		
 		titleText.setText(user.getTitle());
 		introText.setText(user.getIntro());
 
@@ -206,7 +207,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onFollowButtonClicked(View view) {
-		if (session.isLogin()){
+		if (loginRequired()) {
 			if (session.getCurrentUser().getId() != user.getId()) {
 				followButton.setClickable(false);
 				if (dbProvider.isExistFollowing(user.getId())) {
@@ -219,8 +220,6 @@ public class UserMainActivity extends MainActivity implements Requestable {
 					followRequest();
 				}
 			}
-		} else {
-			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 		}
 	}
 
@@ -269,13 +268,16 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
+		button.setText("Message");
+		return true;
 	}
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-
+		if (loginRequired()) {
+			Intent intent = new Intent(this, WriteMessageActivity.class);
+			intent.putExtra("user_id", user.getId());
+			startActivity(intent);
+		}
 	}
 }

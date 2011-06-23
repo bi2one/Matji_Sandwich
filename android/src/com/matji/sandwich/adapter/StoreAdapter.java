@@ -41,6 +41,7 @@ public class StoreAdapter extends MBaseAdapter {
 			storeElement.image = (ImageView) convertView.findViewById(R.id.store_adapter_thumnail);
 			storeElement.name = (TextView) convertView.findViewById(R.id.store_adapter_name);
 			storeElement.address = (TextView) convertView.findViewById(R.id.store_adapter_address);
+			storeElement.likeCount = (TextView) convertView.findViewById(R.id.store_adapter_like_count);
 			convertView.setTag(storeElement);
 		} else {
 			// Get the ViewHolder back to get fast access to the TextView
@@ -58,6 +59,7 @@ public class StoreAdapter extends MBaseAdapter {
 		}
 		storeElement.name.setText(store.getName());
 		storeElement.address.setText(store.getAddress());
+		storeElement.likeCount.setText(store.getLikeCount()+"");
 		
 		return convertView;
 	}
@@ -66,5 +68,6 @@ public class StoreAdapter extends MBaseAdapter {
 		ImageView image;
 		TextView name;
 		TextView address;
+		TextView likeCount;
 	}
 }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.view.View;
 import android.widget.Button;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -21,10 +20,10 @@ import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.session.Session;
 
 public class StoreSliderActivity extends BaseActivity implements OnScrollListener {
-        public static final int INDEX_NEAR_STORE = 2;
+	public static final int INDEX_NEAR_STORE = 2;
 	private static final int mDefaultPage = 1;
-        
-        private SwipeView swipeView;
+
+	private SwipeView swipeView;
 	private StoreSearchView view1;
 	private StoreListView view2;
 	private StoreNearListView view3;
@@ -33,7 +32,6 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 	private Context mContext;
 	private int mCurrentPage;
 	private ArrayList<View> mContentViews;
-        private Intent initIntent;
 
 	private Session session;
 	private boolean privateMode;
@@ -42,7 +40,7 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_slider);
-		
+
 		session = Session.getInstance(this);
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
@@ -76,8 +74,8 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 	public void onResume(){
 		super.onResume();
 		mCurrentPage = session.getPreferenceProvider().getInt(Session.STORE_SLIDER_INDEX, mDefaultPage);
-		session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, mDefaultPage);
-		
+//		session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, mDefaultPage);
+
 		if (session.getToken() == null && privateMode == true){
 			// remove private lists
 			removePrivateStoreList();
@@ -89,8 +87,12 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 		} else {
 			initPages();
 		}
-	}
 
+		view1.dataRefresh();
+		view2.dataRefresh();
+		view3.dataRefresh();
+		if (view4 != null) view4.dataRefresh();
+	}
 
 	private void initPages(){
 		control.start(this);
@@ -130,6 +132,7 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 
 			try {
 				mCurrentPage = currentPage;
+				session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, mCurrentPage);
 				control.setCurrentPage(currentPage);
 				View view = mContentViews.get(currentPage);
 
@@ -158,6 +161,5 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
-		
 	}
 }

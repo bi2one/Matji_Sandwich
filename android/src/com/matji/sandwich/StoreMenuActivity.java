@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class StoreMenuActivity extends BaseActivity {
-	private Intent intent;
 	private int store_id;
 	private StoreMenuListView listView;
     
@@ -18,8 +17,7 @@ public class StoreMenuActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_menu);
 
-		intent = getIntent();
-		store_id = intent.getIntExtra("store_id", 0);
+		store_id = getIntent().getIntExtra("store_id", 0);
 		
 		listView = (StoreMenuListView) findViewById(R.id.store_menu_list);
 		listView.setUserId(store_id);

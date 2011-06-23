@@ -9,21 +9,35 @@ import android.view.View;
 import android.widget.Button;
 
 public class StorePostListActivity extends BaseActivity {
-	private Intent intent;
 	private int store_id;
 	private StorePostListView listView;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_post);
+		store_id = getIntent().getIntExtra("store_id", 0);
 
-		intent = getIntent();
-		store_id = intent.getIntExtra("store_id", 0);
-		
 		listView = (StorePostListView) findViewById(R.id.store_post_list);
 		listView.setStoreId(store_id);
 		listView.setActivity(this);
-		listView.requestReload();		
+		listView.requestReload();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		listView.dataRefresh();
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case WRITE_POST_ACTIVITY:
+			if (resultCode == RESULT_OK) {
+				listView.requestReload();
+			}
+			break;
+		}
 	}
 
 	@Override
@@ -33,13 +47,17 @@ public class StorePostListActivity extends BaseActivity {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
+		button.setText("Write");
+
+		return true;
 	}
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+		if (loginRequired()) {
+			Intent intent = new Intent(getApplicationContext(), WritePostActivity.class);
+			intent.putExtra("store_id", store_id);
+			startActivityForResult(intent, WRITE_POST_ACTIVITY);
+		}
 	}
 }

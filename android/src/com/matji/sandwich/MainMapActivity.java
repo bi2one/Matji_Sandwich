@@ -82,7 +82,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
     public void onLocationChanged(Location location) {
 		if (prevLocation != null) {
-		    if (prevLocation.getAccuracy() <= location.getAccuracy()) {
+		    if (prevLocation.getAccuracy() >= location.getAccuracy()) {
 			mGpsManager.stop();
 		    }
 		}

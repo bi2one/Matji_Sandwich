@@ -23,7 +23,7 @@ public class ImageAdapter extends MBaseAdapter {
 			R.id.image_adapter_image1,
 			R.id.image_adapter_image2,
 			R.id.image_adapter_image3,
-	};	
+	};
 
 	public ImageAdapter(Context context) {
 		super(context);

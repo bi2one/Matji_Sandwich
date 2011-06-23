@@ -163,4 +163,8 @@ PullToRefreshListView.OnRefreshListener {
 		//		 	return adapterData.get(position);
 		//		 }
 	}
+	
+	public void dataRefresh() {
+		adapter.notifyDataSetChanged();
+	}
 }

@@ -53,6 +53,8 @@
   <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
 
   <!-- default String... -->
+  <string name="default_string_writing_content">Writing Content!</string>  
+  <string name="default_string_delete">삭제</string>
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">의 맛집기행</string>
   <string name="default_string_intro">소개가 없습니다.</string>
@@ -85,11 +87,15 @@
   <string name="default_string_near_store">Store</string>
   <string name="default_string_configure">설정</string>
 
+  <!-- ChatActivity -->
+  <string name="chat_waiting_input">메세지를 입력해주세요.</string>
+  <string name="chat_send">보내기</string>
+
   <!-- target --> 
   <string name="target_android">ANDROID</string>
   <string name="target_common">COMMON</string>
      
-  <!-- alarm -->
+  <!-- AlarmActivity -->
   <string name="alarm_following_you">is now following you.</string>
   <string name="alarm_commented_post">commented on your post.</string>
   <string name="alarm_like_post">likes your post.</string>

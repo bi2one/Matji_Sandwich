@@ -190,7 +190,6 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		Log.d("Matji", data.size()+"");
 		switch (tag) {
 		case ATTACH_FILE_IDS_REQUEST:
 			/* Set AttachFile ID */

@@ -1,5 +1,6 @@
 package com.matji.sandwich.base;
 
+import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
@@ -13,6 +14,19 @@ import android.util.Log;
 import android.view.Window;
 
 public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener {
+	
+	protected static final int LOGIN_ACTIVITY = 1;
+	protected static final int WRITE_POST_ACTIVITY = 2;
+	
+	protected boolean loginRequired(){
+		Session session = Session.getInstance(this);
+		if (!session.isLogin()) {
+			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+			return false;
+		}
+		
+		return true;
+	}
 	
 	public void didEnterForeGround(){
 		Session session  = Session.getInstance(this);

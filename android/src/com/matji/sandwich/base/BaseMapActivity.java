@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.maps.MapActivity;
+import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
@@ -19,7 +20,20 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 	protected abstract String titleBarText();
 	protected abstract boolean setTitleBarButton(Button button);
 	protected abstract void onTitleBarItemClicked(View view);
-
+	
+	protected static final int LOGIN_ACTIVITY = 1;
+	protected static final int WRITE_POST_ACTIVITY = 2;
+	
+	protected boolean loginRequired(){
+		Session session = Session.getInstance(this);
+		if (!session.isLogin()) {
+			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public void didEnterForeGround(){
 		Log.d("LifeCycle", "ENTER");
 		Session session  = Session.getInstance(this);

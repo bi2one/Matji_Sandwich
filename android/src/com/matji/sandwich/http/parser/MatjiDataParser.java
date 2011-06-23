@@ -1,6 +1,7 @@
 package com.matji.sandwich.http.parser;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -17,7 +18,8 @@ import com.matji.sandwich.http.request.HttpUtility;
 
 import java.util.ArrayList;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public abstract class MatjiDataParser {
 	protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
@@ -35,9 +37,11 @@ public abstract class MatjiDataParser {
 		JsonArray jsonArray = jsonElement.getAsJsonArray();
 		ArrayList<MatjiData> matjiDataList = new ArrayList<MatjiData>();
 		for (int i = 0; i < jsonArray.size(); i++) {
-			MatjiData data = getMatjiData(jsonArray.get(i).getAsJsonObject());
-			if (data != null) {
-				matjiDataList.add(data);
+			JsonElement em = jsonArray.get(i);
+			try{
+				matjiDataList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
+			} catch (IllegalStateException e){
+				Log.d("Matji", "WTF is " + em.getClass());
 			}
 		}
 		

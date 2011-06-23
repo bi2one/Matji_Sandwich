@@ -14,4 +14,5 @@
 	<color name="DARK_ORANGE">#c30</color>
 	<color name="DODGER_BLUE">#1C86EE</color>
 	<color name="BLACK">#000000</color>
+	<color name="WHITE">#ffffff</color>
 </resources>

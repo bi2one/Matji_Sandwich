@@ -1,10 +1,9 @@
 package com.matji.sandwich.widget;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.matji.sandwich.R;
@@ -12,8 +11,6 @@ import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.CommentAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Comment;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 
@@ -25,13 +22,17 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		super(context, attrs, new CommentAdapter(context), 10);
 		request = new CommentHttpRequest(context);
 		setPage(1);
-		setFadingEdgeLength(0);
 	}
 
 	public void setPostId(int post_id) {
 		this.post_id = post_id;
 	}
 
+	public void addComment(Comment comment) {
+		getAdapterData().add(comment);
+		((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
+	}
+	
 	public HttpRequest request() {
 		((CommentHttpRequest) request).actionList(post_id, getPage(), getLimit());
 		return request;

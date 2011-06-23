@@ -6,7 +6,6 @@ import com.matji.sandwich.http.util.DisplayUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
-import android.util.Log;
 
 public class MainTabActivity extends BaseTabActivity {
     public static final String IF_INDEX = "index";

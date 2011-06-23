@@ -3,14 +3,14 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.session.Session;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +22,6 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 
 	private HttpRequestManager manager;
 	private HttpRequest commentHttpRequest;
-	private Session session;
 
 	private EditText commentField;
 
@@ -34,29 +33,26 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 		setContentView(R.layout.activity_write_comment);
 
 		post_id = getIntent().getIntExtra("post_id", 0);
-		commentField = (EditText) findViewById(R.id.post_field);
+		commentField = (EditText) findViewById(R.id.comment_field);
 		manager = new HttpRequestManager(getApplicationContext(), this);
-		session = Session.getInstance(this);
 	}
 
-	public void onSendButtonClicked(View v) {
+	public void onCommentButtonClicked(View v) {
 		commentHttpRequest = new CommentHttpRequest(getApplicationContext());
 		if(commentField.getText().toString().trim().equals("")) {
-			Toast.makeText(getApplicationContext(), "Writing Content!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
 		} else {
-//			Log.d("matji", )
 			((CommentHttpRequest) commentHttpRequest).actionNew(post_id, commentField.getText().toString().trim(), "ANDROID");
+			manager.request(this, commentHttpRequest, COMMENT_WRITE_REQUEST);
 		}
-
-		manager.request(this, commentHttpRequest, COMMENT_WRITE_REQUEST);
-		User me = session.getCurrentUser();
-		me.setPostCount(me.getPostCount() + 1);
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch(tag) {
 		case COMMENT_WRITE_REQUEST:
-			setResult(RESULT_OK);
+			Intent intent = new Intent();
+			if (data != null) intent.putExtra("comment", (Comment) data.get(0));
+			setResult(RESULT_OK, intent);
 			finish();
 			break;
 		}
@@ -80,6 +76,6 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
-		onSendButtonClicked(view);		
+		onCommentButtonClicked(view);
 	}
 }
