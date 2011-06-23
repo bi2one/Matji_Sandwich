@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-    0mYEJyQuX49uQdz0KqLHqC8lOjaMmZ0nqCLX7EQ
+    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
   </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -44,6 +44,9 @@
   </string>
   <string name="exception_UseNetworkGpsMatjiException">
     GPS수신이 불안정합니다. 네트워크로 현재위치를 추정합니다
+  </string>
+  <string name="exception_GeocodeLocationInvalidMatjiException">
+    해당 위치는 주소를 받아올 수 없는 지역입니다
   </string>
 
   <!-- pull_to_refresh -->
@@ -135,5 +138,8 @@
   <string name="near_post">주변 메모</string>
   <string name="search_post">메모 검색</string>
   <string name="my_post">내메모</string>
+
+  <!-- GetMapPositionActivity -->
+  <string name="get_map_position_complete">위치설정완료</string>
 
 </resources>
