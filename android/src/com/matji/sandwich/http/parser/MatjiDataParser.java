@@ -35,7 +35,10 @@ public abstract class MatjiDataParser {
 		JsonArray jsonArray = jsonElement.getAsJsonArray();
 		ArrayList<MatjiData> matjiDataList = new ArrayList<MatjiData>();
 		for (int i = 0; i < jsonArray.size(); i++) {
-			matjiDataList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
+			MatjiData data = getMatjiData(jsonArray.get(i).getAsJsonObject());
+			if (data != null) {
+				matjiDataList.add(data);
+			}
 		}
 		
 		return matjiDataList;
