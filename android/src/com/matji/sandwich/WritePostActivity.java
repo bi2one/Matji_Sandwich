@@ -13,6 +13,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
@@ -139,12 +140,11 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		if(postField.getText().toString().trim().equals("")) {
 			Toast.makeText(getApplicationContext(), "Writing Content!", Toast.LENGTH_SHORT).show();
 		} else {
-			if(!tagsField.getText().toString().trim().equals("")) {
-				postHttpRequest.actionNew(postField.getText().toString().trim()
-						,tagsField.getText().toString().trim(), "ANDROID");							
-			} else {
-				postHttpRequest.actionNew(postField.getText().toString().trim(),"", "ANDROID");
-			}
+			String tagText = tagsField.getText().toString().trim();
+			double lat = (double)mapView.getMapCenter().getLatitudeE6() / (double)1E6;
+			double lng = (double)mapView.getMapCenter().getLongitudeE6() / (double)1E6;
+			postHttpRequest.actionNew(postField.getText().toString().trim()
+					,tagsField.getText().toString().trim(), "ANDROID", lat, lng);							
 		}
 		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
 //		User me = session.getCurrentUser();
@@ -224,8 +224,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 				postId = ((Post)(data.get(0))).getId();
 				startUploadImage();
 			}else {
-				Log.d("Matji", "Upload failed");
-			
+				setResult(RESULT_OK);
+				finish();
 			}
 
 			break;
@@ -314,6 +314,11 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	}
 
 
+	public void onGPSButtonClicked(View v){
+		mGpsManager.start();
+	}
+	
+	
 	public void onSelectPhotoButtonClicked(View v) {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_GET_CONTENT);

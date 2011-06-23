@@ -8,7 +8,7 @@ import com.matji.sandwich.http.request.HttpRequest;
 
 public class StoreNearListView extends StoreListView {
 	private StoreHttpRequest storeRequest;
-	private double lat_sw=37.;
+	private double lat_sw=37.0;
 	private double lat_ne=126.6;
 	private double lng_sw=37.4;
 	private double lng_ne=126.9;

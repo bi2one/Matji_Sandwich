@@ -34,7 +34,6 @@ public class NoticeAdapter extends MBaseAdapter {
 			convertView.setTag(noticeElement);
 			
 			convertView.setOnClickListener(new OnClickListener() {
-				@Override
 				public void onClick(View v) {
 					if (v.findViewById(R.id.notice_adapter_notice).getVisibility() == View.GONE)
 						v.findViewById(R.id.notice_adapter_notice).setVisibility(View.VISIBLE);

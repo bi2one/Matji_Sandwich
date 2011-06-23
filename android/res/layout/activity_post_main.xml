@@ -26,6 +26,8 @@
 			android:onClick="onLikeButtonClicked" />
 		<Button
 			style="@style/DefaultWrap"
+			android:text = "@string/default_string_delete"
+			android:onClick = "onDeleteButtonClicked"
 			android:layout_margin="7dp" />
 	</LinearLayout>
 </LinearLayout>

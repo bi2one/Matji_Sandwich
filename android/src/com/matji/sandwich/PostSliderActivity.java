@@ -158,7 +158,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 			break;
 		case WRITE_POST_ACTIVITY:
 			if (resultCode == RESULT_OK) {
-				view1.requestReload();
+				((RequestableMListView)mContentViews.get(mCurrentPage)).requestReload();
 			}
 			break;
 		}
