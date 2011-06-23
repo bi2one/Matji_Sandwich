@@ -3,7 +3,6 @@ package com.matji.sandwich.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.matji.sandwich.R;
@@ -29,9 +28,8 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	}
 
 	public void addComment(Comment comment) {
-		getAdapterData().add(comment);
+		getAdapterData().add(0, comment);
 		((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
-		Log.d("Matji", "A");
 	}
 	
 	public HttpRequest request() {

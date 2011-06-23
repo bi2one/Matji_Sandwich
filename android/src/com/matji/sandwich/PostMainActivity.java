@@ -73,6 +73,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);
+		commentListView.requestReload();
 	}
 
 	private void setInfo() {
@@ -90,7 +91,6 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	private void commentListViewReload() {
 		commentListView.getHeaderViewContainer().removeView(header.getRootView());
 		commentListView.addHeaderView(header);
-		commentListView.requestReload();		
 	}
 
 	@Override
@@ -106,11 +106,12 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		switch (requestCode) {
 		case WRITE_COMMENT_ACTIVITY:
 			if (resultCode == RESULT_OK) {
-//				Comment comment = (Comment) data.getParcelableExtra("comment");
-//				if (comment != null) {
-//					commentListView.addComment(comment);
-//				}
-//				
+				Comment comment = (Comment) data.getParcelableExtra("comment");
+				if (comment != null) {
+					comment.setUser(session.getCurrentUser());
+					commentListView.addComment(comment);
+				}
+				
 				post.setCommentCount(post.getCommentCount() + 1);
 			}
 		}

@@ -135,6 +135,7 @@ public class ChatView extends PullToRefreshListView implements ListScrollRequest
 	}
 
 	public void addMessage(Message message) {
+		setTranscriptMode(TRANSCRIPT_MODE_ALWAYS_SCROLL);
 		adapterData.add(message);
 		adapter.notifyDataSetChanged();
 	}

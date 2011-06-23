@@ -8,7 +8,6 @@ import com.matji.sandwich.http.util.TimeUtil;
 import com.matji.sandwich.widget.CommentListView;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
