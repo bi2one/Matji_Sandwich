@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#fff"
+	android:gravity="right|center_vertical">
+	<TextView
+		style="@style/DefaultWrap"
+		android:id="@+id/chat_adapter_me_message" />
+	<!-- <TextView -->
+	<!-- style="@style/DefaultWrap" -->
+	<!-- android:id="@+id/chat_created_at" /> -->
+</LinearLayout>

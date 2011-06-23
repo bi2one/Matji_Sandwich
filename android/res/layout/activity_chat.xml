@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@color/WHITE">
+	<LinearLayout
+		style="@style/DefaultWidthFill"
+		android:id="@+id/chat_input_field"
+		android:layout_alignParentBottom="true">
+		<EditText
+			android:id="@+id/chat_message_field"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="99"
+			android:layout_gravity="center_vertical"
+			android:layout_margin="3dp"
+			android:maxLines="3"
+			android:scrollbars="vertical"
+			android:gravity="top"
+			android:textColor="@color/LIGHT_GRAY"
+			android:hint="@string/chat_waiting_input" />
+		<Button
+			android:background="@drawable/selector"
+			android:id="@+id/chat_send_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent"
+			android:layout_weight="1"
+			android:layout_gravity="center_vertical"
+			android:layout_margin="3dp"
+			android:text="@string/chat_send"
+			android:onClick="onSendButtonClicked" />
+	</LinearLayout>
+	<com.matji.sandwich.widget.ChatView
+		style="@style/DefaultFill"
+		android:id="@+id/chat"
+		android:layout_above="@id/chat_input_field" />
+</RelativeLayout>
