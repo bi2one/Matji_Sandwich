@@ -45,7 +45,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private HttpRequestManager mRequestManager;
     private Session session;
 
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main_map);
 	mMapView = (MatjiMapView)findViewById(R.id.map_view);
@@ -195,7 +195,8 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
     public void onStoreRegisterClick(View v) {
 	// Intent storeRegisterIntent = new Intent(mContext, StoreRegisterActivity.class);
-	// startActivity(storeRegisterIntent);
+	Intent storeRegisterIntent = new Intent(mContext, GetMapPositionActivity.class);
+	startActivity(storeRegisterIntent);
     }
 	
     // public boolean dispatchTouchEvent(MotionEvent event) {

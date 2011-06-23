@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
+import com.matji.sandwich.base.ActivityEnterForeGroundDetector;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
@@ -104,6 +105,13 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		postFooterContentLayout = (LinearLayout)findViewById(R.id.post_footer_content);
 	}
 
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		ActivityEnterForeGroundDetector.getInstance().setEnabled(true);
+	}
 
 	@Override
 	protected void onPause() {
@@ -176,7 +184,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		
 		try {
 			out = new FileOutputStream(file);
-			bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+			bmp.compress(Bitmap.CompressFormat.JPEG, 80, out);
 			out.flush();
 			out.close();
 			
@@ -326,6 +334,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	
 	
 	public void onSelectPhotoButtonClicked(View v) {
+		ActivityEnterForeGroundDetector.getInstance().setEnabled(false);
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_GET_CONTENT);
 		intent.setType("image/*");
