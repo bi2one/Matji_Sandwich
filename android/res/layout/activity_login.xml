@@ -6,14 +6,14 @@
 	android:padding="30dp">
 	<EditText android:id="@+id/username" 
 		android:layout_alignParentTop="true"
-		android:text="test2"
+		android:text="test3"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:singleLine="true" 
 		android:lines="1" /> 
 	<EditText android:id="@+id/password"  
 		android:layout_below="@id/username"
-		android:text="test2"
+		android:text="test3"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:singleLine="true" 

@@ -55,11 +55,13 @@ public class ChatActivity extends BaseActivity implements Requestable {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		return false;
+		button.setText("Reload");
+		return true;
 	}
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
+		listView.requestReload();
 	}
 
 	public void onSendButtonClicked(View view) {

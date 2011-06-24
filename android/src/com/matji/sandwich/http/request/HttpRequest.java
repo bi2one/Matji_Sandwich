@@ -22,7 +22,7 @@ public abstract class HttpRequest {
     private int tag;
     private FileUploadProgressListener progressListener;
     protected Context context = null;
-    protected String serverDomain = "http://api.matji.com:3000/";
+    protected String serverDomain = "http://api.matji.com/";
     
 	protected Hashtable<String, Object> postHashtable;
 	protected Hashtable<String, String> getHashtable;	

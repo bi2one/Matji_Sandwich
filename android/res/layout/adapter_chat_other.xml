@@ -12,6 +12,8 @@
 		android:layout_margin="3dp" />
 	<TextView
 		style="@style/DefaultWrap"
+		android:background="@drawable/msg_bubble_other"
+		android:textColor="@color/BLACK"
 		android:id="@+id/chat_adapter_other_message" />
 	<!-- <TextView -->
 	<!-- style="@style/DefaultWrap" -->

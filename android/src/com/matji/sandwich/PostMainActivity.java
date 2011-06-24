@@ -27,6 +27,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	private Post post;
 	private User user;
 	private Store store;
+	private int intent_post_id;
 
 	private Session session;
 	private DBProvider dbProvider;
@@ -54,11 +55,11 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		dbProvider = DBProvider.getInstance(this);
 		manager = new HttpRequestManager(this, this);
 
-		int post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
-		if (post_id == POST_ID_IS_NULL) {
+		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
+		if (intent_post_id == POST_ID_IS_NULL) {
 			initInfo();
 		} else {
-			postRequest(post_id);
+			postRequest(intent_post_id);
 		}
 	}
 
@@ -96,8 +97,10 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	@Override
 	public void onResume() {
 		super.onResume();
-		setInfo();
-		commentListViewReload();
+		if (intent_post_id == POST_ID_IS_NULL) {
+			setInfo();
+			commentListViewReload();
+		}
 	}
 
 	@Override
@@ -111,7 +114,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 					comment.setUser(session.getCurrentUser());
 					commentListView.addComment(comment);
 				}
-				
+
 				post.setCommentCount(post.getCommentCount() + 1);
 			}
 		}
@@ -136,14 +139,14 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	protected void onTitleBarItemClicked(View view) {
 	}
 
-	
+
 	public void onDeleteButtonClicked(View v) {
 		PostHttpRequest postRequest = new PostHttpRequest(this);
 		postRequest.actionDelete(post.getId());
 		manager.request(this, postRequest, POST_DELETE_REQUEST);
 	}
-	
-	
+
+
 	public void onCommentButtonClicked(View view) {
 		if (loginRequired()) {	
 			Intent intent = new Intent(getApplicationContext(), WriteCommentActivity.class);
@@ -209,6 +212,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			if (data != null && data.size() > 0) {
 				Post post = (Post) data.get(0);
 				SharedMatjiData.getInstance().push(post);
+				intent_post_id = POST_ID_IS_NULL;
 			}
 
 			initInfo();
