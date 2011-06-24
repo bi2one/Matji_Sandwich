@@ -55,7 +55,7 @@ public class ChatActivity extends BaseActivity implements Requestable {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		button.setText("Reload");
+		button.setText("Refresh");
 		return true;
 	}
 

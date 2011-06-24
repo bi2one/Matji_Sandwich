@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 
+import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MessageHttpRequest;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -25,6 +26,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 	private HttpRequestManager manager;
 	private MBaseAdapter adapter;
 	private HttpRequest request;
+	private boolean scrollable;
 	private int thread_id;
 
 	private int page = 1;
@@ -40,12 +42,12 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		manager = new HttpRequestManager(context, this);
 		adapterData = new ArrayList<Message>();
 		adapter.setData(adapterData);
+		scrollable = true;
 		setAdapter(adapter);
 
 		setDivider(null);
-		setCacheColorHint(Color.TRANSPARENT); 
-		setVerticalScrollBarEnabled(false);
-		
+		setCacheColorHint(Color.TRANSPARENT);
+
 		scrollListener = new ChatRequestScrollListener(this, manager);
 		setOnScrollListener(scrollListener);
 	}
@@ -68,13 +70,15 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 
 	public void initValue() {
 		adapterData.clear();
+		adapter.notifyDataSetChanged();
 		page = 1;
 	}
 
 	public void nextValue() {
 		page++;
 	}
-
+	
+	@Override
 	public void requestNext() {
 		Log.d("refresh" , "requestNext()");
 		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
@@ -82,6 +86,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		nextValue();
 	}
 
+	@Override
 	public void requestReload() {
 		Log.d("refresh", "requestReload()");
 		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
@@ -100,38 +105,44 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		return computeVerticalScrollOffset();
 	}
 
+	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (data.size() == 0 || data.size() < limit){
 			scrollListener.requestSetOff();
 		}else{
 			scrollListener.requestSetOn();
 		}
-		
+
 		for (int i = 0; i < data.size(); i++) {
 			adapterData.add(0, (Message) data.get(i));
 		}
 
 		if (data.size() > 0) {
+			setTranscriptMode(TRANSCRIPT_MODE_DISABLED);
 			adapter.notifyDataSetChanged();
 			switch (tag) {
 			case REQUEST_NEXT:
-				setTranscriptMode(TRANSCRIPT_MODE_DISABLED);
-				requestFocus();
+				setScrollable(true);
 				setSelection(data.size()+1);
 				break;
 			case REQUEST_RELOAD:
-				setTranscriptMode(TRANSCRIPT_MODE_ALWAYS_SCROLL);
+				setSelection(adapterData.size());
+				Message recentMessage = (Message) adapterData.get(data.size()-1);
+				Message threadMessage = (Message) SharedMatjiData.getInstance().top();
+				threadMessage.setMessage(recentMessage.getMessage());
+				threadMessage.setAgo(recentMessage.getAgo());
 				break;
 			}
 		}
-		
+
 	}
 
+	@Override
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getContext());
 	}
 
-
+	@Override
 	public void onRefresh() {
 		Log.d("refresh", "OnRefresh!!!!");
 		requestReload();
@@ -165,13 +176,9 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		@Override
 		public void onScrollStateChanged(AbsListView v, int state) {
 			switch (state) {
-			case SCROLL_STATE_IDLE:
+			case SCROLL_STATE_IDLE: case SCROLL_STATE_FLING:
 				if (isSet && !manager.isRunning() && cTotalItemCount > 0 && cFirstVisibleItem == 0) {
-					requestable.requestNext();
-				}
-				break;
-			case SCROLL_STATE_FLING:
-				if (isSet && !manager.isRunning() && cTotalItemCount > 0 && cFirstVisibleItem == 0) {
+					setScrollable(false);
 					requestable.requestNext();
 				}
 				break;
@@ -190,6 +197,14 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		public boolean onTouch(View v, MotionEvent event) {
 			return false;
 		}
-
+	}
+	
+	public void setScrollable(boolean scrollable) {
+		this.scrollable = scrollable;
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		return (scrollable) ? super.onTouchEvent(ev) : scrollable;
 	}
 }

@@ -24,10 +24,11 @@
 			android:background="@drawable/selector"
 			android:id="@+id/chat_send_btn"
 			android:layout_width="wrap_content"
-			android:layout_height="fill_parent"
+			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:layout_gravity="center_vertical"
 			android:layout_margin="3dp"
+			android:padding="3dp"
 			android:text="@string/chat_send"
 			android:onClick="onSendButtonClicked" />
 	</LinearLayout>
