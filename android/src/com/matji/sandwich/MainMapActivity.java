@@ -203,7 +203,8 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onStoreRegisterClick(View v) {
-	Intent storeRegisterIntent = new Intent(mContext, GetMapPositionActivity.class);
+	// Intent storeRegisterIntent = new Intent(mContext, GetMapPositionActivity.class);
+	Intent storeRegisterIntent = new Intent(mContext, RegisterStoreListActivity.class);
 	startActivity(storeRegisterIntent);
     }
 }

@@ -24,7 +24,6 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	
-	
 	protected boolean loginRequired(){
 		Session session = Session.getInstance(this);
 		if (!session.isLogin()) {
@@ -34,7 +33,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 		
 		return true;
 	}
-	
+    
 	public void didEnterForeGround(){
 		Session session  = Session.getInstance(this);
 		if (session.isLogin()){

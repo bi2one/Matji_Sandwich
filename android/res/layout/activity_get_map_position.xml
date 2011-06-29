@@ -22,6 +22,7 @@
       android:id="@+id/regist_main_regist"
       style="@style/get_map_position_registSubmitBtn"
       android:text="@string/get_map_position_complete"
+      android:onClick="onSubmitClicked"
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true" />
 </RelativeLayout>

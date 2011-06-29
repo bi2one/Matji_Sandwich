@@ -148,4 +148,7 @@
   <!-- GetMapPositionActivity -->
   <string name="get_map_position_complete">위치설정완료</string>
 
+  <!-- RegisterStoreListActivity -->
+  <string name="register_store_list_is_not_exist">맛집이 목록에 없다면?</string>
+  <string name="register_store_list_register_new_store">새 맛집 등록</string>
 </resources>
