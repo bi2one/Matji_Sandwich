@@ -154,6 +154,10 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
     	e.performExceptionHandling(mContext);
     }
 
+    public void onCurrentLocationClicked(View v) {
+	mGpsManager.start();
+    }
+
     protected void onTitleBarItemClicked(View view) { }
     protected boolean setTitleBarButton(Button button) { return false; }
     protected String titleBarText() {
