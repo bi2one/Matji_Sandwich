@@ -141,7 +141,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 				control.setCurrentPage(currentPage);
 				View view = mContentViews.get(currentPage);
 
-				if (view instanceof RequestableMListView) {
+				if (view instanceof RequestableMListView && !(view instanceof Searchable)) {
 					RequestableMListView listView = (RequestableMListView) view;
 					listView.requestConditionally();
 				}
