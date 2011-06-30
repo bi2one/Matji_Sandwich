@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.http.HttpRequestManager;
 
 public abstract class PullToRefreshListView extends MListView implements OnScrollListener {
 	private static final boolean IS_PULL_REFRESH = false;
@@ -51,6 +52,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 	private int mLastMotionY;
 	private int mBaseIndex;
 	private OnScrollListener pullDownListener;
+	private Context mContext;
 
 	// public PullToRefreshListView(Context context) {
 	//     super(context);
@@ -59,7 +61,8 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 
 	public PullToRefreshListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context);
+		this.mContext = context;
+		init(context);		
 	}
 
 	public void setPullDownScrollListener(OnScrollListener l) {
@@ -444,10 +447,8 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 	 * list.
 	 */
 	private class OnClickRefreshListener implements OnClickListener {
-
-
 		public void onClick(View v) {
-			if (mRefreshState != REFRESHING) {
+			if (mRefreshState != REFRESHING && !HttpRequestManager.getInstance(mContext).isRunning()) {
 				prepareForRefresh();
 				onRefresh();
 			}
@@ -467,5 +468,5 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 		 * expected to indicate that the refresh has completed.
 		 */
 		public void onRefresh();
-	}
+	}	
 }

@@ -224,7 +224,6 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			onResume();
 			break;
 		case POST_DELETE_REQUEST:
-//			setResult(RESULT_FIRST_USER);
 			setResult(RESULT_OK);
 			finish();
 			break;
