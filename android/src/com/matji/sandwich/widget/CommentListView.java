@@ -42,6 +42,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		};
 
 		setOnTouchListener(listener);
+		setCanRepeat(true);
 	}
 
 	public void setPostId(int post_id) {

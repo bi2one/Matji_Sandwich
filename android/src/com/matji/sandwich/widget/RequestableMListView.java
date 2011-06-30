@@ -18,6 +18,7 @@ PullToRefreshListView.OnRefreshListener {
 	private ArrayList<MatjiData> adapterData;
 	private MBaseAdapter adapter;
 	private HttpRequestManager manager;
+	private boolean canRepeat = false;
 	private int page = 1;
 	private int limit = 10;
 
@@ -75,13 +76,18 @@ PullToRefreshListView.OnRefreshListener {
 		nextValue();
 	}
 
-
+	public void setCanRepeat(boolean canRepeat) {
+		this.canRepeat = canRepeat;
+	}
+	
 	public void requestReload() {
-		Log.d("refresh", "requestReload()");
-		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-		initValue();
-		manager.request(getActivity(), request(), REQUEST_RELOAD, this);
-		nextValue();
+		if (!manager.isRunning(getActivity()) || canRepeat) {
+			Log.d("refresh", "requestReload()");
+			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
+			initValue();
+			manager.request(getActivity(), request(), REQUEST_RELOAD, this);
+			nextValue();
+		}
 	}
 
 

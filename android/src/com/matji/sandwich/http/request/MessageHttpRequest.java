@@ -109,8 +109,8 @@ public class MessageHttpRequest extends HttpRequest {
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
 
-	Log.d("Matji", "MessageresultBody: " + resultBody);
-	Log.d("Matji", "MessageresultCode: " + resultCode);
+	Log.d("Matji", "MessageHttpRequest resultBody: " + resultBody);
+	Log.d("Matji", "MessageHttpRequest resultCode: " + resultCode);
 	
 	return parser.parseToMatjiDataList(resultBody);
     }
