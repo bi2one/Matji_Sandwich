@@ -2,14 +2,12 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.http.util.ModelType;
+import com.matji.sandwich.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TabHost;
 
 public class StoreTabActivity extends BaseTabActivity {
-	private TabHost tabHost;
 	private Intent mainIntent;
 	private Intent postIntent;
 	private Intent menuIntent;
@@ -25,10 +23,7 @@ public class StoreTabActivity extends BaseTabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_tab);
-		tabHost = getTabHost();
 		store = (Store) (SharedMatjiData.getInstance().top());
 
 		mainIntent = new Intent(this, StoreMainActivity.class);

@@ -9,17 +9,14 @@ import com.matji.sandwich.base.BaseTabActivity;
 public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	private Intent defaultIntent;
 	private Intent noteIntent;
-	private TabHost tabHost;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_store_detail_info);
 		
 		defaultIntent = new Intent(this, StoreDefaultInfoActivity.class);
 		noteIntent = new Intent(this, StoreNoteListActivity.class);
 		
-		tabHost = getTabHost();
 		tabHost.addTab(tabHost.newTabSpec("tab1")
 				.setIndicator(getString(R.string.store_detail_info_default))
 				.setContent(defaultIntent));

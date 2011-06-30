@@ -11,8 +11,8 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.util.ModelType;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.ModelType;
 
 import android.app.TabActivity;
 import android.content.Intent;

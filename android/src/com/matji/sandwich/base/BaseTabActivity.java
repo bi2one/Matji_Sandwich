@@ -6,17 +6,43 @@ import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+import android.widget.TabHost;
+import android.widget.Toast;
 
 public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener {
-	
+	protected TabHost tabHost;
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
+	
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_tab);
+		tabHost = getTabHost();
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+
+	    // Checks whether a hardware keyboard is available
+	    if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+	        Toast.makeText(this, "keyboard visible", Toast.LENGTH_SHORT).show();
+	    } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+	        Toast.makeText(this, "keyboard hidden", Toast.LENGTH_SHORT).show();
+	    }
+	}
 	
 	public boolean loginRequired(){
 		Session session = Session.getInstance(this);

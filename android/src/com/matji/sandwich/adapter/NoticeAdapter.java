@@ -2,7 +2,7 @@ package com.matji.sandwich.adapter;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Notice;
-import com.matji.sandwich.http.util.TimeUtil;
+import com.matji.sandwich.util.TimeUtil;
 
 import android.content.Context;
 import android.util.Log;

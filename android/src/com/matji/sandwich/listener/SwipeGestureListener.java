@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-import com.matji.sandwich.http.util.DisplayUtil;
+import com.matji.sandwich.util.DisplayUtil;
 
 public abstract class SwipeGestureListener implements OnTouchListener {
 	public abstract void swipeToLeft(int x, int y);
