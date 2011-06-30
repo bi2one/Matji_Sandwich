@@ -101,8 +101,8 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
 	case GEOCODE_REQUEST_TAG:
 	    Address address = ((AddressMatjiData)data.get(0)).getAddress();
 	    // don't uncomment this line...
-	    // String addressString = getAddressString(address);
-	    lastAddress = address.getAddressLine(0);
+	    lastAddress = getAddressString(address);
+	    // lastAddress = address.getAddressLine(0);
 	    addressText.setText(lastAddress);
 	    break;
 	}
