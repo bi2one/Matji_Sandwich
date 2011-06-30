@@ -7,6 +7,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.util.Log;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
 //import com.google.android.maps.Overlay;
@@ -55,7 +57,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mGpsManager = new GpsManager(mContext, this);
 	mRequestManager = new HttpRequestManager(mContext, this);
 	storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
-	session = Session.getInstance(this);
+	session = Session.getInstance(mContext);
 
 	mGpsManager.start();
 	mMapView.startMapCenterThread();
@@ -86,7 +88,6 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 			mGpsManager.stop();
 		    }
 		}
-	    
 	prevLocation = location;
 	setCenter(prevLocation);
     }
@@ -96,6 +97,14 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onMapCenterChanged(GeoPoint point) {
+	GeoPoint neBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
+	GeoPoint swBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_SW);
+
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_NE, neBound.getLatitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, swBound.getLatitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, neBound.getLongitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_SW, swBound.getLongitudeE6());
+	
     	Runnable runnable = new MapRunnable(this);
 	runOnUiThread(runnable);
     }
@@ -194,47 +203,8 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onStoreRegisterClick(View v) {
-	// Intent storeRegisterIntent = new Intent(mContext, StoreRegisterActivity.class);
-	Intent storeRegisterIntent = new Intent(mContext, GetMapPositionActivity.class);
+	// Intent storeRegisterIntent = new Intent(mContext, GetMapPositionActivity.class);
+	Intent storeRegisterIntent = new Intent(mContext, RegisterStoreListActivity.class);
 	startActivity(storeRegisterIntent);
     }
-	
-    // public boolean dispatchTouchEvent(MotionEvent event) {
-    // 	boolean result = super.dispatchTouchEvent(event);
-    // 	if (event.getAction() == MotionEvent.ACTION_UP) {
-    // 	    // Log.d("======", mMapView.getMapCenter().toString());
-    // 	    storeItemizedOverlay.addOverlay(mMapView.getMapCenter());
-    // 	}
-    // 	return result;
-    // }
-
-    // 	e = (EditText) findViewById(R.id.main_map_search_bar);
-    // 	Button b = (Button) findViewById(R.id.main_map_gps_button);
-    // 	b.requestFocus();
-    // 	//		e.setOnFocusChangeListener(new MyFocusChangeListener());
-    // }
-
-    // private void setMarker(Location loc){
-
-    // }
-
-    // private void setSmallmarker(Location loc){
-
-    // }
-
-    // class MyFocusChangeListener implements OnFocusChangeListener {
-    // 	public void onFocusChange(View v, boolean hasFocus) {
-    // 	    // TODO Auto-generated method stub
-    // 	    if(hasFocus) {
-    // 		Log.d("Matji", hasFocus + "");
-    // 		((EditText) v).setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-    // 	    }
-    // 	    else {
-    // 		Log.d("Matji", hasFocus + "");
-    // 		((EditText) v).setLayoutParams(new RelativeLayout.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT));
-    // 	    }
-
-    // 	}
-		
-    // }
 }

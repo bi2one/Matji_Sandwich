@@ -47,6 +47,10 @@ import com.matji.sandwich.exception.MatjiException;
 public class GetMapPositionActivity extends BaseMapActivity implements MatjiLocationListener,
 								       MatjiMapCenterListener,
 								       Requestable {
+    public static final String RETURN_KEY_ADDRESS = "GetMapPositionActivity.address";
+    public static final String RETURN_KEY_LATITUDE = "GetMapPositionActivity.latitude";
+    public static final String RETURN_KEY_LONGITUDE = "GetMapPositionActivity.longitude";
+    
     private static final int GEOCODE_REQUEST_TAG = 1;
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
@@ -61,6 +65,9 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
     private Location prevLocation;
     private CenterOverlay centerOverlay;
     private boolean isMapClicked;
+    private String lastAddress;
+    private double lastLatitude;
+    private double lastLongitude;
 
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -95,8 +102,8 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
 	    Address address = ((AddressMatjiData)data.get(0)).getAddress();
 	    // don't uncomment this line...
 	    // String addressString = getAddressString(address);
-	    String addressString = address.getAddressLine(0);
-	    addressText.setText(addressString);
+	    lastAddress = address.getAddressLine(0);
+	    addressText.setText(lastAddress);
 	    break;
 	}
     }
@@ -143,6 +150,8 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
 
     public void onMapCenterChanged(GeoPoint point) {
     	Runnable runnable = new GeocodeRunnable(point);
+	lastLongitude = (double)point.getLongitudeE6() / 1E6;
+	lastLatitude = (double)point.getLatitudeE6() / 1E6;
 	runOnUiThread(runnable);
     }
 
@@ -152,6 +161,19 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
 
     public void onLocationExceptionDelivered(MatjiException e) {
     	e.performExceptionHandling(mContext);
+    }
+
+    public void onCurrentLocationClicked(View v) {
+	mGpsManager.start();
+    }
+
+    public void onSubmitClicked(View v) {
+	Intent data = new Intent();
+	data.putExtra(RETURN_KEY_ADDRESS, lastAddress);
+	data.putExtra(RETURN_KEY_LATITUDE, lastLatitude);
+	data.putExtra(RETURN_KEY_LONGITUDE, lastLongitude);
+	setResult(Activity.RESULT_OK, data);
+	finish();
     }
 
     protected void onTitleBarItemClicked(View view) { }

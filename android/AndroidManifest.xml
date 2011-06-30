@@ -68,6 +68,7 @@
 		<activity android:name="MessageThreadActivity"
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="GetMapPositionActivity"></activity>
+		<activity android:name="RegisterStoreListActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

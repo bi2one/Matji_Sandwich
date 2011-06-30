@@ -14,6 +14,9 @@ public class MatjiMapView extends MapView {
     private MatjiMapCenterListener listener;
     private MapAsyncTask asyncTask;
     private GeoPoint mapCenter;
+    public static enum BoundType {
+	MAP_BOUND_NE, MAP_BOUND_SW, MAP_BOUND_SE, MAP_BOUND_NW
+    }
 
     public MatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -86,5 +89,27 @@ public class MatjiMapView extends MapView {
 	protected void onPostExecute(Integer result) { }
 	protected void onPreExecute() {	}
 	protected void onProgressUpdate(Integer... values) { }
-    }    
+    }
+
+    public GeoPoint getBound(BoundType type) {
+	GeoPoint center = getMapCenter();
+	int latBoundUnit = getLatitudeSpan() / 2;
+	int lngBoundUnit = getLatitudeSpan() / 2;
+	int eastLatitude = center.getLatitudeE6() + latBoundUnit;
+	int westLatitude = center.getLatitudeE6() - latBoundUnit;
+	int southLongitude = center.getLongitudeE6() - lngBoundUnit;
+	int northLongitude = center.getLongitudeE6() + lngBoundUnit;
+	
+	switch(type) {
+	case MAP_BOUND_NE:
+	    return new GeoPoint(eastLatitude, northLongitude);
+	case MAP_BOUND_SW:
+	    return new GeoPoint(westLatitude, southLongitude);
+	case MAP_BOUND_SE:
+	    return new GeoPoint(eastLatitude, southLongitude);
+	case MAP_BOUND_NW:
+	    return new GeoPoint(westLatitude, northLongitude);
+	}
+	return null;
+    }
 }

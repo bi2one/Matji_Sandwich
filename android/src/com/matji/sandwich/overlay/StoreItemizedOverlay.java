@@ -111,7 +111,7 @@ public class StoreItemizedOverlay extends ItemizedOverlay<OverlayItem>
 	public void mPopulate()
 	{
 	    //removeBallon();
-		
+
 	    populate();
 	}
 	
