@@ -113,7 +113,7 @@ public abstract class ListItemSwipeListener extends SwipeGestureListener {
 				break;
 			case View.VISIBLE:
 				if (prevPosition > 0 
-						&& (prevPosition < listView.getFirstVisiblePosition() || prevPosition > listView.getLastVisiblePosition())) {
+						&& (prevPosition < listView.getFirstVisiblePosition() || prevPosition - headerPos > listView.getLastVisiblePosition())) {
 					prevPosition = -1;
 				}
 				currentFront.startAnimation(outAnim);

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.Like;
@@ -22,6 +24,10 @@ import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CommentListView;
 import com.matji.sandwich.widget.PostViewContainer;
+
+// TODO
+// 댓글을 달거나, 라이크 했을 때 삭제 한 메모면.
+// 1. 리스트뷰 리로드, 2. 리스트뷰 어댑터 item remove, notifyDataSetChanged
 
 public class PostMainActivity extends MainActivity implements Requestable {
 	private Post post;
@@ -128,6 +134,11 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		}
 	}
 
+	public void postDoesNotExist() {
+		Toast.makeText(this, R.string.post_does_not_exist, Toast.LENGTH_SHORT).show(); 
+		super.finish();
+	}
+	
 	@Override
 	public void finish() {
 		super.finishWithMatjiData();
@@ -147,7 +158,6 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	protected void onTitleBarItemClicked(View view) {
 	}
 
-
 	public void onDeleteButtonClicked(View v) {
 		if (!manager.isRunning(this)) {
 			PostHttpRequest postRequest = new PostHttpRequest(this);
@@ -155,7 +165,6 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			manager.request(this, postRequest, POST_DELETE_REQUEST, this);
 		}
 	}
-
 
 	public void onCommentButtonClicked(View view) {
 		if (loginRequired()) {
@@ -223,10 +232,15 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			setInfo();
 			break;
 		case POST_REQUEST:
+			Log.d("Matji","A");
 			if (data != null && data.size() > 0) {
+				Log.d("Matji", data.size()+"");
 				Post post = (Post) data.get(0);
 				SharedMatjiData.getInstance().push(post);
 				intent_post_id = POST_ID_IS_NULL;
+			} else {
+				postDoesNotExist();
+				return;
 			}
 			initInfo();
 			onResume();

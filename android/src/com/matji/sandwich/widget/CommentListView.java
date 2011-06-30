@@ -8,11 +8,13 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.CommentAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Post;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.listener.ListItemSwipeListener;
@@ -99,6 +101,8 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 			initItemVisible();
 			getAdapterData().remove(curDeletePos);
 			((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
+			Post post = (Post) SharedMatjiData.getInstance().top();
+			post.setCommentCount(post.getCommentCount() - 1);
 		}
 
 		super.requestCallBack(tag, data);
