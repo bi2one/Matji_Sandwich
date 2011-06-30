@@ -11,7 +11,8 @@ import com.matji.sandwich.widget.RequestableMListView;
 
 public abstract class ListItemSwipeListener extends SwipeGestureListener {
 	public abstract void onListItemClicked(int position);
-
+	public abstract boolean isMyItem(int position);
+	
 	private RequestableMListView listView;
 
 	private int frontId;
@@ -98,7 +99,8 @@ public abstract class ListItemSwipeListener extends SwipeGestureListener {
 	public void swipeAnimation(int position, Animation inAnim, Animation outAnim, Animation prevInAnim) {
 		int currentViewPosition = getChildAtPosition(position);
 		int prevViewPositoin = getChildAtPosition(prevPosition);
-		if (!hasAnimationStarted) {
+
+		if (isMyItem(position-headerPos-1) && !hasAnimationStarted) {
 			currentFront = listView.getChildAt(currentViewPosition).findViewById(frontId);
 			currentRear = listView.getChildAt(currentViewPosition).findViewById(rearId);
 

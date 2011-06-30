@@ -39,6 +39,11 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		listener = new ListItemSwipeListener(context, this, R.id.comment_adapter_wrap, R.id.adapter_swipe_rear, 1) {
 			@Override
 			public void onListItemClicked(int position) {}
+
+			@Override
+			public boolean isMyItem(int position) {
+				return session.isLogin() && ((Comment) getAdapterData().get(position)).getUserId() == session.getCurrentUser().getId();
+			}
 		};
 
 		setOnTouchListener(listener);
@@ -72,10 +77,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 			gotoUserPage(Integer.parseInt((String)v.getTag()));
 			break;
 		case R.id.delete_btn:
-			// TODO !!TEST!!
-			// 우선은 이곳에서 세션과 비교해 댓글 삭제 여부 결정. 
-			// 후에 swipe를 자기 댓글만 가능하게 할 것인지 결정해서 수정.
-			if (session.isLogin()) {
+			if (session.isLogin() && !getHttpRequestManager().isRunning(getActivity())) {
 				curDeletePos = Integer.parseInt((String) v.getTag());
 				Comment comment = (Comment) getAdapterData().get(curDeletePos);
 				getHttpRequestManager().request(getActivity(), deleteRequest(comment.getId()), COMMENT_DELETE_REQUEST, this);
@@ -94,8 +96,6 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
 		case COMMENT_DELETE_REQUEST:
-			// TODO !!TEST!!
-			// 이 부분도 나중에 수정할게 있으면 같이.
 			initItemVisible();
 			getAdapterData().remove(curDeletePos);
 			((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();

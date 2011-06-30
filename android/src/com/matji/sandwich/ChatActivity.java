@@ -41,6 +41,11 @@ public class ChatActivity extends BaseActivity implements Requestable {
 		listView = (ChatView) findViewById(R.id.chat);
 		listView.setThreadId(message.getThreadId());
 		listView.setActivity(this);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		listView.requestReload();
 	}
 	

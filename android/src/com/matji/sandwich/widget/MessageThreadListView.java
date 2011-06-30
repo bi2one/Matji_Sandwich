@@ -27,6 +27,11 @@ public class MessageThreadListView extends MessageListView implements View.OnCli
 				Message message = (Message) getAdapterData().get(clickedPosition);
 				((BaseActivity) context).startActivityWithMatjiData(new Intent(context, ChatActivity.class), message);
 			}
+
+			@Override
+			public boolean isMyItem(int position) {
+				return true;
+			}
 		};
 
 		setOnTouchListener(listener);
