@@ -20,6 +20,7 @@ import com.matji.sandwich.listener.FileUploadProgressListener;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.SwipeView;
 import android.content.Context;
@@ -52,7 +53,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private int TAKE_CAMERA = 1;					// 카메라 리턴 코드값 설정
 	private int TAKE_GALLERY = 2;				// 앨범선택에 대한 리턴 코드값 설정
 	static final String[] IMAGE_PROJECTION = {      
-		MediaStore.Images.ImageColumns.DATA, 
+		MediaStore.Images.ImageColumns.DATA,
 		MediaStore.Images.Thumbnails.DATA
 	};
 	private ArrayList<String> uploadImages;
@@ -121,18 +122,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		mGpsManager.stop();
 	}
 
-	private void hideKeyboard(){
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);	
-	}
-
-	private void showKeyboard(View view){
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.showSoftInput(view, 0);
-	}
-
 	public void onImgButtonClicked(View v) {
-		hideKeyboard();
+		KeyboardUtil.hideKeyboard(this);
 		tagsField.setVisibility(View.GONE);
 		footerSwipeView.snapToPage(0);
 
@@ -140,7 +131,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 
 
 	public void onMapButtonClicked(View v) {
-		hideKeyboard();
+		KeyboardUtil.hideKeyboard(this);
 		tagsField.setVisibility(View.GONE);
 		footerSwipeView.snapToPage(1);
 	}
@@ -213,12 +204,12 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		if (tagsField.getVisibility() == View.GONE){
 			tagsField.setVisibility(View.VISIBLE);
 			tagsField.requestFocus();
-			showKeyboard(tagsField);
+			KeyboardUtil.showKeyboard(this, tagsField);
 		}
 		else {
 			tagsField.setVisibility(View.GONE);
 			postField.requestFocus();
-			showKeyboard(postField);
+			KeyboardUtil.showKeyboard(this, postField);
 		}
 	}
 
@@ -278,7 +269,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		onPostButtonClicked(view);		
 	}
 
-
+	@Override
 	public void onSoftKeyboardShown(boolean isShowing) {
 		// TODO Auto-generated method stub
 		if (isShowing){
@@ -299,7 +290,6 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			postFooterContentLayout.setVisibility(View.GONE);
 		}
 	}
-
 
 	private void setCenter(Location loc) {
 		int geoLat = (int)(loc.getLatitude() * 1E6);

@@ -1,4 +1,4 @@
-package com.matji.sandwich.http.util;
+package com.matji.sandwich.util;
 
 public enum ModelType {
 	STORE, USER

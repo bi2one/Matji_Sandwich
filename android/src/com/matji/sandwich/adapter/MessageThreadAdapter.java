@@ -4,9 +4,9 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.TimeUtil;
 import com.matji.sandwich.listener.ListItemSwipeListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.MessageThreadListView;
 
 import android.content.Context;

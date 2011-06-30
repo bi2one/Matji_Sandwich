@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.content.Intent;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.SearchBar;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.PostNearListView;
@@ -56,6 +58,9 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		view2 = (PostListView) findViewById(R.id.ListView2);
 		view3 = (PostNearListView) findViewById(R.id.ListView3);
 
+		LinearLayout searchWrap = (LinearLayout) findViewById(R.id.SearchWrap);
+		searchWrap.addView(new SearchBar(this, view1), 0);
+		
 		view1.setTag(R.string.title, getResources().getText(R.string.search_post).toString());
 		view2.setTag(R.string.title, getResources().getText(R.string.all_post).toString());
 		view3.setTag(R.string.title, getResources().getText(R.string.near_post).toString());
@@ -106,6 +111,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		if (view4 == null) {
 			view4 = new MyPostListView(this, null);
 			Session session = Session.getInstance(mContext);
+			view4.setScrollContainer(false);
 			view4.setUserId(session.getCurrentUser().getId());
 			view4.setTag(R.string.title, getResources().getString(R.string.my_post).toString());
 			view4.setActivity(this);

@@ -1,7 +1,7 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.http.util.ModelType;
+import com.matji.sandwich.util.ModelType;
 import com.matji.sandwich.widget.ImageListView;
 
 import android.os.Bundle;

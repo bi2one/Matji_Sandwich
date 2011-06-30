@@ -2,14 +2,12 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.util.ModelType;
+import com.matji.sandwich.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TabHost;
 
 public class UserTabActivity extends BaseTabActivity {
-	private TabHost tabHost;
 	private Intent mainIntent;
 	private Intent storeListIntent;
 	private Intent postListIntent;
@@ -29,11 +27,7 @@ public class UserTabActivity extends BaseTabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_tab);
-		
-		tabHost = getTabHost();
 		user = (User) SharedMatjiData.getInstance().top();
 		
 		mainIntent = new Intent(this, UserMainActivity.class);
@@ -62,21 +56,4 @@ public class UserTabActivity extends BaseTabActivity {
 				.setIndicator("기타")
 				.setContent(moreIntent));
 	}
-	
-//	@Override
-//	protected String usedTitleBar() {
-//		return "UserTabActivity";
-//	}
-//	
-//	@Override
-//	protected boolean setTitleBarButton(Button button) {
-//		button.setText("Info");
-//		return true;
-//	}
-//
-//	@Override
-//	protected void onTitleBarItemClicked(View view) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 }

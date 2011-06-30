@@ -1,7 +1,7 @@
 package com.matji.sandwich.adapter;
 
-import com.matji.sandwich.http.util.DisplayUtil;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.util.DisplayUtil;
 
 import android.content.Context;
 import android.view.View;

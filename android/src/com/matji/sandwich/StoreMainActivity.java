@@ -17,8 +17,8 @@ import com.matji.sandwich.http.request.BookmarkHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.ModelType;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.ModelType;
 
 import android.app.TabActivity;
 import android.content.Intent;

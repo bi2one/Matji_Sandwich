@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.util.Log;
 
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;

@@ -28,9 +28,9 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.util.DisplayUtil;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.TimeUtil;
+import com.matji.sandwich.util.DisplayUtil;
+import com.matji.sandwich.util.TimeUtil;
 
 public class PostViewContainer extends ViewContainer implements OnClickListener, Requestable {
 	private MatjiImageDownloader downloader;
