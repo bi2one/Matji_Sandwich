@@ -110,7 +110,8 @@ public class Session implements Requestable {
 				
 				removePrivateDataFromDatabase();
 				
-				DBProvider dbProvider = DBProvider.getInstance(mContext);				
+				DBProvider dbProvider = DBProvider.getInstance(mContext);
+				// TODO 느려지는 부분 ㅜㅜ 
 				dbProvider.insertBookmarks(me.getBookmarks());
 				dbProvider.insertLikes(me.getLikes());
 				dbProvider.insertFollowers(me.getFollowers());

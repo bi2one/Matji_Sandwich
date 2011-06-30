@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
@@ -34,7 +35,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 
 	protected final static int REQUEST_NEXT = 0;
 	protected final static int REQUEST_RELOAD = 1;
-
+	GestureDetector d;
 	public ChatView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.adapter = new ChatAdapter(context);
@@ -107,6 +108,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 
 	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		setScrollable(true);
 		if (data.size() == 0 || data.size() < limit){
 			scrollListener.requestSetOff();
 		}else{
@@ -122,7 +124,6 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 			adapter.notifyDataSetChanged();
 			switch (tag) {
 			case REQUEST_NEXT:
-				setScrollable(true);
 				setSelection(data.size()+1);
 				break;
 			case REQUEST_RELOAD:
@@ -206,5 +207,9 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		return (scrollable) ? super.onTouchEvent(ev) : scrollable;
+	}
+	
+	public HttpRequestManager getManager() {
+		return manager;
 	}
 }

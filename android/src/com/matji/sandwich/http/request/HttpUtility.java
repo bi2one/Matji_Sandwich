@@ -27,7 +27,7 @@ import android.os.Message;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import com.matji.sandwich.FileUploadProgressListener;
+import com.matji.sandwich.listener.FileUploadProgressListener;
 
 /**
  * 

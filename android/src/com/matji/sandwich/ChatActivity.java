@@ -43,11 +43,12 @@ public class ChatActivity extends BaseActivity implements Requestable {
 		listView.setActivity(this);
 		listView.requestReload();
 	}
-
+	
 	@Override
 	public void finish() {
 		super.finishWithMatjiData();
 	}
+	
 	@Override
 	protected String titleBarText() {
 		return "ChatActivity";
@@ -61,7 +62,9 @@ public class ChatActivity extends BaseActivity implements Requestable {
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
-		listView.requestReload();
+		if (!listView.getManager().isRunning()) {
+			listView.requestReload();
+		}
 	}
 
 	public void onSendButtonClicked(View view) {
@@ -94,10 +97,11 @@ public class ChatActivity extends BaseActivity implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
 		case MESSAGE_NEW:
-			Message recentMessage = (Message) data.get(0); 
-			message.setMessage(recentMessage.getMessage());
-			message.setAgo(recentMessage.getAgo());
-			if (data != null) listView.addMessage(recentMessage);
+			//TODO
+			Message recentMessage = (Message) data.get(0);
+//			message.setMessage(recentMessage.getMessage());
+//			message.setAgo(recentMessage.getAgo());
+			listView.addMessage(recentMessage);
 			break;
 		}
 	}

@@ -47,6 +47,7 @@
 			android:layout_width="fill_parent"
 			android:layout_height="30dp"
 			android:textColor="#000"
+			android:singleLine="true"
 			android:layout_alignParentTop="true" />
 		<TextView
 			android:id="@+id/store_adapter_address"

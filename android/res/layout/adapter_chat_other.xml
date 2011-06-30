@@ -9,7 +9,8 @@
 		android:id="@+id/chat_adapter_other_thumnail"
 		android:layout_width="30dp"
 		android:layout_height="30dp"
-		android:layout_margin="3dp" />
+		android:layout_margin="3dp"
+		android:layout_gravity="bottom" />
 	<TextView
 		style="@style/DefaultWrap"
 		android:background="@drawable/msg_bubble_other"

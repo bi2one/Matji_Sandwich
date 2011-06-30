@@ -9,23 +9,24 @@ import android.widget.Button;
 
 public class MessageThreadActivity extends BaseActivity {
 	private MessageThreadListView listView;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_message_thread);
 
 		listView = (MessageThreadListView) findViewById(R.id.message_thread_list);
+
 		listView.setActivity(this);
 		listView.requestReload();
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		listView.dataRefresh();
+		listView.initItemVisible();
 	}
-	
+
 	@Override
 	protected String titleBarText() {
 		return "MessageThreadListActivity";
@@ -37,6 +38,6 @@ public class MessageThreadActivity extends BaseActivity {
 	}
 
 	@Override
-	protected void onTitleBarItemClicked(View view) {
-	}
+	protected void onTitleBarItemClicked(View view) {}
+
 }

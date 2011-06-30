@@ -54,6 +54,4 @@ public class LoginActivity extends BaseActivity implements Loginable {
 		// TODO Auto-generated method stub
 		
 	}
-
-
 }

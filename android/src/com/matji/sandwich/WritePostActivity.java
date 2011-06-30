@@ -16,6 +16,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.listener.FileUploadProgressListener;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.session.Session;

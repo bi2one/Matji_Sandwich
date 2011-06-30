@@ -1,9 +1,9 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
+import com.matji.sandwich.listener.FileUploadProgressListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.FileUploadProgressListener;
 import com.matji.sandwich.exception.HttpConnectMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -22,7 +22,7 @@ public abstract class HttpRequest {
     private int tag;
     private FileUploadProgressListener progressListener;
     protected Context context = null;
-    protected String serverDomain = "http://api.matji.com/";
+    protected String serverDomain = "http://api.matji.com:3000/";
     
 	protected Hashtable<String, Object> postHashtable;
 	protected Hashtable<String, String> getHashtable;	

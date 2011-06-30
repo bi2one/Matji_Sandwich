@@ -221,36 +221,40 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 	public void onLikeButtonClicked(View view) {
 		if (loginRequired()) {
-			likeButton.setClickable(false);
-			if (dbProvider.isExistLike(store.getId(), "Store")){
-				dbProvider.deleteLike(store.getId(), "Store");
-				// api request
-				unlikeRequest();
-			}else {
-				Like like = new Like();
-				like.setForeignKey(store.getId());
-				like.setObject("Store");
-				dbProvider.insertLike(like);
-				// api request
-				likeRequest();
+			if (!manager.isRunning()) {
+				likeButton.setClickable(false);
+				if (dbProvider.isExistLike(store.getId(), "Store")){
+					dbProvider.deleteLike(store.getId(), "Store");
+					// api request
+					unlikeRequest();
+				}else {
+					Like like = new Like();
+					like.setForeignKey(store.getId());
+					like.setObject("Store");
+					dbProvider.insertLike(like);
+					// api request
+					likeRequest();
+				}
 			}
 		}
 	}
 
 	public void onScrapButtonClicked(View view) {
 		if (loginRequired()) {
-			scrapButton.setClickable(false);
-			if (dbProvider.isExistBookmark(store.getId(), "Store")){
-				dbProvider.deleteBookmark(store.getId(), "Store");
-				// api request
-				unbookmarkReuqest();
-			}else {
-				Bookmark bookmark = new Bookmark();
-				bookmark.setForeignKey(store.getId());
-				bookmark.setObject("Store");
-				dbProvider.insertBookmark(bookmark);
-				// api request
-				bookmarkRequest();
+			if (!manager.isRunning()) {
+				scrapButton.setClickable(false);
+				if (dbProvider.isExistBookmark(store.getId(), "Store")){
+					dbProvider.deleteBookmark(store.getId(), "Store");
+					// api request
+					unbookmarkReuqest();
+				}else {
+					Bookmark bookmark = new Bookmark();
+					bookmark.setForeignKey(store.getId());
+					bookmark.setObject("Store");
+					dbProvider.insertBookmark(bookmark);
+					// api request
+					bookmarkRequest();
+				}
 			}
 		}
 	}
@@ -269,9 +273,11 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onWebButtonClicked(View view) {
-		if (!store.getWebsite().equals("")) {
-			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(store.getWebsite()));
-			startActivity(intent);
+		if (store.getWebsite() != null) {
+			if (!store.getWebsite().equals("")) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(store.getWebsite()));
+				startActivity(intent);
+			}
 		}
 	}
 
