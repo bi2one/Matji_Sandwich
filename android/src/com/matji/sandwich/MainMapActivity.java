@@ -64,7 +64,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
     protected void onResume() {
 	super.onResume();
-	mMapView.startMapCenterThread();
+	// mMapView.startMapCenterThread();
     }
 
     protected void onPause() {
@@ -110,6 +110,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     private void drawOverlays(){
+	mMapView.getOverlays().clear();
 	storeItemizedOverlay.getOverlayItems().clear();
 
 	for (MatjiData storeData : stores){
