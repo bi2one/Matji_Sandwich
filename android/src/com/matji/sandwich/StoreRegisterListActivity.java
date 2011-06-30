@@ -31,10 +31,6 @@ public class StoreRegisterListActivity extends BaseActivity {
     	startActivityForResult(getPositionIntent, GET_POSITION_TAG);
     }
 
-    protected void onResume() {
-    	super.onResume();
-    }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	super.onActivityResult(requestCode, resultCode, data);
 
