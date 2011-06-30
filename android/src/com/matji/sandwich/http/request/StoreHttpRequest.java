@@ -55,7 +55,8 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
     }
     
-    public void actionNew(String name, String address, int lat, int lng){
+    public void actionNew(String name, String address, double lat, double lng,
+			  String add_address, String tel, String website, String cover) {
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	parser = new StoreParser(context);
@@ -65,6 +66,10 @@ public class StoreHttpRequest extends HttpRequest {
     	postHashtable.put("address", address);
     	postHashtable.put("lat", lat);
     	postHashtable.put("lng", lng);
+	postHashtable.put("add_address", add_address);
+	postHashtable.put("tel", tel);
+	postHashtable.put("website", website);
+	postHashtable.put("cover", cover);
     }
     
     public void actionModify(String name, String address, int lat, int lng, int store_id) {
@@ -157,12 +162,12 @@ public class StoreHttpRequest extends HttpRequest {
 			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
 					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
-	
+
     	String resultBody = response.getHttpResponseBodyAsString();
     	String resultCode = response.getHttpStatusCode() + "";
 
     	Log.d("Matji", "StoreHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "StoreHttpRequest resultCode: " + resultCode);
+	Log.d("Matji", "StoreHttpRequest resultCode: " + resultCode);
 
     	return parser.parseToMatjiDataList(resultBody);
     }

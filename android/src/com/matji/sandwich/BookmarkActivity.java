@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.matji.sandwich.base.BaseActivity;
-
 public class BookmarkActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

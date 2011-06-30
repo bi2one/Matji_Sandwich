@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.content.Intent;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.SearchBar;
 import com.matji.sandwich.widget.SwipeView;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.PostNearListView;
@@ -21,12 +23,10 @@ import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 
 public class PostSliderActivity extends BaseActivity implements OnScrollListener {
-        public static final int INDEX_NEAR_POST = 2;
-	public static final int LOGIN_ACTIVITY = 1;
-	public static final int WRITE_POST_ACTIVITY = 2;
-    
-        private static final int mDefaultPage = 1;
-    
+	public static final int INDEX_NEAR_POST = 2;
+
+	private static final int mDefaultPage = 1;
+
 	private SwipeView swipeView;
 	private PostSearchView view1;
 	private PostListView view2;
@@ -38,25 +38,28 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	private PagerControl control;
 	private Session session;
 	private boolean privateMode;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_slider);
-		
+
 		session = Session.getInstance(this);
 		mContext = getApplicationContext();
 		mContentViews = new ArrayList<View>();
 		privateMode = false;
-			
+
 		control = (PagerControl) findViewById(R.id.PagerControl);
 		control.setContentViews(mContentViews);
-		
+
 		swipeView = (SwipeView) findViewById(R.id.SwipeView);
 		view1 = (PostSearchView) findViewById(R.id.ListView1);
 		view2 = (PostListView) findViewById(R.id.ListView2);
 		view3 = (PostNearListView) findViewById(R.id.ListView3);
+
+		LinearLayout searchWrap = (LinearLayout) findViewById(R.id.SearchWrap);
+		searchWrap.addView(new SearchBar(this, view1), 0);
 		
 		view1.setTag(R.string.title, getResources().getText(R.string.search_post).toString());
 		view2.setTag(R.string.title, getResources().getText(R.string.all_post).toString());
@@ -65,19 +68,19 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		mContentViews.add(view1);
 		mContentViews.add(view2);
 		mContentViews.add(view3);
-		
+
 		view1.setActivity(this);
 		view2.setActivity(this);
 		view3.setActivity(this);
-		
+
 		swipeView.addOnScrollListener(this);
 	}
-	
+
 	public void onResume() {
 		super.onResume();
 		mCurrentPage = session.getPreferenceProvider().getInt(Session.POST_SLIDER_INDEX, mDefaultPage);
-		session.getPreferenceProvider().setInt(Session.POST_SLIDER_INDEX, mDefaultPage);
-		
+		//		session.getPreferenceProvider().setInt(Session.POST_SLIDER_INDEX, mDefaultPage);
+
 		if(session.getToken() == null && privateMode == true){
 			// remove private lists
 			removePrivateStoreList();
@@ -89,6 +92,11 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		} else {
 			initPages();
 		}
+
+		view1.dataRefresh();
+		view2.dataRefresh();
+		view3.dataRefresh();
+		if (view4 != null) view4.dataRefresh();
 	}
 
 	private void initPages(){		
@@ -98,18 +106,19 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		swipeView.setCurrentPage(mCurrentPage);
 		((RequestableMListView)mContentViews.get(mCurrentPage)).requestConditionally();
 	}
-	
+
 	private void addPrivateStoreList() {
 		if (view4 == null) {
 			view4 = new MyPostListView(this, null);
 			Session session = Session.getInstance(mContext);
+			view4.setScrollContainer(false);
 			view4.setUserId(session.getCurrentUser().getId());
 			view4.setTag(R.string.title, getResources().getString(R.string.my_post).toString());
 			view4.setActivity(this);
 		}
 		swipeView.addView(view4);
 		mContentViews.add(view4);
-		
+
 		initPages();
 	}
 
@@ -128,6 +137,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 
 			try {
 				mCurrentPage = currentPage;
+				session.getPreferenceProvider().setInt(Session.POST_SLIDER_INDEX, mCurrentPage);
 				control.setCurrentPage(currentPage);
 				View view = mContentViews.get(currentPage);
 
@@ -141,43 +151,29 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		}
 	}
 
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		super.onCreateOptionsMenu(menu);
-//		MenuInflater inflater = getMenuInflater();
-//		inflater.inflate(R.menu.menu, menu);
-//		return true;
-//	}
+	//	public boolean onCreateOptionsMenu(Menu menu) {
+	//		super.onCreateOptionsMenu(menu);
+	//		MenuInflater inflater = getMenuInflater();
+	//		inflater.inflate(R.menu.menu, menu);
+	//		return true;
+	//	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-		case LOGIN_ACTIVITY:
+		case WRITE_POST_ACTIVITY:
 			if (resultCode == RESULT_OK) {
-				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
+				((RequestableMListView)mContentViews.get(mCurrentPage)).requestReload();
 			}
 			break;
-		case WRITE_POST_ACTIVITY:
+		
+		case POST_MAIN_ACTIVITY:
 			if (resultCode == RESULT_OK) {
 				((RequestableMListView)mContentViews.get(mCurrentPage)).requestReload();
 			}
 			break;
 		}
 	}
-
-
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		Session session = Session.getInstance(this);
-//		switch (item.getItemId()) {
-//		case R.id.posting:
-//			if (session.getToken() == null) {
-//				startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
-//			} else {
-//				startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
-//			}
-//			return true;
-//		}
-//		return false;
-//	}
 
 	@Override
 	protected String titleBarText() {
@@ -194,11 +190,8 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	@Override
 	protected void onTitleBarItemClicked(View view) {
 		// TODO Auto-generated method stub
-		if (!session.isLogin()) {
-			startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
-		} else {
+		if (loginRequired()) {
 			startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
 		}
-		
 	}
 }

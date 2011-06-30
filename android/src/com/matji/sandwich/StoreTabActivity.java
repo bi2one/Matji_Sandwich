@@ -2,14 +2,12 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.http.util.ModelType;
+import com.matji.sandwich.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TabHost;
 
 public class StoreTabActivity extends BaseTabActivity {
-	private TabHost tabHost;
 	private Intent mainIntent;
 	private Intent postIntent;
 	private Intent menuIntent;
@@ -25,10 +23,7 @@ public class StoreTabActivity extends BaseTabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_tab);
-		tabHost = getTabHost();
 		store = (Store) (SharedMatjiData.getInstance().top());
 
 		mainIntent = new Intent(this, StoreMainActivity.class);
@@ -40,7 +35,7 @@ public class StoreTabActivity extends BaseTabActivity {
 		imageIntent.putExtra("id", store.getId());
 		imageIntent.putExtra("type", ModelType.STORE);
 		moreIntent = new Intent(this, StoreMoreActivity.class);
-		
+
 		tabHost.addTab(tabHost.newTabSpec("main")
 				.setIndicator("메인")
 				.setContent(mainIntent));
@@ -57,25 +52,8 @@ public class StoreTabActivity extends BaseTabActivity {
 				.setIndicator("기타")
 				.setContent(moreIntent));
 	}
-	
+
 	public void finish() {
 		super.finishWithMatjiData();
 	}
-
-//	@Override
-//	protected String usedTitleBar() {
-//		return "StoreTabActivity";
-//	}
-//	
-//	@Override
-//	protected boolean setTitleBarButton(Button button) {
-//		button.setText("Info");
-//		return true;
-//	}
-//
-//	@Override
-//	protected void onTitleBarItemClicked(View view) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 }

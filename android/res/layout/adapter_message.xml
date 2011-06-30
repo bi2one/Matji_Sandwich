@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWidthFill"
+	android:background="@color/WHITE">
+	<LinearLayout
+		android:id="@+id/message_adapter_delete"
+		android:layout_width="fill_parent"
+		android:layout_height="70dp"
+		android:gravity="right|center_vertical"
+		android:padding="7dp"
+		android:visibility="gone"
+		android:background="@drawable/memo_bg_line_h10">
+		<Button
+			style="@style/DefaultWrap"
+			android:background="@drawable/btn_delete"
+			android:text="Delete"
+			android:textColor="@color/WHITE"
+			android:id="@+id/message_adapter_delete_btn" />
+	</LinearLayout>
+	<RelativeLayout
+		android:id="@+id/message_adapter_thread"
+		style="@style/DefaultFill"
+		android:layout_width="fill_parent"
+		android:layout_height="70dp"
+		android:background="@color/WHITE">
+		<LinearLayout
+			android:id="@+id/image"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_margin="3dp"
+			android:padding="3dp"
+			android:layout_alignParentLeft="true">
+			<ImageView
+				android:background="@drawable/img_matji_default"
+				android:id="@+id/message_adapter_thumnail"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:scaleType="centerCrop" />
+		</LinearLayout>
+		<LinearLayout
+			android:id="@+id/name"
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingTop="5dp"
+			android:paddingLeft="5dp"
+			android:layout_toRightOf="@id/image">
+			<TextView
+				android:id="@+id/message_adapter_nick"
+				android:clickable="true"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/GRAY2"
+				android:layout_alignParentTop="true" />
+		</LinearLayout>
+		<TextView
+			android:id="@+id/message_adapter_message"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/image"
+			android:layout_below="@id/name"
+			android:paddingLeft="5dp"
+			android:paddingRight="10dp"
+			android:singleLine="true"
+			android:textColor="@color/BLACK" />
+		<TextView
+			android:id="@+id/message_adapter_created_at"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/image"
+			android:layout_below="@id/message_adapter_message"
+			android:textSize="11dp"
+			android:padding="5dp"
+			android:textColor="@color/GRAY" />
+	</RelativeLayout>
+</FrameLayout>

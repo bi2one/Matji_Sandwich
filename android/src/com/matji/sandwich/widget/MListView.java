@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
 import android.app.Activity;
 
-import com.matji.sandwich.http.util.DisplayUtil;
+import com.matji.sandwich.util.DisplayUtil;
 
 public abstract class MListView extends ListView implements OnItemClickListener {
 	private Activity activity;

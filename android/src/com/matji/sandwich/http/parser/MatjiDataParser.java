@@ -18,7 +18,8 @@ import com.matji.sandwich.http.request.HttpUtility;
 
 import java.util.ArrayList;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public abstract class MatjiDataParser {
 	protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;

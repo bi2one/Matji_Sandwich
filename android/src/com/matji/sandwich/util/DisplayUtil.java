@@ -1,4 +1,4 @@
-package com.matji.sandwich.http.util;
+package com.matji.sandwich.util;
 
 import android.content.Context;
 

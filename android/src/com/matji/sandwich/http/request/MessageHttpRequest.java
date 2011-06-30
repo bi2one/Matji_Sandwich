@@ -21,73 +21,83 @@ public class MessageHttpRequest extends HttpRequest {
     	controller = "messages";
     }
     
-    public void actionNew(String received_user_id, String message){
+    public void actionNew(int received_user_id, String message){
     	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	
     	postHashtable.clear();
-		postHashtable.put("received_user_id",received_user_id);
+		postHashtable.put("received_user_id",received_user_id+"");
 		postHashtable.put("message",message);
     }
 
-    public void actionDelete(String message_id){
+    public void actionDelete(int message_id){
     	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_POST;
-    	action = "new";
+    	action = "delete";
     	
     	postHashtable.clear();
-    	postHashtable.put("message_id", message_id);
+    	postHashtable.put("message_id", message_id+"");
     }
 
-    public void actionShow(String message_id){
+    public void actionShow(int message_id){
     	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "show";
     	
     	getHashtable.clear();
-    	getHashtable.put("message_id", message_id);
+    	getHashtable.put("message_id", message_id+"");
     }
     
-    public void actionTreadList(){
+    public void actionThreadList(int page, int limit){
     	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "thread_list";
     	
     	getHashtable.clear();
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");
     }
     
-    public void actionChat(String thread_id){
+    public void actionChat(int thread_id, int page, int limit){
     	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "chat";
     	
-    	postHashtable.clear();
-    	postHashtable.put("thread_id", thread_id);
+    	getHashtable.clear();
+    	getHashtable.put("thread_id", thread_id+"");
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");
     }
     
-    public void actionList(){
+    public void actionList(int page, int limit){
     	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
 
     	getHashtable.clear();
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");
     }
 
-    public void actionReceivedList(){
+    public void actionReceivedList(int page, int limit){
     	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "received_list";
     	
     	getHashtable.clear();
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");
     }
 
-    public void actionSentList(){
+    public void actionSentList(int page, int limit){
     	parser = new MessageParser(context);
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "sent_list";
     	
     	getHashtable.clear();
+    	getHashtable.put("page", page+"");
+    	getHashtable.put("limit", limit+"");
     }
     
     public ArrayList<MatjiData> request() throws MatjiException {
@@ -99,8 +109,8 @@ public class MessageHttpRequest extends HttpRequest {
 	String resultBody = response.getHttpResponseBodyAsString();
 	String resultCode = response.getHttpStatusCode() + "";
 
-	Log.d("Matji", "MessageresultBody: " + resultBody);
-	Log.d("Matji", "MessageresultCode: " + resultCode);
+	Log.d("Matji", "MessageHttpRequest resultBody: " + resultBody);
+	Log.d("Matji", "MessageHttpRequest resultCode: " + resultCode);
 	
 	return parser.parseToMatjiDataList(resultBody);
     }

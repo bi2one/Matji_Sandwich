@@ -17,12 +17,13 @@ import com.matji.sandwich.http.request.BookmarkHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.ModelType;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.ModelType;
 
 import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -68,7 +69,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		store = (Store) SharedMatjiData.getInstance().top();
 
-		manager = new HttpRequestManager(this, this);
+		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);
 
@@ -100,7 +101,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 		/* Set Owner User */
 		//		User ownerUser = store.getOwnerUser();
-		User ownerUser = store.getRegUser();
+		User ownerUser = null;
 		if (ownerUser != null) {
 			string = getString(R.string.default_string_owner_user) + ": " + regUser.getNick();
 			ownerUserText.setText(string);
@@ -165,7 +166,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			request = new BookmarkHttpRequest(this);
 		}
 		((BookmarkHttpRequest) request).actionBookmark(store.getId());
-		manager.request(this, request, BOOKMARK_REQUEST);
+		manager.request(this, request, BOOKMARK_REQUEST, this);
 		store.setBookmarkCount(store.getBookmarkCount() + 1);
 		User me = session.getCurrentUser();
 		me.setStoreCount(me.getStoreCount() + 1);
@@ -176,7 +177,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			request = new BookmarkHttpRequest(this);
 		}
 		((BookmarkHttpRequest) request).actionUnBookmark(store.getId());
-		manager.request(this, request, UN_BOOKMARK_REQUEST);
+		manager.request(this, request, UN_BOOKMARK_REQUEST, this);
 		store.setBookmarkCount(store.getBookmarkCount() - 1);
 		User me = session.getCurrentUser();
 		me.setStoreCount(me.getStoreCount() - 1);
@@ -187,7 +188,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			request = new LikeHttpRequest(this);
 		}
 		((LikeHttpRequest) request).actionStoreLike(store.getId());
-		manager.request(this, request, LIKE_REQUEST);
+		manager.request(this, request, LIKE_REQUEST, this);
 		store.setLikeCount(store.getLikeCount() + 1);
 	}
 
@@ -197,7 +198,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		}
 
 		((LikeHttpRequest) request).actionStoreUnLike(store.getId());
-		manager.request(this, request, UN_LIKE_REQUEST);
+		manager.request(this, request, UN_LIKE_REQUEST, this);
 		store.setLikeCount(store.getLikeCount() - 1);
 	}
 
@@ -219,55 +220,65 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onLikeButtonClicked(View view) {
-		if (session.isLogin()){
-			likeButton.setClickable(false);
-			if (dbProvider.isExistLike(store.getId(), "Store")){
-				dbProvider.deleteLike(store.getId(), "Store");
-				// api request
-				unlikeRequest();
-			}else {
-				Like like = new Like();
-				like.setForeignKey(store.getId());
-				like.setObject("Store");
-				dbProvider.insertLike(like);
-				// api request
-				likeRequest();
+		if (loginRequired()) {
+			if (!manager.isRunning(this)) {
+				likeButton.setClickable(false);
+				if (dbProvider.isExistLike(store.getId(), "Store")){
+					dbProvider.deleteLike(store.getId(), "Store");
+					// api request
+					unlikeRequest();
+				}else {
+					Like like = new Like();
+					like.setForeignKey(store.getId());
+					like.setObject("Store");
+					dbProvider.insertLike(like);
+					// api request
+					likeRequest();
+				}
 			}
-		} else {
-			startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
 
 	public void onScrapButtonClicked(View view) {
-		if (session.isLogin()){
-			scrapButton.setClickable(false);
-			if (dbProvider.isExistBookmark(store.getId(), "Store")){
-				dbProvider.deleteBookmark(store.getId(), "Store");
-				// api request
-				unbookmarkReuqest();
-			}else {
-				Bookmark bookmark = new Bookmark();
-				bookmark.setForeignKey(store.getId());
-				bookmark.setObject("Store");
-				dbProvider.insertBookmark(bookmark);
-				// api request
-				bookmarkRequest();
+		if (loginRequired()) {
+			if (!manager.isRunning(this)) {
+				scrapButton.setClickable(false);
+				if (dbProvider.isExistBookmark(store.getId(), "Store")){
+					dbProvider.deleteBookmark(store.getId(), "Store");
+					// api request
+					unbookmarkReuqest();
+				}else {
+					Bookmark bookmark = new Bookmark();
+					bookmark.setForeignKey(store.getId());
+					bookmark.setObject("Store");
+					dbProvider.insertBookmark(bookmark);
+					// api request
+					bookmarkRequest();
+				}
 			}
-		} else {
-			startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
 
 	public void onMapButtonClicked(View view) {
-
 	}
 
 	public void onPhoneButtonClicked(View view) {
-
+		if (store.getTel() != null) {
+			try {
+				startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + store.getTel())));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void onWebButtonClicked(View view) {
-
+		if (store.getWebsite() != null) {
+			if (!store.getWebsite().equals("")) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(store.getWebsite()));
+				startActivity(intent);
+			}
+		}
 	}
 
 	public void onInfoViewButtonClicked(View view) {

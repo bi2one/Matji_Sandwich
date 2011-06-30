@@ -59,6 +59,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
 		
 	}
 
+
 	public void twitterLoginClicked(View v){
 		MeHttpRequest request = new MeHttpRequest(this);
 		request.authorizeViaExternalService(this, Service.TWITTER);

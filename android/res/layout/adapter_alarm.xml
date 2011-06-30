@@ -11,6 +11,7 @@
 		android:scaleType="centerCrop"
 		android:layout_marginRight="7dp"
 		android:layout_marginBottom="7dp"
+		android:background="@drawable/img_matji_default"
 		android:id="@+id/alarm_adapter_thumnail" />
 	<TextView
 		style="@style/DefaultWrap"

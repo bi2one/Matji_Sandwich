@@ -8,10 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class SettingActivity extends BaseActivity {
 	private Button signin;
@@ -102,9 +100,10 @@ public class SettingActivity extends BaseActivity {
 	}
 	
 	public void onMessagesButtonClicked(View view){
-		Intent messageIntent = new Intent(this, UserTabActivity.class);
-		user = session.getCurrentUser();
-		startActivityWithMatjiData(messageIntent, user);
+		Intent messageIntent = new Intent(this, MessageThreadActivity.class);
+		startActivity(messageIntent);
+//		user = session.getCurrentUser();
+//		startActivityWithMatjiData(messageIntent, user);
 	}
 	
 	public void onNoticesButtonClicked(View view){

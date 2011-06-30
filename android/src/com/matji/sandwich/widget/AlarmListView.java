@@ -40,6 +40,11 @@ public class AlarmListView extends RequestableMListView implements View.OnClickL
 			Intent intent = new Intent(getActivity(), PostMainActivity.class);
 			intent.putExtra("post_id", alarm.getForeignKey());
 			getActivity().startActivity(intent);
+		} else if (type.equals("Following")) {
+			if (alarm.getSentUser() != null) {
+				Intent intent = new Intent(getActivity(), UserTabActivity.class);
+				((BaseActivity) getActivity()).startActivityWithMatjiData(intent, alarm.getSentUser());
+			}
 		}
 	}
 

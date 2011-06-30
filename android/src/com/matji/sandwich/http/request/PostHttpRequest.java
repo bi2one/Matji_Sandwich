@@ -44,6 +44,18 @@ public class PostHttpRequest extends HttpRequest {
     	postHashtable.put("lng", lng + "");
     }
     
+    public void actionNew(String post, String tags, String from_where, int store_id) {
+    	httpMethod = HttpMethod.HTTP_POST;
+    	action = "new";
+    	parser = new PostParser(context);
+    	
+    	postHashtable.clear();
+    	postHashtable.put("post", post);
+    	postHashtable.put("tags", tags);
+    	postHashtable.put("from_where", from_where);
+    	postHashtable.put("store_id", store_id + "");
+    }
+    
     public void actionDelete(int post_id){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "delete";
@@ -98,7 +110,7 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("include", "user,store,tags");
     }
     
-    public void actionNearbyList(double lat_ne, double lat_sw, double lng_sw, double lng_ne, int page, int limit){
+    public void actionNearbyList(double lat_ne, double lat_sw, double lng_sw, double lng_ne, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "nearby_list";
     	parser = new PostParser(context);

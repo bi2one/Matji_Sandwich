@@ -7,9 +7,10 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.util.Log;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
-//import com.google.android.maps.Overlay;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.CoordinateRegion;
 import com.matji.sandwich.data.MatjiData;
@@ -33,7 +34,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
     private static final int MAX_STORE_COUNT = 60;
     private static final int NEARBY_STORE = 1;
-    
+
     private Context mContext;
     private GpsManager mGpsManager;
     private MatjiMapView mMapView;
@@ -45,7 +46,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private HttpRequestManager mRequestManager;
     private Session session;
 
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main_map);
 	mMapView = (MatjiMapView)findViewById(R.id.map_view);
@@ -53,9 +54,9 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mMapView.setMapCenterListener(this);
 	mContext = getApplicationContext();
 	mGpsManager = new GpsManager(mContext, this);
-	mRequestManager = new HttpRequestManager(mContext, this);
+	mRequestManager = HttpRequestManager.getInstance(mContext);
 	storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
-	session = Session.getInstance(this);
+	session = Session.getInstance(mContext);
 
 	mGpsManager.start();
 	mMapView.startMapCenterThread();
@@ -63,7 +64,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
     protected void onResume() {
 	super.onResume();
-	mMapView.startMapCenterThread();
+	// mMapView.startMapCenterThread();
     }
 
     protected void onPause() {
@@ -81,31 +82,40 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onLocationChanged(Location location) {
-		if (prevLocation != null) {
-		    if (prevLocation.getAccuracy() >= location.getAccuracy()) {
-			mGpsManager.stop();
-		    }
-		}
-	    
+	if (prevLocation != null) {
+	    if (prevLocation.getAccuracy() >= location.getAccuracy()) {
+		mGpsManager.stop();
+	    }
+	}
+
 	prevLocation = location;
 	setCenter(prevLocation);
     }
 
     public void onLocationExceptionDelivered(MatjiException e) {
-    	e.performExceptionHandling(mContext);
+	e.performExceptionHandling(mContext);
     }
 
     public void onMapCenterChanged(GeoPoint point) {
-    	Runnable runnable = new MapRunnable(this);
+	GeoPoint neBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
+	GeoPoint swBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_SW);
+
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_NE, neBound.getLatitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, swBound.getLatitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, neBound.getLongitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_SW, swBound.getLongitudeE6());
+
+	Runnable runnable = new MapRunnable(this);
 	runOnUiThread(runnable);
     }
 
     private void drawOverlays(){
+	mMapView.getOverlays().clear();
 	storeItemizedOverlay.getOverlayItems().clear();
-		
+
 	for (MatjiData storeData : stores){
 	    Store store = (Store)storeData;
-		    
+
 	    storeItemizedOverlay.addOverlay(store);
 	}
 	mMapView.postInvalidate();
@@ -119,22 +129,22 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    break;		
 	}
     }
-	
+
     public void requestExceptionCallBack(int tag, MatjiException e) {
 	e.performExceptionHandling(mContext);
     }
 
     protected boolean isRouteDisplayed() {
-    	return true;
+	return true;
     }
-    
+
     public class MapRunnable implements Runnable{
-    	private Activity mActivity;
-    	
+	private Activity mActivity;
+
 	public MapRunnable(Activity activity) {
 	    this.mActivity = activity;
 	}
-		
+
 	public void run() {
 	    loadStoresOnMap();
 	}
@@ -144,33 +154,30 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    CoordinateRegion cr = new CoordinateRegion(mMapView.getMapCenter(), mMapView.getLatitudeSpan(), mMapView.getLongitudeSpan());
 	    GeoPoint swPoint = cr.getSWGeoPoint();
 	    GeoPoint nePoint = cr.getNEGeoPoint();
-		    
+
 	    double lat_sw = (double)(swPoint.getLatitudeE6()) / (double)1E6;
 	    double lng_sw = (double)(swPoint.getLongitudeE6()) / (double)1E6;
 	    double lat_ne = (double)(nePoint.getLatitudeE6()) / (double)1E6;
 	    double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
-		    
+
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
-	    mRequestManager.request(mActivity, request, NEARBY_STORE);
+	    mRequestManager.request(mActivity, request, NEARBY_STORE, (Requestable)mActivity);
 	}
     }
 
 
     @Override
 	protected String titleBarText() {
-	// TODO Auto-generated method stub
 	return "MainMapActivity";
     }
 
     @Override
 	protected boolean setTitleBarButton(Button button) {
-	// TODO Auto-generated method stub
 	return false;
     }
 
     @Override
 	protected void onTitleBarItemClicked(View view) {
-	// TODO Auto-generated method stub
     }
 
     public void onNearStoreClick(View v) {
@@ -194,46 +201,9 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onStoreRegisterClick(View v) {
-	// Intent storeRegisterIntent = new Intent(mContext, StoreRegisterActivity.class);
-	// startActivity(storeRegisterIntent);
+	if (loginRequired()) {			
+	    Intent storeRegisterIntent = new Intent(mContext, StoreRegisterListActivity.class);
+	    startActivity(storeRegisterIntent);
+	}
     }
-	
-    // public boolean dispatchTouchEvent(MotionEvent event) {
-    // 	boolean result = super.dispatchTouchEvent(event);
-    // 	if (event.getAction() == MotionEvent.ACTION_UP) {
-    // 	    // Log.d("======", mMapView.getMapCenter().toString());
-    // 	    storeItemizedOverlay.addOverlay(mMapView.getMapCenter());
-    // 	}
-    // 	return result;
-    // }
-
-    // 	e = (EditText) findViewById(R.id.main_map_search_bar);
-    // 	Button b = (Button) findViewById(R.id.main_map_gps_button);
-    // 	b.requestFocus();
-    // 	//		e.setOnFocusChangeListener(new MyFocusChangeListener());
-    // }
-
-    // private void setMarker(Location loc){
-
-    // }
-
-    // private void setSmallmarker(Location loc){
-
-    // }
-
-    // class MyFocusChangeListener implements OnFocusChangeListener {
-    // 	public void onFocusChange(View v, boolean hasFocus) {
-    // 	    // TODO Auto-generated method stub
-    // 	    if(hasFocus) {
-    // 		Log.d("Matji", hasFocus + "");
-    // 		((EditText) v).setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-    // 	    }
-    // 	    else {
-    // 		Log.d("Matji", hasFocus + "");
-    // 		((EditText) v).setLayoutParams(new RelativeLayout.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT));
-    // 	    }
-
-    // 	}
-		
-    // }
 }

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
@@ -26,6 +28,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	private Post post;
 	private User user;
 	private Store store;
+	private int intent_post_id;
 
 	private Session session;
 	private DBProvider dbProvider;
@@ -38,28 +41,24 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 	private static final int POST_ID_IS_NULL = -1;
 	private static final int POST_REQUEST = 0;
-	private static final int LOGIN_ACTIVITY = 1;
-	private static final int WRITE_COMMENT_ACTIVITY = 2;
 	private static final int LIKE_REQUEST = 3;
 	private static final int UN_LIKE_REQUEST = 4;
 	private static final int POST_DELETE_REQUEST = 5;
-	private static final int COMMENT_DELETE_REQUEST = 6;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_main);
 
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);
-		manager = new HttpRequestManager(this, this);
+		manager = HttpRequestManager.getInstance(this);
 
-		int post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
-		if (post_id == POST_ID_IS_NULL) {
+		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
+		if (intent_post_id == POST_ID_IS_NULL) {
 			initInfo();
 		} else {
-			postRequest(post_id);
+			postRequest(intent_post_id);
 		}
 	}
 
@@ -74,6 +73,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);
+		commentListView.requestReload();
 	}
 
 	private void setInfo() {
@@ -91,13 +91,13 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	private void commentListViewReload() {
 		commentListView.getHeaderViewContainer().removeView(header.getRootView());
 		commentListView.addHeaderView(header);
-		commentListView.requestReload();		
+		commentListView.initItemVisible();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!manager.isRunning()) {
+		if (intent_post_id == POST_ID_IS_NULL) {
 			setInfo();
 			commentListViewReload();
 		}
@@ -107,14 +107,16 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-		case LOGIN_ACTIVITY:
+		case WRITE_COMMENT_ACTIVITY:
 			if (resultCode == RESULT_OK) {
-				Intent intent = new Intent(getApplicationContext(), WriteCommentActivity.class);
-				intent.putExtra("post_id", post.getId());
-				startActivity(intent);
-			}
+				Comment comment = (Comment) data.getParcelableExtra("comment");
+				if (comment != null) {
+					comment.setUser(session.getCurrentUser());
+					commentListView.addComment(comment);
+				}
 
-			break;
+				post.setCommentCount(post.getCommentCount() + 1);
+			}
 		}
 	}
 
@@ -137,41 +139,43 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	protected void onTitleBarItemClicked(View view) {
 	}
 
-	
+
 	public void onDeleteButtonClicked(View v) {
-		PostHttpRequest postRequest = new PostHttpRequest(this);
-		postRequest.actionDelete(post.getId());
-		manager.request(this, postRequest, POST_DELETE_REQUEST);
+		if (!manager.isRunning(this)) {
+			PostHttpRequest postRequest = new PostHttpRequest(this);
+			postRequest.actionDelete(post.getId());
+			manager.request(this, postRequest, POST_DELETE_REQUEST, this);
+		}
 	}
-	
-	
+
+
 	public void onCommentButtonClicked(View view) {
-		if (!session.isLogin()) {
-			startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), LOGIN_ACTIVITY);
-		} else {
-			Intent intent = new Intent(getApplicationContext(), WriteCommentActivity.class);
-			intent.putExtra("post_id", post.getId());
-			startActivity(intent);
+		if (loginRequired()) {
+			if (!manager.isRunning(this)) {
+				Intent intent = new Intent(getApplicationContext(), WriteCommentActivity.class);
+				intent.putExtra("post_id", post.getId());
+				startActivityForResult(intent, WRITE_COMMENT_ACTIVITY);
+			}
 		}
 	}
 
 	public void onLikeButtonClicked(View view) {
-		if (session.isLogin()){
-			likeButton.setClickable(false);
-			if (dbProvider.isExistLike(post.getId(), "Post")){
-				dbProvider.deleteLike(post.getId(), "Post");
-				// api request
-				unlikeRequest();
-			}else {
-				Like like = new Like();
-				like.setForeignKey(post.getId());
-				like.setObject("Post");
-				dbProvider.insertLike(like);
-				// api request
-				likeRequest();
+		if (loginRequired()) {
+			if (!manager.isRunning(this)) {
+				likeButton.setClickable(false);
+				if (dbProvider.isExistLike(post.getId(), "Post")){
+					dbProvider.deleteLike(post.getId(), "Post");
+					// api request
+					unlikeRequest();
+				}else {
+					Like like = new Like();
+					like.setForeignKey(post.getId());
+					like.setObject("Post");
+					dbProvider.insertLike(like);
+					// api request
+					likeRequest();
+				}
 			}
-		} else {
-			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 		}
 	}
 
@@ -180,7 +184,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			request = new PostHttpRequest(this);
 		}
 		((PostHttpRequest) request).actionShow(post_id);
-		manager.request(this, request, POST_REQUEST);
+		manager.request(this, request, POST_REQUEST, this);
 	}
 
 	private void likeRequest() {
@@ -188,7 +192,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			request = new LikeHttpRequest(this);
 		}
 		((LikeHttpRequest) request).actionPostLike(post.getId());
-		manager.request(this, request, LIKE_REQUEST);
+		manager.request(this, request, LIKE_REQUEST, this);
 		post.setLikeCount(post.getLikeCount() + 1);
 	}
 
@@ -198,7 +202,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		}
 
 		((LikeHttpRequest) request).actionPostUnLike(post.getId());
-		manager.request(this, request, UN_LIKE_REQUEST);
+		manager.request(this, request, UN_LIKE_REQUEST, this);
 		post.setLikeCount(post.getLikeCount() - 1);
 	}
 
@@ -214,22 +218,20 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			if (data != null && data.size() > 0) {
 				Post post = (Post) data.get(0);
 				SharedMatjiData.getInstance().push(post);
+				intent_post_id = POST_ID_IS_NULL;
 			}
-
 			initInfo();
 			onResume();
 			break;
 		case POST_DELETE_REQUEST:
-			setResult(RESULT_FIRST_USER);
+//			setResult(RESULT_FIRST_USER);
+			setResult(RESULT_OK);
 			finish();
-			break;
-		case COMMENT_DELETE_REQUEST:
 			break;
 		}
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
-		// TODO Auto-generated method stub
 		e.showToastMsg(getApplicationContext());
 	}
 }

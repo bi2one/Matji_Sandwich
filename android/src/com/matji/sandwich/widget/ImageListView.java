@@ -15,7 +15,7 @@ import com.matji.sandwich.data.MatjiData;
 
 import com.matji.sandwich.http.request.AttachFileIdsHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.util.ModelType;
+import com.matji.sandwich.util.ModelType;
 
 public class ImageListView extends RequestableMListView implements View.OnClickListener {
 	private Context context;

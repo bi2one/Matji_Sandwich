@@ -15,11 +15,10 @@ import java.util.ArrayList;
 public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
 PullToRefreshListView.OnRefreshListener {
 	private ListRequestScrollListener scrollListener;
-//	private LayoutInflater inflater;
 	private ArrayList<MatjiData> adapterData;
-	private HttpRequestManager manager;
-//	private View header;
 	private MBaseAdapter adapter;
+	private HttpRequestManager manager;
+	private boolean canRepeat = false;
 	private int page = 1;
 	private int limit = 10;
 
@@ -28,27 +27,22 @@ PullToRefreshListView.OnRefreshListener {
 
 	public abstract HttpRequest request();
 
-    public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
-	super(context, attrs);
-	this.adapter = adapter;
-	manager = new HttpRequestManager(context, this);
-	//	inflater = LayoutInflater.from(context);
+	public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
+		super(context, attrs);
+		this.adapter = adapter;
+		manager = HttpRequestManager.getInstance(context);
 
-	// if (container != null)
-	//     addHeaderView(container.getRootView());
+		adapterData = new ArrayList<MatjiData>();
+		adapter.setData(adapterData);
+		setAdapter(adapter);
 
-	
-	adapterData = new ArrayList<MatjiData>();
-	adapter.setData(adapterData);
-	setAdapter(adapter);
+		scrollListener = new ListRequestScrollListener(this, this, manager);
+		setPullDownScrollListener(scrollListener);
 
-	scrollListener = new ListRequestScrollListener(this, this, manager);
-	setPullDownScrollListener(scrollListener);
+		setOnRefreshListener(this);
 
-	setOnRefreshListener(this);
-
-	this.limit = limit;
-    }
+		this.limit = limit;
+	}
 
 	protected void setPage(int page) {
 		this.page = page;
@@ -78,20 +72,25 @@ PullToRefreshListView.OnRefreshListener {
 	public void requestNext() {
 		Log.d("refresh" , "requestNext()");
 		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-		manager.request(getActivity(), request(), REQUEST_NEXT);
+		manager.request(getActivity(), request(), REQUEST_NEXT, this);
 		nextValue();
 	}
 
-	
-	public void requestReload() {
-		Log.d("refresh", "requestReload()");
-		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-		initValue();
-		manager.request(getActivity(), request(), REQUEST_RELOAD);
-		nextValue();
+	public void setCanRepeat(boolean canRepeat) {
+		this.canRepeat = canRepeat;
 	}
 	
-	
+	public void requestReload() {
+		if (!manager.isRunning(getActivity()) || canRepeat) {
+			Log.d("refresh", "requestReload()");
+			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
+			initValue();
+			manager.request(getActivity(), request(), REQUEST_RELOAD, this);
+			nextValue();
+		}
+	}
+
+
 	public void requestConditionally(){
 		if (adapterData == null || adapterData.size() == 0){
 			requestReload();
@@ -110,15 +109,15 @@ PullToRefreshListView.OnRefreshListener {
 	protected MBaseAdapter getMBaseAdapter() {
 		return adapter;
 	}
-	
+
 	protected ArrayList<MatjiData> getAdapterData() {
 		return adapterData;
 	}
 
-//	public void setActivity(Activity activity) {
-//		super.setActivity(activity);
-//		requestNext();
-//	}
+	//	public void setActivity(Activity activity) {
+	//		super.setActivity(activity);
+	//		requestNext();
+	//	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (data.size() == 0 || data.size() < limit){
@@ -126,7 +125,7 @@ PullToRefreshListView.OnRefreshListener {
 		}else{
 			scrollListener.requestSetOn();
 		}
-		
+
 		for (int i = 0; i < data.size(); i++) {
 			adapterData.add(data.get(i));
 		}
@@ -154,7 +153,7 @@ PullToRefreshListView.OnRefreshListener {
 		e.performExceptionHandling(getContext());
 	}
 
-	
+
 	public void onRefresh() {
 		Log.d("refresh", "OnRefresh!!!!");
 		requestReload();
@@ -162,5 +161,9 @@ PullToRefreshListView.OnRefreshListener {
 		//		 protected MatjiData getData(int position) {
 		//		 	return adapterData.get(position);
 		//		 }
+	}
+
+	public void dataRefresh() {
+		adapter.notifyDataSetChanged();
 	}
 }

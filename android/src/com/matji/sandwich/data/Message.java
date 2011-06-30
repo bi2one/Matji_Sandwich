@@ -13,6 +13,7 @@ public class Message extends MatjiData{
 	private User received_user;
 	private String created_at;
 	private String updated_at;
+	private long ago;
 
 	public Message() {}
 	
@@ -44,6 +45,7 @@ public class Message extends MatjiData{
 		dest.writeValue(received_user);
 		dest.writeString(created_at);
 		dest.writeString(updated_at);
+		dest.writeLong(ago);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -56,6 +58,7 @@ public class Message extends MatjiData{
 		received_user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		created_at = in.readString();	
 		updated_at = in.readString();
+		ago = in.readLong();
 	}
 	
 	public void setId(int id) {
@@ -111,5 +114,13 @@ public class Message extends MatjiData{
 	}
 	public int getThreadId() {
 		return thread_id;
+	}
+
+	public void setAgo(long ago) {
+		this.ago = ago;
+	}
+
+	public long getAgo() {
+		return ago;
 	}
 }

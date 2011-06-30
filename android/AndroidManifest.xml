@@ -20,40 +20,58 @@
 		</activity>
 		<activity android:name="ExternalServiceWebViewActivity"></activity>
 		<activity android:name="AlarmActivity"></activity>
+		<activity android:name="ChatActivity"
+				  android:launchMode="singleTask"
+				  android:windowSoftInputMode="stateHidden"></activity>
 		<activity android:name="LoginActivity"></activity>
 		<activity android:name="MainMapActivity"></activity>
 		<activity android:name="NoticeActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
-		<activity android:name="PostMainActivity" android:screenOrientation="portrait"></activity>
+		<activity android:name="PostMainActivity" 
+				  android:screenOrientation="portrait"></activity>
 		<activity android:name="PostSliderActivity"></activity>
 		<activity android:name="SettingActivity"></activity>
 		<activity android:name="SignUpActivity"></activity>
-		<activity android:name="StoreSliderActivity"></activity>
+		<activity android:name="StoreSliderActivity"
+				  android:windowSoftInputMode="adjustPan"></activity>
 		<activity android:name="StoreNearListActivity"></activity>
-		<activity android:name="StoreTabActivity" android:screenOrientation="portrait"></activity>
+		<activity android:name="StoreTabActivity" 
+				  android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreMainActivity"></activity>
-		<activity android:name="StoreDetailInfoTabActivity" android:screenOrientation="portrait"></activity>
+		<activity android:name="StoreDetailInfoTabActivity" 
+			 	  android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreNoteListActivity"></activity>
 		<activity android:name="StoreDefaultInfoActivity"></activity>
 		<activity android:name="StoreMenuActivity"></activity>
 		<activity android:name="StorePostListActivity"></activity>
 		<activity android:name="StoreMoreActivity"></activity>
-		<activity android:name="StoreUrlListActivity" android:screenOrientation="portrait"></activity>
-		<activity android:name="UserTabActivity" android:screenOrientation="portrait"></activity>
+		<activity android:name="StoreUrlListActivity" 
+				  android:screenOrientation="portrait"></activity>
+		<activity android:name="UserTabActivity" 
+				  android:screenOrientation="portrait"></activity>
 		<activity android:name="UserMainActivity"></activity>
-		<activity android:name="StoreBookmarkedListActivity"></activity>
+		<activity android:name="UserStoreListActivity"></activity>
 		<activity android:name="UserPostListActivity"></activity>
-		<activity android:name="FollowingActivity" android:screenOrientation="portrait"></activity>
-		<activity android:name="TagListActivity" android:screenOrientation="portrait"></activity>
+		<activity android:name="FollowingActivity" 
+				  android:screenOrientation="portrait"></activity>
+		<activity android:name="TagListActivity" 
+				  android:screenOrientation="portrait"></activity>
 		<activity android:name="WritePostActivity"
 				  android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize"></activity>
 		<activity android:name="WriteCommentActivity"
                   android:windowSoftInputMode="adjustResize"></activity>
+		<activity android:name="WriteMessageActivity"
+                  android:windowSoftInputMode="adjustResize"></activity>
 		<activity android:name="widget.SlideGalleryActivity"></activity>
 		<activity android:name="GridGalleryActivity"></activity>
 		<activity android:name="ImageListActivity"></activity>
 		<activity android:name="ImageSliderActivity"></activity>
+		<activity android:name="MessageThreadActivity"
+				  android:screenOrientation="portrait"></activity>
+		<activity android:name="GetMapPositionActivity"></activity>
+		<activity android:name="StoreRegisterListActivity"></activity>
+		<activity android:name="StoreRegisterActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

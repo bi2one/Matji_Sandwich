@@ -4,7 +4,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.StoreDetailInfo;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.TimeUtil;
+import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.StoreNoteListView;
 
 import android.content.Context;

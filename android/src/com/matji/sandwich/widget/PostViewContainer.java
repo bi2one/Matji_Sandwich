@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -29,9 +28,9 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.util.DisplayUtil;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.http.util.TimeUtil;
+import com.matji.sandwich.util.DisplayUtil;
+import com.matji.sandwich.util.TimeUtil;
 
 public class PostViewContainer extends ViewContainer implements OnClickListener, Requestable {
 	private MatjiImageDownloader downloader;
@@ -75,7 +74,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 
 	private void initPostData() {
 		downloader = new MatjiImageDownloader();
-		manager = new HttpRequestManager(activity, this);
+		manager = HttpRequestManager.getInstance(activity);
 		request = new AttachFileHttpRequest(activity);
 		
 		dateAgo = (TextView) getRootView().findViewById(R.id.header_post_created_at);
@@ -181,7 +180,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	}
 
 	public void attachFileIdsRequest() {
-		manager.request(activity, attachFileIdsRequestSet(), ATTACH_FILE_IDS_REQUEST);
+	    manager.request(activity, attachFileIdsRequestSet(), ATTACH_FILE_IDS_REQUEST, this);
 	}
 
 	public HttpRequest attachFileIdsRequestSet() {
@@ -190,7 +189,6 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		Log.d("Matji", data.size()+"");
 		switch (tag) {
 		case ATTACH_FILE_IDS_REQUEST:
 			/* Set AttachFile ID */

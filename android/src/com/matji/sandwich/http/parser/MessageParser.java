@@ -18,7 +18,7 @@ public class MessageParser extends MatjiDataParser {
 		Message message = new Message();
 		message.setId(getInt(object, "id"));
 		message.setSentUserId(getInt(object, "sent_user_id"));
-		message.setReceivedUserId(getInt(object, "sent_user_id"));
+		message.setReceivedUserId(getInt(object, "received_user_id"));
 		message.setThreadId(getInt(object, "thread_id"));
 		message.setMessage(getString(object, "message"));
 		
@@ -30,6 +30,7 @@ public class MessageParser extends MatjiDataParser {
 		message.setReceivedUser(userParser.getMatjiData(getObject(object, "received_user")));
 		message.setCreatedAt(getString(object, "created_at"));
 		message.setUpdatedAt(getString(object, "updated_at"));
+		message.setAgo(getLong(object, "ago"));
 
 		Log.d("Parser", "MessageParser:: called getMatjiData");
 		

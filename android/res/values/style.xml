@@ -12,7 +12,7 @@
   
   <style name="DefaultWidthFill">
     <item name="android:layout_width">fill_parent</item>
-  	<item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
   </style>
    
   <style name="DefaultHeightFill">
@@ -89,7 +89,7 @@
   </style>
   
   <style name="store_main_LikeCount">
-  	<item name="android:background">@drawable/btn_like_number</item>  
+  	<item name="android:background">@drawable/btn_like_number</item>
   	<item name="android:layout_width">50dp</item>
   	<item name="android:layout_height">30dp</item>
   	<item name="android:layout_centerInParent">true</item>
@@ -273,5 +273,23 @@
     <item name="android:layout_width">50dp</item>
     <item name="android:singleLine">true</item>
     <item name="android:textSize">10dp</item>
+  </style>
+
+  <!-- activity_get_map_position.xml -->
+  <style name="get_map_position_addressText" parent="DefaultWidthFill">
+    <item name="android:background">@color/address_text_bg</item>
+    <item name="android:gravity">center</item>
+    <item name="android:padding">5dp</item>
+  </style>
+
+  <style name="get_map_position_currentPositionBtn" parent="DefaultWrap">
+    <item name="android:layout_width">50dp</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textSize">10dp</item>
+  </style>
+
+  <style name="get_map_position_registSubmitBtn" parent="DefaultWrap">
+    <item name="android:singleLine">true</item>
+    <item name="android:textSize">12dp</item>
   </style>
 </resources>

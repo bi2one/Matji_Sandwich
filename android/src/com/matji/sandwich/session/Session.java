@@ -18,6 +18,10 @@ import com.matji.sandwich.http.request.MeHttpRequest;
 public class Session implements Requestable {
         public static final String STORE_SLIDER_INDEX = "StoreSliderActivity.index";
         public static final String POST_SLIDER_INDEX = "PostSliderActivity.index";
+        public static final String MAP_BOUND_LATITUDE_NE = "MainMapActivity.map_bound_latitude_ne";
+        public static final String MAP_BOUND_LATITUDE_SW = "MainMapActivity.map_bound_latitude_sw";
+        public static final String MAP_BOUND_LONGITUDE_NE = "MainMapActivity.map_bound_longitude_ne";
+        public static final String MAP_BOUND_LONGITUDE_SW = "MainMapActivity.map_bound_longitude_sw";
 	    
     
 	private volatile static Session session = null;
@@ -54,22 +58,20 @@ public class Session implements Requestable {
 	
 	public void sessionValidate(Loginable loginable, Activity activity){
 		this.mLoginable = loginable;
-		mManager = new HttpRequestManager(mContext, this);
+		mManager = HttpRequestManager.getInstance(mContext);
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionMe();
-		mManager.request(activity, request, AUTHORIZE);
+		mManager.request(activity, request, AUTHORIZE, this);
 	}
 	
 	
 	public void login(Loginable loginable, Activity activity, String userid, String password){
 		this.mLoginable = loginable;
-		mManager = new HttpRequestManager(mContext, this);
+		mManager = HttpRequestManager.getInstance(mContext);
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionAuthorize(userid, password);
-		
-		mManager.request(activity, request, AUTHORIZE);
-		
-		
+		mManager.request(activity, request, AUTHORIZE, this);
+
 	}
 	
 	
@@ -119,7 +121,6 @@ public class Session implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (tag == AUTHORIZE){
 				Me me = (Me)data.get(0);
-				
 				saveMe(me);
 				
 				if (mLoginable != null)

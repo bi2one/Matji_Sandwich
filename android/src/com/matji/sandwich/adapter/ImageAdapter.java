@@ -2,8 +2,8 @@ package com.matji.sandwich.adapter;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.AttachFileIds;
-import com.matji.sandwich.http.util.DisplayUtil;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.widget.ImageListView;
 
 import android.content.Context;
@@ -23,7 +23,7 @@ public class ImageAdapter extends MBaseAdapter {
 			R.id.image_adapter_image1,
 			R.id.image_adapter_image2,
 			R.id.image_adapter_image3,
-	};	
+	};
 
 	public ImageAdapter(Context context) {
 		super(context);

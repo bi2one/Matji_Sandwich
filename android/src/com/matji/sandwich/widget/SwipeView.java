@@ -9,10 +9,10 @@ public class SwipeView extends HorizontalPager {
     //private Scroller scroller;
 
     public SwipeView(Context context, AttributeSet attrs) {
-	super(context, attrs, 0);
-	this.mContext = getContext();
-	// gestureDetector = new GestureDetector(new GestureListener());
-	// scroller = new Scroller(context);
+		super(context, attrs, 0);
+		this.mContext = getContext();
+		// gestureDetector = new GestureDetector(new GestureListener());
+		// scroller = new Scroller(context);
     }
 
     // protected void onLayout(boolean changed, int left, int top, int right, int bottom) {

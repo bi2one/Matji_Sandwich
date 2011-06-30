@@ -16,9 +16,11 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.listener.FileUploadProgressListener;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.SwipeView;
 import android.content.Context;
@@ -42,6 +44,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class WritePostActivity extends BaseMapActivity implements Requestable, RelativeLayoutThatDetectsSoftKeyboard.Listener, MatjiLocationListener, FileUploadProgressListener {
+	private static final int STORE_ID_IS_NULL = -1;
 	private static final int POST_WRITE_REQUEST = 1;
 	private static final int IMAGE_UPLOAD_REQUEST = 2;
 	private static final int LAT_SPAN = (int)(0.005 * 1E6);
@@ -50,7 +53,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private int TAKE_CAMERA = 1;					// 카메라 리턴 코드값 설정
 	private int TAKE_GALLERY = 2;				// 앨범선택에 대한 리턴 코드값 설정
 	static final String[] IMAGE_PROJECTION = {      
-		MediaStore.Images.ImageColumns.DATA, 
+		MediaStore.Images.ImageColumns.DATA,
 		MediaStore.Images.Thumbnails.DATA
 	};
 	private ArrayList<String> uploadImages;
@@ -73,12 +76,14 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	private Context mContext;
 	private int uploadImageIndex;
 	private int postId;
+	private int storeId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
-
+		storeId = getIntent().getIntExtra("store_id", STORE_ID_IS_NULL);
+		
 		setContentView(R.layout.activity_write_post);
 
 		mapView = (MapView) findViewById(R.id.post_user_map);
@@ -91,7 +96,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		uploadImages = new ArrayList<String>();
 		thumbImages = new ArrayList<Bitmap>();
 
-		manager = new HttpRequestManager(mContext, this);
+		manager = HttpRequestManager.getInstance(mContext);
 		session = Session.getInstance(this);
 		mGpsManager = new GpsManager(mContext, this);
 		mGpsManager.start();
@@ -117,18 +122,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		mGpsManager.stop();
 	}
 
-	private void hideKeyboard(){
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);	
-	}
-
-	private void showKeyboard(View view){
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.showSoftInput(view, 0);
-	}
-
 	public void onImgButtonClicked(View v) {
-		hideKeyboard();
+		KeyboardUtil.hideKeyboard(this);
 		tagsField.setVisibility(View.GONE);
 		footerSwipeView.snapToPage(0);
 
@@ -136,7 +131,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 
 
 	public void onMapButtonClicked(View v) {
-		hideKeyboard();
+		KeyboardUtil.hideKeyboard(this);
 		tagsField.setVisibility(View.GONE);
 		footerSwipeView.snapToPage(1);
 	}
@@ -146,18 +141,21 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		
 		postHttpRequest = new PostHttpRequest(getApplicationContext());
 		if(postField.getText().toString().trim().equals("")) {
-			Toast.makeText(getApplicationContext(), "Writing Content!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
 		} else {
 			String tagText = tagsField.getText().toString().trim();
 			double lat = (double)mapView.getMapCenter().getLatitudeE6() / (double)1E6;
 			double lng = (double)mapView.getMapCenter().getLongitudeE6() / (double)1E6;
-			postHttpRequest.actionNew(postField.getText().toString().trim(),
-									  tagText, "ANDROID", lat, lng);							
+			if (storeId == STORE_ID_IS_NULL) {
+				postHttpRequest.actionNew(postField.getText().toString().trim(),
+						  tagText, "ANDROID", lat, lng);
+			} else {
+				postHttpRequest.actionNew(postField.getText().toString().trim(),
+						  tagText, "ANDROID", storeId);
+			}
+			
+			manager.request(this, postHttpRequest, POST_WRITE_REQUEST, this);
 		}
-		manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
-//		User me = session.getCurrentUser();
-//		me.setPostCount(me.getPostCount() + 1);
-		
 	}
 
 	
@@ -185,7 +183,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			AttachFileHttpRequest request = new AttachFileHttpRequest(mContext);
 			request.setFileUploadProgressListener(this);
 			request.actionUpload(file, postId);
-			manager.request(this, request, IMAGE_UPLOAD_REQUEST);
+			manager.request(this, request, IMAGE_UPLOAD_REQUEST, this);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -206,12 +204,12 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		if (tagsField.getVisibility() == View.GONE){
 			tagsField.setVisibility(View.VISIBLE);
 			tagsField.requestFocus();
-			showKeyboard(tagsField);
+			KeyboardUtil.showKeyboard(this, tagsField);
 		}
 		else {
 			tagsField.setVisibility(View.GONE);
 			postField.requestFocus();
-			showKeyboard(postField);
+			KeyboardUtil.showKeyboard(this, postField);
 		}
 	}
 
@@ -292,7 +290,6 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			postFooterContentLayout.setVisibility(View.GONE);
 		}
 	}
-
 
 	private void setCenter(Location loc) {
 		int geoLat = (int)(loc.getLatitude() * 1E6);

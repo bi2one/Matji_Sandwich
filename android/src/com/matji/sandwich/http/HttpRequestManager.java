@@ -13,187 +13,254 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
+import java.util.Iterator;
+import java.util.Map;
 
 public class HttpRequestManager {
+    private static volatile HttpRequestManager manager;
     private Context context;
-    private Requestable requestable;
-    private volatile static Spinner spinner;
-    private HttpAsyncTask httpAsyncTask;
-    // private Stack<RequestTagPair> requestPool;
-    private Stack<DataTagPair> dataPool;
-    private MatjiException lastOccuredException = null;
     private Activity mParentActivity;
-    private boolean isRunning = false;
+    private ActivityAsyncPool asyncPool;
 
-    private Stack<HttpRequest> requestPool;
-    
-    public HttpRequestManager(Context context, Requestable requestable) {
+    private HttpRequestManager(Context context) {
 	this.context = context;
-	this.requestable = requestable;
-	requestPool = new Stack<HttpRequest>();
-	// requestPool = new Stack<RequestTagPair>();
-	dataPool = new Stack<DataTagPair>();
+	asyncPool = new ActivityAsyncPool();
     }
 
-    // public void request(HttpRequest request, int tag) {
-    // 	this.request = request;
-    // 	this.lastOccuredException = null;
-    // 	request.setContext(context);
-    // 	httpAsyncTask = new HttpAsyncTask();
-    // 	httpAsyncTask.execute(tag);
-    // }
+    public static HttpRequestManager getInstance(Context context) {
+	if (manager != null && manager.context != context)
+	    manager.context = context;
 
-    public void request(Activity parentActivity, HttpRequest request, int tag) {
-	this.mParentActivity = parentActivity;
-
-	spinner = getSpinner();
-	request.setTag(tag);
-	// requestPool.push(new RequestTagPair(request, tag));
-	requestPool.push(request);
-
-	this.lastOccuredException = null;
-	//request.setContext(context);
-	httpAsyncTask = new HttpAsyncTask();
-	httpAsyncTask.execute(tag);
-    }
-
-    private Spinner getSpinner() {
-	if (spinner == null){
-	    synchronized(NormalSpinner.class) {
-		if (spinner == null) {
-		    spinner = new NormalSpinner(context);
+	if (manager == null) {
+	    synchronized(HttpRequestManager.class) {
+		if (manager == null) {
+		    manager = new HttpRequestManager(context);
 		}
 	    }
 	}
-	return spinner;
+
+	return manager;
+    }
+
+    public void request(Activity parentActivity, HttpRequest request, int tag, Requestable requestable) {
+	request.setTag(tag);
+	asyncPool.putAndRunRequest(parentActivity, request, requestable);
+    }
+
+    public boolean isRunning(Activity parentActivity) {
+	return asyncPool.isRunning(parentActivity);
     }
 
     public boolean isRunning() {
-	return isRunning;
+	return asyncPool.isRunning();
     }
 
-    public void cancel() {
-	if (httpAsyncTask != null) {
-	    if (!httpAsyncTask.isCancelled()) {
-		httpAsyncTask.cancel(true);
-	    }
-	    httpAsyncTask = null;
+    public void cancelTask() {
+	asyncPool.cancelTask();
+    }
+
+    public void cancelTask(Activity parentActivity) {
+	asyncPool.cancelTask(parentActivity);
+    }
+    
+
+    private class HttpAsyncTask extends AsyncTask<HttpRequest, Integer, ArrayList<MatjiData>> {
+	protected int tag = 0;
+	protected HttpRequest request;
+	private Activity parentActivity;
+	private MatjiException occuredException;
+	private Requestable requestable;
+
+	    public HttpAsyncTask(Activity activity, HttpRequest request, Requestable requestable) {
+	    parentActivity = activity;
+	    this.request = request;
+	    this.requestable = requestable;
 	}
-    }
 
-    private void onPreRequestData(int tag) {
-	// Log.d("Request_Test", "pre request data!!");
-    }
-
-    private void onRequestData(int tag) {
-	try {
-	    synchronized(Stack.class) {
-		HttpRequest request = requestPool.pop();
-		dataPool.push(new DataTagPair(request.request(), request.getTag()));
-	    }
-	} catch(MatjiException e) {
-	    lastOccuredException = e;
+	public void execute() {
+	    execute(request);
 	}
-	 Log.d("refresh", "on request data!!");
-    }
 
-    private void onPostRequestData(int tag) {
-    	
-	if (lastOccuredException != null){
-	    requestable.requestExceptionCallBack(tag, lastOccuredException);
-	} else {
-	    synchronized(Stack.class) {
-		DataTagPair pair = dataPool.pop();
-		requestable.requestCallBack(pair.getTag(), pair.getData());
+	protected ArrayList<MatjiData> doInBackground(HttpRequest... params) {
+	    ArrayList<MatjiData> result;
+	    tag = request.getTag();
+	    Log.d("refresh", "doin " + params.length);
+
+	    try {
+		result = request.request();
+	    } catch(MatjiException e) {
+		occuredException = e;
+		return null;
 	    }
-	}
-	
-    }
-
-    private void startSpinner() {
-	if (!requestPool.empty()) {
-	    isRunning = true;
-	    if (spinner != null) {
-		Log.d("refresh", "Start spinner");
-		spinner.start(mParentActivity);
-	    }
-	}
-    }
-
-    private void stopSpinner() {
-	if (requestPool.empty()) {
-	    isRunning = false;
-	    if (spinner != null) {
-		Log.d("refresh", "Stop spinner");
-		spinner.stop();
-	    }
-	}
-    }
-
-    private class HttpAsyncTask extends AsyncTask<Integer, Integer, Integer> {
-	protected int mId = 0;
-
-	protected Integer doInBackground(Integer... params) {
-		Log.d("refresh", "doin " + params.length);
-		mId = params[0];
-	    onRequestData(mId);
+	    
 	    Log.d("refresh", "doin end");
-	    return mId;
+	    return result;
 	}
 
 	protected void onCancelled() {
-	    stopSpinner();
+	    asyncPool.requestStopSpinner(parentActivity);
 	}
 
-	protected void onPostExecute(Integer result) {
-		Log.d("refresh", "onPostExecute");
-	    stopSpinner();
-	    onPostRequestData(mId);
+	protected void onPostExecute(ArrayList<MatjiData> result) {
+	    if (result == null) {
+		requestable.requestExceptionCallBack(tag, occuredException);
+	    } else {
+		requestable.requestCallBack(tag, result);
+	    }
+	    
+	    asyncPool.requestStopSpinner(parentActivity);
+	    Log.d("refresh", "onPostExecute");
 	    Log.d("refresh", "onPostExecute end");
 	}
 
 	protected void onPreExecute() {
-	    startSpinner();
-	    onPreRequestData(mId);
+	    asyncPool.requestStartSpinner(parentActivity);
 	}
 
 	protected void onProgressUpdate(Integer... values) { }
     }
 
-    private class DataTagPair {
-	private ArrayList<MatjiData> data;
-	private int tag;
+    private class ActivityAsyncPool {
+	private HashMap<Activity, AsyncBlock> pool;
 
-	public DataTagPair(ArrayList<MatjiData> data, int tag) {
-	    this.data = data;
-	    this.tag = tag;
+	public ActivityAsyncPool() {
+	    pool = new HashMap<Activity, AsyncBlock>();
 	}
 
-	public ArrayList<MatjiData> getData() {
-	    return data;
+	public boolean isRunning(Activity fromActivity) {
+	    Iterator it = pool.entrySet().iterator();
+	    Activity activity;
+	    AsyncBlock block;
+	    boolean isBlockRunning = false;
+	    
+	    while(it.hasNext() && !isBlockRunning) {
+		Map.Entry pairs = (Map.Entry)it.next();
+		activity = (Activity)pairs.getKey();
+		if (fromActivity == activity) {
+		    block = (AsyncBlock)pairs.getValue();
+		    isBlockRunning = block.isRunning();
+		}
+	    }
+
+	    return isBlockRunning;
 	}
 
-	public int getTag() {
-	    return tag;
+	public boolean isRunning() {
+	    Iterator it = pool.entrySet().iterator();
+	    AsyncBlock block;
+	    boolean isBlockRunning = false;
+	    
+	    while(it.hasNext() && !isBlockRunning) {
+		Map.Entry pairs = (Map.Entry)it.next();
+		block = (AsyncBlock)pairs.getValue();
+		isBlockRunning = block.isRunning();
+	    }
+
+	    return isBlockRunning;
+	}
+
+	public void cancelTask() {
+	    Iterator it = pool.entrySet().iterator();
+	    AsyncBlock block;
+
+	    while(it.hasNext()) {
+		Map.Entry pairs = (Map.Entry)it.next();
+		block = (AsyncBlock)pairs.getValue();
+		block.cancelTask();
+	    }
+	}
+
+	public void cancelTask(Activity fromActivity) {
+	    Iterator it = pool.entrySet().iterator();
+	    AsyncBlock block;
+	    Activity activity;
+
+	    while(it.hasNext()) {
+		Map.Entry pairs = (Map.Entry)it.next();
+		activity = (Activity)pairs.getKey();
+		if (fromActivity == activity) {
+		    block = (AsyncBlock)pairs.getValue();
+		    block.cancelTask();
+		    return;
+		}
+	    }
+	}
+
+	public void putHttpAsyncTask(Activity activity, HttpAsyncTask task) {
+	    AsyncBlock block = pool.get(activity);
+	    if (block == null)
+		block = new AsyncBlock(activity);
+
+	    block.putTask(task);
+	    pool.put(activity, block);
+	}
+
+	public void putAndRunRequest(Activity activity, HttpRequest request, Requestable requestable) {
+	    HttpAsyncTask task = new HttpAsyncTask(activity, request, requestable);
+	    putHttpAsyncTask(activity, task);
+	    task.execute();
+	}
+
+	public void requestStopSpinner(Activity activity) {
+	    AsyncBlock block = pool.get(activity);
+	    block.requestStopSpinner();
+	}
+
+	public void requestStartSpinner(Activity activity) {
+	    AsyncBlock block = pool.get(activity);
+	    block.requestStartSpinner();
 	}
     }
-	
-    // private class RequestTagPair {
-    // 	private HttpRequest request;
-    // 	private int tag;
 
-    // 	public RequestTagPair(HttpRequest request, int tag) {
-    // 	    this.request = request;
-    // 	    this.tag = tag;
-    // 	}
+    private class AsyncBlock {
+	private Activity parent;
+	private Spinner spinner;
+	private int spinnerCount;
+	private ArrayList<HttpAsyncTask> tasks;
 
-    // 	public HttpRequest getRequest() {
-    // 	    return request;
-    // 	}
+	public AsyncBlock(Activity parent) {
+	    this.parent = parent;
+	    spinner = new NormalSpinner(parent);
+	    tasks = new ArrayList<HttpAsyncTask>();
+	}
 
-    // 	public int getTag() {
-    // 	    return tag;
-    // 	}
-    // }
+	public void cancelTask() {
+	    spinnerCount = 0;
+	    spinner.stop();
+	    Iterator itr = tasks.iterator();
+	    while(itr.hasNext()) {
+		((AsyncTask)itr.next()).cancel(true);
+	    }
+	    tasks.clear();
+	}
+
+	public void putTask(HttpAsyncTask task) {
+	    tasks.add(task);
+	}
+
+	public void requestStopSpinner() {
+	    spinnerCount--;
+	    if (spinnerCount <= 0) {
+		spinner.stop();
+		tasks.clear();
+	    }
+	}
+
+	public void requestStartSpinner() {
+	    spinnerCount++;
+	    spinner.start(parent);
+	}
+
+	public boolean isRunning() {
+	    Iterator itr = tasks.iterator();
+	    boolean isTaskRunning = false;
+	    while(itr.hasNext() && !isTaskRunning) {
+		isTaskRunning = (AsyncTask.Status.FINISHED != ((AsyncTask)itr.next()).getStatus());
+	    }
+
+	    return isTaskRunning;
+	}
+    }
 }

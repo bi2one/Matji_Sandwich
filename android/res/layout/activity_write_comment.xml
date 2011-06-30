@@ -5,6 +5,7 @@
 	style="@style/DefaultFill"
 	android:orientation="vertical">
 	<EditText
-		android:id="@+id/post_field"
+		android:id="@+id/comment_field"
+		android:gravity="top"
 		style="@style/DefaultFill" />
 </com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

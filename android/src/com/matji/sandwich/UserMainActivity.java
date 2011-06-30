@@ -11,8 +11,8 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.util.ModelType;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.ModelType;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -60,7 +60,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		setContentView(R.layout.activity_user_main);
 
 		tabHost = ((TabActivity) getParent()).getTabHost();
-		manager = new HttpRequestManager(this, this);
+		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
 
 		user = (User) SharedMatjiData.getInstance().top();
@@ -145,6 +145,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		} else {
 			followButton.setText(R.string.user_main_follow);
 		}
+
 		titleText.setText(user.getTitle());
 		introText.setText(user.getIntro());
 
@@ -156,14 +157,14 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
 		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
 		//TODO
-//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.get));
+		//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.get));
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 
-		setInfo();	
+		setInfo();
 	}
 
 
@@ -173,7 +174,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		}
 
 		((FollowingHttpRequest) request).actionNew(user.getId());
-		manager.request(this, request, FOLLOW_REQUEST);
+		manager.request(this, request, FOLLOW_REQUEST, this);
 		user.setFollowerCount(user.getFollowerCount() + 1);
 		User me = session.getCurrentUser();
 		me.setFollowingCount(me.getFollowingCount() + 1);
@@ -185,7 +186,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		}
 
 		((FollowingHttpRequest) request).actionDelete(user.getId());
-		manager.request(this, request, UN_FOLLOW_REQUEST);
+		manager.request(this, request, UN_FOLLOW_REQUEST, this);
 		user.setFollowerCount(user.getFollowerCount() - 1);
 		User me = session.getCurrentUser();
 		me.setFollowingCount(me.getFollowingCount() - 1);
@@ -206,21 +207,21 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onFollowButtonClicked(View view) {
-		if (session.isLogin()){
-			if (session.getCurrentUser().getId() != user.getId()) {
-				followButton.setClickable(false);
-				if (dbProvider.isExistFollowing(user.getId())) {
-					dbProvider.deleteFollowing(user.getId());
-					// api request
-					unfollowRequest();
-				}else {
-					dbProvider.insertFollowing(user.getId());
-					// api request
-					followRequest();
+		if (loginRequired()) {
+			if (!manager.isRunning(this)) {
+				if (session.getCurrentUser().getId() != user.getId()) {
+					followButton.setClickable(false);
+					if (dbProvider.isExistFollowing(user.getId())) {
+						dbProvider.deleteFollowing(user.getId());
+						// api request
+						unfollowRequest();
+					}else {
+						dbProvider.insertFollowing(user.getId());
+						// api request
+						followRequest();
+					}
 				}
 			}
-		} else {
-			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 		}
 	}
 
@@ -250,14 +251,14 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	public void onMemoButtonClicked(View view) {
 		tabHost.setCurrentTab(UserTabActivity.MEMO_PAGE);
 	}
-	
+
 	public void onTagButtonClicked(View view) {
 		Intent intent = new Intent(this, TagListActivity.class);
 		intent.putExtra("id", user.getId());
 		intent.putExtra("type", ModelType.USER);
 		startActivity(intent);
 	}
-	
+
 	public void onImageButtonClicked(View view) {
 		tabHost.setCurrentTab(UserTabActivity.IMAGE_PAGE);
 	}
@@ -269,13 +270,16 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
+		button.setText("Message");
+		return true;
 	}
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-
+		if (loginRequired()) {
+			Intent intent = new Intent(this, WriteMessageActivity.class);
+			intent.putExtra("user_id", user.getId());
+			startActivity(intent);
+		}
 	}
 }
