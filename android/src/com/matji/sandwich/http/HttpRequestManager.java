@@ -56,6 +56,14 @@ public class HttpRequestManager {
     public boolean isRunning() {
 	return asyncPool.isRunning();
     }
+
+    public void cancelTask() {
+	asyncPool.cancelTask();
+    }
+
+    public void cancelTask(Activity parentActivity) {
+	asyncPool.cancelTask(parentActivity);
+    }
     
 
     private class HttpAsyncTask extends AsyncTask<HttpRequest, Integer, ArrayList<MatjiData>> {
@@ -141,18 +149,43 @@ public class HttpRequestManager {
 
 	public boolean isRunning() {
 	    Iterator it = pool.entrySet().iterator();
-	    Activity activity;
 	    AsyncBlock block;
 	    boolean isBlockRunning = false;
 	    
 	    while(it.hasNext() && !isBlockRunning) {
 		Map.Entry pairs = (Map.Entry)it.next();
-		activity = (Activity)pairs.getKey();
 		block = (AsyncBlock)pairs.getValue();
 		isBlockRunning = block.isRunning();
 	    }
 
 	    return isBlockRunning;
+	}
+
+	public void cancelTask() {
+	    Iterator it = pool.entrySet().iterator();
+	    AsyncBlock block;
+
+	    while(it.hasNext()) {
+		Map.Entry pairs = (Map.Entry)it.next();
+		block = (AsyncBlock)pairs.getValue();
+		block.cancelTask();
+	    }
+	}
+
+	public void cancelTask(Activity fromActivity) {
+	    Iterator it = pool.entrySet().iterator();
+	    AsyncBlock block;
+	    Activity activity;
+
+	    while(it.hasNext()) {
+		Map.Entry pairs = (Map.Entry)it.next();
+		activity = (Activity)pairs.getKey();
+		if (fromActivity == activity) {
+		    block = (AsyncBlock)pairs.getValue();
+		    block.cancelTask();
+		    return;
+		}
+	    }
 	}
 
 	public void putHttpAsyncTask(Activity activity, HttpAsyncTask task) {
@@ -193,6 +226,16 @@ public class HttpRequestManager {
 	    tasks = new ArrayList<HttpAsyncTask>();
 	}
 
+	public void cancelTask() {
+	    spinnerCount = 0;
+	    spinner.stop();
+	    Iterator itr = tasks.iterator();
+	    while(itr.hasNext()) {
+		((AsyncTask)itr.next()).cancel(true);
+	    }
+	    tasks.clear();
+	}
+
 	public void putTask(HttpAsyncTask task) {
 	    tasks.add(task);
 	}
@@ -206,7 +249,6 @@ public class HttpRequestManager {
 	}
 
 	public void requestStartSpinner() {
-	    // Log.d("=====", "spinner: " + spinnerCount);
 	    spinnerCount++;
 	    spinner.start(parent);
 	}
