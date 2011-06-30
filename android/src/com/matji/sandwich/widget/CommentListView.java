@@ -77,7 +77,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 			if (session.isLogin()) {
 				curDeletePos = Integer.parseInt((String) v.getTag());
 				Comment comment = (Comment) getAdapterData().get(curDeletePos);
-				getHttpRequestManager().request(getActivity(), deleteRequest(comment.getId()), COMMENT_DELETE_REQUEST);
+				getHttpRequestManager().request(getActivity(), deleteRequest(comment.getId()), COMMENT_DELETE_REQUEST, this);
 			}
 			break;
 		}	

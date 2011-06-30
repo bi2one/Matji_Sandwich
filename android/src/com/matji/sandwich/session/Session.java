@@ -58,19 +58,19 @@ public class Session implements Requestable {
 	
 	public void sessionValidate(Loginable loginable, Activity activity){
 		this.mLoginable = loginable;
-		mManager = new HttpRequestManager(mContext, this);
+		mManager = HttpRequestManager.getInstance(mContext);
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionMe();
-		mManager.request(activity, request, AUTHORIZE);
+		mManager.request(activity, request, AUTHORIZE, this);
 	}
 	
 	
 	public void login(Loginable loginable, Activity activity, String userid, String password){
 		this.mLoginable = loginable;
-		mManager = new HttpRequestManager(mContext, this);
+		mManager = HttpRequestManager.getInstance(mContext);
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionAuthorize(userid, password);
-		mManager.request(activity, request, AUTHORIZE);
+		mManager.request(activity, request, AUTHORIZE, this);
 	}
 	
 	

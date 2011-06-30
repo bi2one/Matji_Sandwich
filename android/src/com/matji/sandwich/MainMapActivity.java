@@ -53,7 +53,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		mMapView.setMapCenterListener(this);
 		mContext = getApplicationContext();
 		mGpsManager = new GpsManager(mContext, this);
-		mRequestManager = new HttpRequestManager(mContext, this);
+		mRequestManager = HttpRequestManager.getInstance(mContext);
 		storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
 		session = Session.getInstance(mContext);
 
@@ -86,6 +86,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 				mGpsManager.stop();
 			}
 		}
+
 		prevLocation = location;
 		setCenter(prevLocation);
 	}
@@ -158,7 +159,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 			double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
 
 			request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
-			mRequestManager.request(mActivity, request, NEARBY_STORE);
+			mRequestManager.request(mActivity, request, NEARBY_STORE, (Requestable)mActivity);
 		}
 	}
 

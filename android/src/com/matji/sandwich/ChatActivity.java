@@ -34,7 +34,7 @@ public class ChatActivity extends BaseActivity implements Requestable {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat);
 
-		manager = new HttpRequestManager(this, this);
+		manager = HttpRequestManager.getInstance(this);
 		message = (Message) SharedMatjiData.getInstance().top();
 		User me = Session.getInstance(this).getCurrentUser();
 		user_id = (message.getSentUserId() == me.getId()) ? message.getReceivedUserId() : message.getSentUserId();
@@ -62,7 +62,7 @@ public class ChatActivity extends BaseActivity implements Requestable {
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
-		if (!listView.getManager().isRunning()) {
+		if (!listView.getManager().isRunning(this)) {
 			listView.requestReload();
 		}
 	}
@@ -75,7 +75,7 @@ public class ChatActivity extends BaseActivity implements Requestable {
 		if(message.equals("")) {
 			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
 		} else {
-			manager.request(this, request(message), MESSAGE_NEW);
+		    manager.request(this, request(message), MESSAGE_NEW, this);
 			
 			/* keyboard hide. */
 			InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);  

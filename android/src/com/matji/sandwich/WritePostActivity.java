@@ -96,7 +96,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		uploadImages = new ArrayList<String>();
 		thumbImages = new ArrayList<Bitmap>();
 
-		manager = new HttpRequestManager(mContext, this);
+		manager = HttpRequestManager.getInstance(mContext);
 		session = Session.getInstance(this);
 		mGpsManager = new GpsManager(mContext, this);
 		mGpsManager.start();
@@ -154,7 +154,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 						  tagText, "ANDROID", storeId);
 			}
 			
-			manager.request(this, postHttpRequest, POST_WRITE_REQUEST);
+			manager.request(this, postHttpRequest, POST_WRITE_REQUEST, this);
 		}
 	}
 
@@ -183,7 +183,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			AttachFileHttpRequest request = new AttachFileHttpRequest(mContext);
 			request.setFileUploadProgressListener(this);
 			request.actionUpload(file, postId);
-			manager.request(this, request, IMAGE_UPLOAD_REQUEST);
+			manager.request(this, request, IMAGE_UPLOAD_REQUEST, this);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

@@ -74,7 +74,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 
 	private void initPostData() {
 		downloader = new MatjiImageDownloader();
-		manager = new HttpRequestManager(activity, this);
+		manager = HttpRequestManager.getInstance(activity);
 		request = new AttachFileHttpRequest(activity);
 		
 		dateAgo = (TextView) getRootView().findViewById(R.id.header_post_created_at);
@@ -180,7 +180,7 @@ public class PostViewContainer extends ViewContainer implements OnClickListener,
 	}
 
 	public void attachFileIdsRequest() {
-		manager.request(activity, attachFileIdsRequestSet(), ATTACH_FILE_IDS_REQUEST);
+	    manager.request(activity, attachFileIdsRequestSet(), ATTACH_FILE_IDS_REQUEST, this);
 	}
 
 	public HttpRequest attachFileIdsRequestSet() {

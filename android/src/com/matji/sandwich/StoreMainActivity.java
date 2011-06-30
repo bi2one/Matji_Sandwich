@@ -69,7 +69,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		store = (Store) SharedMatjiData.getInstance().top();
 
-		manager = new HttpRequestManager(this, this);
+		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);
 
@@ -166,7 +166,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			request = new BookmarkHttpRequest(this);
 		}
 		((BookmarkHttpRequest) request).actionBookmark(store.getId());
-		manager.request(this, request, BOOKMARK_REQUEST);
+		manager.request(this, request, BOOKMARK_REQUEST, this);
 		store.setBookmarkCount(store.getBookmarkCount() + 1);
 		User me = session.getCurrentUser();
 		me.setStoreCount(me.getStoreCount() + 1);
@@ -177,7 +177,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			request = new BookmarkHttpRequest(this);
 		}
 		((BookmarkHttpRequest) request).actionUnBookmark(store.getId());
-		manager.request(this, request, UN_BOOKMARK_REQUEST);
+		manager.request(this, request, UN_BOOKMARK_REQUEST, this);
 		store.setBookmarkCount(store.getBookmarkCount() - 1);
 		User me = session.getCurrentUser();
 		me.setStoreCount(me.getStoreCount() - 1);
@@ -188,7 +188,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			request = new LikeHttpRequest(this);
 		}
 		((LikeHttpRequest) request).actionStoreLike(store.getId());
-		manager.request(this, request, LIKE_REQUEST);
+		manager.request(this, request, LIKE_REQUEST, this);
 		store.setLikeCount(store.getLikeCount() + 1);
 	}
 
@@ -198,7 +198,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		}
 
 		((LikeHttpRequest) request).actionStoreUnLike(store.getId());
-		manager.request(this, request, UN_LIKE_REQUEST);
+		manager.request(this, request, UN_LIKE_REQUEST, this);
 		store.setLikeCount(store.getLikeCount() - 1);
 	}
 
@@ -221,7 +221,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 	public void onLikeButtonClicked(View view) {
 		if (loginRequired()) {
-			if (!manager.isRunning()) {
+			if (!manager.isRunning(this)) {
 				likeButton.setClickable(false);
 				if (dbProvider.isExistLike(store.getId(), "Store")){
 					dbProvider.deleteLike(store.getId(), "Store");
@@ -241,7 +241,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 	public void onScrapButtonClicked(View view) {
 		if (loginRequired()) {
-			if (!manager.isRunning()) {
+			if (!manager.isRunning(this)) {
 				scrapButton.setClickable(false);
 				if (dbProvider.isExistBookmark(store.getId(), "Store")){
 					dbProvider.deleteBookmark(store.getId(), "Store");
