@@ -22,18 +22,23 @@ public class StoreRegisterListActivity extends BaseActivity {
     private double mCenterLat;
     private double mCenterLng;
     private String mCenterAddr;
+    private boolean isFirst = true;
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_register_store_list);
+	setContentView(R.layout.activity_store_register_list);
+	mContext = getApplicationContext();
+	storeList = (StoreNearRadiusListView)findViewById(R.id.store_list);
+	storeList.setActivity(this);
 	
-	if (loginRequired()) {
-	    mContext = getApplicationContext();
-	    storeList = (StoreNearRadiusListView)findViewById(R.id.store_list);
+    }
 
-
+    protected void onResume() {
+	super.onResume();
+	if (loginRequired() && isFirst) {
 	    Intent getPositionIntent = new Intent(mContext, GetMapPositionActivity.class);
 	    startActivityForResult(getPositionIntent, GET_POSITION_TAG);
+	    isFirst = false;
 	}
     }
 
@@ -46,11 +51,7 @@ public class StoreRegisterListActivity extends BaseActivity {
 		mCenterLat = data.getDoubleExtra(GetMapPositionActivity.RETURN_KEY_LATITUDE, BASIC_CENTER_LATITUDE);
 		mCenterLng = data.getDoubleExtra(GetMapPositionActivity.RETURN_KEY_LONGITUDE, BASIC_CENTER_LONGITUDE);
 		mCenterAddr = data.getStringExtra(GetMapPositionActivity.RETURN_KEY_ADDRESS);
-		// Log.d("BBBBBB", mCenterAddr + "");
-		// Log.d("BBBBBB", mCenterLat + "");
-		// Log.d("BBBBBB", mCenterLng + "");
 		
-		storeList.setActivity(this);
 		storeList.setCenter(mCenterLat, mCenterLng);
 		storeList.requestConditionally();
 		break;
@@ -59,9 +60,17 @@ public class StoreRegisterListActivity extends BaseActivity {
 	}
     }
 
+    public void onNewStoreClicked(View v) {
+	Intent registerIntent = new Intent(mContext, StoreRegisterActivity.class);
+	registerIntent.putExtra(StoreRegisterActivity.RETURN_KEY_CENTER_LAT, mCenterLat);
+	registerIntent.putExtra(StoreRegisterActivity.RETURN_KEY_CENTER_LNG, mCenterLng);
+	registerIntent.putExtra(StoreRegisterActivity.RETURN_KEY_ADDRESS, mCenterAddr);
+	startActivity(registerIntent);
+    }
+
     @Override
 	protected String titleBarText() {
-	return "RegisterStoreListActivity";
+	return "StoreRegisterListActivity";
     }
 
     @Override

@@ -69,6 +69,7 @@
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="GetMapPositionActivity"></activity>
 		<activity android:name="StoreRegisterListActivity"></activity>
+		<activity android:name="StoreRegisterActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

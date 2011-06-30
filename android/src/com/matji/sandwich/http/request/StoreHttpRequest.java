@@ -55,7 +55,8 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
     }
     
-    public void actionNew(String name, String address, int lat, int lng, String add_address, String tel, String website, String cover) {
+    public void actionNew(String name, String address, double lat, double lng,
+			  String add_address, String tel, String website, String cover) {
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "new";
     	parser = new StoreParser(context);

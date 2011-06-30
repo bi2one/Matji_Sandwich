@@ -48,6 +48,9 @@
   <string name="exception_GeocodeLocationInvalidMatjiException">
     해당 위치는 주소를 받아올 수 없는 지역입니다
   </string>
+  <string name="exception_RegistStoreNameInvalidMatjiException">
+    맛집 이름을 입력해주셔야 합니다
+  </string>
 
   <!-- pull_to_refresh -->
   <string name="pull_to_refresh_pull_label">Pull to refresh...</string>
@@ -89,6 +92,8 @@
   <string name="default_string_current_position">GPS</string>
   <string name="default_string_near_store">Store</string>
   <string name="default_string_configure">설정</string>
+  <string name="default_string_address">주소</string>
+  <string name="default_string_change">변경</string>
 
   <!-- ChatActivity -->
   <string name="chat_waiting_input">메세지를 입력해주세요.</string>
@@ -148,7 +153,15 @@
   <!-- GetMapPositionActivity -->
   <string name="get_map_position_complete">위치설정완료</string>
 
-  <!-- RegisterStoreListActivity -->
+  <!-- StoreRegisterListActivity -->
   <string name="register_store_list_is_not_exist">맛집이 목록에 없다면?</string>
   <string name="register_store_list_register_new_store">새 맛집 등록</string>
+
+  <!-- StoreRegisterActivity -->
+  <string name="store_register_add_address">상세주소</string>
+  <string name="store_register_name">맛집이름</string>
+  <string name="store_register_tel">전화번호</string>
+  <string name="store_register_website">홈페이지</string>
+  <string name="store_register_submit">맛집 등록하기</string>
+  <string name="store_register_ok">맛집 등록에 성공하였습니다</string>
 </resources>

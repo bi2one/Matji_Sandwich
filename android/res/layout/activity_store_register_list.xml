@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  <com.matji.sandwich.widget.StoreNearRadiusListView
+      style="@style/DefaultFill"
+      android:layout_above="@+id/regist_bar"
+      android:id="@+id/store_list" />
+  <LinearLayout
+      style="@style/DefaultWidthFill"
+      android:id="@id/regist_bar"
+      android:background="@color/DODGER_BLUE"
+      android:layout_alignParentBottom="true">
+    <TextView
+	style="@style/DefaultWrap"
+	android:text="@string/register_store_list_is_not_exist" />
+    <Button
+	style="@style/DefaultWrap"
+	android:onClick="onNewStoreClicked"
+	android:text="@string/register_store_list_register_new_store" />
+  </LinearLayout>
+</RelativeLayout>
