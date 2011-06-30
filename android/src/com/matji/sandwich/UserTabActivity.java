@@ -6,6 +6,7 @@ import com.matji.sandwich.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TabHost;
 
 public class UserTabActivity extends BaseTabActivity {
 	private Intent mainIntent;
@@ -28,6 +29,8 @@ public class UserTabActivity extends BaseTabActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_tab);
+		
 		user = (User) SharedMatjiData.getInstance().top();
 		
 		mainIntent = new Intent(this, UserMainActivity.class);
@@ -40,6 +43,8 @@ public class UserTabActivity extends BaseTabActivity {
 		imageIntent.putExtra("type", ModelType.USER);
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 
+		TabHost tabHost = getTabHost();
+		
 		tabHost.addTab(tabHost.newTabSpec("main")
 				.setIndicator("메인")
 				.setContent(mainIntent));

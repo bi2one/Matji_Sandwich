@@ -70,8 +70,11 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		mContentViews.add(view3);
 
 		view1.setActivity(this);
+		view1.setCanRepeat(true);
 		view2.setActivity(this);
+		view2.setCanRepeat(true);
 		view3.setActivity(this);
+		view3.setCanRepeat(true);
 
 		swipeView.addOnScrollListener(this);
 	}
@@ -115,6 +118,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 			view4.setUserId(session.getCurrentUser().getId());
 			view4.setTag(R.string.title, getResources().getString(R.string.my_post).toString());
 			view4.setActivity(this);
+			view4.setCanRepeat(true);
 		}
 		swipeView.addView(view4);
 		mContentViews.add(view4);
@@ -133,7 +137,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 
 	public void onViewScrollFinished(int currentPage) {
 		if (mCurrentPage != currentPage) {
-			Log.d("refresh", "pageChanged!");
+			Log.d("Matji", "pageChanged!");
 
 			try {
 				mCurrentPage = currentPage;
@@ -169,7 +173,12 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		
 		case POST_MAIN_ACTIVITY:
 			if (resultCode == RESULT_OK) {
-				((RequestableMListView)mContentViews.get(mCurrentPage)).requestReload();
+				if (data != null) {
+					int position = data.getIntExtra("position", -1);
+					if (position >= 0) {
+						((PostListView) mContentViews.get(mCurrentPage)).delete(position);
+					}		
+				}
 			}
 			break;
 		}

@@ -5,8 +5,11 @@ import com.matji.sandwich.util.DisplayUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TabHost;
 
 public class MainTabActivity extends BaseTabActivity {
+    private TabHost tabHost;
+    
     public static final String IF_INDEX = "index";
     public static final int IV_INDEX_STORE = 1;
     public static final int IV_INDEX_POST = 2;
@@ -14,6 +17,10 @@ public class MainTabActivity extends BaseTabActivity {
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_main_tab);
+
+	tabHost = getTabHost();
+
 	DisplayUtil.setContext(getApplicationContext());
 	tabHost.addTab(tabHost.newTabSpec("tab1")
 		       .setIndicator(getString(R.string.default_string_map))
@@ -30,7 +37,6 @@ public class MainTabActivity extends BaseTabActivity {
 	tabHost.addTab(tabHost.newTabSpec("tab4")
 		       .setIndicator(getString(R.string.default_string_configure))
 		       .setContent(new Intent(this, SettingActivity.class)));
-	
     }
 
     protected void onNewIntent(Intent intent) {

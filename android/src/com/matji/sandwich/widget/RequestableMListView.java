@@ -79,7 +79,7 @@ PullToRefreshListView.OnRefreshListener {
 	public void setCanRepeat(boolean canRepeat) {
 		this.canRepeat = canRepeat;
 	}
-	
+
 	public void requestReload() {
 		if (!manager.isRunning(getActivity()) || canRepeat) {
 			Log.d("refresh", "requestReload()");

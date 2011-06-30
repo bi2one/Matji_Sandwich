@@ -26,8 +26,10 @@
 			android:onClick="onLikeButtonClicked" />
 		<Button
 			style="@style/DefaultWrap"
+			android:id="@+id/post_main_delete_btn"
 			android:text = "@string/default_string_delete"
 			android:onClick = "onDeleteButtonClicked"
+			android:visibility="gone"
 			android:layout_margin="7dp" />
 	</LinearLayout>
 </LinearLayout>

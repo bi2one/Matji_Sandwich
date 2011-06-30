@@ -6,6 +6,7 @@ import com.matji.sandwich.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TabHost;
 
 public class StoreTabActivity extends BaseTabActivity {
 	private Intent mainIntent;
@@ -24,6 +25,8 @@ public class StoreTabActivity extends BaseTabActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_tab);
+		
 		store = (Store) (SharedMatjiData.getInstance().top());
 
 		mainIntent = new Intent(this, StoreMainActivity.class);
@@ -36,6 +39,8 @@ public class StoreTabActivity extends BaseTabActivity {
 		imageIntent.putExtra("type", ModelType.STORE);
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 
+		TabHost tabHost = getTabHost();
+		
 		tabHost.addTab(tabHost.newTabSpec("main")
 				.setIndicator("메인")
 				.setContent(mainIntent));

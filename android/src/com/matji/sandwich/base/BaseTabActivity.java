@@ -15,19 +15,15 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener {
-	protected TabHost tabHost;
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_tab);
-		tabHost = getTabHost();
 	}
 	
 	@Override

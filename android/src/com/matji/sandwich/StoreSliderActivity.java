@@ -94,8 +94,11 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 		}
 
 		view1.dataRefresh();
+		view1.setCanRepeat(true);
 		view2.dataRefresh();
+		view2.setCanRepeat(true);
 		view3.dataRefresh();
+		view3.setCanRepeat(true);
 		if (view4 != null) view4.dataRefresh();
 	}
 
@@ -115,6 +118,7 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 			view4.setUserId(session.getCurrentUser().getId());
 			view4.setTag(R.string.title, getResources().getString(R.string.bookmarked_store).toString());
 			view4.setActivity(this);
+			view4.setCanRepeat(true);
 		}
 		swipeView.addView(view4);
 		mContentViews.add(view4);

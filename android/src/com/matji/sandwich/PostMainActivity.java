@@ -37,6 +37,8 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	private PostViewContainer header;
 	private CommentListView commentListView;
 	private Button likeButton;
+	
+	private int position;
 
 	private static final int POST_ID_IS_NULL = -1;
 	private static final int POST_REQUEST = 0;
@@ -54,6 +56,8 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		manager = HttpRequestManager.getInstance(this);
 
 		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
+		position = getIntent().getIntExtra("position", -1);
+		
 		if (intent_post_id == POST_ID_IS_NULL) {
 			initInfo();
 		} else {
@@ -79,11 +83,16 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		header.setInfo();
 
 		if (session.isLogin()) {
+			if (post.getUserId() == session.getCurrentUser().getId()) {
+				findViewById(R.id.post_main_delete_btn).setVisibility(View.VISIBLE);
+			}
 			if (dbProvider.isExistLike(post.getId(), "Post")) {
 				likeButton.setText(getString(R.string.default_string_unlike));
 			} else {
 				likeButton.setText(getString(R.string.default_string_like));
 			}
+		} else {
+			findViewById(R.id.post_main_delete_btn).setVisibility(View.GONE);
 		}
 	}
 
@@ -223,7 +232,9 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			onResume();
 			break;
 		case POST_DELETE_REQUEST:
-			setResult(RESULT_OK);
+			Intent intent = new Intent();
+			intent.putExtra("position", position);
+			setResult(RESULT_OK, intent);
 			finish();
 			break;
 		}

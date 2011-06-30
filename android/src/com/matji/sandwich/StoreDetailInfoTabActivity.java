@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TabHost;
 
 import com.matji.sandwich.base.BaseTabActivity;
 
@@ -15,6 +16,8 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 		
 		defaultIntent = new Intent(this, StoreDefaultInfoActivity.class);
 		noteIntent = new Intent(this, StoreNoteListActivity.class);
+		
+		TabHost tabHost = getTabHost();
 		
 		tabHost.addTab(tabHost.newTabSpec("tab1")
 				.setIndicator(getString(R.string.store_detail_info_default))
