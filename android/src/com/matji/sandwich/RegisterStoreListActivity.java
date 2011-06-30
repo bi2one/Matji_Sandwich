@@ -6,8 +6,6 @@ import android.view.View;
 import android.content.Intent;
 import android.content.Context;
 import android.widget.Button;
-import android.widget.ListView;
-import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.StoreNearRadiusListView;

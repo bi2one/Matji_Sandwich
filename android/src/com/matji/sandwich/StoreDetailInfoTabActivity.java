@@ -2,7 +2,6 @@ package com.matji.sandwich;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TabHost;
 
 import com.matji.sandwich.base.BaseTabActivity;
 
@@ -24,22 +23,4 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 				.setIndicator(getString(R.string.store_detail_info_note))
 				.setContent(noteIntent));
 	}
-	
-//	@Override
-//	protected String usedTitleBar() {
-//		// TODO Auto-generated method stub
-//		return "StoreDetailInfoActivity";
-//	}
-//	
-//	@Override
-//	protected boolean setTitleBarButton(Button button) {
-//		button.setText("Info");
-//		return true;
-//	}
-//
-//	@Override
-//	protected void onTitleBarItemClicked(View view) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 }

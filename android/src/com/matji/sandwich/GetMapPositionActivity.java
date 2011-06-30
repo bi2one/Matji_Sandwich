@@ -1,36 +1,19 @@
 package com.matji.sandwich;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import android.content.Intent;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 import android.app.Activity;
 
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
 
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.map.MatjiMapView;
@@ -64,7 +47,7 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
     private GeocodeHttpRequest geocodeRequest;
     private Location prevLocation;
     private CenterOverlay centerOverlay;
-    private boolean isMapClicked;
+//    private boolean isMapClicked;
     private String lastAddress;
     private double lastLatitude;
     private double lastLongitude;

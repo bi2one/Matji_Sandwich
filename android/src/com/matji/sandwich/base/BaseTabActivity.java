@@ -22,8 +22,6 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,18 +69,15 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
 	
 	@Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
 		super.onRestart();
 		Log.d("LifeCycle", "onRestart at " + this.getClass());
 	}
 	
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		Log.d("LifeCycle", "onPause at " + this.getClass());
-		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
-		
+		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);		
 	}
 	
 	@Override

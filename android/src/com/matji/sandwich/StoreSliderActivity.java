@@ -13,7 +13,6 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.RequestableMListView;
 import com.matji.sandwich.widget.SearchBar;
-import com.matji.sandwich.widget.SearchBar;
 import com.matji.sandwich.widget.StoreListView;
 import com.matji.sandwich.widget.StoreNearListView;
 import com.matji.sandwich.widget.StoreSearchListView;
