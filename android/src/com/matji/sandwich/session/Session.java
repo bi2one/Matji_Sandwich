@@ -66,7 +66,10 @@ public class Session implements Requestable {
 		mManager = new HttpRequestManager(mContext, this);
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionAuthorize(userid, password);
+		
 		mManager.request(activity, request, AUTHORIZE);
+		
+		
 	}
 	
 	
@@ -91,27 +94,34 @@ public class Session implements Requestable {
 		return (mPrefs.getObject(keyForCurrentUser) == null) ? false : true;	
 	}
 	
+	
+	public boolean saveMe(Me me){
+		try {
+			mPrefs.setObject(keyForCurrentUser, me.getUser());
+		} catch (NotSerializableException e) {
+			e.printStackTrace();
+		}
+		
+		mPrefs.setString(keyForAccessToken, me.getToken());
+		mPrefs.commit();
+		
+		removePrivateDataFromDatabase();
+		
+		DBProvider dbProvider = DBProvider.getInstance(mContext);				
+		dbProvider.insertBookmarks(me.getBookmarks());
+		dbProvider.insertLikes(me.getLikes());
+		dbProvider.insertFollowers(me.getFollowers());
+		dbProvider.insertFollowings(me.getFollowings());
+
+		return true;
+	}
+	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (tag == AUTHORIZE){
 				Me me = (Me)data.get(0);
 				
-				try {
-					mPrefs.setObject(keyForCurrentUser, me.getUser());
-				} catch (NotSerializableException e) {
-					e.printStackTrace();
-				}
+				saveMe(me);
 				
-				mPrefs.setString(keyForAccessToken, me.getToken());
-				mPrefs.commit();
-				
-				removePrivateDataFromDatabase();
-				
-				DBProvider dbProvider = DBProvider.getInstance(mContext);				
-				dbProvider.insertBookmarks(me.getBookmarks());
-				dbProvider.insertLikes(me.getLikes());
-				dbProvider.insertFollowers(me.getFollowers());
-				dbProvider.insertFollowings(me.getFollowings());
-
 				if (mLoginable != null)
 					mLoginable.loginCompleted();
 		}

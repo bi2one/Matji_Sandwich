@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener{
+	public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;
+	
+	
 	protected abstract String titleBarText();
 	protected abstract boolean setTitleBarButton(Button button);
 	protected abstract void onTitleBarItemClicked(View view);

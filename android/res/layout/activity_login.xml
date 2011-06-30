@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
-	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent"
+	style="@style/DefaultFill" 
 	android:padding="30dp">
 	<EditText android:id="@+id/username" 
-		android:layout_alignParentTop="true"
 		android:text="test2"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:singleLine="true" 
 		android:lines="1" /> 
 	<EditText android:id="@+id/password"  
-		android:layout_below="@id/username"
 		android:text="test2"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:singleLine="true" 
 		android:password="true"
 		android:lines="1" />
-	<LinearLayout style="@style/DefaultFill" 
-		android:layout_below="@id/password" 
+	<LinearLayout style="@style/DefaultWidthFill"
 		android:orientation="horizontal" >
 		<Button android:id="@+id/ok" 
 			style="@style/DefaultWrap"
@@ -30,8 +26,19 @@
 		<Button android:id="@+id/cancel" 
 			style="@style/DefaultWrap"
 			android:onClick="cancelButtonClicked" 
-			android:layout_below="@id/password" 
 			android:layout_weight="1"
 			android:text="취소" />
+	</LinearLayout>
+	
+	<LinearLayout style="@style/DefaultFill"
+			android:orientation="horizontal">
+		<Button android:id="@+id/twitterLogin"
+				style="@style/DefaultWrap"
+				android:text="Login via Twitter"
+				android:onClick="twitterLoginClicked"/>
+		<Button android:id="@+id/facebookLogin"
+				style="@style/DefaultWrap"
+				android:text="Login via Facebook"
+				android:onClick="facebookLoginClicked"/>				
 	</LinearLayout>		
-</RelativeLayout>
+</LinearLayout>

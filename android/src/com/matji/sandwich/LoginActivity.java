@@ -1,8 +1,12 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.http.request.MeHttpRequest;
+import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,5 +59,27 @@ public class LoginActivity extends BaseActivity implements Loginable {
 		
 	}
 
-
+	public void twitterLoginClicked(View v){
+		MeHttpRequest request = new MeHttpRequest(this);
+		request.authorizeViaExternalService(this, Service.TWITTER);
+	}
+	
+	public void facebookLoginClicked(View v){
+		MeHttpRequest request = new MeHttpRequest(this);
+		request.authorizeViaExternalService(this, Service.FACEBOOK);
+		
+	}
+	
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if (requestCode == BaseActivity.REQUEST_EXTERNAL_SERVICE_LOGIN){
+			if (resultCode == Activity.RESULT_OK){
+				setResult(Activity.RESULT_OK);
+				finish();
+			}
+		}
+		
+	}
+	
 }

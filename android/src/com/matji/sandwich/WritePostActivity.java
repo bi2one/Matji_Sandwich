@@ -217,11 +217,11 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 
 
 	public void onTwitterButtonClicked(View v){
-
+		
 	}
 
 	public void onFacebookButtonClicked(View w){
-
+		
 	}
 
 

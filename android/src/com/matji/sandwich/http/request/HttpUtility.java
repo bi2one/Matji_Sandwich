@@ -201,7 +201,8 @@ final public class HttpUtility
 	 * @param parameters
 	 * @return
 	 */
-	private String getUrlStringWithQuery(String url, Map<String, String> parameters)
+	
+	public static String getUrlStringWithQuery(String url, Map<String, String> parameters)
 	{
 		if(url == null)
 			return null;

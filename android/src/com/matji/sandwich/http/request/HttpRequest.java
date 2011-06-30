@@ -16,7 +16,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.content.Context;
 
-enum HttpMethod { HTTP_POST, HTTP_GET }
+enum HttpMethod { HTTP_POST, HTTP_GET, HTTP_GET_VIA_WEB_BROWSER}
 
 public abstract class HttpRequest {
     private int tag;
@@ -27,6 +27,7 @@ public abstract class HttpRequest {
 	protected Hashtable<String, Object> postHashtable;
 	protected Hashtable<String, String> getHashtable;	
 	protected HttpMethod httpMethod;
+	
 	
 
 	@SuppressWarnings("unused")
