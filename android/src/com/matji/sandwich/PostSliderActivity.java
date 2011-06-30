@@ -155,8 +155,13 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-
 		case WRITE_POST_ACTIVITY:
+			if (resultCode == RESULT_OK) {
+				((RequestableMListView)mContentViews.get(mCurrentPage)).requestReload();
+			}
+			break;
+		
+		case POST_MAIN_ACTIVITY:
 			if (resultCode == RESULT_OK) {
 				((RequestableMListView)mContentViews.get(mCurrentPage)).requestReload();
 			}

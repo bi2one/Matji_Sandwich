@@ -145,7 +145,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		} else {
 			followButton.setText(R.string.user_main_follow);
 		}
-		
+
 		titleText.setText(user.getTitle());
 		introText.setText(user.getIntro());
 
@@ -157,14 +157,14 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
 		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
 		//TODO
-//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.get));
+		//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.get));
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 
-		setInfo();	
+		setInfo();
 	}
 
 
@@ -208,16 +208,18 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	public void onFollowButtonClicked(View view) {
 		if (loginRequired()) {
-			if (session.getCurrentUser().getId() != user.getId()) {
-				followButton.setClickable(false);
-				if (dbProvider.isExistFollowing(user.getId())) {
-					dbProvider.deleteFollowing(user.getId());
-					// api request
-					unfollowRequest();
-				}else {
-					dbProvider.insertFollowing(user.getId());
-					// api request
-					followRequest();
+			if (!manager.isRunning()) {
+				if (session.getCurrentUser().getId() != user.getId()) {
+					followButton.setClickable(false);
+					if (dbProvider.isExistFollowing(user.getId())) {
+						dbProvider.deleteFollowing(user.getId());
+						// api request
+						unfollowRequest();
+					}else {
+						dbProvider.insertFollowing(user.getId());
+						// api request
+						followRequest();
+					}
 				}
 			}
 		}
@@ -249,14 +251,14 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	public void onMemoButtonClicked(View view) {
 		tabHost.setCurrentTab(UserTabActivity.MEMO_PAGE);
 	}
-	
+
 	public void onTagButtonClicked(View view) {
 		Intent intent = new Intent(this, TagListActivity.class);
 		intent.putExtra("id", user.getId());
 		intent.putExtra("type", ModelType.USER);
 		startActivity(intent);
 	}
-	
+
 	public void onImageButtonClicked(View view) {
 		tabHost.setCurrentTab(UserTabActivity.IMAGE_PAGE);
 	}

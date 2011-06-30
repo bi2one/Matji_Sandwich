@@ -157,7 +157,7 @@ public class StoreHttpRequest extends HttpRequest {
 			(httpMethod == HttpMethod.HTTP_POST) ? 
 					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
 					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
-	
+
     	String resultBody = response.getHttpResponseBodyAsString();
     	String resultCode = response.getHttpStatusCode() + "";
 

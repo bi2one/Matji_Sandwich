@@ -23,9 +23,8 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 	
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
-	
-	
-	protected boolean loginRequired(){
+
+	public boolean loginRequired(){
 		Session session = Session.getInstance(this);
 		if (!session.isLogin()) {
 			startActivity(new Intent(getApplicationContext(), LoginActivity.class));

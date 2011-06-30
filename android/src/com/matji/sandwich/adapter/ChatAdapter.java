@@ -61,7 +61,6 @@ public class ChatAdapter extends MBaseAdapter {
 				messageElement.message.setMaxWidth(DisplayUtil.DPFromPixel(width));
 				break;
 			}
-			//			messageElement.dateAgo = (TextView) convertView.findViewById(R.id.chat_adapter_created_at);
 			convertView.setTag(messageElement);
 		} else {
 			messageElement = (MessageElement) convertView.getTag();

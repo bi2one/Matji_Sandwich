@@ -20,6 +20,7 @@
 		</activity>
 		<activity android:name="AlarmActivity"></activity>
 		<activity android:name="ChatActivity"
+				  android:launchMode="singleTask"
 				  android:windowSoftInputMode="stateHidden"></activity>
 		<activity android:name="LoginActivity"></activity>
 		<activity android:name="MainMapActivity"></activity>

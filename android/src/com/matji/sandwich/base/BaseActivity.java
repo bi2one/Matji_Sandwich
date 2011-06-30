@@ -20,11 +20,12 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 	protected abstract boolean setTitleBarButton(Button button);
 	protected abstract void onTitleBarItemClicked(View view);
 	
-	protected static final int LOGIN_ACTIVITY = 1;
-	protected static final int WRITE_POST_ACTIVITY = 2;
-	protected static final int WRITE_COMMENT_ACTIVITY = 3;	
+	public static final int LOGIN_ACTIVITY = 1;
+	public static final int POST_MAIN_ACTIVITY = 2;
+	public static final int WRITE_POST_ACTIVITY = 3;
+	public static final int WRITE_COMMENT_ACTIVITY = 4;	
 	
-	protected boolean loginRequired(){
+	public boolean loginRequired(){
 		Session session = Session.getInstance(this);
 		if (!session.isLogin()) {
 			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
