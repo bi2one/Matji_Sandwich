@@ -6,7 +6,6 @@ import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 
 import android.app.Activity;
 import android.app.TabActivity;

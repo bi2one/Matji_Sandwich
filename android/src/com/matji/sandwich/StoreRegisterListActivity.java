@@ -6,8 +6,6 @@ import android.view.View;
 import android.content.Intent;
 import android.content.Context;
 import android.widget.Button;
-import android.widget.ListView;
-import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.StoreNearRadiusListView;
@@ -22,24 +20,19 @@ public class StoreRegisterListActivity extends BaseActivity {
     private double mCenterLat;
     private double mCenterLng;
     private String mCenterAddr;
-    private boolean isFirst = true;
     
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_store_register_list);
-	mContext = getApplicationContext();
-	storeList = (StoreNearRadiusListView)findViewById(R.id.store_list);
-	storeList.setActivity(this);
-	
+    	super.onCreate(savedInstanceState);
+    	setContentView(R.layout.activity_store_register_list);
+    	mContext = getApplicationContext();
+    	storeList = (StoreNearRadiusListView)findViewById(R.id.store_list);
+    	storeList.setActivity(this);
+    	Intent getPositionIntent = new Intent(mContext, GetMapPositionActivity.class);
+    	startActivityForResult(getPositionIntent, GET_POSITION_TAG);
     }
 
     protected void onResume() {
-	super.onResume();
-	if (loginRequired() && isFirst) {
-	    Intent getPositionIntent = new Intent(mContext, GetMapPositionActivity.class);
-	    startActivityForResult(getPositionIntent, GET_POSITION_TAG);
-	    isFirst = false;
-	}
+    	super.onResume();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

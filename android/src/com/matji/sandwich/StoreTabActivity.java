@@ -24,7 +24,6 @@ public class StoreTabActivity extends BaseTabActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_tab);
 		store = (Store) (SharedMatjiData.getInstance().top());
 
 		mainIntent = new Intent(this, StoreMainActivity.class);

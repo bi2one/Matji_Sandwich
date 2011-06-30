@@ -27,7 +27,6 @@ public class UserTabActivity extends BaseTabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		user = (User) SharedMatjiData.getInstance().top();
 		
