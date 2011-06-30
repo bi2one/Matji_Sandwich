@@ -81,7 +81,7 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
 	mContext = getApplicationContext();
 	// mMapController.stopPanning();
 	mGpsManager = new GpsManager(mContext, this);
-	mRequestManager = new HttpRequestManager(mContext, this);
+	mRequestManager = HttpRequestManager.getInstance(mContext);
 	geocodeRequest = new GeocodeHttpRequest(mContext);
 	centerOverlay = new CenterOverlay(mContext, mMapView);
 	centerOverlay.drawOverlay();
@@ -130,12 +130,12 @@ public class GetMapPositionActivity extends BaseMapActivity implements MatjiLoca
 
     private void requestGeocodeByLocation(Location loc) {
 	geocodeRequest.actionFromLocation(loc, 1);
-	mRequestManager.request(this, geocodeRequest, GEOCODE_REQUEST_TAG);
+	mRequestManager.request(this, geocodeRequest, GEOCODE_REQUEST_TAG, this);
     }
 
     private void requestGeocodeByGeoPoint(GeoPoint point) {
 	geocodeRequest.actionFromGeoPoint(point, 1);
-	mRequestManager.request(this, geocodeRequest, GEOCODE_REQUEST_TAG);
+	mRequestManager.request(this, geocodeRequest, GEOCODE_REQUEST_TAG, this);
     }
     
     protected void onPause() {

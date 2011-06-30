@@ -29,7 +29,7 @@ PullToRefreshListView.OnRefreshListener {
 	public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
 		super(context, attrs);
 		this.adapter = adapter;
-		manager = new HttpRequestManager(context, this);
+		manager = HttpRequestManager.getInstance(context);
 
 		adapterData = new ArrayList<MatjiData>();
 		adapter.setData(adapterData);
@@ -71,7 +71,7 @@ PullToRefreshListView.OnRefreshListener {
 	public void requestNext() {
 		Log.d("refresh" , "requestNext()");
 		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-		manager.request(getActivity(), request(), REQUEST_NEXT);
+		manager.request(getActivity(), request(), REQUEST_NEXT, this);
 		nextValue();
 	}
 
@@ -80,7 +80,7 @@ PullToRefreshListView.OnRefreshListener {
 		Log.d("refresh", "requestReload()");
 		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
 		initValue();
-		manager.request(getActivity(), request(), REQUEST_RELOAD);
+		manager.request(getActivity(), request(), REQUEST_RELOAD, this);
 		nextValue();
 	}
 

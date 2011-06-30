@@ -48,7 +48,7 @@ public class StoreRegisterActivity extends BaseActivity implements Requestable {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_store_register);
 	mContext = getApplicationContext();
-	mRequestManager = new HttpRequestManager(mContext, this);
+	mRequestManager = HttpRequestManager.getInstance(mContext);
 	deliveredIntent = getIntent();
 	centerLatitude = deliveredIntent.getDoubleExtra(RETURN_KEY_CENTER_LAT, BASIC_CENTER_LATITUDE);
 	centerLongitude = deliveredIntent.getDoubleExtra(RETURN_KEY_CENTER_LNG, BASIC_CENTER_LONGITUDE);
@@ -112,7 +112,7 @@ public class StoreRegisterActivity extends BaseActivity implements Requestable {
 			      telText.getText().toString(),
 			      websiteText.getText().toString(),
 			      coverText.getText().toString());
-	    mRequestManager.request(this, request, REGIST_STORE);
+	    mRequestManager.request(this, request, REGIST_STORE, this);
 	} catch(MatjiException e) {
 	    e.performExceptionHandling(mContext);
 	}

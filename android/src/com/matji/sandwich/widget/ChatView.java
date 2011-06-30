@@ -40,7 +40,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		super(context, attrs);
 		this.adapter = new ChatAdapter(context);
 		request = new MessageHttpRequest(context);
-		manager = new HttpRequestManager(context, this);
+		manager = HttpRequestManager.getInstance(context);
 		adapterData = new ArrayList<Message>();
 		adapter.setData(adapterData);
 		scrollable = true;
@@ -83,7 +83,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 	public void requestNext() {
 		Log.d("refresh" , "requestNext()");
 		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-		manager.request(getActivity(), request(), REQUEST_NEXT);
+		manager.request(getActivity(), request(), REQUEST_NEXT, this);
 		nextValue();
 	}
 
@@ -92,7 +92,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		Log.d("refresh", "requestReload()");
 		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
 		initValue();
-		manager.request(getActivity(), request(), REQUEST_RELOAD);
+		manager.request(getActivity(), request(), REQUEST_RELOAD, this);
 		nextValue();
 	}
 
@@ -178,7 +178,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		public void onScrollStateChanged(AbsListView v, int state) {
 			switch (state) {
 			case SCROLL_STATE_IDLE: case SCROLL_STATE_FLING:
-				if (isSet && !manager.isRunning() && cTotalItemCount > 0 && cFirstVisibleItem == 0) {
+				if (isSet && !manager.isRunning(getActivity()) && cTotalItemCount > 0 && cFirstVisibleItem == 0) {
 					setScrollable(false);
 					requestable.requestNext();
 				}

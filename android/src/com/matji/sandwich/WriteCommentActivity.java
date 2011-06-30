@@ -34,7 +34,7 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 
 		post_id = getIntent().getIntExtra("post_id", 0);
 		commentField = (EditText) findViewById(R.id.comment_field);
-		manager = new HttpRequestManager(getApplicationContext(), this);
+		manager = HttpRequestManager.getInstance(getApplicationContext());
 	}
 
 	public void onCommentButtonClicked(View v) {
@@ -43,7 +43,7 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
 		} else {
 			((CommentHttpRequest) commentHttpRequest).actionNew(post_id, commentField.getText().toString().trim(), "ANDROID");
-			manager.request(this, commentHttpRequest, COMMENT_WRITE_REQUEST);
+			manager.request(this, commentHttpRequest, COMMENT_WRITE_REQUEST, this);
 		}
 	}
 

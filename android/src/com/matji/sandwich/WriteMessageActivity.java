@@ -32,7 +32,7 @@ public class WriteMessageActivity extends BaseActivity implements Requestable {
 
 		user_id = getIntent().getIntExtra("user_id", 0);
 		messageField = (EditText) findViewById(R.id.comment_field);
-		manager = new HttpRequestManager(getApplicationContext(), this);
+		manager = HttpRequestManager.getInstance(getApplicationContext());
 	}
 
 	public void onMessageButtonClicked(View v) {
@@ -41,7 +41,7 @@ public class WriteMessageActivity extends BaseActivity implements Requestable {
 			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
 		} else {
 			((MessageHttpRequest) messageHttpRequest).actionNew(user_id, messageField.getText().toString().trim());
-			manager.request(this, messageHttpRequest, MESSAGE_WRITE_REQUEST);
+			manager.request(this, messageHttpRequest, MESSAGE_WRITE_REQUEST, this);
 		}
 	}
 

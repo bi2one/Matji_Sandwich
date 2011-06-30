@@ -60,7 +60,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		setContentView(R.layout.activity_user_main);
 
 		tabHost = ((TabActivity) getParent()).getTabHost();
-		manager = new HttpRequestManager(this, this);
+		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
 
 		user = (User) SharedMatjiData.getInstance().top();
@@ -174,7 +174,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		}
 
 		((FollowingHttpRequest) request).actionNew(user.getId());
-		manager.request(this, request, FOLLOW_REQUEST);
+		manager.request(this, request, FOLLOW_REQUEST, this);
 		user.setFollowerCount(user.getFollowerCount() + 1);
 		User me = session.getCurrentUser();
 		me.setFollowingCount(me.getFollowingCount() + 1);
@@ -186,7 +186,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		}
 
 		((FollowingHttpRequest) request).actionDelete(user.getId());
-		manager.request(this, request, UN_FOLLOW_REQUEST);
+		manager.request(this, request, UN_FOLLOW_REQUEST, this);
 		user.setFollowerCount(user.getFollowerCount() - 1);
 		User me = session.getCurrentUser();
 		me.setFollowingCount(me.getFollowingCount() - 1);
@@ -208,7 +208,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	public void onFollowButtonClicked(View view) {
 		if (loginRequired()) {
-			if (!manager.isRunning()) {
+			if (!manager.isRunning(this)) {
 				if (session.getCurrentUser().getId() != user.getId()) {
 					followButton.setClickable(false);
 					if (dbProvider.isExistFollowing(user.getId())) {

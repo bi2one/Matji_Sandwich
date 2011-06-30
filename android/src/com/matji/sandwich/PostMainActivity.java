@@ -51,7 +51,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);
-		manager = new HttpRequestManager(this, this);
+		manager = HttpRequestManager.getInstance(this);
 
 		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
 		if (intent_post_id == POST_ID_IS_NULL) {
@@ -140,17 +140,17 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 
 	public void onDeleteButtonClicked(View v) {
-		if (!manager.isRunning()) {
+		if (!manager.isRunning(this)) {
 			PostHttpRequest postRequest = new PostHttpRequest(this);
 			postRequest.actionDelete(post.getId());
-			manager.request(this, postRequest, POST_DELETE_REQUEST);
+			manager.request(this, postRequest, POST_DELETE_REQUEST, this);
 		}
 	}
 
 
 	public void onCommentButtonClicked(View view) {
 		if (loginRequired()) {
-			if (!manager.isRunning()) {
+			if (!manager.isRunning(this)) {
 				Intent intent = new Intent(getApplicationContext(), WriteCommentActivity.class);
 				intent.putExtra("post_id", post.getId());
 				startActivityForResult(intent, WRITE_COMMENT_ACTIVITY);
@@ -160,7 +160,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 	public void onLikeButtonClicked(View view) {
 		if (loginRequired()) {
-			if (!manager.isRunning()) {
+			if (!manager.isRunning(this)) {
 				likeButton.setClickable(false);
 				if (dbProvider.isExistLike(post.getId(), "Post")){
 					dbProvider.deleteLike(post.getId(), "Post");
@@ -183,7 +183,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			request = new PostHttpRequest(this);
 		}
 		((PostHttpRequest) request).actionShow(post_id);
-		manager.request(this, request, POST_REQUEST);
+		manager.request(this, request, POST_REQUEST, this);
 	}
 
 	private void likeRequest() {
@@ -191,7 +191,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			request = new LikeHttpRequest(this);
 		}
 		((LikeHttpRequest) request).actionPostLike(post.getId());
-		manager.request(this, request, LIKE_REQUEST);
+		manager.request(this, request, LIKE_REQUEST, this);
 		post.setLikeCount(post.getLikeCount() + 1);
 	}
 
@@ -201,7 +201,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		}
 
 		((LikeHttpRequest) request).actionPostUnLike(post.getId());
-		manager.request(this, request, UN_LIKE_REQUEST);
+		manager.request(this, request, UN_LIKE_REQUEST, this);
 		post.setLikeCount(post.getLikeCount() - 1);
 	}
 
