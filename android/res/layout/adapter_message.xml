@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<com.matji.sandwich.widget.FrameLayoutForSwipe
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/DefaultWidthFill"
 	android:background="@color/WHITE">
-	<LinearLayout
-		android:id="@+id/message_adapter_delete"
-		android:layout_width="fill_parent"
-		android:layout_height="70dp"
-		android:gravity="right|center_vertical"
-		android:padding="7dp"
-		android:visibility="gone"
-		android:background="@drawable/memo_bg_line_h10">
-		<Button
-			style="@style/DefaultWrap"
-			android:background="@drawable/btn_delete"
-			android:text="Delete"
-			android:textColor="@color/WHITE"
-			android:id="@+id/message_adapter_delete_btn" />
-	</LinearLayout>
+	<include
+		layout="@layout/adapter_swipe_rear" />
 	<RelativeLayout
 		android:id="@+id/message_adapter_thread"
 		style="@style/DefaultFill"
 		android:layout_width="fill_parent"
-		android:layout_height="70dp"
+		android:layout_height="wrap_content"
 		android:background="@color/WHITE">
 		<LinearLayout
 			android:id="@+id/image"
@@ -74,4 +61,4 @@
 			android:padding="5dp"
 			android:textColor="@color/GRAY" />
 	</RelativeLayout>
-</FrameLayout>
+</com.matji.sandwich.widget.FrameLayoutForSwipe>

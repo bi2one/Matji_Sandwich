@@ -109,7 +109,10 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		control.setNumPages(mContentViews.size());
 		control.setCurrentPage(mCurrentPage);
 		swipeView.setCurrentPage(mCurrentPage);
-		((RequestableMListView)mContentViews.get(mCurrentPage)).requestConditionally();
+		RequestableMListView currentView = (RequestableMListView) mContentViews.get(mCurrentPage);
+		if (!(currentView instanceof Searchable)) {
+			currentView.requestConditionally();
+		}
 	}
 
 	private void addPrivateStoreList() {
@@ -139,7 +142,7 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 
 	public void onViewScrollFinished(int currentPage) {
 		if (mCurrentPage != currentPage) {
-			Log.d("Matji", "pageChanged!");
+			Log.d("refresh", "pageChanged!");
 
 			try {
 				mCurrentPage = currentPage;

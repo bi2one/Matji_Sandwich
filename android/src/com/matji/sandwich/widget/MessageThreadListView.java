@@ -20,7 +20,7 @@ public class MessageThreadListView extends MessageListView implements View.OnCli
 
 	public MessageThreadListView(final Context context, AttributeSet attrs) {
 		super(context, attrs);
-		this.listener = new ListItemSwipeListener(context, this, R.id.message_adapter_thread, R.id.message_adapter_delete, 0) {
+		this.listener = new ListItemSwipeListener(context, this, R.id.message_adapter_thread, R.id.adapter_swipe_rear, 0) {
 			@Override
 			public void onListItemClicked(int position) {
 				clickedPosition = position - 1;
@@ -51,7 +51,7 @@ public class MessageThreadListView extends MessageListView implements View.OnCli
 	
 	public void onClick(View v) {
 		switch(v.getId()) {
-		case R.id.message_adapter_delete_btn:
+		case R.id.delete_btn:
 			onDeleteButtonClicked();
 			break;
 		}

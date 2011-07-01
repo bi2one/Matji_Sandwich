@@ -211,7 +211,6 @@ public class HttpRequestManager {
 	}
 
 	public void putAndRunRequest(Activity activity, HttpRequest request, Requestable requestable) {
-	    Log.d("=====", "" + isRequestAlreadyExecute(activity, request));
 	    if (!isRequestAlreadyExecute(activity, request)) {
 		HttpAsyncTask task = new HttpAsyncTask(activity, request, requestable);
 		putHttpAsyncTask(activity, task);
@@ -277,7 +276,9 @@ public class HttpRequestManager {
 	    }
 	}
 
-	public void requestStartSpinner() { 
+	public void requestStartSpinner() {
+	    spinnerCount++;
+	    spinner.start(parent);
 	}
 
 	public boolean isRunning() {

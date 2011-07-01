@@ -39,7 +39,7 @@ public class MessageThreadAdapter extends MBaseAdapter {
 			messageElement.nick = (TextView) convertView.findViewById(R.id.message_adapter_nick);
 			messageElement.message = (TextView) convertView.findViewById(R.id.message_adapter_message);
 			messageElement.dateAgo = (TextView) convertView.findViewById(R.id.message_adapter_created_at);
-			messageElement.delete = (Button) convertView.findViewById(R.id.message_adapter_delete_btn);
+			messageElement.delete = (Button) convertView.findViewById(R.id.delete_btn);
 
 			MessageThreadListView threadListView = (MessageThreadListView) parent;
 			messageElement.delete.setOnClickListener(threadListView);
@@ -58,7 +58,7 @@ public class MessageThreadAdapter extends MBaseAdapter {
 
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, messageElement.thumnail);
 		convertView.findViewById(R.id.message_adapter_thread).setVisibility(View.VISIBLE);
-		convertView.findViewById(R.id.message_adapter_delete).setVisibility(View.GONE);
+		convertView.findViewById(R.id.adapter_swipe_rear).setVisibility(View.GONE);
 		messageElement.nick.setText(user.getNick());
 		messageElement.message.setText(message.getMessage());
 		messageElement.dateAgo.setText(TimeUtil.getAgoFromSecond(message.getAgo()));

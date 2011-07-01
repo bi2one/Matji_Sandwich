@@ -84,7 +84,6 @@
   	<item name="android:layout_marginLeft">3dp</item>
   	<item name="android:text">@string/store_main_like_store</item>
   	<item name="android:textSize">11dp</item>
-  	<item name="android:textStyle">bold</item>
   	<item name="android:drawablePadding">4dp</item>
   </style>
   
@@ -94,14 +93,12 @@
   	<item name="android:layout_height">30dp</item>
   	<item name="android:layout_centerInParent">true</item>
   	<item name="android:textSize">12dp</item>
-  	<item name="android:textStyle">bold</item>
   	<item name="android:gravity">center</item>
   </style>
   
   <style name="store_main_Address" parent="DefaultWidthFill">
   	<item name="android:layout_marginTop">7dp</item>
   	<item name="android:textSize">16dp</item>
-  	<item name="android:textStyle">bold</item>
   	<item name="android:textColor">#000</item>
   </style>
 
@@ -110,7 +107,6 @@
   	<item name="android:layout_height">25dp</item>
   	<item name="android:text">@string/store_main_bookmark</item>
   	<item name="android:textSize">12dp</item>
-  	<item name="android:textStyle">bold</item>
   	<item name="android:textColor">#fff</item>
   </style>
   
@@ -150,7 +146,6 @@
   	<item name="android:layout_width">150dp</item>
   	<item name="android:layout_height">40dp</item>
   	<item name="android:textSize">16dp</item>
-  	<item name="android:textStyle">bold</item>
   </style>
   
   <!-- header_post.xml -->

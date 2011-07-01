@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.listener.ListRequestScrollListener;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.adapter.MBaseAdapter;
@@ -19,7 +20,6 @@ PullToRefreshListView.OnRefreshListener {
 	private MBaseAdapter adapter;
 	private HttpRequestManager manager;
 	private boolean canRepeat = false;
-	private boolean canRequestNext = true;
 	private int page = 1;
 	private int limit = 10;
 
@@ -70,12 +70,19 @@ PullToRefreshListView.OnRefreshListener {
 		page++;
 	}
 
+	private void syncValue() {
+		page = (adapterData.size() / limit) + 1;
+	}
+
 	public void requestNext() {
-			Log.d("refresh" , "requestNext()");
-			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-			
-			manager.request(getActivity(), request(), REQUEST_NEXT, this);
-			nextValue();
+		if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
+			syncValue();
+		}
+		Log.d("refresh" , "requestNext()");
+		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
+
+		manager.request(getActivity(), request(), REQUEST_NEXT, this);
+		nextValue();
 	}
 
 	public void setCanRepeat(boolean canRepeat) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout>
+<com.matji.sandwich.widget.FrameLayoutForSwipe>
 	<include
 		layout="@layout/adapter_swipe_rear" />
 	<RelativeLayout
@@ -61,4 +61,4 @@
 				android:layout_below="@id/comment_adapter_comment" />
 		</LinearLayout>
 	</RelativeLayout>
-</FrameLayout>
+</com.matji.sandwich.widget.FrameLayoutForSwipe>
