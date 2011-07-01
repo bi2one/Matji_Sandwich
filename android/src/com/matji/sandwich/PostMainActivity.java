@@ -112,6 +112,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	public void onResume() {
 		super.onResume();
 		if (intent_post_id == POST_ID_IS_NULL) {
+//			commentListView.setCanRequestNext(true);
 			setInfo();
 			commentListViewReload();
 		}

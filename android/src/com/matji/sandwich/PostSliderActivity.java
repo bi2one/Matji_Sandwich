@@ -99,7 +99,9 @@ public class PostSliderActivity extends BaseActivity implements OnScrollListener
 		view1.dataRefresh();
 		view2.dataRefresh();
 		view3.dataRefresh();
-		if (view4 != null) view4.dataRefresh();
+		if (view4 != null) {
+			view4.dataRefresh();
+		}
 	}
 
 	private void initPages(){		

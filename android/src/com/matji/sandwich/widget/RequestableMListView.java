@@ -19,6 +19,7 @@ PullToRefreshListView.OnRefreshListener {
 	private MBaseAdapter adapter;
 	private HttpRequestManager manager;
 	private boolean canRepeat = false;
+	private boolean canRequestNext = true;
 	private int page = 1;
 	private int limit = 10;
 
@@ -70,10 +71,11 @@ PullToRefreshListView.OnRefreshListener {
 	}
 
 	public void requestNext() {
-		Log.d("refresh" , "requestNext()");
-		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-		manager.request(getActivity(), request(), REQUEST_NEXT, this);
-		nextValue();
+			Log.d("refresh" , "requestNext()");
+			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
+			
+			manager.request(getActivity(), request(), REQUEST_NEXT, this);
+			nextValue();
 	}
 
 	public void setCanRepeat(boolean canRepeat) {
@@ -91,7 +93,7 @@ PullToRefreshListView.OnRefreshListener {
 	}
 
 
-	public void requestConditionally(){
+	public void requestConditionally() {
 		if (adapterData == null || adapterData.size() == 0){
 			requestReload();
 		}

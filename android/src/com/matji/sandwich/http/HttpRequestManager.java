@@ -277,9 +277,7 @@ public class HttpRequestManager {
 	    }
 	}
 
-	public void requestStartSpinner() {
-	    spinnerCount++;
-	    spinner.start(parent);
+	public void requestStartSpinner() { 
 	}
 
 	public boolean isRunning() {

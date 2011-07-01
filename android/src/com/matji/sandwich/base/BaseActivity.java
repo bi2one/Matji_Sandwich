@@ -58,7 +58,6 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 		// TODO Auto-generated method stub
 		super.onPause();
 		Log.d("LifeCycle", "onPause at " + this.getClass());
-		
 		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
 	}
 	
