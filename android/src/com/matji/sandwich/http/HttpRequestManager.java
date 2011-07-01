@@ -260,7 +260,7 @@ public class HttpRequestManager {
 	    while(itr.hasNext() && !result) {
 		task = (HttpAsyncTask)itr.next();
 		prevRequest = task.getRequest();
-		result = (prevRequest.getTag() == request.getTag());
+		result = prevRequest.isEqual(request);
 	    }
 	    return result;
 	}

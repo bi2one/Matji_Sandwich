@@ -15,9 +15,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class AttachFileIdsHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
-    private String action;
-    private String controller;
     private int capacity;
     
     public AttachFileIdsHttpRequest(Context context, int capacity) {
@@ -63,8 +60,8 @@ public class AttachFileIdsHttpRequest extends HttpRequest {
     public ArrayList<MatjiData> request() throws MatjiException {
     	SimpleHttpResponse response = 
     		(httpMethod == HttpMethod.HTTP_POST) ? 
-    				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
-    				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
+	    requestHttpResponsePost(null, postHashtable)
+    				:requestHttpResponseGet(null, getHashtable);
     	
 	
    		String resultBody = response.getHttpResponseBodyAsString();

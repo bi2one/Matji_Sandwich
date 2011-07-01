@@ -11,10 +11,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class NoticeHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
-	private String action;
-	private String controller;
-	
 	public NoticeHttpRequest(Context context) {
 		super(context);
 		parser = new NoticeParser(context);
@@ -40,20 +36,5 @@ public class NoticeHttpRequest extends HttpRequest {
 	
 	public void actionBadge(int last_notice_id, int last_alarm_id) {
 		// TODO
-	}
-	
-	public ArrayList<MatjiData> request() throws MatjiException {
-		SimpleHttpResponse response = 
-			(httpMethod == HttpMethod.HTTP_POST) ?
-					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
-					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
-
-		String resultBody = response.getHttpResponseBodyAsString();
-		String resultCode = response.getHttpStatusCode() + "";
-		
-		Log.d("Matji", "NoticeHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "NoticeHttpRequest resultCode: " + resultCode);
-
-		return parser.parseToMatjiDataList(resultBody);
 	}
 }

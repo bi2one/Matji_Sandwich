@@ -11,10 +11,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class LikeHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
-	private String action;
-	private String controller;
-	
 	public LikeHttpRequest(Context context) {	
 		super(context);
 		controller = "foods";
@@ -79,19 +75,4 @@ public class LikeHttpRequest extends HttpRequest {
     	postHashtable.clear();
     	postHashtable.put("post_id", post_id);
     }
-
-	public ArrayList<MatjiData> request() throws MatjiException {
-		SimpleHttpResponse response = 
-			(httpMethod == HttpMethod.HTTP_POST) ? 
-					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
-					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
-
-		String resultBody = response.getHttpResponseBodyAsString();
-		String resultCode = response.getHttpStatusCode() + "";
-
-		Log.d("Matji", "LikeHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "LikeHttpRequest resultCode: " + resultCode);
-	
-		return parser.parseToMatjiDataList(resultBody);
-	}
 }

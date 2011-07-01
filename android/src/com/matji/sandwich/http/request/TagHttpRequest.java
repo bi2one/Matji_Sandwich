@@ -11,9 +11,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class TagHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
-	private String action;
-	private String controller;
 	//	private boolean isPost; // tag �����  GET 諛⑹�..?
 
 	public TagHttpRequest(Context context) {
@@ -62,17 +59,5 @@ public class TagHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("post_id", post_id + "");
-	}
-	
-	public ArrayList<MatjiData> request() throws MatjiException {
-		SimpleHttpResponse response = requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
-
-		String resultBody = response.getHttpResponseBodyAsString();
-		String resultCode = response.getHttpStatusCode() + "";
-
-		Log.d("Matji", "TagHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "TagHttpRequest resultCode: " + resultCode);
-
-		return parser.parseToMatjiDataList(resultBody);
 	}
 }

@@ -11,10 +11,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class UrlHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
-	private String action;
-	private String controller;
-
 	public UrlHttpRequest(Context context) {
 		super(context);
 		controller = "urls";
@@ -38,17 +34,5 @@ public class UrlHttpRequest extends HttpRequest {
 		getHashtable.put("store_id", user_id + "");
 		getHashtable.put("page", page + "");
 		getHashtable.put("limit", limit + "");
-	}
-	
-	public ArrayList<MatjiData> request() throws MatjiException {
-		SimpleHttpResponse response = requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
-
-		String resultBody = response.getHttpResponseBodyAsString();
-		String resultCode = response.getHttpStatusCode() + "";
-
-		Log.d("Matji", "TagHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "TagHttpRequest resultCode: " + resultCode);
-
-		return parser.parseToMatjiDataList(resultBody);
 	}
 }

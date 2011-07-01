@@ -59,12 +59,12 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	session = Session.getInstance(mContext);
 
 	mGpsManager.start();
-	mMapView.startMapCenterThread();
+	// mMapView.startMapCenterThread();
     }
 
     protected void onResume() {
 	super.onResume();
-	// mMapView.startMapCenterThread();
+	mMapView.startMapCenterThread();
     }
 
     protected void onPause() {

@@ -11,10 +11,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class PostHttpRequest extends HttpRequest {
-    private MatjiDataParser parser;
-    private String action;
-    private String controller;
-    
     public PostHttpRequest(Context context) {
     	super(context);
 		parser = new PostParser(context);
@@ -135,20 +131,5 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
     	getHashtable.put("include", "user,store,tags");
-    }
-    
-    public ArrayList<MatjiData> request() throws MatjiException {
-    	SimpleHttpResponse response = 
-    		(httpMethod == HttpMethod.HTTP_POST) ? 
-    				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
-    				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
-	
-    	String resultBody = response.getHttpResponseBodyAsString();
-    	String resultCode = response.getHttpStatusCode() + "";
-
-    	Log.d("Matji", "PostHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "PostHttpRequest resultCode: " + resultCode);
-
-		return parser.parseToMatjiDataList(resultBody);
     }
 }

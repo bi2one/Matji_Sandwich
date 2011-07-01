@@ -12,11 +12,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class FollowingHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
-	private String controller;
-	private String action;
-
-
 	public FollowingHttpRequest(Context context) {
 		super(context);
 		controller = "followings";
@@ -68,20 +63,5 @@ public class FollowingHttpRequest extends HttpRequest {
 		actionFollowerList(user_id, page, limit);
 		
 		getHashtable.put("include", "post");
-	}
-
-	public ArrayList<MatjiData> request() throws MatjiException {
-		SimpleHttpResponse response = 
-			(httpMethod == HttpMethod.HTTP_POST) ?
-					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
-					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
-
-		String resultBody = response.getHttpResponseBodyAsString();
-		String resultCode = response.getHttpStatusCode() + "";
-
-		Log.d("Matji", "FollowingHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "FollowingHttpRequest resultCode: " + resultCode);
-
-		return parser.parseToMatjiDataList(resultBody);
 	}
 }
