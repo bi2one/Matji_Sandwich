@@ -70,8 +70,11 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 		mContentViews.add(view3);
 
 		view1.setActivity(this);
+		view1.setCanRepeat(true);
 		view2.setActivity(this);
+		view2.setCanRepeat(true);
 		view3.setActivity(this);
+		view3.setCanRepeat(true);
 
 		swipeView.addOnScrollListener(this);
 	}
@@ -94,12 +97,11 @@ public class StoreSliderActivity extends BaseActivity implements OnScrollListene
 		}
 
 		view1.dataRefresh();
-		view1.setCanRepeat(true);
 		view2.dataRefresh();
-		view2.setCanRepeat(true);
 		view3.dataRefresh();
-		view3.setCanRepeat(true);
-		if (view4 != null) view4.dataRefresh();
+		if (view4 != null){
+			view4.dataRefresh();
+		}
 	}
 
 	private void initPages(){
