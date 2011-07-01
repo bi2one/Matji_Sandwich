@@ -11,10 +11,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class AlarmHttpRequest extends HttpRequest {
-    private MatjiDataParser parser;
-    protected String action;
-    protected String controller;
-    
     public AlarmHttpRequest(Context context) {
     	super(context);
     	parser = new AlarmParser(context);
@@ -30,19 +26,4 @@ public class AlarmHttpRequest extends HttpRequest {
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
     }
-
-    public ArrayList<MatjiData> request() throws MatjiException {
-    	SimpleHttpResponse response = 
-    		(httpMethod == HttpMethod.HTTP_POST) ? 
-    				requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
-    				:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
-
-    	String resultBody = response.getHttpResponseBodyAsString();
-    	String resultCode = response.getHttpStatusCode() + "";
-    	
-    	Log.d("Matji", "AlarmHttpRequest resultBody: " + resultBody);
-    	Log.d("Matji", "AlarmHttpRequest resultCode: " + resultCode);
-    	
-    	return parser.parseToMatjiDataList(resultBody);
-        }
 }

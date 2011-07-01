@@ -25,30 +25,11 @@ public class MeHttpRequest extends HttpRequest {
 	private static final String appSecret = "ec04ba2a0b8ed62f3a99a896aed2aa";
 	private static final String redirectURI = "http://api.matji.com/callback.json"; 
 	
-	private String action;
-    private MatjiDataParser parser;
-	
 	public MeHttpRequest(Context context){
 		super(context);
 		parser = new MeParser(context);
 	}
 	
-	
-    public ArrayList<MatjiData> request() throws MatjiException {
-    	SimpleHttpResponse response = (httpMethod == HttpMethod.HTTP_POST) ? 
-    			requestHttpResponsePost(serverDomain + action , null, postHashtable)
-    			:requestHttpResponseGet(serverDomain + action , null, getHashtable);
-
-    	String resultBody = response.getHttpResponseBodyAsString();
-    	String resultCode = response.getHttpStatusCode() + "";
-
-    	Log.d("Matji", "MeHttpRequest resultBody: " + resultBody);
-    	Log.d("Matji", "MeHttpRequest resultCode: " + resultCode);
-
-    	return parser.parseToMatjiDataList(resultBody);
-    }
-
-    
     public void actionMe() {
     	action = "me";
     	Session session = Session.getInstance(context);

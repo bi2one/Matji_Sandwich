@@ -211,6 +211,7 @@ public class HttpRequestManager {
 	}
 
 	public void putAndRunRequest(Activity activity, HttpRequest request, Requestable requestable) {
+	    // Log.d("=====", "" + isRequestAlreadyExecute(activity, request));
 	    if (!isRequestAlreadyExecute(activity, request)) {
 		HttpAsyncTask task = new HttpAsyncTask(activity, request, requestable);
 		putHttpAsyncTask(activity, task);
@@ -259,7 +260,7 @@ public class HttpRequestManager {
 	    while(itr.hasNext() && !result) {
 		task = (HttpAsyncTask)itr.next();
 		prevRequest = task.getRequest();
-		result = (prevRequest.getTag() == request.getTag());
+		result = prevRequest.isEqual(request);
 	    }
 	    return result;
 	}

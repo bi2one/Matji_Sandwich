@@ -11,10 +11,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class BookmarkHttpRequest extends HttpRequest {
-    private MatjiDataParser parser;
-    private String action;
-    private String controller;
-    
     public BookmarkHttpRequest(Context context) {
     	super(context);
     	controller = "stores";
@@ -36,20 +32,5 @@ public class BookmarkHttpRequest extends HttpRequest {
     	
     	postHashtable.clear();
     	postHashtable.put("store_id", store_id);
-    }
-    
-    public ArrayList<MatjiData> request() throws MatjiException {
-    	SimpleHttpResponse response = 
-			(httpMethod == HttpMethod.HTTP_POST) ? 
-					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
-					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable); 
-	
-    	String resultBody = response.getHttpResponseBodyAsString();
-    	String resultCode = response.getHttpStatusCode() + "";
-
-    	Log.d("Matji", "StoreHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "StoreHttpRequest resultCode: " + resultCode);
-
-    	return parser.parseToMatjiDataList(resultBody);
     }
 }

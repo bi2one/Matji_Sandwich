@@ -92,7 +92,7 @@ PullToRefreshListView.OnRefreshListener {
 	public void requestReload() {
 		if (!manager.isRunning(getActivity()) || canRepeat) {
 			Log.d("refresh", "requestReload()");
-			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
+			Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
 			initValue();
 			manager.request(getActivity(), request(), REQUEST_RELOAD, this);
 			nextValue();

@@ -11,10 +11,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class RegionHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
-    private String action;
-    private String controller;
-        
     public RegionHttpRequest(Context context) {
     	super(context);
     	parser = new RegionParser(context);
@@ -47,20 +43,5 @@ public class RegionHttpRequest extends HttpRequest {
       	parser = new RegionParser(context);
       	
     	getHashtable.clear();
-    }
-    
-    public ArrayList<MatjiData> request() throws MatjiException {
-		SimpleHttpResponse response = 
-			(httpMethod == HttpMethod.HTTP_POST) ?
-					requestHttpResponsePost(serverDomain + controller + "/" + action , null, postHashtable)
-					:requestHttpResponseGet(serverDomain + controller + "/" + action , null, getHashtable);
-
-		String resultBody = response.getHttpResponseBodyAsString();
-		String resultCode = response.getHttpStatusCode() + "";
-
-		Log.d("Matji", "RegionHttpRequest resultBody: " + resultBody);
-		Log.d("Matji", "RegionHttpRequest resultCode: " + resultCode);
-
-		return parser.parseToMatjiDataList(resultBody);
     }
 }

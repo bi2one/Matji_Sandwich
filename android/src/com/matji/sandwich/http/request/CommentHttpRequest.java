@@ -12,10 +12,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class CommentHttpRequest extends HttpRequest {
-	private MatjiDataParser parser;
-	private String controller;
-	private String action;
-	
 	public CommentHttpRequest(Context context) {
 		super(context);
 		parser = new CommentParser(context);
@@ -62,21 +58,5 @@ public class CommentHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("comment_id", "" + comment_id);
-	}
-
-	public ArrayList<MatjiData> request() throws MatjiException {		
-
-		SimpleHttpResponse response = 
-			(httpMethod == HttpMethod.HTTP_POST) ? 
-					requestHttpResponsePost(serverDomain + controller +"/" + action, null, postHashtable)
-					:requestHttpResponseGet(serverDomain + controller +"/" + action, null, getHashtable); 
-
-		String resultBody = response.getHttpResponseBodyAsString();
-		String resultCode = response.getHttpStatusCode() + "";
-
-		Log.d("Matji", "CommentresultBody: " + resultBody);
-		Log.d("Matji", "CommentresultCode: " + resultCode);
-
-		return parser.parseToMatjiDataList(resultBody);
 	}
 }
