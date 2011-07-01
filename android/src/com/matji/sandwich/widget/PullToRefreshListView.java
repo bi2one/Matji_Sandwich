@@ -41,7 +41,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 	private ProgressBar mRefreshViewProgress;
 	private TextView mRefreshViewLastUpdated;
 
-	private int mCurrentScrollState;
+	protected int mCurrentScrollState;
 	private int mRefreshState;
 
 	private RotateAnimation mFlipAnimation;

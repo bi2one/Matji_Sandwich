@@ -23,7 +23,8 @@
 		<activity android:name="ChatActivity"
 				  android:launchMode="singleTask"
 				  android:windowSoftInputMode="stateHidden"></activity>
-		<activity android:name="LoginActivity"></activity>
+		<activity android:name="LoginActivity"
+				  android:launchMode="singleTask"></activity>
 		<activity android:name="MainMapActivity"></activity>
 		<activity android:name="NoticeActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
@@ -66,7 +67,8 @@
 		<activity android:name="widget.SlideGalleryActivity"></activity>
 		<activity android:name="GridGalleryActivity"></activity>
 		<activity android:name="ImageListActivity"></activity>
-		<activity android:name="ImageSliderActivity"></activity>
+		<activity android:name="ImageSliderActivity"
+				  android:screenOrientation="unspecified"></activity>
 		<activity android:name="MessageThreadActivity"
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="GetMapPositionActivity"></activity>

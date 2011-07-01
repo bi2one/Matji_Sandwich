@@ -22,7 +22,7 @@ PullToRefreshListView.OnRefreshListener {
 	private boolean canRepeat = false;
 	private int page = 1;
 	private int limit = 10;
-
+	
 	protected final static int REQUEST_NEXT = 0;
 	protected final static int REQUEST_RELOAD = 1;
 
@@ -37,14 +37,14 @@ PullToRefreshListView.OnRefreshListener {
 		adapter.setData(adapterData);
 		setAdapter(adapter);
 
-		scrollListener = new ListRequestScrollListener(this, this, manager);
+		scrollListener = new ListRequestScrollListener(this);
 		setPullDownScrollListener(scrollListener);
 
 		setOnRefreshListener(this);
 
 		this.limit = limit;
 	}
-
+	
 	protected void setPage(int page) {
 		this.page = page;
 	}
@@ -68,6 +68,10 @@ PullToRefreshListView.OnRefreshListener {
 
 	public void nextValue() {
 		page++;
+	}
+	
+	public int getScrollState() {
+		return mCurrentScrollState;
 	}
 
 	private void syncValue() {
