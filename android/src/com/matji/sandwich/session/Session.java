@@ -5,6 +5,8 @@ import java.util.*;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
 
 import com.matji.sandwich.*;
@@ -97,25 +99,8 @@ public class Session implements Requestable {
 	}
 	
 	
-	public boolean saveMe(Me me){
-		try {
-			mPrefs.setObject(keyForCurrentUser, me.getUser());
-		} catch (NotSerializableException e) {
-			e.printStackTrace();
-		}
-		
-		mPrefs.setString(keyForAccessToken, me.getToken());
-		mPrefs.commit();
-		
-		removePrivateDataFromDatabase();
-		
-		DBProvider dbProvider = DBProvider.getInstance(mContext);				
-		dbProvider.insertBookmarks(me.getBookmarks());
-		dbProvider.insertLikes(me.getLikes());
-		dbProvider.insertFollowers(me.getFollowers());
-		dbProvider.insertFollowings(me.getFollowings());
-
-		return true;
+	public void saveMe(Me me){
+		new SaveMeAsyncTask().execute(me);
 	}
 	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
@@ -152,4 +137,57 @@ public class Session implements Requestable {
 		
 		return (User)obj;
 	}
+	
+	
+	
+	
+	/*
+	 *  Async write Me info to local database
+	 */	
+	private class SaveMeAsyncTask extends AsyncTask<Me, Integer, Boolean>{
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+		}
+		
+		
+		private boolean save(Me me){
+			try {
+				mPrefs.setObject(keyForCurrentUser, me.getUser());
+			} catch (NotSerializableException e) {
+				e.printStackTrace();
+			}
+			
+			mPrefs.setString(keyForAccessToken, me.getToken());
+			mPrefs.commit();
+			
+			removePrivateDataFromDatabase();
+			
+			DBProvider dbProvider = DBProvider.getInstance(mContext);				
+			return dbProvider.insertBookmarks(me.getBookmarks()) && 
+			dbProvider.insertLikes(me.getLikes()) &&
+			dbProvider.insertFollowers(me.getFollowers()) &&
+			dbProvider.insertFollowings(me.getFollowings());
+		}
+		
+		
+		@Override
+		protected Boolean doInBackground(Me... args) {
+			// TODO Auto-generated method stub
+			if (args.length == 0) return false;
+				
+			return save(args[0]);
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			
+			Log.d("Matji", "Me info saved properly");
+		}
+	}
+
+	
 }

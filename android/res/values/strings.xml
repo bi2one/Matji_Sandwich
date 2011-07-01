@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-    0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
+    0mYEJyQuX49uQdz0KqLHqC8lOjaMmZ0nqCLX7EQ
   </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
