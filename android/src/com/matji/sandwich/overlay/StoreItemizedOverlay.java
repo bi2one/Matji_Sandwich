@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,49 +30,50 @@ import com.google.android.maps.Projection;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Tag;
-
-
+import com.matji.sandwich.base.BaseMapActivity;
+import com.matji.sandwich.StoreTabActivity;
 
 public class StoreItemizedOverlay extends ItemizedOverlay {
-    // @Override
-    public boolean onTouchEvent(MotionEvent event, MapView mapView) {
-    	// TODO Auto-generated method stub
-    	Log.d("=====","touchEvent!!");
-	return false;
-    	// removeBallon();
-    	// return super.onTouchEvent(event, mapView);
-    }
-	
+    private final int POPUP_OVERLAY_OFFSET_X = -28;
+    private final int POPUP_OVERLAY_OFFSET_Y = -30;
     private View ballonView;
     private MapView mMapView;
     private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
     private Context mContext;
+    private BaseMapActivity mActivity;
     private TextPaint mTextPaint;
     private String mCount;
-    //private Drawable mDrawable;
     private Bitmap mMarkerLocked; // 미발굴 
     private Bitmap mMarkerUnLocked; // 발굴 
     private Bitmap mMarkerBookmarked; // 즐겨찾
+    private View popupOverlay;
     private Paint mPaint;
     private int TEXT_OFFSET_X=0;
     private int TEXT_OFFSET_Y=0;
-    private int BITMAP_OFFSET_X =0;
-    private int BITMAP_OFFSET_Y = 0;
+    private int UNLOCK_BITMAP_OFFSET_X;
+    private int UNLOCK_BITMAP_OFFSET_Y;
+    private int LOCK_BITMAP_OFFSET_X;
+    private int LOCK_BITMAP_OFFSET_Y;
+    private StoreOverlayItem lastPopupItem;
     public enum MARKER_TYPE {MARKER_TYPE_UNLOCKED, MARKER_TYPE_LOCKED, MARKER_TYPE_BOOKMARKED};
 
-    public StoreItemizedOverlay(Context context, MapView mapview) {
+    public StoreItemizedOverlay(Context context, BaseMapActivity activity, MapView mapview) {
 	super(boundCenterBottom(context.getResources().getDrawable(R.drawable.marker_01)));
 	
 	this.mContext = context;
 	this.mMapView = mapview;
+	this.mActivity = activity;
 		
-	//removeBallon();
-
 	mMarkerLocked= BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_15_19);
 	mMarkerUnLocked = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_01);
-		
+
+	UNLOCK_BITMAP_OFFSET_X = mMarkerUnLocked.getWidth()/2;
+	UNLOCK_BITMAP_OFFSET_Y = mMarkerUnLocked.getHeight();
+	LOCK_BITMAP_OFFSET_X = mMarkerLocked.getWidth()/2;
+	LOCK_BITMAP_OFFSET_Y = mMarkerLocked.getHeight();
+	
 	//this.mBitmap100 = BitmapFactory.decodeResource(context.getResources(), R.drawable);
-		
+
 	mPaint = new Paint();
 	mPaint.setAlpha(255);
 	mPaint.setAntiAlias(true);
@@ -85,100 +85,94 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 	mTextPaint.setTypeface(Typeface.DEFAULT_BOLD);
     }
 
-
     public void addOverlay(Store store)
     {
 	if (size() == 0) {
 	    mMapView.getOverlays().add(this);
 	}
-		
-	GeoPoint point = new GeoPoint(store.getLat(), store.getLng());
-	    
-	String tagText = "";
-	ArrayList<Tag> tags = store.getTags();
-	if (tags != null){
-	    for(int index = 0; index < tags.size(); index++){
-		tagText += tags.get(index).getTag();
-	    }
-	}
-	    
-	StoreOverlayItem overlayitem = new StoreOverlayItem(point, store.getName(), tagText, store.getLikeCount());
-	mOverlays.add(overlayitem);
-	mPopulate();
-    }
-	
-    public void mPopulate()
-    {
-	//removeBallon();
 
+	GeoPoint point = new GeoPoint(store.getLat(), store.getLng());
+	StoreOverlayItem overlayitem = new StoreOverlayItem(point, store.getName(), store.getTagString(), store);
+	mOverlays.add(overlayitem);
+    }
+
+    public void mPopulate() {
+	setLastFocusedIndex(-1);
 	populate();
     }
 	
     @Override
 	protected OverlayItem createItem(int index) {
-	// TODO Auto-generated method stub
-	//	Log.i(TAG,"ocreateItem");
 	return mOverlays.get(index);
     }
 	
     @Override
 	public int size() {
-	// TODO Auto-generated method stub
-	//Log.i(TAG,"size()");
 	return mOverlays.size();
     }
 
-    protected boolean onTap(int index) {
-	// TODO Auto-generated method stub
-	
-	Log.d("=====","tap!::" + index);
-	// GeoPoint itemPt = getItem(index).getPoint();
-	// OverlayItem item = getItem(index);
-		    
-	// LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    private void overlayRemove(StoreOverlayItem item) {
+	StoreOverlayItem targetItem;
+	for (int i = 0; i < mOverlays.size(); i++) {
+	    targetItem = (StoreOverlayItem)mOverlays.get(i);
+	    if (item.equals(targetItem)) {
+		mOverlays.remove(targetItem);
+	    }
+	}
+    }
 
-	// LinearLayout ll = (LinearLayout)inflater.inflate(R.layout.popup_overlay, null);
-		    
-	// MapView.LayoutParams lp = 
-	//     new MapView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,
-	// 			     itemPt,-28,-30,MapView.LayoutParams.BOTTOM|MapView.LayoutParams.LEFT);
-		    
-	// TextView _item_title = (TextView)ll.findViewById(R.id.popup_item_title);
-	// TextView _item_snippet = (TextView)ll.findViewById(R.id.popup_item_snippet);
-	// lp.mode = MapView.LayoutParams.MODE_MAP;
-		    
-	// _item_title.setText(item.getTitle());
-	// _item_snippet.setText(item.getSnippet());
-		    
-		    
-	// ballonView = ll;
-	// ballonView.setOnClickListener(new OnClickListener() {
-			    
-	// 	@Override
-	// 	    public void onClick(View v) {
-	// 	    // TODO Auto-generated method stub
-	// 	    Intent intent = new Intent();
-	// 	    intent.setClass(mContext, MatjiStoreActivity.class);
-	// 	    try {
-	// 		intent.putExtra("store_id", mListStore.get(index).getId());
-	// 	    } catch (JSONException e) {
-	// 		// TODO Auto-generated catch block
-	// 		e.printStackTrace();
-	// 	    }
-	// 	    startActivity(intent);
-				
-	// 	}
-	//     });
-		    
-	// mMapView.addView(ll, lp);
-	// mMapView.getController().animateTo(itemPt);
+    private void moveOverlayToLast(StoreOverlayItem item) {
+	if (item != null) {
+	    overlayRemove(item);
+	    mOverlays.add(0, item);
+	    mPopulate();
+	}
+    }
+
+    protected boolean onTap(final int index) {
+	lastPopupItem = (StoreOverlayItem)getItem(index);
+	GeoPoint itemPoint = lastPopupItem.getPoint();
+
+	LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	popupOverlay = (View)inflater.inflate(R.layout.store_popup_overlay, null);
+	MapView.LayoutParams layoutParam = new MapView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+								    ViewGroup.LayoutParams.WRAP_CONTENT,
+								    itemPoint,
+								    POPUP_OVERLAY_OFFSET_X,
+								    POPUP_OVERLAY_OFFSET_Y,
+								    MapView.LayoutParams.BOTTOM|MapView.LayoutParams.LEFT);
+	layoutParam.mode = MapView.LayoutParams.MODE_MAP;
+	TextView title = (TextView)popupOverlay.findViewById(R.id.popup_item_title);
+	TextView snippet = (TextView)popupOverlay.findViewById(R.id.popup_item_snippet);
 	
+	title.setText(lastPopupItem.getTitle());
+	snippet.setText(lastPopupItem.getSnippet());
+	
+	popupOverlay.setOnClickListener(new OnClickListener() {
+		public void onClick(View v) {
+		    Store store = ((StoreOverlayItem)getItem(index)).getStore();
+		    Intent intent = new Intent(mActivity, StoreTabActivity.class);
+		    mActivity.startActivityWithMatjiData(intent, store);
+		}
+	    });
+
+	mMapView.addView(popupOverlay, layoutParam);
+	mMapView.getController().animateTo(itemPoint);
+
 	return false;
     }
+
+    public boolean onTouchEvent(MotionEvent event, MapView mapView) {
+	removePopupOverlay();
+	return super.onTouchEvent(event, mapView);
+    }
 	
-    public void removeBallon() {
-	if(ballonView != null)
-	    mMapView.removeView(ballonView);
+    public void removePopupOverlay() {
+	if(popupOverlay != null) {
+	    moveOverlayToLast(lastPopupItem);
+	    mMapView.removeView(popupOverlay);
+	    popupOverlay = null;
+	}
     }
 	
     @Override
@@ -193,28 +187,33 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 	    Point pt = new Point();
 	    Projection projection = mapview.getProjection();
 	    projection.toPixels(getItem(i).getPoint(), pt);
-		    
+
 	    int jjim_count = ((StoreOverlayItem)getItem(i)).getCount();
-		    
-	    if(jjim_count<100) {
+	    Store store = ((StoreOverlayItem)getItem(i)).getStore();
+
+	    if(store.isLocked()) {
+		canvas.drawBitmap(mMarkerLocked,
+				  pt.x - LOCK_BITMAP_OFFSET_X,
+				  pt.y - LOCK_BITMAP_OFFSET_Y,
+				  mPaint);
+	    } else if(jjim_count<100) {
 		if(jjim_count>-1 && jjim_count<10) {
 		    TEXT_OFFSET_X = 5;
 		    TEXT_OFFSET_Y = 5;
-		    BITMAP_OFFSET_X = mMarkerUnLocked.getWidth()/2;
-		    BITMAP_OFFSET_Y = mMarkerUnLocked.getHeight();
-		}
-		else if(jjim_count>9 && jjim_count<100) {
+		} else if(jjim_count>9 && jjim_count<100) {
 		    TEXT_OFFSET_X = 10;
 		    TEXT_OFFSET_Y = 5;
-		    BITMAP_OFFSET_X = mMarkerUnLocked.getWidth()/2;
-		    BITMAP_OFFSET_Y = mMarkerUnLocked.getHeight();
 		}
-		canvas.drawBitmap(mMarkerUnLocked,pt.x-BITMAP_OFFSET_X,pt.y-BITMAP_OFFSET_Y, mPaint);
+		canvas.drawBitmap(mMarkerUnLocked,
+				  pt.x - UNLOCK_BITMAP_OFFSET_X,
+				  pt.y - UNLOCK_BITMAP_OFFSET_Y,
+				  mPaint);
 			    
-		canvas.drawText(String.valueOf(jjim_count), pt.x + mMarkerUnLocked.getWidth() / 2 - BITMAP_OFFSET_X-TEXT_OFFSET_X,
-				pt.y + mMarkerUnLocked.getHeight() / 2 - BITMAP_OFFSET_Y+TEXT_OFFSET_Y, mTextPaint);
-	    }
-	    else {
+		canvas.drawText(String.valueOf(jjim_count),
+				pt.x - TEXT_OFFSET_X,
+				pt.y - (UNLOCK_BITMAP_OFFSET_Y / 2) + TEXT_OFFSET_Y,
+				mTextPaint);
+	    } else {
 		canvas.drawBitmap(mMarkerUnLocked,pt.x,pt.y, mPaint);
 	    }
 	}
@@ -226,19 +225,28 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 
     private class StoreOverlayItem extends OverlayItem {
 	private int count;
+	private Store store;
+	
 	public StoreOverlayItem(GeoPoint point, String title, String snippet) {
-	    super(point, title, snippet);                                                 
-	    // TODO Auto-generated constructor stub
+	    super(point, title, snippet);
 	}
 
-	public StoreOverlayItem(GeoPoint point, String title, String snippet, int count) {
+	public StoreOverlayItem(GeoPoint point, String title, String snippet, Store store) {
 	    super(point, title, snippet);
-	    this.count = count;
-	    // TODO Auto-generated constructor stub
+	    this.count = store.getLikeCount();
+	    this.store = store;
 	}
 
 	protected int getCount() {
 	    return count;
 	}
-    }       
+
+	protected Store getStore() {
+	    return store;
+	}
+
+	public boolean equals(StoreOverlayItem item) {
+	    return getPoint().equals(item.getPoint()) && getTitle().equals(item.getTitle());
+	}
+    }
 }

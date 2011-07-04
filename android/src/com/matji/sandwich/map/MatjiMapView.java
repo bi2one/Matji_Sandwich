@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 public class MatjiMapView extends MapView {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
     private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 500;
+    private static final int MAP_CENTER_CHANGE_BOUND_LAT = 10;
+    private static final int MAP_CENTER_CHANGE_BOUND_LNG = 10;
     private MatjiMapCenterListener listener;
     private MapAsyncTask asyncTask;
     private GeoPoint mapCenter;
@@ -60,7 +62,12 @@ public class MatjiMapView extends MapView {
 	}
 
 	private boolean geoPointEquals(GeoPoint p1, GeoPoint p2) {
-	    return (p1.getLatitudeE6() == p2.getLatitudeE6() && p2.getLongitudeE6() == p2.getLongitudeE6());
+	    int p1Lat = p1.getLatitudeE6();
+	    int p1Lng = p1.getLongitudeE6();
+	    int p2Lat = p2.getLatitudeE6();
+	    int p2Lng = p2.getLongitudeE6();
+	    return (p1Lat <= p2Lat + MAP_CENTER_CHANGE_BOUND_LAT && p1Lat >= p2Lat - MAP_CENTER_CHANGE_BOUND_LAT &&
+		    p1Lng <= p2Lng + MAP_CENTER_CHANGE_BOUND_LNG && p1Lng >= p2Lng - MAP_CENTER_CHANGE_BOUND_LNG);
 	}
 	
 	protected Integer doInBackground(Integer... params) {

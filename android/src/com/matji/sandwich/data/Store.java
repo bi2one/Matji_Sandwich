@@ -231,4 +231,22 @@ public class Store extends MatjiData implements Serializable {
 	public ArrayList<Food> getFoods() {
 		return foods;
 	}
+
+    public boolean isLocked() {
+	return reg_user_id == 0;
+    }
+
+    public String getTagString() {
+	String tagText = "등록된 태그가 없습니다.";
+	int index = 0;
+
+	if (tags != null && tags.size() > 0){
+	    tagText = tags.get(0).getTag();
+	    for(index = 1; index < tags.size(); index++){
+		tagText += "," + tags.get(index).getTag();
+	    }
+	}
+
+	return tagText;
+    }
 }

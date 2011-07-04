@@ -4,9 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.Address;
 import android.os.Bundle;
 import android.view.View;
+import android.view.KeyEvent;
+// import android.view.inputmethod.InputMethodManager;
+import android.view.View.OnKeyListener;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
@@ -15,9 +21,11 @@ import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.CoordinateRegion;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.AddressMatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.overlay.StoreItemizedOverlay;
@@ -28,23 +36,27 @@ import com.matji.sandwich.session.Session;
 import java.util.ArrayList;
 //import java.util.List;
 
-
-public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener, MatjiMapCenterListener, Requestable{
+public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener,
+								MatjiMapCenterListener,
+								Requestable,
+								OnKeyListener {
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
     private static final int MAX_STORE_COUNT = 60;
     private static final int NEARBY_STORE = 1;
+    private static final int SEARCH_LOCATION = 2;
 
     private Context mContext;
     private GpsManager mGpsManager;
     private MatjiMapView mMapView;
     private MapController mMapController;
+    private EditText mSearchView;
     private Location prevLocation;
-    //private List<Overlay> mapOverlays;
     private StoreItemizedOverlay storeItemizedOverlay;
     private ArrayList<MatjiData> stores;
     private HttpRequestManager mRequestManager;
     private Session session;
+    // private InputMethodManager imm;
 
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -54,9 +66,13 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mMapView.setMapCenterListener(this);
 	mContext = getApplicationContext();
 	mGpsManager = new GpsManager(mContext, this);
+	mSearchView = (EditText)findViewById(R.id.main_map_search_box);
 	mRequestManager = HttpRequestManager.getInstance(mContext);
-	storeItemizedOverlay = new StoreItemizedOverlay(mContext, mMapView);
+	storeItemizedOverlay = new StoreItemizedOverlay(mContext, this, mMapView);
 	session = Session.getInstance(mContext);
+
+	mSearchView.setOnKeyListener(this);
+	// imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
 	mGpsManager.start();
 	// mMapView.startMapCenterThread();
@@ -118,6 +134,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
 	    storeItemizedOverlay.addOverlay(store);
 	}
+	storeItemizedOverlay.mPopulate();
 	mMapView.postInvalidate();
     }
 
@@ -126,7 +143,11 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	case NEARBY_STORE:
 	    stores = data;
 	    drawOverlays();
-	    break;		
+	    break;
+	case SEARCH_LOCATION:
+	    Address address = ((AddressMatjiData)data.get(0)).getAddress();
+	    GeoPoint point = new GeoPoint((int)(address.getLatitude() * 1E6), (int)(address.getLongitude() * 1E6));
+	    mMapController.animateTo(point);
 	}
     }
 
@@ -205,5 +226,20 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    Intent storeRegisterIntent = new Intent(mContext, StoreRegisterListActivity.class);
 	    startActivity(storeRegisterIntent);
 	}
+    }
+
+    private void findAndMovePosition(String seed) {
+	GeocodeHttpRequest request = new GeocodeHttpRequest(mContext);
+	request.actionFromLocationName(seed, 1);
+	mRequestManager.request(this, request, SEARCH_LOCATION, this);
+    }
+
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+	if (v.getId() == mSearchView.getId()) {
+	    if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
+		findAndMovePosition(mSearchView.getText().toString());
+	    }
+	}
+	return false;
     }
 }
