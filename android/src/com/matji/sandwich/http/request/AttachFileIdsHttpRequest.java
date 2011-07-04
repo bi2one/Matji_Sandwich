@@ -1,7 +1,6 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.AttachFileParser;
-import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.adapter.ImageAdapter;
 import com.matji.sandwich.data.AttachFile;

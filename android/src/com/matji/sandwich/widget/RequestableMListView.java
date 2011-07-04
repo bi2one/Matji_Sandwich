@@ -20,9 +20,11 @@ PullToRefreshListView.OnRefreshListener {
 	private MBaseAdapter adapter;
 	private HttpRequestManager manager;
 	private boolean canRepeat = false;
+	private int prevPage = 0;
 	private int page = 1;
 	private int limit = 10;
-	
+
+
 	protected final static int REQUEST_NEXT = 0;
 	protected final static int REQUEST_RELOAD = 1;
 
@@ -37,7 +39,7 @@ PullToRefreshListView.OnRefreshListener {
 		adapter.setData(adapterData);
 		setAdapter(adapter);
 
-		scrollListener = new ListRequestScrollListener(this);
+		scrollListener = new ListRequestScrollListener(context, this);
 		setPullDownScrollListener(scrollListener);
 
 		setOnRefreshListener(this);
@@ -66,7 +68,8 @@ PullToRefreshListView.OnRefreshListener {
 		page = 1;
 	}
 
-	public void nextValue() {
+	public void nextValue() {			
+		prevPage = page;
 		page++;
 	}
 	
@@ -82,11 +85,17 @@ PullToRefreshListView.OnRefreshListener {
 		if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
 			syncValue();
 		}
-		Log.d("refresh" , "requestNext()");
-		Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-
-		manager.request(getActivity(), request(), REQUEST_NEXT, this);
-		nextValue();
+		
+		if (prevPage < page) {
+			Log.d("page", "2. " + prevPage + ", " + page);
+			Log.d("refresh" , "requestNext()");
+			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
+			manager.request(getActivity(), request(), REQUEST_NEXT, this);
+			nextValue();			
+			Log.d("page", "3. " + prevPage + ", " + page);
+		} else if (prevPage == page) {
+			prevPage = page - 1;
+		}
 	}
 
 	public void setCanRepeat(boolean canRepeat) {

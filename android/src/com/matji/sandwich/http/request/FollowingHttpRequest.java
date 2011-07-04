@@ -1,15 +1,9 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.FollowingParser;
-import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.UserParser;
-import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
-import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 public class FollowingHttpRequest extends HttpRequest {
 	public FollowingHttpRequest(Context context) {

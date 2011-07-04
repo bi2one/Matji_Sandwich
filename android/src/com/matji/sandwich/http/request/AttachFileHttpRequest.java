@@ -1,16 +1,10 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.parser.AttachFileParser;
-import com.matji.sandwich.http.parser.MatjiDataParser;
-import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 public class AttachFileHttpRequest extends HttpRequest {
     public AttachFileHttpRequest(Context context) {

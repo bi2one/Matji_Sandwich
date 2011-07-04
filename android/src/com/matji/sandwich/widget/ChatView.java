@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -16,7 +17,6 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.adapter.ChatAdapter;
-import com.matji.sandwich.adapter.MBaseAdapter;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 	private ChatRequestScrollListener scrollListener;
 	private ArrayList<Message> adapterData;
 	private HttpRequestManager manager;
-	private MBaseAdapter adapter;
+	private ChatAdapter adapter;
 	private HttpRequest request;
 	private boolean scrollable;
 	private int thread_id;
@@ -47,9 +47,18 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 
 		setDivider(null);
 		setCacheColorHint(Color.TRANSPARENT);
+		setItemsCanFocus(false);
+		setChoiceMode(CHOICE_MODE_MULTIPLE);
 
 		scrollListener = new ChatRequestScrollListener(this, manager);
 		setOnScrollListener(scrollListener);
+		setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+				// user clicked a list item, make it "selected"
+				adapter.setSelectedPosition(position-1);
+			}
+        });
 	}
 
 	public void addMessage(Message message) {
@@ -134,7 +143,6 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 				break;
 			}
 		}
-
 	}
 
 	
@@ -172,8 +180,6 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 			isSet = true;
 		}
 
-
-		
 		public void onScrollStateChanged(AbsListView v, int state) {
 			switch (state) {
 			case SCROLL_STATE_IDLE: case SCROLL_STATE_FLING:
@@ -211,4 +217,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 	public HttpRequestManager getManager() {
 		return manager;
 	}
+	
+	
+	
 }

@@ -1,19 +1,23 @@
 package com.matji.sandwich.listener;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View.OnTouchListener;
 import android.view.View;
 import android.widget.AbsListView;
 
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.widget.ListScrollRequestable;
-import com.matji.sandwich.widget.RequestableMListView;
 
 public class ListRequestScrollListener implements AbsListView.OnScrollListener, OnTouchListener {
+	private Context context;
 	private ListScrollRequestable requestable;
 	private boolean isSet;
 	private int curFirstVisibleItem = 0;
-	
-	public ListRequestScrollListener(ListScrollRequestable requestable) {
+
+	public ListRequestScrollListener(Context context, ListScrollRequestable requestable) {
+		this.context = context;
 		this.requestable = requestable;
 		isSet = false;
 	}
@@ -27,17 +31,14 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
 	}
 
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
-	
+
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-		int currentScrollState = ((RequestableMListView) requestable).getScrollState();
-		if (isSet && totalItemCount > 0 &&
-				(firstVisibleItem + visibleItemCount) == totalItemCount &&
-				firstVisibleItem != curFirstVisibleItem) {
-			if (currentScrollState != SCROLL_STATE_IDLE) {
+			if (isSet 
+					&& !HttpRequestManager.getInstance(context).isRunning()
+					&& (firstVisibleItem + visibleItemCount) == totalItemCount 
+					&& totalItemCount > 0
+					&& firstVisibleItem != curFirstVisibleItem) {
 				requestable.requestNext();
-			}else {
-				((RequestableMListView) requestable).setSelection(firstVisibleItem);
-			}
 		}
 	}
 
@@ -62,4 +63,4 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
 		// }
 		return false;
 	}
-}
+} 

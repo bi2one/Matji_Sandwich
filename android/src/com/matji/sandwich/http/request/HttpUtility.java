@@ -11,14 +11,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.util.ByteArrayBuffer;
-
-// import com.matji.android.v2.common.Constants;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

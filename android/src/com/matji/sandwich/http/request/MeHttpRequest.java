@@ -1,20 +1,12 @@
 package com.matji.sandwich.http.request;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.webkit.WebView;
 
 import com.matji.sandwich.ExternalServiceWebViewActivity;
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.parser.MatjiDataParser;
 import com.matji.sandwich.http.parser.MeParser;
-import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.session.Session;
 
 

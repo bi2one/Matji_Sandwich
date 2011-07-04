@@ -50,8 +50,8 @@ public abstract class HttpRequest {
     	String resultBody = response.getHttpResponseBodyAsString();
     	String resultCode = response.getHttpStatusCode() + "";
 
-    	Log.d("Matji", "StoreHttpRequest resultBody: " + resultBody);
-	Log.d("Matji", "StoreHttpRequest resultCode: " + resultCode);
+    	Log.d("Matji", getClass() + " resultBody:" + resultBody);
+	Log.d("Matji", getClass() + "resultCode: " + resultCode);
 
     	return parser.parseToMatjiDataList(resultBody);
     }

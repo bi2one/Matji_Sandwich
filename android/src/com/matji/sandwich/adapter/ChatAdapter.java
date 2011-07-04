@@ -22,6 +22,11 @@ public class ChatAdapter extends MBaseAdapter {
 	private final int VIEW_TYPE_COUNT = 2; 
 	private final int ME = 0;
 	private final int OTHER = 1;
+	
+	private int backgroundId;
+	
+	// used to keep selected position in ListView
+	private int selectedPos = -1;	// init value for not-selected
 
 	public ChatAdapter(Context context) {
 		super(context);
@@ -30,6 +35,16 @@ public class ChatAdapter extends MBaseAdapter {
 		downloader = new MatjiImageDownloader();
 	}
 	
+	public void setSelectedPosition(int pos){
+		selectedPos = pos;
+		// inform the view of this change
+		notifyDataSetChanged();
+	}
+
+	public int getSelectedPosition(){
+		return selectedPos;
+	}
+
 	@Override
 	public int getItemViewType(int position) {
 		Message message = (Message) data.get(position);
@@ -70,15 +85,29 @@ public class ChatAdapter extends MBaseAdapter {
 			User sentUser = message.getSentUser();
 			downloader.downloadUserImage(sentUser.getId(), MatjiImageDownloader.IMAGE_SSMALL, messageElement.thumnail);
 		}
-		
-		messageElement.message.setText(message.getMessage());
 
+        // change the row color based on selected state		
+        if (selectedPos == position) {
+        	if (getItemViewType(position) == OTHER) {
+        		messageElement.message.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.msg_bubble_other_pressed));
+        	} else {
+        		messageElement.message.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.msg_bubble_me_pressed));
+        	}
+        } else {
+        	if (getItemViewType(position) == OTHER) {
+        		messageElement.message.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.msg_bubble_other_default));
+        	} else {
+        		messageElement.message.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.msg_bubble_me_default));
+        	}
+        }
+        
+		messageElement.message.setText(message.getMessage());
+        
 		return convertView;
 	}
 
 	private class MessageElement {
 		ImageView thumnail;
 		TextView message;
-		//		TextView dateAgo;
 	}
 }
