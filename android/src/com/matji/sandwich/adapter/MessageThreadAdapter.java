@@ -42,6 +42,8 @@ public class MessageThreadAdapter extends MBaseAdapter {
 			messageElement.delete = (Button) convertView.findViewById(R.id.delete_btn);
 
 			MessageThreadListView threadListView = (MessageThreadListView) parent;
+			messageElement.thumnail.setOnClickListener(threadListView);
+			messageElement.nick.setOnClickListener(threadListView);
 			messageElement.delete.setOnClickListener(threadListView);
 			
 			convertView.setOnTouchListener(listener);
@@ -56,9 +58,14 @@ public class MessageThreadAdapter extends MBaseAdapter {
 			user = message.getReceivedUser();
 		}
 
+		messageElement.thumnail.setTag(position+"");
+		messageElement.nick.setTag(position+"");
+		messageElement.delete.setTag(position+"");
+
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, messageElement.thumnail);
 		convertView.findViewById(R.id.message_adapter_thread).setVisibility(View.VISIBLE);
 		convertView.findViewById(R.id.adapter_swipe_rear).setVisibility(View.GONE);
+		
 		messageElement.nick.setText(user.getNick());
 		messageElement.message.setText(message.getMessage());
 		messageElement.dateAgo.setText(TimeUtil.getAgoFromSecond(message.getAgo()));

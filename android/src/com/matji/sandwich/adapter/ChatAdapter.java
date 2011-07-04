@@ -23,8 +23,6 @@ public class ChatAdapter extends MBaseAdapter {
 	private final int ME = 0;
 	private final int OTHER = 1;
 	
-	private int backgroundId;
-	
 	// used to keep selected position in ListView
 	private int selectedPos = -1;	// init value for not-selected
 
@@ -33,6 +31,10 @@ public class ChatAdapter extends MBaseAdapter {
 		session = Session.getInstance(context);
 		myId = session.getCurrentUser().getId();
 		downloader = new MatjiImageDownloader();
+	}
+	
+	public void initSelectedPosition() {
+		selectedPos = -1;
 	}
 	
 	public void setSelectedPosition(int pos){

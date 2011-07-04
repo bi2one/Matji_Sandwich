@@ -36,7 +36,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -141,7 +140,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 		
 		postHttpRequest = new PostHttpRequest(getApplicationContext());
 		if(postField.getText().toString().trim().equals("")) {
-			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), R.string.writing_content_post, Toast.LENGTH_SHORT).show();
 		} else {
 			String tagText = tagsField.getText().toString().trim();
 			double lat = (double)mapView.getMapCenter().getLatitudeE6() / (double)1E6;

@@ -100,7 +100,7 @@ public abstract class ListItemSwipeListener extends SwipeGestureListener {
 		int currentViewPosition = getChildAtPosition(position);
 		int prevViewPositoin = getChildAtPosition(prevPosition);
 
-		if (isMyItem(position-headerPos-1) && !hasAnimationStarted) {
+		if (isMyItem(position-headerPos-1) && !hasAnimationStarted && listView.getChildAt(currentViewPosition) != null) {
 			currentFront = listView.getChildAt(currentViewPosition).findViewById(frontId);
 			currentRear = listView.getChildAt(currentViewPosition).findViewById(rearId);
 

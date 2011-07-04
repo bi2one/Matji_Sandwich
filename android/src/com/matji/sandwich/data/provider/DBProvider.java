@@ -300,7 +300,7 @@ public class DBProvider {
 
 		return true;
 	}
-
+	
 	public boolean isExistFollower(int id) {
 		return getRecordNums(FOLLOWER_TABLE_NAME, "followed_user_id =  " + id) > 0;
 	}

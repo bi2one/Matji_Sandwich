@@ -3,7 +3,7 @@ package com.matji.sandwich.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Message extends MatjiData{
+public class Message extends MatjiData implements Comparable<Message>{
 	private int id;
 	private int sent_user_id;
 	private int received_user_id;
@@ -122,5 +122,10 @@ public class Message extends MatjiData{
 
 	public long getAgo() {
 		return ago;
+	}
+
+	@Override
+	public int compareTo(Message m) {
+		return new Long(ago).compareTo(new Long(m.getAgo()));
 	}
 }

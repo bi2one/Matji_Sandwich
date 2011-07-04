@@ -29,6 +29,15 @@ public class MessageHttpRequest extends HttpRequest {
     	postHashtable.clear();
     	postHashtable.put("message_id", message_id+"");
     }
+    
+    public void actionDeleteThread(int thread_id){
+    	parser = new MessageParser(context);
+    	httpMethod = HttpMethod.HTTP_POST;
+    	action = "delete_thread";
+    	
+    	postHashtable.clear();
+    	postHashtable.put("thread_id", thread_id+"");
+    }
 
     public void actionShow(int message_id){
     	parser = new MessageParser(context);

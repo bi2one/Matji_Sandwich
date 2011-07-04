@@ -52,7 +52,7 @@ public class SearchBar extends LinearLayout implements OnClickListener, OnEditor
 
 	private void search(String keyword) {
 		if (keyword.equals("")) {
-			Toast.makeText(context, R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, R.string.writing_content_search, Toast.LENGTH_SHORT).show();
 		} else {
 			KeyboardUtil.hideKeyboard((Activity)context);
 			searchableView.search(keyword);

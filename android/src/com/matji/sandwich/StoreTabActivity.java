@@ -30,10 +30,8 @@ public class StoreTabActivity extends BaseTabActivity {
 		store = (Store) (SharedMatjiData.getInstance().top());
 
 		mainIntent = new Intent(this, StoreMainActivity.class);
-		postIntent = new Intent(this, StorePostListActivity.class);
-		postIntent.putExtra("store_id", store.getId());
 		menuIntent = new Intent(this, StoreMenuActivity.class);
-		menuIntent.putExtra("store_id", store.getId());
+		postIntent = new Intent(this, StorePostListActivity.class);
 		imageIntent = new Intent(this, ImageListActivity.class);
 		imageIntent.putExtra("id", store.getId());
 		imageIntent.putExtra("type", ModelType.STORE);

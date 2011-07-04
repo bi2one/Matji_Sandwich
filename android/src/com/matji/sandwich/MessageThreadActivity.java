@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.MessageThreadListView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +16,6 @@ public class MessageThreadActivity extends BaseActivity {
 		setContentView(R.layout.activity_message_thread);
 
 		listView = (MessageThreadListView) findViewById(R.id.message_thread_list);
-
 		listView.setActivity(this);
 		listView.requestReload();
 	}
@@ -23,8 +23,8 @@ public class MessageThreadActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		listView.dataRefresh();
 		listView.initItemVisible();
+		listView.sort();
 	}
 
 	@Override
@@ -34,10 +34,15 @@ public class MessageThreadActivity extends BaseActivity {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		return false;
+		button.setText("Message");
+		return true;
 	}
 
 	@Override
-	protected void onTitleBarItemClicked(View view) {}
-
+	protected void onTitleBarItemClicked(View view) {		
+		if (loginRequired()) {
+			Intent intent = new Intent(this, WriteMessageActivity.class);
+			startActivity(intent);
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.StorePostListView;
 
 import android.content.Intent;
@@ -9,16 +10,16 @@ import android.view.View;
 import android.widget.Button;
 
 public class StorePostListActivity extends BaseActivity {
-	private int store_id;
+	private Store store;
 	private StorePostListView listView;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_post);
-		store_id = getIntent().getIntExtra("store_id", 0);
+		store = (Store) SharedMatjiData.getInstance().top();
 
 		listView = (StorePostListView) findViewById(R.id.store_post_list);
-		listView.setStoreId(store_id);
+		listView.setStoreId(store.getId());
 		listView.setActivity(this);
 		listView.requestReload();
 	}
@@ -35,6 +36,7 @@ public class StorePostListActivity extends BaseActivity {
 		case WRITE_POST_ACTIVITY:
 			if (resultCode == RESULT_OK) {
 				listView.requestReload();
+				store.setPostCount(store.getPostCount() + 1);
 			}
 			break;
 		}
@@ -56,7 +58,7 @@ public class StorePostListActivity extends BaseActivity {
 	protected void onTitleBarItemClicked(View view) {
 		if (loginRequired()) {
 			Intent intent = new Intent(getApplicationContext(), WritePostActivity.class);
-			intent.putExtra("store_id", store_id);
+			intent.putExtra("store_id", store.getId());
 			startActivityForResult(intent, WRITE_POST_ACTIVITY);
 		}
 	}

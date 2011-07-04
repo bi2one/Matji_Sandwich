@@ -59,7 +59,6 @@
   <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
 
   <!-- default String... -->
-  <string name="default_string_writing_content">Writing Content!</string>  
   <string name="default_string_delete">삭제</string>
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">의 맛집기행</string>
@@ -94,6 +93,19 @@
   <string name="default_string_configure">설정</string>
   <string name="default_string_address">주소</string>
   <string name="default_string_change">변경</string>
+  
+  <!-- Writing content -->
+  <string name="writing_content_post">메모를 입력하세요.</string>
+  <string name="writing_content_comment">댓글을 입력하세요.</string>
+  <string name="writing_content_message">메세지를 입력하세요.</string>
+  <string name="writing_content_received_user">받는 사람을 추가하세요.</string>
+  <string name="writing_content_menu">메뉴를 입력하세요.</string>
+  <string name="writing_content_search">검색할 단어를 입력하세요.</string>
+  
+  <!-- StoreMenuActivity -->
+  <string name="store_menu_confirm">확인</string>
+  <string name="store_menu_ex">ex</string>
+  <string name="store_menu_already_exist_menu">이미 존재하는 메뉴입니다.</string>
   
   <!-- PostMainActivity -->
   <string name="post_does_not_exist">메모가 존재하지 않습니다!</string>

@@ -1,23 +1,26 @@
 package com.matji.sandwich;
 
+import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.widget.ReceivedUserListView;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.matji.sandwich.base.BaseListActivity;
-
-public class FoodListActivity extends BaseListActivity {
+public class ReceivedUserActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-	}
+		setContentView(R.layout.activity_received_user);
 
+		ReceivedUserListView listView = (ReceivedUserListView) findViewById(R.id.received_user_list);
+		listView.setActivity(this);
+		listView.requestReload();
+	}
+	
 	@Override
 	protected String titleBarText() {
-		// TODO Auto-generated method stub
-		return "FoodListActivity";
+		return "ReceivedUserActivity";
 	}
 
 	@Override

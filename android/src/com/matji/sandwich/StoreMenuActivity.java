@@ -1,29 +1,68 @@
 package com.matji.sandwich;
 
+import java.util.ArrayList;
+
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.Food;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.StoreFood;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.StoreFoodHttpRequest;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.StoreMenuListView;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-public class StoreMenuActivity extends BaseActivity {
-	private int store_id;
+public class StoreMenuActivity extends BaseActivity implements Requestable {
+	private Session session;
+	private HttpRequestManager manager;
+	private HttpRequest request;
+
+	private Store store;
 	private StoreMenuListView listView;
-    
+	private LinearLayout addWrapper;
+	private EditText menuField;
+	
+	private static final int ADD_MENU_REQUEST = 11;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_menu);
 
-		store_id = getIntent().getIntExtra("store_id", 0);
+		session = Session.getInstance(this);
+		manager = HttpRequestManager.getInstance(this);
+
+		store = (Store) SharedMatjiData.getInstance().top();
+		
+		addWrapper = (LinearLayout) findViewById(R.id.store_menu_add_wrapper);
+		menuField = (EditText) findViewById(R.id.store_menu_menu_field);
 		
 		listView = (StoreMenuListView) findViewById(R.id.store_menu_list);
-		listView.setUserId(store_id);
+		listView.setUserId(store.getId());
 		listView.setActivity(this);
 		listView.requestReload();
 	}
-	
+
+	private HttpRequest addMenuRequest(String name) {
+		if (request == null || !(request instanceof StoreFoodHttpRequest)) {
+			request = new StoreFoodHttpRequest(this);
+		}
+
+		((StoreFoodHttpRequest) request).actionNew(store.getId(), name);
+
+		return request;
+	}
+
 	@Override
 	protected String titleBarText() {
 		return "StoreMenuActivity";
@@ -31,13 +70,53 @@ public class StoreMenuActivity extends BaseActivity {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
+		if (session.isLogin()) {
+			button.setText("New");
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+		addWrapper.setVisibility(View.VISIBLE);
+		menuField.requestFocus();
+		KeyboardUtil.showKeyboard(this, menuField);
+	}
+
+	public void onConfirmButtonClicked(View veiw) {
+		String name = menuField.getText().toString().trim();
+		if (name.equals("")) {
+			Toast.makeText(getApplicationContext(), R.string.writing_content_menu, Toast.LENGTH_SHORT).show();
+		} else if (!manager.isRunning(this)) {
+			manager.request(this, addMenuRequest(name), ADD_MENU_REQUEST, this);
+		}
+	}
+
+	@Override
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		switch (tag) {
+		case ADD_MENU_REQUEST:
+			if (data != null && data.get(0) != null) {
+				addWrapper.setVisibility(View.GONE);
+				KeyboardUtil.hideKeyboard(this);
+				menuField.setText("");
+				
+				StoreFood newFood = (StoreFood) data.get(0);
+				listView.addMenu(newFood);
+				
+				ArrayList<Food> foods = store.getFoods();
+				// NULL EXCEPTION
+				foods.remove(foods.size()-1);
+				foods.add(0, newFood.getFood());
+			}
+			break;
+		}
+	}
+
+	@Override
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.performExceptionHandling(this);
 	}
 }

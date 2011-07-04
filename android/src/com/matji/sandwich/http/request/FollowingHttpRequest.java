@@ -20,6 +20,19 @@ public class FollowingHttpRequest extends HttpRequest {
 		postHashtable.put("followed_user_id", followed_user_id);
 	}
 	
+	public void actionList(int user_id, int page, int limit) {
+		httpMethod = HttpMethod.HTTP_GET;
+		action = "list";
+		parser = new UserParser(context);
+		
+		getHashtable.clear();
+		getHashtable.put("user_id", user_id+"");
+//		getHashtable.put("order", "nick+ASC");
+		getHashtable.put("order", "nick");
+		getHashtable.put("page", page+"");
+		getHashtable.put("limit", limit+"");
+	}
+	
 	public void actionDelete(int followed_user_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "delete";

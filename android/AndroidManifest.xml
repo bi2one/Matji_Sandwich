@@ -20,6 +20,8 @@
 		</activity>
 		<activity android:name="ExternalServiceWebViewActivity"></activity>
 		<activity android:name="AlarmActivity"></activity>
+		<activity android:name="AddMenuActivity"
+				  android:launchMode="singleTask"></activity>
 		<activity android:name="ChatActivity"
 				  android:launchMode="singleTask"
 				  android:windowSoftInputMode="stateHidden"></activity>
@@ -47,7 +49,7 @@
 		<activity android:name="StorePostListActivity"></activity>
 		<activity android:name="StoreMoreActivity"></activity>
 		<activity android:name="StoreUrlListActivity" 
-				  android:screenOrientation="portrait"></activity>
+				  android:screenOrientation="portrait"></activity>		
 		<activity android:name="UserTabActivity" 
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="UserMainActivity"></activity>
@@ -64,6 +66,7 @@
                   android:windowSoftInputMode="adjustResize"></activity>
 		<activity android:name="WriteMessageActivity"
                   android:windowSoftInputMode="adjustResize"></activity>
+		<activity android:name="ReceivedUserActivity"></activity>
 		<activity android:name="widget.SlideGalleryActivity"></activity>
 		<activity android:name="GridGalleryActivity"></activity>
 		<activity android:name="ImageListActivity"></activity>

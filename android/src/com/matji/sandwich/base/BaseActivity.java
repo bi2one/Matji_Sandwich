@@ -28,6 +28,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 	public static final int POST_MAIN_ACTIVITY = 2;
 	public static final int WRITE_POST_ACTIVITY = 3;
 	public static final int WRITE_COMMENT_ACTIVITY = 4;	
+	public static final int RECEIVED_USER_ACTIVITY = 5;	
 	
 	public boolean loginRequired(){
 		Session session = Session.getInstance(this);

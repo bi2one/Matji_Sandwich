@@ -40,7 +40,7 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 	public void onCommentButtonClicked(View v) {
 		commentHttpRequest = new CommentHttpRequest(getApplicationContext());
 		if(commentField.getText().toString().trim().equals("")) {
-			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), R.string.writing_content_comment, Toast.LENGTH_SHORT).show();
 		} else {
 			((CommentHttpRequest) commentHttpRequest).actionNew(post_id, commentField.getText().toString().trim(), "ANDROID");
 			manager.request(this, commentHttpRequest, COMMENT_WRITE_REQUEST, this);

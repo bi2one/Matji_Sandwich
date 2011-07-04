@@ -28,7 +28,7 @@ public class ChatActivity extends BaseActivity implements Requestable {
 	private int user_id;
 	private ChatView listView;
 
-	private final int MESSAGE_NEW = 1;
+	private final int MESSAGE_NEW = 10;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,7 +78,7 @@ public class ChatActivity extends BaseActivity implements Requestable {
 		String message =  messageField.getText().toString().trim();
 		
 		if(message.equals("")) {
-			Toast.makeText(getApplicationContext(), R.string.default_string_writing_content, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), R.string.writing_content_message, Toast.LENGTH_SHORT).show();
 		} else {
 		    manager.request(this, request(message), MESSAGE_NEW, this);
 			
@@ -97,20 +97,17 @@ public class ChatActivity extends BaseActivity implements Requestable {
 
 		return request;
 	}
-
 	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
 		case MESSAGE_NEW:
-			//TODO
 			Message recentMessage = (Message) data.get(0);
-//			message.setMessage(recentMessage.getMessage());
-//			message.setAgo(recentMessage.getAgo());
+			message.setMessage(recentMessage.getMessage());
+			message.setAgo(recentMessage.getAgo());
 			listView.addMessage(recentMessage);
 			break;
 		}
 	}
-
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(this);

@@ -81,6 +81,10 @@ PullToRefreshListView.OnRefreshListener {
 		page = (adapterData.size() / limit) + 1;
 	}
 
+	protected void requestSetOn() {
+		scrollListener.requestSetOn();
+	}
+
 	public void requestNext() {
 		if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
 			syncValue();

@@ -270,8 +270,12 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		button.setText("Message");
-		return true;
+		if (session.isLogin() && session.getCurrentUser().getId() != user.getId()) {
+			button.setText("Message");
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.matji.sandwich.listener;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -36,14 +35,12 @@ public abstract class SwipeGestureListener implements OnTouchListener {
 	class SwipeGestureDetector extends SimpleOnGestureListener {
 		@Override
 		public boolean onSingleTapConfirmed(MotionEvent e) {
-			Log.d("Matji", "single");
 			onItemClicked((int) e.getX(), (int) e.getY());
 			return false;
 		}
 
 		@Override
 		public void onLongPress(MotionEvent e) {
-			Log.d("Matji", "long");
 			int x = (int) e.getX();
 			int y = (int) e.getY();
 
@@ -52,7 +49,6 @@ public abstract class SwipeGestureListener implements OnTouchListener {
 
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
-			Log.d("Matji", "double");
 			onItemClicked((int) e.getX(), (int) e.getY());
 			return false;
 		}

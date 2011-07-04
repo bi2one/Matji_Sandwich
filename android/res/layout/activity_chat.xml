@@ -25,6 +25,9 @@
 			android:layout_height="fill_parent"
 			android:layout_weight="1"
 			android:text="@string/chat_send"
+			android:layout_marginLeft="3dp"
+			android:layout_marginRight="3dp"
+			android:layout_marginBottom="5dp"
 			android:onClick="onSendButtonClicked" />
 	</LinearLayout>
 	<com.matji.sandwich.widget.ChatView

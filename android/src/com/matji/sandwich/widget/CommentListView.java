@@ -100,7 +100,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		case COMMENT_DELETE_REQUEST:
 			initItemVisible();
 			getAdapterData().remove(curDeletePos);
-			((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
+			getMBaseAdapter().notifyDataSetChanged();
 			Post post = (Post) SharedMatjiData.getInstance().top();
 			post.setCommentCount(post.getCommentCount() - 1);
 		}

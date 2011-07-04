@@ -65,6 +65,13 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		setTranscriptMode(TRANSCRIPT_MODE_ALWAYS_SCROLL);
 
 		adapterData.add(message);
+
+		if (adapterData.size() > limit * (page - 1)) {
+			scrollListener.requestSetOn();
+			adapterData.remove(0);
+		}
+		
+		adapter.initSelectedPosition();
 		adapter.notifyDataSetChanged();
 	}
 
@@ -117,9 +124,9 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		setScrollable(true);
-		if (data.size() == 0 || data.size() < limit){
+		if (data.size() == 0 || data.size() < limit) {
 			scrollListener.requestSetOff();
-		}else{
+		} else {
 			scrollListener.requestSetOn();
 		}
 
@@ -128,7 +135,6 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 		}
 
 		if (data.size() > 0) {
-			setTranscriptMode(TRANSCRIPT_MODE_DISABLED);
 			adapter.notifyDataSetChanged();
 			switch (tag) {
 			case REQUEST_NEXT:
@@ -189,6 +195,7 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 				}
 				break;
 			case SCROLL_STATE_TOUCH_SCROLL:
+				setTranscriptMode(TRANSCRIPT_MODE_NORMAL);
 				break;
 			}
 		}
