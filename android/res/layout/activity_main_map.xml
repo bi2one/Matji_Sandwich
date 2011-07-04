@@ -19,6 +19,8 @@
     <EditText
 	android:id="@+id/main_map_search_box"
 	style="@style/main_map_searchBox"
+	android:hint="@string/main_map_search_map"
+	android:inputType="text"
 	android:layout_alignParentTop="true"
 	android:layout_alignParentLeft="true" />
     <Button

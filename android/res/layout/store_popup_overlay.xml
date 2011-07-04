@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/popup_main_layout"
+    style="@style/PopupOverlayBallon">
+  <TextView
+      style="@style/PopupOverlayTitle"
+      android:id="@+id/popup_item_title"
+      android:text="_item_title" />
+  <TextView
+      style="@style/PopupOverlayContent"
+      android:id="@+id/popup_item_snippet"
+      android:text="_item_snippet" />
+</LinearLayout>

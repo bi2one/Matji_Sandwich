@@ -287,4 +287,27 @@
     <item name="android:singleLine">true</item>
     <item name="android:textSize">12dp</item>
   </style>
+
+  <!-- popup_overlay.xml -->
+  <style name="PopupOverlayBallon" parent="DefaultWrap">
+    <item name="android:paddingLeft">5dp</item>
+    <item name="android:paddingTop">0dp</item>
+    <item name="android:paddingRight">23dp</item>
+    <item name="android:paddingBottom">9dp</item>
+    <item name="android:background">@drawable/map_popup</item>
+    <item name="android:scaleType">centerCrop</item>
+  </style>
+
+  <style name="PopupOverlayTitle" parent="DefaultWrap">
+    <item name="android:maxWidth">150dp</item>
+    <item name="android:textSize">14dp</item>
+    <item name="android:textColor">@color/BRIGHT_ORANGE</item>
+    <item name="android:singleLine">true</item>
+  </style>
+
+  <style name="PopupOverlayContent" parent="PopupOverlayTitle">
+    <item name="android:textSize">12dp</item>
+    <item name="android:textColor">@color/WHITE</item>
+  </style>
+
 </resources>
