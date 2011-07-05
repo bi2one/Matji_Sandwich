@@ -15,6 +15,7 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.RegistStoreNameInvalidMatjiException;
 
@@ -103,6 +104,11 @@ public class StoreRegisterActivity extends BaseActivity implements Requestable {
 	try {
 	    isValidValues();
 	    StoreHttpRequest request = new StoreHttpRequest(mContext);
+	    if (centerAddress == null) {
+	    	KeyboardUtil.hideKeyboard(this);
+	    	Toast.makeText(this, R.string.exception_store_address_is_null, Toast.LENGTH_SHORT).show();
+	    	return;
+	    }
 	    request.actionNew(nameText.getText().toString(),
 			      centerAddress,
 			      centerLatitude,

@@ -1,15 +1,17 @@
 package com.matji.sandwich.adapter;
 
+import com.matji.sandwich.ChatActivity;
 import com.matji.sandwich.R;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.listener.ListItemSwipeListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.MessageThreadListView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,8 +21,7 @@ import android.widget.TextView;
 public class MessageThreadAdapter extends MBaseAdapter {
 	private Context context;
 	private MatjiImageDownloader downloader;
-	private ListItemSwipeListener listener;
-	
+		
 	public MessageThreadAdapter(Context context) {
 		super(context);
 		this.context = context;
@@ -46,8 +47,16 @@ public class MessageThreadAdapter extends MBaseAdapter {
 			messageElement.nick.setOnClickListener(threadListView);
 			messageElement.delete.setOnClickListener(threadListView);
 			
-			convertView.setOnTouchListener(listener);
 			convertView.setTag(messageElement);
+			
+			messageElement.message.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					int position = Integer.parseInt((String) v.getTag());
+					Message message = (Message) data.get(position);
+					((BaseActivity) context).startActivityWithMatjiData(new Intent(context, ChatActivity.class), message);					
+				}
+			});
 		} else {
 			messageElement = (MessageElement) convertView.getTag();
 		}
@@ -59,6 +68,7 @@ public class MessageThreadAdapter extends MBaseAdapter {
 		}
 
 		messageElement.thumnail.setTag(position+"");
+		messageElement.message.setTag(position+"");
 		messageElement.nick.setTag(position+"");
 		messageElement.delete.setTag(position+"");
 

@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
+  0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
   </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -54,6 +54,9 @@
   <string name="exception_RegistStoreNameInvalidMatjiException">
     맛집 이름을 입력해주셔야 합니다
   </string>
+  <string name="exception_store_address_is_null">
+  기본 주소가 잘못되었습니다. 
+  </string>
 
   <!-- pull_to_refresh -->
   <string name="pull_to_refresh_pull_label">Pull to refresh...</string>
@@ -63,6 +66,7 @@
 
   <!-- default String... -->
   <string name="default_string_delete">삭제</string>
+  <string name="default_string_check_delete">삭제할까요?</string>
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">의 맛집기행</string>
   <string name="default_string_intro">소개가 없습니다.</string>

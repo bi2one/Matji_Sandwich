@@ -36,7 +36,7 @@ public class CommentAdapter extends MBaseAdapter {
 			commentElement.delete = (Button) convertView.findViewById(R.id.delete_btn);
 			convertView.setTag(commentElement);
 
-			CommentListView commentListView = (CommentListView)parent;
+			final CommentListView commentListView = (CommentListView) parent;
 			commentElement.image.setOnClickListener(commentListView);
 			commentElement.nick.setOnClickListener(commentListView);
 			commentElement.delete.setOnClickListener(commentListView);

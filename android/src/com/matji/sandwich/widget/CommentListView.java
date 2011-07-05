@@ -2,7 +2,9 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.matji.sandwich.listener.ListItemSwipeListener;
 import com.matji.sandwich.session.Session;
 
 public class CommentListView extends RequestableMListView implements View.OnClickListener {
+	private Context context;
 	private HttpRequest request;
 	private Session session;
 
@@ -33,6 +36,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 	public CommentListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new CommentAdapter(context), 10);
+		this.context = context;
 		request = new CommentHttpRequest(context);
 		session = Session.getInstance(context); 
 
@@ -44,6 +48,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 			@Override
 			public boolean isMyItem(int position) {
+				if (position < 0 || position >= getAdapterData().size()) return false;
 				return session.isLogin() && ((Comment) getAdapterData().get(position)).getUserId() == session.getCurrentUser().getId();
 			}
 		};
@@ -79,15 +84,37 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 			gotoUserPage(Integer.parseInt((String)v.getTag()));
 			break;
 		case R.id.delete_btn:
-			if (session.isLogin() && !getHttpRequestManager().isRunning(getActivity())) {
-				curDeletePos = Integer.parseInt((String) v.getTag());
-				Comment comment = (Comment) getAdapterData().get(curDeletePos);
-				getHttpRequestManager().request(getActivity(), deleteRequest(comment.getId()), COMMENT_DELETE_REQUEST, this);
-			}
+			onDeleteButtonClicked(v);
 			break;
 		}	
 	}
 
+	public void onDeleteButtonClicked(View v) {
+		if (session.isLogin() && !getHttpRequestManager().isRunning(getActivity())) {
+			curDeletePos = Integer.parseInt((String) v.getTag());
+
+			AlertDialog.Builder alert = new AlertDialog.Builder(context);
+			alert.setTitle(R.string.default_string_delete);
+			alert.setMessage(R.string.default_string_check_delete);
+			alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					int comment_id= ((Comment) getAdapterData().get(curDeletePos)).getId();
+					deleteComment(comment_id);
+				}
+			}); 
+			alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {}
+			});
+			alert.show();
+		}
+	}
+
+	public void deleteComment(int comment_id) {
+		getHttpRequestManager().request(getActivity(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
+	}
+	
 	protected void gotoUserPage(int position) { 
 		Comment comment = (Comment)getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);

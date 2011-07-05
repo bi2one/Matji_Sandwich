@@ -3,7 +3,9 @@ package com.matji.sandwich.widget;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
@@ -82,14 +84,34 @@ public class MessageThreadListView extends MessageListView implements OnClickLis
 			gotoUserPage((Message) getAdapterData().get(position));
 			break;
 		case R.id.delete_btn:
-			curDeletePos = Integer.parseInt((String) v.getTag());
-			onDeleteButtonClicked(curDeletePos);
+			onDeleteButtonClicked(v);
 			break;
 		}
 	}
 	
-	private void onDeleteButtonClicked(int position) {
-		int thread_id = ((Message) getAdapterData().get(position)).getThreadId();
+	public void onDeleteButtonClicked(View v) {
+		if (session.isLogin() && !getHttpRequestManager().isRunning(getActivity())) {
+			curDeletePos = Integer.parseInt((String) v.getTag());
+
+			AlertDialog.Builder alert = new AlertDialog.Builder(context);
+			alert.setTitle(R.string.default_string_delete);
+			alert.setMessage(R.string.default_string_check_delete);
+			alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					int thread_id = ((Message) getAdapterData().get(curDeletePos)).getThreadId();
+					deleteThread(thread_id);
+				}
+			}); 
+			alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {}
+			});
+			alert.show();
+		}
+	}
+	
+	public void deleteThread(int thread_id) {
 		getHttpRequestManager().request(getActivity(), deleteRequest(thread_id), THREAD_DELETE_REQUEST, this);
 	}
 

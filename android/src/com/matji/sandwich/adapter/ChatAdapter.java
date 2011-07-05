@@ -79,6 +79,22 @@ public class ChatAdapter extends MBaseAdapter {
 				break;
 			}
 			convertView.setTag(messageElement);
+			convertView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					int position = Integer.parseInt((String) ((MessageElement) v.getTag()).message.getTag());
+					setSelectedPosition(position);
+				}
+			});
+			messageElement.message.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					int position = Integer.parseInt((String) v.getTag());
+					setSelectedPosition(position);
+				}
+			});
 		} else {
 			messageElement = (MessageElement) convertView.getTag();
 		}
@@ -88,6 +104,8 @@ public class ChatAdapter extends MBaseAdapter {
 			downloader.downloadUserImage(sentUser.getId(), MatjiImageDownloader.IMAGE_SSMALL, messageElement.thumnail);
 		}
 
+		// set position for OnClickListener
+		messageElement.message.setTag(position+"");
         // change the row color based on selected state		
         if (selectedPos == position) {
         	if (getItemViewType(position) == OTHER) {

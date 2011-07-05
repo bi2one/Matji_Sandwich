@@ -152,7 +152,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		postButton.setText(getCountNumberOf(R.string.default_string_memo, store.getPostCount()));
 		imageButton.setText(getCountNumberOf(R.string.default_string_image, store.getImageCount()));
 		tagButton.setText(getCountNumberOf(R.string.default_string_tag, store.getTagCount()));	
-		urlButton.setText(getCountNumberOf(R.string.default_string_url, 0));
+		urlButton.setText(getCountNumberOf(R.string.default_string_url, store.getUrlCount()));
 	}
 
 	public void onResume() {
@@ -273,11 +273,14 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	public void onWebButtonClicked(View view) {
-		if (store.getWebsite() != null) {
-			if (!store.getWebsite().equals("")) {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(store.getWebsite()));
-				startActivity(intent);
+		String web = store.getWebsite();
+		if (web != null && !web.equals("")) {
+			if (!web.subSequence(0, 3).equals("http")) {
+				web = "http://" + web;
 			}
+
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(web));
+			startActivity(intent);				
 		}
 	}
 

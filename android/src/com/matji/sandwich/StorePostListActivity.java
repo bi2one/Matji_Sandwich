@@ -39,6 +39,18 @@ public class StorePostListActivity extends BaseActivity {
 				store.setPostCount(store.getPostCount() + 1);
 			}
 			break;
+
+			
+		case POST_MAIN_ACTIVITY:
+			if (resultCode == RESULT_OK) {
+				if (data != null) {
+					int position = data.getIntExtra("position", -1);
+					if (position >= 0) {
+						listView.delete(position);
+					}
+				}
+			}
+			break;
 		}
 	}
 

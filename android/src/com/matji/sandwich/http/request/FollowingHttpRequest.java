@@ -27,7 +27,6 @@ public class FollowingHttpRequest extends HttpRequest {
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id+"");
-//		getHashtable.put("order", "nick+ASC");
 		getHashtable.put("order", "nick");
 		getHashtable.put("page", page+"");
 		getHashtable.put("limit", limit+"");

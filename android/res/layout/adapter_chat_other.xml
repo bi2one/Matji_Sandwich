@@ -2,21 +2,27 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:background="#fff"
-	android:gravity="left|center_vertical">
-	<ImageView
-		android:id="@+id/chat_adapter_other_thumnail"
-		android:layout_width="30dp"
-		android:layout_height="30dp"
-		android:layout_margin="3dp"
-		android:layout_gravity="bottom" />
-<!-- 		android:background="@drawable/msg_bubble_other" -->
-	<TextView
-		style="@style/DefaultWrap"
-		android:textColor="@color/BLACK"
-		android:id="@+id/chat_adapter_other_message" />
-	<!-- <TextView -->
-	<!-- style="@style/DefaultWrap" -->
-	<!-- android:id="@+id/chat_created_at" /> -->
+	android:layout_height="wrap_content">
+	<LinearLayout
+	android:id="@+id/chat_adapter_other_wrapper"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:background="#fff"
+		android:gravity="left|center_vertical">
+		<ImageView
+			android:id="@+id/chat_adapter_other_thumnail"
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_margin="3dp"
+			android:layout_gravity="bottom" />
+		<!-- android:background="@drawable/msg_bubble_other" -->
+		<TextView
+			style="@style/DefaultWrap"
+			android:textColor="@color/BLACK"
+			android:id="@+id/chat_adapter_other_message"
+			android:autoLink="all" />
+		<!-- <TextView -->
+		<!-- style="@style/DefaultWrap" -->
+		<!-- android:id="@+id/chat_created_at" /> -->
+	</LinearLayout>
 </LinearLayout>

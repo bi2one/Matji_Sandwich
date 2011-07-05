@@ -2,9 +2,10 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -43,14 +44,14 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	private PostViewContainer header;
 	private CommentListView commentListView;
 	private Button likeButton;
-	
+
 	private int position;
 
-	private static final int POST_ID_IS_NULL = -1;
-	private static final int POST_REQUEST = 0;
-	private static final int LIKE_REQUEST = 3;
-	private static final int UN_LIKE_REQUEST = 4;
-	private static final int POST_DELETE_REQUEST = 5;
+	public static final int POST_ID_IS_NULL = -1;
+	private static final int POST_REQUEST = 11;
+	private static final int LIKE_REQUEST = 12;
+	private static final int UN_LIKE_REQUEST = 13;
+	private static final int POST_DELETE_REQUEST = 14;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
 		position = getIntent().getIntExtra("position", -1);
-		
+
 		if (intent_post_id == POST_ID_IS_NULL) {
 			initInfo();
 		} else {
@@ -73,6 +74,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 	private void initInfo() {
 		post = (Post) SharedMatjiData.getInstance().top();
+		if (post.getId() == POST_ID_IS_NULL) postDoesNotExist();
 		user = post.getUser();
 		store = post.getStore();
 
@@ -112,7 +114,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	public void onResume() {
 		super.onResume();
 		if (intent_post_id == POST_ID_IS_NULL) {
-//			commentListView.setCanRequestNext(true);
+			//			commentListView.setCanRequestNext(true);
 			setInfo();
 			commentListViewReload();
 		}
@@ -139,7 +141,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		Toast.makeText(this, R.string.post_does_not_exist, Toast.LENGTH_SHORT).show(); 
 		super.finish();
 	}
-	
+
 	@Override
 	public void finish() {
 		super.finishWithMatjiData();
@@ -161,10 +163,28 @@ public class PostMainActivity extends MainActivity implements Requestable {
 
 	public void onDeleteButtonClicked(View v) {
 		if (!manager.isRunning(this)) {
-			PostHttpRequest postRequest = new PostHttpRequest(this);
-			postRequest.actionDelete(post.getId());
-			manager.request(this, postRequest, POST_DELETE_REQUEST, this);
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+			alert.setTitle(R.string.default_string_delete);
+			alert.setMessage(R.string.default_string_check_delete);
+			alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					deletePost();
+				}
+			}); 
+			alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {}
+			});
+			alert.show();
 		}
+	}
+	
+	public void deletePost() {
+		PostHttpRequest postRequest = new PostHttpRequest(this);
+		postRequest.actionDelete(post.getId());
+		manager.request(this, postRequest, POST_DELETE_REQUEST, this);
+		
 	}
 
 	public void onCommentButtonClicked(View view) {
@@ -233,9 +253,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			setInfo();
 			break;
 		case POST_REQUEST:
-			Log.d("Matji","A");
 			if (data != null && data.size() > 0) {
-				Log.d("Matji", data.size()+"");
 				Post post = (Post) data.get(0);
 				SharedMatjiData.getInstance().push(post);
 				intent_post_id = POST_ID_IS_NULL;

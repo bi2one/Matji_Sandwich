@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -52,13 +51,6 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 
 		scrollListener = new ChatRequestScrollListener(this, manager);
 		setOnScrollListener(scrollListener);
-		setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-				// user clicked a list item, make it "selected"
-				adapter.setSelectedPosition(position-1);
-			}
-        });
 	}
 
 	public void addMessage(Message message) {

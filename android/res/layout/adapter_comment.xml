@@ -47,8 +47,9 @@
 			android:paddingLeft="5dp">
 			<TextView
 				android:id="@+id/comment_adapter_comment"
-				android:layout_width="fill_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:autoLink="all"
 				android:textColor="#000"
 				android:layout_below="@id/comment_adapter_nick" />
 			<TextView

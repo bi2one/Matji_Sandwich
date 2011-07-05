@@ -24,6 +24,7 @@ public class Store extends MatjiData implements Serializable {
 	private int image_count;
 	private int like_count;
 	private int bookmark_count;
+	private int url_count;
 	private AttachFile file; 
 	private User reg_user;
 	private ArrayList<Tag> tags;
@@ -67,6 +68,7 @@ public class Store extends MatjiData implements Serializable {
 		dest.writeInt(image_count);
 		dest.writeInt(like_count);
 		dest.writeInt(bookmark_count);
+		dest.writeInt(url_count);
 		dest.writeValue(file);
 		dest.writeValue(reg_user);
 		dest.writeTypedList(tags);
@@ -91,6 +93,7 @@ public class Store extends MatjiData implements Serializable {
 		image_count = in.readInt();
 		like_count = in.readInt();
 		bookmark_count = in.readInt();
+		url_count= in.readInt();
 		file = AttachFile.class.cast(in.readValue(AttachFile.class.getClassLoader()));
 		reg_user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		tags = new ArrayList<Tag>();
@@ -196,6 +199,12 @@ public class Store extends MatjiData implements Serializable {
 	}
 	public int getBookmarkCount() {
 		return bookmark_count;
+	}
+	public void setUrlCount(int url_count) {
+		this.url_count = url_count;
+	}
+	public int getUrlCount() {
+		return url_count;
 	}
 	public void setRegUser(User user) {
 		this.reg_user = user;

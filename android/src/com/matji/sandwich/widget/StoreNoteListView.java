@@ -12,7 +12,7 @@ import com.matji.sandwich.adapter.NoteAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.StoreDetailInfo;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.http.request.StoreDetailHttpRequest;
 
 public class StoreNoteListView extends RequestableMListView implements OnClickListener {
 	private HttpRequest request;
@@ -20,7 +20,7 @@ public class StoreNoteListView extends RequestableMListView implements OnClickLi
 
 	public StoreNoteListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new NoteAdapter(context), 10);
-		request = new StoreHttpRequest(context);
+		request = new StoreDetailHttpRequest(context);
 		setPage(1);
 	}
 
@@ -30,7 +30,7 @@ public class StoreNoteListView extends RequestableMListView implements OnClickLi
 	
 	@Override
 	public HttpRequest request() {
-		((StoreHttpRequest) request).actionDetailList(store_id, getPage(), getLimit());
+		((StoreDetailHttpRequest) request).actionList(store_id, getPage(), getLimit());
 		return request;
 	}
 

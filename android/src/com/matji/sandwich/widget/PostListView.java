@@ -21,9 +21,10 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	public PostListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new PostAdapter(context), 10);
 		postRequest = new PostHttpRequest(context);
+		
 		setPage(1);
 	}
-
+	
 	@Override
 	public HttpRequest request() {
 		postRequest.actionList(getPage(), getLimit());

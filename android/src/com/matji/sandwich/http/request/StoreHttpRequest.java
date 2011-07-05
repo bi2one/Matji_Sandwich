@@ -1,6 +1,5 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.StoreDetailInfoParser;
 import com.matji.sandwich.http.parser.StoreParser;
 
 import android.content.Context;
@@ -113,36 +112,5 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
     	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
-    }
-
-    public void actionDetailList(int store_id, int page, int limit){
-    	httpMethod = HttpMethod.HTTP_GET;
-    	action = "detail_list";
-    	parser = new StoreDetailInfoParser(context);
-    	
-    	getHashtable.clear();
-    	getHashtable.put("store_id", store_id + "");
-    	getHashtable.put("page", page + "");
-    	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "user");
-    }
-    
-    public void actionDetailNew(int store_id, String note){
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "detail_new";
-    	parser = new StoreParser(context);
-    	
-    	postHashtable.clear();
-    	postHashtable.put("store_id", store_id);
-    	postHashtable.put("note", note);
-    }
-    
-    public void actionRollbackDetail(int store_detail_info_id){
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "rollback_detail";
-    	parser = new StoreParser(context);
-
-    	postHashtable.clear();
-    	postHashtable.put("store_detail_info_id", store_detail_info_id);
     }
 }

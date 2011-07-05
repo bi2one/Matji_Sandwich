@@ -37,6 +37,5 @@ public class MessageListView extends RequestableMListView {
 		User user = (message.getReceivedUserId() == session.getCurrentUser().getId()) ? message.getSentUser() : message.getReceivedUser();
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
 		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, user);
-	}	
-
+	}
 }

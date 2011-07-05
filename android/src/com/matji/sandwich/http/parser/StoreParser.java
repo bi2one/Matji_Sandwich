@@ -40,6 +40,7 @@ public class StoreParser extends MatjiDataParser {
 		store.setImageCount(getInt(object, "image_count"));
 		store.setLikeCount(getInt(object, "like_count"));
 		store.setBookmarkCount(getInt(object, "bookmark_count"));
+		store.setUrlCount(getInt(object, "url_count"));
 
 		/* Set AttachFile */
 		AttachFileParser afParser = new AttachFileParser(context);

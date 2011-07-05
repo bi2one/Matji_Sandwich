@@ -35,16 +35,17 @@
 				android:clickable="true"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="#000" />
+				android:textColor="@color/DODGER_BLUE2" />
 		</LinearLayout>
 		<TextView
 			android:id="@+id/header_post_post"
-			android:layout_width="fill_parent"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/header_post_thumnail"
 			android:layout_below="@id/header_post_names"
 			android:paddingLeft="5dp"
 			android:paddingRight="15dp"
+			android:autoLink="all"
 			android:textColor="#000" />
 		<TextView
 			style="@style/DefaultWrap"
