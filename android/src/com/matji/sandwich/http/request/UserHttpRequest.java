@@ -3,6 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.UserParser;
 
 import android.content.Context;
+import android.util.Log;
 
 public class UserHttpRequest extends HttpRequest {
 	public UserHttpRequest(Context context) {
@@ -39,7 +40,7 @@ public class UserHttpRequest extends HttpRequest {
 		getHashtable.clear();
 	}
 
-	public void actionNearByRankingList(int lat_sw, int lat_ne, int lng_sw, int lng_ne) {
+	public void actionNearByRankingList(double lat_sw, double lat_ne, double lng_sw, double lng_ne) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "nearby_ranking_list";
 		parser = new UserParser(context);

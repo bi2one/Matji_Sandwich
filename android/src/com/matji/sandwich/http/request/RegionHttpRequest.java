@@ -31,11 +31,13 @@ public class RegionHttpRequest extends HttpRequest {
     	postHashtable.put("region_id", region_id);
     }
     
-    public void actionBookmarkedList(){
+    public void actionBookmarkedList(int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "bookmarked_list";
       	parser = new RegionParser(context);
       	
     	getHashtable.clear();
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
     }
 }

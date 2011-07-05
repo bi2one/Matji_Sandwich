@@ -77,6 +77,8 @@
 		<activity android:name="GetMapPositionActivity"></activity>
 		<activity android:name="StoreRegisterListActivity"></activity>
 		<activity android:name="StoreRegisterActivity"></activity>
+		<activity android:name="UserNearRankingActivity"></activity>
+		<activity android:name="BookmarkListActivity"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

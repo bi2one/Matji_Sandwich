@@ -24,6 +24,8 @@ public class Session implements Requestable {
         public static final String MAP_BOUND_LATITUDE_SW = "MainMapActivity.map_bound_latitude_sw";
         public static final String MAP_BOUND_LONGITUDE_NE = "MainMapActivity.map_bound_longitude_ne";
         public static final String MAP_BOUND_LONGITUDE_SW = "MainMapActivity.map_bound_longitude_sw";
+        public static final String MAP_BOUND_CENTER_LATITUDE = "MainMapActivity.map_bound_center_latitude";
+        public static final String MAP_BOUND_CENTER_LONGITUDE = "MainMapActivity.map_bound_center_longitude";
 	    
     
 	private volatile static Session session = null;
