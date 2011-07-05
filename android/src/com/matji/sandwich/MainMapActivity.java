@@ -33,17 +33,27 @@ import com.matji.sandwich.map.MatjiMapCenterListener;
 import com.matji.sandwich.session.Session;
 
 import java.util.ArrayList;
+import java.util.Collections;
 //import java.util.List;
 
 public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener,
 								MatjiMapCenterListener,
 								Requestable,
 								OnKeyListener {
+    public static final String RETURN_KEY_LAT_NE = "MainMapActivity.return_key_lat_ne";
+    public static final String RETURN_KEY_LAT_SW = "MainMapActivity.return_key_lat_sw";
+    public static final String RETURN_KEY_LNG_NE = "MainMapActivity.return_key_lng_ne";
+    public static final String RETURN_KEY_LNG_SW = "MainMapActivity.return_key_lng_sw";
+    private static final int BOOKMARK_BASIC_LAT_NE = 100;
+    private static final int BOOKMARK_BASIC_LAT_SW = 100;
+    private static final int BOOKMARK_BASIC_LNG_NE = 100;
+    private static final int BOOKMARK_BASIC_LNG_SW = 100;
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
     private static final int MAX_STORE_COUNT = 60;
     private static final int NEARBY_STORE = 1;
     private static final int SEARCH_LOCATION = 2;
+    private static final int GET_BOOKMARK_POSITION_TAG = 0;
 
     private Context mContext;
     private GpsManager mGpsManager;
@@ -119,6 +129,8 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, swBound.getLatitudeE6());
 	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, neBound.getLongitudeE6());
 	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_SW, swBound.getLongitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LATITUDE, point.getLatitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LONGITUDE, point.getLongitudeE6());
 
 	Runnable runnable = new MapRunnable(this);
 	runOnUiThread(runnable);
@@ -141,6 +153,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	switch (tag) {
 	case NEARBY_STORE:
 	    stores = data;
+	    Collections.reverse(stores);
 	    drawOverlays();
 	    break;
 	case SEARCH_LOCATION:
@@ -221,9 +234,60 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onStoreRegisterClick(View v) {
-	if (loginRequired()) {			
+	if (loginRequired()) {
 	    Intent storeRegisterIntent = new Intent(mContext, StoreRegisterListActivity.class);
 	    startActivity(storeRegisterIntent);
+	}
+    }
+
+    public void onNearRankingClick(View v) {
+	GeoPoint neBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
+	GeoPoint swBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_SW);
+	int neLat = neBound.getLatitudeE6();
+	int neLng = neBound.getLongitudeE6();
+	int swLat = swBound.getLatitudeE6();
+	int swLng = swBound.getLongitudeE6();
+
+	Intent userNearRankingIntent = new Intent(mContext, UserNearRankingActivity.class);
+	userNearRankingIntent.putExtra(UserNearRankingActivity.IF_LAT_NE, neLat);
+	userNearRankingIntent.putExtra(UserNearRankingActivity.IF_LNG_NE, neLng);
+	userNearRankingIntent.putExtra(UserNearRankingActivity.IF_LAT_SW, swLat);
+	userNearRankingIntent.putExtra(UserNearRankingActivity.IF_LNG_SW, swLng);
+	
+	startActivity(userNearRankingIntent);
+    }
+
+    public void onBookmarkClick(View v) {
+	if (loginRequired()) {
+	    Intent bookmarkIntent = new Intent(mContext, BookmarkListActivity.class);
+	    startActivityForResult(bookmarkIntent, GET_BOOKMARK_POSITION_TAG);
+	}
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
+
+	if (resultCode == Activity.RESULT_OK) {
+	    switch(requestCode) {
+	    case GET_BOOKMARK_POSITION_TAG:
+    		int latNe = data.getIntExtra(RETURN_KEY_LAT_NE, BOOKMARK_BASIC_LAT_NE);
+    		int latSw = data.getIntExtra(RETURN_KEY_LAT_SW, BOOKMARK_BASIC_LAT_SW);
+    		int lngNe = data.getIntExtra(RETURN_KEY_LNG_NE, BOOKMARK_BASIC_LNG_NE);
+    		int lngSw = data.getIntExtra(RETURN_KEY_LNG_SW, BOOKMARK_BASIC_LNG_SW);
+		int latSpan = Math.abs(latNe - latSw);
+		int lngSpan = Math.abs(lngNe - lngSw);
+		int centerLat = (latNe + latSw) / 2;
+		int centerLng = (lngNe + lngSw) / 2;
+
+		Log.d("=====", "============================");
+		Log.d("=====", "latSpan: " + latSpan);
+		Log.d("=====", "lngSpan: " + lngSpan);
+		Log.d("=====", "centerLat: " + centerLat);
+		Log.d("=====", "centerLng: " + centerLng);
+		
+		mMapController.animateTo(new GeoPoint(centerLat, centerLng));
+		mMapController.zoomToSpan(latSpan, lngSpan);
+	    }
 	}
     }
 

@@ -33,12 +33,12 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-			if (isSet 
-					&& !HttpRequestManager.getInstance(context).isRunning()
-					&& (firstVisibleItem + visibleItemCount) == totalItemCount 
-					&& totalItemCount > 0
-					&& firstVisibleItem != curFirstVisibleItem) {
-				requestable.requestNext();
+			if (isSet &&
+			    !HttpRequestManager.getInstance(context).isRunning() &&
+			    (firstVisibleItem + visibleItemCount) == totalItemCount &&
+			    totalItemCount > 0 &&
+			    firstVisibleItem != curFirstVisibleItem) {
+			    requestable.requestNext();
 		}
 	}
 

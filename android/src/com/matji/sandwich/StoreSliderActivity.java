@@ -17,7 +17,7 @@ public class StoreSliderActivity extends SliderActivity {
 			R.string.search_store,
 			R.string.all_store,
 			R.string.near_store,
-	};	
+	};
 	
 	public static final int INDEX_NEAR_STORE = 2;
 

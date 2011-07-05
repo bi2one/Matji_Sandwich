@@ -49,10 +49,24 @@
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:isScrollContainer="false" />
-		<com.matji.sandwich.widget.StoreNearListView
-			android:id="@+id/ListView3"
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:isScrollContainer="false" />
+		<RelativeLayout
+		    android:id="@+id/store_near_area"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent">
+		  <TextView
+		      android:id="@+id/store_near_address"
+		      android:layout_width="fill_parent"
+		      android:layout_height="wrap_content"
+		      android:layout_alignParentTop="true"
+		      android:layout_alignParentLeft="true"
+		      android:visibility="invisible" />
+		  <com.matji.sandwich.widget.StoreNearListView
+		      android:id="@+id/ListView3"
+		      android:layout_alignParentTop="true"
+		      android:layout_alignParentLeft="true"
+		      android:layout_width="fill_parent"
+		      android:layout_height="fill_parent"
+		      android:isScrollContainer="false" />
+		</RelativeLayout>
 	</com.matji.sandwich.widget.SwipeView>
 </LinearLayout>
