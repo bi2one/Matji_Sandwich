@@ -30,6 +30,10 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
 		isSet = true;
 	}
 
+    public boolean isNextRequestable() {
+	return isSet;
+    }
+
 	public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {

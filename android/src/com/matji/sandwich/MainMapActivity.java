@@ -61,10 +61,14 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private MapController mMapController;
     private EditText mSearchView;
     private Location prevLocation;
+    private GeoPoint currentCenterPoint;
+    private GeoPoint currentNeBound;
+    private GeoPoint currentSwBound;
     private StoreItemizedOverlay storeItemizedOverlay;
     private ArrayList<MatjiData> stores;
     private HttpRequestManager mRequestManager;
     private Session session;
+    private Button bookmarkButton;
     // private InputMethodManager imm;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mSearchView = (EditText)findViewById(R.id.main_map_search_box);
 	mRequestManager = HttpRequestManager.getInstance(mContext);
 	storeItemizedOverlay = new StoreItemizedOverlay(mContext, this, mMapView);
+	bookmarkButton = (Button)findViewById(R.id.bookmark_button);
 	session = Session.getInstance(mContext);
 
 	mSearchView.setOnKeyListener(this);
@@ -107,6 +112,11 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onLocationChanged(Location location) {
+	currentCenterPoint = new GeoPoint((int)(location.getLatitude()*1E6),
+					  (int)(location.getLongitude()*1E6));
+	currentNeBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
+	currentSwBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_SW);
+	
 	if (prevLocation != null) {
 	    if (prevLocation.getAccuracy() >= location.getAccuracy()) {
 		mGpsManager.stop();
@@ -122,13 +132,14 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onMapCenterChanged(GeoPoint point) {
-	GeoPoint neBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
-	GeoPoint swBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_SW);
+	currentCenterPoint = point;
+	currentNeBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
+	currentSwBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_SW);
 
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_NE, neBound.getLatitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, swBound.getLatitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, neBound.getLongitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_SW, swBound.getLongitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_NE, currentNeBound.getLatitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, currentSwBound.getLatitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, currentNeBound.getLongitudeE6());
+	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_SW, currentSwBound.getLongitudeE6());
 	session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LATITUDE, point.getLatitudeE6());
 	session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LONGITUDE, point.getLongitudeE6());
 
@@ -259,7 +270,21 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
     public void onBookmarkClick(View v) {
 	if (loginRequired()) {
+	    bookmarkButton.setClickable(false);
 	    Intent bookmarkIntent = new Intent(mContext, BookmarkListActivity.class);
+	    
+	    if (currentNeBound != null && currentSwBound != null) {
+		double latNe = (double)currentNeBound.getLatitudeE6() / 1E6;
+		double lngNe = (double)currentNeBound.getLongitudeE6() / 1E6;
+		double latSw = (double)currentSwBound.getLatitudeE6() / 1E6;
+		double lngSw = (double)currentSwBound.getLongitudeE6() / 1E6;
+		
+		bookmarkIntent.putExtra(BookmarkListActivity.IF_LAT_NE, latNe);
+		bookmarkIntent.putExtra(BookmarkListActivity.IF_LNG_NE, lngNe);
+		bookmarkIntent.putExtra(BookmarkListActivity.IF_LAT_SW, latSw);
+		bookmarkIntent.putExtra(BookmarkListActivity.IF_LNG_SW, lngSw);
+	    }
+	    
 	    startActivityForResult(bookmarkIntent, GET_BOOKMARK_POSITION_TAG);
 	}
     }
@@ -278,17 +303,12 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		int lngSpan = Math.abs(lngNe - lngSw);
 		int centerLat = (latNe + latSw) / 2;
 		int centerLng = (lngNe + lngSw) / 2;
-
-		Log.d("=====", "============================");
-		Log.d("=====", "latSpan: " + latSpan);
-		Log.d("=====", "lngSpan: " + lngSpan);
-		Log.d("=====", "centerLat: " + centerLat);
-		Log.d("=====", "centerLng: " + centerLng);
 		
 		mMapController.animateTo(new GeoPoint(centerLat, centerLng));
 		mMapController.zoomToSpan(latSpan, lngSpan);
 	    }
 	}
+	bookmarkButton.setClickable(true);
     }
 
     private void findAndMovePosition(String seed) {

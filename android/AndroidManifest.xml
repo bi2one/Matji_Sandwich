@@ -78,7 +78,7 @@
 		<activity android:name="StoreRegisterListActivity"></activity>
 		<activity android:name="StoreRegisterActivity"></activity>
 		<activity android:name="UserNearRankingActivity"></activity>
-		<activity android:name="BookmarkListActivity"></activity>
+		<activity android:name="BookmarkListActivity" android:theme="@style/Theme.Transparent"></activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />
