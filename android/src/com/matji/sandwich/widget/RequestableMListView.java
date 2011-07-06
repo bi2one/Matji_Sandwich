@@ -85,6 +85,10 @@ PullToRefreshListView.OnRefreshListener {
 		scrollListener.requestSetOn();
 	}
 
+    protected boolean isNextRequestable() {
+	return scrollListener.isNextRequestable();
+    }
+
 	public void requestNext() {
 		if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
 			syncValue();

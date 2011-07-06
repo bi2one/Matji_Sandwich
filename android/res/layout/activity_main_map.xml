@@ -26,6 +26,7 @@
     <Button
 	style="@style/main_map_commonButton"
 	android:onClick="onBookmarkClick"
+	android:id="@+id/bookmark_button"
 	android:text="@string/default_string_bookmark" />
     <Button
 	style="@style/main_map_commonButton"

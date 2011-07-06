@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-  0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
+    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
   </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -58,6 +58,11 @@
   기본 주소가 잘못되었습니다. 
   </string>
 
+  <!-- server exception -->
+  <string name="exception_failed_to_save_region">
+    북마크를 이미 한 지역입니다.
+  </string>
+
   <!-- pull_to_refresh -->
   <string name="pull_to_refresh_pull_label">Pull to refresh...</string>
   <string name="pull_to_refresh_release_label">Release to refresh...</string>
@@ -100,6 +105,8 @@
   <string name="default_string_configure">설정</string>
   <string name="default_string_address">주소</string>
   <string name="default_string_change">변경</string>
+  <string name="default_string_edit">수정</string>
+  <string name="default_string_confirm">확인</string>
   
   <!-- Writing content -->
   <string name="writing_content_post">메모를 입력하세요.</string>
@@ -189,4 +196,9 @@
 
   <!-- MainMapActivity -->
   <string name="main_map_search_map">Search Map</string>
+
+  <!-- BookmarkListActivity -->
+  <string name="bookmark_list_register">이곳을 북마크하기</string>
+  <string name="bookmark_list_register_hint">북마크 이름을 입력하세요.</string>
+  <string name="bookmark_list_register_alert">북마크 이름은 빈칸이 올 수 없습니다</string>
 </resources>

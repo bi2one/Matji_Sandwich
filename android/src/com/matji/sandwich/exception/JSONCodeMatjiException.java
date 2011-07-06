@@ -16,4 +16,8 @@ public class JSONCodeMatjiException extends MatjiException {
     public void performExceptionHandling(Context context) {
 	Toast.makeText(context, errMessage, Toast.LENGTH_SHORT).show();
     }
+
+    public String getErrMessage() {
+	return errMessage;
+    }
 }
