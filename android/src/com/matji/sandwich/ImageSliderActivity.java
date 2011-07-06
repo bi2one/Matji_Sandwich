@@ -5,7 +5,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.content.Intent;
+import android.graphics.Color;
 
 import com.matji.sandwich.adapter.ImageAdapter;
 import com.matji.sandwich.base.BaseActivity;
@@ -41,10 +44,20 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
 	private void initImageView() {
 		for (int i = 0; i < attachFileIds.length; i++) {
+			RelativeLayout rl = new RelativeLayout(this);
+			rl.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+			
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			params.addRule(RelativeLayout.CENTER_IN_PARENT);
+
 			ImageView image = new ImageView(this);
+			image.setLayoutParams(params);
 			image.setScaleType(ScaleType.FIT_CENTER);
+
+			rl.addView(image);
+
 			if (attachFileIds[i] != ImageAdapter.IMAGE_IS_NULL) {
-				swipeView.addView(image);
+				swipeView.addView(rl);
 			}
 		}
 	}
@@ -53,14 +66,14 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 		int attach_file_id = attachFileIds[currentPage];
 
 		/* Set Current Page Image */
-		ImageView image = (ImageView) swipeView.getChildAt(currentPage);
+		ImageView image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage)).getChildAt(0);
 		downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
 
 		/* Set Previous Page Image */
 		if (currentPage > 0) {
 			attach_file_id = attachFileIds[currentPage - 1];
 			if (attach_file_id != ImageAdapter.IMAGE_IS_NULL) {
-				image = (ImageView) swipeView.getChildAt(currentPage - 1);
+				image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage - 1)).getChildAt(0);
 				downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
 			}
 		}
@@ -69,7 +82,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 		if (currentPage < attachFileIds.length - 1) {
 			attach_file_id = attachFileIds[currentPage + 1];
 			if (attach_file_id != ImageAdapter.IMAGE_IS_NULL) {
-				image = (ImageView) swipeView.getChildAt(currentPage + 1);
+				image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage + 1)).getChildAt(0);
 				downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
 			}
 		}

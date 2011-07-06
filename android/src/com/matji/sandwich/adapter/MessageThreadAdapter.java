@@ -49,6 +49,7 @@ public class MessageThreadAdapter extends MBaseAdapter {
 			
 			convertView.setTag(messageElement);
 			
+			messageElement.message.setLinksClickable(false);
 			messageElement.message.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

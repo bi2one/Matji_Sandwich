@@ -49,7 +49,7 @@
 		android:layout_below="@id/name"
 		android:paddingLeft="5dp"
 		android:paddingRight="10dp"
-		android:autoLink="all"
+		android:autoLink="web"
 		android:textColor="#000" />
 	<TextView
 		android:id="@+id/post_adapter_created_at"

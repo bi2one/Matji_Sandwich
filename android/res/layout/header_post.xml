@@ -45,7 +45,7 @@
 			android:layout_below="@id/header_post_names"
 			android:paddingLeft="5dp"
 			android:paddingRight="15dp"
-			android:autoLink="all"
+			android:autoLink="web"
 			android:textColor="#000" />
 		<TextView
 			style="@style/DefaultWrap"

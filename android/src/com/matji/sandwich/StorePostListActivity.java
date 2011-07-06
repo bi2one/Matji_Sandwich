@@ -36,7 +36,6 @@ public class StorePostListActivity extends BaseActivity {
 		case WRITE_POST_ACTIVITY:
 			if (resultCode == RESULT_OK) {
 				listView.requestReload();
-				store.setPostCount(store.getPostCount() + 1);
 			}
 			break;
 

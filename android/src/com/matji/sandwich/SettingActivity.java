@@ -3,13 +3,16 @@ package com.matji.sandwich;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.http.util.MatjiImageDownloader;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class SettingActivity extends BaseActivity {
 	private Button signin;
@@ -17,6 +20,8 @@ public class SettingActivity extends BaseActivity {
 	private Button signup;
 	private Session session;
 	private User user;
+	private MatjiImageDownloader downloader;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,8 @@ public class SettingActivity extends BaseActivity {
 //		TextView messages = (TextView) findViewById(R.id.messages);
 //		TextView notices = (TextView) findViewById(R.id.notices);
 		LinearLayout ll = (LinearLayout)findViewById(R.id.user_settings);
-		
+		ImageView myPageImage = (ImageView) findViewById(R.id.mypage_img);
+		TextView myPage = (TextView) findViewById(R.id.mypage_txt); 
 		
  		if (session.getToken() == null) {
 			signin.setVisibility(Button.VISIBLE);
@@ -54,6 +60,11 @@ public class SettingActivity extends BaseActivity {
 //			messages.setVisibility(TextView.GONE);
 			
 		} else {
+			user = session.getCurrentUser();
+			downloader = new MatjiImageDownloader();
+			downloader.downloadUserImage(user.getId(), myPageImage);
+			myPage.setText(user.getNick());
+
 			signin.setVisibility(Button.GONE);
 			signout.setVisibility(Button.VISIBLE);
 			signup.setVisibility(Button.GONE);
@@ -85,12 +96,14 @@ public class SettingActivity extends BaseActivity {
 		startActivityForResult(intent, 1);
 	}
 
-	
-	public void onProfileButtonClicked(View view){
+	public void onMyPageButtonClicked(View view) {
 		Intent profileIntent = new Intent(this, UserTabActivity.class);
 		session = Session.getInstance(this);
 		user = session.getCurrentUser();
 		startActivityWithMatjiData(profileIntent, user);
+	}
+	
+	public void onProfileButtonClicked(View view){
 	}
 	
 	public void onNotificationsButtonClicked(View view){

@@ -154,6 +154,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			}
 			
 			manager.request(this, postHttpRequest, POST_WRITE_REQUEST, this);
+			KeyboardUtil.hideKeyboard(this);
 		}
 	}
 
@@ -211,7 +212,6 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			KeyboardUtil.showKeyboard(this, postField);
 		}
 	}
-
 
 	public void onTwitterButtonClicked(View v){
 		

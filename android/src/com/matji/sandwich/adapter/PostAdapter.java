@@ -9,6 +9,7 @@ import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.PostListView;
 
 import android.content.Context;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -44,10 +45,20 @@ public class PostAdapter extends MBaseAdapter {
 			postElement.thumnail.setOnClickListener(postListView);
 			postElement.nick.setOnClickListener(postListView);
 			postElement.storeName.setOnClickListener(postListView);
+			postElement.post.setLinksClickable(false);
 			postElement.post.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					int position = Integer.parseInt((String) v.getTag());
+					postListView.onListItemClick(position);
+				}
+			});
+			
+			convertView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					int position = Integer.parseInt((String) ((PostElement) v.getTag()).post.getTag());
 					postListView.onListItemClick(position);
 				}
 			});

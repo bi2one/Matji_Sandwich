@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.matji.sandwich.ImageSliderActivity;
@@ -82,7 +83,10 @@ public class ImageListView extends RequestableMListView implements View.OnClickL
 	
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
-		callImageViewer(position);
+		Log.d("Matji", position+"");
+		if (position >= 0) {
+			callImageViewer(position);
+		}
 	}
 
 	public void callImageViewer(int position) {

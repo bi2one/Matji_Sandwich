@@ -50,6 +50,7 @@
 			android:paddingLeft="5dp"
 			android:paddingRight="10dp"
 			android:autoLink="all"
+			android:singleLine="true"
 			android:textColor="@color/BLACK" />
 		<TextView
 			android:id="@+id/message_adapter_created_at"

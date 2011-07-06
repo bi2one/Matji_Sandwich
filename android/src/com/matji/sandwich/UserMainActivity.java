@@ -11,6 +11,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.ModelType;
 
@@ -134,7 +135,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		}
 
 		/* Set User Image */
-		downloader.downloadUserImage(user.getId(), (ImageView) findViewById(R.id.user_cell_thumnail));
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SMALL, (ImageView) findViewById(R.id.user_cell_thumnail));
 
 		if (session.isLogin()) {
 			if (dbProvider.isExistFollowing(user.getId())) {

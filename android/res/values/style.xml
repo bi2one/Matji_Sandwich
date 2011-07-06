@@ -159,8 +159,8 @@
   <!-- cell_user.xml --> 
   <style name="user_cell_Thumnail">
   	<item name="android:background">@drawable/img_matji_default</item>
-	<item name="android:layout_width">70dp</item>
-	<item name="android:layout_height">70dp</item>
+	<item name="android:layout_width">60dp</item>
+	<item name="android:layout_height">60dp</item>
 	<item name="android:layout_marginRight">7dp</item>
 	<item name="android:layout_marginBottom">7dp</item>
 	<item name="android:scaleType">centerCrop</item>

@@ -45,6 +45,7 @@ public class RelativeLayoutThatDetectsSoftKeyboard extends RelativeLayout {
         int screenHeight = activity.getWindowManager().getDefaultDisplay().getHeight();
         int diff = (screenHeight - statusBarHeight) - height;
         if (listener != null) {
+        	Log.d("Matji", (keyboardState) + ", " + diff+ ", " +  ASSUMED_MINIMUM_KEYBOARD_HEIGHT);
         	if (keyboardState == KeyboardState.keyboardStateShow && diff <= ASSUMED_MINIMUM_KEYBOARD_HEIGHT) {
         		keyboardState = KeyboardState.keyboardStateHidden;
         		listener.onSoftKeyboardShown(false);	
