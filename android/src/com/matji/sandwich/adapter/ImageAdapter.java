@@ -7,7 +7,6 @@ import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.widget.ImageListView;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -57,6 +56,7 @@ public class ImageAdapter extends MBaseAdapter {
 		for (int i = 0; i < imageIds.length; i++) {
 			if (attachFileIds.getIds()[i] == IMAGE_IS_NULL) {
 				imageElement.images[i].setTag(-1+"");
+				imageElement.images[i].setImageDrawable(null);
 			}else {
 				imageElement.images[i].setTag((position * imageIds.length + i)+"");
 				downloader.downloadAttachFileImage(attachFileIds.getIds()[i], MatjiImageDownloader.IMAGE_MEDIUM, imageElement.images[i]);

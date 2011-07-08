@@ -179,12 +179,12 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			alert.show();
 		}
 	}
-	
+
 	public void deletePost() {
 		PostHttpRequest postRequest = new PostHttpRequest(this);
 		postRequest.actionDelete(post.getId());
 		manager.request(this, postRequest, POST_DELETE_REQUEST, this);
-		
+
 	}
 
 	public void onCommentButtonClicked(View view) {
@@ -202,14 +202,9 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			if (!manager.isRunning(this)) {
 				likeButton.setClickable(false);
 				if (dbProvider.isExistLike(post.getId(), "Post")){
-					dbProvider.deleteLike(post.getId(), "Post");
 					// api request
 					unlikeRequest();
 				}else {
-					Like like = new Like();
-					like.setForeignKey(post.getId());
-					like.setObject("Post");
-					dbProvider.insertLike(like);
 					// api request
 					likeRequest();
 				}
@@ -248,8 +243,15 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub
 		switch (tag) {
-		case LIKE_REQUEST: case UN_LIKE_REQUEST:
-			likeButton.setClickable(true);
+		case LIKE_REQUEST:
+			Like like = new Like();
+			like.setForeignKey(post.getId());
+			like.setObject("Post");
+			dbProvider.insertLike(like);
+			setInfo();
+			break;
+		case UN_LIKE_REQUEST:
+			dbProvider.deleteLike(post.getId(), "Post");
 			setInfo();
 			break;
 		case POST_REQUEST:
@@ -271,9 +273,12 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			finish();
 			break;
 		}
+
+		likeButton.setClickable(true);
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
+		likeButton.setClickable(true);
 		e.showToastMsg(getApplicationContext());
 	}
 }

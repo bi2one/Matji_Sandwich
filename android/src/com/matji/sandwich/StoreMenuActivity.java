@@ -11,7 +11,6 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreFoodHttpRequest;
-import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.StoreMenuListView;
 
@@ -23,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class StoreMenuActivity extends BaseActivity implements Requestable {
-	private Session session;
 	private HttpRequestManager manager;
 	private HttpRequest request;
 
@@ -31,24 +29,22 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 	private StoreMenuListView listView;
 	private LinearLayout addWrapper;
 	private EditText menuField;
-	
+
 	private static final int ADD_MENU_REQUEST = 11;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_menu);
 
-		session = Session.getInstance(this);
 		manager = HttpRequestManager.getInstance(this);
 
 		store = (Store) SharedMatjiData.getInstance().top();
-		
+
 		addWrapper = (LinearLayout) findViewById(R.id.store_menu_add_wrapper);
 		menuField = (EditText) findViewById(R.id.store_menu_menu_field);
-		
+
 		listView = (StoreMenuListView) findViewById(R.id.store_menu_list);
-		listView.setUserId(store.getId());
 		listView.setActivity(this);
 		listView.requestReload();
 	}
@@ -70,19 +66,17 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 
 	@Override
 	protected boolean setTitleBarButton(Button button) {
-		if (session.isLogin()) {
-			button.setText("New");
-			return true;
-		} else {
-			return false;
-		}
+		button.setText("New");
+		return true;
 	}
 
 	@Override
 	protected void onTitleBarItemClicked(View view) {
-		addWrapper.setVisibility(View.VISIBLE);
-		menuField.requestFocus();
-		KeyboardUtil.showKeyboard(this, menuField);
+		if (loginRequired()) {
+			addWrapper.setVisibility(View.VISIBLE);
+			menuField.requestFocus();
+			KeyboardUtil.showKeyboard(this, menuField);
+		}
 	}
 
 	public void onConfirmButtonClicked(View veiw) {
@@ -102,10 +96,10 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 				addWrapper.setVisibility(View.GONE);
 				KeyboardUtil.hideKeyboard(this);
 				menuField.setText("");
-				
+
 				StoreFood newFood = (StoreFood) data.get(0);
 				listView.addMenu(newFood);
-				
+
 				ArrayList<Food> foods = store.getFoods();
 				// NULL EXCEPTION
 				foods.remove(foods.size()-1);

@@ -35,7 +35,7 @@
 				android:clickable="true"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="#000"
+				android:textColor="@color/GRAY2"
 				android:layout_alignParentTop="true" />
 		</LinearLayout>
 		<LinearLayout

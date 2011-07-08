@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,10 +57,10 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	private Button urlButton;
 
 	/* request tags */
-	public final static int BOOKMARK_REQUEST = 1;
-	public final static int UN_BOOKMARK_REQUEST = 2;
-	public final static int LIKE_REQUEST = 3;
-	public final static int UN_LIKE_REQUEST = 4;
+	public final static int BOOKMARK_REQUEST = 10;
+	public final static int UN_BOOKMARK_REQUEST = 11;
+	public final static int LIKE_REQUEST = 12;
+	public final static int UN_LIKE_REQUEST = 13;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		foodText.setText(foodListToCSV(store.getStoreFoods()));
 		tagText.setText(tagListToCSV(store.getTags()));
 
+		Log.d("Matji", session.isLogin()+"");
 		if (session.isLogin()) {
 			if (dbProvider.isExistLike(store.getId(), "Store")) {
 				likeButton.setText(R.string.store_main_unlike_store);
@@ -168,8 +170,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		((BookmarkHttpRequest) request).actionBookmark(store.getId());
 		manager.request(this, request, BOOKMARK_REQUEST, this);
 		store.setBookmarkCount(store.getBookmarkCount() + 1);
-		User me = session.getCurrentUser();
-		me.setStoreCount(me.getStoreCount() + 1);
 	}
 
 	private void unbookmarkReuqest() {
@@ -179,8 +179,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		((BookmarkHttpRequest) request).actionUnBookmark(store.getId());
 		manager.request(this, request, UN_BOOKMARK_REQUEST, this);
 		store.setBookmarkCount(store.getBookmarkCount() - 1);
-		User me = session.getCurrentUser();
-		me.setStoreCount(me.getStoreCount() - 1);
 	}
 
 	private void likeRequest() {
@@ -189,7 +187,6 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		}
 		((LikeHttpRequest) request).actionStoreLike(store.getId());
 		manager.request(this, request, LIKE_REQUEST, this);
-		store.setLikeCount(store.getLikeCount() + 1);
 	}
 
 	private void unlikeRequest() {
@@ -199,16 +196,56 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 		((LikeHttpRequest) request).actionStoreUnLike(store.getId());
 		manager.request(this, request, UN_LIKE_REQUEST, this);
-		store.setLikeCount(store.getLikeCount() - 1);
 	}
 
+	private void postBookmarkRequest() {
+		User me = session.getCurrentUser();
+		
+		Bookmark bookmark = new Bookmark();
+		bookmark.setForeignKey(store.getId());
+		bookmark.setObject("Store");
+		dbProvider.insertBookmark(bookmark);		
+		me.setStoreCount(me.getStoreCount() + 1);
+		scrapButton.setClickable(true);
+	}
+	
+	private void postUnBookmarkRequest() {
+		User me = session.getCurrentUser();
+		
+		dbProvider.deleteBookmark(store.getId(), "Store");
+		me.setStoreCount(me.getStoreCount() - 1);
+		scrapButton.setClickable(true);
+	}
+	
+	private void postLikeRequest() {
+		Like like = new Like();
+		like.setForeignKey(store.getId());
+		like.setObject("Store");
+		dbProvider.insertLike(like);
+		store.setLikeCount(store.getLikeCount() + 1);
+		likeButton.setClickable(true);
+	}
 
+	private void postUnLikeRequest() {
+		dbProvider.deleteLike(store.getId(), "Store");
+		store.setLikeCount(store.getLikeCount() - 1);
+		likeButton.setClickable(true);
+	}
+	
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
-		case BOOKMARK_REQUEST: case UN_BOOKMARK_REQUEST:
-			scrapButton.setClickable(true);
-		case LIKE_REQUEST: case UN_LIKE_REQUEST:
-			likeButton.setClickable(true);
+		case BOOKMARK_REQUEST:
+			postBookmarkRequest();
+			break;
+		case UN_BOOKMARK_REQUEST:
+			postUnBookmarkRequest();
+			break;
+		case LIKE_REQUEST:
+			postLikeRequest();
+			break;
+		case UN_LIKE_REQUEST:
+			postUnLikeRequest();
+			break;
 		}
 
 		setInfo();
@@ -216,6 +253,8 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
+		likeButton.setClickable(true);
+		scrapButton.setClickable(true);
 		e.showToastMsg(getApplicationContext());
 	}
 
@@ -224,14 +263,9 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			if (!manager.isRunning(this)) {
 				likeButton.setClickable(false);
 				if (dbProvider.isExistLike(store.getId(), "Store")){
-					dbProvider.deleteLike(store.getId(), "Store");
 					// api request
 					unlikeRequest();
 				}else {
-					Like like = new Like();
-					like.setForeignKey(store.getId());
-					like.setObject("Store");
-					dbProvider.insertLike(like);
 					// api request
 					likeRequest();
 				}
@@ -244,14 +278,9 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 			if (!manager.isRunning(this)) {
 				scrapButton.setClickable(false);
 				if (dbProvider.isExistBookmark(store.getId(), "Store")){
-					dbProvider.deleteBookmark(store.getId(), "Store");
 					// api request
 					unbookmarkReuqest();
 				}else {
-					Bookmark bookmark = new Bookmark();
-					bookmark.setForeignKey(store.getId());
-					bookmark.setObject("Store");
-					dbProvider.insertBookmark(bookmark);
 					// api request
 					bookmarkRequest();
 				}

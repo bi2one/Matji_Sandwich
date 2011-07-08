@@ -10,7 +10,7 @@ public class LikeHttpRequest extends HttpRequest {
 		controller = "foods";
 	}
 
-	public void actionFoodUnlike(int store_food_id) {
+	public void actionFoodUnLike(int store_food_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "unlike";
 		parser = new LikeParser(context);

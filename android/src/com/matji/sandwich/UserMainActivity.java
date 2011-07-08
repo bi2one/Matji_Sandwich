@@ -157,6 +157,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		jjimStoreButton.setText(getCountNumberOf(R.string.user_main_jjim_store, user.getStoreCount()));
 		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
 		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
+		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getImageCount()));
 		//TODO
 		//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.get));
 	}
@@ -195,11 +196,15 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
-		case FOLLOW_REQUEST: case UN_FOLLOW_REQUEST:
-			followButton.setClickable(true);
+		case FOLLOW_REQUEST:
+			dbProvider.insertFollowing(user.getId());
+			break;
+		case UN_FOLLOW_REQUEST:
+			dbProvider.deleteFollowing(user.getId());
 			break;
 		}
 
+		followButton.setClickable(true);
 		setInfo();
 	}
 
@@ -213,11 +218,9 @@ public class UserMainActivity extends MainActivity implements Requestable {
 				if (session.getCurrentUser().getId() != user.getId()) {
 					followButton.setClickable(false);
 					if (dbProvider.isExistFollowing(user.getId())) {
-						dbProvider.deleteFollowing(user.getId());
 						// api request
 						unfollowRequest();
 					}else {
-						dbProvider.insertFollowing(user.getId());
 						// api request
 						followRequest();
 					}

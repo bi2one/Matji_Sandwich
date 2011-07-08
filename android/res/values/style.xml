@@ -111,7 +111,8 @@
   </style>
   
   <style name="store_main_StoreCellButton">
-  	<item name="android:background">@drawable/btn_bg_h31px</item>
+<!--   	<item name="android:background">@drawable/btn_bg_h31px</item> -->
+  	<item name="android:background">@drawable/selector</item>
   	<item name="android:layout_width">60dp</item>
   	<item name="android:layout_height">25dp</item>
   	<item name="android:layout_marginLeft">3dp</item>

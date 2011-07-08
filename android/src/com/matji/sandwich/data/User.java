@@ -19,6 +19,7 @@ public class User extends MatjiData implements Serializable{
 	private int store_count;
 	private int following_count;
 	private int follower_count;
+	private int image_count;
 	private boolean following;
 	private boolean followed;
 	private UserExternalAccount external_account;
@@ -59,6 +60,7 @@ public class User extends MatjiData implements Serializable{
 		dest.writeInt(store_count);
 		dest.writeInt(following_count);
 		dest.writeInt(follower_count);
+		dest.writeInt(image_count);
 		dest.writeInt(following ? 1 : 0);
 		dest.writeInt(followed ? 1 : 0);
 		dest.writeValue(external_account);
@@ -80,6 +82,7 @@ public class User extends MatjiData implements Serializable{
 		store_count = in.readInt();
 		following_count = in.readInt();
 		follower_count = in.readInt();
+		image_count = in.readInt();
 		following = in.readInt() != 0;
 		followed = in.readInt() != 0;
 		external_account = UserExternalAccount.class.cast(in.readValue(UserExternalAccount.class.getClassLoader()));
@@ -177,6 +180,14 @@ public class User extends MatjiData implements Serializable{
 
 	public int getFollowerCount() {
 		return follower_count;
+	}
+
+	public void setImageCount(int image_count) {
+		this.image_count = image_count;
+	}
+
+	public int getImageCount() {
+		return image_count;
 	}
 
 	public void setFollowing(boolean following) {

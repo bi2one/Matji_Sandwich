@@ -32,7 +32,7 @@
 			android:clickable="true"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="@color/GRAY2"
+			android:textColor="@color/BLACK"
 			android:layout_alignParentTop="true" />
 		<TextView
 			android:id="@+id/post_adapter_store_name"
