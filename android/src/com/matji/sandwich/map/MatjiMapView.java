@@ -6,9 +6,11 @@ import com.google.android.maps.GeoPoint;
 import android.os.AsyncTask;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 
-
-public class MatjiMapView extends MapView {
+public class MatjiMapView extends MapView implements OnTouchListener {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
     private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 500;
     private static final int MAP_CENTER_CHANGE_BOUND_LAT = 10;
@@ -23,6 +25,7 @@ public class MatjiMapView extends MapView {
     public MatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	mapCenter = getMapCenter();
+	setOnTouchListener(this);
     }
 
     public void startMapCenterThread() {
@@ -118,5 +121,16 @@ public class MatjiMapView extends MapView {
 	    return new GeoPoint(westLatitude, northLongitude);
 	}
 	return null;
+    }
+
+    public boolean onTouch(View v, MotionEvent e) {
+	switch(e.getAction()) {
+	case MotionEvent.ACTION_DOWN:
+	    stopMapCenterThread();
+	    break;
+	case MotionEvent.ACTION_UP:
+	    startMapCenterThread();
+	}
+	return false;
     }
 }

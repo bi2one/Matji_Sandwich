@@ -7,6 +7,8 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.matji.sandwich.MainMapActivity;
 import com.matji.sandwich.adapter.BookmarkAdapter;
@@ -14,13 +16,13 @@ import com.matji.sandwich.data.Region;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.RegionHttpRequest;
 
-public class BookmarkListView extends RequestableMListView {
+public class BookmarkListView extends RequestableMListView implements OnItemLongClickListener {
     private HttpRequest request;
 
     public BookmarkListView(Context context, AttributeSet attrs) {
 	super(context, attrs, new BookmarkAdapter(context), 10);
 	request = new RegionHttpRequest(context);
-
+	setOnItemLongClickListener(this);
 	setPage(1);
     }
 
@@ -48,5 +50,10 @@ public class BookmarkListView extends RequestableMListView {
 	    getAdapterData().remove(getAdapterData().size() - 1);
 	}
 	getMBaseAdapter().notifyDataSetChanged();
+    }
+
+    public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+	Log.d("=====", "" + position);
+	return true;
     }
 }
