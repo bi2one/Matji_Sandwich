@@ -16,7 +16,6 @@ public class FoodParser extends MatjiDataParser {
 		if (object == null) return null;
 		
 		Food food = new Food();
-		food.setLikeCount(getInt(object, "like_count"));
 		food.setCreatedAt(getString(object, "created_at"));
 		food.setUpdatedAt(getString(object, "updated_at"));
 		food.setId(getInt(object, "id"));

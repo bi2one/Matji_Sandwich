@@ -132,6 +132,9 @@
   <string name="target_android">ANDROID</string>
   <string name="target_common">COMMON</string>
      
+  <!-- Activity memo -->
+  <string name="activity_likes_the">likes the</string>
+  
   <!-- AlarmActivity -->
   <string name="alarm_following_you">is now following you.</string>
   <string name="alarm_commented_post">commented on your post.</string>

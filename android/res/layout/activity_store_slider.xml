@@ -31,8 +31,7 @@
 	<com.matji.sandwich.widget.SwipeView
 		android:id="@+id/SwipeView"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:isScrollContainer="false">
+		android:layout_height="fill_parent">
 		<LinearLayout
 			android:id="@+id/SearchWrap"
 			android:layout_width="fill_parent"

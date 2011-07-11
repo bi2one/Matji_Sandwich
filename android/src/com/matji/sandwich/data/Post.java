@@ -148,7 +148,7 @@ public class Post extends MatjiData {
 	public void setActivityId(int activity_id) {
 		this.activity_id = activity_id;
 	}
-	public int getActivity_id() {
+	public int getActivityId() {
 		return activity_id;
 	}
 	public void setImageCount(int image_count) {

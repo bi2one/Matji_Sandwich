@@ -35,8 +35,7 @@
 		<activity android:name="PostSliderActivity"></activity>
 		<activity android:name="SettingActivity"></activity>
 		<activity android:name="SignUpActivity"></activity>
-		<activity android:name="StoreSliderActivity"
-				  android:windowSoftInputMode="adjustPan"></activity>
+		<activity android:name="StoreSliderActivity"></activity>
 		<activity android:name="StoreNearListActivity"></activity>
 		<activity android:name="StoreTabActivity" 
 				  android:screenOrientation="portrait"></activity>
@@ -45,7 +44,8 @@
 			 	  android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreNoteListActivity"></activity>
 		<activity android:name="StoreDefaultInfoActivity"></activity>
-		<activity android:name="StoreMenuActivity"></activity>
+		<activity android:name="StoreMenuActivity"
+				  android:windowSoftInputMode="adjustPan"></activity>
 		<activity android:name="StorePostListActivity"></activity>
 		<activity android:name="StoreMoreActivity"></activity>
 		<activity android:name="StoreUrlListActivity" 

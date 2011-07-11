@@ -48,6 +48,11 @@ public class StoreSliderActivity extends SliderActivity {
 	}
 	
 	@Override
+	protected String getSliderIndex() {
+		return Session.STORE_SLIDER_INDEX;
+	}
+	
+	@Override
 	protected int[] getViewIds() {
 		return viewIds;
 	}

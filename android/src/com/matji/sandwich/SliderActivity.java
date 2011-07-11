@@ -19,6 +19,7 @@ import com.matji.sandwich.session.Session;
 public abstract class SliderActivity extends BaseActivity implements OnScrollListener {
 	protected abstract int getLayoutId();
 	protected abstract int getDefaultPageCount();
+	protected abstract String getSliderIndex();
 	protected abstract int[] getViewIds();
 	protected abstract int[] getTitleIds();
 	protected abstract View getPrivateView();
@@ -71,7 +72,7 @@ public abstract class SliderActivity extends BaseActivity implements OnScrollLis
 
 	public void onResume(){
 		super.onResume();
-		mCurrentPage = session.getPreferenceProvider().getInt(Session.STORE_SLIDER_INDEX, mDefaultPage);
+		mCurrentPage = session.getPreferenceProvider().getInt(getSliderIndex(), mDefaultPage);
 		//		session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, mDefaultPage);
 
 		if (session.getToken() == null && privateMode == true){
@@ -125,7 +126,7 @@ public abstract class SliderActivity extends BaseActivity implements OnScrollLis
 			try {
 				KeyboardUtil.hideKeyboard(this);
 				mCurrentPage = currentPage;
-				session.getPreferenceProvider().setInt(Session.STORE_SLIDER_INDEX, mCurrentPage);
+				session.getPreferenceProvider().setInt(getSliderIndex(), mCurrentPage);
 				control.setCurrentPage(currentPage);
 				View view = mContentViews.get(currentPage);
 

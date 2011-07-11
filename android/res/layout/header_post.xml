@@ -29,7 +29,7 @@
 				android:clickable="true"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="@color/GRAY2" />
+				android:textColor="@color/BLACK" />
 			<TextView
 				android:id="@+id/header_post_store_name"
 				android:clickable="true"

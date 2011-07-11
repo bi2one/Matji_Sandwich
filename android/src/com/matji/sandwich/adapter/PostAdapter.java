@@ -9,7 +9,6 @@ import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.PostListView;
 
 import android.content.Context;
-import android.text.util.Linkify;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,11 +16,25 @@ import android.widget.TextView;
 
 public class PostAdapter extends MBaseAdapter {
 	private MatjiImageDownloader downloader;
+	private static final int NORMAL_MEMO = 0;
+	private static final int ACTIVITY_MEMO = 1;
+	private static final int VIEW_TYPE_COUNT = 2;
 
 	public PostAdapter(Context context) {
 		super(context);
 		downloader = new MatjiImageDownloader();
 	}
+
+	@Override
+	public int getItemViewType(int position) {
+		Post post = (Post) data.get(position);
+		return (post.getActivityId() > 0) ? ACTIVITY_MEMO : NORMAL_MEMO;
+	}
+
+	@Override
+	public int getViewTypeCount() {
+		return VIEW_TYPE_COUNT; // ME, OTHER
+	};
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		PostElement postElement;
@@ -29,67 +42,91 @@ public class PostAdapter extends MBaseAdapter {
 
 		if (convertView == null) {
 			postElement = new PostElement();
-			convertView = getLayoutInflater().inflate(R.layout.adapter_post, null);
-
-			postElement.thumnail = (ImageView) convertView.findViewById(R.id.post_adapter_thumnail);
-			postElement.nick = (TextView) convertView.findViewById(R.id.post_adapter_nick);
-			postElement.storeName = (TextView)convertView.findViewById(R.id.post_adapter_store_name);
-			postElement.post = (TextView) convertView.findViewById(R.id.post_adapter_post);
-			postElement.dateAgo = (TextView) convertView.findViewById(R.id.post_adapter_created_at);
-			postElement.commentCount = (TextView) convertView.findViewById(R.id.post_adapter_comment_count);
-			postElement.imageCount = (TextView) convertView.findViewById(R.id.post_adapter_image_count);
-			postElement.tagCount = (TextView) convertView.findViewById(R.id.post_adapter_tag_count);
-
-			convertView.setTag(postElement);
 			final PostListView postListView = (PostListView)parent;
-			postElement.thumnail.setOnClickListener(postListView);
-			postElement.nick.setOnClickListener(postListView);
-			postElement.storeName.setOnClickListener(postListView);
-			postElement.post.setLinksClickable(false);
-			postElement.post.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					int position = Integer.parseInt((String) v.getTag());
-					postListView.onListItemClick(position);
-				}
-			});
-			
-			convertView.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					int position = Integer.parseInt((String) ((PostElement) v.getTag()).post.getTag());
-					postListView.onListItemClick(position);
-				}
-			});
 
+			switch (getItemViewType(position)) {
+			case NORMAL_MEMO:
+				convertView = getLayoutInflater().inflate(R.layout.adapter_post, null);
+				postElement.thumnail = (ImageView) convertView.findViewById(R.id.post_adapter_thumnail);
+				postElement.nick = (TextView) convertView.findViewById(R.id.post_adapter_nick);
+				postElement.storeName = (TextView)convertView.findViewById(R.id.post_adapter_store_name);
+				postElement.post = (TextView) convertView.findViewById(R.id.post_adapter_post);
+				postElement.dateAgo = (TextView) convertView.findViewById(R.id.post_adapter_created_at);
+				postElement.commentCount = (TextView) convertView.findViewById(R.id.post_adapter_comment_count);
+				postElement.imageCount = (TextView) convertView.findViewById(R.id.post_adapter_image_count);
+				postElement.tagCount = (TextView) convertView.findViewById(R.id.post_adapter_tag_count);
 
+				convertView.setTag(postElement);
+				postElement.thumnail.setOnClickListener(postListView);
+				postElement.nick.setOnClickListener(postListView);
+				postElement.storeName.setOnClickListener(postListView);
+				postElement.post.setLinksClickable(false);
+				postElement.post.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						int position = Integer.parseInt((String) v.getTag());
+						postListView.onListItemClick(position);
+					}
+				});
+
+				convertView.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						int position = Integer.parseInt((String) ((PostElement) v.getTag()).post.getTag());
+						postListView.onListItemClick(position);
+					}
+				});
+				break;
+			case ACTIVITY_MEMO:
+				convertView = getLayoutInflater().inflate(R.layout.adapter_activity, null);
+				postElement.nick = (TextView) convertView.findViewById(R.id.activity_adapter_nick);
+				postElement.post = (TextView) convertView.findViewById(R.id.activity_adapter_memo);
+				postElement.storeName = (TextView) convertView.findViewById(R.id.activity_adapter_target);
+				postElement.dateAgo = (TextView) convertView.findViewById(R.id.activity_adapter_created_at);
+
+				convertView.setTag(postElement);
+				postElement.nick.setOnClickListener(postListView);
+				postElement.storeName.setOnClickListener(postListView);
+				break;
+			}
 		} else {
 			postElement = (PostElement) convertView.getTag();
 		}
 
-		/* Set Store */
 		Store store = post.getStore();
-		if (store != null)
-			postElement.storeName.setText(" @" + store.getName());
-		else 
-			postElement.storeName.setText("");
-
-		postElement.thumnail.setTag(position+"");
-		postElement.nick.setTag(position+"");
-		postElement.storeName.setTag(position+"");
-		postElement.post.setTag(position+"");
-
-		/* Set User */
 		User user = post.getUser();
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.thumnail);
-		postElement.nick.setText(user.getNick());
-		postElement.post.setText(post.getPost());
-		//		postElement.dateAgo.setText(TimeUtil.getAgoFromDate(post.getCreatedAt()));
-		postElement.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
-		postElement.commentCount.setText(post.getCommentCount() + "");
-		postElement.imageCount.setText(post.getImageCount() + "");
-		postElement.tagCount.setText(post.getTagCount() + "");
+		
+		switch (getItemViewType(position)) {
+		case NORMAL_MEMO:
+			if (store != null)
+				postElement.storeName.setText(" @" + store.getName());
+			else 
+				postElement.storeName.setText("");
+
+			postElement.thumnail.setTag(position+"");
+			postElement.nick.setTag(position+"");
+			postElement.storeName.setTag(position+"");
+			postElement.post.setTag(position+"");
+
+			downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.thumnail);
+			postElement.nick.setText(user.getNick());
+			postElement.post.setText(post.getPost());
+			postElement.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
+			postElement.commentCount.setText(post.getCommentCount() + "");
+			postElement.imageCount.setText(post.getImageCount() + "");
+			postElement.tagCount.setText(post.getTagCount() + "");
+			break;
+		case ACTIVITY_MEMO:
+			postElement.nick.setTag(position+"");
+			postElement.storeName.setTag(position+"");
+			
+			postElement.nick.setText(user.getNick()+" ");
+			postElement.post.setText(R.string.activity_likes_the);
+			postElement.storeName.setText(" "+store.getName());
+			postElement.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));			
+			break;
+		}
 
 		return convertView;
 	}

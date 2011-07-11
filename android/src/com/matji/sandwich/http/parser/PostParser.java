@@ -23,6 +23,7 @@ public class PostParser extends MatjiDataParser {
 		post.setId(getInt(object, "id"));
 		post.setUserId(getInt(object, "user_id"));
 		post.setStoreId(getInt(object, "store_id"));
+		post.setActivityId(getInt(object, "activity_id"));
 		post.setPost(getString(object, "post"));
 		post.setImageCount(getInt(object, "image_count"));
 		post.setLikeCount(getInt(object, "like_count"));

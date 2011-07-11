@@ -72,7 +72,13 @@ public class PostSliderActivity extends SliderActivity {
 	@Override
 	protected int getDefaultPageCount() {
 		return viewIds.length;
+	}	
+	
+	@Override
+	protected String getSliderIndex() {
+		return Session.POST_SLIDER_INDEX;
 	}
+
 
 	@Override
 	protected int[] getViewIds() {

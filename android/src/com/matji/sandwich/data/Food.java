@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Food extends MatjiData{
-	private int like_count;
 	private String created_at;
 	private String updated_at;
 	private int id;
@@ -31,7 +30,6 @@ public class Food extends MatjiData{
 	}
 
 	public void writeToParcel(Parcel dest, int arg1) {
-		dest.writeInt(like_count);
 		dest.writeString(created_at);
 		dest.writeString(updated_at);
 		dest.writeInt(id);
@@ -39,19 +37,10 @@ public class Food extends MatjiData{
 	}
 
 	private void readFromParcel(Parcel in) {
-		like_count = in.readInt();
 		created_at = in.readString();	
 		updated_at = in.readString();
 		id = in.readInt();
 		name = in.readString();
-	}
-	
-	public void setLikeCount(int like_count) {
-		this.like_count = like_count;
-	}
-	
-	public int getLikeCount() {
-		return like_count;
 	}
 
 	public void setCreatedAt(String created_at) {

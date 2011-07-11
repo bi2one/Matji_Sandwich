@@ -12,12 +12,12 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.adapter.FoodAdapter;
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.data.provider.DBProvider;
+import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.request.StoreFoodHttpRequest;
@@ -58,7 +58,7 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 			requestSetOn();
 			getAdapterData().remove(getAdapterData().size() - 1);
 		}
-		getMBaseAdapter().notifyDataSetChanged();		
+		getMBaseAdapter().notifyDataSetChanged();
 	}
 
 	public HttpRequest request() {
@@ -77,7 +77,6 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 
 		((LikeHttpRequest) request).actionFoodLike(currentClickedStoreFood.getId());
 		getHttpRequestManager().request(getActivity(), request, LIKE_REQUEST, this);
-		currentClickedStoreFood.setLikeCount(currentClickedStoreFood.getLikeCount() + 1);
 	}
 
 	private void unlikeRequest() {
@@ -87,29 +86,27 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 
 		((LikeHttpRequest) request).actionFoodUnLike(currentClickedStoreFood.getId());
 		getHttpRequestManager().request(getActivity(), request, UN_LIKE_REQUEST, this);
-		currentClickedStoreFood.setLikeCount(currentClickedStoreFood.getLikeCount() - 1);
 	}	
 	
 	private void postLikeRequest() {
 		Like like = new Like();
 		like.setForeignKey(currentClickedStoreFood.getId());
-		like.setObject("Food");
+		like.setObject("StoreFood");
 
 		dbProvider.insertLike(like);
-		store.setLikeCount(currentClickedStoreFood.getLikeCount() + 1);
+		currentClickedStoreFood.setLikeCount(currentClickedStoreFood.getLikeCount() + 1);
 		currentClickedView.setClickable(true);
 	}
 
 	private void postUnLikeRequest() {
-		dbProvider.deleteLike(currentClickedStoreFood.getId(), "Food");
-		store.setLikeCount(currentClickedStoreFood.getLikeCount() - 1);
+		dbProvider.deleteLike(currentClickedStoreFood.getId(), "StoreFood");
+		currentClickedStoreFood.setLikeCount(currentClickedStoreFood.getLikeCount() - 1);
 		currentClickedView.setClickable(true);
 	}
 
 	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (tag == LIKE_REQUEST || tag == UN_LIKE_REQUEST) {
-			currentClickedView.setClickable(true);
 			switch (tag) {
 			case LIKE_REQUEST:
 				postLikeRequest();
@@ -118,6 +115,8 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 				postUnLikeRequest();
 				break;
 			}
+			
+			getMBaseAdapter().notifyDataSetChanged();
 		}
 
 		else {
@@ -125,7 +124,11 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 		}
 	}
 
-	public void onListItemClick(int position) {}
+	@Override
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		if (currentClickedView != null) currentClickedView.setClickable(true);
+		super.requestExceptionCallBack(tag, e);
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -135,9 +138,10 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 				if (!getHttpRequestManager().isRunning(getActivity())) {
 					v.setClickable(false);
 					currentClickedView = v;
-					currentClickedStoreFood = ((StoreFood) getAdapterData().get(Integer.parseInt((String) v.getTag())));
+					int position = Integer.parseInt((String) v.getTag());
+					currentClickedStoreFood = ((StoreFood) getAdapterData().get(position));
 					
-					if (dbProvider.isExistLike(store.getId(), "Store")){
+					if (dbProvider.isExistLike(currentClickedStoreFood.getId(), "StoreFood")) {
 						// api request
 						unlikeRequest();
 					}else {
@@ -148,4 +152,6 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 			}
 		}
 	}
+	
+	public void onListItemClick(int position) {}
 }

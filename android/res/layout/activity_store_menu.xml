@@ -33,6 +33,7 @@
 			android:onClick="onConfirmButtonClicked" />
 	</LinearLayout>
 	<com.matji.sandwich.widget.StoreMenuListView
+		android:id="@+id/store_menu_list"
 		style="@style/DefaultFill"
-		android:id="@+id/store_menu_list" />
+		android:isScrollContainer="false" />
 </LinearLayout>

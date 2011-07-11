@@ -24,7 +24,7 @@ public abstract class HttpRequest {
 	private int tag;
 	private FileUploadProgressListener progressListener;
 	protected Context context = null;
-	protected String serverDomain = "http://api.matji.com/v2/";
+	protected String serverDomain = "http://api.matji.com:3000/v2/";
 
 	protected Hashtable<String, Object> postHashtable;
 	protected Hashtable<String, String> getHashtable;
@@ -149,19 +149,30 @@ public abstract class HttpRequest {
 	}
 
 	public boolean isEqual(HttpRequest request) {
-		if (httpMethod != request.getHttpMethod())
+		if (httpMethod != request.getHttpMethod()) {
+			Log.d("Matji", "THIS");
 			return false;
-
+		}
+		
+		if (httpMethod == HttpMethod.HTTP_POST ||
+			request.getHttpMethod() == HttpMethod.HTTP_POST) {
+			return false;
+		}
+			
 		if (getUrl() == null || request.getUrl() == null) {
+			Log.d("Matji", "THIS2");
 			return false;
 		} else if (!getUrl().equals(request.getUrl())) {
+			Log.d("Matji", "THIS3");
 			return false;
 		} else {
 			if (httpMethod == HttpMethod.HTTP_GET) {
+				Log.d("Matji", "THIS4");
 				String currentUrl = HttpUtility.getUrlStringWithQuery(getUrl(), getGetHashtable());
 				String requestUrl = HttpUtility.getUrlStringWithQuery(request.getUrl(), request.getGetHashtable());
 				return currentUrl.equals(requestUrl);
 			} else {
+				Log.d("Matji", "THIS5");
 				return true;
 			}
 		}

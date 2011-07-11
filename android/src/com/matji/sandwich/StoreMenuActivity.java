@@ -99,11 +99,6 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 
 				StoreFood newFood = (StoreFood) data.get(0);
 				listView.addMenu(newFood);
-
-				ArrayList<Food> foods = store.getFoods();
-				// NULL EXCEPTION
-				foods.remove(foods.size()-1);
-				foods.add(0, newFood.getFood());
 			}
 			break;
 		}

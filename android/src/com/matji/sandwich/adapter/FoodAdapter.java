@@ -40,7 +40,10 @@ public class FoodAdapter extends MBaseAdapter {
 		foodElement.like.setTag(position+"");
 		
 		foodElement.name.setText(food.getName());
-		if (food.getLikeCount() > 0) foodElement.likeCount.setText(food.getLikeCount() + "person");
+		if (storeFood.getLikeCount() > 0) {
+			foodElement.likeCount.setVisibility(View.VISIBLE);
+			foodElement.likeCount.setText(storeFood.getLikeCount() + "person");
+		} else foodElement.likeCount.setVisibility(View.GONE);
 
 		return convertView;
 	}

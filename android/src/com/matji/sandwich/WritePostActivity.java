@@ -166,8 +166,8 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	
 	
 	private void uploadImage(int index){
+		Log.d("Matji", index+"  ==========b");
 		if (index >= uploadImages.size()) return;
-		
 		String path = Environment.getExternalStorageDirectory().toString();
 		File file = new File(path, "uploadimage.jpg");
 		
@@ -184,7 +184,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			request.setFileUploadProgressListener(this);
 			request.actionUpload(file, postId);
 			manager.request(this, request, IMAGE_UPLOAD_REQUEST, this);
-			
+			Log.d("Matji", "request");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -236,6 +236,7 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 			break;
 		case IMAGE_UPLOAD_REQUEST:
 			++uploadImageIndex;
+			Log.d("Matji", uploadImageIndex +", " + uploadImages.size());
 			if (uploadImageIndex >= uploadImages.size()){
 				setResult(RESULT_OK);
 				finish();
