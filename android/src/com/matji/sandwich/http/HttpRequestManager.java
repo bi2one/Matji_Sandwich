@@ -9,6 +9,7 @@ import com.matji.sandwich.Requestable;
 import com.matji.sandwich.widget.Spinner;
 import com.matji.sandwich.widget.NormalSpinner;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.RequestCommand;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -44,9 +45,9 @@ public class HttpRequestManager {
 	return manager;
     }
 
-    public void request(Activity parentActivity, HttpRequest request, int tag, Requestable requestable) {
-	request.setTag(tag);
-	asyncPool.putAndRunRequest(parentActivity, request, requestable);
+    public void request(Activity parentActivity, RequestCommand request, int tag, Requestable requestable) {
+	// request.setTag(tag);
+	asyncPool.putAndRunRequest(parentActivity, request, requestable, tag);
     }
 
     public boolean isRunning(Activity parentActivity) {
@@ -64,17 +65,17 @@ public class HttpRequestManager {
     public void cancelTask(Activity parentActivity) {
 	asyncPool.cancelTask(parentActivity);
     }
-    
 
-    private class HttpAsyncTask extends AsyncTask<HttpRequest, Integer, ArrayList<MatjiData>> {
-	protected int tag = 0;
-	protected HttpRequest request;
+    private class HttpAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayList<MatjiData>> {
+	protected int tag;
+	protected RequestCommand request;
 	private Activity parentActivity;
 	private MatjiException occuredException;
 	private Requestable requestable;
 
-	    public HttpAsyncTask(Activity activity, HttpRequest request, Requestable requestable) {
+	public HttpAsyncTask(Activity activity, RequestCommand request, Requestable requestable, int tag) {
 	    parentActivity = activity;
+	    this.tag = tag;
 	    this.request = request;
 	    this.requestable = requestable;
 	}
@@ -83,13 +84,12 @@ public class HttpRequestManager {
 	    execute(request);
 	}
 
-	public HttpRequest getRequest() {
+	public RequestCommand getRequest() {
 	    return request;
 	}
 
-	protected ArrayList<MatjiData> doInBackground(HttpRequest... params) {
+	protected ArrayList<MatjiData> doInBackground(RequestCommand... params) {
 	    ArrayList<MatjiData> result;
-	    tag = request.getTag();
 	    Log.d("refresh", "doin " + params.length);
 
 	    try {
@@ -201,7 +201,7 @@ public class HttpRequestManager {
 	    pool.put(activity, block);
 	}
 
-	public boolean isRequestAlreadyExecute(Activity activity, HttpRequest request) {
+	public boolean isRequestAlreadyExecute(Activity activity, RequestCommand request) {
 	    AsyncBlock block = pool.get(activity);
 	    if (block == null)
 		return false;
@@ -210,10 +210,10 @@ public class HttpRequestManager {
 	    }
 	}
 
-	public void putAndRunRequest(Activity activity, HttpRequest request, Requestable requestable) {
+	public void putAndRunRequest(Activity activity, RequestCommand request, Requestable requestable, int tag) {
 	    // Log.d("=====", "" + isRequestAlreadyExecute(activity, request));
 	    if (!isRequestAlreadyExecute(activity, request)) {
-		HttpAsyncTask task = new HttpAsyncTask(activity, request, requestable);
+		HttpAsyncTask task = new HttpAsyncTask(activity, request, requestable, tag);
 		putHttpAsyncTask(activity, task);
 		task.execute();
 	    }
@@ -252,15 +252,15 @@ public class HttpRequestManager {
 	    tasks.clear();
 	}
 
-	public boolean isRequestAlreadyExecute(HttpRequest request) {
+	public boolean isRequestAlreadyExecute(RequestCommand request) {
 	    Iterator itr = tasks.iterator();
 	    boolean result = false;
 	    HttpAsyncTask task;
-	    HttpRequest prevRequest;
+	    RequestCommand prevRequest;
 	    while(itr.hasNext() && !result) {
 		task = (HttpAsyncTask)itr.next();
 		prevRequest = task.getRequest();
-		result = prevRequest.isEqual(request);
+		result = prevRequest.equals(request);
 	    }
 	    return result;
 	}

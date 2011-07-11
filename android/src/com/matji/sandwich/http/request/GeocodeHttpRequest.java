@@ -18,7 +18,7 @@ import com.matji.sandwich.exception.GeocodeLocationInvalidMatjiException;
 import com.matji.sandwich.exception.GeocodeSearchInvalidMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 
-public class GeocodeHttpRequest extends HttpRequest {
+public class GeocodeHttpRequest implements RequestCommand {
     private static final Locale GEOCODE_LOCALE = Locale.KOREA;
     private GeoPoint _point;
     private int _listCount;
@@ -28,7 +28,6 @@ public class GeocodeHttpRequest extends HttpRequest {
     private enum Action { LOCATION, SEARCH }
     
     public GeocodeHttpRequest(Context context) {
-	super(context);
 	_geocoder = new Geocoder(context, GEOCODE_LOCALE);
     }
 
