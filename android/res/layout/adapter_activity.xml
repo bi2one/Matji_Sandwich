@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:padding="7dp"
+	android:background="#fff">
+	<LinearLayout
+		style="@style/DefaultWrap"
+		android:id="@+id/activity_adapter_wrap">
+		<TextView
+			style="@style/DefaultWrap"
+			android:id="@+id/activity_adapter_nick"
+			android:textColor="@color/DODGER_BLUE" />
+		<TextView
+			style="@style/DefaultWrap"
+			android:id="@+id/activity_adapter_memo"
+			android:textColor="@color/BLACK" />
+		<TextView
+			style="@style/DefaultWrap"
+			android:id="@+id/activity_adapter_target"
+			android:textColor="@color/DODGER_BLUE"
+			android:singleLine="true" />
+	</LinearLayout>
+	<TextView
+		android:id="@+id/activity_adapter_created_at"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/activity_adapter_wrap"
+		android:textSize="11dp"
+		android:padding="3dp"
+		android:textColor="@color/GRAY" />
+</RelativeLayout>
