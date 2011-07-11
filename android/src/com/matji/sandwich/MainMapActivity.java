@@ -284,7 +284,6 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		bookmarkIntent.putExtra(BookmarkListActivity.IF_LAT_SW, latSw);
 		bookmarkIntent.putExtra(BookmarkListActivity.IF_LNG_SW, lngSw);
 	    }
-	    
 	    startActivityForResult(bookmarkIntent, GET_BOOKMARK_POSITION_TAG);
 	}
     }
