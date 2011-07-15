@@ -2,11 +2,11 @@ package com.matji.sandwich.base;
 
 import android.app.Activity;
 import android.content.Intent;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.google.android.maps.MapActivity;
 import com.matji.sandwich.LoginActivity;
@@ -17,11 +17,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.session.Session;
 
-public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener{
-	protected abstract String titleBarText();
-	protected abstract boolean setTitleBarButton(Button button);
-	protected abstract void onTitleBarItemClicked(View view);
-	
+public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener{	
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	
@@ -77,12 +73,9 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 			super.setContentView(layoutResID);
 		}
 	}
-
 	
 	@Override
 	protected void onResume() {
-		
-		// TODO Auto-generated method stub
 		super.onResume();
 		
 		Log.d("LifeCycle", "onResume at " + this.getClass());
@@ -90,22 +83,9 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 		
 		Activity act = (this.getParent() == null)? this: this.getParent();
 		
-		String titleBarText = titleBarText();
-		TextView titleBarView = (TextView) act.findViewById(R.id.title);
-		titleBarView.setText(titleBarText);
-		
-		Button titleBarButton = (Button) act.findViewById(R.id.title_btn);
-		if (setTitleBarButton(titleBarButton)){
-			titleBarButton.setOnClickListener(new View.OnClickListener() {
-			
-				public void onClick(View arg0) {
-					onTitleBarItemClicked(arg0);
-				}
-			});
-			titleBarButton.setVisibility(Button.VISIBLE);
-		}else{			
-			titleBarButton.setVisibility(Button.GONE);
-		}		
+		((LinearLayout) act.findViewById(R.id.title_left_view)).addView(setLeftTitleView());
+		((LinearLayout) act.findViewById(R.id.title_center_view)).addView(setCenterTitleView());
+		((LinearLayout) act.findViewById(R.id.title_right_view)).addView(setRightTitleView());
 	}
 	
 	private void preFinish() {
@@ -170,5 +150,15 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	protected View setRightTitleView() {
+		return new View(this);
+	}
+	protected View setLeftTitleView() {
+		return new View(this);
+	}
+	protected View setCenterTitleView() {
+		return new View(this);
 	}
 }

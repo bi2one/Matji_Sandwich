@@ -3,11 +3,12 @@ package com.matji.sandwich;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.StorePostListView;
+import com.matji.sandwich.widget.title.TitleButton;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class StorePostListActivity extends BaseActivity {
 	private Store store;
@@ -52,21 +53,23 @@ public class StorePostListActivity extends BaseActivity {
 			break;
 		}
 	}
-
+	
 	@Override
-	protected String titleBarText() {
-		return "StorePostListActivity";
+	protected View setCenterTitleView() {
+		return new TitleText(this, "StorePostListActivity");
 	}
 
 	@Override
-	protected boolean setTitleBarButton(Button button) {
-		button.setText("Write");
-
-		return true;
+	protected View setRightTitleView() {
+		return new TitleButton(this, "Write") {
+			@Override
+			public void onClick(View v) {
+				onWriteButtonClicked();				
+			}
+		};
 	}
 
-	@Override
-	protected void onTitleBarItemClicked(View view) {
+	private void onWriteButtonClicked() {
 		if (loginRequired()) {
 			Intent intent = new Intent(getApplicationContext(), WritePostActivity.class);
 			intent.putExtra("store_id", store.getId());

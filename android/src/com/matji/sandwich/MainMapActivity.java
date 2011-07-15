@@ -12,7 +12,7 @@ import android.view.KeyEvent;
 import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
@@ -209,19 +209,30 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	}
     }
 
+    @Override
+    protected View setLeftTitleView() {
+    	Button tmp = new Button(this);
+    	tmp.setText("Left");
+    	
+    	return tmp;
+    }
+
 
     @Override
-	protected String titleBarText() {
-	return "MainMapActivity";
+    protected View setCenterTitleView() {
+    	TextView tmp = new TextView(this);
+    	tmp.setText("MainMapActivity");
+    	
+    	return tmp;
     }
 
     @Override
-	protected boolean setTitleBarButton(Button button) {
-	return false;
-    }
-
-    @Override
-	protected void onTitleBarItemClicked(View view) {
+    protected View setRightTitleView() {
+    	// TODO Auto-generated method stub
+    	Button tmp = new Button(this);
+    	tmp.setText("Right");
+    	
+    	return tmp;
     }
 
     public void onNearStoreClick(View v) {

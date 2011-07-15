@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,6 +15,7 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.util.KeyboardUtil;
+import com.matji.sandwich.widget.title.TitleText;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.RegistStoreNameInvalidMatjiException;
 
@@ -136,18 +136,7 @@ public class StoreRegisterActivity extends BaseActivity implements Requestable {
     }
 
     @Override
-	protected String titleBarText() {
-	return "StoreRegisterActivity";
+    protected View setCenterTitleView() {
+    	return new TitleText(this, "StoreRegisterActivity");
     }
-
-    @Override
-	protected boolean setTitleBarButton(Button button) {
-	// TODO Auto-generated method stub
-	return false;
-    }
-
-    @Override
-	protected void onTitleBarItemClicked(View view) {
-	// TODO Auto-generated method stub
-    }    
 }

@@ -4,12 +4,12 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginActivity extends BaseActivity implements Loginable {
@@ -43,22 +43,9 @@ public class LoginActivity extends BaseActivity implements Loginable {
 	}
 
 	@Override
-	protected String titleBarText() {
-		return "LoginActivity";
+	protected View setCenterTitleView() {
+		return new TitleText(this, "LoginActivity");
 	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	public void twitterLoginClicked(View v){
 		MeHttpRequest request = new MeHttpRequest(this);

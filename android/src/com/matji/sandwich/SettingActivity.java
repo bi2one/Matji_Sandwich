@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.title.TitleText;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
@@ -141,19 +142,7 @@ public class SettingActivity extends BaseActivity {
 	}
 	
 	@Override
-	protected String titleBarText() {
-		return "SettingActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+	protected View setCenterTitleView() {
+		return new TitleText(this, "SettingActivity");
 	}
 }

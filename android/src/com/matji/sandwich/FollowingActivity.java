@@ -2,10 +2,10 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.FollowingListView;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class FollowingActivity extends BaseActivity {
 	private FollowingListView listView; 
@@ -36,19 +36,7 @@ public class FollowingActivity extends BaseActivity {
 	}
 	
 	@Override
-	protected String titleBarText() {
-		return "FollowingActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+	protected View setCenterTitleView() {
+		return  new TitleText(this, "FollowingActivity");
 	}
 }

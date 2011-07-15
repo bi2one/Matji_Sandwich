@@ -2,9 +2,9 @@ package com.matji.sandwich;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.widget.title.TitleText;
 
 public class StoreModifyActivity extends BaseActivity {
 	@Override
@@ -15,19 +15,7 @@ public class StoreModifyActivity extends BaseActivity {
 	}
 
 	@Override
-	protected String titleBarText() {
-		return "StoreModifyActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+	protected View setCenterTitleView() {
+		return new TitleText(this, "StoreMainActivity");
 	}
 }

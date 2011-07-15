@@ -14,14 +14,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener {
-	protected abstract String titleBarText();
-	protected abstract boolean setTitleBarButton(Button button);
-	protected abstract void onTitleBarItemClicked(View view);
-	
+public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener {	
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	
@@ -88,23 +83,9 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 		
 		Activity act = (this.getParent() == null)? this: this.getParent();
 		
-		String titleBarText = titleBarText();
-		TextView titleBarView = (TextView) act.findViewById(R.id.title);
-		titleBarView.setText(titleBarText);
-		
-		final Button titleBarButton = (Button) act.findViewById(R.id.title_btn);
-		if (setTitleBarButton(titleBarButton)){
-			titleBarButton.setOnClickListener(new View.OnClickListener() {
-				
-				public void onClick(View arg0) {
-					onTitleBarItemClicked(titleBarButton);
-				}
-			});
-			titleBarButton.setVisibility(Button.VISIBLE);
-		}else{			
-			titleBarButton.setVisibility(Button.GONE);
-		}
-		
+		((LinearLayout) act.findViewById(R.id.title_left_view)).addView(setLeftTitleView());
+		((LinearLayout) act.findViewById(R.id.title_center_view)).addView(setCenterTitleView());
+		((LinearLayout) act.findViewById(R.id.title_right_view)).addView(setRightTitleView());
 	}
 	
 	private void preFinish() {
@@ -163,5 +144,15 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 		// TODO Auto-generated method stub
 		preStart(data);
 		return super.startActivityIfNeeded(intent, requestCode);
+	}
+	
+	protected View setRightTitleView() {
+		return new View(this);
+	}
+	protected View setLeftTitleView() {
+		return new View(this);
+	}
+	protected View setCenterTitleView() {
+		return new View(this);
 	}
 }

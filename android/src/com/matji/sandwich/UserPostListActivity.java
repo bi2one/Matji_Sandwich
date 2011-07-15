@@ -2,11 +2,11 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.UserPostListView;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class UserPostListActivity extends BaseActivity {
 	private Intent intent;
@@ -32,21 +32,9 @@ public class UserPostListActivity extends BaseActivity {
 		super.onResume();
 		listView.dataRefresh();
 	}
-	
-	@Override
-	protected String titleBarText() {
-		return "UserPostListActivity";
-	}
 
 	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+	protected View setCenterTitleView() {
+		return new TitleText(this, "UserPostListActivity");
 	}
 }

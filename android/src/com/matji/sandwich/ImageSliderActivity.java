@@ -2,19 +2,18 @@ package com.matji.sandwich;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.content.Intent;
-import android.graphics.Color;
 
 import com.matji.sandwich.adapter.ImageAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.widget.SwipeView;
+import com.matji.sandwich.widget.title.TitleText;
 
 public class ImageSliderActivity extends BaseActivity implements OnScrollListener {
 	private Intent intent;
@@ -88,12 +87,10 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 		}
 	}
 
-
 	public void onScroll(int scrollX) {
 		// TODO Auto-generated method stub
 
 	}
-
 
 	public void onViewScrollFinished(int currentPage) {
 		if (this.currentPage != currentPage) {
@@ -103,19 +100,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 	}
 
 	@Override
-	protected String titleBarText() {
-		return "ImageSliderActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-
+	protected View setCenterTitleView() {
+		return new TitleText(this, "ImageSliderActivity");
 	}
 }

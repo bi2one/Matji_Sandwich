@@ -2,10 +2,10 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.StoreBookmarkedListView;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class UserStoreListActivity extends BaseActivity {
 	private StoreBookmarkedListView listView;
@@ -30,19 +30,7 @@ public class UserStoreListActivity extends BaseActivity {
 	}
 	
 	@Override
-	protected String titleBarText() {
-		return "UserStoreListActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+	protected View setCenterTitleView() {
+		return new TitleText(this, "UserStoreListActivity");
 	}
 }

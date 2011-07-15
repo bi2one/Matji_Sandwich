@@ -5,10 +5,10 @@ import android.app.Activity;
 import android.view.View;
 import android.content.Intent;
 import android.content.Context;
-import android.widget.Button;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.StoreNearRadiusListView;
+import com.matji.sandwich.widget.title.TitleText;
 
 public class StoreRegisterListActivity extends BaseActivity {
     private static final int GET_POSITION_TAG = 0;
@@ -58,18 +58,7 @@ public class StoreRegisterListActivity extends BaseActivity {
     }
 
     @Override
-	protected String titleBarText() {
-	return "StoreRegisterListActivity";
-    }
-
-    @Override
-	protected boolean setTitleBarButton(Button button) {
-	// TODO Auto-generated method stub
-	return false;
-    }
-
-    @Override
-	protected void onTitleBarItemClicked(View view) {
-	// TODO Auto-generated method stub
+    protected View setCenterTitleView() {
+    	return new TitleText(this, "StoreRegisterListActivity");
     }
 }

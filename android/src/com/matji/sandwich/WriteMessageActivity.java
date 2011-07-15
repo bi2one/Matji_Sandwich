@@ -9,11 +9,12 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.MessageHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.widget.title.TitleButton;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -108,20 +109,18 @@ public class WriteMessageActivity extends BaseActivity implements Requestable {
 	}
 
 	@Override
-	protected String titleBarText() {
-		return "WriteMessageActivity";
-	}
-
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		button.setText("Send");
-		return true;
+	protected View setCenterTitleView() {
+		return new TitleText(this, "WriteMessageActivity");
 	}
 
 	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		onSendButtonClicked(view);		
+	protected View setRightTitleView() {
+		return new TitleButton(this, "Send") {
+			@Override
+			public void onClick(View v) {
+				onSendButtonClicked(v);
+			}
+		};
 	}
 }
 

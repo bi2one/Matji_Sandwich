@@ -3,7 +3,6 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
@@ -13,10 +12,11 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreFoodHttpRequest;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.StoreMenuListView;
+import com.matji.sandwich.widget.title.TitleButton;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -60,18 +60,22 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 	}
 
 	@Override
-	protected String titleBarText() {
-		return "StoreMenuActivity";
+	protected View setCenterTitleView() {
+		return new TitleText(this, "StoreMenuActivity");
+	}
+	
+	@Override
+	protected View setRightTitleView() {
+		return new TitleButton(this, "New") {
+			
+			@Override
+			public void onClick(View v) {
+				onNewButtonClicked();
+			}
+		};
 	}
 
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		button.setText("New");
-		return true;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
+	private void onNewButtonClicked() {
 		if (loginRequired()) {
 			addWrapper.setVisibility(View.VISIBLE);
 			menuField.requestFocus();

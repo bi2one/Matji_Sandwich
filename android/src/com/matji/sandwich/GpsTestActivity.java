@@ -11,6 +11,7 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
+import com.matji.sandwich.widget.title.TitleText;
 
 public class GpsTestActivity extends BaseActivity implements MatjiLocationListener {
 
@@ -43,19 +44,7 @@ public class GpsTestActivity extends BaseActivity implements MatjiLocationListen
 	}
 
 	@Override
-	protected String titleBarText() {
-		return "GpsTestActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+	protected View setCenterTitleView() {
+		return new TitleText(this, "GpsTestActivity");
 	}
 }

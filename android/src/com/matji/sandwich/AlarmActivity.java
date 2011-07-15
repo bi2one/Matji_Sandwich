@@ -2,10 +2,10 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.AlarmListView;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class AlarmActivity extends BaseActivity {
 	@Override
@@ -19,19 +19,7 @@ public class AlarmActivity extends BaseActivity {
 	}
 	
 	@Override
-	protected String titleBarText() {
-		return "AlarmActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+	protected View setCenterTitleView() {
+		return new TitleText(this, "AlarmActivity");
 	}
 }

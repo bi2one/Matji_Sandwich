@@ -2,11 +2,11 @@ package com.matji.sandwich;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.widget.title.TitleText;
 
 public class StoreDefaultInfoActivity extends BaseActivity {
 	private Store store;
@@ -33,20 +33,7 @@ public class StoreDefaultInfoActivity extends BaseActivity {
 	}
 
 	@Override
-	protected String titleBarText() {
-		// TODO Auto-generated method stub
-		return "StoreDefaultInfoActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
+	protected View setCenterTitleView() {
+		return new TitleText(this, "StoreDefaultInfoActivity");
 	}
 }

@@ -9,11 +9,12 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.widget.title.TitleButton;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -62,20 +63,19 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 		e.performExceptionHandling(getApplicationContext());
 	}
 
+	
 	@Override
-	protected String titleBarText() {
-		return "WritePostActivity";
+	protected View setCenterTitleView() {
+		return new TitleText(this, "WritePostActivity");
 	}
-
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		button.setText("Send");
-		return true;
-	}
-
+	
 	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		onCommentButtonClicked(view);
+	protected View setRightTitleView() {
+		return new TitleButton(this, "Comment") {
+			@Override
+			public void onClick(View v) {
+				onCommentButtonClicked(v);
+			}
+		};
 	}
 }

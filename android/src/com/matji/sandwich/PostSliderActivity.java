@@ -1,12 +1,13 @@
 package com.matji.sandwich;
 
 import android.view.View;
-import android.widget.Button;
 import android.content.Intent;
 
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.MyPostListView;
+import com.matji.sandwich.widget.title.TitleButton;
+import com.matji.sandwich.widget.title.TitleText;
 
 public class PostSliderActivity extends SliderActivity {
 	private int[] viewIds = {
@@ -46,19 +47,21 @@ public class PostSliderActivity extends SliderActivity {
 	}
 
 	@Override
-	protected String titleBarText() {
-		return "PostSliderActivity";
+	protected View setCenterTitleView() {
+		return new TitleText(this, "PostSliderActivity");
 	}
 
 	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		button.setText("Write");
-		return true;
+	protected View setRightTitleView() {
+		return new TitleButton(this, "Write") {
+			@Override
+			public void onClick(View v) {
+				onWriteButtonClicked();
+			}
+		};
 	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
+	
+	private void onWriteButtonClicked() {
 		if (loginRequired()) {
 			startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
 		}

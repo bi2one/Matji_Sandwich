@@ -19,6 +19,7 @@ import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.ModelType;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -384,19 +385,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 	}
 
 	@Override
-	protected String titleBarText() {
-		return "StoreMainActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-
+	protected View setCenterTitleView() {
+		return new TitleText(this, "StoreMainActivity");
 	}
 }

@@ -12,18 +12,19 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MessageHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.ChatView;
+import com.matji.sandwich.widget.title.TitleButton;
+import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class ChatActivity extends BaseActivity implements Requestable {
 	private HttpRequestManager manager;
-	
+
 	private Message message;
 	private int user_id;
 	private ChatView listView;
@@ -42,31 +43,34 @@ public class ChatActivity extends BaseActivity implements Requestable {
 		listView.setThreadId(message.getThreadId());
 		listView.setActivity(this);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		listView.requestReload();
 	}
-	
+
 	@Override
 	public void finish() {
 		super.finishWithMatjiData();
 	}
-	
+
 	@Override
-	protected String titleBarText() {
-		return "ChatActivity";
+	protected View setCenterTitleView() {
+		return new TitleText(this, "ChatActivity");
 	}
 
 	@Override
-	protected boolean setTitleBarButton(Button button) {
-		button.setText("Refresh");
-		return true;
+	protected View setRightTitleView() {
+		return new TitleButton(this, "Refresh") {			
+			@Override
+			public void onClick(View v) {
+				onRefreshButtonClicked();
+			}
+		};
 	}
 
-	@Override
-	protected void onTitleBarItemClicked(View view) {
+	private void onRefreshButtonClicked() {
 		if (!listView.getManager().isRunning(this)) {
 			listView.requestReload();
 		}
@@ -76,12 +80,12 @@ public class ChatActivity extends BaseActivity implements Requestable {
 		EditText messageField = (EditText) findViewById(R.id.chat_message_field);
 
 		String message =  messageField.getText().toString().trim();
-		
+
 		if(message.equals("")) {
 			Toast.makeText(getApplicationContext(), R.string.writing_content_message, Toast.LENGTH_SHORT).show();
 		} else {
-		    manager.request(this, request(message), MESSAGE_NEW, this);
-			
+			manager.request(this, request(message), MESSAGE_NEW, this);
+
 			/* keyboard hide. */
 			InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);  
 			imm.hideSoftInputFromWindow(messageField.getWindowToken(), 0); 
@@ -97,7 +101,7 @@ public class ChatActivity extends BaseActivity implements Requestable {
 
 		return request;
 	}
-	
+
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
 		case MESSAGE_NEW:
