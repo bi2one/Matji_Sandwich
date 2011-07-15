@@ -8,6 +8,8 @@ import android.location.Address;
 import android.os.Bundle;
 import android.view.View;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View.OnTouchListener;
 // import android.view.inputmethod.InputMethodManager;
 import android.view.View.OnKeyListener;
 import android.widget.Button;
@@ -39,7 +41,8 @@ import java.util.Collections;
 public class MainMapActivity extends BaseMapActivity implements MatjiLocationListener,
 								MatjiMapCenterListener,
 								Requestable,
-								OnKeyListener {
+								OnKeyListener,
+								OnTouchListener {
     public static final String RETURN_KEY_LAT_NE = "MainMapActivity.return_key_lat_ne";
     public static final String RETURN_KEY_LAT_SW = "MainMapActivity.return_key_lat_sw";
     public static final String RETURN_KEY_LNG_NE = "MainMapActivity.return_key_lng_ne";
@@ -77,6 +80,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mMapView = (MatjiMapView)findViewById(R.id.map_view);
 	mMapController = mMapView.getController();
 	mMapView.setMapCenterListener(this);
+	mMapView.setOnTouchListener(this);
 	mContext = getApplicationContext();
 	mGpsManager = new GpsManager(mContext, this);
 	mSearchView = (EditText)findViewById(R.id.main_map_search_box);
@@ -332,6 +336,14 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
 		findAndMovePosition(mSearchView.getText().toString());
 	    }
+	}
+	return false;
+    }
+
+    public boolean onTouch(View v, MotionEvent e) {
+	switch(e.getAction()) {
+	case MotionEvent.ACTION_DOWN:
+	    mGpsManager.stop();
 	}
 	return false;
     }
