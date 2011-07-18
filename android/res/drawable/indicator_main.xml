@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:state_focused="true">
     <shape>
-      <solid android:color="@color/tab_focused" />
+      <solid android:color="@color/main_tab_focused" />
     </shape>
   </item>
-  <item>
+  <item android:state_focused="false">
     <shape>
-      <solid android:color="@color/tab_focused" />
+      <solid android:color="@color/main_tab_default" />
     </shape>
   </item>
 </selector>

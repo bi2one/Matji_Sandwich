@@ -4,6 +4,7 @@ import android.widget.TabHost;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.matji.sandwich.widget.indicator.MainIndicator;
 
@@ -17,11 +18,14 @@ public class MainTabHost extends TabHost {
 
     public MainTabHost(Context context, AttributeSet attrs) {
 	super(context, attrs);
+	this.context = context;
     }
 
     public void addTab(String specLabel, int drawableRef, int textRef, Intent content) {
-	addTab(newTabSpec(specLabel)
-	       .setIndicator(new MainIndicator(context, drawableRef, textRef))
-	       .setContent(content));
+	TabHost.TabSpec spec = newTabSpec(specLabel);
+	spec.setIndicator(new MainIndicator(context, drawableRef, textRef));
+	spec.setContent(content);
+	
+	addTab(spec);
     }
 }

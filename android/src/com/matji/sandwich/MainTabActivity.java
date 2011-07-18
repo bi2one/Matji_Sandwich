@@ -1,6 +1,6 @@
 package com.matji.sandwich;
 
-import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.widget.MainTabHost;
 import com.matji.sandwich.widget.indicator.RoundHeadIndicator;
@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.view.View;
 
-public class MainTabActivity extends BaseActivity {
+public class MainTabActivity extends BaseTabActivity {
     private MainTabHost tabHost;
     
     public static final String IF_INDEX = "index";
@@ -22,28 +22,26 @@ public class MainTabActivity extends BaseActivity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main_tab);
 
-	tabHost = (MainTabHost)findViewById(R.id.tab_host);
+	tabHost = (MainTabHost)getTabHost();
 
 	DisplayUtil.setContext(getApplicationContext());
-	// tabHost.addTab(tabHost.newTabSpec("tab1")
-	// 	       .setIndicator(getString(R.string.default_string_map))
-	// 	       .setContent(new Intent(this, MainMapActivity.class)));
+
 	tabHost.addTab("tab1",
 		       R.drawable.icon,
 		       R.string.default_string_map,
 		       new Intent(this, MainMapActivity.class));
-
-	// tabHost.addTab(tabHost.newTabSpec("tab2")
-	// 	       .setIndicator(getString(R.string.default_string_store))
-	// 	       .setContent(new Intent(this, StoreSliderActivity.class)));
-
-	// tabHost.addTab(tabHost.newTabSpec("tab3")
-	// 	       .setIndicator(getString(R.string.default_string_memo))
-	// 	       .setContent(new Intent(this, PostSliderActivity.class)));
-
-	// tabHost.addTab(tabHost.newTabSpec("tab4")
-	// 	       .setIndicator(getString(R.string.default_string_configure))
-	// 	       .setContent(new Intent(this, SettingActivity.class)));
+	tabHost.addTab("tab2",
+		       R.drawable.icon,
+		       R.string.default_string_store,
+		       new Intent(this, StoreSliderActivity.class));
+	tabHost.addTab("tab3",
+		       R.drawable.icon,
+		       R.string.default_string_memo,
+		       new Intent(this, PostSliderActivity.class));
+	tabHost.addTab("tab4",
+		       R.drawable.icon,
+		       R.string.default_string_configure,
+		       new Intent(this, SettingActivity.class));
     }
 
     protected void onNewIntent(Intent intent) {

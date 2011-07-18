@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.matji.sandwich.widget.MainTabHost
     xmlns:android="http://schemas.android.com/apk/res/android"
-     android:id="@+id/tab_host"
+    android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
   <LinearLayout

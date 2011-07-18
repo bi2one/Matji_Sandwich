@@ -326,8 +326,9 @@
   </style>
 
   <!-- indicator_main.xml -->
-  <style name="IndicatorMain" parent="DefaultWrap">
+  <style name="IndicatorMain" parent="DefaultWidthFill">
     <item name="android:background">@drawable/indicator_main</item>
+    <item name="android:gravity">center</item>
   </style>
 
   <style name="IndicatorMainIcon" parent="DefaultWrap">
