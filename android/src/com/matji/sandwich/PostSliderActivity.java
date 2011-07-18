@@ -1,7 +1,6 @@
 package com.matji.sandwich;
 
 import android.view.View;
-import android.widget.Button;
 import android.content.Intent;
 
 import com.matji.sandwich.session.Session;
@@ -44,21 +43,8 @@ public class PostSliderActivity extends SliderActivity {
 			break;
 		}
 	}
-
-	@Override
-	protected String titleBarText() {
-		return "PostSliderActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		button.setText("Write");
-		return true;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
+	
+	private void onWriteButtonClicked() {
 		if (loginRequired()) {
 			startActivityForResult(new Intent(getApplicationContext(), WritePostActivity.class), WRITE_POST_ACTIVITY);
 		}

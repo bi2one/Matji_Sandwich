@@ -382,21 +382,4 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
 		return result;
 	}
-
-	@Override
-	protected String titleBarText() {
-		return "StoreMainActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-
-	}
 }

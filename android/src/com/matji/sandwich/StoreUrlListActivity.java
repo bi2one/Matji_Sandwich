@@ -4,8 +4,6 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.StoreUrlListView;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 public class StoreUrlListActivity extends BaseActivity {
 	private int store_id;		
@@ -23,22 +21,5 @@ public class StoreUrlListActivity extends BaseActivity {
 		listView.setUserId(store_id);
 		listView.setActivity(this);
 		listView.requestReload();
-	}
-
-	@Override
-	protected String titleBarText() {
-		return "StoreUrlListActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
 	}
 }

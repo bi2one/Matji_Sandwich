@@ -1,10 +1,8 @@
 package com.matji.sandwich;
 
 import android.util.Log;
-import android.view.View;
 import android.location.Location;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -40,22 +38,5 @@ public class GpsTestActivity extends BaseActivity implements MatjiLocationListen
 
 	public void onLocationExceptionDelivered(MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
-	}
-
-	@Override
-	protected String titleBarText() {
-		return "GpsTestActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
 	}
 }

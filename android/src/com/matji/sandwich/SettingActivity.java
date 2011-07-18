@@ -139,21 +139,4 @@ public class SettingActivity extends BaseActivity {
 	public void onVersionButtonClicked(View view){
 		Log.d("Button", "Version Clicked");
 	}
-	
-	@Override
-	protected String titleBarText() {
-		return "SettingActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
-	}
 }

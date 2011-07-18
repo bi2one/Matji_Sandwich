@@ -3,7 +3,6 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
@@ -16,7 +15,6 @@ import com.matji.sandwich.widget.StoreMenuListView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -59,19 +57,7 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 		return request;
 	}
 
-	@Override
-	protected String titleBarText() {
-		return "StoreMenuActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		button.setText("New");
-		return true;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
+	private void onNewButtonClicked() {
 		if (loginRequired()) {
 			addWrapper.setVisibility(View.VISIBLE);
 			menuField.requestFocus();

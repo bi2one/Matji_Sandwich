@@ -147,20 +147,6 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		super.finishWithMatjiData();
 	}
 
-	@Override
-	protected String titleBarText() {
-		return "PostMainActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-	}
-
 	public void onDeleteButtonClicked(View v) {
 		if (!manager.isRunning(this)) {
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);

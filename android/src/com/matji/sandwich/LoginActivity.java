@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginActivity extends BaseActivity implements Loginable {
@@ -41,24 +40,6 @@ public class LoginActivity extends BaseActivity implements Loginable {
 	public void loginFailed() {
 		// show toast -> id, pw 확인해라
 	}
-
-	@Override
-	protected String titleBarText() {
-		return "LoginActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	public void twitterLoginClicked(View v){
 		MeHttpRequest request = new MeHttpRequest(this);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector;
-import com.matji.sandwich.base.BaseMapActivity;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.exception.MatjiException;
@@ -23,6 +23,7 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.SwipeView;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -36,13 +37,12 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class WritePostActivity extends BaseMapActivity implements Requestable, RelativeLayoutThatDetectsSoftKeyboard.Listener, MatjiLocationListener, FileUploadProgressListener {
+public class WritePostActivity extends BaseActivity implements Requestable, RelativeLayoutThatDetectsSoftKeyboard.Listener, MatjiLocationListener, FileUploadProgressListener {
 	private static final int STORE_ID_IS_NULL = -1;
 	private static final int POST_WRITE_REQUEST = 1;
 	private static final int IMAGE_UPLOAD_REQUEST = 2;
@@ -250,25 +250,6 @@ public class WritePostActivity extends BaseMapActivity implements Requestable, R
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
 	}
-
-	@Override
-	protected String titleBarText() {
-		return "WritePostActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		button.setText("Send");
-		return true;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		onPostButtonClicked(view);		
-	}
-
 
 	public void onSoftKeyboardShown(boolean isShowing) {
 		// TODO Auto-generated method stub

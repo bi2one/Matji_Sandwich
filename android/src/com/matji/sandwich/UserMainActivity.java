@@ -267,23 +267,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		tabHost.setCurrentTab(UserTabActivity.IMAGE_PAGE);
 	}
 
-	@Override
-	protected String titleBarText() {
-		return "UserMainActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		if (session.isLogin() && session.getCurrentUser().getId() != user.getId()) {
-			button.setText("Message");
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
+	private void onMessageButtonClicked() {
 		if (loginRequired()) {
 			Intent intent = new Intent(this, WriteMessageActivity.class);
 			intent.putExtra("user_id", user.getId());

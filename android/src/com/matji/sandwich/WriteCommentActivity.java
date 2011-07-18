@@ -13,7 +13,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -60,22 +59,5 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
-	}
-
-	@Override
-	protected String titleBarText() {
-		return "WritePostActivity";
-	}
-
-	protected boolean setTitleBarButton(Button button) {
-		// TODO Auto-generated method stub
-		button.setText("Send");
-		return true;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {
-		// TODO Auto-generated method stub
-		onCommentButtonClicked(view);
 	}
 }

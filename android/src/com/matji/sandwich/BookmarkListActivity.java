@@ -1,6 +1,5 @@
 package com.matji.sandwich;
 
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.BookmarkListView;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -12,14 +11,11 @@ import com.matji.sandwich.exception.JSONCodeMatjiException;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
 import android.content.Context;
-import android.util.Log;
 import android.graphics.Color;
 
 import java.util.ArrayList;

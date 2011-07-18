@@ -1,7 +1,6 @@
 package com.matji.sandwich.base;
 
 import com.matji.sandwich.LoginActivity;
-import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
@@ -12,16 +11,9 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
 
-public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener {
-	protected abstract String titleBarText();
-	protected abstract boolean setTitleBarButton(Button button);
-	protected abstract void onTitleBarItemClicked(View view);
-	
+public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener {	
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	
@@ -71,11 +63,8 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 	public void setContentView(int layoutResID) {
 		if (this.getParent() == null){
 			requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-			super.setContentView(layoutResID);
-			getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
-		}else{
-			super.setContentView(layoutResID);
 		}
+		super.setContentView(layoutResID);
 	}
 	
 	@Override
@@ -85,26 +74,6 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 		
 		Log.d("LifeCycle", "onResume at " + this.getClass());
 		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
-		
-		Activity act = (this.getParent() == null)? this: this.getParent();
-		
-		String titleBarText = titleBarText();
-		TextView titleBarView = (TextView) act.findViewById(R.id.title);
-		titleBarView.setText(titleBarText);
-		
-		final Button titleBarButton = (Button) act.findViewById(R.id.title_btn);
-		if (setTitleBarButton(titleBarButton)){
-			titleBarButton.setOnClickListener(new View.OnClickListener() {
-				
-				public void onClick(View arg0) {
-					onTitleBarItemClicked(titleBarButton);
-				}
-			});
-			titleBarButton.setVisibility(Button.VISIBLE);
-		}else{			
-			titleBarButton.setVisibility(Button.GONE);
-		}
-		
 	}
 	
 	private void preFinish() {

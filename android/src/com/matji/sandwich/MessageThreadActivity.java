@@ -5,8 +5,6 @@ import com.matji.sandwich.widget.MessageThreadListView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 public class MessageThreadActivity extends BaseActivity {
 	private MessageThreadListView listView;
@@ -27,19 +25,7 @@ public class MessageThreadActivity extends BaseActivity {
 		listView.sort();
 	}
 
-	@Override
-	protected String titleBarText() {
-		return "MessageThreadListActivity";
-	}
-
-	@Override
-	protected boolean setTitleBarButton(Button button) {
-		button.setText("Message");
-		return true;
-	}
-
-	@Override
-	protected void onTitleBarItemClicked(View view) {		
+	private void onMessageButtonClicked() {		
 		if (loginRequired()) {
 			Intent intent = new Intent(this, WriteMessageActivity.class);
 			startActivity(intent);
