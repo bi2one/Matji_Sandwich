@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/IndicatorMain">
+  <ImageView
+      android:id="@+id/icon"
+      style="@style/IndicatorMainIcon" />
+  <TextView
+      android:id="@+id/label"
+      android:layout_below="@+id/icon"
+      style="@style/IndicatorMainText" />
+</RelativeLayout>

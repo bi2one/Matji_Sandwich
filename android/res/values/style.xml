@@ -311,4 +311,28 @@
     <item name="android:textColor">@color/WHITE</item>
   </style>
 
+  <!-- indicator_round common attributes -->
+  <style name="IndicatorRound" parent="DefaultWrap">
+    <item name="android:padding">10dp</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="IndicatorRoundText" parent="DefaultWrap">
+  </style>
+    
+  <!-- indicator_round_head.xml -->
+  <style name="IndicatorRoundHead" parent="IndicatorRound">
+    <item name="android:background">@drawable/btn_left_corner</item>
+  </style>
+
+  <!-- indicator_main.xml -->
+  <style name="IndicatorMain" parent="DefaultWrap">
+    <item name="android:background">@drawable/indicator_main</item>
+  </style>
+
+  <style name="IndicatorMainIcon" parent="DefaultWrap">
+  </style>
+
+  <style name="IndicatorMainText" parent="DefaultWrap">
+  </style>
 </resources>

@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- <RelativeLayout -->
-
-	<TabHost
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		android:id="@android:id/tabhost"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-		<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent">
-			<FrameLayout
-				android:id="@android:id/tabcontent"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:layout_weight="1" />
-			<TabWidget
-				android:id="@android:id/tabs"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:layout_weight="0" />
-		</LinearLayout>
-	</TabHost>
-<!-- </RelativeLayout> -->
+<com.matji.sandwich.widget.MainTabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/tab_host"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent">
+    <TabWidget
+	android:id="@android:id/tabs"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:layout_weight="0" />
+    <FrameLayout
+	android:id="@android:id/tabcontent"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:layout_weight="1" />
+  </LinearLayout>
+</com.matji.sandwich.widget.MainTabHost>

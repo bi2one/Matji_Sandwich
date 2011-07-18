@@ -52,6 +52,6 @@
       style="@style/main_map_commonButton"
       android:text="@string/default_string_current_position"
       android:onClick="onCurrentPositionClick"
-      android:layout_alignParentRight="true" 
+      android:layout_alignParentRight="true"
       android:layout_below="@id/main_map_option_buttons" />
 </RelativeLayout>
