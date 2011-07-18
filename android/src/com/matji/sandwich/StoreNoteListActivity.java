@@ -1,13 +1,11 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.BaseViewContainer;
 import com.matji.sandwich.widget.StoreNoteListView;
-import com.matji.sandwich.widget.title.TitleText;
 
 public class StoreNoteListActivity extends BaseActivity {
 	private StoreNoteListView listView;
@@ -26,10 +24,5 @@ public class StoreNoteListActivity extends BaseActivity {
 		listView.getHeaderViewContainer().removeView(header.getRootView());
 		listView.addHeaderView(header);
 		listView.requestReload();		
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "StoreNoteListActivity");
 	}
 }

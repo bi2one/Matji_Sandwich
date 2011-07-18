@@ -14,8 +14,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.ModelType;
-import com.matji.sandwich.widget.title.TitleButton;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -267,25 +265,6 @@ public class UserMainActivity extends MainActivity implements Requestable {
 
 	public void onImageButtonClicked(View view) {
 		tabHost.setCurrentTab(UserTabActivity.IMAGE_PAGE);
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "UserMainActivity");
-	}
-
-	@Override
-	protected View setRightTitleView() {
-		if (session.isLogin() && session.getCurrentUser().getId() != user.getId()) {
-			return new TitleButton(this, "Message") {
-				@Override
-				public void onClick(View arg0) {
-					onMessageButtonClicked();
-				}
-			};
-		} else {
-			return super.setRightTitleView();
-		}
 	}
 
 	private void onMessageButtonClicked() {

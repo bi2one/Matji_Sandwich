@@ -12,8 +12,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreFoodHttpRequest;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.StoreMenuListView;
-import com.matji.sandwich.widget.title.TitleButton;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
 import android.view.View;
@@ -57,22 +55,6 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 		((StoreFoodHttpRequest) request).actionNew(store.getId(), name);
 
 		return request;
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "StoreMenuActivity");
-	}
-	
-	@Override
-	protected View setRightTitleView() {
-		return new TitleButton(this, "New") {
-			
-			@Override
-			public void onClick(View v) {
-				onNewButtonClicked();
-			}
-		};
 	}
 
 	private void onNewButtonClicked() {

@@ -25,7 +25,6 @@ import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CommentListView;
 import com.matji.sandwich.widget.PostViewContainer;
-import com.matji.sandwich.widget.title.TitleText;
 
 // TODO
 // 댓글을 달거나, 라이크 했을 때 삭제 한 메모면.
@@ -146,11 +145,6 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	@Override
 	public void finish() {
 		super.finishWithMatjiData();
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "PostMainActivity");
 	}
 
 	public void onDeleteButtonClicked(View v) {

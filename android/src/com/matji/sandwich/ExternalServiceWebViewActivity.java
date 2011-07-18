@@ -3,8 +3,6 @@ package com.matji.sandwich;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Me;

@@ -19,7 +19,6 @@ import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.ModelType;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -382,10 +381,5 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		}
 
 		return result;
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "StoreMainActivity");
 	}
 }

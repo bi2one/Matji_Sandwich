@@ -1,12 +1,10 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.widget.title.TitleText;
 
 public class StoreDefaultInfoActivity extends BaseActivity {
 	private Store store;
@@ -30,10 +28,5 @@ public class StoreDefaultInfoActivity extends BaseActivity {
 		address.setText(store.getAddress());
 		tel.setText(store.getTel());
 		website.setText(store.getWebsite());
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "StoreDefaultInfoActivity");
 	}
 }

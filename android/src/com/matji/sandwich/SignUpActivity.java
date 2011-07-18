@@ -1,7 +1,6 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
 import android.view.View;
@@ -25,10 +24,5 @@ public class SignUpActivity extends BaseActivity {
 	
 	public void cancelButtonClicked(View v) {
 		finish();
-	}
-	
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "SignUpActivity");
 	}
 }

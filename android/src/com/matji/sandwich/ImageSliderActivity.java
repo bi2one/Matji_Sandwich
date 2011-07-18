@@ -1,7 +1,6 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
@@ -13,7 +12,6 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.widget.SwipeView;
-import com.matji.sandwich.widget.title.TitleText;
 
 public class ImageSliderActivity extends BaseActivity implements OnScrollListener {
 	private Intent intent;
@@ -97,10 +95,5 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 			this.currentPage = currentPage;
 			setImage(currentPage);
 		}
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "ImageSliderActivity");
 	}
 }

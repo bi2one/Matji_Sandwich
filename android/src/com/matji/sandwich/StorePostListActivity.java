@@ -3,12 +3,9 @@ package com.matji.sandwich;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.StorePostListView;
-import com.matji.sandwich.widget.title.TitleButton;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 public class StorePostListActivity extends BaseActivity {
 	private Store store;
@@ -52,21 +49,6 @@ public class StorePostListActivity extends BaseActivity {
 			}
 			break;
 		}
-	}
-	
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "StorePostListActivity");
-	}
-
-	@Override
-	protected View setRightTitleView() {
-		return new TitleButton(this, "Write") {
-			@Override
-			public void onClick(View v) {
-				onWriteButtonClicked();				
-			}
-		};
 	}
 
 	private void onWriteButtonClicked() {

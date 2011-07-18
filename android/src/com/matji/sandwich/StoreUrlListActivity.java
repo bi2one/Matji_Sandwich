@@ -2,10 +2,8 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.StoreUrlListView;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
-import android.view.View;
 
 public class StoreUrlListActivity extends BaseActivity {
 	private int store_id;		
@@ -23,10 +21,5 @@ public class StoreUrlListActivity extends BaseActivity {
 		listView.setUserId(store_id);
 		listView.setActivity(this);
 		listView.requestReload();
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "StoreUrlListActivity");
 	}
 }

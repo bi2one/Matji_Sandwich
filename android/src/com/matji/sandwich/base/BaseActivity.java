@@ -1,20 +1,16 @@
 package com.matji.sandwich.base;
 
 import com.matji.sandwich.LoginActivity;
-import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.title.NullView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
-import android.widget.LinearLayout;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener{
 	public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
@@ -68,12 +64,9 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 	@Override
 	public void setContentView(int layoutResID) {
 		if (this.getParent() == null){
-			requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-			super.setContentView(layoutResID);
-			getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
-		}else{
-			super.setContentView(layoutResID);
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
+		super.setContentView(layoutResID);
 	}
 
 	@Override
@@ -83,18 +76,6 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 
 		Log.d("LifeCycle", "onResume at " + this.getClass());
 		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
-
-		Activity act = (this.getParent() == null)? this: this.getParent();
-
-		LinearLayout titleLeft = ((LinearLayout) act.findViewById(R.id.title_left_view));
-		LinearLayout titleCenter = ((LinearLayout) act.findViewById(R.id.title_center_view));
-		LinearLayout titleRight = ((LinearLayout) act.findViewById(R.id.title_right_view));
-		titleLeft.removeAllViews();
-		titleLeft.addView(setLeftTitleView());
-		titleCenter.removeAllViews();
-		titleCenter.addView(setCenterTitleView());
-		titleRight.removeAllViews();
-		titleRight.addView(setRightTitleView());
 	}
 
 	private void preFinish() {
@@ -154,15 +135,5 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 		// TODO Auto-generated method stub
 		preStart(data);
 		return super.startActivityIfNeeded(intent, requestCode);
-	}
-
-	protected View setRightTitleView() {
-		return new NullView(this);
-	}
-	protected View setLeftTitleView() {
-		return new NullView(this);
-	}
-	protected View setCenterTitleView() {
-		return new NullView(this);
 	}
 }

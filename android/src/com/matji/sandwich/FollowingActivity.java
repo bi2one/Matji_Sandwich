@@ -2,10 +2,8 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.FollowingListView;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
-import android.view.View;
 
 public class FollowingActivity extends BaseActivity {
 	private FollowingListView listView; 
@@ -33,10 +31,5 @@ public class FollowingActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		listView.dataRefresh();
-	}
-	
-	@Override
-	protected View setCenterTitleView() {
-		return  new TitleText(this, "FollowingActivity");
 	}
 }

@@ -23,8 +23,6 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.SwipeView;
-import com.matji.sandwich.widget.title.TitleButton;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Context;
 import android.content.Intent;
@@ -251,21 +249,6 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "WritePostActivity");
-	}
-
-	@Override
-	protected View setRightTitleView() {
-		return new TitleButton(this, "Post") {
-			@Override
-			public void onClick(View v) {
-				onPostButtonClicked(v);
-			}
-		};
 	}
 
 	public void onSoftKeyboardShown(boolean isShowing) {

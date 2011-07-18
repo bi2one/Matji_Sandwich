@@ -2,11 +2,9 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.UserPostListView;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 public class UserPostListActivity extends BaseActivity {
 	private Intent intent;
@@ -31,10 +29,5 @@ public class UserPostListActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		listView.dataRefresh();
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "UserPostListActivity");
 	}
 }

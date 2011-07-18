@@ -21,7 +21,6 @@ import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.overlay.CenterOverlay;
-import com.matji.sandwich.widget.title.TitleText;
 import com.matji.sandwich.data.AddressMatjiData;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -157,11 +156,6 @@ Requestable {
 		data.putExtra(RETURN_KEY_LONGITUDE, lastLongitude);
 		setResult(Activity.RESULT_OK, data);
 		finish();
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "GetMapPositionActivity");
 	}
 
 	private class GeocodeRunnable implements Runnable {

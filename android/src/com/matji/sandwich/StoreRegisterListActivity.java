@@ -8,7 +8,6 @@ import android.content.Context;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.StoreNearRadiusListView;
-import com.matji.sandwich.widget.title.TitleText;
 
 public class StoreRegisterListActivity extends BaseActivity {
     private static final int GET_POSITION_TAG = 0;
@@ -55,10 +54,5 @@ public class StoreRegisterListActivity extends BaseActivity {
 	registerIntent.putExtra(StoreRegisterActivity.RETURN_KEY_CENTER_LNG, mCenterLng);
 	registerIntent.putExtra(StoreRegisterActivity.RETURN_KEY_ADDRESS, mCenterAddr);
 	startActivity(registerIntent);
-    }
-
-    @Override
-    protected View setCenterTitleView() {
-    	return new TitleText(this, "StoreRegisterListActivity");
     }
 }

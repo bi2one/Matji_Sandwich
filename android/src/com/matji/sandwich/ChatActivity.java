@@ -12,8 +12,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MessageHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.ChatView;
-import com.matji.sandwich.widget.title.TitleButton;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -53,21 +51,6 @@ public class ChatActivity extends BaseActivity implements Requestable {
 	@Override
 	public void finish() {
 		super.finishWithMatjiData();
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "ChatActivity");
-	}
-
-	@Override
-	protected View setRightTitleView() {
-		return new TitleButton(this, "Refresh") {			
-			@Override
-			public void onClick(View v) {
-				onRefreshButtonClicked();
-			}
-		};
 	}
 
 	private void onRefreshButtonClicked() {

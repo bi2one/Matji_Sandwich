@@ -3,10 +3,8 @@ package com.matji.sandwich;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.util.ModelType;
 import com.matji.sandwich.widget.TagListView;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
-import android.view.View;
 
 public class TagListActivity extends BaseActivity {
     
@@ -22,10 +20,5 @@ public class TagListActivity extends BaseActivity {
 		listView.setModelType(type);
 		listView.setActivity(this);
 		listView.requestReload();
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "StoreTagListActivity");
 	}
 }

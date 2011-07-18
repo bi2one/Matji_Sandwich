@@ -4,7 +4,6 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -40,11 +39,6 @@ public class LoginActivity extends BaseActivity implements Loginable {
 
 	public void loginFailed() {
 		// show toast -> id, pw 확인해라
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "LoginActivity");
 	}
 
 	public void twitterLoginClicked(View v){

@@ -2,10 +2,8 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.StoreBookmarkedListView;
-import com.matji.sandwich.widget.title.TitleText;
 
 import android.os.Bundle;
-import android.view.View;
 
 public class UserStoreListActivity extends BaseActivity {
 	private StoreBookmarkedListView listView;
@@ -27,10 +25,5 @@ public class UserStoreListActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		listView.dataRefresh();
-	}
-	
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "UserStoreListActivity");
 	}
 }

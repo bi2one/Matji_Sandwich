@@ -1,10 +1,8 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.widget.title.TitleText;
 
 public class SettingAccountActivity extends BaseActivity {
 	@Override
@@ -12,10 +10,5 @@ public class SettingAccountActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "SettingAccountActivity");
 	}
 }

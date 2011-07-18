@@ -1,17 +1,14 @@
 package com.matji.sandwich;
 
 import android.util.Log;
-import android.view.View;
 import android.location.Location;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
-import com.matji.sandwich.widget.title.TitleText;
 
 public class GpsTestActivity extends BaseActivity implements MatjiLocationListener {
 
@@ -41,10 +38,5 @@ public class GpsTestActivity extends BaseActivity implements MatjiLocationListen
 
 	public void onLocationExceptionDelivered(MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "GpsTestActivity");
 	}
 }

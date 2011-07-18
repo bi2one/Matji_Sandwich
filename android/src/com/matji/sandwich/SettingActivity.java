@@ -1,7 +1,6 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.title.TitleText;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
@@ -139,10 +138,5 @@ public class SettingActivity extends BaseActivity {
 
 	public void onVersionButtonClicked(View view){
 		Log.d("Button", "Version Clicked");
-	}
-	
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "SettingActivity");
 	}
 }

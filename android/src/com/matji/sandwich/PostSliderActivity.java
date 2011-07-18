@@ -6,8 +6,6 @@ import android.content.Intent;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.MyPostListView;
-import com.matji.sandwich.widget.title.TitleButton;
-import com.matji.sandwich.widget.title.TitleText;
 
 public class PostSliderActivity extends SliderActivity {
 	private int[] viewIds = {
@@ -44,21 +42,6 @@ public class PostSliderActivity extends SliderActivity {
 			}
 			break;
 		}
-	}
-
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "PostSliderActivity");
-	}
-
-	@Override
-	protected View setRightTitleView() {
-		return new TitleButton(this, "Write") {
-			@Override
-			public void onClick(View v) {
-				onWriteButtonClicked();
-			}
-		};
 	}
 	
 	private void onWriteButtonClicked() {

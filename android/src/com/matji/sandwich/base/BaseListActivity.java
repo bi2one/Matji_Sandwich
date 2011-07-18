@@ -1,7 +1,6 @@
 package com.matji.sandwich.base;
 
 import com.matji.sandwich.LoginActivity;
-import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
@@ -12,9 +11,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
-import android.widget.LinearLayout;
 
 public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener {	
 	protected static final int LOGIN_ACTIVITY = 1;
@@ -66,11 +63,8 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 	public void setContentView(int layoutResID) {
 		if (this.getParent() == null){
 			requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-			super.setContentView(layoutResID);
-			getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
-		}else{
-			super.setContentView(layoutResID);
 		}
+		super.setContentView(layoutResID);
 	}
 	
 	@Override
@@ -80,12 +74,6 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 		
 		Log.d("LifeCycle", "onResume at " + this.getClass());
 		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
-		
-		Activity act = (this.getParent() == null)? this: this.getParent();
-		
-		((LinearLayout) act.findViewById(R.id.title_left_view)).addView(setLeftTitleView());
-		((LinearLayout) act.findViewById(R.id.title_center_view)).addView(setCenterTitleView());
-		((LinearLayout) act.findViewById(R.id.title_right_view)).addView(setRightTitleView());
 	}
 	
 	private void preFinish() {
@@ -144,15 +132,5 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 		// TODO Auto-generated method stub
 		preStart(data);
 		return super.startActivityIfNeeded(intent, requestCode);
-	}
-	
-	protected View setRightTitleView() {
-		return new View(this);
-	}
-	protected View setLeftTitleView() {
-		return new View(this);
-	}
-	protected View setCenterTitleView() {
-		return new View(this);
 	}
 }

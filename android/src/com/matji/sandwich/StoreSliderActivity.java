@@ -3,7 +3,6 @@ package com.matji.sandwich;
 import android.view.View;
 
 import com.matji.sandwich.widget.StoreBookmarkedListView;
-import com.matji.sandwich.widget.title.TitleText;
 import com.matji.sandwich.session.Session;
 
 public class StoreSliderActivity extends SliderActivity {
@@ -21,11 +20,6 @@ public class StoreSliderActivity extends SliderActivity {
 	
 	public static final int INDEX_NEAR_STORE = 2;
 
-	@Override
-	protected View setCenterTitleView() {
-		return new TitleText(this, "StoreSliderActivity");
-	}
-	
 	@Override
 	protected int getLayoutId() {
 		return R.layout.activity_store_slider;
