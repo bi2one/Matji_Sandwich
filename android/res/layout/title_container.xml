@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="@drawable/img_title_bg"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/title_container_height">
+	<LinearLayout
+		android:id="@+id/title_container_left"
+		style="@style/title_container_Default"
+		android:layout_alignParentLeft="true" />
+	<LinearLayout
+		android:id="@+id/title_container_title"
+		style="@style/title_container_Default"
+		android:layout_toRightOf="@id/title_container_left">
+		<TextView
+			android:id="@+id/title_container_text"
+			style="@style/DefaultWrap"
+			android:text="TITLE HERE!!" />
+	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/title_container_right"
+		style="@style/title_container_Default"
+		android:layout_alignParentRight="true" />
+</RelativeLayout>

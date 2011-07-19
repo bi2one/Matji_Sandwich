@@ -58,9 +58,9 @@
   	<item name="android:layout_height">wrap_content</item>
   </style>
   
-  <!-- title_bar.xml -->
-  <style name="WindowTitleBackground" parent="android:WindowTitleBackground">    
-	<item name="android:background">@android:color/transparent</item>        
+  <!-- title_container.xml -->
+  <style name="title_container_Default" parent="DefaultHeightFill">
+  	<item name="android:gravity">center</item>
   </style>
   
   <!-- activity_store_main.xml -->
