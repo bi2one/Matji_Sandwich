@@ -58,9 +58,9 @@
   	<item name="android:layout_height">wrap_content</item>
   </style>
   
-  <!-- title_bar.xml -->
-  <style name="WindowTitleBackground" parent="android:WindowTitleBackground">    
-	<item name="android:background">@android:color/transparent</item>        
+  <!-- title_container.xml -->
+  <style name="title_container_Default" parent="DefaultHeightFill">
+  	<item name="android:gravity">center</item>
   </style>
   
   <!-- activity_store_main.xml -->
@@ -311,4 +311,29 @@
     <item name="android:textColor">@color/WHITE</item>
   </style>
 
+  <!-- indicator_round common attributes -->
+  <style name="IndicatorRound" parent="DefaultWrap">
+    <item name="android:padding">10dp</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="IndicatorRoundText" parent="DefaultWrap">
+  </style>
+    
+  <!-- indicator_round_head.xml -->
+  <style name="IndicatorRoundHead" parent="IndicatorRound">
+    <item name="android:background">@drawable/btn_left_corner</item>
+  </style>
+
+  <!-- indicator_main.xml -->
+  <style name="IndicatorMain" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/indicator_main</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="IndicatorMainIcon" parent="DefaultWrap">
+  </style>
+
+  <style name="IndicatorMainText" parent="DefaultWrap">
+  </style>
 </resources>

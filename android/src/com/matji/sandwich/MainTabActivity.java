@@ -2,13 +2,16 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.util.DisplayUtil;
+import com.matji.sandwich.widget.MainTabHost;
+import com.matji.sandwich.widget.TitleContainer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TabHost;
+import android.util.Log;
+import android.view.View;
 
 public class MainTabActivity extends BaseTabActivity {
-    private TabHost tabHost;
+    private MainTabHost tabHost;
     
     public static final String IF_INDEX = "index";
     public static final int IV_INDEX_STORE = 1;
@@ -19,24 +22,44 @@ public class MainTabActivity extends BaseTabActivity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main_tab);
 
-	tabHost = getTabHost();
+	tabHost = (MainTabHost)getTabHost();
 
 	DisplayUtil.setContext(getApplicationContext());
-	tabHost.addTab(tabHost.newTabSpec("tab1")
-		       .setIndicator(getString(R.string.default_string_map))
-		       .setContent(new Intent(this, MainMapActivity.class)));
 
-	tabHost.addTab(tabHost.newTabSpec("tab2")
-		       .setIndicator(getString(R.string.default_string_store))
-		       .setContent(new Intent(this, StoreSliderActivity.class)));
-
-	tabHost.addTab(tabHost.newTabSpec("tab3")
-		       .setIndicator(getString(R.string.default_string_memo))
-		       .setContent(new Intent(this, PostSliderActivity.class)));
-
-	tabHost.addTab(tabHost.newTabSpec("tab4")
-		       .setIndicator(getString(R.string.default_string_configure))
-		       .setContent(new Intent(this, SettingActivity.class)));
+	tabHost.addTab("tab1",
+		       R.drawable.icon,
+		       R.string.default_string_map,
+		       new Intent(this, MainMapActivity.class));
+	tabHost.addTab("tab2",
+		       R.drawable.icon,
+		       R.string.default_string_store,
+		       new Intent(this, StoreSliderActivity.class));
+	tabHost.addTab("tab3",
+		       R.drawable.icon,
+		       R.string.default_string_memo,
+		       new Intent(this, PostSliderActivity.class));
+	tabHost.addTab("tab4",
+		       R.drawable.icon,
+		       R.string.default_string_configure,
+		       new Intent(this, SettingActivity.class));
+	((TitleContainer) findViewById(R.id.TEST_TITLE)).addLeftButton(R.drawable.btn_like, new View.OnClickListener() {
+		@Override
+		public void onClick(View arg0) {
+			Log.d("Matji", "CLICK");
+		}
+	});
+	((TitleContainer) findViewById(R.id.TEST_TITLE)).addRightButton(R.drawable.btn_like, new View.OnClickListener() {
+		@Override
+		public void onClick(View arg0) {
+			Log.d("Matji", "CLICK");
+		}
+	});
+	((TitleContainer) findViewById(R.id.TEST_TITLE)).addRightButton(R.drawable.btn_like, new View.OnClickListener() {
+		@Override
+		public void onClick(View arg0) {
+			Log.d("Matji", "CLICK");
+		}
+	});
     }
 
     protected void onNewIntent(Intent intent) {

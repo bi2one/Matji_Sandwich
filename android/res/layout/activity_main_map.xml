@@ -40,17 +40,47 @@
 			android:onClick="onNearPostClick"
 			android:text="@string/default_string_post" />
 	</LinearLayout>
+  <LinearLayout
+      android:id="@+id/main_map_option_buttons"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentTop="true"
+      style="@style/DefaultWrap">
+    <EditText
+	android:id="@+id/main_map_search_box"
+	style="@style/main_map_searchBox"
+	android:hint="@string/main_map_search_map"
+	android:inputType="text"
+	android:layout_alignParentTop="true"
+	android:layout_alignParentLeft="true" />
+    <Button
+	style="@style/main_map_commonButton"
+	android:onClick="onBookmarkClick"
+	android:id="@+id/bookmark_button"
+	android:text="@string/default_string_bookmark" />
+    <Button
+	style="@style/main_map_commonButton"
+	android:onClick="onNearRankingClick"
+	android:text="@string/default_string_ranking" />
+    <Button
+	style="@style/main_map_commonButton"
+	android:onClick="onNearStoreClick"
+	android:text="@string/default_string_near_store" />
+    <Button
+	style="@style/main_map_commonButton"
+	android:onClick="onNearPostClick"
+	android:text="@string/default_string_post" />
+  </LinearLayout>
 
-	<Button
-		style="@style/main_map_commonButton"
-		android:text="@string/default_string_store_register"
-		android:onClick="onStoreRegisterClick"
-		android:layout_alignParentLeft="true"
-		android:layout_below="@id/main_map_option_buttons" />
-	<Button
-		style="@style/main_map_commonButton"
-		android:text="@string/default_string_current_position"
-		android:onClick="onCurrentPositionClick"
-		android:layout_alignParentRight="true"
-		android:layout_below="@id/main_map_option_buttons" />
+  <Button
+      style="@style/main_map_commonButton"
+      android:text="@string/default_string_store_register"
+      android:onClick="onStoreRegisterClick"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@id/main_map_option_buttons" />
+  <Button
+      style="@style/main_map_commonButton"
+      android:text="@string/default_string_current_position"
+      android:onClick="onCurrentPositionClick"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/main_map_option_buttons" />
 </RelativeLayout>
