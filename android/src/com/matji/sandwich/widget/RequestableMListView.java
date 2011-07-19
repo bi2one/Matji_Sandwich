@@ -144,11 +144,6 @@ PullToRefreshListView.OnRefreshListener {
 		return adapterData;
 	}
 
-	//	public void setActivity(Activity activity) {
-	//		super.setActivity(activity);
-	//		requestNext();
-	//	}
-
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (data.size() == 0 || data.size() < limit){
 			scrollListener.requestSetOff();
@@ -156,13 +151,10 @@ PullToRefreshListView.OnRefreshListener {
 			scrollListener.requestSetOn();
 		}
 
-		for (int i = 0; i < data.size(); i++) {
-			adapterData.add(data.get(i));
-		}
-		//	adapterData = getListByT(data);
-
+		adapter.addAll(data);
+		
 		if (data.size() > 0)
-			((MBaseAdapter)adapter).notifyDataSetChanged();
+			adapter.notifyDataSetChanged();
 
 		if (adapterData.size() <= limit){
 			Log.d("refresh", "Will invoke onRefreshComplete()");
@@ -170,14 +162,6 @@ PullToRefreshListView.OnRefreshListener {
 		}
 	}
 
-
-	// function for wild card data
-	//	private <T> ArrayList<T> getListByT(ArrayList<T> list) {
-	//		ArrayList<T> tList = new ArrayList<T>(list);
-	//		for (T tData : list)
-	//			tList.add(tData);
-	//		return tList;
-	//	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getContext());
@@ -187,10 +171,6 @@ PullToRefreshListView.OnRefreshListener {
 	public void onRefresh() {
 		Log.d("refresh", "OnRefresh!!!!");
 		requestReload();
-
-		//		 protected MatjiData getData(int position) {
-		//		 	return adapterData.get(position);
-		//		 }
 	}
 
 	public void dataRefresh() {

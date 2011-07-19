@@ -1,5 +1,7 @@
 package com.matji.sandwich.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -8,6 +10,34 @@ import java.util.TimeZone;
 public class TimeUtil {
 	final static String timezone = "UTC";	
 	static int timeOffset = 0;
+
+	public static Date getDateFromCreatedAt(String created_at) {
+		created_at = created_at.replace('T', ' ');
+		created_at = created_at.replaceAll("Z", "");
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		TimeZone zone = TimeZone.getTimeZone(timezone);
+		format.setTimeZone(zone);
+
+		Date date = null;  
+		
+		try {
+			date = getDateInTimeZone((Date)format.parse(created_at), TimeZone.getDefault().getID());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return date;
+	}
+
+	public static String getDay(Date date) {
+		return String.valueOf(date.getDay());
+	}
+	
+	public static String getDay(String created_at) {
+		return String.valueOf(getDateFromCreatedAt(created_at).getDay());
+	}
 	
 	public static String getAgoFromSecond(long second) {
 		long x = 0;		
@@ -24,7 +54,7 @@ public class TimeUtil {
 		String hours = "hours ago";
 		String min = "min ago";
 		String sec = "sec ago";
-		
+
 		if ((x = second / 31104000) > 0) { // year
 			if (x == 1) {
 				timestampText = x + " " + year; // singular
@@ -70,16 +100,16 @@ public class TimeUtil {
 				}
 			}
 		}
-		
+
 		return timestampText;
 	}
-	
+
 	public static Date getDateInTimeZone(Date currentDate, String timeZoneId)
 	{
 		TimeZone tz = TimeZone.getTimeZone(timeZoneId);
 		Calendar mbCal = new GregorianCalendar(tz);
 		mbCal.setTimeInMillis(currentDate.getTime());
-	
+
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, mbCal.get(Calendar.YEAR));
 		cal.set(Calendar.MONTH, mbCal.get(Calendar.MONTH));
@@ -88,7 +118,7 @@ public class TimeUtil {
 		cal.set(Calendar.MINUTE, mbCal.get(Calendar.MINUTE));
 		cal.set(Calendar.SECOND, mbCal.get(Calendar.SECOND));
 		cal.set(Calendar.MILLISECOND, mbCal.get(Calendar.MILLISECOND));
-	
+
 		return cal.getTime();
 	}
 }

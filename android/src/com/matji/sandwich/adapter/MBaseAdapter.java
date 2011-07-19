@@ -6,12 +6,15 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
+import com.matji.sandwich.data.MatjiData;
+
+@SuppressWarnings("rawtypes")
 public abstract class MBaseAdapter extends BaseAdapter {
 	protected LayoutInflater inflater;
 	protected Context context;
-	protected ArrayList<?> data;
+	protected ArrayList data;
 
-	public MBaseAdapter(Context context, ArrayList<?> data) {
+	public MBaseAdapter(Context context, ArrayList data) {
 		inflater = LayoutInflater.from(context);
 		this.context = context;
 		this.data = data;
@@ -26,7 +29,7 @@ public abstract class MBaseAdapter extends BaseAdapter {
 		return inflater;
 	}
 
-	public void setData(ArrayList<?> data) {
+	public void setData(ArrayList data) {
 		this.data = data;
 	}
 
@@ -40,5 +43,9 @@ public abstract class MBaseAdapter extends BaseAdapter {
 
 	public long getItemId(int position) {
 		return position;
+	}
+	
+	public void addAll(ArrayList<MatjiData> items) {
+		data.addAll(items);
 	}
 }
