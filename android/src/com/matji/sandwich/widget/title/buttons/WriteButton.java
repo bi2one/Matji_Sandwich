@@ -24,7 +24,7 @@ public class WriteButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_like));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_doc_edit));
 	}
 	
 	/**

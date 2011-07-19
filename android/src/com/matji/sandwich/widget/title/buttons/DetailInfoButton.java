@@ -6,14 +6,14 @@ import android.content.Context;
 import android.util.Log;
 
 /**
- * Main 이 되는 Activity 로 돌아가게 하는 역할을 하는 버튼 
- * 
+ * TODO
+ *
  * @author mozziluv
  *
  */
-public class HomeButton extends TitleButton {
+public class DetailInfoButton extends TitleButton {
 
-	public HomeButton(Context context) {
+	public DetailInfoButton(Context context) {
 		super(context);
 		init();
 	}
@@ -24,7 +24,7 @@ public class HomeButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_home));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_lightbulb));
 	}
 	
 	/**
@@ -33,6 +33,6 @@ public class HomeButton extends TitleButton {
 	@Override
 	public void onTitleItemClicked() {
 		// TODO Auto-generated method stub
-		Log.d("Matji", "HomeButtonClicked");
+		Log.d("Matji", "DetailInfoButtonClicked");
 	}
 }

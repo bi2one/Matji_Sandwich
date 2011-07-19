@@ -5,6 +5,8 @@
 	android:layout_height="fill_parent"
 	android:background="#fff"
 	android:orientation="vertical">
+	<com.matji.sandwich.widget.title.StoreTitle
+		style="@style/DefaultWrap" />
 	<!-- Store Cell -->
 	<RelativeLayout
 		style="@style/store_main_Cell">
