@@ -17,8 +17,12 @@ public class MainTabActivity extends BaseTabActivity {
     public static final int IV_INDEX_STORE = 1;
     public static final int IV_INDEX_POST = 2;
     
-    @Override
-	protected void onCreate(Bundle savedInstanceState) {
+    /**
+     * Activity생성시 실행하는 메소드
+     *
+     * @param savedInstanceState
+     */
+    protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main_tab);
 
@@ -42,26 +46,14 @@ public class MainTabActivity extends BaseTabActivity {
 		       R.drawable.icon,
 		       R.string.main_tab_config,
 		       new Intent(this, SettingActivity.class));
-	((TitleContainer) findViewById(R.id.TEST_TITLE)).addLeftButton(R.drawable.btn_like, new View.OnClickListener() {
-		@Override
-		public void onClick(View arg0) {
-			Log.d("Matji", "CLICK");
-		}
-	});
-	((TitleContainer) findViewById(R.id.TEST_TITLE)).addRightButton(R.drawable.btn_like, new View.OnClickListener() {
-		@Override
-		public void onClick(View arg0) {
-			Log.d("Matji", "CLICK");
-		}
-	});
-	((TitleContainer) findViewById(R.id.TEST_TITLE)).addRightButton(R.drawable.btn_like, new View.OnClickListener() {
-		@Override
-		public void onClick(View arg0) {
-			Log.d("Matji", "CLICK");
-		}
-	});
     }
 
+    /**
+     * 이 Activity로 intent를 이용해서 다시 돌아왔을 때, 실행하는
+     * 메소드. 현재 탭을 지정한 인덱스로 설정한다.
+     *
+     * @param intent 탭 이동 정보가 담긴 Intent
+     */
     protected void onNewIntent(Intent intent) {
 	super.onNewIntent(intent);
 	tabHost.setCurrentTab(intent.getIntExtra(IF_INDEX, 0));
