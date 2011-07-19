@@ -3,9 +3,20 @@
 		style="@style/IndicatorMain">
   <ImageView
       android:id="@+id/icon"
+      android:layout_centerHorizontal="true"
       style="@style/IndicatorMainIcon" />
   <TextView
       android:id="@+id/label"
-      android:layout_below="@+id/icon"
+      android:layout_centerHorizontal="true"
+      android:layout_below="@id/icon"
       style="@style/IndicatorMainText" />
+  <ImageView
+      android:id="@+id/bottom_bar"
+      android:layout_below="@id/label"
+      style="@style/IndicatorMainBottomBar" />
+  <ImageView
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      android:layout_alignBottom="@id/bottom_bar"
+      style="@style/IndicatorMainRightBar" />
 </RelativeLayout>

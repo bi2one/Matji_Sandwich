@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-  	0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
+    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
   </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -165,6 +165,11 @@
   <string name="user_main_jjim_store">찜한 맛집</string>
   <string name="user_main_activity_area">활동지역</string>
   <string name="user_main_not_exist_blog">님은 블로그를 운영하고 있지 않습니다.</string>
+
+  <!-- MainTabActivity -->
+  <string name="main_tab_map">맛지도</string>
+  <string name="main_tab_talk">맛이야기</string>
+  <string name="main_tab_ranking">맛티스트</string>
 
   <!-- StoreDetailInfoTabActivity  -->
   <string name="store_detail_info_default">맛집 기본 정보</string>

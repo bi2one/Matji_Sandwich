@@ -335,5 +335,17 @@
   </style>
 
   <style name="IndicatorMainText" parent="DefaultWrap">
+    <item name="android:textColor">@drawable/indicator_main_text</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="IndicatorMainBottomBar" parent="DefaultWidthFill">
+    <item name="android:layout_height">1dp</item>
+    <item name="android:background">@drawable/indicator_main_bottom_bar</item>
+  </style>
+
+  <style name="IndicatorMainRightBar" parent="DefaultHeightFill">
+    <item name="android:layout_width">1dp</item>
+    <item name="android:background">@color/main_tab_right_bar</item>
   </style>
 </resources>
