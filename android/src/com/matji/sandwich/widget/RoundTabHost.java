@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.matji.sandwich.widget.indicator.Indicator;
 import com.matji.sandwich.widget.indicator.RoundLeftIndicator;
+import com.matji.sandwich.widget.indicator.RoundCenterIndicator;
+import com.matji.sandwich.widget.indicator.RoundRightIndicator;
 
 public class RoundTabHost extends TabHost {
     private Context context;
@@ -52,8 +54,7 @@ public class RoundTabHost extends TabHost {
      * @param content 추가할 TabSpec이 가질 Intent
      */
     public void addCenterTab(String specLabel, int textRef, Intent content) {
-	addTab(new RoundLeftIndicator(context, textRef), specLabel, content);
-	// addTab(new RoundCenterIndicator(context, textRef), specLabel, content);
+	addTab(new RoundCenterIndicator(context, textRef), specLabel, content);
     }
 
     /**
@@ -64,8 +65,7 @@ public class RoundTabHost extends TabHost {
      * @param content 추가할 TabSpec이 가질 Intent
      */
     public void addRightTab(String specLabel, int textRef, Intent content) {
-	addTab(new RoundLeftIndicator(context, textRef), specLabel, content);
-	// addTab(new RoundRightIndicator(context, textRef), specLabel, content);
+	addTab(new RoundRightIndicator(context, textRef), specLabel, content);
     }
 
     /**

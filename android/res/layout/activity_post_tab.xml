@@ -2,9 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/DefaultLinearFill">
-  <com.matji.sandwich.widget.TitleContainer
-      android:id="@+id/TEST_TITLE"
-      style="@style/DefaultWrap" />
   <com.matji.sandwich.widget.RoundTabHost
       android:id="@android:id/tabhost"
       android:layout_width="fill_parent"
@@ -15,9 +12,10 @@
 	android:layout_height="fill_parent">
       <TabWidget
 	  android:id="@android:id/tabs"
-	  android:layout_width="fill_parent"
-	  android:layout_height="wrap_content"
+	  style="@style/post_tab_TabBar"
 	  android:layout_weight="0" />
+      <ImageView
+	  style="@style/post_tab_DivisionBar" />
       <FrameLayout
 	  android:id="@android:id/tabcontent"
 	  android:layout_width="fill_parent"

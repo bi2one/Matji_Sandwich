@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		style="@style/IndicatorRoundLeft">
+		style="@style/IndicatorRoundRight">
   <TextView
-      android:id="@+id/indicator_round_left_label"
+      android:id="@+id/indicator_round_right_label"
       android:layout_centerHorizontal="true"
       style="@style/IndicatorRoundText" />
 </RelativeLayout>

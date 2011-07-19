@@ -2,21 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		style="@style/IndicatorMain">
   <ImageView
-      android:id="@+id/icon"
+      android:id="@+id/indicator_main_icon"
       android:layout_centerHorizontal="true"
       style="@style/IndicatorMainIcon" />
   <TextView
-      android:id="@+id/label"
+      android:id="@+id/indicator_main_label"
       android:layout_centerHorizontal="true"
-      android:layout_below="@id/icon"
+      android:layout_below="@id/indicator_main_icon"
       style="@style/IndicatorMainText" />
   <ImageView
-      android:id="@+id/bottom_bar"
-      android:layout_below="@id/label"
+      android:id="@+id/indicator_main_bottom_bar"
+      android:layout_below="@id/indicator_main_label"
       style="@style/IndicatorMainBottomBar" />
   <ImageView
       android:layout_alignParentRight="true"
       android:layout_alignParentTop="true"
-      android:layout_alignBottom="@id/bottom_bar"
+      android:layout_alignBottom="@id/indicator_main_bottom_bar"
       style="@style/IndicatorMainRightBar" />
 </RelativeLayout>

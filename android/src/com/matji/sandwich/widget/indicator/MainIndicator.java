@@ -15,8 +15,8 @@ public class MainIndicator extends Indicator {
     public MainIndicator(Context context, int drawableRef, int textRef) {
 	super(context, LAYOUT_REFERENCE);
 
-	iconView = (ImageView)findViewById(R.id.icon);
-	labelView = (TextView)findViewById(R.id.label);
+	iconView = (ImageView)findViewById(R.id.indicator_main_icon);
+	labelView = (TextView)findViewById(R.id.indicator_main_label);
 
 	iconView.setImageResource(drawableRef);
 	labelView.setText(textRef);

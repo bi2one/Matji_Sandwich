@@ -27,7 +27,6 @@
   
   <style name="DefaultLinearFill" parent="DefaultFill">
   	<item name="android:orientation">vertical</item>
-  	<item name="android:padding">7dp</item>
   </style>
   
   <style name="DefaultRelativeWrap" parent="DefaultWrap">
@@ -318,6 +317,8 @@
   </style>
 
   <style name="IndicatorRoundText" parent="DefaultWrap">
+    <item name="android:layout_gravity">center</item>
+    <item name="android:textColor">@color/minor_tab_text_default</item>
   </style>
     
   <!-- indicator_round_head.xml -->
@@ -329,12 +330,17 @@
   <style name="IndicatorRoundLeft" parent="IndicatorRound">
     <item name="android:background">@drawable/indicator_left_corner</item>
   </style>
-
-  <style name="IndicatorRoundLeftText" parent="DefaultWrap">
-    <item name="android:layout_gravity">center</item>
-    <item name="android:textColor">@color/minor_tab_text_default</item>
+  
+  <!-- indicator_round_center.xml -->
+  <style name="IndicatorRoundCenter" parent="IndicatorRound">
+    <item name="android:background">@drawable/indicator_center_rect</item>
   </style>
 
+  <!-- indicator_round_right.xml -->
+  <style name="IndicatorRoundRight" parent="IndicatorRound">
+    <item name="android:background">@drawable/indicator_right_corner</item>
+  </style>
+  
   <!-- indicator_main.xml -->
   <style name="IndicatorMain" parent="DefaultWidthFill">
     <item name="android:background">@drawable/indicator_main</item>
@@ -357,5 +363,16 @@
   <style name="IndicatorMainRightBar" parent="DefaultHeightFill">
     <item name="android:layout_width">1dp</item>
     <item name="android:background">@color/main_tab_right_bar</item>
+  </style>
+
+  <!-- activity_post_tab.xml -->
+  <style name="post_tab_TabBar" parent="DefaultWidthFill">
+    <item name="android:padding">10dp</item>
+    <item name="android:background">@color/main_tab_focused</item>
+  </style>
+
+  <style name="post_tab_DivisionBar" parent="DefaultFill">
+    <item name="android:layout_height">2dp</item>
+    <item name="android:background">@color/post_tab_division_bar</item>
   </style>
 </resources>

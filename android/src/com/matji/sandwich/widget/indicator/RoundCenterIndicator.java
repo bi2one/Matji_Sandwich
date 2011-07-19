@@ -7,8 +7,8 @@ import android.widget.ImageView;
 
 import com.matji.sandwich.R;
 
-public class RoundLeftIndicator extends Indicator {
-    public static final int LAYOUT_REFERENCE = R.layout.indicator_round_left;
+public class RoundCenterIndicator extends Indicator {
+    public static final int LAYOUT_REFERENCE = R.layout.indicator_round_center;
     private TextView labelView;
 
     /**
@@ -17,10 +17,10 @@ public class RoundLeftIndicator extends Indicator {
      * @param context 이 레이아웃의 기반 Context
      * @param textRef 레이아웃에 채울 String의 참조 id
      */
-    public RoundLeftIndicator(Context context, int textRef) {
+    public RoundCenterIndicator(Context context, int textRef) {
 	super(context, LAYOUT_REFERENCE);
 
-	labelView = (TextView)findViewById(R.id.indicator_round_left_label);
+	labelView = (TextView)findViewById(R.id.indicator_round_center_label);
 	labelView.setText(textRef);
     }
 }
