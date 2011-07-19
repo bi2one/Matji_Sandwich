@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -13,6 +14,7 @@ import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.adapter.SeparatorAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.PostForSeparator;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
@@ -20,11 +22,14 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	private PostHttpRequest postRequest;
 
 	public PostListView(Context context, AttributeSet attrs) {
-//		super(context, attrs, new PostAdapter(context), 10);
 		super(context, attrs, new SeparatorAdapter(context), 10);
 		postRequest = new PostHttpRequest(context);
 
 		setPage(1);
+		//TODO
+		setBackgroundDrawable(context.getResources().getDrawable(R.drawable.pattern_bg));
+		setScrollingCacheEnabled(false);
+		setDivider(null);
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	@Override
 	public void onListItemClick(int position) {
-		Post post = (Post) getAdapterData().get(position);
+		Post post = ((PostForSeparator) getAdapterData().get(position)).post;
 		if (post.getActivityId() == 0) {
 			Intent intent = new Intent(getActivity(), PostMainActivity.class);
 			intent.putExtra("position", position);
@@ -45,7 +50,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
-		Post post = (Post) getAdapterData().get(position);
+		Post post = ((PostForSeparator) getAdapterData().get(position)).post;
 
 		switch(v.getId()){
 		case R.id.post_adapter_thumnail: case R.id.post_adapter_nick: case R.id.activity_adapter_nick:
