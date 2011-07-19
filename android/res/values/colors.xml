@@ -19,6 +19,11 @@
 	<color name="WHITE">#ffffff</color>
 	<color name="BRIGHT_ORANGE">#FF9D00</color>
 	<color name="address_text_bg">#88000000</color>
-	<color name="main_tab_focused">#4F4F4F</color>
-	<color name="main_tab_default">#FFEDAB</color>
+	<color name="main_tab_focused">#FFEDAB</color>
+	<color name="main_tab_default">#4F4F4F</color>
+	<color name="main_tab_text_default">#ACACAC</color>
+	<color name="main_tab_text_focused">#FF2B00</color>
+	<color name="main_tab_bottom_bar_default">#040404</color>
+	<color name="main_tab_bottom_bar_focused">#FDC75D</color>
+	<color name="main_tab_right_bar">#343434</color>
 </resources>
