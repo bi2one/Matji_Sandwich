@@ -312,7 +312,7 @@
   </style>
 
   <!-- indicator_round common attributes -->
-  <style name="IndicatorRound" parent="DefaultWrap">
+  <style name="IndicatorRound" parent="DefaultWidthFill">
     <item name="android:padding">10dp</item>
     <item name="android:gravity">center</item>
   </style>
@@ -323,6 +323,16 @@
   <!-- indicator_round_head.xml -->
   <style name="IndicatorRoundHead" parent="IndicatorRound">
     <item name="android:background">@drawable/btn_left_corner</item>
+  </style>
+
+  <!-- indicator_round_left.xml -->
+  <style name="IndicatorRoundLeft" parent="IndicatorRound">
+    <item name="android:background">@drawable/indicator_left_corner</item>
+  </style>
+
+  <style name="IndicatorRoundLeftText" parent="DefaultWrap">
+    <item name="android:layout_gravity">center</item>
+    <item name="android:textColor">@color/minor_tab_text_default</item>
   </style>
 
   <!-- indicator_main.xml -->

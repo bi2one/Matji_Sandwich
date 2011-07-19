@@ -210,4 +210,9 @@
   <string name="bookmark_list_register">이곳을 북마크하기</string>
   <string name="bookmark_list_register_hint">북마크 이름을 입력하세요.</string>
   <string name="bookmark_list_register_alert">북마크 이름은 빈칸이 올 수 없습니다</string>
+
+  <!-- PostTabActivity -->
+  <string name="post_tab_friend">친구</string>
+  <string name="post_tab_near">지역</string>
+  <string name="post_tab_all">전체</string>
 </resources>

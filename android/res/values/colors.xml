@@ -26,4 +26,9 @@
 	<color name="main_tab_bottom_bar_default">#040404</color>
 	<color name="main_tab_bottom_bar_focused">#FDC75D</color>
 	<color name="main_tab_right_bar">#343434</color>
+	<color name="minor_tab_focused">#FFB800</color>
+	<color name="minor_tab_default">#FFDD00</color>
+	<color name="minor_tab_border_focused">#ff6700</color>
+	<color name="minor_tab_border_default">#B36D00</color>
+	<color name="minor_tab_text_default">#A6721E</color>
 </resources>
