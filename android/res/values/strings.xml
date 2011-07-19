@@ -170,6 +170,7 @@
   <string name="main_tab_map">맛지도</string>
   <string name="main_tab_talk">맛이야기</string>
   <string name="main_tab_ranking">맛티스트</string>
+  <string name="main_tab_config">개인설정</string>
 
   <!-- StoreDetailInfoTabActivity  -->
   <string name="store_detail_info_default">맛집 기본 정보</string>

@@ -33,6 +33,7 @@
 		<activity android:name="PostMainActivity" 
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="PostSliderActivity"></activity>
+		<activity android:name="PostTabActivity"></activity>
 		<activity android:name="SettingActivity"></activity>
 		<activity android:name="SignUpActivity"></activity>
 		<activity android:name="StoreSliderActivity"></activity>
