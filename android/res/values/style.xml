@@ -312,7 +312,7 @@
 
   <!-- indicator_round common attributes -->
   <style name="IndicatorRound" parent="DefaultWidthFill">
-    <item name="android:padding">10dp</item>
+    <item name="android:padding">7dp</item>
     <item name="android:gravity">center</item>
   </style>
 
@@ -367,7 +367,7 @@
 
   <!-- activity_post_tab.xml -->
   <style name="post_tab_TabBar" parent="DefaultWidthFill">
-    <item name="android:padding">10dp</item>
+    <item name="android:padding">6dp</item>
     <item name="android:background">@color/main_tab_focused</item>
   </style>
 
