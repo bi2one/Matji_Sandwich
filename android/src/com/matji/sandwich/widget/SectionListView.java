@@ -1,7 +1,7 @@
 package com.matji.sandwich.widget;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.adapter.SectionAdapter;
+import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
@@ -20,7 +20,7 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 	private HttpRequest request;
 
 	public SectionListView(Context context, AttributeSet attr) {
-		super(context, attr, new SectionAdapter(context), 10);
+		super(context, attr, new PostAdapter(context), 10);
 		commonInitialisation();
 	}
 
@@ -40,7 +40,9 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 	}
 
 	@Override
-	public void onListItemClick(int position) {}
+	public void onListItemClick(int position) {
+		Log.d("Matji", "CLICKED!!!!!");
+	}
 
 	@Override
 	public void onClick(View arg0) {
