@@ -107,7 +107,8 @@
   <string name="default_string_change">변경</string>
   <string name="default_string_edit">수정</string>
   <string name="default_string_confirm">확인</string>
-  <string name="today">오늘</string>
+  <string name="today">Today</string>
+  <string name="at">in</string>
   
   <!-- Writing content -->
   <string name="writing_content_post">메모를 입력하세요.</string>

@@ -30,7 +30,7 @@ public class PostTabActivity extends BaseTabActivity {
 
 	tabHost.addLeftTab("tab1",
 			   R.string.post_tab_friend,
-			   new Intent(this, PostSliderActivity.class));
+			   new Intent(this, PostListActivity.class));
 	tabHost.addCenterTab("tab2",
 			     R.string.post_tab_near,
 			     new Intent(this, StoreSliderActivity.class));

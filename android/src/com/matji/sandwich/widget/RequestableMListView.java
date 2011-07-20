@@ -64,7 +64,7 @@ PullToRefreshListView.OnRefreshListener {
 	}
 
 	public void initValue() {
-		adapterData.clear();
+		adapter.clear();
 		page = 1;
 	}
 

@@ -1,14 +1,14 @@
 package com.matji.sandwich.widget;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.adapter.SectionAdapter;
+import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.ListAdapter;
+import android.view.View;
 
 /**
  * View displaying the list with sectioned header.
@@ -16,11 +16,11 @@ import android.widget.ListAdapter;
  * @author mozziluv
  *
  */
-public class SectionListView extends RequestableMListView {
+public class SectionListView extends RequestableMListView implements View.OnClickListener {
 	private HttpRequest request;
 
 	public SectionListView(Context context, AttributeSet attr) {
-		super(context, attr, new SectionAdapter(context), 10);
+		super(context, attr, new PostAdapter(context), 10);
 		commonInitialisation();
 	}
 
@@ -28,17 +28,6 @@ public class SectionListView extends RequestableMListView {
 		setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.pattern_bg));
 		setScrollingCacheEnabled(false);
 		setDivider(null);
-	}
-
-	@Override
-	public void setAdapter(final ListAdapter adapter) {
-		if (!(adapter instanceof SectionAdapter)) {
-			throw new IllegalArgumentException(
-					"The adapter needds to be of type "
-					+ SectionAdapter.class + " and is "
-					+ adapter.getClass());
-		}
-		super.setAdapter(adapter);
 	}
 
 	@Override
@@ -52,7 +41,11 @@ public class SectionListView extends RequestableMListView {
 
 	@Override
 	public void onListItemClick(int position) {
-		// TODO Auto-generated method stub
-		Log.d("Matji", "CLICK!!");		
+		Log.d("Matji", "CLICKED!!!!!");
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		Log.d("Matji", "CLICK");		
 	}
 }

@@ -25,7 +25,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.http.HttpRequestManager;
 
 public abstract class PullToRefreshListView extends MListView implements OnScrollListener {
-	private static final boolean IS_PULL_REFRESH = false;
+	private static final boolean IS_PULL_REFRESH = true;
 	private static final int TAP_TO_REFRESH = 1;
 	private static final int PULL_TO_REFRESH = 2;
 	private static final int RELEASE_TO_REFRESH = 3;
