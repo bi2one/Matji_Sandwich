@@ -1,8 +1,8 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.widget.title.buttons.HomeButton;
-import com.matji.sandwich.widget.title.buttons.LikeButton;
-import com.matji.sandwich.widget.title.buttons.WriteButton;
+import com.matji.sandwich.widget.title.button.HomeButton;
+import com.matji.sandwich.widget.title.button.LikeButton;
+import com.matji.sandwich.widget.title.button.WriteButton;
 
 import android.content.Context;
 import android.util.AttributeSet;

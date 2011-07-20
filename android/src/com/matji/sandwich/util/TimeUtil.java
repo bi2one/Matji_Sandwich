@@ -11,6 +11,11 @@ public class TimeUtil {
 	final static String timezone = "UTC";	
 	static int timeOffset = 0;
 
+	public static boolean isToday(String time) {
+		Date date = new Date(System.currentTimeMillis());
+		return parseString(date).equals(time);		
+	}
+	
 	public static Date getDateFromCreatedAt(String created_at) {
 		created_at = created_at.replace('T', ' ');
 		created_at = created_at.replaceAll("Z", "");
@@ -30,7 +35,7 @@ public class TimeUtil {
 		
 		return date;
 	}
-
+	
 	public static String getDay(Date date) {
 		return String.valueOf(date.getDay());
 	}
@@ -120,5 +125,9 @@ public class TimeUtil {
 		cal.set(Calendar.MILLISECOND, mbCal.get(Calendar.MILLISECOND));
 
 		return cal.getTime();
+	}
+	
+	public static String parseString(Date date) {
+		return (String) android.text.format.DateFormat.format("yyyy.MM.dd", date);
 	}
 }

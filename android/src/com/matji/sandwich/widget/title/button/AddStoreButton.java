@@ -1,4 +1,4 @@
-package com.matji.sandwich.widget.title.buttons;
+package com.matji.sandwich.widget.title.button;
 
 import com.matji.sandwich.R;
 
@@ -19,7 +19,7 @@ public class AddStoreButton extends TitleButton {
 	}
 
 	/**
-	 * @see com.matji.sandwich.widget.title.buttons.TitleButton#init()
+	 * @see com.matji.sandwich.widget.title.button.TitleButton#init()
 	 */
 	@Override
 	public void init() {
@@ -28,7 +28,7 @@ public class AddStoreButton extends TitleButton {
 	}
 	
 	/**
-	 * @see com.matji.sandwich.widget.title.buttons.TitleItem#onTitleItemClicked()
+	 * @see com.matji.sandwich.widget.title.button.TitleItem#onTitleItemClicked()
 	 */
 	@Override
 	public void onTitleItemClicked() {

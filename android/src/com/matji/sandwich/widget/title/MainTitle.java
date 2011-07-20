@@ -1,8 +1,8 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.widget.title.buttons.AddStoreButton;
-import com.matji.sandwich.widget.title.buttons.DetailInfoButton;
-import com.matji.sandwich.widget.title.buttons.SettingsButton;
+import com.matji.sandwich.widget.title.button.AddStoreButton;
+import com.matji.sandwich.widget.title.button.DetailInfoButton;
+import com.matji.sandwich.widget.title.button.SettingsButton;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -6,8 +6,9 @@
 	android:paddingTop="3dp"
 	android:paddingBottom="3dp">
 	<TextView
-		android:id="@+id/date_separator"
+		android:id="@+id/date_section"
 		style="@style/DefaultWrap"
-		android:background="@drawable/separator"
+		android:minWidth="150dp"
+		android:background="@drawable/section"
 		android:textColor="@color/WHITE" />
 </LinearLayout>

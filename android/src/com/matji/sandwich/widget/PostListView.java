@@ -2,7 +2,6 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -10,8 +9,7 @@ import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
-import com.matji.sandwich.adapter.PostAdapter;
-import com.matji.sandwich.adapter.SeparatorAdapter;
+import com.matji.sandwich.adapter.SectionAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.PostForSeparator;
@@ -22,7 +20,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	private PostHttpRequest postRequest;
 
 	public PostListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new SeparatorAdapter(context), 10);
+		super(context, attrs, new SectionAdapter(context), 10);
 		postRequest = new PostHttpRequest(context);
 
 		setPage(1);
@@ -40,7 +38,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	@Override
 	public void onListItemClick(int position) {
-		Post post = ((PostForSeparator) getAdapterData().get(position)).post;
+		Post post = (Post) getAdapterData().get(position);
 		if (post.getActivityId() == 0) {
 			Intent intent = new Intent(getActivity(), PostMainActivity.class);
 			intent.putExtra("position", position);

@@ -1,4 +1,4 @@
-package com.matji.sandwich.widget.title.buttons;
+package com.matji.sandwich.widget.title.button;
 
 import android.view.View;
 

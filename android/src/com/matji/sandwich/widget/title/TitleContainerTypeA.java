@@ -1,6 +1,6 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.widget.title.buttons.TitleButton;
+import com.matji.sandwich.widget.title.button.TitleButton;
 
 import android.content.Context;
 import android.util.AttributeSet;

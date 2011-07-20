@@ -1,4 +1,4 @@
-package com.matji.sandwich.widget.title.buttons;
+package com.matji.sandwich.widget.title.button;
 
 import com.matji.sandwich.R;
 

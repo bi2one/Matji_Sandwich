@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-    <TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/textView1" android:text="Hello World, StoreListActivity"></TextView>
-    <TextView android:text="이게 동작하는건가???" android:id="@+id/textView2" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
-</LinearLayout>
-
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/listView"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<com.matji.sandwich.widget.SectionListView
+		android:id="@+id/section_list_view"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"/>
+</FrameLayout>
