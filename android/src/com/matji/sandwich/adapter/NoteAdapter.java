@@ -27,13 +27,13 @@ public class NoteAdapter extends MBaseAdapter {
 		
 		if (convertView == null) {
 			noteElement = new NoteElement();
-			convertView = getLayoutInflater().inflate(R.layout.adapter_post, null);
+			convertView = getLayoutInflater().inflate(R.layout.row_post, null);
 			
-			noteElement.image = (ImageView) convertView.findViewById(R.id.post_adapter_thumnail);
-			noteElement.nick = (TextView) convertView.findViewById(R.id.post_adapter_nick);
-			noteElement.storeName = (TextView)convertView.findViewById(R.id.post_adapter_store_name);
-			noteElement.note = (TextView) convertView.findViewById(R.id.post_adapter_post);
-			noteElement.dateAgo = (TextView) convertView.findViewById(R.id.post_adapter_created_at);
+			noteElement.image = (ImageView) convertView.findViewById(R.id.row_post_thumnail);
+			noteElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
+			noteElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
+			noteElement.note = (TextView) convertView.findViewById(R.id.row_post_post);
+			noteElement.dateAgo = (TextView) convertView.findViewById(R.id.row_post_created_at);
 			convertView.setTag(noteElement);
 			
 			StoreNoteListView storeNoteListView = (StoreNoteListView)parent;

@@ -2,4 +2,5 @@
 <resources>
 	<!-- Title Container -->
 	<dimen name="title_container_height">40dp</dimen>
+	<dimen name="thumnail_size">50dp</dimen>
 </resources>
