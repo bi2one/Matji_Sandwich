@@ -5,6 +5,13 @@ import android.os.Bundle;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.SectionListView;
 
+/**
+ * 전체 Post 리스트를 보여주는 액티비티.
+ * 
+ * 
+ * @author mozziluv
+ *
+ */
 public class PostListActivity extends BaseActivity {
 	private SectionListView listView;
 

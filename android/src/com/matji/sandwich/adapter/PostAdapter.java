@@ -1,5 +1,6 @@
 package com.matji.sandwich.adapter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -8,17 +9,22 @@ import java.util.Map;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.SectionListView;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
 
 /**
  * Adapter for sections.
@@ -40,6 +46,11 @@ public class PostAdapter extends MBaseAdapter {
 			updateSessionCache();
 		};
 	};
+	private int[] imageIds = {
+			R.id.row_post_preview1,
+			R.id.row_post_preview2,
+			R.id.row_post_preview3
+	};
 
 	private final Map<Integer, String> sectionPositions = new LinkedHashMap<Integer, String>();
 	private final Map<Integer, Integer> itemPositions = new LinkedHashMap<Integer, Integer>();
@@ -49,12 +60,19 @@ public class PostAdapter extends MBaseAdapter {
 	private static final int TYPE_SECTION = 1;
 	private static final int VIEW_TYPE_COUNT = TYPE_SECTION + 1;
 	
+	private int thumnailSize;
+	private static final int MARGIN_THUMNAIL = DisplayUtil.PixelFromDP(11);
+	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
+
 	private MatjiImageDownloader downloader;
 
 	public PostAdapter(Context context) {
 		super(context);
 		registerDataSetObserver(dataSetObserver);
 		downloader = new MatjiImageDownloader();
+		
+		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
+		Log.d("Matji", thumnailSize+"");
 	}
 
 	private boolean isTheSame(final String previousSection, final String newSection) {
@@ -121,9 +139,6 @@ public class PostAdapter extends MBaseAdapter {
 		}
 	}
 
-	protected Integer getLinkedPosition(final int position) {
-		return itemPositions.get(position);
-	}
 
 	@Override
 	public int getItemViewType(final int position) {
@@ -131,6 +146,39 @@ public class PostAdapter extends MBaseAdapter {
 			return VIEW_TYPE_COUNT - 1;
 		}
 		return super.getItemViewType(getLinkedPosition(position));
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		if (isSection(position)) {
+			return getSectionView(convertView, sectionPositions.get(position));
+		}
+		return getItemView(getLinkedPosition(position), convertView, parent);
+	}
+
+	@Override
+	public int getViewTypeCount() {
+		return VIEW_TYPE_COUNT;
+	}
+
+	@Override
+	public boolean isEnabled(final int position) {
+		if (isSection(position)) {
+			return false;
+		}
+		return super.isEnabled(getLinkedPosition(position));
+	}
+
+	@Override
+	public void clear() {
+		super.clear();
+		sectionPositions.clear();
+		itemPositions.clear();
+		currentViewSections.clear();
+	}
+	
+	protected Integer getLinkedPosition(final int position) {
+		return itemPositions.get(position);
 	}
 
 	private View getSectionView(final View convertView, final String section) {
@@ -164,19 +212,11 @@ public class PostAdapter extends MBaseAdapter {
 	protected View createNewSectionView() {
 		return inflater.inflate(R.layout.date_section, null);
 	}
-
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		if (isSection(position)) {
-			return getSectionView(convertView, sectionPositions.get(position));
-		}
-		return getItemView(getLinkedPosition(position), convertView, parent);
-	}
-
+	
 	public View getItemView(int position, View convertView, ViewGroup parent) {
 		PostElement postElement;
 		Post post = (Post) data.get(position);
-		
+
 		if (convertView == null) {
 			postElement = new PostElement();
 			final SectionListView sectionListView = (SectionListView) parent;
@@ -190,6 +230,12 @@ public class PostAdapter extends MBaseAdapter {
 			postElement.dateAgo = (TextView) convertView.findViewById(R.id.row_post_created_at);
 			postElement.commentCount = (TextView) convertView.findViewById(R.id.row_post_comment_count);
 			postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
+			
+
+			postElement.preview = new ImageView[imageIds.length];
+			for (int i = 0; i < postElement.preview.length; i++) {
+				postElement.preview[i] = (ImageView) convertView.findViewById(imageIds[i]);
+			}
 
 			convertView.setTag(postElement);
 			postElement.thumnail.setOnClickListener(sectionListView);
@@ -205,7 +251,6 @@ public class PostAdapter extends MBaseAdapter {
 			});
 
 			convertView.setOnClickListener(new View.OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					int position = Integer.parseInt((String) ((PostElement) v.getTag()).post.getTag());
@@ -216,59 +261,74 @@ public class PostAdapter extends MBaseAdapter {
 			postElement = (PostElement) convertView.getTag();
 		}
 
-		Store store = post.getStore();
-		User user = post.getUser();
-
-		if (store != null) {
-			postElement.at.setVisibility(View.VISIBLE);
-			postElement.storeName.setText(" "+store.getName());
-		}
-		else { 
-			postElement.at.setVisibility(View.GONE);
-			postElement.storeName.setText("");
-		}
-
-		if (post.getTagCount() == 0) {
-			postElement.tag.setVisibility(View.GONE);
-		} else {
-			postElement.tag.setVisibility(View.VISIBLE);
-			postElement.tag.setText("아직 수정 덜됨.");
-		}
-		postElement.thumnail.setTag(position+"");
-		postElement.nick.setTag(position+"");
-		postElement.storeName.setTag(position+"");
-		postElement.post.setTag(position+"");
-
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.thumnail);
-		postElement.nick.setText(user.getNick()+" ");
-		postElement.post.setText(post.getPost().trim());
-		postElement.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
-		postElement.commentCount.setText(post.getCommentCount() + "");
-		postElement.likeCount.setText(post.getLikeCount() + "");
+		setViewItemPosition(postElement, position);
+		setViewData(postElement, post);
 
 		return convertView;
 	}
 
-	@Override
-	public int getViewTypeCount() {
-		return VIEW_TYPE_COUNT;
+	private void setViewItemPosition(PostElement holder, int position) {
+		holder.thumnail.setTag(position+"");
+		holder.nick.setTag(position+"");
+		holder.storeName.setTag(position+"");
+		holder.post.setTag(position+"");
 	}
 
-	@Override
-	public boolean isEnabled(final int position) {
-		if (isSection(position)) {
-			return false;
+	private void setViewData(PostElement holder, Post post) {
+		Store store = post.getStore();
+		User user = post.getUser();
+
+
+		if (store != null) {
+			holder.at.setVisibility(View.VISIBLE);
+			holder.storeName.setText(" "+store.getName());
 		}
-		return super.isEnabled(getLinkedPosition(position));
+		else { 
+			holder.at.setVisibility(View.GONE);
+			holder.storeName.setText("");
+		}
+
+		ArrayList<Tag> tags = post.getTags();
+		String tagResult = "";
+
+		if (tags.size() > 0) {
+			tagResult += tags.get(0).getTag();
+			for (int i = 1; i < tags.size(); i++) {
+				tagResult += ", " + tags.get(i).getTag();
+			}
+			holder.tag.setText(tagResult);
+			holder.tag.setVisibility(View.VISIBLE);
+		} else {
+			holder.tag.setVisibility(View.GONE);
+		}
+		
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, holder.thumnail);
+		holder.nick.setText(user.getNick()+" ");
+		holder.post.setText(post.getPost().trim());
+		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
+		holder.commentCount.setText(post.getCommentCount() + "");
+		holder.likeCount.setText(post.getLikeCount() + "");
+
+
+
+
+
+
+
+
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		params.setMargins(MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS);
+
+		int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
+
+		for (int i = 0; i < holder.preview.length; i++) {
+			holder.preview[i].setMaxWidth(remainScreenWidth/imageIds.length - MARGIN_PREVIEWS*2);
+			holder.preview[i].setLayoutParams(params);
+			//TODO set lisener
+//			holder.preview[i].setOnClickListener(this);
+		}
 	}
-	
-	@Override
-	public void clear() {
-		super.clear();
-		sectionPositions.clear();
-		itemPositions.clear();
-		currentViewSections.clear();
-	}
+
 
 	private class PostElement {
 		ImageView thumnail;
@@ -280,5 +340,6 @@ public class PostAdapter extends MBaseAdapter {
 		TextView dateAgo;
 		TextView commentCount;
 		TextView likeCount;
+		ImageView[] preview;
 	}
 }
