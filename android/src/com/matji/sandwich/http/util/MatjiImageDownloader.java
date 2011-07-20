@@ -3,7 +3,10 @@ package com.matji.sandwich.http.util;
 import android.widget.ImageView;
 import java.util.HashMap;
 
-public class MatjiImageDownloader {
+import com.matji.sandwich.listener.ImageDownloaderListener;
+import com.matji.sandwich.widget.ThumnailImageView;
+
+public class MatjiImageDownloader implements ImageDownloaderListener {
 	private static final String URL_USER_IMAGE = "http://api.matji.com/v2/users/profile";
 	private static final String URL_ATTACH_FILE_IMAGE = "http://api.matji.com/v2/attach_files/image";
 	public static final String IMAGE_SSMALL = "ss";
@@ -16,6 +19,7 @@ public class MatjiImageDownloader {
 
 	public MatjiImageDownloader() {
 		downloader = new ImageDownloader();
+		downloader.setDownloaderListsener(this);
 	}
 
 	public void downloadUserImage(int userId, ImageView imageView) {
@@ -40,4 +44,10 @@ public class MatjiImageDownloader {
 		downloader.download(URL_ATTACH_FILE_IMAGE, params, imageView);
 	}
 
+	@Override
+	public void postSetBitmap(ImageView view) {
+		if (view instanceof ThumnailImageView) {
+			((ThumnailImageView) view).convertToRoundedCornerImage();
+		}
+	}
 }

@@ -7,14 +7,13 @@ import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.PostForSeparator;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -38,6 +37,12 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 	}
 
 	@Override
+	public void setActivity(Activity activity) {
+		super.setActivity(activity);
+		((PostAdapter) getMBaseAdapter()).setActivity(activity);
+	}
+	
+	@Override
 	public HttpRequest request() {
 		if (request == null || !(request instanceof PostHttpRequest)) {
 			request = new PostHttpRequest(getContext());
@@ -48,7 +53,7 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 	
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
-		Post post = ((PostForSeparator) getAdapterData().get(position)).post;
+		Post post = (Post) getAdapterData().get(position);
 
 		switch(v.getId()){
 		case R.id.row_post_thumnail: case R.id.row_post_nick:

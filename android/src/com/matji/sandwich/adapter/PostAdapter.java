@@ -7,15 +7,24 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.Requestable;
+import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.AttachFileHttpRequest;
+import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.SectionListView;
+import com.matji.sandwich.widget.ThumnailImageView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.util.Log;
@@ -32,7 +41,7 @@ import android.widget.LinearLayout.LayoutParams;
  * @author mozziluv
  *
  */
-public class PostAdapter extends MBaseAdapter {
+public class PostAdapter extends MBaseAdapter implements Requestable {
 	private final DataSetObserver dataSetObserver = new DataSetObserver() {
 		@Override
 		public void onChanged() {
@@ -46,11 +55,15 @@ public class PostAdapter extends MBaseAdapter {
 			updateSessionCache();
 		};
 	};
+
 	private int[] imageIds = {
 			R.id.row_post_preview1,
 			R.id.row_post_preview2,
 			R.id.row_post_preview3
 	};
+	
+	private int[] curAttachFileIds;
+	private ImageView[] curPreview;
 
 	private final Map<Integer, String> sectionPositions = new LinkedHashMap<Integer, String>();
 	private final Map<Integer, Integer> itemPositions = new LinkedHashMap<Integer, Integer>();
@@ -59,20 +72,27 @@ public class PostAdapter extends MBaseAdapter {
 	private static final int TYPE_POST = 0;
 	private static final int TYPE_SECTION = 1;
 	private static final int VIEW_TYPE_COUNT = TYPE_SECTION + 1;
+	private static final int ATTACH_FILE_IDS_REQUEST = 10;
 	
+
 	private int thumnailSize;
 	private static final int MARGIN_THUMNAIL = DisplayUtil.PixelFromDP(11);
 	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
 
+	private HttpRequestManager manager;
 	private MatjiImageDownloader downloader;
+	private HttpRequest request;
+	
+	private Activity activity;
 
 	public PostAdapter(Context context) {
 		super(context);
+		
 		registerDataSetObserver(dataSetObserver);
 		downloader = new MatjiImageDownloader();
-		
+		manager = HttpRequestManager.getInstance(context);
+
 		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
-		Log.d("Matji", thumnailSize+"");
 	}
 
 	private boolean isTheSame(final String previousSection, final String newSection) {
@@ -176,7 +196,7 @@ public class PostAdapter extends MBaseAdapter {
 		itemPositions.clear();
 		currentViewSections.clear();
 	}
-	
+
 	protected Integer getLinkedPosition(final int position) {
 		return itemPositions.get(position);
 	}
@@ -212,7 +232,7 @@ public class PostAdapter extends MBaseAdapter {
 	protected View createNewSectionView() {
 		return inflater.inflate(R.layout.date_section, null);
 	}
-	
+
 	public View getItemView(int position, View convertView, ViewGroup parent) {
 		PostElement postElement;
 		Post post = (Post) data.get(position);
@@ -221,7 +241,7 @@ public class PostAdapter extends MBaseAdapter {
 			postElement = new PostElement();
 			final SectionListView sectionListView = (SectionListView) parent;
 			convertView = getLayoutInflater().inflate(R.layout.row_post, null);
-			postElement.thumnail = (ImageView) convertView.findViewById(R.id.row_post_thumnail);
+			postElement.thumnail = (ThumnailImageView) convertView.findViewById(R.id.row_post_thumnail);
 			postElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
 			postElement.at = (TextView) convertView.findViewById(R.id.row_post_at);
 			postElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
@@ -230,13 +250,26 @@ public class PostAdapter extends MBaseAdapter {
 			postElement.dateAgo = (TextView) convertView.findViewById(R.id.row_post_created_at);
 			postElement.commentCount = (TextView) convertView.findViewById(R.id.row_post_comment_count);
 			postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
-			
+
 
 			postElement.preview = new ImageView[imageIds.length];
 			for (int i = 0; i < postElement.preview.length; i++) {
 				postElement.preview[i] = (ImageView) convertView.findViewById(imageIds[i]);
 			}
 
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			params.setMargins(MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS);
+
+			int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
+			
+			curPreview = postElement.preview;
+			
+			for (int i = 0; i < postElement.preview.length; i++) {
+				postElement.preview[i].setMaxWidth(remainScreenWidth/imageIds.length - MARGIN_PREVIEWS*2);
+				postElement.preview[i].setLayoutParams(params);
+				//TODO set lisener
+				//			holder.preview[i].setOnClickListener(this);
+			}
 			convertView.setTag(postElement);
 			postElement.thumnail.setOnClickListener(sectionListView);
 			postElement.nick.setOnClickListener(sectionListView);
@@ -260,7 +293,8 @@ public class PostAdapter extends MBaseAdapter {
 		} else {
 			postElement = (PostElement) convertView.getTag();
 		}
-
+		
+		
 		setViewItemPosition(postElement, position);
 		setViewData(postElement, post);
 
@@ -274,7 +308,9 @@ public class PostAdapter extends MBaseAdapter {
 		holder.post.setTag(position+"");
 	}
 
-	private void setViewData(PostElement holder, Post post) {
+	private void setViewData(PostElement holder, Post post) {		
+//		attachFileIdsRequest(post);
+
 		Store store = post.getStore();
 		User user = post.getUser();
 
@@ -301,37 +337,59 @@ public class PostAdapter extends MBaseAdapter {
 		} else {
 			holder.tag.setVisibility(View.GONE);
 		}
-		
+
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, holder.thumnail);
 		holder.nick.setText(user.getNick()+" ");
 		holder.post.setText(post.getPost().trim());
 		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
 		holder.commentCount.setText(post.getCommentCount() + "");
 		holder.likeCount.setText(post.getLikeCount() + "");
+	}
+	
+	public void attachFileIdsRequest(Post post) {
+	    manager.request(activity, attachFileIdsRequestSet(post), ATTACH_FILE_IDS_REQUEST, this);
+	}
 
+	public HttpRequest attachFileIdsRequestSet(Post post) {
+		if (request == null || !(request instanceof AttachFileHttpRequest)) {
+			request = new AttachFileHttpRequest(activity);
+		}
+		
+		((AttachFileHttpRequest) request).actionPostList(post.getId(), 1, 10);
+		
+		return request;
+	}
+	
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+	
+	@Override
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		switch (tag) {
+		case ATTACH_FILE_IDS_REQUEST:
+			/* Set AttachFile ID */
+			curAttachFileIds = new int[data.size()];
+			for (int i = 0; i < data.size(); i++) {
+				curAttachFileIds[i] = ((AttachFile) data.get(i)).getId();
+			}
 
-
-
-
-
-
-
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.setMargins(MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS);
-
-		int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
-
-		for (int i = 0; i < holder.preview.length; i++) {
-			holder.preview[i].setMaxWidth(remainScreenWidth/imageIds.length - MARGIN_PREVIEWS*2);
-			holder.preview[i].setLayoutParams(params);
-			//TODO set lisener
-//			holder.preview[i].setOnClickListener(this);
+			for (int i = 0; i < ((data.size() > curPreview.length) ? curPreview.length : data.size()); i++) {
+				downloader.downloadAttachFileImage(curAttachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, curPreview[i]);
+				curPreview[i].setVisibility(View.VISIBLE);
+			}
+			break;
 		}
 	}
 
+	@Override
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		// TODO Auto-generated method stub
+		e.performExceptionHandling(context);
+	}
 
 	private class PostElement {
-		ImageView thumnail;
+		ThumnailImageView thumnail;
 		TextView nick;
 		TextView at;
 		TextView storeName;

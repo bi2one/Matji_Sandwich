@@ -32,6 +32,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.matji.sandwich.listener.ImageDownloaderListener;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -60,7 +62,7 @@ public class ImageDownloader {
 
 	public enum Mode { NO_ASYNC_TASK, NO_DOWNLOADED_DRAWABLE, CORRECT }
 	private Mode mode = Mode.CORRECT;
-
+	private ImageDownloaderListener downloaderListener;	
 
 	/**
 	 * Download the specified image from the Internet and binds it to the provided ImageView. The
@@ -100,7 +102,7 @@ public class ImageDownloader {
 			forceDownload(url, imageView);
 		} else {
 			cancelPotentialDownload(url, imageView);
-			imageView.setImageBitmap(bitmap);
+			setImageBitmap(imageView, bitmap);
 		}
 	}
 
@@ -129,7 +131,7 @@ public class ImageDownloader {
 			case NO_ASYNC_TASK:
 				Bitmap bitmap = downloadBitmap(url);
 				addBitmapToCache(url, bitmap);
-				imageView.setImageBitmap(bitmap);
+				setImageBitmap(imageView, bitmap);
 				break;
 
 			case NO_DOWNLOADED_DRAWABLE:
@@ -311,10 +313,9 @@ public class ImageDownloader {
 				// Or if we don't use any bitmap to task association (NO_DOWNLOADED_DRAWABLE mode)
 				if ((this == bitmapDownloaderTask) || (mode != Mode.CORRECT)) {
 					imageView.setImageBitmap(bitmap);
+					if (downloaderListener != null) downloaderListener.postSetBitmap(imageView);
 				}
 			}
-
-
 		}
 	}
 
@@ -468,4 +469,13 @@ public class ImageDownloader {
 		purgeHandler.removeCallbacks(purger);
 		purgeHandler.postDelayed(purger, DELAY_BEFORE_PURGE);
 	}
+	
+	public void setDownloaderListsener(ImageDownloaderListener downloaderListener) {
+		this.downloaderListener = downloaderListener;
+	}
+	
+	private void setImageBitmap(ImageView view, Bitmap bitmap) {
+		view.setImageBitmap(bitmap);
+		if (downloaderListener != null) downloaderListener.postSetBitmap(view);
+	}	
 }
