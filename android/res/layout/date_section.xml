@@ -4,11 +4,12 @@
 	style="@style/DefaultWidthFill"
 	android:gravity="right"
 	android:paddingTop="3dp"
-	android:paddingBottom="3dp">
+	android:paddingBottom="3dp" >
 	<TextView
 		android:id="@+id/date_section"
 		style="@style/DefaultWrap"
-		android:minWidth="150dp"
+		android:minWidth="100dp"
 		android:background="@drawable/section"
-		android:textColor="@color/WHITE" />
+		android:textColor="@color/WHITE"
+		android:gravity="center" />
 </LinearLayout>

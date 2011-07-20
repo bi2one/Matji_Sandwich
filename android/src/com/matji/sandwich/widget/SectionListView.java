@@ -8,7 +8,7 @@ import com.matji.sandwich.http.request.PostHttpRequest;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.ListAdapter;
+import android.view.View;
 
 /**
  * View displaying the list with sectioned header.
@@ -16,7 +16,7 @@ import android.widget.ListAdapter;
  * @author mozziluv
  *
  */
-public class SectionListView extends RequestableMListView {
+public class SectionListView extends RequestableMListView implements View.OnClickListener {
 	private HttpRequest request;
 
 	public SectionListView(Context context, AttributeSet attr) {
@@ -31,17 +31,6 @@ public class SectionListView extends RequestableMListView {
 	}
 
 	@Override
-	public void setAdapter(final ListAdapter adapter) {
-		if (!(adapter instanceof SectionAdapter)) {
-			throw new IllegalArgumentException(
-					"The adapter needds to be of type "
-					+ SectionAdapter.class + " and is "
-					+ adapter.getClass());
-		}
-		super.setAdapter(adapter);
-	}
-
-	@Override
 	public HttpRequest request() {
 		if (request == null || !(request instanceof PostHttpRequest)) {
 			request = new PostHttpRequest(getContext());
@@ -51,8 +40,10 @@ public class SectionListView extends RequestableMListView {
 	}
 
 	@Override
-	public void onListItemClick(int position) {
-		// TODO Auto-generated method stub
-		Log.d("Matji", "CLICK!!");		
+	public void onListItemClick(int position) {}
+
+	@Override
+	public void onClick(View arg0) {
+		Log.d("Matji", "CLICK");		
 	}
 }

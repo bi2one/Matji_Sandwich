@@ -48,4 +48,8 @@ public abstract class MBaseAdapter extends BaseAdapter {
 	public void addAll(ArrayList<MatjiData> items) {
 		data.addAll(items);
 	}
+	
+	public void clear() {
+		data.clear();
+	}
 }

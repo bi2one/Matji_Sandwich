@@ -25,7 +25,7 @@ public class StoreAdapter extends MBaseAdapter {
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		StoreElement storeElement;
-		Store store = (Store) data.get(position);	
+		Store store = (Store) data.get(position);
 
 		// When convertView is not null, we can reuse it directly, there is no
 		// need
