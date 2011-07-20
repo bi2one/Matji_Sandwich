@@ -138,6 +138,11 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
 	return animation;
     }
 
+    /**
+     * 탭이 바뀔 때, 탭뷰에 애니메이션을 걸어준다.
+     *
+     * @param tabId TabSpec등록시 명시한 탭의 label
+     */
     public void onTabChanged(String tabId) {
 	View currentTabView = getCurrentView();
 	if (prevTabId == null) {
