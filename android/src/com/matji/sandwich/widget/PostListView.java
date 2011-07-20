@@ -12,7 +12,6 @@ import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.PostForSeparator;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
@@ -48,7 +47,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
-		Post post = ((PostForSeparator) getAdapterData().get(position)).post;
+		Post post = (Post) getAdapterData().get(position);
 
 //		switch(v.getId()){
 //		case R.id.post_adapter_thumnail: case R.id.post_adapter_nick: case R.id.activity_adapter_nick:

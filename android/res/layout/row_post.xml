@@ -10,8 +10,8 @@
 	android:paddingBottom="3dp">
 	<LinearLayout
 		android:background="@drawable/thumnail_bg"
-		android:layout_width="50dp"
-		android:layout_height="50dp">
+		android:layout_width="@dimen/thumnail_size"
+		android:layout_height="@dimen/thumnail_size">
 		<com.matji.sandwich.widget.ThumnailImageView
 			android:id="@+id/row_post_thumnail"
 			android:layout_width="fill_parent"
@@ -67,13 +67,13 @@
 			style="@style/DefaultWidthFill">
 			<ImageView
 				style="@style/header_post_Preview"
-				android:id="@+id/header_post_preview1" />
+				android:id="@+id/row_post_preview1" />
 			<ImageView
 				style="@style/header_post_Preview"
-				android:id="@+id/header_post_preview2" />
+				android:id="@+id/row_post_preview2" />
 			<ImageView
 				style="@style/header_post_Preview"
-				android:id="@+id/header_post_preview3" />
+				android:id="@+id/row_post_preview3" />
 		</LinearLayout>
 		<LinearLayout
 			style="@style/DefaultWrap">
