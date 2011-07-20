@@ -31,7 +31,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	@Override
 	public HttpRequest request() {
-		postRequest.actionList(getPage(), getLimit());
+		postRequest.actionListWithAttachFiles(getPage(), getLimit());
 		return postRequest;
 	}
 

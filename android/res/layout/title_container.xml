@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="@drawable/img_title_bg"
+	android:background="@drawable/title_bg"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/title_container_height">
 	<LinearLayout
@@ -14,7 +14,8 @@
 		android:layout_toRightOf="@id/title_container_left">
 		<TextView
 			android:id="@+id/title_container_text"
-			style="@style/DefaultWrap"
+			android:layout_width="wrap_content"
+			android:layout_height="@dimen/title_container_height"
 			android:text="TITLE HERE!!" />
 	</LinearLayout>
 	<LinearLayout

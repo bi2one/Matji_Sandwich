@@ -19,7 +19,7 @@
 			android:padding="3dp"
 			android:layout_alignParentLeft="true">
 			<ImageView
-				android:background="@drawable/img_matji_default"
+				android:background="@drawable/thumnail_bg"
 				android:id="@+id/message_adapter_thumnail"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"

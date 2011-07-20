@@ -47,7 +47,7 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 		if (request == null || !(request instanceof PostHttpRequest)) {
 			request = new PostHttpRequest(getContext());
 		}
-		((PostHttpRequest) request).actionList(getPage(), getLimit());
+		((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
 		return request;
 	}
 	

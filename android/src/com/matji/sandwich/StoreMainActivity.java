@@ -120,7 +120,7 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 		if (file != null) {
 			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeImage);
 		} else {
-			Drawable defaultImage = getResources().getDrawable(R.drawable.img_matji_default);
+			Drawable defaultImage = getResources().getDrawable(R.drawable.thumnail_bg);
 			storeImage.setImageDrawable(defaultImage);
 		}
 

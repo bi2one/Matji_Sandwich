@@ -12,7 +12,7 @@
 		android:padding="3dp"
 		android:layout_alignParentLeft="true">
 		<ImageView
-			android:background="@drawable/img_matji_default"
+			android:background="@drawable/thumnail_bg"
 			android:id="@+id/store_adapter_thumnail"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
@@ -31,7 +31,7 @@
 			android:gravity="center"
 			android:layout_gravity="center"
 			android:textColor="@color/DARK_ORANGE"
-			android:drawableTop="@drawable/icon_like"
+			android:drawableTop="@drawable/btn_unlike"
 			android:drawablePadding="3dp" />
 	</LinearLayout>
 	<LinearLayout

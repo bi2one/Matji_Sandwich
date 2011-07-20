@@ -9,7 +9,7 @@
 		style="@style/DefaultWrap"
 		android:id="@+id/header_post_post_wrap">
 		<ImageView
-			android:background="@drawable/img_matji_default"
+			android:background="@drawable/thumnail_bg"
 			android:id="@+id/header_post_thumnail"
 			android:layout_width="50dp"
 			android:layout_height="50dp"

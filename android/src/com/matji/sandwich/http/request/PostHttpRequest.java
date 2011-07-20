@@ -65,6 +65,17 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("include", "user,store,tags");
     }    
     
+    public void actionListWithAttachFiles(int page, int limit) {
+    	httpMethod = HttpMethod.HTTP_GET;	
+    	action = "list";
+    	parser = new PostParser(context);
+    	
+    	getHashtable.clear();
+    	getHashtable.put("page", "" + page);
+    	getHashtable.put("limit", "" + limit);
+    	getHashtable.put("include", "user,store,tags,attach_files");
+    }    
+    
     public void actionStoreList(int store_id, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
