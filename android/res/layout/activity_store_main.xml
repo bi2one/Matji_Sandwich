@@ -1,134 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+  <!-- Store Name Cell -->
+  <RelativeLayout
+      style="@style/store_main_Cell">
+    <TextView
+	style="@style/store_main_Name"
+	android:singleLine="true"
+	android:id="@+id/store_main_name"/>
+    <Button
+	style="@style/store_main_InfoButton"	
+	android:id="@+id/store_main_info_btn"
+	android:layout_toRightOf="@id/store_main_name" />
+    <Button
+	style="@style/store_main_LikeButton"
+	android:id="@+id/store_main_like_btn"
+	android:layout_alignParentRight="true"
+	android:onClick="onLikeButtonClicked"/>
+  </RelativeLayout>
+
+  <!-- Store Cell -->
+  <RelativeLayout
+      style="@style/store_main_Cell">
+    <ImageView
 	android:background="#fff"
-	android:orientation="vertical">
-	<!-- Store Cell -->
-	<RelativeLayout
-		style="@style/store_main_Cell">
-		<ImageView
-			android:background="#fff"
-			style="@style/store_main_Thumnail"
-			android:id="@+id/store_main_thumnail" />
-		<Button
-			style="@style/store_main_LikeButton"
-			android:id="@+id/store_main_like_btn"
-			android:layout_toRightOf="@id/store_main_thumnail"
-			android:onClick="onLikeButtonClicked" />
-		<TextView
-			style="@style/store_main_LikeCount"
-			android:id="@+id/store_main_like_count"
-			android:layout_toRightOf="@id/store_main_like_btn"
-			android:layout_alignBaseline="@id/store_main_like_btn" />
-		<TextView
-			style="@style/store_main_Address"
-			android:id="@+id/store_main_address"
-			android:layout_toRightOf="@id/store_main_thumnail"
-			android:layout_below="@id/store_main_like_btn"
-			android:layout_alignLeft="@id/store_main_like_btn" />
-		<Button
-			android:background="@drawable/btn_scrap"
-			style="@style/store_main_ScrapButton"
-			android:id="@+id/store_main_scrap_btn"
-			android:layout_below="@id/store_main_thumnail"
-			android:layout_alignLeft="@id/store_main_thumnail"
-			android:onClick="onScrapButtonClicked" />
-		<Button
-			style="@style/store_main_StoreCellButton"
-			android:id="@+id/store_main_map_btn"
-			android:layout_toRightOf="@id/store_main_scrap_btn"
-			android:layout_below="@id/store_main_thumnail"
-			android:layout_alignLeft="@id/store_main_address"
-			android:text="@string/store_main_map"
-			android:onClick="onMapButtonClicked" />
-		<Button
-			style="@style/store_main_StoreCellButton"
-			android:id="@+id/store_main_phone_btn"
-			android:layout_toRightOf="@id/store_main_map_btn"
-			android:layout_below="@id/store_main_thumnail"
-			android:text="@string/store_main_phone"
-			android:onClick="onPhoneButtonClicked" />
-		<Button
-			style="@style/store_main_StoreCellButton"
-			android:id="@+id/store_main_web_btn"
-			android:layout_toRightOf="@id/store_main_phone_btn"
-			android:layout_below="@id/store_main_thumnail"
-			android:text="@string/store_main_web"
-			android:onClick="onWebButtonClicked" />
-	</RelativeLayout>
-
-	<!-- Store Info Cell -->
-	<LinearLayout
-		style="@style/store_main_Cell"
-		android:orientation="vertical">
-		<TextView
-			style="@style/store_main_Cover"
-			android:id="@+id/store_main_cover" />
-		<TextView
-			style="@style/store_main_MenuAndTag"
-			android:id="@+id/store_main_popular_menu" />
-		<TextView
-			style="@style/store_main_MenuAndTag"
-			android:id="@+id/store_main_tag" />
-		<LinearLayout
-			style="@style/DefaultWidthFill">
-			<TextView
-				style="@style/store_main_User"
-				android:id="@+id/store_main_reg_user" />
-			<TextView
-				style="@style/store_main_User"
-				android:id="@+id/store_main_owner_user" />
-		</LinearLayout>
-	</LinearLayout>
-
-	<!-- Detail View Button Cell -->
-	<LinearLayout
-		style="@style/store_main_Cell"
-		android:orientation="vertical">
-		<LinearLayout
-			style="@style/DefaultWidthFill">
-			<Button
-				android:background="@drawable/btn_left_corner"
-				style="@style/store_main_ViewButton"
-				android:id="@+id/store_main_info_view_btn"
-				android:text="@string/store_main_info_view"
-				android:onClick="onInfoViewButtonClicked" />
-			<Button
-				android:background="@drawable/btn_right_corner"
-				style="@style/store_main_ViewButton"
-				android:id="@+id/store_main_menu_view_btn"
-				android:text="@string/store_main_menu_view"
-				android:onClick="onMenuViewButtonClicked" />
-		</LinearLayout>
-		<RelativeLayout
-			style="@style/DefaultWidthFill"
-			android:layout_marginTop="7dp">
-			<Button
-				android:background="@drawable/btn_top_left_corner"
-				style="@style/ETCButton"
-				android:id="@+id/store_main_memo_btn"
-				android:onClick="onMemoButtonClicked" />
-			<Button
-				android:background="@drawable/btn_top_right_corner"
-				style="@style/ETCButton"
-				android:id="@+id/store_main_image_btn"
-				android:layout_toRightOf="@id/store_main_memo_btn"
-				android:onClick="onImageButtonClicked" />
-			<Button
-				android:background="@drawable/btn_bottom_left_corner"
-				style="@style/ETCButton"
-				android:id="@+id/store_main_tag_btn"
-				android:layout_below="@id/store_main_memo_btn"
-				android:onClick="onTagButtonClicked" />
-			<Button
-				android:background="@drawable/btn_bottom_right_corner"
-				style="@style/ETCButton"
-				android:id="@+id/store_main_url_btn"
-				android:layout_toRightOf="@id/store_main_tag_btn"
-				android:layout_below="@id/store_main_image_btn"
-				android:onClick="onUrlButtonClicked" />
-		</RelativeLayout>
-	</LinearLayout>
+	style="@style/store_main_Thumnail"
+	android:id="@+id/store_main_thumnail" />
+    <TextView
+	style="@style/store_main_Tel"
+	android:id="@+id/store_main_tel"
+	android:layout_toRightOf="@id/store_main_thumnail" />
+    <TextView
+	style="@style/store_main_Address"
+	android:id="@+id/store_main_address"
+	android:layout_below="@id/store_main_tel"
+	android:layout_toRightOf="@id/store_main_thumnail" 
+	android:singleLine="true"/>
+    <TextView 
+	style="@style/store_main_Tag"
+	android:id="@+id/store_main_tag"
+	android:layout_below="@id/store_main_address"
+	android:layout_toRightOf="@id/store_main_thumnail" 
+	android:singleLine="true"/>
+  </RelativeLayout>
 </LinearLayout>

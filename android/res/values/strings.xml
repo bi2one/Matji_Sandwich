@@ -147,7 +147,7 @@
   
   <!-- StoreMainActivity  -->
   <string name="store_main_unlike_store">내가 좋아하는 맛집</string>
-  <string name="store_main_like_store">좋아요</string>
+  <string name="store_main_like_store">♥좋아요</string>
   <string name="store_main_scrap">스크랩</string>
   <string name="store_main_bookmark">스크랩</string>
   <string name="store_main_unbookmark">취소</string>

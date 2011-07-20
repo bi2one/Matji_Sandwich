@@ -67,37 +67,51 @@
   	<item name="android:layout_weight">1</item>
   </style>
   
+  <style name="store_main_Name">
+  	<item name="android:layout_width">170dp</item>
+  	<item name="android:layout_height">wrap_content</item>
+	<item name="android:textSize">20dp</item>
+  	<item name="android:textColor">#000</item>
+  </style>
+
+  <style name="store_main_InfoButton">
+  	<item name="android:layout_width">30dp</item>
+  	<item name="android:layout_height">30dp</item>
+  	<item name="android:background">@drawable/icon_caution</item>
+  	<item name="android:layout_marginLeft">5dp</item>
+  </style>
+  
+  <style name="store_main_LikeButton">
+  	<item name="android:background">@drawable/btn_like</item>
+  	<item name="android:layout_width">90dp</item>
+  	<item name="android:layout_height">30dp</item>
+  	<item name="android:layout_marginLeft">3dp</item>
+  	<item name="android:text">@string/store_main_like_store</item>
+  	<item name="android:textSize">12dp</item>
+  </style>
+
   <style name="store_main_Thumnail">
   	<item name="android:background">@drawable/img_matji_default</item>
-	<item name="android:layout_width">100dp</item>
-	<item name="android:layout_height">90dp</item>
+	<item name="android:layout_width">85dp</item>
+	<item name="android:layout_height">80dp</item>
 	<item name="android:layout_marginRight">6dp</item>
 	<item name="android:layout_marginBottom">6dp</item>
 	<item name="android:scaleType">centerCrop</item>
   </style>
   
-  <style name="store_main_LikeButton">
-  	<item name="android:background">@drawable/btn_like</item>
-  	<item name="android:layout_width">150dp</item>
-  	<item name="android:layout_height">30dp</item>
-  	<item name="android:layout_marginLeft">3dp</item>
-  	<item name="android:text">@string/store_main_like_store</item>
-  	<item name="android:textSize">11dp</item>
-  	<item name="android:drawablePadding">4dp</item>
+  <style name="store_main_Tel" parent="DefaultWidthFill">
+        <item name="android:layout_marginTop">7dp</item>
+	<item name="android:textSize">15dp</item>
+	<item name="android:textColor">#000</item>
   </style>
-  
-  <style name="store_main_LikeCount">
-  	<item name="android:background">@drawable/btn_like_number</item>
-  	<item name="android:layout_width">50dp</item>
-  	<item name="android:layout_height">30dp</item>
-  	<item name="android:layout_centerInParent">true</item>
-  	<item name="android:textSize">12dp</item>
-  	<item name="android:gravity">center</item>
-  </style>
-  
+
   <style name="store_main_Address" parent="DefaultWidthFill">
-  	<item name="android:layout_marginTop">7dp</item>
-  	<item name="android:textSize">16dp</item>
+  	<item name="android:textSize">15dp</item>
+  	<item name="android:textColor">#000</item>
+  </style>
+
+  <style name="store_main_Tag" parent="DefaultWidthFill">
+  	<item name="android:textSize">15dp</item>
   	<item name="android:textColor">#000</item>
   </style>
 
