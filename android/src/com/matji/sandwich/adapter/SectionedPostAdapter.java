@@ -215,7 +215,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 	}
 
 	protected View createNewSectionView() {
-		return inflater.inflate(R.layout.date_section, null);
+		return inflater.inflate(R.layout.row_date_section, null);
 	}
 
 	public View getItemView(int position, View convertView, final ViewGroup parent) {
