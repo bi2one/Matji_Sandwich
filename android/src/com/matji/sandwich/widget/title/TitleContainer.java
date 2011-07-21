@@ -4,6 +4,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.widget.title.button.TitleButton;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -17,9 +18,9 @@ import android.widget.TextView;
  *
  */
 public class TitleContainer extends RelativeLayout {
-	protected Context context;
 	private LinearLayout leftContainer;
 	private LinearLayout rightContainer;
+	private TextView titleContainer;
 	
 	public TitleContainer(Context context) {
 		super(context);
@@ -37,12 +38,12 @@ public class TitleContainer extends RelativeLayout {
 	 * @param context
 	 */
 	private void init(Context context) {
-		this.context = context;
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.title_container, this);
 		
 		leftContainer = (LinearLayout) findViewById(R.id.title_container_left);
 		rightContainer = (LinearLayout) findViewById(R.id.title_container_right);
+		titleContainer = (TextView) findViewById(R.id.title_container_text);
 	}
 	
 	/**
@@ -71,6 +72,15 @@ public class TitleContainer extends RelativeLayout {
 	 * @param title 타이틀로 사용 할 문자열
 	 */
 	protected void setTitle(String title) {
-		((TextView) findViewById(R.id.title_container_text)).setText(title);
+		titleContainer.setText(title);
+	}
+	
+	/**
+	 * 타이틀의 Background 를 지정한다.
+	 * 
+	 * @param bg 타이틀의 Background 로 사용 할 Drawable 이미지
+	 */
+	protected void setTitleBackground(Drawable bg) {
+		titleContainer.setBackgroundDrawable(bg);
 	}
 }

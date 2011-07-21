@@ -22,8 +22,8 @@ public class StoreTitle extends TitleContainerTypeA {
 	 */
 	@Override
 	protected void setButtons() {
-		leftButton1 = new HomeButton(context);
-		rightButton1 = new WriteButton(context);
-		rightButton2 = new LikeButton(context);
+		leftButton1 = new HomeButton(getContext());
+		rightButton1 = new WriteButton(getContext());
+		rightButton2 = new LikeButton(getContext());
 	}
 }

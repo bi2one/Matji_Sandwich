@@ -24,7 +24,7 @@ public class HomeButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_home));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_home));
 	}
 	
 	/**

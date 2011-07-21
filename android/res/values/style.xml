@@ -81,24 +81,24 @@
   	<item name="android:layout_marginLeft">5dp</item>
   </style>
   
+  <style name="store_main_Thumnail">
+  	<item name="android:background">@drawable/thumnail_bg</item>
+	<item name="android:layout_width">100dp</item>
+	<item name="android:layout_height">90dp</item>
+	<item name="android:layout_marginRight">6dp</item>
+	<item name="android:layout_marginBottom">6dp</item>
+	<item name="android:scaleType">centerCrop</item>
+  </style>
+  
   <style name="store_main_LikeButton">
-  	<item name="android:background">@drawable/btn_bg_h31px</item>
-  	<item name="android:layout_width">90dp</item>
+  	<item name="android:background">@drawable/like_bg</item>
+  	<item name="android:layout_width">150dp</item>
   	<item name="android:layout_height">30dp</item>
   	<item name="android:layout_marginLeft">3dp</item>
   	<item name="android:textSize">15dp</item>
   	<item name="android:textColor">#f00</item>
   </style>
 
-  <style name="store_main_Thumnail">
-  	<item name="android:background">@drawable/img_matji_default</item>
-	<item name="android:layout_width">85dp</item>
-	<item name="android:layout_height">80dp</item>
-	<item name="android:layout_marginRight">6dp</item>
-	<item name="android:layout_marginBottom">6dp</item>
-	<item name="android:scaleType">centerCrop</item>
-  </style>
-  
   <style name="store_main_Tel" parent="DefaultWidthFill">
 	<item name="android:textSize">15dp</item>
 	<item name="android:textColor">#aaa</item>
@@ -176,7 +176,7 @@
   
   <!-- cell_user.xml --> 
   <style name="user_cell_Thumnail">
-  	<item name="android:background">@drawable/img_matji_default</item>
+  	<item name="android:background">@drawable/thumnail_bg</item>
 	<item name="android:layout_width">60dp</item>
 	<item name="android:layout_height">60dp</item>
 	<item name="android:layout_marginRight">7dp</item>

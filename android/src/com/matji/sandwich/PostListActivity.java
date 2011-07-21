@@ -3,7 +3,7 @@ package com.matji.sandwich;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.widget.SectionListView;
+import com.matji.sandwich.widget.SectionedPostListView;
 
 /**
  * 전체 Post 리스트를 보여주는 액티비티.
@@ -13,7 +13,7 @@ import com.matji.sandwich.widget.SectionListView;
  *
  */
 public class PostListActivity extends BaseActivity {
-	private SectionListView listView;
+	private SectionedPostListView listView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class PostListActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_list);
 
-		listView = (SectionListView) findViewById(R.id.post_list_view);
+		listView = (SectionedPostListView) findViewById(R.id.post_list_view);
 		listView.setActivity(this);
 		listView.requestReload();
 	}

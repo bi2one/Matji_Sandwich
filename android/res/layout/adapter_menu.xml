@@ -12,7 +12,7 @@
 			android:id="@+id/menu_adapter_like_btn"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/icon_like"
+			android:background="@drawable/btn_like"
 			android:layout_alignParentRight="true" />
 		<TextView
 			android:id="@+id/menu_adapter_name"

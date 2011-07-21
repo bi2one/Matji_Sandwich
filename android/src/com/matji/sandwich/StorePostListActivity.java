@@ -51,11 +51,11 @@ public class StorePostListActivity extends BaseActivity {
 		}
 	}
 
-	private void onWriteButtonClicked() {
-		if (loginRequired()) {
-			Intent intent = new Intent(getApplicationContext(), WritePostActivity.class);
-			intent.putExtra("store_id", store.getId());
-			startActivityForResult(intent, WRITE_POST_ACTIVITY);
-		}
-	}
+//	private void onWriteButtonClicked() {
+//		if (loginRequired()) {
+//			Intent intent = new Intent(getApplicationContext(), WritePostActivity.class);
+//			intent.putExtra("store_id", store.getId());
+//			startActivityForResult(intent, WRITE_POST_ACTIVITY);
+//		}
+//	}
 }

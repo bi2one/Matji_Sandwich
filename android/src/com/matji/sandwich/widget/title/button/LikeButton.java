@@ -24,7 +24,7 @@ public class LikeButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_heart_empty));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_like));
 	}
 	
 	/**

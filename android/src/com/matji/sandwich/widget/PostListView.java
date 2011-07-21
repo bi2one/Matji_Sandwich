@@ -9,7 +9,7 @@ import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
-import com.matji.sandwich.adapter.PostAdapter;
+import com.matji.sandwich.adapter.SectionedPostAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -19,7 +19,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	private PostHttpRequest postRequest;
 
 	public PostListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new PostAdapter(context), 10);
+		super(context, attrs, new SectionedPostAdapter(context), 10);
 		postRequest = new PostHttpRequest(context);
 
 		setPage(1);
@@ -31,7 +31,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	@Override
 	public HttpRequest request() {
-		postRequest.actionList(getPage(), getLimit());
+		postRequest.actionListWithAttachFiles(getPage(), getLimit());
 		return postRequest;
 	}
 

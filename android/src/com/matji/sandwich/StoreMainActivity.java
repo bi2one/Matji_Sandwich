@@ -91,11 +91,6 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
     			R.string.store_main_review,
     			new Intent(this, StoreSliderActivity.class));
 
-//	listView = (StorePostListView) findViewById(R.id.store_post_list_view);
-//	listView.setActivity(this);
-//	listView.requestReload();
-
-	
  
 //	/* Set RegUser */
 //	User regUser = store.getRegUser();
@@ -130,7 +125,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
     	if (file != null) {
     		downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeImage);
     	} else {
-    		Drawable defaultImage = getResources().getDrawable(R.drawable.img_matji_default);
+    		Drawable defaultImage = getResources().getDrawable(R.drawable.thumnail_bg);
     		storeImage.setImageDrawable(defaultImage);
     	}
 
@@ -153,7 +148,6 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
     public void onResume() {
     	super.onResume();
-//	listView.dataRefresh();
     	setInfo();
     }
 

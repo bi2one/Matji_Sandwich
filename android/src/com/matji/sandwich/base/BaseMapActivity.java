@@ -8,6 +8,7 @@ import android.view.Window;
 
 import com.google.android.maps.MapActivity;
 import com.matji.sandwich.LoginActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
@@ -64,6 +65,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 	public void setContentView(int layoutResID) {
 		if (this.getParent() == null){
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			setTheme(R.style.Theme_RemoveOverlay);
 		}
 		super.setContentView(layoutResID);
 	}

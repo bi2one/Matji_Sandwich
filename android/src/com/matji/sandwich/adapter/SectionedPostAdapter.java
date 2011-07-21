@@ -6,30 +6,27 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.matji.sandwich.ImageSliderActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.AttachFile;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.AttachFileHttpRequest;
-import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
-import com.matji.sandwich.widget.SectionListView;
+import com.matji.sandwich.widget.SectionedPostListView;
 import com.matji.sandwich.widget.ThumnailImageView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,7 +38,7 @@ import android.widget.LinearLayout.LayoutParams;
  * @author mozziluv
  *
  */
-public class PostAdapter extends MBaseAdapter implements Requestable {
+public class SectionedPostAdapter extends MBaseAdapter {
 	private final DataSetObserver dataSetObserver = new DataSetObserver() {
 		@Override
 		public void onChanged() {
@@ -61,9 +58,6 @@ public class PostAdapter extends MBaseAdapter implements Requestable {
 			R.id.row_post_preview2,
 			R.id.row_post_preview3
 	};
-	
-	private int[] curAttachFileIds;
-	private ImageView[] curPreview;
 
 	private final Map<Integer, String> sectionPositions = new LinkedHashMap<Integer, String>();
 	private final Map<Integer, Integer> itemPositions = new LinkedHashMap<Integer, Integer>();
@@ -72,25 +66,20 @@ public class PostAdapter extends MBaseAdapter implements Requestable {
 	private static final int TYPE_POST = 0;
 	private static final int TYPE_SECTION = 1;
 	private static final int VIEW_TYPE_COUNT = TYPE_SECTION + 1;
-	private static final int ATTACH_FILE_IDS_REQUEST = 10;
-	
+
 
 	private int thumnailSize;
-	private static final int MARGIN_THUMNAIL = DisplayUtil.PixelFromDP(11);
 	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
 
-	private HttpRequestManager manager;
 	private MatjiImageDownloader downloader;
-	private HttpRequest request;
-	
+
 	private Activity activity;
 
-	public PostAdapter(Context context) {
+	public SectionedPostAdapter(Context context) {
 		super(context);
-		
+
 		registerDataSetObserver(dataSetObserver);
 		downloader = new MatjiImageDownloader();
-		manager = HttpRequestManager.getInstance(context);
 
 		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
 	}
@@ -233,13 +222,12 @@ public class PostAdapter extends MBaseAdapter implements Requestable {
 		return inflater.inflate(R.layout.date_section, null);
 	}
 
-	public View getItemView(int position, View convertView, ViewGroup parent) {
+	public View getItemView(int position, View convertView, final ViewGroup parent) {
 		PostElement postElement;
 		Post post = (Post) data.get(position);
 
 		if (convertView == null) {
 			postElement = new PostElement();
-			final SectionListView sectionListView = (SectionListView) parent;
 			convertView = getLayoutInflater().inflate(R.layout.row_post, null);
 			postElement.thumnail = (ThumnailImageView) convertView.findViewById(R.id.row_post_thumnail);
 			postElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
@@ -252,64 +240,75 @@ public class PostAdapter extends MBaseAdapter implements Requestable {
 			postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
 
 
-			postElement.preview = new ImageView[imageIds.length];
-			for (int i = 0; i < postElement.preview.length; i++) {
-				postElement.preview[i] = (ImageView) convertView.findViewById(imageIds[i]);
+			postElement.previews = new ImageView[imageIds.length];
+			for (int i = 0; i < postElement.previews.length; i++) {
+				postElement.previews[i] = (ImageView) convertView.findViewById(imageIds[i]);
 			}
 
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			params.setMargins(MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS);
 
 			int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
-			
-			curPreview = postElement.preview;
-			
-			for (int i = 0; i < postElement.preview.length; i++) {
-				postElement.preview[i].setMaxWidth(remainScreenWidth/imageIds.length - MARGIN_PREVIEWS*2);
-				postElement.preview[i].setLayoutParams(params);
+
+			for (int i = 0; i < postElement.previews.length; i++) {
+				postElement.previews[i].setMaxWidth((remainScreenWidth-thumnailSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
+				postElement.previews[i].setLayoutParams(params);
 				//TODO set lisener
 				//			holder.preview[i].setOnClickListener(this);
 			}
 			convertView.setTag(postElement);
-			postElement.thumnail.setOnClickListener(sectionListView);
-			postElement.nick.setOnClickListener(sectionListView);
-			postElement.storeName.setOnClickListener(sectionListView);
-			postElement.post.setLinksClickable(false);
-			postElement.post.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					int position = Integer.parseInt((String) v.getTag());
-					sectionListView.onListItemClick(position);
-				}
-			});
+			
+			setOnClickListener(postElement, parent);
 
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					int position = Integer.parseInt((String) ((PostElement) v.getTag()).post.getTag());
-					sectionListView.onListItemClick(position);
+					((SectionedPostListView) parent).onListItemClick(position);
 				}
 			});
 		} else {
 			postElement = (PostElement) convertView.getTag();
 		}
-		
-		
+
 		setViewItemPosition(postElement, position);
-		setViewData(postElement, post);
+		setViewData(postElement, post, position);
 
 		return convertView;
 	}
 
+	private void setOnClickListener(PostElement holder, ViewGroup parent) {
+		final SectionedPostListView sectionListView = (SectionedPostListView) parent;
+		
+		holder.thumnail.setOnClickListener(sectionListView);
+		holder.nick.setOnClickListener(sectionListView);
+		holder.storeName.setOnClickListener(sectionListView);
+		holder.post.setLinksClickable(false);
+		holder.post.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int position = Integer.parseInt((String) v.getTag());
+				sectionListView.onListItemClick(position);
+			}
+		});
+		
+		for (int i = 0; i < holder.previews.length; i++) {
+			holder.previews[i].setOnClickListener(new PreviewOnClickListener(i));
+		}
+	}
+	
 	private void setViewItemPosition(PostElement holder, int position) {
 		holder.thumnail.setTag(position+"");
 		holder.nick.setTag(position+"");
 		holder.storeName.setTag(position+"");
 		holder.post.setTag(position+"");
+		for (int i = 0; i < holder.previews.length; i++) {
+			holder.previews[i].setTag(position+"");
+		}
 	}
 
-	private void setViewData(PostElement holder, Post post) {		
-//		attachFileIdsRequest(post);
+	private void setViewData(PostElement holder, Post post, int position) {
+		setPreviews(post, holder.previews);
 
 		Store store = post.getStore();
 		User user = post.getUser();
@@ -345,49 +344,56 @@ public class PostAdapter extends MBaseAdapter implements Requestable {
 		holder.commentCount.setText(post.getCommentCount() + "");
 		holder.likeCount.setText(post.getLikeCount() + "");
 	}
-	
-	public void attachFileIdsRequest(Post post) {
-	    manager.request(activity, attachFileIdsRequestSet(post), ATTACH_FILE_IDS_REQUEST, this);
-	}
 
-	public HttpRequest attachFileIdsRequestSet(Post post) {
-		if (request == null || !(request instanceof AttachFileHttpRequest)) {
-			request = new AttachFileHttpRequest(activity);
-		}
-		
-		((AttachFileHttpRequest) request).actionPostList(post.getId(), 1, 10);
-		
-		return request;
-	}
-	
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
-	
-	@Override
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		switch (tag) {
-		case ATTACH_FILE_IDS_REQUEST:
-			/* Set AttachFile ID */
-			curAttachFileIds = new int[data.size()];
-			for (int i = 0; i < data.size(); i++) {
-				curAttachFileIds[i] = ((AttachFile) data.get(i)).getId();
-			}
 
-			for (int i = 0; i < ((data.size() > curPreview.length) ? curPreview.length : data.size()); i++) {
-				downloader.downloadAttachFileImage(curAttachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, curPreview[i]);
-				curPreview[i].setVisibility(View.VISIBLE);
-			}
-			break;
+
+	public void setPreviews(Post post, ImageView[] previews) {
+		int[] attachFileIds = new int[post.getAttachFiles().size()];
+		for (int i = 0; i < attachFileIds.length; i++) {
+			attachFileIds[i] = post.getAttachFiles().get(i).getId();
+		}
+
+		for (int i = 0; i < previews.length; i++) {
+			previews[i].setVisibility(View.GONE);
+		}
+		
+		for (int i = 0; i < ((attachFileIds.length > previews.length) ? previews.length : attachFileIds.length); i++) {
+			downloader.downloadAttachFileImage(attachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, previews[i]);
+			previews[i].setVisibility(View.VISIBLE);
 		}
 	}
 
-	@Override
-	public void requestExceptionCallBack(int tag, MatjiException e) {
-		// TODO Auto-generated method stub
-		e.performExceptionHandling(context);
+	public void callImageViewer(int postPosition, int position){
+		ArrayList<AttachFile> attachFiles = ((Post) data.get(postPosition)).getAttachFiles();
+		int[] attachFileIds = new int[attachFiles.size()];
+		
+		for (int i = 0; i < attachFiles.size(); i++) {
+			attachFileIds[i] = attachFiles.get(i).getId();
+		}
+		
+		Intent viewerIntent = new Intent(activity, ImageSliderActivity.class);
+		viewerIntent.putExtra("attach_file_ids", attachFileIds);
+		viewerIntent.putExtra("position", position);
+		activity.startActivity(viewerIntent);
 	}
-
+	
+	private class PreviewOnClickListener implements OnClickListener {
+		private int position = 0;
+		
+		public PreviewOnClickListener(int position) {
+			this.position = position;
+		}
+		
+		@Override
+		public void onClick(View v) {
+			int postPosition = Integer.parseInt((String) v.getTag());
+			callImageViewer(postPosition, position);
+		}		
+	}
+	
 	private class PostElement {
 		ThumnailImageView thumnail;
 		TextView nick;
@@ -398,6 +404,6 @@ public class PostAdapter extends MBaseAdapter implements Requestable {
 		TextView dateAgo;
 		TextView commentCount;
 		TextView likeCount;
-		ImageView[] preview;
+		ImageView[] previews;
 	}
 }
