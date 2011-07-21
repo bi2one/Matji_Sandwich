@@ -73,10 +73,6 @@ PullToRefreshListView.OnRefreshListener {
 		page++;
 	}
 	
-	public int getScrollState() {
-		return mCurrentScrollState;
-	}
-
 	private void syncValue() {
 		page = (adapterData.size() / limit) + 1;
 	}
@@ -156,10 +152,10 @@ PullToRefreshListView.OnRefreshListener {
 		if (data.size() > 0)
 			adapter.notifyDataSetChanged();
 
-		if (adapterData.size() <= limit){
-			Log.d("refresh", "Will invoke onRefreshComplete()");
-			onRefreshComplete();
-		}
+		// if (adapterData.size() <= limit) {
+			// Log.d("refresh", "Will invoke onRefreshComplete()");
+		onRefreshComplete();
+		// }
 	}
 
 

@@ -22,466 +22,339 @@ import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.widget.pullstate.PullState;
+import com.matji.sandwich.widget.pullstate.PullStateFactory;
 
 public abstract class PullToRefreshListView extends MListView implements OnScrollListener {
-	private static final boolean IS_PULL_REFRESH = true;
-	private static final int TAP_TO_REFRESH = 1;
-	private static final int PULL_TO_REFRESH = 2;
-	private static final int RELEASE_TO_REFRESH = 3;
-	private static final int REFRESHING = 4;
+    private enum State { DEFAULT, START, PULL_TO_REFRESH, RELEASE_TO_REFRESH, REFRESHING };
+    private static final int FLIP_ANIMATION_DURATION = 250;
+    private static final int HEADER_REFRESH_LIMIT = 80;
+    private static final int LIST_BASE_INDEX = 1;
+    private Context context;
+    private OnScrollListener pullDownListener;
+    private OnRefreshListener onRefreshListener;
+    private RotateAnimation flipAnimation;
+    private RotateAnimation reverseFlipAnimation;
+    private LayoutInflater inflater;
+    private int baseTopPadding;
+    private int refreshViewHeight;
+    private int pullStartedY = -1;
+    private int currentY;
+    private int movedY;
+    private int firstVisibleItem;
+    private PullStateFactory stateFactory;
+    private PullState state;
+    private PullState defaultState;
+    private PullState startState;
+    private PullState pullToRefreshState;
+    private PullState releaseToRefreshState;
+    private PullState reloadingState;
 
-	private static final String TAG = "PullToRefreshListView";
-	private OnRefreshListener mOnRefreshListener;
-	private LayoutInflater mInflater;
+    // view
+    private View refreshView;
+    private TextView refreshText;
+    private ImageView refreshImage;
+    private ProgressBar refreshProgress;
+    private TextView refreshLastUpdated;
 
-	private LinearLayout mRefreshView;
-	private TextView mRefreshViewText;
-	private ImageView mRefreshViewImage;
-	private ProgressBar mRefreshViewProgress;
-	private TextView mRefreshViewLastUpdated;
+    /**
+     * View의 기본 생성자, 각종 정보를 초기화합니다.
+     *
+     * @param context
+     * @param attrs
+     */
+    public PullToRefreshListView(Context context, AttributeSet attrs) {
+	super(context, attrs);
+	this.context = context;
 
-	protected int mCurrentScrollState;
-	private int mRefreshState;
+	flipAnimation = new RotateAnimation(0, -180,
+					    RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+					    RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+	flipAnimation.setInterpolator(new LinearInterpolator());
+	flipAnimation.setDuration(FLIP_ANIMATION_DURATION);
+	flipAnimation.setFillAfter(true);
 
-	private RotateAnimation mFlipAnimation;
-	private RotateAnimation mReverseFlipAnimation;
+	reverseFlipAnimation = new RotateAnimation(-180, 0,
+						   RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+						   RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+	reverseFlipAnimation.setInterpolator(new LinearInterpolator());
+	reverseFlipAnimation.setDuration(FLIP_ANIMATION_DURATION);
+	reverseFlipAnimation.setFillAfter(true);
 
-	private int mRefreshViewHeight;
-	private int mRefreshOriginalTopPadding;
-	private int mLastMotionY;
-	private int mBaseIndex;
-	private OnScrollListener pullDownListener;
-	private Context mContext;
+	inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	refreshView = inflater.inflate(R.layout.pull_to_refresh_header, null);
+	refreshText = (TextView)refreshView.findViewById(R.id.pull_to_refresh_text);
+	refreshImage = (ImageView)refreshView.findViewById(R.id.pull_to_refresh_image);
+	refreshProgress = (ProgressBar)refreshView.findViewById(R.id.pull_to_refresh_progress);
+	refreshLastUpdated = (TextView)refreshView.findViewById(R.id.pull_to_refresh_updated_at);
+	measureView(refreshView);
+	refreshViewHeight = refreshView.getMeasuredHeight();
+	baseTopPadding = refreshView.getPaddingTop();
+	addHeaderView(refreshView);
+
+	stateFactory = new PullStateFactory(this);
+	defaultState = stateFactory.getState(PullStateFactory.State.DEFAULT);
+	startState = stateFactory.getState(PullStateFactory.State.START);
+	pullToRefreshState = stateFactory.getState(PullStateFactory.State.PULL_TO_REFRESH);
+	releaseToRefreshState = stateFactory.getState(PullStateFactory.State.RELEASE_TO_REFRESH);
+	reloadingState = stateFactory.getState(PullStateFactory.State.RELOADING);
+	state = defaultState;
+	
+	setOnScrollListener(this);
+    }
+
+    /**
+     * 윈도우에 이 뷰가 올라갈때 실행하는 메소드, 초기 리스트 위치를 정해준다.
+     */
+    protected void onAttachedToWindow() {
+	resetSelection();
+    }
+
+    /**
+     * 이 뷰에 연결할 ListAdapter를 설정한다.
+     *
+     * @param adapter 연결할 ListAdapter
+     */
+    public void setAdapter(ListAdapter adapter) {
+	super.setAdapter(adapter);
+	resetSelection();
+    }
+
+    /**
+     * 이 뷰의 refresh동작에 반응하기 위한 리스너를 등록한다.
+     *
+     * @param onRefreshListener 실제 refresh를 수행하는 listener
+     */
+    public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
+	this.onRefreshListener = onRefreshListener;
+    }
     
-	// public PullToRefreshListView(Context context) {
-	//     super(context);
-	//     init(context);
-	// }
+    /**
+     * 이 클래스에서는 위쪽으로 스크롤 한 것만 지원하므로, 이 함수를
+     * 이용해서 아래쪽 스크롤을 담당할 리스너를 세팅한다.
+     *
+     * @param l 아래쪽 스크롤로 등록할 OnScrollListener
+     */
+    public void setPullDownScrollListener(OnScrollListener l) {
+	pullDownListener = l;
+    }
 
-	public PullToRefreshListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		this.mContext = context;
-		init(context);
+    /**
+     * 뷰의 refresh를 담당하는 부분
+     */
+    public void refresh() {
+	resetHeaderPadding();
+	
+	refreshImage.setVisibility(View.GONE);
+	refreshImage.setImageDrawable(null);
+	refreshProgress.setVisibility(View.VISIBLE);
+	
+	refreshText.setText(R.string.pull_to_refresh_refreshing_label);
+
+	onRefresh();
+	onRefreshListener.onRefresh();
+    }
+
+    public void onRefresh() { };
+
+    /**
+     * refreshView의 위쪽 padding을 변경한다.
+     *
+     * @param topPadding 위쪽 padding값
+     */
+    public void applyHeaderPadding(int topPadding) {
+	refreshView.setPadding(refreshView.getPaddingLeft(),
+			       topPadding,
+			       refreshView.getPaddingRight(),
+			       refreshView.getPaddingBottom());
+    }
+
+    /**
+     * refreshView의 padding을 원위치 시킨다.
+     */
+    public void resetHeaderPadding() {
+	applyHeaderPadding(baseTopPadding);
+    }
+
+    /**
+     * refreshView를 초기화하고 원위치 시킨다.
+     */
+    public void resetHeader() {
+	resetHeaderPadding();
+	pullStartedY = -1;
+	movedY = 0;
+	refreshText.setText(R.string.pull_to_refresh_pull_label);
+	refreshImage.setImageResource(R.drawable.ic_pulltorefresh_arrow);
+	refreshImage.clearAnimation();
+	refreshProgress.setVisibility(View.GONE);
+	refreshImage.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 인자로 받은 뷰를 측정해서, 가로/세로길이를 리턴할 수 있도록 준비시킨다.
+     *
+     * @param child 측정 준비할 View
+     */
+    private void measureView(View child) {
+	ViewGroup.LayoutParams p = child.getLayoutParams();
+	if (p == null) {
+	    p = new ViewGroup.LayoutParams(
+					   ViewGroup.LayoutParams.FILL_PARENT,
+					   ViewGroup.LayoutParams.WRAP_CONTENT);
 	}
 
-	public void setPullDownScrollListener(OnScrollListener l) {
-		pullDownListener = l;
+	int childWidthSpec = ViewGroup.getChildMeasureSpec(0,
+							   0 + 0, p.width);
+	int lpHeight = p.height;
+	int childHeightSpec;
+	if (lpHeight > 0) {
+	    childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight, MeasureSpec.EXACTLY);
+	} else {
+	    childHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+	}
+	child.measure(childWidthSpec, childHeightSpec);
+    }
+
+    /**
+     * 뷰의 터치 이벤트를 감시한다. State에 따라 reloading여부를
+     * 판단하고 reloading을 한다.
+     *
+     * @param event 받은 이벤트
+     * @return 다른 하위 이벤트 감시 함수들을 추가로 허용할지 여부
+     */
+    public boolean onTouchEvent(MotionEvent event) {
+	currentY = (int) event.getY();
+	if (pullStartedY != -1)
+	    movedY = currentY - pullStartedY;
+	
+	switch(event.getAction()) {
+	case MotionEvent.ACTION_UP:
+	    state.onActionUp();
+	    break;
+	case MotionEvent.ACTION_MOVE:
+	    state.onActionMove();
+	    if (movedY <= HEADER_REFRESH_LIMIT) {
+		state.onYCordinateLessThanLimit();
+	    } else {
+		state.onYCordinateLargerThanLimit();
+	    }
+	    
+	    if (movedY < 0) {
+		state.onYCordinateMoveBelow();
+	    } else if (movedY <= HEADER_REFRESH_LIMIT) {
+		state.onYCordinateMoveAboveLessThanLimit();
+	    } else {
+		state.onYCordinateMoveAboveLargerThanLimit();
+	    }
+	    
+	    break;
 	}
 
-	// public PullToRefreshListView(Context context, AttributeSet attrs, int defStyle) {
-	//     super(context, attrs, defStyle);
-	//     init(context);
-	// }
+	return super.onTouchEvent(event);
+    }
 
-	// public PullToRefreshListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
-	// 	super(context, attrs, adapter, limit);
-	// 	init(context);
-	// }
-
-	private void init(Context context) {
-		// Load all of the animations we need in code rather than through XML
-		mFlipAnimation = new RotateAnimation(0, -180,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-		mFlipAnimation.setInterpolator(new LinearInterpolator());
-		mFlipAnimation.setDuration(250);
-		mFlipAnimation.setFillAfter(true);
-		mReverseFlipAnimation = new RotateAnimation(-180, 0,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-		mReverseFlipAnimation.setInterpolator(new LinearInterpolator());
-		mReverseFlipAnimation.setDuration(250);
-		mReverseFlipAnimation.setFillAfter(true);
-
-		mInflater = (LayoutInflater) context.getSystemService(
-				Context.LAYOUT_INFLATER_SERVICE);
-
-		mRefreshView = (LinearLayout) mInflater.inflate(
-				R.layout.pull_to_refresh_header, null);
-
-		mRefreshViewText =
-			(TextView) mRefreshView.findViewById(R.id.pull_to_refresh_text);
-		mRefreshViewImage =
-			(ImageView) mRefreshView.findViewById(R.id.pull_to_refresh_image);
-		mRefreshViewProgress =
-			(ProgressBar) mRefreshView.findViewById(R.id.pull_to_refresh_progress);
-		mRefreshViewLastUpdated =
-			(TextView) mRefreshView.findViewById(R.id.pull_to_refresh_updated_at);
-
-		mRefreshViewImage.setMinimumHeight(50);
-		mRefreshView.setOnClickListener(new OnClickRefreshListener());
-		mRefreshOriginalTopPadding = mRefreshView.getPaddingTop();
-
-		mRefreshState = TAP_TO_REFRESH;
-
-		addHeaderView(mRefreshView);
-
-		setOnScrollListener(this);
-		if (IS_PULL_REFRESH) {
-			mBaseIndex = 1;
-		} else {
-			mBaseIndex = 0;
-		}
-
-		measureView(mRefreshView);
-		mRefreshViewHeight = mRefreshView.getMeasuredHeight();
+    /**
+     * scroll시 실행하는 callback function
+     *
+     * @param view
+     * @param firstVisibleItem
+     * @param visibleItemCount
+     * @param totalItemCount
+     */
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+	if (firstVisibleItem == 0) {
+	    Log.d("=====", "state: " + state.toString());
+	    state.onFirstElement();
+	} else if (firstVisibleItem != 0) {
+	    state.onNotFirstElement();
 	}
+    }
 
-	@Override
-	protected void onAttachedToWindow() {
-		setSelection(mBaseIndex);
+    public void onScrollStateChanged(AbsListView view, int scrollState) { }
+
+    /**
+     * state의 setter함수
+     *
+     * @param state 새로 설정할 state
+     */
+    public void setState(PullState state) {
+	this.state = state;
+    }
+
+    /**
+     * Resets the list to a normal state after a refresh.
+     */
+    public void onRefreshComplete() {
+	resetHeader();
+	state.onRefreshOk();
+
+	// If refresh view is visible when loading completes, scroll down to
+	// the next item.
+	if (refreshView.getBottom() > 0) {
+	    invalidateViews();
+	    resetSelection();
 	}
+    }
 
-	@Override
-	public void setAdapter(ListAdapter adapter) {
-		super.setAdapter(adapter);
+    public void resetSelection() {
+	setSelection(LIST_BASE_INDEX);
+    }
 
-		setSelection(mBaseIndex);
-	}
+    public PullState getDefaultState() {
+	return defaultState;
+    }
 
+    public PullState getStartState() {
+	return startState;
+    }
+
+    public PullState getPullToRefreshState() {
+	return pullToRefreshState;
+    }
+
+    public PullState getReleaseToRefreshState() {
+	return releaseToRefreshState;
+    }
+
+    public PullState getReloadingState() {
+	return reloadingState;
+    }
+
+    public int getCurrentY() {
+	return currentY;
+    }
+
+    public void setPullStartedY(int y) {
+	pullStartedY = y;
+    }
+
+    public int getMovedY() {
+	return movedY;
+    }
+
+    public void startReleaseToRefreshAnimation() {
+	refreshText.setText(R.string.pull_to_refresh_release_label);
+	refreshImage.clearAnimation();
+	refreshImage.startAnimation(flipAnimation);
+    }
+
+    public void startPullToRefreshAnimation() {
+	refreshText.setText(R.string.pull_to_refresh_pull_label);
+	refreshImage.clearAnimation();
+	refreshImage.startAnimation(reverseFlipAnimation);
+    }
+
+    /**
+     * Interface definition for a callback to be invoked when list should be
+     * refreshed.
+     */
+    public interface OnRefreshListener {
 	/**
-	 * Register a callback to be invoked when this list should be refreshed.
-	 * 
-	 * @param onRefreshListener The callback to run.
+	 * Called when the list should be refreshed.
+	 * <p>
+	 * A call to {@link PullToRefreshListView #onRefreshComplete()} is
+	 * expected to indicate that the refresh has completed.
 	 */
-	public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
-		mOnRefreshListener = onRefreshListener;
-	}
-
-	/**
-	 * Set a text to represent when the list was last updated.
-	 * @param lastUpdated Last updated at.
-	 */
-	public void setLastUpdated(CharSequence lastUpdated) {
-		if (lastUpdated != null) {
-			mRefreshViewLastUpdated.setVisibility(View.VISIBLE);
-			mRefreshViewLastUpdated.setText(lastUpdated);
-		} else {
-			mRefreshViewLastUpdated.setVisibility(View.GONE);
-		}
-	}
-
-	/**
-	 * Smoothly scroll by distance pixels over duration milliseconds.
-	 * 
-	 * <p>Using reflection internally to call smoothScrollBy for API Level 8
-	 * otherwise scrollBy is called.
-	 * 
-	 * @param distance Distance to scroll in pixels.
-	 * @param duration Duration of the scroll animation in milliseconds.
-	 */
-	private void scrollListBy(int distance, int duration) {
-		if (IS_PULL_REFRESH) {
-			try {
-				Method method = ListView.class.getMethod("smoothScrollBy",
-						Integer.TYPE, Integer.TYPE);
-				method.invoke(this, distance + 1, duration);
-			} catch (NoSuchMethodException e) {
-				// If smoothScrollBy is not available (< 2.2)
-				setSelection(mBaseIndex);
-			} catch (IllegalArgumentException e) {
-				throw e;
-			} catch (IllegalAccessException e) {
-				System.err.println("unexpected " + e);
-			} catch (InvocationTargetException e) {
-				System.err.println("unexpected " + e);
-			}
-		}
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		if (IS_PULL_REFRESH) {
-			final int y = (int) event.getY();
-
-			switch (event.getAction()) {
-			case MotionEvent.ACTION_UP:
-				if (!isVerticalScrollBarEnabled()) {
-					setVerticalScrollBarEnabled(true);
-				}
-				
-				if (getFirstVisiblePosition() == 0 && mRefreshState != REFRESHING) {
-				    if ((mRefreshView.getBottom() > mRefreshViewHeight
-					 || mRefreshView.getTop() >= 0)
-					&& mRefreshState == RELEASE_TO_REFRESH) {
-						// Initiate the refresh
-						mRefreshState = REFRESHING;
-						prepareForRefresh();
-						onRefresh();
-					} else if (mRefreshView.getBottom() < mRefreshViewHeight
-						   || mRefreshView.getTop() < 0) {
-						// Abort refresh and scroll down below the refresh view
-						resetHeader();
-						setSelection(mBaseIndex);
-					}
-				}
-				break;
-			case MotionEvent.ACTION_DOWN:
-				mLastMotionY = y;
-				break;
-			case MotionEvent.ACTION_MOVE:
-				applyHeaderPadding(event);
-				break;
-			}
-		}
-
-		boolean flag = false;
-		try{
-			flag = super.onTouchEvent(event);
-		}catch(Throwable e){
-			e.printStackTrace();
-			flag = true;
-		}
-
-		return flag;
-	}
-
-	private void applyHeaderPadding(MotionEvent ev) {
-		final int historySize = ev.getHistorySize();
-
-		// Workaround for getPointerCount() which is unavailable in 1.5
-		// (it's always 1 in 1.5)
-		int pointerCount = 1;
-		try {
-			Method method = MotionEvent.class.getMethod("getPointerCount");
-			pointerCount = (Integer)method.invoke(ev);
-		} catch (NoSuchMethodException e) {
-			pointerCount = 1;
-		} catch (IllegalArgumentException e) {
-			throw e;
-		} catch (IllegalAccessException e) {
-			System.err.println("unexpected " + e);
-		} catch (InvocationTargetException e) {
-			System.err.println("unexpected " + e);
-		}
-
-		for (int h = 0; h < historySize; h++) {
-			for (int p = 0; p < pointerCount; p++) {
-				if (mRefreshState == RELEASE_TO_REFRESH || mRefreshState == PULL_TO_REFRESH) {
-					if (isVerticalFadingEdgeEnabled()) {
-						setVerticalScrollBarEnabled(false);
-					}
-
-					int historicalY = 0;
-					try {
-						// For Android > 2.0
-						Method method = MotionEvent.class.getMethod(
-								"getHistoricalY", Integer.TYPE, Integer.TYPE);
-						historicalY = ((Float) method.invoke(ev, p, h)).intValue();
-					} catch (NoSuchMethodException e) {
-						// For Android < 2.0
-						historicalY = (int) (ev.getHistoricalY(h));
-					} catch (IllegalArgumentException e) {
-						throw e;
-					} catch (IllegalAccessException e) {
-						System.err.println("unexpected " + e);
-					} catch (InvocationTargetException e) {
-						System.err.println("unexpected " + e);
-					}
-
-					// Calculate the padding to apply, we divide by 1.7 to
-					// simulate a more resistant effect during pull.
-					int topPadding = (int) (((historicalY - mLastMotionY)
-							- mRefreshViewHeight) / 1.7);
-
-					mRefreshView.setPadding(
-							mRefreshView.getPaddingLeft(),
-							topPadding,
-							mRefreshView.getPaddingRight(),
-							mRefreshView.getPaddingBottom());
-				}
-			}
-		}
-	}
-
-	/**
-	 * Sets the header padding back to original size.
-	 */
-	private void resetHeaderPadding() {
-		mRefreshView.setPadding(
-				mRefreshView.getPaddingLeft(),
-				mRefreshOriginalTopPadding,
-				mRefreshView.getPaddingRight(),
-				mRefreshView.getPaddingBottom());
-	}
-
-	/**
-	 * Resets the header to the original state.
-	 */
-	private void resetHeader() {
-		if (mRefreshState != TAP_TO_REFRESH) {
-			mRefreshState = TAP_TO_REFRESH;
-
-			resetHeaderPadding();
-
-			// Set refresh view text to the pull label
-			mRefreshViewText.setText(R.string.pull_to_refresh_tap_label);
-			// Replace refresh drawable with arrow drawable
-			mRefreshViewImage.setImageResource(R.drawable.ic_pulltorefresh_arrow);
-			// Clear the full rotation animation
-			mRefreshViewImage.clearAnimation();
-			// Hide progress bar and arrow.
-			mRefreshViewImage.setVisibility(View.GONE);
-			mRefreshViewProgress.setVisibility(View.GONE);
-		}
-	}
-
-	private void measureView(View child) {
-		ViewGroup.LayoutParams p = child.getLayoutParams();
-		if (p == null) {
-			p = new ViewGroup.LayoutParams(
-					ViewGroup.LayoutParams.FILL_PARENT,
-					ViewGroup.LayoutParams.WRAP_CONTENT);
-		}
-
-		int childWidthSpec = ViewGroup.getChildMeasureSpec(0,
-				0 + 0, p.width);
-		int lpHeight = p.height;
-		int childHeightSpec;
-		if (lpHeight > 0) {
-			childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight, MeasureSpec.EXACTLY);
-		} else {
-			childHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
-		}
-		child.measure(childWidthSpec, childHeightSpec);
-	}
-
-
-	public void onScroll(AbsListView view, int firstVisibleItem,
-			int visibleItemCount, int totalItemCount) {
-		// When the refresh view is completely visible, change the text to say
-		// "Release to refresh..." and flip the arrow drawable.
-		if (IS_PULL_REFRESH) {
-			if (mCurrentScrollState == SCROLL_STATE_TOUCH_SCROLL
-					&& mRefreshState != REFRESHING) {
-				if (firstVisibleItem == 0) {
-					mRefreshViewImage.setVisibility(View.VISIBLE);
-					// Log.d("=====", "==============================");
-					// Log.d("=====", "bottom: " + mRefreshView.getBottom());
-					// Log.d("=====", "height: " + mRefreshViewHeight);
-					// Log.d("=====", "sub   : " + (mRefreshView.getBottom() - (mRefreshViewHeight + 20)));
-					if ((mRefreshView.getBottom() > mRefreshViewHeight + 20
-							|| mRefreshView.getTop() >= 0)
-							&& mRefreshState != RELEASE_TO_REFRESH) {
-						mRefreshViewText.setText(R.string.pull_to_refresh_release_label);
-						mRefreshViewImage.clearAnimation();
-						mRefreshViewImage.startAnimation(mFlipAnimation);
-						mRefreshState = RELEASE_TO_REFRESH;
-					} else if (mRefreshView.getBottom() < mRefreshViewHeight + 20
-						   && mRefreshState != PULL_TO_REFRESH
-						   && mRefreshState != RELEASE_TO_REFRESH) {
-						mRefreshViewText.setText(R.string.pull_to_refresh_pull_label);
-						if (mRefreshState != TAP_TO_REFRESH) {
-							mRefreshViewImage.clearAnimation();
-							mRefreshViewImage.startAnimation(mReverseFlipAnimation);
-						}
-						mRefreshState = PULL_TO_REFRESH;
-					}
-					// else if (mRefreshView.getBottom() < mRefreshViewHeight + 30
-					// 	   && mRefreshState == RELEASE_TO_REFRESH) {
-					// 	mRefreshViewText.setText(R.string.pull_to_refresh_pull_label);
-					// 	if (mRefreshState != TAP_TO_REFRESH) {
-					// 		mRefreshViewImage.clearAnimation();
-					// 		mRefreshViewImage.startAnimation(mReverseFlipAnimation);
-					// 	}
-					// 	mRefreshState = PULL_TO_REFRESH;
-					// }
-				} else {
-					mRefreshViewImage.setVisibility(View.GONE);
-					resetHeader();
-				}
-			} else if (mCurrentScrollState == SCROLL_STATE_FLING
-					&& firstVisibleItem == 0
-					&& mRefreshState != REFRESHING) {
-				setSelection(mBaseIndex);
-			}
-		}
-
-		if (pullDownListener != null)
-			pullDownListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-	}
-
-
-	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		mCurrentScrollState = scrollState;
-	}
-
-	public void prepareForRefresh() {
-		resetHeaderPadding();
-
-		mRefreshViewImage.setVisibility(View.GONE);
-		// We need this hack, otherwise it will keep the previous drawable.
-		mRefreshViewImage.setImageDrawable(null);
-		mRefreshViewProgress.setVisibility(View.VISIBLE);
-
-		// Set refresh view text to the refreshing label
-		mRefreshViewText.setText(R.string.pull_to_refresh_refreshing_label);
-
-		mRefreshState = REFRESHING;
-	}
-
-	public void onRefresh() {
-		Log.d("refresh", "onRefresh");
-
-		if (mOnRefreshListener != null) {
-			mOnRefreshListener.onRefresh();
-		}
-	}
-
-	/**
-	 * Resets the list to a normal state after a refresh.
-	 * @param lastUpdated Last updated at.
-	 */
-	public void onRefreshComplete(CharSequence lastUpdated) {
-		Log.d("refresh", "onRefreshComplete(latUpdated)");
-
-		setLastUpdated(lastUpdated);
-		onRefreshComplete();
-	}
-
-	/**
-	 * Resets the list to a normal state after a refresh.
-	 */
-	public void onRefreshComplete() {
-		Log.d("refresh", "onRefreshComplete");
-
-		resetHeader();
-
-		// If refresh view is visible when loading completes, scroll down to
-		// the next item.
-		if (mRefreshView.getBottom() > 0) {
-			invalidateViews();
-			setSelection(mBaseIndex);
-		}
-	}
-
-	/**
-	 * Invoked when the refresh view is clicked on. This is mainly used when
-	 * there's only a few items in the list and it's not possible to drag the
-	 * list.
-	 */
-	private class OnClickRefreshListener implements OnClickListener {
-		public void onClick(View v) {
-			if (mRefreshState != REFRESHING && !HttpRequestManager.getInstance(mContext).isRunning()) {
-				prepareForRefresh();
-				onRefresh();
-			}
-		}
-
-	}
-
-	/**
-	 * Interface definition for a callback to be invoked when list should be
-	 * refreshed.
-	 */
-	public interface OnRefreshListener {
-		/**
-		 * Called when the list should be refreshed.
-		 * <p>
-		 * A call to {@link PullToRefreshListView #onRefreshComplete()} is
-		 * expected to indicate that the refresh has completed.
-		 */
-		public void onRefresh();
-	}	
+	public void onRefresh();
+    }
 }
