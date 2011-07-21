@@ -9,7 +9,7 @@ import com.matji.sandwich.data.Post;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
-public class StorePostListView extends PostListView {
+public class StorePostListView extends SectionedPostListView {
 	private HttpRequest request;
 	private int store_id;	
 	
