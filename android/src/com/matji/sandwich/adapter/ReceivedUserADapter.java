@@ -15,7 +15,7 @@ public class ReceivedUserADapter extends MBaseAdapter {
 
 	public ReceivedUserADapter(Context context) {
 		super(context);
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parent) {

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
@@ -19,6 +20,7 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CommentListView;
 
@@ -26,14 +28,16 @@ import com.matji.sandwich.widget.CommentListView;
 // 댓글을 달거나, 라이크 했을 때 삭제 한 메모면.
 // 1. 리스트뷰 리로드, 2. 리스트뷰 어댑터 item remove, notifyDataSetChanged
 
-public class PostMainActivity extends MainActivity implements Requestable {
+public class PostMainActivity extends BaseActivity implements Requestable {
 	private Post post;
 	private int intent_post_id;
 
 	private Session session;
 	private DBProvider dbProvider;
+	
 	private HttpRequest request;
 	private HttpRequestManager manager;
+	private MatjiImageDownloader downloader;
 
 	private CommentListView commentListView;
 //	private Button likeButton;
@@ -54,6 +58,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);
 		manager = HttpRequestManager.getInstance(this);
+		downloader = new MatjiImageDownloader(this);
 
 		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
 		position = getIntent().getIntExtra("position", -1);
@@ -246,5 +251,14 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 //		likeButton.setClickable(true);
 		e.showToastMsg(getApplicationContext());
+	}
+	
+
+	public String getCount(int id, int count) {
+		return getString(id) + ": " + count;
+	}
+	
+	public String getCountNumberOf(int id, int count) {
+		return getString(id) + ": " + count + getString(R.string.default_string_number_of);
 	}
 }

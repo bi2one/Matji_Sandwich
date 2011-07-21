@@ -29,19 +29,19 @@ public class MainTabActivity extends BaseTabActivity {
 	DisplayUtil.setContext(getApplicationContext());
 
 	tabHost.addTab("tab1",
-		       R.drawable.icon,
+		       R.drawable.icon_tab_map,
 		       R.string.main_tab_map,
 		       new Intent(this, MainMapActivity.class));
 	tabHost.addTab("tab2",
-		       R.drawable.icon,
+		       R.drawable.icon_tab_talk,
 		       R.string.main_tab_talk,
 		       new Intent(this, PostTabActivity.class));
 	tabHost.addTab("tab3",
-		       R.drawable.icon,
+		       R.drawable.icon_tab_matist,
 		       R.string.main_tab_ranking,
 		       new Intent(this, PostSliderActivity.class));
 	tabHost.addTab("tab4",
-		       R.drawable.icon,
+		       R.drawable.icon_tab_private,
 		       R.string.main_tab_config,
 		       new Intent(this, SettingActivity.class));
     }

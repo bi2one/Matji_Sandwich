@@ -30,7 +30,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 		attachFileIds = intent.getIntArrayExtra("attach_file_ids");
 		currentPage = intent.getIntExtra("position", 0);
 		swipeView = (SwipeView)findViewById(R.id.SwipeView);
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(this);
 
 		swipeView.addOnScrollListener(this);
 

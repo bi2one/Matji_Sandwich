@@ -24,20 +24,13 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 	
 	private Bitmap defaultUserImage;
 	private Bitmap defaultAttachedImage;
-	
-	
-
-	public MatjiImageDownloader() {
+		
+	public MatjiImageDownloader(Context context){
 		downloader = new ImageDownloader();
 		params = new HashMap<String, String>();
 		downloader.setDownloaderListsener(this);
-	}
-	
-	public MatjiImageDownloader(Context context){
-		this();
-		
 		defaultUserImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.thumnail_bg));
-		defaultAttachedImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.thumnail_bg));
+		defaultAttachedImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.btn_home));
 	}
 	
 
@@ -63,6 +56,7 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 		
 		params.put("attach_file_id", attachFileId + "");
 		params.put("size", imageSize);
+		downloader.setDefaultBitmap(defaultAttachedImage);
 		downloader.download(URL_ATTACH_FILE_IMAGE, params, imageView);
 	}
 

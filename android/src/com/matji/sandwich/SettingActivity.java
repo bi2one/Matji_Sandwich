@@ -61,7 +61,7 @@ public class SettingActivity extends BaseActivity {
 			
 		} else {
 			user = session.getCurrentUser();
-			downloader = new MatjiImageDownloader();
+			downloader = new MatjiImageDownloader(this);
 			downloader.downloadUserImage(user.getId(), myPageImage);
 			myPage.setText(user.getNick());
 

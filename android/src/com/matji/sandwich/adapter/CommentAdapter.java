@@ -45,7 +45,7 @@ public class CommentAdapter extends MBaseAdapter {
 
 	public CommentAdapter(Context context) {
 		super(context);
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 
 		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
 	}

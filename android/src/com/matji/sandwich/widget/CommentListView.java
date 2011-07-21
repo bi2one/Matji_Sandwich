@@ -37,11 +37,15 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		super(context, attrs, new CommentAdapter(context), 10);
 		this.context = context;
 		request = new CommentHttpRequest(context);
-		session = Session.getInstance(context); 
+		session = Session.getInstance(context);
 
+		init();
+	}
+
+	private void init() {
 		post = (Post) SharedMatjiData.getInstance().top();
 		setPage(1);
-//		setDivider(null);		
+		setDivider(null);
 		setCanRepeat(true);
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
 	}

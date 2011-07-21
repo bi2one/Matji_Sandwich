@@ -20,7 +20,7 @@ public class StoreAdapter extends MBaseAdapter {
 	
 	public StoreAdapter(Context context) {
 		super(context);
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
