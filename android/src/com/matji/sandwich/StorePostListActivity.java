@@ -43,7 +43,7 @@ public class StorePostListActivity extends BaseActivity {
 				if (data != null) {
 					int position = data.getIntExtra("position", -1);
 					if (position >= 0) {
-						listView.delete(position);
+//						listView.delete(position);
 					}
 				}
 			}
