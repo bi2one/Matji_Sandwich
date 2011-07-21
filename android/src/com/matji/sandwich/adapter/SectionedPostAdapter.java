@@ -75,7 +75,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		super(context);
 
 		registerDataSetObserver(dataSetObserver);
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 
 		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
 	}
@@ -250,6 +250,8 @@ public class SectionedPostAdapter extends MBaseAdapter {
 				postElement.previews[i].setMaxWidth((remainScreenWidth-thumnailSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
 				postElement.previews[i].setLayoutParams(params);
 			}
+			
+			
 			convertView.setTag(postElement);
 			
 			setOnClickListener(postElement, parent);
@@ -332,6 +334,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		}
 
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, holder.thumnail);
+		
 		holder.nick.setText(user.getNick()+" ");
 		holder.post.setText(post.getPost().trim());
 		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));

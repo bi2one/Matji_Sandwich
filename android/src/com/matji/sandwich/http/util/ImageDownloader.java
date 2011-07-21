@@ -63,7 +63,10 @@ public class ImageDownloader {
 	public enum Mode { NO_ASYNC_TASK, NO_DOWNLOADED_DRAWABLE, CORRECT }
 	private Mode mode = Mode.CORRECT;
 	private ImageDownloaderListener downloaderListener;	
-
+	private Bitmap defaultBitmap;
+	
+	
+	
 	/**
 	 * Download the specified image from the Internet and binds it to the provided ImageView. The
 	 * binding is immediate if the image is found in the cache and will be done asynchronously
@@ -75,12 +78,14 @@ public class ImageDownloader {
 	 */
 	public void download(String url, HashMap<String, String> params, ImageView imageView) {
 		StringBuilder sb = new StringBuilder(url);
+		
 		sb.append("?");
 
 		for (String key: params.keySet()) {
 			sb.append(key + "=" + params.get(key) + "&");
 		}
-		Log.d("url!!!", sb.toString());
+		
+//		Log.d("url!!!", sb.toString());
 
 		download(sb.toString(), imageView);
 	}
@@ -95,12 +100,15 @@ public class ImageDownloader {
 	 * @param imageView The ImageView to bind the downloaded image to.
 	 */
 	public void download(String url, ImageView imageView) {
-		resetPurgeTimer();
+		resetPurgeTimer(); // ?
 		Bitmap bitmap = getBitmapFromCache(url);
 
 		if (bitmap == null) {
+			Log.d("url!!!", url);
+//			 request to server
 			forceDownload(url, imageView);
 		} else {
+			// request to file system
 			cancelPotentialDownload(url, imageView);
 			setImageBitmap(imageView, bitmap);
 		}
@@ -142,11 +150,13 @@ public class ImageDownloader {
 				break;
 
 			case CORRECT:
+				
 				task = new BitmapDownloaderTask(imageView);
 				DownloadedDrawable downloadedDrawable = new DownloadedDrawable(task);
 				imageView.setImageDrawable(downloadedDrawable);
 				imageView.setMinimumHeight(156);
 				task.execute(url);
+				
 				break;
 			}
 		}
@@ -290,6 +300,7 @@ public class ImageDownloader {
 		@Override
 		protected Bitmap doInBackground(String... params) {
 			url = params[0];
+
 			return downloadBitmap(url);
 		}
 
@@ -304,7 +315,9 @@ public class ImageDownloader {
 				bitmap = null;
 			}
 
+			
 			addBitmapToCache(url, bitmap);
+			Log.d("url!!!", "add bitmap to cache, size is " + sHardBitmapCache.size());
 
 			if (imageViewReference != null) {
 				imageView = imageViewReference.get();
@@ -410,8 +423,12 @@ public class ImageDownloader {
 	 * @param bitmap The newly downloaded bitmap.
 	 */
 	private void addBitmapToCache(String url, Bitmap bitmap) {
+		if (bitmap == null) bitmap = this.defaultBitmap;
+		
 		if (bitmap != null) {
+			Log.d("url!!!", "add in");
 			synchronized (sHardBitmapCache) {
+				Log.d("url!!!", "should add");
 				sHardBitmapCache.put(url, bitmap);
 				Log.d("ImageDownloader", "Bitmap added to HardBitmapCache, size is " + sHardBitmapCache.size());
 			}
@@ -477,5 +494,15 @@ public class ImageDownloader {
 	private void setImageBitmap(ImageView view, Bitmap bitmap) {
 		view.setImageBitmap(bitmap);
 		if (downloaderListener != null) downloaderListener.postSetBitmap(view);
+	}
+
+
+	public void setDefaultBitmap(Bitmap defaultBitmap) {
+		this.defaultBitmap = defaultBitmap;
+	}
+
+
+	public Bitmap getDefaultBitmap() {
+		return defaultBitmap;
 	}	
 }

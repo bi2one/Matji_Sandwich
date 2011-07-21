@@ -41,7 +41,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 		post = (Post) SharedMatjiData.getInstance().top();
 		setPage(1);
-		setDivider(null);		
+//		setDivider(null);		
 		setCanRepeat(true);
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
 	}
