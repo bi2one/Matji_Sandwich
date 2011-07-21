@@ -33,5 +33,6 @@
 	<color name="minor_tab_border_default">#B36D00</color>
 	<color name="minor_tab_text_default">#A6721E</color>
 	<color name="post_tab_division_bar">#E2AD51</color>
-	<color name="fading_edge_color">#555</color>
+	<color name="fading_edge_color">#555</color
+	<color name="store_main_text">#0f0f0f</color>
 </resources>
