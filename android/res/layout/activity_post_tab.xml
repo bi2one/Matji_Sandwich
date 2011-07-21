@@ -14,8 +14,6 @@
 	  android:id="@android:id/tabs"
 	  style="@style/post_tab_TabBar"
 	  android:layout_weight="0" />
-      <ImageView
-	  style="@style/post_tab_DivisionBar" />
       <FrameLayout
 	  android:id="@android:id/tabcontent"
 	  android:layout_width="fill_parent"

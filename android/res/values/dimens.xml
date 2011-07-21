@@ -17,4 +17,7 @@
 	<dimen name="text_medium">11dp</dimen>
 	<dimen name="text_large">18dp</dimen>
 	<dimen name="text_xlarge">20dp</dimen>
+	
+	<!-- Fade Edge -->
+	<dimen name="fade_edge_length">3dp</dimen>
 </resources>

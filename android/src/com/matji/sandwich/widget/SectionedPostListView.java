@@ -10,7 +10,6 @@ import com.matji.sandwich.data.Post;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -34,6 +33,8 @@ public class SectionedPostListView extends RequestableMListView implements View.
 		setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.pattern_bg));
 		setScrollingCacheEnabled(false);
 		setDivider(null);
+		setFadingEdgeLength((int) getResources().getDimension(R.dimen.fade_edge_length));
+		setCacheColorHint(getResources().getColor(R.color.fading_edge_color));
 	}
 
 	@Override
