@@ -130,20 +130,20 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
     	}
 
     	nameText.setText(store.getName());
-    	    	telText.setText(store.getTel());
+    	telText.setText(store.getTel());
     	addressText.setText(store.getAddress());
     	tagText.setText(tagListToCSV(store.getTags()));
     	foodText.setText(foodListToCSV(store.getStoreFoods()));
+//		likeButton.setText(store.getLikeCount());
 	
-    	if (session.isLogin()) {
-    		if (dbProvider.isExistLike(store.getId(), "Store")) {
-    			likeButton.setText(store.getLikeCount());
-    		} else {
-    			likeButton.setText(store.getLikeCount());
-    		}
-    	} else {
-    		likeButton.setText(store.getLikeCount());
-    	}
+//    	if (session.isLogin()) {
+//    		if (dbProvider.isExistLike(store.getId(), "Store")) {
+//    			likeButton.setText(store.getLikeCount());
+//    		} else {
+//    			likeButton.setText(store.getLikeCount());
+//    		}
+//    	} else {
+//    	}
   	}
 
     public void onResume() {
