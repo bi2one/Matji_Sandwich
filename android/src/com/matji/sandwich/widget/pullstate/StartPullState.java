@@ -30,5 +30,14 @@ public class StartPullState implements PullState {
     public void onYCordinateLargerThanLimit() { }
     public void onYCordinateLessThanLimit() { }
     public void onActionUp() { }
-    public void onRefreshOk() { }
+    
+    public void onRefreshOk() {
+	view.resetSelection();
+    }
+    
+    public void onScrollIdle() {
+	view.resetHeader();
+	view.resetSelection();
+	view.setState(view.getDefaultState());
+    }
 }

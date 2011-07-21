@@ -23,4 +23,5 @@ public class DefaultPullState implements PullState {
     public void onYCordinateLessThanLimit() { }
     public void onActionUp() { }
     public void onRefreshOk() { }
+    public void onScrollIdle() { }
 }

@@ -28,7 +28,7 @@ import com.matji.sandwich.widget.pullstate.PullStateFactory;
 public abstract class PullToRefreshListView extends MListView implements OnScrollListener {
     private enum State { DEFAULT, START, PULL_TO_REFRESH, RELEASE_TO_REFRESH, REFRESHING };
     private static final int FLIP_ANIMATION_DURATION = 250;
-    private static final int HEADER_REFRESH_LIMIT = 80;
+    private static final int HEADER_REFRESH_LIMIT = 70;
     private static final int LIST_BASE_INDEX = 1;
     private Context context;
     private OnScrollListener pullDownListener;
@@ -263,14 +263,21 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      */
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 	if (firstVisibleItem == 0) {
-	    Log.d("=====", "state: " + state.toString());
 	    state.onFirstElement();
 	} else if (firstVisibleItem != 0) {
 	    state.onNotFirstElement();
 	}
+
+	if (pullDownListener != null)
+	    pullDownListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
-    public void onScrollStateChanged(AbsListView view, int scrollState) { }
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+	switch(scrollState) {
+	case OnScrollListener.SCROLL_STATE_IDLE:
+	    state.onScrollIdle();
+	}
+    }
 
     /**
      * state의 setter함수
@@ -287,13 +294,16 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
     public void onRefreshComplete() {
 	resetHeader();
 	state.onRefreshOk();
+	showRefreshView();
 
 	// If refresh view is visible when loading completes, scroll down to
 	// the next item.
-	if (refreshView.getBottom() > 0) {
-	    invalidateViews();
-	    resetSelection();
-	}
+	
+	// if (refreshView.getBottom() > 0) {
+	//     invalidateViews();
+	//     resetSelection();
+	// }
+	// resetSelection();
     }
 
     public void resetSelection() {
@@ -356,5 +366,13 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 	 * expected to indicate that the refresh has completed.
 	 */
 	public void onRefresh();
+    }
+
+    public void hideRefreshView() {
+	refreshView.setVisibility(View.GONE);
+    }
+
+    public void showRefreshView() {
+	refreshView.setVisibility(View.VISIBLE);
     }
 }

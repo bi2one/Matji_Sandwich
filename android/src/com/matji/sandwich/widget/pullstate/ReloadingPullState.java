@@ -24,4 +24,5 @@ public class ReloadingPullState implements PullState {
 	view.resetSelection();
 	view.setState(view.getDefaultState());
     }
+    public void onScrollIdle() { }
 }

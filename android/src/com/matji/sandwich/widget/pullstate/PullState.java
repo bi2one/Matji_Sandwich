@@ -12,4 +12,5 @@ public interface PullState {
     public void onYCordinateLessThanLimit();
     public void onActionUp();
     public void onRefreshOk();
+    public void onScrollIdle();
 }

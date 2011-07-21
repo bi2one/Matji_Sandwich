@@ -37,4 +37,5 @@ public class ReleaseToRefreshPullState implements PullState {
     }
     
     public void onRefreshOk() { }
+    public void onScrollIdle() { }
 }

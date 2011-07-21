@@ -33,11 +33,12 @@ public class PullToRefreshPullState implements PullState {
     
     public void onYCordinateLessThanLimit() { }
     
-    public void onActionUp() {
+    public void onActionUp() { }
+    
+    public void onRefreshOk() { }
+    public void onScrollIdle() {
 	view.resetHeader();
 	view.resetSelection();
 	view.setState(view.getDefaultState());
     }
-    
-    public void onRefreshOk() { }
 }
