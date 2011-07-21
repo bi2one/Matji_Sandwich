@@ -3,4 +3,18 @@
 	<!-- Title Container -->
 	<dimen name="title_container_height">40dp</dimen>
 	<dimen name="thumnail_size">50dp</dimen>
+	
+	<!-- everywhere used dimens -->
+	<dimen name="default_distance">6dp</dimen>
+	<dimen name="default_distance_half">3dp</dimen>
+	
+	<!-- Post List Row -->
+	<dimen name="row_post_distance">1dp</dimen>
+	
+	<!-- Text Size -->
+	<dimen name="text_ssmall">11dp</dimen>
+	<dimen name="text_small">11dp</dimen>
+	<dimen name="text_medium">11dp</dimen>
+	<dimen name="text_large">11dp</dimen>
+	<dimen name="text_xlarge">11dp</dimen>
 </resources>

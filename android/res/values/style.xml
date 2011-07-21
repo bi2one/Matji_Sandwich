@@ -42,6 +42,16 @@
   </style>
   
   <!-- everywhere used style -->
+  <style name="SmallGrayText" parent="DefaultWrap">
+  	<item name="android:textSize">@dimen/text_small</item>
+  	<item name="android:textColor">@color/GRAY</item>
+  </style>
+
+  <style name="SmallOrangeText" parent="DefaultWrap">
+  	<item name="android:textSize">@dimen/text_small</item>
+  	<item name="android:textColor">@color/GRAY</item>
+  </style>
+  
   <style name="ETCButton">
   	<item name="android:layout_width">150dp</item>
   	<item name="android:layout_height">40dp</item>
@@ -375,4 +385,63 @@
     <item name="android:layout_height">2dp</item>
     <item name="android:background">@color/post_tab_division_bar</item>
   </style>
+  
+  <!-- Thumnail -->
+  <style name="ThumnailWrapper">
+    <item name="android:layout_width">@dimen/thumnail_size</item>
+    <item name="android:layout_height">@dimen/thumnail_size</item>
+    <item name="android:background">@drawable/thumnail_bg</item>
+  </style>
+  
+  <style name="Thumnail">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">fill_parent</item>
+    <item name="android:scaleType">centerCrop</item>
+  </style>
+  
+  <!-- Post List Row -->
+  <style name="row_post_PostRowWrapper" parent="DefaultWidthFill">
+  	<item name="android:paddingLeft">@dimen/default_distance</item>
+  	<item name="android:paddingRight">@dimen/default_distance</item>
+  	<item name="android:paddingTop">@dimen/default_distance_half</item>
+  	<item name="android:paddingBottom">@dimen/default_distance_half</item>
+  </style>
+  
+  <style name="row_post_PostWrapper" parent="DefaultWidthFill">
+  	<item name="android:background">@drawable/post_bg</item>
+  	<item name="android:orientation">vertical</item>
+  	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
+  </style>
+
+  <style name="row_post_Name" parent="DefaultWrap">
+	<item name="android:textColor">@color/DARK_ORANGE</item>
+  </style>
+
+  <style name="row_post_At" parent="DefaultWrap">
+  	<item name="android:textColor">@color/GRAY</item>  
+  	<item name="android:text">@string/at</item>  
+  </style>
+  
+  <style name="row_post_PostContent" parent="DefaultWrap">
+  	<item name="android:autoLink">web</item>
+  	<item name="android:textColor">@color/BLACK</item>
+  </style>
+  
+  <style name="row_post_Tags" parent="SmallGrayText">
+   	<item name="android:drawableLeft">@drawable/img_tag</item>
+  </style>
+  
+  <style name="row_post_Comment" parent="SmallOrangeText">
+    <item name="android:text">@string/default_string_comment</item>
+  </style>
+  
+  <style name="row_post_Count" parent="SmallGrayText">
+  	<item name="android:paddingLeft">@dimen/default_distance</item>
+  	<item name="android:paddingRight">@dimen/default_distance_half</item>
+  </style>
+  
+  <style name="row_post_Like" parent="SmallOrangeText">
+   	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
+  </style>
+  
 </resources>
