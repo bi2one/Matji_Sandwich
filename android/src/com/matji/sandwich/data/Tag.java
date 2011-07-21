@@ -46,7 +46,7 @@ public class Tag extends MatjiData{
 		this.tag = tag;
 	}
 	public String getTag() {
-		return tag;
+		return tag.trim();
 	}
 	public void setCreatedAt(String created_at) {
 		this.created_at = created_at;

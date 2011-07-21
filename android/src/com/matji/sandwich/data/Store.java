@@ -108,31 +108,31 @@ public class Store extends MatjiData implements Serializable {
 		this.tel = tel;
 	}
 	public String getTel() {
-		return tel;
+		return tel.trim();
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
 	public String getAddress() {
-		return address;
+		return address.trim();
 	}
 	public void setAddAddress(String add_address) {
 		this.add_address = add_address;
 	}
 	public String getAddAddress() {
-		return add_address;
+		return add_address.trim();
 	}
 	public void setWebsite(String website) {
 		this.website = website;
 	}
 	public String getWebsite() {
-		return website;
+		return website.trim();
 	}
 	public void setText(String text) {
 		this.text = text;
 	}
 	public String getText() {
-		return text;
+		return text.trim();
 	}
 	public void setLat(double lat) {
 	    this.lat = (int)(lat * 1E6);
@@ -150,7 +150,7 @@ public class Store extends MatjiData implements Serializable {
 		this.cover = cover;
 	}
 	public String getCover() {
-		return cover;
+		return cover.trim();
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -162,7 +162,7 @@ public class Store extends MatjiData implements Serializable {
 		this.name = name;
 	}
 	public String getName() {
-		return name;
+		return name.trim();
 	}
 	public void setRegUserId(int reg_user_id) {
 		this.reg_user_id = reg_user_id;

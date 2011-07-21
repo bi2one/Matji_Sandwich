@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class StoreMainActivity extends BaseTabActivity implements Requestable {
-	private RoundTabHost tabHost;
+    private RoundTabHost tabHost;
     private Store store;
 
     private HttpRequestManager manager;
@@ -131,19 +131,19 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
     	nameText.setText(store.getName());
     	telText.setText(store.getTel());
-    	addressText.setText(store.getAddress().trim());
+    	addressText.setText(store.getAddress());
     	tagText.setText(tagListToCSV(store.getTags()));
     	foodText.setText(foodListToCSV(store.getStoreFoods()));
-		likeButton.setText(""+store.getLikeCount());
 	
-//    	if (session.isLogin()) {
-//    		if (dbProvider.isExistLike(store.getId(), "Store")) {
-//    			likeButton.setText(store.getLikeCount());
-//    		} else {
-//    			likeButton.setText(store.getLikeCount());
-//    		}
-//    	} else {
-//    	}
+    	if (session.isLogin()) {
+    		if (dbProvider.isExistLike(store.getId(), "Store")) {
+    			likeButton.setText("" + store.getLikeCount());
+    		} else {
+    			likeButton.setText("" + store.getLikeCount());
+    		}
+    	} else {
+    		likeButton.setText("" + store.getLikeCount());
+    	}
   	}
 
     public void onResume() {
