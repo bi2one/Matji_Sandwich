@@ -52,7 +52,7 @@
 			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_post_created_at"
-				style="@style/SmallGrayText" />
+				style="@style/row_post_CreatedAt" />
 			<TextView
 				android:id="@+id/row_post_comment"
 				style="@style/row_post_Comment" />

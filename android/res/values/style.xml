@@ -49,7 +49,7 @@
 
   <style name="SmallOrangeText" parent="DefaultWrap">
   	<item name="android:textSize">@dimen/text_small</item>
-  	<item name="android:textColor">@color/GRAY</item>
+  	<item name="android:textColor">@color/DARK_ORANGE</item>
   </style>
   
   <style name="ETCButton">
@@ -429,15 +429,20 @@
   
   <style name="row_post_Tags" parent="SmallGrayText">
    	<item name="android:drawableLeft">@drawable/img_tag</item>
+  	<item name="android:drawablePadding">@dimen/default_distance_half</item>
   </style>
   
+  <style name="row_post_CreatedAt" parent="SmallGrayText">
+    <item name="android:paddingRight">@dimen/default_distance</item>
+  </style>
+
   <style name="row_post_Comment" parent="SmallOrangeText">
     <item name="android:text">@string/default_string_comment</item>
   </style>
   
   <style name="row_post_Count" parent="SmallGrayText">
   	<item name="android:paddingLeft">@dimen/default_distance</item>
-  	<item name="android:paddingRight">@dimen/default_distance_half</item>
+  	<item name="android:paddingRight">@dimen/default_distance</item>
   </style>
   
   <style name="row_post_Like" parent="SmallOrangeText">
