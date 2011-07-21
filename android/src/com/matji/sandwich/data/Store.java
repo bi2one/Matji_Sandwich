@@ -108,7 +108,7 @@ public class Store extends MatjiData implements Serializable {
 		this.tel = tel;
 	}
 	public String getTel() {
-		return tel.trim();
+		return tel;
 	}
 	public void setAddress(String address) {
 		this.address = address;
