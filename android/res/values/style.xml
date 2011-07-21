@@ -42,6 +42,15 @@
   </style>
   
   <!-- everywhere used style -->
+  <style name="LinkifyName" parent="DefaultWrap">
+	<item name="android:textColor">@color/DARK_ORANGE</item>
+  </style>
+  
+  <style name="TalkContent" parent="DefaultWrap">
+  	<item name="android:autoLink">web</item>
+  	<item name="android:textColor">@color/BLACK</item>
+  </style>
+  
   <style name="SmallGrayText" parent="DefaultWrap">
   	<item name="android:textSize">@dimen/text_small</item>
   	<item name="android:textColor">@color/GRAY</item>
@@ -432,7 +441,7 @@
   <!-- Post List Row -->
   <style name="row_post_PostRowWrapper" parent="DefaultWidthFill">
   	<item name="android:paddingLeft">@dimen/default_distance</item>
-  	<item name="android:paddingRight">@dimen/default_distance</item>
+  	<item name="android:paddingRight">@dimen/default_distance</item>a
   	<item name="android:paddingTop">@dimen/default_distance_half</item>
   	<item name="android:paddingBottom">@dimen/default_distance_half</item>
   </style>
@@ -443,18 +452,9 @@
   	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
   </style>
 
-  <style name="row_post_Name" parent="DefaultWrap">
-	<item name="android:textColor">@color/DARK_ORANGE</item>
-  </style>
-
   <style name="row_post_At" parent="DefaultWrap">
   	<item name="android:textColor">@color/GRAY</item>  
   	<item name="android:text">@string/at</item>  
-  </style>
-  
-  <style name="row_post_PostContent" parent="DefaultWrap">
-  	<item name="android:autoLink">web</item>
-  	<item name="android:textColor">@color/BLACK</item>
   </style>
   
   <style name="row_post_Tags" parent="SmallGrayText">

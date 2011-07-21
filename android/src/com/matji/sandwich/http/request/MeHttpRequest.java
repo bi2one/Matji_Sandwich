@@ -13,9 +13,9 @@ import com.matji.sandwich.session.Session;
 
 public class MeHttpRequest extends HttpRequest {
 	public enum Service {TWITTER, FACEBOOK};
-	private static final String appId = "180d68e304";
-	private static final String appSecret = "ec04ba2a0b8ed62f3a99a896aed2aa";
-	private static final String redirectURI = "http://api.matji.com/callback.json"; 
+	private static final String appId = "d52ec64efe";
+	private static final String appSecret = "3e9f2acc6f5d6b8b0312c8321e1de4";
+	private static final String redirectURI = "http://api.matji.com/callback"; 
 	
 	public MeHttpRequest(Context context){
 		super(context);

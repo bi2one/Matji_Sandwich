@@ -3,31 +3,28 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/row_post_wrapper"
 	style="@style/row_post_PostRowWrapper">
+	<include
+		layout="@layout/thumnail" />
 	<LinearLayout
-		style="@style/ThumnailWrapper">
-		<com.matji.sandwich.widget.ThumnailImageView
-			android:id="@+id/row_post_thumnail"
-			style="@style/Thumnail" />
-	</LinearLayout>
-	<LinearLayout
+		android:id="@+id/row_post_post_wrapper"
 		style="@style/row_post_PostWrapper">
 		<LinearLayout
 			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_post_nick"
-				style="@style/row_post_Name" />
+				style="@style/LinkifyName" />
 			<TextView
 				android:id="@+id/row_post_at"
 				style="@style/row_post_At" />
 			<TextView
 				android:id="@+id/row_post_store_name"
-				style="@style/row_post_Name" />
+				style="@style/LinkifyName" />
 		</LinearLayout>
 		<LinearLayout
 			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_post_post"
-				style="@style/row_post_PostContent" />
+				style="@style/TalkContent" />
 		</LinearLayout>
 		<LinearLayout
 			style="@style/DefaultWrap">

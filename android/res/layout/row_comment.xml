@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/row_comment_wrapper"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:padding="@dimen/default_distance"
+	android:background="@drawable/comment_bg">
+	<include
+		layout="@layout/thumnail" />
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<TextView
+				android:id="@+id/row_comment_nick"
+				style="@style/LinkifyName" />
+			<TextView
+				android:id="@+id/row_comment_created_at"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/CHOCOLATE" />
+		</LinearLayout>
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<TextView
+				android:id="@+id/row_comment_comment"
+				style="@style/TalkContent" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>
+<!-- <com.matji.sandwich.widget.FrameLayoutForSwipe> -->
+<!-- <include -->
+<!-- layout="@layout/adapter_swipe_rear" /> -->
+<!-- <RelativeLayout -->
+<!-- xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- android:id="@+id/comment_adapter_wrap" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:background="#fff"> -->
+<!-- <LinearLayout -->
+<!-- android:id="@+id/image" -->
+<!-- android:layout_width="50dp" -->
+<!-- android:layout_height="50dp" -->
+<!-- android:layout_margin="3dp" -->
+<!-- android:padding="3dp" -->
+<!-- android:layout_alignParentLeft="true"> -->
+<!-- <ImageView -->
+<!-- android:background="@drawable/thumnail_bg" -->
+<!-- android:id="@+id/comment_adapter_thumnail" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="fill_parent" -->
+<!-- android:scaleType="centerCrop" /> -->
+<!-- </LinearLayout> -->
+<!-- <LinearLayout -->
+<!-- android:id="@+id/name" -->
+<!-- android:orientation="horizontal" -->
+<!-- android:layout_width="wrap_content" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:paddingTop="5dp" -->
+<!-- android:paddingLeft="5dp" -->
+<!-- android:layout_toRightOf="@id/image"> -->
+<!-- <TextView -->
+<!-- android:id="@+id/comment_adapter_nick" -->
+<!-- android:clickable="true" -->
+<!-- android:layout_width="wrap_content" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:textColor="@color/BLACK" -->
+<!-- android:layout_alignParentTop="true" /> -->
+<!-- </LinearLayout> -->
+<!-- <LinearLayout -->
+<!-- android:orientation="vertical" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:layout_toRightOf="@id/image" -->
+<!-- android:layout_below="@id/name" -->
+<!-- android:paddingLeft="5dp"> -->
+<!-- <TextView -->
+<!-- android:id="@+id/comment_adapter_comment" -->
+<!-- android:layout_width="wrap_content" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:autoLink="web" -->
+<!-- android:textColor="#000" -->
+<!-- android:layout_below="@id/comment_adapter_nick" /> -->
+<!-- <TextView -->
+<!-- android:id="@+id/comment_adapter_created_at" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:textSize="11dp" -->
+<!-- android:textColor="@color/GRAY" -->
+<!-- android:padding="5dp" -->
+<!-- android:layout_below="@id/comment_adapter_comment" /> -->
+<!-- </LinearLayout> -->
+<!-- </RelativeLayout> -->
+<!-- </com.matji.sandwich.widget.FrameLayoutForSwipe> -->

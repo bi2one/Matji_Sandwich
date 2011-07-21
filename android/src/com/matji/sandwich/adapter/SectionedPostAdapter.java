@@ -19,11 +19,9 @@ import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.SectionedPostListView;
 import com.matji.sandwich.widget.ThumnailImageView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -72,8 +70,6 @@ public class SectionedPostAdapter extends MBaseAdapter {
 	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
 
 	private MatjiImageDownloader downloader;
-
-	private Activity activity;
 
 	public SectionedPostAdapter(Context context) {
 		super(context);
@@ -229,7 +225,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		if (convertView == null) {
 			postElement = new PostElement();
 			convertView = getLayoutInflater().inflate(R.layout.row_post, null);
-			postElement.thumnail = (ThumnailImageView) convertView.findViewById(R.id.row_post_thumnail);
+			postElement.thumnail = (ThumnailImageView) convertView.findViewById(R.id.thumnail);
 			postElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
 			postElement.at = (TextView) convertView.findViewById(R.id.row_post_at);
 			postElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
@@ -253,8 +249,6 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			for (int i = 0; i < postElement.previews.length; i++) {
 				postElement.previews[i].setMaxWidth((remainScreenWidth-thumnailSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
 				postElement.previews[i].setLayoutParams(params);
-				//TODO set lisener
-				//			holder.preview[i].setOnClickListener(this);
 			}
 			convertView.setTag(postElement);
 			
@@ -345,11 +339,6 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		holder.likeCount.setText(post.getLikeCount() + "");
 	}
 
-	public void setActivity(Activity activity) {
-		this.activity = activity;
-	}
-
-
 	public void setPreviews(Post post, ImageView[] previews) {
 		int[] attachFileIds = new int[post.getAttachFiles().size()];
 		for (int i = 0; i < attachFileIds.length; i++) {
@@ -374,10 +363,10 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			attachFileIds[i] = attachFiles.get(i).getId();
 		}
 		
-		Intent viewerIntent = new Intent(activity, ImageSliderActivity.class);
+		Intent viewerIntent = new Intent(context, ImageSliderActivity.class);
 		viewerIntent.putExtra("attach_file_ids", attachFileIds);
 		viewerIntent.putExtra("position", position);
-		activity.startActivity(viewerIntent);
+		context.startActivity(viewerIntent);
 	}
 	
 	private class PreviewOnClickListener implements OnClickListener {

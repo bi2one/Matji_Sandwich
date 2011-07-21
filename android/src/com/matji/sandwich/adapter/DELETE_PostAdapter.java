@@ -47,7 +47,7 @@ public class DELETE_PostAdapter extends MBaseAdapter {
 			switch (getItemViewType(position)) {
 			case NORMAL_MEMO:
 				convertView = getLayoutInflater().inflate(R.layout.row_post, null);
-				postElement.thumnail = (ImageView) convertView.findViewById(R.id.row_post_thumnail);
+				postElement.thumnail = (ImageView) convertView.findViewById(R.id.thumnail);
 				postElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
 				postElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
 				postElement.post = (TextView) convertView.findViewById(R.id.row_post_post);

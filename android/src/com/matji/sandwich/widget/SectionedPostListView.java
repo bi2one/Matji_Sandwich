@@ -37,12 +37,6 @@ public class SectionedPostListView extends RequestableMListView implements View.
 	}
 
 	@Override
-	public void setActivity(Activity activity) {
-		super.setActivity(activity);
-		((SectionedPostAdapter) getMBaseAdapter()).setActivity(activity);
-	}
-	
-	@Override
 	public HttpRequest request() {
 		if (request == null || !(request instanceof PostHttpRequest)) {
 			request = new PostHttpRequest(getContext());
@@ -56,7 +50,7 @@ public class SectionedPostListView extends RequestableMListView implements View.
 		Post post = (Post) getAdapterData().get(position);
 
 		switch(v.getId()){
-		case R.id.row_post_thumnail: case R.id.row_post_nick:
+		case R.id.thumnail: case R.id.row_post_nick:
 			gotoUserPage(post);
 			break;
 
