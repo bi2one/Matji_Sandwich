@@ -1,6 +1,7 @@
 package com.matji.sandwich.base;
 
 import com.matji.sandwich.LoginActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
@@ -63,6 +64,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 	public void setContentView(int layoutResID) {
 		if (this.getParent() == null){
 			requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+			setTheme(R.style.Theme_RemoveOverlay);
 		}
 		super.setContentView(layoutResID);
 	}

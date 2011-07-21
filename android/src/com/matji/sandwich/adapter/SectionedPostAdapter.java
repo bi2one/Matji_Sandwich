@@ -16,7 +16,7 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
-import com.matji.sandwich.widget.SectionListView;
+import com.matji.sandwich.widget.SectionedPostListView;
 import com.matji.sandwich.widget.ThumnailImageView;
 
 import android.app.Activity;
@@ -38,7 +38,7 @@ import android.widget.LinearLayout.LayoutParams;
  * @author mozziluv
  *
  */
-public class PostAdapter extends MBaseAdapter {
+public class SectionedPostAdapter extends MBaseAdapter {
 	private final DataSetObserver dataSetObserver = new DataSetObserver() {
 		@Override
 		public void onChanged() {
@@ -75,7 +75,7 @@ public class PostAdapter extends MBaseAdapter {
 
 	private Activity activity;
 
-	public PostAdapter(Context context) {
+	public SectionedPostAdapter(Context context) {
 		super(context);
 
 		registerDataSetObserver(dataSetObserver);
@@ -264,7 +264,7 @@ public class PostAdapter extends MBaseAdapter {
 				@Override
 				public void onClick(View v) {
 					int position = Integer.parseInt((String) ((PostElement) v.getTag()).post.getTag());
-					((SectionListView) parent).onListItemClick(position);
+					((SectionedPostListView) parent).onListItemClick(position);
 				}
 			});
 		} else {
@@ -278,7 +278,7 @@ public class PostAdapter extends MBaseAdapter {
 	}
 
 	private void setOnClickListener(PostElement holder, ViewGroup parent) {
-		final SectionListView sectionListView = (SectionListView) parent;
+		final SectionedPostListView sectionListView = (SectionedPostListView) parent;
 		
 		holder.thumnail.setOnClickListener(sectionListView);
 		holder.nick.setOnClickListener(sectionListView);

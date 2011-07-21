@@ -4,7 +4,7 @@ import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
-import com.matji.sandwich.adapter.PostAdapter;
+import com.matji.sandwich.adapter.SectionedPostAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -22,11 +22,11 @@ import android.view.View;
  * @author mozziluv
  *
  */
-public class SectionListView extends RequestableMListView implements View.OnClickListener {
+public class SectionedPostListView extends RequestableMListView implements View.OnClickListener {
 	private HttpRequest request;
 
-	public SectionListView(Context context, AttributeSet attr) {
-		super(context, attr, new PostAdapter(context), 10);
+	public SectionedPostListView(Context context, AttributeSet attr) {
+		super(context, attr, new SectionedPostAdapter(context), 10);
 		commonInitialisation();
 	}
 
@@ -39,7 +39,7 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 	@Override
 	public void setActivity(Activity activity) {
 		super.setActivity(activity);
-		((PostAdapter) getMBaseAdapter()).setActivity(activity);
+		((SectionedPostAdapter) getMBaseAdapter()).setActivity(activity);
 	}
 	
 	@Override

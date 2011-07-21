@@ -1,35 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:state_pressed="true">
-    <shape>
-      <solid android:color="@color/minor_tab_focused" />
-      <stroke android:width="1px"
-	      android:color="@color/minor_tab_border_focused" />
-    </shape>
-  </item>
-
-  <item android:state_focused="true">
-    <shape>
-      <solid android:color="@color/minor_tab_focused" />
-      <stroke android:width="1px"
-	      android:color="@color/minor_tab_border_focused" />
-    </shape>
-  </item>
-
-  <item android:state_selected="true">
-    <shape>
-      <solid android:color="@color/minor_tab_focused" />
-      <stroke android:width="1px"
-	      android:color="@color/minor_tab_border_focused" />
-    </shape>
-  </item>
-  
-  <item>
-    <shape>
-      <solid android:color="@color/minor_tab_default" />
-      <stroke
- 	  android:width="1px"
-	  android:color="@color/minor_tab_border_default" />
-    </shape>
-  </item>
+<selector
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:state_pressed="true"
+		android:drawable="@drawable/btn_sort_p" /> <!-- pressed -->
+	<item
+		android:state_focused="true"
+		android:drawable="@drawable/btn_sort_p" /> <!-- pressed -->
+	<item
+		android:state_selected="true"
+		android:drawable="@drawable/btn_sort_p" /> <!-- selected -->
+	<item
+		android:drawable="@drawable/btn_sort_d" /> <!-- default -->
 </selector>
