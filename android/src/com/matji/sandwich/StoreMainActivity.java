@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
@@ -19,8 +20,9 @@ import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.ModelType;
+import com.matji.sandwich.widget.StorePostListView;
+import com.matji.sandwich.widget.RoundTabHost;
 
-import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -28,11 +30,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 
-public class StoreMainActivity extends MainActivity implements Requestable {
-    private TabHost tabHost;
+public class StoreMainActivity extends BaseTabActivity implements Requestable {
+	private RoundTabHost tabHost;
     private Store store;
 
     private HttpRequestManager manager;
@@ -45,12 +46,15 @@ public class StoreMainActivity extends MainActivity implements Requestable {
     private TextView nameText;
     private TextView telText;
     private TextView addressText;
-    private TextView coverText;
-    private TextView foodText;
     private TextView tagText;
+    private TextView foodText;
+    private TextView coverText;
     private TextView regUserText;
     private TextView ownerUserText;
 
+    private MatjiImageDownloader downloader;
+    private StorePostListView listView;
+    
     /* request tags */
     public final static int BOOKMARK_REQUEST = 10;
     public final static int UN_BOOKMARK_REQUEST = 11;
@@ -59,24 +63,40 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_store_main);
+    	super.onCreate(savedInstanceState);
+    	setContentView(R.layout.activity_store_main);
 
-	tabHost = ((TabActivity) getParent()).getTabHost();
-	store = (Store) SharedMatjiData.getInstance().top();
+    	tabHost = (RoundTabHost)getTabHost();
+    	store = (Store) SharedMatjiData.getInstance().top();
 
-	manager = HttpRequestManager.getInstance(this);
-	session = Session.getInstance(this);
-	dbProvider = DBProvider.getInstance(this);
+    	manager = HttpRequestManager.getInstance(this);
+    	session = Session.getInstance(this);
+    	dbProvider = DBProvider.getInstance(this);
 
-	storeImage = (ImageView) findViewById(R.id.store_main_thumnail);
-	likeButton = (Button) findViewById(R.id.store_main_like_btn);
-	nameText = (TextView) findViewById(R.id.store_main_name);
-	telText = (TextView) findViewById(R.id.store_main_tel);
-	addressText = (TextView) findViewById(R.id.store_main_address);
-	tagText = (TextView) findViewById(R.id.store_main_tag);
+    	storeImage = (ImageView) findViewById(R.id.store_main_thumnail);
+    	likeButton = (Button) findViewById(R.id.store_main_like_btn);
+    	nameText = (TextView) findViewById(R.id.store_main_name);
+    	telText = (TextView) findViewById(R.id.store_main_tel);
+    	addressText = (TextView) findViewById(R.id.store_main_address);
+    	tagText = (TextView) findViewById(R.id.store_main_tag);
+    	foodText = (TextView) findViewById(R.id.store_main_food);
+
+    	tabHost.addLeftTab("tab1",
+    			R.string.store_main_post_list_view,
+    			new Intent(this, StoreSliderActivity.class));
+    	tabHost.addCenterTab("tab2",
+    			R.string.store_main_img,
+    			new Intent(this, StorePostListActivity.class));
+    	tabHost.addRightTab("tab3",
+    			R.string.store_main_review,
+    			new Intent(this, StoreSliderActivity.class));
+
+//	listView = (StorePostListView) findViewById(R.id.store_post_list_view);
+//	listView.setActivity(this);
+//	listView.requestReload();
+
 	
-
+ 
 //	/* Set RegUser */
 //	User regUser = store.getRegUser();
 //	String string;
@@ -98,43 +118,43 @@ public class StoreMainActivity extends MainActivity implements Requestable {
 //	    ownerUserText.setVisibility(TextView.GONE);
 //	}
 
-	setInfo();
+    	setInfo();
     }
+
     
     private void setInfo() {
-	store = (Store) SharedMatjiData.getInstance().top();
+    	store = (Store) SharedMatjiData.getInstance().top();
 
-	/* Set StoreImage */
-	AttachFile file = store.getFile();
-	if (file != null) {
-	    downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeImage);
-	} else {
-	    Drawable defaultImage = getResources().getDrawable(R.drawable.img_matji_default);
-	    storeImage.setImageDrawable(defaultImage);
-	}
+    	/* Set StoreImage */
+    	AttachFile file = store.getFile();
+    	if (file != null) {
+    		downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeImage);
+    	} else {
+    		Drawable defaultImage = getResources().getDrawable(R.drawable.img_matji_default);
+    		storeImage.setImageDrawable(defaultImage);
+    	}
 
-	nameText.setText(store.getName());
-	telText.setText(store.getTel());
-	addressText.setText(store.getAddress());
-	tagText.setText(tagListToCSV(store.getTags()));
-
-	if (session.isLogin()) {
-	    if (dbProvider.isExistLike(store.getId(), "Store")) {
-		likeButton.setText(R.string.store_main_unlike_store);
-	    } else {
-		likeButton.setText(R.string.store_main_like_store);
-	    }
-	} else {
-	    likeButton.setText(R.string.store_main_like_store);
-	}
-
-
+    	nameText.setText(store.getName());
+    	    	telText.setText(store.getTel());
+    	addressText.setText(store.getAddress());
+    	tagText.setText(tagListToCSV(store.getTags()));
+    	foodText.setText(foodListToCSV(store.getStoreFoods()));
+	
+    	if (session.isLogin()) {
+    		if (dbProvider.isExistLike(store.getId(), "Store")) {
+    			likeButton.setText(store.getLikeCount());
+    		} else {
+    			likeButton.setText(store.getLikeCount());
+    		}
+    	} else {
+    		likeButton.setText(store.getLikeCount());
+    	}
   	}
 
     public void onResume() {
-	super.onResume();
-
-	setInfo();
+    	super.onResume();
+//	listView.dataRefresh();
+    	setInfo();
     }
 
     // private void bookmarkRequest() {
