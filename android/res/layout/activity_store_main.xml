@@ -6,6 +6,7 @@
     android:background="#fff"
     android:orientation="vertical">
 
+  <!-- Main Title -->
 	<com.matji.sandwich.widget.title.MainTitle
 		style="@style/DefaultWrap" />
   
@@ -27,6 +28,14 @@
 			android:layout_alignParentRight="true"
 			android:onClick="onLikeButtonClicked"/>
   	</RelativeLayout>
+
+  <!-- Seperate Line -->
+	<RelativeLayout
+		style="@style/DefaultWidthFill">
+		<ImageView 
+			style="@style/DefaultWidthFill"
+			android:background="@drawable/seperate_line"/>
+	</RelativeLayout>
 
   	<!-- Store Cell -->
   	<RelativeLayout
@@ -51,14 +60,24 @@
 			style="@style/store_main_Tag"
 			android:id="@+id/store_main_tag"
 			android:layout_below="@id/store_main_address"
-			android:layout_toRightOf="@id/store_main_thumnail" 
+			android:layout_toRightOf="@id/store_main_thumnail"
+			android:layout_alignLeft="@id/store_main_tel"	 
 			android:singleLine="true"/>
     	<TextView 
 			style="@style/store_main_Food"
 			android:id="@+id/store_main_food"
 			android:layout_below="@id/store_main_tag"
 			android:layout_toRightOf="@id/store_main_thumnail" 
+			android:layout_alignLeft="@id/store_main_tel"	 
 			android:singleLine="true"/>
+	</RelativeLayout>
+
+	<!-- Seperate Line -->
+	<RelativeLayout
+		style="@style/DefaultWidthFill">
+		<ImageView 
+			style="@style/DefaultWidthFill"
+			android:background="@drawable/seperate_line"/>
 	</RelativeLayout>
   
   	<!-- Store Tab -->

@@ -83,10 +83,10 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
     	tabHost.addLeftTab("tab1",
     			R.string.store_main_post_list_view,
-    			new Intent(this, StoreSliderActivity.class));
+    			new Intent(this, StorePostListActivity.class));
     	tabHost.addCenterTab("tab2",
     			R.string.store_main_img,
-    			new Intent(this, StorePostListActivity.class));
+    			new Intent(this, StoreSliderActivity.class));
     	tabHost.addRightTab("tab3",
     			R.string.store_main_review,
     			new Intent(this, StoreSliderActivity.class));
@@ -131,10 +131,10 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
     	nameText.setText(store.getName());
     	telText.setText(store.getTel());
-    	addressText.setText(store.getAddress());
+    	addressText.setText(store.getAddress().trim());
     	tagText.setText(tagListToCSV(store.getTags()));
     	foodText.setText(foodListToCSV(store.getStoreFoods()));
-//		likeButton.setText(store.getLikeCount());
+		likeButton.setText(""+store.getLikeCount());
 	
 //    	if (session.isLogin()) {
 //    		if (dbProvider.isExistLike(store.getId(), "Store")) {

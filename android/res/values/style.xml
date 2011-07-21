@@ -67,11 +67,6 @@
   	<item name="android:layout_height">wrap_content</item>
   </style>
   
-  <!-- title_container.xml -->
-  <style name="title_container_Default" parent="DefaultHeightFill">
-  	<item name="android:gravity">center</item>
-  </style>
-  
   <!-- activity_store_main.xml -->
   <style name="store_main_Cell" parent="Cell">
   	<item name="android:layout_weight">1</item>
@@ -101,32 +96,31 @@
   </style>
   
   <style name="store_main_LikeButton">
-  	<item name="android:background">@drawable/like_bg</item>
-  	<item name="android:layout_width">150dp</item>
+  	<item name="android:background">@drawable/like_btn</item>
+  	<item name="android:layout_width">80dp</item>
   	<item name="android:layout_height">30dp</item>
-  	<item name="android:layout_marginLeft">3dp</item>
   	<item name="android:textSize">15dp</item>
   	<item name="android:textColor">#f00</item>
   </style>
 
   <style name="store_main_Tel" parent="DefaultWidthFill">
 	<item name="android:textSize">15dp</item>
-	<item name="android:textColor">#aaa</item>
+	<item name="android:textColor">@color/store_main_text</item>
   </style>
 
   <style name="store_main_Address" parent="DefaultWidthFill">
   	<item name="android:textSize">15dp</item>
-  	<item name="android:textColor">#aaa</item>
+  	<item name="android:textColor">@color/store_main_text</item>
   </style>
 
   <style name="store_main_Tag" parent="DefaultWidthFill">
   	<item name="android:textSize">15dp</item>
-  	<item name="android:textColor">#aaa</item>
+  	<item name="android:textColor">@color/store_main_text</item>
   </style>
   
   <style name="store_main_Food" parent="DefaultWidthFill">
   	<item name="android:textSize">15dp</item>
-  	<item name="android:textColor">#aaa</item>
+  	<item name="android:textColor">@color/store_main_text</item>
   </style>
   
   <style name="store_main_ScrapButton">
@@ -402,6 +396,24 @@
   <style name="post_tab_DivisionBar" parent="DefaultFill">
     <item name="android:layout_height">2dp</item>
     <item name="android:background">@color/post_tab_division_bar</item>
+  </style>
+  
+  <!-- Title Container -->
+  <style name="TitleContainer">
+	<item name="android:layout_width">match_parent</item>
+	<item name="android:layout_height">@dimen/title_container_height</item>
+	<item name="android:background">@drawable/title_bg</item>
+  </style>
+
+  <style name="TitleContainerItem" parent="DefaultHeightFill">
+  	<item name="android:gravity">center</item>
+  </style>
+  
+  <style name="TitleText" parent="DefaultHeightFill">
+  	<item name="android:gravity">center_vertical</item>
+  	<item name="android:text">맛있는 지도</item>
+  	<item name="android:textSize">@dimen/text_large</item>
+  	<item name="android:textColor">@color/BLACK</item>
   </style>
   
   <!-- Thumnail -->

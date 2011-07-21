@@ -2,7 +2,7 @@ package com.matji.sandwich.widget;
 
 import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.StoreTabActivity;
+import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.SectionedPostAdapter;
 import com.matji.sandwich.base.BaseActivity;
@@ -72,7 +72,7 @@ public class SectionedPostListView extends RequestableMListView implements View.
 	}	
 
 	protected void gotoStorePage(Post post) {
-		Intent intent = new Intent(getActivity(), StoreTabActivity.class);
+		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
 		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getStore());
 	}
 
