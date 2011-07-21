@@ -10,13 +10,4 @@
       android:layout_centerHorizontal="true"
       android:layout_below="@id/indicator_main_icon"
       style="@style/IndicatorMainText" />
-  <ImageView
-      android:id="@+id/indicator_main_bottom_bar"
-      android:layout_below="@id/indicator_main_label"
-      style="@style/IndicatorMainBottomBar" />
-  <ImageView
-      android:layout_alignParentRight="true"
-      android:layout_alignParentTop="true"
-      android:layout_alignBottom="@id/indicator_main_bottom_bar"
-      style="@style/IndicatorMainRightBar" />
 </RelativeLayout>

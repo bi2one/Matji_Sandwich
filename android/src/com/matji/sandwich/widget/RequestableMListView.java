@@ -73,10 +73,6 @@ PullToRefreshListView.OnRefreshListener {
 		page++;
 	}
 	
-	public int getScrollState() {
-		return mCurrentScrollState;
-	}
-
 	private void syncValue() {
 		page = (adapterData.size() / limit) + 1;
 	}
@@ -111,6 +107,7 @@ PullToRefreshListView.OnRefreshListener {
 	}
 
 	public void requestReload() {
+	    hideRefreshView();
 		if (!manager.isRunning(getActivity()) || canRepeat) {
 			Log.d("refresh", "requestReload()");
 			Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
@@ -156,17 +153,16 @@ PullToRefreshListView.OnRefreshListener {
 		if (data.size() > 0)
 			adapter.notifyDataSetChanged();
 
-		if (adapterData.size() <= limit){
-			Log.d("refresh", "Will invoke onRefreshComplete()");
-			onRefreshComplete();
-		}
+		// if (adapterData.size() <= limit) {
+			// Log.d("refresh", "Will invoke onRefreshComplete()");
+		onRefreshComplete();
+		// }
 	}
 
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getContext());
 	}
-
 
 	public void onRefresh() {
 		Log.d("refresh", "OnRefresh!!!!");
