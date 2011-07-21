@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
+import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Tag;
@@ -57,6 +58,16 @@ public class PostParser extends MatjiDataParser {
 				tags.add((Tag) data);
 		}
 		post.setTags(tags);
+		
+		/* Set AttachFiles */
+		AttachFileParser attachFileParser = new AttachFileParser(context);
+		dataList = attachFileParser.getMatjiDataList(getArray(object, "attach_files"));
+		ArrayList<AttachFile> attach_files = new ArrayList<AttachFile>(); 
+		if (dataList != null) {
+			for (MatjiData data : dataList)
+				attach_files.add((AttachFile) data);
+		}
+		post.setAttachFiles(attach_files);
 
 		Log.d("Parser", "PostParser:: called getMatjiData");
 		

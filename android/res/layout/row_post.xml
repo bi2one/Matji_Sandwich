@@ -2,65 +2,35 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/row_post_wrapper"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:paddingLeft="6dp"
-	android:paddingRight="6dp"
-	android:paddingTop="3dp"
-	android:paddingBottom="3dp">
+	style="@style/row_post_PostRowWrapper">
+	<include
+		layout="@layout/thumnail" />
 	<LinearLayout
-		android:background="@drawable/thumnail_bg"
-		android:layout_width="@dimen/thumnail_size"
-		android:layout_height="@dimen/thumnail_size">
-		<com.matji.sandwich.widget.ThumnailImageView
-			android:id="@+id/row_post_thumnail"
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:scaleType="centerCrop" />
-	</LinearLayout>
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:background="@drawable/post_bg"
-		android:orientation="vertical">
+		android:id="@+id/row_post_post_wrapper"
+		style="@style/row_post_PostWrapper">
 		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_post_nick"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="@color/DARK_ORANGE" />
+				style="@style/LinkifyName" />
 			<TextView
 				android:id="@+id/row_post_at"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/at"
-				android:textColor="@color/GRAY" />
+				style="@style/row_post_At" />
 			<TextView
 				android:id="@+id/row_post_store_name"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="@color/DARK_ORANGE" />
+				style="@style/LinkifyName" />
 		</LinearLayout>
 		<LinearLayout
 			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_post_post"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:autoLink="web"
-				android:textColor="@color/BLACK" />
+				style="@style/TalkContent" />
 		</LinearLayout>
 		<LinearLayout
 			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_post_tag"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:drawableLeft="@drawable/img_tag"
-				android:textSize="11dp"
-				android:textColor="@color/GRAY" />
+				style="@style/row_post_Tags" />
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/row_post_previews"
@@ -79,32 +49,18 @@
 			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_post_created_at"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="11dp"
-				android:textColor="@color/GRAY" />
+				style="@style/row_post_CreatedAt" />
 			<TextView
 				android:id="@+id/row_post_comment"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/default_string_comment"
-				android:textSize="11dp"
-				android:textColor="@color/DARK_ORANGE" />
+				style="@style/row_post_Comment" />
 			<TextView
 				android:id="@+id/row_post_comment_count"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="11dp"
-				android:paddingLeft="3dp"
-				android:paddingRight="6dp"
-				android:textColor="@color/GRAY" />
+				style="@style/row_post_Count" />
+			<TextView
+				style="@style/row_post_Like" />
 			<TextView
 				android:id="@+id/row_post_like_count"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:drawableLeft="@drawable/img_like_cnt"
-				android:textSize="11dp"
-				android:textColor="@color/GRAY" />
+				style="@style/row_post_Count" />
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.matji.sandwich.base;
 
 import com.matji.sandwich.LoginActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.data.MatjiData;
@@ -87,6 +88,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
 	@Override
 	public void setContentView(int layoutResID) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setTheme(R.style.Theme_RemoveOverlay);
 		super.setContentView(layoutResID);
 	}
 

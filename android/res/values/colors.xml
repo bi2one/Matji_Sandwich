@@ -18,6 +18,7 @@
 	<color name="BLACK">#000000</color>
 	<color name="WHITE">#ffffff</color>
 	<color name="BRIGHT_ORANGE">#FF9D00</color>
+	<color name="CHOCOLATE">#a27c47</color>
 	<color name="address_text_bg">#88000000</color>
 	<color name="main_tab_focused">#FFEDAB</color>
 	<color name="main_tab_default">#4F4F4F</color>
@@ -32,4 +33,6 @@
 	<color name="minor_tab_border_default">#B36D00</color>
 	<color name="minor_tab_text_default">#A6721E</color>
 	<color name="post_tab_division_bar">#E2AD51</color>
+	<color name="fading_edge_color">#555</color>
+	<color name="store_main_text">#0f0f0f</color>
 </resources>

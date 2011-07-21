@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.matji.sandwich.ImageSliderActivity;
 import com.matji.sandwich.R;
+import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Tag;
@@ -14,13 +16,15 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
-import com.matji.sandwich.widget.SectionListView;
+import com.matji.sandwich.widget.SectionedPostListView;
+import com.matji.sandwich.widget.ThumnailImageView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,7 +36,7 @@ import android.widget.LinearLayout.LayoutParams;
  * @author mozziluv
  *
  */
-public class PostAdapter extends MBaseAdapter {
+public class SectionedPostAdapter extends MBaseAdapter {
 	private final DataSetObserver dataSetObserver = new DataSetObserver() {
 		@Override
 		public void onChanged() {
@@ -46,6 +50,7 @@ public class PostAdapter extends MBaseAdapter {
 			updateSessionCache();
 		};
 	};
+
 	private int[] imageIds = {
 			R.id.row_post_preview1,
 			R.id.row_post_preview2,
@@ -59,20 +64,20 @@ public class PostAdapter extends MBaseAdapter {
 	private static final int TYPE_POST = 0;
 	private static final int TYPE_SECTION = 1;
 	private static final int VIEW_TYPE_COUNT = TYPE_SECTION + 1;
-	
+
+
 	private int thumnailSize;
-	private static final int MARGIN_THUMNAIL = DisplayUtil.PixelFromDP(11);
 	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
 
 	private MatjiImageDownloader downloader;
 
-	public PostAdapter(Context context) {
+	public SectionedPostAdapter(Context context) {
 		super(context);
+
 		registerDataSetObserver(dataSetObserver);
 		downloader = new MatjiImageDownloader();
-		
+
 		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
-		Log.d("Matji", thumnailSize+"");
 	}
 
 	private boolean isTheSame(final String previousSection, final String newSection) {
@@ -176,7 +181,7 @@ public class PostAdapter extends MBaseAdapter {
 		itemPositions.clear();
 		currentViewSections.clear();
 	}
-	
+
 	protected Integer getLinkedPosition(final int position) {
 		return itemPositions.get(position);
 	}
@@ -212,16 +217,15 @@ public class PostAdapter extends MBaseAdapter {
 	protected View createNewSectionView() {
 		return inflater.inflate(R.layout.date_section, null);
 	}
-	
-	public View getItemView(int position, View convertView, ViewGroup parent) {
+
+	public View getItemView(int position, View convertView, final ViewGroup parent) {
 		PostElement postElement;
 		Post post = (Post) data.get(position);
 
 		if (convertView == null) {
 			postElement = new PostElement();
-			final SectionListView sectionListView = (SectionListView) parent;
 			convertView = getLayoutInflater().inflate(R.layout.row_post, null);
-			postElement.thumnail = (ImageView) convertView.findViewById(R.id.row_post_thumnail);
+			postElement.thumnail = (ThumnailImageView) convertView.findViewById(R.id.thumnail);
 			postElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
 			postElement.at = (TextView) convertView.findViewById(R.id.row_post_at);
 			postElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
@@ -230,31 +234,31 @@ public class PostAdapter extends MBaseAdapter {
 			postElement.dateAgo = (TextView) convertView.findViewById(R.id.row_post_created_at);
 			postElement.commentCount = (TextView) convertView.findViewById(R.id.row_post_comment_count);
 			postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
-			
 
-			postElement.preview = new ImageView[imageIds.length];
-			for (int i = 0; i < postElement.preview.length; i++) {
-				postElement.preview[i] = (ImageView) convertView.findViewById(imageIds[i]);
+
+			postElement.previews = new ImageView[imageIds.length];
+			for (int i = 0; i < postElement.previews.length; i++) {
+				postElement.previews[i] = (ImageView) convertView.findViewById(imageIds[i]);
 			}
 
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			params.setMargins(MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS);
+
+			int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
+
+			for (int i = 0; i < postElement.previews.length; i++) {
+				postElement.previews[i].setMaxWidth((remainScreenWidth-thumnailSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
+				postElement.previews[i].setLayoutParams(params);
+			}
 			convertView.setTag(postElement);
-			postElement.thumnail.setOnClickListener(sectionListView);
-			postElement.nick.setOnClickListener(sectionListView);
-			postElement.storeName.setOnClickListener(sectionListView);
-			postElement.post.setLinksClickable(false);
-			postElement.post.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					int position = Integer.parseInt((String) v.getTag());
-					sectionListView.onListItemClick(position);
-				}
-			});
+			
+			setOnClickListener(postElement, parent);
 
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					int position = Integer.parseInt((String) ((PostElement) v.getTag()).post.getTag());
-					sectionListView.onListItemClick(position);
+					((SectionedPostListView) parent).onListItemClick(position);
 				}
 			});
 		} else {
@@ -262,19 +266,44 @@ public class PostAdapter extends MBaseAdapter {
 		}
 
 		setViewItemPosition(postElement, position);
-		setViewData(postElement, post);
+		setViewData(postElement, post, position);
 
 		return convertView;
 	}
 
+	private void setOnClickListener(PostElement holder, ViewGroup parent) {
+		final SectionedPostListView sectionListView = (SectionedPostListView) parent;
+		
+		holder.thumnail.setOnClickListener(sectionListView);
+		holder.nick.setOnClickListener(sectionListView);
+		holder.storeName.setOnClickListener(sectionListView);
+		holder.post.setLinksClickable(false);
+		holder.post.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int position = Integer.parseInt((String) v.getTag());
+				sectionListView.onListItemClick(position);
+			}
+		});
+		
+		for (int i = 0; i < holder.previews.length; i++) {
+			holder.previews[i].setOnClickListener(new PreviewOnClickListener(i));
+		}
+	}
+	
 	private void setViewItemPosition(PostElement holder, int position) {
 		holder.thumnail.setTag(position+"");
 		holder.nick.setTag(position+"");
 		holder.storeName.setTag(position+"");
 		holder.post.setTag(position+"");
+		for (int i = 0; i < holder.previews.length; i++) {
+			holder.previews[i].setTag(position+"");
+		}
 	}
 
-	private void setViewData(PostElement holder, Post post) {
+	private void setViewData(PostElement holder, Post post, int position) {
+		setPreviews(post, holder.previews);
+
 		Store store = post.getStore();
 		User user = post.getUser();
 
@@ -301,37 +330,61 @@ public class PostAdapter extends MBaseAdapter {
 		} else {
 			holder.tag.setVisibility(View.GONE);
 		}
-		
+
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, holder.thumnail);
 		holder.nick.setText(user.getNick()+" ");
 		holder.post.setText(post.getPost().trim());
 		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
 		holder.commentCount.setText(post.getCommentCount() + "");
 		holder.likeCount.setText(post.getLikeCount() + "");
+	}
 
+	public void setPreviews(Post post, ImageView[] previews) {
+		int[] attachFileIds = new int[post.getAttachFiles().size()];
+		for (int i = 0; i < attachFileIds.length; i++) {
+			attachFileIds[i] = post.getAttachFiles().get(i).getId();
+		}
 
-
-
-
-
-
-
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.setMargins(MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS);
-
-		int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
-
-		for (int i = 0; i < holder.preview.length; i++) {
-			holder.preview[i].setMaxWidth(remainScreenWidth/imageIds.length - MARGIN_PREVIEWS*2);
-			holder.preview[i].setLayoutParams(params);
-			//TODO set lisener
-//			holder.preview[i].setOnClickListener(this);
+		for (int i = 0; i < previews.length; i++) {
+			previews[i].setVisibility(View.GONE);
+		}
+		
+		for (int i = 0; i < ((attachFileIds.length > previews.length) ? previews.length : attachFileIds.length); i++) {
+			downloader.downloadAttachFileImage(attachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, previews[i]);
+			previews[i].setVisibility(View.VISIBLE);
 		}
 	}
 
-
+	public void callImageViewer(int postPosition, int position){
+		ArrayList<AttachFile> attachFiles = ((Post) data.get(postPosition)).getAttachFiles();
+		int[] attachFileIds = new int[attachFiles.size()];
+		
+		for (int i = 0; i < attachFiles.size(); i++) {
+			attachFileIds[i] = attachFiles.get(i).getId();
+		}
+		
+		Intent viewerIntent = new Intent(context, ImageSliderActivity.class);
+		viewerIntent.putExtra("attach_file_ids", attachFileIds);
+		viewerIntent.putExtra("position", position);
+		context.startActivity(viewerIntent);
+	}
+	
+	private class PreviewOnClickListener implements OnClickListener {
+		private int position = 0;
+		
+		public PreviewOnClickListener(int position) {
+			this.position = position;
+		}
+		
+		@Override
+		public void onClick(View v) {
+			int postPosition = Integer.parseInt((String) v.getTag());
+			callImageViewer(postPosition, position);
+		}		
+	}
+	
 	private class PostElement {
-		ImageView thumnail;
+		ThumnailImageView thumnail;
 		TextView nick;
 		TextView at;
 		TextView storeName;
@@ -340,6 +393,6 @@ public class PostAdapter extends MBaseAdapter {
 		TextView dateAgo;
 		TextView commentCount;
 		TextView likeCount;
-		ImageView[] preview;
+		ImageView[] previews;
 	}
 }

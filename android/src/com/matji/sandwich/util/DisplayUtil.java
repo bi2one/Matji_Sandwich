@@ -3,7 +3,6 @@ package com.matji.sandwich.util;
 import android.content.Context;
 
 public class DisplayUtil { 
-	private static final float DEFAULT_HDIP_DENSITY_SCALE = 1.5f; 
 	private static Context mContext;
 
 	public static void setContext(Context context) {
@@ -16,9 +15,7 @@ public class DisplayUtil {
 	 * @return 변환된 값 (DP) 
 	 */
 	public static int DPFromPixel(int pixel)   {
-		float scale = mContext.getResources().getDisplayMetrics().density; 
-
-		return (int)(pixel / DEFAULT_HDIP_DENSITY_SCALE * scale); 
+		return (int)(pixel / mContext.getResources().getDisplayMetrics().density); 
 	} 
 
 	/** 
@@ -27,9 +24,7 @@ public class DisplayUtil {
 	 * @param  DP 픽셀 
 	 * @return 변환된 값 (pixel) 
 	 */ 
-	public static int PixelFromDP(int DP)   { 
-		float scale = mContext.getResources().getDisplayMetrics().density; 
-
-		return (int)(DP / scale * DEFAULT_HDIP_DENSITY_SCALE); 
+	public static int PixelFromDP(int DP)   {
+		return (int)(DP * mContext.getResources().getDisplayMetrics().density);
 	} 
 }

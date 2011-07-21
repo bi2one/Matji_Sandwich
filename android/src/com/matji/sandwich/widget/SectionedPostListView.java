@@ -2,19 +2,17 @@ package com.matji.sandwich.widget;
 
 import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.StoreTabActivity;
+import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.UserTabActivity;
-import com.matji.sandwich.adapter.PostAdapter;
+import com.matji.sandwich.adapter.SectionedPostAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.PostForSeparator;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -23,11 +21,11 @@ import android.view.View;
  * @author mozziluv
  *
  */
-public class SectionListView extends RequestableMListView implements View.OnClickListener {
+public class SectionedPostListView extends RequestableMListView implements View.OnClickListener {
 	private HttpRequest request;
 
-	public SectionListView(Context context, AttributeSet attr) {
-		super(context, attr, new PostAdapter(context), 10);
+	public SectionedPostListView(Context context, AttributeSet attr) {
+		super(context, attr, new SectionedPostAdapter(context), 10);
 		commonInitialisation();
 	}
 
@@ -35,6 +33,8 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 		setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.pattern_bg));
 		setScrollingCacheEnabled(false);
 		setDivider(null);
+		setFadingEdgeLength((int) getResources().getDimension(R.dimen.fade_edge_length));
+		setCacheColorHint(getResources().getColor(R.color.fading_edge_color));
 	}
 
 	@Override
@@ -42,16 +42,16 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 		if (request == null || !(request instanceof PostHttpRequest)) {
 			request = new PostHttpRequest(getContext());
 		}
-		((PostHttpRequest) request).actionList(getPage(), getLimit());
+		((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
 		return request;
 	}
 	
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
-		Post post = ((PostForSeparator) getAdapterData().get(position)).post;
+		Post post = (Post) getAdapterData().get(position);
 
 		switch(v.getId()){
-		case R.id.row_post_thumnail: case R.id.row_post_nick:
+		case R.id.thumnail: case R.id.row_post_nick:
 			gotoUserPage(post);
 			break;
 
@@ -67,7 +67,7 @@ public class SectionListView extends RequestableMListView implements View.OnClic
 	}	
 
 	protected void gotoStorePage(Post post) {
-		Intent intent = new Intent(getActivity(), StoreTabActivity.class);
+		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
 		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getStore());
 	}
 

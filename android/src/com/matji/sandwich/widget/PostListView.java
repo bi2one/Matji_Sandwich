@@ -9,10 +9,9 @@ import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
-import com.matji.sandwich.adapter.PostAdapter;
+import com.matji.sandwich.adapter.SectionedPostAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.PostForSeparator;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
@@ -20,7 +19,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	private PostHttpRequest postRequest;
 
 	public PostListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new PostAdapter(context), 10);
+		super(context, attrs, new SectionedPostAdapter(context), 10);
 		postRequest = new PostHttpRequest(context);
 
 		setPage(1);
@@ -32,7 +31,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	@Override
 	public HttpRequest request() {
-		postRequest.actionList(getPage(), getLimit());
+		postRequest.actionListWithAttachFiles(getPage(), getLimit());
 		return postRequest;
 	}
 
@@ -48,7 +47,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	public void onClick(View v) {
 		int position = Integer.parseInt((String)v.getTag());
-		Post post = ((PostForSeparator) getAdapterData().get(position)).post;
+		Post post = (Post) getAdapterData().get(position);
 
 //		switch(v.getId()){
 //		case R.id.post_adapter_thumnail: case R.id.post_adapter_nick: case R.id.activity_adapter_nick:

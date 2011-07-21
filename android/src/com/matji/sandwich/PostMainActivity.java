@@ -7,15 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -24,7 +21,6 @@ import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CommentListView;
-import com.matji.sandwich.widget.PostViewContainer;
 
 // TODO
 // 댓글을 달거나, 라이크 했을 때 삭제 한 메모면.
@@ -32,8 +28,6 @@ import com.matji.sandwich.widget.PostViewContainer;
 
 public class PostMainActivity extends MainActivity implements Requestable {
 	private Post post;
-	private User user;
-	private Store store;
 	private int intent_post_id;
 
 	private Session session;
@@ -41,9 +35,8 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	private HttpRequest request;
 	private HttpRequestManager manager;
 
-	private PostViewContainer header;
 	private CommentListView commentListView;
-	private Button likeButton;
+//	private Button likeButton;
 
 	private int position;
 
@@ -75,39 +68,27 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	private void initInfo() {
 		post = (Post) SharedMatjiData.getInstance().top();
 		if (post.getId() == POST_ID_IS_NULL) postDoesNotExist();
-		user = post.getUser();
-		store = post.getStore();
 
-		header = new PostViewContainer(this, this, post, user, store);
 		commentListView = (CommentListView) findViewById(R.id.post_main_comment_list);
-		likeButton = (Button) findViewById(R.id.post_main_like_btn);
+//		likeButton = (Button) findViewById(R.id.post_main_like_btn);
 
-		commentListView.setPostId(post.getId());
 		commentListView.setActivity(this);
 		commentListView.requestReload();
 	}
 
 	private void setInfo() {
-		header.setInfo();
-
 		if (session.isLogin()) {
 			if (post.getUserId() == session.getCurrentUser().getId()) {
-				findViewById(R.id.post_main_delete_btn).setVisibility(View.VISIBLE);
+//				findViewById(R.id.post_main_delete_btn).setVisibility(View.VISIBLE);
 			}
 			if (dbProvider.isExistLike(post.getId(), "Post")) {
-				likeButton.setText(getString(R.string.default_string_unlike));
+//				likeButton.setText(getString(R.string.default_string_unlike));
 			} else {
-				likeButton.setText(getString(R.string.default_string_like));
+//				likeButton.setText(getString(R.string.default_string_like));
 			}
 		} else {
-			findViewById(R.id.post_main_delete_btn).setVisibility(View.GONE);
+//			findViewById(R.id.post_main_delete_btn).setVisibility(View.GONE);
 		}
-	}
-
-	private void commentListViewReload() {
-		commentListView.getHeaderViewContainer().removeView(header.getRootView());
-		commentListView.addHeaderView(header);
-		commentListView.initItemVisible();
 	}
 
 	@Override
@@ -116,7 +97,6 @@ public class PostMainActivity extends MainActivity implements Requestable {
 		if (intent_post_id == POST_ID_IS_NULL) {
 			//			commentListView.setCanRequestNext(true);
 			setInfo();
-			commentListViewReload();
 		}
 	}
 
@@ -186,7 +166,7 @@ public class PostMainActivity extends MainActivity implements Requestable {
 	public void onLikeButtonClicked(View view) {
 		if (loginRequired()) {
 			if (!manager.isRunning(this)) {
-				likeButton.setClickable(false);
+//				likeButton.setClickable(false);
 				if (dbProvider.isExistLike(post.getId(), "Post")){
 					// api request
 					unlikeRequest();
@@ -260,11 +240,11 @@ public class PostMainActivity extends MainActivity implements Requestable {
 			break;
 		}
 
-		likeButton.setClickable(true);
+//		likeButton.setClickable(true);
 	}
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
-		likeButton.setClickable(true);
+//		likeButton.setClickable(true);
 		e.showToastMsg(getApplicationContext());
 	}
 }

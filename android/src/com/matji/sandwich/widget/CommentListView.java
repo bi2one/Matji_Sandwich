@@ -19,7 +19,6 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.listener.ListItemSwipeListener;
 import com.matji.sandwich.session.Session;
 
 public class CommentListView extends RequestableMListView implements View.OnClickListener {
@@ -27,10 +26,10 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	private HttpRequest request;
 	private Session session;
 
-	private int post_id;
 	private int curDeletePos;
 
-	private ListItemSwipeListener listener;
+//	private ListItemSwipeListener listener;
+	private Post post;
 
 	private static final int COMMENT_DELETE_REQUEST = 11;
 
@@ -40,25 +39,11 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		request = new CommentHttpRequest(context);
 		session = Session.getInstance(context); 
 
+		post = (Post) SharedMatjiData.getInstance().top();
 		setPage(1);
-
-		listener = new ListItemSwipeListener(context, this, R.id.comment_adapter_wrap, R.id.adapter_swipe_rear, 1) {
-			@Override
-			public void onListItemClicked(int position) {}
-
-			@Override
-			public boolean isMyItem(int position) {
-				if (position < 0 || position >= getAdapterData().size()) return false;
-				return session.isLogin() && ((Comment) getAdapterData().get(position)).getUserId() == session.getCurrentUser().getId();
-			}
-		};
-
-		setOnTouchListener(listener);
+		setDivider(null);		
 		setCanRepeat(true);
-	}
-
-	public void setPostId(int post_id) {
-		this.post_id = post_id;
+		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
 	}
 
 	public void addComment(Comment comment) {
@@ -67,7 +52,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	}
 
 	public HttpRequest request() {
-		((CommentHttpRequest) request).actionList(post_id, getPage(), getLimit());
+		((CommentHttpRequest) request).actionList(post.getId(), getPage(), getLimit());
 		return request;
 	}
 
@@ -80,12 +65,12 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.comment_adapter_thumnail: case R.id.comment_adapter_nick:
+		case R.id.thumnail: case R.id.row_comment_nick:
 			gotoUserPage(Integer.parseInt((String)v.getTag()));
 			break;
-		case R.id.delete_btn:
-			onDeleteButtonClicked(v);
-			break;
+//		case R.id.delete_btn:
+//			onDeleteButtonClicked(v);
+//			break;
 		}	
 	}
 
@@ -125,17 +110,15 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
 		case COMMENT_DELETE_REQUEST:
-			initItemVisible();
 			getAdapterData().remove(curDeletePos);
 			getMBaseAdapter().notifyDataSetChanged();
 			Post post = (Post) SharedMatjiData.getInstance().top();
 			post.setCommentCount(post.getCommentCount() - 1);
 		}
 
+		if (tag == REQUEST_RELOAD && data != null) {
+			data.add(0, post);
+		}
 		super.requestCallBack(tag, data);
-	}
-	
-	public void initItemVisible() {
-		listener.initItemVisible();
 	}
 }

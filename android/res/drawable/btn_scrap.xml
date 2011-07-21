@@ -3,13 +3,12 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
 		android:state_pressed="true"
-		android:drawable="@drawable/icon_like" /> <!-- pressed -->
+		android:drawable="@drawable/btn_like" /> <!-- pressed -->
 	<!--
 	<item 
 	android:state_focused="true" 
 	android:drawable="@drawable/kr_7" /> 
 	focused -->
 	<item
-		android:drawable="@drawable/btn_scrap_default" />
-	<!-- default -->
+		android:drawable="@drawable/btn_scrap_default" /> <!-- default -->
 </selector>

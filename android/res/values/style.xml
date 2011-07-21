@@ -42,6 +42,25 @@
   </style>
   
   <!-- everywhere used style -->
+  <style name="LinkifyName" parent="DefaultWrap">
+	<item name="android:textColor">@color/DARK_ORANGE</item>
+  </style>
+  
+  <style name="TalkContent" parent="DefaultWrap">
+  	<item name="android:autoLink">web</item>
+  	<item name="android:textColor">@color/BLACK</item>
+  </style>
+  
+  <style name="SmallGrayText" parent="DefaultWrap">
+  	<item name="android:textSize">@dimen/text_small</item>
+  	<item name="android:textColor">@color/GRAY</item>
+  </style>
+
+  <style name="SmallOrangeText" parent="DefaultWrap">
+  	<item name="android:textSize">@dimen/text_small</item>
+  	<item name="android:textColor">@color/DARK_ORANGE</item>
+  </style>
+  
   <style name="ETCButton">
   	<item name="android:layout_width">150dp</item>
   	<item name="android:layout_height">40dp</item>
@@ -57,18 +76,27 @@
   	<item name="android:layout_height">wrap_content</item>
   </style>
   
-  <!-- title_container.xml -->
-  <style name="title_container_Default" parent="DefaultHeightFill">
-  	<item name="android:gravity">center</item>
-  </style>
-  
   <!-- activity_store_main.xml -->
   <style name="store_main_Cell" parent="Cell">
   	<item name="android:layout_weight">1</item>
   </style>
   
+  <style name="store_main_Name">
+  	<item name="android:layout_width">170dp</item>
+  	<item name="android:layout_height">30dp</item>
+	<item name="android:textSize">23dp</item>
+  	<item name="android:textColor">#000</item>
+  </style>
+
+  <style name="store_main_InfoButton">
+  	<item name="android:layout_width">30dp</item>
+  	<item name="android:layout_height">30dp</item>
+  	<item name="android:background">@drawable/btn_info</item>
+  	<item name="android:layout_marginLeft">5dp</item>
+  </style>
+  
   <style name="store_main_Thumnail">
-  	<item name="android:background">@drawable/img_matji_default</item>
+  	<item name="android:background">@drawable/thumnail_bg</item>
 	<item name="android:layout_width">100dp</item>
 	<item name="android:layout_height">90dp</item>
 	<item name="android:layout_marginRight">6dp</item>
@@ -77,30 +105,33 @@
   </style>
   
   <style name="store_main_LikeButton">
-  	<item name="android:background">@drawable/btn_like</item>
-  	<item name="android:layout_width">150dp</item>
+  	<item name="android:background">@drawable/like_btn</item>
+  	<item name="android:layout_width">80dp</item>
   	<item name="android:layout_height">30dp</item>
-  	<item name="android:layout_marginLeft">3dp</item>
-  	<item name="android:text">@string/store_main_like_store</item>
-  	<item name="android:textSize">11dp</item>
-  	<item name="android:drawablePadding">4dp</item>
-  </style>
-  
-  <style name="store_main_LikeCount">
-  	<item name="android:background">@drawable/btn_like_number</item>
-  	<item name="android:layout_width">50dp</item>
-  	<item name="android:layout_height">30dp</item>
-  	<item name="android:layout_centerInParent">true</item>
-  	<item name="android:textSize">12dp</item>
-  	<item name="android:gravity">center</item>
-  </style>
-  
-  <style name="store_main_Address" parent="DefaultWidthFill">
-  	<item name="android:layout_marginTop">7dp</item>
-  	<item name="android:textSize">16dp</item>
-  	<item name="android:textColor">#000</item>
+  	<item name="android:textSize">15dp</item>
+  	<item name="android:textColor">#f00</item>
   </style>
 
+  <style name="store_main_Tel" parent="DefaultWidthFill">
+	<item name="android:textSize">15dp</item>
+	<item name="android:textColor">@color/store_main_text</item>
+  </style>
+
+  <style name="store_main_Address" parent="DefaultWidthFill">
+  	<item name="android:textSize">15dp</item>
+  	<item name="android:textColor">@color/store_main_text</item>
+  </style>
+
+  <style name="store_main_Tag" parent="DefaultWidthFill">
+  	<item name="android:textSize">15dp</item>
+  	<item name="android:textColor">@color/store_main_text</item>
+  </style>
+  
+  <style name="store_main_Food" parent="DefaultWidthFill">
+  	<item name="android:textSize">15dp</item>
+  	<item name="android:textColor">@color/store_main_text</item>
+  </style>
+  
   <style name="store_main_ScrapButton">
   	<item name="android:layout_width">100dp</item>
   	<item name="android:layout_height">25dp</item>
@@ -158,7 +189,7 @@
   
   <!-- cell_user.xml --> 
   <style name="user_cell_Thumnail">
-  	<item name="android:background">@drawable/img_matji_default</item>
+  	<item name="android:background">@drawable/thumnail_bg</item>
 	<item name="android:layout_width">60dp</item>
 	<item name="android:layout_height">60dp</item>
 	<item name="android:layout_marginRight">7dp</item>
@@ -355,16 +386,6 @@
     <item name="android:textStyle">bold</item>
   </style>
 
-  <style name="IndicatorMainBottomBar" parent="DefaultWidthFill">
-    <item name="android:layout_height">1dp</item>
-    <item name="android:background">@drawable/indicator_main_bottom_bar</item>
-  </style>
-
-  <style name="IndicatorMainRightBar" parent="DefaultHeightFill">
-    <item name="android:layout_width">1dp</item>
-    <item name="android:background">@color/main_tab_right_bar</item>
-  </style>
-
   <!-- activity_post_tab.xml -->
   <style name="post_tab_TabBar" parent="DefaultWidthFill">
     <item name="android:padding">6dp</item>
@@ -375,4 +396,77 @@
     <item name="android:layout_height">2dp</item>
     <item name="android:background">@color/post_tab_division_bar</item>
   </style>
+  
+  <!-- Title Container -->
+  <style name="TitleContainer">
+	<item name="android:layout_width">match_parent</item>
+	<item name="android:layout_height">@dimen/title_container_height</item>
+	<item name="android:background">@drawable/title_bg</item>
+  </style>
+
+  <style name="TitleContainerItem" parent="DefaultHeightFill">
+  	<item name="android:gravity">center</item>
+  </style>
+  
+  <style name="TitleText" parent="DefaultHeightFill">
+  	<item name="android:gravity">center_vertical</item>
+  	<item name="android:text">맛있는 지도</item>
+  	<item name="android:textSize">@dimen/text_large</item>
+  	<item name="android:textColor">@color/BLACK</item>
+  </style>
+  
+  <!-- Thumnail -->
+  <style name="ThumnailWrapper">
+    <item name="android:layout_width">@dimen/thumnail_size</item>
+    <item name="android:layout_height">@dimen/thumnail_size</item>
+    <item name="android:background">@drawable/thumnail_bg</item>
+  </style>
+  
+  <style name="Thumnail">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">fill_parent</item>
+    <item name="android:scaleType">centerCrop</item>
+  </style>
+  
+  <!-- Post List Row -->
+  <style name="row_post_PostRowWrapper" parent="DefaultWidthFill">
+  	<item name="android:paddingLeft">@dimen/default_distance</item>
+  	<item name="android:paddingRight">@dimen/default_distance</item>a
+  	<item name="android:paddingTop">@dimen/default_distance_half</item>
+  	<item name="android:paddingBottom">@dimen/default_distance_half</item>
+  </style>
+  
+  <style name="row_post_PostWrapper" parent="DefaultWidthFill">
+  	<item name="android:background">@drawable/post_bg</item>
+  	<item name="android:orientation">vertical</item>
+  	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
+  </style>
+
+  <style name="row_post_At" parent="DefaultWrap">
+  	<item name="android:textColor">@color/GRAY</item>  
+  	<item name="android:text">@string/at</item>  
+  </style>
+  
+  <style name="row_post_Tags" parent="SmallGrayText">
+   	<item name="android:drawableLeft">@drawable/img_tag</item>
+  	<item name="android:drawablePadding">@dimen/default_distance_half</item>
+  </style>
+  
+  <style name="row_post_CreatedAt" parent="SmallGrayText">
+    <item name="android:paddingRight">@dimen/default_distance</item>
+  </style>
+
+  <style name="row_post_Comment" parent="SmallOrangeText">
+    <item name="android:text">@string/default_string_comment</item>
+  </style>
+  
+  <style name="row_post_Count" parent="SmallGrayText">
+  	<item name="android:paddingLeft">@dimen/default_distance</item>
+  	<item name="android:paddingRight">@dimen/default_distance</item>
+  </style>
+  
+  <style name="row_post_Like" parent="SmallOrangeText">
+   	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
+  </style>
+  
 </resources>

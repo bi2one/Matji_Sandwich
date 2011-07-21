@@ -1,8 +1,9 @@
 package com.matji.sandwich.widget.title.button;
 
-import com.matji.sandwich.R;
+import com.matji.sandwich.util.DisplayUtil;
 
 import android.content.Context;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 
 /**
@@ -13,13 +14,16 @@ import android.widget.ImageButton;
  */
 public abstract class TitleButton extends ImageButton implements TitleItem {
 	protected Context context;
+	private static final int WIDTH = DisplayUtil.PixelFromDP(40);
+	private static final int HEIGHT = DisplayUtil.PixelFromDP(40);
 	
 	public TitleButton(Context context) {
 		super(context);
 		this.context = context;
 		init();
 		setOnClickListener(new TitleButtonClickListener());
-		setBackgroundDrawable(context.getResources().getDrawable(R.drawable.btn_title_bg));
+		LayoutParams params = new LayoutParams(WIDTH, HEIGHT);
+		setLayoutParams(params);
 	}
 	
 	/**

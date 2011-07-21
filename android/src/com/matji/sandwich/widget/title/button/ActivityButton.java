@@ -11,9 +11,9 @@ import android.util.Log;
  * @author mozziluv
  *
  */
-public class DetailInfoButton extends TitleButton {
+public class ActivityButton extends TitleButton {
 
-	public DetailInfoButton(Context context) {
+	public ActivityButton(Context context) {
 		super(context);
 		init();
 	}
@@ -24,9 +24,9 @@ public class DetailInfoButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_lightbulb));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_activity));
 	}
-	
+
 	/**
 	 * @see com.matji.sandwich.widget.title.button.TitleItem#onTitleItemClicked()
 	 */

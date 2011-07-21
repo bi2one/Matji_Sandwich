@@ -24,7 +24,7 @@ public class AddStoreButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_pin_2));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_register_store));
 	}
 	
 	/**

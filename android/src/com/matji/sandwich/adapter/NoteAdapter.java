@@ -29,7 +29,7 @@ public class NoteAdapter extends MBaseAdapter {
 			noteElement = new NoteElement();
 			convertView = getLayoutInflater().inflate(R.layout.row_post, null);
 			
-			noteElement.image = (ImageView) convertView.findViewById(R.id.row_post_thumnail);
+			noteElement.thumnail = (ImageView) convertView.findViewById(R.id.thumnail);
 			noteElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
 			noteElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
 			noteElement.note = (TextView) convertView.findViewById(R.id.row_post_post);
@@ -37,7 +37,7 @@ public class NoteAdapter extends MBaseAdapter {
 			convertView.setTag(noteElement);
 			
 			StoreNoteListView storeNoteListView = (StoreNoteListView)parent;
-			noteElement.image.setOnClickListener(storeNoteListView);
+			noteElement.thumnail.setOnClickListener(storeNoteListView);
 			noteElement.nick.setOnClickListener(storeNoteListView);
 			noteElement.storeName.setOnClickListener(storeNoteListView);
 			
@@ -47,13 +47,13 @@ public class NoteAdapter extends MBaseAdapter {
 		
 		/* Set Store */
 		noteElement.storeName.setText("");
-		noteElement.image.setTag(position+"");
+		noteElement.thumnail.setTag(position+"");
 		noteElement.nick.setTag(position+"");
 		noteElement.storeName.setTag(position+"");
 		
 		/* Set User */
 		User user = info.getUser();
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, noteElement.image);
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, noteElement.thumnail);
 		noteElement.nick.setText(user.getNick());
 		noteElement.note.setText(info.getNote());
 		noteElement.dateAgo.setText(TimeUtil.getAgoFromSecond(info.getAgo()));
@@ -62,7 +62,7 @@ public class NoteAdapter extends MBaseAdapter {
 	}
 	
     private class NoteElement {
-    	ImageView image;
+    	ImageView thumnail;
     	TextView nick;
     	TextView storeName;
     	TextView note;
