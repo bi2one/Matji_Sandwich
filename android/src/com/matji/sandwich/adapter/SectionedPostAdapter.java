@@ -16,7 +16,7 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
-import com.matji.sandwich.widget.SectionedPostListView;
+import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.ThumnailImageView;
 
 import android.content.Context;
@@ -260,7 +260,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 				@Override
 				public void onClick(View v) {
 					int position = Integer.parseInt((String) ((PostElement) v.getTag()).post.getTag());
-					((SectionedPostListView) parent).onListItemClick(position);
+					((PostListView) parent).onListItemClick(position);
 				}
 			});
 		} else {
@@ -274,7 +274,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 	}
 
 	private void setOnClickListener(PostElement holder, ViewGroup parent) {
-		final SectionedPostListView sectionListView = (SectionedPostListView) parent;
+		final PostListView sectionListView = (PostListView) parent;
 		
 		holder.thumnail.setOnClickListener(sectionListView);
 		holder.nick.setOnClickListener(sectionListView);

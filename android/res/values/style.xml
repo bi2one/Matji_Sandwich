@@ -400,7 +400,7 @@
   <!-- activity_post_tab.xml -->
   <style name="post_tab_TabBar" parent="DefaultWidthFill">
     <item name="android:padding">6dp</item>
-    <item name="android:background">@color/main_tab_focused</item>
+    <item name="android:background">@drawable/btn_sort_bg</item>
   </style>
 
   <style name="post_tab_DivisionBar" parent="DefaultFill">
