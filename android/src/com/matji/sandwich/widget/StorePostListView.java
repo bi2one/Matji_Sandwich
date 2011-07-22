@@ -11,10 +11,8 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
-
 public class StorePostListView extends PostListView {
 	private HttpRequest request;
-
 	private Store store;	
 	
 	public StorePostListView(Context context, AttributeSet attrs) {

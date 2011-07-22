@@ -21,7 +21,6 @@ public class UserPostListActivity extends BaseActivity {
 		user_id = intent.getIntExtra("user_id", 0);
 		
 		listView = (UserPostListView) findViewById(R.id.user_post_list_view);
-		listView.setUserId(user_id);
 		listView.setActivity(this);
 		listView.requestReload();
 	}
