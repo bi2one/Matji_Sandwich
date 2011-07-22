@@ -12,7 +12,7 @@ import android.view.View.OnTouchListener;
 
 public class MatjiMapView extends MapView implements OnTouchListener {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
-    private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 500;
+    private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
     private static final int MAP_CENTER_CHANGE_BOUND_LAT = 10;
     private static final int MAP_CENTER_CHANGE_BOUND_LNG = 10;
     private MatjiMapCenterListener listener;

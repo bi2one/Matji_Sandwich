@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface RequestCommand {
     public ArrayList<MatjiData> request() throws MatjiException;
+    public void cancel();
 }

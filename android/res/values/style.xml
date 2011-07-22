@@ -482,6 +482,8 @@
 
   <!-- map_title_bar.xml -->
   <style name="map_title_bar" parent="DefaultWidthFill">
+    <item name="android:paddingTop">1px</item>
+    <item name="android:paddingBottom">0dp</item>
     <item name="android:background">@drawable/map_titlebar_bg</item>
   </style>
 
@@ -494,16 +496,24 @@
   </style>
 
   <style name="map_title_bar_address" parent="DefaultWidthFill">
+    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:paddingLeft">4dp</item>
+    <item name="android:paddingRight">3dp</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textColor">@color/map_title_bar_address</item>
+    <item name="android:textSize">12dp</item>
   </style>
 
   <style name="map_title_bar_changeLocationText" parent="DefaultWrap">
-    <item name="android:layout_width">30dp</item>
-    <item name="android:layout_height">30dp</item>
+    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:paddingRight">1dp</item>
+    <item name="android:textColor">@color/map_title_bar_change_address</item>
+    <item name="android:textSize">10dp</item>
   </style>
 
   <style name="map_title_bar_changeLocationArrow" parent="DefaultWrap">
-    <item name="android:layout_width">10dp</item>
-    <item name="android:layout_height">10dp</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:paddingRight">2dp</item>
   </style>
 
   <style name="map_title_bar_nearPostButton" parent="DefaultWrap">

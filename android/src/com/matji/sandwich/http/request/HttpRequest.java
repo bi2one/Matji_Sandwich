@@ -109,10 +109,10 @@ public abstract class HttpRequest implements RequestCommand {
 		HttpUtility utility = HttpUtility.getInstance();
 		utility.setFileUploadProgressListener(progressListener);
 		// httpResponse = utility.post(url, baseHeader, postParam, tag);
-		httpResponse = utility.post(url, baseHeader, postParam);
+		httpResponse = utility.post(url, baseHeader, postParam, this);
 		utility.removeFileUploadProgressListener();
 	    } else {
-		httpResponse = HttpUtility.getInstance().get(url, baseHeader, getParam);
+		httpResponse = HttpUtility.getInstance().get(url, baseHeader, getParam, this);
 	    }
 	} else {
 	    httpResponse = null;
@@ -124,6 +124,13 @@ public abstract class HttpRequest implements RequestCommand {
 	    return httpResponse;
     }
 
+    
+    public void cancel() {
+	if (httpMethod == HttpMethod.HTTP_POST || httpMethod == HttpMethod.HTTP_GET) {
+	    HttpUtility.getInstance().disconnectConnection(this);
+	}
+    }
+    
     public String getUrl() {
 	if (controller == null || controller.equals("")) {
 	    return serverDomain + action;

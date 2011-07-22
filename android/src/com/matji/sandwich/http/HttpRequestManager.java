@@ -21,6 +21,7 @@ import java.util.Map;
 
 public class HttpRequestManager {
     private static volatile HttpRequestManager manager;
+    private boolean isRunnable = true;
     private Context context;
     private Activity mParentActivity;
     private ActivityAsyncPool asyncPool;
@@ -47,7 +48,9 @@ public class HttpRequestManager {
 
     public void request(Activity parentActivity, RequestCommand request, int tag, Requestable requestable) {
 	// request.setTag(tag);
-	asyncPool.putAndRunRequest(parentActivity, request, requestable, tag);
+	if (isRunnable) {
+	    asyncPool.putAndRunRequest(parentActivity, request, requestable, tag);
+	}
     }
 
     public boolean isRunning(Activity parentActivity) {
@@ -64,6 +67,22 @@ public class HttpRequestManager {
 
     public void cancelTask(Activity parentActivity) {
 	asyncPool.cancelTask(parentActivity);
+    }
+
+    /**
+     * Manager에 들어오는 request요청들을 전부 수행하지 않도록 꺼둔다
+     */
+    public void turnOff() {
+	cancelTask();
+	isRunnable = false;
+    }
+
+    /**
+     * Manager에 들어오는 request요청들을 수행할 수 있도록 다시 켠다
+     */
+    public void turnOn() {
+	cancelTask();
+	isRunnable = true;
     }
 
     private class HttpAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayList<MatjiData>> {
@@ -104,6 +123,7 @@ public class HttpRequestManager {
 	}
 
 	protected void onCancelled() {
+	    request.cancel();
 	    asyncPool.requestStopSpinner(parentActivity);
 	}
 

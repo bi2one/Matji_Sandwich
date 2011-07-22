@@ -23,9 +23,13 @@ public class GeocodeHttpRequest implements RequestCommand {
     private GeoPoint _point;
     private int _listCount;
     private String _locName;
+    private double _lowerLeftLatitude;
+    private double _lowerLeftLongitude;
+    private double _upperRightLatitude;
+    private double _upperRightLongitude;
     private Geocoder _geocoder;
     private Action actionFlag;
-    private enum Action { LOCATION, SEARCH }
+    private enum Action { LOCATION, SEARCH, LOCATION_POINT }
     
     public GeocodeHttpRequest(Context context) {
 	_geocoder = new Geocoder(context, GEOCODE_LOCALE);
@@ -49,14 +53,57 @@ public class GeocodeHttpRequest implements RequestCommand {
 	actionFlag = Action.SEARCH;
     }
 
+    public void actionFromLocationNamePoints(String locName, int listCount,
+					     double lowerLeftLatitude,
+					     double lowerLeftLongitude,
+					     double upperRightLatitude,
+					     double upperRightLongitude) {
+	_locName = locName;
+	_listCount = listCount;
+	_lowerLeftLatitude = lowerLeftLatitude;
+	_lowerLeftLongitude = lowerLeftLongitude;
+	_upperRightLatitude = upperRightLatitude;
+	_upperRightLongitude = upperRightLongitude;
+	actionFlag = Action.LOCATION_POINT;
+    }
+
     public ArrayList<MatjiData> request() throws MatjiException {
 	switch(actionFlag) {
 	case LOCATION:
 	    return requestLocation();
 	case SEARCH:
 	    return requestSearch();
+	case LOCATION_POINT:
+	    return requestLocationPoint();
 	}
 	return null;
+    }
+
+    public ArrayList<MatjiData> requestLocationPoint() throws MatjiException {
+	List<Address> geocoderResult = null;
+
+	try {
+	    geocoderResult = _geocoder.getFromLocationName(_locName,
+							   _listCount,
+							   _lowerLeftLatitude,
+							   _lowerLeftLongitude,
+							   _upperRightLatitude,
+							   _upperRightLongitude);
+	} catch(IOException e) {
+	    e.printStackTrace();
+	    throw new GeocodeLocationInvalidMatjiException();
+	}
+	
+	ArrayList<MatjiData> result = new ArrayList<MatjiData>();
+
+	if (geocoderResult.size() == 0) {
+	    throw new GeocodeLocationInvalidMatjiException();
+	}
+
+	for (Address addr : geocoderResult) {
+	    result.add(new AddressMatjiData(addr));
+	}
+	return result;    	
     }
 
     public ArrayList<MatjiData> requestLocation() throws MatjiException {
@@ -105,4 +152,6 @@ public class GeocodeHttpRequest implements RequestCommand {
 	}
 	return result;    	
     }
+
+    public void cancel() { }
 }

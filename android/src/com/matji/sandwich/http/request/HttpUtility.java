@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,8 @@ final public class HttpUtility
     public static final String ASYNC_RESULT_BUNDLE_KEY_HTTP_BODY = "body";
 	
     public static final String BASE_URL = "http://cyphone.nate.com/";
+
+    private HashMap<HttpRequest, HttpURLConnection> connectionPool;
 	
     public static int convertFoundToOk(int http_status) {
 	return ((http_status == HTTP_STATUS_FOUND)? HTTP_STATUS_OK : http_status);
@@ -76,7 +79,9 @@ final public class HttpUtility
     /**
      * 
      */
-    private HttpUtility(){}
+    private HttpUtility() {
+	connectionPool = new HashMap<HttpRequest, HttpURLConnection>();
+    }
 	
     /**
      * 
@@ -197,6 +202,15 @@ final public class HttpUtility
 	// Log.d(Constants.DEBUG_TAG,urlWithQuery.toString());
 	return urlWithQuery.toString();
     }
+
+    public void disconnectConnection(HttpRequest request) {
+	HttpURLConnection connection = connectionPool.get(request);
+	if (connection != null) {
+	    // Log.d("=====", "disconnect!!");
+	    connection.disconnect();
+	    connectionPool.remove(request);
+	}
+    }
 	
     /**
      * 
@@ -205,7 +219,7 @@ final public class HttpUtility
      * @param getParameters
      * @return
      */
-    public SimpleHttpResponse get(String url, Map<String, String> headerValues, Map<String, String> getParameters)
+    public SimpleHttpResponse get(String url, Map<String, String> headerValues, Map<String, String> getParameters, HttpRequest request)
     {
 	//open connection
 	HttpURLConnection connection = null;
@@ -220,12 +234,13 @@ final public class HttpUtility
 		connection.setUseCaches(getUseCaches());
 		connection.setConnectTimeout(getConnectionTimeout());
 		connection.setReadTimeout(getReadTimeout());
+		connectionPool.put(request, connection);
 	    }
 	catch(Exception e)
 	    {
 		Log.e("HttpUtility.get", e.toString());
 		if(connection != null)
-		    connection.disconnect();
+		    disconnectConnection(request);
 		return null;
 	    }
 
@@ -240,16 +255,24 @@ final public class HttpUtility
 		InputStream is = connection.getInputStream();
 		byte[] responseBody = readBytesFromInputStream(is);
 		is.close();
-		return new SimpleHttpResponse(connection.getResponseCode(), responseBody, connection.getHeaderFields());
+		SimpleHttpResponse result = new SimpleHttpResponse(connection.getResponseCode(), responseBody, connection.getHeaderFields());
+		disconnectConnection(request);
+		return result;
 	    }
+	catch(SocketException e) {
+	    return null;
+	}
 	catch(Exception e)
 	    {
 		Log.e("HttpUtility.get", e.toString());
 		try
 		    {
 			int responseCode = connection.getResponseCode();
-			if(responseCode != -1)
-			    return new SimpleHttpResponse(responseCode, connection.getResponseMessage());
+			if(responseCode != -1) {
+			    SimpleHttpResponse result = new SimpleHttpResponse(responseCode, connection.getResponseMessage());
+			    disconnectConnection(request);
+			    return result;
+			}
 		    }
 		catch(IOException ioe)
 		    {
@@ -258,13 +281,14 @@ final public class HttpUtility
 	    }
 	finally
 	    {
-		connection.disconnect();
+		disconnectConnection(request);
 	    }
 		
 	return null;
     }
 
-    public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters) {
+    public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters, HttpRequest request) {
+	
 	// return post(url, headerValues, postParameters, 0);
     // 	return post(url, headerValues, postParameters);
     // }
@@ -279,6 +303,7 @@ final public class HttpUtility
     // {
 	//open connection
 	HttpURLConnection connection = null;
+	connectionPool.put(request, connection);
 	try
 	    {
 		connection = (HttpURLConnection)new URL(url).openConnection();
@@ -291,12 +316,13 @@ final public class HttpUtility
 		connection.setConnectTimeout(getConnectionTimeout());
 		connection.setReadTimeout(getReadTimeout());
 		connection.setRequestProperty("Accept", "text/html,application/json,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		connectionPool.put(request, connection);
 	    }
 	catch(Exception e)
 	    {
 		Log.e("HttpUtility.post", e.toString());
 		if(connection != null)
-		    connection.disconnect();
+		    disconnectConnection(request);
 		return null;
 	    }
 
@@ -407,7 +433,7 @@ final public class HttpUtility
 		    {
 			Log.d("Test", "post error " + e.toString());
 			Log.e("HttpUtility.post", e.toString());
-			connection.disconnect();
+			disconnectConnection(request);
 			return null;
 		    }
 	    }
@@ -430,7 +456,7 @@ final public class HttpUtility
 		catch(Exception e)
 		    {
 			Log.e("HttpUtility.post", e.toString());
-			connection.disconnect();
+			disconnectConnection(request);
 			return null;
 		    }	
 	    }
@@ -441,7 +467,9 @@ final public class HttpUtility
 		InputStream is = connection.getInputStream();
 		byte[] responseBody = readBytesFromInputStream(is);
 		is.close();
-		return new SimpleHttpResponse(connection.getResponseCode(), responseBody, connection.getHeaderFields());
+		SimpleHttpResponse result = new SimpleHttpResponse(connection.getResponseCode(), responseBody, connection.getHeaderFields());
+		disconnectConnection(request);
+		return result;
 	    }
 	catch(Exception e)
 	    {
@@ -449,8 +477,11 @@ final public class HttpUtility
 		try
 		    {
 			int responseCode = connection.getResponseCode();
-			if(responseCode != -1)
-			    return new SimpleHttpResponse(responseCode, connection.getResponseMessage());
+			if(responseCode != -1) {
+			    SimpleHttpResponse result = new SimpleHttpResponse(responseCode, connection.getResponseMessage());
+			    disconnectConnection(request);
+			    return result;
+			}
 		    }
 		catch(IOException ioe)
 		    {
@@ -459,7 +490,7 @@ final public class HttpUtility
 	    }
 	finally
 	    {
-		connection.disconnect();
+			disconnectConnection(request);
 	    }
 	return null;
     }

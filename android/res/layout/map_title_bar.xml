@@ -8,17 +8,20 @@
       android:layout_alignParentLeft="true" />
   <Button
       style="@style/map_title_bar_locationButton"
+      android:onClick="onCurrentPositionClick"
       android:id="@+id/map_title_bar_location_button"
       android:layout_toRightOf="@id/map_title_bar_flip_button" />
   <TextView
       style="@style/map_title_bar_address"
       android:id="@+id/map_title_bar_address"
-      android:text="test"
+      android:text="서울시 강남구 신사동"
+      android:layout_centerVertical="true"
       android:layout_toRightOf="@id/map_title_bar_location_button"
       android:layout_toLeftOf="@+id/map_title_bar_change_location_button" />
   <LinearLayout
       style="@style/DefaultWrap"
       android:layout_toLeftOf="@+id/map_title_bar_near_post_button"
+      android:layout_centerVertical="true"
       android:id="@id/map_title_bar_change_location_button">
     <TextView
 	style="@style/map_title_bar_changeLocationText"

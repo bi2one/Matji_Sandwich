@@ -14,6 +14,8 @@ import android.view.View.OnTouchListener;
 import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
@@ -55,13 +57,13 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private static final int MAX_STORE_COUNT = 60;
     private static final int NEARBY_STORE = 1;
     private static final int SEARCH_LOCATION = 2;
+    private static final int GEOCODE = 3;
     private static final int GET_BOOKMARK_POSITION_TAG = 0;
 
     private Context mContext;
     private GpsManager mGpsManager;
     private MatjiMapView mMapView;
     private MapController mMapController;
-    private EditText mSearchView;
     private Location prevLocation;
     private GeoPoint currentCenterPoint;
     private GeoPoint currentNeBound;
@@ -70,7 +72,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private ArrayList<MatjiData> stores;
     private HttpRequestManager mRequestManager;
     private Session session;
-    private Button bookmarkButton;
+    private TextView addressView;
     // private InputMethodManager imm;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -82,13 +84,10 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mMapView.setOnTouchListener(this);
 	mContext = getApplicationContext();
 	mGpsManager = new GpsManager(mContext, this);
-	// mSearchView = (EditText)findViewById(R.id.main_map_search_box);
+	addressView = (TextView)findViewById(R.id.map_title_bar_address);
 	mRequestManager = HttpRequestManager.getInstance(mContext);
 	storeItemizedOverlay = new StoreItemizedOverlay(mContext, this, mMapView);
-	// bookmarkButton = (Button)findViewById(R.id.bookmark_button);
 	session = Session.getInstance(mContext);
-
-	// mSearchView.setOnKeyListener(this);
 
 	mGpsManager.start();
     }
@@ -102,6 +101,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	super.onPause();
 	mGpsManager.stop();
 	mMapView.stopMapCenterThread();
+	mRequestManager.turnOn();
     }
 
     private void setCenter(Location loc) {
@@ -172,6 +172,17 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    Address address = ((AddressMatjiData)data.get(0)).getAddress();
 	    GeoPoint point = new GeoPoint((int)(address.getLatitude() * 1E6), (int)(address.getLongitude() * 1E6));
 	    mMapController.animateTo(point);
+	    break;
+	case GEOCODE:
+	    if (((AddressMatjiData)data.get(0)).getAddress().getPremises() != null) {
+		Log.d("=====", ((AddressMatjiData)data.get(0)).getAddress().getPremises());
+	    } else {
+		Log.d("=====", "null: " + ((AddressMatjiData)data.get(0)).getAddress().getAddressLine(0));
+	    }
+	    // for ((AddressMatjiData) addressData : data) {
+	    // 	Address address = addressData.getAddress();
+		
+	    // }
 	}
     }
 
@@ -196,6 +207,8 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
 	private void loadStoresOnMap(){
 	    StoreHttpRequest request = new StoreHttpRequest(mContext);
+	    GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(mContext);
+	    
 	    CoordinateRegion cr = new CoordinateRegion(mMapView.getMapCenter(), mMapView.getLatitudeSpan(), mMapView.getLongitudeSpan());
 	    GeoPoint swPoint = cr.getSWGeoPoint();
 	    GeoPoint nePoint = cr.getNEGeoPoint();
@@ -206,7 +219,9 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
 
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
+	    geocodeRequest.actionFromGeoPoint(mMapView.getMapCenter(), 10);
 	    mRequestManager.request(mActivity, request, NEARBY_STORE, (Requestable)mActivity);
+	    mRequestManager.request(mActivity, geocodeRequest, GEOCODE, (Requestable)mActivity);
 	}
     }
 
@@ -227,6 +242,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onCurrentPositionClick(View v) {
+	mRequestManager.cancelTask();
 	mGpsManager.start();
     }
 
@@ -254,25 +270,25 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	startActivity(userNearRankingIntent);
     }
 
-    public void onBookmarkClick(View v) {
-	if (loginRequired()) {
-	    bookmarkButton.setClickable(false);
-	    Intent bookmarkIntent = new Intent(mContext, BookmarkListActivity.class);
+    // public void onBookmarkClick(View v) {
+    // 	if (loginRequired()) {
+    // 	    bookmarkButton.setClickable(false);
+    // 	    Intent bookmarkIntent = new Intent(mContext, BookmarkListActivity.class);
 
-	    if (currentNeBound != null && currentSwBound != null) {
-		double latNe = (double)currentNeBound.getLatitudeE6() / 1E6;
-		double lngNe = (double)currentNeBound.getLongitudeE6() / 1E6;
-		double latSw = (double)currentSwBound.getLatitudeE6() / 1E6;
-		double lngSw = (double)currentSwBound.getLongitudeE6() / 1E6;
+    // 	    if (currentNeBound != null && currentSwBound != null) {
+    // 		double latNe = (double)currentNeBound.getLatitudeE6() / 1E6;
+    // 		double lngNe = (double)currentNeBound.getLongitudeE6() / 1E6;
+    // 		double latSw = (double)currentSwBound.getLatitudeE6() / 1E6;
+    // 		double lngSw = (double)currentSwBound.getLongitudeE6() / 1E6;
 
-		bookmarkIntent.putExtra(BookmarkListActivity.IF_LAT_NE, latNe);
-		bookmarkIntent.putExtra(BookmarkListActivity.IF_LNG_NE, lngNe);
-		bookmarkIntent.putExtra(BookmarkListActivity.IF_LAT_SW, latSw);
-		bookmarkIntent.putExtra(BookmarkListActivity.IF_LNG_SW, lngSw);
-	    }
-	    startActivityForResult(bookmarkIntent, GET_BOOKMARK_POSITION_TAG);
-	}
-    }
+    // 		bookmarkIntent.putExtra(BookmarkListActivity.IF_LAT_NE, latNe);
+    // 		bookmarkIntent.putExtra(BookmarkListActivity.IF_LNG_NE, lngNe);
+    // 		bookmarkIntent.putExtra(BookmarkListActivity.IF_LAT_SW, latSw);
+    // 		bookmarkIntent.putExtra(BookmarkListActivity.IF_LNG_SW, lngSw);
+    // 	    }
+    // 	    startActivityForResult(bookmarkIntent, GET_BOOKMARK_POSITION_TAG);
+    // 	}
+    // }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	super.onActivityResult(requestCode, resultCode, data);
@@ -293,7 +309,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 		mMapController.zoomToSpan(latSpan, lngSpan);
 	    }
 	}
-	bookmarkButton.setClickable(true);
+	// bookmarkButton.setClickable(true);
     }
 
     private void findAndMovePosition(String seed) {
@@ -315,6 +331,10 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	switch(e.getAction()) {
 	case MotionEvent.ACTION_DOWN:
 	    mGpsManager.stop();
+	    mRequestManager.turnOff();
+	    break;
+	case MotionEvent.ACTION_UP:
+	    mRequestManager.turnOn();
 	}
 	return false;
     }
