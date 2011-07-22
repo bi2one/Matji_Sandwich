@@ -11,8 +11,8 @@
 		android:scaleType="centerCrop"
 		android:layout_marginRight="7dp"
 		android:layout_marginBottom="7dp"
-		android:background="@drawable/thumnail_bg"
-		android:id="@+id/alarm_adapter_thumnail" />
+		android:background="@drawable/img_profile_bg"
+		android:id="@+id/alarm_adapter_profile" />
 	<TextView
 		style="@style/DefaultWrap"
 		android:id="@+id/alarm_adapter_nick"

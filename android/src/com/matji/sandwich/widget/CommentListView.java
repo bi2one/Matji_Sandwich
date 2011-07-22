@@ -74,7 +74,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		int position = Integer.parseInt((String) v.getTag());
 
 		switch(v.getId()){
-		case R.id.thumnail:
+		case R.id.profile:
 			if (position == 0) {
 				Post post = (Post) getAdapterData().get(position);
 				gotoUserPage(post.getUser());

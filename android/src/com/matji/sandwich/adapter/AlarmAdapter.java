@@ -27,19 +27,19 @@ public class AlarmAdapter extends MBaseAdapter {
 			alarmElement = new AlarmElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_alarm, null);
 
-			alarmElement.image = (ImageView) convertView.findViewById(R.id.alarm_adapter_thumnail);
+			alarmElement.profile = (ImageView) convertView.findViewById(R.id.alarm_adapter_profile);
 			alarmElement.nick = (TextView) convertView.findViewById(R.id.alarm_adapter_nick);
 			alarmElement.message = (TextView) convertView.findViewById(R.id.alarm_adapter_message);
 			convertView.setTag(alarmElement);
 
 			AlarmListView alarmListView = (AlarmListView)parent;
-			alarmElement.image.setOnClickListener(alarmListView);
+			alarmElement.profile.setOnClickListener(alarmListView);
 			alarmElement.nick.setOnClickListener(alarmListView);
 		} else {
 			alarmElement = (AlarmElement) convertView.getTag();
 		}
 
-		alarmElement.image.setTag(position+"");
+		alarmElement.profile.setTag(position+"");
 		alarmElement.nick.setTag(position+"");
 
 		/* Set User */
@@ -48,7 +48,7 @@ public class AlarmAdapter extends MBaseAdapter {
 
 		alarmElement.nick.setText(sentUser.getNick() + " ");
 
-		downloader.downloadUserImage(sentUser.getId(), alarmElement.image);
+		downloader.downloadUserImage(sentUser.getId(), alarmElement.profile);
 		
 		if (type.equals("Following")) {
 			alarmElement.message.setText(R.string.alarm_following_you);
@@ -62,7 +62,7 @@ public class AlarmAdapter extends MBaseAdapter {
 	}
 
 	private class AlarmElement {
-		ImageView image;
+		ImageView profile;
 		TextView nick;
 		TextView message;
 	}

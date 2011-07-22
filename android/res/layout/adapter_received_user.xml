@@ -6,7 +6,7 @@
 	android:padding="3dp"
 	android:background="@color/WHITE">
 	<ImageView
-		android:id="@+id/received_user_adapter_thumnail"
+		android:id="@+id/received_user_adapter_profile"
 		android:layout_width="30dp"
 		android:layout_height="30dp"
 		android:layout_margin="3dp" />

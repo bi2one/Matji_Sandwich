@@ -6,8 +6,8 @@
 	<!-- Store Cell -->
 	<dimen name="max_title_width">200dp</dimen>
 	
-	<!-- User Thumnail -->
-	<dimen name="thumnail_size">50dp</dimen>
+	<!-- User Profile -->
+	<dimen name="profile_size">50dp</dimen>
 	
 	<!-- everywhere used dimens -->
 	<dimen name="default_distance">6dp</dimen>

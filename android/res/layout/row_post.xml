@@ -4,7 +4,7 @@
 	android:id="@+id/row_post_wrapper"
 	style="@style/row_post_PostRowWrapper">
 	<include
-		layout="@layout/thumnail" />
+		layout="@layout/profile" />
 	<LinearLayout
 		android:id="@+id/row_post_post_wrapper"
 		style="@style/row_post_PostWrapper">

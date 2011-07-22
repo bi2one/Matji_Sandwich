@@ -17,7 +17,7 @@ import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.PostListView;
-import com.matji.sandwich.widget.ThumnailImageView;
+import com.matji.sandwich.widget.ProfileImageView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -66,7 +66,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 	private static final int VIEW_TYPE_COUNT = TYPE_SECTION + 1;
 
 
-	private int thumnailSize;
+	private int profileSize;
 	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
 
 	private MatjiImageDownloader downloader;
@@ -77,7 +77,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		registerDataSetObserver(dataSetObserver);
 		downloader = new MatjiImageDownloader(context);
 
-		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
+		profileSize = context.getResources().getDimensionPixelSize(R.dimen.profile_size);
 	}
 
 	private boolean isTheSame(final String previousSection, final String newSection) {
@@ -225,7 +225,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		if (convertView == null) {
 			postElement = new PostElement();
 			convertView = getLayoutInflater().inflate(R.layout.row_post, null);
-			postElement.thumnail = (ThumnailImageView) convertView.findViewById(R.id.thumnail);
+			postElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
 			postElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
 			postElement.at = (TextView) convertView.findViewById(R.id.row_post_at);
 			postElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
@@ -247,7 +247,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
 
 			for (int i = 0; i < postElement.previews.length; i++) {
-				postElement.previews[i].setMaxWidth((remainScreenWidth-thumnailSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
+				postElement.previews[i].setMaxWidth((remainScreenWidth-profileSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
 				postElement.previews[i].setLayoutParams(params);
 			}
 			
@@ -276,7 +276,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 	private void setOnClickListener(PostElement holder, ViewGroup parent) {
 		final PostListView sectionListView = (PostListView) parent;
 		
-		holder.thumnail.setOnClickListener(sectionListView);
+		holder.profile.setOnClickListener(sectionListView);
 		holder.nick.setOnClickListener(sectionListView);
 		holder.storeName.setOnClickListener(sectionListView);
 		holder.post.setLinksClickable(false);
@@ -294,7 +294,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 	}
 	
 	private void setViewItemPosition(PostElement holder, int position) {
-		holder.thumnail.setTag(position+"");
+		holder.profile.setTag(position+"");
 		holder.nick.setTag(position+"");
 		holder.storeName.setTag(position+"");
 		holder.post.setTag(position+"");
@@ -333,7 +333,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			holder.tag.setVisibility(View.GONE);
 		}
 
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, holder.thumnail);
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, holder.profile);
 		
 		holder.nick.setText(user.getNick()+" ");
 		holder.post.setText(post.getPost().trim());
@@ -387,7 +387,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 	}
 	
 	private class PostElement {
-		ThumnailImageView thumnail;
+		ProfileImageView profile;
 		TextView nick;
 		TextView at;
 		TextView storeName;
