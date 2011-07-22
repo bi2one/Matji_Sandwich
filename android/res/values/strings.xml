@@ -223,4 +223,7 @@
   <string name="standard_list">standard_list</string>
   <string name="empty_list">empty_list</string>
   <string name="at"></string>
+  
+  <!-- map_title_bar.xml -->
+  <string name="change_location">위치변경</string>
 </resources>

@@ -24,7 +24,7 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 
     public MatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	mapCenter = getMapCenter();
+	// mapCenter = getMapCenter();
 	setOnTouchListener(this);
     }
 
@@ -65,6 +65,10 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 	}
 
 	private boolean geoPointEquals(GeoPoint p1, GeoPoint p2) {
+	    if (p1 == null || p2 == null) {
+		return false;
+	    }
+	    
 	    int p1Lat = p1.getLatitudeE6();
 	    int p1Lng = p1.getLongitudeE6();
 	    int p2Lat = p2.getLatitudeE6();
