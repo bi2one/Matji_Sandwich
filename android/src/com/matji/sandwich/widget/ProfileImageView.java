@@ -14,16 +14,16 @@ import android.widget.ImageView;
  * @author mozziluv
  *
  */
-public class ThumnailImageView extends ImageView {
+public class ProfileImageView extends ImageView {
 
-	public ThumnailImageView(Context context) {
+	public ProfileImageView(Context context) {
 		super(context);
 	}
 
-	public ThumnailImageView(Context context, AttributeSet attr) {
+	public ProfileImageView(Context context, AttributeSet attr) {
 		super(context, attr, 0);
 	}
-	public ThumnailImageView(Context context, AttributeSet attr, int defStyle) {
+	public ProfileImageView(Context context, AttributeSet attr, int defStyle) {
 		super(context, attr, defStyle);
 	}
 	

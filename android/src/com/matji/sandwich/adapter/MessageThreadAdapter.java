@@ -36,14 +36,14 @@ public class MessageThreadAdapter extends MBaseAdapter {
 			messageElement = new MessageElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_message, null);
 
-			messageElement.thumnail = (ImageView) convertView.findViewById(R.id.message_adapter_thumnail);
+			messageElement.profile = (ImageView) convertView.findViewById(R.id.message_adapter_profile);
 			messageElement.nick = (TextView) convertView.findViewById(R.id.message_adapter_nick);
 			messageElement.message = (TextView) convertView.findViewById(R.id.message_adapter_message);
 			messageElement.dateAgo = (TextView) convertView.findViewById(R.id.message_adapter_created_at);
 			messageElement.delete = (Button) convertView.findViewById(R.id.delete_btn);
 
 			MessageThreadListView threadListView = (MessageThreadListView) parent;
-			messageElement.thumnail.setOnClickListener(threadListView);
+			messageElement.profile.setOnClickListener(threadListView);
 			messageElement.nick.setOnClickListener(threadListView);
 			messageElement.delete.setOnClickListener(threadListView);
 			
@@ -68,12 +68,12 @@ public class MessageThreadAdapter extends MBaseAdapter {
 			user = message.getReceivedUser();
 		}
 
-		messageElement.thumnail.setTag(position+"");
+		messageElement.profile.setTag(position+"");
 		messageElement.message.setTag(position+"");
 		messageElement.nick.setTag(position+"");
 		messageElement.delete.setTag(position+"");
 
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, messageElement.thumnail);
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, messageElement.profile);
 		convertView.findViewById(R.id.message_adapter_thread).setVisibility(View.VISIBLE);
 		convertView.findViewById(R.id.adapter_swipe_rear).setVisibility(View.GONE);
 		
@@ -85,7 +85,7 @@ public class MessageThreadAdapter extends MBaseAdapter {
 	}
 	
 	private class MessageElement {
-		ImageView thumnail;
+		ImageView profile;
 		TextView nick;
 		TextView message;
 		TextView dateAgo;

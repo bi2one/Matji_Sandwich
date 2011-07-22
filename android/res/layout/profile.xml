@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/ProfileWrapper">
+	<com.matji.sandwich.widget.ProfileImageView
+		android:id="@+id/profile"
+		style="@style/Profile" />
+</LinearLayout>

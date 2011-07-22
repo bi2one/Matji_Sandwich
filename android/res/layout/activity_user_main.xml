@@ -5,6 +5,7 @@
 	android:layout_height="fill_parent"
 	android:background="#fff"
 	android:orientation="vertical">
+	
 	<!-- User Cell -->
 	<RelativeLayout
 		style="@style/user_main_Cell">

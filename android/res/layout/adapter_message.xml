@@ -19,8 +19,8 @@
 			android:padding="3dp"
 			android:layout_alignParentLeft="true">
 			<ImageView
-				android:background="@drawable/thumnail_bg"
-				android:id="@+id/message_adapter_thumnail"
+				android:background="@drawable/img_profile_bg"
+				android:id="@+id/message_adapter_profile"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
 				android:scaleType="centerCrop" />

@@ -59,7 +59,7 @@ public class FollowingListView extends UserListView implements View.OnClickListe
 		//		Post recentPost = user.getPosts().get(0);
 		//
 		//		switch(v.getId()){
-		//		case R.id.thumnail: case R.id.post_adapter_nick:
+		//		case R.id.profile: case R.id.post_adapter_nick:
 		//			gotoUserPage(recentPost);
 		//			break;
 		//

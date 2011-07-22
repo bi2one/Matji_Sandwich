@@ -11,12 +11,15 @@ import android.view.View;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
+import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.CommentAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
@@ -68,14 +71,28 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	public void onListItemClick(int position) {}
 
 	public void onClick(View v) {
+		int position = Integer.parseInt((String) v.getTag());
+
 		switch(v.getId()){
-		case R.id.thumnail: case R.id.row_comment_nick:
-			gotoUserPage(Integer.parseInt((String)v.getTag()));
+		case R.id.profile:
+			if (position == 0) {
+				Post post = (Post) getAdapterData().get(position);
+				gotoUserPage(post.getUser());
+				break;
+			}
+		case R.id.row_comment_nick:
+			Comment comment = (Comment) getAdapterData().get(position);
+			gotoUserPage(comment.getUser());
 			break;
-//		case R.id.delete_btn:
-//			onDeleteButtonClicked(v);
-//			break;
-		}	
+		case R.id.row_post_nick:
+			Post post = (Post) getAdapterData().get(position);
+			gotoUserPage(post.getUser());
+			break;
+		case R.id.row_post_store_name:
+			post = (Post) getAdapterData().get(position);
+			gotoStorePage(post.getStore());
+			break;
+		}
 	}
 
 	public void onDeleteButtonClicked(View v) {
@@ -103,11 +120,15 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	public void deleteComment(int comment_id) {
 		getHttpRequestManager().request(getActivity(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
 	}
-	
-	protected void gotoUserPage(int position) { 
-		Comment comment = (Comment)getAdapterData().get(position);
+
+	protected void gotoUserPage(User user) { 
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, comment.getUser());
+		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, user);
+	}
+	
+	protected void gotoStorePage(Store store) { 
+		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
+		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, store);
 	}
 
 	@Override

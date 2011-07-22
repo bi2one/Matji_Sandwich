@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- Title Container -->
-	<dimen name="title_container_height">40dp</dimen>
-	<dimen name="thumnail_size">50dp</dimen>
+	<dimen name="title_container_height">37dp</dimen>
+	
+	<!-- Store Cell -->
+	<dimen name="max_title_width">200dp</dimen>
+	
+	<!-- User Profile -->
+	<dimen name="profile_size">50dp</dimen>
 	
 	<!-- everywhere used dimens -->
 	<dimen name="default_distance">6dp</dimen>

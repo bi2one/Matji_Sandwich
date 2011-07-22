@@ -79,7 +79,7 @@ public class MessageThreadListView extends MessageListView implements OnClickLis
 	
 	public void onClick(View v) {
 		switch(v.getId()) {
-		case R.id.message_adapter_thumnail: case R.id.message_adapter_nick:
+		case R.id.message_adapter_profile: case R.id.message_adapter_nick:
 			int position = Integer.parseInt((String) v.getTag()); 
 			gotoUserPage((Message) getAdapterData().get(position));
 			break;

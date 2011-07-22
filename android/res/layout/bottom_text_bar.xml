@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/BottomTextBarWrapper">
+	<EditText
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="99"
+		android:layout_gravity="center"
+		android:singleLine="true"
+		android:scrollbars="horizontal"
+		android:layout_margin="@dimen/default_distance_half"
+		/>
+	<Button
+		android:id="@+id/confirm_button"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		android:layout_gravity="center"
+		android:text="@string/confirm"
+		android:textColor="@color/BLACK"
+		android:background="@drawable/selector" />
+</LinearLayout>

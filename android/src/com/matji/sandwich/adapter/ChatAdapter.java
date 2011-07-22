@@ -73,7 +73,7 @@ public class ChatAdapter extends MBaseAdapter {
 				break;
 			case OTHER:
 				convertView = getLayoutInflater().inflate(R.layout.adapter_chat_other, null);
-				messageElement.thumnail = (ImageView) convertView.findViewById(R.id.chat_adapter_other_thumnail);
+				messageElement.profile = (ImageView) convertView.findViewById(R.id.chat_adapter_other_profile);
 				messageElement.message = (TextView) convertView.findViewById(R.id.chat_adapter_other_message);
 				messageElement.message.setMaxWidth(DisplayUtil.DPFromPixel(width));
 				break;
@@ -101,7 +101,7 @@ public class ChatAdapter extends MBaseAdapter {
 
 		if (getItemViewType(position) == OTHER) {
 			User sentUser = message.getSentUser();
-			downloader.downloadUserImage(sentUser.getId(), MatjiImageDownloader.IMAGE_SSMALL, messageElement.thumnail);
+			downloader.downloadUserImage(sentUser.getId(), MatjiImageDownloader.IMAGE_SSMALL, messageElement.profile);
 		}
 
 		// set position for OnClickListener
@@ -127,7 +127,7 @@ public class ChatAdapter extends MBaseAdapter {
 	}
 
 	private class MessageElement {
-		ImageView thumnail;
+		ImageView profile;
 		TextView message;
 	}
 }

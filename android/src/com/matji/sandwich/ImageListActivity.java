@@ -18,6 +18,6 @@ public class ImageListActivity extends BaseActivity {
 		listView.setModelId(id);
 		listView.setType(type);
 		listView.setActivity(this);
-		listView.requestReload();
+//		listView.requestReload();
 	}
 }

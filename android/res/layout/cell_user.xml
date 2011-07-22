@@ -4,12 +4,15 @@
   android:layout_width="wrap_content"
   android:layout_height="wrap_content">
 		<ImageView
-			style="@style/user_cell_Thumnail"
-			android:id="@+id/user_cell_thumnail" />
+			style="@style/user_cell_Profile"
+			android:id="@+id/user_cell_profile" />
+		<TextView
+			style="@style/user_cell_Name" 
+			android:id="@+id/user_cell_name"/>
 		<TextView
 			style="@style/user_cell_Grade"
 			android:id="@+id/user_cell_grade"
-			android:layout_toRightOf="@id/user_cell_thumnail" />
+			android:layout_toRightOf="@id/user_cell_profile" />
 		<TextView
 			style="@style/user_cell_PointText"
 			android:id="@+id/user_cell_point_text"
@@ -21,11 +24,11 @@
 		<TextView
 			style="@style/user_cell_Title"
 			android:id="@+id/user_cell_title"
-			android:layout_toRightOf="@id/user_cell_thumnail"
+			android:layout_toRightOf="@id/user_cell_profile"
 			android:layout_below="@id/user_cell_grade" />
 		<TextView
 			style="@style/user_cell_Intro"
 			android:id="@+id/user_cell_intro"
-			android:layout_toRightOf="@id/user_cell_thumnail"
+			android:layout_toRightOf="@id/user_cell_profile"
 			android:layout_below="@id/user_cell_title" />
 </RelativeLayout>

@@ -14,7 +14,7 @@ import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.CommentListView;
-import com.matji.sandwich.widget.ThumnailImageView;
+import com.matji.sandwich.widget.ProfileImageView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,14 +40,14 @@ public class CommentAdapter extends MBaseAdapter {
 			R.id.row_post_preview3
 	};
 
-	private int thumnailSize;
+	private int profileSize;
 	private static final int MARGIN_PREVIEWS = DisplayUtil.PixelFromDP(5);
 
 	public CommentAdapter(Context context) {
 		super(context);
 		downloader = new MatjiImageDownloader(context);
 
-		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
+		profileSize = context.getResources().getDimensionPixelSize(R.dimen.profile_size);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class CommentAdapter extends MBaseAdapter {
 
 			convertView = getLayoutInflater().inflate(R.layout.row_post, null);
 
-			postElement.thumnail = (ThumnailImageView) convertView.findViewById(R.id.thumnail);
+			postElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
 			postElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
 			postElement.at = (TextView) convertView.findViewById(R.id.row_post_at);
 			postElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
@@ -99,14 +99,14 @@ public class CommentAdapter extends MBaseAdapter {
 			int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
 
 			for (int i = 0; i < postElement.previews.length; i++) {
-				postElement.previews[i].setMaxWidth((remainScreenWidth-thumnailSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
+				postElement.previews[i].setMaxWidth((remainScreenWidth-profileSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
 				postElement.previews[i].setLayoutParams(params);
 			}
 			convertView.setTag(postElement);
 
 			convertView.findViewById(R.id.row_post_post_wrapper).setBackgroundColor(Color.TRANSPARENT);
 			convertView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.comment_post_bg));
-			postElement.thumnail.setOnClickListener(commentListView);
+			postElement.profile.setOnClickListener(commentListView);
 			postElement.nick.setOnClickListener(commentListView);
 			postElement.storeName.setOnClickListener(commentListView);
 			postElement.post.setLinksClickable(false);
@@ -119,7 +119,7 @@ public class CommentAdapter extends MBaseAdapter {
 			postElement = (PostElement) convertView.getTag();
 		}
 
-		postElement.thumnail.setTag(position+"");
+		postElement.profile.setTag(position+"");
 		postElement.nick.setTag(position+"");
 		postElement.storeName.setTag(position+"");
 		postElement.post.setTag(position+"");
@@ -155,7 +155,7 @@ public class CommentAdapter extends MBaseAdapter {
 			postElement.tag.setVisibility(View.GONE);
 		}
 
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.thumnail);
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.profile);
 		postElement.nick.setText(user.getNick()+" ");
 		postElement.post.setText(post.getPost().trim());
 		postElement.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
@@ -174,26 +174,26 @@ public class CommentAdapter extends MBaseAdapter {
 			final CommentListView commentListView = (CommentListView) parent;
 			convertView = getLayoutInflater().inflate(R.layout.row_comment, null);
 
-			commentElement.thumnail = (ImageView) convertView.findViewById(R.id.thumnail);
+			commentElement.profile = (ImageView) convertView.findViewById(R.id.profile);
 			commentElement.nick = (TextView) convertView.findViewById(R.id.row_comment_nick);
 			commentElement.dateAgo = (TextView) convertView.findViewById(R.id.row_comment_created_at);
 			commentElement.comment = (TextView) convertView.findViewById(R.id.row_comment_comment);
 			convertView.setTag(commentElement);
 
-			commentElement.thumnail.setOnClickListener(commentListView);
+			commentElement.profile.setOnClickListener(commentListView);
 			commentElement.nick.setOnClickListener(commentListView);
 		} else {
 			commentElement = (CommentElement) convertView.getTag();
 		}
-		commentElement.thumnail.setTag(position+"");
+		commentElement.profile.setTag(position+"");
 		commentElement.nick.setTag(position+"");
 
 		convertView.findViewById(R.id.row_comment_wrapper).setVisibility(View.VISIBLE);
 
 		User user = comment.getUser();
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, commentElement.thumnail);
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, commentElement.profile);
 		commentElement.nick.setText(user.getNick());
-		commentElement.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()));
+		commentElement.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()) + comment.getFromWhere() + "에서");
 		commentElement.comment.setText(comment.getComment());
 
 		return convertView;
@@ -247,7 +247,7 @@ public class CommentAdapter extends MBaseAdapter {
 	}
 
 	private class PostElement {
-		ThumnailImageView thumnail;
+		ProfileImageView profile;
 		TextView nick;
 		TextView at;
 		TextView storeName;
@@ -260,7 +260,7 @@ public class CommentAdapter extends MBaseAdapter {
 	}
 
 	private class CommentElement {
-		ImageView thumnail;
+		ImageView profile;
 		TextView nick;
 		TextView comment;
 		TextView dateAgo;

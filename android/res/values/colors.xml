@@ -37,4 +37,6 @@
 	<color name="store_main_text">#0f0f0f</color>
 	<color name="map_title_bar_address">#814903</color>
 	<color name="map_title_bar_change_address">#B7924C</color>
+	<color name="section_shadow_color">#333333</color>
+	<color name="title_shadow_color">#ffffff</color>
 </resources>

@@ -17,7 +17,6 @@ public class StorePostListActivity extends BaseActivity {
 		store = (Store) SharedMatjiData.getInstance().top();
 
 		listView = (StorePostListView) findViewById(R.id.store_post_list);
-		listView.setStoreId(store.getId());
 		listView.setActivity(this);
 		listView.requestReload();
 	}

@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
+	0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
   </string>
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -108,6 +108,7 @@
   <string name="default_string_edit">수정</string>
   <string name="default_string_confirm">확인</string>
   <string name="today">Today</string>
+  <string name="confirm">확인</string>
   
   <!-- Writing content -->
   <string name="writing_content_post">메모를 입력하세요.</string>
@@ -222,7 +223,7 @@
   <!-- section list view test -->
   <string name="standard_list">standard_list</string>
   <string name="empty_list">empty_list</string>
-  <string name="at"></string>
+  <string name="at">in</string>
   
   <!-- map_title_bar.xml -->
   <string name="change_location">위치변경</string>

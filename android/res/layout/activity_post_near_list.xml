@@ -4,7 +4,7 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:orientation="vertical">
-	<com.matji.sandwich.widget.PostListView
+	<com.matji.sandwich.widget.PostNearListView
 		style="@style/DefaultFill"
-		android:id="@+id/post_list_view" />
+		android:id="@+id/post_near_list_view" />
 </LinearLayout>

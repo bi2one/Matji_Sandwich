@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
+	<RelativeLayout
+		style="@style/DefaultWidthFill"
+		android:padding="7dp">
+		<ImageView
+			style="@style/store_main_Thumbnail"
+			android:id="@+id/store_main_thumbnail" />
+		<TextView
+			style="@style/store_main_Tel"
+			android:id="@+id/store_main_tel"
+			android:layout_toRightOf="@id/store_main_thumbnail"
+			android:singleLine="true" />
+		<TextView
+			style="@style/store_main_Address"
+			android:id="@+id/store_main_address"
+			android:layout_below="@id/store_main_tel"
+			android:layout_toRightOf="@id/store_main_thumbnail"
+			android:layout_alignLeft="@id/store_main_tel"
+			android:singleLine="true" />
+		<TextView
+			style="@style/store_main_Tag"
+			android:id="@+id/store_main_tag"
+			android:layout_below="@id/store_main_address"
+			android:layout_toRightOf="@id/store_main_thumbnail"
+			android:layout_alignLeft="@id/store_main_tel"
+			android:singleLine="true" />
+		<TextView
+			style="@style/store_main_Food"
+			android:id="@+id/store_main_food"
+			android:layout_below="@id/store_main_tag"
+			android:layout_toRightOf="@id/store_main_thumbnail"
+			android:layout_alignLeft="@id/store_main_tel"
+			android:singleLine="true" />
+		<ImageView
+			style="@style/DefaultWrap"
+			android:background="@drawable/img_moresign"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:padding="5dp" />
+	</RelativeLayout>
+</LinearLayout>
