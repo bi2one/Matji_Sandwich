@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content">
+  <RelativeLayout
+      style="@style/DefaultWidthFill"
+      android:padding="7dp">
+    <TextView
+	style="@style/store_main_Name"
+	android:singleLine="true"
+	android:id="@+id/store_main_name"/>
+    <Button
+	style="@style/store_main_InfoButton"	
+	android:id="@+id/store_main_info_btn"
+	android:layout_toRightOf="@id/store_main_name" />
+    <Button
+	style="@style/store_main_LikeButton"
+	android:id="@+id/store_main_like_btn"
+	android:layout_alignParentRight="true"
+	android:onClick="onLikeButtonClicked"/>
+  </RelativeLayout>
+</LinearLayout>

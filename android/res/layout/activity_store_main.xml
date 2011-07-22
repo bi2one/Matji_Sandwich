@@ -1,114 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#fff"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:background="#fff" 
+	android:orientation="vertical">
 
-  <!-- Main Title -->
-  <com.matji.sandwich.widget.title.MainTitle
-      style="@style/DefaultWrap" />
-  
-  <!-- Store Name Cell -->
-  <RelativeLayout
-      style="@style/DefaultWidthFill"
-      android:padding="7dp">
-    <TextView
-	style="@style/store_main_Name"
-	android:singleLine="true"
-	android:id="@+id/store_main_name"/>
-    <Button
-	style="@style/store_main_InfoButton"	
-	android:id="@+id/store_main_info_btn"
-	android:layout_toRightOf="@id/store_main_name" />
-    <Button
-	style="@style/store_main_LikeButton"
-	android:id="@+id/store_main_like_btn"
-	android:layout_alignParentRight="true"
-	android:onClick="onLikeButtonClicked"/>
-  </RelativeLayout>
+	<!-- Main Title -->
+	<com.matji.sandwich.widget.title.MainTitle
+		style="@style/DefaultWrap" />
 
-  <!-- Seperate Line -->
-  <RelativeLayout
-      style="@style/DefaultWidthFill">
-    <ImageView 
-	style="@style/DefaultWidthFill"
-	android:background="@drawable/seperate_line"/>
-  </RelativeLayout>
+	<!-- Store Name Cell -->
+	<include 
+		android:id="@+id/store_main_name_cell"
+		layout="@layout/cell_store_name" />
 
-  <!-- Store Cell -->
-  <RelativeLayout
-      style="@style/DefaultWidthFill"
-      android:padding="7dp">
-    <ImageView
-	style="@style/store_main_Thumnail"
-	android:id="@+id/store_main_thumnail" />
-    <TextView
-	style="@style/store_main_Tel"
-	android:id="@+id/store_main_tel"
-	android:layout_toRightOf="@id/store_main_thumnail"
-	android:singleLine="true"/> 
-    <TextView
-	style="@style/store_main_Address"
-	android:id="@+id/store_main_address"
-	android:layout_below="@id/store_main_tel"
-	android:layout_toRightOf="@id/store_main_thumnail" 
-	android:layout_alignLeft="@id/store_main_tel"
-	android:singleLine="true"/>
-    <TextView 
-	style="@style/store_main_Tag"
-	android:id="@+id/store_main_tag"
-	android:layout_below="@id/store_main_address"
-	android:layout_toRightOf="@id/store_main_thumnail"
-	android:layout_alignLeft="@id/store_main_tel"	 
-	android:singleLine="true"/>
-    <TextView 
-	style="@style/store_main_Food"
-	android:id="@+id/store_main_food"
-	android:layout_below="@id/store_main_tag"
-	android:layout_toRightOf="@id/store_main_thumnail" 
-	android:layout_alignLeft="@id/store_main_tel"	 
-	android:singleLine="true"/>
-    <ImageView 
-	style="@style/DefaultWrap"
-	android:background="@drawable/store_main_next"
-	android:layout_alignParentRight="true" 
-	android:layout_centerVertical="true"
-	android:padding="5dp"/>
-  </RelativeLayout>
+	<!-- Seperate Line -->
+	<RelativeLayout 
+		style="@style/DefaultWidthFill">
+		<ImageView 
+		style="@style/DefaultWidthFill"
+			android:background="@drawable/seperate_line" />
+	</RelativeLayout>
 
-  <!-- Seperate Line -->
-  <RelativeLayout
-      style="@style/DefaultWidthFill">
-    <ImageView 
-	style="@style/DefaultWidthFill"
-	android:background="@drawable/seperate_line"/>
-  </RelativeLayout>
-  
-  <!-- Store Tab -->
-  <com.matji.sandwich.widget.RoundTabHost
-      android:id="@android:id/tabhost"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent">
-    <LinearLayout
-	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-      <TabWidget
-	  android:id="@android:id/tabs"
-	  style="@style/post_tab_TabBar"
-	  android:background="#fff"
-	  android:layout_weight="0" />
-      <ImageView
-	  android:layout_width="fill_parent"
-	  android:layout_height="wrap_content"/>
-      <FrameLayout
-	  android:id="@android:id/tabcontent"
-	  android:layout_width="fill_parent"
-	  android:layout_height="wrap_content"
-	  android:layout_weight="1" />
-    </LinearLayout>
-  </com.matji.sandwich.widget.RoundTabHost>
+	<!-- Store Cell -->
+	<include 
+		android:id="@+id/store_main_info_cell"
+		layout="@layout/cell_store_info" />
 
+	<!-- Seperate Line -->
+	<RelativeLayout 
+		style="@style/DefaultWidthFill">
+		<ImageView 
+			style="@style/DefaultWidthFill"
+			android:background="@drawable/seperate_line" />
+	</RelativeLayout>
+
+	<!-- Store Tab -->
+	<com.matji.sandwich.widget.RoundTabHost
+		android:id="@android:id/tabhost" 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<LinearLayout 
+			android:orientation="vertical"
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent">
+			<TabWidget 
+				android:id="@android:id/tabs" 
+				style="@style/post_tab_TabBar"
+				android:background="#fff" 
+				android:layout_weight="0" />
+			<ImageView 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+			<FrameLayout 
+				android:id="@android:id/tabcontent"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" />
+		</LinearLayout>
+	</com.matji.sandwich.widget.RoundTabHost>
 </LinearLayout>

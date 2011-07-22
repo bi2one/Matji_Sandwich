@@ -82,7 +82,7 @@
   </style>
   
   <style name="store_main_Name">
-  	<item name="android:layout_width">175dp</item>
+  	<item name="android:layout_width">180dp</item>
   	<item name="android:layout_height">30dp</item>
 	<item name="android:textSize">23dp</item>
   	<item name="android:textColor">#000</item>
@@ -208,6 +208,11 @@
 	<item name="android:scaleType">centerCrop</item>
   </style>
 
+	<style name="user_cell_Name">
+		<item name="android:layout_width">100dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textSize">18dp</item>
+	</style>
   <style name="user_cell_Mileage" parent="DefaultWrap">
   	<item name="android:textSize">11dp</item>
   </style>
