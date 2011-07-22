@@ -8,7 +8,6 @@ import com.matji.sandwich.widget.PostListView;
 /**
  * 전체 Post 리스트를 보여주는 액티비티.
  * 
- * 
  * @author mozziluv
  *
  */

@@ -108,6 +108,7 @@
   <string name="default_string_edit">수정</string>
   <string name="default_string_confirm">확인</string>
   <string name="today">Today</string>
+  <string name="confirm">확인</string>
   
   <!-- Writing content -->
   <string name="writing_content_post">메모를 입력하세요.</string>
@@ -222,7 +223,7 @@
   <!-- section list view test -->
   <string name="standard_list">standard_list</string>
   <string name="empty_list">empty_list</string>
-  <string name="at"></string>
+  <string name="at">in</string>
   
   <!-- map_title_bar.xml -->
   <string name="change_location">위치변경</string>

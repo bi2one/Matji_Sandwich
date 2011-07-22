@@ -42,6 +42,23 @@
   </style>
   
   <!-- everywhere used style -->
+  <style name="BottomBarListView">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">0dp</item>
+  	<item name="android:layout_weight">1</item>
+  </style>
+  
+  <style name="BottomBar">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">wrap_content</item>
+  	<item name="android:layout_weight">0</item>
+  	<item name="android:gravity">bottom</item>
+  </style>
+
+  <style name="BottomTextBarWrapper" parent="DefaultWidthFill">
+  	<item name="android:background">@drawable/bottom_text_bar_bg</item>
+  </style>
+      
   <style name="LinkifyName" parent="DefaultWrap">
 	<item name="android:textColor">@color/DARK_ORANGE</item>
   </style>
@@ -67,7 +84,7 @@
   	<item name="android:padding">7dp</item>
   	<item name="android:textSize">16dp</item>
   	<item name="android:gravity">left|center</item>
-  	<item name="android:drawableRight">@drawable/img_moresign01</item>
+  	<item name="android:drawableRight">@drawable/img_moresign</item>
   </style>
   
   <style name="SettingButton" parent="ETCButton">
@@ -82,16 +99,15 @@
   </style>
   
   <style name="store_main_Name">
-  	<item name="android:layout_width">180dp</item>
+  	<item name="android:layout_width">wrap_content</item>
   	<item name="android:layout_height">30dp</item>
 	<item name="android:textSize">23dp</item>
   	<item name="android:textColor">#000</item>
   </style>
 
-  <style name="store_main_InfoButton">
-  	<item name="android:layout_width">30dp</item>
-  	<item name="android:layout_height">30dp</item>
-  	<item name="android:background">@drawable/btn_info</item>
+  <style name="store_main_InfoButton" parent="DefaultWrap">
+  	<item name="android:src">@drawable/btn_info</item>
+  	<item name="android:background">@null</item>
   	<item name="android:layout_marginLeft">5dp</item>
   </style>
   
@@ -104,10 +120,8 @@
 	<item name="android:scaleType">centerCrop</item>
   </style>
   
-  <style name="store_main_LikeButton">
+  <style name="store_main_LikeButton" parent="DefaultWrap">
   	<item name="android:background">@drawable/like_btn</item>
-  	<item name="android:layout_width">70dp</item>
-  	<item name="android:layout_height">30dp</item>
 	<item name="android:gravity">right|center_vertical</item>
 	<item name="android:paddingRight">15dp</item>
   	<item name="android:textSize">15dp</item>

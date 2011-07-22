@@ -4,28 +4,23 @@ import java.util.ArrayList;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.AttachFile;
-import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.data.Tag;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.BookmarkHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.util.ModelType;
 import com.matji.sandwich.widget.StorePostListView;
 import com.matji.sandwich.widget.RoundTabHost;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -72,6 +67,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
 		dbProvider = DBProvider.getInstance(this);
+		downloader = new MatjiImageDownloader(this);
 
 		storeImage = (ImageView) findViewById(R.id.store_main_thumnail);
 		likeButton = (Button) findViewById(R.id.store_main_like_btn);
@@ -86,7 +82,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 				new Intent(this, StorePostListActivity.class));
 		tabHost.addCenterTab("tab2",
 				R.string.store_main_img,
-				new Intent(this, ImageListActivity.class));
+				new Intent(this, StoreSliderActivity.class));
 		tabHost.addRightTab("tab3",
 				R.string.store_main_review,
 				new Intent(this, StoreSliderActivity.class));
@@ -205,34 +201,34 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	// 	scrapButton.setClickable(true);
 	// }
 
-	// private void postLikeRequest() {
-	// 	Like like = new Like();
-	// 	like.setForeignKey(store.getId());
-	// 	like.setObject("Store");
-	// 	dbProvider.insertLike(like);
-	// 	store.setLikeCount(store.getLikeCount() + 1);
-	// 	likeButton.setClickable(true);
-	// }
+	private void postLikeRequest() {
+		Like like = new Like();
+		like.setForeignKey(store.getId());
+		like.setObject("Store");
+		dbProvider.insertLike(like);
+		store.setLikeCount(store.getLikeCount() + 1);
+		likeButton.setClickable(true);
+	}
 
-	// private void postUnLikeRequest() {
-	// 	dbProvider.deleteLike(store.getId(), "Store");
-	// 	store.setLikeCount(store.getLikeCount() - 1);
-	// 	likeButton.setClickable(true);
-	// }
+	private void postUnLikeRequest() {
+		dbProvider.deleteLike(store.getId(), "Store");
+		store.setLikeCount(store.getLikeCount() - 1);
+		likeButton.setClickable(true);
+	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
 		case BOOKMARK_REQUEST:
-			//	    postBookmarkRequest();
+//			postBookmarkRequest();
 			break;
 		case UN_BOOKMARK_REQUEST:
-			//	    postUnBookmarkRequest();
+//			postUnBookmarkRequest();
 			break;
 		case LIKE_REQUEST:
-			//	    postLikeRequest();
+			postLikeRequest();
 			break;
 		case UN_LIKE_REQUEST:
-			//	    postUnLikeRequest();
+			postUnLikeRequest();
 			break;
 		}
 

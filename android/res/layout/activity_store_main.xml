@@ -6,7 +6,7 @@
 	android:orientation="vertical">
 
 	<!-- Main Title -->
-	<com.matji.sandwich.widget.title.MainTitle
+	<com.matji.sandwich.widget.title.StoreTitle
 		style="@style/DefaultWrap" />
 
 	<!-- Store Name Cell -->
