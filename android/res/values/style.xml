@@ -42,6 +42,23 @@
   </style>
   
   <!-- everywhere used style -->
+  <style name="BottomBarListView">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">0dp</item>
+  	<item name="android:layout_weight">1</item>
+  </style>
+  
+  <style name="BottomBar">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">wrap_content</item>
+  	<item name="android:layout_weight">0</item>
+  	<item name="android:gravity">bottom</item>
+  </style>
+
+  <style name="BottomTextBarWrapper" parent="DefaultWidthFill">
+  	<item name="android:background">@drawable/bottom_text_bar_bg</item>
+  </style>
+      
   <style name="LinkifyName" parent="DefaultWrap">
 	<item name="android:textColor">@color/DARK_ORANGE</item>
   </style>

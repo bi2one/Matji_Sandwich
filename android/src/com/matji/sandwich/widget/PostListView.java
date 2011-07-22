@@ -33,7 +33,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.pattern_bg));
 		setScrollingCacheEnabled(false);
 		setDivider(null);
-		setFadingEdgeLength((int) getResources().getDimension(R.dimen.fade_edge_length));
+		setFadingEdgeLength(getResources().getDimensionPixelSize(R.dimen.fade_edge_length));
 		setCacheColorHint(getResources().getColor(R.color.fading_edge_color));
 	}
 
