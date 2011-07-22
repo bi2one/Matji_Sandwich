@@ -21,7 +21,7 @@ public class SlideImageAdapter extends BaseAdapter {
 	public SlideImageAdapter(Context context) {
 		this.context = context;
 		
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 	}
 
 	public void setAttachFileIds(int[] attachFileIds) {

@@ -30,7 +30,7 @@ public class ChatAdapter extends MBaseAdapter {
 		super(context);
 		session = Session.getInstance(context);
 		myId = session.getCurrentUser().getId();
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 	}
 	
 	public void initSelectedPosition() {

@@ -18,7 +18,7 @@ public class NoteAdapter extends MBaseAdapter {
 
     public NoteAdapter(Context context) {
     	super(context);
-    	downloader = new MatjiImageDownloader();
+    	downloader = new MatjiImageDownloader(context);
     }
 	
 	public View getView(int position, View convertView, ViewGroup parent) {

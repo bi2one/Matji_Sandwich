@@ -1,9 +1,13 @@
 package com.matji.sandwich.http.util;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 import java.util.HashMap;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.listener.ImageDownloaderListener;
+import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.widget.ThumnailImageView;
 
 public class MatjiImageDownloader implements ImageDownloaderListener {
@@ -14,22 +18,32 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 	public static final String IMAGE_MEDIUM = "m";
 	public static final String IMAGE_LARGE = "l";
 	public static final String IMAGE_XLARGE = "xl";
+	private HashMap<String, String> params;
 
 	private ImageDownloader downloader;
-
-	public MatjiImageDownloader() {
+	
+	private Bitmap defaultUserImage;
+	private Bitmap defaultAttachedImage;
+		
+	public MatjiImageDownloader(Context context){
 		downloader = new ImageDownloader();
+		params = new HashMap<String, String>();
 		downloader.setDownloaderListsener(this);
+		defaultUserImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.thumnail_bg));
+		defaultAttachedImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.btn_home));
 	}
+	
 
 	public void downloadUserImage(int userId, ImageView imageView) {
 		downloadUserImage(userId, IMAGE_SSMALL, imageView);
 	}
 
 	public void downloadUserImage(int userId, String imageSize, ImageView imageView) {
-		HashMap<String, String> params = new HashMap<String, String>();
+		params.clear();
+		
 		params.put("user_id", userId + "");
 		params.put("size", imageSize);
+		downloader.setDefaultBitmap(defaultUserImage);
 		downloader.download(URL_USER_IMAGE, params, imageView);
 	}
 
@@ -38,9 +52,11 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 	}	
 
 	public void downloadAttachFileImage(int attachFileId, String imageSize, ImageView imageView) {
-		HashMap<String, String> params = new HashMap<String, String>();
+		params.clear();
+		
 		params.put("attach_file_id", attachFileId + "");
 		params.put("size", imageSize);
+		downloader.setDefaultBitmap(defaultAttachedImage);
 		downloader.download(URL_ATTACH_FILE_IMAGE, params, imageView);
 	}
 

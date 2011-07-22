@@ -22,7 +22,7 @@ public class DELETE_PostAdapter extends MBaseAdapter {
 
 	public DELETE_PostAdapter(Context context) {
 		super(context);
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 	}
 
 	@Override

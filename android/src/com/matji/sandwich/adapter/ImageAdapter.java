@@ -27,7 +27,7 @@ public class ImageAdapter extends MBaseAdapter {
 
 	public ImageAdapter(Context context) {
 		super(context);
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 		this.context = context;		
 	}
 

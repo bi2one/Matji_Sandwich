@@ -82,7 +82,7 @@
   </style>
   
   <style name="store_main_Name">
-  	<item name="android:layout_width">170dp</item>
+  	<item name="android:layout_width">175dp</item>
   	<item name="android:layout_height">30dp</item>
 	<item name="android:textSize">23dp</item>
   	<item name="android:textColor">#000</item>
@@ -97,8 +97,8 @@
   
   <style name="store_main_Thumnail">
   	<item name="android:background">@drawable/thumnail_bg</item>
-	<item name="android:layout_width">100dp</item>
-	<item name="android:layout_height">90dp</item>
+	<item name="android:layout_width">90dp</item>
+	<item name="android:layout_height">80dp</item>
 	<item name="android:layout_marginRight">6dp</item>
 	<item name="android:layout_marginBottom">6dp</item>
 	<item name="android:scaleType">centerCrop</item>
@@ -106,28 +106,39 @@
   
   <style name="store_main_LikeButton">
   	<item name="android:background">@drawable/like_btn</item>
-  	<item name="android:layout_width">80dp</item>
+  	<item name="android:layout_width">70dp</item>
   	<item name="android:layout_height">30dp</item>
+	<item name="android:gravity">right|center_vertical</item>
+	<item name="android:paddingRight">15dp</item>
   	<item name="android:textSize">15dp</item>
   	<item name="android:textColor">#f00</item>
+	<item name="android:textStyle">bold</item>
   </style>
 
-  <style name="store_main_Tel" parent="DefaultWidthFill">
+  <style name="store_main_Tel">
+	<item name="android:layout_width">185dp</item>
+	<item name="android:layout_height">wrap_content</item>
 	<item name="android:textSize">15dp</item>
 	<item name="android:textColor">@color/store_main_text</item>
   </style>
 
-  <style name="store_main_Address" parent="DefaultWidthFill">
+  <style name="store_main_Address">
+	<item name="android:layout_width">185dp</item>
+	<item name="android:layout_height">wrap_content</item>
   	<item name="android:textSize">15dp</item>
   	<item name="android:textColor">@color/store_main_text</item>
   </style>
 
-  <style name="store_main_Tag" parent="DefaultWidthFill">
+  <style name="store_main_Tag">
+	<item name="android:layout_width">185dp</item>
+	<item name="android:layout_height">wrap_content</item>
   	<item name="android:textSize">15dp</item>
   	<item name="android:textColor">@color/store_main_text</item>
   </style>
   
-  <style name="store_main_Food" parent="DefaultWidthFill">
+  <style name="store_main_Food">
+	<item name="android:layout_width">185dp</item>
+	<item name="android:layout_height">wrap_content</item>
   	<item name="android:textSize">15dp</item>
   	<item name="android:textColor">@color/store_main_text</item>
   </style>

@@ -19,6 +19,7 @@ import com.matji.sandwich.widget.ThumnailImageView;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -44,7 +45,7 @@ public class CommentAdapter extends MBaseAdapter {
 
 	public CommentAdapter(Context context) {
 		super(context);
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 
 		thumnailSize = context.getResources().getDimensionPixelSize(R.dimen.thumnail_size);
 	}
@@ -62,9 +63,9 @@ public class CommentAdapter extends MBaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		Log.d("Matji", "HERE");
 		if (position == 0) return getPostView(position, convertView, parent);
 		else return getCommentView(position, convertView, parent);
-
 	}
 
 	private View getPostView(int position, View convertView, ViewGroup parent) {

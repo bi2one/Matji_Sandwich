@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import com.matji.sandwich.FollowingActivity.FollowingListType;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.UserMileage;
@@ -24,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-public class UserMainActivity extends MainActivity implements Requestable {
+public class UserMainActivity extends BaseActivity implements Requestable {
 	private TabHost tabHost;
 	private User user;
 	private boolean me;
@@ -33,6 +34,7 @@ public class UserMainActivity extends MainActivity implements Requestable {
 	private HttpRequest request;
 	private Session session;
 	private DBProvider dbProvider;
+	private MatjiImageDownloader downloader;
 
 	private TextView gradeText;
 	private TextView pointText1;
@@ -63,7 +65,8 @@ public class UserMainActivity extends MainActivity implements Requestable {
 		tabHost = ((TabActivity) getParent()).getTabHost();
 		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
-
+		downloader = new MatjiImageDownloader(this);
+		
 		user = (User) SharedMatjiData.getInstance().top();
 		dbProvider = DBProvider.getInstance(this);
 
@@ -273,5 +276,16 @@ public class UserMainActivity extends MainActivity implements Requestable {
 			intent.putExtra("user_id", user.getId());
 			startActivity(intent);
 		}
+	}
+	
+
+	
+
+	public String getCount(int id, int count) {
+		return getString(id) + ": " + count;
+	}
+	
+	public String getCountNumberOf(int id, int count) {
+		return getString(id) + ": " + count + getString(R.string.default_string_number_of);
 	}
 }

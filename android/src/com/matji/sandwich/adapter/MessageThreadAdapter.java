@@ -25,7 +25,7 @@ public class MessageThreadAdapter extends MBaseAdapter {
 	public MessageThreadAdapter(Context context) {
 		super(context);
 		this.context = context;
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {

@@ -20,7 +20,7 @@ public class GridImageAdapter extends BaseAdapter {
 	public GridImageAdapter(Context context) {
 		this.context = context;
 		
-		downloader = new MatjiImageDownloader();
+		downloader = new MatjiImageDownloader(context);
 	}
 
 	public void setAttachFileIds(int[] attachFileIds) {
