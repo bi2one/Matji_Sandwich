@@ -83,7 +83,7 @@ public class UserMainActivity extends BaseTabActivity implements Requestable {
 
 		gradeText = (TextView) findViewById(R.id.user_cell_grade);
 		pointText1 = (TextView) findViewById(R.id.user_cell_point_text);
-		pointText2 = (TextView) findViewById(R.id.user_cell_point);
+//		pointText2 = (TextView) findViewById(R.id.user_cell_point);
 		nameText = (TextView) findViewById(R.id.user_cell_name);
 		introText = (TextView) findViewById(R.id.user_cell_intro);
 		followButton = (Button) findViewById(R.id.user_main_follow_btn);
@@ -139,8 +139,8 @@ public class UserMainActivity extends BaseTabActivity implements Requestable {
 			gradeText.setText(getString(R.string.grade_diamond) + "A");
 		}
 
-		pointText1.setText(R.string.grade_point);
-		pointText2.setText(" " + totalPoint);
+//		pointText1.setText(R.string.grade_point);
+//		pointText2.setText(" " + totalPoint);
 
 //		if (dbProvider.isExistFollower(user.getId())) {
 //			followingYouText.setText(user.getNick() + " " + getString(R.string.user_main_following_you));
@@ -152,15 +152,15 @@ public class UserMainActivity extends BaseTabActivity implements Requestable {
 		/* Set User Image */
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SMALL, (ImageView) findViewById(R.id.user_cell_thumnail));
 
-		if (session.isLogin()) {
-			if (dbProvider.isExistFollowing(user.getId())) {
-				followButton.setText(R.string.user_main_unfollow);
-			} else {
-				followButton.setText(R.string.user_main_follow);
-			}
-		} else {
-			followButton.setText(R.string.user_main_follow);
-		}
+//		if (session.isLogin()) {
+//			if (dbProvider.isExistFollowing(user.getId())) {
+//				followButton.setText(R.string.user_main_unfollow);
+//			} else {
+//				followButton.setText(R.string.user_main_follow);
+//			}
+//		} else {
+//			followButton.setText(R.string.user_main_follow);
+//		}
 
 		nameText.setText(user.getNick());
 		introText.setText(user.getIntro());

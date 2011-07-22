@@ -5,18 +5,18 @@
 	android:padding="7dp"
 	android:gravity="center_vertical">
 	<TextView
-		style="@style/store_main_Name"
+		style="@style/Name"
 		android:singleLine="true"
 		android:id="@+id/store_main_name"
 		android:maxWidth="@dimen/max_title_width" />
 	<ImageButton
-		style="@style/store_main_InfoButton"
+		style="@style/InfoButton"
 		android:id="@+id/store_main_info_btn" />
 	<LinearLayout
 		style="@style/DefaultWidthFill"
 		android:gravity="right">
 		<Button
-			style="@style/store_main_LikeButton"
+			style="@style/LikeButton"
 			android:id="@+id/store_main_like_btn"
 			android:onClick="onLikeButtonClicked" />
 	</LinearLayout>

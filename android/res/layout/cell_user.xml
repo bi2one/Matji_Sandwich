@@ -9,23 +9,22 @@
 		<TextView
 			style="@style/user_cell_Name"
 			android:id="@+id/user_cell_name"
-			android:layout_toRightOf="@id/user_cell_thumnail" />
+			android:layout_toRightOf="@id/user_cell_thumnail" 
+			android:singleLine="true"/>
 		<Button
-			style="@style/store_main_InfoButton"	
-			android:id="@+id/store_main_info_btn"
+			style="@style/InfoButton"
+			android:id="@+id/user_cell_info_btn"
 			android:layout_toRightOf="@id/user_cell_name" />
 		<TextView
 			style="@style/user_cell_Grade"
 			android:id="@+id/user_cell_grade"
+			android:layout_below="@id/user_cell_name"
 			android:layout_toRightOf="@id/user_cell_thumnail" />
 		<TextView
 			style="@style/user_cell_PointText"
 			android:id="@+id/user_cell_point_text"
+			android:layout_below="@id/user_cell_grade"
 			android:layout_toRightOf="@id/user_cell_grade" />
-		<TextView
-			style="@style/user_cell_Point"
-			android:id="@+id/user_cell_point"
-			android:layout_toRightOf="@id/user_cell_point_text" />
 		<TextView
 			style="@style/user_cell_Title"
 			android:id="@+id/user_cell_title"
@@ -37,15 +36,15 @@
 			android:layout_toRightOf="@id/user_cell_thumnail"
 			android:layout_below="@id/user_cell_title" />
 		<Button
-			style="@style/store_main_LikeButton"
-			android:id="@+id/store_main_like_btn"
+			style="@style/LikeButton"
+			android:id="@+id/user_cell_like_btn"
 			android:layout_alignParentRight="true"
 			android:onClick="onLikeButtonClicked"/>		
 		<Button
 			style="@style/user_main_FollowButton"
 			android:id="@+id/user_main_follow_btn"
 			android:layout_alignParentRight="true"
-			android:layout_below="@id/store_main_like_btn"
+			android:layout_below="@id/user_cell_like_btn"
 			android:onClick="onFollowButtonClicked" />
 			
 </RelativeLayout>
