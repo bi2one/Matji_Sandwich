@@ -69,7 +69,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		dbProvider = DBProvider.getInstance(this);
 		downloader = new MatjiImageDownloader(this);
 
-		storeImage = (ImageView) findViewById(R.id.store_main_thumnail);
+		storeImage = (ImageView) findViewById(R.id.store_main_thumbnail);
 		likeButton = (Button) findViewById(R.id.store_main_like_btn);
 		nameText = (TextView) findViewById(R.id.store_main_name);
 		telText = (TextView) findViewById(R.id.store_main_tel);
@@ -121,7 +121,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		if (file != null) {
 			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeImage);
 		} else {
-			Drawable defaultImage = getResources().getDrawable(R.drawable.thumnail_bg);
+			Drawable defaultImage = getResources().getDrawable(R.drawable.img_thumbnail_bg);
 			storeImage.setImageDrawable(defaultImage);
 		}
 

@@ -8,7 +8,7 @@ import android.util.Log;
 import com.matji.sandwich.R;
 import com.matji.sandwich.listener.ImageDownloaderListener;
 import com.matji.sandwich.util.ImageUtil;
-import com.matji.sandwich.widget.ThumnailImageView;
+import com.matji.sandwich.widget.ProfileImageView;
 
 public class MatjiImageDownloader implements ImageDownloaderListener {
 	private static final String URL_USER_IMAGE = "http://api.matji.com/v2/users/profile";
@@ -29,8 +29,8 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 		downloader = new ImageDownloader();
 		params = new HashMap<String, String>();
 		downloader.setDownloaderListsener(this);
-		defaultUserImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.thumnail_bg));
-		defaultAttachedImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.btn_home));
+		defaultUserImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.img_profile_bg));
+		defaultAttachedImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.img_thumbnail_bg));
 	}
 	
 
@@ -62,8 +62,8 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 
 	@Override
 	public void postSetBitmap(ImageView view) {
-		if (view instanceof ThumnailImageView) {
-			((ThumnailImageView) view).convertToRoundedCornerImage();
+		if (view instanceof ProfileImageView) {
+			((ProfileImageView) view).convertToRoundedCornerImage();
 		}
 	}
 }

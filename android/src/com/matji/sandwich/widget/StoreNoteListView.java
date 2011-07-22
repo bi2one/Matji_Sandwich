@@ -43,7 +43,7 @@ public class StoreNoteListView extends RequestableMListView implements OnClickLi
 		StoreDetailInfo info = (StoreDetailInfo) getAdapterData().get(position);
 
 		switch(v.getId()){
-//		case R.id.post_adapter_thumnail: case R.id.post_adapter_nick:
+//		case R.id.post_adapter_profile: case R.id.post_adapter_nick:
 //			gotoUserPage(info);
 //			break;
 		}

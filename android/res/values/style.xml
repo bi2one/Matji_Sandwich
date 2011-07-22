@@ -111,8 +111,7 @@
   	<item name="android:layout_marginLeft">5dp</item>
   </style>
   
-  <style name="store_main_Thumnail">
-  	<item name="android:background">@drawable/thumnail_bg</item>
+  <style name="store_main_Thumbnail">
 	<item name="android:layout_width">90dp</item>
 	<item name="android:layout_height">80dp</item>
 	<item name="android:layout_marginRight">6dp</item>
@@ -213,8 +212,8 @@
   </style>
   
   <!-- cell_user.xml --> 
-  <style name="user_cell_Thumnail">
-  	<item name="android:background">@drawable/thumnail_bg</item>
+  <style name="user_cell_Profile">
+  	<item name="android:background">@drawable/img_profile_bg</item>
 	<item name="android:layout_width">60dp</item>
 	<item name="android:layout_height">60dp</item>
 	<item name="android:layout_marginRight">7dp</item>
@@ -445,14 +444,14 @@
   	<item name="android:textColor">@color/BLACK</item>
   </style>
   
-  <!-- Thumnail -->
-  <style name="ThumnailWrapper">
-    <item name="android:layout_width">@dimen/thumnail_size</item>
-    <item name="android:layout_height">@dimen/thumnail_size</item>
-    <item name="android:background">@drawable/thumnail_bg</item>
+  <!-- Profile -->
+  <style name="ProfileWrapper">
+    <item name="android:layout_width">@dimen/profile_size</item>
+    <item name="android:layout_height">@dimen/profile_size</item>
+    <item name="android:background">@drawable/img_profile_bg</item>
   </style>
   
-  <style name="Thumnail">
+  <style name="Profile">
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">fill_parent</item>
     <item name="android:scaleType">centerCrop</item>

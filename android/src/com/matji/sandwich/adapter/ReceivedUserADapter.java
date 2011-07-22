@@ -25,7 +25,7 @@ public class ReceivedUserADapter extends MBaseAdapter {
 			receivedUserElement = new ReceivedUserElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_received_user, null);
 
-			receivedUserElement.thumnail= (ImageView) convertView.findViewById(R.id.received_user_adapter_thumnail);
+			receivedUserElement.profile= (ImageView) convertView.findViewById(R.id.received_user_adapter_profile);
 			receivedUserElement.nick = (TextView) convertView.findViewById(R.id.received_user_adapter_nick);
 			convertView.setTag(receivedUserElement);
 		} else {
@@ -33,13 +33,13 @@ public class ReceivedUserADapter extends MBaseAdapter {
 		}
 
 		receivedUserElement.nick.setText(following.getNick());
-		downloader.downloadUserImage(following.getId(), receivedUserElement.thumnail);
+		downloader.downloadUserImage(following.getId(), receivedUserElement.profile);
 		
 		return convertView;
 	}
 
 	private class ReceivedUserElement {
-		ImageView thumnail;
+		ImageView profile;
 		TextView nick;
 	}
 }

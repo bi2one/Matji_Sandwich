@@ -138,7 +138,7 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 		}
 
 		/* Set User Image */
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SMALL, (ImageView) findViewById(R.id.user_cell_thumnail));
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SMALL, (ImageView) findViewById(R.id.user_cell_profile));
 
 		if (session.isLogin()) {
 			if (dbProvider.isExistFollowing(user.getId())) {

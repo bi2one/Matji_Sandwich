@@ -29,7 +29,7 @@ public class UserAdapter extends MBaseAdapter {
 			userElement = new UserElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_user, null);
 
-			userElement.image = (ImageView) convertView.findViewById(R.id.user_cell_thumnail);
+			userElement.profile = (ImageView) convertView.findViewById(R.id.user_cell_profile);
 			userElement.grade = (TextView) convertView.findViewById(R.id.user_cell_grade);
 			userElement.title = (TextView) convertView.findViewById(R.id.user_cell_title);
 			userElement.intro = (TextView) convertView.findViewById(R.id.user_cell_intro);
@@ -42,7 +42,7 @@ public class UserAdapter extends MBaseAdapter {
 		}
 		
 		/* Set User */
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, userElement.image);		
+		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, userElement.profile);		
 		
 		UserMileage mileage = user.getMileage();
 		String grade = "E";
@@ -78,7 +78,7 @@ public class UserAdapter extends MBaseAdapter {
 	}
 
 	private class UserElement {
-		ImageView image;
+		ImageView profile;
 		TextView grade;
 		TextView title;
 		TextView intro;

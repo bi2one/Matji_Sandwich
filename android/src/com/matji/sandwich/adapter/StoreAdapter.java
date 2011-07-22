@@ -12,9 +12,6 @@ import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 
-// import com.matji.android.v2.common.Constants;
-// import com.matji.android.v2.common.ImageDownloader;
-
 public class StoreAdapter extends MBaseAdapter {
 	MatjiImageDownloader downloader;
 	
@@ -38,7 +35,7 @@ public class StoreAdapter extends MBaseAdapter {
 			// Creates a ViewHolder and store references to the two children
 			// views
 			// we want to bind data to.
-			storeElement.image = (ImageView) convertView.findViewById(R.id.store_adapter_thumnail);
+			storeElement.thumbnail = (ImageView) convertView.findViewById(R.id.store_adapter_thumbnail);
 			storeElement.name = (TextView) convertView.findViewById(R.id.store_adapter_name);
 			storeElement.address = (TextView) convertView.findViewById(R.id.store_adapter_address);
 			storeElement.likeCount = (TextView) convertView.findViewById(R.id.store_adapter_like_count);
@@ -52,10 +49,10 @@ public class StoreAdapter extends MBaseAdapter {
 		// Bind the data efficiently with the holder.
 		AttachFile file = store.getFile();
 		if (file != null) {
-			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeElement.image);
+			downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeElement.thumbnail);
 		} else {			
-			Drawable defaultImage = context.getResources().getDrawable(R.drawable.thumnail_bg);
-			storeElement.image.setImageDrawable(defaultImage);
+			Drawable defaultImage = context.getResources().getDrawable(R.drawable.img_thumbnail_bg);
+			storeElement.thumbnail.setImageDrawable(defaultImage);
 		}
 		storeElement.name.setText(store.getName());
 		storeElement.address.setText(store.getAddress());
@@ -65,7 +62,7 @@ public class StoreAdapter extends MBaseAdapter {
 	}
 
 	private class StoreElement {
-		ImageView image;
+		ImageView thumbnail;
 		TextView name;
 		TextView address;
 		TextView likeCount;
