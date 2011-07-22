@@ -193,7 +193,7 @@ public class CommentAdapter extends MBaseAdapter {
 		User user = comment.getUser();
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, commentElement.thumnail);
 		commentElement.nick.setText(user.getNick());
-		commentElement.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()));
+		commentElement.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()) + comment.getFromWhere() + "에서");
 		commentElement.comment.setText(comment.getComment());
 
 		return convertView;

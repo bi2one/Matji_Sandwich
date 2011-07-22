@@ -33,6 +33,7 @@
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="PostSliderActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
+		<activity android:name="PostNearListActivity"></activity>
 		<activity android:name="PostTabActivity"></activity>
 		<activity android:name="SettingActivity"></activity>
 		<activity android:name="SignUpActivity"></activity>

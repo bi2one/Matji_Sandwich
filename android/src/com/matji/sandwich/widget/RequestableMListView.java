@@ -64,9 +64,12 @@ PullToRefreshListView.OnRefreshListener {
 	}
 
 	public void initValue() {
-		adapter.clear();
 		page = 1;
 	}
+
+    public void clearAdapter() {
+	adapter.clear();
+    }
 
 	public void nextValue() {			
 		prevPage = page;
@@ -142,6 +145,9 @@ PullToRefreshListView.OnRefreshListener {
 	}
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+	    if (tag == REQUEST_RELOAD) {
+		clearAdapter();
+	    }
 		if (data.size() == 0 || data.size() < limit){
 			scrollListener.requestSetOff();
 		}else{

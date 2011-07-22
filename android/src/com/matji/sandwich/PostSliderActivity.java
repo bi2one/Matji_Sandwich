@@ -36,7 +36,7 @@ public class PostSliderActivity extends SliderActivity {
 				if (data != null) {
 					int position = data.getIntExtra("position", -1);
 					if (position >= 0) {
-						((PostListView) getCurrentPage()).delete(position);
+//						((PostListView) getCurrentPage()).delete(position);
 					}
 				}
 			}

@@ -405,7 +405,7 @@
   <!-- activity_post_tab.xml -->
   <style name="post_tab_TabBar" parent="DefaultWidthFill">
     <item name="android:padding">6dp</item>
-    <item name="android:background">@color/main_tab_focused</item>
+    <item name="android:background">@drawable/btn_sort_bg</item>
   </style>
 
   <style name="post_tab_DivisionBar" parent="DefaultFill">
@@ -484,5 +484,34 @@
   <style name="row_post_Like" parent="SmallOrangeText">
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
   </style>
-  
+
+  <!-- map_title_bar.xml -->
+  <style name="map_title_bar" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/map_titlebar_bg</item>
+  </style>
+
+  <style name="map_title_bar_flipButton" parent="DefaultWrap">
+    <item name="android:background">@drawable/map_titlebar_flip_btn</item>
+  </style>
+
+  <style name="map_title_bar_locationButton" parent="DefaultWrap">
+    <item name="android:background">@drawable/map_titlebar_location_btn</item>
+  </style>
+
+  <style name="map_title_bar_address" parent="DefaultWidthFill">
+  </style>
+
+  <style name="map_title_bar_changeLocationText" parent="DefaultWrap">
+    <item name="android:layout_width">30dp</item>
+    <item name="android:layout_height">30dp</item>
+  </style>
+
+  <style name="map_title_bar_changeLocationArrow" parent="DefaultWrap">
+    <item name="android:layout_width">10dp</item>
+    <item name="android:layout_height">10dp</item>
+  </style>
+
+  <style name="map_title_bar_nearPostButton" parent="DefaultWrap">
+    <item name="android:background">@drawable/map_titlebar_near_post_btn</item>
+  </style>
 </resources>

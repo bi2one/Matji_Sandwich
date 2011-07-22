@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- Title Container -->
-	<dimen name="title_container_height">40dp</dimen>
+	<dimen name="title_container_height">37dp</dimen>
+	
+	<!-- User Thumnail -->
 	<dimen name="thumnail_size">50dp</dimen>
 	
 	<!-- everywhere used dimens -->
