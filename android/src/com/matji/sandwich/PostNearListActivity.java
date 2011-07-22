@@ -25,6 +25,7 @@ public class PostNearListActivity extends BaseActivity {
 		listView.setActivity(this);
 		listView.requestReload();
 	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();

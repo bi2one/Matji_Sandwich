@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 import java.util.HashMap;
-
+import android.util.Log;
 import com.matji.sandwich.R;
 import com.matji.sandwich.listener.ImageDownloaderListener;
 import com.matji.sandwich.util.ImageUtil;

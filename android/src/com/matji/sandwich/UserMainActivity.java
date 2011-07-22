@@ -87,16 +87,16 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 		titleText = (TextView) findViewById(R.id.user_cell_title);
 		introText = (TextView) findViewById(R.id.user_cell_intro);
 		followButton = (Button) findViewById(R.id.user_main_follow_btn);
-		followingYouText = (TextView) findViewById(R.id.user_main_following_you);
-		blogText = (TextView) findViewById(R.id.user_main_blog);
-		ownerText = (TextView) findViewById(R.id.user_main_owner);
-
-		followerButton = (Button) findViewById(R.id.user_main_follower_btn);
-		followingButton = (Button) findViewById(R.id.user_main_following_btn);
-		jjimStoreButton = (Button) findViewById(R.id.user_main_jjim_store_btn);
-		memoButton = (Button) findViewById(R.id.user_main_memo_btn);
-		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
-		imageButton = (Button) findViewById(R.id.user_main_image_btn);		
+//		followingYouText = (TextView) findViewById(R.id.user_main_following_you);
+//		blogText = (TextView) findViewById(R.id.user_main_blog);
+//		ownerText = (TextView) findViewById(R.id.user_main_owner);
+//
+//		followerButton = (Button) findViewById(R.id.user_main_follower_btn);
+//		followingButton = (Button) findViewById(R.id.user_main_following_btn);
+//		jjimStoreButton = (Button) findViewById(R.id.user_main_jjim_store_btn);
+//		memoButton = (Button) findViewById(R.id.user_main_memo_btn);
+//		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
+//		imageButton = (Button) findViewById(R.id.user_main_image_btn);		
 	}
 
 	private void setInfo() {
@@ -157,10 +157,10 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 
 		followerButton.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
 		followingButton.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
-		jjimStoreButton.setText(getCountNumberOf(R.string.user_main_jjim_store, user.getStoreCount()));
-		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
-		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
-		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getImageCount()));
+//		jjimStoreButton.setText(getCountNumberOf(R.string.user_main_jjim_store, user.getStoreCount()));
+//		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
+//		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
+//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.getImageCount()));
 		//TODO
 		//		imageButton.setText(getCountNumberOf(R.string.default_string_image, user.get));
 	}
@@ -251,33 +251,33 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 		startActivity(intent);
 	}
 
-	public void onJjimStoreButtonClicked(View view) {
-		tabHost.setCurrentTab(UserTabActivity.JJIM_STORE_PAGE);
-	}
-
-	public void onMemoButtonClicked(View view) {
-		tabHost.setCurrentTab(UserTabActivity.MEMO_PAGE);
-	}
-
-	public void onTagButtonClicked(View view) {
-		Intent intent = new Intent(this, TagListActivity.class);
-		intent.putExtra("id", user.getId());
-		intent.putExtra("type", ModelType.USER);
-		startActivity(intent);
-	}
-
-	public void onImageButtonClicked(View view) {
-		tabHost.setCurrentTab(UserTabActivity.IMAGE_PAGE);
-	}
-
-	private void onMessageButtonClicked() {
-		if (loginRequired()) {
-			Intent intent = new Intent(this, WriteMessageActivity.class);
-			intent.putExtra("user_id", user.getId());
-			startActivity(intent);
-		}
-	}
-	
+//	public void onJjimStoreButtonClicked(View view) {
+//		tabHost.setCurrentTab(UserTabActivity.JJIM_STORE_PAGE);
+//	}
+//
+//	public void onMemoButtonClicked(View view) {
+//		tabHost.setCurrentTab(UserTabActivity.MEMO_PAGE);
+//	}
+//
+//	public void onTagButtonClicked(View view) {
+//		Intent intent = new Intent(this, TagListActivity.class);
+//		intent.putExtra("id", user.getId());
+//		intent.putExtra("type", ModelType.USER);
+//		startActivity(intent);
+//	}
+//
+//	public void onImageButtonClicked(View view) {
+//		tabHost.setCurrentTab(UserTabActivity.IMAGE_PAGE);
+//	}
+//
+//	private void onMessageButtonClicked() {
+//		if (loginRequired()) {
+//			Intent intent = new Intent(this, WriteMessageActivity.class);
+//			intent.putExtra("user_id", user.getId());
+//			startActivity(intent);
+//		}
+//	}
+//	
 
 	
 

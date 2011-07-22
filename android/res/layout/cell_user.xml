@@ -7,6 +7,9 @@
 			style="@style/user_cell_Thumnail"
 			android:id="@+id/user_cell_thumnail" />
 		<TextView
+			style="@style/user_cell_Name" 
+			android:id="@+id/user_cell_name"/>
+		<TextView
 			style="@style/user_cell_Grade"
 			android:id="@+id/user_cell_grade"
 			android:layout_toRightOf="@id/user_cell_thumnail" />

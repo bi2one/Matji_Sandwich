@@ -3,6 +3,9 @@
 	<!-- Title Container -->
 	<dimen name="title_container_height">37dp</dimen>
 	
+	<!-- Store Cell -->
+	<dimen name="max_title_width">200dp</dimen>
+	
 	<!-- User Thumnail -->
 	<dimen name="thumnail_size">50dp</dimen>
 	
