@@ -4,28 +4,28 @@ import android.app.TabActivity;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.UserTabActivity;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 
 public class UserPostListView extends PostListView {
 	private HttpRequest request;
-	private int user_id;
+	private User user;
 
 	public UserPostListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		request = new PostHttpRequest(context);
 		setPage(1);
+		
+		user = (User) SharedMatjiData.getInstance().top();
 	}
 
-	public void setUserId(int user_id) {
-		this.user_id = user_id;
-	}
-	
 	@Override
 	public HttpRequest request() {
-		((PostHttpRequest) request).actionUserList(user_id, getPage(), getLimit());
+		((PostHttpRequest) request).actionUserList(user.getId(), getPage(), getLimit());
 		return request;
 	}
 	

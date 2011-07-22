@@ -5,6 +5,10 @@
 	android:layout_height="fill_parent"
 	android:background="#fff"
 	android:orientation="vertical">
+		
+	<!-- Main Title -->
+	<com.matji.sandwich.widget.title.MainTitle
+		style="@style/DefaultWrap" />
 	
 	<!-- User Cell -->
 	<RelativeLayout
@@ -12,19 +16,41 @@
 		<include
 			android:id="@+id/user_main_user_cell"
 			layout="@layout/cell_user" />
-		<Button
-			style="@style/user_main_FollowButton"
-			android:id="@+id/user_main_follow_btn"
-			android:layout_below="@id/user_main_user_cell"
-			android:onClick="onFollowButtonClicked" />
-		<TextView
-			style="@style/user_main_FollowingYou"
-			android:id="@+id/user_main_following_you"
-			android:layout_below="@id/user_main_follow_btn"
-			android:visibility="gone" />
 	</RelativeLayout>
-
-	<!-- User Info Cell -->
+	
+	<!-- Seperate Line -->
+	<RelativeLayout 
+		style="@style/DefaultWidthFill">
+		<ImageView 
+		style="@style/DefaultWidthFill"
+			android:background="@drawable/seperate_line" />
+	</RelativeLayout>
+	
+	<!-- User Tab -->
+	<com.matji.sandwich.widget.RoundTabHost
+		android:id="@android:id/tabhost" 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<LinearLayout 
+			android:orientation="vertical"
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent">
+			<TabWidget 
+				android:id="@android:id/tabs" 
+				style="@style/post_tab_TabBar"
+				android:background="#fff" 
+				android:layout_weight="0" />
+			<ImageView 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+			<FrameLayout 
+				android:id="@android:id/tabcontent"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" />
+		</LinearLayout>
+	</com.matji.sandwich.widget.RoundTabHost>
+	<!--
 	<LinearLayout
 		style="@style/user_main_Cell"
 		android:orientation="vertical">
@@ -45,7 +71,7 @@
 			android:visibility="gone" />
 	</LinearLayout>
 
-	<!-- Detail View ButttonCell -->
+	Detail View ButttonCell
 	<RelativeLayout
 		style="@style/user_main_Cell">
 		<Button
@@ -85,5 +111,5 @@
 			android:layout_below="@id/user_main_jjim_store_btn"
 			android:layout_toRightOf="@id/user_main_tag_btn"
 			android:onClick="onImageButtonClicked" />
-	</RelativeLayout>
+	</RelativeLayout> -->
 </LinearLayout>

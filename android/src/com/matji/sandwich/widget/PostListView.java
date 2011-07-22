@@ -3,7 +3,7 @@ package com.matji.sandwich.widget;
 import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreMainActivity;
-import com.matji.sandwich.UserTabActivity;
+import com.matji.sandwich.UserMainActivity;
 import com.matji.sandwich.adapter.SectionedPostAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
@@ -62,7 +62,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	}
 
 	protected void gotoUserPage(Post post) {
-		Intent intent = new Intent(getActivity(), UserTabActivity.class);
+		Intent intent = new Intent(getActivity(), UserMainActivity.class);
 		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getUser());
 	}	
 

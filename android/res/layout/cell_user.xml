@@ -7,8 +7,13 @@
 			style="@style/user_cell_Thumnail"
 			android:id="@+id/user_cell_thumnail" />
 		<TextView
-			style="@style/user_cell_Name" 
-			android:id="@+id/user_cell_name"/>
+			style="@style/user_cell_Name"
+			android:id="@+id/user_cell_name"
+			android:layout_toRightOf="@id/user_cell_thumnail" />
+		<Button
+			style="@style/store_main_InfoButton"	
+			android:id="@+id/store_main_info_btn"
+			android:layout_toRightOf="@id/user_cell_name" />
 		<TextView
 			style="@style/user_cell_Grade"
 			android:id="@+id/user_cell_grade"
@@ -31,4 +36,16 @@
 			android:id="@+id/user_cell_intro"
 			android:layout_toRightOf="@id/user_cell_thumnail"
 			android:layout_below="@id/user_cell_title" />
+		<Button
+			style="@style/store_main_LikeButton"
+			android:id="@+id/store_main_like_btn"
+			android:layout_alignParentRight="true"
+			android:onClick="onLikeButtonClicked"/>		
+		<Button
+			style="@style/user_main_FollowButton"
+			android:id="@+id/user_main_follow_btn"
+			android:layout_alignParentRight="true"
+			android:layout_below="@id/store_main_like_btn"
+			android:onClick="onFollowButtonClicked" />
+			
 </RelativeLayout>

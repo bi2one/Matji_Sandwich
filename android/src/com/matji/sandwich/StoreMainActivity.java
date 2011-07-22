@@ -1,7 +1,6 @@
 package com.matji.sandwich;
 
 import java.util.ArrayList;
-import android.util.Log;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.AttachFile;

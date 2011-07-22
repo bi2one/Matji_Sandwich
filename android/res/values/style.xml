@@ -244,13 +244,15 @@
   <style name="user_main_Cell" parent="Cell">
   </style>
   
-  <style name="user_main_FollowButton" parent="DefaultWidthFill">
+  <style name="user_main_FollowButton">
+   	<item name="android:layout_width">70dp</item>
+  	<item name="android:layout_height">30dp</item>
   	<item name="android:layout_marginTop">7dp</item>
   	<item name="android:textSize">16dp</item>
   	<item name="android:textStyle">bold</item>
   </style>
 
-  <style name="user_main_FollowingYou" parent="DefaultWidthFill">
+  <style name="user_main_FollowingYou">
     <item name="android:gravity">center</item>
   </style>
 

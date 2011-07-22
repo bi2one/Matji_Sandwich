@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -14,19 +15,18 @@ import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.RoundTabHost;
 import com.matji.sandwich.util.ModelType;
 
-import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 
-public class UserMainActivity extends BaseActivity implements Requestable {
-	private TabHost tabHost;
+public class UserMainActivity extends BaseTabActivity implements Requestable {
+	private RoundTabHost tabHost;
 	private User user;
 	private boolean me;
 
@@ -39,7 +39,7 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 	private TextView gradeText;
 	private TextView pointText1;
 	private TextView pointText2;
-	private TextView titleText;
+	private TextView nameText;
 	private TextView introText;
 	private Button followButton;
 	private TextView followingYouText;
@@ -62,7 +62,7 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_main);
 
-		tabHost = ((TabActivity) getParent()).getTabHost();
+		tabHost = (RoundTabHost)getTabHost();
 		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
 		downloader = new MatjiImageDownloader(this);
@@ -84,10 +84,11 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 		gradeText = (TextView) findViewById(R.id.user_cell_grade);
 		pointText1 = (TextView) findViewById(R.id.user_cell_point_text);
 		pointText2 = (TextView) findViewById(R.id.user_cell_point);
-		titleText = (TextView) findViewById(R.id.user_cell_title);
+		nameText = (TextView) findViewById(R.id.user_cell_name);
 		introText = (TextView) findViewById(R.id.user_cell_intro);
 		followButton = (Button) findViewById(R.id.user_main_follow_btn);
-//		followingYouText = (TextView) findViewById(R.id.user_main_following_you);
+		
+		//		followingYouText = (TextView) findViewById(R.id.user_main_following_you);
 //		blogText = (TextView) findViewById(R.id.user_main_blog);
 //		ownerText = (TextView) findViewById(R.id.user_main_owner);
 //
@@ -97,6 +98,17 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 //		memoButton = (Button) findViewById(R.id.user_main_memo_btn);
 //		tagButton = (Button) findViewById(R.id.user_main_tag_btn);
 //		imageButton = (Button) findViewById(R.id.user_main_image_btn);		
+
+		tabHost.addLeftTab("tab1",
+				R.string.store_main_post_list_view,
+				new Intent(this, UserPostListActivity.class));
+		tabHost.addCenterTab("tab2",
+				R.string.store_main_img,
+				new Intent(this, ImageListActivity.class));
+		tabHost.addRightTab("tab3",
+				R.string.store_main_review,
+				new Intent(this, UserStoreListActivity.class));
+
 	}
 
 	private void setInfo() {
@@ -130,12 +142,12 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 		pointText1.setText(R.string.grade_point);
 		pointText2.setText(" " + totalPoint);
 
-		if (dbProvider.isExistFollower(user.getId())) {
-			followingYouText.setText(user.getNick() + " " + getString(R.string.user_main_following_you));
-			followingYouText.setVisibility(TextView.VISIBLE);
-		} else {
-			followingYouText.setVisibility(TextView.GONE);
-		}
+//		if (dbProvider.isExistFollower(user.getId())) {
+//			followingYouText.setText(user.getNick() + " " + getString(R.string.user_main_following_you));
+//			followingYouText.setVisibility(TextView.VISIBLE);
+//		} else {
+//			followingYouText.setVisibility(TextView.GONE);
+//		}
 
 		/* Set User Image */
 		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SMALL, (ImageView) findViewById(R.id.user_cell_thumnail));
@@ -150,13 +162,13 @@ public class UserMainActivity extends BaseActivity implements Requestable {
 			followButton.setText(R.string.user_main_follow);
 		}
 
-		titleText.setText(user.getTitle());
+		nameText.setText(user.getNick());
 		introText.setText(user.getIntro());
 
-		blogText.setText(user.getNick() + getString(R.string.user_main_not_exist_blog));
-
-		followerButton.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
-		followingButton.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
+//		blogText.setText(user.getNick() + getString(R.string.user_main_not_exist_blog));
+//
+//		followerButton.setText(getCount(R.string.user_main_follower, user.getFollowerCount()));
+//		followingButton.setText(getCount(R.string.user_main_following, user.getFollowingCount()));
 //		jjimStoreButton.setText(getCountNumberOf(R.string.user_main_jjim_store, user.getStoreCount()));
 //		memoButton.setText(getCountNumberOf(R.string.default_string_memo, user.getPostCount()));
 //		tagButton.setText(getCountNumberOf(R.string.default_string_tag, user.getTagCount()));
