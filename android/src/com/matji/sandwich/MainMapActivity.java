@@ -174,11 +174,11 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    mMapController.animateTo(point);
 	    break;
 	case GEOCODE:
-	    if (((AddressMatjiData)data.get(0)).getAddress().getPremises() != null) {
-		Log.d("=====", ((AddressMatjiData)data.get(0)).getAddress().getPremises());
-	    } else {
-		Log.d("=====", "null: " + ((AddressMatjiData)data.get(0)).getAddress().getAddressLine(0));
-	    }
+	    // if (((AddressMatjiData)data.get(0)).getAddress().getPremises() != null) {
+		// Log.d("=====", ((AddressMatjiData)data.get(0)).getAddress().getPremises());
+	    // } else {
+		// Log.d("=====", "null: " + ((AddressMatjiData)data.get(0)).getAddress().getAddressLine(0));
+	    // }
 	    // for ((AddressMatjiData) addressData : data) {
 	    // 	Address address = addressData.getAddress();
 		

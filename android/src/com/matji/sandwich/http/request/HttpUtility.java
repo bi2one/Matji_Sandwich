@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.io.BufferedInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -17,6 +18,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.util.ByteArrayBuffer;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.HttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.HttpVersion;
+
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,7 +68,7 @@ final public class HttpUtility
 
     //default connection values
     private static int connectionTimeoutMillis = 10000;
-    private static int readTimeoutMillis = 10000;
+    private static int readTimeoutMillis = 5000;
     private static boolean useCaches = false;
 
     public static final int ASYNC_METHOD_GET = 1;
@@ -81,6 +91,7 @@ final public class HttpUtility
      */
     private HttpUtility() {
 	connectionPool = new HashMap<HttpRequest, HttpURLConnection>();
+	System.setProperty("http.keepAlive", "false");
     }
 	
     /**
@@ -211,7 +222,7 @@ final public class HttpUtility
 	    connectionPool.remove(request);
 	}
     }
-	
+
     /**
      * 
      * @param url
@@ -221,86 +232,113 @@ final public class HttpUtility
      */
     public SimpleHttpResponse get(String url, Map<String, String> headerValues, Map<String, String> getParameters, HttpRequest request)
     {
-	//open connection
-	HttpURLConnection connection = null;
-	try
-	    {
-		connection = (HttpURLConnection)new URL(getUrlStringWithQuery(url, getParameters)).openConnection();
+	// Log.d("=====", "=====================================");
+    	//open connection
+    	HttpURLConnection connection = null;
+    	try
+    	    {
+    		// Log.d("=====", "1");
+    		connection = (HttpURLConnection)new URL(getUrlStringWithQuery(url, getParameters)).openConnection();
+		Log.d("Matji", getUrlStringWithQuery(url, getParameters));
 
-		connection.setRequestMethod("GET");
-		connection.setDoInput(true);
-		connection.setDoOutput(false);
+    		connection.setRequestProperty("Connection","close");
+    		connection.setRequestMethod("GET");
+    		connection.setDoInput(true);
+    		connection.setDoOutput(false);
 
-		connection.setUseCaches(getUseCaches());
-		connection.setConnectTimeout(getConnectionTimeout());
-		connection.setReadTimeout(getReadTimeout());
-		connectionPool.put(request, connection);
-	    }
-	catch(Exception e)
-	    {
-		Log.e("HttpUtility.get", e.toString());
-		if(connection != null)
-		    disconnectConnection(request);
-		return null;
-	    }
+    		connection.setUseCaches(getUseCaches());
+    		connection.setConnectTimeout(getConnectionTimeout());
+    		connection.setReadTimeout(getReadTimeout());
+    		connectionPool.put(request, connection);
+    	    }
+    	catch(Exception e)
+    	    {
+    		// Log.d("=====", "2");
+    		Log.e("HttpUtility.get", e.toString());
+    		if(connection != null)
+    		    disconnectConnection(request);
+    		return null;
+    	    }
 
-	//set header
-	if(headerValues != null)
-	    for(String key: headerValues.keySet())
-		connection.setRequestProperty(key, headerValues.get(key));
+    	// Log.d("=====", "3");
+    	//set header
+    	if(headerValues != null) {
+    	    // Log.d("=====", "4");
+    	    for(String key: headerValues.keySet())
+    		connection.setRequestProperty(key, headerValues.get(key));
+    	}
 
-	//get response
-	try
-	    {
-		InputStream is = connection.getInputStream();
-		byte[] responseBody = readBytesFromInputStream(is);
-		is.close();
-		SimpleHttpResponse result = new SimpleHttpResponse(connection.getResponseCode(), responseBody, connection.getHeaderFields());
-		disconnectConnection(request);
-		return result;
-	    }
-	catch(SocketException e) {
-	    return null;
-	}
-	catch(Exception e)
-	    {
-		Log.e("HttpUtility.get", e.toString());
-		try
-		    {
-			int responseCode = connection.getResponseCode();
-			if(responseCode != -1) {
-			    SimpleHttpResponse result = new SimpleHttpResponse(responseCode, connection.getResponseMessage());
-			    disconnectConnection(request);
-			    return result;
-			}
-		    }
-		catch(IOException ioe)
-		    {
-			Log.e("HttpUtility.get", ioe.toString());
-		    }
-	    }
-	finally
-	    {
-		disconnectConnection(request);
-	    }
+    	//get response
+    	try
+    	    {
+    		// Log.d("=====", "5");
 		
-	return null;
+    		// Log.d("=====", "5-1");
+    		// BufferedReader dis = new BufferedReader(new
+    		// InputStreamReader(conn.getInputStream()));
+		long start = System.currentTimeMillis();
+    		InputStream is = new BufferedInputStream(connection.getInputStream());
+    		// Log.d("=====", "5-2");
+    		byte[] responseBody = readBytesFromInputStream(is);
+		long timeGap = System.currentTimeMillis() - start;
+		// Log.d("=====", "get   : " + timeGap);
+		
+    		// Log.d("=====", "5-3");
+    		// is.close();
+    		// Log.d("=====", "5-4");
+    		SimpleHttpResponse result = new SimpleHttpResponse(connection.getResponseCode(), responseBody, connection.getHeaderFields());
+    		// Log.d("=====", "5-5");
+		
+    		disconnectConnection(request);
+    		return result;
+    	    }
+    	catch(SocketException e) {
+    	    // Log.d("=====", "exception");
+    	    return null;
+    	}
+    	catch(Exception e)
+    	    {
+    		// Log.d("=====", "6");
+    		Log.e("HttpUtility.get", e.toString());
+    		try
+    		    {
+    			// Log.d("=====", "7");
+    			int responseCode = connection.getResponseCode();
+    			if(responseCode != -1) {
+    			    // Log.d("=====", "8");
+    			    SimpleHttpResponse result = new SimpleHttpResponse(responseCode, connection.getResponseMessage());
+    			    disconnectConnection(request);
+    			    return result;
+    			}
+    		    }
+    		catch(IOException ioe)
+    		    {
+    			Log.e("HttpUtility.get", ioe.toString());
+    		    }
+    	    }
+    	finally
+    	    {
+    		// Log.d("=====", "9");
+    		disconnectConnection(request);
+    	    }
+		
+    	return null;
     }
 
     public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters, HttpRequest request) {
 	
 	// return post(url, headerValues, postParameters, 0);
-    // 	return post(url, headerValues, postParameters);
-    // }
-    /**
-     * 
-     * @param url
-     * @param headerValues
-     * @param postParameters
-     * @return
-     */
-    // public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters)
-    // {
+	// 	return post(url, headerValues, postParameters);
+	// }
+	/**
+	 * 
+	 * @param url
+	 * @param headerValues
+	 * @param postParameters
+	 * @return
+	 */
+	// public SimpleHttpResponse post(String url, Map<String, String> headerValues, Map<String, Object> postParameters)
+	// {
 	//open connection
 	HttpURLConnection connection = null;
 	connectionPool.put(request, connection);
@@ -387,7 +425,7 @@ final public class HttpUtility
 						    {
 							dos.write(buffer, 0, bytesRead);
 							// if (progressListener != null)
-							    // progressListener.onFileWritten(tag, totalSize, bytesRead);
+							// progressListener.onFileWritten(tag, totalSize, bytesRead);
 						    }
 						fis.close();
 					    }
@@ -490,7 +528,7 @@ final public class HttpUtility
 	    }
 	finally
 	    {
-			disconnectConnection(request);
+		disconnectConnection(request);
 	    }
 	return null;
     }
