@@ -43,7 +43,7 @@ Requestable {
 	private Context mContext;
 	private GpsManager mGpsManager;
 	private HttpRequestManager mRequestManager;
-	private GeocodeHttpRequest geocodeRequest;
+	// private GeocodeHttpRequest geocodeRequest;
 	private Location prevLocation;
 	private CenterOverlay centerOverlay;
 	//    private boolean isMapClicked;
@@ -64,7 +64,7 @@ Requestable {
 		// mMapController.stopPanning();
 		mGpsManager = new GpsManager(mContext, this);
 		mRequestManager = HttpRequestManager.getInstance(mContext);
-		geocodeRequest = new GeocodeHttpRequest(mContext);
+		// geocodeRequest = new GeocodeHttpRequest(mContext);
 		centerOverlay = new CenterOverlay(mContext, mMapView);
 		centerOverlay.drawOverlay();
 		mGpsManager.start();
@@ -111,13 +111,13 @@ Requestable {
 	}
 
 	private void requestGeocodeByLocation(Location loc) {
-		geocodeRequest.actionFromLocation(loc, 1);
-		mRequestManager.request(this, geocodeRequest, GEOCODE_REQUEST_TAG, this);
+		// geocodeRequest.actionFromLocation(loc, 1);
+		// mRequestManager.request(this, geocodeRequest, GEOCODE_REQUEST_TAG, this);
 	}
 
 	private void requestGeocodeByGeoPoint(GeoPoint point) {
-		geocodeRequest.actionFromGeoPoint(point, 1);
-		mRequestManager.request(this, geocodeRequest, GEOCODE_REQUEST_TAG, this);
+		// geocodeRequest.actionFromGeoPoint(point, 1);
+		// mRequestManager.request(this, geocodeRequest, GEOCODE_REQUEST_TAG, this);
 	}
 
 	protected void onPause() {

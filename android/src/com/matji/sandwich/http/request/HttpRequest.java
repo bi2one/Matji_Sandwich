@@ -1,7 +1,7 @@
 package com.matji.sandwich.http.request;
 
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.http.parser.MatjiDataParser;
+import com.matji.sandwich.http.parser.MatjiParser;
 import com.matji.sandwich.listener.FileUploadProgressListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.data.MatjiData;
@@ -28,7 +28,7 @@ public abstract class HttpRequest implements RequestCommand {
     protected Hashtable<String, Object> postHashtable;
     protected Hashtable<String, String> getHashtable;
     protected HttpMethod httpMethod;
-    protected MatjiDataParser parser;
+    protected MatjiParser parser;
 
     protected String action;
     protected String controller;
@@ -132,7 +132,9 @@ public abstract class HttpRequest implements RequestCommand {
     }
     
     public String getUrl() {
-	if (controller == null || controller.equals("")) {
+	if (action == null && controller == null) {
+	    return serverDomain;
+	} else if (controller == null || controller.equals("")) {
 	    return serverDomain + action;
 	} else {
 	    return serverDomain + controller + "/" + action;

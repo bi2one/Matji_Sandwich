@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class MatjiDataParser {
+public abstract class MatjiDataParser implements MatjiParser {
 	protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
 	public Context context;
 	
@@ -38,9 +38,9 @@ public abstract class MatjiDataParser {
 		ArrayList<MatjiData> matjiDataList = new ArrayList<MatjiData>();
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonElement em = jsonArray.get(i);
-			try{
+			try {
 				matjiDataList.add(getMatjiData(jsonArray.get(i).getAsJsonObject()));
-			} catch (IllegalStateException e){
+			} catch (IllegalStateException e) {
 				Log.d("Matji", "WTF is " + em.getClass());
 			}
 		}
