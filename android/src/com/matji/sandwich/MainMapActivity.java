@@ -12,10 +12,7 @@ import android.view.MotionEvent;
 import android.view.View.OnTouchListener;
 // import android.view.inputmethod.InputMethodManager;
 import android.view.View.OnKeyListener;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.util.Log;
 import android.graphics.drawable.Drawable;
 
 import com.google.android.maps.GeoPoint;

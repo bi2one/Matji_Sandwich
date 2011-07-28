@@ -169,6 +169,7 @@
   <string name="user_main_following">following</string>
   <string name="user_main_jjim_store">찜한 맛집</string>
   <string name="user_main_not_exist_blog">님은 블로그를 운영하고 있지 않습니다.</string>
+  <string name="number_of_tag">개의 태그</string>
 
   <!-- MainTabActivity -->
   <string name="main_tab_map">맛지도</string>

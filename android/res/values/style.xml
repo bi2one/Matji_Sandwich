@@ -105,6 +105,10 @@
   
   
   <!-- everywhere used style -->
+  <style name="SubTitle" parent="DefaultWrap">
+  	<item name="android:textColor">@color/matji_chocolate</item>
+  	<item name="android:textSize">@dimen/text_large</item>
+  </style>
   <style name="BottomBarListView">
   	<item name="android:layout_width">fill_parent</item>
   	<item name="android:layout_height">0dp</item>

@@ -34,7 +34,7 @@ public class UserTagActivity extends BaseActivity implements Requestable {
 		tagCloudView = (TagCloudView) findViewById(R.id.user_tag_cloud);
 		
 		TextView tagCount = (TextView) findViewById(R.id.user_tag_count);
-		tagCount.setText(user.getTagCount()+"개의 태그");
+		tagCount.setText(user.getTagCount()+getString(R.string.number_of_tag));
 	}
 	
 	private HttpRequest request() {

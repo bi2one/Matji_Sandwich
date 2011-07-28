@@ -32,4 +32,7 @@
 	
 	<!-- Border -->
 	<dimen name="white_border_width">5dp</dimen>
+	
+	<!-- ScrollView -->
+	<dimen name="default_fading_edge_length">3dp</dimen>
 </resources>
