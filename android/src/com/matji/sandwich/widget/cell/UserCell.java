@@ -56,7 +56,10 @@ public class UserCell extends RelativeLayout {
 		User user = (User) SharedMatjiData.getInstance().top();
 		((ProfileImageView) findViewById(R.id.profile)).setUserId(user.getId());
 		((TextView) findViewById(R.id.cell_user_nick)).setText(user.getNick());
-		((TextView) findViewById(R.id.cell_user_point)).setText(user.getMileage().getTotalPoint()+"");
+		if (user.getMileage() != null) 
+			((TextView) findViewById(R.id.cell_user_point)).setText(user.getMileage().getTotalPoint()+"");
+		else 
+			((TextView) findViewById(R.id.cell_user_point)).setText("0");
 		((TextView) findViewById(R.id.cell_user_area)).setText("KOREA");
 		((TextView) findViewById(R.id.cell_user_like_list)).setText("165");
 		refresh(user);
@@ -70,7 +73,7 @@ public class UserCell extends RelativeLayout {
 	public void refresh(User user) {
 		Session session = Session.getInstance(getContext());
 		Button follow = (Button) findViewById(R.id.cell_user_follow);
-		Button messageList = (Button) findViewById(R.id.cell_user_follow);
+		Button messageList = (Button) findViewById(R.id.cell_user_message_list);
 
 		if (session.isLogin() && session.getCurrentUser().getId() == user.getId()) {
 			follow.setVisibility(View.GONE);
