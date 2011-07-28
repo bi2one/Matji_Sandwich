@@ -30,7 +30,7 @@
 			android:layout_height="wrap_content"
 			android:gravity="center"
 			android:layout_gravity="center"
-			android:textColor="@color/DARK_ORANGE"
+			android:textColor="@color/default_theme_key"
 			android:drawableTop="@drawable/btn_unlike"
 			android:drawablePadding="3dp" />
 	</LinearLayout>

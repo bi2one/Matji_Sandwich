@@ -13,7 +13,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
-import com.matji.sandwich.widget.TagCloudView;
+import com.matji.sandwich.widget.tag.TagCloudView;
 
 public class UserTagActivity extends BaseActivity implements Requestable {
 	private final int USER_TAG_LIST_REQUEST = 11;

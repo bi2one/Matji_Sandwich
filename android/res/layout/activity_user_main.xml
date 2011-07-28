@@ -11,9 +11,8 @@
 		style="@style/DefaultWrap" />
 
 	<!-- User Cell -->
-	<include
-		android:id="@+id/user_main_user_cell"
-		layout="@layout/cell_user" />
+	<com.matji.sandwich.widget.cell.UserCell
+		style="@style/DefaultWrap" />
 
 	<!-- Seperate Line -->
 	<RelativeLayout

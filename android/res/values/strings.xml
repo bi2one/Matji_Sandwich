@@ -142,9 +142,12 @@
   <string name="alarm_commented_post">commented on your post.</string>
   <string name="alarm_like_post">likes your post.</string>
   
-  <!-- grade -->
-  <string name="grade_point">활동점수 :</string>
-  <string name="grade_diamond">다이아몬드</string>
+  <!-- Cell -->
+  <string name="cell_user_point">Point</string>
+  <string name="cell_user_area">활동지역</string>
+  <string name="cell_user_follow">Follow</string>
+  <string name="cell_user_unfollow">unFollow</string>
+  
   
   <!-- StoreMainActivity  -->
   <string name="store_main_unlike_store">내가 좋아하는 맛집</string>
@@ -161,13 +164,10 @@
   <string name="store_main_review">웹리뷰</string>
     
   <!-- UserMainActivity -->
-  <string name="user_main_follow">Follow</string>
-  <string name="user_main_unfollow">unFollow</string>
   <string name="user_main_following_you">follows you.</string>
   <string name="user_main_follower">follower</string>
   <string name="user_main_following">following</string>
   <string name="user_main_jjim_store">찜한 맛집</string>
-  <string name="user_main_activity_area">활동지역</string>
   <string name="user_main_not_exist_blog">님은 블로그를 운영하고 있지 않습니다.</string>
 
   <!-- MainTabActivity -->

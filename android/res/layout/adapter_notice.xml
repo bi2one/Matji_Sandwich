@@ -20,6 +20,6 @@
 		style="@style/DefaultWrap"
 		android:id="@+id/notice_adapter_date_ago"
 		android:textSize="11dp"
-		android:textColor="@color/LIGHT_GRAY"
+		android:textColor="@color/default_theme_value"
 		android:singleLine="true" />
 </LinearLayout>

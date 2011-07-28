@@ -29,5 +29,5 @@
 		android:layout_below="@id/activity_adapter_wrap"
 		android:textSize="11dp"
 		android:padding="3dp"
-		android:textColor="@color/GRAY" />
+		android:textColor="@color/default_theme_value" />
 </RelativeLayout>

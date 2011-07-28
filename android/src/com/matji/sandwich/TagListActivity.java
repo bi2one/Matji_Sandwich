@@ -2,7 +2,7 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.util.ModelType;
-import com.matji.sandwich.widget.TagListView;
+import com.matji.sandwich.widget.tag.TagListView;
 
 import android.os.Bundle;
 

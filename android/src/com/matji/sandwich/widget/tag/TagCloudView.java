@@ -1,10 +1,12 @@
-package com.matji.sandwich.widget;
+package com.matji.sandwich.widget.tag;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.FlowLayout;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -182,6 +184,7 @@ public class TagCloudView extends FlowLayout {
 	 */
 	public void init(ArrayList<Tag> tags) {
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_box));
+		Collections.shuffle(tags);	// shuffling for tag cloud
 
 		if (tags.size() > 0) {
 			for (Tag tag : tags) {

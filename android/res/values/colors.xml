@@ -8,11 +8,7 @@
 	<color name="focused2">#646d79</color>
 	<color name="default1">#eeeeee</color>	
 	<color name="default2">#ffffff</color>
-	<color name="LIGHT_GRAY">#ffcccccc</color>
-	<color name="GRAY">#bfbfbf</color>
-	<color name="GRAY2">#adadad</color>
 	<color name="SKYBLUE">#b0e2ff</color>
-	<color name="DARK_ORANGE">#c30</color>
 	<color name="DODGER_BLUE">#1C86EE</color>
 	<color name="DODGER_BLUE2">#1874CD</color>
 	<color name="BLACK">#000000</color>
@@ -40,11 +36,15 @@
 	<color name="section_shadow_color">#333333</color>
 	<color name="title_shadow_color">#ffffff</color>
 	
+	<color name="default_theme_key">#c30</color>
+	<color name="default_theme_value">#adadad</color>
+	<color name="default_theme_main">#000</color>
+	
 	<!-- Cell -->
 	<color name="cell_user_bg">#ffffff</color>
 	
 	<!-- Tag Cloud -->
-	<color name="tag_color1">#555555</color>
+	<color name="tag_color1">#bfbfbf</color>
 	<color name="tag_color2">#000000</color>
 	<color name="tag_color3">#ffaa55</color>
 	<color name="tag_color4">#ff5500</color>
