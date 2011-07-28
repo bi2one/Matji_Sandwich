@@ -1,53 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:background="@color/cell_bg">
-	<com.matji.sandwich.widget.ProfileImageView
-		style="@style/DefaultWrap" />
-		<ImageView
-			style="@style/user_cell_Profile"
-			android:id="@+id/user_cell_profile" />
+	style="@style/UserCell">
+	<include
+		layout="@layout/profile" />
+	<RelativeLayout
+		style="@style/DefaultWrap">
 		<TextView
-			style="@style/user_cell_Name"
-			android:id="@+id/user_cell_name"
-			android:layout_toRightOf="@id/user_cell_profile" 
-			android:singleLine="true"/>
-<!-- 		<Button -->
-<!-- 			style="@style/InfoButton" -->
-<!-- 			android:id="@+id/user_cell_info_btn" -->
-<!-- 			android:layout_toRightOf="@id/user_cell_name" /> -->
+			style="@style/cell_user_Name"
+			android:id="@+id/cell_user_name"
+			android:singleLine="true" />
 		<TextView
-			style="@style/user_cell_Grade"
-			android:id="@+id/user_cell_grade"
-			android:layout_below="@id/user_cell_name"
-			android:layout_toRightOf="@id/user_cell_profile" />
+			style="@style/cell_user_Grade"
+			android:id="@+id/cell_user_grade"
+			android:layout_below="@id/cell_user_name" />
 		<TextView
-			style="@style/user_cell_PointText"
-			android:id="@+id/user_cell_point_text"
-			android:layout_below="@id/user_cell_grade"
-			android:layout_toRightOf="@id/user_cell_grade" />
+			style="@style/cell_user_PointText"
+			android:id="@+id/cell_user_point_text"
+			android:layout_below="@id/cell_user_grade"
+			android:layout_toRightOf="@id/cell_user_grade" />
 		<TextView
-			style="@style/user_cell_Title"
-			android:id="@+id/user_cell_title"
-			android:layout_toRightOf="@id/user_cell_profile"
-			android:layout_below="@id/user_cell_grade" />
-		<TextView
-			style="@style/user_cell_Intro"
-			android:id="@+id/user_cell_intro"
-			android:layout_toRightOf="@id/user_cell_profile"
-			android:layout_below="@id/user_cell_title" />
+			style="@style/cell_user_Title"
+			android:id="@+id/cell_user_title"
+			android:layout_below="@id/cell_user_grade" />
+<!-- 		<TextView -->
+<!-- 			style="@style/cell_user_Intro" -->
+<!-- 			android:id="@+id/cell_user_intro" -->
+<!-- 			android:layout_below="@id/cell_user_title" /> -->
 		<Button
 			style="@style/LikeButton"
-			android:id="@+id/user_cell_like_btn"
+			android:id="@+id/cell_user_like_btn"
 			android:layout_alignParentRight="true"
-			android:onClick="onLikeButtonClicked"/>		
+			android:onClick="onLikeButtonClicked" />
 		<Button
-			style="@style/user_main_FollowButton"
+			style="@style/cell_user_FollowButton"
 			android:id="@+id/user_main_follow_btn"
 			android:layout_alignParentRight="true"
-			android:layout_below="@id/user_cell_like_btn"
+			android:layout_below="@id/cell_user_like_btn"
 			android:onClick="onFollowButtonClicked" />
-			
-</RelativeLayout>
+	</RelativeLayout>
+</LinearLayout>

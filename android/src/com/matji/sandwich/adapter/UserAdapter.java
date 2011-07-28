@@ -3,22 +3,16 @@ package com.matji.sandwich.adapter;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.UserMileage;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.widget.ProfileImageView;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class UserAdapter extends MBaseAdapter {  
-	private MatjiImageDownloader downloader;
-	private Context context;
-	
 	public UserAdapter(Context context) {
 		super(context);
-		downloader = new MatjiImageDownloader(context);
-		this.context = context;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -29,7 +23,7 @@ public class UserAdapter extends MBaseAdapter {
 			userElement = new UserElement();
 			convertView = getLayoutInflater().inflate(R.layout.adapter_user, null);
 
-			userElement.profile = (ImageView) convertView.findViewById(R.id.user_cell_profile);
+			userElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
 			userElement.grade = (TextView) convertView.findViewById(R.id.user_cell_grade);
 			userElement.title = (TextView) convertView.findViewById(R.id.user_cell_title);
 			userElement.intro = (TextView) convertView.findViewById(R.id.user_cell_intro);
@@ -42,8 +36,6 @@ public class UserAdapter extends MBaseAdapter {
 		}
 		
 		/* Set User */
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, userElement.profile);		
-		
 		UserMileage mileage = user.getMileage();
 		String grade = "E";
 
@@ -66,6 +58,7 @@ public class UserAdapter extends MBaseAdapter {
 			userElement.grade.setText(context.getString(R.string.grade_diamond) + "A");
 		}
 		
+		userElement.profile.setUserId(user.getId());
 		userElement.title.setText(user.getTitle());
 		userElement.intro.setText(user.getIntro());
 		if (user.getPost() != null) {
@@ -78,7 +71,7 @@ public class UserAdapter extends MBaseAdapter {
 	}
 
 	private class UserElement {
-		ImageView profile;
+		ProfileImageView profile;
 		TextView grade;
 		TextView title;
 		TextView intro;

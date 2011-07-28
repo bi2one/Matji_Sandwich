@@ -41,7 +41,7 @@
 	<color name="title_shadow_color">#ffffff</color>
 	
 	<!-- Cell -->
-	<color name="cell_bg">#ffffff</color>
+	<color name="cell_user_bg">#ffffff</color>
 	
 	<!-- Tag Cloud -->
 	<color name="tag_color1">#555555</color>
