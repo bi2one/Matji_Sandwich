@@ -10,6 +10,11 @@
       android:enabled="true"
       android:clickable="true"
       android:apiKey="@string/map_api_key" />
+  <LinearLayout style="@style/DefaultFill"
+		android:id="@+id/main_map_store_list"
+		android:visibility="gone"
+		android:background="@color/WHITE">
+  </LinearLayout>
 </LinearLayout>
 
 

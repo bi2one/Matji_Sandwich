@@ -19,6 +19,7 @@ import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
+
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.CoordinateRegion;
 import com.matji.sandwich.data.MatjiData;
@@ -36,6 +37,7 @@ import com.matji.sandwich.map.MatjiMapView;
 import com.matji.sandwich.map.MatjiMapCenterListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.GeocodeUtil;
+import com.matji.sandwich.util.AnimationUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,6 +77,11 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private HttpRequestManager mRequestManager;
     private Session session;
     private TextView addressView;
+
+    // for test
+    private View storeListView;
+    private View currentView;
+    
     // private InputMethodManager imm;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +94,10 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mContext = getApplicationContext();
 	mGpsManager = new GpsManager(mContext, this);
 	addressView = (TextView)findViewById(R.id.map_title_bar_address);
+	// for test start
+	storeListView = findViewById(R.id.main_map_store_list);
+	currentView = mMapView;
+	// test end
 	mRequestManager = HttpRequestManager.getInstance(mContext);
 	storeItemizedOverlay = new StoreItemizedOverlay(mContext, this, mMapView);
 	session = Session.getInstance(mContext);
@@ -179,9 +190,9 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    GeocodeAddress geocodeAddress = GeocodeUtil.approximateAddress(data, currentNeBound, currentSwBound);
 	    addressView.setText(geocodeAddress.getShortenFormattedAddress());
 	    // if (((AddressMatjiData)data.get(0)).getAddress().getPremises() != null) {
-		// Log.d("=====", ((AddressMatjiData)data.get(0)).getAddress().getPremises());
+	    // Log.d("=====", ((AddressMatjiData)data.get(0)).getAddress().getPremises());
 	    // } else {
-		// Log.d("=====", "null: " + ((AddressMatjiData)data.get(0)).getAddress().getAddressLine(0));
+	    // Log.d("=====", "null: " + ((AddressMatjiData)data.get(0)).getAddress().getAddressLine(0));
 	    // }
 	    // for ((AddressMatjiData) addressData : data) {
 	    // 	Address address = addressData.getAddress();
@@ -342,5 +353,15 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	    mRequestManager.turnOn();
 	}
 	return false;
+    }
+
+    public void onFlipClicked(View v) {
+	if (currentView == mMapView) {
+	    AnimationUtil.applyRotation(0, 90, currentView, mMapView, storeListView);
+	    currentView = storeListView;
+	} else {
+	    AnimationUtil.applyRotation(0, -90, currentView, mMapView, storeListView);
+	    currentView = mMapView;
+	}
     }
 }

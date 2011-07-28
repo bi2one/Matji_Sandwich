@@ -5,6 +5,7 @@
   <Button
       style="@style/map_title_bar_flipButton"
       android:id="@+id/map_title_bar_flip_button"
+      android:onClick="onFlipClicked"
       android:layout_alignParentLeft="true" />
   <Button
       style="@style/map_title_bar_locationButton"
