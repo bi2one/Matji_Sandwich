@@ -3,15 +3,8 @@ package com.matji.sandwich.widget;
 import android.graphics.drawable.Drawable;
 import android.graphics.Bitmap;
 
-/**
- * Action item, displayed as menu with icon and text.
- * 
- * @author Lorensius. W. L. T
- *
- */
 public class ActionItem {
 	private Drawable icon;
-	private Bitmap thumb;
 	private boolean selected;
 	
 	/**
@@ -61,23 +54,5 @@ public class ActionItem {
 	 */
 	public boolean isSelected() {
 		return this.selected;
-	}
-
-	/**
-	 * Set thumb
-	 * 
-	 * @param thumb Thumb image
-	 */
-	public void setThumb(Bitmap thumb) {
-		this.thumb = thumb;
-	}
-	
-	/**
-	 * Get thumb image
-	 * 
-	 * @return Thumb image
-	 */
-	public Bitmap getThumb() {
-		return this.thumb;
 	}
 }

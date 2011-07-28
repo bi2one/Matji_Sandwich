@@ -12,12 +12,6 @@ import android.view.View.OnTouchListener;
 import android.widget.PopupWindow;
 import android.content.Context;
 
-/**
- * Custom popup window.
- * 
- * @author Lorensius W. L. T <lorenz@londatiga.net>
- * 
- */
 public class PopupWindows {
 	protected Context mContext;
 	protected PopupWindow mWindow;

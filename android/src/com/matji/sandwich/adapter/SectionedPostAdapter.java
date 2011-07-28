@@ -22,6 +22,7 @@ import com.matji.sandwich.widget.ProfileImageView;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -79,8 +80,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		downloader = new MatjiImageDownloader(context);
 
 		profileSize = context.getResources().getDimensionPixelSize(R.dimen.profile_size);
-	
-
+		
 	}
 
 	private boolean isTheSame(final String previousSection, final String newSection) {
@@ -283,6 +283,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		holder.profile.setOnClickListener(sectionListView);
 		holder.nick.setOnClickListener(sectionListView);
 		holder.storeName.setOnClickListener(sectionListView);
+		holder.menu.setOnClickListener(sectionListView);
 		holder.post.setLinksClickable(false);
 		
 		holder.post.setOnClickListener(new View.OnClickListener() {
@@ -302,6 +303,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		holder.profile.setTag(position+"");
 		holder.nick.setTag(position+"");
 		holder.storeName.setTag(position+"");
+		holder.menu.setTag(position+"");
 		holder.post.setTag(position+"");
 		
 		for (int i = 0; i < holder.previews.length; i++) {

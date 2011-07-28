@@ -4,6 +4,12 @@
 	style="@style/DefaultWidthFill"
 	android:padding="7dp"
 	android:gravity="center_vertical">
+	<Button 
+		style="@style/DefaultWrap"
+		android:id="@+id/store_main_scrap_btn"
+		android:layout_marginRight="7dp"
+		android:text="★"
+		android:onClick="onScrapButtonClicked" />
 	<TextView
 		style="@style/Name"
 		android:singleLine="true"

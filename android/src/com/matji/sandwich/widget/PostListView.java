@@ -27,8 +27,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	public PostListView(Context context, AttributeSet attr) {
 		super(context, attr, new SectionedPostAdapter(context), 10);
 		commonInitialisation();
-		
-	}
+	}	
 
 	protected final void commonInitialisation() {
 		setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.pattern_bg));
@@ -63,6 +62,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 			break;
 		}
 	}
+	
 	
 	protected void gotoUserPage(Post post) {
 		Intent intent = new Intent(getActivity(), UserMainActivity.class);

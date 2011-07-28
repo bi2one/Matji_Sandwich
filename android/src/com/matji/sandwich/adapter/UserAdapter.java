@@ -24,12 +24,12 @@ public class UserAdapter extends MBaseAdapter {
 			convertView = getLayoutInflater().inflate(R.layout.adapter_user, null);
 
 			userElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
-			userElement.grade = (TextView) convertView.findViewById(R.id.user_cell_grade);
-			userElement.title = (TextView) convertView.findViewById(R.id.user_cell_title);
-			userElement.intro = (TextView) convertView.findViewById(R.id.user_cell_intro);
+//			userElement.grade = (TextView) convertView.findViewById(R.id.user_cell_grade);
+//			userElement.title = (TextView) convertView.findViewById(R.id.user_cell_title);
+//			userElement.intro = (TextView) convertView.findViewById(R.id.user_cell_intro);
 			userElement.post = (TextView) convertView.findViewById(R.id.user_adapter_post);
 			
-			convertView.findViewById(R.id.user_cell_point_text).setVisibility(View.GONE);
+//			convertView.findViewById(R.id.user_cell_point_text).setVisibility(View.GONE);
 			convertView.setTag(userElement);
 		} else {
 			userElement = (UserElement) convertView.getTag();

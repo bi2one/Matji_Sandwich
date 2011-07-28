@@ -77,11 +77,11 @@ public class UserMainActivity extends BaseTabActivity implements Requestable {
 			user = (User) SharedMatjiData.getInstance().top();
 		}		
 
-		gradeText = (TextView) findViewById(R.id.user_cell_grade);
-		pointText1 = (TextView) findViewById(R.id.user_cell_point_text);
+//		gradeText = (TextView) findViewById(R.id.user_cell_grade);
+//		pointText1 = (TextView) findViewById(R.id.user_cell_point_text);
 //		pointText2 = (TextView) findViewById(R.id.user_cell_point);
-		nameText = (TextView) findViewById(R.id.user_cell_name);
-		introText = (TextView) findViewById(R.id.user_cell_intro);
+//		nameText = (TextView) findViewById(R.id.user_cell_name);
+//		introText = (TextView) findViewById(R.id.user_cell_intro);
 		followButton = (Button) findViewById(R.id.user_main_follow_btn);
 		
 		//		followingYouText = (TextView) findViewById(R.id.user_main_following_you);

@@ -4,14 +4,17 @@ import java.util.ArrayList;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.data.SimpleTag;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.BookmarkHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
@@ -38,6 +41,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
 	private ImageView storeImage;
 	private Button likeButton;
+	private Button scrapButton;
 	private TextView nameText;
 	private TextView telText;
 	private TextView addressText;
@@ -70,6 +74,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		downloader = new MatjiImageDownloader(this);
 
 		storeImage = (ImageView) findViewById(R.id.store_main_thumbnail);
+		scrapButton = (Button) findViewById(R.id.store_main_scrap_btn);
 		likeButton = (Button) findViewById(R.id.store_main_like_btn);
 		nameText = (TextView) findViewById(R.id.store_main_name);
 		telText = (TextView) findViewById(R.id.store_main_tel);
@@ -147,23 +152,23 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		setInfo();
 	}
 
-	// private void bookmarkRequest() {
-	// 	if (request == null || !(request instanceof BookmarkHttpRequest)) {
-	// 	    request = new BookmarkHttpRequest(this);
-	// 	}
-	// 	((BookmarkHttpRequest) request).actionBookmark(store.getId());
-	// 	manager.request(this, request, BOOKMARK_REQUEST, this);
-	// 	store.setBookmarkCount(store.getBookmarkCount() + 1);
-	// }
+	 private void bookmarkRequest() {
+	 	if (request == null || !(request instanceof BookmarkHttpRequest)) {
+	 	    request = new BookmarkHttpRequest(this);
+	 	}
+	 	((BookmarkHttpRequest) request).actionBookmark(store.getId());
+	 	manager.request(this, request, BOOKMARK_REQUEST, this);
+	 	store.setBookmarkCount(store.getBookmarkCount() + 1);
+	 }
 
-	// private void unbookmarkReuqest() {
-	// 	if (request == null || !(request instanceof BookmarkHttpRequest)) {
-	// 	    request = new BookmarkHttpRequest(this);
-	// 	}
-	// 	((BookmarkHttpRequest) request).actionUnBookmark(store.getId());
-	// 	manager.request(this, request, UN_BOOKMARK_REQUEST, this);
-	// 	store.setBookmarkCount(store.getBookmarkCount() - 1);
-	// }
+	 private void unbookmarkReuqest() {
+	 	if (request == null || !(request instanceof BookmarkHttpRequest)) {
+	 	    request = new BookmarkHttpRequest(this);
+	 	}
+	 	((BookmarkHttpRequest) request).actionUnBookmark(store.getId());
+	 	manager.request(this, request, UN_BOOKMARK_REQUEST, this);
+	 	store.setBookmarkCount(store.getBookmarkCount() - 1);
+	 }
 
 	private void likeRequest() {
 		if (request == null || !(request instanceof LikeHttpRequest)) {
@@ -182,24 +187,24 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		manager.request(this, request, UN_LIKE_REQUEST, this);
 	}
 
-	// private void postBookmarkRequest() {
-	// 	User me = session.getCurrentUser();
+	 private void postBookmarkRequest() {
+	 	User me = session.getCurrentUser();
 
-	// 	Bookmark bookmark = new Bookmark();
-	// 	bookmark.setForeignKey(store.getId());
-	// 	bookmark.setObject("Store");
-	// 	dbProvider.insertBookmark(bookmark);		
-	// 	me.setStoreCount(me.getStoreCount() + 1);
-	// 	scrapButton.setClickable(true);
-	// }
+	 	Bookmark bookmark = new Bookmark();
+	 	bookmark.setForeignKey(store.getId());
+	 	bookmark.setObject("Store");
+	 	dbProvider.insertBookmark(bookmark);		
+	 	me.setStoreCount(me.getStoreCount() + 1);
+	 	scrapButton.setClickable(true);
+	 }
 
-	// private void postUnBookmarkRequest() {
-	// 	User me = session.getCurrentUser();
+	 private void postUnBookmarkRequest() {
+	 	User me = session.getCurrentUser();
 
-	// 	dbProvider.deleteBookmark(store.getId(), "Store");
-	// 	me.setStoreCount(me.getStoreCount() - 1);
-	// 	scrapButton.setClickable(true);
-	// }
+	 	dbProvider.deleteBookmark(store.getId(), "Store");
+	 	me.setStoreCount(me.getStoreCount() - 1);
+	 	scrapButton.setClickable(true);
+	 }
 
 	private void postLikeRequest() {
 		Like like = new Like();
@@ -219,10 +224,10 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch (tag) {
 		case BOOKMARK_REQUEST:
-//			postBookmarkRequest();
+			postBookmarkRequest();
 			break;
 		case UN_BOOKMARK_REQUEST:
-//			postUnBookmarkRequest();
+			postUnBookmarkRequest();
 			break;
 		case LIKE_REQUEST:
 			postLikeRequest();
@@ -237,8 +242,8 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
 
 	public void requestExceptionCallBack(int tag, MatjiException e) {
-		// likeButton.setClickable(true);
-		// scrapButton.setClickable(true);
+		likeButton.setClickable(true);
+		scrapButton.setClickable(true);
 		e.showToastMsg(getApplicationContext());
 	}
 
@@ -257,20 +262,20 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		}
 	}
 
-	// public void onScrapButtonClicked(View view) {
-	// 	if (loginRequired()) {
-	// 	    if (!manager.isRunning(this)) {
-	// 		scrapButton.setClickable(false);
-	// 		if (dbProvider.isExistBookmark(store.getId(), "Store")){
-	// 		    // api request
-	// 		    unbookmarkReuqest();
-	// 		}else {
-	// 		    // api request
-	// 		    bookmarkRequest();
-	// 		}
-	// 	    }
-	// 	}
-	// }
+	 public void onScrapButtonClicked(View view) {
+	 	if (loginRequired()) {
+	 	    if (!manager.isRunning(this)) {
+	 		scrapButton.setClickable(false);
+	 		if (dbProvider.isExistBookmark(store.getId(), "Store")){
+	 		    // api request
+	 		    unbookmarkReuqest();
+	 		}else {
+	 		    // api request
+	 		    bookmarkRequest();
+	 		}
+	 	    }
+	 	}
+	 }
 
 	// public void onMapButtonClicked(View view) {
 	// }
