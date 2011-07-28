@@ -178,4 +178,5 @@ PullToRefreshListView.OnRefreshListener {
 	public void dataRefresh() {
 		adapter.notifyDataSetChanged();
 	}
+	
 }

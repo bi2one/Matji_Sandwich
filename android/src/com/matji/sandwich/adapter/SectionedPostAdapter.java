@@ -28,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Button;
 import android.widget.LinearLayout.LayoutParams;
 
 /**
@@ -78,6 +79,8 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		downloader = new MatjiImageDownloader(context);
 
 		profileSize = context.getResources().getDimensionPixelSize(R.dimen.profile_size);
+	
+
 	}
 
 	private boolean isTheSame(final String previousSection, final String newSection) {
@@ -234,9 +237,10 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			postElement.dateAgo = (TextView) convertView.findViewById(R.id.row_post_created_at);
 			postElement.commentCount = (TextView) convertView.findViewById(R.id.row_post_comment_count);
 			postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
-
-
+			postElement.menu = (Button) convertView.findViewById(R.id.row_post_menu);
+			
 			postElement.previews = new ImageView[imageIds.length];
+
 			for (int i = 0; i < postElement.previews.length; i++) {
 				postElement.previews[i] = (ImageView) convertView.findViewById(imageIds[i]);
 			}
@@ -280,6 +284,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		holder.nick.setOnClickListener(sectionListView);
 		holder.storeName.setOnClickListener(sectionListView);
 		holder.post.setLinksClickable(false);
+		
 		holder.post.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -298,6 +303,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		holder.nick.setTag(position+"");
 		holder.storeName.setTag(position+"");
 		holder.post.setTag(position+"");
+		
 		for (int i = 0; i < holder.previews.length; i++) {
 			holder.previews[i].setTag(position+"");
 		}
@@ -397,5 +403,6 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		TextView commentCount;
 		TextView likeCount;
 		ImageView[] previews;
+		Button menu;
 	}
 }

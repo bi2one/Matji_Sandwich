@@ -5,7 +5,8 @@
 	android:versionName="1.0">
 	<application
 		android:label="@string/app_name"
-		android:icon="@drawable/intro_bg">
+		android:icon="@drawable/intro_bg"
+		android:debuggable="true">
 		<uses-library android:name="com.google.android.maps" />
 		<activity
 			android:name="MainTabActivity"

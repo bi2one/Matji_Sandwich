@@ -64,6 +64,7 @@
   </style>
   
   <style name="TalkContent" parent="DefaultWrap">
+  	<item name="android:layout_width">200dp</item>
   	<item name="android:autoLink">web</item>
   	<item name="android:textColor">@color/BLACK</item>
   </style>
@@ -471,6 +472,10 @@
   	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
   </style>
 
+  <style name="row_post_menu" parent="DefaultWrap">
+	<item name="android:background">@drawable/btn_info_d</item>
+  </style>
+  
   <style name="row_post_At" parent="DefaultWrap">
   	<item name="android:textColor">@color/GRAY</item>  
   	<item name="android:text">@string/at</item>  
@@ -536,5 +541,12 @@
 
   <style name="map_title_bar_nearPostButton" parent="DefaultWrap">
     <item name="android:background">@drawable/map_titlebar_near_post_btn</item>
+  </style>
+  
+  <style name="Animations" />
+  <style name="Animations.PopUpMenu" />
+  <style name="Animations.PopUpMenu.Right">
+  	<item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
   </style>
 </resources>

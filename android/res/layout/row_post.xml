@@ -1,65 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout 
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/row_post_wrapper"
+	android:id="@+id/row_post_wrapper" 
 	style="@style/row_post_PostRowWrapper">
-	<include
+	<include 
 		layout="@layout/profile" />
-	<LinearLayout
+	<LinearLayout 
 		android:id="@+id/row_post_post_wrapper"
 		style="@style/row_post_PostWrapper">
-		<LinearLayout
+		<LinearLayout 
 			style="@style/DefaultWrap">
-			<TextView
-				android:id="@+id/row_post_nick"
+			<TextView 
+				android:id="@+id/row_post_nick" 
 				style="@style/LinkifyName" />
-			<TextView
-				android:id="@+id/row_post_at"
+			<TextView 
+				android:id="@+id/row_post_at" 
 				style="@style/row_post_At" />
-			<TextView
-				android:id="@+id/row_post_store_name"
+			<TextView 
+				android:id="@+id/row_post_store_name" 
 				style="@style/LinkifyName" />
 		</LinearLayout>
-		<LinearLayout
+		<RelativeLayout 
 			style="@style/DefaultWrap">
-			<TextView
-				android:id="@+id/row_post_post"
+			<TextView 
+				android:id="@+id/row_post_post" 
 				style="@style/TalkContent" />
-		</LinearLayout>
-		<LinearLayout
+ 			<Button
+				android:id="@+id/row_post_menu"
+				style="@style/row_post_menu"
+				android:layout_alignParentRight="true"/> 
+		</RelativeLayout>
+		<LinearLayout 
 			style="@style/DefaultWrap">
-			<TextView
-				android:id="@+id/row_post_tag"
+			<TextView 
+				android:id="@+id/row_post_tag" 
 				style="@style/row_post_Tags" />
 		</LinearLayout>
-		<LinearLayout
-			android:id="@+id/row_post_previews"
+		<LinearLayout 
+			android:id="@+id/row_post_previews" 
 			style="@style/DefaultWidthFill">
-			<ImageView
-				style="@style/header_post_Preview"
+			<ImageView 
+				style="@style/header_post_Preview" 
 				android:id="@+id/row_post_preview1" />
-			<ImageView
-				style="@style/header_post_Preview"
+			<ImageView 
+				style="@style/header_post_Preview" 
 				android:id="@+id/row_post_preview2" />
-			<ImageView
-				style="@style/header_post_Preview"
+			<ImageView 
+				style="@style/header_post_Preview" 
 				android:id="@+id/row_post_preview3" />
 		</LinearLayout>
-		<LinearLayout
+		<LinearLayout 
 			style="@style/DefaultWrap">
-			<TextView
-				android:id="@+id/row_post_created_at"
+			<TextView 
+				android:id="@+id/row_post_created_at" 
 				style="@style/row_post_CreatedAt" />
-			<TextView
-				android:id="@+id/row_post_comment"
+			<TextView 
+				android:id="@+id/row_post_comment" 
 				style="@style/row_post_Comment" />
-			<TextView
-				android:id="@+id/row_post_comment_count"
+			<TextView 
+				android:id="@+id/row_post_comment_count" 
 				style="@style/row_post_Count" />
-			<TextView
+			<TextView 
 				style="@style/row_post_Like" />
-			<TextView
-				android:id="@+id/row_post_like_count"
+			<TextView 
+				android:id="@+id/row_post_like_count" 
 				style="@style/row_post_Count" />
 		</LinearLayout>
 	</LinearLayout>

@@ -9,9 +9,6 @@
 		android:singleLine="true"
 		android:id="@+id/store_main_name"
 		android:maxWidth="@dimen/max_title_width" />
-	<ImageButton
-		style="@style/InfoButton"
-		android:id="@+id/store_main_info_btn" />
 	<LinearLayout
 		style="@style/DefaultWidthFill"
 		android:gravity="right">

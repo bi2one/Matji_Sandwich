@@ -11,6 +11,8 @@ import com.matji.sandwich.widget.PostListView;
  * @author mozziluv
  *
  */
+
+
 public class PostListActivity extends BaseActivity {
 	private PostListView listView;
 
@@ -24,6 +26,7 @@ public class PostListActivity extends BaseActivity {
 		listView.setActivity(this);
 		listView.requestReload();
 	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();

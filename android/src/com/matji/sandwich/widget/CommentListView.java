@@ -12,7 +12,7 @@ import android.view.View;
 import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.StoreMainActivity;
-import com.matji.sandwich.UserTabActivity;
+import com.matji.sandwich.UserMainActivity;
 import com.matji.sandwich.adapter.CommentAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Comment;
@@ -122,7 +122,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 	}
 
 	protected void gotoUserPage(User user) { 
-		Intent intent = new Intent(getActivity(), UserTabActivity.class);
+		Intent intent = new Intent(getActivity(), UserMainActivity.class);
 		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, user);
 	}
 	
