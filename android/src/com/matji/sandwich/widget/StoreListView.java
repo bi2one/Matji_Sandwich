@@ -30,6 +30,6 @@ public class StoreListView extends RequestableMListView {
 	public void onListItemClick(int position) {
 		Store store = (Store) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, store);		
+		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, store);
 	}
 }

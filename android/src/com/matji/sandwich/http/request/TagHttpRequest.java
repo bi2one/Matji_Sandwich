@@ -38,7 +38,7 @@ public class TagHttpRequest extends HttpRequest {
 		getHashtable.put("page", page + "");
 		getHashtable.put("limit", limit + "");
 	}
-	
+
 	public void actionUserTagList(int user_id, int page, int limit) {
 		action = "user_tag_list";
 		parser = new UserTagParser(context);
@@ -47,6 +47,17 @@ public class TagHttpRequest extends HttpRequest {
 		getHashtable.put("user_id", user_id+ "");		
 		getHashtable.put("page", page+ "");
 		getHashtable.put("limit", limit+ "");
+	}
+	
+	public void actionUserTagListForCloud(int user_id) {
+		action = "user_tag_list";
+		parser = new UserTagParser(context);
+		
+		getHashtable.clear();
+		getHashtable.put("user_id", user_id+ "");		
+		getHashtable.put("page", "1");
+		getHashtable.put("limit", "50");
+		getHashtable.put("order", "tag_count");
 	}
 	
 	public void actionPostTagList(int post_id) {

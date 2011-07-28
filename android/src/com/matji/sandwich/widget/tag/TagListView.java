@@ -1,4 +1,4 @@
-package com.matji.sandwich.widget;
+package com.matji.sandwich.widget.tag;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,6 +7,7 @@ import com.matji.sandwich.adapter.TagAdapter;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
 import com.matji.sandwich.util.ModelType;
+import com.matji.sandwich.widget.RequestableMListView;
 
 public class TagListView extends RequestableMListView {
 	private HttpRequest request;

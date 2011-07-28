@@ -38,7 +38,7 @@
 				android:clickable="true"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="@color/GRAY2"
+				android:textColor="@color/default_theme_value"
 				android:layout_alignParentTop="true" />
 		</LinearLayout>
 		<TextView
@@ -60,6 +60,6 @@
 			android:layout_below="@id/message_adapter_message"
 			android:textSize="11dp"
 			android:padding="5dp"
-			android:textColor="@color/GRAY" />
+			android:textColor="@color/default_theme_value" />
 	</RelativeLayout>
 </com.matji.sandwich.widget.FrameLayoutForSwipe>

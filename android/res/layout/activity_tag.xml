@@ -4,7 +4,7 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:orientation="vertical">
-	<com.matji.sandwich.widget.TagListView
+	<com.matji.sandwich.widget.tag.TagListView
 		style="@style/DefaultFill"
 		android:id="@+id/tag_list" />
 </LinearLayout>

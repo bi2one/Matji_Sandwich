@@ -15,7 +15,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.session.Session;
 
-public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener{	
+public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener{
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	

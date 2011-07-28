@@ -84,7 +84,7 @@
   </style>
   
   <style name="cell_user_Point" parent="cell_user_Mileage">
-  	<item name="android:textColor">@color/DARK_ORANGE</item>
+  	<item name="android:textColor">@color/default_theme_key</item>
   </style>
   
   <style name="cell_user_Title" parent="DefaultWrap">
@@ -123,7 +123,8 @@
   </style>
       
   <style name="LinkifyName" parent="DefaultWrap">
-	<item name="android:textColor">@color/DARK_ORANGE</item>
+	<item name="android:singleLine">true</item>
+	<item name="android:textColor">@color/default_theme_key</item>
   </style>
   
   <style name="TalkContent" parent="DefaultWrap">
@@ -132,14 +133,14 @@
   	<item name="android:textColor">@color/BLACK</item>
   </style>
   
-  <style name="SmallGrayText" parent="DefaultWrap">
+  <style name="Smalldefault_theme_valueText" parent="DefaultWrap">
   	<item name="android:textSize">@dimen/text_small</item>
-  	<item name="android:textColor">@color/GRAY</item>
+  	<item name="android:textColor">@color/default_theme_value</item>
   </style>
 
   <style name="SmallOrangeText" parent="DefaultWrap">
   	<item name="android:textSize">@dimen/text_small</item>
-  	<item name="android:textColor">@color/DARK_ORANGE</item>
+  	<item name="android:textColor">@color/default_theme_key</item>
   </style>
   
   <style name="ETCButton">
@@ -480,16 +481,16 @@
   </style>
   
   <style name="row_post_At" parent="DefaultWrap">
-  	<item name="android:textColor">@color/GRAY</item>  
+  	<item name="android:textColor">@color/default_theme_value</item>  
   	<item name="android:text">@string/at</item>  
   </style>
   
-  <style name="row_post_Tags" parent="SmallGrayText">
+  <style name="row_post_Tags" parent="Smalldefault_theme_valueText">
    	<item name="android:drawableLeft">@drawable/img_tag</item>
   	<item name="android:drawablePadding">@dimen/default_distance_half</item>
   </style>
   
-  <style name="row_post_CreatedAt" parent="SmallGrayText">
+  <style name="row_post_CreatedAt" parent="Smalldefault_theme_valueText">
     <item name="android:paddingRight">@dimen/default_distance</item>
   </style>
 
@@ -497,7 +498,7 @@
     <item name="android:text">@string/default_string_comment</item>
   </style>
   
-  <style name="row_post_Count" parent="SmallGrayText">
+  <style name="row_post_Count" parent="Smalldefault_theme_valueText">
   	<item name="android:paddingLeft">@dimen/default_distance</item>
   	<item name="android:paddingRight">@dimen/default_distance</item>
   </style>

@@ -37,7 +37,8 @@ import com.matji.sandwich.map.MatjiMapView;
 import com.matji.sandwich.map.MatjiMapCenterListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.GeocodeUtil;
-import com.matji.sandwich.util.AnimationUtil;
+import com.matji.sandwich.util.FlipAnimationUtil;
+import com.matji.sandwich.widget.StoreNearListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,10 +78,10 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private HttpRequestManager mRequestManager;
     private Session session;
     private TextView addressView;
-
-    // for test
-    private View storeListView;
+    private StoreNearListView storeListView;
     private View currentView;
+    private FlipAnimationUtil animationUtil;
+    private View flipButton;
     
     // private InputMethodManager imm;
 
@@ -94,13 +95,15 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mContext = getApplicationContext();
 	mGpsManager = new GpsManager(mContext, this);
 	addressView = (TextView)findViewById(R.id.map_title_bar_address);
-	// for test start
-	storeListView = findViewById(R.id.main_map_store_list);
+	storeListView = (StoreNearListView)findViewById(R.id.main_map_store_list);
+	storeListView.setActivity(this);
+	storeListView.requestConditionally();
+	flipButton = findViewById(R.id.map_title_bar_flip_button);
 	currentView = mMapView;
-	// test end
 	mRequestManager = HttpRequestManager.getInstance(mContext);
 	storeItemizedOverlay = new StoreItemizedOverlay(mContext, this, mMapView);
 	session = Session.getInstance(mContext);
+	animationUtil = new FlipAnimationUtil(this, mMapView, storeListView, flipButton);
 
 	mGpsManager.start();
     }
@@ -357,10 +360,14 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
     public void onFlipClicked(View v) {
 	if (currentView == mMapView) {
-	    AnimationUtil.applyRotation(0, 90, currentView, mMapView, storeListView);
+	    // mMapView.setVisibility(View.GONE);
+	    // storeListView.setVisibility(View.VISIBLE);
+	    animationUtil.applyFlipRotation();
 	    currentView = storeListView;
 	} else {
-	    AnimationUtil.applyRotation(0, -90, currentView, mMapView, storeListView);
+	    // mMapView.setVisibility(View.VISIBLE);
+	    // storeListView.setVisibility(View.GONE);
+	    animationUtil.applyFlipRotation();
 	    currentView = mMapView;
 	}
     }

@@ -9,7 +9,7 @@
 			android:id="@+id/user_tag_count"
 			android:layout_margin="@dimen/default_distance"
 			style="@style/DefaultWrap" />
-		<com.matji.sandwich.widget.TagCloudView
+		<com.matji.sandwich.widget.tag.TagCloudView
 			android:id="@+id/user_tag_cloud"
 			style="@style/DefaultFill" />
 	</LinearLayout>
