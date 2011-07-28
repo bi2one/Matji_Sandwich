@@ -3,18 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/DefaultLinearFill" >
   <include layout="@layout/map_title_bar" />
-  <com.matji.sandwich.map.MatjiMapView
-      android:id="@+id/map_view"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:enabled="true"
-      android:clickable="true"
-      android:apiKey="@string/map_api_key" />
-  <LinearLayout style="@style/DefaultFill"
-		android:id="@+id/main_map_store_list"
-		android:visibility="gone"
-		android:background="@color/WHITE">
-  </LinearLayout>
+  <FrameLayout
+      style="@style/DefaultFill">
+    <com.matji.sandwich.map.MatjiMapView
+	android:id="@+id/map_view"
+	style="@style/DefaultFill"
+	android:enabled="true"
+	android:clickable="true"
+	android:focusable="true"
+	android:apiKey="@string/map_api_key" />
+    <com.matji.sandwich.widget.StoreNearListView
+	style="@style/DefaultFill"
+	android:id="@+id/main_map_store_list"
+	android:visibility="gone" />
+  </FrameLayout>
 </LinearLayout>
 
 

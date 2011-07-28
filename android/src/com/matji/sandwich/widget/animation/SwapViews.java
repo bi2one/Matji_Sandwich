@@ -3,6 +3,7 @@ package com.matji.sandwich.widget.animation;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.util.Log;
 
 public final class SwapViews implements Runnable {
     private boolean mIsFirstView;
@@ -21,16 +22,8 @@ public final class SwapViews implements Runnable {
 	Flip3dAnimation rotation;
 
 	if (mIsFirstView) {
-	    view1.setVisibility(View.GONE);
-	    view2.setVisibility(View.VISIBLE);
-	    view2.requestFocus();
-
 	    rotation = new Flip3dAnimation(-90, 0, centerX, centerY);
 	} else {
-	    view2.setVisibility(View.GONE);
-	    view1.setVisibility(View.VISIBLE);
-	    view1.requestFocus();
-
 	    rotation = new Flip3dAnimation(90, 0, centerX, centerY);
 	}
 
@@ -40,8 +33,22 @@ public final class SwapViews implements Runnable {
 
 	if (mIsFirstView) {
 	    view2.startAnimation(rotation);
+	    
+	    view1.setVisibility(View.GONE);
+	    view2.setVisibility(View.VISIBLE);
+	    Log.d("=====", "view2 focus: " + view2.requestFocus());
+
+	    view2.setEnabled(true);
+	    view1.setEnabled(false);
 	} else {
 	    view1.startAnimation(rotation);
+	    
+	    view2.setVisibility(View.GONE);
+	    view1.setVisibility(View.VISIBLE);
+	    Log.d("=====", "view1 focus: " + view1.requestFocus());
+
+	    view2.setEnabled(false);
+	    view1.setEnabled(true);
 	}
     }
 }
