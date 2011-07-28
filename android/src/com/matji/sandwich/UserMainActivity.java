@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.FollowingActivity.FollowingListType;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.UserMileage;
@@ -16,7 +15,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.RoundTabHost;
-import com.matji.sandwich.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -104,7 +102,8 @@ public class UserMainActivity extends BaseTabActivity implements Requestable {
 				new Intent(this, UserPostListActivity.class));
 		tabHost.addCenterTab("tab2",
 				R.string.store_main_img,
-				new Intent(this, ImageListActivity.class));
+//				new Intent(this, ImageListActivity.class));
+				new Intent(this, UserTagActivity.class));
 		tabHost.addRightTab("tab3",
 				R.string.store_main_review,
 				new Intent(this, UserStoreListActivity.class));

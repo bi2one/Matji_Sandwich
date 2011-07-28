@@ -22,6 +22,14 @@ public class UserTagParser extends MatjiDataParser {
 		userTag.setCount(getInt(object, "count"));
 		userTag.setCreatedAt(getString(object, "created_at"));
 		userTag.setUpdatedAt(getString(object, "updated_at"));
+		
+		/* Set Tag */
+		TagParser tagParser = new TagParser(context);
+		userTag.setTag(tagParser.getMatjiData(getObject(object, "tag")));
+		
+		/* Set User */
+		UserParser userParser = new UserParser(context);
+		userTag.setUser(userParser.getMatjiData(getObject(object, "user")));
 
 		Log.d("Parser", "UserTagParser:: called getMatjiData");
 		

@@ -24,21 +24,20 @@ public class TitleContainer extends RelativeLayout {
 	
 	public TitleContainer(Context context) {
 		super(context);
-		init(context);
+		init();
 	}
 	
 	public TitleContainer(Context context, AttributeSet attr) {
 		super(context, attr);
-		init(context);
+		init();
 	}
 
 	/**
 	 * LayoutInflater 를 이용해 inflate 한다. 
 	 * 
-	 * @param context
 	 */
-	private void init(Context context) {
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	private void init() {
+		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.title_container, this);
 		
 		leftContainer = (LinearLayout) findViewById(R.id.title_container_left);

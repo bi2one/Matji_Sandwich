@@ -15,7 +15,7 @@ import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.CoordinateRegion;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.db.request.DBStoreRequest;
 import com.matji.sandwich.data.provider.DataBaseHelper;
 
@@ -78,8 +78,8 @@ public class DBProvider {
 		String tags = null;
 		if (store.getTags() != null) {
 			ArrayList<String> tagArray = new ArrayList<String>();
-			Iterator<Tag> tagIter = store.getTags().iterator();
-			Tag t = null;
+			Iterator<SimpleTag> tagIter = store.getTags().iterator();
+			SimpleTag t = null;
 			while ((t = tagIter.next()) != null) {
 				tagArray.add(t.getTag());
 			}

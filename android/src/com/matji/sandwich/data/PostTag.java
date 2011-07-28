@@ -9,7 +9,7 @@ public class PostTag extends MatjiData{
 	private int post_id;
 	private String created_at;
 	private String updated_at;
-	private Tag tag;
+	private SimpleTag tag;
 	private Post post;
 	
 	public PostTag() {}
@@ -48,7 +48,7 @@ public class PostTag extends MatjiData{
 		post_id = in.readInt();
 		created_at = in.readString();
 		updated_at = in.readString();
-		tag = Tag.class.cast(in.readValue(Tag.class.getClassLoader()));
+		tag = SimpleTag.class.cast(in.readValue(SimpleTag.class.getClassLoader()));
 		post = Post.class.cast(in.readValue(Post.class.getClassLoader()));
 	}
 	
@@ -92,11 +92,11 @@ public class PostTag extends MatjiData{
 		return updated_at;
 	}
 	
-	public void setTag(Tag tag) {
+	public void setTag(SimpleTag tag) {
 		this.tag = tag;
 	}
 	
-	public Tag getTag() {
+	public SimpleTag getTag() {
 		return tag;
 	}
 	

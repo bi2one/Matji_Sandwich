@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.db.sqlite.SQLiteResult;
 
 public class DBStoreParser extends DBParser<Store>{
@@ -44,9 +44,9 @@ public class DBStoreParser extends DBParser<Store>{
 			String tagString = getString(record, "tags");
 			if (tagString != null && tagString.trim().length() > 0){
 				String[] tagArr = tagString.split(",");
-				ArrayList<Tag> tags = new ArrayList<Tag>();
+				ArrayList<SimpleTag> tags = new ArrayList<SimpleTag>();
 				for (String tag : tagArr){
-					Tag t = new Tag();
+					SimpleTag t = new SimpleTag();
 					t.setTag(tag);
 					tags.add(t);
 				}

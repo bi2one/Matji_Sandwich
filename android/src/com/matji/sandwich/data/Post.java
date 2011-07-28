@@ -23,7 +23,7 @@ public class Post extends MatjiData {
 	private User user;
 	private Store store;
 	private Activity activity;
-	private ArrayList<Tag> tags;
+	private ArrayList<SimpleTag> tags;
 	private ArrayList<AttachFile> attach_files;
 	private long ago;
 
@@ -88,8 +88,8 @@ public class Post extends MatjiData {
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
 		activity = Activity.class.cast(in.readValue(Activity.class.getClassLoader()));
-		tags = new ArrayList<Tag>();
-		in.readTypedList(tags, Tag.CREATOR);
+		tags = new ArrayList<SimpleTag>();
+		in.readTypedList(tags, SimpleTag.CREATOR);
 		attach_files = new ArrayList<AttachFile>();
 		in.readTypedList(attach_files, AttachFile.CREATOR);
 		ago = in.readLong();
@@ -198,11 +198,11 @@ public class Post extends MatjiData {
 		return activity;
 	}
 
-	public void setTags(ArrayList<Tag> tags) {
+	public void setTags(ArrayList<SimpleTag> tags) {
 		this.tags = tags;
 	}
 
-	public ArrayList<Tag> getTags() {
+	public ArrayList<SimpleTag> getTags() {
 		return tags;
 	}
 

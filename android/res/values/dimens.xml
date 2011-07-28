@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- everywhere used dimens -->
+	<dimen name="default_distance">6dp</dimen>
+	<dimen name="default_distance_half">3dp</dimen>
+	
 	<!-- Title Container -->
 	<dimen name="title_container_height">37dp</dimen>
 	
@@ -8,10 +12,6 @@
 	
 	<!-- User Profile -->
 	<dimen name="profile_size">50dp</dimen>
-	
-	<!-- everywhere used dimens -->
-	<dimen name="default_distance">6dp</dimen>
-	<dimen name="default_distance_half">3dp</dimen>
 	
 	<!-- Post List Row -->
 	<dimen name="row_post_distance">1dp</dimen>
@@ -25,4 +25,7 @@
 	
 	<!-- Fade Edge -->
 	<dimen name="fade_edge_length">3dp</dimen>
+	
+	<!-- Tag Cloud -->
+	<dimen name="tag_line_height">30dp</dimen>
 </resources>

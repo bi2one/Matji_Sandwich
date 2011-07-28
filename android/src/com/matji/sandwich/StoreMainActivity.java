@@ -8,7 +8,7 @@ import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -327,7 +327,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	// 	startActivity(intent);
 	// }
 
-	public String tagListToCSV(ArrayList<Tag> tags) {
+	public String tagListToCSV(ArrayList<SimpleTag> tags) {
 		String result = "";
 		if (tags.size() > 0) {
 			int i;

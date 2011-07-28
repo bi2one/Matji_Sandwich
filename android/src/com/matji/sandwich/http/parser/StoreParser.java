@@ -11,7 +11,7 @@ import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -55,10 +55,10 @@ public class StoreParser extends MatjiDataParser {
 		/* Set Tags */
 		TagParser tagParser = new TagParser(context);
 		ArrayList<MatjiData> dataList = tagParser.getMatjiDataList(getArray(object, "tags"));
-		ArrayList<Tag> tags = new ArrayList<Tag>(); 
+		ArrayList<SimpleTag> tags = new ArrayList<SimpleTag>(); 
 		if (dataList != null) {
 			for (MatjiData data : dataList)
-				tags.add((Tag) data);
+				tags.add((SimpleTag) data);
 		}
 		store.setTags(tags);
 

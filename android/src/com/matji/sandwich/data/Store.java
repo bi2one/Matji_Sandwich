@@ -27,7 +27,7 @@ public class Store extends MatjiData implements Serializable {
 	private int url_count;
 	private AttachFile file; 
 	private User reg_user;
-	private ArrayList<Tag> tags;
+	private ArrayList<SimpleTag> tags;
 	private ArrayList<StoreFood> store_foods;
 	private ArrayList<Food> foods;
 	
@@ -96,8 +96,8 @@ public class Store extends MatjiData implements Serializable {
 		url_count= in.readInt();
 		file = AttachFile.class.cast(in.readValue(AttachFile.class.getClassLoader()));
 		reg_user = User.class.cast(in.readValue(User.class.getClassLoader()));
-		tags = new ArrayList<Tag>();
-		in.readTypedList(tags, Tag.CREATOR);
+		tags = new ArrayList<SimpleTag>();
+		in.readTypedList(tags, SimpleTag.CREATOR);
 		store_foods = new ArrayList<StoreFood>();
 		in.readTypedList(store_foods, StoreFood.CREATOR);
 		foods = new ArrayList<Food>();
@@ -218,10 +218,10 @@ public class Store extends MatjiData implements Serializable {
 	public AttachFile getFile() {
 		return file;
 	}
-	public void setTags(ArrayList<Tag> tags) {
+	public void setTags(ArrayList<SimpleTag> tags) {
 		this.tags = tags;
 	}
-	public ArrayList<Tag> getTags() {
+	public ArrayList<SimpleTag> getTags() {
 		return tags;
 	}
 

@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.util.DisplayUtil;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.MainTabHost;
 
 import android.content.Intent;
@@ -21,12 +22,11 @@ public class MainTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	DisplayUtil.setContext(getApplicationContext());
+	DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
+	MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
 	setContentView(R.layout.activity_main_tab);
 
 	tabHost = (MainTabHost)getTabHost();
-
-	DisplayUtil.setContext(getApplicationContext());
 
 	tabHost.addTab("tab1",
 		       R.drawable.icon_tab_map,
