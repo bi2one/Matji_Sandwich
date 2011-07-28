@@ -6,6 +6,7 @@ import com.matji.sandwich.widget.ImageListView;
 
 import android.os.Bundle;
 
+//public abstract class ImageListActivity extends BaseActivity {
 public class ImageListActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,6 @@ public class ImageListActivity extends BaseActivity {
 		listView.setModelId(id);
 		listView.setType(type);
 		listView.setActivity(this);
-//		listView.requestReload();
+		listView.requestReload();
 	}
 }

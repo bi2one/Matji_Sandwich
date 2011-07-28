@@ -202,14 +202,15 @@ public class CommentAdapter extends MBaseAdapter {
 
 	public void setPreviews(Post post, ImageView[] previews) {
 		int[] attachFileIds = new int[post.getAttachFiles().size()];
+		
 		for (int i = 0; i < attachFileIds.length; i++) {
 			attachFileIds[i] = post.getAttachFiles().get(i).getId();
 		}
 
-		for (int i = 0; i < previews.length; i++) {
-			previews[i].setVisibility(View.GONE);
-		}
-
+//		for (int i = 0; i < previews.length; i++) {
+//			previews[i].setVisibility(View.GONE);
+//		}
+//		
 		for (int i = 0; i < ((attachFileIds.length > previews.length) ? previews.length : attachFileIds.length); i++) {
 			downloader.downloadAttachFileImage(attachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, previews[i]);
 			previews[i].setVisibility(View.VISIBLE);

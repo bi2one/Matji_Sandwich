@@ -14,6 +14,7 @@ import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.ModelType;
 import com.matji.sandwich.widget.ProfileImageView;
 import com.matji.sandwich.widget.RoundTabHost;
 
@@ -66,13 +67,17 @@ public class UserMainActivity extends BaseTabActivity {
 		tabHost.addLeftTab("tab1",
 				R.string.store_main_post_list_view,
 				new Intent(this, UserPostListActivity.class));
+		Intent imageViewIntent = new Intent(this, ImageListActivity.class);
+		imageViewIntent.putExtra("id", user.getId());
+		imageViewIntent.putExtra("type", ModelType.USER);
 		tabHost.addCenterTab("tab2",
 				R.string.store_main_img,
-//				new Intent(this, ImageListActivity.class));
-				new Intent(this, UserTagActivity.class));
+				imageViewIntent);
+
 		tabHost.addRightTab("tab3",
 				R.string.store_main_review,
-				new Intent(this, UserStoreListActivity.class));
+				new Intent(this, UserTagActivity.class));
+//		new Intent(this, UserStoreListActivity.class));
 
 	}
 	

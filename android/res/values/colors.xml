@@ -36,10 +36,11 @@
 	<color name="section_shadow_color">#333333</color>
 	<color name="title_shadow_color">#ffffff</color>
 	
-	<color name="default_theme_key">#c30</color>
-	<color name="default_theme_value">#adadad</color>
-	<color name="default_theme_main">#000</color>
-	
+	<color name="matji_dark_orange">#c30</color>
+	<color name="matji_light_gray">#adadad</color>
+	<color name="matji_black">#000</color>
+	<color name="matji_chocolate">#a27c47</color>	
+
 	<!-- Cell -->
 	<color name="cell_user_bg">#ffffff</color>
 	

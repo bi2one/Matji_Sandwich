@@ -36,9 +36,9 @@ public class ImageListView extends RequestableMListView implements View.OnClickL
 		request = new AttachFileIdsHttpRequest(context, imageCount);
 				
 		setDivider(null);
+		setSelector(android.R.color.transparent);
 		setCacheColorHint(Color.TRANSPARENT);
 		setVerticalScrollBarEnabled(false);
-
 	}
 	
 	public void setModelId(int id) {
