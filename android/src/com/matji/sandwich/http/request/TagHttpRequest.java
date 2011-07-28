@@ -1,6 +1,8 @@
 package com.matji.sandwich.http.request;
 
+import com.matji.sandwich.http.parser.StoreTagParser;
 import com.matji.sandwich.http.parser.TagParser;
+import com.matji.sandwich.http.parser.UserTagParser;
 
 import android.content.Context;
 
@@ -29,7 +31,7 @@ public class TagHttpRequest extends HttpRequest {
 	
 	public void actionStoreTagList(int store_id, int page, int limit) {
 		action = "store_tag_list";
-		parser = new TagParser(context);
+		parser = new StoreTagParser(context);
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
@@ -39,7 +41,7 @@ public class TagHttpRequest extends HttpRequest {
 	
 	public void actionUserTagList(int user_id, int page, int limit) {
 		action = "user_tag_list";
-		parser = new TagParser(context);
+		parser = new UserTagParser(context);
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id+ "");		

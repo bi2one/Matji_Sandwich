@@ -1,6 +1,6 @@
 package com.matji.sandwich.adapter;
 
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.SimpleTag;
 
 import android.content.Context;
 
@@ -12,7 +12,7 @@ public class TagAdapter extends DefaultAdapter {
 
 	@Override
 	protected String getText(int position) {
-		Tag tag = (Tag) data.get(position);
+		SimpleTag tag = (SimpleTag) data.get(position);
 		return tag.getTag();
 	}
 }

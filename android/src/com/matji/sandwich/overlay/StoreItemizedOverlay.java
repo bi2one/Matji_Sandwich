@@ -29,7 +29,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Projection;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.StoreTabActivity;
 

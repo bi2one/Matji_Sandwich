@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background="@color/cell_bg">
+	<com.matji.sandwich.widget.ProfileImageView
+		style="@style/DefaultWrap" />
 		<ImageView
 			style="@style/user_cell_Profile"
 			android:id="@+id/user_cell_profile" />
@@ -11,10 +14,10 @@
 			android:id="@+id/user_cell_name"
 			android:layout_toRightOf="@id/user_cell_profile" 
 			android:singleLine="true"/>
-		<Button
-			style="@style/InfoButton"
-			android:id="@+id/user_cell_info_btn"
-			android:layout_toRightOf="@id/user_cell_name" />
+<!-- 		<Button -->
+<!-- 			style="@style/InfoButton" -->
+<!-- 			android:id="@+id/user_cell_info_btn" -->
+<!-- 			android:layout_toRightOf="@id/user_cell_name" /> -->
 		<TextView
 			style="@style/user_cell_Grade"
 			android:id="@+id/user_cell_grade"

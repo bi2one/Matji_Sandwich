@@ -30,6 +30,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
     private static final int FLIP_ANIMATION_DURATION = 250;
     private static final int HEADER_REFRESH_LIMIT = 70;
     private static final int LIST_BASE_INDEX = 1;
+    private static final boolean IS_ON = false;
     private Context context;
     private OnScrollListener pullDownListener;
     private OnRefreshListener onRefreshListener;
@@ -90,7 +91,9 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 	measureView(refreshView);
 	refreshViewHeight = refreshView.getMeasuredHeight();
 	baseTopPadding = refreshView.getPaddingTop();
-	addHeaderView(refreshView);
+
+	if (IS_ON)
+	    addHeaderView(refreshView);
 
 	stateFactory = new PullStateFactory(this);
 	defaultState = stateFactory.getState(PullStateFactory.State.DEFAULT);
@@ -223,31 +226,33 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @return 다른 하위 이벤트 감시 함수들을 추가로 허용할지 여부
      */
     public boolean onTouchEvent(MotionEvent event) {
-	currentY = (int) event.getY();
-	if (pullStartedY != -1)
-	    movedY = currentY - pullStartedY;
+	if(IS_ON) {
+	    currentY = (int) event.getY();
+	    if (pullStartedY != -1)
+		movedY = currentY - pullStartedY;
 	
-	switch(event.getAction()) {
-	case MotionEvent.ACTION_UP:
-	    state.onActionUp();
-	    break;
-	case MotionEvent.ACTION_MOVE:
-	    state.onActionMove();
-	    if (movedY <= HEADER_REFRESH_LIMIT) {
-		state.onYCordinateLessThanLimit();
-	    } else {
-		state.onYCordinateLargerThanLimit();
-	    }
+	    switch(event.getAction()) {
+	    case MotionEvent.ACTION_UP:
+		state.onActionUp();
+		break;
+	    case MotionEvent.ACTION_MOVE:
+		state.onActionMove();
+		if (movedY <= HEADER_REFRESH_LIMIT) {
+		    state.onYCordinateLessThanLimit();
+		} else {
+		    state.onYCordinateLargerThanLimit();
+		}
 	    
-	    if (movedY < 0) {
-		state.onYCordinateMoveBelow();
-	    } else if (movedY <= HEADER_REFRESH_LIMIT) {
-		state.onYCordinateMoveAboveLessThanLimit();
-	    } else {
-		state.onYCordinateMoveAboveLargerThanLimit();
-	    }
+		if (movedY < 0) {
+		    state.onYCordinateMoveBelow();
+		} else if (movedY <= HEADER_REFRESH_LIMIT) {
+		    state.onYCordinateMoveAboveLessThanLimit();
+		} else {
+		    state.onYCordinateMoveAboveLargerThanLimit();
+		}
 	    
-	    break;
+		break;
+	    }
 	}
 
 	return super.onTouchEvent(event);
@@ -262,10 +267,12 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param totalItemCount
      */
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-	if (firstVisibleItem == 0) {
-	    state.onFirstElement();
-	} else if (firstVisibleItem != 0) {
-	    state.onNotFirstElement();
+	if (IS_ON) {
+	    if (firstVisibleItem == 0) {
+		state.onFirstElement();
+	    } else if (firstVisibleItem != 0) {
+		state.onNotFirstElement();
+	    }
 	}
 
 	if (pullDownListener != null)

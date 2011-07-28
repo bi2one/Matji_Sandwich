@@ -11,7 +11,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
@@ -325,7 +325,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			holder.storeName.setText("");
 		}
 
-		ArrayList<Tag> tags = post.getTags();
+		ArrayList<SimpleTag> tags = post.getTags();
 		String tagResult = "";
 
 		if (tags.size() > 0) {
@@ -339,8 +339,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			holder.tag.setVisibility(View.GONE);
 		}
 
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, holder.profile);
-		
+		holder.profile.setUserId(user.getId());
 		holder.nick.setText(user.getNick()+" ");
 		holder.post.setText(post.getPost().trim());
 		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));

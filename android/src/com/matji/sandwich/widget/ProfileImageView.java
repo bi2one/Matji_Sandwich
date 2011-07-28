@@ -1,5 +1,6 @@
 package com.matji.sandwich.widget;
 
+import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.ImageUtil;
 
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
  *
  */
 public class ProfileImageView extends ImageView {
+	private final MatjiImageDownloader downloader = new MatjiImageDownloader(getContext());
 
 	public ProfileImageView(Context context) {
 		super(context);
@@ -37,5 +39,9 @@ public class ProfileImageView extends ImageView {
 			ImageUtil.getRoundedCornerBitmap(bm, 7);
 			setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, 7));
 		}
+	}
+	
+	public void setUserId(int id) {
+		downloader.downloadUserImage(id, MatjiImageDownloader.IMAGE_SSMALL, this);
 	}
 }

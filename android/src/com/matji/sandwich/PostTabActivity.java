@@ -26,7 +26,6 @@ public class PostTabActivity extends BaseTabActivity {
 	setContentView(R.layout.activity_post_tab);
 	tabHost = (RoundTabHost)getTabHost();
 	context = getApplicationContext();
-	DisplayUtil.setContext(context);
 
 	tabHost.addLeftTab("tab1",
 			   R.string.post_tab_friend,

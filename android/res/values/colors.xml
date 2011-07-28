@@ -39,4 +39,14 @@
 	<color name="map_title_bar_change_address">#B7924C</color>
 	<color name="section_shadow_color">#333333</color>
 	<color name="title_shadow_color">#ffffff</color>
+	
+	<!-- Cell -->
+	<color name="cell_bg">#ffffff</color>
+	
+	<!-- Tag Cloud -->
+	<color name="tag_color1">#555555</color>
+	<color name="tag_color2">#000000</color>
+	<color name="tag_color3">#ffaa55</color>
+	<color name="tag_color4">#ff5500</color>
+	<color name="tag_color5">#ff1100</color>
 </resources>

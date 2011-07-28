@@ -49,13 +49,13 @@
     해당 위치는 주소를 받아올 수 없는 지역입니다
   </string>
   <string name="exception_GeocodeSearchInvalidMatjiException">
-    검색 결과가 없습니다.
+    주소 검색이 올바르지 않습니다
   </string>
   <string name="exception_RegistStoreNameInvalidMatjiException">
     맛집 이름을 입력해주셔야 합니다
   </string>
   <string name="exception_store_address_is_null">
-  기본 주소가 잘못되었습니다. 
+    기본 주소가 잘못되었습니다. 
   </string>
 
   <!-- server exception -->

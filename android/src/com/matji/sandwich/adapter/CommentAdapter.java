@@ -8,7 +8,7 @@ import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
@@ -141,7 +141,7 @@ public class CommentAdapter extends MBaseAdapter {
 			postElement.storeName.setText("");
 		}
 
-		ArrayList<Tag> tags = post.getTags();
+		ArrayList<SimpleTag> tags = post.getTags();
 		String tagResult = "";
 
 		if (tags.size() > 0) {
@@ -155,7 +155,7 @@ public class CommentAdapter extends MBaseAdapter {
 			postElement.tag.setVisibility(View.GONE);
 		}
 
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, postElement.profile);
+		postElement.profile.setUserId(user.getId());
 		postElement.nick.setText(user.getNick()+" ");
 		postElement.post.setText(post.getPost().trim());
 		postElement.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
@@ -174,7 +174,7 @@ public class CommentAdapter extends MBaseAdapter {
 			final CommentListView commentListView = (CommentListView) parent;
 			convertView = getLayoutInflater().inflate(R.layout.row_comment, null);
 
-			commentElement.profile = (ImageView) convertView.findViewById(R.id.profile);
+			commentElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
 			commentElement.nick = (TextView) convertView.findViewById(R.id.row_comment_nick);
 			commentElement.dateAgo = (TextView) convertView.findViewById(R.id.row_comment_created_at);
 			commentElement.comment = (TextView) convertView.findViewById(R.id.row_comment_comment);
@@ -191,16 +191,14 @@ public class CommentAdapter extends MBaseAdapter {
 		convertView.findViewById(R.id.row_comment_wrapper).setVisibility(View.VISIBLE);
 
 		User user = comment.getUser();
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SSMALL, commentElement.profile);
+		
+		commentElement.profile.setUserId(user.getId());
 		commentElement.nick.setText(user.getNick());
 		commentElement.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()) + comment.getFromWhere() + "에서");
 		commentElement.comment.setText(comment.getComment());
 
 		return convertView;
 	}
-
-
-
 
 	public void setPreviews(Post post, ImageView[] previews) {
 		int[] attachFileIds = new int[post.getAttachFiles().size()];
@@ -260,7 +258,7 @@ public class CommentAdapter extends MBaseAdapter {
 	}
 
 	private class CommentElement {
-		ImageView profile;
+		ProfileImageView profile;
 		TextView nick;
 		TextView comment;
 		TextView dateAgo;
