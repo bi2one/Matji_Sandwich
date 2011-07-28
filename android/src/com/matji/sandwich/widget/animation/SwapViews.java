@@ -40,11 +40,13 @@ public final class SwapViews implements Runnable {
 
 	    view2.setEnabled(true);
 	    view1.setEnabled(false);
+	    // view2.requestFocus(true);
 	} else {
 	    view1.startAnimation(rotation);
 	    
 	    view2.setVisibility(View.GONE);
 	    view1.setVisibility(View.VISIBLE);
+	    // view1.requestFocus(true);
 	    Log.d("=====", "view1 focus: " + view1.requestFocus());
 
 	    view2.setEnabled(false);
