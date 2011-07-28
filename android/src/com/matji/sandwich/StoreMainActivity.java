@@ -118,6 +118,11 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	}
 
 
+	@Override
+	public void finish() {
+		super.finishWithMatjiData();
+	}
+	
 	private void setInfo() {
 		store = (Store) SharedMatjiData.getInstance().top();
 
