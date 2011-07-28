@@ -14,13 +14,13 @@ import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.ProfileImageView;
 import com.matji.sandwich.widget.RoundTabHost;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class UserMainActivity extends BaseTabActivity implements Requestable {
@@ -32,7 +32,6 @@ public class UserMainActivity extends BaseTabActivity implements Requestable {
 	private HttpRequest request;
 	private Session session;
 	private DBProvider dbProvider;
-	private MatjiImageDownloader downloader;
 
 	private TextView gradeText;
 	private TextView pointText1;
@@ -63,7 +62,6 @@ public class UserMainActivity extends BaseTabActivity implements Requestable {
 		tabHost = (RoundTabHost)getTabHost();
 		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
-		downloader = new MatjiImageDownloader(this);
 		
 		user = (User) SharedMatjiData.getInstance().top();
 		dbProvider = DBProvider.getInstance(this);
@@ -149,7 +147,7 @@ public class UserMainActivity extends BaseTabActivity implements Requestable {
 //		}
 
 		/* Set User Image */
-		downloader.downloadUserImage(user.getId(), MatjiImageDownloader.IMAGE_SMALL, (ImageView) findViewById(R.id.user_cell_profile));
+		((ProfileImageView) findViewById(R.id.profile)).setUserId(user.getId());
 
 //		if (session.isLogin()) {
 //			if (dbProvider.isExistFollowing(user.getId())) {
