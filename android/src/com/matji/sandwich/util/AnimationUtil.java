@@ -18,7 +18,7 @@ public class AnimationUtil {
     	rotation.setDuration(500);
     	rotation.setFillAfter(true);
     	rotation.setInterpolator(new AccelerateInterpolator());
-    	rotation.setAnimationListener(new DisplayNextView((currentView == v1), v1, v2));
+//    	rotation.setAnimationListener(new DisplayNextView((currentView == v1), v1, v2));
 
     	if (currentView == v1) {
     	    v1.startAnimation(rotation);
