@@ -16,6 +16,7 @@
 			<TextView
 				android:id="@+id/cell_user_nick"
 				style="@style/DefaultWrap"
+				android:layout_margin="@dimen/default_distance_half"
 				android:textColor="@color/default_theme_main"
 				android:textSize="@dimen/text_xxlarge" />
 			<LinearLayout

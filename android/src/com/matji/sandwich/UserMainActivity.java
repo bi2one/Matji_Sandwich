@@ -45,7 +45,7 @@ public class UserMainActivity extends BaseTabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_main);
 
-		tabHost = (RoundTabHost)getTabHost();
+		tabHost = (RoundTabHost) getTabHost();
 		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
 		
@@ -83,6 +83,10 @@ public class UserMainActivity extends BaseTabActivity {
 		refresh();
 	}
 	
+	@Override
+	public void finish() {
+		super.finishWithMatjiData();
+	}
 	private void init() {
 		
 	}

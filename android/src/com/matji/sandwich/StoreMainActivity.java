@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
 	private ImageView storeImage;
 	private Button likeButton;
-	private Button scrapButton;
+	private ImageButton scrapButton;
 	private TextView nameText;
 	private TextView telText;
 	private TextView addressText;
@@ -74,7 +75,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		downloader = new MatjiImageDownloader(this);
 
 		storeImage = (ImageView) findViewById(R.id.store_main_thumbnail);
-		scrapButton = (Button) findViewById(R.id.store_main_scrap_btn);
+		scrapButton = (ImageButton) findViewById(R.id.store_main_scrap_btn);
 		likeButton = (Button) findViewById(R.id.store_main_like_btn);
 		nameText = (TextView) findViewById(R.id.store_main_name);
 		telText = (TextView) findViewById(R.id.store_main_tel);
@@ -118,6 +119,11 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	}
 
 
+	@Override
+	public void finish() {
+		super.finishWithMatjiData();
+	}
+	
 	private void setInfo() {
 		store = (Store) SharedMatjiData.getInstance().top();
 
