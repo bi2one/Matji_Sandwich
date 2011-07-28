@@ -25,6 +25,7 @@ public class GpsManager implements LocationListener {
     private LocationManager locationManager;
     private String majorProvider;
     private boolean gpsPerformed;
+    private boolean runningFlag;
     private final static int minDistanceForNotifyInMeters = 0;
     
     public GpsManager(Context context, MatjiLocationListener matjiListener) {
@@ -32,9 +33,11 @@ public class GpsManager implements LocationListener {
 	this.matjiListener = matjiListener;
 	locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
 	gpsPerformed = false;
+	runningFlag = false;
     }
 
     public void start() {
+	runningFlag = true;
 	notifyLastKnownLocation();
 	try {
 	    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -91,9 +94,9 @@ public class GpsManager implements LocationListener {
     }
 
     private void notifyLocationChanged(Location loc) {
-	if (loc != null)
+	if (loc != null) {
 	    matjiListener.onLocationChanged(loc);
-	else {
+	} else {
 	    Location seoulLocation = new Location("");
 	    seoulLocation.setLatitude(37.541);
 	    seoulLocation.setLongitude(126.986);
@@ -103,7 +106,12 @@ public class GpsManager implements LocationListener {
     }
 
     public void stop() {
+	runningFlag = false;
 	locationManager.removeUpdates(this);
+    }
+
+    public boolean isRunning() {
+	return runningFlag;
     }
 
     public void onProviderDisabled(String provider) {

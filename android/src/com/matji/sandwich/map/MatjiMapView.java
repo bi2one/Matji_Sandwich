@@ -12,12 +12,13 @@ import android.view.View.OnTouchListener;
 
 public class MatjiMapView extends MapView implements OnTouchListener {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
-    private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
+    private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 200;
     private static final int MAP_CENTER_CHANGE_BOUND_LAT = 10;
     private static final int MAP_CENTER_CHANGE_BOUND_LNG = 10;
     private MatjiMapCenterListener listener;
     private MapAsyncTask asyncTask;
     private GeoPoint mapCenter;
+    private GeoPoint newMapCenter;
     public static enum BoundType {
 	MAP_BOUND_NE, MAP_BOUND_SW, MAP_BOUND_SE, MAP_BOUND_NW
     }
@@ -46,6 +47,12 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 
     public void setMapCenterListener(MatjiMapCenterListener listener) {
 	this.listener = listener;
+    }
+
+    public void requestMapCenterChanged(GeoPoint point) {
+	mapCenter = point;
+	newMapCenter = point;
+	listener.onMapCenterChanged(mapCenter);
     }
 
     private class MapAsyncTask extends AsyncTask<Integer, Integer, Integer> {
@@ -78,7 +85,6 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 	}
 	
 	protected Integer doInBackground(Integer... params) {
-	    GeoPoint newMapCenter;
 	    while(!stopFlag) {
 		if (listener != null) {
 		    threadSleep(MAP_CENTER_UPDATE_TICK);
