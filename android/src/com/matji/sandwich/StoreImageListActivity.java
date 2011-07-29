@@ -11,7 +11,7 @@ public class StoreImageListActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_image_list);
 
-		StoreImageListView listView = (StoreImageListView) findViewById(R.id.user_image_list_view);
+		StoreImageListView listView = (StoreImageListView) findViewById(R.id.store_image_list_view);
 		listView.setActivity(this);
 		listView.requestReload();
 	}

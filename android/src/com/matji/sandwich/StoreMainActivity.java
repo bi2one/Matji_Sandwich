@@ -86,7 +86,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 				new Intent(this, StorePostListActivity.class));
 		tabHost.addCenterTab("tab2",
 				R.string.store_main_img,
-				new Intent(this, StoreSliderActivity.class));
+				new Intent(this, StoreImageListActivity.class));
 		tabHost.addRightTab("tab3",
 				R.string.store_main_review,
 				new Intent(this, StoreDetailInfoTabActivity.class));
