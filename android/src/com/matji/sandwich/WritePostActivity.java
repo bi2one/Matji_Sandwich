@@ -432,19 +432,4 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 		Log.d("Matji", "total : "+ totalBytes + "  writeBytes: " + readBytes);
 		
 	}
-
-
-	@Override
-	public void onLocationChanged(int startedFromTag, Location location) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onLocationExceptionDelivered(int startedFromTag,
-			MatjiException e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

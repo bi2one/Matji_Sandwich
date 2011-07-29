@@ -34,10 +34,10 @@ public class BookmarkListView extends RequestableMListView implements OnItemLong
 	Region region = (Region) getAdapterData().get(position);
 	Intent data = new Intent();
 	    
-	data.putExtra(MainMapActivity.RETURN_KEY_LAT_NE, region.getLatNe());
-	data.putExtra(MainMapActivity.RETURN_KEY_LAT_SW, region.getLatSw());
-	data.putExtra(MainMapActivity.RETURN_KEY_LNG_NE, region.getLngNe());
-	data.putExtra(MainMapActivity.RETURN_KEY_LNG_SW, region.getLngSw());
+	// data.putExtra(MainMapActivity.RETURN_KEY_LAT_NE, region.getLatNe());
+	// data.putExtra(MainMapActivity.RETURN_KEY_LAT_SW, region.getLatSw());
+	// data.putExtra(MainMapActivity.RETURN_KEY_LNG_NE, region.getLngNe());
+	// data.putExtra(MainMapActivity.RETURN_KEY_LNG_SW, region.getLngSw());
 
 	getActivity().setResult(Activity.RESULT_OK, data);
 	getActivity().finish();
