@@ -9,7 +9,7 @@
       android:layout_alignParentLeft="true" />
   <Button
       style="@style/map_title_bar_locationButton"
-      android:onClick="onCurrentPositionClick"
+      android:onClick="onCurrentPositionClicked"
       android:id="@+id/map_title_bar_location_button"
       android:layout_toRightOf="@id/map_title_bar_flip_button" />
   <TextView

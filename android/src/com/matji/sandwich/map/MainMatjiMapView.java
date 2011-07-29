@@ -38,7 +38,10 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     private static final GeocodeHttpRequest.Country country = GeocodeHttpRequest.Country.KOREA;
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
+    private static final int LAT_HALVE_SPAN = LAT_SPAN / 2;
+    private static final int LNG_HALVE_SPAN = LNG_SPAN / 2;
     private static final int MAX_STORE_COUNT = 60;
+    private static final int GPS_START_TAG = 1;
     private static final int NEARBY_STORE = 1;
     private static final int GEOCODE = 2;
     private MapController mapController;
@@ -71,7 +74,11 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	gpsManager = new GpsManager(context, this);
 
 	mapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
-	gpsManager.start(1);
+	gpsManager.start(GPS_START_TAG);
+    }
+
+    public void moveToGpsCenter() {
+	gpsManager.start(GPS_START_TAG);
     }
 
     public void setCenter(Location location) {
@@ -79,7 +86,8 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     }
 
     public void onMapCenterChanged(GeoPoint point) {
-	setBoundToSession();
+	setBoundToSession(getBound(BoundType.MAP_BOUND_NE),
+			  getBound(BoundType.MAP_BOUND_SW));
 	setCenterToSession(point);
 
 	Runnable runnable = new MapRunnable(this);
@@ -107,9 +115,10 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 		gpsManager.stop();
 	    }
 	}
-    
+
 	prevLocation = location;
-	setCenter(prevLocation);
+	setNearBoundToSession(location);
+	setCenter(location);
     }
 
     public void onLocationExceptionDelivered(int startedFromTag, MatjiException e) {
@@ -145,10 +154,18 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	postInvalidate();
     }
 
-    private void setBoundToSession() {
-	GeoPoint neBound = getBound(BoundType.MAP_BOUND_NE);
-	GeoPoint swBound = getBound(BoundType.MAP_BOUND_SW);
+    private void setNearBoundToSession(Location centerLocation) {
+	GeoPoint centerPoint = new LocationToGeoPointAdapter(centerLocation);
+	int centerLat = centerPoint.getLatitudeE6();
+	int centerLng = centerPoint.getLongitudeE6();
+	GeoPoint neBound = new GeoPoint(centerLat + LAT_HALVE_SPAN,
+					centerLng + LNG_HALVE_SPAN);
+	GeoPoint swBound = new GeoPoint(centerLat - LAT_HALVE_SPAN,
+					centerLng - LNG_HALVE_SPAN);
+	setBoundToSession(neBound, swBound);
+    }
 
+    private void setBoundToSession(GeoPoint neBound, GeoPoint swBound) {
 	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_NE, neBound.getLatitudeE6());
 	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, swBound.getLatitudeE6());
 	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, neBound.getLongitudeE6());

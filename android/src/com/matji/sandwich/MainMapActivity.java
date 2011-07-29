@@ -11,12 +11,15 @@ import android.util.Log;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.map.MainMatjiMapView;
+import com.matji.sandwich.widget.StoreMapNearListView;
 
 public class MainMapActivity extends BaseMapActivity {
     private Context context;
     private MainMatjiMapView mapView;
+    private StoreMapNearListView storeListView;
     private TextView addressView;
     private View flipButton;
+    private boolean currentViewIsMap;
 
     private Drawable flipMapViewBackground;
     private Drawable flipNearStoreBackground;
@@ -29,13 +32,13 @@ public class MainMapActivity extends BaseMapActivity {
 	addressView = (TextView)findViewById(R.id.map_title_bar_address);
 	mapView = (MainMatjiMapView)findViewById(R.id.map_view);
 	mapView.init(addressView, this);
+	storeListView = (StoreMapNearListView)findViewById(R.id.main_map_store_list);
+	storeListView.setActivity(this);
 	
 	flipButton = findViewById(R.id.map_title_bar_flip_button);
 	
 	flipMapViewBackground = getResources().getDrawable(R.drawable.map_titlebar_flip_mapview_btn);
 	flipNearStoreBackground = getResources().getDrawable(R.drawable.map_titlebar_flip_btn);
-
-	flipButton.setClickable(false);
     }
 
     protected void onResume() {
@@ -48,6 +51,20 @@ public class MainMapActivity extends BaseMapActivity {
 	mapView.stopMapCenterThread();
     }
 
-    public void onCurrentPositionClick(View v) {
+    public void onCurrentPositionClicked(View v) {
+	mapView.moveToGpsCenter();
+	storeListView.moveToGpsCenter();
+    }
+
+    public void onFlipClicked(View v) {
+	if (currentViewIsMap) {
+	    storeListView.requestReload();
+	    mapView.setVisibility(View.GONE);
+	    storeListView.setVisibility(View.VISIBLE);
+	} else {
+	    mapView.setVisibility(View.VISIBLE);
+	    storeListView.setVisibility(View.GONE);
+	}
+	currentViewIsMap = !currentViewIsMap;
     }
 }

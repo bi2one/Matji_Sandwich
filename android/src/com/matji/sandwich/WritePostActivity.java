@@ -395,15 +395,15 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 		if(resultCode == RESULT_OK){
 			if(requestCode == TAKE_CAMERA){
 				String imageRealPath = null;
-				final Uri uriImages = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;        
+				final Uri uriImages = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 				//final Uri uriImagesthum = MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI;
-				try{
+				try {
 					final Cursor cursorImages = getContentResolver().query(uriImages, IMAGE_PROJECTION, null, null, null);
 					if(cursorImages != null && cursorImages.moveToLast()){         
 						imageRealPath = cursorImages.getString(0);
 						cursorImages.close();
-					} 
-				}catch(Exception e){}
+					}
+				} catch(Exception e) {}
 
 				addUploadImage(imageRealPath);
 
@@ -423,13 +423,10 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 		int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 		cursor.moveToFirst();
 		return cursor.getString(column_index);
-
 	}
-
 
 	public void onFileWritten(int tag, int totalBytes, int readBytes) {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "total : "+ totalBytes + "  writeBytes: " + readBytes);
-		
 	}
 }
