@@ -6,19 +6,21 @@ import com.google.android.maps.GeoPoint;
 import android.os.AsyncTask;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
 public class MatjiMapView extends MapView implements OnTouchListener {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
-    private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 200;
-    private static final int MAP_CENTER_CHANGE_BOUND_LAT = 10;
-    private static final int MAP_CENTER_CHANGE_BOUND_LNG = 10;
+    private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
+    private static final int MAP_CENTER_CHANGE_BOUND_LAT = 100;
+    private static final int MAP_CENTER_CHANGE_BOUND_LNG = 100;
     private MatjiMapCenterListener listener;
     private MapAsyncTask asyncTask;
     private GeoPoint mapCenter;
     private GeoPoint newMapCenter;
+    private GeoPoint tempMapCenter;
     public static enum BoundType {
 	MAP_BOUND_NE, MAP_BOUND_SW, MAP_BOUND_SE, MAP_BOUND_NW
     }
@@ -33,6 +35,16 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 	if (asyncTask == null) {
 	    asyncTask = new MapAsyncTask();
 	    asyncTask.execute(0);
+	}
+    }
+
+    public GeoPoint getMapCenter() {
+	if (tempMapCenter == null)
+	    return super.getMapCenter();
+	else {
+	    GeoPoint result = tempMapCenter;
+	    tempMapCenter = null;
+	    return result;
 	}
     }
 				 
@@ -50,9 +62,7 @@ public class MatjiMapView extends MapView implements OnTouchListener {
     }
 
     public void requestMapCenterChanged(GeoPoint point) {
-	mapCenter = point;
-	newMapCenter = point;
-	listener.onMapCenterChanged(mapCenter);
+	this.tempMapCenter = tempMapCenter;
     }
 
     private class MapAsyncTask extends AsyncTask<Integer, Integer, Integer> {
@@ -68,7 +78,7 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 
 	public boolean stopTask(boolean mayInterruptIfRunning) {
 	    stopFlag = true;
-	    return super.cancel(mayInterruptIfRunning);
+	    return cancel(mayInterruptIfRunning);
 	}
 
 	private boolean geoPointEquals(GeoPoint p1, GeoPoint p2) {

@@ -3,6 +3,7 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.StoreParser;
 
 import android.content.Context;
+import android.util.Log;
 
 public class StoreHttpRequest extends HttpRequest {
     public StoreHttpRequest(Context context) {
