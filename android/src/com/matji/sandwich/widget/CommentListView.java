@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -25,7 +27,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 
 public class CommentListView extends RequestableMListView implements View.OnClickListener {
-	private Context context;
 	private HttpRequest request;
 	private Session session;
 
@@ -38,18 +39,21 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 	public CommentListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new CommentAdapter(context), 10);
-		this.context = context;
-		request = new CommentHttpRequest(context);
-		session = Session.getInstance(context);
-
 		init();
 	}
 
 	private void init() {
+		request = new CommentHttpRequest(getContext());
+		session = Session.getInstance(getContext());
+
 		post = (Post) SharedMatjiData.getInstance().top();
+		addHeaderView(new CommentHeader(getContext()));
 		setPage(1);
-		setDivider(null);
+		setDivider(new ColorDrawable(Color.WHITE));
+		setDividerHeight(2);
 		setCanRepeat(true);
+//		setCacheColorHint(Color.BLACK);
+		setFadingEdgeLength(0);
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
 	}
 
@@ -99,7 +103,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		if (session.isLogin() && !getHttpRequestManager().isRunning(getActivity())) {
 			curDeletePos = Integer.parseInt((String) v.getTag());
 
-			AlertDialog.Builder alert = new AlertDialog.Builder(context);
+			AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 			alert.setTitle(R.string.default_string_delete);
 			alert.setMessage(R.string.default_string_check_delete);
 			alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -141,9 +145,9 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 			post.setCommentCount(post.getCommentCount() - 1);
 		}
 
-		if (tag == REQUEST_RELOAD && data != null) {
-			data.add(0, post);
-		}
+//		if (tag == REQUEST_RELOAD && data != null) {
+//			data.add(0, post);
+//		}
 		super.requestCallBack(tag, data);
 	}
 }

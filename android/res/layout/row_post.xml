@@ -20,16 +20,16 @@
 				android:id="@+id/row_post_store_name" 
 				style="@style/LinkifyName" />
 		</LinearLayout>
-		<RelativeLayout 
-			style="@style/DefaultWrap">
+<!-- 		<RelativeLayout  -->
+<!-- 			style="@style/DefaultWrap"> -->
 			<TextView 
 				android:id="@+id/row_post_post" 
 				style="@style/TalkContent" />
- 			<Button
-				android:id="@+id/row_post_menu"
-				style="@style/row_post_menu"
-				android:layout_alignParentRight="true"/> 
-		</RelativeLayout>
+<!--  			<Button -->
+<!-- 				android:id="@+id/row_post_menu" -->
+<!-- 				style="@style/row_post_menu" -->
+<!-- 				android:layout_alignParentRight="true"/>  -->
+<!-- 		</RelativeLayout> -->
 		<LinearLayout 
 			style="@style/DefaultWrap">
 			<TextView 
@@ -40,13 +40,13 @@
 			android:id="@+id/row_post_previews" 
 			style="@style/DefaultWidthFill">
 			<ImageView 
-				style="@style/header_post_Preview" 
+				style="@style/row_post_Preview" 
 				android:id="@+id/row_post_preview1" />
 			<ImageView 
-				style="@style/header_post_Preview" 
+				style="@style/row_post_Preview" 
 				android:id="@+id/row_post_preview2" />
 			<ImageView 
-				style="@style/header_post_Preview" 
+				style="@style/row_post_Preview" 
 				android:id="@+id/row_post_preview3" />
 		</LinearLayout>
 		<LinearLayout 

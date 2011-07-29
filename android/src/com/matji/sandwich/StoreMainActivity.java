@@ -25,6 +25,8 @@ import com.matji.sandwich.widget.RoundTabHost;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
@@ -43,8 +45,6 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	private ImageView storeImage;
 	private Button likeButton;
 	private ImageButton scrapButton;
-	private TextView telText;
-	private TextView addressText;
 	private TextView tagText;
 	private TextView foodText;
 	private TextView coverText;
@@ -54,6 +54,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	private MatjiImageDownloader downloader;
 	private StorePostListView listView;
 
+	private LayoutInflater inflater;
 	/* request tags */
 	public final static int BOOKMARK_REQUEST = 10;
 	public final static int UN_BOOKMARK_REQUEST = 11;
@@ -76,8 +77,6 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		storeImage = (ImageView) findViewById(R.id.cell_store_thumbnail);
 		scrapButton = (ImageButton) findViewById(R.id.cell_store_scrap_btn);
 		likeButton = (Button) findViewById(R.id.cell_store_like_btn);
-		telText = (TextView) findViewById(R.id.cell_store_tel);
-		addressText = (TextView) findViewById(R.id.cell_store_address);
 		tagText = (TextView) findViewById(R.id.cell_store_tag);
 		foodText = (TextView) findViewById(R.id.cell_store_food);
 
@@ -89,9 +88,11 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 				new Intent(this, StoreImageListActivity.class));
 		tabHost.addRightTab("tab3",
 				R.string.store_main_review,
-				new Intent(this, StoreDetailInfoTabActivity.class));
-
-
+				new Intent(this, StoreUrlListActivity.class));
+		
+		//View container = (View) inflater.inflate(R.layout.cell_store_info, null);
+		
+		
 		//	/* Set RegUser */
 		//	User regUser = store.getRegUser();
 		//	String string;
@@ -134,19 +135,17 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 			storeImage.setImageDrawable(defaultImage);
 		}
 
-		telText.setText(store.getTel());
-		addressText.setText(store.getAddress());
 		tagText.setText(tagListToCSV(store.getTags()));
 		foodText.setText(foodListToCSV(store.getStoreFoods()));
 
 		if (session.isLogin()) {
 			if (dbProvider.isExistLike(store.getId(), "Store")) {
-				likeButton.setText("" + store.getLikeCount());
+				//likeButton.setText("" + store.getLikeCount());
 			} else {
-				likeButton.setText("" + store.getLikeCount());
+				//likeButton.setText("" + store.getLikeCount());
 			}
 		} else {
-			likeButton.setText("" + store.getLikeCount());
+			//likeButton.setText("" + store.getLikeCount());
 		}
 	}
 
@@ -318,9 +317,10 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	// 	tabHost.setCurrentTab(StoreTabActivity.MEMO_PAGE);
 	// }
 
-	// public void onImageButtonClicked(View view) {
-	// 	tabHost.setCurrentTab(StoreTabActivity.IMAGE_PAGE);
-	// }
+	 public void onImageClicked(View view) {
+	 	Intent intent = new Intent(this, StoreDetailInfoTabActivity.class);
+	 	startActivity(intent);
+	 }
 
 	// public void onTagButtonClicked(View view) {
 	// 	Intent intent = new Intent(this, TagListActivity.class);

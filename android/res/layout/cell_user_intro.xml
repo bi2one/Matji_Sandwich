@@ -2,6 +2,7 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/DefaultWidthFill"
+	android:id="@+id/cell_user_intro_Wrapper"
 	android:padding="@dimen/default_distance"
 	android:background="@color/WHITE">
 	<TextView

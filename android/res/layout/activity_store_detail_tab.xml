@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" 
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:background="#FFF" 
+	android:background="#FFF"
 	android:orientation="vertical">
-
+		
 	<!-- Main Title -->
 	<com.matji.sandwich.widget.title.StoreTitle
 		style="@style/DefaultWrap" />
-
+		
 	<!-- Store Name Cell -->
-	<com.matji.sandwich.widget.cell.StoreCell 
-		style="@style/DefaultWrap" /> 		
+	<com.matji.sandwich.widget.cell.StoreCell
+		style="@style/DefaultWidthFill"/>
 	
 	<!-- Seperate Line -->
 	<RelativeLayout 
@@ -20,23 +21,10 @@
 			style="@style/DefaultWidthFill"
 			android:background="@drawable/seperate_line" />
 	</RelativeLayout>
-
-	<!-- Store Info Cell -->
-	<com.matji.sandwich.widget.cell.StoreInfoCell
-		style="@style/DefaultWrap" 
-		android:id="@+id/store_info_cell"/>
 	
-	<!-- Seperate Line -->
-	<RelativeLayout 
-		style="@style/DefaultWidthFill">
-		<ImageView 
-			style="@style/DefaultWidthFill"
-			android:background="@drawable/seperate_line" />
-	</RelativeLayout>
-
 	<!-- Tab -->
 	<com.matji.sandwich.widget.RoundTabHost
-		android:id="@android:id/tabhost"
+		android:id="@android:id/tabhost" 
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		<LinearLayout 
