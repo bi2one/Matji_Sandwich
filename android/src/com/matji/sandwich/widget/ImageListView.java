@@ -63,8 +63,8 @@ public abstract class ImageListView extends RequestableMListView implements View
 		totalImageCount.setText(getTotalImageCountText());
 		totalImageCount.setTextColor(getResources().getColor(R.color.matji_chocolate));
 		
-		int margin = (int) getResources().getDimension(R.dimen.default_distance);
-		totalImageCount.setPadding(0, margin, 0, margin);
+		int padding = (int) getResources().getDimension(R.dimen.default_distance);
+		totalImageCount.setPadding(padding, padding, padding, 0);
 		
 		return totalImageCount;
 	}
