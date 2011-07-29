@@ -67,7 +67,7 @@ Requestable {
 		// geocodeRequest = new GeocodeHttpRequest(mContext);
 		centerOverlay = new CenterOverlay(mContext, mMapView);
 		centerOverlay.drawOverlay();
-		mGpsManager.start();
+		mGpsManager.start(1);
 	}
 
 	private String getAddressString(Address addr) {
@@ -146,7 +146,7 @@ Requestable {
 	}
 
 	public void onCurrentLocationClicked(View v) {
-		mGpsManager.start();
+		mGpsManager.start(1);
 	}
 
 	public void onSubmitClicked(View v) {
@@ -168,5 +168,18 @@ Requestable {
 		public void run() {
 			requestGeocodeByGeoPoint(point);
 		}
+	}
+
+	@Override
+	public void onLocationChanged(int startedFromTag, Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLocationExceptionDelivered(int startedFromTag,
+			MatjiException e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

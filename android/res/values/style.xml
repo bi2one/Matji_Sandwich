@@ -38,76 +38,7 @@
   
   <style name="DefaultRelativeFill" parent="DefaultFill">
   	<item name="android:padding">7dp</item>
-<<<<<<< HEAD
-  </style>  
-
-  <!-- Cell -->  
-  <style name="Cell" parent="DefaultWidthFill">
-  	<item name="android:padding">7dp</item>
-  </style>
-  
-  <style name="UserCell" parent="Cell">
-  	<item name="android:background">@color/cell_user_bg</item>
-  </style>
-  
-  <style name="LikeButton" parent="DefaultWrap">
-  	<item name="android:background">@drawable/like_btn</item>
-	<item name="android:gravity">right|center_vertical</item>
-	<item name="android:paddingRight">14dp</item>
-  	<item name="android:textSize">15dp</item>
-  	<item name="android:textColor">#f00</item>
-	<item name="android:textStyle">bold</item>
-  </style>
-  
-
-  <style name="cell_user_Profile">
-  	<item name="android:background">@drawable/img_profile_bg</item>
-	<item name="android:layout_width">60dp</item>
-	<item name="android:layout_height">60dp</item>
-	<item name="android:layout_marginRight">7dp</item>
-	<item name="android:layout_marginBottom">7dp</item>
-	<item name="android:scaleType">centerCrop</item>
-  </style>
-
-  <style name="cell_user_Name" parent="Name">
-  	<item name="android:layout_width">130dp</item>
-  </style>
-  
-  
-  <style name="cell_user_Mileage" parent="DefaultWrap">
-  	<item name="android:textSize">11dp</item>
-  </style>
-  
-  <style name="cell_user_Grade" parent="cell_user_Mileage">
-  	<item name="android:drawablePadding">3dp</item>
-  	<item name="android:textColor">@color/SKYBLUE</item>
-  </style>
-  
-  <style name="cell_user_PointText" parent="cell_user_Mileage">
-    <item name="android:layout_marginLeft">10dp</item>
-  </style>
-  
-  <style name="cell_user_Point" parent="cell_user_Mileage">
-  	<item name="android:textColor">@color/matji_dark_orange</item>
-  </style>
-  
-  <style name="cell_user_Title" parent="DefaultWrap">
-  	<item name="android:textSize">18dp</item>
-  	<item name="android:textStyle">bold</item>
-  	<item name="android:textColor">#333333</item>
-  </style>
-    
-  <style name="cell_user_FollowButton">
-   	<item name="android:background">@drawable/follow_btn</item>
-   	<item name="android:layout_width">67dp</item>
-  	<item name="android:layout_height">28dp</item>
-  	<item name="android:layout_marginTop">5dp</item>
-  </style>
-  
-  
-=======
   </style> 
->>>>>>> 956810716ede2d99766039df9b50e986a0f350dd
   
   <style name="SubTitle" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_chocolate</item>
