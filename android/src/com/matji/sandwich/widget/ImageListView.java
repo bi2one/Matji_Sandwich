@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.matji.sandwich.ImageSliderActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.ImageAdapter;
 import com.matji.sandwich.data.AttachFileIds;
 import com.matji.sandwich.data.MatjiData;
@@ -32,6 +33,7 @@ public class ImageListView extends RequestableMListView implements View.OnClickL
 		setSelector(android.R.color.transparent);
 		setCacheColorHint(Color.TRANSPARENT);
 		setVerticalScrollBarEnabled(false);
+		setBackgroundDrawable(getResources().getDrawable(R.drawable.pattern_bg));
 	}
 
 	protected void createRequest() {
