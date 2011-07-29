@@ -2,7 +2,6 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,9 +31,7 @@ public class StoreTabActivity extends BaseTabActivity {
 		mainIntent = new Intent(this, StoreMainActivity.class);
 		menuIntent = new Intent(this, StoreMenuActivity.class);
 		postIntent = new Intent(this, StorePostListActivity.class);
-		imageIntent = new Intent(this, ImageListActivity.class);
-		imageIntent.putExtra("id", store.getId());
-		imageIntent.putExtra("type", ModelType.STORE);
+		imageIntent = new Intent(this, StoreImageListActivity.class);
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 
 		TabHost tabHost = getTabHost();
