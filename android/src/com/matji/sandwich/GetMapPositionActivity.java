@@ -67,7 +67,7 @@ Requestable {
 		// geocodeRequest = new GeocodeHttpRequest(mContext);
 		centerOverlay = new CenterOverlay(mContext, mMapView);
 		centerOverlay.drawOverlay();
-		mGpsManager.start();
+		mGpsManager.start(1);
 	}
 
 	private String getAddressString(Address addr) {
@@ -90,7 +90,7 @@ Requestable {
 		}
 	}
 
-	public void onLocationChanged(Location location) {
+    public void onLocationChanged(int tag, Location location) {
 		if (prevLocation != null) {
 			if (prevLocation.getAccuracy() <= location.getAccuracy()) {
 				mGpsManager.stop();
@@ -141,12 +141,12 @@ Requestable {
 		e.performExceptionHandling(mContext);
 	}
 
-	public void onLocationExceptionDelivered(MatjiException e) {
+    public void onLocationExceptionDelivered(int tag, MatjiException e) {
 		e.performExceptionHandling(mContext);
 	}
 
 	public void onCurrentLocationClicked(View v) {
-		mGpsManager.start();
+		mGpsManager.start(1);
 	}
 
 	public void onSubmitClicked(View v) {

@@ -5,7 +5,7 @@
   <include layout="@layout/map_title_bar" />
   <FrameLayout
       style="@style/DefaultFill">
-    <com.matji.sandwich.map.MatjiMapView
+    <com.matji.sandwich.map.MainMatjiMapView
 	android:id="@+id/map_view"
 	style="@style/DefaultFill"
 	android:enabled="true"

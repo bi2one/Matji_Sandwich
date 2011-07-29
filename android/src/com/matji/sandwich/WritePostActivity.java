@@ -98,7 +98,7 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 		manager = HttpRequestManager.getInstance(mContext);
 		session = Session.getInstance(this);
 		mGpsManager = new GpsManager(mContext, this);
-		mGpsManager.start();
+		mGpsManager.start(1);
 
 		contentWrapper = (RelativeLayoutThatDetectsSoftKeyboard)findViewById(R.id.contentWrapper);
 		contentWrapper.setListener(this);
@@ -280,7 +280,7 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 		mapView.getController().zoomToSpan(LAT_SPAN, LNG_SPAN);
 	}
 
-	public void onLocationChanged(Location location) {
+    public void onLocationChanged(int tag, Location location) {
 		// TODO Auto-generated method stub
 
 		if (prevLocation != null) {
@@ -294,14 +294,14 @@ public class WritePostActivity extends BaseActivity implements Requestable, Rela
 	}
 
 
-	public void onLocationExceptionDelivered(MatjiException e) {
+    public void onLocationExceptionDelivered(int tag, MatjiException e) {
 		// TODO Auto-generated method stub
 
 	}
 
 
 	public void onGPSButtonClicked(View v){
-		mGpsManager.start();
+		mGpsManager.start(1);
 	}
 	
 	

@@ -67,7 +67,7 @@ public class GpsManager implements LocationListener {
 		if (gpsLoc != null && netLoc != null){
 			if (gpsLoc.getTime() > netLoc.getTime()){
 				lastLoc = gpsLoc;
-			}else {
+			} else {
 				lastLoc = netLoc;
 			}
 		
