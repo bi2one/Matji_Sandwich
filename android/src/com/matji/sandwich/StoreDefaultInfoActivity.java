@@ -8,10 +8,7 @@ import com.matji.sandwich.data.Store;
 
 public class StoreDefaultInfoActivity extends BaseActivity {
 	private Store store;
-	private TextView name;
-	private TextView address;
-	private TextView tel;
-	private TextView website;
+	private TextView defaultInfo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +16,6 @@ public class StoreDefaultInfoActivity extends BaseActivity {
 		setContentView(R.layout.activity_store_default_info);
 
 		store = (Store) SharedMatjiData.getInstance().top();
-		name = (TextView) findViewById(R.id.store_default_info_name);
-		address = (TextView) findViewById(R.id.store_default_info_address);
-		tel = (TextView) findViewById(R.id.store_default_info_phone);
-		website = (TextView) findViewById(R.id.store_default_info_web);
-		
-		name.setText(store.getName());
-		address.setText(store.getAddress());
-		tel.setText(store.getTel());
-		website.setText(store.getWebsite());
+
 	}
 }

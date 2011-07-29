@@ -75,6 +75,8 @@
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">의 맛집기행</string>
   <string name="default_string_intro">소개가 없습니다.</string>
+  <string name="default_string_basic_info">기본정보</string>
+  <string name="default_string_more_info">부가정보</string>
   <string name="default_string_info">정보</string>
   <string name="default_string_popular_food">인기메뉴</string>
   <string name="default_string_not_exist_reg_user">미발굴 맛집</string>

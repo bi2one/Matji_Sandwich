@@ -26,11 +26,11 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class StoreMainActivity extends BaseTabActivity implements Requestable {
@@ -54,7 +54,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	private MatjiImageDownloader downloader;
 	private StorePostListView listView;
 
-	private LayoutInflater inflater;
+	private LinearLayout wrapper;
 	/* request tags */
 	public final static int BOOKMARK_REQUEST = 10;
 	public final static int UN_BOOKMARK_REQUEST = 11;
@@ -90,8 +90,15 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 				R.string.store_main_review,
 				new Intent(this, StoreUrlListActivity.class));
 		
-		//View container = (View) inflater.inflate(R.layout.cell_store_info, null);
-		
+		wrapper= (LinearLayout) findViewById(R.id.cell_store_info_Wrapper);
+		wrapper.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getApplicationContext(), StoreDetailInfoTabActivity.class);
+				intent.putExtra("id", store.getId());
+				startActivity(intent);
+			}
+		});
 		
 		//	/* Set RegUser */
 		//	User regUser = store.getRegUser();

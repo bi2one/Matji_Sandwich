@@ -11,7 +11,7 @@
 
 	<!-- Store Name Cell -->
 	<com.matji.sandwich.widget.cell.StoreCell 
-		style="@style/DefaultWrap" /> 		
+		style="@style/DefaultWrap" />
 	
 	<!-- Seperate Line -->
 	<RelativeLayout 
