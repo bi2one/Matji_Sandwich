@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/cell_store_name_Wrapper"	
 	style="@style/DefaultWidthFill"
-	android:padding="7dp"
+	android:padding="@dimen/default_distance"
 	android:gravity="center_vertical">
 	<ImageButton 
 		style="@style/DefaultWrap"

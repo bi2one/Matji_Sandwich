@@ -237,7 +237,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			postElement.dateAgo = (TextView) convertView.findViewById(R.id.row_post_created_at);
 			postElement.commentCount = (TextView) convertView.findViewById(R.id.row_post_comment_count);
 			postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
-			postElement.menu = (Button) convertView.findViewById(R.id.row_post_menu);
+//			postElement.menu = (Button) convertView.findViewById(R.id.row_post_menu);
 			
 			postElement.previews = new ImageView[imageIds.length];
 
@@ -283,7 +283,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		holder.profile.setOnClickListener(sectionListView);
 		holder.nick.setOnClickListener(sectionListView);
 		holder.storeName.setOnClickListener(sectionListView);
-		holder.menu.setOnClickListener(sectionListView);
+//		holder.menu.setOnClickListener(sectionListView);
 		holder.post.setLinksClickable(false);
 		
 		holder.post.setOnClickListener(new View.OnClickListener() {
@@ -303,7 +303,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		holder.profile.setTag(position+"");
 		holder.nick.setTag(position+"");
 		holder.storeName.setTag(position+"");
-		holder.menu.setTag(position+"");
+//		holder.menu.setTag(position+"");
 		holder.post.setTag(position+"");
 		
 		for (int i = 0; i < holder.previews.length; i++) {
@@ -404,6 +404,6 @@ public class SectionedPostAdapter extends MBaseAdapter {
 		TextView commentCount;
 		TextView likeCount;
 		ImageView[] previews;
-		Button menu;
+//		Button menu;
 	}
 }

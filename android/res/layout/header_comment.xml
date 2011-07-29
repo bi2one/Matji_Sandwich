@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/row_post_wrapper"
+	style="@style/header_comment_Wrapper">
+	<include
+		layout="@layout/profile" />
+	<LinearLayout
+		android:id="@+id/header_comment_post_wrapper"
+		style="@style/header_comment_PostWrapper">
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<TextView
+				android:id="@+id/header_comment_nick"
+				style="@style/LinkifyName" />
+			<TextView
+				android:id="@+id/header_comment_at"
+				style="@style/row_post_At" />
+			<TextView
+				android:id="@+id/header_comment_store_name"
+				style="@style/LinkifyName" />
+		</LinearLayout>
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<TextView
+				android:id="@+id/header_comment_post"
+				style="@style/TalkContent" />
+		</LinearLayout>
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<TextView
+				android:id="@+id/header_comment_tag"
+				style="@style/header_comment_Tags" />
+		</LinearLayout>
+		<LinearLayout
+			android:id="@+id/row_post_previews"
+			style="@style/DefaultWidthFill">
+			<ImageView
+				style="@style/header_comment_Preview"
+				android:id="@+id/header_comment_preview1" />
+			<ImageView
+				style="@style/header_comment_Preview"
+				android:id="@+id/header_comment_preview2" />
+			<ImageView
+				style="@style/header_comment_Preview"
+				android:id="@+id/header_comment_preview3" />
+		</LinearLayout>
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<TextView
+				android:id="@+id/header_comment_created_at"
+				style="@style/header_comment_CreatedAt" />
+			<TextView
+				style="@style/header_comment_Comment" />
+			<TextView
+				android:id="@+id/header_comment_comment_count"
+				style="@style/header_comment_Count" />
+			<Button
+				android:id="@+id/header_comment_like_list"
+				style="@style/header_comment_LikeList" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

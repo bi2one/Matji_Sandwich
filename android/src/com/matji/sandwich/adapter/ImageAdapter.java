@@ -40,7 +40,7 @@ public class ImageAdapter extends MBaseAdapter {
 
 		if (convertView == null) {
 			imageElement = new ImageElement();
-			convertView = getLayoutInflater().inflate(R.layout.adapter_image, null);
+			convertView = getLayoutInflater().inflate(R.layout.row_image, null);
 			this.parent = (ImageListView) parent;
 
 			imageElement.images = new WhiteBorderImageView[imageIds.length];

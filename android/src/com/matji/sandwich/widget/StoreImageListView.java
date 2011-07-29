@@ -14,11 +14,6 @@ public class StoreImageListView extends ImageListView {
 	
 	public StoreImageListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		/* 기본적으로 맛집 이야기 페이지 안에 있는 뷰이므로,
-		 * SharedMatjiData의 top에 해당 Store의 정보가 들어있어야 한다.
-		 */
-		store = (Store) SharedMatjiData.getInstance().top();
-
 	}
 
 	@Override
@@ -27,5 +22,18 @@ public class StoreImageListView extends ImageListView {
 		((AttachFileIdsHttpRequest) request).actionStoreList(store.getId(), getPage(), getLimit() * imageCount);
 		
 		return request;
+	}
+
+	@Override
+	protected void setModelData() {
+		/* 기본적으로 맛집 이야기 페이지 안에 있는 뷰이므로,
+		 * SharedMatjiData의 top에 해당 Store의 정보가 들어있어야 한다.
+		 */
+		store = (Store) SharedMatjiData.getInstance().top();
+	}
+
+	@Override
+	protected String getTotalImageCountText() {
+		return store.getImageCount() + "개의 " + store.getName() + " 사진";
 	}
 }
