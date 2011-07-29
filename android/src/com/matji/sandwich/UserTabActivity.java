@@ -2,7 +2,6 @@ package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.util.ModelType;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,9 +37,7 @@ public class UserTabActivity extends BaseTabActivity {
 		storeListIntent.putExtra("user_id", user.getId());
 		postListIntent = new Intent(this, UserPostListActivity.class);
 		postListIntent.putExtra("user_id", user.getId());
-		imageIntent = new Intent(this, ImageListActivity.class);
-		imageIntent.putExtra("id", user.getId());
-		imageIntent.putExtra("type", ModelType.USER);
+		imageIntent = new Intent(this, UserImageListActivity.class);
 		moreIntent = new Intent(this, StoreMoreActivity.class);
 
 		TabHost tabHost = getTabHost();

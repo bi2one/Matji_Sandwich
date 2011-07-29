@@ -43,7 +43,6 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	private ImageView storeImage;
 	private Button likeButton;
 	private ImageButton scrapButton;
-	private TextView nameText;
 	private TextView telText;
 	private TextView addressText;
 	private TextView tagText;
@@ -74,24 +73,23 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		dbProvider = DBProvider.getInstance(this);
 		downloader = new MatjiImageDownloader(this);
 
-		storeImage = (ImageView) findViewById(R.id.store_main_thumbnail);
-		scrapButton = (ImageButton) findViewById(R.id.store_main_scrap_btn);
-		likeButton = (Button) findViewById(R.id.store_main_like_btn);
-		nameText = (TextView) findViewById(R.id.store_main_name);
-		telText = (TextView) findViewById(R.id.store_main_tel);
-		addressText = (TextView) findViewById(R.id.store_main_address);
-		tagText = (TextView) findViewById(R.id.store_main_tag);
-		foodText = (TextView) findViewById(R.id.store_main_food);
+		storeImage = (ImageView) findViewById(R.id.cell_store_thumbnail);
+		scrapButton = (ImageButton) findViewById(R.id.cell_store_scrap_btn);
+		likeButton = (Button) findViewById(R.id.cell_store_like_btn);
+		telText = (TextView) findViewById(R.id.cell_store_tel);
+		addressText = (TextView) findViewById(R.id.cell_store_address);
+		tagText = (TextView) findViewById(R.id.cell_store_tag);
+		foodText = (TextView) findViewById(R.id.cell_store_food);
 
 		tabHost.addLeftTab("tab1",
 				R.string.store_main_post_list_view,
 				new Intent(this, StorePostListActivity.class));
 		tabHost.addCenterTab("tab2",
 				R.string.store_main_img,
-				new Intent(this, StoreSliderActivity.class));
+				new Intent(this, StoreImageListActivity.class));
 		tabHost.addRightTab("tab3",
 				R.string.store_main_review,
-				new Intent(this, StoreSliderActivity.class));
+				new Intent(this, StoreDetailInfoTabActivity.class));
 
 
 		//	/* Set RegUser */
@@ -136,7 +134,6 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 			storeImage.setImageDrawable(defaultImage);
 		}
 
-		nameText.setText(store.getName());
 		telText.setText(store.getTel());
 		addressText.setText(store.getAddress());
 		tagText.setText(tagListToCSV(store.getTags()));

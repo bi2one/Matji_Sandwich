@@ -10,15 +10,14 @@
 		style="@style/DefaultWrap" />
 
 	<!-- Store Name Cell -->
-	<include 
-		android:id="@+id/store_main_name_cell"
-		layout="@layout/cell_store_name" />
-
+	<com.matji.sandwich.widget.cell.StoreCell 
+		style="@style/DefaultWidthFill" />
+	
 	<!-- Seperate Line -->
 	<RelativeLayout 
 		style="@style/DefaultWidthFill">
 		<ImageView 
-		style="@style/DefaultWidthFill"
+			style="@style/DefaultWidthFill"
 			android:background="@drawable/seperate_line" />
 	</RelativeLayout>
 

@@ -6,7 +6,7 @@
 	android:gravity="center_vertical">
 	<ImageButton 
 		style="@style/DefaultWrap"
-		android:id="@+id/store_main_scrap_btn"
+		android:id="@+id/cell_store_scrap_btn"
 		android:layout_marginRight="7dp"
 		android:src="@drawable/btn_info_d"
 		android:background="#fff"
@@ -14,39 +14,14 @@
 	<TextView
 		style="@style/Name"
 		android:singleLine="true"
-		android:id="@+id/store_main_name"
+		android:id="@+id/cell_store_name"
 		android:maxWidth="@dimen/max_title_width" />
 	<LinearLayout
 		style="@style/DefaultWidthFill"
 		android:gravity="right">
 		<Button
 			style="@style/LikeButton"
-			android:id="@+id/store_main_like_btn"
+			android:id="@+id/cell_store_like_btn"
 			android:onClick="onLikeButtonClicked" />
 	</LinearLayout>
 </LinearLayout>
-<!-- <?xml version="1.0" encoding="utf-8"?> -->
-<!-- <LinearLayout -->
-<!-- xmlns:android="http://schemas.android.com/apk/res/android" -->
-<!-- android:layout_width="wrap_content" -->
-<!-- android:layout_height="wrap_content"> -->
-<!-- <RelativeLayout -->
-<!-- style="@style/DefaultWidthFill" -->
-<!-- android:padding="7dp"> -->
-<!-- <TextView -->
-<!-- style="@style/store_main_Name" -->
-<!-- android:singleLine="true" -->
-<!-- android:id="@+id/store_main_name" /> -->
-<!-- <ImageButton -->
-<!-- style="@style/store_main_InfoButton" -->
-<!-- android:id="@+id/store_main_info_btn" -->
-<!-- android:layout_toRightOf="@id/store_main_name" -->
-<!-- android:layout_toLeftOf="@+id/store_main_like_btn" -->
-<!-- android:layout_alignBottom="@+id/store_main_name" /> -->
-<!-- <Button -->
-<!-- style="@style/store_main_LikeButton" -->
-<!-- android:id="@id/store_main_like_btn" -->
-<!-- android:layout_alignParentRight="true" -->
-<!-- android:onClick="onLikeButtonClicked" /> -->
-<!-- </RelativeLayout> -->
-<!-- </LinearLayout> -->
