@@ -17,31 +17,31 @@
 				android:id="@+id/cell_user_nick"
 				style="@style/DefaultWrap"
 				android:layout_margin="@dimen/default_distance_half"
-				android:textColor="@color/default_theme_main"
+				android:textColor="@color/matji_black"
 				android:textSize="@dimen/text_xxlarge" />
 			<LinearLayout
 				style="@style/DefaultWrap">
 				<TextView
 					style="@style/DefaultWrap"
-					android:textColor="@color/default_theme_key"
+					android:textColor="@color/matji_dark_orange"
 					android:layout_marginRight="@dimen/default_distance"
 					android:text="@string/cell_user_point" />
 				<TextView
 					style="@style/DefaultWrap"
 					android:id="@+id/cell_user_point"
-					android:textColor="@color/default_theme_value" />
+					android:textColor="@color/matji_light_gray" />
 			</LinearLayout>
 			<LinearLayout
 				style="@style/DefaultWrap">
 				<TextView
 					style="@style/DefaultWrap"
 					android:layout_marginRight="@dimen/default_distance"
-					android:textColor="@color/default_theme_key"
+					android:textColor="@color/matji_dark_orange"
 					android:text="@string/cell_user_area" />
 				<TextView
 					style="@style/DefaultWrap"
 					android:id="@+id/cell_user_area"
-					android:textColor="@color/default_theme_value" />
+					android:textColor="@color/matji_light_gray" />
 			</LinearLayout>
 		</LinearLayout>
 		<LinearLayout
@@ -52,7 +52,7 @@
 				android:layout_width="80dp"
 				android:layout_height="wrap_content"
 				android:background="@drawable/btn_white"
-				android:textColor="@color/default_theme_key"
+				android:textColor="@color/matji_dark_orange"
 				android:singleLine="true"
 				android:drawableLeft="@drawable/img_heart"
 				android:layout_marginBottom="@dimen/default_distance"
@@ -67,7 +67,7 @@
 				android:layout_width="80dp"
 				android:layout_height="wrap_content"
 				android:background="@drawable/btn_white"
-				android:textColor="@color/default_theme_key"
+				android:textColor="@color/matji_dark_orange"
 				android:singleLine="true"
 				android:drawableLeft="@drawable/img_heart"
 				android:id="@+id/cell_user_message_list"

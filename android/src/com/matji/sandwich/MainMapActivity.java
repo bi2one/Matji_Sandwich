@@ -12,10 +12,8 @@ import android.view.MotionEvent;
 import android.view.View.OnTouchListener;
 // import android.view.inputmethod.InputMethodManager;
 import android.view.View.OnKeyListener;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.util.Log;
+import android.graphics.drawable.Drawable;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
@@ -38,7 +36,7 @@ import com.matji.sandwich.map.MatjiMapCenterListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.FlipAnimationUtil;
-import com.matji.sandwich.widget.StoreNearListView;
+import com.matji.sandwich.widget.StoreMapNearListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,10 +76,13 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     private HttpRequestManager mRequestManager;
     private Session session;
     private TextView addressView;
-    private StoreNearListView storeListView;
+    private StoreMapNearListView storeListView;
     private View currentView;
     private FlipAnimationUtil animationUtil;
     private View flipButton;
+
+    private Drawable flipMapViewBackground;
+    private Drawable flipNearStoreBackground;
     
     // private InputMethodManager imm;
 
@@ -95,15 +96,18 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	mContext = getApplicationContext();
 	mGpsManager = new GpsManager(mContext, this);
 	addressView = (TextView)findViewById(R.id.map_title_bar_address);
-	storeListView = (StoreNearListView)findViewById(R.id.main_map_store_list);
+	storeListView = (StoreMapNearListView)findViewById(R.id.main_map_store_list);
 	storeListView.setActivity(this);
 	storeListView.requestConditionally();
 	flipButton = findViewById(R.id.map_title_bar_flip_button);
+	flipButton.setClickable(false);
 	currentView = mMapView;
 	mRequestManager = HttpRequestManager.getInstance(mContext);
 	storeItemizedOverlay = new StoreItemizedOverlay(mContext, this, mMapView);
 	session = Session.getInstance(mContext);
 	animationUtil = new FlipAnimationUtil(this, mMapView, storeListView, flipButton);
+	flipMapViewBackground = getResources().getDrawable(R.drawable.map_titlebar_flip_mapview_btn);
+	flipNearStoreBackground = getResources().getDrawable(R.drawable.map_titlebar_flip_btn);
 
 	mGpsManager.start();
     }
@@ -129,6 +133,7 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onLocationChanged(Location location) {
+	// Log.d("=====", "location changed");
 	currentCenterPoint = new GeoPoint((int)(location.getLatitude()*1E6),
 					  (int)(location.getLongitude()*1E6));
 	currentNeBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
@@ -137,9 +142,10 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 	if (prevLocation != null) {
 	    if (prevLocation.getAccuracy() >= location.getAccuracy()) {
 		mGpsManager.stop();
+		// mMapView.requestMapCenterChanged(currentCenterPoint);
 	    }
 	}
-
+    
 	prevLocation = location;
 	setCenter(prevLocation);
     }
@@ -149,19 +155,27 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
     }
 
     public void onMapCenterChanged(GeoPoint point) {
-	currentCenterPoint = point;
-	currentNeBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
-	currentSwBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_SW);
+	// TODO: 이 곳을 호출하는 횟수 줄이기. onLocationChanged로
+	// 인해 처음에 1번 호출해도 될 것을 2번 호출한다.
+	
+	// if (!mGpsManager.isRunning()) {
+	    currentCenterPoint = point;
+	    currentNeBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_NE);
+	    currentSwBound = mMapView.getBound(MatjiMapView.BoundType.MAP_BOUND_SW);
 
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_NE, currentNeBound.getLatitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, currentSwBound.getLatitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, currentNeBound.getLongitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_SW, currentSwBound.getLongitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LATITUDE, point.getLatitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LONGITUDE, point.getLongitudeE6());
+	    session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_NE, currentNeBound.getLatitudeE6());
+	    session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, currentSwBound.getLatitudeE6());
+	    session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, currentNeBound.getLongitudeE6());
+	    session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_SW, currentSwBound.getLongitudeE6());
+	    session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LATITUDE, point.getLatitudeE6());
+	    session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LONGITUDE, point.getLongitudeE6());
+	    storeListView.fillVariables();
+	
+	    flipButton.setClickable(true);
 
-	Runnable runnable = new MapRunnable(this);
-	runOnUiThread(runnable);
+	    Runnable runnable = new MapRunnable(this);
+	    runOnUiThread(runnable);
+	// }
     }
 
     private void drawOverlays() {
@@ -360,14 +374,17 @@ public class MainMapActivity extends BaseMapActivity implements MatjiLocationLis
 
     public void onFlipClicked(View v) {
 	if (currentView == mMapView) {
-	    // mMapView.setVisibility(View.GONE);
-	    // storeListView.setVisibility(View.VISIBLE);
-	    animationUtil.applyFlipRotation();
+	    mMapView.setVisibility(View.GONE);
+	    storeListView.setVisibility(View.VISIBLE);
+	    v.setBackgroundDrawable(flipMapViewBackground);
+	    storeListView.requestReload();
+	    // animationUtil.applyFlipRotation();
 	    currentView = storeListView;
 	} else {
-	    // mMapView.setVisibility(View.VISIBLE);
-	    // storeListView.setVisibility(View.GONE);
-	    animationUtil.applyFlipRotation();
+	    mMapView.setVisibility(View.VISIBLE);
+	    storeListView.setVisibility(View.GONE);
+	    v.setBackgroundDrawable(flipNearStoreBackground);
+	    // animationUtil.applyFlipRotation();
 	    currentView = mMapView;
 	}
     }

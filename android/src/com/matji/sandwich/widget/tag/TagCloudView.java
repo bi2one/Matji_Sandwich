@@ -109,7 +109,6 @@ public class TagCloudView extends FlowLayout {
 		private void init(Tag tag) {
 			String shortTag = getShortTag(tag.getTag().getTag());
 			int length = shortTag.length();
-			Log.d("Matji", tag.getCount()+"");
 			int color = TAG_TEXT_COLOR[getIndex(tag.getCount())];
 			int size = TAG_TEXT_SIZE[getIndex(tag.getCount())];
 
@@ -205,7 +204,7 @@ public class TagCloudView extends FlowLayout {
 		int line = getMeasuredHeight() / LINE_HEIGHT;
 
 		Paint p = new Paint();
-		p.setColor(Color.LTGRAY);
+		p.setColor(getResources().getColor(R.color.matji_light_gray));
 		for (int i = 1; i < line; i++)
 			canvas.drawLine(0, (LINE_HEIGHT+1)*i, getMeasuredWidth(), (LINE_HEIGHT+1)*i, p);
 

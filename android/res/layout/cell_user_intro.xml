@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWidthFill"
+	android:padding="@dimen/default_distance"
+	android:background="@color/WHITE">
+	<TextView
+		style="@style/DefaultFill"
+		android:id="@+id/cell_user_intro"
+		android:textColor="@color/matji_light_gray"
+		android:minLines="2"
+		android:maxLines="2"
+		android:drawablePadding="@dimen/default_distance"
+		android:drawableRight="@drawable/img_moresign" />
+</LinearLayout>

@@ -12,6 +12,7 @@ import com.matji.sandwich.http.request.PostHttpRequest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -31,10 +32,10 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 
 	protected final void commonInitialisation() {
 		setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.pattern_bg));
-		setScrollingCacheEnabled(false);
 		setDivider(null);
 		setFadingEdgeLength(getResources().getDimensionPixelSize(R.dimen.fade_edge_length));
-		setCacheColorHint(getResources().getColor(R.color.fading_edge_color));
+		setCacheColorHint(Color.TRANSPARENT);
+		setSelector(android.R.color.transparent);
 	}
 
 	@Override

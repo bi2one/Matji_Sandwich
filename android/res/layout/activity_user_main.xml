@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/user_talk_wrapper"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:background="@drawable/pattern_bg"
@@ -12,6 +13,17 @@
 
 	<!-- User Cell -->
 	<com.matji.sandwich.widget.cell.UserCell
+		style="@style/DefaultWrap" />
+
+	<!-- Seperate Line -->
+	<RelativeLayout
+		style="@style/DefaultWidthFill">
+		<ImageView
+			style="@style/DefaultWidthFill"
+			android:background="@drawable/seperate_line" />
+	</RelativeLayout>
+		
+	<com.matji.sandwich.widget.cell.UserIntroCell
 		style="@style/DefaultWrap" />
 
 	<!-- Seperate Line -->
@@ -46,25 +58,12 @@
 				android:layout_weight="1" />
 		</LinearLayout>
 	</com.matji.sandwich.widget.RoundTabHost>
-	<!-- <LinearLayout style="@style/user_main_Cell" android:orientation="vertical"> 
-		<LinearLayout style="@style/DefaultWidthFill"> <TextView style="@style/user_main_InfoText" 
-		android:id="@+id/user_main_blog" /> <Button style="@style/user_main_BlogButton" 
-		android:id="@+id/user_main_blog_btn" android:visibility="gone" android:onClick="onBlogButtonClicked" 
-		/> </LinearLayout> <TextView style="@style/user_main_InfoText" android:id="@+id/user_main_owner" 
-		android:visibility="gone" /> </LinearLayout> Detail View ButttonCell <RelativeLayout 
-		style="@style/user_main_Cell"> <Button android:background="@drawable/btn_top_left_corner" 
-		style="@style/ETCButton" android:id="@+id/user_main_follower_btn" android:onClick="onFollowerButtonClicked" 
-		/> <Button android:background="@drawable/btn_top_right_corner" style="@style/ETCButton" 
-		android:id="@+id/user_main_following_btn" android:layout_toRightOf="@id/user_main_follower_btn" 
-		android:onClick="onFollowingButtonClicked" /> <Button android:background="@drawable/btn_rectangle" 
-		style="@style/ETCButton" android:id="@+id/user_main_jjim_store_btn" android:layout_below="@id/user_main_follower_btn" 
-		android:onClick="onJjimStoreButtonClicked" /> <Button android:background="@drawable/btn_rectangle" 
-		style="@style/ETCButton" android:id="@+id/user_main_memo_btn" android:layout_below="@id/user_main_following_btn" 
-		android:layout_toRightOf="@id/user_main_jjim_store_btn" android:onClick="onMemoButtonClicked" 
-		/> <Button android:background="@drawable/btn_bottom_left_corner" style="@style/ETCButton" 
-		android:id="@+id/user_main_tag_btn" android:layout_below="@id/user_main_jjim_store_btn" 
-		android:onClick="onTagButtonClicked" /> <Button android:background="@drawable/btn_bottom_right_corner" 
-		style="@style/ETCButton" android:id="@+id/user_main_image_btn" android:layout_below="@id/user_main_jjim_store_btn" 
-		android:layout_toRightOf="@id/user_main_tag_btn" android:onClick="onImageButtonClicked" 
-		/> </RelativeLayout> -->
+	
+	<!-- Seperate Line -->
+	<RelativeLayout
+		style="@style/DefaultWidthFill">
+		<ImageView
+			style="@style/DefaultWidthFill"
+			android:background="@drawable/seperate_line" />
+	</RelativeLayout>
 </LinearLayout>

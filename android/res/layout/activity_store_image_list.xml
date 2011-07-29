@@ -4,7 +4,7 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:orientation="vertical">
-	<com.matji.sandwich.widget.ImageListView
+	<com.matji.sandwich.widget.StoreImageListView
 		style="@style/DefaultFill"
-		android:id="@+id/image_list_view" />
+		android:id="@+id/store_image_list_view" />
 </LinearLayout>

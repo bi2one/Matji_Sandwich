@@ -12,7 +12,7 @@
 	android:clickable="true"
 	android:focusable="true"
 	android:apiKey="@string/map_api_key" />
-    <com.matji.sandwich.widget.StoreNearListView
+    <com.matji.sandwich.widget.StoreMapNearListView
 	style="@style/DefaultFill"
 	android:id="@+id/main_map_store_list"
 	android:visibility="gone" />
