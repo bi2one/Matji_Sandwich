@@ -8,7 +8,8 @@
 		android:padding="7dp">
 		<ImageView
 			style="@style/cell_store_Thumbnail"
-			android:id="@+id/cell_store_thumbnail" /> 
+			android:id="@+id/cell_store_thumbnail" 
+			android:onClick="onImageClicked"/> 
 		<TextView
 			style="@style/cell_store_Info"
 			android:id="@+id/cell_store_tel"

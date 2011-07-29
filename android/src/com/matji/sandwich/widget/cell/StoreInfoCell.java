@@ -7,25 +7,25 @@ import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.session.Session;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
-public class StoreCell extends RelativeLayout {
+public class StoreInfoCell extends RelativeLayout {
 	private Session session;
 	private Button likeButton;
 	private DBProvider dbProvider;
 	
-	public StoreCell(Context context) {
+	public StoreInfoCell(Context context) {
 		super(context);
-		session = Session.getInstance(context);
-		dbProvider = DBProvider.getInstance(context);
 		init();
 	}
 	
-	public StoreCell(Context context, AttributeSet attr) {
+	public StoreInfoCell(Context context, AttributeSet attr) {
 		super(context, attr);
 		init();
 	}
@@ -33,13 +33,15 @@ public class StoreCell extends RelativeLayout {
 	private void init() {
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		inflater.inflate(R.layout.cell_store_name, this);
+		inflater.inflate(R.layout.cell_store_info, this);
 		
 		Store store = (Store) SharedMatjiData.getInstance().top();
 		
-		((TextView) findViewById(R.id.cell_store_name)).setText(store.getName());
-		((Button) findViewById(R.id.cell_store_like_btn)).setText("1");
-	
+		((TextView) findViewById(R.id.cell_store_tel)).setText(store.getTel());
+		((TextView) findViewById(R.id.cell_store_address)).setText(store.getAddress());
+//		((TextView) findViewById(R.id.cell_store_tag)).setText(tagListToCSV(store.getTags()));
+//		((TextView) findViewById(R.id.cell_store_food)).setText(foodListToCSV(store.getStoreFoods()));
+
 	}
 	
 

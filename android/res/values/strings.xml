@@ -75,12 +75,14 @@
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">의 맛집기행</string>
   <string name="default_string_intro">소개가 없습니다.</string>
+  <string name="default_string_info">정보</string>
   <string name="default_string_popular_food">인기메뉴</string>
   <string name="default_string_not_exist_reg_user">미발굴 맛집</string>
   <string name="default_string_reg_user">발굴자</string>
   <string name="default_string_owner_user">주인장</string>
   <string name="default_string_url">관련 URL</string>
   <string name="default_string_memo">메모</string>
+  <string name="default_string_menu">메뉴</string>
   <string name="default_string_comment">댓글</string>
   <string name="default_string_like">Like</string>
   <string name="default_string_unlike">Unlike</string>
