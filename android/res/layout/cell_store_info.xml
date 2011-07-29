@@ -7,30 +7,34 @@
 		style="@style/DefaultWidthFill"
 		android:padding="7dp">
 		<ImageView
-			style="@style/store_main_Thumbnail"
-			android:id="@+id/store_main_thumbnail" />
+			style="@style/cell_store_Thumbnail"
+			android:id="@+id/cell_store_thumbnail" /> 
 		<TextView
-			style="@style/store_main_Info"
-			android:id="@+id/store_main_tel"
-			android:layout_toRightOf="@id/store_main_thumbnail" />
+			style="@style/cell_store_Info"
+			android:id="@+id/cell_store_tel"
+			android:maxWidth="@dimen/max_title_width"	
+			android:layout_toRightOf="@id/cell_store_thumbnail" />
 		<TextView
-			style="@style/store_main_Info"
-			android:id="@+id/store_main_address"
-			android:layout_below="@id/store_main_tel"
-			android:layout_toRightOf="@id/store_main_thumbnail"
-			android:layout_alignLeft="@id/store_main_tel" />
+			style="@style/cell_store_Info"
+			android:id="@+id/cell_store_address"
+			android:maxWidth="@dimen/max_title_width"
+			android:layout_below="@id/cell_store_tel"
+			android:layout_toRightOf="@id/cell_store_thumbnail"
+			android:layout_alignLeft="@id/cell_store_tel" />
 		<TextView
-			style="@style/store_main_Info"
-			android:id="@+id/store_main_tag"
-			android:layout_below="@id/store_main_address"
-			android:layout_toRightOf="@id/store_main_thumbnail"
-			android:layout_alignLeft="@id/store_main_tel" />
+			style="@style/cell_store_Info"
+			android:id="@+id/cell_store_tag"
+			android:maxWidth="@dimen/max_title_width"	
+			android:layout_below="@id/cell_store_address"
+			android:layout_toRightOf="@id/cell_store_thumbnail"
+			android:layout_alignLeft="@id/cell_store_tel" />
 		<TextView
-			style="@style/store_main_Info"
-			android:id="@+id/store_main_food"
-			android:layout_below="@id/store_main_tag"
-			android:layout_toRightOf="@id/store_main_thumbnail"
-			android:layout_alignLeft="@id/store_main_tel" />
+			style="@style/cell_store_Info"
+			android:id="@+id/cell_store_food"
+			android:maxWidth="@dimen/max_title_width"	
+			android:layout_below="@id/cell_store_tag"
+			android:layout_toRightOf="@id/cell_store_thumbnail"
+			android:layout_alignLeft="@id/cell_store_tel" />
 		<ImageView
 			style="@style/DefaultWrap"
 			android:background="@drawable/img_moresign"

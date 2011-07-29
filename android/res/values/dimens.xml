@@ -8,7 +8,7 @@
 	<dimen name="title_container_height">37dp</dimen>
 	
 	<!-- Store Cell -->
-	<dimen name="max_title_width">170dp</dimen>
+	<dimen name="max_title_width">190dp</dimen>
 	
 	<!-- User Profile -->
 	<dimen name="profile_size">50dp</dimen>
