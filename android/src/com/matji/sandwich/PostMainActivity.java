@@ -42,6 +42,11 @@ public class PostMainActivity extends BaseActivity implements Requestable {
 	private CommentListView commentListView;
 //	private Button likeButton;
 
+	private int[] imageIds = {
+			R.id.row_post_preview1,
+			R.id.row_post_preview2,
+			R.id.row_post_preview3
+	};
 	private int position;
 
 	public static final int POST_ID_IS_NULL = -1;

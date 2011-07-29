@@ -11,6 +11,7 @@
 	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/default_distance_half"
 		android:orientation="vertical">
 		<LinearLayout
 			style="@style/DefaultWrap">
@@ -19,20 +20,21 @@
 				style="@style/LinkifyName" />
 			<TextView
 				android:id="@+id/row_comment_created_at"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="@color/CHOCOLATE" />
-		</LinearLayout>
-		<LinearLayout
-			style="@style/DefaultWrap">
-			<TextView
-				android:id="@+id/row_comment_comment"
-				style="@style/TalkContent" />
-			<Button 
-				android:id="@+id/row_post_menu"
 				style="@style/DefaultWrap"
-				android:background="@drawable/icon_tab_private"
-				android:layout_alignParentRight="true" /> 
+				android:layout_marginLeft="@dimen/default_distance_half"
+				android:textSize="@dimen/text_small"
+				android:textColor="@color/matji_chocolate" />
 		</LinearLayout>
+<!-- 		<LinearLayout -->
+<!-- 			style="@style/DefaultWrap"> -->
+		<TextView
+			android:id="@+id/row_comment_comment"
+			style="@style/TalkContent" />
+<!-- 			<Button  -->
+<!-- 				android:id="@+id/row_post_menu" -->
+<!-- 				style="@style/DefaultWrap" -->
+<!-- 				android:background="@drawable/icon_tab_private" -->
+<!-- 				android:layout_alignParentRight="true" />  -->
+<!-- 		</LinearLayout> -->
 	</LinearLayout>
 </LinearLayout>

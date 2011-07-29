@@ -230,4 +230,20 @@
   
   <!-- map_title_bar.xml -->
   <string name="change_location">위치변경</string>
+  
+  
+  <!-- TimeUtil -->
+  <string name="about">약</string>
+  <string name="year_ago">년 전</string>
+  <string name="years_ago">년 전</string>
+  <string name="month_ago">달 전</string>
+  <string name="months_ago">달 전</string>
+  <string name="week_ago">주 전</string>
+  <string name="weeks_ago">주 전</string>
+  <string name="day_ago">일 전</string>
+  <string name="days_ago">일 전</string>
+  <string name="hour_ago">시간 전</string>
+  <string name="hours_ago">시간 전</string>
+  <string name="min_ago">분 전</string>
+  <string name="sec_ago">초 전</string>
 </resources>

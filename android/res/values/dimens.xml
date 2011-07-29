@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- everywhere used dimens -->
-	<dimen name="default_distance">6dp</dimen>
-	<dimen name="default_distance_half">3dp</dimen>
+	<dimen name="default_distance">10dp</dimen>
+	<dimen name="default_distance_half">5dp</dimen>
 	
 	<!-- Title Container -->
 	<dimen name="title_container_height">37dp</dimen>

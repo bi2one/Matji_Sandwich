@@ -18,10 +18,6 @@ public class UserImageListView extends ImageListView {
 	
 	public UserImageListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		/* 기본적으로 유저 이야기 페이지 안에 있는 뷰이므로,
-		 * SharedMatjiData의 top에 해당 User의 정보가 들어있어야 한다.
-		 */
-		user = (User) SharedMatjiData.getInstance().top();
 	}
 
 	@Override
@@ -30,5 +26,18 @@ public class UserImageListView extends ImageListView {
 		((AttachFileIdsHttpRequest) request).actionUserList(user.getId(), getPage(), getLimit() * imageCount);
 		
 		return request;
+	}
+
+	@Override
+	protected void setModelData() {
+		/* 기본적으로 유저 이야기 페이지 안에 있는 뷰이므로,
+		 * SharedMatjiData의 top에 해당 User의 정보가 들어있어야 한다.
+		 */
+		user = (User) SharedMatjiData.getInstance().top();
+	}
+	
+	@Override
+	protected String getTotalImageCountText() {
+		return user.getImageCount() + "개의 " + user.getNick() + " 사진";
 	}
 }

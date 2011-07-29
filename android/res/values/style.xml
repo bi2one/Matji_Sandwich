@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+  <!-- activity_store_main.xml -->
   <style name="DefaultWrap">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
@@ -35,6 +38,7 @@
   
   <style name="DefaultRelativeFill" parent="DefaultFill">
   	<item name="android:padding">7dp</item>
+<<<<<<< HEAD
   </style>  
 
   <!-- Cell -->  
@@ -101,10 +105,10 @@
   </style>
   
   
+=======
+  </style> 
+>>>>>>> 956810716ede2d99766039df9b50e986a0f350dd
   
-  
-  
-  <!-- everywhere used style -->
   <style name="SubTitle" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_chocolate</item>
   	<item name="android:textSize">@dimen/text_large</item>
@@ -175,7 +179,6 @@
   	<item name="android:textColor">@color/BLACK</item>
   </style>
   
-  <!-- activity_store_main.xml -->
   <style name="store_main_Cell" parent="Cell">
   	<item name="android:layout_weight">1</item>
   </style>
@@ -234,12 +237,122 @@
   	<item name="android:textSize">16dp</item>
   </style>
   
-  <!-- header_post.xml -->
-  <style name="header_post_Preview" parent="DefaultWrap">
+  
+  
+  
+
+  <!-- Cell -->  
+  <style name="Cell" parent="DefaultWidthFill">
+  	<item name="android:padding">7dp</item>
+  </style>
+  
+  <style name="UserCell" parent="Cell">
+  	<item name="android:background">@color/cell_user_bg</item>
+  </style>
+  
+  <style name="LikeButton" parent="DefaultWrap">
+  	<item name="android:background">@drawable/like_btn</item>
+	<item name="android:gravity">right|center_vertical</item>
+	<item name="android:paddingRight">15dp</item>
+  	<item name="android:textSize">15dp</item>
+  	<item name="android:textColor">#f00</item>
+	<item name="android:textStyle">bold</item>
+  </style>
+  
+
+  <style name="cell_user_Profile">
+  	<item name="android:background">@drawable/img_profile_bg</item>
+	<item name="android:layout_width">60dp</item>
+	<item name="android:layout_height">60dp</item>
+	<item name="android:layout_marginRight">7dp</item>
+	<item name="android:layout_marginBottom">7dp</item>
+	<item name="android:scaleType">centerCrop</item>
+  </style>
+
+  <style name="cell_user_Name" parent="Name">
+  	<item name="android:layout_width">130dp</item>
+  </style>
+  
+  
+  <style name="cell_user_Mileage" parent="DefaultWrap">
+  	<item name="android:textSize">11dp</item>
+  </style>
+  
+  <style name="cell_user_Grade" parent="cell_user_Mileage">
+  	<item name="android:drawablePadding">3dp</item>
+  	<item name="android:textColor">@color/SKYBLUE</item>
+  </style>
+  
+  <style name="cell_user_PointText" parent="cell_user_Mileage">
+    <item name="android:layout_marginLeft">10dp</item>
+  </style>
+  
+  <style name="cell_user_Point" parent="cell_user_Mileage">
+  	<item name="android:textColor">@color/matji_dark_orange</item>
+  </style>
+  
+  <style name="cell_user_Title" parent="DefaultWrap">
+  	<item name="android:textSize">18dp</item>
+  	<item name="android:textStyle">bold</item>
+  	<item name="android:textColor">#333333</item>
+  </style>
+    
+  <style name="cell_user_FollowButton">
+   	<item name="android:background">@drawable/follow_btn</item>
+   	<item name="android:layout_width">67dp</item>
+  	<item name="android:layout_height">28dp</item>
+  	<item name="android:layout_marginTop">5dp</item>
+  </style>
+  
+  
+  
+  
+  
+  <!-- header_comment.xml -->
+  <style name="header_comment_Preview" parent="DefaultWrap">
   	<item name="android:background">@drawable/img_border</item>
   	<item name="android:adjustViewBounds">true</item>
-  	<item name="android:padding">3dp</item>
+  	<item name="android:padding">@dimen/default_distance_half</item>
   	<item name="android:visibility">gone</item>
+  </style>
+  
+  <style name="header_comment_Wrapper" parent="DefaultWidthFill">
+  	<item name="android:padding">@dimen/default_distance</item>
+  	<item name="android:background">@drawable/comment_post_bg</item>
+  </style>
+  
+  <style name="header_comment_PostWrapper" parent="DefaultWidthFill">
+  	<item name="android:orientation">vertical</item>
+  	<item name="android:layout_marginLeft">@dimen/default_distance</item>
+  </style>
+
+  <style name="header_comment_At" parent="DefaultWrap">
+  	<item name="android:textColor">@color/matji_light_gray</item>  
+  	<item name="android:text">@string/at</item>  
+  </style>
+  
+  <style name="header_comment_Tags" parent="SmallGrayText">
+   	<item name="android:drawableLeft">@drawable/img_tag</item>
+  	<item name="android:drawablePadding">@dimen/default_distance_half</item>
+  </style>
+  
+  <style name="header_comment_CreatedAt" parent="SmallGrayText">
+    <item name="android:paddingRight">@dimen/default_distance</item>
+  </style>
+
+  <style name="header_comment_Comment" parent="SmallDarkOrangeText">
+    <item name="android:text">@string/default_string_comment</item>
+  </style>
+  
+  <style name="header_comment_Count" parent="SmallGrayText">
+  	<item name="android:paddingLeft">@dimen/default_distance</item>
+  	<item name="android:paddingRight">@dimen/default_distance</item>
+  </style>
+  
+  <style name="header_comment_LikeList" parent="SmallDarkOrangeText">
+  	<item name="android:background">@drawable/selector</item>
+   	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
+  	<item name="android:drawablePadding">@dimen/default_distance_half</item>
   </style>
 
   <!-- activity_user_main.xml -->
@@ -464,6 +577,13 @@
    	<item name="android:drawableLeft">@drawable/img_tag</item>
   	<item name="android:drawablePadding">@dimen/default_distance_half</item>
   </style>
+
+  <style name="row_post_Preview" parent="DefaultWrap">
+  	<item name="android:background">@drawable/img_border</item>
+  	<item name="android:adjustViewBounds">true</item>
+  	<item name="android:padding">@dimen/default_distance_half</item>
+  	<item name="android:visibility">gone</item>
+  </style>
   
   <style name="row_post_CreatedAt" parent="SmallGrayText">
     <item name="android:paddingRight">@dimen/default_distance</item>
@@ -480,6 +600,7 @@
   
   <style name="row_post_Like" parent="SmallDarkOrangeText">
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
+   	<item name="android:drawablePadding">@dimen/default_distance_half</item>
   </style>
 
   <!-- map_title_bar.xml -->

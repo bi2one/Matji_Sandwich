@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+import com.matji.sandwich.R;
+
 public class TimeUtil {
 	final static String timezone = "UTC";	
 	static int timeOffset = 0;
@@ -47,52 +49,54 @@ public class TimeUtil {
 	public static String getAgoFromSecond(long second) {
 		long x = 0;		
 		String timestampText;
-		String year = "year ago";
-		String years = "years ago";
-		String month = "month ago";
-		String months = "months ago";
-		String week = "week ago";
-		String weeks = "weeks ago";
-		String day = "day ago";
-		String days = "days ago";
-		String hour = "hour ago";
-		String hours = "hours ago";
-		String min = "min ago";
-		String sec = "sec ago";
+		// year 랑 year 의 차이는????????
+		String year = MatjiConstants.string(R.string.year_ago);
+		String years = MatjiConstants.string(R.string.years_ago);
+		String month = MatjiConstants.string(R.string.month_ago);
+		String months = MatjiConstants.string(R.string.months_ago);
+		String week = MatjiConstants.string(R.string.week_ago);
+		String weeks = MatjiConstants.string(R.string.weeks_ago);
+		String day = MatjiConstants.string(R.string.day_ago);
+		String days = MatjiConstants.string(R.string.days_ago);
+		String hour = MatjiConstants.string(R.string.hour_ago);
+		String hours = MatjiConstants.string(R.string.hours_ago);
+		String min = MatjiConstants.string(R.string.min_ago);
+		String sec = MatjiConstants.string(R.string.sec_ago);
+		String about = MatjiConstants.string(R.string.about);
 
 		if ((x = second / 31104000) > 0) { // year
 			if (x == 1) {
 				timestampText = x + " " + year; // singular
 			} else {
-				timestampText = x + " " + years;	// plural
+				timestampText = about + " " + x + " " + years;	// plural
 			}
 		} else {
 			if ((x = second / 2592000) > 0) { // month
 				if (x == 1) {
 					timestampText = x+ " " + month; // singular
 				} else {
-					timestampText = x+ " " + months; // plural
+					timestampText = about + " " + x+ " " + months; // plural
 				}
 			} else {
 				if ((x = second / 604800) > 0) { // week
 					if (x == 1) {
 						timestampText = x+ " " + week; // singular
 					} else {
-						timestampText = x+ " " + weeks; // plural
+						timestampText = about + " " + x+ " " + weeks; // plural
 					}
 				} else {
 					if ((x = second / 86400) > 0) { // day
 						if (x == 1) {
 							timestampText = x+ " " + day; // singular
 						} else {
-							timestampText = x+ " " + days; // plural
+							timestampText = about + " " + x+ " " + days; // plural
 						}
 					} else {
 						if ((x = second / 3600) > 0) { // hour
 							if (x == 1) {
 								timestampText = x+ " " + hour; // singular
 							} else {
-								timestampText = x+ " " + hours; // plural
+								timestampText = about + " " + x+ " " + hours; // plural
 							}
 						} else {
 							if ((x = second / 60) > 0) { // min
