@@ -126,7 +126,7 @@ public class Store extends MatjiData implements Serializable {
 		this.website = website;
 	}
 	public String getWebsite() {
-		return website.trim();
+		return website;
 	}
 	public void setText(String text) {
 		this.text = text;
@@ -150,7 +150,7 @@ public class Store extends MatjiData implements Serializable {
 		this.cover = cover;
 	}
 	public String getCover() {
-		return cover.trim();
+		return cover;
 	}
 	public void setId(int id) {
 		this.id = id;

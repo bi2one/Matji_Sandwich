@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.matji.sandwich.widget.MatjiScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="@drawable/pattern_bg"		
+	style="@style/DefaultFill">
+	<LinearLayout
+		style="@style/DefaultLinearFill"
+		android:padding="@dimen/default_distance">
+		<TextView
+			android:id="@+id/store_tag_count"
+			android:layout_margin="@dimen/default_distance"
+			style="@style/SubTitle" />
+		<com.matji.sandwich.widget.tag.TagCloudView
+			android:id="@+id/store_tag_cloud"
+			style="@style/DefaultFill" />
+	</LinearLayout>
+</com.matji.sandwich.widget.MatjiScrollView>

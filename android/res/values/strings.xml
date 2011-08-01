@@ -166,7 +166,8 @@
   <string name="store_main_post_list_view">이야기</string>
   <string name="store_main_img">사진</string>
   <string name="store_main_review">웹리뷰</string>
-    
+
+  
   <!-- UserMainActivity -->
   <string name="user_main_following_you">follows you.</string>
   <string name="user_main_follower">follower</string>
@@ -184,7 +185,10 @@
   <!-- StoreDetailInfoTabActivity  -->
   <string name="store_detail_info_default">맛집 기본 정보</string>
   <string name="store_detail_info_note">맛집 노트</string>
-
+  <string name="request">정보 등록/수정 요청</string>
+  <string name="registered_menu">등록된 메뉴</string>
+  <string name="uncertain_menu">불확실한 메뉴</string>
+  
   <!-- StoreSliderActivity -->
   <string name="all_store">전체 맛집</string>
   <string name="near_store">주변 맛집</string>

@@ -61,6 +61,7 @@
 		<activity android:name="UserImageListActivity"></activity>
 		<activity android:name="UserPostListActivity"></activity>
 		<activity android:name="UserTagActivity"></activity>
+		<activity android:name="StoreTagActivity"></activity>
 		<activity android:name="FollowingActivity" 
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="TagListActivity" 

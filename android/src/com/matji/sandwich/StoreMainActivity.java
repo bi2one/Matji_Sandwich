@@ -95,7 +95,6 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(getApplicationContext(), StoreDetailInfoTabActivity.class);
-				intent.putExtra("id", store.getId());
 				startActivity(intent);
 			}
 		});

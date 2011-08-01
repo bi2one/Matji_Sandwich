@@ -107,7 +107,10 @@ public class TagCloudView extends FlowLayout {
 		 * @param tag 이 View 에서 보여 줄 Tag class
 		 */
 		private void init(Tag tag) {
-			String shortTag = getShortTag(tag.getTag().getTag());
+			String shortTag = "";
+			if (tag.getTag() != null)
+				shortTag = getShortTag(tag.getTag().getTag());
+			
 			int length = shortTag.length();
 			int color = TAG_TEXT_COLOR[getIndex(tag.getCount())];
 			int size = TAG_TEXT_SIZE[getIndex(tag.getCount())];
