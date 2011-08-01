@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.matji.sandwich.widget.StoreBookmarkedListView;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.SessionIndex;
 
 public class StoreSliderActivity extends SliderActivity {
 	private int[] viewIds = {
@@ -32,7 +33,7 @@ public class StoreSliderActivity extends SliderActivity {
 	
 	@Override
 	protected String getSliderIndex() {
-		return Session.STORE_SLIDER_INDEX;
+		return SessionIndex.STORE_SLIDER_INDEX;
 	}
 	
 	@Override

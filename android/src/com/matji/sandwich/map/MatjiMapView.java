@@ -2,6 +2,7 @@ package com.matji.sandwich.map;
 
 import com.google.android.maps.MapView;
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapController;
 
 import android.os.AsyncTask;
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+
+import com.matji.sandwich.session.SessionMapUtil;
 
 public class MatjiMapView extends MapView implements OnTouchListener {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
@@ -21,17 +24,22 @@ public class MatjiMapView extends MapView implements OnTouchListener {
     private GeoPoint mapCenter;
     private GeoPoint newMapCenter;
     private GeoPoint tempMapCenter;
+    private SessionMapUtil sessionUtil;
+    private MapController mapController;
+	
     public static enum BoundType {
 	MAP_BOUND_NE, MAP_BOUND_SW, MAP_BOUND_SE, MAP_BOUND_NW
     }
 
     public MatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	// mapCenter = getMapCenter();
 	setOnTouchListener(this);
+	sessionUtil = new SessionMapUtil(context);
+	mapController = getController();
     }
 
     public void startMapCenterThread() {
+	notifySessionChanged();
 	if (asyncTask == null) {
 	    asyncTask = new MapAsyncTask();
 	    asyncTask.execute(0);
@@ -47,7 +55,11 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 	    return result;
 	}
     }
-				 
+
+    public void notifySessionChanged() {
+	mapController.setCenter(sessionUtil.getCenter());
+    }
+
     public void stopMapCenterThread() {
 	if (asyncTask != null) {
 	    if (!asyncTask.isCancelled()) {

@@ -142,11 +142,15 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 								    POPUP_OVERLAY_OFFSET_Y,
 								    MapView.LayoutParams.BOTTOM|MapView.LayoutParams.LEFT);
 	layoutParam.mode = MapView.LayoutParams.MODE_MAP;
+	
+	Store popupStore = lastPopupItem.getStore();
 	TextView title = (TextView)popupOverlay.findViewById(R.id.popup_item_title);
-	TextView snippet = (TextView)popupOverlay.findViewById(R.id.popup_item_snippet);
+	TextView likeCount = (TextView)popupOverlay.findViewById(R.id.popup_item_like_count);
+	TextView postCount = (TextView)popupOverlay.findViewById(R.id.popup_item_post_count);
 	
 	title.setText(lastPopupItem.getTitle());
-	snippet.setText(lastPopupItem.getSnippet());
+	likeCount.setText("" + popupStore.getLikeCount());
+	postCount.setText("" + popupStore.getPostCount());
 	
 	popupOverlay.setOnClickListener(new OnClickListener() {
 		public void onClick(View v) {
@@ -237,11 +241,11 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 	    this.store = store;
 	}
 
-	protected int getCount() {
+	public int getCount() {
 	    return count;
 	}
 
-	protected Store getStore() {
+	public Store getStore() {
 	    return store;
 	}
 

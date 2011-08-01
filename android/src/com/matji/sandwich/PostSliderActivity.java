@@ -4,6 +4,7 @@ import android.view.View;
 import android.content.Intent;
 
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.SessionIndex;
 import com.matji.sandwich.widget.PostListView;
 import com.matji.sandwich.widget.MyPostListView;
 
@@ -62,7 +63,7 @@ public class PostSliderActivity extends SliderActivity {
 	
 	@Override
 	protected String getSliderIndex() {
-		return Session.POST_SLIDER_INDEX;
+		return SessionIndex.POST_SLIDER_INDEX;
 	}
 
 

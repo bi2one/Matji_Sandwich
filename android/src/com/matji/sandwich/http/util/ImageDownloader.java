@@ -146,11 +146,9 @@ public class ImageDownloader {
 				imageView.setMinimumHeight(156);
 				BitmapDownloaderTask task = new BitmapDownloaderTask(imageView);
 				task.execute(url);
-
 				break;
 
 			case CORRECT:
-				
 				task = new BitmapDownloaderTask(imageView);
 				DownloadedDrawable downloadedDrawable = new DownloadedDrawable(task);
 				imageView.setImageDrawable(downloadedDrawable);

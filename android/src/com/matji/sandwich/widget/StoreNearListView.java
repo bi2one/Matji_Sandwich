@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.SessionIndex;
 
 public class StoreNearListView extends StoreListView {
     private StoreHttpRequest storeRequest;
@@ -25,10 +26,10 @@ public class StoreNearListView extends StoreListView {
 	storeRequest = new StoreHttpRequest(context);
 	session = Session.getInstance(context);
 
-	latSW = session.getPreferenceProvider().getInt(Session.MAP_BOUND_LATITUDE_SW, BASIC_LATITUDE_SW);
-	latNE = session.getPreferenceProvider().getInt(Session.MAP_BOUND_LATITUDE_NE, BASIC_LATITUDE_NE);
-	lngSW = session.getPreferenceProvider().getInt(Session.MAP_BOUND_LONGITUDE_SW, BASIC_LONGITUDE_SW);
-	lngNE = session.getPreferenceProvider().getInt(Session.MAP_BOUND_LONGITUDE_NE, BASIC_LONGITUDE_NE);
+	latSW = session.getPreferenceProvider().getInt(SessionIndex.MAP_BOUND_LATITUDE_SW, BASIC_LATITUDE_SW);
+	latNE = session.getPreferenceProvider().getInt(SessionIndex.MAP_BOUND_LATITUDE_NE, BASIC_LATITUDE_NE);
+	lngSW = session.getPreferenceProvider().getInt(SessionIndex.MAP_BOUND_LONGITUDE_SW, BASIC_LONGITUDE_SW);
+	lngNE = session.getPreferenceProvider().getInt(SessionIndex.MAP_BOUND_LONGITUDE_NE, BASIC_LONGITUDE_NE);
     }
 
     public HttpRequest request() {
