@@ -19,7 +19,7 @@ import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.CoordinateRegion;
-import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
@@ -35,11 +35,9 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 							      MatjiLocationListener,
 							      Requestable,
 							      OnTouchListener {
-    private static final GeocodeHttpRequest.Country country = GeocodeHttpRequest.Country.KOREA;
+    private static final GeocodeHttpRequest.Country COUNTRY = GeocodeHttpRequest.Country.KOREA;
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
-    private static final int LAT_HALVE_SPAN = LAT_SPAN / 2;
-    private static final int LNG_HALVE_SPAN = LNG_SPAN / 2;
     private static final int MAX_STORE_COUNT = 60;
     private static final int GPS_START_TAG = 1;
     private static final int NEARBY_STORE = 1;
@@ -50,7 +48,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     private BaseMapActivity activity;
     private HttpRequestManager requestManager;
     private StoreItemizedOverlay storeItemizedOverlay;
-    private Session session;
+    private SessionMapUtil sessionUtil;
     private ArrayList<MatjiData> stores;
     private GpsManager gpsManager;
     private Location prevLocation;
@@ -70,7 +68,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	storeItemizedOverlay = new StoreItemizedOverlay(context, activity, this);
 	mapController = getController();
 	requestManager = HttpRequestManager.getInstance(context);
-	session = Session.getInstance(context);
+	sessionUtil = new SessionMapUtil(context);
 	gpsManager = new GpsManager(context, this);
 
 	mapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
@@ -86,9 +84,9 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     }
 
     public void onMapCenterChanged(GeoPoint point) {
-	setBoundToSession(getBound(BoundType.MAP_BOUND_NE),
-			  getBound(BoundType.MAP_BOUND_SW));
-	setCenterToSession(point);
+	sessionUtil.setBound(getBound(BoundType.MAP_BOUND_NE),
+			     getBound(BoundType.MAP_BOUND_SW));
+	sessionUtil.setCenter(point);
 
 	Runnable runnable = new MapRunnable(this);
 	activity.runOnUiThread(runnable);
@@ -103,8 +101,8 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	    break;
 	case GEOCODE:
 	    GeocodeAddress geocodeAddress = GeocodeUtil.approximateAddress(data,
-									   getBound(BoundType.MAP_BOUND_NE),
-									   getBound(BoundType.MAP_BOUND_SW));
+									   sessionUtil.getNEBound(),
+									   sessionUtil.getSWBound());
 	    addressView.setText(geocodeAddress.getShortenFormattedAddress());
 	}
     }
@@ -117,7 +115,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	}
 
 	prevLocation = location;
-	setNearBoundToSession(location);
+	sessionUtil.setNearBound(new LocationToGeoPointAdapter(location));
 	setCenter(location);
     }
 
@@ -154,29 +152,6 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	postInvalidate();
     }
 
-    private void setNearBoundToSession(Location centerLocation) {
-	GeoPoint centerPoint = new LocationToGeoPointAdapter(centerLocation);
-	int centerLat = centerPoint.getLatitudeE6();
-	int centerLng = centerPoint.getLongitudeE6();
-	GeoPoint neBound = new GeoPoint(centerLat + LAT_HALVE_SPAN,
-					centerLng + LNG_HALVE_SPAN);
-	GeoPoint swBound = new GeoPoint(centerLat - LAT_HALVE_SPAN,
-					centerLng - LNG_HALVE_SPAN);
-	setBoundToSession(neBound, swBound);
-    }
-
-    private void setBoundToSession(GeoPoint neBound, GeoPoint swBound) {
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_NE, neBound.getLatitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LATITUDE_SW, swBound.getLatitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_NE, neBound.getLongitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_LONGITUDE_SW, swBound.getLongitudeE6());
-    }
-
-    private void setCenterToSession(GeoPoint centerPoint) {
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LATITUDE, centerPoint.getLatitudeE6());
-	session.getPreferenceProvider().setInt(Session.MAP_BOUND_CENTER_LONGITUDE, centerPoint.getLongitudeE6());
-    }
-
     private void setAddressView(TextView addressView) {
 	this.addressView = addressView;
     }
@@ -210,7 +185,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	    double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
 
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
-	    geocodeRequest.actionReverseGeocodingByGeoPoint(getMapCenter(), country);
+	    geocodeRequest.actionReverseGeocodingByGeoPoint(getMapCenter(), COUNTRY);
 	    requestManager.request(activity, request, NEARBY_STORE, requestable);
 	    requestManager.request(activity, geocodeRequest, GEOCODE, requestable);
 	}

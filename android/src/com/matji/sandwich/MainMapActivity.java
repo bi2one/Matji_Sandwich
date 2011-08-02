@@ -33,7 +33,7 @@ public class MainMapActivity extends BaseMapActivity {
 	mapView = (MainMatjiMapView)findViewById(R.id.map_view);
 	mapView.init(addressView, this);
 	storeListView = (StoreMapNearListView)findViewById(R.id.main_map_store_list);
-	storeListView.setActivity(this);
+	storeListView.init(addressView, this);
 	
 	flipButton = findViewById(R.id.map_title_bar_flip_button);
 	
@@ -52,19 +52,33 @@ public class MainMapActivity extends BaseMapActivity {
     }
 
     public void onCurrentPositionClicked(View v) {
-	mapView.moveToGpsCenter();
-	storeListView.moveToGpsCenter();
+	if (currentViewIsMap) {
+	    mapView.moveToGpsCenter();
+	} else {
+	    storeListView.moveToGpsCenter();
+	}
     }
 
     public void onFlipClicked(View v) {
 	if (currentViewIsMap) {
-	    storeListView.requestReload();
-	    mapView.setVisibility(View.GONE);
-	    storeListView.setVisibility(View.VISIBLE);
+	    showStoreListView();
 	} else {
-	    mapView.setVisibility(View.VISIBLE);
-	    storeListView.setVisibility(View.GONE);
+	    showMapView();
 	}
 	currentViewIsMap = !currentViewIsMap;
+    }
+
+    private void showMapView() {
+	flipButton.setBackgroundDrawable(flipNearStoreBackground);
+	mapView.setVisibility(View.VISIBLE);
+	storeListView.setVisibility(View.GONE);
+	mapView.notifySessionChanged();
+    }
+
+    private void showStoreListView() {
+	flipButton.setBackgroundDrawable(flipNearStoreBackground);
+	storeListView.requestReload();
+	mapView.setVisibility(View.GONE);
+	storeListView.setVisibility(View.VISIBLE);
     }
 }

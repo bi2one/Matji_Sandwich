@@ -37,9 +37,9 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 				R.string.default_string_info, defaultInfoIntent);
 		tabHost.addCenterTab("tab2", 
 				R.string.default_string_tag, 
-				new Intent(this, StoreSliderActivity.class));
+				new Intent(this, StoreTagActivity.class));
 		tabHost.addRightTab("tab3", 
 				R.string.default_string_menu, 
-				new Intent(this, StoreSliderActivity.class));
+				new Intent(this, StoreMenuActivity.class));
 	}
 }

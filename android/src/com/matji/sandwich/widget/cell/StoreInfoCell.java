@@ -2,22 +2,14 @@ package com.matji.sandwich.widget.cell;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.provider.DBProvider;
-import com.matji.sandwich.session.Session;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Button;
 
 public class StoreInfoCell extends RelativeLayout {
-	private Session session;
-	private Button likeButton;
-	private DBProvider dbProvider;
 	private Store store;
 	
 	public StoreInfoCell(Context context) {
