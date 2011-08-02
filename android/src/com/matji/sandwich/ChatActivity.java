@@ -28,13 +28,15 @@ public class ChatActivity extends BaseActivity implements Requestable {
 	private ChatView listView;
 
 	private final int MESSAGE_NEW = 10;
+	
+	public static final String MESSAGE = "message";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat);
 
 		manager = HttpRequestManager.getInstance(this);
-		message = (Message) SharedMatjiData.getInstance().top();
+		message = (Message) getIntent().getParcelableExtra(MESSAGE);
 		User me = Session.getInstance(this).getCurrentUser();
 		user_id = (message.getSentUserId() == me.getId()) ? message.getReceivedUserId() : message.getSentUserId();
 		listView = (ChatView) findViewById(R.id.chat);
@@ -46,11 +48,6 @@ public class ChatActivity extends BaseActivity implements Requestable {
 	protected void onResume() {
 		super.onResume();
 		listView.requestReload();
-	}
-
-	@Override
-	public void finish() {
-		super.finishWithMatjiData();
 	}
 
 	private void onRefreshButtonClicked() {

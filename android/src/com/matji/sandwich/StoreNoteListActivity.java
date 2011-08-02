@@ -11,6 +11,8 @@ public class StoreNoteListActivity extends BaseActivity {
 	private StoreNoteListView listView;
 	private BaseViewContainer header;
 
+	public static final String STORE = "store";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -19,7 +21,7 @@ public class StoreNoteListActivity extends BaseActivity {
 
 		header = new BaseViewContainer(this, getString(R.string.default_string_write_note));
 		listView = (StoreNoteListView) findViewById(R.id.store_note_list);
-		listView.setStoreId(((Store) SharedMatjiData.getInstance().top()).getId());
+		listView.setStoreId(((Store) getIntent().getParcelableExtra(STORE)).getId());
 		listView.setActivity(this);
 		listView.getHeaderViewContainer().removeView(header.getRootView());
 		listView.addHeaderView(header);

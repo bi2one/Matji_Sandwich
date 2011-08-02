@@ -4,7 +4,6 @@ import android.app.TabActivity;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.Post;
@@ -26,11 +25,13 @@ public class UserPostListView extends PostListView {
 		
 		request = new PostHttpRequest(getContext());
 		setPage(1);
-		
-		user = (User) SharedMatjiData.getInstance().top();
+	}
 
-		addHeaderView(new UserCell(getContext()));
-		addHeaderView(new UserIntroCell(getContext()));
+	public void setUser(User user) {
+		this.user = user;
+		
+		addHeaderView(new UserCell(getContext(), user));
+		addHeaderView(new UserIntroCell(getContext(), user));
 	}
 	
 	@Override

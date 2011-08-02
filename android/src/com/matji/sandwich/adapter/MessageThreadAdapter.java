@@ -12,6 +12,7 @@ import com.matji.sandwich.widget.MessageThreadListView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -55,7 +56,9 @@ public class MessageThreadAdapter extends MBaseAdapter {
 				public void onClick(View v) {
 					int position = Integer.parseInt((String) v.getTag());
 					Message message = (Message) data.get(position);
-					((BaseActivity) context).startActivityWithMatjiData(new Intent(context, ChatActivity.class), message);					
+					Intent intent = new Intent(context, ChatActivity.class);
+					intent.putExtra(ChatActivity.MESSAGE, (Parcelable) message);
+					((BaseActivity) context).startActivity(new Intent(context, ChatActivity.class));					
 				}
 			});
 		} else {

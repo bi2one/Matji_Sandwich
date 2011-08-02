@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.UserTabActivity;
@@ -36,6 +37,7 @@ public class MessageListView extends RequestableMListView {
 	protected void gotoUserPage(Message message) {
 		User user = (message.getReceivedUserId() == session.getCurrentUser().getId()) ? message.getSentUser() : message.getReceivedUser();
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, user);
+		intent.putExtra(UserTabActivity.USER, (Parcelable) user);
+		((BaseActivity) getActivity()).startActivity(intent);
 	}
 }

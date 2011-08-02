@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultLinearFill">
+	<!-- User Cell -->
+	<com.matji.sandwich.widget.cell.UserCell
+		android:id="@+id/UserCell"
+		style="@style/DefaultWrap" />
+
+	<!-- Information Wrapper -->
+	<LinearLayout
+		style="@style/DefaultVerticalWrap">
+		<!-- Basic Information -->
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<!-- Title -->
+			<TextView
+				style="@style/DefaultWrap"
+				android:layout_margin="@dimen/default_distance"
+				android:textColor="@color/matji_chocolate" />
+			<!-- Intro -->
+			<TextView
+				android:id="@+id/user_profile_intro"
+				style="@style/DefaultWidthFill"
+				android:padding="@dimen/default_distance"
+				android:background="@drawable/btn_top_corner" />
+			<!-- Blog -->
+			<TextView
+				android:id="@+id/user_profile_blog"
+				style="@style/DefaultWidthFill"
+				android:padding="@dimen/default_distance"
+				android:background="@drawable/btn_bottom_corner" />
+		</LinearLayout>
+
+		<!-- Friend Information -->
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<!-- Title -->
+			<TextView
+				style="@style/DefaultWrap"
+				android:layout_margin="@dimen/default_distance"
+				android:text="@string/user_profile_friend_information"
+				android:textColor="@color/matji_chocolate" />
+			<!-- Following -->
+			<RelativeLayout
+				style="@style/DefaultWrap"
+				android:padding="@dimen/default_distance"
+				android:background="@drawable/btn_left_corner">
+				<TextView
+					android:layout_above="@+id/user_profile_following_count"
+					style="@style/DefaultWrap"
+					android:text="@string/user_profile_following"
+					android:textColor="@color/matji_dark_orange" />
+				<TextView
+					android:id="@id/user_profile_following_count"
+					style="@style/DefaultWrap"
+					android:textSize="@dimen/text_xxlarge" />
+				<ImageView
+					style="@style/DefaultWrap"
+					android:layout_alignParentRight="true"
+					android:src="@drawable/img_moresign" />
+			</RelativeLayout>
+			<!-- Follower -->
+			<RelativeLayout
+				style="@style/DefaultWrap"
+				android:padding="@dimen/default_distance"
+				android:background="@drawable/btn_right_corner">
+				<TextView
+					android:layout_above="@+id/user_profile_follower_count"
+					style="@style/DefaultWrap"
+					android:text="@string/user_profile_follower"
+					android:textColor="@color/matji_dark_orange" />
+				<TextView
+					android:id="@id/user_profile_follower_count"
+					style="@style/DefaultWrap"
+					android:textSize="@dimen/text_xxlarge" />
+				<ImageView
+					style="@style/DefaultWrap"
+					android:layout_alignParentRight="true"
+					android:src="@drawable/img_moresign" />
+			</RelativeLayout>
+		</LinearLayout>
+
+		<!-- Store Information -->
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<!-- Title -->
+			<TextView
+				style="@style/DefaultWrap"
+				android:layout_margin="@dimen/default_distance"
+				android:text="@string/user_profile_store_information"
+				android:textColor="@color/matji_chocolate" />
+			<!-- Find Store -->
+			<RelativeLayout
+				style="@style/DefaultWrap">
+				<TextView
+					android:layout_above="@+id/user_profile_find_store_count"
+					style="@style/DefaultWrap"
+					android:text="@string/user_profile_find_store"
+					android:textColor="@color/matji_dark_orange" />
+				<TextView
+					android:id="@id/user_profile_find_store_count"
+					style="@style/DefaultWrap"
+					android:textSize="@dimen/text_xxlarge" />
+				<ImageView
+					style="@style/DefaultWrap"
+					android:layout_alignParentRight="true"
+					android:src="@drawable/img_moresign" />
+			</RelativeLayout>
+		</LinearLayout>
+
+		<!-- Recent Store -->
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<!-- Title -->
+			<TextView
+				style="@style/DefaultWrap"
+				android:layout_margin="@dimen/default_distance"
+				android:text="@string/user_profile_recent_store"
+				android:textColor="@color/matji_chocolate" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

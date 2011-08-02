@@ -2,10 +2,10 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.StoreMainActivity;
-import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
 import com.matji.sandwich.base.BaseActivity;
@@ -30,6 +30,7 @@ public class StoreListView extends RequestableMListView {
 	public void onListItemClick(int position) {
 		Store store = (Store) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, store);
+		intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
+		((BaseActivity) getActivity()).startActivity(intent);
 	}
 }

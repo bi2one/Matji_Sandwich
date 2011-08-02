@@ -13,6 +13,7 @@ import com.matji.sandwich.http.request.PostHttpRequest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -43,8 +44,7 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		if (request == null || !(request instanceof PostHttpRequest)) {
 			request = new PostHttpRequest(getContext());
 		}
-		((PostHttpRequest) request).actionListWithAttachFiles(getPage(),
-				getLimit());
+		((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
 		return request;
 	}
 
@@ -67,12 +67,14 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	
 	protected void gotoUserPage(Post post) {
 		Intent intent = new Intent(getActivity(), UserMainActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent,post.getUser());
+		intent.putExtra(UserMainActivity.USER, (Parcelable) post.getUser());
+		((BaseActivity) getActivity()).startActivity(intent);
 	}
 
 	protected void gotoStorePage(Post post) {
 		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent,post.getStore());
+		intent.putExtra(StoreMainActivity.STORE, (Parcelable) post.getStore());
+		((BaseActivity) getActivity()).startActivity(intent);
 	}
 
 	@Override
@@ -80,9 +82,9 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 		Post post = (Post) getAdapterData().get(position);
 		if (post.getActivityId() == 0) {
 			Intent intent = new Intent(getActivity(), PostMainActivity.class);
-			intent.putExtra("position", position);
-			((BaseActivity) getActivity()).startActivityForResultWithMatjiData(
-					intent, BaseActivity.POST_MAIN_ACTIVITY, post);
+			intent.putExtra(PostMainActivity.POSITION, position);
+			intent.putExtra(PostMainActivity.POST, (Parcelable) post);
+			((BaseActivity) getActivity()).startActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY);
 		}
 	}
 

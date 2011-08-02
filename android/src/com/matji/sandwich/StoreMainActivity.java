@@ -25,6 +25,7 @@ import com.matji.sandwich.widget.RoundTabHost;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -60,14 +61,16 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	public final static int UN_BOOKMARK_REQUEST = 11;
 	public final static int LIKE_REQUEST = 12;
 	public final static int UN_LIKE_REQUEST = 13;
+	
+	public final static String STORE = "store";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_main);
 
-		tabHost = (RoundTabHost)getTabHost();
-		store = (Store) SharedMatjiData.getInstance().top();
+		tabHost = (RoundTabHost) getTabHost();
+		store = (Store) getIntent().getParcelableExtra(STORE);
 
 		manager = HttpRequestManager.getInstance(this);
 		session = Session.getInstance(this);
@@ -80,15 +83,24 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		tagText = (TextView) findViewById(R.id.cell_store_tag);
 		foodText = (TextView) findViewById(R.id.cell_store_food);
 
+		Intent storePostListIntent = new Intent(this, StorePostListActivity.class);
+		storePostListIntent.putExtra(StorePostListActivity.STORE, (Parcelable) store);
+		
+		Intent storeImageListIntent = new Intent(this, StoreImageListActivity.class);
+		storeImageListIntent.putExtra(StoreImageListActivity.STORE, (Parcelable) store);
+		
+		Intent storeUrlListIntent = new Intent(this, StoreUrlListActivity.class);
+		storeUrlListIntent.putExtra(StoreUrlListActivity.STORE, (Parcelable) store);
+				
 		tabHost.addLeftTab("tab1",
 				R.string.store_main_post_list_view,
-				new Intent(this, StorePostListActivity.class));
+				storePostListIntent);
 		tabHost.addCenterTab("tab2",
 				R.string.store_main_img,
-				new Intent(this, StoreImageListActivity.class));
+				storeImageListIntent);
 		tabHost.addRightTab("tab3",
 				R.string.store_main_review,
-				new Intent(this, StoreUrlListActivity.class));
+				storeUrlListIntent);
 		
 		wrapper= (LinearLayout) findViewById(R.id.cell_store_info_Wrapper);
 		wrapper.setOnClickListener(new View.OnClickListener() {
@@ -124,15 +136,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		setInfo();
 	}
 
-
-	@Override
-	public void finish() {
-		super.finishWithMatjiData();
-	}
-	
 	private void setInfo() {
-		store = (Store) SharedMatjiData.getInstance().top();
-
 		/* Set StoreImage */
 		AttachFile file = store.getFile();
 		if (file != null) {

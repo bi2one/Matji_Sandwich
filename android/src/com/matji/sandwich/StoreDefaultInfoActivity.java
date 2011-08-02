@@ -9,13 +9,17 @@ import com.matji.sandwich.data.Store;
 public class StoreDefaultInfoActivity extends BaseActivity {
 	private Store store;
 	private TextView defaultInfo;
+	public static final String STORE  = "store";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void init() {
+		super.init();
 		setContentView(R.layout.activity_store_default_info);
-
-		store = (Store) SharedMatjiData.getInstance().top();
-
+		store = (Store) getIntent().getParcelableExtra(STORE);
 	}
 }

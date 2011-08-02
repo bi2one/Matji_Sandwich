@@ -1,7 +1,6 @@
 package com.matji.sandwich.widget.cell;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.session.Session;
@@ -17,6 +16,7 @@ public class StoreCell extends RelativeLayout {
 	private Session session;
 	private Button likeButton;
 	private DBProvider dbProvider;
+	private Store store;
 	
 	public StoreCell(Context context) {
 		super(context);
@@ -27,20 +27,17 @@ public class StoreCell extends RelativeLayout {
 	
 	public StoreCell(Context context, AttributeSet attr) {
 		super(context, attr);
-		init();
+		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		inflater.inflate(R.layout.cell_store_name, this);
 	}
 
 	private void init() {
-		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
-		inflater.inflate(R.layout.cell_store_name, this);
-		
-		Store store = (Store) SharedMatjiData.getInstance().top();
-		
 		((TextView) findViewById(R.id.cell_store_name)).setText(store.getName());
 		((Button) findViewById(R.id.cell_store_like_btn)).setText("1");
-	
 	}
 	
-
+	public void setStore(Store store) {
+		this.store = store;
+		init();
+	}
 }

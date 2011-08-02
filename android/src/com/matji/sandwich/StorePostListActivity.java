@@ -10,13 +10,16 @@ import android.os.Bundle;
 public class StorePostListActivity extends BaseActivity {
 	private Store store;
 	private StorePostListView listView;
+	
+	public static final String STORE = "store";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_post);
-		store = (Store) SharedMatjiData.getInstance().top();
+		store = (Store) getIntent().getParcelableExtra(STORE);
 
 		listView = (StorePostListView) findViewById(R.id.store_post_list);
+		listView.setStore(store);
 		listView.setActivity(this);
 		listView.requestReload();
 	}

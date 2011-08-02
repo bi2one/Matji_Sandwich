@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -49,7 +50,8 @@ public class FollowingListView extends UserListView implements View.OnClickListe
 	public void onListItemClick(int position) {
 		User user = (User) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, user);
+		intent.putExtra(UserTabActivity.USER, (Parcelable) user);
+		((BaseActivity) getActivity()).startActivity(intent);
 	}
 
 
@@ -71,11 +73,13 @@ public class FollowingListView extends UserListView implements View.OnClickListe
 
 	protected void gotoUserPage(Post post) {
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getUser());
+		intent.putExtra(UserTabActivity.USER, (Parcelable) post.getUser());
+		((BaseActivity) getActivity()).startActivity(intent);
 	}	
 
 	protected void gotoStorePage(Post post) {
 		Intent intent = new Intent(getActivity(), StoreTabActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getStore());
+		intent.putExtra(StoreTabActivity.STORE, (Parcelable) post.getStore());
+		((BaseActivity) getActivity()).startActivity(intent);
 	}
 }

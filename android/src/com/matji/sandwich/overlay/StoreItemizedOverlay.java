@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Parcelable;
 import android.text.TextPaint;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -152,7 +153,8 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 		public void onClick(View v) {
 		    Store store = ((StoreOverlayItem)getItem(index)).getStore();
 		    Intent intent = new Intent(mActivity, StoreTabActivity.class);
-		    mActivity.startActivityWithMatjiData(intent, store);
+		    intent.putExtra(StoreTabActivity.STORE, (Parcelable) store);
+		    mActivity.startActivity(intent);
 		}
 	    });
 

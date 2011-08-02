@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.UserProfileActivity;
 import com.matji.sandwich.data.User;
 
@@ -17,7 +16,7 @@ import com.matji.sandwich.data.User;
  *
  */
 public class UserIntroCell extends Cell {
-
+	private User user;
 	/**
 	 * 기본 생성자 (Java Code)
 	 * 
@@ -25,19 +24,24 @@ public class UserIntroCell extends Cell {
 	 */
 	public UserIntroCell(Context context) {
 		super(context, R.layout.cell_user_intro);
-		init();
 	}
 
 	/**
-	 * 데이터 초기화
+	 * User 정보를 같이 전달 받을 때 사용하는 생성자.
+	 * 
+	 * @param context
+	 * @param user 이 Cell의 유저 데이터
 	 */
-	protected void init() {
-		super.init();
-		User user = (User) SharedMatjiData.getInstance().top();
-		((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(user.getIntro());
-//		refresh(user);
+	public UserIntroCell(Context context, User user) {
+		super(context, R.layout.cell_user_intro);
+		setUser(user);
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+		((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(user.getIntro());
+	}
+	
 	@Override
 	protected Class<?> getDetailPageActivity() {
 		// TODO Auto-generated method stub

@@ -1,7 +1,6 @@
 package com.matji.sandwich.widget.cell;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.session.Session;
@@ -19,6 +18,7 @@ public class StoreInfoCell extends RelativeLayout {
 	private Session session;
 	private Button likeButton;
 	private DBProvider dbProvider;
+	private Store store;
 	
 	public StoreInfoCell(Context context) {
 		super(context);
@@ -27,22 +27,19 @@ public class StoreInfoCell extends RelativeLayout {
 	
 	public StoreInfoCell(Context context, AttributeSet attr) {
 		super(context, attr);
-		init();
+		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		inflater.inflate(R.layout.cell_store_info, this);
 	}
 
-	private void init() {
-		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
-		inflater.inflate(R.layout.cell_store_info, this);
-		
-		Store store = (Store) SharedMatjiData.getInstance().top();
-		
+	protected void init() {
 		((TextView) findViewById(R.id.cell_store_tel)).setText(store.getTel());
 		((TextView) findViewById(R.id.cell_store_address)).setText(store.getAddress());
 //		((TextView) findViewById(R.id.cell_store_tag)).setText(tagListToCSV(store.getTags()));
 //		((TextView) findViewById(R.id.cell_store_food)).setText(foodListToCSV(store.getStoreFoods()));
-
 	}
 	
-
+	public void setStore(Store store) {
+		this.store = store;
+		init();
+	}	
 }
