@@ -52,5 +52,4 @@ public class ActivityEnterForeGroundDetector{
 	public interface ActivityEnterForeGroundListener{
 		abstract public void didEnterForeGround();
 	}
-	
 }

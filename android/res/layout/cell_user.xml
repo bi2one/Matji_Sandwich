@@ -2,77 +2,47 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/cell_user_Wrapper"
-	style="@style/UserCell">
+	style="@style/cell_user_Wrapper">
 	<include
-		android:layout_width="@dimen/profile_size_cell"
-		android:layout_height="@dimen/profile_size_cell"
+		style="@style/cell_user_Profile"
 		layout="@layout/profile" />
 	<RelativeLayout
-	android:layout_marginLeft="@dimen/default_distance"
-		style="@style/DefaultWrap">
+		style="@style/cell_user_InfoWrapper">
 		<LinearLayout
 			android:layout_toRightOf="@+id/profile"
-			style="@style/DefaultWrap"
-			android:orientation="vertical">
+			style="@style/DefaultVerticalWrap">
 			<TextView
 				android:id="@+id/cell_user_nick"
-				style="@style/DefaultWrap"
-				android:layout_margin="@dimen/default_distance_half"
-				android:textColor="@color/matji_black"
-				android:textSize="@dimen/text_xxlarge" />
+				style="@style/cell_user_Nickname" />
 			<LinearLayout
 				style="@style/DefaultWrap">
 				<TextView
-					style="@style/DefaultWrap"
-					android:textColor="@color/matji_dark_orange"
-					android:layout_marginRight="@dimen/default_distance"
-					android:text="@string/cell_user_point" />
+					style="@style/cell_user_PointLabel" />
 				<TextView
-					style="@style/DefaultWrap"
 					android:id="@+id/cell_user_point"
-					android:textColor="@color/matji_light_gray" />
+					style="@style/cell_user_LabelValue" />
 			</LinearLayout>
 			<LinearLayout
 				style="@style/DefaultWrap">
 				<TextView
-					style="@style/DefaultWrap"
-					android:layout_marginRight="@dimen/default_distance"
-					android:textColor="@color/matji_dark_orange"
-					android:text="@string/cell_user_area" />
+					style="@style/cell_user_AreaLabel" />
 				<TextView
-					style="@style/DefaultWrap"
 					android:id="@+id/cell_user_area"
-					android:textColor="@color/matji_light_gray" />
+					style="@style/cell_user_LabelValue" />
 			</LinearLayout>
 		</LinearLayout>
 		<LinearLayout
 			android:layout_alignParentRight="true"
-			style="@style/DefaultWrap"
-			android:orientation="vertical">
+			style="@style/DefaultVerticalWrap">
 			<Button
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:background="@drawable/btn_white"
-				android:textColor="@color/matji_dark_orange"
-				android:singleLine="true"
-				android:drawableLeft="@drawable/img_heart"
-				android:layout_marginBottom="@dimen/default_distance"
-				android:id="@+id/cell_user_like_list" />
+				android:id="@+id/cell_user_like_list"
+				style="@style/cell_user_LikeListButton" />
 			<Button
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:background="@drawable/btn_red"
 				android:id="@+id/cell_user_follow"
-				android:text="@string/cell_user_follow" />
+				style="@style/cell_user_FollowButton" />
 			<Button
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:background="@drawable/btn_white"
-				android:textColor="@color/matji_dark_orange"
-				android:singleLine="true"
-				android:drawableLeft="@drawable/img_heart"
 				android:id="@+id/cell_user_message_list"
-				android:visibility="gone" />
+				style="@style/cell_user_MessageListButton" />
 		</LinearLayout>
 	</RelativeLayout>
 </LinearLayout>

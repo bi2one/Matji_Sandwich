@@ -15,15 +15,15 @@ public class ActivityButton extends TitleButton {
 
 	public ActivityButton(Context context) {
 		super(context);
-		init();
 	}
 
 	/**
 	 * @see com.matji.sandwich.widget.title.button.TitleButton#init()
 	 */
 	@Override
-	public void init() {
+	protected void init() {
 		// TODO Auto-generated method stub
+		super.init();
 		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_activity));
 	}
 

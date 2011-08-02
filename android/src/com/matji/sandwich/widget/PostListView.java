@@ -27,10 +27,10 @@ public class PostListView extends RequestableMListView implements View.OnClickLi
 	
 	public PostListView(Context context, AttributeSet attr) {
 		super(context, attr, new SectionedPostAdapter(context), 10);
-		commonInitialisation();
+		init();
 	}	
 
-	protected final void commonInitialisation() {
+	protected void init() {
 		setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.pattern_bg));
 		setDivider(null);
 		setFadingEdgeLength(getResources().getDimensionPixelSize(R.dimen.fade_edge_length));

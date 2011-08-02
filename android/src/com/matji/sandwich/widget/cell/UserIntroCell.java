@@ -1,13 +1,11 @@
 package com.matji.sandwich.widget.cell;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
+import com.matji.sandwich.UserProfileActivity;
 import com.matji.sandwich.data.User;
 
 /**
@@ -18,7 +16,7 @@ import com.matji.sandwich.data.User;
  * @author mozziluv
  *
  */
-public class UserIntroCell extends RelativeLayout {
+public class UserIntroCell extends Cell {
 
 	/**
 	 * 기본 생성자 (Java Code)
@@ -26,31 +24,24 @@ public class UserIntroCell extends RelativeLayout {
 	 * @param context
 	 */
 	public UserIntroCell(Context context) {
-		super(context);
+		super(context, R.layout.cell_user_intro);
 		init();
 	}
 
 	/**
-	 * 기본 생성자 (XML)
-	 * 
-	 * @param context
-	 * @param attr
-	 */
-	public UserIntroCell(Context context, AttributeSet attr) {
-		super(context, attr);
-		init();
-	}
-	
-	/**
 	 * 데이터 초기화
 	 */
-	private void init() {
-		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		inflater.inflate(R.layout.cell_user_intro, this);
-		
+	protected void init() {
+		super.init();
 		User user = (User) SharedMatjiData.getInstance().top();
-		((TextView) findViewById(R.id.cell_user_intro)).setText(user.getIntro());
+		((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(user.getIntro());
 //		refresh(user);
+	}
+
+	@Override
+	protected Class<?> getDetailPageActivity() {
+		// TODO Auto-generated method stub
+		return UserProfileActivity.class;
 	}
 	
 //	/**

@@ -39,10 +39,10 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 	public CommentListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new CommentAdapter(context), 10);
-		init();
+		commonInitialisation();
 	}
 
-	private void init() {
+	private void commonInitialisation() {
 		request = new CommentHttpRequest(getContext());
 		session = Session.getInstance(getContext());
 
@@ -78,13 +78,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		int position = Integer.parseInt((String) v.getTag());
 
 		switch(v.getId()){
-		case R.id.profile:
-			if (position == 0) {
-				Post post = (Post) getAdapterData().get(position);
-				gotoUserPage(post.getUser());
-				break;
-			}
-		case R.id.row_comment_nick:
+		case R.id.profile: case R.id.row_comment_nick:
 			Comment comment = (Comment) getAdapterData().get(position);
 			gotoUserPage(comment.getUser());
 			break;

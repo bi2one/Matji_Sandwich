@@ -10,7 +10,6 @@ import com.matji.sandwich.widget.FlowLayout;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -18,7 +17,6 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.TextView;
 
@@ -94,7 +92,7 @@ public class TagCloudView extends FlowLayout {
 		 * 기본 크기 지정 및 콘텐츠의 정렬을 실행한다.
 		 * 
 		 */
-		private void init() {
+		protected void init() {
 			setMinHeight(LINE_HEIGHT);
 			setMaxHeight(LINE_HEIGHT);
 			setGravity(Gravity.CENTER);
@@ -106,7 +104,7 @@ public class TagCloudView extends FlowLayout {
 		 * 
 		 * @param tag 이 View 에서 보여 줄 Tag class
 		 */
-		private void init(Tag tag) {
+		protected void init(Tag tag) {
 			String shortTag = getShortTag(tag.getTag().getTag());
 			int length = shortTag.length();
 			int color = TAG_TEXT_COLOR[getIndex(tag.getCount())];
@@ -126,7 +124,7 @@ public class TagCloudView extends FlowLayout {
 		 * 
 		 * @param str 이 View 에서 보여 줄 String
 		 */
-		private void init(String str) {
+		protected void init(String str) {
 			setText(str);
 			init();
 		}

@@ -60,6 +60,7 @@
 		<activity android:name="UserStoreListActivity"></activity>
 		<activity android:name="UserImageListActivity"></activity>
 		<activity android:name="UserPostListActivity"></activity>
+		<activity android:name="UserProfileActivity"></activity>
 		<activity android:name="UserTagActivity"></activity>
 		<activity android:name="FollowingActivity" 
 				  android:screenOrientation="portrait"></activity>

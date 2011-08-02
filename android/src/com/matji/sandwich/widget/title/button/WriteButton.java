@@ -15,7 +15,6 @@ public class WriteButton extends TitleButton {
 //TODO 나중에 Post write, Comment write 등 나눠질 수 있으니 후에 수정
 	public WriteButton(Context context) {
 		super(context);
-		init();
 	}
 
 	/**
@@ -24,6 +23,7 @@ public class WriteButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
+		super.init();
 		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_write));
 	}
 	

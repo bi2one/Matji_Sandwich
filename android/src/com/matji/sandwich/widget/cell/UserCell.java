@@ -2,16 +2,15 @@ package com.matji.sandwich.widget.cell;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.SharedMatjiData;
+import com.matji.sandwich.UserProfileActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.ProfileImageView;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -22,7 +21,7 @@ import android.widget.TextView;
  * @author mozziluv
  *
  */
-public class UserCell extends RelativeLayout {
+public class UserCell extends Cell {
 
 	/**
 	 * 기본 생성자 (Java Code)
@@ -30,38 +29,29 @@ public class UserCell extends RelativeLayout {
 	 * @param context
 	 */
 	public UserCell(Context context) {
-		super(context);
-		init();
-	}
-
-	/**
-	 * 기본 생성자 (XML)
-	 * 
-	 * @param context
-	 * @param attr
-	 */
-	public UserCell(Context context, AttributeSet attr) {
-		super(context, attr);
-		init();
+		super(context, R.layout.cell_user);
 	}
 	
+	public UserCell(Context context, AttributeSet attr) {
+		super(context, R.layout.cell_user);
+	}
+
 	/**
 	 * 데이터 초기화
 	 */
-	private void init() {
-		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		inflater.inflate(R.layout.cell_user, this);
+	protected void init() {
+		super.init();
 		
 		User user = (User) SharedMatjiData.getInstance().top();
-		((ProfileImageView) findViewById(R.id.profile)).setUserId(user.getId());
-		((TextView) findViewById(R.id.cell_user_nick)).setText(user.getNick());
+		((ProfileImageView) getRootView().findViewById(R.id.profile)).setUserId(user.getId());
+		((TextView) getRootView().findViewById(R.id.cell_user_nick)).setText(user.getNick());
 		if (user.getMileage() != null) 
-			((TextView) findViewById(R.id.cell_user_point)).setText(user.getMileage().getTotalPoint()+"");
+			((TextView) getRootView().findViewById(R.id.cell_user_point)).setText(user.getMileage().getTotalPoint()+"");
 		else 
-			((TextView) findViewById(R.id.cell_user_point)).setText("0");
-		((TextView) findViewById(R.id.cell_user_area)).setText("KOREA");
-		((TextView) findViewById(R.id.cell_user_like_list)).setText("165");
+			((TextView) getRootView().findViewById(R.id.cell_user_point)).setText("0");
+		((TextView) getRootView().findViewById(R.id.cell_user_area)).setText("KOREA");
+		((TextView) getRootView().findViewById(R.id.cell_user_like_list)).setText("165");
+		
 		refresh(user);
 	}
 	
@@ -71,15 +61,20 @@ public class UserCell extends RelativeLayout {
 	 * @param user
 	 */
 	public void refresh(User user) {
-		Session session = Session.getInstance(getContext());
-		Button follow = (Button) findViewById(R.id.cell_user_follow);
-		Button messageList = (Button) findViewById(R.id.cell_user_message_list);
+		Session session = Session.getInstance(getRootView().getContext());
+		Button follow = (Button) getRootView().findViewById(R.id.cell_user_follow);
+		Button messageList = (Button) getRootView().findViewById(R.id.cell_user_message_list);
 
 		if (session.isLogin() && session.getCurrentUser().getId() == user.getId()) {
 			follow.setVisibility(View.GONE);
 			messageList.setVisibility(View.VISIBLE);
 			messageList.setText("246");
-		} else {
 		}
+	}
+	
+	@Override
+	protected Class<?> getDetailPageActivity() {
+		// TODO Auto-generated method stub
+		return UserProfileActivity.class;
 	}
 }

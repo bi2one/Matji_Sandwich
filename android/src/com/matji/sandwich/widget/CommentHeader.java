@@ -17,7 +17,6 @@ import com.matji.sandwich.util.TimeUtil;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -55,7 +54,7 @@ public class CommentHeader extends ViewContainer implements View.OnClickListener
 		init();
 	}
 	
-	private void init() {
+	protected void init() {
 		downloader = new MatjiImageDownloader(getRootView().getContext());
 		profileSize = getRootView().getResources().getDimensionPixelSize(R.dimen.profile_size);
 		
@@ -183,7 +182,6 @@ public class CommentHeader extends ViewContainer implements View.OnClickListener
 			callImageViewer(position);
 		}		
 	}
-
 
 	@Override
 	public void onClick(View arg0) {

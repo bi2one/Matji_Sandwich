@@ -44,7 +44,7 @@ public abstract class ImageListView extends RequestableMListView implements View
 		init();
 	}
 	
-	private void init() {
+	protected void init() {
 		setModelData();
 		
 		imageCount = ((ImageAdapter) getMBaseAdapter()).getImageViewCount();
