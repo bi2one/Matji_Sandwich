@@ -12,6 +12,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.http.request.NearBookmarkStoreRequest;
 
 public class MapStoreSectionedAdapter extends SectionedAdapter {
     private static final String SECTION_BOOKMARK_STORE = "MapStoreSectionedAdapter.section_bookmarked_store";
@@ -20,12 +21,27 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
     private LayoutInflater inflater;
     private Context context;
     private MatjiImageDownloader downloader;
+    private NearBookmarkStoreRequest storeRequest;
+    private int nearByStoreIndex;
     
     public MapStoreSectionedAdapter(Context context) {
 	super(context);
 	this.context = context;
 	inflater = getLayoutInflater();
 	downloader = new MatjiImageDownloader(context);
+    }
+
+    public void init(NearBookmarkStoreRequest storeRequest) {
+	setNearBookmarkStoreRequest(storeRequest);
+    }
+
+    public void setNearBookmarkStoreRequest(NearBookmarkStoreRequest storeRequest) {
+	this.storeRequest = storeRequest;
+    }
+
+    public void notifyDataSetChanged() {
+	nearByStoreIndex = storeRequest.getFirstNearByStoreIndex();
+	super.notifyDataSetChanged();
     }
 
     public View getSectionView(View convertView, String section) {
@@ -82,11 +98,10 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
     }
 
     public String putSectionName(int position) {
-	Store store = (Store) data.get(position);
-	if (store.getLikeCount() > 1) {
-	    return SECTION_BOOKMARK_STORE;
-	} else {
+	if (position >= nearByStoreIndex) {
 	    return SECTION_STORE;
+	} else {
+	    return SECTION_BOOKMARK_STORE;
 	}
     }
 
