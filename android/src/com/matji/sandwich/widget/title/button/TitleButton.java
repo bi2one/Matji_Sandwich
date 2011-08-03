@@ -32,5 +32,5 @@ public abstract class TitleButton extends ImageButton implements TitleItem {
 	/**
 	 * TitleButton 을 initialize 한다. 생성자에서 해야 할 일이 있는 클래스들은 오버라이드 해 작성한다.
 	 */
-	public void init() {}
+	protected void init() {}
 }

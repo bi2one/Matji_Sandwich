@@ -24,13 +24,7 @@ public abstract class ImageListView extends RequestableMListView implements View
 	protected int imageCount;
 	
 	private static final int LIMIT = 5;
-	
-	/**
-	 * 헤더를 추가하기 전 모델 데이터가 필요하기 때문에
-	 * 후커를 이용해 미리 데이터를 저장해둔다.
-	 */
-	abstract protected void setModelData();
-	
+
 	/**
 	 * 헤더에 추가될 텍스트.
 	 * ex) 777개의 MOZZILUV 사진
@@ -41,12 +35,9 @@ public abstract class ImageListView extends RequestableMListView implements View
 	
 	public ImageListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new ImageAdapter(context), LIMIT);
-		init();
 	}
 	
-	private void init() {
-		setModelData();
-		
+	protected void init() {
 		imageCount = ((ImageAdapter) getMBaseAdapter()).getImageViewCount();
 
 		addHeaderView(createHeader());

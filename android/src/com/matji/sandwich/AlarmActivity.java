@@ -6,6 +6,7 @@ import com.matji.sandwich.widget.AlarmListView;
 import android.os.Bundle;
 
 public class AlarmActivity extends BaseActivity {
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

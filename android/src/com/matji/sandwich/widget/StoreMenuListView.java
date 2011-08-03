@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.adapter.FoodAdapter;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Like;
@@ -39,11 +38,13 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 
 		dbProvider = DBProvider.getInstance(context);
 
-		store = ((Store) SharedMatjiData.getInstance().top());
-
 		setPage(1);
 	}
-
+	
+	public void setStore(Store store) {
+		this.store = store;
+	}	
+	
 	public void addMenu(StoreFood food) {
 		for (MatjiData data : getAdapterData()) {
 			if (food.getFood().getName().equals(((StoreFood) data).getFood().getName())) {

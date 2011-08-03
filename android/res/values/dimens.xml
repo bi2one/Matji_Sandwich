@@ -9,10 +9,14 @@
 	
 	<!-- Store Cell -->
 	<dimen name="max_title_width">190dp</dimen>
-	
+
+	<!-- User Cell -->
+	<dimen name="cell_profile_size">80dp</dimen>
+	<dimen name="cell_btn_width">80dp</dimen>
+		
 	<!-- User Profile -->
 	<dimen name="profile_size">50dp</dimen>
-	<dimen name="profile_size_cell">80dp</dimen>	
+	
 	<!-- Post List Row -->
 	<dimen name="row_post_distance">1dp</dimen>
 	

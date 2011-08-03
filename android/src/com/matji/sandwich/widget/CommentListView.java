@@ -8,11 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.UserMainActivity;
 import com.matji.sandwich.adapter.CommentAdapter;
@@ -46,8 +46,6 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		request = new CommentHttpRequest(getContext());
 		session = Session.getInstance(getContext());
 
-		post = (Post) SharedMatjiData.getInstance().top();
-		addHeaderView(new CommentHeader(getContext()));
 		setPage(1);
 		setDivider(new ColorDrawable(Color.WHITE));
 		setDividerHeight(2);
@@ -55,6 +53,11 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 //		setCacheColorHint(Color.BLACK);
 		setFadingEdgeLength(0);
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
+	}
+	
+	public void setPost(Post post) {
+		this.post = post;
+		addHeaderView(new CommentHeader(getContext(), post));
 	}
 
 	public void addComment(Comment comment) {
@@ -78,13 +81,7 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		int position = Integer.parseInt((String) v.getTag());
 
 		switch(v.getId()){
-		case R.id.profile:
-			if (position == 0) {
-				Post post = (Post) getAdapterData().get(position);
-				gotoUserPage(post.getUser());
-				break;
-			}
-		case R.id.row_comment_nick:
+		case R.id.profile: case R.id.row_comment_nick:
 			Comment comment = (Comment) getAdapterData().get(position);
 			gotoUserPage(comment.getUser());
 			break;
@@ -127,12 +124,14 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 	protected void gotoUserPage(User user) { 
 		Intent intent = new Intent(getActivity(), UserMainActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, user);
+		intent.putExtra(UserMainActivity.USER, (Parcelable) user);
+		((BaseActivity) getActivity()).startActivity(intent);
 	}
 	
 	protected void gotoStorePage(Store store) { 
 		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, store);
+		intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
+		((BaseActivity) getActivity()).startActivity(intent);
 	}
 
 	@Override
@@ -141,8 +140,6 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 		case COMMENT_DELETE_REQUEST:
 			getAdapterData().remove(curDeletePos);
 			getMBaseAdapter().notifyDataSetChanged();
-			Post post = (Post) SharedMatjiData.getInstance().top();
-			post.setCommentCount(post.getCommentCount() - 1);
 		}
 
 //		if (tag == REQUEST_RELOAD && data != null) {

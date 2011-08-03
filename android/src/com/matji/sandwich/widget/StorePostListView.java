@@ -4,7 +4,6 @@ import android.app.TabActivity;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
@@ -19,10 +18,12 @@ public class StorePostListView extends PostListView {
 		super(context, attrs);
 		request = new PostHttpRequest(context);
 		setPage(1);
-		
-		store = (Store) SharedMatjiData.getInstance().top();
 	}
 
+	public void setStore(Store store) {
+		this.store = store;
+	}
+	
 	@Override
 	public HttpRequest request() {
 		((PostHttpRequest) request).actionStoreList(store.getId(), getPage(), getLimit());

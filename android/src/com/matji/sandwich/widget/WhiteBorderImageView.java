@@ -24,7 +24,7 @@ public class WhiteBorderImageView extends LinearLayout {
 		init();
 	}
 	
-	public void init() {
+	protected void init() {
 		image.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		image.setScaleType(ScaleType.CENTER_CROP);
 		addView(image);

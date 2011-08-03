@@ -20,13 +20,15 @@ public class StoreTabActivity extends BaseTabActivity {
 	public static final int MEMO_PAGE = 2;
 	public static final int IMAGE_PAGE = 3;
 	public static final int MORE_PAGE = 4;
+	
+	public static final String STORE = "store";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_tab);
 		
-		store = (Store) (SharedMatjiData.getInstance().top());
+		store = (Store) getIntent().getParcelableExtra(STORE);
 
 		mainIntent = new Intent(this, StoreMainActivity.class);
 		menuIntent = new Intent(this, StoreMenuActivity.class);
@@ -51,9 +53,5 @@ public class StoreTabActivity extends BaseTabActivity {
 		tabHost.addTab(tabHost.newTabSpec("more")
 				.setIndicator("기타")
 				.setContent(moreIntent));
-	}
-
-	public void finish() {
-		super.finishWithMatjiData();
 	}
 }

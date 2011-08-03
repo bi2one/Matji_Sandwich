@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -43,7 +44,8 @@ public class AlarmListView extends RequestableMListView implements View.OnClickL
 		} else if (type.equals("Following")) {
 			if (alarm.getSentUser() != null) {
 				Intent intent = new Intent(getActivity(), UserTabActivity.class);
-				((BaseActivity) getActivity()).startActivityWithMatjiData(intent, alarm.getSentUser());
+				intent.putExtra(UserTabActivity.USER, (Parcelable) alarm.getSentUser());
+				((BaseActivity) getActivity()).startActivity(intent);
 			}
 		}
 	}
@@ -56,7 +58,8 @@ public class AlarmListView extends RequestableMListView implements View.OnClickL
 
 		if (alarm.getSentUser() != null) {
 			Intent intent = new Intent(getActivity(), UserTabActivity.class);
-			((BaseActivity) getActivity()).startActivityWithMatjiData(intent, alarm.getSentUser());
+			intent.putExtra(UserTabActivity.USER, (Parcelable) alarm.getSentUser());
+			((BaseActivity) getActivity()).startActivity(intent);
 		}
 	}
 }

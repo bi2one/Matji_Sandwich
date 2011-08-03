@@ -49,12 +49,17 @@ public class PostMainActivity extends BaseActivity implements Requestable {
 	};
 	private int position;
 
-	public static final int POST_ID_IS_NULL = -1;
+//	public static final int POST_ID_IS_NULL = -1;
+	
 	private static final int POST_REQUEST = 11;
 	private static final int LIKE_REQUEST = 12;
 	private static final int UN_LIKE_REQUEST = 13;
 	private static final int POST_DELETE_REQUEST = 14;
-
+	
+	public static final String POSITION = "position";
+	public static final String POST = "post";
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,23 +70,23 @@ public class PostMainActivity extends BaseActivity implements Requestable {
 		manager = HttpRequestManager.getInstance(this);
 		downloader = new MatjiImageDownloader(this);
 
-		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
-		position = getIntent().getIntExtra("position", -1);
-
-		if (intent_post_id == POST_ID_IS_NULL) {
+//		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
+		position = getIntent().getIntExtra(POSITION, -1);
+		
+//		if (intent_post_id == POST_ID_IS_NULL) {
 			initInfo();
-		} else {
-			postRequest(intent_post_id);
-		}
+//		} else {
+//			postRequest(intent_post_id);
+//		}
 	}
 
 	private void initInfo() {
-		post = (Post) SharedMatjiData.getInstance().top();
-		if (post.getId() == POST_ID_IS_NULL) postDoesNotExist();
+		post = (Post) getIntent().getParcelableExtra(POST);
+//		if (post.getId() == POST_ID_IS_NULL) postDoesNotExist();
 
 		commentListView = (CommentListView) findViewById(R.id.post_main_comment_list);
 //		likeButton = (Button) findViewById(R.id.post_main_like_btn);
-
+		commentListView.setPost(post);
 		commentListView.setActivity(this);
 		commentListView.requestReload();
 	}
@@ -104,10 +109,10 @@ public class PostMainActivity extends BaseActivity implements Requestable {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (intent_post_id == POST_ID_IS_NULL) {
+//		if (intent_post_id == POST_ID_IS_NULL) {
 			//			commentListView.setCanRequestNext(true);
 			setInfo();
-		}
+//		}
 	}
 
 	@Override
@@ -132,10 +137,6 @@ public class PostMainActivity extends BaseActivity implements Requestable {
 		super.finish();
 	}
 
-	@Override
-	public void finish() {
-		super.finishWithMatjiData();
-	}
 
 	public void onDeleteButtonClicked(View v) {
 		if (!manager.isRunning(this)) {
@@ -233,8 +234,7 @@ public class PostMainActivity extends BaseActivity implements Requestable {
 		case POST_REQUEST:
 			if (data != null && data.size() > 0) {
 				Post post = (Post) data.get(0);
-				SharedMatjiData.getInstance().push(post);
-				intent_post_id = POST_ID_IS_NULL;
+//				intent_post_id = POST_ID_IS_NULL;
 			} else {
 				postDoesNotExist();
 				return;

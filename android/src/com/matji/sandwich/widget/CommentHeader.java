@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.matji.sandwich.ImageSliderActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.SimpleTag;
@@ -17,7 +16,6 @@ import com.matji.sandwich.util.TimeUtil;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -49,17 +47,21 @@ public class CommentHeader extends ViewContainer implements View.OnClickListener
 	private TextView commentCountText;
 	private Button likeListButton;
 	private ImageView[] previews;
-	
+
 	public CommentHeader(Context context) {
 		super(context, R.layout.header_comment);
 		init();
 	}
 	
-	private void init() {
+	public CommentHeader(Context context, Post post) {
+		this(context);
+		setPost(post);
+	}
+	
+	protected void init() {
 		downloader = new MatjiImageDownloader(getRootView().getContext());
 		profileSize = getRootView().getResources().getDimensionPixelSize(R.dimen.profile_size);
 		
-		post = (Post) SharedMatjiData.getInstance().top();
 		profile = (ProfileImageView) getRootView().findViewById(R.id.profile);
 		nickText = (TextView) getRootView().findViewById(R.id.header_comment_nick);
 		atText = (TextView) getRootView().findViewById(R.id.header_comment_at);
@@ -89,10 +91,13 @@ public class CommentHeader extends ViewContainer implements View.OnClickListener
 		}		
 		
 		setOnClickListener();
-		setViewData(post);
-
 	}
 
+	public void setPost(Post post) {
+		this.post = post;
+		setViewData(post);
+	}
+	
 	private void setOnClickListener() {
 		profile.setOnClickListener(this);
 		nickText.setOnClickListener(this);
@@ -183,7 +188,6 @@ public class CommentHeader extends ViewContainer implements View.OnClickListener
 			callImageViewer(position);
 		}		
 	}
-
 
 	@Override
 	public void onClick(View arg0) {

@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MessageHttpRequest;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -134,10 +133,10 @@ public class ChatView extends MListView implements ListScrollRequestable, PullTo
 				break;
 			case REQUEST_RELOAD:
 				setSelection(adapterData.size());
-				Message recentMessage = (Message) adapterData.get(data.size()-1);
-				Message threadMessage = (Message) SharedMatjiData.getInstance().top();
-				threadMessage.setMessage(recentMessage.getMessage());
-				threadMessage.setAgo(recentMessage.getAgo());
+//				Message recentMessage = (Message) adapterData.get(data.size()-1);
+//				Message threadMessage = (Message) SharedMatjiData.getInstance().top();
+//				threadMessage.setMessage(recentMessage.getMessage());
+//				threadMessage.setAgo(recentMessage.getAgo());
 				break;
 			}
 		}

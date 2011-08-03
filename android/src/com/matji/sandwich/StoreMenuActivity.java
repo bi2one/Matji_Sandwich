@@ -29,6 +29,8 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 	private EditText menuField;
 
 	private static final int ADD_MENU_REQUEST = 11;
+	
+	public static final String STORE = "store";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 
 		manager = HttpRequestManager.getInstance(this);
 
-		store = (Store) SharedMatjiData.getInstance().top();
+		store = (Store) getIntent().getParcelableExtra(STORE);
 
 		addWrapper = (LinearLayout) findViewById(R.id.store_menu_add_wrapper);
 		menuField = (EditText) findViewById(R.id.store_menu_menu_field);
