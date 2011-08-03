@@ -20,6 +20,5 @@ public class UserProfileActivity extends BaseActivity {
 	protected void init() {
 		setContentView(R.layout.activity_user_profile);
 		user = (User) getIntent().getParcelableExtra(USER);
-		((UserCell) findViewById(R.id.UserCell)).setUser(user);
 	}
 }

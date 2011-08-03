@@ -5,28 +5,21 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.StoreMainActivity;
-import com.matji.sandwich.UserMainActivity;
 import com.matji.sandwich.adapter.CommentAdapter;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 
-public class CommentListView extends RequestableMListView implements View.OnClickListener {
+public class CommentListView extends RequestableMListView {
 	private HttpRequest request;
 	private Session session;
 
@@ -77,25 +70,6 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 	public void onListItemClick(int position) {}
 
-	public void onClick(View v) {
-		int position = Integer.parseInt((String) v.getTag());
-
-		switch(v.getId()){
-		case R.id.profile: case R.id.row_comment_nick:
-			Comment comment = (Comment) getAdapterData().get(position);
-			gotoUserPage(comment.getUser());
-			break;
-		case R.id.row_post_nick:
-			Post post = (Post) getAdapterData().get(position);
-			gotoUserPage(post.getUser());
-			break;
-		case R.id.row_post_store_name:
-			post = (Post) getAdapterData().get(position);
-			gotoStorePage(post.getStore());
-			break;
-		}
-	}
-
 	public void onDeleteButtonClicked(View v) {
 		if (session.isLogin() && !getHttpRequestManager().isRunning(getActivity())) {
 			curDeletePos = Integer.parseInt((String) v.getTag());
@@ -120,18 +94,6 @@ public class CommentListView extends RequestableMListView implements View.OnClic
 
 	public void deleteComment(int comment_id) {
 		getHttpRequestManager().request(getActivity(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
-	}
-
-	protected void gotoUserPage(User user) { 
-		Intent intent = new Intent(getActivity(), UserMainActivity.class);
-		intent.putExtra(UserMainActivity.USER, (Parcelable) user);
-		((BaseActivity) getActivity()).startActivity(intent);
-	}
-	
-	protected void gotoStorePage(Store store) { 
-		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
-		intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-		((BaseActivity) getActivity()).startActivity(intent);
 	}
 
 	@Override

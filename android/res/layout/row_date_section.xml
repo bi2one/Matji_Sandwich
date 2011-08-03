@@ -6,7 +6,7 @@
 	android:paddingTop="3dp"
 	android:paddingBottom="3dp" >
 	<TextView
-		android:id="@+id/date_section"
+		android:id="@+id/row_date_section"
 		style="@style/DefaultWrap"
 		android:minWidth="100dp"
 		android:background="@drawable/section"

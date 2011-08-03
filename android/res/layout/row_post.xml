@@ -1,70 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/row_post_wrapper" 
+	android:id="@+id/row_post_wrapper"
 	style="@style/row_post_PostRowWrapper">
-	<include 
+	<include
 		layout="@layout/profile" />
-	<LinearLayout 
+	<!-- Post Wrapper -->
+	<RelativeLayout
 		android:id="@+id/row_post_post_wrapper"
 		style="@style/row_post_PostWrapper">
-		<LinearLayout 
-			style="@style/DefaultWrap">
-			<TextView 
-				android:id="@+id/row_post_nick" 
-				style="@style/LinkifyName" />
-			<TextView 
-				android:id="@+id/row_post_at" 
-				style="@style/row_post_At" />
-			<TextView 
-				android:id="@+id/row_post_store_name" 
-				style="@style/LinkifyName" />
-		</LinearLayout>
-<!-- 		<RelativeLayout  -->
-<!-- 			style="@style/DefaultWrap"> -->
-			<TextView 
-				android:id="@+id/row_post_post" 
+		<LinearLayout
+			style="@style/DefaultVerticalWrap">
+			<!-- Name Line -->
+			<LinearLayout
+				style="@style/DefaultWrap">
+				<TextView
+					android:id="@+id/row_post_nick"
+					style="@style/LinkifyName" />
+				<TextView
+					android:id="@+id/row_post_at"
+					style="@style/row_post_At" />
+				<TextView
+					android:id="@+id/row_post_store_name"
+					style="@style/LinkifyName" />
+			</LinearLayout>
+
+			<!-- Post -->
+			<TextView
+				android:id="@+id/row_post_post"
 				style="@style/TalkContent" />
-<!--  			<Button -->
-<!-- 				android:id="@+id/row_post_menu" -->
-<!-- 				style="@style/row_post_menu" -->
-<!-- 				android:layout_alignParentRight="true"/>  -->
-<!-- 		</RelativeLayout> -->
-		<LinearLayout 
-			style="@style/DefaultWrap">
-			<TextView 
-				android:id="@+id/row_post_tag" 
+
+			<!-- Tag -->
+			<TextView
+				android:id="@+id/row_post_tag"
 				style="@style/row_post_Tags" />
+
+			<!-- Previews -->
+			<LinearLayout
+				android:id="@+id/row_post_previews"
+				style="@style/DefaultWidthFill">
+				<ImageView
+					style="@style/row_post_Preview"
+					android:id="@+id/row_post_preview1" />
+				<ImageView
+					style="@style/row_post_Preview"
+					android:id="@+id/row_post_preview2" />
+				<ImageView
+					style="@style/row_post_Preview"
+					android:id="@+id/row_post_preview3" />
+			</LinearLayout>
+
+			<!-- Ago and Count -->
+			<LinearLayout
+				style="@style/DefaultWrap">
+				<TextView
+					android:id="@+id/row_post_created_at"
+					style="@style/row_post_CreatedAt" />
+				<TextView
+					android:id="@+id/row_post_comment"
+					style="@style/row_post_Comment" />
+				<TextView
+					android:id="@+id/row_post_comment_count"
+					style="@style/row_post_Count" />
+				<TextView
+					style="@style/row_post_Like" />
+				<TextView
+					android:id="@+id/row_post_like_count"
+					style="@style/row_post_Count" />
+			</LinearLayout>
+
 		</LinearLayout>
-		<LinearLayout 
-			android:id="@+id/row_post_previews" 
-			style="@style/DefaultWidthFill">
-			<ImageView 
-				style="@style/row_post_Preview" 
-				android:id="@+id/row_post_preview1" />
-			<ImageView 
-				style="@style/row_post_Preview" 
-				android:id="@+id/row_post_preview2" />
-			<ImageView 
-				style="@style/row_post_Preview" 
-				android:id="@+id/row_post_preview3" />
+		<LinearLayout
+			style="@style/DefaultWrap"
+			android:layout_centerVertical="true"
+			android:layout_alignParentRight="true">
+			<ImageButton
+				android:id="@+id/row_post_menu_btn"
+				android:background="@color/matji_transparent"
+				style="@style/DefaultWrap"
+				android:src="@drawable/btn_quickaction">
+			</ImageButton>
 		</LinearLayout>
-		<LinearLayout 
-			style="@style/DefaultWrap">
-			<TextView 
-				android:id="@+id/row_post_created_at" 
-				style="@style/row_post_CreatedAt" />
-			<TextView 
-				android:id="@+id/row_post_comment" 
-				style="@style/row_post_Comment" />
-			<TextView 
-				android:id="@+id/row_post_comment_count" 
-				style="@style/row_post_Count" />
-			<TextView 
-				style="@style/row_post_Like" />
-			<TextView 
-				android:id="@+id/row_post_like_count" 
-				style="@style/row_post_Count" />
-		</LinearLayout>
-	</LinearLayout>
+	</RelativeLayout>
 </LinearLayout>

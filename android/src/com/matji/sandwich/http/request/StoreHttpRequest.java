@@ -3,7 +3,6 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.StoreParser;
 
 import android.content.Context;
-import android.util.Log;
 
 public class StoreHttpRequest extends HttpRequest {
     public StoreHttpRequest(Context context) {
@@ -103,9 +102,21 @@ public class StoreHttpRequest extends HttpRequest {
     	
     }
     
-    public void actionBookmarkedList(int user_id, int page, int limit) {
+    public void actionBookmarkList(int user_id, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
-    	action = "bookmarked_list";
+    	action = "bookmark_list";
+    	parser = new StoreParser(context);
+
+    	getHashtable.clear();
+    	getHashtable.put("user_id", user_id+ "");
+    	getHashtable.put("page", page + "");
+    	getHashtable.put("limit", limit + "");
+    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
+    }
+    
+    public void actionLikeList(int user_id, int page, int limit) {
+    	httpMethod = HttpMethod.HTTP_GET;
+    	action = "like_list";
     	parser = new StoreParser(context);
 
     	getHashtable.clear();

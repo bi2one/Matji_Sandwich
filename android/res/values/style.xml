@@ -502,8 +502,11 @@
   
   <style name="row_post_PostWrapper" parent="DefaultWidthFill">
   	<item name="android:background">@drawable/post_bg</item>
-  	<item name="android:orientation">vertical</item>
   	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
+  </style>
+  
+  <style name="row_post_PostWrapper2" parent="DefaultWidthFill">
+  	<item name="android:orientation">vertical</item>
   </style>
 
   <style name="row_post_menu" parent="DefaultWrap">
@@ -577,18 +580,47 @@
   </style>
 
   <style name="map_title_bar_changeLocationArrow" parent="DefaultWrap">
-    <item name="android:layout_gravity">center</item>
-    <item name="android:paddingRight">2dp</item>
+	<item name="android:layout_gravity">center</item>
+	<item name="android:paddingRight">2dp</item>
   </style>
 
   <style name="map_title_bar_nearPostButton" parent="DefaultWrap">
     <item name="android:background">@drawable/map_titlebar_near_post_btn</item>
   </style>
   
+  
   <style name="Animations" />
+  <!-- PopDownMenu -->
+  <style name="Animations.PopDownMenu" />
+  <style name="Animations.PopDownMenu.Left">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
+  </style>
+
+  <style name="Animations.PopDownMenu.Right">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+  </style>
+
+  <style name="Animations.PopDownMenu.Center">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
+  </style>
+
+  <!-- PopUpMenu -->
   <style name="Animations.PopUpMenu" />
+  <style name="Animations.PopUpMenu.Left">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
+  </style>
+
   <style name="Animations.PopUpMenu.Right">
-  	<item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+	<item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
 	<item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
+  </style>
+
+  <style name="Animations.PopUpMenu.Center">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
   </style>
 </resources>

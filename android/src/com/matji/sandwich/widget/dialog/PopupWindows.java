@@ -1,4 +1,4 @@
-package com.matji.sandwich.widget.quick;
+package com.matji.sandwich.widget.dialog;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;

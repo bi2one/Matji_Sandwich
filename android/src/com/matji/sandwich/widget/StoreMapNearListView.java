@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.location.Location;
+import android.os.Parcelable;
 import android.widget.TextView;
 import android.view.View;
 import android.view.MotionEvent;
@@ -134,6 +135,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
     public void onListItemClick(int position) {
 	Store store = (Store) getAdapterData().get(position);
 	Intent intent = new Intent(getActivity(), StoreMainActivity.class);
-	((BaseActivity) getActivity()).startActivityWithMatjiData(intent, store);
+	intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
+	((BaseActivity) getActivity()).startActivity(intent);
     }    
 }

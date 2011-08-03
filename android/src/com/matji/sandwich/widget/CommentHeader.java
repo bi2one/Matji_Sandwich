@@ -2,28 +2,27 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
-import com.matji.sandwich.ImageSliderActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.listener.GotoImageSliderAction;
+import com.matji.sandwich.listener.GotoStoreMainAction;
+import com.matji.sandwich.listener.GotoUserMainAction;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
-public class CommentHeader extends ViewContainer implements View.OnClickListener {
+public class CommentHeader extends ViewContainer {
 
 	private int[] imageIds = {
 			R.id.header_comment_preview1,
@@ -88,30 +87,33 @@ public class CommentHeader extends ViewContainer implements View.OnClickListener
 			previews[i].setMaxWidth((remainScreenWidth-profileSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
 			previews[i].setLayoutParams(params);
 			previews[i].setTag(i+"");
-		}		
-		
-		setOnClickListener();
+		}
 	}
 
 	public void setPost(Post post) {
 		this.post = post;
-		setViewData(post);
+		setOnClickListener();
+		setViewData();
 	}
 	
 	private void setOnClickListener() {
-		profile.setOnClickListener(this);
-		nickText.setOnClickListener(this);
-		storeNameText.setOnClickListener(this);
+		GotoUserMainAction action1 = new GotoUserMainAction(getRootView().getContext(), post.getUser());
+		GotoStoreMainAction action2 = new GotoStoreMainAction(getRootView().getContext(), post.getStore());
+		GotoImageSliderAction action3 = new GotoImageSliderAction(getRootView().getContext(), post.getAttachFiles());
+		
+		profile.setOnClickListener(action1);
+		nickText.setOnClickListener(action1);
+		storeNameText.setOnClickListener(action2);
 //		holder.menu.setOnClickListener(this);
 //		postText.setLinksClickable(false);
 		
 		for (int i = 0; i < previews.length; i++) {
-			previews[i].setOnClickListener(new PreviewOnClickListener());
+			previews[i].setOnClickListener(action3);
 		}
 	}
 	
 
-	private void setViewData(Post post) {
+	private void setViewData() {
 		setPreviews(post, previews);
 
 		Store store = post.getStore();
@@ -163,35 +165,5 @@ public class CommentHeader extends ViewContainer implements View.OnClickListener
 			downloader.downloadAttachFileImage(attachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, previews[i]);
 			previews[i].setVisibility(View.VISIBLE);
 		}
-	}
-
-	public void callImageViewer(int position){
-		ArrayList<AttachFile> attachFiles = post.getAttachFiles();
-		int[] attachFileIds = new int[attachFiles.size()];
-		
-		for (int i = 0; i < attachFiles.size(); i++) {
-			attachFileIds[i] = attachFiles.get(i).getId();
-		}
-		
-		Intent viewerIntent = new Intent(getRootView().getContext(), ImageSliderActivity.class);
-		viewerIntent.putExtra("attach_file_ids", attachFileIds);
-		viewerIntent.putExtra("position", position);
-		getRootView().getContext().startActivity(viewerIntent);
-	}
-
-	
-	private class PreviewOnClickListener implements OnClickListener {
-		
-		@Override
-		public void onClick(View v) {
-			int position = Integer.parseInt((String) v.getTag());
-			callImageViewer(position);
-		}		
-	}
-
-	@Override
-	public void onClick(View arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }

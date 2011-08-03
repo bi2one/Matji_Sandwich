@@ -3,7 +3,6 @@ package com.matji.sandwich.http.request;
 import com.matji.sandwich.http.parser.UserParser;
 
 import android.content.Context;
-import android.util.Log;
 
 public class UserHttpRequest extends HttpRequest {
 	public UserHttpRequest(Context context) {
@@ -52,6 +51,42 @@ public class UserHttpRequest extends HttpRequest {
 		getHashtable.put("lng_sw", lng_sw + "");
 	}
 
+	public void actionStoreLikeList(int store_id, int page, int limit) {
+		httpMethod = HttpMethod.HTTP_GET;
+		action = "like_list";
+		parser = new UserParser(context);
+
+		getHashtable.clear();		
+		getHashtable.put("store_id", store_id+"");
+		getHashtable.put("page", page+"");
+		getHashtable.put("limit", limit+"");
+		getHashtable.put("include", "stores,attach_files,user_mileage"); 
+	}
+	
+	public void actionStoreFoodLikeList(int store_food_id, int page, int limit) {
+		httpMethod = HttpMethod.HTTP_GET;
+		action = "like_list";
+		parser = new UserParser(context);
+
+		getHashtable.clear();		
+		getHashtable.put("store_food_id", store_food_id+"");
+		getHashtable.put("page", page+"");
+		getHashtable.put("limit", limit+"");
+		getHashtable.put("include", "stores,attach_files,user_mileage"); 
+	}
+	
+	public void actionPostLikeList(int post_id, int page, int limit) {
+		httpMethod = HttpMethod.HTTP_GET;
+		action = "like_list";
+		parser = new UserParser(context);
+
+		getHashtable.clear();		
+		getHashtable.put("post_id", post_id+"");
+		getHashtable.put("page", page+"");
+		getHashtable.put("limit", limit+"");
+		getHashtable.put("include", "stores,attach_files,user_mileage"); 
+	}
+	
 	public void actionMe() {
 
 	}

@@ -19,6 +19,7 @@
 	
 	<!-- Post List Row -->
 	<dimen name="row_post_distance">1dp</dimen>
+	<dimen name="row_post_previews_margin">5dp</dimen>
 	
 	<!-- Text Size -->
 	<dimen name="text_ssmall">9dp</dimen>
