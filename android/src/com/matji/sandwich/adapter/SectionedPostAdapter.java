@@ -278,7 +278,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 	}
 
 	private void setOnClickListener(PostElement holder, ViewGroup parent) {
-		final PostListView sectionListView = (PostListView) parent;
+		                    final PostListView sectionListView = (PostListView) parent;
 		
 		holder.profile.setOnClickListener(sectionListView);
 		holder.nick.setOnClickListener(sectionListView);
@@ -322,7 +322,7 @@ public class SectionedPostAdapter extends MBaseAdapter {
 			holder.at.setVisibility(View.VISIBLE);
 			holder.storeName.setText(" "+store.getName());
 		}
-		else { 
+		else {
 			holder.at.setVisibility(View.GONE);
 			holder.storeName.setText("");
 		}

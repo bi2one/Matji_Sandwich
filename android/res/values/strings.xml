@@ -252,4 +252,8 @@
   <string name="hours_ago">시간 전</string>
   <string name="min_ago">분 전</string>
   <string name="sec_ago">초 전</string>
+
+  <!-- MapStoreSectionedAdapter.java -->
+  <string name="map_store_sectioned_adapter_bookmarked_store">북마크 맛집</string>
+  <string name="map_store_sectioned_adapter_store">맛집</string>
 </resources>

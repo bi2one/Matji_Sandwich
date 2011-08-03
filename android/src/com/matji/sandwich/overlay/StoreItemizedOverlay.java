@@ -147,6 +147,9 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 	TextView title = (TextView)popupOverlay.findViewById(R.id.popup_item_title);
 	TextView likeCount = (TextView)popupOverlay.findViewById(R.id.popup_item_like_count);
 	TextView postCount = (TextView)popupOverlay.findViewById(R.id.popup_item_post_count);
+
+	// Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/pala.ttf");
+	// likeCount.setTypeface(tf);
 	
 	title.setText(lastPopupItem.getTitle());
 	likeCount.setText("" + popupStore.getLikeCount());
