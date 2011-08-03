@@ -21,8 +21,9 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.RequestCommand;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
-import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.http.request.NearBookmarkStoreRequest;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
@@ -48,17 +49,20 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
     private BaseMapActivity activity;
     private TextView addressView;
     private HttpRequestManager requestManager;
-    private StoreHttpRequest storeRequest;
+    private NearBookmarkStoreRequest storeRequest;
+    private MapStoreSectionedAdapter adapter;
 
     public StoreMapNearListView(Context context, AttributeSet attrs) {
 	super(context, attrs, new MapStoreSectionedAdapter(context), 10);
 	this.context = context;
 	sessionUtil = new SessionMapUtil(context);
-	storeRequest = new StoreHttpRequest(context);
+	storeRequest = new NearBookmarkStoreRequest(context, 10);
 	gpsManager = new GpsManager(context, this);
 	requestManager = HttpRequestManager.getInstance(context);
 	setOnTouchListener(this);
 	setPage(1);
+	adapter = (MapStoreSectionedAdapter)getMBaseAdapter();
+	adapter.init(storeRequest);
     }
 
     public void init(TextView addressView, BaseMapActivity activity) {
@@ -96,15 +100,20 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	e.performExceptionHandling(context);
     }
 
-    public HttpRequest request() {
+    public RequestCommand request() {
 	GeoPoint neBound = sessionUtil.getNEBound();
 	GeoPoint swBound = sessionUtil.getSWBound();
 	
-	storeRequest.actionNearbyList((double) swBound.getLatitudeE6() / 1E6,
-				      (double) neBound.getLatitudeE6() / 1E6,
-				      (double) swBound.getLongitudeE6() / 1E6,
-				      (double) neBound.getLongitudeE6() / 1E6,
-				      getPage(), getLimit());
+	// storeRequest.actionNearbyList((double) swBound.getLatitudeE6() / 1E6,
+	// 			      (double) neBound.getLatitudeE6() / 1E6,
+	// 			      (double) swBound.getLongitudeE6() / 1E6,
+	// 			      (double) neBound.getLongitudeE6() / 1E6,
+	// 			      getPage(), getLimit());
+	storeRequest.actionCurrentUserNearBookmarkedList((double) swBound.getLatitudeE6() / 1E6,
+							 (double) neBound.getLatitudeE6() / 1E6,
+							 (double) swBound.getLongitudeE6() / 1E6,
+							 (double) neBound.getLongitudeE6() / 1E6,
+							 getPage());
 	return storeRequest;
     }
 
@@ -136,6 +145,6 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	Store store = (Store) getAdapterData().get(position);
 	Intent intent = new Intent(getActivity(), StoreMainActivity.class);
 	intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-	((BaseActivity) getActivity()).startActivity(intent);
+	getActivity().startActivity(intent);
     }    
 }

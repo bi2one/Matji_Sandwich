@@ -25,7 +25,7 @@ public class Store extends MatjiData implements Serializable {
 	private int like_count;
 	private int bookmark_count;
 	private int url_count;
-	private AttachFile file; 
+	private AttachFile file;
 	private User reg_user;
 	private ArrayList<SimpleTag> tags;
 	private ArrayList<StoreFood> store_foods;
