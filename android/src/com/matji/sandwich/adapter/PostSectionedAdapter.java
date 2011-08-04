@@ -7,6 +7,7 @@ import com.matji.sandwich.CommentActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.Base;
+import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
@@ -35,12 +36,19 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * {@link Post} Adapter.
+ * 
+ * @author mozziluv
+ *
+ */
 public class PostSectionedAdapter extends SectionedAdapter {
 	private int[] imageIds = {
 			R.id.row_post_preview1,
@@ -56,16 +64,30 @@ public class PostSectionedAdapter extends SectionedAdapter {
 	private GotoStoreMainAction action2;
 	private GotoImageSliderAction action3;
 
+	/**
+	 * 기본 생성자.
+	 * 
+	 * @param context
+	 */
 	public PostSectionedAdapter(Context context) {
 		super(context);
 		init();
 	}
 
+	/**
+	 * 초기화 메소드.
+	 */
 	protected void init() {
 		downloader = new MatjiImageDownloader(context);
 		profileSize = (int) MatjiConstants.dimen(R.dimen.profile_size);
 	}
 
+	/**
+	 * Section의 View를 리턴한다.
+	 * Section의 날짜가 오늘일 때, Text는 Today, background drawable은 today용 이미지로 설정해 리턴한다.
+	 * 
+	 * @see SectionedAdapter#getSectionView(View, String)
+	 */
 	@Override
 	public View getSectionView(View convertView, String section) {
 		PostSectionElement postSectionElement;
@@ -91,6 +113,11 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		return convertView;
 	}
 
+	/**
+	 * {@link Post}의 뷰를 리턴한다.
+	 * 
+	 * @see SectionedAdapter#getItemView(int, View, ViewGroup)
+	 */
 	@Override
 	public View getItemView(final int position, View convertView, final ViewGroup parent) {
 		PostElement postElement;
@@ -144,6 +171,12 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		return convertView;
 	}
 
+	/**
+	 * 전달받은 position의 {@link Post}의 작성 날짜를 Section의 Name으로 한다.
+	 * {@link Post}의 작성 날짜를 변환해 리턴한다.
+	 * 
+	 * @see SectionedAdapter#putSectionName(int)
+	 */
 	@Override
 	public String putSectionName(int position) {
 		Post post = (Post) data.get(position);
@@ -152,6 +185,12 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		return section;
 	}
 
+	/**
+	 * holder의 각 View에 대해 리스너를 등록한다.
+	 * 
+	 * @param holder 뷰가 위치한 holder
+	 * @param position 해당 holder의 position
+	 */
 	private void setActions(PostElement holder, final int position) {
 		action1 = new GotoUserMainAction(context, ((Post) data.get(position)).getUser());
 		action2 = new GotoStoreMainAction(context, ((Post) data.get(position)).getStore());
@@ -161,19 +200,19 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		holder.nick.setOnClickListener(action1);
 		holder.storeName.setOnClickListener(action2);
 		holder.post.setLinksClickable(false);
-		holder.menu.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				new PostQuickActionDialog(position).show(v);
-			}
-		});
+		holder.menu.setOnClickListener(new PostQuickActionDialog(position));
 
 		for (int i = 0; i < holder.previews.length; i++) {
 			holder.previews[i].setOnClickListener(action3);
 		}
 	}
 
+	/**
+	 * {@link Post}내의 정보를 View에 뿌려준다.
+	 * 
+	 * @param holder 정보를 뿌려줄 view holder
+	 * @param position 해당 holder의 position
+	 */
 	private void setViewData(PostElement holder, int position) {
 		Post post = (Post) data.get(position);
 
@@ -213,6 +252,13 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		holder.likeCount.setText(post.getLikeCount() + "");
 	}
 
+	/**
+	 * 파라미터로 전달받은 {@link Post}에 {@link AttachFile}이 존재할 경우,
+	 * preview에 이미지를 다운로드 받는다.
+	 * 
+	 * @param post 
+	 * @param previews
+	 */
 	public void setPreviews(Post post, ImageView[] previews) {
 		int[] attachFileIds = new int[post.getAttachFiles().size()];
 		for (int i = 0; i < attachFileIds.length; i++) {
@@ -230,6 +276,12 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		}		
 	}
 
+	/**
+	 * 리스트 아이템을 클릭했을 때,
+	 * {@link CommentActivity}로 이동한다.
+	 * 
+	 * @param position 클릭된 아이템의 positoin
+	 */
 	private void onListItemClick(int position) {
 		Post post = (Post) data.get(position);
 		if (post.getActivityId() == 0) {
@@ -240,11 +292,12 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		}
 	}
 
-	// 넣어야하나...
-	public void refresh() {
-		notifyDataSetChanged();
-	}
-
+	/**
+	 * {@link Post} 뷰 홀더
+	 * 
+	 * @author mozziluv
+	 *
+	 */
 	private class PostElement {
 		ProfileImageView profile;
 		TextView nick;
@@ -270,7 +323,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
 	 * @author mozziluv
 	 *
 	 */
-	class PostQuickActionDialog implements Requestable {
+	class PostQuickActionDialog implements Requestable, OnClickListener {
 		private QuickActionDialog quickaction;
 		private Session session;
 		private HttpRequest request;
@@ -413,14 +466,19 @@ public class PostSectionedAdapter extends SectionedAdapter {
 			}
 		}		
 
+		/**
+		 * 파라미터로 전달받은 {@link Post}가 현재 로그인 된 {@link User}의 {@link Post}인지 확인한다.
+		 * 
+		 * @param post 확인 할 {@link Post}
+		 * @return 전달받은 {@link Post}가 로그인 된 {@link User}의 {@link Post}일 때 true
+		 */
 		public boolean isMine(Post post) {
 			return session.isLogin() && session.getCurrentUser().getId() == post.getUserId();
 		}
 
-		public void show(View v) {
-			quickaction.show(v);
-		}
-
+		/**
+		 * @see Requestable#requestCallBack(int, ArrayList)
+		 */
 		@Override
 		public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 
@@ -442,10 +500,21 @@ public class PostSectionedAdapter extends SectionedAdapter {
 			notifyDataSetChanged();
 		}
 
+		/**
+		 * @see Requestable#requestExceptionCallBack(int, MatjiException)
+		 */
 		@Override
 		public void requestExceptionCallBack(int tag, MatjiException e) {
 			// TODO Auto-generated method stub
 			e.performExceptionHandling(context);
+		}
+		
+		/**
+		 * Quick Action Dialog를 보여준다.
+		 */
+		@Override
+		public void onClick(View v) {
+			quickaction.show(v);
 		}
 	}
 }
