@@ -91,7 +91,7 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
 	storeElement.name.setText(store.getName());
 	storeElement.likeCount.setText("" + store.getLikeCount());
 	storeElement.postCount.setText("" + store.getPostCount());
-	storeElement.bookmarkToggle.init(false);
+	storeElement.bookmarkToggle.init(this, bookmarkedList, store);
 
 	return convertView;
     }

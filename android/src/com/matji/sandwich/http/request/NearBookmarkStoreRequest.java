@@ -26,6 +26,7 @@ public class NearBookmarkStoreRequest implements RequestCommand {
     private int nearbyStoreStartingPage = 1;
     private ArrayList<MatjiData> bookmarkList;
     private ArrayList<MatjiData> storeList;
+    private ArrayList<MatjiData> resultList;
     
     public NearBookmarkStoreRequest(Context context, int limit) {
 	this.context = context;
@@ -36,6 +37,7 @@ public class NearBookmarkStoreRequest implements RequestCommand {
 	this.limit = limit;
 	bookmarkList = new ArrayList<MatjiData>();
 	storeList = new ArrayList<MatjiData>();
+	resultList = new ArrayList<MatjiData>();
     }
 
     public void actionNearBookmarkedList(int user_id, double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page) {
@@ -47,6 +49,7 @@ public class NearBookmarkStoreRequest implements RequestCommand {
 	this.page = page;
 
 	if (page == 1) {
+	    resultList.clear();
 	    isBookmarkListEnded = false;
 	}
     }
@@ -70,15 +73,16 @@ public class NearBookmarkStoreRequest implements RequestCommand {
 
 	    storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, page, limit);
 	    storeList = storeRequest.request();
-	    bookmarkList.addAll(storeList);
+	    resultList.addAll(bookmarkList);
+	    resultList.addAll(storeList);
 
 	    // Log.d("=====", "bookmarklist: " + bookmarkList.size());
-	    return bookmarkList;
+	    return resultList;
 	} else {
 	    storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, page, limit);
-	    storeList = storeRequest.request();
+	    resultList = storeRequest.request();
 	    // Log.d("=====", "storelist   : " + storeList.size());
-	    return storeList;
+	    return resultList;
 	}
     }
 
