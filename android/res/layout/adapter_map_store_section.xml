@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/DefaultWidthFill"
-    android:background="@color/DODGER_BLUE">
+    style="@style/adapter_map_store_section_bg">
   <TextView
       android:id="@+id/map_store_section_subject"
-      style="@style/DefaultWidthFill"
-      android:textSize="20dp"
-      android:textColor="@color/BLACK"
+      style="@style/adapter_map_store_section_text"
       android:layout_alignParentLeft="true" />
-  <!-- <TextView -->
-  <!--     android:id="@+id/bookmark_desc" -->
-  <!--     android:layout_width="fill_parent" -->
-  <!--     android:layout_height="wrap_content" -->
-  <!--     android:textSize="20dp" -->
-  <!--     android:textColor="@color/BLACK" -->
-  <!--     android:layout_alignParentLeft="true" /> -->
 </RelativeLayout>

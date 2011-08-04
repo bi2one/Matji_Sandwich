@@ -35,12 +35,14 @@
 	<color name="map_title_bar_change_address">#B7924C</color>
 	<color name="section_shadow_color">#333333</color>
 	<color name="title_shadow_color">#ffffff</color>
+	<color name="listview_divider1_gray">#DDDDDD</color>
 	
 	<color name="matji_dark_orange">#c30</color>
 	<color name="matji_light_gray">#9b9b9b</color>
 	<color name="matji_black">#000</color>
 	<color name="matji_chocolate">#a27c47</color>
 	<color name="matji_transparent">#00000000</color>
+	<color name="matji_red">#FF2400</color>
 
 	<!-- Cell -->
 	<color name="cell_user_bg">#ffffff</color>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/relativelayout_loading"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DefaultWrap">
+  <ImageView
+      android:id="@+id/bookmark_star_toggle_unchecked"
+      style="@style/bookmark_star_toggle_unchecked" />
+  <ImageView android:visibility="gone"
+	     android:id="@+id/bookmark_star_toggle_checked"
+	     style="@style/bookmark_star_toggle_checked" />
+</LinearLayout>

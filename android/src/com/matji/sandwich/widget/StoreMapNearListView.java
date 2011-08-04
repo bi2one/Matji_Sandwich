@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.MotionEvent;
 import android.view.View.OnTouchListener;
 
+import com.matji.sandwich.MainMapActivity;
 import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
@@ -46,7 +46,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
     private GpsManager gpsManager;
     private Location prevLocation;
     private Context context;
-    private BaseMapActivity activity;
+    private MainMapActivity activity;
     private TextView addressView;
     private HttpRequestManager requestManager;
     private NearBookmarkStoreRequest storeRequest;
@@ -65,7 +65,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	adapter.init(storeRequest);
     }
 
-    public void init(TextView addressView, BaseMapActivity activity) {
+    public void init(TextView addressView, MainMapActivity activity) {
 	setActivity(activity);
 	this.addressView = addressView;
 	this.activity = activity;
@@ -104,11 +104,6 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	GeoPoint neBound = sessionUtil.getNEBound();
 	GeoPoint swBound = sessionUtil.getSWBound();
 	
-	// storeRequest.actionNearbyList((double) swBound.getLatitudeE6() / 1E6,
-	// 			      (double) neBound.getLatitudeE6() / 1E6,
-	// 			      (double) swBound.getLongitudeE6() / 1E6,
-	// 			      (double) neBound.getLongitudeE6() / 1E6,
-	// 			      getPage(), getLimit());
 	storeRequest.actionCurrentUserNearBookmarkedList((double) swBound.getLatitudeE6() / 1E6,
 							 (double) neBound.getLatitudeE6() / 1E6,
 							 (double) swBound.getLongitudeE6() / 1E6,
@@ -142,6 +137,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
     }
 
     public void onListItemClick(int position) {
+	activity.setIsFlow(true);
 	Store store = (Store) getAdapterData().get(position);
 	Intent intent = new Intent(getActivity(), StoreMainActivity.class);
 	intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);

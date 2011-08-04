@@ -258,4 +258,8 @@ public class Store extends MatjiData implements Serializable {
 
 	return tagText;
     }
+
+    public boolean equals(Store store) {
+	return getId() == store.getId();
+    }
 }

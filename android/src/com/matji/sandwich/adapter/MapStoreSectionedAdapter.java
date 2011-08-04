@@ -5,14 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.TextView;
-import android.widget.ImageView;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.AttachFile;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.widget.BookmarkStarToggleView;
 import com.matji.sandwich.http.request.NearBookmarkStoreRequest;
+
+import java.util.ArrayList;
 
 public class MapStoreSectionedAdapter extends SectionedAdapter {
     private static final String SECTION_BOOKMARK_STORE = "MapStoreSectionedAdapter.section_bookmarked_store";
@@ -20,15 +23,14 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
     
     private LayoutInflater inflater;
     private Context context;
-    private MatjiImageDownloader downloader;
     private NearBookmarkStoreRequest storeRequest;
     private int nearByStoreIndex;
+    private ArrayList<MatjiData> bookmarkedList;
     
     public MapStoreSectionedAdapter(Context context) {
 	super(context);
 	this.context = context;
 	inflater = getLayoutInflater();
-	downloader = new MatjiImageDownloader(context);
     }
 
     public void init(NearBookmarkStoreRequest storeRequest) {
@@ -41,6 +43,8 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
 
     public void notifyDataSetChanged() {
 	nearByStoreIndex = storeRequest.getFirstNearByStoreIndex();
+	bookmarkedList = storeRequest.getBookmarkedList();
+	// Log.d("=====", "index: " + bookmarkedList.size());
 	super.notifyDataSetChanged();
     }
 
@@ -72,27 +76,22 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
 
 	if (convertView == null) {
 	    storeElement = new StoreElement();
-	    convertView = getLayoutInflater().inflate(R.layout.adapter_store, null);
+	    convertView = getLayoutInflater().inflate(R.layout.adapter_near_store, null);
 
-	    storeElement.thumbnail = (ImageView) convertView.findViewById(R.id.store_adapter_thumbnail);
-	    storeElement.name = (TextView) convertView.findViewById(R.id.store_adapter_name);
-	    storeElement.address = (TextView) convertView.findViewById(R.id.store_adapter_address);
-	    storeElement.likeCount = (TextView) convertView.findViewById(R.id.store_adapter_like_count);
+	    storeElement.name = (TextView) convertView.findViewById(R.id.adapter_near_store_name);
+	    storeElement.likeCount = (TextView) convertView.findViewById(R.id.adapter_near_store_like_count);
+	    storeElement.postCount = (TextView) convertView.findViewById(R.id.adapter_near_store_post_count);
+	    storeElement.bookmarkToggle = (BookmarkStarToggleView) convertView.findViewById(R.id.adapter_near_store_bookmark);
+
 	    convertView.setTag(storeElement);
 	} else {
 	    storeElement = (StoreElement) convertView.getTag();
 	}
 
-	AttachFile file = store.getFile();
-	if (file != null) {
-	    downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, storeElement.thumbnail);
-	} else {
-	    Drawable defaultImage = context.getResources().getDrawable(R.drawable.img_thumbnail_bg);
-	    storeElement.thumbnail.setImageDrawable(defaultImage);
-	}
 	storeElement.name.setText(store.getName());
-	storeElement.address.setText(store.getAddress());
-	storeElement.likeCount.setText(store.getLikeCount()+"");
+	storeElement.likeCount.setText("" + store.getLikeCount());
+	storeElement.postCount.setText("" + store.getPostCount());
+	storeElement.bookmarkToggle.init(false);
 
 	return convertView;
     }
@@ -111,9 +110,9 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
     }
 
     private class StoreElement {
-	ImageView thumbnail;
 	TextView name;
-	TextView address;
 	TextView likeCount;
+	TextView postCount;
+	BookmarkStarToggleView bookmarkToggle;
     }
 }

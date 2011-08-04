@@ -45,23 +45,26 @@ public class NearBookmarkStoreRequest implements RequestCommand {
 	this.lng_sw = lng_sw;
 	this.lng_ne = lng_ne;
 	this.page = page;
+
+	if (page == 1) {
+	    isBookmarkListEnded = false;
+	}
     }
 
     public void actionCurrentUserNearBookmarkedList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page) {
 	if (session.isLogin()) {
-	    isBookmarkListEnded = false;
 	    actionNearBookmarkedList(session.getCurrentUser().getId(), lat_sw, lat_ne, lng_sw, lng_ne, page);
 	} else {
-	    isBookmarkListEnded = true;
 	    actionNearBookmarkedList(0, lat_sw, lat_ne, lng_sw, lng_ne, page);
 	}
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
-	if (!isBookmarkListEnded) {
+	if (!isBookmarkListEnded && session.isLogin()) {
 	    isBookmarkListEnded = true;
-	    // storeRequest.actionNearbyBookmarkedList(user_id, lat_sw, lat_ne, lng_sw, lng_ne, page);
-	    storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, page, 100);
+	    storeRequest.actionNearbyBookmarkedList(user_id, lat_sw, lat_ne, lng_sw, lng_ne, page);
+	    // storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, page, 100);
+	    
 	    bookmarkList = storeRequest.request();
 	    nearByStoreIndex = bookmarkList.size();
 
@@ -74,9 +77,8 @@ public class NearBookmarkStoreRequest implements RequestCommand {
 	} else {
 	    storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, page, limit);
 	    storeList = storeRequest.request();
-	    bookmarkList.addAll(storeList);
 	    // Log.d("=====", "storelist   : " + storeList.size());
-	    return bookmarkList;
+	    return storeList;
 	}
     }
 
@@ -86,5 +88,9 @@ public class NearBookmarkStoreRequest implements RequestCommand {
 
     public int getFirstNearByStoreIndex() {
 	return nearByStoreIndex;
+    }
+
+    public ArrayList<MatjiData> getBookmarkedList() {
+	return bookmarkList;
     }
 }

@@ -365,6 +365,11 @@
     <item name="android:textSize">10dp</item>
   </style>
 
+  <style name="main_map_listView" parent="DefaultFill">
+    <item name="android:divider">@color/listview_divider1_gray</item>
+    <item name="android:dividerHeight">0px</item>
+  </style>
+
   <!-- activity_get_map_position.xml -->
   <style name="get_map_position_addressText" parent="DefaultWidthFill">
     <item name="android:background">@color/address_text_bg</item>
@@ -622,5 +627,78 @@
   <style name="Animations.PopUpMenu.Center">
 	<item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
 	<item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+  </style>
+
+  <!-- adapter_map_store_section.xml -->
+  <style name="adapter_map_store_section_bg" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/list_section_red_bg</item>
+    <item name="android:padding">2dp</item>
+  </style>
+
+  <style name="adapter_map_store_section_text" parent="DefaultWrap">
+    <item name="android:textColor">@color/WHITE</item>
+    <item name="android:layout_marginLeft">5dp</item>
+    <item name="android:textSize">14dp</item>
+  </style>
+
+  <!-- adapter_near_store.xml -->
+  <style name="adapter_near_store" parent="DefaultWidthFill">
+    <item name="android:background">@color/WHITE</item>
+  </style>
+
+  <style name="adapter_near_store_left_element" parent="DefaultWrap">
+    <item name="android:layout_marginLeft">7dp</item>
+  </style>
+  
+  <style name="adapter_near_store_name" parent="adapter_near_store_left_element">
+    <item name="android:layout_marginTop">7dp</item>
+    <item name="android:textSize">15dp</item>
+    <item name="android:textColor">@color/BLACK</item>
+  </style>
+
+  <style name="adapter_near_store_desc" parent="adapter_near_store_left_element">
+    <item name="android:layout_marginTop">4dp</item>
+    <item name="android:layout_marginBottom">5dp</item>
+  </style>
+
+  <style name="adapter_near_store_heart" parent="DefaultWrap">
+    <item name="android:src">@drawable/img_heart</item>
+    <item name="android:layout_marginRight">2dp</item>
+  </style>
+
+  <style name="adapter_near_store_desc_text" parent="DefaultWrap">
+    <item name="android:textSize">12dp</item>
+    <item name="android:textColor">@color/matji_red</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+
+  <style name="adapter_near_store_balloon" parent="DefaultWrap">
+    <item name="android:src">@drawable/img_post_cnt</item>
+    <item name="android:layout_marginRight">2dp</item>
+    <item name="android:layout_marginLeft">5dp</item>
+  </style>
+
+  <style name="adapter_near_store_divider" parent="DefaultWidthFill">
+    <item name="android:layout_height">1dp</item>
+    <item name="android:background">@color/listview_divider1_gray</item>
+  </style>
+
+  <style name="adapter_near_store_bookmark" parent="DefaultWrap">
+    <item name="android:layout_marginRight">10dp</item>
+  </style>
+
+  <!-- bookmark_star_toggle.xml -->
+  <style name="bookmark_star_toggle_unchecked" parent="DefaultWrap">
+    <item name="android:src">@drawable/empty_star</item>
+    <item name="android:layout_width">100px</item>
+    <item name="android:layout_height">100px</item>
+    <item name="android:scaleType">fitXY</item>
+  </style>
+
+  <style name="bookmark_star_toggle_checked" parent="DefaultWrap">
+    <item name="android:src">@drawable/full_star</item>
+    <item name="android:layout_width">100px</item>
+    <item name="android:layout_height">100px</item>
+    <item name="android:scaleType">fitXY</item>
   </style>
 </resources>

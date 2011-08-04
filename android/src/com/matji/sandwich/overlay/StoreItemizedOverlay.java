@@ -45,7 +45,7 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
     private TextPaint mTextPaint;
     private String mCount;
     private Bitmap mMarkerLocked; // 미발굴 
-    private Bitmap mMarkerUnLocked; // 발굴 
+    private Bitmap mMarkerUnLocked; // 발굴
     private Bitmap mMarkerBookmarked; // 즐겨찾
     private View popupOverlay;
     private Paint mPaint;
