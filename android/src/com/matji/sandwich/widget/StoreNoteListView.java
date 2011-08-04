@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.NoteAdapter;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.StoreDetailInfo;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreDetailHttpRequest;
@@ -52,7 +51,7 @@ public class StoreNoteListView extends RequestableMListView implements OnClickLi
 	protected void gotoUserPage(StoreDetailInfo info) {
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
 		intent.putExtra(UserTabActivity.USER, (Parcelable) info.getUser());
-		((BaseActivity) getActivity()).startActivity(intent);
+		getActivity().startActivity(intent);
 	}	
 
 }

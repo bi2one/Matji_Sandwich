@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.view.View;
 
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -41,18 +39,18 @@ public class RankingUserListView extends UserListView {
 	User user = (User) getAdapterData().get(position);
 	Intent intent = new Intent(getActivity(), UserTabActivity.class);
 	intent.putExtra(UserTabActivity.USER, (Parcelable) user);
-	((BaseActivity) getActivity()).startActivity(intent);
+	getActivity().startActivity(intent);
     }
 
     protected void gotoUserPage(Post post) {
 	Intent intent = new Intent(getActivity(), UserTabActivity.class);
 	intent.putExtra(UserTabActivity.USER, (Parcelable) post.getUser());
-	((BaseActivity) getActivity()).startActivity(intent);
+	getActivity().startActivity(intent);
     }	
 
     protected void gotoStorePage(Post post) {
 	Intent intent = new Intent(getActivity(), StoreTabActivity.class);
 	intent.putExtra(StoreTabActivity.STORE, (Parcelable) post.getStore());
-	((BaseActivity) getActivity()).startActivity(intent);
+	getActivity().startActivity(intent);
     }
 }

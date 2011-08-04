@@ -2,6 +2,7 @@ package com.matji.sandwich.adapter;
 
 import com.matji.sandwich.ChatActivity;
 import com.matji.sandwich.R;
+import com.matji.sandwich.base.Base;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.data.User;
@@ -58,7 +59,7 @@ public class MessageThreadAdapter extends MBaseAdapter {
 					Message message = (Message) data.get(position);
 					Intent intent = new Intent(context, ChatActivity.class);
 					intent.putExtra(ChatActivity.MESSAGE, (Parcelable) message);
-					((BaseActivity) context).startActivity(new Intent(context, ChatActivity.class));					
+					context.startActivity(new Intent(context, ChatActivity.class));					
 				}
 			});
 		} else {

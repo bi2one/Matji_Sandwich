@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.MessageThreadAdapter;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -38,6 +37,6 @@ public class MessageListView extends RequestableMListView {
 		User user = (message.getReceivedUserId() == session.getCurrentUser().getId()) ? message.getSentUser() : message.getReceivedUser();
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
 		intent.putExtra(UserTabActivity.USER, (Parcelable) user);
-		((BaseActivity) getActivity()).startActivity(intent);
+		getActivity().startActivity(intent);
 	}
 }

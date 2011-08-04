@@ -135,7 +135,6 @@
   <string name="chat_send">보내기</string>
 
   <!-- target --> 
-  <string name="target_android">ANDROID</string>
   <string name="target_common">COMMON</string>
      
   <!-- Activity memo -->
@@ -263,4 +262,7 @@
   <string name="user_profile_store_information">맛집정보</string>
   <string name="user_profile_find_store">발견맛집</string>
   <string name="user_profile_recent_store">최근맛집</string>
+  
+  <!-- ANDROID -->
+  <string name="android">ANDROID</string>
 </resources>

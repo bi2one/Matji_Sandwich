@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.StoreAdapter;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 
@@ -31,6 +30,6 @@ public class StoreListView extends RequestableMListView {
 		Store store = (Store) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
 		intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-		((BaseActivity) getActivity()).startActivity(intent);
+		getActivity().startActivity(intent);
 	}
 }

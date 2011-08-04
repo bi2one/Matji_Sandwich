@@ -3,6 +3,7 @@
 	<!-- everywhere used dimens -->
 	<dimen name="default_distance">10dp</dimen>
 	<dimen name="default_distance_half">5dp</dimen>
+	<dimen name="edit_text_bottom_padding">5dp</dimen>
 	
 	<!-- Title Container -->
 	<dimen name="title_container_height">37dp</dimen>

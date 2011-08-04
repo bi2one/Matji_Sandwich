@@ -13,13 +13,11 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.Toast;
 
-public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener {
+public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener, Base {
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	
-	protected void init() {
-	
-	}
+	protected void init() {}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +37,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
 	    }
 	}
 	
+	@Override
 	public boolean loginRequired(){
 		Session session = Session.getInstance(this);
 		if (!session.isLogin()) {

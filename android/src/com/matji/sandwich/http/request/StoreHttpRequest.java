@@ -128,7 +128,7 @@ public class StoreHttpRequest extends HttpRequest {
 
     public void actionCurrentUserBookmarkedList(int page, int limit) {
 	Session session = Session.getInstance(context);
-	actionBookmarkedList(session.getCurrentUser().getId() , page, limit);
+	actionBookmarkList(session.getCurrentUser().getId() , page, limit);
     }
 
     public void actionNearbyBookmarkedList(int user_id, double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page) {

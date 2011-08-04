@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.FoodAdapter;
-import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.Base;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
@@ -135,7 +135,7 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.menu_adapter_like_btn:
-			if (((BaseActivity) getActivity()).loginRequired()) {
+			if (((Base) getActivity()).loginRequired()) {
 				if (!getHttpRequestManager().isRunning(getActivity())) {
 					v.setClickable(false);
 					currentClickedView = v;

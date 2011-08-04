@@ -11,13 +11,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
-public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener {	
+public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener, Base {	
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	
-	protected void init() {
-		
-	}
+	protected void init() {}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +24,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 		init();
 	}
 	
+	@Override
 	public boolean loginRequired(){
 		Session session = Session.getInstance(this);
 		if (!session.isLogin()) {

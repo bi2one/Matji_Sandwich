@@ -3,7 +3,7 @@ package com.matji.sandwich.adapter;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.matji.sandwich.PostMainActivity;
+import com.matji.sandwich.CommentActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.SimpleTag;
@@ -218,9 +218,9 @@ public class PostSectionedAdapter extends SectionedAdapter {
 	private void onListItemClick(int position) {
 		Post post = (Post) data.get(position);
 		if (post.getActivityId() == 0) {
-			Intent intent = new Intent(context, PostMainActivity.class);
-			intent.putExtra(PostMainActivity.POSITION, position);
-			intent.putExtra(PostMainActivity.POST, (Parcelable) post);
+			Intent intent = new Intent(context, CommentActivity.class);
+			intent.putExtra(CommentActivity.POSITION, position);
+			intent.putExtra(CommentActivity.POST, (Parcelable) post);
 			context.startActivity(intent);
 		}
 	}

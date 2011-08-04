@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
-public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener{
+public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Base {
 	public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
 	public static final int LOGIN_ACTIVITY = 1;
 	public static final int POST_MAIN_ACTIVITY = 2;
@@ -29,6 +29,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 		init();
 	}
 	
+	@Override
 	public boolean loginRequired(){
 		Session session = Session.getInstance(this);
 		if (!session.isLogin()) {
