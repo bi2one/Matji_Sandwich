@@ -25,7 +25,6 @@ public class CommentListView extends RequestableMListView {
 
 	private int curDeletePos;
 
-//	private ListItemSwipeListener listener;
 	private Post post;
 
 	private static final int COMMENT_DELETE_REQUEST = 11;
@@ -43,7 +42,6 @@ public class CommentListView extends RequestableMListView {
 		setDivider(new ColorDrawable(Color.WHITE));
 		setDividerHeight(2);
 		setCanRepeat(true);
-//		setCacheColorHint(Color.BLACK);
 		setFadingEdgeLength(0);
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
 	}
@@ -56,6 +54,7 @@ public class CommentListView extends RequestableMListView {
 	public void addComment(Comment comment) {
 		getAdapterData().add(0, comment);
 		((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
+		setSelection(0);
 	}
 
 	public HttpRequest request() {

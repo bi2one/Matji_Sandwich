@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/BottomTextBarWrapper">
+	style="@style/BottomTextBarWrapper"
+	android:gravity="center_vertical">
 	<EditText
 		android:id="@+id/text_field"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_weight="99"
-		android:layout_gravity="center"
 		android:maxLines="3"
-		android:scrollbars="vertical"
-		android:layout_margin="@dimen/default_distance_half"
-		/>
+		android:hint="@string/hint_write_comment"
+		android:scrollbars="vertical" />
 	<Button
 		android:layout_width="wrap_content"
 		android:layout_height="fill_parent"
 		android:layout_weight="1"
-		android:layout_gravity="center"
-		android:paddingBottom="@dimen/edit_text_bottom_padding"
+		android:layout_marginBottom="@dimen/edit_text_bottom_padding"
 		android:text="@string/confirm"
-		android:textColor="@color/BLACK"
-		android:background="@drawable/selector"
 		android:onClick="onConfirmButtonClicked" />
 </LinearLayout>

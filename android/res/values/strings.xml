@@ -265,4 +265,7 @@
   
   <!-- ANDROID -->
   <string name="android">ANDROID</string>
+  
+  <!-- hint -->
+  <string name="hint_write_comment">댓글 입력</string>
 </resources>
