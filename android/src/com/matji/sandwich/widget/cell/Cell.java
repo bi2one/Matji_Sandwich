@@ -1,5 +1,7 @@
 package com.matji.sandwich.widget.cell;
 
+import com.matji.sandwich.R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -12,7 +14,7 @@ import android.widget.LinearLayout;
  * @author mozziluv
  */
 public abstract class Cell extends LinearLayout {
-	protected abstract Class<?> getDetailPageActivity();
+	protected abstract Intent getIntent();
 	private int layout_id;
 	/**
 	 * 기본 생성자(Java Code)
@@ -29,7 +31,7 @@ public abstract class Cell extends LinearLayout {
 	public Cell(Context context, AttributeSet attr, int id) {
 		super(context, attr);
 		this.layout_id = id;
-		init();
+		init();		
 	}
 	
 	/**
@@ -54,7 +56,6 @@ public abstract class Cell extends LinearLayout {
 	 * DetailPageActivity를 실행하는 메소드.
 	 */
 	public void gotoDetailPage() {
-		Intent intent = new Intent(getRootView().getContext(), getDetailPageActivity());
-		getRootView().getContext().startActivity(intent);
+		getRootView().getContext().startActivity(getIntent());
 	}
 }

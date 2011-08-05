@@ -4,15 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 import java.util.HashMap;
-import android.util.Log;
 import com.matji.sandwich.R;
 import com.matji.sandwich.listener.ImageDownloaderListener;
 import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.widget.ProfileImageView;
 
 public class MatjiImageDownloader implements ImageDownloaderListener {
-	private static final String URL_USER_IMAGE = "http://api.matji.com/v2/users/profile";
-	private static final String URL_ATTACH_FILE_IMAGE = "http://api.matji.com/v2/attach_files/image";
+//	private static final String URL_USER_IMAGE = "http://api.matji.com/v2/users/profile";
+//	private static final String URL_ATTACH_FILE_IMAGE = "http://api.matji.com/v2/attach_files/image";
+	private static final String URL_USER_IMAGE = "http://222.122.205.227/v2/users/profile";
+	private static final String URL_ATTACH_FILE_IMAGE = "http://222.122.205.227/v2/attach_files/image";
 	public static final String IMAGE_SSMALL = "ss";
 	public static final String IMAGE_SMALL = "s";
 	public static final String IMAGE_MEDIUM = "m";
@@ -53,7 +54,6 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 
 	public void downloadAttachFileImage(int attachFileId, String imageSize, ImageView imageView) {
 		params.clear();
-		
 		params.put("attach_file_id", attachFileId + "");
 		params.put("size", imageSize);
 		downloader.setDefaultBitmap(defaultAttachedImage);

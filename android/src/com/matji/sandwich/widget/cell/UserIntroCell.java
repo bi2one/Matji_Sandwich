@@ -1,6 +1,8 @@
 package com.matji.sandwich.widget.cell;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
@@ -42,10 +44,14 @@ public class UserIntroCell extends Cell {
 		((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(user.getIntro());
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
-	protected Class<?> getDetailPageActivity() {
-		// TODO Auto-generated method stub
-		return UserProfileActivity.class;
+	protected Intent getIntent() {
+		Intent intent = new Intent(getContext(), UserProfileActivity.class);
+		intent.putExtra(UserProfileActivity.USER, (Parcelable) user);
+		return intent;
 	}
 	
 //	/**

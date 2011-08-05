@@ -31,7 +31,10 @@ import com.matji.sandwich.widget.ProfileImageView;
 import com.matji.sandwich.widget.dialog.ActionItem;
 import com.matji.sandwich.widget.dialog.QuickActionDialog;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -59,11 +62,13 @@ public class PostSectionedAdapter extends SectionedAdapter {
 	private MatjiImageDownloader downloader;
 	private int profileSize;
 	private static final int MARGIN_PREVIEWS = (int) MatjiConstants.dimen(R.dimen.row_post_previews_margin);
-
+	private static final int QUICK_ACTION_BTN_WIDTH = (int) MatjiConstants.dimen(R.dimen.quickaction_btn_width);
+	
 	private GotoUserMainAction action1;
 	private GotoStoreMainAction action2;
 	private GotoImageSliderAction action3;
-
+	private Activity activity;
+	
 	/**
 	 * 기본 생성자.
 	 * 
@@ -121,6 +126,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
 	@Override
 	public View getItemView(final int position, View convertView, final ViewGroup parent) {
 		PostElement postElement;
+//		if (this.parent == null) this.parent = parent;
 
 		if (convertView == null) {
 			postElement = new PostElement();
@@ -148,7 +154,10 @@ public class PostSectionedAdapter extends SectionedAdapter {
 			int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
 
 			for (int i = 0; i < postElement.previews.length; i++) {
-				postElement.previews[i].setMaxWidth((remainScreenWidth-profileSize*2)/imageIds.length - MARGIN_PREVIEWS*2);
+				postElement.previews[i].setMaxWidth(
+						(remainScreenWidth - profileSize*2) / imageIds.length 
+								- MARGIN_PREVIEWS*2 
+								- QUICK_ACTION_BTN_WIDTH/imageIds.length);
 				postElement.previews[i].setLayoutParams(params);
 			}
 
@@ -290,6 +299,15 @@ public class PostSectionedAdapter extends SectionedAdapter {
 			intent.putExtra(CommentActivity.POSITION, position);
 			context.startActivity(intent);
 		}
+	}
+
+	/**
+	 * Dialog를 show 하기 위해 activity를 저장한다.
+	 * 
+	 * @param activity
+	 */
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 
 	/**
@@ -454,9 +472,33 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		 * 확인 했을 때 삭제요청을 한다.
 		 */
 		public void deletePost() {
+			final Post post = (Post) data.get(position);
+			if (activity.getParent() != null) {
+				activity = activity.getParent();
+			}
+			AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+			alert.setTitle(R.string.default_string_delete);
+			alert.setMessage(R.string.default_string_check_delete);
+			alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					deleteRequest(post);
+				}
+			}); 
+			alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {}
+			});
+			alert.show();
+		}
+
+		/**
+		 * Delete 요청
+		 * @param post Delete할 이야기
+		 */
+		public void deleteRequest(Post post) {
 			// Alert 창 띄우기.
 			if (!manager.isRunning(context)) {
-				Post post = (Post) data.get(position);
 				if (request == null || !(request instanceof PostHttpRequest)) {
 					request = new PostHttpRequest(context);
 				}
@@ -464,8 +506,8 @@ public class PostSectionedAdapter extends SectionedAdapter {
 				((PostHttpRequest) request).actionDelete(post.getId());
 				manager.request(context, request, DELETE_REQUEST, this);
 			}
-		}		
-
+		}
+		
 		/**
 		 * 파라미터로 전달받은 {@link Post}가 현재 로그인 된 {@link User}의 {@link Post}인지 확인한다.
 		 * 
