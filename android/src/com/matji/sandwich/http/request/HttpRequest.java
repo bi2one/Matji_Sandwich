@@ -23,7 +23,8 @@ enum HttpMethod { HTTP_POST, HTTP_GET, HTTP_GET_VIA_WEB_BROWSER }
 public abstract class HttpRequest implements RequestCommand {
     private FileUploadProgressListener progressListener;
     protected Context context = null;
-    protected String serverDomain = "http://api.matji.com/v2/";
+    // protected String serverDomain = "http://api.matji.com/v2/";
+    protected String serverDomain = "http://222.122.205.227/v2/";
 
     protected Hashtable<String, Object> postHashtable;
     protected Hashtable<String, String> getHashtable;

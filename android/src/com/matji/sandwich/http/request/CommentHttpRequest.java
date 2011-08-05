@@ -21,6 +21,7 @@ public class CommentHttpRequest extends HttpRequest {
 		postHashtable.put("post_id", post_id);
 		postHashtable.put("comment", comment);
 		postHashtable.put("from_where", from_where);
+		postHashtable.put("include", "user");
 	}
 	
 	public void actionDelete(int comment_id) {

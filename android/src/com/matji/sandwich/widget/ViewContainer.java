@@ -5,25 +5,23 @@ import android.view.LayoutInflater;
 import android.content.Context;
 
 public class ViewContainer {
-    private Context context;
-    private View rootView;
-    private LayoutInflater inflater;
-    
-    public ViewContainer(Context context, int id) {
-	this.context = context;
-	inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	rootView = getViewById(id);
-    }
+	private View rootView;
+	private LayoutInflater inflater;
 
-    protected View getViewById(int id) {
-	return inflater.inflate(id, null);
-    }
+	public ViewContainer(Context context, int id) {
+		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		rootView = getViewById(id);
+	}
 
-    public void setRootView(View v) {
-	rootView = v;
-    }
+	protected View getViewById(int id) {
+		return inflater.inflate(id, null);
+	}
 
-    public View getRootView() {
-	return rootView;
-    }
+	public void setRootView(View v) {
+		rootView = v;
+	}
+
+	public View getRootView() {
+		return rootView;
+	}
 }

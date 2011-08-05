@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -89,7 +90,8 @@ public class StoreRegisterActivity extends BaseActivity implements Requestable {
 			Toast.makeText(mContext, R.string.store_register_ok, Toast.LENGTH_SHORT).show();
 			Store store = (Store)data.get(0);
 			Intent intent = new Intent(mContext, StoreTabActivity.class);
-			startActivityWithMatjiData(intent, store);
+			intent.putExtra(StoreTabActivity.STORE, (Parcelable) store);
+			startActivity(intent);
 			break;
 		}
 	}

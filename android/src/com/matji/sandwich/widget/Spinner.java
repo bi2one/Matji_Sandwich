@@ -19,9 +19,9 @@ public class Spinner extends RelativeLayout {
 		LayoutInflater.from(mContext).inflate(R.layout.popup_loading, this, true);
     }
 
-    public void start(Activity activity) {
+    public void start(Context context) {
     	if (this.getParent() == null){
-    		activity.addContentView(this, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+    		((Activity) context).addContentView(this, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
     	}
     	setVisibility(View.VISIBLE);
     }

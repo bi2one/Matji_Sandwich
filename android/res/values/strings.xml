@@ -135,7 +135,6 @@
   <string name="chat_send">보내기</string>
 
   <!-- target --> 
-  <string name="target_android">ANDROID</string>
   <string name="target_common">COMMON</string>
      
   <!-- Activity memo -->
@@ -170,8 +169,6 @@
   
   <!-- UserMainActivity -->
   <string name="user_main_following_you">follows you.</string>
-  <string name="user_main_follower">follower</string>
-  <string name="user_main_following">following</string>
   <string name="user_main_jjim_store">찜한 맛집</string>
   <string name="user_main_not_exist_blog">님은 블로그를 운영하고 있지 않습니다.</string>
   <string name="number_of_tag">개의 태그</string>
@@ -253,4 +250,23 @@
   <string name="hours_ago">시간 전</string>
   <string name="min_ago">분 전</string>
   <string name="sec_ago">초 전</string>
+
+  <!-- MapStoreSectionedAdapter.java -->
+  <string name="map_store_sectioned_adapter_bookmarked_store">북마크 맛집</string>
+  <string name="map_store_sectioned_adapter_store">맛집</string>
+
+  <!-- User Profile -->
+  <string name="user_profile_basic_information">기본정보</string>
+  <string name="user_profile_friend_information">친구정보</string>
+  <string name="user_profile_following">following</string>
+  <string name="user_profile_follower">follower</string>
+  <string name="user_profile_store_information">맛집정보</string>
+  <string name="user_profile_find_store">발견맛집</string>
+  <string name="user_profile_recent_store">최근맛집</string>
+  
+  <!-- ANDROID -->
+  <string name="android">ANDROID</string>
+  
+  <!-- hint -->
+  <string name="hint_write_comment">댓글 입력</string>
 </resources>

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.RequestCommand;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.listener.ListRequestScrollListener;
 import com.matji.sandwich.data.MatjiData;
@@ -28,7 +28,7 @@ PullToRefreshListView.OnRefreshListener {
 	protected final static int REQUEST_NEXT = 0;
 	protected final static int REQUEST_RELOAD = 1;
 
-	public abstract HttpRequest request();
+	public abstract RequestCommand request();
 
 	public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
 		super(context, attrs);
@@ -94,12 +94,10 @@ PullToRefreshListView.OnRefreshListener {
 		}
 		
 		if (prevPage < page) {
-			Log.d("page", "2. " + prevPage + ", " + page);
 			Log.d("refresh" , "requestNext()");
 			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
 			manager.request(getActivity(), request(), REQUEST_NEXT, this);
 			nextValue();
-			Log.d("page", "3. " + prevPage + ", " + page);
 		} else if (prevPage == page) {
 			prevPage = page - 1;
 		}
@@ -117,6 +115,7 @@ PullToRefreshListView.OnRefreshListener {
 			initValue();
 			manager.request(getActivity(), request(), REQUEST_RELOAD, this);
 			nextValue();
+			setSelection(0);
 		}
 	}
 
@@ -127,6 +126,7 @@ PullToRefreshListView.OnRefreshListener {
 	initValue();
 	manager.request(getActivity(), request(), REQUEST_RELOAD, this);
 	nextValue();
+	setSelection(0);
     }
 
 

@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.util.MatjiConstants;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -17,7 +18,7 @@ public class MatjiScrollView extends ScrollView {
 	 */
 	public MatjiScrollView(Context context, AttributeSet attr) {
 		super(context, attr);
-		setFadingEdgeLength((int) getResources().getDimension(R.dimen.default_fading_edge_length));
+		setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.default_fading_edge_length));
 	}
 	
 	

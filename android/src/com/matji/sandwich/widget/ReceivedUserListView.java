@@ -1,12 +1,12 @@
 package com.matji.sandwich.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.adapter.ReceivedUserADapter;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -41,7 +41,7 @@ public class ReceivedUserListView extends RequestableMListView {
 		User user = (User) getAdapterData().get(position);
 		Intent intent = new Intent();
 		intent.putExtra("user", (Parcelable) user);
-		getActivity().setResult(BaseActivity.RESULT_OK, intent);
-		((BaseActivity) getActivity()).finish();
+		getActivity().setResult(Activity.RESULT_OK, intent);
+		getActivity().finish();
 	}
 }

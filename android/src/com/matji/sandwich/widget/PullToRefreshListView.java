@@ -31,7 +31,6 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
     private static final int HEADER_REFRESH_LIMIT = 70;
     private static final int LIST_BASE_INDEX = 1;
     private static final boolean IS_ON = false;
-    private Context context;
     private OnScrollListener pullDownListener;
     private OnRefreshListener onRefreshListener;
     private RotateAnimation flipAnimation;
@@ -66,7 +65,6 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      */
     public PullToRefreshListView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	this.context = context;
 
 	flipAnimation = new RotateAnimation(0, -180,
 					    RotateAnimation.RELATIVE_TO_SELF, 0.5f,

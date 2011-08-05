@@ -7,6 +7,7 @@ import com.matji.sandwich.http.util.MatjiImageDownloader;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -98,9 +99,10 @@ public class SettingActivity extends BaseActivity {
 
 	public void onMyPageButtonClicked(View view) {
 		Intent profileIntent = new Intent(this, UserTabActivity.class);
+		profileIntent.putExtra(UserTabActivity.USER, (Parcelable) user);
 		session = Session.getInstance(this);
 		user = session.getCurrentUser();
-		startActivityWithMatjiData(profileIntent, user);
+		startActivity(profileIntent);
 	}
 	
 	public void onProfileButtonClicked(View view){
@@ -108,8 +110,9 @@ public class SettingActivity extends BaseActivity {
 	
 	public void onNotificationsButtonClicked(View view){
 		Intent notificationIntent = new Intent(this, AlarmActivity.class);
-		user = session.getCurrentUser();
-		startActivityWithMatjiData(notificationIntent, user);
+//		notificationIntent.putExtra(AlarmActivity.USER, (Parcelable) user);
+//		user = session.getCurrentUser();
+		startActivity(notificationIntent);
 	}
 	
 	public void onMessagesButtonClicked(View view){

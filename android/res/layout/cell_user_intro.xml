@@ -4,7 +4,7 @@
 	style="@style/DefaultWidthFill"
 	android:id="@+id/cell_user_intro_Wrapper"
 	android:padding="@dimen/default_distance"
-	android:background="@color/WHITE">
+	android:background="@drawable/selector">
 	<TextView
 		style="@style/DefaultFill"
 		android:id="@+id/cell_user_intro"

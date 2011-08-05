@@ -6,7 +6,7 @@
 	android:orientation="vertical">
 	<com.matji.sandwich.widget.CommentListView
 		style="@style/BottomBarListView"
-		android:id="@+id/post_main_comment_list" />
+		android:id="@+id/comment_list" />
 	<include
 		style="@style/BottomBar"
 		layout="@layout/bottom_text_bar" />

@@ -20,6 +20,7 @@ public class MainMapActivity extends BaseMapActivity {
     private TextView addressView;
     private View flipButton;
     private boolean currentViewIsMap;
+    private boolean isFlow;
 
     private Drawable flipMapViewBackground;
     private Drawable flipNearStoreBackground;
@@ -36,6 +37,7 @@ public class MainMapActivity extends BaseMapActivity {
 	storeListView.init(addressView, this);
 	
 	flipButton = findViewById(R.id.map_title_bar_flip_button);
+	isFlow = false;
 	
 	flipMapViewBackground = getResources().getDrawable(R.drawable.map_titlebar_flip_mapview_btn);
 	flipNearStoreBackground = getResources().getDrawable(R.drawable.map_titlebar_flip_btn);
@@ -43,7 +45,12 @@ public class MainMapActivity extends BaseMapActivity {
 
     protected void onResume() {
 	super.onResume();
-	mapView.startMapCenterThread();
+	if (!isFlow) {
+	    mapView.startMapCenterThread();
+	    storeListView.requestReload();
+	} else {
+	    isFlow = false;
+	}
     }
 
     protected void onPause() {
@@ -66,6 +73,10 @@ public class MainMapActivity extends BaseMapActivity {
 	    showMapView();
 	}
 	currentViewIsMap = !currentViewIsMap;
+    }
+
+    public void setIsFlow(boolean isFlow) {
+	this.isFlow = isFlow;
     }
 
     private void showMapView() {

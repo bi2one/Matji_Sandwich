@@ -23,11 +23,14 @@
   	<item name="android:layout_height">fill_parent</item>
   </style>
   
+  <style name="DefaultVerticalWrap" parent="DefaultWrap">
+  	<item name="android:orientation">vertical</item>
+  </style>
+  
   <style name="DefaultLinearWrap" parent="DefaultWrap">
   	<item name="android:orientation">vertical</item>
   	<item name="android:padding">7dp</item>
   </style>
-  
   <style name="DefaultLinearFill" parent="DefaultFill">
   	<item name="android:orientation">vertical</item>
   </style>
@@ -174,11 +177,68 @@
 
   <!-- Cell -->  
   <style name="Cell" parent="DefaultWidthFill">
-  	<item name="android:padding">7dp</item>
+  	<item name="android:padding">@dimen/default_distance</item>
   </style>
   
-  <style name="UserCell" parent="Cell">
-  	<item name="android:background">@color/cell_user_bg</item>
+  <style name="cell_user_Wrapper" parent="Cell">
+  	<item name="android:background">@drawable/selector</item>
+  </style>
+  
+  <style name="cell_user_Profile">
+	<item name="android:layout_width">@dimen/cell_profile_size</item>
+  	<item name="android:layout_height">@dimen/cell_profile_size</item>
+  </style>
+  
+  <style name="cell_user_InfoWrapper" parent="DefaultWrap">
+  	<item name="android:layout_marginLeft">@dimen/default_distance</item>
+  </style>
+  
+  <style name="cell_user_Nickname" parent="DefaultWrap">
+  	<item name="android:layout_margin">@dimen/default_distance_half</item>
+  	<item name="android:textColor">@color/matji_black</item>
+  	<item name="android:textSize">@dimen/text_xxlarge</item>
+  </style>
+  
+  <style name="cell_user_Label" parent="DefaultWrap">
+  	<item name="android:layout_marginRight">@dimen/default_distance</item>
+  	<item name="android:textColor">@color/matji_dark_orange</item>
+  </style>
+
+  <style name="cell_user_PointLabel" parent="cell_user_Label">
+  	<item name="android:text">@string/cell_user_point</item>
+  </style>
+
+  <style name="cell_user_AreaLabel" parent="cell_user_Label">
+   	<item name="android:text">@string/cell_user_area</item>
+  </style>
+  
+  <style name="cell_user_LabelValue" parent="DefaultWrap">
+  	<item name="android:textColor">@color/matji_light_gray</item>
+  </style>
+  
+  <style name="cell_user_Button">
+  	<item name="android:layout_width">@dimen/cell_btn_width</item>
+  	<item name="android:layout_height">wrap_content</item>
+  </style>
+  
+  <style name="cell_user_WhiteButton" parent="cell_user_Button">
+  	<item name="android:background">@drawable/btn_white</item>
+  	<item name="android:textColor">@color/matji_dark_orange</item>
+  	<item name="android:singleLine">true</item>
+  </style>
+
+  <style name="cell_user_LikeListButton" parent="cell_user_WhiteButton">
+  	<item name="android:drawableLeft">@drawable/img_heart</item>
+  	<item name="android:layout_marginBottom">@dimen/default_distance</item>
+  </style>
+  
+  <style name="cell_user_FollowButton" parent="cell_user_Button">
+  	<item name="android:background">@drawable/btn_red</item>
+  </style>
+  
+  <style name="cell_user_MessageListButton" parent="cell_user_WhiteButton">
+  	<item name="android:drawableLeft">@drawable/img_heart</item>
+  	<item name="android:visibility">gone</item>
   </style>
   
   <style name="LikeButton" parent="DefaultWrap">
@@ -189,61 +249,10 @@
   	<item name="android:textColor">#f00</item>
 	<item name="android:textStyle">bold</item>
   </style>
-  
-
-  <style name="cell_user_Profile">
-  	<item name="android:background">@drawable/img_profile_bg</item>
-	<item name="android:layout_width">60dp</item>
-	<item name="android:layout_height">60dp</item>
-	<item name="android:layout_marginRight">7dp</item>
-	<item name="android:layout_marginBottom">7dp</item>
-	<item name="android:scaleType">centerCrop</item>
-  </style>
-
-  <style name="cell_user_Name" parent="Name">
-  	<item name="android:layout_width">130dp</item>
-  </style>
-  
-  
-  <style name="cell_user_Mileage" parent="DefaultWrap">
-  	<item name="android:textSize">11dp</item>
-  </style>
-  
-  <style name="cell_user_Grade" parent="cell_user_Mileage">
-  	<item name="android:drawablePadding">3dp</item>
-  	<item name="android:textColor">@color/SKYBLUE</item>
-  </style>
-  
-  <style name="cell_user_PointText" parent="cell_user_Mileage">
-    <item name="android:layout_marginLeft">10dp</item>
-  </style>
-  
-  <style name="cell_user_Point" parent="cell_user_Mileage">
-  	<item name="android:textColor">@color/matji_dark_orange</item>
-  </style>
-  
-  <style name="cell_user_Title" parent="DefaultWrap">
-  	<item name="android:textSize">18dp</item>
-  	<item name="android:textStyle">bold</item>
-  	<item name="android:textColor">#333333</item>
-  </style>
-    
-  <style name="cell_user_FollowButton">
-   	<item name="android:background">@drawable/follow_btn</item>
-   	<item name="android:layout_width">67dp</item>
-  	<item name="android:layout_height">28dp</item>
-  	<item name="android:layout_marginTop">5dp</item>
-  </style>
-  
-  
-  
-  
-  
+   
   <!-- header_comment.xml -->
   <style name="header_comment_Preview" parent="DefaultWrap">
-  	<item name="android:background">@drawable/img_border</item>
   	<item name="android:adjustViewBounds">true</item>
-  	<item name="android:padding">@dimen/default_distance_half</item>
   	<item name="android:visibility">gone</item>
   </style>
   
@@ -352,6 +361,11 @@
     <item name="android:layout_width">50dp</item>
     <item name="android:singleLine">true</item>
     <item name="android:textSize">10dp</item>
+  </style>
+
+  <style name="main_map_listView" parent="DefaultFill">
+    <item name="android:divider">@color/listview_divider1_gray</item>
+    <item name="android:dividerHeight">0px</item>
   </style>
 
   <!-- activity_get_map_position.xml -->
@@ -491,8 +505,11 @@
   
   <style name="row_post_PostWrapper" parent="DefaultWidthFill">
   	<item name="android:background">@drawable/post_bg</item>
-  	<item name="android:orientation">vertical</item>
   	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
+  </style>
+  
+  <style name="row_post_PostWrapper2" parent="DefaultWidthFill">
+  	<item name="android:orientation">vertical</item>
   </style>
 
   <style name="row_post_menu" parent="DefaultWrap">
@@ -510,9 +527,7 @@
   </style>
 
   <style name="row_post_Preview" parent="DefaultWrap">
-  	<item name="android:background">@drawable/img_border</item>
   	<item name="android:adjustViewBounds">true</item>
-  	<item name="android:padding">@dimen/default_distance_half</item>
   	<item name="android:visibility">gone</item>
   </style>
   
@@ -525,13 +540,12 @@
   </style>
   
   <style name="row_post_Count" parent="SmallGrayText">
-  	<item name="android:paddingLeft">@dimen/default_distance</item>
+  	<item name="android:paddingLeft">@dimen/default_distance_half</item>
   	<item name="android:paddingRight">@dimen/default_distance</item>
   </style>
   
   <style name="row_post_Like" parent="SmallDarkOrangeText">
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
-   	<item name="android:drawablePadding">@dimen/default_distance_half</item>
   </style>
 
   <!-- map_title_bar.xml -->
@@ -566,18 +580,120 @@
   </style>
 
   <style name="map_title_bar_changeLocationArrow" parent="DefaultWrap">
-    <item name="android:layout_gravity">center</item>
-    <item name="android:paddingRight">2dp</item>
+	<item name="android:layout_gravity">center</item>
+	<item name="android:paddingRight">2dp</item>
   </style>
 
   <style name="map_title_bar_nearPostButton" parent="DefaultWrap">
     <item name="android:background">@drawable/map_titlebar_near_post_btn</item>
   </style>
   
+  
   <style name="Animations" />
+  <!-- PopDownMenu -->
+  <style name="Animations.PopDownMenu" />
+  <style name="Animations.PopDownMenu.Left">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
+  </style>
+
+  <style name="Animations.PopDownMenu.Right">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+  </style>
+
+  <style name="Animations.PopDownMenu.Center">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
+  </style>
+
+  <!-- PopUpMenu -->
   <style name="Animations.PopUpMenu" />
+  <style name="Animations.PopUpMenu.Left">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
+  </style>
+
   <style name="Animations.PopUpMenu.Right">
-  	<item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+	<item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
 	<item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
+  </style>
+
+  <style name="Animations.PopUpMenu.Center">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+  </style>
+
+  <!-- adapter_map_store_section.xml -->
+  <style name="adapter_map_store_section_bg" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/list_section_red_bg</item>
+    <item name="android:padding">2dp</item>
+  </style>
+
+  <style name="adapter_map_store_section_text" parent="DefaultWrap">
+    <item name="android:textColor">@color/WHITE</item>
+    <item name="android:layout_marginLeft">5dp</item>
+    <item name="android:textSize">14dp</item>
+  </style>
+
+  <!-- adapter_near_store.xml -->
+  <style name="adapter_near_store" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/btn_white_to_lightpink</item>
+  </style>
+
+  <style name="adapter_near_store_left_element" parent="DefaultWrap">
+    <item name="android:layout_marginLeft">7dp</item>
+  </style>
+  
+  <style name="adapter_near_store_name" parent="adapter_near_store_left_element">
+    <item name="android:layout_marginTop">7dp</item>
+    <item name="android:textSize">15dp</item>
+    <item name="android:textColor">@color/BLACK</item>
+  </style>
+
+  <style name="adapter_near_store_desc" parent="adapter_near_store_left_element">
+    <item name="android:layout_marginTop">4dp</item>
+    <item name="android:layout_marginBottom">5dp</item>
+  </style>
+
+  <style name="adapter_near_store_heart" parent="DefaultWrap">
+    <item name="android:src">@drawable/img_heart</item>
+    <item name="android:layout_marginRight">2dp</item>
+  </style>
+
+  <style name="adapter_near_store_desc_text" parent="DefaultWrap">
+    <item name="android:textSize">12dp</item>
+    <item name="android:textColor">@color/matji_red</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+
+  <style name="adapter_near_store_balloon" parent="DefaultWrap">
+    <item name="android:src">@drawable/img_post_cnt</item>
+    <item name="android:layout_marginRight">2dp</item>
+    <item name="android:layout_marginLeft">5dp</item>
+  </style>
+
+  <style name="adapter_near_store_divider" parent="DefaultWidthFill">
+    <item name="android:layout_height">1dp</item>
+    <item name="android:background">@color/listview_divider1_gray</item>
+  </style>
+
+  <style name="adapter_near_store_bookmark" parent="DefaultWrap">
+    <item name="android:layout_marginRight">10dp</item>
+  </style>
+
+  <!-- bookmark_star_toggle.xml -->
+  <style name="bookmark_star_toggle_unchecked" parent="DefaultWrap">
+    <item name="android:src">@drawable/empty_star</item>
+    <item name="android:layout_width">100px</item>
+    <item name="android:layout_height">100px</item>
+    <item name="android:scaleType">fitXY</item>
+  </style>
+
+  <style name="bookmark_star_toggle_checked" parent="DefaultWrap">
+    <item name="android:src">@drawable/full_star</item>
+    <item name="android:layout_width">100px</item>
+    <item name="android:layout_height">100px</item>
+    <item name="android:scaleType">fitXY</item>
   </style>
 </resources>

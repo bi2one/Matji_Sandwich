@@ -1,6 +1,5 @@
 package com.matji.sandwich.widget;
 
-import com.matji.sandwich.SharedMatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.AttachFileIdsHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -28,14 +27,11 @@ public class UserImageListView extends ImageListView {
 		return request;
 	}
 
-	@Override
-	protected void setModelData() {
-		/* 기본적으로 유저 이야기 페이지 안에 있는 뷰이므로,
-		 * SharedMatjiData의 top에 해당 User의 정보가 들어있어야 한다.
-		 */
-		user = (User) SharedMatjiData.getInstance().top();
+	public void setUser(User user) {
+		this.user = user;
+		init();
 	}
-	
+
 	@Override
 	protected String getTotalImageCountText() {
 		return user.getImageCount() + "개의 " + user.getNick() + " 사진";

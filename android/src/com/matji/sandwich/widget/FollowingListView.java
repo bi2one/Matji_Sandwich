@@ -2,13 +2,13 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.StoreTabActivity;
 import com.matji.sandwich.UserTabActivity;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
@@ -49,7 +49,8 @@ public class FollowingListView extends UserListView implements View.OnClickListe
 	public void onListItemClick(int position) {
 		User user = (User) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, user);
+		intent.putExtra(UserTabActivity.USER, (Parcelable) user);
+		getActivity().startActivity(intent);
 	}
 
 
@@ -71,11 +72,13 @@ public class FollowingListView extends UserListView implements View.OnClickListe
 
 	protected void gotoUserPage(Post post) {
 		Intent intent = new Intent(getActivity(), UserTabActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getUser());
+		intent.putExtra(UserTabActivity.USER, (Parcelable) post.getUser());
+		getActivity().startActivity(intent);
 	}	
 
 	protected void gotoStorePage(Post post) {
 		Intent intent = new Intent(getActivity(), StoreTabActivity.class);
-		((BaseActivity) getActivity()).startActivityWithMatjiData(intent, post.getStore());
+		intent.putExtra(StoreTabActivity.STORE, (Parcelable) post.getStore());
+		getActivity().startActivity(intent);
 	}
 }

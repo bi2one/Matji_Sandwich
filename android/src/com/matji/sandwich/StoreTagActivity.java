@@ -28,7 +28,6 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_tag);
-		store = (Store) SharedMatjiData.getInstance().top();
 		HttpRequestManager.getInstance(this).request(this, request(), STORE_TAG_LIST_REQUEST, this);
 
 		tagCloudView = (TagCloudView) findViewById(R.id.store_tag_cloud);
@@ -37,6 +36,9 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 		tagCount.setText(store.getTagCount()+getString(R.string.number_of_tag));
 	}
 	
+	public void setStore(Store store) {
+		this.store = store;
+	}
 	
 	private HttpRequest request() {
 		if (request == null || !(request instanceof TagHttpRequest)) {

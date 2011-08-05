@@ -6,6 +6,7 @@ import com.matji.sandwich.widget.RoundTabHost;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,11 +17,12 @@ import android.widget.LinearLayout;
 public class UserMainActivity extends BaseTabActivity {
 	private RoundTabHost tabHost;
 	private User user;
+	
+	public static final String USER = "user";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		init();
 	}
 	
 	@Override
@@ -30,25 +32,34 @@ public class UserMainActivity extends BaseTabActivity {
 		refresh();
 	}
 	
-	@Override
-	public void finish() {
-		super.finishWithMatjiData();
-	}
-	
-	private void init() {
+	protected void init() {
+		super.init();
+		
 		setContentView(R.layout.activity_user_main);
+		
+		user = getIntent().getParcelableExtra(USER);
 
+		Intent userPostListIntent = new Intent(this, UserPostListActivity.class);
+		userPostListIntent.putExtra(UserPostListActivity.USER, (Parcelable) user);
+		
+		Intent userImageListIntent = new Intent(this, UserImageListActivity.class);
+		userImageListIntent.putExtra(UserImageListActivity.USER, (Parcelable) user);
+		
+		Intent userUrlListIntent = new Intent(this, UserTagActivity.class);
+		userUrlListIntent.putExtra(UserTagActivity.USER, (Parcelable) user);
+		
 		tabHost = (RoundTabHost) getTabHost();
 
 		tabHost.addLeftTab("tab1",
-				R.string.store_main_post_list_view,
-				new Intent(this, UserPostListActivity.class));
+				R.string.store_main_post_list_view, 
+				userPostListIntent);
 		tabHost.addCenterTab("tab2",
 				R.string.store_main_img,
-				new Intent(this, UserImageListActivity.class));
+				userImageListIntent);
 		tabHost.addRightTab("tab3",
 				R.string.store_main_review,
-				new Intent(this, UserTagActivity.class));
+				userUrlListIntent);
+
 //		new Intent(this, UserStoreListActivity.class));
 		
 		LinearLayout wrapper = (LinearLayout) findViewById(R.id.user_talk_wrapper);

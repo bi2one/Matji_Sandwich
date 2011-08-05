@@ -15,7 +15,6 @@ public class HomeButton extends TitleButton {
 
 	public HomeButton(Context context) {
 		super(context);
-		init();
 	}
 
 	/**
@@ -24,6 +23,7 @@ public class HomeButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
+		super.init();
 		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_home));
 	}
 	

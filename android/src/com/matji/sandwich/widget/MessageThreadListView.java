@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,7 +15,6 @@ import android.view.View.OnClickListener;
 import com.matji.sandwich.ChatActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -36,7 +36,9 @@ public class MessageThreadListView extends MessageListView implements OnClickLis
 			public void onListItemClicked(int position) {
 				clickedPosition = position - 1;
 				Message message = (Message) getAdapterData().get(clickedPosition);
-				((BaseActivity) context).startActivityWithMatjiData(new Intent(context, ChatActivity.class), message);
+				Intent intent = new Intent(context, ChatActivity.class);
+				intent.putExtra(ChatActivity.MESSAGE, (Parcelable) message);
+				context.startActivity(intent);
 			}
 
 			@Override

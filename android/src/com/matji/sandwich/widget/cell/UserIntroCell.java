@@ -1,13 +1,12 @@
 package com.matji.sandwich.widget.cell;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.widget.RelativeLayout;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.SharedMatjiData;
+import com.matji.sandwich.UserProfileActivity;
 import com.matji.sandwich.data.User;
 
 /**
@@ -18,39 +17,41 @@ import com.matji.sandwich.data.User;
  * @author mozziluv
  *
  */
-public class UserIntroCell extends RelativeLayout {
-
+public class UserIntroCell extends Cell {
+	private User user;
 	/**
 	 * 기본 생성자 (Java Code)
 	 * 
 	 * @param context
 	 */
 	public UserIntroCell(Context context) {
-		super(context);
-		init();
+		super(context, R.layout.cell_user_intro);
 	}
 
 	/**
-	 * 기본 생성자 (XML)
+	 * User 정보를 같이 전달 받을 때 사용하는 생성자.
 	 * 
 	 * @param context
-	 * @param attr
+	 * @param user 이 Cell의 유저 데이터
 	 */
-	public UserIntroCell(Context context, AttributeSet attr) {
-		super(context, attr);
-		init();
+	public UserIntroCell(Context context, User user) {
+		super(context, R.layout.cell_user_intro);
+		setUser(user);
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+		((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(user.getIntro());
 	}
 	
 	/**
-	 * 데이터 초기화
+	 * 
 	 */
-	private void init() {
-		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		inflater.inflate(R.layout.cell_user_intro, this);
-		
-		User user = (User) SharedMatjiData.getInstance().top();
-		((TextView) findViewById(R.id.cell_user_intro)).setText(user.getIntro());
-//		refresh(user);
+	@Override
+	protected Intent getIntent() {
+		Intent intent = new Intent(getContext(), UserProfileActivity.class);
+		intent.putExtra(UserProfileActivity.USER, (Parcelable) user);
+		return intent;
 	}
 	
 //	/**

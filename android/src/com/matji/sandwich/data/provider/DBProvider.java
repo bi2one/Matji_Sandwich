@@ -20,11 +20,13 @@ import com.matji.sandwich.data.db.request.DBStoreRequest;
 import com.matji.sandwich.data.provider.DataBaseHelper;
 
 public class DBProvider {
-	private static String STORE_TABLE_NAME = "matji_stores";
-	private static String BOOKMARK_TABLE_NAME = "matji_bookmarks";
-	private static String LIKE_TABLE_NAME = "matji_likes";
-	private static String FOLLOWING_TABLE_NAME = "matji_followings";
-	private static String FOLLOWER_TABLE_NAME = "matji_followers";
+	public static String STORE_TABLE_NAME = "matji_stores";
+	public static String BOOKMARK_TABLE_NAME = "matji_bookmarks";
+	public static String LIKE_TABLE_NAME = "matji_likes";
+	public static String FOLLOWING_TABLE_NAME = "matji_followings";
+	public static String FOLLOWER_TABLE_NAME = "matji_followers";
+	
+	public static final String POST = "Post";
 
 	private static DBProvider dbProvider;
 	private static DataBaseHelper dbHelper;
@@ -54,6 +56,10 @@ public class DBProvider {
 		}
 		return dbProvider;
 	}
+
+    public DataBaseHelper getDataBaseHelper() {
+	return dbHelper;
+    }
 
 	private int getRecordNums(String table, String condition) {
 		SQLiteDatabase db = dbHelper.getDatabase();

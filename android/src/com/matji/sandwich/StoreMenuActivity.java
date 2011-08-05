@@ -31,6 +31,8 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 	private EditText menuField;
 
 	private static final int ADD_MENU_REQUEST = 11;
+	
+	public static final String STORE = "store";
 
 	public static final String STORE = "store";
 

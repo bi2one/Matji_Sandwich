@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Parcelable;
 import android.text.TextPaint;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.base.BaseMapActivity;
-import com.matji.sandwich.StoreTabActivity;
+import com.matji.sandwich.StoreMainActivity;
 
 public class StoreItemizedOverlay extends ItemizedOverlay {
     private final int POPUP_OVERLAY_OFFSET_X = -28;
@@ -44,7 +45,7 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
     private TextPaint mTextPaint;
     private String mCount;
     private Bitmap mMarkerLocked; // 미발굴 
-    private Bitmap mMarkerUnLocked; // 발굴 
+    private Bitmap mMarkerUnLocked; // 발굴
     private Bitmap mMarkerBookmarked; // 즐겨찾
     private View popupOverlay;
     private Paint mPaint;
@@ -147,6 +148,9 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 	TextView title = (TextView)popupOverlay.findViewById(R.id.popup_item_title);
 	TextView likeCount = (TextView)popupOverlay.findViewById(R.id.popup_item_like_count);
 	TextView postCount = (TextView)popupOverlay.findViewById(R.id.popup_item_post_count);
+
+	// Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/pala.ttf");
+	// likeCount.setTypeface(tf);
 	
 	title.setText(lastPopupItem.getTitle());
 	likeCount.setText("" + popupStore.getLikeCount());
@@ -155,8 +159,9 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 	popupOverlay.setOnClickListener(new OnClickListener() {
 		public void onClick(View v) {
 		    Store store = ((StoreOverlayItem)getItem(index)).getStore();
-		    Intent intent = new Intent(mActivity, StoreTabActivity.class);
-		    mActivity.startActivityWithMatjiData(intent, store);
+		    Intent intent = new Intent(mActivity, StoreMainActivity.class);
+		    intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
+		    mActivity.startActivity(intent);
 		}
 	    });
 

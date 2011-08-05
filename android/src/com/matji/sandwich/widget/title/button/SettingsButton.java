@@ -15,7 +15,6 @@ public class SettingsButton extends TitleButton {
 
 	public SettingsButton(Context context) {
 		super(context);
-		init();
 	}
 
 	/**
@@ -24,6 +23,7 @@ public class SettingsButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
+		super.init();
 		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_notification));
 	}
 	

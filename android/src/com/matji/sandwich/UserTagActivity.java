@@ -16,19 +16,18 @@ import com.matji.sandwich.http.request.TagHttpRequest;
 import com.matji.sandwich.widget.tag.TagCloudView;
 
 public class UserTagActivity extends BaseActivity implements Requestable {
+	private HttpRequest request;
+	private TagCloudView tagCloudView;
+	private User user;
+	
 	private final int USER_TAG_LIST_REQUEST = 11;
-	
-	HttpRequest request;
-	
-	TagCloudView tagCloudView;
-	
-	User user;
+	public static final String USER = "user";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_tag);
-		user = ((User) SharedMatjiData.getInstance().top());
+		user = (User) getIntent().getParcelableExtra(USER);
 		HttpRequestManager.getInstance(this).request(this, request(), USER_TAG_LIST_REQUEST, this);
 		
 		tagCloudView = (TagCloudView) findViewById(R.id.user_tag_cloud);

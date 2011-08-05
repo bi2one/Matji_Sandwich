@@ -21,16 +21,14 @@ public class UserTabActivity extends BaseTabActivity {
 	public static final int IMAGE_PAGE = 3;
 	public static final int SETTING_PAGE = 4;
 
-	public void finish() {
-	    super.finishWithMatjiData();
-	}
-
+	public final static String USER = "user";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_tab);
 		
-		user = (User) SharedMatjiData.getInstance().top();
+		user = (User) getIntent().getParcelableExtra(USER);
 		
 		mainIntent = new Intent(this, UserMainActivity.class);
 		storeListIntent = new Intent(this, UserStoreListActivity.class);

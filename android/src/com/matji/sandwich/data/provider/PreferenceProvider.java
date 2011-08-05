@@ -33,7 +33,7 @@ public class PreferenceProvider {
 	private HashMap<String, Object> getSharedObjectPreferences(){
 		HashMap<String, Object> hmap = null;
 		FileInputStream fis = null;
-		ObjectInputStream ois = null; 
+		ObjectInputStream ois = null;
 		try {
 			fis = context.openFileInput(OBJECT_PREFERENCE_NAME);
 			ois = new ObjectInputStream(fis);
@@ -46,6 +46,8 @@ public class PreferenceProvider {
 			}
 			
 		}catch (Throwable e){
+		    // file not found exception 발생함. 아래 있는 commit method를
+		    // 실행하면 나지 않을 것 같음. --TODO--
 			hmap = new HashMap<String, Object>();
 			Log.d("PreferenceProvider", "Error occured while read Preference Object.");
 		}
@@ -121,7 +123,7 @@ public class PreferenceProvider {
 	
 	public boolean commit(){
 		boolean success = false;
-		try{   
+		try{
             FileOutputStream fos = context.openFileOutput(OBJECT_PREFERENCE_NAME, Context.MODE_WORLD_WRITEABLE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(sharedObjects); 

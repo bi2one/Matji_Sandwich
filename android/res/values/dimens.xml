@@ -3,18 +3,25 @@
 	<!-- everywhere used dimens -->
 	<dimen name="default_distance">10dp</dimen>
 	<dimen name="default_distance_half">5dp</dimen>
+	<dimen name="edit_text_bottom_padding">5dp</dimen>
+	<dimen name="edit_text_top_padding">3dp</dimen>
 	
 	<!-- Title Container -->
 	<dimen name="title_container_height">37dp</dimen>
 	
 	<!-- Store Cell -->
 	<dimen name="max_title_width">190dp</dimen>
-	
+
+	<!-- User Cell -->
+	<dimen name="cell_profile_size">80dp</dimen>
+	<dimen name="cell_btn_width">80dp</dimen>
+		
 	<!-- User Profile -->
 	<dimen name="profile_size">50dp</dimen>
-	<dimen name="profile_size_cell">80dp</dimen>	
+	
 	<!-- Post List Row -->
 	<dimen name="row_post_distance">1dp</dimen>
+	<dimen name="row_post_previews_margin">5dp</dimen>
 	
 	<!-- Text Size -->
 	<dimen name="text_ssmall">9dp</dimen>
@@ -35,4 +42,8 @@
 	
 	<!-- ScrollView -->
 	<dimen name="default_fading_edge_length">3dp</dimen>
+	
+	<!-- Quick Action Button Size -->
+	<dimen name="quickaction_btn_width">20dp</dimen>
+	<dimen name="quickaction_btn_height">50dp</dimen>
 </resources>

@@ -15,7 +15,6 @@ public class LikeButton extends TitleButton {
 //TODO 나중에 Like가 여러개로  나눠질 수 있으니 후에 수정
 	public LikeButton(Context context) {
 		super(context);
-		init();
 	}
 
 	/**
@@ -24,6 +23,7 @@ public class LikeButton extends TitleButton {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
+		super.init();
 		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_like));
 	}
 	

@@ -26,7 +26,7 @@ public class StoreBookmarkedListView extends StoreListView {
 	}
 	
 	public HttpRequest request() {
-		storeRequest.actionBookmarkedList(userId, getPage(), getLimit());
+		storeRequest.actionBookmarkList(userId, getPage(), getLimit());
 		return storeRequest; 
 	}
 }
