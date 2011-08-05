@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DefaultWidthFill">
+  <Button android:id="@+id/middle_rounded_button"
+	  style="@style/middle_rounded_button" />
+</LinearLayout>

@@ -70,9 +70,18 @@ public class TitleContainer extends RelativeLayout {
 	 * 
 	 * @param title 타이틀로 사용 할 문자열
 	 */
-	protected void setTitle(String title) {
+	public void setTitle(String title) {
 		titleContainer.setText(title);
 	}
+
+    /**
+     * 타이틀을 지정한다.
+     *
+     * @param titleRes 타이틀로 사용할 문자열의 아이디
+     */
+    public void setTitle(int titleRes) {
+	titleContainer.setText(titleRes);
+    }
 	
 	/**
 	 * 타이틀의 Background 를 지정한다.

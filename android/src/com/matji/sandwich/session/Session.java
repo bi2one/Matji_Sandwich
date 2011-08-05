@@ -66,7 +66,6 @@ public class Session implements Requestable {
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionAuthorize(userid, password);
 		mManager.request(activity, request, AUTHORIZE, this);
-
 	}
 	
 	

@@ -368,6 +368,7 @@
   <style name="main_map_listView" parent="DefaultFill">
     <item name="android:divider">@color/listview_divider1_gray</item>
     <item name="android:dividerHeight">0px</item>
+    <item name="android:background">@color/WHITE</item>
   </style>
 
   <!-- activity_get_map_position.xml -->
@@ -701,4 +702,31 @@
     <item name="android:layout_height">100px</item>
     <item name="android:scaleType">fitXY</item>
   </style>
+
+  <!-- activity_change_location.xml -->
+  <style name="activity_change_location" parent="DefaultFill">
+    <item name="android:background">@drawable/pattern_bg</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <!-- top_rounded_button.xml -->
+  <style name="top_rounded_button" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/btn_top_corner</item>
+  </style>
+
+  <!-- middle_rounded_button.xml -->
+  <style name="middle_rounded_button" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/btn_rectangle</item>
+  </style>
+
+  <!-- bottom_rounded_button.xml -->
+  <style name="bottom_rounded_button" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/btn_bottom_corner</item>
+  </style>
+
+  <!-- all_rounded_button.xml -->
+  <style name="all_rounded_button" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/btn_all_corner</item>
+  </style>
+
 </resources>

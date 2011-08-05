@@ -22,6 +22,7 @@
       style="@style/DefaultWrap"
       android:layout_toLeftOf="@+id/map_title_bar_near_post_button"
       android:layout_centerVertical="true"
+      android:onClick="onChangeLocationClicked"
       android:id="@id/map_title_bar_change_location_button">
     <!-- <TextView -->
     <!-- 	style="@style/map_title_bar_changeLocationText" -->

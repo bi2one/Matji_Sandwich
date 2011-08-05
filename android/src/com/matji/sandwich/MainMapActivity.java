@@ -2,11 +2,14 @@ package com.matji.sandwich;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+
+import com.google.android.maps.GeoPoint;
 
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.location.GpsManager;
@@ -14,6 +17,8 @@ import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.widget.StoreMapNearListView;
 
 public class MainMapActivity extends BaseMapActivity {
+    private static final int BASIC_SEARCH_LOC_LAT = 0;
+    private static final int BASIC_SEARCH_LOC_LNG = 0;
     private Context context;
     private MainMatjiMapView mapView;
     private StoreMapNearListView storeListView;
@@ -45,8 +50,8 @@ public class MainMapActivity extends BaseMapActivity {
 
     protected void onResume() {
 	super.onResume();
+	mapView.startMapCenterThread();
 	if (!isFlow) {
-	    mapView.startMapCenterThread();
 	    storeListView.requestReload();
 	} else {
 	    isFlow = false;
@@ -75,6 +80,10 @@ public class MainMapActivity extends BaseMapActivity {
 	currentViewIsMap = !currentViewIsMap;
     }
 
+    public void onChangeLocationClicked(View v) {
+	startActivityForResult(new Intent(context, ChangeLocationActivity.class), ChangeLocationActivity.REQUEST_CODE_LOCATION);
+    }
+
     public void setIsFlow(boolean isFlow) {
 	this.isFlow = isFlow;
     }
@@ -91,5 +100,14 @@ public class MainMapActivity extends BaseMapActivity {
 	storeListView.requestReload();
 	mapView.setVisibility(View.GONE);
 	storeListView.setVisibility(View.VISIBLE);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	switch(requestCode) {
+	case ChangeLocationActivity.REQUEST_CODE_LOCATION:
+	    int searchedLat = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LATITUDE, BASIC_SEARCH_LOC_LAT);
+	    int searchedLng = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE, BASIC_SEARCH_LOC_LNG);
+	    mapView.setCenter(new GeoPoint(searchedLat, searchedLng));
+	}
     }
 }

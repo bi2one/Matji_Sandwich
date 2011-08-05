@@ -31,6 +31,7 @@ public class PreferenceProvider {
 	
 	@SuppressWarnings("unchecked")
 	private HashMap<String, Object> getSharedObjectPreferences(){
+	    // Log.d("=====", "load");
 		HashMap<String, Object> hmap = null;
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
@@ -46,6 +47,7 @@ public class PreferenceProvider {
 			}
 			
 		}catch (Throwable e){
+		    // Log.d("=====", e.getMessage());
 		    // file not found exception 발생함. 아래 있는 commit method를
 		    // 실행하면 나지 않을 것 같음. --TODO--
 			hmap = new HashMap<String, Object>();
@@ -122,11 +124,12 @@ public class PreferenceProvider {
 	
 	
 	public boolean commit(){
+	    // Log.d("=====", "commit!!");
 		boolean success = false;
 		try{
             FileOutputStream fos = context.openFileOutput(OBJECT_PREFERENCE_NAME, Context.MODE_WORLD_WRITEABLE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(sharedObjects); 
+            oos.writeObject(sharedObjects);
             oos.flush();
             oos.close();
             fos.close();

@@ -35,7 +35,6 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 							      MatjiLocationListener,
 							      Requestable,
 							      OnTouchListener {
-    private static final GeocodeHttpRequest.Country COUNTRY = GeocodeHttpRequest.Country.KOREA;
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
     private static final int MAX_STORE_COUNT = 60;
@@ -81,6 +80,10 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
     public void setCenter(Location location) {
 	mapController.animateTo(new LocationToGeoPointAdapter(location));
+    }
+
+    public void setCenter(GeoPoint point) {
+	mapController.animateTo(point);
     }
 
     public void onMapCenterChanged(GeoPoint point) {
@@ -185,7 +188,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	    double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
 
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
-	    geocodeRequest.actionReverseGeocodingByGeoPoint(getMapCenter(), COUNTRY);
+	    geocodeRequest.actionReverseGeocodingByGeoPoint(getMapCenter(), sessionUtil.getCurrentCountry());
 	    requestManager.request(activity, request, NEARBY_STORE, requestable);
 	    requestManager.request(activity, geocodeRequest, GEOCODE, requestable);
 	}

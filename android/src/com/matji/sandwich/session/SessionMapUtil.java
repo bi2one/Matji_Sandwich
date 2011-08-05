@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.android.maps.GeoPoint;
 
 import com.matji.sandwich.data.provider.PreferenceProvider;
+import com.matji.sandwich.http.request.GeocodeHttpRequest.Country;
 
 public class SessionMapUtil {
     private static final int LAT_NEAR_BASIC_SPAN = 3000;
@@ -62,5 +63,9 @@ public class SessionMapUtil {
 	int latSW = preferenceProvider.getInt(SessionIndex.MAP_BOUND_LATITUDE_SW, BASIC_LATITUDE_SW);
 	int lngSW = preferenceProvider.getInt(SessionIndex.MAP_BOUND_LONGITUDE_SW, BASIC_LONGITUDE_SW);
 	return new GeoPoint(latSW, lngSW);
+    }
+
+    public Country getCurrentCountry() {
+	return Country.KOREA;
     }
 }

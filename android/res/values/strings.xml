@@ -268,4 +268,14 @@
   
   <!-- hint -->
   <string name="hint_write_comment">댓글 입력</string>
+
+  <!-- activity_change_location -->
+  <string name="activity_change_location_hint">지명이나 지역 입력</string>
+
+  <!-- ChangeLocationActivity.java -->
+  <string name="change_location_activity_input_empty_string">주소를 입력해 주세요.</string>
+
+  <!-- recent_changed_location.xml -->
+  <string name="recent_changed_location_empty">최근 변경한 지역이 없습니다.</string>
+  <string name="recent_changed_location_filled">최근 변경한 지역</string>
 </resources>

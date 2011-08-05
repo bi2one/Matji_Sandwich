@@ -47,6 +47,22 @@ public class GeocodeHttpRequest extends HttpRequest {
     }
 
     /**
+     * address string을 통해서 geocoding action을 설정한다.
+     *
+     * @param address 위치를 지정할 address
+     * @param country geocoding결과 언어의 국가
+     */
+    public void actionGeocoding(String address, Country country) {
+	httpMethod = HttpMethod.HTTP_GET;
+
+	getHashtable.clear();
+	getHashtable.put("address", address);
+	getHashtable.put("sensor", sensor);
+	getHashtable.put("language", country.toLanguageCode());
+	parser = new GeocodeParser(context);
+    }
+
+    /**
      * Location객체를 통해서 지정하는 역 geocoding action을 설정한다.
      *
      * @param location 위치를 지정할 Location
