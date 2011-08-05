@@ -94,12 +94,10 @@ PullToRefreshListView.OnRefreshListener {
 		}
 		
 		if (prevPage < page) {
-			Log.d("page", "2. " + prevPage + ", " + page);
 			Log.d("refresh" , "requestNext()");
 			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
 			manager.request(getActivity(), request(), REQUEST_NEXT, this);
 			nextValue();
-			Log.d("page", "3. " + prevPage + ", " + page);
 		} else if (prevPage == page) {
 			prevPage = page - 1;
 		}

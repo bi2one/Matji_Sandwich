@@ -4,7 +4,9 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.PostSectionedAdapter;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -24,9 +26,9 @@ public class PostListView extends RequestableMListView {
 	}	
 
 	protected void init() {
-		setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.pattern_bg));
+		setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
 		setDivider(null);
-		setFadingEdgeLength(getResources().getDimensionPixelSize(R.dimen.fade_edge_length));
+		setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
 		setCacheColorHint(Color.TRANSPARENT);
 		setSelector(android.R.color.transparent);
 	}
@@ -40,6 +42,12 @@ public class PostListView extends RequestableMListView {
 		return request;
 	}
 
+	@Override
+	public void setActivity(Activity activity) {
+		super.setActivity(activity);
+		((PostSectionedAdapter) getMBaseAdapter()).setActivity(getActivity());
+	}
+	
 	@Override
 	public void onListItemClick(int position) {}
 }

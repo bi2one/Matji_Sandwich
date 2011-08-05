@@ -252,9 +252,7 @@
    
   <!-- header_comment.xml -->
   <style name="header_comment_Preview" parent="DefaultWrap">
-  	<item name="android:background">@drawable/img_border</item>
   	<item name="android:adjustViewBounds">true</item>
-  	<item name="android:padding">@dimen/default_distance_half</item>
   	<item name="android:visibility">gone</item>
   </style>
   
@@ -530,9 +528,7 @@
   </style>
 
   <style name="row_post_Preview" parent="DefaultWrap">
-  	<item name="android:background">@drawable/img_border</item>
   	<item name="android:adjustViewBounds">true</item>
-  	<item name="android:padding">@dimen/default_distance_half</item>
   	<item name="android:visibility">gone</item>
   </style>
   
@@ -545,13 +541,12 @@
   </style>
   
   <style name="row_post_Count" parent="SmallGrayText">
-  	<item name="android:paddingLeft">@dimen/default_distance</item>
+  	<item name="android:paddingLeft">@dimen/default_distance_half</item>
   	<item name="android:paddingRight">@dimen/default_distance</item>
   </style>
   
   <style name="row_post_Like" parent="SmallDarkOrangeText">
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
-   	<item name="android:drawablePadding">@dimen/default_distance_half</item>
   </style>
 
   <!-- map_title_bar.xml -->

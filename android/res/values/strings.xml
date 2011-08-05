@@ -185,6 +185,7 @@
   <string name="request">정보 등록/수정 요청</string>
   <string name="registered_menu">등록된 메뉴</string>
   <string name="uncertain_menu">불확실한 메뉴</string>
+  <string name="register_new_menu">등록된 메뉴</string>
   
   <!-- StoreSliderActivity -->
   <string name="all_store">전체 맛집</string>

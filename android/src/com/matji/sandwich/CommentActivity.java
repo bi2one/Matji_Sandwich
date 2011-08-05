@@ -18,6 +18,7 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.CommentListView;
 
@@ -134,6 +135,7 @@ public class CommentActivity extends BaseActivity implements Requestable {
 				((CommentHttpRequest) request).actionNew(((Post) posts.get(position)).getId(), commentField.getText().toString().trim(), MatjiConstants.string(R.string.android));
 				manager.request(this, request, COMMENT_WRITE_REQUEST, this);
 				commentField.setText("");
+				KeyboardUtil.hideKeyboard(this);
 			}
 		}
 	}

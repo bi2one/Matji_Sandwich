@@ -9,7 +9,7 @@ import com.matji.sandwich.widget.cell.UserCell;
 public class UserProfileActivity extends BaseActivity {
 	private User user;
 	
-	public final String USER = "user";
+	public final static String USER = "user";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,9 @@ public class UserProfileActivity extends BaseActivity {
 	@Override
 	protected void init() {
 		setContentView(R.layout.activity_user_profile);
+		
 		user = (User) getIntent().getParcelableExtra(USER);
+		((UserCell) findViewById(R.id.UserCell)).setUser(user);
+		((UserCell) findViewById(R.id.UserCell)).setClickable(false);
 	}
 }

@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,6 +45,12 @@ public class CommentListView extends RequestableMListView {
 		setCanRepeat(true);
 		setFadingEdgeLength(0);
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
+	}
+	
+	@Override
+	public void setActivity(Activity activity) {
+		super.setActivity(activity);
+//		((CommentAdapter) getMBaseAdapter()).setActivity(activity);
 	}
 	
 	public void setPost(Post post) {

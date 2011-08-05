@@ -7,6 +7,8 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.ProfileImageView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -30,8 +32,15 @@ public class UserCell extends Cell {
 		super(context, R.layout.cell_user);
 	}
 	
+	/**
+	 * 기본 생성자 (XML)
+	 * 
+	 * @param context
+	 * @param attr
+	 */
 	public UserCell(Context context, AttributeSet attr) {
 		super(context, R.layout.cell_user);
+		setId(R.id.UserCell);		
 	}
 
 	/**
@@ -82,9 +91,13 @@ public class UserCell extends Cell {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
-	protected Class<?> getDetailPageActivity() {
-		// TODO Auto-generated method stub
-		return UserProfileActivity.class;
+	protected Intent getIntent() {
+		Intent intent = new Intent(getContext(), UserProfileActivity.class);
+		intent.putExtra(UserProfileActivity.USER, (Parcelable) user);
+		return intent;
 	}
 }

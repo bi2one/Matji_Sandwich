@@ -32,7 +32,7 @@ public class FoodAdapter extends MBaseAdapter {
 			convertView.setTag(foodElement);
 
 			StoreMenuListView storeMenuListView = (StoreMenuListView) parent;
-			foodElement.like.setOnClickListener(storeMenuListView);
+			//foodElement.like.setOnClickListener(storeMenuListView);
 		} else {
 			foodElement = (FoodElement) convertView.getTag();
 		}

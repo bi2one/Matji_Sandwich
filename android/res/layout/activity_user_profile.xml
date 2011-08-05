@@ -2,6 +2,7 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/DefaultLinearFill">
+	
 	<!-- User Cell -->
 	<com.matji.sandwich.widget.cell.UserCell
 		android:id="@+id/UserCell"

@@ -17,6 +17,8 @@ import com.matji.sandwich.data.MatjiData;
 
 import com.matji.sandwich.http.request.AttachFileIdsHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
+
 
 public abstract class ImageListView extends RequestableMListView implements View.OnClickListener {
 	protected HttpRequest request;
@@ -45,17 +47,19 @@ public abstract class ImageListView extends RequestableMListView implements View
 		setSelector(android.R.color.transparent);
 		setCacheColorHint(Color.TRANSPARENT);
 		setVerticalScrollBarEnabled(false);
-		setBackgroundDrawable(getResources().getDrawable(R.drawable.pattern_bg));
+		setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
 
 	}
 
 	private TextView createHeader() {
 		TextView totalImageCount = new TextView(getContext());
 		totalImageCount.setText(getTotalImageCountText());
-		totalImageCount.setTextColor(getResources().getColor(R.color.matji_chocolate));
-		
-		int padding = (int) getResources().getDimension(R.dimen.default_distance);
-		totalImageCount.setPadding(padding, padding, padding, 0);
+		totalImageCount.setTextColor(MatjiConstants.color(R.color.matji_chocolate));
+//		totalImageCount.setTextSize(MatjiConstants.dimen(R.dimen.text_large));
+		// TODO 이상하게 파라미터로 픽셀이 아니라 DIP로 받는 것 같네요...
+		totalImageCount.setTextSize(17);
+		int padding = (int) MatjiConstants.dimen(R.dimen.default_distance);
+		totalImageCount.setPadding(padding, padding*2, padding, 0);
 		
 		return totalImageCount;
 	}
