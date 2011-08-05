@@ -34,8 +34,6 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 	
 	public static final String STORE = "store";
 
-	public static final String STORE = "store";
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
