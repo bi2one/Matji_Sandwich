@@ -32,7 +32,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.base.BaseMapActivity;
-import com.matji.sandwich.StoreTabActivity;
+import com.matji.sandwich.StoreMainActivity;
 
 public class StoreItemizedOverlay extends ItemizedOverlay {
     private final int POPUP_OVERLAY_OFFSET_X = -28;
@@ -159,8 +159,8 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 	popupOverlay.setOnClickListener(new OnClickListener() {
 		public void onClick(View v) {
 		    Store store = ((StoreOverlayItem)getItem(index)).getStore();
-		    Intent intent = new Intent(mActivity, StoreTabActivity.class);
-		    intent.putExtra(StoreTabActivity.STORE, (Parcelable) store);
+		    Intent intent = new Intent(mActivity, StoreMainActivity.class);
+		    intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
 		    mActivity.startActivity(intent);
 		}
 	    });

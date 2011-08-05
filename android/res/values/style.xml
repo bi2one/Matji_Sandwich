@@ -638,7 +638,7 @@
 
   <!-- adapter_near_store.xml -->
   <style name="adapter_near_store" parent="DefaultWidthFill">
-    <item name="android:background">@color/WHITE</item>
+    <item name="android:background">@drawable/btn_white_to_lightpink</item>
   </style>
 
   <style name="adapter_near_store_left_element" parent="DefaultWrap">

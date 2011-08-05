@@ -142,5 +142,5 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	Intent intent = new Intent(getActivity(), StoreMainActivity.class);
 	intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
 	getActivity().startActivity(intent);
-    }    
+    }
 }
