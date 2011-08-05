@@ -1,11 +1,17 @@
 package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matji.sandwich.R;
@@ -21,6 +27,89 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.request.StoreFoodHttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
+
+//public class StoreMenuListView extends FlowLayout{
+//	private final int LINE_HEIGHT = (int) MatjiConstants.dimen(R.dimen.tag_line_height);
+//
+//	class MenuView extends TextView {
+//		private final int PADDING = (int) MatjiConstants.dimen(R.dimen.default_distance);
+//		
+//		public MenuView(Context context, StoreFood menu) {
+//			super(context);
+//			init(menu);
+//		}
+//		
+//		public MenuView(Context context, String str) {
+//			super(context);
+//			init(str);
+//		}
+//		
+//		private void init() {
+//			setMinHeight(LINE_HEIGHT);
+//			setMaxHeight(LINE_HEIGHT);
+//			setGravity(Gravity.CENTER);
+//			setPadding(PADDING, PADDING, PADDING, PADDING);
+//		}
+//		
+//		private void init(StoreFood menu) {
+//			String shortMenu = "";
+//			if (menu.getFood() != null)
+//				shortMenu = getShortMenu(menu.getFood().getName());
+//			setText(shortMenu);
+//			init();
+//		}
+//		
+//		private void init(String str) {
+//			setText(str);
+//			init();
+//		}
+//		
+//		private String getShortMenu(String menu) {
+//			if (menu.length() > 10) {
+//				return menu.substring(0, 10) + "...";
+//			} else return menu;
+//		}
+//	}
+//	
+//	public StoreMenuListView(Context context, ArrayList<StoreFood> menus){
+//		super(context);
+//		init(menus);
+//	}
+//	
+//	public StoreMenuListView(Context context, AttributeSet attr) {
+//		super(context,attr);
+//	}
+//
+//	public void init(ArrayList<StoreFood> menus) {
+//		setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_box));
+//		Collections.shuffle(menus);
+//		
+//		if (menus.size() > 0) { 
+//			for (StoreFood menu : menus) {
+//				addView(new MenuView(getContext(), menu));
+//			}
+//		} else {
+//			addView(new MenuView(getContext(), "No Menus"));
+//		}
+//	}
+//	
+//	@Override
+//	protected void onDraw(Canvas canvas) {
+//		super.onDraw(canvas);
+//
+//		int line = getMeasuredHeight() / LINE_HEIGHT;
+//
+//		Paint p = new Paint();
+//		p.setColor(getResources().getColor(R.color.matji_light_gray));
+//		for (int i = 1; i < line; i++)
+//			canvas.drawLine(0, (LINE_HEIGHT+1)*i, getMeasuredWidth(), (LINE_HEIGHT+1)*i, p);
+//
+//		super.onDraw(canvas);
+//	}
+//
+//}
+
 
 public class StoreMenuListView extends RequestableMListView implements OnClickListener {
 	private Context context;

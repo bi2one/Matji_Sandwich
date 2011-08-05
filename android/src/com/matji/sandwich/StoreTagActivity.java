@@ -3,7 +3,6 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;

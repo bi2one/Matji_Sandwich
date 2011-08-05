@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- <com.matji.sandwich.widget.MatjiScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="@drawable/pattern_bg"		
+	style="@style/DefaultFill">
+	<LinearLayout
+		style="@style/DefaultLinearFill"
+		android:padding="@dimen/default_distance">
+		<TextView
+			android:id="@+id/store_default_basic_info"
+			android:layout_margin="@dimen/default_distance"
+			android:text="@string/registered_menu"
+			style="@style/SubTitle" />
+		<com.matji.sandwich.widget.StoreMenuListView
+			style="@style/DefaultFill"
+			android:layout_marginBottom="20dp" />
+		
+		<TextView
+			android:id="@+id/store_default_more_info"
+			android:layout_margin="@dimen/default_distance"
+			android:text="@string/uncertain_menu"
+			style="@style/SubTitle" />
+		<LinearLayout 
+			style="@style/DefaultWidthFill"
+			android:orientation="vertical">			
+		</LinearLayout>			
+	</LinearLayout>
+</com.matji.sandwich.widget.MatjiScrollView> -->
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
