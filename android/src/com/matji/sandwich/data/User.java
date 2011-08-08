@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User extends MatjiData implements Serializable{
+public class User extends MatjiData implements Serializable {
 	private static final long serialVersionUID = 3938226042478924177L;
 	private int id;
 	private String userid;
