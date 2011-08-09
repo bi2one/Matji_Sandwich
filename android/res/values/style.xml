@@ -547,22 +547,23 @@
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
   </style>
 
+  <!-- location_title_bar.xml -->
   <!-- map_title_bar.xml -->
-  <style name="map_title_bar" parent="DefaultWidthFill">
+  <style name="location_title_bar" parent="DefaultWidthFill">
     <item name="android:paddingTop">1px</item>
     <item name="android:paddingBottom">0dp</item>
     <item name="android:background">@drawable/map_titlebar_bg</item>
   </style>
 
-  <style name="map_title_bar_flipButton" parent="DefaultWrap">
+  <style name="location_title_bar_flipButton" parent="DefaultWrap">
     <item name="android:background">@drawable/map_titlebar_flip_btn</item>
   </style>
 
-  <style name="map_title_bar_locationButton" parent="DefaultWrap">
+  <style name="location_title_bar_locationButton" parent="DefaultWrap">
     <item name="android:background">@drawable/map_titlebar_location_btn</item>
   </style>
 
-  <style name="map_title_bar_address" parent="DefaultWidthFill">
+  <style name="location_title_bar_address" parent="DefaultWidthFill">
     <item name="android:layout_gravity">center_vertical</item>
     <item name="android:paddingLeft">4dp</item>
     <item name="android:paddingRight">3dp</item>
@@ -571,19 +572,19 @@
     <item name="android:textSize">12dp</item>
   </style>
 
-  <style name="map_title_bar_changeLocationText" parent="DefaultWrap">
+  <style name="location_title_bar_changeLocationText" parent="DefaultWrap">
     <item name="android:layout_gravity">center_vertical</item>
     <item name="android:paddingRight">1dp</item>
     <item name="android:textColor">@color/map_title_bar_change_address</item>
     <item name="android:textSize">10dp</item>
   </style>
 
-  <style name="map_title_bar_changeLocationArrow" parent="DefaultWrap">
+  <style name="location_title_bar_changeLocationArrow" parent="DefaultWrap">
 	<item name="android:layout_gravity">center</item>
 	<item name="android:paddingRight">2dp</item>
   </style>
 
-  <style name="map_title_bar_nearPostButton" parent="DefaultWrap">
+  <style name="location_title_bar_nearPostButton" parent="DefaultWrap">
     <item name="android:background">@drawable/map_titlebar_near_post_btn</item>
   </style>
   

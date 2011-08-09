@@ -37,6 +37,14 @@ public class SessionMapUtil {
 	preferenceProvider.setInt(SessionIndex.MAP_BOUND_CENTER_LONGITUDE, centerPoint.getLongitudeE6());
     }
 
+    public void setCenterAddress(String address) {
+	preferenceProvider.setString(SessionIndex.MAP_ADDRESS, address);
+    }
+
+    public String getCenterAddress() {
+	return preferenceProvider.getString(SessionIndex.MAP_ADDRESS, "");
+    }
+
     public GeoPoint getCenter() {
 	int centerLat = preferenceProvider.getInt(SessionIndex.MAP_BOUND_CENTER_LATITUDE, BASIC_CENTER_LAT);
 	int centerLng = preferenceProvider.getInt(SessionIndex.MAP_BOUND_CENTER_LONGITUDE, BASIC_CENTER_LNG);
