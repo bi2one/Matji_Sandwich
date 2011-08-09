@@ -47,6 +47,7 @@ public class MainMapActivity extends BaseMapActivity {
 	
 	flipButton = findViewById(R.id.map_title_bar_flip_button);
 	isFlow = false;
+	currentViewIsMap = true;
 	
 	flipMapViewBackground = getResources().getDrawable(R.drawable.map_titlebar_flip_mapview_btn);
 	flipNearStoreBackground = getResources().getDrawable(R.drawable.map_titlebar_flip_btn);
