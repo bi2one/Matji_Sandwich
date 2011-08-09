@@ -42,6 +42,7 @@
 	<color name="matji_black">#000</color>
 	<color name="matji_chocolate">#a27c47</color>
 	<color name="matji_transparent">#00000000</color>
+	<color name="matji_translucent">#55000000</color>
 	<color name="matji_red">#FF2400</color>
 	<color name="matji_light_pink">#FFFAD6</color>
 

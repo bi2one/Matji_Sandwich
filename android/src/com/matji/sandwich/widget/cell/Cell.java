@@ -1,7 +1,5 @@
 package com.matji.sandwich.widget.cell;
 
-import com.matji.sandwich.R;
-
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;

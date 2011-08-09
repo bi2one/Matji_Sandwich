@@ -1,8 +1,10 @@
 package com.matji.sandwich.widget.title.button;
 
+import com.matji.sandwich.MainTabActivity;
 import com.matji.sandwich.R;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 /**
@@ -34,5 +36,6 @@ public class HomeButton extends TitleButton {
 	public void onTitleItemClicked() {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "HomeButtonClicked");
+		context.startActivity(new Intent(context, MainTabActivity.class));
 	}
 }

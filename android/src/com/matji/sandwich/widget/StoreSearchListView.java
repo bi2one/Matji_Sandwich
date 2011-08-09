@@ -33,9 +33,9 @@
 
 package com.matji.sandwich.widget;
 
-import com.matji.sandwich.Searchable;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.widget.SearchInputBar.Searchable;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -20,6 +19,7 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.CommentInputBar;
 import com.matji.sandwich.widget.CommentListView;
 
 // TODO
@@ -41,7 +41,7 @@ public class CommentActivity extends BaseActivity implements Requestable {
 	private HttpRequestManager manager;
 
 	private CommentListView commentListView;
-	private EditText commentField;
+	private CommentInputBar commentInputBar;
 	
 //	private Button likeButton;
 
@@ -88,9 +88,9 @@ public class CommentActivity extends BaseActivity implements Requestable {
 		commentListView.setActivity(this);
 		commentListView.requestReload();
 		
-		commentField = (EditText) findViewById(R.id.text_field);
+		commentInputBar = (CommentInputBar) findViewById(R.id.comment_input_bar);
 		if (showKeyboard) {
-			commentField.requestFocus();
+			commentInputBar.requestFocusToTextField();
 		}
 	}
 
@@ -129,12 +129,12 @@ public class CommentActivity extends BaseActivity implements Requestable {
 				request = new CommentHttpRequest(getApplicationContext());
 			}
 			
-			if(commentField.getText().toString().trim().equals("")) {
+			if(commentInputBar.getText().trim().equals("")) {
 				Toast.makeText(getApplicationContext(), R.string.writing_content_comment, Toast.LENGTH_SHORT).show();
 			} else {
-				((CommentHttpRequest) request).actionNew(((Post) posts.get(position)).getId(), commentField.getText().toString().trim(), MatjiConstants.string(R.string.android));
+				((CommentHttpRequest) request).actionNew(((Post) posts.get(position)).getId(), commentInputBar.getText().trim(), MatjiConstants.string(R.string.android));
 				manager.request(this, request, COMMENT_WRITE_REQUEST, this);
-				commentField.setText("");
+				commentInputBar.setText("");
 				KeyboardUtil.hideKeyboard(this);
 			}
 		}

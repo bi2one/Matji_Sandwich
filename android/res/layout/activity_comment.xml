@@ -5,9 +5,9 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 	<com.matji.sandwich.widget.CommentListView
-		style="@style/BottomBarListView"
-		android:id="@+id/comment_list" />
-	<include
-		style="@style/BottomBar"
-		layout="@layout/bottom_text_bar" />
+		android:id="@+id/comment_list"
+		style="@style/BottomBarListView" />
+	<com.matji.sandwich.widget.CommentInputBar
+		android:id="@+id/comment_input_bar"	
+		style="@style/BottomBar" />
 </LinearLayout>

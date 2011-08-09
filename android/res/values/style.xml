@@ -22,6 +22,10 @@
     <item name="android:layout_width">wrap_content</item>
   	<item name="android:layout_height">fill_parent</item>
   </style>
+
+  <style name="DefaultVerticalFill" parent="DefaultFill">
+  	<item name="android:orientation">vertical</item>
+  </style>
   
   <style name="DefaultVerticalWrap" parent="DefaultWrap">
   	<item name="android:orientation">vertical</item>
@@ -53,15 +57,12 @@
   	<item name="android:layout_weight">1</item>
   </style>
   
-  <style name="BottomBar">
-  	<item name="android:layout_width">fill_parent</item>
-  	<item name="android:layout_height">wrap_content</item>
+  <style name="BottomBar" parent="DefaultWidthFill">
   	<item name="android:layout_weight">0</item>
   	<item name="android:gravity">bottom</item>
   </style>
 
-  <style name="BottomTextBarWrapper" parent="DefaultWidthFill">
-  	<item name="android:background">@drawable/bottom_text_bar_bg</item>
+  <style name="InputBarWrapper" parent="DefaultWidthFill">
   </style>
       
   <style name="LinkifyName" parent="DefaultWrap">

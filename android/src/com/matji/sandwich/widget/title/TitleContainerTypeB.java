@@ -1,12 +1,16 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.R;
 import com.matji.sandwich.widget.title.button.TitleButton;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
+/**
+ * 오른쪽 버튼 3개가 있는 타이틀바
+ * 
+ * @author mozziluv
+ *
+ */
 public abstract class TitleContainerTypeB extends TypedTitleContainer {
 	protected TitleButton rightButton1;
 	protected TitleButton rightButton2;
@@ -25,13 +29,10 @@ public abstract class TitleContainerTypeB extends TypedTitleContainer {
 	 */
 	@Override
 	final protected void addButtons() {
-		Drawable titleBg1 = getContext().getResources().getDrawable(R.drawable.title_left_btn_bg);
-		Drawable titleBg2 = getContext().getResources().getDrawable(R.drawable.title_btn_bg);
-		
-		setTitleBackground(titleBg1);
-		rightButton1.setBackgroundDrawable(titleBg2);
-		rightButton2.setBackgroundDrawable(titleBg2);
-		rightButton3.setBackgroundDrawable(titleBg2);
+		setTitleBackground(titleBgLeft);
+		rightButton1.setBackgroundDrawable(titleBgRight);
+		rightButton2.setBackgroundDrawable(titleBgRight);
+		rightButton3.setBackgroundDrawable(titleBgRight);
 		
 		addRightButton(rightButton1);
 		addRightButton(rightButton2);

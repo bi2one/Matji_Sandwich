@@ -32,8 +32,6 @@ public class RelativeLayoutThatDetectsSoftKeyboard extends RelativeLayout {
     public void setListener(Listener listener) {
         this.listener = listener;
     }
-
-    	
     
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

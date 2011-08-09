@@ -108,7 +108,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		}
 
 		if (TimeUtil.isToday(section)) {
-			postSectionElement.subject.setText(context.getResources().getString(R.string.today));
+			postSectionElement.subject.setText(context.getResources().getString(R.string.default_string_today));
 			postSectionElement.subject.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.section_today));
 		} else {
 			postSectionElement.subject.setText(section);
