@@ -45,6 +45,7 @@
 	<color name="matji_translucent">#55000000</color>
 	<color name="matji_red">#FF2400</color>
 	<color name="matji_light_pink">#FFFAD6</color>
+	<color name="matji_dark_brown">#8E5000</color>
 
 	<!-- Cell -->
 	<color name="cell_user_bg">#ffffff</color>

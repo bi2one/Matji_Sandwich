@@ -53,6 +53,18 @@ public class FollowingHttpRequest extends HttpRequest {
 		getHashtable.put("limit", limit+"");
 		getHashtable.put("include", "post");
 	}
+
+    public void actionFollowingRankingList(int user_id, int page, int limit) {
+	httpMethod = HttpMethod.HTTP_GET;
+	action = "following_list";
+
+	getHashtable.clear();
+	getHashtable.put("user_id", user_id + "");
+	getHashtable.put("page", page + "");
+	getHashtable.put("limit", limit + "");
+	getHashtable.put("include", "user_mileage");
+	getHashtable.put("order", "user_mileages.total_point+desc");
+    }
 	
 	public void actionFollowerList(int user_id, int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;

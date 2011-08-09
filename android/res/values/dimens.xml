@@ -44,4 +44,7 @@
 	<!-- Quick Action Button Size -->
 	<dimen name="quickaction_btn_width">20dp</dimen>
 	<dimen name="quickaction_btn_height">50dp</dimen>
+
+	<!-- corner buttons size -->
+	<dimen name="round_btn_radius">9dp</dimen>
 </resources>

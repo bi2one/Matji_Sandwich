@@ -9,4 +9,6 @@ public class SessionIndex {
     public static final String MAP_BOUND_LONGITUDE_SW = "MainMapActivity.map_bound_longitude_sw";
     public static final String MAP_BOUND_CENTER_LATITUDE = "MainMapActivity.map_bound_center_latitude";
     public static final String MAP_BOUND_CENTER_LONGITUDE = "MainMapActivity.map_bound_center_longitude";
+
+    public static final String RECENT_CHANGED_LOCATION = "ChangeLocationActivity.recent_changed_location";
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/InputBarWrapper">
+	<EditText
+		android:id="@+id/input_bar_text_field"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="99"
+		android:scrollbars="vertical" />
+	<Button
+		android:gravity="center_vertical"
+		android:id="@+id/input_bar_confirm_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		android:onClick="onConfirmButtonClicked" />
+</LinearLayout>

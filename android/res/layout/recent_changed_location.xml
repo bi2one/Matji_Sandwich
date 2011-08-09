@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	      android:orientation="vertical"
-	      style="@style/DefaultFill">
+	      style="@style/recent_changed_location">
   <TextView android:id="@+id/recent_changed_location_empty"
 	    android:text="@string/recent_changed_location_empty"
 	    android:visibility="gone"
-	    style="@style/DefaultWidthFill" />
+	    style="@style/recent_changed_location_header" />
   <LinearLayout android:orientation="vertical"
 		android:id="@+id/recent_changed_location_filled"
 		style="@style/DefaultWidthFill">
-    <TextView style="@style/DefaultWidthFill"
+    <TextView style="@style/recent_changed_location_header"
 	      android:text="@string/recent_changed_location_filled" />
     <com.matji.sandwich.widget.MultiRoundButtonView
 	android:id="@+id/recent_changed_location_locations"

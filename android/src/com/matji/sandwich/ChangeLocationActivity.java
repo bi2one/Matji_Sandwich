@@ -1,9 +1,13 @@
 package com.matji.sandwich;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.view.View;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.DialogInterface;
@@ -19,10 +23,10 @@ import com.matji.sandwich.session.SessionMapUtil;
 
 import java.util.ArrayList;
 
-public class ChangeLocationActivity extends BaseActivity implements Requestable {
-    public static final int REQUEST_CODE_LOCATION = 1;
+public class ChangeLocationActivity extends BaseActivity implements Requestable, TextView.OnEditorActionListener {
     public static final String INTENT_KEY_LATITUDE = "ChangeLocationActivity.intent_key_latitude";
     public static final String INTENT_KEY_LONGITUDE = "ChangeLocationActivity.intent_key_longitude";
+    public static final String INTENT_KEY_LOCATION_NAME = "ChangeLocationActivity.intent_key_location_name";
     private static final int REQUEST_GEOCODING = 1;
     private Context context;
     private EditText locationInput;
@@ -30,7 +34,8 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable 
     private HttpRequestManager requestManager;
     private GeocodeHttpRequest request;
     private AlertDialog inputEmptyStringDialog;
-    private SessionMapUtil sessionUtil;
+    private SessionMapUtil sessionMapUtil;
+    private String lastSearchSeed;
     
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -38,10 +43,13 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable 
 	context = getApplicationContext();
 
 	locationInput = (EditText)findViewById(R.id.activity_change_location_input);
+	locationInput.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+	locationInput.setOnEditorActionListener(this);
 	locationView = (RecentChangedLocationView)findViewById(R.id.activity_change_location_recent_view);
+	locationView.init(this);
 	requestManager = HttpRequestManager.getInstance(context);
 	request = new GeocodeHttpRequest(context);
-	sessionUtil = new SessionMapUtil(context);
+	sessionMapUtil = new SessionMapUtil(context);
 
 	inputEmptyStringDialog = new AlertDialog.Builder(this)
 	    .setMessage(R.string.change_location_activity_input_empty_string)
@@ -49,7 +57,7 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable 
 	    .create();
     }
 
-    public void onConfirmClicked(View v) {
+    public void searchLocation() {
 	if (requestManager.isRunning()) {
 	    return ;
 	}
@@ -58,8 +66,9 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable 
 	    inputEmptyStringDialog.show();
 	    return ;
 	}
-	
-	request.actionGeocoding(input, sessionUtil.getCurrentCountry());
+
+	lastSearchSeed = input;
+	request.actionGeocoding(input, sessionMapUtil.getCurrentCountry());
 	requestManager.request(this, request, REQUEST_GEOCODING, this);
     }
 
@@ -68,14 +77,29 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable 
 	case REQUEST_GEOCODING:
 	    GeocodeAddress address = (GeocodeAddress)data.get(0);
 	    Intent result = new Intent();
-	    result.putExtra(INTENT_KEY_LATITUDE, address.getLocationLat());
-	    result.putExtra(INTENT_KEY_LONGITUDE, address.getLocationLng());
-	    setResult(REQUEST_CODE_LOCATION, result);
+	    int addrLat = address.getLocationLat();
+	    int addrLng = address.getLocationLng();
+	    result.putExtra(INTENT_KEY_LATITUDE, addrLat);
+	    result.putExtra(INTENT_KEY_LONGITUDE, addrLng);
+	    result.putExtra(INTENT_KEY_LOCATION_NAME, lastSearchSeed);
+	    setResult(Activity.RESULT_OK, result);
 	    finish();
 	}
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
 	e.performExceptionHandling(context);
+    }
+
+    public boolean onEditorAction(TextView v, int action, KeyEvent e) {
+	if ((action == EditorInfo.IME_ACTION_DONE) ||
+	    (e != null && e.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+	    searchLocation();
+	}
+	return false;
+    }
+
+    public void onCancelClicked(View v) {
+	
     }
 }

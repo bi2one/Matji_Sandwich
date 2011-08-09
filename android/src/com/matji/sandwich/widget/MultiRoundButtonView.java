@@ -1,8 +1,11 @@
 package com.matji.sandwich.widget;
 
+import android.app.Activity;
 import android.widget.LinearLayout;
+import android.widget.Button;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 // import android.view.View;
@@ -17,10 +20,11 @@ import com.matji.sandwich.Requestable;
 
 import java.util.ArrayList;
 
-public class MultiRoundButtonView extends LinearLayout {
+public class MultiRoundButtonView extends LinearLayout implements View.OnClickListener {
     private Context context;
     private ArrayList<IntentTitlePair> buttons;
     private LayoutInflater inflater;
+    private OnItemClickListener listener;
 
     public MultiRoundButtonView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -28,6 +32,10 @@ public class MultiRoundButtonView extends LinearLayout {
 	setOrientation(VERTICAL);
 	buttons = new ArrayList<IntentTitlePair>();
 	inflater = LayoutInflater.from(context);
+    }
+
+    public void init(OnItemClickListener listener) {
+	this.listener = listener;
     }
 
     public void add(Intent intent, String title) {
@@ -39,34 +47,35 @@ public class MultiRoundButtonView extends LinearLayout {
     }
 
     public void updateView() {
-	for (IntentTitlePair pair : buttons) {
-	    addView(getMiddleView());
-	    Log.d("=====", pair.getTitle());
+	int buttonSize = buttons.size();
+	if (buttonSize == 1) {
+	    IntentTitlePair firstPair = buttons.get(0);
+	    addButtonView(new AllRoundButtonView(context), firstPair.getTitle(), firstPair.getIntent());
+	} else if (buttonSize > 1) {
+	    IntentTitlePair firstPair = buttons.get(0);
+	    IntentTitlePair lastPair = buttons.get(buttonSize - 1);
+	    for (IntentTitlePair pair : buttons) {
+		if (pair == firstPair) {
+		    addButtonView(new TopRoundButtonView(context), pair.getTitle(), pair.getIntent());
+		} else if (pair == lastPair) {
+		    addButtonView(new BottomRoundButtonView(context), pair.getTitle(), pair.getIntent());
+		} else {
+		    addButtonView(new MiddleRoundButtonView(context), pair.getTitle(), pair.getIntent());
+		}
+	    }
 	}
     }
 
-    public ViewGroup getTopRoundedView() {
-	ViewGroup result = new LinearLayout(context);
-	inflater.inflate(R.layout.top_rounded_button, result, true);
-	return result;
+    private void addButtonView(ButtonView v, String text, Intent intent) {
+	v.setText(text);
+	v.setOnClickListener(this);
+	v.setTag(intent);
+	addView(v);
     }
 
-    public ViewGroup getMiddleView() {
-	ViewGroup result = new LinearLayout(context);
-	inflater.inflate(R.layout.middle_rounded_button, result, true);
-	return result;
-    }
-
-    public ViewGroup getAllRoundedView() {
-	ViewGroup result = new LinearLayout(context);
-	inflater.inflate(R.layout.all_rounded_button, result, true);
-	return result;
-    }
-
-    public ViewGroup getBottomRoundedView() {
-	ViewGroup result = new LinearLayout(context);
-	inflater.inflate(R.layout.bottom_rounded_button, result, true);
-	return result;
+    public void onClick(View v) {
+    	Intent intent = (Intent)v.getTag();
+	listener.onItemClick(v, intent);
     }
 
     private class IntentTitlePair {
@@ -106,5 +115,9 @@ public class MultiRoundButtonView extends LinearLayout {
 	    else
 		return title;
 	}
+    }
+
+    public interface OnItemClickListener {
+	public void onItemClick(View v, Intent intent);
     }
 }

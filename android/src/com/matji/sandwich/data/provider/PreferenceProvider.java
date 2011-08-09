@@ -85,7 +85,7 @@ public class PreferenceProvider {
 	}
 	
 	public Object getObject(String key){
-		return sharedObjects.get(key);		
+		return sharedObjects.get(key);
 	}
 	
 	public void setInt(String key, int value){

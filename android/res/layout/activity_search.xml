@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/contentWrapper"
+	style="@style/DefaultFill">
+	<LinearLayout
+		style="@style/DefaultVerticalFill">
+
+		<!-- Titlebar -->
+		<com.matji.sandwich.widget.title.HomeTitle
+			android:id="@id/Titlebar"
+			style="@style/DefaultWidthFill" />
+
+		<!-- Searchbar -->
+		<com.matji.sandwich.widget.MainSearchInputBar
+			android:id="@+id/search_input_bar"
+			style="@style/DefaultWidthFill" />
+		<!-- Tab -->
+		<com.matji.sandwich.widget.RoundTabHost
+			android:id="@android:id/tabhost"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
+				<TabWidget
+					android:id="@android:id/tabs"
+					style="@style/post_tab_TabBar"
+					android:layout_weight="0" />
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" />
+
+				<!-- SearchView -->
+				<FrameLayout
+					android:id="@+id/search_wrapper"
+					style="@style/DefaultWrap">
+					<FrameLayout
+						android:id="@android:id/tabcontent"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1" />
+				</FrameLayout>
+			</LinearLayout>
+		</com.matji.sandwich.widget.RoundTabHost>
+	</LinearLayout>
+</com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>
