@@ -111,6 +111,7 @@
   <string name="default_string_change">변경</string>
   <string name="default_string_edit">수정</string>
   <string name="default_string_confirm">확인</string>
+  <string name="default_string_cancel">취소</string>
   <string name="today">Today</string>
   <string name="confirm">확인</string>
   

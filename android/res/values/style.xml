@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
   <!-- activity_store_main.xml -->
   <style name="DefaultWrap">
     <item name="android:layout_width">wrap_content</item>
@@ -704,24 +702,48 @@
     <item name="android:orientation">vertical</item>
   </style>
 
+  <!-- rounded_button common attributes -->
+  <style name="rounded_button" parent="DefaultWidthFill">
+    <item name="android:textSize">18dp</item>
+    <item name="android:textColor">@color/BLACK</item>
+    <item name="android:gravity">left</item>
+    <item name="android:paddingTop">4dp</item>
+    <item name="android:paddingBottom">4dp</item>
+    <item name="android:paddingLeft">8dp</item>
+    <item name="android:paddingRight">8dp</item>
+  </style>
+  
   <!-- top_rounded_button.xml -->
-  <style name="top_rounded_button" parent="DefaultWidthFill">
+  <style name="top_rounded_button" parent="rounded_button">
     <item name="android:background">@drawable/btn_top_corner</item>
   </style>
 
   <!-- middle_rounded_button.xml -->
-  <style name="middle_rounded_button" parent="DefaultWidthFill">
+  <style name="middle_rounded_button" parent="rounded_button">
     <item name="android:background">@drawable/btn_rectangle</item>
   </style>
 
   <!-- bottom_rounded_button.xml -->
-  <style name="bottom_rounded_button" parent="DefaultWidthFill">
+  <style name="bottom_rounded_button" parent="rounded_button">
     <item name="android:background">@drawable/btn_bottom_corner</item>
   </style>
 
   <!-- all_rounded_button.xml -->
-  <style name="all_rounded_button" parent="DefaultWidthFill">
+  <style name="all_rounded_button" parent="rounded_button">
     <item name="android:background">@drawable/btn_all_corner</item>
+  </style>
+
+  <!-- recent_change_location.xml -->
+  <style name="recent_changed_location" parent="DefaultFill">
+    <item name="android:orientation">vertical</item>
+    <item name="android:paddingTop">10dp</item>
+    <item name="android:paddingLeft">8dp</item>
+    <item name="android:paddingRight">8dp</item>
+  </style>
+
+  <style name="recent_changed_location_header" parent="DefaultWidthFill">
+    <item name="android:textSize">16dp</item>
+    <item name="android:textColor">@color/matji_dark_brown</item>
   </style>
 
 </resources>

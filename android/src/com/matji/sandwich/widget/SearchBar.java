@@ -32,7 +32,6 @@ public class SearchBar extends LinearLayout implements OnClickListener, OnEditor
 		getRootView().findViewById(R.id.search_btn).setOnClickListener(this);
 	}
 
-	
 	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if ((actionId == EditorInfo.IME_ACTION_DONE) ||

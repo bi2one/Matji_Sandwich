@@ -7,10 +7,10 @@
       <solid
 	  android:color="@color/pressed2" />
       <stroke
-	  android:width="1px"
-	  android:color="#dddddd" />
+	  android:width="1dp"
+	  android:color="@color/matji_dark_brown" />
       <corners
-	  android:radius="3dp"
+	  android:radius="@dimen/round_btn_radius"
 	  />
     </shape>
   </item>
@@ -21,10 +21,10 @@
       <solid
 	  android:color="@color/focused2" />
       <stroke
-	  android:width="1px"
-	  android:color="#dddddd" />
+	  android:width="1dp"
+	  android:color="@color/matji_dark_brown" />
       <corners
-	  android:radius="3dp"
+	  android:radius="@dimen/round_btn_radius"
 	  />
     </shape>
   </item>
@@ -34,10 +34,10 @@
       <solid
 	  android:color="@color/default2" />
       <stroke
-	  android:width="1px"
-	  android:color="#dddddd" />
+	  android:width="1dp"
+	  android:color="@color/matji_dark_brown" />
       <corners
-	  android:radius="3dp"
+	  android:radius="@dimen/round_btn_radius"
 	  />
     </shape>
   </item>

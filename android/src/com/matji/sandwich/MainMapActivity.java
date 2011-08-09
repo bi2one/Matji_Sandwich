@@ -15,8 +15,10 @@ import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.widget.StoreMapNearListView;
+import com.matji.sandwich.session.SessionRecentLocationUtil;
 
 public class MainMapActivity extends BaseMapActivity {
+    private static final int REQUEST_CODE_LOCATION = 1;
     private static final int BASIC_SEARCH_LOC_LAT = 0;
     private static final int BASIC_SEARCH_LOC_LNG = 0;
     private Context context;
@@ -26,6 +28,7 @@ public class MainMapActivity extends BaseMapActivity {
     private View flipButton;
     private boolean currentViewIsMap;
     private boolean isFlow;
+    private SessionRecentLocationUtil sessionLocationUtil;
 
     private Drawable flipMapViewBackground;
     private Drawable flipNearStoreBackground;
@@ -35,6 +38,7 @@ public class MainMapActivity extends BaseMapActivity {
 	setContentView(R.layout.activity_main_map);
 	
 	context = getApplicationContext();
+	sessionLocationUtil = new SessionRecentLocationUtil(context);
 	addressView = (TextView)findViewById(R.id.map_title_bar_address);
 	mapView = (MainMatjiMapView)findViewById(R.id.map_view);
 	mapView.init(addressView, this);
@@ -81,7 +85,7 @@ public class MainMapActivity extends BaseMapActivity {
     }
 
     public void onChangeLocationClicked(View v) {
-	startActivityForResult(new Intent(context, ChangeLocationActivity.class), ChangeLocationActivity.REQUEST_CODE_LOCATION);
+	startActivityForResult(new Intent(context, ChangeLocationActivity.class), REQUEST_CODE_LOCATION);
     }
 
     public void setIsFlow(boolean isFlow) {
@@ -104,10 +108,14 @@ public class MainMapActivity extends BaseMapActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	switch(requestCode) {
-	case ChangeLocationActivity.REQUEST_CODE_LOCATION:
-	    int searchedLat = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LATITUDE, BASIC_SEARCH_LOC_LAT);
-	    int searchedLng = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE, BASIC_SEARCH_LOC_LNG);
-	    mapView.setCenter(new GeoPoint(searchedLat, searchedLng));
+	case REQUEST_CODE_LOCATION:
+	    if (resultCode == Activity.RESULT_OK) {
+		int searchedLat = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LATITUDE, BASIC_SEARCH_LOC_LAT);
+		int searchedLng = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE, BASIC_SEARCH_LOC_LNG);
+		String searchedLocation = data.getStringExtra(ChangeLocationActivity.INTENT_KEY_LOCATION_NAME);
+		sessionLocationUtil.push(searchedLocation, searchedLat, searchedLng);
+		mapView.setCenter(new GeoPoint(searchedLat, searchedLng));
+	    }
 	}
     }
 }

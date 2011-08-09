@@ -10,16 +10,17 @@
 	style="@style/DefaultWidthFill"
 	android:hint="@string/activity_change_location_hint"
 	android:id="@+id/activity_change_location_input"
+	android:singleLine="true"
 	android:layout_alignParentLeft="true"
 	android:layout_toLeftOf="@+id/activity_change_location_confirm" />
     <Button
 	android:id="@id/activity_change_location_confirm"
 	style="@style/DefaultWrap"
-	android:onClick="onConfirmClicked"
-	android:text="@string/default_string_confirm"
+	android:onClick="onCancelClicked"
+	android:text="@string/default_string_cancel"
 	android:layout_alignParentRight="true" />
   </RelativeLayout>
-   <com.matji.sandwich.widget.RecentChangedLocationView
+  <com.matji.sandwich.widget.RecentChangedLocationView
       android:id="@+id/activity_change_location_recent_view"
       style="@style/DefaultFill" />
 </LinearLayout>
