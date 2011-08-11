@@ -127,6 +127,7 @@ PullToRefreshListView.OnRefreshListener {
 	manager.request(getActivity(), request(), REQUEST_RELOAD, this);
 	nextValue();
 	setSelection(0);
+	setCanRepeat(true);
     }
 
 

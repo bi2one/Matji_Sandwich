@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.DialogInterface;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -83,6 +84,7 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
 	    result.putExtra(INTENT_KEY_LONGITUDE, addrLng);
 	    result.putExtra(INTENT_KEY_LOCATION_NAME, lastSearchSeed);
 	    setResult(Activity.RESULT_OK, result);
+	    Log.d("=====", "before finish");
 	    finish();
 	}
     }

@@ -34,6 +34,7 @@
   
   <Button
       style="@style/location_title_bar_nearPostButton"
+      android:onClick="onMoveToNearPostClicked"
       android:layout_alignParentRight="true"
       android:id="@id/map_title_bar_near_post_button" />
 </RelativeLayout>

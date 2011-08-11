@@ -89,6 +89,13 @@ public class MainMapActivity extends BaseMapActivity {
 	startActivityForResult(new Intent(context, ChangeLocationActivity.class), REQUEST_CODE_LOCATION);
     }
 
+    public void onMoveToNearPostClicked(View v) {
+	Intent intent = new Intent(context, MainTabActivity.class);
+	intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
+	intent.putExtra(MainTabActivity.IF_SUB_INDEX, 1);
+	startActivity(intent);
+    }
+
     public void setIsFlow(boolean isFlow) {
 	this.isFlow = isFlow;
     }
@@ -115,7 +122,12 @@ public class MainMapActivity extends BaseMapActivity {
 		int searchedLng = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE, BASIC_SEARCH_LOC_LNG);
 		String searchedLocation = data.getStringExtra(ChangeLocationActivity.INTENT_KEY_LOCATION_NAME);
 		sessionLocationUtil.push(searchedLocation, searchedLat, searchedLng);
-		mapView.setCenter(new GeoPoint(searchedLat, searchedLng));
+		if (currentViewIsMap) 
+		    mapView.setCenter(new GeoPoint(searchedLat, searchedLng));
+		else {
+		    storeListView.setCenter(new GeoPoint(searchedLat, searchedLng));
+		    storeListView.forceReload();
+		}
 	    }
 	}
     }

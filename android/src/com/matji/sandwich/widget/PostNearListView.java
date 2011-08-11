@@ -19,10 +19,17 @@ public class PostNearListView extends PostListView {
     public PostNearListView(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	postRequest = new PostHttpRequest(context);
-	SessionMapUtil sessionUtil = new SessionMapUtil(context);
+	sessionUtil = new SessionMapUtil(context);
 
 	neBound = sessionUtil.getNEBound();
 	swBound = sessionUtil.getSWBound();
+    }
+
+    public void requestReload() {
+	neBound = sessionUtil.getNEBound();
+	swBound = sessionUtil.getSWBound();
+
+	super.forceReload();
     }
 
     public HttpRequest request() {

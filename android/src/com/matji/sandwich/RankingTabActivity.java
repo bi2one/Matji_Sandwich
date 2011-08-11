@@ -14,11 +14,10 @@ import com.matji.sandwich.widget.RoundTabHost;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.session.SessionTabHostUtil;
 
-public class PostTabActivity extends BaseTabActivity {
+public class RankingTabActivity extends BaseTabActivity {
     private RoundTabHost tabHost;
     private Context context;
     private SessionTabHostUtil sessionUtil;
-    private ActivityStartable lastStartedChild;
     
     /**
      * Activity생성시 실행하는 메소드
@@ -50,15 +49,5 @@ public class PostTabActivity extends BaseTabActivity {
 	if (baseIndex >= 0)  {
 	    tabHost.setCurrentTab(baseIndex);
 	}
-    }
-
-    public void tabStartActivityForResult(Intent intent, int requestCode, ActivityStartable child) {
-	lastStartedChild = child;
-	startActivityForResult(intent, requestCode);
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	lastStartedChild.activityResultDelivered(requestCode, resultCode, data);
-	// Log.d("=====", "result");
     }
 }
