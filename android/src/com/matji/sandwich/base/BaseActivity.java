@@ -12,80 +12,107 @@ import android.util.Log;
 import android.view.Window;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Base {
-	public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
-	public static final int LOGIN_ACTIVITY = 1;
-	public static final int POST_MAIN_ACTIVITY = 2;
-	public static final int WRITE_POST_ACTIVITY = 3;
-	public static final int WRITE_COMMENT_ACTIVITY = 4;	
-	public static final int RECEIVED_USER_ACTIVITY = 5;	
+    public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
+    public static final int LOGIN_ACTIVITY = 1;
+    public static final int POST_MAIN_ACTIVITY = 2;
+    public static final int WRITE_POST_ACTIVITY = 3;
+    public static final int WRITE_COMMENT_ACTIVITY = 4;	
+    public static final int RECEIVED_USER_ACTIVITY = 5;
+    private boolean isFlow;
 
-	protected void init() {
-		
-	}
+    protected void init() {
+	setIsFlow(false);
+    }
+
+    public void setIsFlow(boolean isFlow) {
+	this.isFlow = isFlow;
+    }
 	
-	@Override
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		init();
-	}
+	super.onCreate(savedInstanceState);
+	init();
+    }
 	
-	@Override
+    @Override
 	public boolean loginRequired(){
-		Session session = Session.getInstance(this);
-		if (!session.isLogin()) {
-			startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-			return false;
-		}
-
-		return true;
+	Session session = Session.getInstance(this);
+	if (!session.isLogin()) {
+	    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+	    return false;
 	}
 
-	public void didEnterForeGround(){
-		Session session  = Session.getInstance(this);
-		if (session.isLogin()){
-			session.sessionValidate(null, this);
-		}
-	}
+	return true;
+    }
 
-	@Override
+    public void didEnterForeGround(){
+	Session session  = Session.getInstance(this);
+	if (session.isLogin()){
+	    session.sessionValidate(null, this);
+	}
+    }
+
+    @Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
-		super.onRestart();
-		Log.d("LifeCycle", "onRestart at " + this.getClass());
-	}
+	// TODO Auto-generated method stub
+	super.onRestart();
+	Log.d("LifeCycle", "onRestart at " + this.getClass());
+    }
 
-	@Override
+    @Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		Log.d("LifeCycle", "onPause at " + this.getClass());
-		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
-	}
+	// TODO Auto-generated method stub
+	super.onPause();
+	Log.d("LifeCycle", "onPause at " + this.getClass());
+	ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
+    }
 
-	@Override
+    @Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		Log.d("LifeCycle", "onStop at " + this.getClass());
-		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
-	}
+	// TODO Auto-generated method stub
+	super.onStop();
+	Log.d("LifeCycle", "onStop at " + this.getClass());
+	ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
+    }
 
 
-	@Override
+    @Override
 	public void setContentView(int layoutResID) {
-		if (this.getParent() == null){
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
-			setTheme(R.style.Theme_RemoveOverlay);
-		}
-		super.setContentView(layoutResID);
+	if (this.getParent() == null){
+	    requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    setTheme(R.style.Theme_RemoveOverlay);
 	}
+	super.setContentView(layoutResID);
+    }
 
-	@Override
+    @Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
+	// TODO Auto-generated method stub
+	super.onResume();
 
-		Log.d("LifeCycle", "onResume at " + this.getClass());
-		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
+	Log.d("LifeCycle", "onResume at " + this.getClass());
+	ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
+
+	if (!isFlow) {
+	    Log.d("LifeCycle", "onNotFlowResume at " + this.getClass());
+	    onNotFlowResume();
+	} else {
+	    Log.d("LifeCycle", "onFlowResume at " + this.getClass());
+	    onFlowResume();
 	}
+	setIsFlow(false);
+    }
+
+    protected void onNotFlowResume() { }
+    protected void onFlowResume() { }
+
+    public void startActivity(Intent intent) {
+	setIsFlow(true);
+	super.startActivity(intent);
+    }
+
+    public void startActivityForResult(Intent intent, int requestCode) {
+	setIsFlow(true);
+	super.startActivityForResult(intent, requestCode);
+    }
 }

@@ -282,4 +282,10 @@
   <!-- recent_changed_location.xml -->
   <string name="recent_changed_location_empty">최근 변경한 지역이 없습니다.</string>
   <string name="recent_changed_location_filled">최근 변경한 지역</string>
+
+  <!-- RankingTabActivity.java -->
+  <string name="ranking_tab_friend">친구</string>
+  <string name="ranking_tab_near">지역</string>
+  <string name="ranking_tab_country">전국</string>
+  <string name="ranking_tab_all">전체</string>
 </resources>

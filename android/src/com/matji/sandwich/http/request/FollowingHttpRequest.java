@@ -57,13 +57,14 @@ public class FollowingHttpRequest extends HttpRequest {
     public void actionFollowingRankingList(int user_id, int page, int limit) {
 	httpMethod = HttpMethod.HTTP_GET;
 	action = "following_list";
+	parser = new UserParser(context);
 
 	getHashtable.clear();
 	getHashtable.put("user_id", user_id + "");
 	getHashtable.put("page", page + "");
 	getHashtable.put("limit", limit + "");
 	getHashtable.put("include", "user_mileage");
-	getHashtable.put("order", "user_mileages.total_point+desc");
+	getHashtable.put("order", "user_mileages.total_point desc");
     }
 	
 	public void actionFollowerList(int user_id, int page, int limit) {
