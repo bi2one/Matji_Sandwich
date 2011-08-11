@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -67,6 +68,15 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable,
 		//		}
 	}
 
+	@Override
+	public void finish() {
+	    Intent intent = new Intent();
+	    intent.putParcelableArrayListExtra(POSTS, posts);
+	    setResult(RESULT_OK, intent);
+	    Log.d("Matji", "FINISHED");
+	    super.finish();
+	}
+	
 	protected void init() {
 		super.init();
 		setContentView(R.layout.activity_post);
@@ -105,7 +115,7 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable,
 		//		}
 	}
 
-
+	
 	
 	public void onConfirmButtonClicked(View v) {
 		if (loginRequired() && !manager.isRunning(this)) {

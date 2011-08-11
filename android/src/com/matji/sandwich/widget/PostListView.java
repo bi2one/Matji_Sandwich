@@ -1,7 +1,10 @@
 package com.matji.sandwich.widget;
 
+import java.util.ArrayList;
+
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.PostSectionedAdapter;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
@@ -46,5 +49,9 @@ public class PostListView extends RequestableMListView {
 	((PostSectionedAdapter) getMBaseAdapter()).setActivity(getActivity());
     }
 	
+    public void setPosts(ArrayList<MatjiData> data) {
+        getMBaseAdapter().setData(data);
+    }
+    
     public void onListItemClick(int position) {}
 }

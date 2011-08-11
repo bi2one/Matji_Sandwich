@@ -3,9 +3,11 @@ package com.matji.sandwich.adapter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.matji.sandwich.ActivityStartable;
 import com.matji.sandwich.PostActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.AttachFile;
@@ -299,7 +301,10 @@ public class PostSectionedAdapter extends SectionedAdapter {
 			intent.putExtra(PostActivity.POSTS, data);
 			intent.putExtra(PostActivity.POSITION, position);
 			if (((Activity) context).getParent() instanceof BaseTabActivity) {
-//				((BaseTabActivity) context
+			    BaseTabActivity parent = (BaseTabActivity) ((Activity) context).getParent();
+				parent.tabStartActivityForResult(intent, BaseActivity.POST_ACTIVITY, (ActivityStartable) context);
+			} else {
+			    ((Activity) context).startActivityForResult(intent, BaseActivity.POST_ACTIVITY);
 			}
 		}
 	}

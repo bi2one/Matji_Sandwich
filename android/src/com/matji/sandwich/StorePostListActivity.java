@@ -40,7 +40,7 @@ public class StorePostListActivity extends BaseActivity {
 			break;
 
 			
-		case POST_MAIN_ACTIVITY:
+		case POST_ACTIVITY:
 			if (resultCode == RESULT_OK) {
 				if (data != null) {
 					int position = data.getIntExtra("position", -1);

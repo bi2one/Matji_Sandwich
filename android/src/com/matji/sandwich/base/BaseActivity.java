@@ -13,11 +13,11 @@ import android.view.Window;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Identifiable {
 	public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
-	public static final int LOGIN_ACTIVITY = 1;
-	public static final int POST_MAIN_ACTIVITY = 2;
-	public static final int WRITE_POST_ACTIVITY = 3;
-	public static final int WRITE_COMMENT_ACTIVITY = 4;	
-	public static final int RECEIVED_USER_ACTIVITY = 5;	
+	public static final int LOGIN_ACTIVITY = 100;
+	public static final int POST_ACTIVITY = 101;
+	public static final int WRITE_POST_ACTIVITY = 102;
+	public static final int WRITE_COMMENT_ACTIVITY = 103;	
+	public static final int RECEIVED_USER_ACTIVITY = 104;	
 
     private boolean isFlow;
 
