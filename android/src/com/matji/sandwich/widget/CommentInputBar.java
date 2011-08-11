@@ -2,13 +2,10 @@ package com.matji.sandwich.widget;
 
 import com.matji.sandwich.PostActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.data.Post;
 import com.matji.sandwich.util.MatjiConstants;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 
 /**
@@ -18,10 +15,9 @@ import android.widget.ImageButton;
  *
  */
 public class CommentInputBar extends InputBar {
-	
-	private Post post;
 	private ImageButton likeButton;
-	
+	public static final int LIKE_BUTTON = 1010;
+
 	public CommentInputBar(Context context, AttributeSet attr) {
 		super(context, attr);
 	}
@@ -31,9 +27,11 @@ public class CommentInputBar extends InputBar {
 		super.init();
 		likeButton = new ImageButton(getContext());
 		likeButton.setImageDrawable(MatjiConstants.drawable(R.drawable.like_btn));
+		likeButton.setTag(new Integer(LIKE_BUTTON));
+		
 		addView(likeButton, 0);
 	}
-	
+
 	@Override
 	protected void setTextFieldAttribute() {
 		textField.setHint(MatjiConstants.string(R.string.hint_write_comment));
@@ -44,15 +42,8 @@ public class CommentInputBar extends InputBar {
 	protected void setConfirmButtonAttribute() {
 		confirmButton.setText(MatjiConstants.string(R.string.default_string_confirm));
 	}
-	
-	public void setPost(Post post) {
-		this.post = post;
-		likeButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Log.d("Matji", "CommentInputBar : likebutton clicked");
-			}
-		});
+
+	public void setLikeListener(OnClickListener listener) {
+		likeButton.setOnClickListener(listener);
 	}
 }

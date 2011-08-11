@@ -2,7 +2,7 @@ package com.matji.sandwich.adapter;
 
 import com.matji.sandwich.ChatActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.base.Base;
+import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.data.User;

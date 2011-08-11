@@ -41,7 +41,7 @@ public class UserTagActivity extends BaseActivity implements Requestable {
 			request = new TagHttpRequest(this);
 		}
 		
-		((TagHttpRequest) request).actionUserTagList(user.getId(), 1, 50);
+		((TagHttpRequest) request).actionUserTagListForCloud(user.getId());
 
 		return request;
 	}

@@ -57,7 +57,7 @@ public class TagHttpRequest extends HttpRequest {
 		getHashtable.put("user_id", user_id+ "");		
 		getHashtable.put("page", "1");
 		getHashtable.put("limit", "50");
-		getHashtable.put("order", "tag_count");
+		getHashtable.put("order", "count desc");
 	}
 	
 	public void actionPostTagList(int post_id) {

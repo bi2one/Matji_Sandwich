@@ -21,12 +21,12 @@ public class TitleContainer extends RelativeLayout {
 	private LinearLayout leftContainer;
 	private LinearLayout rightContainer;
 	private TextView titleContainer;
-	
+
 	public TitleContainer(Context context) {
 		super(context);
 		init();
 	}
-	
+
 	public TitleContainer(Context context, AttributeSet attr) {
 		super(context, attr);
 		init();
@@ -39,12 +39,12 @@ public class TitleContainer extends RelativeLayout {
 	private void init() {
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.title_container, this);
-		
+
 		leftContainer = (LinearLayout) findViewById(R.id.title_container_left);
 		rightContainer = (LinearLayout) findViewById(R.id.title_container_right);
 		titleContainer = (TextView) findViewById(R.id.title_container_text);
 	}
-	
+
 	/**
 	 * 오른쪽 끝에 버튼을 추가한다.
 	 * 
@@ -74,15 +74,15 @@ public class TitleContainer extends RelativeLayout {
 		titleContainer.setText(title);
 	}
 
-    /**
-     * 타이틀을 지정한다.
-     *
-     * @param titleRes 타이틀로 사용할 문자열의 아이디
-     */
-    public void setTitle(int titleRes) {
-	titleContainer.setText(titleRes);
-    }
-	
+	/**
+	 * 타이틀을 지정한다.
+	 *
+	 * @param titleRes 타이틀로 사용할 문자열의 아이디
+	 */
+	public void setTitle(int titleRes) {
+		titleContainer.setText(titleRes);
+	}
+
 	/**
 	 * 타이틀의 Background 를 지정한다.
 	 * 
@@ -90,5 +90,33 @@ public class TitleContainer extends RelativeLayout {
 	 */
 	protected void setTitleBackground(Drawable bg) {
 		titleContainer.setBackgroundDrawable(bg);
+	}
+
+	/**
+	 * 버튼들의 Clickable을 지정한다.
+	 * 
+	 * @param clickable
+	 */
+	private void childrenClickable(boolean clickable) {
+		for (int i = 0; i < rightContainer.getChildCount(); i++) {
+			rightContainer.getChildAt(i).setClickable(clickable);
+		}
+		for (int i = 0; i < leftContainer.getChildCount(); i++) {
+			leftContainer.getChildAt(i).setClickable(clickable);
+		}	
+	}
+
+	/**
+	 * 버튼들을 클릭하지 못하도록 설정한다.
+	 */
+	public void lock() {
+		childrenClickable(false);
+	}
+
+	/**
+	 * 버튼들을 클릭할 수 있도록 설정한다.
+	 */
+	public void unlock() {
+		childrenClickable(true);
 	}
 }

@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
-public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener, Base {	
+public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener, Identifiable {	
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	

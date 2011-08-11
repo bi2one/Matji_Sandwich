@@ -6,7 +6,8 @@ import java.util.Date;
 import com.matji.sandwich.PostActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.base.Base;
+import com.matji.sandwich.base.BaseTabActivity;
+import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
@@ -297,7 +298,9 @@ public class PostSectionedAdapter extends SectionedAdapter {
 			Intent intent = new Intent(context, PostActivity.class);
 			intent.putExtra(PostActivity.POSTS, data);
 			intent.putExtra(PostActivity.POSITION, position);
-			context.startActivity(intent);
+			if (((Activity) context).getParent() instanceof BaseTabActivity) {
+//				((BaseTabActivity) context
+			}
 		}
 	}
 
@@ -392,7 +395,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
 
 				@Override
 				public void onItemClick(int pos) {
-					if (((Base) context).loginRequired()) {
+					if (((Identifiable) context).loginRequired()) {
 						if (pos == 0) {
 							Log.d("Matji", "comment button click");
 							gotoCommentActivity();

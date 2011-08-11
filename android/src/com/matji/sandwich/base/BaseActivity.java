@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
-public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Base {
+public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Identifiable {
 	public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
 	public static final int LOGIN_ACTIVITY = 1;
 	public static final int POST_MAIN_ACTIVITY = 2;

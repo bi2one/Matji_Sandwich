@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.Toast;
 
-public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener, Base {
+public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener, Identifiable {
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 	

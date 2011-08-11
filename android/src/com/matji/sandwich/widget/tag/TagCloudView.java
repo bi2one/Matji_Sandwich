@@ -32,8 +32,7 @@ import android.widget.TextView;
  * </pre>
  * 
  * @author mozziluv
- * @version 1.0	
- * @link {@link TagView}
+ * @version 1.0
  * 
  */
 public class TagCloudView extends FlowLayout {
@@ -49,7 +48,10 @@ public class TagCloudView extends FlowLayout {
 	class TagView extends TextView {
 		private final int PADDING = (int) MatjiConstants.dimen(R.dimen.default_distance);
 		private final int MAX_TAG_LENGTH = 10;				// 최대 태그 글자 수
-		private final int NUMBER_OF_OPTION = 5;				// color, size 등 옵션 갯수
+		private final int[] TAG_STEP = new int[] {			// 태그 Count 스탭
+				0, 2, 4, 7, 10,
+		};
+		                                        
 		private final int[] TAG_TEXT_COLOR = new int[] {	// 태그 색
 				MatjiConstants.color(R.color.tag_color1),
 				MatjiConstants.color(R.color.tag_color2),
@@ -144,15 +146,20 @@ public class TagCloudView extends FlowLayout {
 		}
 
 		/**
-		 * 파라미터로 전달받은 count 를 가지고 
-		 * TAG_TEXT_COLOR, TAG_TEXT_SIZE 의 item 을 얻기 위한 index 를 계산해 리턴한다. 
+		 * 파라미터로 전달받은 count를 가지고 
+		 * TAG_TEXT_COLOR, TAG_TEXT_SIZE 의 item을 얻기 위한 index를 계산해 리턴한다. 
 		 * 
-		 * @param count 옵션 index 를 구할 태그의 count
+		 * @param count 옵션 index를 구할 태그의 count
 		 * @return count 에 맞는 index
 		 */
 		private int getIndex(int count) {
-			if (--count < 0) count = 0;
-			return (count >= NUMBER_OF_OPTION)? NUMBER_OF_OPTION-1 : count;
+			for (int i = TAG_STEP.length-1; i >= 0; i--) {
+				if (count > TAG_STEP[i]) {
+					return i;
+				}
+			}
+			
+			return 0;
 		}
 	}
 

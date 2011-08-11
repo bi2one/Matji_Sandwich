@@ -12,7 +12,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
 
-public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener, Base {
+public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener, Identifiable {
 	protected static final int LOGIN_ACTIVITY = 1;
 	protected static final int WRITE_POST_ACTIVITY = 2;
 
