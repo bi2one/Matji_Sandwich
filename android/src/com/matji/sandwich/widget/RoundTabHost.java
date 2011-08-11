@@ -21,6 +21,8 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
     private Context context;
     private String prevTabId;
     private View prevTabView;
+    private boolean isAnimationOn;
+    // private HashMap<String, TabHost.TabSpec> tabSpecPool;
 
     /**
      * TabHost기본 생성자
@@ -31,8 +33,14 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
     public RoundTabHost(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	this.context = context;
-
+	// tabSpecPool = new HashMap<String, TabHost.TabSpec>();
+	
 	setOnTabChangedListener(this);
+	setAnimationable(false);
+    }
+
+    public void setAnimationable(boolean isAnimationOn) {
+	this.isAnimationOn = isAnimationOn;
     }
 
     /**
@@ -79,8 +87,11 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
 	TabHost.TabSpec spec = newTabSpec(specLabel);
 	spec.setIndicator(indicator);
 	spec.setContent(content);
+	// tabSpecPool.add(specLabel, spec);
 	addTab(spec);
     }
+
+    
 
     /**
      * 오른쪽에서 나타나는 애니메이션
@@ -144,22 +155,24 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param tabId TabSpec등록시 명시한 탭의 label
      */
     public void onTabChanged(String tabId) {
-	View currentTabView = getCurrentView();
-	if (prevTabId == null) {
+	if (isAnimationOn) {
+	    View currentTabView = getCurrentView();
+	    if (prevTabId == null) {
+		prevTabId = tabId;
+		prevTabView = currentTabView;
+		return;
+	    }
+
+	    // tabId가 prevTabId보다 왼쪽에 있는 탭일 때
+	    if (tabId.compareTo(prevTabId) < 0) {
+		prevTabView.setAnimation(outToRightAnimation());
+		currentTabView.setAnimation(inFromLeftAnimation());
+	    } else {
+		prevTabView.setAnimation(outToLeftAnimation());
+		currentTabView.setAnimation(inFromRightAnimation());
+	    }
 	    prevTabId = tabId;
 	    prevTabView = currentTabView;
-	    return;
 	}
-
-	// tabId가 prevTabId보다 왼쪽에 있는 탭일 때
-	if (tabId.compareTo(prevTabId) < 0) {
-	    prevTabView.setAnimation(outToRightAnimation());
-	    currentTabView.setAnimation(inFromLeftAnimation());
-	} else {
-	    prevTabView.setAnimation(outToLeftAnimation());
-	    currentTabView.setAnimation(inFromRightAnimation());
-	}
-	prevTabId = tabId;
-	prevTabView = currentTabView;
     }
 }

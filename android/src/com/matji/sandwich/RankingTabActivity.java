@@ -56,10 +56,25 @@ public class RankingTabActivity extends BaseTabActivity {
 
     protected void onResume() {
 	super.onResume();
-	int baseIndex = sessionUtil.getSubTabIndex();
-	sessionUtil.flush();
-	if (baseIndex >= 0)  {
-	    tabHost.setCurrentTab(baseIndex);
+	tabHost.clearAllTabs();
+	if (session.isLogin()) {
+	    tabHost.addLeftTab("tab1",
+			       R.string.ranking_tab_friend,
+			       new Intent(this, RankingFriendListActivity.class));
+	    tabHost.addCenterTab("tab2",
+				 R.string.ranking_tab_near,
+				 new Intent(this, PostNearListActivity.class));
+	} else {
+	    tabHost.addLeftTab("tab2",
+			       R.string.ranking_tab_near,
+			       new Intent(this, PostNearListActivity.class));
 	}
+	
+	tabHost.addCenterTab("tab3",
+			     R.string.ranking_tab_country,
+			     new Intent(this, PostNearListActivity.class));
+	tabHost.addRightTab("tab4",
+			    R.string.post_tab_all,
+			    new Intent(this, PostListActivity.class));
     }
 }

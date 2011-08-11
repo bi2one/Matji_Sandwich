@@ -123,8 +123,8 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
 	super.setContentView(layoutResID);
     }
 
-    public void tabStartActivityForResult(Intent intent, int requestCode, ActivityStartable child) {
-	lastStartedChild = child;
+    public void tabStartActivityForResult(Intent intent, int requestCode, ActivityStartable activityStartable) {
+	lastStartedChild = activityStartable;
 	startActivityForResult(intent, requestCode);
     }
 
