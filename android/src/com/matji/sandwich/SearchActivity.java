@@ -1,7 +1,6 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseTabActivity;
-import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.MainSearchInputBar;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.RoundTabHost;
@@ -10,7 +9,6 @@ import com.matji.sandwich.widget.title.HomeTitle;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TabHost.OnTabChangeListener;
@@ -36,7 +34,7 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
 		title = (HomeTitle) findViewById(R.id.Titlebar);
 		title.setTitle(R.string.default_string_search);
 
-		searchInputBar = (MainSearchInputBar) findViewById(R.id.search_input_bar);
+		searchInputBar = (MainSearchInputBar) findViewById(R.id.main_search_input_bar);
 
 		tabHost = (RoundTabHost) getTabHost();
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
@@ -73,6 +71,7 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
 		contentWrapper = (RelativeLayoutThatDetectsSoftKeyboard) findViewById(R.id.contentWrapper);
 		contentWrapper.setListener(this);
 		searchInputBar.setSearchView((FrameLayout) findViewById(R.id.search_wrapper));
+		title.setVisibility(View.GONE);
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,6 +26,8 @@ public class CommentListView extends RequestableMListView {
 	private int curDeletePos;
 
 	private Post post;
+	
+	private PostHeader header;
 
 	private static final int COMMENT_DELETE_REQUEST = 11;
 
@@ -45,17 +46,14 @@ public class CommentListView extends RequestableMListView {
 		setCanRepeat(true);
 		setFadingEdgeLength(0);
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
-	}
-	
-	@Override
-	public void setActivity(Activity activity) {
-		super.setActivity(activity);
-//		((CommentAdapter) getMBaseAdapter()).setActivity(activity);
+		
+		header = new PostHeader(getContext());
+		addHeaderView(header);
 	}
 	
 	public void setPost(Post post) {
 		this.post = post;
-		addHeaderView(new CommentHeader(getContext(), post));
+		header.setPost(post);
 	}
 
 	public void addComment(Comment comment) {
@@ -110,9 +108,6 @@ public class CommentListView extends RequestableMListView {
 			getMBaseAdapter().notifyDataSetChanged();
 		}
 
-//		if (tag == REQUEST_RELOAD && data != null) {
-//			data.add(0, post);
-//		}
 		super.requestCallBack(tag, data);
 	}
 }

@@ -3,7 +3,7 @@ package com.matji.sandwich.adapter;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.matji.sandwich.CommentActivity;
+import com.matji.sandwich.PostActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.Base;
@@ -287,16 +287,16 @@ public class PostSectionedAdapter extends SectionedAdapter {
 
 	/**
 	 * 리스트 아이템을 클릭했을 때,
-	 * {@link CommentActivity}로 이동한다.
+	 * {@link PostActivity}로 이동한다.
 	 * 
 	 * @param position 클릭된 아이템의 positoin
 	 */
 	private void onListItemClick(int position) {
 		Post post = (Post) data.get(position);
 		if (post.getActivityId() == 0) {
-			Intent intent = new Intent(context, CommentActivity.class);
-			intent.putExtra(CommentActivity.POSTS, data);
-			intent.putExtra(CommentActivity.POSITION, position);
+			Intent intent = new Intent(context, PostActivity.class);
+			intent.putExtra(PostActivity.POSTS, data);
+			intent.putExtra(PostActivity.POSITION, position);
 			context.startActivity(intent);
 		}
 	}
@@ -416,10 +416,10 @@ public class PostSectionedAdapter extends SectionedAdapter {
 		 * 댓글 페이지로 이동하고 키보드가 바로 올라오도록 한다.
 		 */
 		public void gotoCommentActivity() {
-			Intent intent = new Intent(context, CommentActivity.class);
-			intent.putExtra(CommentActivity.POSTS, data);
-			intent.putExtra(CommentActivity.POSITION, position);
-			intent.putExtra(CommentActivity.SHOW_KEYBOARD, true);
+			Intent intent = new Intent(context, PostActivity.class);
+			intent.putExtra(PostActivity.POSTS, data);
+			intent.putExtra(PostActivity.POSITION, position);
+			intent.putExtra(PostActivity.SHOW_KEYBOARD, true);
 			context.startActivity(intent);
 		}
 

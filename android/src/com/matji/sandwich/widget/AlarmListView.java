@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.matji.sandwich.CommentActivity;
+import com.matji.sandwich.PostActivity;
 import com.matji.sandwich.UserTabActivity;
 import com.matji.sandwich.adapter.AlarmAdapter;
 import com.matji.sandwich.data.Alarm;
@@ -37,7 +37,7 @@ public class AlarmListView extends RequestableMListView implements View.OnClickL
 		String type = alarm.getAlarmType();
 
 		if (type.equals("Comment") || type.equals("PostLike")) {
-			Intent intent = new Intent(getActivity(), CommentActivity.class);
+			Intent intent = new Intent(getActivity(), PostActivity.class);
 			intent.putExtra("post_id", alarm.getForeignKey());
 			getActivity().startActivity(intent);
 		} else if (type.equals("Following")) {
