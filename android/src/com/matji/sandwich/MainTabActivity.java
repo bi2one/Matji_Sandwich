@@ -49,7 +49,7 @@ public class MainTabActivity extends BaseTabActivity {
 	tabHost.addTab("tab3",
 		       R.drawable.icon_tab_matist,
 		       R.string.main_tab_ranking,
-		       new Intent(this, PostTabActivity.class));
+		       new Intent(this, RankingTabActivity.class));
 	tabHost.addTab("tab4",
 		       R.drawable.icon_tab_private,
 		       R.string.main_tab_config,

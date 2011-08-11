@@ -51,14 +51,4 @@ public class PostTabActivity extends BaseTabActivity {
 	    tabHost.setCurrentTab(baseIndex);
 	}
     }
-
-    public void tabStartActivityForResult(Intent intent, int requestCode, ActivityStartable child) {
-	lastStartedChild = child;
-	startActivityForResult(intent, requestCode);
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	lastStartedChild.activityResultDelivered(requestCode, resultCode, data);
-	// Log.d("=====", "result");
-    }
 }

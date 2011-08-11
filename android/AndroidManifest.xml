@@ -37,6 +37,8 @@
 		<activity android:name="PostListActivity"></activity>
 		<activity android:name="PostNearListActivity"></activity>
 		<activity android:name="PostTabActivity"></activity>
+		<activity android:name="RankingTabActivity"></activity>
+		<activity android:name="RankingFriendListActivity"></activity>
 		<activity android:name="SearchActivity"></activity>
 		<activity android:name="StoreSearchActivity"></activity>
 		<activity android:name="PostSearchActivity"></activity>
