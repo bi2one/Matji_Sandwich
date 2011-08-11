@@ -12,4 +12,7 @@ public class SessionIndex {
     public static final String MAP_ADDRESS = "MainMapActivity.map_address";
 
     public static final String RECENT_CHANGED_LOCATION = "ChangeLocationActivity.recent_changed_location";
+
+    public static final String TAB_INDEX = "MainTabActivity.tab_index";
+    public static final String TAB_SUB_INDEX = "MainTabActivity.tab_sub_index";
 }

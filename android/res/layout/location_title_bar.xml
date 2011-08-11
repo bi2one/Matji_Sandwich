@@ -9,7 +9,7 @@
       android:layout_alignParentLeft="true" />
   <TextView
       style="@style/location_title_bar_address"
-      android:id="@+id/map_title_bar_address"
+      android:id="@+id/location_title_bar_address"
       android:layout_centerVertical="true"
       android:layout_toRightOf="@id/location_title_bar_location_button"
       android:layout_toLeftOf="@+id/location_title_bar_change_location_button" />
@@ -27,5 +27,6 @@
   <Button
       style="@style/location_title_bar_nearPostButton"
       android:layout_alignParentRight="true"
+      android:onClick="onMoveToMapViewClicked"
       android:id="@id/location_title_bar_mapview_button" />
 </RelativeLayout>

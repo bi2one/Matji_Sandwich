@@ -119,15 +119,16 @@ PullToRefreshListView.OnRefreshListener {
 		}
 	}
 
-	public void forceReload() {
-		hideRefreshView();
-		Log.d("refresh", "forceReload()");
-		Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
-		initValue();
-		manager.request(getActivity(), request(), REQUEST_RELOAD, this);
-		nextValue();
-		setSelection(0);
-	}
+    public void forceReload() {
+	hideRefreshView();
+	Log.d("refresh", "forceReload()");
+	Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
+	initValue();
+	manager.request(getActivity(), request(), REQUEST_RELOAD, this);
+	nextValue();
+	setSelection(0);
+	setCanRepeat(true);
+    }
 
 
 	public void requestConditionally() {

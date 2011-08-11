@@ -16,6 +16,7 @@ import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
+import com.matji.sandwich.util.adapter.GeoPointToLocationAdapter;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.GeocodeAddress;
@@ -128,10 +129,17 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	e.performExceptionHandling(context);
     }
 
-    private void setCenter(Location location) {
+    public void setCenter(GeoPoint point) {
+	setCenter(new GeoPointToLocationAdapter(point));
+    }
+
+    public void setCenter(Location location) {
+	GeoPoint locationPoint = new LocationToGeoPointAdapter(location);
 	GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
-	sessionUtil.setCenter(new LocationToGeoPointAdapter(location));
-	geocodeRequest.actionReverseGeocodingByGeoPoint(new LocationToGeoPointAdapter(location), COUNTRY);
+	
+	sessionUtil.setCenter(locationPoint);
+	sessionUtil.setNearBound(locationPoint);
+	geocodeRequest.actionReverseGeocodingByGeoPoint(locationPoint, COUNTRY);
 	requestManager.cancelTask();
 	requestManager.request(activity, geocodeRequest, GEOCODE, this);
     }

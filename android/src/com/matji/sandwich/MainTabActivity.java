@@ -4,16 +4,24 @@ import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.MainTabHost;
+import com.matji.sandwich.session.SessionTabHostUtil;
 
 import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainTabActivity extends BaseTabActivity {
     private MainTabHost tabHost;
+    private SessionTabHostUtil sessionUtil;
+    private Context context;
     
-    public static final String IF_INDEX = "index";
-    public static final int IV_INDEX_STORE = 1;
-    public static final int IV_INDEX_POST = 2;
+    public static final String IF_INDEX = "MainTabActivity.index";
+    public static final String IF_SUB_INDEX = "MainTabActivity.sub_index";
+    public static final int IV_INDEX_MAP = 0;
+    public static final int IV_INDEX_POST = 1;
+    public static final int IV_INDEX_RANKING = 2;
+    public static final int IV_INDEX_CONFIG = 3;
     
     /**
      * Activity생성시 실행하는 메소드
@@ -22,8 +30,10 @@ public class MainTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
-	MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
+	context = getApplicationContext();
+	DisplayUtil.setContext(context); // DisplayUtil 초기화
+	MatjiConstants.setContext(context); // MatjiContstants 초기화
+	sessionUtil = new SessionTabHostUtil(context);
 	setContentView(R.layout.activity_main_tab);
 
 	tabHost = (MainTabHost)getTabHost();
@@ -55,5 +65,6 @@ public class MainTabActivity extends BaseTabActivity {
     protected void onNewIntent(Intent intent) {
 	super.onNewIntent(intent);
 	tabHost.setCurrentTab(intent.getIntExtra(IF_INDEX, 0));
+	sessionUtil.setSubTabIndex(intent.getIntExtra(IF_SUB_INDEX, 0));
     }
 }
