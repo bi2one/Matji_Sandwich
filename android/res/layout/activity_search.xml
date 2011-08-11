@@ -13,7 +13,7 @@
 
 		<!-- Searchbar -->
 		<com.matji.sandwich.widget.MainSearchInputBar
-			android:id="@+id/search_input_bar"
+			android:id="@+id/main_search_input_bar"
 			style="@style/DefaultWidthFill" />
 		<!-- Tab -->
 		<com.matji.sandwich.widget.RoundTabHost

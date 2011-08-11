@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
-public class CommentHeader extends ViewContainer {
+public class PostHeader extends ViewContainer {
 
 	private int[] imageIds = {
 			R.id.header_comment_preview1,
@@ -47,12 +47,12 @@ public class CommentHeader extends ViewContainer {
 	private Button likeListButton;
 	private ImageView[] previews;
 
-	public CommentHeader(Context context) {
+	public PostHeader(Context context) {
 		super(context, R.layout.header_comment);
 		init();
 	}
 	
-	public CommentHeader(Context context, Post post) {
+	public PostHeader(Context context, Post post) {
 		this(context);
 		setPost(post);
 	}

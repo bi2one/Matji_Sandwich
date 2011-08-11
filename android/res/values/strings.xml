@@ -127,8 +127,10 @@
   <string name="store_menu_ex">ex</string>
   <string name="store_menu_already_exist_menu">이미 존재하는 메뉴입니다.</string>
   
-  <!-- PostMainActivity -->
+  <!-- PostActivity -->
   <string name="post_does_not_exist">메모가 존재하지 않습니다!</string>
+  <string name="does_not_exist_prev_post">이전 이야기가 존재하지 않습니다.</string>
+  <string name="does_not_exist_next_post">현재 로드된 이야기의 마지막입니다.</string>
 
   <!-- ChatActivity -->
   <string name="chat_waiting_input">메세지를 입력해주세요.</string>

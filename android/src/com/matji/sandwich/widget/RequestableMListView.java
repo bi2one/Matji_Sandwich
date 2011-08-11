@@ -46,7 +46,7 @@ PullToRefreshListView.OnRefreshListener {
 
 		this.limit = limit;
 	}
-	
+
 	protected void setPage(int page) {
 		this.page = page;
 	}
@@ -67,15 +67,15 @@ PullToRefreshListView.OnRefreshListener {
 		page = 1;
 	}
 
-    public void clearAdapter() {
-	adapter.clear();
-    }
+	public void clearAdapter() {
+		adapter.clear();
+	}
 
 	public void nextValue() {			
 		prevPage = page;
 		page++;
 	}
-	
+
 	private void syncValue() {
 		page = (adapterData.size() / limit) + 1;
 	}
@@ -84,15 +84,15 @@ PullToRefreshListView.OnRefreshListener {
 		scrollListener.requestSetOn();
 	}
 
-    protected boolean isNextRequestable() {
-	return scrollListener.isNextRequestable();
-    }
+	protected boolean isNextRequestable() {
+		return scrollListener.isNextRequestable();
+	}
 
 	public void requestNext() {
 		if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
 			syncValue();
 		}
-		
+
 		if (prevPage < page) {
 			Log.d("refresh" , "requestNext()");
 			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
@@ -108,10 +108,10 @@ PullToRefreshListView.OnRefreshListener {
 	}
 
 	public void requestReload() {
-	    hideRefreshView();
+		hideRefreshView();
+		Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
 		if (!manager.isRunning(getActivity()) || canRepeat) {
 			Log.d("refresh", "requestReload()");
-			Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
 			initValue();
 			manager.request(getActivity(), request(), REQUEST_RELOAD, this);
 			nextValue();
@@ -154,27 +154,25 @@ PullToRefreshListView.OnRefreshListener {
 		return adapterData;
 	}
 
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-	    if (tag == REQUEST_RELOAD || tag == REQUEST_NEXT) {
-		if (tag == REQUEST_RELOAD) {
-		    clearAdapter();
-		}
-		if (data.size() == 0 || data.size() < limit){
-		    scrollListener.requestSetOff();
-		}else{
-		    scrollListener.requestSetOn();
-		}
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {		
+		if (tag == REQUEST_RELOAD || tag == REQUEST_NEXT) {
+			if (tag == REQUEST_RELOAD) {
+				clearAdapter();
+			}
+			if (data.size() == 0 || data.size() < limit){
+				scrollListener.requestSetOff();
+			}else{
+				scrollListener.requestSetOn();
+			}
 
-		adapter.addAll(data);
-		
-		if (data.size() > 0)
-		    adapter.notifyDataSetChanged();
+			adapter.addAll(data);
+			adapter.notifyDataSetChanged();
 
-		// if (adapterData.size() <= limit) {
-		// Log.d("refresh", "Will invoke onRefreshComplete()");
-		onRefreshComplete();
-		// }
-	    }
+			// if (adapterData.size() <= limit) {
+			// Log.d("refresh", "Will invoke onRefreshComplete()");
+			onRefreshComplete();
+			// }
+		}
 	}
 
 
@@ -190,5 +188,5 @@ PullToRefreshListView.OnRefreshListener {
 	public void dataRefresh() {
 		adapter.notifyDataSetChanged();
 	}
-	
+
 }

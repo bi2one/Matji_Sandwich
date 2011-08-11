@@ -31,7 +31,7 @@
 		<activity android:name="MainMapActivity"></activity>
 		<activity android:name="NoticeActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
-		<activity android:name="CommentActivity" 
+		<activity android:name="PostActivity" 
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="PostSliderActivity"></activity>
 		<activity android:name="PostListActivity"></activity>

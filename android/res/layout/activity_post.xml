@@ -4,10 +4,14 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
+	<!-- Titlebar -->
+	<com.matji.sandwich.widget.title.PageableTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWidthFill" />
 	<com.matji.sandwich.widget.CommentListView
 		android:id="@+id/comment_list"
 		style="@style/BottomBarListView" />
 	<com.matji.sandwich.widget.CommentInputBar
-		android:id="@+id/comment_input_bar"	
+		android:id="@+id/comment_input_bar"
 		style="@style/BottomBar" />
 </LinearLayout>
