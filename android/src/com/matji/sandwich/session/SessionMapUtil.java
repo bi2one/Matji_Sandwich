@@ -25,6 +25,14 @@ public class SessionMapUtil {
 	preferenceProvider = session.getPreferenceProvider();
     }
 
+    public int getBasicLatSpan() {
+	return LAT_NEAR_BASIC_SPAN;
+    }
+
+    public int getBasicLngSpan() {
+	return LNG_NEAR_BASIC_SPAN;
+    }
+
     public void setBound(GeoPoint neBound, GeoPoint swBound) {
 	preferenceProvider.setInt(SessionIndex.MAP_BOUND_LATITUDE_NE, neBound.getLatitudeE6());
 	preferenceProvider.setInt(SessionIndex.MAP_BOUND_LATITUDE_SW, swBound.getLatitudeE6());

@@ -19,6 +19,7 @@ public class RankingTabActivity extends BaseTabActivity {
     private Context context;
     private SessionTabHostUtil sessionUtil;
     private Session session;
+    private int lastTab;
     
     /**
      * Activity생성시 실행하는 메소드
@@ -33,29 +34,30 @@ public class RankingTabActivity extends BaseTabActivity {
 	sessionUtil = new SessionTabHostUtil(context);
 	session = Session.getInstance(context);
 
-	if (session.isLogin()) {
-	    tabHost.addLeftTab("tab1",
-			       R.string.ranking_tab_friend,
-			       new Intent(this, RankingFriendListActivity.class));
-	    tabHost.addCenterTab("tab2",
-				 R.string.ranking_tab_near,
-				 new Intent(this, PostNearListActivity.class));
-	} else {
-	    tabHost.addLeftTab("tab2",
-			       R.string.ranking_tab_near,
-			       new Intent(this, PostNearListActivity.class));
-	}
+	// if (session.isLogin()) {
+	//     tabHost.addLeftTab("tab1",
+	// 		       R.string.ranking_tab_friend,
+	// 		       new Intent(this, RankingFriendListActivity.class));
+	//     tabHost.addCenterTab("tab2",
+	// 			 R.string.ranking_tab_near,
+	// 			 new Intent(this, PostNearListActivity.class));
+	// } else {
+	//     tabHost.addLeftTab("tab2",
+	// 		       R.string.ranking_tab_near,
+	// 		       new Intent(this, PostNearListActivity.class));
+	// }
 	
-	tabHost.addCenterTab("tab3",
-			     R.string.ranking_tab_country,
-			     new Intent(this, PostNearListActivity.class));
-	tabHost.addRightTab("tab4",
-			    R.string.post_tab_all,
-			    new Intent(this, PostListActivity.class));
+	// tabHost.addCenterTab("tab3",
+	// 		     R.string.ranking_tab_country,
+	// 		     new Intent(this, PostNearListActivity.class));
+	// tabHost.addRightTab("tab4",
+	// 		    R.string.post_tab_all,
+	// 		    new Intent(this, PostListActivity.class));
     }
 
     protected void onResume() {
 	super.onResume();
+	tabHost.setCurrentTab(0);
 	tabHost.clearAllTabs();
 	if (session.isLogin()) {
 	    tabHost.addLeftTab("tab1",
@@ -76,5 +78,15 @@ public class RankingTabActivity extends BaseTabActivity {
 	tabHost.addRightTab("tab4",
 			    R.string.post_tab_all,
 			    new Intent(this, PostListActivity.class));
+
+	if (!session.isLogin() && lastTab > 2) {
+	    lastTab = 0;
+	}
+	tabHost.setCurrentTab(lastTab);
+    }
+
+    protected void onPause() {
+	super.onPause();
+	lastTab = tabHost.getCurrentTab();
     }
 }

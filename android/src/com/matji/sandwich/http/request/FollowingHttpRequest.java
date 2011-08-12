@@ -63,7 +63,7 @@ public class FollowingHttpRequest extends HttpRequest {
 	getHashtable.put("user_id", user_id + "");
 	getHashtable.put("page", page + "");
 	getHashtable.put("limit", limit + "");
-	getHashtable.put("include", "user_mileage");
+	getHashtable.put("join", "user_mileage");
 	getHashtable.put("order", "user_mileages.total_point desc");
     }
 	

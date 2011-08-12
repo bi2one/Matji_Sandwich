@@ -55,7 +55,6 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     
     public MainMatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	
 	this.context = context;
 	setMapCenterListener(this);
 	setOnTouchListener(this);
@@ -80,7 +79,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     }
 
     public void setCenter(Location location) {
-	mapController.animateTo(new LocationToGeoPointAdapter(location));
+	setCenter(new LocationToGeoPointAdapter(location));
     }
 
     public void setCenter(GeoPoint point) {
@@ -120,6 +119,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	prevLocation = location;
 	sessionUtil.setNearBound(new LocationToGeoPointAdapter(location));
+	mapController.zoomToSpan(sessionUtil.getBasicLatSpan(), sessionUtil.getBasicLngSpan());
 	setCenter(location);
     }
 

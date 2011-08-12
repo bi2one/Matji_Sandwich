@@ -290,4 +290,7 @@
   <string name="ranking_tab_near">지역</string>
   <string name="ranking_tab_country">전국</string>
   <string name="ranking_tab_all">전체</string>
+
+  <!-- adapter_ranking.xml -->
+  <string name="adapter_ranking_point_hint">P</string>
 </resources>

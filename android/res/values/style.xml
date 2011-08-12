@@ -565,12 +565,16 @@
   </style>
 
   <style name="location_title_bar_address" parent="DefaultWidthFill">
-    <item name="android:layout_gravity">center_vertical</item>
+  </style>
+
+  <style name="location_title_bar_address_text" parent="DefaultWidthFill">
     <item name="android:paddingLeft">4dp</item>
     <item name="android:paddingRight">3dp</item>
-    <item name="android:singleLine">true</item>
     <item name="android:textColor">@color/map_title_bar_address</item>
     <item name="android:textSize">12dp</item>
+    <item name="android:scrollHorizontally">false</item>
+    <item name="android:maxLines">2</item>
+    <item name="android:inputType">textMultiLine</item>
   </style>
 
   <style name="location_title_bar_changeLocationText" parent="DefaultWrap">
@@ -581,7 +585,6 @@
   </style>
 
   <style name="location_title_bar_changeLocationArrow" parent="DefaultWrap">
-	<item name="android:layout_gravity">center</item>
 	<item name="android:paddingRight">2dp</item>
   </style>
 
@@ -748,4 +751,60 @@
     <item name="android:textColor">@color/matji_dark_brown</item>
   </style>
 
+  <!-- adapter_ranking.xml -->
+  <style name="adapter_ranking">
+    <item name="android:background">@color/WHITE</item>
+    <item name="android:layout_width">fill_parent</item>
+  </style>
+
+  <style name="adapter_ranking_position" parent="DefaultWrap">
+    <item name="android:background">@color/DODGER_BLUE</item>
+    <item name="android:layout_width">20dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="android:textSize">18dp</item>
+    <item name="android:layout_marginLeft">10dp</item>
+  </style>
+
+  <style name="adapter_ranking_body" parent="DefaultWidthFill">
+  </style>
+
+  <style name="adapter_ranking_body_profile" parent="DefaultWrap">
+    <item name="android:layout_width">40dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="android:scaleType">centerCrop</item>
+  </style>
+
+  <style name="adapter_ranking_nickname" parent="DefaultWrap">
+    <item name="android:textSize">17dp</item>
+    <item name="android:textColor">@color/BLACK</item>
+    <item name="android:singleLine">true</item>
+  </style>
+
+  <style name="adapter_ranking_count_wrap" parent="DefaultWrap">
+  </style>
+
+  <style name="adapter_ranking_heart" parent="adapter_near_store_heart">
+  </style>
+
+  <style name="adapter_ranking_desc_text" parent="adapter_near_store_desc_text">
+  </style>
+
+  <style name="adapter_ranking_balloon" parent="adapter_near_store_balloon">
+  </style>
+
+  <style name="adapter_ranking_point" parent="DefaultWrap">
+    <item name="android:textSize">15dp</item>
+    <item name="android:textColor">@color/matji_light_gray</item>
+  </style>
+
+  <style name="adapter_ranking_point_hint" parent="DefaultWrap">
+    <item name="android:textSize">15dp</item>
+    <item name="android:textColor">@color/matji_red</item>
+    <item name="android:layout_marginLeft">3dp</item>
+  </style>
+
+  <style name="adapter_ranking_divider" parent="DefaultWidthFill">
+    <item name="android:layout_height">1dp</item>
+    <item name="android:background">@color/listview_divider1_gray</item>
+  </style>
 </resources>

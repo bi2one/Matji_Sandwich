@@ -7,22 +7,25 @@
       android:onClick="onCurrentPositionClicked"
       android:id="@+id/location_title_bar_location_button"
       android:layout_alignParentLeft="true" />
-  <TextView
+
+  <RelativeLayout
       style="@style/location_title_bar_address"
-      android:id="@+id/location_title_bar_address"
-      android:layout_centerVertical="true"
       android:layout_toRightOf="@id/location_title_bar_location_button"
-      android:layout_toLeftOf="@+id/location_title_bar_change_location_button" />
-  <LinearLayout
-      style="@style/DefaultWrap"
       android:layout_toLeftOf="@+id/location_title_bar_mapview_button"
-      android:layout_centerVertical="true"
-      android:onClick="onChangeLocationClicked"
-      android:id="@id/location_title_bar_change_location_button">
-    <ImageView
-	style="@style/location_title_bar_changeLocationArrow"
-	android:src="@drawable/map_titlebar_change_location_arrow" />
-  </LinearLayout>
+      android:layout_centerVertical="true" >
+      <TextView
+	  style="@style/location_title_bar_address_text"
+	  android:layout_alignParentLeft="true"
+	  android:layout_centerVertical="true"
+	  android:onClick="onChangeLocationClicked"
+	  android:id="@+id/location_title_bar_address" />
+      <ImageView
+	  style="@style/location_title_bar_changeLocationArrow"
+	  android:layout_alignParentRight="true"
+	  android:layout_centerVertical="true"
+	  android:onClick="onChangeLocationClicked"
+	  android:src="@drawable/map_titlebar_change_location_arrow" />
+  </RelativeLayout>
   
   <Button
       style="@style/location_title_bar_nearPostButton"
