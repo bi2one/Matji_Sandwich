@@ -113,6 +113,7 @@
   <string name="default_string_confirm">확인</string>
   <string name="default_string_today">Today</string>
   <string name="default_string_cancel">취소</string>
+  <string name="default_string_user">사람</string>
   
   <!-- Writing content -->
   <string name="writing_content_post">메모를 입력하세요.</string>

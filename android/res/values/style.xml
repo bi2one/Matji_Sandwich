@@ -45,6 +45,10 @@
   	<item name="android:padding">7dp</item>
   </style> 
   
+  <style name="DefaultBackgroundFill" parent="DefaultFill">
+   	<item name="android:background">@drawable/pattern_bg</item>
+  </style>
+  
   <style name="SubTitle" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_chocolate</item>
   	<item name="android:textSize">@dimen/text_large</item>

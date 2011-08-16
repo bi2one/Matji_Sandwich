@@ -142,6 +142,7 @@ public class SimplePostAdapter extends MBaseAdapter {
             }
         }
     }
+    
     /**
      * {@link Post} 뷰 홀더
      * 

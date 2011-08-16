@@ -30,7 +30,19 @@ public class UserHttpRequest extends HttpRequest {
 		getHashtable.put("user_id", user_id + "");
 		getHashtable.put("include", "stores,attach_files,user_mileage");
 	}
-
+	
+    public void actionSearch(String keyword, int page, int limit) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "search";
+        parser = new UserParser(context);
+        
+        getHashtable.clear();
+        getHashtable.put("q",keyword);
+        getHashtable.put("page", page + "");
+        getHashtable.put("limit", limit + ""); 
+        getHashtable.put("include", "stores,attach_files,user_mileage");
+    }
+    	
 	public void actionRankingList() {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "ranking_list";

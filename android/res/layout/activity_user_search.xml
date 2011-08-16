@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:background="@drawable/pattern_bg"
 	style="@style/DefaultFill">
-	<com.matji.sandwich.widget.PostSearchListView
+	<com.matji.sandwich.widget.UserSearchListView
 		style="@style/DefaultFill"
-		android:id="@+id/PostSearchListView" />
+		android:id="@+id/UserSearchListView" />
 </LinearLayout>
