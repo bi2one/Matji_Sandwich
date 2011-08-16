@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/row_simple_post_wrapper"
+	style="@style/row_simple_post_PostRowWrapper">
+	<include
+		layout="@layout/profile" />
+		
+	<!-- Post Wrapper -->
+	<LinearLayout
+		style="@style/DefaultVerticalWrap">
+		<!-- Name Line -->
+		<LinearLayout
+			style="@style/DefaultWrap">
+			<TextView
+				android:id="@+id/row_simple_post_nick"
+				style="@style/LinkifyName" />
+			<TextView
+				android:id="@+id/row_simple_post_at"
+				style="@style/row_post_At" />
+			<TextView
+				android:id="@+id/row_simple_post_store_name"
+				style="@style/LinkifyName" />
+		</LinearLayout>
+
+		<!-- Post -->
+		<TextView
+			android:id="@+id/row_simple_post_post"
+			style="@style/SimpleTalkContent" />
+	</LinearLayout>
+</LinearLayout>
