@@ -1,25 +1,25 @@
 package com.matji.sandwich.widget;
 
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.http.request.UserHttpRequest;
 import com.matji.sandwich.widget.SearchInputBar.Searchable;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 
-public class PostSearchListView extends SimplePostListView implements Searchable {
-	private PostHttpRequest postRequest;
+public class UserSearchListView extends SimpleUserListView implements Searchable {
+	private UserHttpRequest userRequest;
 	private String keyword = "";
 	
-	public PostSearchListView(Context context, AttributeSet attrs) {
+	public UserSearchListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		postRequest = new PostHttpRequest(context);
+		userRequest = new UserHttpRequest(context);
 	}
 	
 	public HttpRequest request() {
-		postRequest.actionSearch(keyword, getPage(), getLimit());
-		return postRequest;
+		userRequest.actionSearch(keyword, getPage(), getLimit());
+		return userRequest;
 	}
 
 	

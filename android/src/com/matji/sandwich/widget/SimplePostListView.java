@@ -3,15 +3,14 @@ package com.matji.sandwich.widget;
 import java.util.ArrayList;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.adapter.PostSectionedAdapter;
+import com.matji.sandwich.adapter.SimplePostAdapter;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 
 /**
@@ -20,20 +19,17 @@ import android.util.AttributeSet;
  * @author mozziluv
  * 
  */
-public class PostListView extends RequestableMListView {
+public class SimplePostListView extends RequestableMListView {
     private HttpRequest request;
 
-    public PostListView(Context context, AttributeSet attr) {
-        super(context, attr, new PostSectionedAdapter(context), 10);
+    public SimplePostListView(Context context, AttributeSet attr) {
+        super(context, attr, new SimplePostAdapter(context), 10);
         init();
-    }	
-
+    }
+    
     protected void init() {
-        setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
-        setDivider(null);
-        setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
-        setCacheColorHint(Color.TRANSPARENT);
-        setSelector(android.R.color.transparent);
+        setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
+        setDividerHeight(1);
     }
 
     public HttpRequest request() {
@@ -42,11 +38,6 @@ public class PostListView extends RequestableMListView {
         }
         ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
         return request;
-    }
-
-    public void setActivity(Activity activity) {
-        super.setActivity(activity);
-        ((PostSectionedAdapter) getMBaseAdapter()).setActivity(getActivity());
     }
 
     public void setPosts(ArrayList<MatjiData> data) {

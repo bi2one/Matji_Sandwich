@@ -54,115 +54,115 @@ public abstract class SectionedAdapter extends MBaseAdapter {
     private static final int VIEW_TYPE_COUNT = TYPE_SECTION + 1;
 
     public SectionedAdapter(Context context) {
-	super(context);
+        super(context);
     }
-    
+
     public void notifyDataSetChanged() {
-	int currentPosition = 0;
-	String currentSection = "";
-	String prevSectionName = "";
-	sectionPositions.clear();
-	itemPositions.clear();
-	
-	for (int i = 0; i < data.size(); i++) {
-	    Object dataObject = data.get(i);
-	    String sectionName = putSectionName(i);
-	    if (sectionName != null && !sectionName.equals(prevSectionName)) {
-		prevSectionName = sectionName;
-		sectionPositions.put(currentPosition, sectionName);
-		currentSection = sectionName;
-		currentPosition++;
-	    }
-	    itemPositions.put(currentPosition, i);
-	    currentPosition++;
-	}
-	super.notifyDataSetChanged();
+        int currentPosition = 0;
+        String currentSection = "";
+        String prevSectionName = "";
+        sectionPositions.clear();
+        itemPositions.clear();
+
+        for (int i = 0; i < data.size(); i++) {
+            Object dataObject = data.get(i);
+            String sectionName = putSectionName(i);
+            if (sectionName != null && !sectionName.equals(prevSectionName)) {
+                prevSectionName = sectionName;
+                sectionPositions.put(currentPosition, sectionName);
+                currentSection = sectionName;
+                currentPosition++;
+            }
+            itemPositions.put(currentPosition, i);
+            currentPosition++;
+        }
+        super.notifyDataSetChanged();
     }
 
     @Override
-	public int getCount() {
-	    return sectionPositions.size() + itemPositions.size();
-	}
+    public int getCount() {
+        return sectionPositions.size() + itemPositions.size();
+    }
 
     @Override
-	public Object getItem(final int position) {
-	    if (isSection(position)) {
-		return sectionPositions.get(position);
-	    } else {
-		final int linkedItemPosition = getLinkedPosition(position);
-		return data.get(linkedItemPosition);
-	    }
-	}
+    public Object getItem(final int position) {
+        if (isSection(position)) {
+            return sectionPositions.get(position);
+        } else {
+            final int linkedItemPosition = getLinkedPosition(position);
+            return data.get(linkedItemPosition);
+        }
+    }
 
     public boolean isSection(final int position) {
-	return sectionPositions.containsKey(position);
+        return sectionPositions.containsKey(position);
     }
 
     public String getSectionName(final int position) {
-	if (isSection(position)) {
-	    return sectionPositions.get(position);
-	} else {
-	    return null;
-	}
+        if (isSection(position)) {
+            return sectionPositions.get(position);
+        } else {
+            return null;
+        }
     }
 
     @Override
-	public long getItemId(final int position) {
-	if (isSection(position)) {
-	    return sectionPositions.get(position).hashCode();
-	} else {
-	    return super.getItemId(getLinkedPosition(position));
-	}
+    public long getItemId(final int position) {
+        if (isSection(position)) {
+            return sectionPositions.get(position).hashCode();
+        } else {
+            return super.getItemId(getLinkedPosition(position));
+        }
     }
 
 
     @Override
-	public int getItemViewType(final int position) {
-	if (isSection(position)) {
-	    return VIEW_TYPE_COUNT - 1;
-	}
-	return super.getItemViewType(getLinkedPosition(position));
+    public int getItemViewType(final int position) {
+        if (isSection(position)) {
+            return VIEW_TYPE_COUNT - 1;
+        }
+        return super.getItemViewType(getLinkedPosition(position));
     }
 
     @Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-	if (isSection(position)) {
-	    View sectionView = getSectionView(convertView, sectionPositions.get(position));
-	    replaceSectionViewsInMaps(sectionPositions.get(position), sectionView);
-	    return sectionView;
-	}
-	return getItemView(getLinkedPosition(position), convertView, parent);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (isSection(position)) {
+            View sectionView = getSectionView(convertView, sectionPositions.get(position));
+            replaceSectionViewsInMaps(sectionPositions.get(position), sectionView);
+            return sectionView;
+        }
+        return getItemView(getLinkedPosition(position), convertView, parent);
     }
 
     protected void replaceSectionViewsInMaps(final String section, final View theView) {
-	if (currentViewSections.containsKey(theView)) {
-	    currentViewSections.remove(theView);
-	}
-	currentViewSections.put(theView, section);
+        if (currentViewSections.containsKey(theView)) {
+            currentViewSections.remove(theView);
+        }
+        currentViewSections.put(theView, section);
     }
 
     @Override
-	public int getViewTypeCount() {
-	return VIEW_TYPE_COUNT;
+    public int getViewTypeCount() {
+        return VIEW_TYPE_COUNT;
     }
 
     @Override
-	public boolean isEnabled(final int position) {
-	if (isSection(position)) {
-	    return false;
-	}
-	return super.isEnabled(getLinkedPosition(position));
+    public boolean isEnabled(final int position) {
+        if (isSection(position)) {
+            return false;
+        }
+        return super.isEnabled(getLinkedPosition(position));
     }
 
     @Override
-	public void clear() {
-	super.clear();
-	sectionPositions.clear();
-	itemPositions.clear();
-	currentViewSections.clear();
+    public void clear() {
+        super.clear();
+        sectionPositions.clear();
+        itemPositions.clear();
+        currentViewSections.clear();
     }
 
     protected Integer getLinkedPosition(final int position) {
-	return itemPositions.get(position);
+        return itemPositions.get(position);
     }
 }

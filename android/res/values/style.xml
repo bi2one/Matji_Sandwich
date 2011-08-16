@@ -45,6 +45,10 @@
   	<item name="android:padding">7dp</item>
   </style> 
   
+  <style name="DefaultBackgroundFill" parent="DefaultFill">
+   	<item name="android:background">@drawable/pattern_bg</item>
+  </style>
+  
   <style name="SubTitle" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_chocolate</item>
   	<item name="android:textSize">@dimen/text_large</item>
@@ -72,6 +76,10 @@
   	<item name="android:layout_width">200dp</item>
   	<item name="android:autoLink">web</item>
   	<item name="android:textColor">@color/BLACK</item>
+  </style>
+  
+  <style name="SimpleTalkContent" parent="TalkContent">
+  	<item name="android:singleLine">true</item>
   </style>
   
   <style name="SmallGrayText" parent="DefaultWrap">
@@ -496,11 +504,16 @@
   </style>
   
   <!-- Post List Row -->
+  
   <style name="row_post_PostRowWrapper" parent="DefaultWidthFill">
   	<item name="android:paddingLeft">@dimen/default_distance</item>
   	<item name="android:paddingRight">@dimen/default_distance</item>a
   	<item name="android:paddingTop">@dimen/default_distance_half</item>
   	<item name="android:paddingBottom">@dimen/default_distance_half</item>
+  </style>
+  
+  <style name="row_simple_post_PostRowWrapper" parent="row_post_PostRowWrapper">
+  	<item name="android:background">@drawable/btn_white_to_lightpink</item>
   </style>
   
   <style name="row_post_PostWrapper" parent="DefaultWidthFill">

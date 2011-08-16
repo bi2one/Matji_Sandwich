@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -60,6 +61,7 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Debug.startMethodTracing("trace-base-name");
 		//		intent_post_id = getIntent().getIntExtra("post_id", POST_ID_IS_NULL);
 
 		//		if (intent_post_id == POST_ID_IS_NULL) {
@@ -68,6 +70,13 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable,
 		//		}
 	}
 
+	@Override
+	protected void onDestroy() {
+	    // TODO Auto-generated method stub
+	    Debug.stopMethodTracing();
+	    super.onDestroy();
+	    
+	}
 	@Override
 	public void finish() {
 	    Intent intent = new Intent();

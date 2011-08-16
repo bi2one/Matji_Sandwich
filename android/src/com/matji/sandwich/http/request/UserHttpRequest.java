@@ -71,6 +71,18 @@ public class UserHttpRequest extends HttpRequest {
 	getHashtable.put("include", "stores,attach_files,user_mileage"); 
     }
 	
+    public void actionSearch(String keyword, int page, int limit) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "search";
+        parser = new UserParser(context);
+        
+        getHashtable.clear();
+        getHashtable.put("q",keyword);
+        getHashtable.put("page", page + "");
+        getHashtable.put("limit", limit + ""); 
+        getHashtable.put("include", "stores,attach_files,user_mileage");
+    }
+	
     public void actionStoreFoodLikeList(int store_food_id, int page, int limit) {
 	httpMethod = HttpMethod.HTTP_GET;
 	action = "like_list";
@@ -88,7 +100,7 @@ public class UserHttpRequest extends HttpRequest {
 	action = "like_list";
 	parser = new UserParser(context);
 
-	getHashtable.clear();		
+	getHashtable.clear();
 	getHashtable.put("post_id", post_id+"");
 	getHashtable.put("page", page+"");
 	getHashtable.put("limit", limit+"");
