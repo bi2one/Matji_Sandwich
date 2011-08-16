@@ -137,8 +137,10 @@ public class PostNearListActivity extends BaseActivity implements MatjiLocationL
     	switch(requestCode) {
     	case REQUEST_CODE_LOCATION:
     	    if (resultCode == Activity.RESULT_OK) {
-    		int searchedLat = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LATITUDE, BASIC_SEARCH_LOC_LAT);
-    		int searchedLng = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE, BASIC_SEARCH_LOC_LNG);
+    		int searchedLat = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LATITUDE,
+						   ChangeLocationActivity.BASIC_SEARCH_LOC_LAT);
+    		int searchedLng = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE,
+						   ChangeLocationActivity.BASIC_SEARCH_LOC_LNG);
     		String searchedLocation = data.getStringExtra(ChangeLocationActivity.INTENT_KEY_LOCATION_NAME);
     		sessionLocationUtil.push(searchedLocation, searchedLat, searchedLng);
 

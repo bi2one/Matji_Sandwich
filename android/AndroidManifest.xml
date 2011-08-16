@@ -40,6 +40,7 @@
 		<activity android:name="RankingTabActivity"></activity>
 		<activity android:name="RankingFriendListActivity"></activity>
 		<activity android:name="RankingNearListActivity"></activity>
+		<activity android:name="RankingAllListActivity"></activity>
 		<activity android:name="SearchActivity"></activity>
 		<activity android:name="StoreSearchActivity"></activity>
 		<activity android:name="PostSearchActivity"></activity>
