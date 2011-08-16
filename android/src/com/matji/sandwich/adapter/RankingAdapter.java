@@ -44,7 +44,7 @@ public class RankingAdapter extends MBaseAdapter {
 	}
 	
 	rankingElement.position.setText("" + (position + 1));
-	// rankingElement.profile
+	rankingElement.profile.setUserId(user.getId());
 	rankingElement.nickname.setText(user.getNick());
 	rankingElement.likeCount.setText("" + user.getStoreCount());
 	rankingElement.postCount.setText("" + user.getPostCount());

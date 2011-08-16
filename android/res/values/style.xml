@@ -754,7 +754,6 @@
   <!-- adapter_ranking.xml -->
   <style name="adapter_ranking" parent="DefaultWidthFill">
     <item name="android:background">@drawable/btn_white_to_lightpink</item>
-    <item name="android:layout_height">50dp</item>
   </style>
 
   <style name="adapter_ranking_position" parent="DefaultWrap">
