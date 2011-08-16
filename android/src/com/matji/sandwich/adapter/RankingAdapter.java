@@ -7,6 +7,10 @@ public class RankingAdapter extends SimpleUserAdapter {
 
     public RankingAdapter(Context context) {
         super(context);
-        positionVisibility = View.VISIBLE;
+    }
+    
+    @Override
+    protected int getPositionVisibility() {
+        return View.VISIBLE;
     }
 }

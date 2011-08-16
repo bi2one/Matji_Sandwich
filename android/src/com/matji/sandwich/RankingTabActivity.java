@@ -33,26 +33,6 @@ public class RankingTabActivity extends BaseTabActivity {
 	context = getApplicationContext();
 	sessionUtil = new SessionTabHostUtil(context);
 	session = Session.getInstance(context);
-
-	// if (session.isLogin()) {
-	//     tabHost.addLeftTab("tab1",
-	// 		       R.string.ranking_tab_friend,
-	// 		       new Intent(this, RankingFriendListActivity.class));
-	//     tabHost.addCenterTab("tab2",
-	// 			 R.string.ranking_tab_near,
-	// 			 new Intent(this, PostNearListActivity.class));
-	// } else {
-	//     tabHost.addLeftTab("tab2",
-	// 		       R.string.ranking_tab_near,
-	// 		       new Intent(this, PostNearListActivity.class));
-	// }
-	
-	// tabHost.addCenterTab("tab3",
-	// 		     R.string.ranking_tab_country,
-	// 		     new Intent(this, PostNearListActivity.class));
-	// tabHost.addRightTab("tab4",
-	// 		    R.string.post_tab_all,
-	// 		    new Intent(this, PostListActivity.class));
     }
 
     protected void onResume() {
@@ -65,11 +45,11 @@ public class RankingTabActivity extends BaseTabActivity {
 			       new Intent(this, RankingFriendListActivity.class));
 	    tabHost.addCenterTab("tab2",
 				 R.string.ranking_tab_near,
-				 new Intent(this, PostNearListActivity.class));
+				 new Intent(this, RankingNearListActivity.class));
 	} else {
 	    tabHost.addLeftTab("tab2",
 			       R.string.ranking_tab_near,
-			       new Intent(this, PostNearListActivity.class));
+			       new Intent(this, RankingNearListActivity.class));
 	}
 	
 	tabHost.addCenterTab("tab3",

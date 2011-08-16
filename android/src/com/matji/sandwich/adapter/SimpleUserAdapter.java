@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class SimpleUserAdapter extends MBaseAdapter {
-    protected int positionVisibility = View.GONE;
-
     public SimpleUserAdapter(Context context) {
         super(context);
         this.context = context;
@@ -37,10 +35,10 @@ public class SimpleUserAdapter extends MBaseAdapter {
             rankingElement = (RankingElement) convertView.getTag();
         }
 
-        rankingElement.position.setVisibility(positionVisibility);
-        if (positionVisibility == View.VISIBLE)
+        rankingElement.position.setVisibility(getPositionVisibility());
+        if (getPositionVisibility() == View.VISIBLE)
             rankingElement.position.setText("" + (position + 1));
-        // rankingElement.profile
+        rankingElement.profile.setUserId(user.getId());
         rankingElement.nickname.setText(user.getNick());
         rankingElement.likeCount.setText("" + user.getStoreCount());
         rankingElement.postCount.setText("" + user.getPostCount());
@@ -49,6 +47,10 @@ public class SimpleUserAdapter extends MBaseAdapter {
         return convertView;
     }
 
+    protected int getPositionVisibility() {
+        return View.GONE;
+    }
+    
     private class RankingElement {
         TextView position;
         ProfileImageView profile;
@@ -56,5 +58,5 @@ public class SimpleUserAdapter extends MBaseAdapter {
         TextView likeCount;
         TextView postCount;
         TextView point;
-    }    
+    }
 }

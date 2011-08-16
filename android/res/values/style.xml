@@ -763,7 +763,6 @@
   <!-- adapter_ranking.xml -->
   <style name="adapter_ranking" parent="DefaultWidthFill">
     <item name="android:background">@drawable/btn_white_to_lightpink</item>
-    <item name="android:layout_height">50dp</item>
   </style>
 
   <style name="adapter_ranking_position" parent="DefaultWrap">
@@ -778,18 +777,20 @@
   </style>
 
   <style name="adapter_ranking_body_profile" parent="DefaultWrap">
-    <item name="android:layout_width">40dp</item>
-    <item name="android:layout_height">40dp</item>
+    <item name="android:layout_width">36.67dp</item>
+    <item name="android:layout_height">36.67dp</item>
     <item name="android:scaleType">centerCrop</item>
+    <item name="android:layout_margin">10dp</item>
   </style>
 
   <style name="adapter_ranking_nickname" parent="DefaultWrap">
-    <item name="android:textSize">17dp</item>
+    <item name="android:textSize">16dp</item>
     <item name="android:textColor">@color/BLACK</item>
     <item name="android:singleLine">true</item>
   </style>
 
   <style name="adapter_ranking_count_wrap" parent="DefaultWrap">
+    <item name="android:layout_marginBottom">10dp</item>
   </style>
 
   <style name="adapter_ranking_heart" parent="adapter_near_store_heart">
@@ -802,12 +803,12 @@
   </style>
 
   <style name="adapter_ranking_point" parent="DefaultWrap">
-    <item name="android:textSize">15dp</item>
+    <item name="android:textSize">14.67dp</item>
     <item name="android:textColor">@color/matji_light_gray</item>
   </style>
 
   <style name="adapter_ranking_point_hint" parent="DefaultWrap">
-    <item name="android:textSize">15dp</item>
+    <item name="android:textSize">14.67dp</item>
     <item name="android:textColor">@color/matji_red</item>
     <item name="android:layout_marginLeft">3dp</item>
   </style>

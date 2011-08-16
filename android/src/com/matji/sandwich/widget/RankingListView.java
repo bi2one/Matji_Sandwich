@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ public abstract class RankingListView extends RequestableMListView {
 
 	this.context = context;
 	setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
-	setDivider(null);
+	setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
+	setDividerHeight(1);
 	setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
 	setCacheColorHint(Color.TRANSPARENT);
 	setSelector(android.R.color.transparent);
