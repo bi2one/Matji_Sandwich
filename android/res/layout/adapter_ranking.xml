@@ -28,13 +28,13 @@
     <TextView
 	android:id="@+id/adapter_ranking_nickname"
 	android:layout_toRightOf="@id/adapter_ranking_profile"
-	android:layout_alignTop="@id/adapter_ranking_profile"
+	android:layout_alignParentTop="true"
 	style="@style/adapter_ranking_nickname" />
 
     <!-- heart and balloon -->
     <LinearLayout
 	android:layout_toRightOf="@id/adapter_ranking_profile"
-	android:layout_alignBottom="@id/adapter_ranking_profile"
+	android:layout_below="@id/adapter_ranking_nickname"
 	style="@style/adapter_ranking_count_wrap" >
       <ImageView style="@style/adapter_ranking_heart" />
       <TextView
@@ -61,7 +61,7 @@
       style="@style/adapter_ranking_point_hint" />
 
   <!-- division bar -->
-  <ImageView
-      android:layout_alignParentBottom="true"
-      style="@style/adapter_ranking_divider" />
+  <!-- <ImageView -->
+  <!--     android:layout_alignParentBottom="true" -->
+  <!--     style="@style/adapter_ranking_divider" /> -->
 </RelativeLayout>
