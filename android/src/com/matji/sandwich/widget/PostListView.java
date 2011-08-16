@@ -22,36 +22,36 @@ import android.util.AttributeSet;
  */
 public class PostListView extends RequestableMListView {
     private HttpRequest request;
-	
+
     public PostListView(Context context, AttributeSet attr) {
-	super(context, attr, new PostSectionedAdapter(context), 10);
-	init();
+        super(context, attr, new PostSectionedAdapter(context), 10);
+        init();
     }	
 
     protected void init() {
-	setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
-	setDivider(null);
-	setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
-	setCacheColorHint(Color.TRANSPARENT);
-	setSelector(android.R.color.transparent);
+        setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
+        setDivider(null);
+        setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
+        setCacheColorHint(Color.TRANSPARENT);
+        setSelector(android.R.color.transparent);
     }
 
     public HttpRequest request() {
-	if (request == null || !(request instanceof PostHttpRequest)) {
-	    request = new PostHttpRequest(getContext());
-	}
-	((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
-	return request;
+        if (request == null || !(request instanceof PostHttpRequest)) {
+            request = new PostHttpRequest(getContext());
+        }
+        ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
+        return request;
     }
 
     public void setActivity(Activity activity) {
-	super.setActivity(activity);
-	((PostSectionedAdapter) getMBaseAdapter()).setActivity(getActivity());
+        super.setActivity(activity);
+        ((PostSectionedAdapter) getMBaseAdapter()).setActivity(getActivity());
     }
-	
+
     public void setPosts(ArrayList<MatjiData> data) {
         getMBaseAdapter().setData(data);
     }
-    
+
     public void onListItemClick(int position) {}
 }

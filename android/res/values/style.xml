@@ -74,6 +74,10 @@
   	<item name="android:textColor">@color/BLACK</item>
   </style>
   
+  <style name="SimpleTalkContent" parent="TalkContent">
+  	<item name="android:singleLine">true</item>
+  </style>
+  
   <style name="SmallGrayText" parent="DefaultWrap">
   	<item name="android:textSize">@dimen/text_small</item>
   	<item name="android:textColor">@color/matji_light_gray</item>
@@ -496,11 +500,16 @@
   </style>
   
   <!-- Post List Row -->
+  
   <style name="row_post_PostRowWrapper" parent="DefaultWidthFill">
   	<item name="android:paddingLeft">@dimen/default_distance</item>
   	<item name="android:paddingRight">@dimen/default_distance</item>a
   	<item name="android:paddingTop">@dimen/default_distance_half</item>
   	<item name="android:paddingBottom">@dimen/default_distance_half</item>
+  </style>
+  
+  <style name="row_simple_post_PostRowWrapper" parent="row_post_PostRowWrapper">
+  	<item name="android:background">@drawable/btn_white_to_lightpink</item>
   </style>
   
   <style name="row_post_PostWrapper" parent="DefaultWidthFill">

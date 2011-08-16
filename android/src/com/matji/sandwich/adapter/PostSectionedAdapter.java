@@ -300,7 +300,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
 			Intent intent = new Intent(context, PostActivity.class);
 			intent.putExtra(PostActivity.POSTS, data);
 			intent.putExtra(PostActivity.POSITION, position);
-			if (((Activity) context).getParent() instanceof BaseTabActivity) {
+			if (((Activity) context).getParent().getParent() instanceof BaseTabActivity) {
 			    BaseTabActivity parent = (BaseTabActivity) ((Activity) context).getParent();
 				parent.tabStartActivityForResult(intent, BaseActivity.POST_ACTIVITY, (ActivityStartable) context);
 			} else {

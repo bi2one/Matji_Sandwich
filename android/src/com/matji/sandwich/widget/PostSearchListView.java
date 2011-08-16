@@ -8,7 +8,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 
-public class PostSearchListView extends PostListView implements Searchable {
+public class PostSearchListView extends SimplePostListView implements Searchable {
 	private PostHttpRequest postRequest;
 	private String keyword = "";
 	
