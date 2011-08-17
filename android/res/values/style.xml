@@ -241,6 +241,7 @@
   
   <style name="cell_user_FollowButton" parent="cell_user_Button">
   	<item name="android:background">@drawable/btn_red</item>
+  	<item name="android:textColor">@color/matji_white</item>
   </style>
   
   <style name="cell_user_MessageListButton" parent="cell_user_WhiteButton">
@@ -764,12 +765,12 @@
     <item name="android:textColor">@color/matji_dark_brown</item>
   </style>
 
-  <!-- adapter_ranking.xml -->
-  <style name="adapter_ranking" parent="DefaultWidthFill">
+  <!-- row_simple_user.xml -->
+  <style name="row_simple_user" parent="DefaultWidthFill">
     <item name="android:background">@drawable/btn_white_to_lightpink</item>
   </style>
 
-  <style name="adapter_ranking_position" parent="DefaultWrap">
+  <style name="row_simple_user_position" parent="DefaultWrap">
     <item name="android:background">@color/DODGER_BLUE</item>
     <item name="android:layout_width">20dp</item>
     <item name="android:layout_height">40dp</item>
@@ -777,47 +778,47 @@
     <item name="android:layout_marginLeft">10dp</item>
   </style>
 
-  <style name="adapter_ranking_body" parent="DefaultWidthFill">
+  <style name="row_simple_user_body" parent="DefaultWidthFill">
   </style>
 
-  <style name="adapter_ranking_body_profile" parent="DefaultWrap">
+  <style name="row_simple_user_body_profile" parent="DefaultWrap">
     <item name="android:layout_width">36.67dp</item>
     <item name="android:layout_height">36.67dp</item>
     <item name="android:scaleType">centerCrop</item>
     <item name="android:layout_margin">10dp</item>
   </style>
 
-  <style name="adapter_ranking_nickname" parent="DefaultWrap">
+  <style name="row_simple_user_nickname" parent="DefaultWrap">
     <item name="android:textSize">16dp</item>
     <item name="android:textColor">@color/BLACK</item>
     <item name="android:singleLine">true</item>
   </style>
 
-  <style name="adapter_ranking_count_wrap" parent="DefaultWrap">
+  <style name="row_simple_user_count_wrap" parent="DefaultWrap">
     <item name="android:layout_marginBottom">10dp</item>
   </style>
 
-  <style name="adapter_ranking_heart" parent="adapter_near_store_heart">
+  <style name="row_simple_user_heart" parent="adapter_near_store_heart">
   </style>
 
-  <style name="adapter_ranking_desc_text" parent="adapter_near_store_desc_text">
+  <style name="row_simple_user_desc_text" parent="adapter_near_store_desc_text">
   </style>
 
-  <style name="adapter_ranking_balloon" parent="adapter_near_store_balloon">
+  <style name="row_simple_user_balloon" parent="adapter_near_store_balloon">
   </style>
 
-  <style name="adapter_ranking_point" parent="DefaultWrap">
+  <style name="row_simple_user_point" parent="DefaultWrap">
     <item name="android:textSize">14.67dp</item>
     <item name="android:textColor">@color/matji_light_gray</item>
   </style>
 
-  <style name="adapter_ranking_point_hint" parent="DefaultWrap">
+  <style name="row_simple_user_point_hint" parent="DefaultWrap">
     <item name="android:textSize">14.67dp</item>
     <item name="android:textColor">@color/matji_red</item>
     <item name="android:layout_marginLeft">3dp</item>
   </style>
 
-  <style name="adapter_ranking_divider" parent="DefaultWidthFill">
+  <style name="row_simple_user_divider" parent="DefaultWidthFill">
     <item name="android:layout_height">1dp</item>
     <item name="android:background">@color/listview_divider1_gray</item>
   </style>

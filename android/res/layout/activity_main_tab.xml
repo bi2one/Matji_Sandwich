@@ -4,7 +4,7 @@
 	style="@style/DefaultFill"
 	android:orientation="vertical">
 	<com.matji.sandwich.widget.title.MainTitle
-		android:id="@+id/Titlebar"
+		android:id="@id/Titlebar"
 		style="@style/DefaultWrap" />
 	<com.matji.sandwich.widget.MainTabHost
 		android:id="@android:id/tabhost"

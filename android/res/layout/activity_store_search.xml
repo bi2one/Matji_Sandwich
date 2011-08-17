@@ -2,7 +2,7 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/DefaultFill">
-	<com.matji.sandwich.widget.StoreSearchListView
+	<com.matji.sandwich.widget.search.StoreSearchListView
 		style="@style/DefaultFill"
 		android:id="@+id/StoreSearchListView" />
 </LinearLayout>

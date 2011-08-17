@@ -26,8 +26,9 @@ public class DBProvider {
 	public static String FOLLOWING_TABLE_NAME = "matji_followings";
 	public static String FOLLOWER_TABLE_NAME = "matji_followers";
 	
-	public static final String POST = "Post";
-	public static final String LIKE = "Like";
+    public static final String POST = "Post";
+    public static final String STORE = "Store";
+    public static final String LIKE = "Like";
 
 	private static DBProvider dbProvider;
 	private static DataBaseHelper dbHelper;

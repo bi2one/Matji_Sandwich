@@ -4,7 +4,7 @@ import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.widget.MainSearchInputBar;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.RoundTabHost;
-import com.matji.sandwich.widget.SearchInputBar.Searchable;
+import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 import com.matji.sandwich.widget.title.HomeTitle;
 
 import android.content.Intent;

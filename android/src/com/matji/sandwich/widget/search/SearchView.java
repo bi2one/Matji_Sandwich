@@ -1,4 +1,4 @@
-package com.matji.sandwich.widget;
+package com.matji.sandwich.widget.search;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.KeyboardUtil;
-import com.matji.sandwich.widget.SearchInputBar.Searchable;
+import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 
 public class SearchView extends LinearLayout implements OnClickListener, OnEditorActionListener {
 	private Context context;

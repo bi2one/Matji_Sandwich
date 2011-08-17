@@ -21,6 +21,7 @@ public class SimpleUserListView extends RequestableMListView {
 	protected void init() {
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
         setDividerHeight(1);
+        setCacheColorHint(R.color.matji_transparent);
     }
 
     public HttpRequest request() {

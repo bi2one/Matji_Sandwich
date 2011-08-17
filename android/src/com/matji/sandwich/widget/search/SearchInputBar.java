@@ -1,8 +1,9 @@
-package com.matji.sandwich.widget;
+package com.matji.sandwich.widget.search;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.InputBar;
 
 import android.app.Activity;
 import android.content.Context;

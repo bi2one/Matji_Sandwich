@@ -2,16 +2,16 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.util.AttributeSet;
+
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.SimplePostAdapter;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
-
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.util.AttributeSet;
 
 /**
  * View displaying the list with sectioned header.
@@ -30,6 +30,7 @@ public class SimplePostListView extends RequestableMListView {
     protected void init() {
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
         setDividerHeight(1);
+        setBackgroundDrawable(null);
     }
 
     public HttpRequest request() {

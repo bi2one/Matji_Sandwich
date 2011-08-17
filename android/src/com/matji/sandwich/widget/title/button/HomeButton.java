@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.util.Log;
 
 /**
- * Main 이 되는 Activity 로 돌아가게 하는 역할을 하는 버튼 
+ * {@link MainTabActivity}로 돌아가게 하는 버튼 
  * 
  * @author mozziluv
  *

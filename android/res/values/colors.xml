@@ -40,6 +40,7 @@
 	<color name="matji_dark_orange">#FF2400</color>
 	<color name="matji_red">#FF2400</color>
 	<color name="matji_light_gray">#9b9b9b</color>
+	<color name="matji_white">#fff</color>
 	<color name="matji_black">#000</color>
 	<color name="matji_chocolate">#a27c47</color>
 	<color name="matji_transparent">#00000000</color>

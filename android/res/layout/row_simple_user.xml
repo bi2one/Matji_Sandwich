@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/row_simple_user">
+  <!-- ranking position -->
+  <TextView
+      android:id="@+id/row_simple_user_position"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentTop="true"
+      style="@style/row_simple_user_position" />
+
+  <!-- ranking body -->
+  <RelativeLayout
+      android:id="@+id/row_simple_user_body"
+      style="@style/row_simple_user_body"
+      android:layout_toRightOf="@id/row_simple_user_position"
+      android:layout_toLeftOf="@+id/row_simple_user_point"
+      android:layout_centerVertical="true">
+    
+    <!-- profile image -->
+    <com.matji.sandwich.widget.ProfileImageView
+	android:id="@+id/row_simple_user_profile"
+	android:layout_alignParentLeft="true"
+	android:layout_centerVertical="true"
+	style="@style/row_simple_user_body_profile" />
+
+    <!-- nickname -->    
+    <TextView
+	android:id="@+id/row_simple_user_nickname"
+	android:layout_toRightOf="@id/row_simple_user_profile"
+	android:layout_alignParentTop="true"
+	style="@style/row_simple_user_nickname" />
+
+    <!-- heart and balloon -->
+    <LinearLayout
+	android:layout_toRightOf="@id/row_simple_user_profile"
+	android:layout_below="@id/row_simple_user_nickname"
+	style="@style/row_simple_user_count_wrap" >
+      <ImageView style="@style/row_simple_user_heart" />
+      <TextView
+	  android:id="@+id/row_simple_user_like_count"
+	  style="@style/row_simple_user_desc_text" />
+      <ImageView style="@style/row_simple_user_balloon" />
+      <TextView
+	  android:id="@+id/row_simple_user_post_count"
+	  style="@style/row_simple_user_desc_text" />
+    </LinearLayout>
+  </RelativeLayout>
+
+  <!-- ranking point -->
+  <TextView
+      android:id="@+id/row_simple_user_point"
+      android:layout_toLeftOf="@+id/row_simple_user_point_hint"
+      android:layout_centerVertical="true"
+      style="@style/row_simple_user_point" />
+  <TextView
+      android:id="@id/row_simple_user_point_hint"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:text="@string/row_simple_user_point_hint"
+      style="@style/row_simple_user_point_hint" />
+
+  <!-- division bar -->
+  <!-- <ImageView -->
+  <!--     android:layout_alignParentBottom="true" -->
+  <!--     style="@style/row_simple_user_divider" /> -->
+</RelativeLayout>

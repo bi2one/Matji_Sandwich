@@ -25,7 +25,7 @@ public abstract class ImageListView extends RequestableMListView implements View
 
 	protected int imageCount;
 	
-	private static final int LIMIT = 5;
+	private static final int LIMIT = 6;
 
 	/**
 	 * 헤더에 추가될 텍스트.
@@ -56,7 +56,7 @@ public abstract class ImageListView extends RequestableMListView implements View
 		totalImageCount.setText(getTotalImageCountText());
 		totalImageCount.setTextColor(MatjiConstants.color(R.color.matji_chocolate));
 //		totalImageCount.setTextSize(MatjiConstants.dimen(R.dimen.text_large));
-		// TODO 이상하게 파라미터로 픽셀이 아니라 DIP로 받는 것 같네요...
+		// TODO 이상하게 파라미터로 픽셀이 아니라 DIP로 받는 것 같네...?
 		totalImageCount.setTextSize(17);
 		int padding = (int) MatjiConstants.dimen(R.dimen.default_distance);
 		totalImageCount.setPadding(padding, padding*2, padding, 0);

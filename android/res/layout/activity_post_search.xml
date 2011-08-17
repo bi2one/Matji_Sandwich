@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="@drawable/pattern_bg"
 	style="@style/DefaultFill">
-	<com.matji.sandwich.widget.PostSearchListView
+	<com.matji.sandwich.widget.search.PostSearchListView
 		style="@style/DefaultFill"
 		android:id="@+id/PostSearchListView" />
 </LinearLayout>

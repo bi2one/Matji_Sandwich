@@ -8,7 +8,8 @@
 	android:orientation="vertical">
 
 	<!-- Main Title -->
-	<com.matji.sandwich.widget.title.MainTitle
+	<com.matji.sandwich.widget.title.UserTitle
+		android:id="@id/Titlebar"
 		style="@style/DefaultWrap" />
 		
 	<!-- User Tab -->

@@ -1,8 +1,9 @@
-package com.matji.sandwich.widget;
+package com.matji.sandwich.widget.search;
 
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.UserHttpRequest;
-import com.matji.sandwich.widget.SearchInputBar.Searchable;
+import com.matji.sandwich.widget.SimpleUserListView;
+import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -14,7 +15,13 @@ public class UserSearchListView extends SimpleUserListView implements Searchable
 	
 	public UserSearchListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		userRequest = new UserHttpRequest(context);
+	}
+	
+	@Override
+	protected void init() {
+	    super.init();
+        userRequest = new UserHttpRequest(getContext());
+        addHeaderView(new SearchHighlightHeader(getContext()));
 	}
 	
 	public HttpRequest request() {

@@ -21,14 +21,14 @@ public class SimpleUserAdapter extends MBaseAdapter {
 
         if (convertView == null) {
             rankingElement = new RankingElement();
-            convertView = getLayoutInflater().inflate(R.layout.adapter_ranking, null);
+            convertView = getLayoutInflater().inflate(R.layout.row_simple_user, null);
 
-            rankingElement.position = (TextView) convertView.findViewById(R.id.adapter_ranking_position);
-            rankingElement.profile = (ProfileImageView) convertView.findViewById(R.id.adapter_ranking_profile);
-            rankingElement.nickname = (TextView) convertView.findViewById(R.id.adapter_ranking_nickname);
-            rankingElement.likeCount = (TextView) convertView.findViewById(R.id.adapter_ranking_like_count);
-            rankingElement.postCount = (TextView) convertView.findViewById(R.id.adapter_ranking_post_count);
-            rankingElement.point = (TextView) convertView.findViewById(R.id.adapter_ranking_point);
+            rankingElement.position = (TextView) convertView.findViewById(R.id.row_simple_user_position);
+            rankingElement.profile = (ProfileImageView) convertView.findViewById(R.id.row_simple_user_profile);
+            rankingElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
+            rankingElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
+            rankingElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_user_post_count);
+            rankingElement.point = (TextView) convertView.findViewById(R.id.row_simple_user_point);
 
             convertView.setTag(rankingElement);
         } else {

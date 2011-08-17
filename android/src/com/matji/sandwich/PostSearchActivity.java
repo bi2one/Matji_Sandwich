@@ -1,8 +1,8 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.widget.PostSearchListView;
-import com.matji.sandwich.widget.SearchInputBar.Searchable;
+import com.matji.sandwich.widget.search.PostSearchListView;
+import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 
 import android.os.Bundle;
 

@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.search.SearchInputBar;
 
 import android.content.Context;
 import android.util.AttributeSet;

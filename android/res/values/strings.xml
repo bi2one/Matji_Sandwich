@@ -152,7 +152,7 @@
   <string name="cell_user_point">Point</string>
   <string name="cell_user_area">Area</string>
   <string name="cell_user_follow">Follow</string>
-  <string name="cell_user_unfollow">unFollow</string>
+  <string name="cell_user_unfollow">Unfollow</string>
   
   
   <!-- StoreMainActivity  -->
@@ -292,6 +292,15 @@
   <string name="ranking_tab_country">전국</string>
   <string name="ranking_tab_all">전체</string>
 
-  <!-- adapter_ranking.xml -->
-  <string name="adapter_ranking_point_hint">P</string>
+  <!-- row_simple_user.xml -->
+  <string name="row_simple_user_point_hint">P</string>
+  
+  <!-- Search Highlight Header-->
+  <string name="search_highlight">검색결과</string>
+  
+  <!-- Highlight Header -->
+  <string name="highlight_store_like_users">맛집을 좋아하는 사람들</string>
+  <string name="highlight_post_like_users">이 이야기를 좋아하는 사람들</string>
+  <string name="highlight_store_food_like_users">메뉴를 좋아하는 사람들</string>
+  <string name="highlight_like_stores">님이 좋아하는 맛집들</string>
 </resources>

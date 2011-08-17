@@ -37,7 +37,7 @@
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:orientation="vertical">
-			<com.matji.sandwich.widget.StoreSearchListView
+			<com.matji.sandwich.widget.search.StoreSearchListView
 				android:id="@+id/ListView1"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"

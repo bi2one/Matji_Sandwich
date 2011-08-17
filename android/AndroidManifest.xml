@@ -28,6 +28,8 @@
 				  android:windowSoftInputMode="stateHidden"></activity>
 		<activity android:name="LoginActivity"
 				  android:launchMode="singleTask"></activity>
+		<activity android:name="LikeStoreListActivity"></activity>
+		<activity android:name="LikeUserListActivity"></activity>
 		<activity android:name="MainMapActivity"></activity>
 		<activity android:name="NoticeActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
@@ -65,7 +67,8 @@
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="UserMainActivity"></activity>
 		<activity android:name="UserStoreListActivity"></activity>
-		<activity android:name="UserSearchActivity"></activity>		
+		<activity android:name="UserSearchActivity"
+				  android:theme="@style/Theme.NoBackground"></activity>		
 		<activity android:name="UserImageListActivity"></activity>
 		<activity android:name="UserPostListActivity"></activity>
 		<activity android:name="UserProfileActivity"></activity>

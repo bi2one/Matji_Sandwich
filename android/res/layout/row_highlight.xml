@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/highlight_bg">
+	<TextView
+		android:id="@+id/row_highlight_title"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="99"
+		android:singleLine="true"
+		android:textColor="@color/matji_white" />
+	<TextView
+		android:id="@+id/row_highlight_count"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:textColor="@color/matji_white"
+		android:visibility="gone" />
+</LinearLayout>

@@ -1,8 +1,8 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.widget.SearchInputBar.Searchable;
-import com.matji.sandwich.widget.UserSearchListView;
+import com.matji.sandwich.widget.search.UserSearchListView;
+import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 
 import android.os.Bundle;
 
@@ -18,7 +18,7 @@ public class UserSearchActivity extends BaseActivity implements Searchable {
 	protected void init() {
 		super.init();
 		setContentView(R.layout.activity_user_search);
-
+		
 		searchView = (UserSearchListView) findViewById(R.id.UserSearchListView);
 		searchView.setActivity(this);
 	}
