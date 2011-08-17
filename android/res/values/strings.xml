@@ -294,4 +294,8 @@
 
   <!-- adapter_ranking.xml -->
   <string name="adapter_ranking_point_hint">P</string>
+
+  <!-- dialog action buttons -->
+  <string name="dialog_action_button_write_post">이야기 쓰기</string>
+  <string name="dialog_action_button_write_store">맛집 발견하기</string>
 </resources>

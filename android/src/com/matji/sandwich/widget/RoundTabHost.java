@@ -15,6 +15,11 @@ import com.matji.sandwich.widget.indicator.Indicator;
 import com.matji.sandwich.widget.indicator.RoundLeftIndicator;
 import com.matji.sandwich.widget.indicator.RoundCenterIndicator;
 import com.matji.sandwich.widget.indicator.RoundRightIndicator;
+import com.matji.sandwich.widget.indicator.RoundLeftCheckIndicator;
+import com.matji.sandwich.widget.indicator.RoundCenterCheckIndicator;
+import com.matji.sandwich.widget.indicator.RoundRightCheckIndicator;
+
+import java.util.HashMap;
 
 public class RoundTabHost extends TabHost implements OnTabChangeListener {
     private static final long ANIMATION_DURATION = 300;
@@ -22,7 +27,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
     private String prevTabId;
     private View prevTabView;
     private boolean isAnimationOn;
-    // private HashMap<String, TabHost.TabSpec> tabSpecPool;
+    private HashMap<String, Indicator> indicatorPool;
 
     /**
      * TabHost기본 생성자
@@ -33,7 +38,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
     public RoundTabHost(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	this.context = context;
-	// tabSpecPool = new HashMap<String, TabHost.TabSpec>();
+	indicatorPool = new HashMap<String, Indicator>();
 	
 	setOnTabChangedListener(this);
 	setAnimationable(false);
@@ -77,6 +82,39 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
     }
 
     /**
+     * TabHost의 왼쪽 TabSpec을 추가한다.
+     *
+     * @param specLabel 추가할 TabSpec의 label
+     * @param textRef 추가할 TabSpec에 들어갈 문자열의 참조 id
+     * @param content 추가할 TabSpec이 가질 Intent
+     */
+    public void addLeftCheckTab(String specLabel, int textRef, Intent content) {
+	addTab(new RoundLeftCheckIndicator(context, textRef), specLabel, content);
+    }
+
+    /**
+     * TabHost의 가운데 TabSpec을 추가한다.
+     *
+     * @param specLabel 추가할 TabSpec의 label
+     * @param textRef 추가할 TabSpec에 들어갈 문자열의 참조 id
+     * @param content 추가할 TabSpec이 가질 Intent
+     */
+    public void addCenterCheckTab(String specLabel, int textRef, Intent content) {
+	addTab(new RoundCenterCheckIndicator(context, textRef), specLabel, content);
+    }
+
+    /**
+     * TabHost의 오른쪽 TabSpec을 추가한다.
+     *
+     * @param specLabel 추가할 TabSpec의 label
+     * @param textRef 추가할 TabSpec에 들어갈 문자열의 참조 id
+     * @param content 추가할 TabSpec이 가질 Intent
+     */
+    public void addRightCheckTab(String specLabel, int textRef, Intent content) {
+	addTab(new RoundRightCheckIndicator(context, textRef), specLabel, content);
+    }
+
+    /**
      * TabHost에 TabSpec을 추가한다.
      *
      * @param indicator TabSpec의 모양을 명시하는 Indicator
@@ -85,13 +123,16 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      */
     public void addTab(Indicator indicator, String specLabel, Intent content) {
 	TabHost.TabSpec spec = newTabSpec(specLabel);
+	indicatorPool.put(specLabel, indicator);
 	spec.setIndicator(indicator);
 	spec.setContent(content);
-	// tabSpecPool.add(specLabel, spec);
 	addTab(spec);
     }
 
-    
+    public void clearAllTabs() {
+	super.clearAllTabs();
+	indicatorPool.clear();
+    }
 
     /**
      * 오른쪽에서 나타나는 애니메이션

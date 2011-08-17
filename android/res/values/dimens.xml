@@ -47,4 +47,12 @@
 
 	<!-- corner buttons size -->
 	<dimen name="round_btn_radius">9dp</dimen>
+
+	<!-- matji dialog corner size -->
+	<dimen name="dialog_matji_radius">12dp</dimen>
+
+	<!-- matji dialog size -->
+	<dimen name="dialog_button_width">246dp</dimen>
+	<dimen name="dialog_button_height">43.33dp</dimen>
+	<dimen name="dialog_button_margin_bottom">4dp</dimen>
 </resources>

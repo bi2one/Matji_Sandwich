@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <shape>
+      <solid android:color="@color/matji_light_pink" />
+      <stroke android:width="3dp"
+	      android:color="@color/matji_light_orange" />
+      <corners android:radius="@dimen/dialog_matji_radius" />
+    </shape>
+  </item>
+</selector>
