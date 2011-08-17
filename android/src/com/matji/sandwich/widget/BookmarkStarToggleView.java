@@ -94,8 +94,9 @@ public class BookmarkStarToggleView extends LinearLayout implements OnClickListe
     	if (isUnchecked) {
 	    if (session.isLogin()) {
 		bookmarkedList.add(store);
-		adapter.notifyDataSetChanged();
+		// adapter.notifyDataSetChanged();
 		requestBookmark(store);
+		showCheckedView();
 		isUnchecked = false;
 		// Log.d("=====", "isUnchecked2: " + isUnchecked);
 	    } else {
@@ -103,8 +104,9 @@ public class BookmarkStarToggleView extends LinearLayout implements OnClickListe
 	    }
     	} else {
 	    removeBookmarkedList(store);
-	    adapter.notifyDataSetChanged();
+	    // adapter.notifyDataSetChanged();
 	    requestUnBookmark(store);
+	    showUncheckedView();
 	    isUnchecked = true;
     	}
     }

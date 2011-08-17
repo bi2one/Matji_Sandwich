@@ -86,7 +86,6 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
 	    result.putExtra(INTENT_KEY_LONGITUDE, addrLng);
 	    result.putExtra(INTENT_KEY_LOCATION_NAME, lastSearchSeed);
 	    setResult(Activity.RESULT_OK, result);
-	    Log.d("=====", "before finish");
 	    finish();
 	}
     }

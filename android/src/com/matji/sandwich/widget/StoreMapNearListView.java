@@ -145,10 +145,10 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
     }
 
     public void onListItemClick(int position) {
-	activity.setIsFlow(true);
-	Store store = (Store) getAdapterData().get(position);
-	Intent intent = new Intent(getActivity(), StoreMainActivity.class);
-	intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-	getActivity().startActivity(intent);
+    	// activity.setIsFlow(true);
+    	// Store store = (Store) getAdapterData().get(position);
+    	// Intent intent = new Intent(getActivity(), StoreMainActivity.class);
+    	// intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
+    	// getActivity().startActivity(intent);
     }
 }

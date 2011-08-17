@@ -73,7 +73,7 @@ public class NearBookmarkStoreRequest implements RequestCommand {
 
 	    storeRequest.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, page, limit);
 	    storeList = storeRequest.request();
-	    resultList.addAll(bookmarkList);
+	    // resultList.addAll(bookmarkList);
 	    resultList.addAll(storeList);
 
 	    // Log.d("=====", "bookmarklist: " + bookmarkList.size());
