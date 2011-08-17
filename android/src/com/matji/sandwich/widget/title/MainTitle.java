@@ -1,6 +1,6 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.widget.title.button.ActivityButton;
+import com.matji.sandwich.widget.title.button.StorePostWriteButton;
 import com.matji.sandwich.widget.title.button.SearchButton;
 import com.matji.sandwich.widget.title.button.SettingsButton;
 
@@ -23,7 +23,7 @@ public class MainTitle extends TitleContainerTypeB {
 	@Override
 	protected void setButtons() {
 		rightButton1 = new SearchButton(getContext());
-		rightButton2 = new ActivityButton(getContext());
+		rightButton2 = new StorePostWriteButton(getContext());
 		rightButton3 = new SettingsButton(getContext());
 	}
 }

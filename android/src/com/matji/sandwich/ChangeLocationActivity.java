@@ -28,6 +28,8 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
     public static final String INTENT_KEY_LATITUDE = "ChangeLocationActivity.intent_key_latitude";
     public static final String INTENT_KEY_LONGITUDE = "ChangeLocationActivity.intent_key_longitude";
     public static final String INTENT_KEY_LOCATION_NAME = "ChangeLocationActivity.intent_key_location_name";
+    public static final int BASIC_SEARCH_LOC_LAT = 0;
+    public static final int BASIC_SEARCH_LOC_LNG = 0;
     private static final int REQUEST_GEOCODING = 1;
     private Context context;
     private EditText locationInput;
@@ -84,7 +86,6 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
 	    result.putExtra(INTENT_KEY_LONGITUDE, addrLng);
 	    result.putExtra(INTENT_KEY_LOCATION_NAME, lastSearchSeed);
 	    setResult(Activity.RESULT_OK, result);
-	    Log.d("=====", "before finish");
 	    finish();
 	}
     }

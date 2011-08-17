@@ -5,31 +5,71 @@ import com.matji.sandwich.http.parser.UserParser;
 import android.content.Context;
 
 public class UserHttpRequest extends HttpRequest {
-	public UserHttpRequest(Context context) {
-		super(context);
-		controller = "users";
-	}
+    public UserHttpRequest(Context context) {
+	super(context);
+	controller = "users";
+    }
 
-	public void actionList(int page, int limit){
-		httpMethod = HttpMethod.HTTP_GET;
-		action = "list";
-		parser = new UserParser(context);
+    public void actionList(int page, int limit){
+	httpMethod = HttpMethod.HTTP_GET;
+	action = "list";
+	parser = new UserParser(context);
 
-		getHashtable.clear();
-		getHashtable.put("page", page+"");
-		getHashtable.put("limit", limit+"");
-		getHashtable.put("include", "stores,attach_files,user_mileage"); 
-	}
+	getHashtable.clear();
+	getHashtable.put("page", page+"");
+	getHashtable.put("limit", limit+"");
+	getHashtable.put("include", "stores,attach_files,user_mileage"); 
+    }
 
-	public void actionShow(int user_id){
-		httpMethod = HttpMethod.HTTP_GET;
-		action = "show";
-		parser = new UserParser(context);
+    public void actionShow(int user_id){
+	httpMethod = HttpMethod.HTTP_GET;
+	action = "show";
+	parser = new UserParser(context);
 
-		getHashtable.clear();
-		getHashtable.put("user_id", user_id + "");
-		getHashtable.put("include", "stores,attach_files,user_mileage");
-	}
+	getHashtable.clear();
+	getHashtable.put("user_id", user_id + "");
+	getHashtable.put("include", "stores,attach_files,user_mileage");
+    }
+
+    public void actionRankingList(int page, int limit) {
+	httpMethod = HttpMethod.HTTP_GET;
+	action = "list";
+	parser = new UserParser(context);
+
+	getHashtable.clear();
+	getHashtable.put("page", page + "");
+	getHashtable.put("limit", limit + "");
+	getHashtable.put("join", "user_mileage");
+	getHashtable.put("order", "user_mileages.total_point desc");
+	getHashtable.put("include", "user_mileage");
+    }
+
+    public void actionNearByRankingList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit) {
+	httpMethod = HttpMethod.HTTP_GET;
+	action = "nearby_ranking_list";
+	parser = new UserParser(context);
+
+	getHashtable.clear();
+	getHashtable.put("lat_ne", lat_ne + "");
+	getHashtable.put("lat_sw", lat_sw + "");
+	getHashtable.put("lng_ne", lng_ne + "");
+	getHashtable.put("lng_sw", lng_sw + "");
+	getHashtable.put("page", page + "");
+	getHashtable.put("limit", limit + "");
+	getHashtable.put("include", "user_mileage");
+    }
+
+    public void actionStoreLikeList(int store_id, int page, int limit) {
+	httpMethod = HttpMethod.HTTP_GET;
+	action = "like_list";
+	parser = new UserParser(context);
+
+	getHashtable.clear();		
+	getHashtable.put("store_id", store_id+"");
+	getHashtable.put("page", page+"");
+	getHashtable.put("limit", limit+"");
+	getHashtable.put("include", "stores,attach_files,user_mileage"); 
+    }
 	
     public void actionSearch(String keyword, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
@@ -42,80 +82,48 @@ public class UserHttpRequest extends HttpRequest {
         getHashtable.put("limit", limit + ""); 
         getHashtable.put("include", "stores,attach_files,user_mileage");
     }
-    	
-	public void actionRankingList() {
-		httpMethod = HttpMethod.HTTP_GET;
-		action = "ranking_list";
-		parser = new UserParser(context);
-
-		getHashtable.clear();
-	}
-
-	public void actionNearByRankingList(double lat_sw, double lat_ne, double lng_sw, double lng_ne) {
-		httpMethod = HttpMethod.HTTP_GET;
-		action = "nearby_ranking_list";
-		parser = new UserParser(context);
-
-		getHashtable.clear();
-		getHashtable.put("lat_ne", lat_ne + "");
-		getHashtable.put("lat_sw", lat_sw + "");
-		getHashtable.put("lng_ne", lng_ne + "");
-		getHashtable.put("lng_sw", lng_sw + "");
-	}
-
-	public void actionStoreLikeList(int store_id, int page, int limit) {
-		httpMethod = HttpMethod.HTTP_GET;
-		action = "like_list";
-		parser = new UserParser(context);
-
-		getHashtable.clear();		
-		getHashtable.put("store_id", store_id+"");
-		getHashtable.put("page", page+"");
-		getHashtable.put("limit", limit+"");
-		getHashtable.put("include", "stores,attach_files,user_mileage"); 
-	}
 	
-	public void actionStoreFoodLikeList(int store_food_id, int page, int limit) {
-		httpMethod = HttpMethod.HTTP_GET;
-		action = "like_list";
-		parser = new UserParser(context);
+    public void actionStoreFoodLikeList(int store_food_id, int page, int limit) {
+	httpMethod = HttpMethod.HTTP_GET;
+	action = "like_list";
+	parser = new UserParser(context);
 
-		getHashtable.clear();		
-		getHashtable.put("store_food_id", store_food_id+"");
-		getHashtable.put("page", page+"");
-		getHashtable.put("limit", limit+"");
-		getHashtable.put("include", "stores,attach_files,user_mileage"); 
-	}
+	getHashtable.clear();		
+	getHashtable.put("store_food_id", store_food_id+"");
+	getHashtable.put("page", page+"");
+	getHashtable.put("limit", limit+"");
+	getHashtable.put("include", "stores,attach_files,user_mileage"); 
+    }
 	
-	public void actionPostLikeList(int post_id, int page, int limit) {
-		httpMethod = HttpMethod.HTTP_GET;
-		action = "like_list";
-		parser = new UserParser(context);
+    public void actionPostLikeList(int post_id, int page, int limit) {
+	httpMethod = HttpMethod.HTTP_GET;
+	action = "like_list";
+	parser = new UserParser(context);
 
-		getHashtable.clear();		
-		getHashtable.put("post_id", post_id+"");
-		getHashtable.put("page", page+"");
-		getHashtable.put("limit", limit+"");
-		getHashtable.put("include", "stores,attach_files,user_mileage"); 
-	}
+	getHashtable.clear();
+	getHashtable.put("post_id", post_id+"");
+	getHashtable.put("page", page+"");
+	getHashtable.put("limit", limit+"");
+	getHashtable.put("include", "stores,attach_files,user_mileage"); 
+    }
 	
-	public void actionMe() {
+    public void actionMe() {
 
-	}
+    }
 
-	public void actionAuthorize() {
+    public void actionAuthorize() {
 
-	}
+    }
 
-	public void actionCreate() {
+    public void actionCreate() {
 
-	}
+    }
 
-	public void actionProfile() {
+    public void actionProfile() {
 
-	}
+    }
 
-	public void actionUpdate(){
+    public void actionUpdate(){
 
-	}
+    }
 }

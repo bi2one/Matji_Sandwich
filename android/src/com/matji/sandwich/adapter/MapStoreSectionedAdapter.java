@@ -14,6 +14,7 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
 import com.matji.sandwich.http.request.NearBookmarkStoreRequest;
+import com.matji.sandwich.adapter.listener.StoreClickListener;
 
 import java.util.ArrayList;
 
@@ -82,6 +83,7 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
 	    storeElement.likeCount = (TextView) convertView.findViewById(R.id.adapter_near_store_like_count);
 	    storeElement.postCount = (TextView) convertView.findViewById(R.id.adapter_near_store_post_count);
 	    storeElement.bookmarkToggle = (BookmarkStarToggleView) convertView.findViewById(R.id.adapter_near_store_bookmark);
+	    storeElement.listener = new StoreClickListener(context);
 
 	    convertView.setTag(storeElement);
 	} else {
@@ -92,18 +94,19 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
 	storeElement.likeCount.setText("" + store.getLikeCount());
 	storeElement.postCount.setText("" + store.getPostCount());
 	storeElement.bookmarkToggle.init(this, bookmarkedList, store);
+	storeElement.listener.setStore(store);
+	convertView.setOnClickListener(storeElement.listener);
 
 	return convertView;
     }
 
     public String putSectionName(int position) {
-	if (position >= nearByStoreIndex) {
-	    return SECTION_STORE;
-	} else {
-	    return SECTION_BOOKMARK_STORE;
-	}
+	// if (position >= nearByStoreIndex) {
+	return SECTION_STORE;
+	// } else {
+	//     return SECTION_BOOKMARK_STORE;
+	// }
     }
-
 
     private class StoreSectionElement {
 	TextView subject;
@@ -114,5 +117,6 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
 	TextView likeCount;
 	TextView postCount;
 	BookmarkStarToggleView bookmarkToggle;
+	StoreClickListener listener;
     }
 }

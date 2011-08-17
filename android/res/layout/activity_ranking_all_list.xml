@@ -4,10 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
-  
-  <include layout="@layout/location_title_bar" />
-  
-  <com.matji.sandwich.widget.RankingNearListView
+  <com.matji.sandwich.widget.RankingAllListView
       style="@style/DefaultFill"
-      android:id="@+id/ranking_near_list_view" />
+      android:id="@+id/ranking_all_list_view" />
 </LinearLayout>

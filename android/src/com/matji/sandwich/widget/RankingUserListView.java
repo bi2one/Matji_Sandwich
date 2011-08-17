@@ -31,7 +31,7 @@ public class RankingUserListView extends UserListView {
     }
 	
     public HttpRequest request() {
-	request.actionNearByRankingList(lat_sw, lat_ne, lng_sw, lng_ne);
+	request.actionNearByRankingList(lat_sw, lat_ne, lng_sw, lng_ne, 1, 10);
 	return request;
     }
 

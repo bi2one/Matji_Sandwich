@@ -20,6 +20,7 @@
 	  android:onClick="onChangeLocationClicked"
 	  android:id="@+id/location_title_bar_address" />
       <ImageView
+	  android:id="@+id/location_title_bar_address_arrow"
 	  style="@style/location_title_bar_changeLocationArrow"
 	  android:layout_alignParentRight="true"
 	  android:layout_centerVertical="true"

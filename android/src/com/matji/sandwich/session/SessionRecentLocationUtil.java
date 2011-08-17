@@ -53,6 +53,7 @@ public class SessionRecentLocationUtil {
 
     private LinkedList<LocationSearchToken> getRecentQueue() {
 	LinkedList<LocationSearchToken> queue = (LinkedList<LocationSearchToken>)preferenceProvider.getObject(SessionIndex.RECENT_CHANGED_LOCATION);
+	
 	if (queue == null) {
 	    return new LinkedList<LocationSearchToken>();
 	} else {
@@ -63,6 +64,7 @@ public class SessionRecentLocationUtil {
     private void saveRecentQueue(LinkedList<LocationSearchToken> queue) {
 	try {
 	    preferenceProvider.setObject(SessionIndex.RECENT_CHANGED_LOCATION, queue);
+	    preferenceProvider.commit();
 	} catch(NotSerializableException e) {
 	    Log.d("Matji", "SessionRecentLocationUtil: not serializable exception");
 	    e.printStackTrace();
