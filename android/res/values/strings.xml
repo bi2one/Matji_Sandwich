@@ -114,6 +114,7 @@
   <string name="default_string_today">Today</string>
   <string name="default_string_cancel">취소</string>
   <string name="default_string_user">사람</string>
+  <string name="default_string_picture">사진</string>
   
   <!-- Writing content -->
   <string name="writing_content_post">메모를 입력하세요.</string>
@@ -310,4 +311,7 @@
   <!-- dialog action buttons -->
   <string name="dialog_action_button_write_post">이야기 쓰기</string>
   <string name="dialog_action_button_write_store">맛집 발견하기</string>
+
+  <!-- activity_write_post_store.xml -->
+  <string name="activity_write_post_store_select">맛집을 선택해주세요.</string>
 </resources>

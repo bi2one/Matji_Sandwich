@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/TitleContainer">
+  <LinearLayout
+      android:id="@+id/title_container_left"
+      style="@style/TitleContainerItem"
+      android:layout_alignParentLeft="true" />
+  <LinearLayout
+      android:id="@+id/title_container_title"
+      style="@style/TitleContainerItem"
+      android:layout_toRightOf="@id/title_container_left">
+    <TextView
+	android:id="@+id/title_container_text"
+	style="@style/TitleText"
+	android:shadowColor="@color/title_shadow_color"
+	android:shadowRadius="0.5"
+	android:shadowDy="1.3"
+	android:shadowDx="0.5" />
+  </LinearLayout>
+  <LinearLayout
+      android:id="@+id/title_container_right"
+      style="@style/TitleContainerItem"
+      android:layout_alignParentRight="true" />
+</RelativeLayout>

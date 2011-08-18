@@ -56,6 +56,17 @@
   <style name="DefaultBackgroundFill" parent="DefaultFill">
    	<item name="android:background">@drawable/pattern_bg</item>
   </style>
+
+  <style name="DefaultMinorTitleBar" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/locationsbar_bg</item>
+    <item name="android:layout_height">@dimen/minor_title_height</item>
+    <item name="android:padding">0dp</item>
+  </style>
+
+  <style name="DefaultMinorTitleBarDivider" parent="DefaultHeightFill">
+    <item name="android:src">@drawable/locationsbar_line</item>
+    <item name="android:layout_width">@dimen/minor_title_divider_width</item>
+  </style>
   
   <style name="SubTitle" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_chocolate</item>
@@ -873,5 +884,45 @@
   </style>    
 
   <style name="dialog_matji_cancel" parent="dialog_matji_action_button">
+  </style>
+
+  <!-- activity_write_post.xml -->
+  <style name="activity_write_post" parent="DefaultFill">
+    <item name="android:background">@color/matji_light_pink</item>
+    <item name="android:padding">10dp</item>
+  </style>
+
+  <style name="activity_write_post_text" parent="DefaultFill">
+    <item name="android:gravity">top</item>
+  </style>
+
+  <!-- row_write_post_store.xml -->
+  <style name="row_write_post_store" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/btn_white_to_lightpink</item>
+  </style>
+
+  <!-- activity_write_post_store.xml -->
+  <style name="activity_write_post_store" parent="DefaultFill">
+    <item name="android:background">@color/WHITE</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="activity_write_post_store_selected" parent="DefaultWidthFill">
+    <item name="android:paddingLeft">@dimen/minor_title_location_padding</item>
+    <item name="android:paddingRight">@dimen/minor_title_location_padding</item>
+    <item name="android:textColor">@color/matji_brown_text</item>
+  </style>
+
+  <style name="activity_write_post_store_imagebutton" parent="DefaultHeightFill">
+    <item name="android:layout_width">@dimen/minor_title_button_width</item>
+    <item name="android:background">@color/invisible</item>
+  </style>
+
+  <style name="activity_write_post_store_search" parent="activity_write_post_store_imagebutton">
+    <item name="android:src">@drawable/icon_navi_search</item>
+  </style>
+  
+  <style name="activity_write_post_store_add" parent="activity_write_post_store_imagebutton">
+    <item name="android:src">@drawable/btn_register_store</item>
   </style>
 </resources>

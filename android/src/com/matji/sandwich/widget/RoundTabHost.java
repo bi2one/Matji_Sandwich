@@ -134,6 +134,10 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
 	indicatorPool.clear();
     }
 
+    public Indicator getIndicator(String specLabel) {
+	return indicatorPool.get(specLabel);
+    }
+
     /**
      * 오른쪽에서 나타나는 애니메이션
      *

@@ -7,10 +7,8 @@ import android.widget.ImageView;
 
 import com.matji.sandwich.R;
 
-public class RoundLeftCheckIndicator extends Indicator {
+public class RoundLeftCheckIndicator extends CheckableIndicator {
     public static final int LAYOUT_REFERENCE = R.layout.indicator_round_left_check;
-    public static final int CHECK_REFERENCE = R.drawable.indicator_check;
-    public static final int UNCHECK_REFERENCE = R.drawable.indicator_uncheck;
     private TextView labelView;
     private ImageView checkView;
 
@@ -28,10 +26,7 @@ public class RoundLeftCheckIndicator extends Indicator {
 	checkView = (ImageView)findViewById(R.id.indicator_round_left_check_image);
     }
 
-    public void setCheck(boolean isCheck) {
-	if (isCheck)
-	    checkView.setImageResource(CHECK_REFERENCE);
-	else
-	    checkView.setImageResource(UNCHECK_REFERENCE);
+    public ImageView getCheckView() {
+	return checkView;
     }
 }

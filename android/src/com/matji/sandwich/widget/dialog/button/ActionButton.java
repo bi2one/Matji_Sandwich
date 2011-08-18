@@ -34,7 +34,6 @@ public abstract class ActionButton extends RelativeLayout implements OnClickList
 	setOnClickListener(this);
 	title = (TextView)findViewById(R.id.dialog_action_button_title);
 	title.setText(setTitle());
-	Log.d("=====", setTitle());
     }
 
     public void onClick(View v) { }
