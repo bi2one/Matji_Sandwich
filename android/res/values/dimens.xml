@@ -55,4 +55,10 @@
 	<dimen name="dialog_button_width">246dp</dimen>
 	<dimen name="dialog_button_height">43.33dp</dimen>
 	<dimen name="dialog_button_margin_bottom">4dp</dimen>
+
+	<!-- minor locaton title size -->
+	<dimen name="minor_title_button_width">39.33dp</dimen>
+	<dimen name="minor_title_divider_width">1.33dp</dimen>
+	<dimen name="minor_title_height">30dp</dimen>
+	<dimen name="minor_title_location_padding">6.67dp</dimen>
 </resources>

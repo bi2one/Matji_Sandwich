@@ -15,4 +15,7 @@ public class SessionIndex {
 
     public static final String TAB_INDEX = "MainTabActivity.tab_index";
     public static final String TAB_SUB_INDEX = "MainTabActivity.tab_sub_index";
+
+    public static final String WRITE_POST_POST = "WritePostTabActivity.post";
+    public static final String WRITE_POST_STORE_ID = "WritePostTabActivity.store_id";
 }

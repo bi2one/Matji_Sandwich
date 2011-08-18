@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/IndicatorRoundRight">
+  <RelativeLayout
+      style="@style/DefaultWrap"
+      android:layout_centerInParent="true">
+    <ImageView
+	android:id="@+id/indicator_round_right_check_image"
+	android:layout_centerVertical="true"
+	android:visibility="visible"
+	style="@style/IndicatorRoundCheck" />
+    <TextView
+	android:id="@+id/indicator_round_right_check_label"
+	android:layout_toRightOf="@id/indicator_round_right_check_image"
+	android:layout_centerVertical="true"
+	style="@style/IndicatorRoundText" />
+  </RelativeLayout>
+</RelativeLayout>

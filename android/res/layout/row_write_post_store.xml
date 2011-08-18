@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/row_write_post_store">
+  <!-- store name -->
+  <TextView
+      android:id="@+id/row_write_post_store_name"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentTop="true"
+      style="@style/DefaultWrap" />
+
+  <!-- store like count -->
+  <TextView
+      android:id="@+id/row_write_post_store_like_count"
+      android:layout_below="@id/row_write_post_store_name"
+      android:layout_alignParentLeft="true"
+      style="@style/DefaultWrap" />
+  
+  <!-- store post count -->
+  <TextView
+      android:id="@+id/row_write_post_store_post_count"
+      android:layout_below="@id/row_write_post_store_like_count"
+      android:layout_alignParentLeft="true"
+      style="@style/DefaultWrap" />
+</RelativeLayout>

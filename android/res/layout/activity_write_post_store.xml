@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	      style="@style/activity_write_post_store" >
+  <RelativeLayout style="@style/DefaultMinorTitleBar">
+    <TextView android:id="@+id/activity_write_post_store_selected"
+	      android:layout_toLeftOf="@+id/activity_write_post_store_divider1"
+	      android:layout_alignParentLeft="true"
+	      android:layout_centerVertical="true"
+	      android:text="@string/activity_write_post_store_select"
+	      style="@style/activity_write_post_store_selected" />
+    <ImageView
+	android:id="@id/activity_write_post_store_divider1"
+	android:layout_toLeftOf="@+id/activity_write_post_store_search"
+	style="@style/DefaultMinorTitleBarDivider" />
+    <ImageButton
+	android:id="@+id/activity_write_post_store_search"
+	android:layout_toLeftOf="@+id/activity_write_post_store_divider2"
+	style="@style/activity_write_post_store_search" />
+    <ImageView
+	android:id="@id/activity_write_post_store_divider2"
+	android:layout_toLeftOf="@+id/activity_write_post_store_add"
+	style="@style/DefaultMinorTitleBarDivider" />
+    <ImageButton
+	android:id="@id/activity_write_post_store_add"
+	android:layout_alignParentRight="true"
+	style="@style/activity_write_post_store_add" />
+  </RelativeLayout>
+  
+  <com.matji.sandwich.widget.WritePostStoreListView
+      android:id="@+id/activity_write_post_store_listview"
+      style="@style/DefaultFill" />
+</LinearLayout>

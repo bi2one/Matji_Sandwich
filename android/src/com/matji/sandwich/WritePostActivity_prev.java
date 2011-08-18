@@ -83,7 +83,7 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 		mContext = getApplicationContext();
 		storeId = getIntent().getIntExtra("store_id", STORE_ID_IS_NULL);
 		
-		setContentView(R.layout.activity_write_post);
+		setContentView(R.layout.activity_write_post_prev);
 
 		mapView = (MapView) findViewById(R.id.post_user_map);
 		postField = (EditText) findViewById(R.id.post_field);

@@ -7,10 +7,8 @@ import android.widget.ImageView;
 
 import com.matji.sandwich.R;
 
-public class RoundCenterCheckIndicator extends Indicator {
-    public static final int LAYOUT_REFERENCE = R.layout.indicator_round_left_check;
-    public static final int CHECK_REFERENCE = R.drawable.indicator_check;
-    public static final int UNCHECK_REFERENCE = R.drawable.indicator_uncheck;
+public class RoundCenterCheckIndicator extends CheckableIndicator {
+    public static final int LAYOUT_REFERENCE = R.layout.indicator_round_center_check;
     private TextView labelView;
     private ImageView checkView;
 
@@ -23,15 +21,12 @@ public class RoundCenterCheckIndicator extends Indicator {
     public RoundCenterCheckIndicator(Context context, int textRef) {
 	super(context, LAYOUT_REFERENCE);
 
-	labelView = (TextView)findViewById(R.id.indicator_round_left_check_label);
+	labelView = (TextView)findViewById(R.id.indicator_round_center_check_label);
 	labelView.setText(textRef);
-	checkView = (ImageView)findViewById(R.id.indicator_round_left_check_image);
+	checkView = (ImageView)findViewById(R.id.indicator_round_center_check_image);
     }
 
-    public void setCheck(boolean isCheck) {
-	if (isCheck)
-	    checkView.setBackgroundResource(CHECK_REFERENCE);
-	else
-	    checkView.setBackgroundResource(UNCHECK_REFERENCE);
+    public ImageView getCheckView() {
+	return checkView;
     }
 }
