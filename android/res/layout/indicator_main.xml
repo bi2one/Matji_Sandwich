@@ -5,7 +5,7 @@
       android:id="@+id/indicator_main_icon"
       android:layout_centerHorizontal="true"
       style="@style/IndicatorMainIcon" />
-  <TextView
+  <com.matji.sandwich.widget.indicator.MainIndicatorTextView
       android:id="@+id/indicator_main_label"
       android:layout_centerHorizontal="true"
       android:layout_below="@id/indicator_main_icon"

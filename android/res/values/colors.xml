@@ -58,4 +58,14 @@
 	<color name="tag_color3">#ffaa55</color>
 	<color name="tag_color4">#ff5500</color>
 	<color name="tag_color5">#ff1100</color>
+	
+	<!-- Title Container -->
+	<color name="title_container_title">#543100</color>
+	<color name="title_container_title_shadow">#fff1be</color>
+	
+	<!-- Tabbar -->
+	<color name="tabbar_text">#c5c5c5</color>
+	<color name="tabbar_text_shadow">#000000</color>
+	<color name="tabbar_text_touch">#e42402</color>
+	<color name="tabbar_text_touch_shadow">#fff5d1</color>
 </resources>

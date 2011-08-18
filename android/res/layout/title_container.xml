@@ -10,13 +10,20 @@
 		android:id="@+id/title_container_title"
 		style="@style/TitleContainerItem"
 		android:layout_toRightOf="@id/title_container_left">
+		<ImageView
+			android:id="@+id/title_container_title_line"
+			android:layout_width="wrap_content"
+			android:layout_height="@dimen/title_container_height"
+			android:src="@drawable/navigationbar_bg_line"
+			android:visibility="gone" />
 		<TextView
 			android:id="@+id/title_container_text"
 			style="@style/TitleText"
-			android:shadowColor="@color/title_shadow_color"
-			android:shadowRadius="0.5"
-			android:shadowDy="1.3"
-			android:shadowDx="0.5" />
+			android:layout_marginLeft="@dimen/default_distance"
+			android:textColor="@color/title_container_title"
+			android:shadowColor="@color/title_container_title_shadow"
+			android:shadowRadius="1"
+			android:shadowDy="1.5" />
 	</LinearLayout>
 	<LinearLayout
 		android:id="@+id/title_container_right"

@@ -1,15 +1,16 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.widget.title.button.TitleButton;
-
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.matji.sandwich.R;
+import com.matji.sandwich.widget.title.button.TitleButton;
 
 /**
  * Custom Titlebar Container
@@ -17,11 +18,13 @@ import android.widget.TextView;
  * @author mozziluv
  *
  */
-public class TitleContainer extends RelativeLayout {
+public abstract class TitleContainer extends RelativeLayout {
+    protected abstract boolean isExistLeftButton();
+    
 	private LinearLayout leftContainer;
 	private LinearLayout rightContainer;
 	private TextView titleContainer;
-
+	
 	public TitleContainer(Context context) {
 		super(context);
 		init();
@@ -43,15 +46,21 @@ public class TitleContainer extends RelativeLayout {
 		leftContainer = (LinearLayout) findViewById(R.id.title_container_left);
 		rightContainer = (LinearLayout) findViewById(R.id.title_container_right);
 		titleContainer = (TextView) findViewById(R.id.title_container_text);
+		if (isExistLeftButton()) ((ImageView) findViewById(R.id.title_container_title_line)).setVisibility(View.VISIBLE);
 	}
 
 	/**
 	 * 오른쪽 끝에 버튼을 추가한다.
+	 * line도 함께 추가해준다.
 	 * 
 	 * @param resourceId Drawable image 의 resource id
 	 * @param listener Button 을 클릭 했을 때 이벤트를 처리할 OnClickListener
 	 */
 	protected final void addRightButton(TitleButton button) {
+	    ImageView line = new ImageView(getContext());
+        line.setPadding(0, 0, 0, 0);
+        line.setImageResource(R.drawable.navigationbar_bg_line);
+	    rightContainer.addView(line);
 		rightContainer.addView(button);
 	}
 
@@ -81,15 +90,6 @@ public class TitleContainer extends RelativeLayout {
 	 */
 	public void setTitle(int titleRes) {
 		titleContainer.setText(titleRes);
-	}
-
-	/**
-	 * 타이틀의 Background 를 지정한다.
-	 * 
-	 * @param bg 타이틀의 Background 로 사용 할 Drawable 이미지
-	 */
-	protected void setTitleBackground(Drawable bg) {
-		titleContainer.setBackgroundDrawable(bg);
 	}
 
 	/**

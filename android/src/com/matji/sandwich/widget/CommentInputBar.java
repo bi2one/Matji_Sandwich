@@ -6,7 +6,9 @@ import com.matji.sandwich.util.MatjiConstants;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 /**
  * {@link PostActivity}에서 사용하는 InputBar.
@@ -16,7 +18,6 @@ import android.widget.ImageButton;
  */
 public class CommentInputBar extends InputBar {
 	private ImageButton likeButton;
-	public static final int LIKE_BUTTON = 1010;
 
 	public CommentInputBar(Context context, AttributeSet attr) {
 		super(context, attr);
@@ -26,10 +27,18 @@ public class CommentInputBar extends InputBar {
 	protected void init() {
 		super.init();
 		likeButton = new ImageButton(getContext());
-		likeButton.setImageDrawable(MatjiConstants.drawable(R.drawable.like_btn));
-		likeButton.setTag(new Integer(LIKE_BUTTON));
+		likeButton.setImageDrawable(MatjiConstants.drawable(R.drawable.icon_tabbtn_likehand));
+		likeButton.setBackgroundResource(R.drawable.btn_likehand_bg);
+		LinearLayout.LayoutParams params = 
+		    new LinearLayout.LayoutParams(
+		            (int) MatjiConstants.dimen(R.dimen.likehand_btn_width),
+		            (int) MatjiConstants.dimen(R.dimen.input_bar_item_height));
+		params.setMargins((int) MatjiConstants.dimen(R.dimen.default_distance), 0, 0, 0);
+		params.gravity = Gravity.CENTER_VERTICAL;
+		likeButton.setLayoutParams(params);
 		
 		addView(likeButton, 0);
+        setBackgroundResource(R.drawable.reply_bg);
 	}
 
 	@Override

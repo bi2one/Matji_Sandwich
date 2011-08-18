@@ -1,10 +1,6 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.util.MatjiConstants;
-
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 /**
@@ -22,10 +18,6 @@ public abstract class TypedTitleContainer extends TitleContainer {
 	 * 버튼을 추가한다. 
 	 */
 	protected abstract void addButtons();
-
-	protected final Drawable titleBgLeft = MatjiConstants.drawable(R.drawable.title_left_btn_bg);
-	protected final Drawable titleBgRight = MatjiConstants.drawable(R.drawable.title_btn_bg);
-
 	
 	public TypedTitleContainer(Context context) {
 		super(context);

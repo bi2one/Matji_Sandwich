@@ -1,10 +1,9 @@
 package com.matji.sandwich.widget;
 
-import android.widget.TabHost;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.widget.TabHost;
 
 import com.matji.sandwich.widget.indicator.MainIndicator;
 

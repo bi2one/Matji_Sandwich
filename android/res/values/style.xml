@@ -72,7 +72,11 @@
   	<item name="android:gravity">bottom</item>
   </style>
 
-  <style name="InputBarWrapper" parent="DefaultWidthFill">
+  <style name="InputBarWrapper">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">wrap_content</item>
+  	<item name="android:minHeight">@dimen/input_bar_min_height</item>
+  	<item name="android:gravity">center_vertical</item>
   </style>
       
   <style name="LinkifyName" parent="DefaultWrap">
@@ -464,7 +468,9 @@
   </style>
   
   <!-- indicator_main.xml -->
-  <style name="IndicatorMain" parent="DefaultWidthFill">
+  <style name="IndicatorMain">
+	<item name="android:layout_width">fill_parent</item>
+	<item name="android:layout_height">@dimen/tabbar_height</item>    
     <item name="android:background">@drawable/indicator_main</item>
     <item name="android:gravity">center</item>
   </style>
@@ -475,6 +481,7 @@
   <style name="IndicatorMainText" parent="DefaultWrap">
     <item name="android:textColor">@drawable/indicator_main_text</item>
     <item name="android:textStyle">bold</item>
+    <item name="android:textSize">@dimen/tabbar_text_size</item>
   </style>
 
   <!-- activity_post_tab.xml -->
@@ -492,11 +499,15 @@
   <style name="TitleContainer">
 	<item name="android:layout_width">match_parent</item>
 	<item name="android:layout_height">@dimen/title_container_height</item>
-	<item name="android:background">@drawable/title_bg</item>
+	<item name="android:background">@drawable/navigationbar_bg</item>
+	<item name="android:padding">0dp</item>
   </style>
 
-  <style name="TitleContainerItem" parent="DefaultHeightFill">
+  <style name="TitleContainerItem">
+  	<item name="android:layout_width">wrap_content</item>
+  	<item name="android:layout_height">@dimen/title_container_height</item>
   	<item name="android:gravity">center</item>
+  	<item name="android:padding">0dp</item>
   </style>
   
   <style name="TitleText" parent="DefaultHeightFill">

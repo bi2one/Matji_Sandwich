@@ -12,7 +12,10 @@ import android.util.AttributeSet;
  *
  */
 public abstract class TitleContainerTypeC extends TypedTitleContainer {
-	protected TitleButton leftButton1;
+	
+    protected abstract TitleButton getLeftButton1();
+    
+    protected TitleButton leftButton1;
 	
 	public TitleContainerTypeC(Context context) {
 		super(context);
@@ -27,9 +30,22 @@ public abstract class TitleContainerTypeC extends TypedTitleContainer {
 	 */
 	@Override
 	final protected void addButtons() {
-		leftButton1.setBackgroundDrawable(titleBgLeft);
-		setTitleBackground(titleBgRight);
-
-		addLeftButton(leftButton1);
-	}	
+	    addLeftButton(leftButton1);
+	}
+	
+	/**
+	 * @see com.matji.sandwich.widget.title.TypedTitleContainer#setButtons()
+	 */
+	@Override
+	final protected void setButtons() {
+	    leftButton1 = getLeftButton1();
+	}
+	
+	/**
+	 * @see com.matji.sandwich.widget.title.TypedTitleContainer#isExistLeftButton()
+	 */
+	@Override
+	final protected boolean isExistLeftButton() {
+	    return true;
+	}
 }

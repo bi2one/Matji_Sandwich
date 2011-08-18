@@ -4,14 +4,6 @@ import com.matji.sandwich.R;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
-import android.util.AttributeSet;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 
 import com.matji.sandwich.widget.dialog.WritePostStoreMatjiDialog;
 
