@@ -1,7 +1,7 @@
 package com.matji.sandwich.widget;
 
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.request.AttachFileIdsHttpRequest;
+import com.matji.sandwich.http.request.AttachFilesHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.widget.cell.UserCell;
 
@@ -23,7 +23,7 @@ public class UserImageListView extends ImageListView {
 	@Override
 	public HttpRequest request() {
 		createRequest();
-		((AttachFileIdsHttpRequest) request).actionUserList(user.getId(), getPage(), getLimit() * imageCount);
+		((AttachFilesHttpRequest) request).actionUserList(user.getId(), getPage(), getLimit() * imageCount);
 		
 		return request;
 	}

@@ -1,7 +1,7 @@
 package com.matji.sandwich.widget;
 
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.http.request.AttachFileIdsHttpRequest;
+import com.matji.sandwich.http.request.AttachFilesHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 
 import android.content.Context;
@@ -18,7 +18,7 @@ public class StoreImageListView extends ImageListView {
 	@Override
 	public HttpRequest request() {
 		createRequest();
-		((AttachFileIdsHttpRequest) request).actionStoreList(store.getId(), getPage(), getLimit() * imageCount);
+		((AttachFilesHttpRequest) request).actionStoreList(store.getId(), getPage(), getLimit() * imageCount);
 		
 		return request;
 	}

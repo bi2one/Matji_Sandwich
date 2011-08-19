@@ -1,46 +1,93 @@
 package com.matji.sandwich;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
-import android.content.Intent;
+import android.widget.TextView;
 
-import com.matji.sandwich.adapter.ImageAdapter;
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Post;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.widget.SwipeView;
 
-public class ImageSliderActivity extends BaseActivity implements OnScrollListener {
-	private Intent intent;
-	private int[] attachFileIds;
+public class ImageSliderActivity extends BaseActivity implements OnScrollListener, Requestable {
+	private AttachFile[] attachFiles;
 	private int currentPage;
 	private SwipeView swipeView;
-	private MatjiImageDownloader downloader;
+    
+    private HttpRequest request;
+    private HttpRequestManager manager;
+    private MatjiImageDownloader downloader;	
+	
+    private TextView count;
+    
+    private TextView nick;
+    private TextView at;
+    private TextView storeName;
+    private TextView post;
+    private TextView ago;
+    private TextView commentCount;
+    private TextView likeCount;    
+    
+	public static final String ATTACH_FILES = "attach_files";
+	public static final String POSITION = "position";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_image_slider);
-
-		intent = getIntent();
-		attachFileIds = intent.getIntArrayExtra("attach_file_ids");
-		currentPage = intent.getIntExtra("position", 0);
-		swipeView = (SwipeView)findViewById(R.id.SwipeView);
-		downloader = new MatjiImageDownloader(this);
-
-		swipeView.addOnScrollListener(this);
-
-		initImageView();
-		swipeView.setCurrentPage(currentPage);
-		setImage(currentPage);
 	}
 
+    
+    protected void init() {
+        setContentView(R.layout.activity_image_slider);
+
+        Parcelable[] tmp = getIntent().getParcelableArrayExtra(ATTACH_FILES);
+        attachFiles = new AttachFile[tmp.length];
+        for (int i = 0; i < tmp.length; i++) {
+            attachFiles[i] = (AttachFile) tmp[i];
+        }
+        
+        currentPage = getIntent().getIntExtra(POSITION, 0);
+        downloader = new MatjiImageDownloader(this);        
+        manager = HttpRequestManager.getInstance(this);
+        
+        count = (TextView) findViewById(R.id.image_slider_count);
+        swipeView = (SwipeView) findViewById(R.id.SwipeView);
+        nick = (TextView) findViewById(R.id.image_slider_nick);
+        at = (TextView) findViewById(R.id.image_slider_at);
+        storeName = (TextView) findViewById(R.id.image_slider_store_name);
+        post = (TextView) findViewById(R.id.image_slider_post);
+        ago = (TextView) findViewById(R.id.image_slider_created_at);
+        commentCount = (TextView) findViewById(R.id.image_slider_comment_count);
+        likeCount = (TextView) findViewById(R.id.image_slider_like_count);
+        
+        swipeView.addOnScrollListener(this);
+        
+        initImageView();
+        swipeView.setCurrentPage(currentPage);
+        setPage(currentPage);
+        setImage(currentPage);
+        postRequest(attachFiles[currentPage].getPostId());
+        super.init();
+    }
+    
 	private void initImageView() {
-		for (int i = 0; i < attachFileIds.length; i++) {
+		for (int i = 0; i < attachFiles.length; i++) {
 			RelativeLayout rl = new RelativeLayout(this);
 			rl.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 			
@@ -53,14 +100,45 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
 			rl.addView(image);
 
-			if (attachFileIds[i] != ImageAdapter.IMAGE_IS_NULL) {
+			if (attachFiles[i] != null) {
 				swipeView.addView(rl);
 			}
 		}
 	}
 
+    public void postRequest(int postId) {
+        if (request == null || !(request instanceof PostHttpRequest)) {
+            request = new PostHttpRequest(this);
+        }
+        
+        ((PostHttpRequest) request).actionShow(postId);
+        manager.request(this, request, HttpRequest.POST_SHOW_REQUEST, this);
+    }
+    
+    public void setPost(Post post) {
+        nick.setText(post.getUser().getNick());
+        if (post.getStore() != null) {
+            at.setVisibility(View.VISIBLE);
+            storeName.setText(post.getStore().getName());
+        } else {
+            at.setVisibility(View.GONE);
+            storeName.setText("");
+        }
+        this.post.setText(post.getPost());
+        ago.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
+        commentCount.setText(post.getCommentCount()+"");
+        likeCount.setText(post.getLikeCount()+"");
+    }
+    
+    public void setPage(int currentPage) {
+        count.setText(
+                MatjiConstants.string(R.string.default_string_image) 
+                + " " + (currentPage+1) + "/" + attachFiles.length);
+        count.bringToFront();
+    }
+    
 	public void setImage(int currentPage) {
-		int attach_file_id = attachFileIds[currentPage];
+		int attach_file_id = attachFiles[currentPage].getId();
 
 		/* Set Current Page Image */
 		ImageView image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage)).getChildAt(0);
@@ -68,32 +146,49 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
 		/* Set Previous Page Image */
 		if (currentPage > 0) {
-			attach_file_id = attachFileIds[currentPage - 1];
-			if (attach_file_id != ImageAdapter.IMAGE_IS_NULL) {
+			attach_file_id = attachFiles[currentPage - 1].getId();
+			if (attachFiles[currentPage - 1] != null) {
 				image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage - 1)).getChildAt(0);
 				downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
 			}
 		}
 
 		/* Set Next Page Image */
-		if (currentPage < attachFileIds.length - 1) {
-			attach_file_id = attachFileIds[currentPage + 1];
-			if (attach_file_id != ImageAdapter.IMAGE_IS_NULL) {
+		if (currentPage < attachFiles.length - 1) {
+			attach_file_id = attachFiles[currentPage + 1].getId();
+			if (attachFiles[currentPage + 1] != null) {
 				image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage + 1)).getChildAt(0);
 				downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
 			}
 		}
 	}
 
-	public void onScroll(int scrollX) {
-		// TODO Auto-generated method stub
-
-	}
+	public void onScroll(int scrollX) {}
 
 	public void onViewScrollFinished(int currentPage) {
 		if (this.currentPage != currentPage) {
 			this.currentPage = currentPage;
+			manager.cancelTask(this);
+	        setPage(currentPage);
 			setImage(currentPage);
+			postRequest(attachFiles[currentPage].getPostId());
 		}
 	}
+
+    @Override
+    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+        switch (tag) {
+        case HttpRequest.POST_SHOW_REQUEST:
+            if (data != null) {
+                setPost((Post) data.get(0));
+            } else {
+                // TODO error message
+            }
+        }
+    }
+    
+    @Override
+    public void requestExceptionCallBack(int tag, MatjiException e) {
+        e.performExceptionHandling(this);
+    }    
 }
