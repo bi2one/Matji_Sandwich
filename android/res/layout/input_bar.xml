@@ -6,13 +6,22 @@
 		android:id="@+id/input_bar_text_field"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
+		android:minHeight="@dimen/input_bar_item_height"
 		android:layout_weight="99"
+		android:layout_marginRight="@dimen/input_bar_margin"
+		android:layout_marginLeft="@dimen/input_bar_margin"
+		android:layout_marginBottom="0dp"
+		android:layout_marginTop="0dp"
+		android:textSize="10.67dp"
 		android:scrollbars="vertical" />
 	<Button
-		android:gravity="center_vertical"
+		android:gravity="center"
 		android:id="@+id/input_bar_confirm_btn"
-		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
-		android:layout_weight="1"
+		android:layout_width="@dimen/input_bar_confirm_btn_width"
+		android:layout_height="@dimen/input_bar_item_height"
+		android:layout_marginRight="@dimen/default_distance"
+		android:textColor="@color/matji_white"
+		android:background="@drawable/btn_replyok_bg"
+		android:padding="0dp"
 		android:onClick="onConfirmButtonClicked" />
 </LinearLayout>

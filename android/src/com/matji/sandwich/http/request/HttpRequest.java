@@ -27,6 +27,7 @@ public abstract class HttpRequest implements RequestCommand {
     public static final int UN_LIKE_REQUEST = 1;
     public static final int FOLLOW_REQUEST = 2;
     public static final int UN_FOLLOW_REQUEST = 3;
+    public static final int POST_SHOW_REQUEST = 4;
     
     private FileUploadProgressListener progressListener;
     protected Context context = null;

@@ -35,7 +35,7 @@ public class PageDownButton extends TitleButton {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_home));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_next));
 	}
 	
 	/**

@@ -4,7 +4,7 @@ import com.matji.sandwich.http.parser.AttachFileParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.adapter.ImageAdapter;
 import com.matji.sandwich.data.AttachFile;
-import com.matji.sandwich.data.AttachFileIds;
+import com.matji.sandwich.data.AttachFiles;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -13,10 +13,16 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.Log;
 
-public class AttachFileIdsHttpRequest extends HttpRequest {
+/**
+ * AttachFile을 capacity만큼씩 묶어서 저장한다.
+ * 
+ * @author mozziluv
+ *
+ */
+public class AttachFilesHttpRequest extends HttpRequest {
     private int capacity;
     
-    public AttachFileIdsHttpRequest(Context context, int capacity) {
+    public AttachFilesHttpRequest(Context context, int capacity) {
     	super(context);
     	this.capacity = capacity;
     	parser = new AttachFileParser(context);
@@ -69,23 +75,23 @@ public class AttachFileIdsHttpRequest extends HttpRequest {
 		Log.d("Matji", "AttachFileHttpRequest resultBody: " + resultBody);
 		Log.d("Matji", "AttachFileHttpRequest resultCode: " + resultCode);
 
-		ArrayList<MatjiData> attachFiles = parser.parseToMatjiDataList(resultBody);
+		ArrayList<MatjiData> attachFileList = parser.parseToMatjiDataList(resultBody);
 		ArrayList<MatjiData> result = new ArrayList<MatjiData>();
 		
-		for (int i = 0; i < attachFiles.size(); i = i+capacity){
-			int[] ids = new int[capacity];
+		for (int i = 0; i < attachFileList.size(); i = i+capacity){
+			AttachFile[] attachFiles = new AttachFile[capacity];
 			
-			for (int j = 0; j < ids.length; j++){
-				ids[j] = ImageAdapter.IMAGE_IS_NULL;
+			for (int j = 0; j < attachFiles.length; j++){
+				attachFiles[j] = null;
 			}
 			
-			for (int j = 0; (j < ids.length) && (i + j < attachFiles.size()); j++) {
-				ids[j] = ((AttachFile) attachFiles.get(i + j)).getId();
+			for (int j = 0; (j < attachFiles.length) && (i + j < attachFileList.size()); j++) {
+				attachFiles[j] = (AttachFile) attachFileList.get(i + j);
 			}
 			
-			AttachFileIds attachFileIds = new AttachFileIds();
-			attachFileIds.setIds(ids);
-			result.add(attachFileIds);
+			AttachFiles attachFilesList = new AttachFiles();
+			attachFilesList.setFiles(attachFiles);
+			result.add(attachFilesList);
 		}
 
 		return result;

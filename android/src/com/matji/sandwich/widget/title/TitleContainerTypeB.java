@@ -12,6 +12,11 @@ import android.util.AttributeSet;
  *
  */
 public abstract class TitleContainerTypeB extends TypedTitleContainer {
+
+    protected abstract TitleButton getRightButton1();
+    protected abstract TitleButton getRightButton2();
+    protected abstract TitleButton getRightButton3();
+    
 	protected TitleButton rightButton1;
 	protected TitleButton rightButton2;
 	protected TitleButton rightButton3;
@@ -29,13 +34,26 @@ public abstract class TitleContainerTypeB extends TypedTitleContainer {
 	 */
 	@Override
 	final protected void addButtons() {
-		setTitleBackground(titleBgLeft);
-		rightButton1.setBackgroundDrawable(titleBgRight);
-		rightButton2.setBackgroundDrawable(titleBgRight);
-		rightButton3.setBackgroundDrawable(titleBgRight);
-		
 		addRightButton(rightButton1);
 		addRightButton(rightButton2);
 		addRightButton(rightButton3);
+	}
+	
+	/**
+	 * @see com.matji.sandwich.widget.title.TypedTitleContainer#setButtons()
+	 */
+	@Override
+	final protected void setButtons() {
+	    rightButton1 = getRightButton1();
+	    rightButton2 = getRightButton2();
+	    rightButton3 = getRightButton3();
+	}
+	
+    /**
+     * @see com.matji.sandwich.widget.title.TypedTitleContainer#setButtons()
+     */
+	@Override
+	protected boolean isExistLeftButton() {
+	    return false;
 	}
 }

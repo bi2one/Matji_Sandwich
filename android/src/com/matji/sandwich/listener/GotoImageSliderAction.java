@@ -57,15 +57,11 @@ public class GotoImageSliderAction implements OnClickListener {
 	 * @param position 가장 처음 보여 줄 Image의 files 내의 포지션 position.
 	 */
 	public void callImageViewer(int position){
-		int[] attachFileIds = new int[files.size()];
-
-		for (int i = 0; i < files.size(); i++) {
-			attachFileIds[i] = files.get(i).getId();
-		}
+		AttachFile[] attachFiles = files.toArray(new AttachFile[]{});
 
 		Intent viewerIntent = new Intent(context, ImageSliderActivity.class);
-		viewerIntent.putExtra("attach_file_ids", attachFileIds);
-		viewerIntent.putExtra("position", position);
+		viewerIntent.putExtra(ImageSliderActivity.ATTACH_FILES, attachFiles);
+		viewerIntent.putExtra(ImageSliderActivity.POSITION, position);
 		context.startActivity(viewerIntent);
 	}
 }

@@ -1,7 +1,7 @@
 package com.matji.sandwich.adapter;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.data.AttachFileIds;
+import com.matji.sandwich.data.AttachFiles;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.ImageListView;
@@ -16,7 +16,7 @@ public class ImageAdapter extends MBaseAdapter {
 	private MatjiImageDownloader downloader;
 	private ImageListView parent;
 
-	public static final int IMAGE_IS_NULL = -1;
+//	public static final int IMAGE_IS_NULL = -1;
 	private static final int MARGIN = (int)(MatjiConstants.dimen(R.dimen.default_distance_half));
 
 	private int[] imageIds = {
@@ -36,7 +36,7 @@ public class ImageAdapter extends MBaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageElement imageElement;
 
-		AttachFileIds attachFileIds = (AttachFileIds) data.get(position);
+		AttachFiles attachFileIds = (AttachFiles) data.get(position);
 
 		if (convertView == null) {
 			imageElement = new ImageElement();
@@ -63,13 +63,13 @@ public class ImageAdapter extends MBaseAdapter {
 			params.setMargins(newMargin, newMargin, newMargin, newMargin);
 			imageElement.images[i].setLayoutParams(params);
 			
-			if (attachFileIds.getIds()[i] == IMAGE_IS_NULL) {
+			if (attachFileIds.getFiles()[i] == null) {
 				imageElement.images[i].setTag(-1+"");
 				imageElement.images[i].getImageView().setImageDrawable(null);
 			}else {
 				imageElement.images[i].setTag((position * imageIds.length + i)+"");
 				imageElement.images[i].visibleBackground();
-				downloader.downloadAttachFileImage(attachFileIds.getIds()[i], MatjiImageDownloader.IMAGE_MEDIUM, imageElement.images[i].getImageView());
+				downloader.downloadAttachFileImage(attachFileIds.getFiles()[i].getId(), MatjiImageDownloader.IMAGE_MEDIUM, imageElement.images[i].getImageView());
 			}
 		}
 

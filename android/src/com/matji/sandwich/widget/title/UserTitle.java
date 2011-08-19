@@ -5,8 +5,9 @@ import android.util.AttributeSet;
 
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.widget.title.button.HomeButton;
-import com.matji.sandwich.widget.title.button.LikeButton;
 import com.matji.sandwich.widget.title.button.LikeStoreListButton;
+import com.matji.sandwich.widget.title.button.MessageButton;
+import com.matji.sandwich.widget.title.button.TitleButton;
 
 /**
  * UserMainActivity에서 사용하는 Titlebar.
@@ -28,19 +29,27 @@ public class UserTitle extends TitleContainerTypeA {
 	public UserTitle(Context context, AttributeSet attr) {
 		super(context, attr);
 	}
-
-	/**
-	 * @see com.matji.sandwich.widget.title.TypedTitleContainer#setButtons()
-	 */
-	@Override
-	protected void setButtons() {
-		leftButton1 = new HomeButton(getContext());
-		rightButton1 = new LikeStoreListButton(getContext());
-		rightButton2 = new LikeButton(getContext());
-	}
 	
 	public void setUser(User user) {
         setTitle(user.getNick());
         ((LikeStoreListButton) rightButton1).setUser(user);
 	}
+
+    @Override
+    protected TitleButton getLeftButton1() {
+        // TODO Auto-generated method stub
+        return new HomeButton(getContext());
+    }
+
+    @Override
+    protected TitleButton getRightButton1() {
+        // TODO Auto-generated method stub
+        return new LikeStoreListButton(getContext());
+    }
+
+    @Override
+    protected TitleButton getRightButton2() {
+        // TODO Auto-generated method stub
+        return new MessageButton(getContext());
+    }
 }

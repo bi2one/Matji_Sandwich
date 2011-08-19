@@ -12,10 +12,10 @@ import android.widget.TextView;
 import com.matji.sandwich.ImageSliderActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.ImageAdapter;
-import com.matji.sandwich.data.AttachFileIds;
+import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.AttachFiles;
 import com.matji.sandwich.data.MatjiData;
-
-import com.matji.sandwich.http.request.AttachFileIdsHttpRequest;
+import com.matji.sandwich.http.request.AttachFilesHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
 
@@ -67,28 +67,28 @@ public abstract class ImageListView extends RequestableMListView implements View
 
 	
 	protected void createRequest() {
-		if (request == null || !(request instanceof AttachFileIdsHttpRequest)) {
-			request = new AttachFileIdsHttpRequest(getContext(), imageCount);
+		if (request == null || !(request instanceof AttachFilesHttpRequest)) {
+			request = new AttachFilesHttpRequest(getContext(), imageCount);
 		}
 	}
 	
-	private int[] convertIds() {
-		int idCount = 0;
+	private AttachFile[] getAttachFiles() {
+		int cnt = 0;
 		ArrayList<MatjiData> adapterData = getAdapterData();
 		
 		for (MatjiData arr : adapterData) {
-			idCount += ((AttachFileIds) arr).getIds().length;
+			cnt += ((AttachFiles) arr).getFiles().length;
 		}
-		
-		int[] convertedIds = new int[idCount];
+
+		AttachFile[] attachFiles = new AttachFile[cnt];
 
 		for (int i = 0; i < adapterData.size(); i++) {
-			for (int j = 0; j < ((AttachFileIds) adapterData.get(i)).getIds().length; j++) {
-				convertedIds[i * imageCount + j] = ((AttachFileIds) adapterData.get(i)).getIds()[j];
+			for (int j = 0; j < ((AttachFiles) adapterData.get(i)).getFiles().length; j++) {
+				attachFiles[i * imageCount + j] = ((AttachFiles) adapterData.get(i)).getFiles()[j];
 			}
 		}
 		
-		return convertedIds;
+		return attachFiles;
 	}
 	
 	public void onClick(View v) {
@@ -101,8 +101,8 @@ public abstract class ImageListView extends RequestableMListView implements View
 
 	public void callImageViewer(int position) {
 		Intent viewerIntent = new Intent(getContext(), ImageSliderActivity.class);
-		viewerIntent.putExtra("attach_file_ids", convertIds());
-		viewerIntent.putExtra("position", position);
+		viewerIntent.putExtra(ImageSliderActivity.ATTACH_FILES, getAttachFiles());
+		viewerIntent.putExtra(ImageSliderActivity.POSITION, position);
 		getContext().startActivity(viewerIntent);
 	}	
 	

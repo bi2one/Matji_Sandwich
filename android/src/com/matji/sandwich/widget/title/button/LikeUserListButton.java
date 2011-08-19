@@ -29,7 +29,7 @@ public class LikeUserListButton extends TitleButton {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_like));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_like_list));
 	}
 	
 	/**

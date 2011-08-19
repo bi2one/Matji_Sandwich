@@ -1,10 +1,11 @@
 package com.matji.sandwich.widget.title.button;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.util.MatjiConstants;
 
 import android.content.Context;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 /**
  * 타이틀바에 추가되는 모든 버튼들은 이 클래스를 확장한다.
@@ -20,13 +21,17 @@ public abstract class TitleButton extends ImageButton implements TitleItem {
 	public TitleButton(Context context) {
 		super(context);
 		this.context = context;
-		width = getResources().getDimensionPixelSize(R.dimen.title_container_height);
+		width = getResources().getDimensionPixelSize(R.dimen.title_container_btn_min_width);
 		height = getResources().getDimensionPixelSize(R.dimen.title_container_height);
 		
 		init();
 		setOnClickListener(new TitleButtonClickListener());
-		LayoutParams params = new LayoutParams(width, height);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
 		setLayoutParams(params);
+		setPadding(0, 0, 0, 0);
+		setMinimumWidth((int) MatjiConstants.dimen(R.dimen.title_container_btn_min_width));
+		setMaxWidth((int) MatjiConstants.dimen(R.dimen.title_container_btn_max_width));
+		setBackgroundDrawable(null);
 	}
 	
 	/**

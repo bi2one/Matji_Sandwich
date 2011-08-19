@@ -1,9 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
+
 	<com.matji.sandwich.widget.SwipeView
 		style="@style/DefaultFill"
 		android:id="@+id/SwipeView" />
-</LinearLayout>
+
+	<TextView
+		android:id="@+id/image_slider_count"
+		style="@style/DefaultWidthFill"
+		android:gravity="center"
+		android:textColor="@color/matji_white"
+		android:background="@color/matji_translucent_white"
+		android:layout_alignParentTop="true" />
+
+	<RelativeLayout
+		android:layout_alignParentBottom="true"
+		android:background="@color/matji_translucent_white"
+		style="@style/DefaultWidthFill">
+
+		<TextView
+			android:id="@+id/image_slider_nick"
+			style="@style/LinkifyName" />
+		<TextView
+			android:id="@+id/image_slider_at"
+			style="@style/row_post_At"
+			android:layout_toRightOf="@id/image_slider_nick" />
+		<TextView
+			android:id="@+id/image_slider_store_name"
+			style="@style/LinkifyName"
+			android:layout_toRightOf="@id/image_slider_at"
+			android:layout_toLeftOf="@+id/image_slider_moresign" />
+
+		<!-- Post -->
+		<TextView
+			android:id="@+id/image_slider_post"
+			style="@style/TalkContent"
+			android:textColor="@color/matji_white"
+			android:layout_below="@id/image_slider_nick"
+			android:layout_toLeftOf="@id/image_slider_moresign" />
+
+		<!-- Ago and Count -->
+		<TextView
+			android:id="@+id/image_slider_created_at"
+			android:layout_below="@id/image_slider_post"
+			style="@style/row_post_CreatedAt" />
+		<TextView
+			android:id="@+id/image_slider_comment"
+			android:layout_toRightOf="@id/image_slider_created_at"
+			android:layout_below="@id/image_slider_post"
+			style="@style/row_post_Comment" />
+		<TextView
+			android:id="@+id/image_slider_comment_count"
+			android:layout_toRightOf="@id/image_slider_comment"
+			android:layout_below="@id/image_slider_post"
+			style="@style/row_post_Count" />
+		<TextView
+			android:id="@+id/image_slider_like"
+			android:layout_below="@id/image_slider_post"
+			android:layout_toRightOf="@id/image_slider_comment_count"
+			style="@style/row_post_Like" />
+		<TextView
+			android:id="@+id/image_slider_like_count"
+			android:layout_below="@id/image_slider_post"
+			style="@style/row_post_Count"
+			android:layout_toRightOf="@id/image_slider_like"
+			android:layout_toLeftOf="@id/image_slider_moresign" />
+		<ImageView
+			android:id="@id/image_slider_moresign"
+			android:src="@drawable/img_moresign"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			style="@style/DefaultWrap" />
+	</RelativeLayout>
+</RelativeLayout>
