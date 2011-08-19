@@ -39,6 +39,7 @@
 	
 	<color name="matji_light_orange">#FFC200</color>
 	<color name="matji_dark_orange">#FF4500</color>
+	<color name="matji_yellow_orange">#FFE851</color>
 	<color name="matji_red">#FF2400</color>
 	<color name="matji_light_gray">#9b9b9b</color>
 	<color name="matji_white">#fff</color>

@@ -11,6 +11,7 @@ public class WritePostActivity extends BaseActivity {
     private Context context;
     private EditText editText;
     private SessionWritePostUtil sessionUtil;
+    // private WritePostTabActivity parentActivity;
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -18,6 +19,7 @@ public class WritePostActivity extends BaseActivity {
 	context = getApplicationContext();
 	editText = (EditText)findViewById(R.id.activity_write_post_text);
 	sessionUtil = new SessionWritePostUtil(context);
+	// parentActivity = (WritePostTabActivity)getParent();
     }
 
     protected void onResume() {
@@ -27,5 +29,6 @@ public class WritePostActivity extends BaseActivity {
     protected void onPause() {
 	super.onPause();
 	sessionUtil.setPost(editText.getText().toString());
+	// parentActivity.hideKeyboard();
     }
 }
