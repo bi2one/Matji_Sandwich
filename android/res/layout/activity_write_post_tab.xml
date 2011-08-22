@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_write_post_tab"
     style="@style/DefaultFill">
-  
   <com.matji.sandwich.widget.title.WritePostTitle
       android:layout_alignParentTop="true"
       android:id="@+id/activity_write_post_tab_title"
@@ -12,6 +11,7 @@
   <com.matji.sandwich.widget.RoundTabHost
       android:id="@android:id/tabhost"
       android:layout_below="@id/activity_write_post_tab_title"
+      android:layout_above="@+id/activity_write_post_tab_picture_keyboard"
       style="@style/DefaultFill">
     <LinearLayout
 	android:orientation="vertical"
@@ -28,4 +28,11 @@
 	  android:layout_weight="0" />
     </LinearLayout>
   </com.matji.sandwich.widget.RoundTabHost>
+
+  <com.matji.sandwich.widget.GetPictureLayout
+      android:id="@id/activity_write_post_tab_picture_keyboard"
+      android:layout_alignParentBottom="true"
+      android:visibility="gone"
+      android:layout_height="0dp"
+      android:layout_width="fill_parent" />
 </com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

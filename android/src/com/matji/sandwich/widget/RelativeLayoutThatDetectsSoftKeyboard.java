@@ -55,6 +55,5 @@ public class RelativeLayoutThatDetectsSoftKeyboard extends RelativeLayout {
         }
         
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-               
     }
 }

@@ -21,5 +21,10 @@
   <LinearLayout
       android:id="@+id/title_container_right"
       style="@style/TitleContainerItem"
-      android:layout_alignParentRight="true" />
+      android:layout_alignParentRight="true">
+    <Button
+	android:id="@+id/title_write_post_complete"
+	android:text="@string/default_string_complete"
+	style="@style/DefaultWrap" />
+  </LinearLayout>
 </RelativeLayout>

@@ -985,4 +985,33 @@
   <style name="user_profile_Count" parent="DefaultWrap">
   </style>
 
+  <!-- album_image_view.xml -->
+  <style name="album_image_view" parent="DefaultWrap">
+    <item name="android:background">@drawable/write_post_picture_frame</item>
+    <item name="android:layout_width">@dimen/album_view_frame_width</item>
+    <item name="android:layout_height">@dimen/album_view_frame_height</item>
+  </style>
+
+  <style name="album_image_view_contents" parent="DefaultWrap">
+    <item name="android:src">@drawable/write_post_picture_empty</item>
+    <item name="android:layout_width">@dimen/album_view_contents_width</item>
+    <item name="android:layout_height">@dimen/album_view_contents_height</item>
+    <item name="android:scaleType">fitXY</item>
+  </style>
+
+  <!-- activity_write_post_picture.xml -->
+  <style name="activity_write_post_picture" parent="DefaultFill">
+    <item name="android:background">@color/matji_light_pink</item>
+  </style>
+
+  <!-- get_picture_layout.xml -->
+  <style name="get_picture_layout" parent="DefaultFill">
+    <item name="android:background">@color/matji_yellow_orange</item>
+    <item name="android:padding">20dp</item>
+  </style>
+
+  <style name="get_picture_layout_button" parent="DefaultWrap"> 
+   <item name="android:layout_width">80dp</item>
+    <item name="android:layout_height">60dp</item>
+  </style>
 </resources>

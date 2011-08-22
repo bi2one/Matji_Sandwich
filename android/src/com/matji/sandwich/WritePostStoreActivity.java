@@ -21,7 +21,6 @@ public class WritePostStoreActivity extends BaseActivity implements OnItemClickL
     private TextView selectedText;
     private WritePostTabActivity parentActivity;
     private SessionWritePostUtil sessionUtil;
-    private String currentStoreName;
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

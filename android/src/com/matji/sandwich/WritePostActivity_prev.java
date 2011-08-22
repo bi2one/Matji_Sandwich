@@ -345,7 +345,6 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 		return Uri.fromFile(file);
 	}
 
-
 	private void invalidateThumbToContainerView(){
 		thumbnailsContainer.removeAllViews();
 
@@ -399,7 +398,7 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 				//final Uri uriImagesthum = MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI;
 				try {
 					final Cursor cursorImages = getContentResolver().query(uriImages, IMAGE_PROJECTION, null, null, null);
-					if(cursorImages != null && cursorImages.moveToLast()){         
+					if(cursorImages != null && cursorImages.moveToLast()){
 						imageRealPath = cursorImages.getString(0);
 						cursorImages.close();
 					}
