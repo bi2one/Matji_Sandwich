@@ -23,7 +23,7 @@
 			android:textColor="@color/title_container_title"
 			android:shadowColor="@color/title_container_title_shadow"
 			android:shadowRadius="1"
-			android:shadowDy="1.5" />
+			android:shadowDy="1.3" />
 	</LinearLayout>
 	<LinearLayout
 		android:id="@+id/title_container_right"

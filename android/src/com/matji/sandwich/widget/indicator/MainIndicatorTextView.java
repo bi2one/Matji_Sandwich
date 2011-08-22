@@ -25,9 +25,9 @@ public class MainIndicatorTextView extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         if (isPressed() || isFocused() || isSelected()) {
-            setShadowLayer(1, 0, (float) 1.5, MatjiConstants.color(R.color.tabbar_text_touch_shadow));
+            setShadowLayer(1, 0, (float) 1.3, MatjiConstants.color(R.color.tabbar_text_touch_shadow));
         } else {
-            setShadowLayer(1, 0, (float) -1.5, MatjiConstants.color(R.color.tabbar_text_shadow));
+            setShadowLayer(1, 0, (float) -1.3, MatjiConstants.color(R.color.tabbar_text_shadow));
         }
         super.onDraw(canvas);
     }    

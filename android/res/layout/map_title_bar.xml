@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/location_title_bar">
-  <Button
-      style="@style/location_title_bar_flipButton"
-      android:id="@+id/map_title_bar_flip_button"
-      android:onClick="onFlipClicked"
-      android:layout_alignParentLeft="true" />
-  <Button
-      style="@style/location_title_bar_locationButton"
-      android:onClick="onCurrentPositionClicked"
-      android:id="@+id/map_title_bar_location_button"
-      android:layout_toRightOf="@id/map_title_bar_flip_button" />
-
-  <RelativeLayout
-      style="@style/location_title_bar_address"
-      android:layout_toRightOf="@id/map_title_bar_location_button"
-      android:layout_toLeftOf="@+id/map_title_bar_near_post_button"
-      android:layout_centerVertical="true" >
-      <TextView
-	  style="@style/location_title_bar_address_text"
-	  android:layout_alignParentLeft="true"
-	  android:layout_centerVertical="true"
-	  android:onClick="onChangeLocationClicked"
-	  android:id="@+id/map_title_bar_address" />
-      <ImageView
-	  style="@style/location_title_bar_changeLocationArrow"
-	  android:layout_alignParentRight="true"
-	  android:layout_centerVertical="true"
-	  android:onClick="onChangeLocationClicked"
-	  android:src="@drawable/map_titlebar_change_location_arrow" />
-  </RelativeLayout>
-  
-  <Button
-      style="@style/location_title_bar_nearPostButton"
-      android:onClick="onMoveToNearPostClicked"
-      android:layout_alignParentRight="true"
-      android:id="@id/map_title_bar_near_post_button" />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/location_title_bar">
+	<ImageButton
+		style="@style/location_title_bar_flipButton"
+		android:id="@+id/map_title_bar_flip_button"
+		android:onClick="onFlipClicked"
+		android:layout_alignParentLeft="true" />
+	<ImageView
+		style="@style/location_title_bar_line"
+		android:layout_toRightOf="@id/map_title_bar_flip_button" />
+	<ImageButton
+		style="@style/location_title_bar_locationButton"
+		android:onClick="onCurrentPositionClicked"
+		android:id="@+id/map_title_bar_location_button"
+		android:layout_toRightOf="@id/map_title_bar_flip_button" />
+	<ImageView
+		style="@style/location_title_bar_line"
+		android:layout_toRightOf="@id/map_title_bar_location_button" />
+	<TextView
+		style="@style/location_title_bar_address_text"
+		android:layout_toRightOf="@id/map_title_bar_location_button"
+		android:layout_toLeftOf="@+id/map_title_bar_near_post_button"
+		android:layout_centerVertical="true"
+		android:gravity="left|center_vertical"
+		android:onClick="onChangeLocationClicked"
+		android:id="@+id/map_title_bar_address"
+		android:clickable="true"
+		android:drawableRight="@drawable/icon_location_mappoint_selector" />
+	<ImageView
+		style="@style/location_title_bar_line"
+		android:layout_toRightOf="@id/map_title_bar_address" />
+	<ImageButton
+		style="@style/location_title_bar_nearPostButton"
+		android:onClick="onMoveToNearPostClicked"
+		android:layout_alignParentRight="true"
+		android:id="@id/map_title_bar_near_post_button" />
 </RelativeLayout>

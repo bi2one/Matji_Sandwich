@@ -39,7 +39,7 @@
 				android:textColor="@color/BLACK"
 				android:background="@drawable/btn_rectangle"
 				android:padding="@dimen/default_distance"
-				android:drawableLeft="@drawable/icon_tabbar_user_touch"
+				android:drawableLeft="@drawable/icon_tapbar_user_touch"
 				android:drawablePadding="@dimen/default_distance_half"
 				android:drawableRight="@drawable/img_moresign" />
 			<TextView

@@ -2,20 +2,31 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:background="@drawable/highlight_bg">
+	android:layout_height="@dimen/highlight_height"
+	android:background="@drawable/indexbar_bg"
+	android:paddingRight="@dimen/default_distance"
+	android:paddingLeft="@dimen/default_distance"
+	android:gravity="center_vertical">
 	<TextView
 		android:id="@+id/row_highlight_title"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_weight="99"
 		android:singleLine="true"
-		android:textColor="@color/matji_white" />
+		android:textColor="@color/matji_white"
+		android:textSize="12dp"
+		android:shadowColor="@color/highlight_text_shadow"
+		android:shadowDy="1.3"
+		android:shadowRadius="1" />
 	<TextView
 		android:id="@+id/row_highlight_count"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_weight="1"
 		android:textColor="@color/matji_white"
+		android:textSize="12dp"
+		android:shadowColor="@color/highlight_text_shadow"
+		android:shadowDy="1.3"
+		android:shadowRadius="1"
 		android:visibility="gone" />
 </LinearLayout>

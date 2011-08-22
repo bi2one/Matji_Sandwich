@@ -260,7 +260,6 @@
   <string name="map_store_sectioned_adapter_store">맛집</string>
 
   <!-- User Profile -->
-  <string name="user_profile_basic_information">기본정보</string>
   <string name="user_profile_friend_information">친구정보</string>
   <string name="user_profile_following">following</string>
   <string name="user_profile_follower">follower</string>

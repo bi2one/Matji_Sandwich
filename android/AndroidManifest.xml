@@ -23,9 +23,6 @@
 		<activity android:name="AlarmActivity"></activity>
 		<activity android:name="AddMenuActivity"
 				  android:launchMode="singleTask"></activity>
-		<activity android:name="ChatActivity"
-				  android:launchMode="singleTask"
-				  android:windowSoftInputMode="stateHidden"></activity>
 		<activity android:name="LoginActivity"
 				  android:launchMode="singleTask"></activity>
 		<activity android:name="LikeStoreListActivity"></activity>
@@ -96,8 +93,6 @@
 		<activity android:name="GridGalleryActivity"></activity>
 		<activity android:name="ImageSliderActivity"
 				  android:screenOrientation="unspecified"></activity>
-		<activity android:name="MessageThreadActivity"
-				  android:screenOrientation="portrait"></activity>
 		<activity android:name="GetMapPositionActivity"></activity>
 		<activity android:name="StoreRegisterListActivity"></activity>
 		<activity android:name="StoreRegisterActivity"></activity>

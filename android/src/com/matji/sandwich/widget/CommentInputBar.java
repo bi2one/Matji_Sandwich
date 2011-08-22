@@ -27,7 +27,7 @@ public class CommentInputBar extends InputBar {
 	protected void init() {
 		super.init();
 		likeButton = new ImageButton(getContext());
-		likeButton.setImageDrawable(MatjiConstants.drawable(R.drawable.icon_tabbtn_likehand));
+		likeButton.setImageDrawable(MatjiConstants.drawable(R.drawable.icon_tabbtn_likehand_selector));
 		likeButton.setBackgroundResource(R.drawable.btn_likehand_bg);
 		LinearLayout.LayoutParams params = 
 		    new LinearLayout.LayoutParams(

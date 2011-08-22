@@ -116,8 +116,8 @@ public class SettingActivity extends BaseActivity {
 	}
 	
 	public void onMessagesButtonClicked(View view){
-		Intent messageIntent = new Intent(this, MessageThreadActivity.class);
-		startActivity(messageIntent);
+//		Intent messageIntent = new Intent(this, MessageThreadActivity.class);
+//		startActivity(messageIntent);
 //		user = session.getCurrentUser();
 //		startActivityWithMatjiData(messageIntent, user);
 	}

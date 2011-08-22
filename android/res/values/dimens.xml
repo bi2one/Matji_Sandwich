@@ -74,4 +74,7 @@
 	<dimen name="minor_title_divider_width">1.33dp</dimen>
 	<dimen name="minor_title_height">30dp</dimen>
 	<dimen name="minor_title_location_padding">6.67dp</dimen>
+	
+	<!-- Highlight view -->
+	<dimen name="highlight_height">25.33dp</dimen>
 </resources>

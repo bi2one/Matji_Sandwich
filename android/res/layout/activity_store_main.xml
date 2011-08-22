@@ -8,10 +8,6 @@
 	<!-- Main Title -->
 	<com.matji.sandwich.widget.title.StoreTitle
 		style="@style/DefaultWrap" />
-
-	<!-- Store Name Cell -->
-	<com.matji.sandwich.widget.cell.StoreCell 
-		style="@style/DefaultWrap" />
 	
 	<!-- Seperate Line -->
 	<RelativeLayout 
