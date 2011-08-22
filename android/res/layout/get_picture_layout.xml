@@ -2,4 +2,14 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/get_picture_layout">
+  <Button
+      android:id="@+id/get_picture_layout_camera"
+      android:text="@string/default_string_camera"
+      style="@style/get_picture_layout_button"
+      android:layout_alignParentLeft="true" />
+  <Button
+      android:id="@+id/get_picture_layout_album"
+      android:text="@string/default_string_album"
+      style="@style/get_picture_layout_button"
+      android:layout_alignParentRight="true" />
 </RelativeLayout>

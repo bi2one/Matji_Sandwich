@@ -937,6 +937,7 @@
     <item name="android:src">@drawable/write_post_picture_empty</item>
     <item name="android:layout_width">@dimen/album_view_contents_width</item>
     <item name="android:layout_height">@dimen/album_view_contents_height</item>
+    <item name="android:scaleType">fitXY</item>
   </style>
 
   <!-- activity_write_post_picture.xml -->
@@ -947,5 +948,11 @@
   <!-- get_picture_layout.xml -->
   <style name="get_picture_layout" parent="DefaultFill">
     <item name="android:background">@color/matji_yellow_orange</item>
+    <item name="android:padding">20dp</item>
+  </style>
+
+  <style name="get_picture_layout_button" parent="DefaultWrap"> 
+   <item name="android:layout_width">80dp</item>
+    <item name="android:layout_height">60dp</item>
   </style>
 </resources>
