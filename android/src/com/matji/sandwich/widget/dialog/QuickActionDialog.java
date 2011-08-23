@@ -1,27 +1,22 @@
 package com.matji.sandwich.widget.dialog;
 
-import com.matji.sandwich.R;
-
 import android.content.Context;
-
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.View.OnClickListener;
-
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+
+import com.matji.sandwich.R;
 
 /**
  * Quickaction window.
@@ -30,14 +25,12 @@ import android.view.animation.Interpolator;
  *
  */
 public class QuickActionDialog extends PopupWindows {
-	private ImageView mArrowUp;
-	private ImageView mArrowDown;
 	private Animation mTrackAnim;
 	private LayoutInflater inflater;
 	private ViewGroup mTrack;
 	private OnActionItemClickListener mListener;
 
-	private int animStyle;
+//	private int animStyle;
 	private int mChildPos;
 	private boolean animateTrack;
 
@@ -70,7 +63,7 @@ public class QuickActionDialog extends PopupWindows {
 
 		setRootViewId(R.layout.dialog_quick_action);
 
-		animStyle		= ANIM_AUTO;
+//		animStyle		= ANIM_AUTO;
 		animateTrack	= true;
 		mChildPos		= 0;
 	}
@@ -84,8 +77,6 @@ public class QuickActionDialog extends PopupWindows {
 		mRootView	= (ViewGroup) inflater.inflate(id, null);
 		mTrack 		= (ViewGroup) mRootView.findViewById(R.id.tracks);
 
-		mArrowDown 	= (ImageView) mRootView.findViewById(R.id.arrow_down);
-		mArrowUp 	= (ImageView) mRootView.findViewById(R.id.arrow_up);
 
 		setContentView(mRootView);
 	}
@@ -99,14 +90,14 @@ public class QuickActionDialog extends PopupWindows {
 		this.animateTrack = animateTrack;
 	}
 
-	/**
-	 * Set animation style.
-	 * 
-	 * @param animStyle animation style, default is set to ANIM_AUTO
-	 */
-	public void setAnimStyle(int animStyle) {
-		this.animStyle = animStyle;
-	}
+//	/**
+//	 * Set animation style.
+//	 * 
+//	 * @param animStyle animation style, default is set to ANIM_AUTO
+//	 */
+//	public void setAnimStyle(int animStyle) {
+//		this.animStyle = animStyle;
+//	}
 
 	/**
 	 * Add action item
@@ -115,27 +106,20 @@ public class QuickActionDialog extends PopupWindows {
 	 */
 	public void addActionItem(ActionItem action) {
 
-		String title 	= action.getTitle();
 		Drawable icon 	= action.getIcon();
 
 		View container	= (View) inflater.inflate(R.layout.action_item, null);
 
-		ImageView img 	= (ImageView) container.findViewById(R.id.iv_icon);
-		TextView text 	= (TextView) container.findViewById(R.id.tv_title);
+		ImageButton imgbtn 	= (ImageButton) container.findViewById(R.id.action_item);
 
 		if (icon != null) 
-			img.setImageDrawable(icon);
+			imgbtn.setImageDrawable(icon);
 		else
-			img.setVisibility(View.GONE);
-
-		if (title != null)
-			text.setText(title);
-		else
-			text.setVisibility(View.GONE);
+			imgbtn.setVisibility(View.GONE);
 
 		final int pos =  mChildPos;
 
-		container.setOnClickListener(new OnClickListener() {
+		imgbtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (mListener != null) mListener.onItemClick(pos);
@@ -147,8 +131,14 @@ public class QuickActionDialog extends PopupWindows {
 		container.setFocusable(true);
 		container.setClickable(true);
 
-		mTrack.addView(container, mChildPos+1);
-
+		ImageView line = new ImageView(mContext);
+		line.setImageResource(R.drawable.memo_popupmenu_line);
+		line.setScaleType(ScaleType.FIT_XY);
+		line.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT));
+		
+		
+		if (mChildPos > 0) mTrack.addView(line);
+		mTrack.addView(container);
 		mChildPos++;
 	}
 
@@ -182,20 +172,9 @@ public class QuickActionDialog extends PopupWindows {
 		int screenWidth 	= mWindowManager.getDefaultDisplay().getWidth();
 		//int screenHeight 	= mWindowManager.getDefaultDisplay().getHeight();
 
-		int xPos 			= (screenWidth - rootWidth) / 2;
-		int yPos	 		= anchorRect.top - rootHeight;
+		int xPos 			= (screenWidth - rootWidth) / 2 + 20;        int yPos            = anchorRect.top - rootHeight / 2 + 10;
 
-		boolean onTop		= true;
-
-		// display on bottom
-		if (rootHeight > anchor.getTop()) {
-			yPos 	= anchorRect.bottom;
-			onTop	= false;
-		}
-
-		showArrow(((onTop) ? R.id.arrow_down : R.id.arrow_up), anchorRect.centerX());
-
-		setAnimationStyle(screenWidth, anchorRect.centerX(), onTop);
+		setAnimationStyle(screenWidth, anchorRect.centerX());
 
 		mWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, xPos, yPos);
 
@@ -209,55 +188,33 @@ public class QuickActionDialog extends PopupWindows {
 	 * @param requestedX distance from left screen
 	 * @param onTop flag to indicate where the popup should be displayed. Set TRUE if displayed on top of anchor and vice versa
 	 */
-	private void setAnimationStyle(int screenWidth, int requestedX, boolean onTop) {
-		int arrowPos = requestedX - mArrowUp.getMeasuredWidth()/2;
+	private void setAnimationStyle(int screenWidth, int requestedX) {
+//		switch (animStyle) {
+//		case ANIM_GROW_FROM_LEFT:
+//			mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Left : R.style.Animations_PopDownMenu_Left);
+//			break;
 
-		switch (animStyle) {
-		case ANIM_GROW_FROM_LEFT:
-			mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Left : R.style.Animations_PopDownMenu_Left);
-			break;
-
-		case ANIM_GROW_FROM_RIGHT:
-			mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Right : R.style.Animations_PopDownMenu_Right);
-			break;
-
-		case ANIM_GROW_FROM_CENTER:
-			mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Center : R.style.Animations_PopDownMenu_Center);
-		break;
-
-		case ANIM_AUTO:
-			if (arrowPos <= screenWidth/4) {
-				mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Left : R.style.Animations_PopDownMenu_Left);
-			} else if (arrowPos > screenWidth/4 && arrowPos < 3 * (screenWidth/4)) {
-				mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Center : R.style.Animations_PopDownMenu_Center);
-			} else {
-				mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopDownMenu_Right : R.style.Animations_PopDownMenu_Right);
-			}
-
-			break;
-		}
+//		case ANIM_GROW_FROM_RIGHT:
+//        mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Right : R.style.Animations_PopDownMenu_Right);
+        mWindow.setAnimationStyle(R.style.Animations_PopUpMenu_Right);        
+//			break;
+//
+//		case ANIM_GROW_FROM_CENTER:
+//			mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Center : R.style.Animations_PopDownMenu_Center);
+//		break;
+//
+//		case ANIM_AUTO:
+//			if (arrowPos <= screenWidth/4) {
+//				mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Left : R.style.Animations_PopDownMenu_Left);
+//			} else if (arrowPos > screenWidth/4 && arrowPos < 3 * (screenWidth/4)) {
+//				mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Center : R.style.Animations_PopDownMenu_Center);
+//			} else {
+//				mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopDownMenu_Right : R.style.Animations_PopDownMenu_Right);
+//			}
+//
+//			break;
+//		}
 	}
-
-	/**
-	 * Show arrow
-	 * 
-	 * @param whichArrow arrow type resource id
-	 * @param requestedX distance from left screen
-	 */
-	private void showArrow(int whichArrow, int requestedX) {
-        final View showArrow = (whichArrow == R.id.arrow_up) ? mArrowUp : mArrowDown;
-        final View hideArrow = (whichArrow == R.id.arrow_up) ? mArrowDown : mArrowUp;
-
-        final int arrowWidth = mArrowUp.getMeasuredWidth();
-
-        showArrow.setVisibility(View.VISIBLE);
-        
-        ViewGroup.MarginLayoutParams param = (ViewGroup.MarginLayoutParams)showArrow.getLayoutParams();
-        
-        param.leftMargin = requestedX - arrowWidth / 2;
-      
-        hideArrow.setVisibility(View.INVISIBLE);
-    }
 
 	/**
 	 * Listener for item click

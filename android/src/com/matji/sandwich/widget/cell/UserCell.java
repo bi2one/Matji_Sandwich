@@ -78,7 +78,7 @@ public class UserCell extends Cell {
         else 
             ((TextView) getRootView().findViewById(R.id.cell_user_point)).setText("0");
         ((TextView) getRootView().findViewById(R.id.cell_user_area)).setText("KOREA");
-        ((TextView) getRootView().findViewById(R.id.cell_user_like_list)).setText(user.getStoreCount()+"");
+        ((TextView) getRootView().findViewById(R.id.cell_user_like_list)).setText(user.getLikeStoreCount()+"");
 
         follow = (Button) getRootView().findViewById(R.id.cell_user_follow);
         messageList = (Button) getRootView().findViewById(R.id.cell_user_message_list);
@@ -112,7 +112,7 @@ public class UserCell extends Cell {
         if (session.isLogin() && session.getCurrentUser().getId() == user.getId()) {
             follow.setVisibility(View.GONE);
             messageList.setVisibility(View.VISIBLE);
-            messageList.setText("246");
+            messageList.setText(user.getReceivedMessageCount()+"");
         } else {
             follow.setText(
                     (followingListener.isExistFollower()) ? 

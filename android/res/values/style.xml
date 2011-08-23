@@ -92,7 +92,7 @@
       
   <style name="LinkifyName" parent="DefaultWrap">
 	<item name="android:singleLine">true</item>
-	<item name="android:textColor">@color/matji_dark_orange</item>
+	<item name="android:textColor">@color/matji_red</item>
   </style>
   
   <style name="TalkContent" parent="DefaultWrap">
@@ -112,7 +112,7 @@
 
   <style name="SmallDarkOrangeText" parent="DefaultWrap">
   	<item name="android:textSize">@dimen/text_small</item>
-  	<item name="android:textColor">@color/matji_dark_orange</item>
+  	<item name="android:textColor">@color/matji_red</item>
   </style>
   
   <style name="ETCButton">
@@ -121,7 +121,7 @@
   	<item name="android:padding">7dp</item>
   	<item name="android:textSize">16dp</item>
   	<item name="android:gravity">left|center</item>
-  	<item name="android:drawableRight">@drawable/img_moresign</item>
+  	<item name="android:drawableRight">@drawable/icon_flow</item>
   </style>
   
   <style name="SettingButton" parent="ETCButton">
@@ -141,6 +141,35 @@
   	<item name="android:layout_height">30dp</item>
 	<item name="android:textSize">@dimen/text_xxlarge</item>
   	<item name="android:textColor">@color/BLACK</item>
+  </style>
+  
+  
+  <!-- Buttons -->
+  <style name="WhiteButton">
+  	<item name="android:layout_width">wrap_content</item>
+  	<item name="android:layout_height">@dimen/white_btn_height</item>
+  	<item name="android:background">@drawable/btn_white</item>
+  	<item name="android:textColor">@color/matji_red</item>
+  	<item name="android:singleLine">true</item>
+  </style>
+  
+  <style name="WhiteButtonNumber" parent="WhiteButton">
+    <item name="android:textSize">@dimen/white_btn_number_size</item>
+  </style>
+
+  <style name="WhiteButtonText" parent="WhiteButton">
+    <item name="android:textSize">@dimen/white_btn_text_size</item>
+  </style>
+  
+  <style name="RedButton">
+  	<item name="android:layout_width">wrap_content</item>
+  	<item name="android:layout_height">@dimen/red_btn_height</item>
+  	<item name="android:background">@drawable/btn_red</item>
+  	<item name="android:textColor">@color/matji_white</item>
+  	<item name="android:singleLine">true</item>		
+	<item name="android:shadowColor">@color/red_btn_shadow</item>
+	<item name="android:shadowDy">-1.3</item>
+	<item name="android:shadowRadius">1</item>
   </style>
   
   <style name="store_main_Cell" parent="Cell">
@@ -211,12 +240,14 @@
   </style>
   
   <style name="cell_user_Wrapper" parent="Cell">
-  	<item name="android:background">@drawable/selector</item>
+  	<item name="android:layout_height">@dimen/user_cell_height</item>
+  	<item name="android:background">@color/matji_white</item>
   </style>
   
   <style name="cell_user_Profile">
-	<item name="android:layout_width">@dimen/cell_profile_size</item>
-  	<item name="android:layout_height">@dimen/cell_profile_size</item>
+	<item name="android:layout_width">@dimen/user_cell_profile_size</item>
+  	<item name="android:layout_height">@dimen/user_cell_profile_size</item>
+  	<item name="android:src">@drawable/user_img90</item>
   </style>
   
   <style name="cell_user_InfoWrapper" parent="DefaultWrap">
@@ -224,14 +255,14 @@
   </style>
   
   <style name="cell_user_Nickname" parent="DefaultWrap">
-  	<item name="android:layout_margin">@dimen/default_distance_half</item>
-  	<item name="android:textColor">@color/matji_black</item>
-  	<item name="android:textSize">@dimen/text_xxlarge</item>
+  	<item name="android:textColor">@color/matji_gray</item>
+  	<item name="android:textSize">@dimen/user_cell_nick_size</item>
   </style>
   
   <style name="cell_user_Label" parent="DefaultWrap">
-  	<item name="android:layout_marginRight">@dimen/default_distance</item>
-  	<item name="android:textColor">@color/matji_dark_orange</item>
+  	<item name="android:layout_marginRight">@dimen/default_distance_half</item>
+  	<item name="android:textColor">@color/matji_red</item>
+	<item name="android:textSize">@dimen/user_cell_content_size</item>
   </style>
 
   <style name="cell_user_PointLabel" parent="cell_user_Label">
@@ -244,31 +275,28 @@
   
   <style name="cell_user_LabelValue" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_light_gray</item>
+  	<item name="android:textSize">@dimen/user_cell_content_size</item>
   </style>
   
-  <style name="cell_user_Button">
-  	<item name="android:layout_width">@dimen/cell_btn_width</item>
-  	<item name="android:layout_height">wrap_content</item>
-  </style>
+  <style name="cell_user_WhiteButton" parent="WhiteButtonNumber">
+  	<item name="android:layout_width">@dimen/user_cell_btn_width</item>
+  </style>  
   
-  <style name="cell_user_WhiteButton" parent="cell_user_Button">
-  	<item name="android:background">@drawable/btn_white</item>
-  	<item name="android:textColor">@color/matji_dark_orange</item>
-  	<item name="android:singleLine">true</item>
+  <style name="cell_user_RedButton" parent="RedButton">
+  	<item name="android:layout_width">@dimen/user_cell_btn_width</item>
   </style>
 
   <style name="cell_user_LikeListButton" parent="cell_user_WhiteButton">
-  	<item name="android:drawableLeft">@drawable/img_heart</item>
-  	<item name="android:layout_marginBottom">@dimen/default_distance</item>
+  	<item name="android:drawableLeft">@drawable/icon_likelist</item>
+  	<item name="android:layout_marginBottom">@dimen/user_cell_btn_margin</item>
   </style>
   
-  <style name="cell_user_FollowButton" parent="cell_user_Button">
-  	<item name="android:background">@drawable/btn_red</item>
-  	<item name="android:textColor">@color/matji_white</item>
+  <style name="cell_user_FollowButton" parent="RedButton">
+  	<item name="android:layout_width">@dimen/user_cell_btn_width</item>
   </style>
   
   <style name="cell_user_MessageListButton" parent="cell_user_WhiteButton">
-  	<item name="android:drawableLeft">@drawable/img_heart</item>
+  	<item name="android:drawableLeft">@drawable/icon_note</item>
   	<item name="android:visibility">gone</item>
   </style>
   
@@ -420,18 +448,12 @@
 
   <!-- popup_overlay.xml -->
   <style name="PopupOverlayBallon" parent="DefaultWrap">
-    <item name="android:paddingLeft">5dp</item>
-    <item name="android:paddingTop">0dp</item>
-    <item name="android:paddingRight">23dp</item>
-    <item name="android:paddingBottom">9dp</item>
-    <item name="android:background">@drawable/map_popup</item>
-    <item name="android:scaleType">centerCrop</item>
+    <item name="android:background">@drawable/map_infobox_01top</item>
   </style>
 
   <style name="PopupOverlayTitle" parent="DefaultWrap">
-    <item name="android:maxWidth">150dp</item>
-    <item name="android:textSize">14dp</item>
-    <item name="android:textColor">@color/BRIGHT_ORANGE</item>
+    <item name="android:textSize">@dimen/popup_title_size</item>
+    <item name="android:textColor">@color/matji_gray</item>
     <item name="android:singleLine">true</item>
   </style>
 
@@ -448,6 +470,9 @@
 
   <style name="IndicatorRoundText" parent="DefaultWrap">
     <item name="android:textColor">@color/minor_tab_text_default</item>
+    <item name="android:shadowDy">1.3</item>
+    <item name="android:shadowRadius">1</item>
+    <item name="android:shadowColor">@color/minor_tab_text_shadow</item>
   </style>
 
   <style name="IndicatorRoundCheck">
@@ -498,7 +523,7 @@
   <!-- activity_post_tab.xml -->
   <style name="post_tab_TabBar" parent="DefaultWidthFill">
     <item name="android:padding">6dp</item>
-    <item name="android:background">@drawable/btn_sort_bg</item>
+    <item name="android:background">@drawable/tabbtn_bg</item>
   </style>
 
   <style name="post_tab_DivisionBar" parent="DefaultFill">
@@ -532,12 +557,12 @@
   <style name="ProfileWrapper">
     <item name="android:layout_width">@dimen/profile_size</item>
     <item name="android:layout_height">@dimen/profile_size</item>
-    <item name="android:background">@drawable/img_profile_bg</item>
   </style>
   
   <style name="Profile">
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">fill_parent</item>
+    <item name="android:src">@drawable/user_img54</item>
     <item name="android:scaleType">centerCrop</item>
   </style>
   
@@ -555,7 +580,7 @@
   </style>
   
   <style name="row_post_PostWrapper" parent="DefaultWidthFill">
-  	<item name="android:background">@drawable/post_bg</item>
+  	<item name="android:background">@drawable/box_memo</item>
   	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
   </style>
   
@@ -575,6 +600,7 @@
   <style name="row_post_Tags" parent="SmallGrayText">
    	<item name="android:drawableLeft">@drawable/img_tag</item>
   	<item name="android:drawablePadding">@dimen/default_distance_half</item>
+  	<item name="android:singleLine">true</item>
   </style>
 
   <style name="row_post_Preview" parent="DefaultWrap">
@@ -837,13 +863,6 @@
   <style name="row_simple_user_body" parent="DefaultWidthFill">
   </style>
 
-  <style name="row_simple_user_body_profile" parent="DefaultWrap">
-    <item name="android:layout_width">36.67dp</item>
-    <item name="android:layout_height">36.67dp</item>
-    <item name="android:scaleType">centerCrop</item>
-    <item name="android:layout_margin">10dp</item>
-  </style>
-
   <style name="row_simple_user_nickname" parent="DefaultWrap">
     <item name="android:textSize">16dp</item>
     <item name="android:textColor">@color/BLACK</item>
@@ -891,7 +910,7 @@
   </style>
 
   <style name="dialog_matji_action_button_text" parent="DefaultWrap">
-    <item name="android:textColor">@color/matji_dark_orange</item>
+    <item name="android:textColor">@color/matji_red</item>
     <item name="android:textSize">18dp</item>
   </style>
 
@@ -966,7 +985,7 @@
   </style>
 
   <style name="user_profile_Moresign" parent="DefaultWrap">
-	<item name="android:src">@drawable/img_moresign</item>
+	<item name="android:src">@drawable/icon_flow</item>
 	<item name="android:layout_alignParentRight">true</item>
 	<item name="android:layout_centerVertical">true</item>
   </style>

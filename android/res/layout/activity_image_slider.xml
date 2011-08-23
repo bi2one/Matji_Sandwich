@@ -70,7 +70,7 @@
 			android:layout_toLeftOf="@id/image_slider_moresign" />
 		<ImageView
 			android:id="@id/image_slider_moresign"
-			android:src="@drawable/img_moresign"
+			android:src="@drawable/icon_flow"
 			android:layout_alignParentRight="true"
 			android:layout_centerVertical="true"
 			style="@style/DefaultWrap" />

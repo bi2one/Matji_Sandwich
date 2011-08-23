@@ -39,7 +39,7 @@
 			android:layout_alignLeft="@id/cell_store_tel" />
 		<ImageView
 			style="@style/DefaultWrap"
-			android:background="@drawable/img_moresign"
+			android:background="@drawable/icon_flow"
 			android:layout_alignParentRight="true"
 			android:layout_centerVertical="true"
 			android:padding="5dp" />

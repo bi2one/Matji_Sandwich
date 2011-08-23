@@ -19,36 +19,36 @@ public class PostTabActivity extends BaseTabActivity {
     private Context context;
     private SessionTabHostUtil sessionUtil;
     private ActivityStartable lastStartedChild;
-    
+
     /**
      * Activity생성시 실행하는 메소드
      *
      * @param savedInstanceState
      */
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_post_tab);
-	tabHost = (RoundTabHost)getTabHost();
-	context = getApplicationContext();
-	sessionUtil = new SessionTabHostUtil(context);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_post_tab);
+        tabHost = (RoundTabHost)getTabHost();
+        context = getApplicationContext();
+        sessionUtil = new SessionTabHostUtil(context);
 
-	tabHost.addLeftTab("tab1",
-			   R.string.post_tab_friend,
-			   new Intent(this, PostListActivity.class));
-	tabHost.addCenterTab("tab2",
-			     R.string.post_tab_near,
-			     new Intent(this, PostNearListActivity.class));
-	tabHost.addRightTab("tab3",
-			     R.string.post_tab_all,
-			     new Intent(this, PostListActivity.class));
+        tabHost.addLeftTab("tab1",
+                R.string.post_tab_friend,
+                new Intent(this, PostListActivity.class));
+        tabHost.addCenterTab("tab2",
+                R.string.post_tab_near,
+                new Intent(this, PostNearListActivity.class));
+        tabHost.addRightTab("tab3",
+                R.string.post_tab_all,
+                new Intent(this, PostListActivity.class));
     }
 
     protected void onResume() {
-	super.onResume();
-	int baseIndex = sessionUtil.getSubTabIndex();
-	sessionUtil.flush();
-	if (baseIndex >= 0)  {
-	    tabHost.setCurrentTab(baseIndex);
-	}
+        super.onResume();
+        int baseIndex = sessionUtil.getSubTabIndex();
+        sessionUtil.flush();
+        if (baseIndex >= 0)  {
+            tabHost.setCurrentTab(baseIndex);
+        }
     }
 }

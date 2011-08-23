@@ -16,9 +16,12 @@ public class User extends MatjiData implements Serializable {
 	private String intro;
 	private int post_count;
 	private int tag_count;
-	private int store_count;
+	private int like_store_count;
+	private int discover_store_count;
+	private int bookmark_store_count;
 	private int following_count;
 	private int follower_count;
+	private int received_message_count;
 	private int image_count;
 	private boolean following;
 	private boolean followed;
@@ -57,10 +60,13 @@ public class User extends MatjiData implements Serializable {
 		dest.writeString(intro);
 		dest.writeInt(post_count);
 		dest.writeInt(tag_count);
-		dest.writeInt(store_count);
+        dest.writeInt(like_store_count);
+        dest.writeInt(discover_store_count);
+        dest.writeInt(bookmark_store_count);
 		dest.writeInt(following_count);
 		dest.writeInt(follower_count);
-		dest.writeInt(image_count);
+        dest.writeInt(image_count);
+        dest.writeInt(received_message_count);
 		dest.writeInt(following ? 1 : 0);
 		dest.writeInt(followed ? 1 : 0);
 		dest.writeValue(external_account);
@@ -79,10 +85,13 @@ public class User extends MatjiData implements Serializable {
 		intro = in.readString();
 		post_count = in.readInt();
 		tag_count = in.readInt();
-		store_count = in.readInt();
+        like_store_count = in.readInt();
+        discover_store_count = in.readInt();
+        bookmark_store_count = in.readInt();
 		following_count = in.readInt();
 		follower_count = in.readInt();
 		image_count = in.readInt();
+		received_message_count = in.readInt();
 		following = in.readInt() != 0;
 		followed = in.readInt() != 0;
 		external_account = UserExternalAccount.class.cast(in.readValue(UserExternalAccount.class.getClassLoader()));
@@ -158,15 +167,31 @@ public class User extends MatjiData implements Serializable {
 		return tag_count;
 	}
 
-	public void setStoreCount(int store_count) {
-		this.store_count = store_count;
+	public void setLikeStoreCount(int store_count) {
+		this.like_store_count = store_count;
 	}
 
-	public int getStoreCount() {
-		return store_count;
+	public int getLikeStoreCount() {
+		return like_store_count;
 	}
 
-	public void setFollowingCount(int following_count) {
+	public void setDiscoverStoreCount(int discover_store_count) {
+        this.discover_store_count = discover_store_count;
+    }
+
+    public int getDiscoverStoreCount() {
+        return discover_store_count;
+    }
+
+    public void setBookmarkStoreCount(int bookmark_store_count) {
+        this.bookmark_store_count = bookmark_store_count;
+    }
+
+    public int getBookmarkStoreCount() {
+        return bookmark_store_count;
+    }
+
+    public void setFollowingCount(int following_count) {
 		this.following_count = following_count;
 	}
 
@@ -182,13 +207,21 @@ public class User extends MatjiData implements Serializable {
 		return follower_count;
 	}
 
-	public void setImageCount(int image_count) {
-		this.image_count = image_count;
-	}
+    public void setImageCount(int image_count) {
+        this.image_count = image_count;
+    }
 
-	public int getImageCount() {
-		return image_count;
-	}
+    public int getImageCount() {
+        return image_count;
+    }
+
+    public void setReceivedMessageCount(int received_message_count) {
+        this.received_message_count = received_message_count;
+    }
+
+    public int getReceivedMessageCount() {
+        return received_message_count;
+    }
 
 	public void setFollowing(boolean following) {
 		this.following = following;

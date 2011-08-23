@@ -3,13 +3,13 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
 		android:state_pressed="true"
-		android:drawable="@drawable/btn_sort_right_p" /> <!-- pressed -->
+		android:drawable="@drawable/tabbtn_right_touch" /> <!-- pressed -->
 	<item
 		android:state_focused="true"
-		android:drawable="@drawable/btn_sort_right_p" /> <!-- focused -->
+		android:drawable="@drawable/tabbtn_right_touch" /> <!-- focused -->
 	<item
 		android:state_selected="true"
-		android:drawable="@drawable/btn_sort_right_p" /> <!-- selected -->
+		android:drawable="@drawable/tabbtn_right_touch" /> <!-- selected -->
 	<item
-		android:drawable="@drawable/btn_sort_right_d" /> <!-- default -->
+		android:drawable="@drawable/tabbtn_right" /> <!-- default -->
 </selector>

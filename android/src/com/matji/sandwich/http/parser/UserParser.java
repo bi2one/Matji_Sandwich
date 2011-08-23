@@ -51,10 +51,13 @@ public class UserParser extends MatjiDataParser {
 		}
 		user.setPostCount(getInt(object, "post_count"));
 		user.setTagCount(getInt(object, "tag_count"));
-		user.setStoreCount(getInt(object, "store_count"));
+        user.setLikeStoreCount(getInt(object, "like_store_count"));
+        user.setDiscoverStoreCount(getInt(object, "discover_store_count"));
+        user.setBookmarkStoreCount(getInt(object, "bookmark_store_count"));
 		user.setFollowingCount(getInt(object, "following_count"));
 		user.setFollowerCount(getInt(object, "follower_count"));
-		user.setFollowerCount(getInt(object, "image_count"));
+        user.setReceivedMessageCount(getInt(object, "message_count"));
+        user.setFollowerCount(getInt(object, "image_count"));
 		user.setFollowing(getBoolean(object, "following"));
 		user.setFollowed(getBoolean(object, "followed"));
 

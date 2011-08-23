@@ -24,7 +24,7 @@ public class SimpleUserAdapter extends MBaseAdapter {
             convertView = getLayoutInflater().inflate(R.layout.row_simple_user, null);
 
             rankingElement.position = (TextView) convertView.findViewById(R.id.row_simple_user_position);
-            rankingElement.profile = (ProfileImageView) convertView.findViewById(R.id.row_simple_user_profile);
+            rankingElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
             rankingElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
             rankingElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
             rankingElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_user_post_count);
@@ -40,7 +40,7 @@ public class SimpleUserAdapter extends MBaseAdapter {
             rankingElement.position.setText("" + (position + 1));
         rankingElement.profile.setUserId(user.getId());
         rankingElement.nickname.setText(user.getNick());
-        rankingElement.likeCount.setText("" + user.getStoreCount());
+        rankingElement.likeCount.setText("" + user.getLikeStoreCount());
         rankingElement.postCount.setText("" + user.getPostCount());
         rankingElement.point.setText("" + user.getMileage().getTotalPoint());
 

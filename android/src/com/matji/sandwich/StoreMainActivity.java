@@ -67,75 +67,60 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_store_main);
-
-		tabHost = (RoundTabHost) getTabHost();
-		store = (Store) getIntent().getParcelableExtra(STORE);
-
-		manager = HttpRequestManager.getInstance(this);
-		session = Session.getInstance(this);
-		dbProvider = DBProvider.getInstance(this);
-		downloader = new MatjiImageDownloader(this);
-
-		storeImage = (ImageView) findViewById(R.id.cell_store_thumbnail);
-		scrapButton = (ImageButton) findViewById(R.id.cell_store_scrap_btn);
-		likeButton = (Button) findViewById(R.id.cell_store_like_btn);
-		tagText = (TextView) findViewById(R.id.cell_store_tag);
-		foodText = (TextView) findViewById(R.id.cell_store_food);
-
-		Intent storePostListIntent = new Intent(this, StorePostListActivity.class);
-		storePostListIntent.putExtra(StorePostListActivity.STORE, (Parcelable) store);
-		
-		Intent storeImageListIntent = new Intent(this, StoreImageListActivity.class);
-		storeImageListIntent.putExtra(StoreImageListActivity.STORE, (Parcelable) store);
-		
-		Intent storeUrlListIntent = new Intent(this, StoreUrlListActivity.class);
-		storeUrlListIntent.putExtra(StoreUrlListActivity.STORE, (Parcelable) store);
-				
-		tabHost.addLeftTab("tab1",
-				R.string.store_main_post_list_view,
-				storePostListIntent);
-		tabHost.addCenterTab("tab2",
-				R.string.store_main_img,
-				storeImageListIntent);
-		tabHost.addRightTab("tab3",
-				R.string.store_main_review,
-				storeUrlListIntent);
-		
-		wrapper= (LinearLayout) findViewById(R.id.cell_store_info_Wrapper);
-		wrapper.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent intent = new Intent(getApplicationContext(), StoreDetailInfoTabActivity.class);
-				startActivity(intent);
-			}
-		});
-		
-		//	/* Set RegUser */
-		//	User regUser = store.getRegUser();
-		//	String string;
-		//	if (regUser == null) {
-		//	    string = getString(R.string.default_string_not_exist_reg_user);
-		//	    regUserText.setText(string);
-		//	} else {
-		//	    string = getString(R.string.default_string_reg_user) + ": " + regUser.getNick();
-		//	    regUserText.setText(string);
-		//	}		
-		//
-		//	/* Set Owner User */
-		//	//User ownerUser = store.getOwnerUser();
-		//	User ownerUser = null;
-		//	if (ownerUser != null) {
-		//	    string = getString(R.string.default_string_owner_user) + ": " + regUser.getNick();
-		//	    ownerUserText.setText(string);
-		//	} else {
-		//	    ownerUserText.setVisibility(TextView.GONE);
-		//	}
-
-		setInfo();
 	}
+	
+	@Override
+	protected void init() {
+	    // TODO Auto-generated method stub
+	    super.init();	    
 
-	private void setInfo() {
+        setContentView(R.layout.activity_store_main);
+
+        tabHost = (RoundTabHost) getTabHost();
+        store = (Store) getIntent().getParcelableExtra(STORE);
+
+        manager = HttpRequestManager.getInstance(this);
+        session = Session.getInstance(this);
+        dbProvider = DBProvider.getInstance(this);
+        downloader = new MatjiImageDownloader(this);
+
+        storeImage = (ImageView) findViewById(R.id.cell_store_thumbnail);
+        scrapButton = (ImageButton) findViewById(R.id.cell_store_scrap_btn);
+        likeButton = (Button) findViewById(R.id.cell_store_like_btn);
+        tagText = (TextView) findViewById(R.id.cell_store_tag);
+        foodText = (TextView) findViewById(R.id.cell_store_food);
+
+        Intent storePostListIntent = new Intent(this, StorePostListActivity.class);
+        storePostListIntent.putExtra(StorePostListActivity.STORE, (Parcelable) store);
+        
+        Intent storeImageListIntent = new Intent(this, StoreImageListActivity.class);
+        storeImageListIntent.putExtra(StoreImageListActivity.STORE, (Parcelable) store);
+        
+        Intent storeUrlListIntent = new Intent(this, StoreUrlListActivity.class);
+        storeUrlListIntent.putExtra(StoreUrlListActivity.STORE, (Parcelable) store);
+                
+        tabHost.addLeftTab("tab1",
+                R.string.store_main_post_list_view,
+                storePostListIntent);
+        tabHost.addCenterTab("tab2",
+                R.string.store_main_img,
+                storeImageListIntent);
+        tabHost.addRightTab("tab3",
+                R.string.store_main_review,
+                storeUrlListIntent);
+        
+        wrapper= (LinearLayout) findViewById(R.id.cell_store_info_Wrapper);
+        wrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), StoreDetailInfoTabActivity.class);
+                startActivity(intent);
+            }
+        });
+        refresh();
+	}
+	
+	private void refresh() {
 		/* Set StoreImage */
 		AttachFile file = store.getFile();
 		if (file != null) {
@@ -161,7 +146,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
 	public void onResume() {
 		super.onResume();
-		setInfo();
+		refresh();
 	}
 
 	 private void bookmarkRequest() {
@@ -206,7 +191,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	 	bookmark.setForeignKey(store.getId());
 	 	bookmark.setObject("Store");
 	 	dbProvider.insertBookmark(bookmark);		
-	 	me.setStoreCount(me.getStoreCount() + 1);
+	 	me.setLikeStoreCount(me.getLikeStoreCount() + 1);
 	 	scrapButton.setClickable(true);
 	 }
 
@@ -214,7 +199,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	 	User me = session.getCurrentUser();
 
 	 	dbProvider.deleteBookmark(store.getId(), "Store");
-	 	me.setStoreCount(me.getStoreCount() - 1);
+	 	me.setLikeStoreCount(me.getLikeStoreCount() - 1);
 	 	scrapButton.setClickable(true);
 	 }
 
@@ -249,7 +234,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 			break;
 		}
 
-		setInfo();
+		refresh();
 	}
 
 

@@ -1,12 +1,15 @@
 package com.matji.sandwich.http.util;
 
+import java.util.HashMap;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
-import java.util.HashMap;
+
 import com.matji.sandwich.R;
 import com.matji.sandwich.listener.ImageDownloaderListener;
 import com.matji.sandwich.util.ImageUtil;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.ProfileImageView;
 
 public class MatjiImageDownloader implements ImageDownloaderListener {
@@ -23,14 +26,16 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 
 	private ImageDownloader downloader;
 	
-	private Bitmap defaultUserImage;
+    private Bitmap defaultUserImageSmall;
+    private Bitmap defaultUserImageLarge;
 	private Bitmap defaultAttachedImage;
 		
 	public MatjiImageDownloader(Context context){
 		downloader = new ImageDownloader();
 		params = new HashMap<String, String>();
 		downloader.setDownloaderListsener(this);
-		defaultUserImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.img_profile_bg));
+        defaultUserImageSmall = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.user_img54));
+        defaultUserImageLarge = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.user_img90));
 		defaultAttachedImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.img_thumbnail_bg));
 	}
 	
@@ -44,8 +49,13 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 		
 		params.put("user_id", userId + "");
 		params.put("size", imageSize);
-		downloader.setDefaultBitmap(defaultUserImage);
-		downloader.download(URL_USER_IMAGE, params, imageView);
+		if (imageSize.equals(IMAGE_SSMALL)) {
+            downloader.setDefaultBitmap(defaultUserImageSmall);
+            downloader.download(URL_USER_IMAGE, params, imageView);
+		} else {
+            downloader.setDefaultBitmap(defaultUserImageLarge);
+            downloader.download(URL_USER_IMAGE, params, imageView);
+		}
 	}
 
 	public void downloadAttachFileImage(int attachFileId, ImageView imageView) {

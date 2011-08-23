@@ -12,5 +12,5 @@
 		android:minLines="2"
 		android:maxLines="2"
 		android:drawablePadding="@dimen/default_distance"
-		android:drawableRight="@drawable/img_moresign" />
+		android:drawableRight="@drawable/icon_flow" />
 </LinearLayout>

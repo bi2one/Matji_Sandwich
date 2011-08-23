@@ -24,15 +24,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.matji.sandwich.listener.ImageDownloaderListener;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,6 +41,8 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
+
+import com.matji.sandwich.listener.ImageDownloaderListener;
 
 
 /**

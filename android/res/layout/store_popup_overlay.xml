@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:id="@+id/popup_main_layout"
-    style="@style/PopupOverlayBallon">
-  <TextView
-      style="@style/PopupOverlayTitle"
-      android:id="@+id/popup_item_title"
-      android:text="_item_title" />
-  <LinearLayout style="@style/DefaultWrap">
-    <ImageView android:src="@drawable/img_heart"
-	       style="@style/DefaultWrap" />
-    <TextView android:id="@+id/popup_item_like_count"
-	      style="@style/DefaultWrap" />
-    <ImageView android:src="@drawable/img_post_cnt"
-	       style="@style/DefaultWrap" />
-    <TextView android:id="@+id/popup_item_post_count"
-	      style="@style/DefaultWrap" />
-  </LinearLayout>
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/popup_main_layout"
+	android:orientation="vertical"
+	style="@style/PopupOverlayBallon">
+	<TextView
+		style="@style/PopupOverlayTitle"
+		android:includeFontPadding="false"
+		android:id="@+id/popup_item_title"
+		android:maxWidth="@dimen/popup_min_width"
+		android:text="_item_title" />
+	<LinearLayout
+		style="@style/DefaultWrap">
+		<TextView
+			android:id="@+id/popup_item_like_count"
+			android:drawableLeft="@drawable/img_heart"
+			android:drawablePadding="@dimen/default_drawable_padding"
+			android:textStyle="bold"
+			android:textColor="@color/matji_red"
+			android:textSize="@dimen/popup_count_size"
+			android:singleLine="true"
+			style="@style/DefaultWrap" />
+		<TextView
+			android:id="@+id/popup_item_post_count"
+			android:drawableLeft="@drawable/img_post_cnt"
+			android:drawablePadding="@dimen/default_drawable_padding"
+			android:textStyle="bold"
+			android:textColor="@color/matji_red"
+			android:textSize="@dimen/popup_count_size"
+			android:singleLine="true"
+			android:layout_marginLeft="@dimen/default_distance_half"
+			style="@style/DefaultWrap" />
+	</LinearLayout>
 </LinearLayout>

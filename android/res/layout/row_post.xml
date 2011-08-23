@@ -10,7 +10,8 @@
 		android:id="@+id/row_post_post_wrapper"
 		style="@style/row_post_PostWrapper">
 		<LinearLayout
-			style="@style/DefaultVerticalWrap">
+			style="@style/DefaultVerticalWrap"
+			android:layout_toLeftOf="@+id/row_post_menu_btn_wrapper">
 			<!-- Name Line -->
 			<LinearLayout
 				style="@style/DefaultWrap">
@@ -68,19 +69,21 @@
 					android:id="@+id/row_post_like_count"
 					style="@style/row_post_Count" />
 			</LinearLayout>
-
 		</LinearLayout>
-		<LinearLayout
-			style="@style/DefaultWrap"
+
+		<RelativeLayout
+			android:id="@id/row_post_menu_btn_wrapper"
+			android:layout_width="@dimen/quickaction_btn_width"
+			android:layout_height="@dimen/quickaction_btn_height"
 			android:layout_centerVertical="true"
 			android:layout_alignParentRight="true">
 			<ImageButton
 				android:id="@+id/row_post_menu_btn"
+				style="@style/DefaultWrap"
 				android:background="@color/matji_transparent"
-				android:layout_width="@dimen/quickaction_btn_width"
-				android:layout_height="@dimen/quickaction_btn_height"
-				android:src="@drawable/btn_quickaction">
+				android:src="@drawable/btn_quickaction"
+				android:layout_centerInParent="true">
 			</ImageButton>
-		</LinearLayout>
+		</RelativeLayout>
 	</RelativeLayout>
 </LinearLayout>

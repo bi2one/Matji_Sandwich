@@ -47,11 +47,11 @@ public class UserProfileActivity extends BaseActivity {
 	
 	final public void refresh() {
 	    intro.setText(user.getIntro());
-	    blog.setText("아직..");
+	    blog.setText("블로그는??????????");
 	    followingCount.setText(user.getFollowingCount()+"");
 	    followerCount.setText(user.getFollowerCount()+"");
-	    findCount.setText("API");
-	    bookmarkCount.setText("API");
+	    findCount.setText(user.getDiscoverStoreCount()+"");
+	    bookmarkCount.setText(user.getBookmarkStoreCount()+"");
 	}
 	
     public void onFollowingButtonClicked(View v) {

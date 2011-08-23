@@ -36,16 +36,16 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param attrs
      */
     public RoundTabHost(Context context, AttributeSet attrs) {
-	super(context, attrs);
-	this.context = context;
-	indicatorPool = new HashMap<String, Indicator>();
-	
-	setOnTabChangedListener(this);
-	setAnimationable(false);
+        super(context, attrs);
+        this.context = context;
+        indicatorPool = new HashMap<String, Indicator>();
+
+        setOnTabChangedListener(this);
+        setAnimationable(false);
     }
 
     public void setAnimationable(boolean isAnimationOn) {
-	this.isAnimationOn = isAnimationOn;
+        this.isAnimationOn = isAnimationOn;
     }
 
     /**
@@ -56,7 +56,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param content 추가할 TabSpec이 가질 Intent
      */
     public void addLeftTab(String specLabel, int textRef, Intent content) {
-	addTab(new RoundLeftIndicator(context, textRef), specLabel, content);
+        addTab(new RoundLeftIndicator(context, textRef), specLabel, content);
     }
 
     /**
@@ -67,7 +67,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param content 추가할 TabSpec이 가질 Intent
      */
     public void addCenterTab(String specLabel, int textRef, Intent content) {
-	addTab(new RoundCenterIndicator(context, textRef), specLabel, content);
+        addTab(new RoundCenterIndicator(context, textRef), specLabel, content);
     }
 
     /**
@@ -78,7 +78,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param content 추가할 TabSpec이 가질 Intent
      */
     public void addRightTab(String specLabel, int textRef, Intent content) {
-	addTab(new RoundRightIndicator(context, textRef), specLabel, content);
+        addTab(new RoundRightIndicator(context, textRef), specLabel, content);
     }
 
     /**
@@ -89,7 +89,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param content 추가할 TabSpec이 가질 Intent
      */
     public void addLeftCheckTab(String specLabel, int textRef, Intent content) {
-	addTab(new RoundLeftCheckIndicator(context, textRef), specLabel, content);
+        addTab(new RoundLeftCheckIndicator(context, textRef), specLabel, content);
     }
 
     /**
@@ -100,7 +100,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param content 추가할 TabSpec이 가질 Intent
      */
     public void addCenterCheckTab(String specLabel, int textRef, Intent content) {
-	addTab(new RoundCenterCheckIndicator(context, textRef), specLabel, content);
+        addTab(new RoundCenterCheckIndicator(context, textRef), specLabel, content);
     }
 
     /**
@@ -111,7 +111,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param content 추가할 TabSpec이 가질 Intent
      */
     public void addRightCheckTab(String specLabel, int textRef, Intent content) {
-	addTab(new RoundRightCheckIndicator(context, textRef), specLabel, content);
+        addTab(new RoundRightCheckIndicator(context, textRef), specLabel, content);
     }
 
     /**
@@ -122,20 +122,20 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param content TabSpec이 가질 Intent
      */
     public void addTab(Indicator indicator, String specLabel, Intent content) {
-	TabHost.TabSpec spec = newTabSpec(specLabel);
-	indicatorPool.put(specLabel, indicator);
-	spec.setIndicator(indicator);
-	spec.setContent(content);
-	addTab(spec);
+        TabHost.TabSpec spec = newTabSpec(specLabel);
+        indicatorPool.put(specLabel, indicator);
+        spec.setIndicator(indicator);
+        spec.setContent(content);
+        addTab(spec);
     }
 
     public void clearAllTabs() {
-	super.clearAllTabs();
-	indicatorPool.clear();
+        super.clearAllTabs();
+        indicatorPool.clear();
     }
 
     public Indicator getIndicator(String specLabel) {
-	return indicatorPool.get(specLabel);
+        return indicatorPool.get(specLabel);
     }
 
     /**
@@ -144,7 +144,7 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @return 오른쪽에서 나타나게 하는 애니메이션 객체
      */
     private Animation inFromRightAnimation() {
-	return getAccelerateAnimation(+1.0f, 0.0f, 0.0f, 0.0f);
+        return getAccelerateAnimation(+1.0f, 0.0f, 0.0f, 0.0f);
     }
 
     /**
@@ -153,16 +153,16 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @return 왼쪽에서 나타나게 하는 애니메이션 객체
      */
     private Animation inFromLeftAnimation() {
-	return getAccelerateAnimation(-1.0f, 0.0f, 0.0f, 0.0f);
+        return getAccelerateAnimation(-1.0f, 0.0f, 0.0f, 0.0f);
     }
-    
+
     /**
      * 왼쪽으로 사라지는 애니메이션
      *
      * @return 왼쪽으로 사라지게 하는 애니메이션 객체
      */
     private Animation outToLeftAnimation() {
-	return getAccelerateAnimation(0.0f, -1.0f, 0.0f, 0.0f);
+        return getAccelerateAnimation(0.0f, -1.0f, 0.0f, 0.0f);
     }
 
     /**
@@ -171,9 +171,9 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @return 오른쪽으로 사라지게 하는 애니메이션 객체
      */
     private Animation outToRightAnimation() {
-	return getAccelerateAnimation(0.0f, +1.0f, 0.0f, 0.0f);
+        return getAccelerateAnimation(0.0f, +1.0f, 0.0f, 0.0f);
     }
-    
+
     /**
      * 관성이 적용된 slide애니메이션 객체를 리턴한다.
      *
@@ -185,13 +185,13 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @return 관성이 적용된 slide애니메이션 객체
      */
     private Animation getAccelerateAnimation(float fromXDelta, float toXDelta, float fromYDelta, float toYDelta) {
-	Animation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, fromXDelta,
-						     Animation.RELATIVE_TO_PARENT, toXDelta,
-						     Animation.RELATIVE_TO_PARENT, fromYDelta,
-						     Animation.RELATIVE_TO_PARENT, toYDelta);
-	animation.setDuration(ANIMATION_DURATION);
-	animation.setInterpolator(new AccelerateInterpolator());
-	return animation;
+        Animation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, fromXDelta,
+                Animation.RELATIVE_TO_PARENT, toXDelta,
+                Animation.RELATIVE_TO_PARENT, fromYDelta,
+                Animation.RELATIVE_TO_PARENT, toYDelta);
+        animation.setDuration(ANIMATION_DURATION);
+        animation.setInterpolator(new AccelerateInterpolator());
+        return animation;
     }
 
     /**
@@ -200,24 +200,24 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
      * @param tabId TabSpec등록시 명시한 탭의 label
      */
     public void onTabChanged(String tabId) {
-	if (isAnimationOn) {
-	    View currentTabView = getCurrentView();
-	    if (prevTabId == null) {
-		prevTabId = tabId;
-		prevTabView = currentTabView;
-		return;
-	    }
+        if (isAnimationOn) {
+            View currentTabView = getCurrentView();
+            if (prevTabId == null) {
+                prevTabId = tabId;
+                prevTabView = currentTabView;
+                return;
+            }
 
-	    // tabId가 prevTabId보다 왼쪽에 있는 탭일 때
-	    if (tabId.compareTo(prevTabId) < 0) {
-		prevTabView.setAnimation(outToRightAnimation());
-		currentTabView.setAnimation(inFromLeftAnimation());
-	    } else {
-		prevTabView.setAnimation(outToLeftAnimation());
-		currentTabView.setAnimation(inFromRightAnimation());
-	    }
-	    prevTabId = tabId;
-	    prevTabView = currentTabView;
-	}
+            // tabId가 prevTabId보다 왼쪽에 있는 탭일 때
+            if (tabId.compareTo(prevTabId) < 0) {
+                prevTabView.setAnimation(outToRightAnimation());
+                currentTabView.setAnimation(inFromLeftAnimation());
+            } else {
+                prevTabView.setAnimation(outToLeftAnimation());
+                currentTabView.setAnimation(inFromRightAnimation());
+            }
+            prevTabId = tabId;
+            prevTabView = currentTabView;
+        }
     }
 }
