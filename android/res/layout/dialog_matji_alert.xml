@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/dialog_matji_alert" >
+  <TextView android:id="@+id/dialog_matji_alert_contents"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    style="@style/dialog_matji_alert_contents" />
+  <Button android:id="@+id/dialog_matji_alert_confirm"
+	  android:layout_centerHorizontal="true"
+	  android:layout_below="@id/dialog_matji_alert_contents"
+	  android:text="@string/default_string_confirm"
+	  style="@style/dialog_matji_alert_confirm" />
+</RelativeLayout>

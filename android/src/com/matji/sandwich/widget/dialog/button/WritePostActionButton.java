@@ -19,7 +19,7 @@ public class WritePostActionButton extends ActionButton {
 	return getContext().getString(STRING_REFERENCE);
     }
 
-    public void onClick(View v) {
+    public void onButtonClick(View v) {
 	// Log.d("=====", "write post action button clicked!!");
 	Intent writePostIntent = new Intent(getContext(), WritePostTabActivity.class);
 	getContext().startActivity(writePostIntent);

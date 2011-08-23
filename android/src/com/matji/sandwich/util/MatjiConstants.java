@@ -16,6 +16,10 @@ public class MatjiConstants {
 	public static void setContext(Context context) {
 		mContext = context;
 	}
+
+    public static final String[] stringArray(int id) {
+	return mContext.getResources().getStringArray(id);
+    }
 	
 	public static final String string(int id) {
 		return mContext.getResources().getString(id);

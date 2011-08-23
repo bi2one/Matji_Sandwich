@@ -57,6 +57,15 @@
   <string name="exception_store_address_is_null">
     기본 주소가 잘못되었습니다. 
   </string>
+  <string name="exception_WritePostMatjiException">
+    내부 오류로 인해 맛이야기가 제대로 등록되지 않았습니다
+  </string>
+  <string name="exception_BitmapCompressMatjiException">
+    내부 문제로 이미지가 압축되지 않습니다
+  </string>
+  <string name="exception_BitmapCompressIOMatjiException">
+    이미지 압축 대상 파일을 생성할 수 없습니다
+  </string>
 
   <!-- server exception -->
   <string name="exception_failed_to_save_region">
@@ -316,4 +325,17 @@
 
   <!-- activity_write_post_store.xml -->
   <string name="activity_write_post_store_select">맛집을 선택해주세요.</string>
+
+  <!-- arrays.xml.write_post_tags -->
+  <string name="array_write_post_tags_date">데이트장소</string>
+  <string name="array_write_post_tags_together">회사 회식 장소</string>
+  <string name="array_write_post_tags_sbs">SBS 맛대맛</string>
+  <string name="array_write_post_tags_tv">TV에 나온 집</string>
+  <string name="array_write_post_tags_time">시간때우기 좋아요</string>
+
+  <!-- activity_write_post_tag.xml -->
+  <string name="activity_write_post_tag_hint">태그 입력</string>
+
+  <!-- WritePostTabActivity.java -->
+  <string name="write_post_tab_activity_post_empty">이야기를 입력해 주세요.</string>
 </resources>

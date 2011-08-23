@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DefaultFill" >
+  <RelativeLayout
+      android:id="@+id/activity_write_post_tag_edittext_wrapper"
+      style="@style/activity_write_post_tag_edittext_wrapper"
+      android:layout_alignParentTop="true" >
+    <EditText
+	android:id="@+id/activity_write_post_tag_text"
+	android:hint="@string/activity_write_post_tag_hint"
+	android:layout_centerInParent="true"
+	style="@style/activity_write_post_tag_edittext" />
+  </RelativeLayout>
+
+  <ListView
+      android:id="@+id/activity_write_post_tag_listview"
+      android:layout_below="@id/activity_write_post_tag_edittext_wrapper"
+      style="@style/DefaultFill" />
+
+  <ImageView
+      android:id="@+id/activity_write_post_tag_listview_wrapper"
+      android:layout_alignLeft="@id/activity_write_post_tag_listview"
+      android:layout_alignTop="@id/activity_write_post_tag_listview"
+      android:layout_alignRight="@id/activity_write_post_tag_listview"
+      android:layout_alignBottom="@id/activity_write_post_tag_listview"
+      android:visibility="gone"
+      style="@style/activity_write_post_tag_listview_wrapper" />
+</RelativeLayout>

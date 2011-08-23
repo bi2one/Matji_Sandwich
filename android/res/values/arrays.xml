@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <string-array name="write_post_tags">
+    <item>@string/array_write_post_tags_date</item>
+    <item>@string/array_write_post_tags_together</item>
+    <item>@string/array_write_post_tags_sbs</item>
+    <item>@string/array_write_post_tags_tv</item>
+    <item>@string/array_write_post_tags_time</item>
+    
+    <item>@string/array_write_post_tags_date</item>
+    <item>@string/array_write_post_tags_together</item>
+    <item>@string/array_write_post_tags_sbs</item>
+    <item>@string/array_write_post_tags_tv</item>
+    <item>@string/array_write_post_tags_time</item>
+  </string-array>
+</resources>
+      

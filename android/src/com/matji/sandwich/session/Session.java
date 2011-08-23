@@ -83,7 +83,6 @@ public class Session implements Requestable {
 		dbProvider.deleteLikes();
 		dbProvider.deleteFollowers();
 		dbProvider.deleteFollowings();
-		
 	}
 
 	public boolean isLogin(){

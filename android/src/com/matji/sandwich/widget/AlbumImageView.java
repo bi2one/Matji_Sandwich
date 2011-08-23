@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.PhotoUtil;
+import com.matji.sandwich.util.MatjiConstants;
 
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
@@ -19,7 +20,10 @@ import java.io.File;
 
 public class AlbumImageView extends RelativeLayout {
     private static final int LAYOUT_REFERENCE = R.layout.album_image_view;
-    private final int REQUIRED_SIZE = 60; // image thumbnail의 가로 세로 크기
+    private static final int THUMBNAIL_WIDTH_REF = R.dimen.album_view_contents_width;
+    private static final int THUMBNAIL_HEIGHT_REF = R.dimen.album_view_contents_height;
+    private static final int THUMBNAIL_WIDTH = (int)MatjiConstants.dimen(THUMBNAIL_WIDTH_REF);
+    private static final int THUMBNAIL_HEIGHT = (int)MatjiConstants.dimen(THUMBNAIL_HEIGHT_REF);
     private ImageView imageView;
     private Context context;
     private File file;
@@ -63,8 +67,9 @@ public class AlbumImageView extends RelativeLayout {
 	    //Find the correct scale value. It should be the power of 2.
 	    int width_tmp=o.outWidth, height_tmp=o.outHeight;
 	    int scale=1;
+
 	    while(true){
-		if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
+		if(width_tmp/2<THUMBNAIL_WIDTH || height_tmp/2<THUMBNAIL_HEIGHT)
 		    break;
 		width_tmp/=2;
 		height_tmp/=2;

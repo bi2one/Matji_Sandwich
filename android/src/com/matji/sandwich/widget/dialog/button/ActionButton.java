@@ -9,14 +9,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.widget.dialog.MatjiDialog;
 
 public abstract class ActionButton extends RelativeLayout implements OnClickListener {
     private static final int LAYOUT_REFERENCE = R.layout.dialog_action_button;
     private Context context;
     private TextView title;
+    private OnClickListener listener;
 
     protected abstract String setTitle();
-
+    public abstract void onButtonClick(View v);
+    
     public ActionButton(Context context) {
         super(context);
         init(context);
@@ -27,6 +30,10 @@ public abstract class ActionButton extends RelativeLayout implements OnClickList
         init(context);
     }
 
+    public void setLastOnClickListener(OnClickListener listener) {
+	this.listener = listener;
+    }
+
     private void init(Context context) {
         this.context = context;
         LayoutInflater.from(context).inflate(LAYOUT_REFERENCE, this, true);
@@ -35,5 +42,8 @@ public abstract class ActionButton extends RelativeLayout implements OnClickList
         title.setText(setTitle());
     }
 
-    public void onClick(View v) { }
+    public void onClick(View v) {
+	onButtonClick(v);
+	listener.onClick(v);
+    }
 }
