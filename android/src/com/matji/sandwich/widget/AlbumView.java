@@ -102,21 +102,35 @@ public class AlbumView extends LinearLayout {
 	return false;
     }
 
-    public boolean isContains(File file) {
+    public ArrayList<File> getFiles() {
+	ArrayList<File> files = new ArrayList<File>();
+
 	for (int i = 0; i < rowSize; i++) {
 	    ArrayList<AlbumImageView> rowImages = albumImages.get(i);
 	    for (int j = 0; j < colSize; j++) {
-		if (i == currentRow && j == currentCol) // 다 돌았을 때
-		    return false;
+		if (i == currentRow && j == currentCol)
+		    return files;
 		else {
-		    // 다 돌지 않았을 때
 		    AlbumImageView frame = rowImages.get(j);
-		    if (frame.isFileEquals(file)) {
-			return true;
-		    }
+		    files.add(frame.getFile());
 		}
 	    }
 	}
+	
+	return files;
+    }
+
+    public boolean isContains(File targetFile) {
+	ArrayList<File> files = getFiles();
+	
+	for (File file : files) {
+	    if (isFileNameEquals(file, targetFile))
+		return true;
+	}
 	return false;
+    }
+
+    private boolean isFileNameEquals(File file1, File file2) {
+	return file1.getAbsolutePath().equals(file2.getAbsolutePath());
     }
 }

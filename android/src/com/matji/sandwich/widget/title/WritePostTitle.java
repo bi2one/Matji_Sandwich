@@ -28,6 +28,7 @@ public class WritePostTitle extends RelativeLayout implements View.OnClickListen
 	this.context = context;
 	LayoutInflater.from(context).inflate(R.layout.title_write_post, this, true);
 	completeButton = (Button)findViewById(R.id.title_write_post_complete);
+	completeButton.setOnClickListener(this);
     }
 
     public void setOnClickListener(OnClickListener listener) {

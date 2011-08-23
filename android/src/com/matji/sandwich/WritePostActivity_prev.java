@@ -146,11 +146,11 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 			double lat = (double)mapView.getMapCenter().getLatitudeE6() / (double)1E6;
 			double lng = (double)mapView.getMapCenter().getLongitudeE6() / (double)1E6;
 			if (storeId == STORE_ID_IS_NULL) {
-				postHttpRequest.actionNew(postField.getText().toString().trim(),
-						  tagText, "ANDROID", lat, lng);
+			    postHttpRequest.actionNew(postField.getText().toString().trim(),
+						  tagText, PostHttpRequest.Device.ANDROID, lat, lng);
 			} else {
-				postHttpRequest.actionNew(postField.getText().toString().trim(),
-						  tagText, "ANDROID", storeId);
+			    postHttpRequest.actionNew(postField.getText().toString().trim(),
+						  tagText, PostHttpRequest.Device.ANDROID, storeId);
 			}
 			
 			manager.request(this, postHttpRequest, POST_WRITE_REQUEST, this);

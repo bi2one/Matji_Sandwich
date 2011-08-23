@@ -48,7 +48,8 @@ public class WritePostStoreActivity extends BaseActivity implements OnItemClickL
 	Store store = element.getStore();
 	
 	selectedText.setText(store.getName());
+	selectedText.setTag(store);
 	sessionUtil.setStoreId(store.getId());
-	parentActivity.onChecked(WritePostTabActivity.TAB_ID_STORE);
+	parentActivity.onChecked(WritePostTabActivity.TAB_ID_STORE, true);
     }
 }

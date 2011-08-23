@@ -18,4 +18,6 @@ public class SessionIndex {
 
     public static final String WRITE_POST_POST = "WritePostTabActivity.post";
     public static final String WRITE_POST_STORE_ID = "WritePostTabActivity.store_id";
+    public static final String WRITE_POST_IMAGES = "WritePostTabActivity.images";
+    public static final String WRITE_POST_TAGS = "WritePostTabActivity.tags";
 }

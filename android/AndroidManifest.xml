@@ -83,6 +83,8 @@
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="WritePostPictureActivity"
 				  android:screenOrientation="portrait"></activity>
+		<activity android:name="WritePostTagActivity"
+				  android:screenOrientation="portrait"></activity>
 		<activity android:name="WritePostTabActivity"
 				  android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize"></activity>

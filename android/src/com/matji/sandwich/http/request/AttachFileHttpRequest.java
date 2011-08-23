@@ -22,7 +22,6 @@ public class AttachFileHttpRequest extends HttpRequest {
     	
     	postHashtable.put("upload_file", imageFile);
     	postHashtable.put("post_id", postId + "");
-    	
     }
     
     public void actionImage(){

@@ -1014,4 +1014,46 @@
    <item name="android:layout_width">80dp</item>
     <item name="android:layout_height">60dp</item>
   </style>
+
+  <!-- row_post_tag.xml -->
+  <style name="row_post_tag" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/btn_white_to_lightpink</item>
+    <item name="android:paddingLeft">6.67dp</item>
+    <item name="android:paddingTop">10dp</item>
+    <item name="android:paddingBottom">10dp</item>
+  </style>
+
+  <style name="row_post_tag_text" parent="DefaultWrap">
+    <item name="android:textColor">@color/BLACK</item>
+    <item name="android:textSize">16.67dp</item>
+  </style>
+
+  <!-- activity_write_post_tag.xml -->
+  <style name="activity_write_post_tag_edittext_wrapper" parent="DefaultWidthFill">
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:paddingTop">6.67dp</item>
+    <item name="android:paddingBottom">6.67dp</item>
+    <item name="android:background">@color/matji_light_pink</item>
+  </style>
+
+  <style name="activity_write_post_tag_edittext" parent="DefaultWidthFill">
+    <item name="android:textColor">@color/BLACK</item>
+    <item name="android:textSize">16.67dp</item>
+  </style>
+
+  <style name="activity_write_post_tag_listview_wrapper" parent="DefaultFill">
+    <item name="android:background">@color/transparent_black</item>
+  </style>
+
+  <!-- dialog_matji_alert.xml -->
+  <style name="dialog_matji_alert" parent="dialog_matji"></style>
+
+  <style name="dialog_matji_alert_contents" parent="dialog_matji_action_button_text">
+    <item name="android:layout_marginBottom">10dp</item>
+  </style>
+
+  <style name="dialog_matji_alert_confirm" parent="dialog_matji_cancel">
+    <item name="android:layout_width">70dp</item>
+  </style>
 </resources>

@@ -2,6 +2,7 @@
 <resources>
 	<color name="invisible">#00ffffff</color>
 	<color name="transparent">#55ffffff</color>
+	<color name="transparent_black">#88000000</color>
 	<color name="pressed1">#686e77</color>
 	<color name="pressed2">#40474f</color>
 	<color name="focused1">#959ca4</color>

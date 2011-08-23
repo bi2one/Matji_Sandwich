@@ -23,4 +23,10 @@ public class WritePostPictureActivity extends BaseActivity {
 	// parentActivity = (WritePostTabActivity)getParent();
 	sessionUtil = new SessionWritePostUtil(context);
     }
+
+    protected void onPause() {
+	super.onPause();
+	// Log.d("=====", "albumView files: " + albumView.getFiles().toString());
+	sessionUtil.setPictureFiles(albumView.getFiles());
+    }
 }
