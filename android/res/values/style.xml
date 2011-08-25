@@ -578,13 +578,18 @@
   </style>
   
   <style name="row_post_CreatedAt" parent="SmallGrayText">
+    <item name="android:layout_marginRight">@dimen/default_distance_half</item>
   </style>
 
   <style name="row_post_Comment" parent="SmallRedText">
     <item name="android:text">@string/default_string_comment</item>
+    <item name="android:layout_marginRight">@dimen/default_drawable_padding</item>
   </style>
   
   <style name="row_post_Count" parent="SmallGrayText">
+  </style>
+  
+  <style name="row_post_LikeCount" parent="row_post_Count">
   </style>
   
   <style name="row_post_Like" parent="SmallRedText">

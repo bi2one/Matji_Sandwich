@@ -68,11 +68,14 @@
 			<com.matji.sandwich.widget.BoldStyleTextView
 				android:id="@+id/row_post_comment_count"
 				style="@style/row_post_Count"
+				android:layout_marginRight="@dimen/default_drawable_padding"
 				android:layout_below="@id/row_post_previews"
 				android:layout_toRightOf="@id/row_post_comment" />
 			<com.matji.sandwich.widget.BoldStyleTextView
 				android:id="@+id/row_post_like_count"
-				style="@style/row_post_Count"
+				style="@style/row_post_LikeCount"
+				android:layout_marginRight="@dimen/default_drawable_padding"
+				android:drawablePadding="@dimen/default_drawable_padding"
 				android:layout_below="@id/row_post_previews"
 				android:layout_toRightOf="@id/row_post_comment_count"
 				android:drawableLeft="@drawable/icon_hand01" />

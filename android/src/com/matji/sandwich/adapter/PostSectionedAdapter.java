@@ -132,7 +132,8 @@ public class PostSectionedAdapter extends SectionedAdapter {
             int padding = (int) MatjiConstants.dimen(R.dimen.default_distance);
             convertView.setPadding(padding, padding, 0, 0);
         } else {
-            postSectionElement.subtitle.setVisibility(View.GONE);
+            if (postSectionElement.subtitle != null)
+                postSectionElement.subtitle.setVisibility(View.GONE);
         }
         
         return convertView;
