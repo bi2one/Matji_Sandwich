@@ -14,7 +14,7 @@ import android.view.View.OnTouchListener;
 
 import com.matji.sandwich.session.SessionMapUtil;
 
-public class MatjiMapView extends MapView implements OnTouchListener {
+public class MatjiMapView extends MapView {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
     private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
     private static final int MAP_CENTER_CHANGE_BOUND_LAT = 100;
@@ -33,13 +33,12 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 
     public MatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	setOnTouchListener(this);
+	// setOnTouchListener(this);
 	sessionUtil = new SessionMapUtil(context);
 	mapController = getController();
     }
 
     public void startMapCenterThread() {
-	notifySessionChanged();
 	if (asyncTask == null) {
 	    asyncTask = new MapAsyncTask();
 	    asyncTask.execute(0);
@@ -54,10 +53,6 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 	    tempMapCenter = null;
 	    return result;
 	}
-    }
-
-    public void notifySessionChanged() {
-	mapController.setCenter(sessionUtil.getCenter());
     }
 
     public void stopMapCenterThread() {
@@ -155,14 +150,14 @@ public class MatjiMapView extends MapView implements OnTouchListener {
 	return null;
     }
 
-    public boolean onTouch(View v, MotionEvent e) {
-	switch(e.getAction()) {
-	case MotionEvent.ACTION_DOWN:
-	    stopMapCenterThread();
-	    break;
-	case MotionEvent.ACTION_UP:
-	    startMapCenterThread();
-	}
-	return false;
-    }
+    // public boolean onTouch(View v, MotionEvent e) {
+	// switch(e.getAction()) {
+	// case MotionEvent.ACTION_DOWN:
+	//     stopMapCenterThread();
+	//     break;
+	// case MotionEvent.ACTION_UP:
+	//     startMapCenterThread();
+	// }
+    // 	return false;
+    // }
 }

@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.session.SessionRecentLocationUtil;
+import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.widget.StoreMapNearListView;
 
 public class MainMapActivity extends BaseMapActivity {
@@ -26,6 +28,7 @@ public class MainMapActivity extends BaseMapActivity {
     private View flipButton;
     private boolean currentViewIsMap;
     private SessionRecentLocationUtil sessionLocationUtil;
+    private SessionMapUtil sessionMapUtil;
 
     private Drawable flipMapViewImage;
     private Drawable flipNearStoreImage;
@@ -36,6 +39,7 @@ public class MainMapActivity extends BaseMapActivity {
 
         context = getApplicationContext();
         sessionLocationUtil = new SessionRecentLocationUtil(context);
+	sessionMapUtil = new SessionMapUtil(context);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
         mapView = (MainMatjiMapView)findViewById(R.id.map_view);
         mapView.init(addressView, this);
@@ -52,6 +56,7 @@ public class MainMapActivity extends BaseMapActivity {
     protected void onResume() {
         super.onResume();
         mapView.startMapCenterThread();
+	mapView.setCenterNotAnimate(sessionMapUtil.getCenter());
     }
 
     protected void onNotFlowResume() {
@@ -62,6 +67,7 @@ public class MainMapActivity extends BaseMapActivity {
 
     protected void onPause() {
         super.onPause();
+	// Log.d("=====", "mainmap activity pause");
         mapView.stopMapCenterThread();
     }
 
@@ -97,7 +103,7 @@ public class MainMapActivity extends BaseMapActivity {
         ((ImageButton) flipButton).setImageDrawable(flipNearStoreImage);
         mapView.setVisibility(View.VISIBLE);
         storeListView.setVisibility(View.GONE);
-        mapView.notifySessionChanged();
+        mapView.setCenter(sessionMapUtil.getCenter());
     }
 
     private void showStoreListView() {

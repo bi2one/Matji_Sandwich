@@ -26,6 +26,8 @@ public class WritePostStoreListView extends RequestableMListView {
     private StoreHttpRequest request;
     private SessionMapUtil sessionUtil;
     private ArrayList<MatjiData> adapterData;
+    private GeoPoint neBound;
+    private GeoPoint swBound;
 
     public WritePostStoreListView(Context context, AttributeSet attrs) {
 	super(context, attrs, new WritePostStoreAdapter(context), 10);
@@ -44,14 +46,25 @@ public class WritePostStoreListView extends RequestableMListView {
 	setPage(1);
     }
 
-    public void init(Activity activity) {
+    public void init(Activity activity, GeoPoint neBound, GeoPoint swBound) {
 	setActivity(activity);
+	setBound(neBound, swBound);
+    }
+
+    public void setNeBound(GeoPoint neBound) {
+	this.neBound = neBound;
+    }
+
+    public void setSwBound(GeoPoint swBound) {
+	this.swBound = swBound;
+    }
+
+    public void setBound(GeoPoint neBound, GeoPoint swBound) {
+	setNeBound(neBound);
+	setSwBound(swBound);
     }
 
     public HttpRequest request() {
-	GeoPoint neBound = sessionUtil.getNEBound();
-	GeoPoint swBound = sessionUtil.getSWBound();
-	
 	request.actionNearbyList((double) swBound.getLatitudeE6() / 1E6,
 				 (double) neBound.getLatitudeE6() / 1E6,
 				 (double) swBound.getLongitudeE6() / 1E6,
