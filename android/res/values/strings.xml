@@ -323,8 +323,8 @@
   <string name="dialog_action_button_write_post">이야기 쓰기</string>
   <string name="dialog_action_button_write_store">맛집 발견하기</string>
 
-  <!-- activity_write_post_store.xml -->
-  <string name="activity_write_post_store_select">맛집을 선택해주세요.</string>
+  <!-- write_post_store_view.xml -->
+  <string name="write_post_store_view_select">맛집을 선택해주세요.</string>
 
   <!-- arrays.xml.write_post_tags -->
   <string name="array_write_post_tags_date">데이트장소</string>
@@ -338,4 +338,7 @@
 
   <!-- WritePostTabActivity.java -->
   <string name="write_post_tab_activity_post_empty">이야기를 입력해 주세요.</string>
+
+  <!-- simple_submit_location_bar.xml -->
+  <string name="simple_submit_location_bar_submit">지역변경</string>
 </resources>

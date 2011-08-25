@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    style="@style/DefaultFill" >
+  <com.matji.sandwich.widget.SimpleSubmitLocationBar
+      android:id="@+id/radius_matji_mapview_location_bar"
+      android:layout_alignParentTop="true"
+      style="@style/DefaultWidthFill" />
+
+  <RelativeLayout
+      android:layout_below="@id/radius_matji_mapview_location_bar"
+      style="@style/DefaultFill">
+    <com.matji.sandwich.map.MatjiMapView
+	android:id="@+id/radius_matji_mapview_map"
+	style="@style/DefaultFill"
+	android:enabled="true"
+	android:clickable="true"
+	android:focusable="true"
+	android:apiKey="@string/map_api_key" />
+
+    <ImageView
+	android:layout_centerInParent="true"
+	style="@style/radius_matji_mapview_ring" />
+
+    <ImageView
+	android:layout_centerInParent="true"
+	style="@style/radius_matji_mapview_center" />
+  </RelativeLayout>
+</RelativeLayout>

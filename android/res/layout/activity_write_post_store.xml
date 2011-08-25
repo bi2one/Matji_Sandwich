@@ -1,34 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	      style="@style/activity_write_post_store" >
-  <RelativeLayout style="@style/DefaultMinorTitleBar">
-    <TextView android:id="@+id/activity_write_post_store_selected"
-	      android:layout_toLeftOf="@+id/activity_write_post_store_divider1"
-	      android:layout_alignParentLeft="true"
-	      android:layout_centerVertical="true"
-	      android:text="@string/activity_write_post_store_select"
-	      style="@style/activity_write_post_store_selected" />
-    <ImageView
-	android:id="@id/activity_write_post_store_divider1"
-	android:layout_toLeftOf="@+id/activity_write_post_store_search"
-	style="@style/DefaultMinorTitleBarDivider" />
-    <ImageButton
-	android:id="@+id/activity_write_post_store_search"
-	android:layout_toLeftOf="@+id/activity_write_post_store_divider2"
-	android:onClick="onChangeLocationClick"
-	style="@style/activity_write_post_store_search" />
-    <ImageView
-	android:id="@id/activity_write_post_store_divider2"
-	android:layout_toLeftOf="@+id/activity_write_post_store_add"
-	style="@style/DefaultMinorTitleBarDivider" />
-    <ImageButton
-	android:id="@id/activity_write_post_store_add"
-	android:layout_alignParentRight="true"
-	android:onClick="onNewStoreClick"
-	style="@style/activity_write_post_store_add" />
-  </RelativeLayout>
-  
-  <com.matji.sandwich.widget.WritePostStoreListView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/DefaultFill" >
+  <com.matji.sandwich.widget.WritePostStoreView
       android:id="@+id/activity_write_post_store_listview"
+      android:layout_alignParentTop="true"
       style="@style/DefaultFill" />
-</LinearLayout>
+  <com.matji.sandwich.map.RadiusMatjiMapView
+      android:id="@+id/activity_write_post_store_mapview"
+      android:layout_alignParentTop="true"
+      android:visibility="gone"
+      android:enabled="true"
+      android:clickable="true"
+      android:focusable="true"
+      android:apiKey="@string/map_api_key"
+      style="@style/DefaultFill" />
+</RelativeLayout>

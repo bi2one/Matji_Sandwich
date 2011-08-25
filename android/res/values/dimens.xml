@@ -112,4 +112,10 @@
 	<!-- Popup menu -->
 	<dimen name="popupmenu_width">48.67dp</dimen>
 	<dimen name="popupmenu_height">47.33dp</dimen>
+
+	<!-- radius_matji_mapview.xml -->
+	<dimen name="radius_matji_mapview_ring_width">280dp</dimen>
+	<dimen name="radius_matji_mapview_ring_height">280dp</dimen>
+	<dimen name="radius_matji_mapview_center_width">6.67dp</dimen>
+	<dimen name="radius_matji_mapview_center_height">6.67dp</dimen>
 </resources>

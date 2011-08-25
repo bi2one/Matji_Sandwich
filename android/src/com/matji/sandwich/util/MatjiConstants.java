@@ -2,6 +2,7 @@ package com.matji.sandwich.util;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.WindowManager;
 
 /**
  * string, dimen 등에서 정의된 상수를 가져올 때 사용하는 클래스.
@@ -11,29 +12,29 @@ import android.graphics.drawable.Drawable;
  *
  */
 public class MatjiConstants {
-	private static Context mContext;
-	
-	public static void setContext(Context context) {
-		mContext = context;
-	}
+    private static Context mContext;
+
+    public static void setContext(Context context) {
+	mContext = context;
+    }
 
     public static final String[] stringArray(int id) {
 	return mContext.getResources().getStringArray(id);
     }
 	
-	public static final String string(int id) {
-		return mContext.getResources().getString(id);
-	}
+    public static final String string(int id) {
+	return mContext.getResources().getString(id);
+    }
 	
-	public static final float dimen(int id) {
-		return mContext.getResources().getDimension(id);
-	}
+    public static final float dimen(int id) {
+	return mContext.getResources().getDimension(id);
+    }
 	
-	public static final int color(int id) {
-		return mContext.getResources().getColor(id);
-	}
+    public static final int color(int id) {
+	return mContext.getResources().getColor(id);
+    }
 	
-	public static final Drawable drawable(int id) {
-		return mContext.getResources().getDrawable(id);
-	}
+    public static final Drawable drawable(int id) {
+	return mContext.getResources().getDrawable(id);
+    }
 }

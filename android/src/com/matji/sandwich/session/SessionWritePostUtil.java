@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.matji.sandwich.data.provider.PreferenceProvider;
 
+import com.google.android.maps.GeoPoint;
+
 import java.io.File;
 import java.io.NotSerializableException;
 import java.util.ArrayList;

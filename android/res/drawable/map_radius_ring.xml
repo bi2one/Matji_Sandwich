@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="ring" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:innerRadius="8.67dp"
+    android:thickness="124.33dp"
+    android:useLevel="false">
+    <size android:width="280dp"
+	  android:height="280dp" />
+    <stroke android:width="2dp" android:color="@color/matji_red" />
+    <solid android:color="@color/matji_transient_red" />
+</shape>

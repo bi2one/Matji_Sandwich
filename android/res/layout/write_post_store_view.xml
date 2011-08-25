@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/write_post_store_view" >
+  <RelativeLayout style="@style/DefaultMinorTitleBar"
+		  android:layout_alignParentTop="true"
+		  android:id="@+id/write_post_store_view_title_bar" >
+    <TextView android:id="@+id/write_post_store_view_selected"
+	      android:layout_toLeftOf="@+id/write_post_store_view_divider1"
+	      android:layout_alignParentLeft="true"
+	      android:layout_centerVertical="true"
+	      android:text="@string/write_post_store_view_select"
+	      style="@style/write_post_store_view_selected" />
+    <ImageView
+	android:id="@id/write_post_store_view_divider1"
+	android:layout_toLeftOf="@+id/write_post_store_view_search"
+	style="@style/DefaultMinorTitleBarDivider" />
+    <ImageButton
+	android:id="@+id/write_post_store_view_search"
+	android:layout_toLeftOf="@+id/write_post_store_view_divider2"
+	android:onClick="onChangeLocationClick"
+	style="@style/write_post_store_view_search" />
+    <ImageView
+	android:id="@id/write_post_store_view_divider2"
+	android:layout_toLeftOf="@+id/write_post_store_view_add"
+	style="@style/DefaultMinorTitleBarDivider" />
+    <ImageButton
+	android:id="@id/write_post_store_view_add"
+	android:layout_alignParentRight="true"
+	android:onClick="onNewStoreClick"
+	style="@style/write_post_store_view_add" />
+  </RelativeLayout>
+  
+  <com.matji.sandwich.widget.WritePostStoreListView
+      android:id="@+id/write_post_store_view_listview"
+      android:layout_below="@id/write_post_store_view_title_bar"
+      style="@style/DefaultFill" />
+</RelativeLayout>

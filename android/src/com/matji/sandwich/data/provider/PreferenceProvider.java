@@ -71,7 +71,13 @@ public class PreferenceProvider {
 		Integer intValue = (Integer)sharedObjects.get(key);
 		return (intValue == null) ?  defValue : intValue.intValue();
 	}
-	
+
+	public float getFloat(String key, float defValue){
+//		return sharedPref.getInt(key, defValue);
+		Float floatValue = (Float)sharedObjects.get(key);
+		return (floatValue == null) ?  defValue : floatValue.floatValue();
+	}
+    
 	public String getString(String key ,String defValue){
 //		return sharedPref.getString(key, defValue);
 		String stringValue = (String)sharedObjects.get(key);
@@ -93,6 +99,13 @@ public class PreferenceProvider {
 //		sharedPref.edit().commit();
 		Integer intValue = new Integer(value);
 		sharedObjects.put(key, intValue);
+	}
+
+	public void setFloat(String key, int value){
+//		sharedPref.edit().putInt(key, value);
+//		sharedPref.edit().commit();
+		Float floatValue = new Float(value);
+		sharedObjects.put(key, floatValue);
 	}
 	
 	public void setBoolean(String key, boolean value){

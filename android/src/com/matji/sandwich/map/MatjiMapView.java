@@ -14,7 +14,7 @@ import android.view.View.OnTouchListener;
 
 import com.matji.sandwich.session.SessionMapUtil;
 
-public class MatjiMapView extends MapView {
+public class MatjiMapView extends MapView implements MatjiMapViewInterface {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
     private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
     private static final int MAP_CENTER_CHANGE_BOUND_LAT = 100;
@@ -27,10 +27,6 @@ public class MatjiMapView extends MapView {
     private SessionMapUtil sessionUtil;
     private MapController mapController;
 	
-    public static enum BoundType {
-	MAP_BOUND_NE, MAP_BOUND_SW, MAP_BOUND_SE, MAP_BOUND_NW
-    }
-
     public MatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	// setOnTouchListener(this);

@@ -166,7 +166,7 @@
   	<item name="android:layout_height">@dimen/red_btn_height</item>
   	<item name="android:background">@drawable/btn_red</item>
   	<item name="android:textColor">@color/matji_white</item>
-  	<item name="android:singleLine">true</item>		
+	<item name="android:singleLine">true</item>		
 	<item name="android:shadowColor">@color/red_btn_shadow</item>
 	<item name="android:shadowDy">-1.3</item>
 	<item name="android:shadowRadius">1</item>
@@ -939,31 +939,6 @@
     <item name="android:background">@drawable/btn_white_to_lightpink</item>
   </style>
 
-  <!-- activity_write_post_store.xml -->
-  <style name="activity_write_post_store" parent="DefaultFill">
-    <item name="android:background">@color/WHITE</item>
-    <item name="android:orientation">vertical</item>
-  </style>
-
-  <style name="activity_write_post_store_selected" parent="DefaultWidthFill">
-    <item name="android:paddingLeft">@dimen/minor_title_location_padding</item>
-    <item name="android:paddingRight">@dimen/minor_title_location_padding</item>
-    <item name="android:textColor">@color/matji_brown_text</item>
-  </style>
-
-  <style name="activity_write_post_store_imagebutton" parent="DefaultHeightFill">
-    <item name="android:layout_width">@dimen/minor_title_button_width</item>
-    <item name="android:background">@color/invisible</item>
-  </style>
-
-  <style name="activity_write_post_store_search" parent="activity_write_post_store_imagebutton">
-    <item name="android:src">@drawable/icon_navi_search</item>
-  </style>
-  
-  <style name="activity_write_post_store_add" parent="activity_write_post_store_imagebutton">
-    <item name="android:src">@drawable/btn_register_store</item>
-  </style>
-  
   <!-- User Profile (Detail information) -->
   <style name="user_profile_Title" parent="DefaultWrap">
   </style>
@@ -1074,5 +1049,43 @@
 
   <style name="dialog_matji_alert_confirm" parent="dialog_matji_cancel">
     <item name="android:layout_width">70dp</item>
+  </style>
+
+  <!-- radius_matji_mapview.xml -->
+  <style name="radius_matji_mapview_ring" parent="DefaultWrap">
+    <item name="android:layout_width">@dimen/radius_matji_mapview_ring_width</item>
+    <item name="android:layout_height">@dimen/radius_matji_mapview_ring_height</item>
+    <item name="android:src">@drawable/map_radius_ring</item>
+  </style>
+
+  <style name="radius_matji_mapview_center" parent="DefaultWrap">
+    <item name="android:layout_width">@dimen/radius_matji_mapview_center_width</item>
+    <item name="android:layout_height">@dimen/radius_matji_mapview_center_height</item>
+    <item name="android:src">@drawable/map_center_circle</item>
+  </style>
+
+  <!-- write_post_store_view.xml -->
+  <style name="write_post_store_view" parent="DefaultFill">
+    <item name="android:background">@color/WHITE</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="write_post_store_view_selected" parent="DefaultWidthFill">
+    <item name="android:paddingLeft">@dimen/minor_title_location_padding</item>
+    <item name="android:paddingRight">@dimen/minor_title_location_padding</item>
+    <item name="android:textColor">@color/matji_brown_text</item>
+  </style>
+
+  <style name="write_post_store_view_imagebutton" parent="DefaultHeightFill">
+    <item name="android:layout_width">@dimen/minor_title_button_width</item>
+    <item name="android:background">@color/invisible</item>
+  </style>
+
+  <style name="write_post_store_view_search" parent="write_post_store_view_imagebutton">
+    <item name="android:src">@drawable/icon_navi_search</item>
+  </style>
+  
+  <style name="write_post_store_view_add" parent="write_post_store_view_imagebutton">
+    <item name="android:src">@drawable/btn_register_store</item>
   </style>
 </resources>

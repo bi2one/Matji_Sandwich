@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/DefaultMinorTitleBar" >
+  <TextView android:id="@+id/simple_submit_location_bar_address"
+	    android:layout_alignParentLeft="true"
+	    android:layout_toLeftOf="@+id/simple_submit_location_bar_submit"
+	    style="@style/DefaultWidthFill" />
+	    <!-- style="@style/simple_submit_location_bar_address" /> -->
+  <ImageView style="@style/DefaultMinorTitleBarDivider"
+	     android:layout_toLeftOf="@id/simple_submit_location_bar_submit" />
+  <Button android:id="@id/simple_submit_location_bar_submit"
+	  android:text="@string/simple_submit_location_bar_submit"
+	  android:layout_alignParentRight="true"
+	  style="@style/DefaultWrap" />
+</RelativeLayout>

@@ -46,9 +46,8 @@ public class WritePostStoreListView extends RequestableMListView {
 	setPage(1);
     }
 
-    public void init(Activity activity, GeoPoint neBound, GeoPoint swBound) {
+    public void init(Activity activity) {
 	setActivity(activity);
-	setBound(neBound, swBound);
     }
 
     public void setNeBound(GeoPoint neBound) {

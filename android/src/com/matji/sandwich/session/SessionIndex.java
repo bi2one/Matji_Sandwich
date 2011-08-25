@@ -20,4 +20,11 @@ public class SessionIndex {
     public static final String WRITE_POST_STORE_ID = "WritePostTabActivity.store_id";
     public static final String WRITE_POST_IMAGES = "WritePostTabActivity.images";
     public static final String WRITE_POST_TAGS = "WritePostTabActivity.tags";
+    public static final String WRITE_POST_RADIUS_POINT_LAT_NE = "WritePostTabActvity.radius_point_lat_ne";
+    public static final String WRITE_POST_RADIUS_POINT_LAT_SW = "WritePostTabActvity.radius_point_lat_sw";
+    public static final String WRITE_POST_RADIUS_POINT_LNG_NE = "WritePostTabActvity.radius_point_lng_ne";
+    public static final String WRITE_POST_RADIUS_POINT_LNG_SW = "WritePostTabActvity.radius_point_lng_sw";
+    public static final String WRITE_POST_RADIUS_LAT_SPAN = "WritePostTabActivity.radius_lat_span";
+    public static final String WRITE_POST_RADIUS_LNG_SPAN = "WritePostTabActivity.radius_lng_span";
+    public static final String WRITE_POST_RADIUS_ADDRESS = "WritePostTabActivity.radius_address";
 }

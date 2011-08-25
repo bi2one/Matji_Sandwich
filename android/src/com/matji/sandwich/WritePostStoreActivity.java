@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.Window;
+import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -13,24 +14,25 @@ import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 
-import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.map.RadiusMatjiMapView;
+import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.util.KeyboardUtil;
-import com.matji.sandwich.widget.WritePostStoreListView;
+import com.matji.sandwich.widget.WritePostStoreView;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.WritePostStoreAdapter.StoreElement;
 import com.matji.sandwich.session.SessionWritePostUtil;
 import com.matji.sandwich.session.SessionMapUtil;
 
-public class WritePostStoreActivity extends Activity implements OnItemClickListener {
-    private static final int INTENT_CHANGE_LOCATION = 0;
+public class WritePostStoreActivity extends BaseMapActivity implements WritePostStoreView.StoreSelectListener,
+								       WritePostStoreView.OnClickListener,
+								       RadiusMatjiMapView.OnClickListener {
     private Context context;
-    private WritePostStoreListView listView;
-    private TextView selectedText;
-    private WritePostStoreActivityGroup parentActivity;
+    private WritePostTabActivity parentActivity;
     private SessionWritePostUtil sessionUtil;
+    private WritePostStoreView storeListView;
+    private RadiusMatjiMapView radiusMapView;
     private SessionMapUtil sessionMapUtil;
-    private GeoPoint mapNePoint;
-    private GeoPoint mapSwPoint;
+    private View currentView;
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -39,36 +41,71 @@ public class WritePostStoreActivity extends Activity implements OnItemClickListe
 	context = getApplicationContext();
 	sessionUtil = new SessionWritePostUtil(context);
 	sessionMapUtil = new SessionMapUtil(context);
-	mapNePoint = sessionMapUtil.getNEBound();
-	mapSwPoint = sessionMapUtil.getSWBound();
-	
-	selectedText = (TextView)findViewById(R.id.activity_write_post_store_selected);
-	listView = (WritePostStoreListView)findViewById(R.id.activity_write_post_store_listview);
-	listView.init(this, mapNePoint, mapSwPoint);
-	listView.setOnItemClickListener(this);
-	parentActivity = (WritePostStoreActivityGroup)getParent();
+
+	radiusMapView = (RadiusMatjiMapView)findViewById(R.id.activity_write_post_store_mapview);
+	storeListView = (WritePostStoreView)findViewById(R.id.activity_write_post_store_listview);
+	radiusMapView.init(this);
+	storeListView.init(this);
+	storeListView.refresh(sessionMapUtil.getNEBound(), sessionMapUtil.getSWBound());
+	storeListView.setStoreSelectListener(this);
+	storeListView.setOnClickListener(this);
+	radiusMapView.setOnClickListener(this);
+
+	parentActivity = (WritePostTabActivity)getParent();
+	currentView = storeListView;
     }
 
     protected void onResume() {
 	super.onResume();
-	listView.requestReload();
 	KeyboardUtil.hideKeyboard(this);
     }
 
-    public void onItemClick(AdapterView parent, View view, int position, long id) {
-	StoreElement element = (StoreElement)view.getTag();
-	Store store = element.getStore();
-	
-	selectedText.setText(store.getName());
-	selectedText.setTag(store);
-	sessionUtil.setStoreId(store.getId());
+    protected void onPause() {
+	super.onPause();
+	Store selectedStore = storeListView.getSelectedStore();
+	if (selectedStore != null)
+	    sessionUtil.setStoreId(selectedStore.getId());
+    }
+
+    public void onSearchLocationClick(View v) {
+	showRadiusMapView();
+    }
+
+    public void onWriteStoreClick(View v) {
+	Log.d("=====", "write store");
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+	if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+	    if (currentView.getId() == storeListView.getId())
+		finish();
+	    else
+		showStoreListView();
+	    return true;
+	}
+	return super.onKeyDown(keyCode, event);
+    }    
+
+    public void onSubmitClick(View v, GeoPoint neBound, GeoPoint swBound) {
+	storeListView.refresh(neBound, swBound);
+	showStoreListView();
+    }
+    
+    public void onStoreSelect(Store store) {
 	parentActivity.onChecked(WritePostTabActivity.TAB_ID_STORE, true);
     }
 
-    public void onChangeLocationClick(View view) {
-	Intent intent = new Intent(this, GetMapPositionRadiusActivity.class);
-	parentActivity.startChildActivity("GetMapPositionActivity", intent);
+    private void showRadiusMapView() {
+	storeListView.setVisibility(View.GONE);
+	radiusMapView.startMapCenterThread();
+	radiusMapView.setVisibility(View.VISIBLE);
+	currentView = radiusMapView;
     }
-    
-    public void onNewStoreClick(View view) { }
+
+    private void showStoreListView() {
+	radiusMapView.setVisibility(View.GONE);
+	radiusMapView.stopMapCenterThread();
+	storeListView.setVisibility(View.VISIBLE);
+	currentView = storeListView;
+    }
 }
