@@ -62,6 +62,8 @@ public class PostSectionedAdapter extends SectionedAdapter {
             R.id.row_post_preview3,
     };
     
+    private String subtitle;
+    
     private MatjiImageDownloader downloader;
 
     private GotoUserMainAction action1;
@@ -89,6 +91,10 @@ public class PostSectionedAdapter extends SectionedAdapter {
 //        profileSize = (int) MatjiConstants.dimen(R.dimen.profile_size);
     }
 
+    public void setSubtitle(String subtitle) {    
+        this.subtitle= subtitle;
+    }
+    
     /**
      * Section의 View를 리턴한다.
      * Section의 날짜가 오늘일 때, Text는 Today, background drawable은 today용 이미지로 설정해 리턴한다.
@@ -103,20 +109,32 @@ public class PostSectionedAdapter extends SectionedAdapter {
             postSectionElement = new PostSectionElement();
             convertView = inflater.inflate(R.layout.row_date_section, null);
 
-            postSectionElement.subject = (TextView)convertView.findViewById(R.id.row_date_section);
+            postSectionElement.section = (TextView)convertView.findViewById(R.id.row_date_section);
             convertView.setTag(postSectionElement);
         } else {
             postSectionElement = (PostSectionElement)convertView.getTag();
         }
 
         if (TimeUtil.isToday(section)) {
-            postSectionElement.subject.setText(context.getResources().getString(R.string.default_string_today));
-            postSectionElement.subject.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.section_today));
+            postSectionElement.section.setText(context.getResources().getString(R.string.default_string_today));
+            postSectionElement.section.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.indexbar_today));
         } else {
-            postSectionElement.subject.setText(section);
-            postSectionElement.subject.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.section));
+            postSectionElement.section.setText(section);
+            postSectionElement.section.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.indexbar_day));
         }
-
+        
+        if (getSectionName(0).equals(section)) {
+            if (postSectionElement.subtitle == null) {
+                postSectionElement.subtitle = (TextView) convertView.findViewById(R.id.row_date_section_subtitle);
+            }
+            postSectionElement.subtitle.setText(subtitle);
+            postSectionElement.subtitle.setVisibility(View.VISIBLE);
+            int padding = (int) MatjiConstants.dimen(R.dimen.default_distance);
+            convertView.setPadding(padding, padding, 0, 0);
+        } else {
+            postSectionElement.subtitle.setVisibility(View.GONE);
+        }
+        
         return convertView;
     }
 
@@ -135,6 +153,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
         if (convertView == null) {
             postElement = new PostElement();
             convertView = getLayoutInflater().inflate(R.layout.row_post, null);
+            postElement.postWrapper = convertView.findViewById(R.id.row_post_post_wrapper);
             postElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
             postElement.nick = (TextView) convertView.findViewById(R.id.row_post_nick);
             postElement.at = (TextView) convertView.findViewById(R.id.row_post_at);
@@ -164,7 +183,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             postElement = (PostElement) convertView.getTag();
         }
 
-        convertView.setOnClickListener(new View.OnClickListener() {
+        postElement.postWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onListItemClick(position);
@@ -321,6 +340,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
      *
      */
     private class PostElement {
+        View postWrapper;
         ProfileImageView profile;
         TextView nick;
         TextView at;
@@ -338,7 +358,8 @@ public class PostSectionedAdapter extends SectionedAdapter {
     }
 
     private class PostSectionElement {
-        TextView subject;
+        TextView subtitle;
+        TextView section;
     }
 
     /**

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/row_simple_user">
+	<!-- ranking position -->
+	<TextView
+		android:id="@+id/row_ranked_user_rank"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		style="@style/row_ranked_user_Rank" />
+	<include
+		style="@style/row_simple_user"
+		android:layout_toRightOf="@id/row_ranked_user_rank"
+		layout="@layout/row_simple_user" />
+</RelativeLayout>

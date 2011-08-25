@@ -54,7 +54,7 @@
   </style> 
   
   <style name="DefaultBackgroundFill" parent="DefaultFill">
-   	<item name="android:background">@drawable/pattern_bg</item>
+   	<item name="android:background">@drawable/bg_01</item>
   </style>
 
   <style name="DefaultMinorTitleBar" parent="DefaultWidthFill">
@@ -70,7 +70,7 @@
   
   <style name="SubTitle" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_chocolate</item>
-  	<item name="android:textSize">@dimen/text_large</item>
+  	<item name="android:textSize">@dimen/subtitle_size</item>
   </style>
   <style name="BottomBarListView">
   	<item name="android:layout_width">fill_parent</item>
@@ -305,48 +305,9 @@
   </style>
    
   <!-- header_comment.xml -->
-  <style name="header_comment_Preview" parent="DefaultWrap">
-  	<item name="android:adjustViewBounds">true</item>
-  	<item name="android:visibility">gone</item>
-  </style>
-  
-  <style name="header_comment_Wrapper" parent="DefaultWidthFill">
+  <style name="header_post_Wrapper" parent="DefaultWidthFill">
   	<item name="android:padding">@dimen/default_distance</item>
   	<item name="android:background">@drawable/comment_post_bg</item>
-  </style>
-  
-  <style name="header_comment_PostWrapper" parent="DefaultWidthFill">
-  	<item name="android:orientation">vertical</item>
-  	<item name="android:layout_marginLeft">@dimen/default_distance</item>
-  </style>
-
-  <style name="header_comment_At" parent="DefaultWrap">
-  	<item name="android:textColor">@color/matji_light_gray</item>  
-  	<item name="android:text">@string/at</item>  
-  </style>
-  
-  <style name="header_comment_Tags" parent="SmallGrayText">
-   	<item name="android:drawableLeft">@drawable/img_tag</item>
-  	<item name="android:drawablePadding">@dimen/default_distance_half</item>
-  </style>
-  
-  <style name="header_comment_CreatedAt" parent="SmallGrayText">
-    <item name="android:paddingRight">@dimen/default_distance</item>
-  </style>
-
-  <style name="header_comment_Comment" parent="SmallRedText">
-    <item name="android:text">@string/default_string_comment</item>
-  </style>
-  
-  <style name="header_comment_Count" parent="SmallGrayText">
-  	<item name="android:paddingLeft">@dimen/default_distance</item>
-  	<item name="android:paddingRight">@dimen/default_distance</item>
-  </style>
-  
-  <style name="header_comment_LikeList" parent="SmallRedText">
-  	<item name="android:background">@drawable/selector</item>
-   	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
-  	<item name="android:drawablePadding">@dimen/default_distance_half</item>
   </style>
 
   <!-- activity_user_main.xml -->
@@ -576,10 +537,7 @@
   <!-- Post List Row -->
   
   <style name="row_post_PostRowWrapper" parent="DefaultWidthFill">
-  	<item name="android:paddingLeft">@dimen/default_distance</item>
-  	<item name="android:paddingRight">@dimen/default_distance</item>a
-  	<item name="android:paddingTop">@dimen/default_distance_half</item>
-  	<item name="android:paddingBottom">@dimen/default_distance_half</item>
+  	<item name="android:padding">@dimen/default_distance</item>
   </style>
   
   <style name="row_simple_post_PostRowWrapper" parent="row_post_PostRowWrapper">
@@ -587,7 +545,7 @@
   </style>
   
   <style name="row_post_PostWrapper" parent="DefaultWidthFill">
-  	<item name="android:background">@drawable/box_memo</item>
+  	<item name="android:background">@drawable/box_memo_selector</item>
   	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
   </style>
   
@@ -627,8 +585,6 @@
   </style>
   
   <style name="row_post_Count" parent="SmallGrayText">
-  	<item name="android:paddingLeft">@dimen/default_distance_half</item>
-  	<item name="android:paddingRight">@dimen/default_distance</item>
   </style>
   
   <style name="row_post_Like" parent="SmallRedText">
@@ -813,7 +769,7 @@
 
   <!-- activity_change_location.xml -->
   <style name="activity_change_location" parent="DefaultFill">
-    <item name="android:background">@drawable/pattern_bg</item>
+    <item name="android:background">@drawable/bg_01</item>
     <item name="android:orientation">vertical</item>
   </style>
 
@@ -862,24 +818,30 @@
   </style>
 
   <!-- row_simple_user.xml -->
-  <style name="row_simple_user" parent="DefaultWidthFill">
+  <style name="row_simple_user">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">@dimen/row_simple_user_height</item>
     <item name="android:background">@drawable/btn_white_to_lightpink</item>
+    <item name="android:paddingRight">@dimen/default_distance</item>
+    <item name="android:paddingLeft">@dimen/default_distance</item>
   </style>
 
-  <style name="row_simple_user_position" parent="DefaultWrap">
-    <item name="android:background">@color/DODGER_BLUE</item>
-    <item name="android:layout_width">20dp</item>
-    <item name="android:layout_height">40dp</item>
-    <item name="android:textSize">18dp</item>
-    <item name="android:layout_marginLeft">10dp</item>
+  <style name="row_ranked_user_Rank" parent="DefaultWrap">
+    <item name="android:textSize">@dimen/rank_size</item>
+    <item name="android:textColor">@color/matji_white</item>
+    <item name="android:shadowDy">-1.3</item>
+    <item name="android:shadowRadius">1.4</item>
+    <item name="android:shadowColor">@color/matji_black</item>
+    <item name="android:gravity">center_horizontal</item>
+    <item name="android:layout_marginRight">@dimen/rank_margin_right</item>
   </style>
 
   <style name="row_simple_user_body" parent="DefaultWidthFill">
   </style>
 
   <style name="row_simple_user_nickname" parent="DefaultWrap">
-    <item name="android:textSize">16dp</item>
-    <item name="android:textColor">@color/BLACK</item>
+    <item name="android:textSize">@dimen/row_simple_user_nickname_size</item>
+    <item name="android:textColor">@color/matji_gray</item>
     <item name="android:singleLine">true</item>
   </style>
 
@@ -887,9 +849,19 @@
     <item name="android:layout_marginBottom">10dp</item>
   </style>
 
-  <style name="row_simple_user_heart" parent="adapter_near_store_heart">
+ 
+  <style name="row_simple_user_like_count" parent="DefaultWrap">
+  	<item name="android:textColor">@color/matji_red</item>
+  	<item name="android:drawableLeft">@drawable/img_heart</item>
+  	<item name="android:drawablePadding">@dimen/default_drawable_padding</item>
   </style>
 
+  <style name="row_simple_user_post_count" parent="DefaultWrap">
+  	<item name="android:textColor">@color/matji_red</item>
+  	<item name="android:drawableLeft">@drawable/img_post_cnt</item>
+  	<item name="android:drawablePadding">@dimen/default_drawable_padding</item>
+  </style>
+ 
   <style name="row_simple_user_desc_text" parent="adapter_near_store_desc_text">
   </style>
 

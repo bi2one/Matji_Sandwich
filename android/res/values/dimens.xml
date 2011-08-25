@@ -32,7 +32,7 @@
 	
 	<!-- User Profile -->
 	<dimen name="profile_size">36dp</dimen>
-	
+
 	<!-- Post List Row -->
 	<dimen name="linkify_name_size">12dp</dimen>
 	<dimen name="talkcontent_size">14dp</dimen>
@@ -116,4 +116,15 @@
 	<!-- Popup menu -->
 	<dimen name="popupmenu_width">48.67dp</dimen>
 	<dimen name="popupmenu_height">47.33dp</dimen>
+	
+	<!-- row_simple_user -->
+	<dimen name="row_simple_user_height">53.33dp</dimen>
+	<dimen name="row_simple_user_nickname_size">16dp</dimen>
+	
+	<!-- row_ranked_user -->
+	<dimen name="rank_size">20dp</dimen>
+	<dimen name="rank_margin_right">6.67dp</dimen>
+	
+	<!-- Subtitl -->
+	<dimen name="subtitle_size">14dp</dimen>
 </resources>

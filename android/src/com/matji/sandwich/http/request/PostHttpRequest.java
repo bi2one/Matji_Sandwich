@@ -141,6 +141,21 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("include", "user,store,tags");
     }
 
+    public void actionNearbyListWithAttachFiles(double lat_ne, double lat_sw, double lng_sw, double lng_ne, int page, int limit) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "nearby_list";
+        parser = new PostParser(context);
+        
+        getHashtable.clear();
+        getHashtable.put("lat_ne", lat_ne + "");
+        getHashtable.put("lat_sw", lat_sw + "");
+        getHashtable.put("lng_ne", lng_ne + "");
+        getHashtable.put("lng_sw", lng_sw + "");
+        getHashtable.put("page", page+"");
+        getHashtable.put("limit", limit+"");
+        getHashtable.put("include", "user,store,tags,attach_files");
+    }
+
     public void actionSearch(String keyword, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "search";

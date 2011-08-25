@@ -27,7 +27,6 @@
 	<color name="post_tab_division_bar">#E2AD51</color>
 	<color name="fading_edge_color">#777</color>
 	<color name="store_main_text">#0f0f0f</color>
-	<color name="section_shadow_color">#333333</color>
 	<color name="title_shadow_color">#ffffff</color>
 	<color name="listview_divider1_gray">#DDDDDD</color>
 	
@@ -38,7 +37,7 @@
 	<color name="matji_light_gray">#999999</color>
 	<color name="matji_white">#fff</color>
 	<color name="matji_black">#000</color>
-	<color name="matji_chocolate">#a27c47</color>
+	<color name="matji_chocolate">#7f510a</color>
 	<color name="matji_transparent">#00000000</color>
 	<color name="matji_translucent">#55000000</color>
 	<color name="matji_translucent_white">#55ffffff</color>
@@ -87,4 +86,8 @@
 	
 	<!-- Button -->
 	<color name="red_btn_shadow">#9d5b00</color>
+	
+	<!-- Comment List View -->
+	<color name="comment_list_view_bg">#fff3b3</color>
+	
 </resources>

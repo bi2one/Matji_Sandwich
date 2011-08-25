@@ -34,12 +34,12 @@
 			<TableLayout
 				android:id="@+id/row_post_previews"
 				style="@style/row_post_Previews"
-				android:background="#000"
 				android:shrinkColumns="*"
 				android:layout_below="@id/row_post_tag">
 				<TableRow>
 					<RelativeLayout
 						android:id="@+id/row_post_preview1"
+						android:layout_height="wrap_content"
 						android:paddingRight="@dimen/default_drawable_padding"
 						android:layout_gravity="center">
 					</RelativeLayout>
@@ -82,8 +82,7 @@
 			android:layout_width="@dimen/quickaction_btn_width"
 			android:layout_height="@dimen/quickaction_btn_height"
 			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true"
-			android:visibility="gone">
+			android:layout_alignParentRight="true">
 			<ImageButton
 				android:id="@+id/row_post_menu_btn"
 				style="@style/DefaultWrap"
