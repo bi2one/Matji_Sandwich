@@ -14,7 +14,7 @@ import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.ProfileImageView;
+import com.matji.sandwich.widget.CellProfileImageView;
 
 /**
  * UI 상의 유저 셀 (유저 기본 정보가 보이는 곳)
@@ -71,7 +71,8 @@ public class UserCell extends Cell {
     public void setUser(User user) {
         this.user = user;
 
-        ((ProfileImageView) getRootView().findViewById(R.id.profile)).setUserId(user.getId());
+        ((CellProfileImageView) getRootView().findViewById(R.id.profile)).setUserId(user.getId());
+        ((CellProfileImageView) getRootView().findViewById(R.id.profile)).showInsetBackground();
         ((TextView) getRootView().findViewById(R.id.cell_user_nick)).setText(user.getNick());
         if (user.getMileage() != null) 
             ((TextView) getRootView().findViewById(R.id.cell_user_point)).setText(user.getMileage().getTotalPoint()+"");

@@ -92,13 +92,14 @@
       
   <style name="LinkifyName" parent="DefaultWrap">
 	<item name="android:singleLine">true</item>
+	<item name="@android:textSize">@dimen/linkify_name_size</item>
 	<item name="android:textColor">@color/matji_red</item>
   </style>
   
   <style name="TalkContent" parent="DefaultWrap">
-  	<item name="android:layout_width">200dp</item>
   	<item name="android:autoLink">web</item>
-  	<item name="android:textColor">@color/BLACK</item>
+  	<item name="android:textSize">@dimen/talkcontent_size</item>
+  	<item name="android:textColor">@color/matji_gray</item>
   </style>
   
   <style name="SimpleTalkContent" parent="TalkContent">
@@ -106,11 +107,11 @@
   </style>
   
   <style name="SmallGrayText" parent="DefaultWrap">
-  	<item name="android:textSize">@dimen/text_small</item>
+  	<item name="android:textSize">@dimen/linkify_name_size</item>
   	<item name="android:textColor">@color/matji_light_gray</item>
   </style>
 
-  <style name="SmallDarkOrangeText" parent="DefaultWrap">
+  <style name="SmallRedText" parent="DefaultWrap">
   	<item name="android:textSize">@dimen/text_small</item>
   	<item name="android:textColor">@color/matji_red</item>
   </style>
@@ -244,14 +245,8 @@
   	<item name="android:background">@color/matji_white</item>
   </style>
   
-  <style name="cell_user_Profile">
-	<item name="android:layout_width">@dimen/user_cell_profile_size</item>
-  	<item name="android:layout_height">@dimen/user_cell_profile_size</item>
-  	<item name="android:src">@drawable/user_img90</item>
-  </style>
-  
   <style name="cell_user_InfoWrapper" parent="DefaultWrap">
-  	<item name="android:layout_marginLeft">@dimen/default_distance</item>
+  	<item name="android:layout_marginLeft">@dimen/user_cell_margin_left</item>
   </style>
   
   <style name="cell_user_Nickname" parent="DefaultWrap">
@@ -339,7 +334,7 @@
     <item name="android:paddingRight">@dimen/default_distance</item>
   </style>
 
-  <style name="header_comment_Comment" parent="SmallDarkOrangeText">
+  <style name="header_comment_Comment" parent="SmallRedText">
     <item name="android:text">@string/default_string_comment</item>
   </style>
   
@@ -348,7 +343,7 @@
   	<item name="android:paddingRight">@dimen/default_distance</item>
   </style>
   
-  <style name="header_comment_LikeList" parent="SmallDarkOrangeText">
+  <style name="header_comment_LikeList" parent="SmallRedText">
   	<item name="android:background">@drawable/selector</item>
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
   	<item name="android:drawablePadding">@dimen/default_distance_half</item>
@@ -559,10 +554,22 @@
     <item name="android:layout_height">@dimen/profile_size</item>
   </style>
   
+  <style name="CellProfileWrapper">
+    <item name="android:layout_width">@dimen/user_cell_profile_size</item>
+    <item name="android:layout_height">@dimen/user_cell_profile_size</item>
+  </style>
+  
   <style name="Profile">
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">fill_parent</item>
     <item name="android:src">@drawable/user_img54</item>
+    <item name="android:scaleType">centerCrop</item>
+  </style>
+  
+  <style name="CellProfile">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">fill_parent</item>
+    <item name="android:src">@drawable/user_img90</item>
     <item name="android:scaleType">centerCrop</item>
   </style>
   
@@ -584,8 +591,8 @@
   	<item name="android:layout_marginLeft">@dimen/row_post_distance</item>
   </style>
   
-  <style name="row_post_PostWrapper2" parent="DefaultWidthFill">
-  	<item name="android:orientation">vertical</item>
+  <style name="row_post_PostWrapperInner" parent="DefaultWidthFill">
+	<item name="android:padding">@dimen/default_distance</item>
   </style>
 
   <style name="row_post_menu" parent="DefaultWrap">
@@ -593,7 +600,8 @@
   </style>
   
   <style name="row_post_At" parent="DefaultWrap">
-  	<item name="android:textColor">@color/matji_light_gray</item>  
+  	<item name="android:textColor">@color/matji_light_gray</item>
+  	<item name="android:textSize">@dimen/linkify_name_size</item>  
   	<item name="android:text">@string/at</item>  
   </style>
   
@@ -603,16 +611,18 @@
   	<item name="android:singleLine">true</item>
   </style>
 
-  <style name="row_post_Preview" parent="DefaultWrap">
-  	<item name="android:adjustViewBounds">true</item>
-  	<item name="android:visibility">gone</item>
+  <style name="row_post_Previews">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">wrap_content</item>
+  	<item name="android:padding">0dp</item>
+  	<item name="android:layout_marginTop">@dimen/default_distance</item>
+  	<item name="android:layout_marginBottom">@dimen/default_distance</item>
   </style>
   
   <style name="row_post_CreatedAt" parent="SmallGrayText">
-    <item name="android:paddingRight">@dimen/default_distance</item>
   </style>
 
-  <style name="row_post_Comment" parent="SmallDarkOrangeText">
+  <style name="row_post_Comment" parent="SmallRedText">
     <item name="android:text">@string/default_string_comment</item>
   </style>
   
@@ -621,7 +631,7 @@
   	<item name="android:paddingRight">@dimen/default_distance</item>
   </style>
   
-  <style name="row_post_Like" parent="SmallDarkOrangeText">
+  <style name="row_post_Like" parent="SmallRedText">
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
   </style>
 
@@ -724,6 +734,10 @@
 	<item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
   </style>
 
+  <style name="Animations.PopUpMenu.ToLeft">
+	<item name="@android:windowEnterAnimation">@anim/grow_from_right_to_left</item>
+	<item name="@android:windowExitAnimation">@anim/shrink_from_left_to_right</item>
+  </style>
   <!-- adapter_map_store_section.xml -->
   <style name="adapter_map_store_section_bg" parent="DefaultWidthFill">
     <item name="android:background">@drawable/list_section_red_bg</item>

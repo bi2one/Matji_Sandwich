@@ -172,7 +172,7 @@ public class QuickActionDialog extends PopupWindows {
 		int screenWidth 	= mWindowManager.getDefaultDisplay().getWidth();
 		//int screenHeight 	= mWindowManager.getDefaultDisplay().getHeight();
 
-		int xPos 			= (screenWidth - rootWidth) / 2 + 20;        int yPos            = anchorRect.top - rootHeight / 2 + 10;
+		int xPos            = location[0] - rootWidth;        int yPos            = location[1] - rootHeight/2 + anchor.getHeight()/2;
 
 		setAnimationStyle(screenWidth, anchorRect.centerX());
 
@@ -180,7 +180,7 @@ public class QuickActionDialog extends PopupWindows {
 
 		if (animateTrack) mTrack.startAnimation(mTrackAnim);
 	}
-
+    
 	/**
 	 * Set animation style
 	 * 
@@ -196,7 +196,7 @@ public class QuickActionDialog extends PopupWindows {
 
 //		case ANIM_GROW_FROM_RIGHT:
 //        mWindow.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Right : R.style.Animations_PopDownMenu_Right);
-        mWindow.setAnimationStyle(R.style.Animations_PopUpMenu_Right);        
+        mWindow.setAnimationStyle(R.style.Animations_PopUpMenu_ToLeft);        
 //			break;
 //
 //		case ANIM_GROW_FROM_CENTER:

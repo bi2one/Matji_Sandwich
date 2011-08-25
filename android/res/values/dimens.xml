@@ -4,6 +4,7 @@
 	<dimen name="default_distance">10dp</dimen>
 	<dimen name="default_distance_half">5dp</dimen>
 	<dimen name="default_drawable_padding">3dp</dimen>
+	<dimen name="default_drawable_padding_half">1.5dp</dimen>
 	
 	<!-- Title Container -->
 	<dimen name="title_container_height">36.67dp</dimen>
@@ -20,6 +21,7 @@
 	<dimen name="user_cell_height">80dp</dimen>
 	<dimen name="user_cell_content_size">12dp</dimen>
 	<dimen name="user_cell_btn_margin">1.33dp</dimen>
+	<dimen name="user_cell_margin_left">13.33dp</dimen>
 		
 	<!-- Inputbar -->	
 	<dimen name="input_bar_margin">6.67dp</dimen>
@@ -32,6 +34,8 @@
 	<dimen name="profile_size">36dp</dimen>
 	
 	<!-- Post List Row -->
+	<dimen name="linkify_name_size">12dp</dimen>
+	<dimen name="talkcontent_size">14dp</dimen>
 	<dimen name="row_post_distance">1dp</dimen>
 	<dimen name="row_post_previews_margin">5dp</dimen>
 	

@@ -16,33 +16,35 @@ public class SimpleUserAdapter extends MBaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        RankingElement rankingElement;
+        RankingElement userElement;
         User user = (User) data.get(position);
 
         if (convertView == null) {
-            rankingElement = new RankingElement();
+            userElement = new RankingElement();
             convertView = getLayoutInflater().inflate(R.layout.row_simple_user, null);
 
-            rankingElement.position = (TextView) convertView.findViewById(R.id.row_simple_user_position);
-            rankingElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
-            rankingElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
-            rankingElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
-            rankingElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_user_post_count);
-            rankingElement.point = (TextView) convertView.findViewById(R.id.row_simple_user_point);
+            userElement.position = (TextView) convertView.findViewById(R.id.row_simple_user_position);
+            userElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
+            userElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
+            userElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
+            userElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_user_post_count);
+            userElement.point = (TextView) convertView.findViewById(R.id.row_simple_user_point);
 
-            convertView.setTag(rankingElement);
+            userElement.profile.showInsetBackground();
+            
+            convertView.setTag(userElement);
         } else {
-            rankingElement = (RankingElement) convertView.getTag();
+            userElement = (RankingElement) convertView.getTag();
         }
 
-        rankingElement.position.setVisibility(getPositionVisibility());
+        userElement.position.setVisibility(getPositionVisibility());
         if (getPositionVisibility() == View.VISIBLE)
-            rankingElement.position.setText("" + (position + 1));
-        rankingElement.profile.setUserId(user.getId());
-        rankingElement.nickname.setText(user.getNick());
-        rankingElement.likeCount.setText("" + user.getLikeStoreCount());
-        rankingElement.postCount.setText("" + user.getPostCount());
-        rankingElement.point.setText("" + user.getMileage().getTotalPoint());
+            userElement.position.setText("" + (position + 1));
+        userElement.profile.setUserId(user.getId());
+        userElement.nickname.setText(user.getNick());
+        userElement.likeCount.setText("" + user.getLikeStoreCount());
+        userElement.postCount.setText("" + user.getPostCount());
+        userElement.point.setText("" + user.getMileage().getTotalPoint());
 
         return convertView;
     }

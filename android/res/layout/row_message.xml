@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWidthFill">
+<!-- 	<ImageView -->
+<!-- 		android:id="@+id/row_message_flow" -->
+<!-- 		style="@style/DefaultWrap" /> -->
+<!-- 	<TextView -->
+<!-- 		android:id="@+id/row_message_title" -->
+<!-- 		android:layout_toRightOf="@id/row_message_flow" -->
+<!-- 		android:singleLine="true" /> -->
+<!-- 	<TextView -->
+<!-- 		android:id="@+id/row_message_nick" -->
+<!-- 		android:layout_toRightOf="@id/row_message_flow" -->
+<!-- 		android:layout_below="" /> -->
+<!-- 	<TextView  -->
+<!-- 	"/> -->
+<!-- 	<LinearLayout> -->
+<!-- 		<TextView /> -->
+<!-- 		<TextView /> -->
+<!-- 	</LinearLayout> -->
+</RelativeLayout>

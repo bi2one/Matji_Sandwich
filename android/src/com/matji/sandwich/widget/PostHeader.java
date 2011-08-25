@@ -72,6 +72,7 @@ public class PostHeader extends ViewContainer {
 		likeListButton = (Button) getRootView().findViewById(R.id.header_comment_like_list);
 //		postElement.menu = (Button) convertView.findViewById(R.id.header_comment_menu);
 		
+		profile.showInsetBackground();
 		previews = new ImageView[imageIds.length];
 
 		for (int i = 0; i < previews.length; i++) {

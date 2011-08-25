@@ -18,13 +18,23 @@ public class DisplayUtil {
 		return (int)(pixel / mContext.getResources().getDisplayMetrics().density); 
 	} 
 
-	/** 
-	 * 현재 디스플레이 화면에 비례한 DP단위를 픽셀 크기로 반환합니다. 
-	 *  
-	 * @param  DP 픽셀 
-	 * @return 변환된 값 (pixel) 
-	 */ 
-	public static int PixelFromDP(int DP)   {
-		return (int)(DP * mContext.getResources().getDisplayMetrics().density);
-	} 
+    /** 
+     * 현재 디스플레이 화면에 비례한 DP단위를 픽셀 크기로 반환합니다. 
+     *  
+     * @param  DP 픽셀 
+     * @return 변환된 값 (pixel) 
+     */ 
+    public static int PixelFromDP(double DP)   {
+        return (int)(DP * mContext.getResources().getDisplayMetrics().density);
+    } 
+
+    /** 
+     * 현재 디스플레이 화면에 비례한 DP단위를 픽셀 크기로 반환합니다. 
+     *  
+     * @param  DP 픽셀 
+     * @return 변환된 값 (pixel) 
+     */ 
+    public static int PixelFromDP(float DP)   {
+        return (int)(DP * mContext.getResources().getDisplayMetrics().density);
+    } 
 }

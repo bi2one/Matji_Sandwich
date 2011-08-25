@@ -338,4 +338,10 @@
 
   <!-- WritePostTabActivity.java -->
   <string name="write_post_tab_activity_post_empty">이야기를 입력해 주세요.</string>
+  
+  <!-- Matji -->
+  <string name="main_tab_title_matmap">맛있는 지도</string>
+  <string name="main_tab_title_mattalk">맛있는 이야기</string>
+  <string name="main_tab_title_matist">맛티스트</string>
+  <string name="main_tab_title_mypage">내 정보</string>
 </resources>

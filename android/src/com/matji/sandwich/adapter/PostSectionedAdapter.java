@@ -12,10 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -58,16 +56,13 @@ import com.matji.sandwich.widget.dialog.QuickActionDialog;
  *
  */
 public class PostSectionedAdapter extends SectionedAdapter {
-    private int[] imageIds = {
+    private int[] previewWrapperIds = new int[]{
             R.id.row_post_preview1,
             R.id.row_post_preview2,
-            R.id.row_post_preview3
+            R.id.row_post_preview3,
     };
-
+    
     private MatjiImageDownloader downloader;
-    private int profileSize;
-    private static final int MARGIN_PREVIEWS = (int) MatjiConstants.dimen(R.dimen.row_post_previews_margin);
-    private static final int QUICK_ACTION_BTN_WIDTH = (int) MatjiConstants.dimen(R.dimen.quickaction_btn_width);
 
     private GotoUserMainAction action1;
     private GotoStoreMainAction action2;
@@ -91,7 +86,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
      */
     protected void init() {
         downloader = new MatjiImageDownloader(context);
-        profileSize = (int) MatjiConstants.dimen(R.dimen.profile_size);
+//        profileSize = (int) MatjiConstants.dimen(R.dimen.profile_size);
     }
 
     /**
@@ -146,31 +141,23 @@ public class PostSectionedAdapter extends SectionedAdapter {
             postElement.storeName = (TextView)convertView.findViewById(R.id.row_post_store_name);
             postElement.post = (TextView) convertView.findViewById(R.id.row_post_post);
             postElement.tag = (TextView) convertView.findViewById(R.id.row_post_tag);
+            postElement.previews = convertView.findViewById(R.id.row_post_previews);
             postElement.dateAgo = (TextView) convertView.findViewById(R.id.row_post_created_at);
             postElement.commentCount = (TextView) convertView.findViewById(R.id.row_post_comment_count);
             postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
             postElement.menu= (ImageButton) convertView.findViewById(R.id.row_post_menu_btn);
             postElement.menuWrapper = (RelativeLayout) convertView.findViewById(R.id.row_post_menu_btn_wrapper);
-
-            postElement.previews = new ImageView[imageIds.length];
-
-            for (int i = 0; i < postElement.previews.length; i++) {
-                postElement.previews[i] = (ImageView) convertView.findViewById(imageIds[i]);
+            
+            postElement.preview = new ImageView[previewWrapperIds.length];
+            postElement.previewWrapper = new RelativeLayout[previewWrapperIds.length];
+            for (int i = 0; i < previewWrapperIds.length; i++) {
+                postElement.preview[i] = new ImageView(context);
+                postElement.previewWrapper[i] = (RelativeLayout) convertView.findViewById(previewWrapperIds[i]);
+                postElement.previewWrapper[i].addView(postElement.preview[i]);
             }
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            params.setMargins(MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS, MARGIN_PREVIEWS);
-
-            int remainScreenWidth = context.getResources().getDisplayMetrics().widthPixels;
-
-            for (int i = 0; i < postElement.previews.length; i++) {
-                postElement.previews[i].setMaxWidth(
-                        (remainScreenWidth - profileSize*2) / imageIds.length 
-                        - MARGIN_PREVIEWS*2 
-                        - QUICK_ACTION_BTN_WIDTH/imageIds.length);
-                postElement.previews[i].setLayoutParams(params);
-            }
-
+            
+            postElement.profile.showReliefBackground();
+            
             convertView.setTag(postElement);
 
         } else {
@@ -225,8 +212,8 @@ public class PostSectionedAdapter extends SectionedAdapter {
         holder.menuWrapper.setOnClickListener(dialog);
         holder.menuWrapper.setTag(holder.menu);
 
-        for (int i = 0; i < holder.previews.length; i++) {
-            holder.previews[i].setOnClickListener(action3);
+        for (int i = 0; i < holder.preview.length; i++) {
+            holder.preview[i].setOnClickListener(action3);
         }
     }
 
@@ -239,8 +226,8 @@ public class PostSectionedAdapter extends SectionedAdapter {
     private void setViewData(PostElement holder, int position) {
         Post post = (Post) data.get(position);
 
-        setPreviews(post, holder.previews);
-
+        setPreviews(holder, post);
+        
         Store store = post.getStore();
         User user = post.getUser();
 
@@ -280,23 +267,21 @@ public class PostSectionedAdapter extends SectionedAdapter {
      * preview에 이미지를 다운로드 받는다.
      * 
      * @param post 
-     * @param previews
+     * @param preview
      */
-    public void setPreviews(Post post, ImageView[] previews) {
-        int[] attachFileIds = new int[post.getAttachFiles().size()];
-        for (int i = 0; i < attachFileIds.length; i++) {
-            attachFileIds[i] = post.getAttachFiles().get(i).getId();
+    public void setPreviews(PostElement holder, Post post) {
+        holder.previews.setVisibility(View.GONE);
+        
+        for (int i = 0; i < holder.preview.length; i++) {
+            holder.preview[i].setVisibility(View.GONE);
         }
-
-        for (int i = 0; i < previews.length; i++) {
-            previews[i].setVisibility(View.GONE);
-            previews[i].setTag(i+"");
+        
+        for (int i = 0; (i < post.getAttachFiles().size()) && (i < holder.preview.length); i++) {
+            holder.previews.setVisibility(View.VISIBLE);
+            holder.preview[i].setVisibility(View.VISIBLE);
+            holder.preview[i].setTag(i+"");
+            downloader.downloadAttachFileImage(post.getAttachFiles().get(i).getId(), MatjiImageDownloader.IMAGE_SMALL, holder.preview[i]);
         }
-
-        for (int i = 0; i < ((attachFileIds.length > previews.length) ? previews.length : attachFileIds.length); i++) {
-            downloader.downloadAttachFileImage(attachFileIds[i], MatjiImageDownloader.IMAGE_MEDIUM, previews[i]);
-            previews[i].setVisibility(View.VISIBLE);
-        }		
     }
 
     /**
@@ -345,7 +330,9 @@ public class PostSectionedAdapter extends SectionedAdapter {
         TextView dateAgo;
         TextView commentCount;
         TextView likeCount;
-        ImageView[] previews;
+        View previews;
+        RelativeLayout[] previewWrapper;
+        ImageView[] preview;
         ImageButton menu;
         RelativeLayout menuWrapper;
     }

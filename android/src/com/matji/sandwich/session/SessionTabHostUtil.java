@@ -1,8 +1,8 @@
 package com.matji.sandwich.session;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 
 public class SessionTabHostUtil {
@@ -24,5 +24,13 @@ public class SessionTabHostUtil {
 
     public void flush() {
 	setSubTabIndex(-1);
+    }
+    
+    public User getCurrentUser() {
+        return session.getCurrentUser();
+    }
+    
+    public boolean isLogin() {
+        return session.isLogin();
     }
 }

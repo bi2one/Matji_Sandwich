@@ -12,17 +12,17 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 public class ImageUtil {
-	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels, int inset) {
 		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
 		Canvas canvas = new Canvas(output);
 
 		final int color = 0xff424242;
 		final Paint paint = new Paint();
-		final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+		final Rect rect = new Rect(inset, inset, bitmap.getWidth()-inset, bitmap.getHeight()-inset);
 		final RectF rectF = new RectF(rect);
 		final float roundPx = pixels;
 
-		paint.setAntiAlias(true);
+        paint.setAntiAlias(true);
 		canvas.drawARGB(0, 0, 0, 0);
 		paint.setColor(color);
 		canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
