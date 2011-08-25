@@ -103,7 +103,7 @@ public class WritePostTabActivity extends BaseTabActivity implements OnTabChange
 			   new Intent(this, WritePostActivity.class));
 	tabHost.addCenterCheckTab(TAB_ID_STORE,
 				  R.string.default_string_store,
-				  new Intent(this, WritePostStoreActivity.class));
+				  new Intent(this, WritePostStoreActivityGroup.class));
 	tabHost.addCenterCheckTab(TAB_ID_PICTURE,
 				  R.string.default_string_picture,
 				  new Intent(this, WritePostPictureActivity.class));

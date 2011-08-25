@@ -15,6 +15,7 @@
     <ImageButton
 	android:id="@+id/activity_write_post_store_search"
 	android:layout_toLeftOf="@+id/activity_write_post_store_divider2"
+	android:onClick="onChangeLocationClick"
 	style="@style/activity_write_post_store_search" />
     <ImageView
 	android:id="@id/activity_write_post_store_divider2"
@@ -23,6 +24,7 @@
     <ImageButton
 	android:id="@id/activity_write_post_store_add"
 	android:layout_alignParentRight="true"
+	android:onClick="onNewStoreClick"
 	style="@style/activity_write_post_store_add" />
   </RelativeLayout>
   
