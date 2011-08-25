@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultWidthFill"
-	android:gravity="right"
-	android:paddingTop="3dp"
-	android:paddingBottom="3dp" >
-	<TextView
-		android:id="@+id/row_date_section"
+	style="@style/DefaultWidthFill">
+	<com.matji.sandwich.widget.BoldStyleTextView
+		android:id="@+id/row_date_section_subtitle"
+		style="@style/SubTitle"
+		android:layout_alignParentLeft="true"
+		android:layout_toLeftOf="@+id/row_date_section"
+		android:shadowColor="@color/matji_white"
+		android:shadowRadius="1"
+		android:shadowDy="1.3"
+		android:singleLine="true" />
+	<com.matji.sandwich.widget.BoldStyleTextView
+		android:id="@id/row_date_section"
 		style="@style/DefaultWrap"
 		android:minWidth="100dp"
-		android:background="@drawable/section"
-		android:textColor="@color/WHITE"
-		android:shadowColor="@color/section_shadow_color"
-		android:shadowRadius="0.5"
+		android:layout_alignParentRight="true"
+		android:background="@drawable/indexbar_day"
+		android:textColor="@color/matji_white"
+		android:shadowColor="@color/matji_black"
+		android:shadowRadius="1.4"
 		android:shadowDy="-1.3"
-		android:shadowDx="-0.5"
 		android:gravity="center" />
-</LinearLayout>
+</RelativeLayout>

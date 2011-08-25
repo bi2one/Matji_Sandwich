@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/main_tab_wrapper"
 	style="@style/DefaultFill"
 	android:orientation="vertical">
-	<com.matji.sandwich.widget.title.MainTitle
-		android:id="@id/Titlebar"
-		style="@style/DefaultWrap" />
 	<com.matji.sandwich.widget.MainTabHost
 		android:id="@android:id/tabhost"
 		android:padding="0dp"

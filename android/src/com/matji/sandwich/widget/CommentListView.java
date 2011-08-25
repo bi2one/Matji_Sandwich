@@ -18,6 +18,7 @@ import com.matji.sandwich.data.Post;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.DisplayUtil;
 
 public class CommentListView extends RequestableMListView {
 	private HttpRequest request;
@@ -42,10 +43,11 @@ public class CommentListView extends RequestableMListView {
 
 		setPage(1);
 		setDivider(new ColorDrawable(Color.WHITE));
-		setDividerHeight(2);
+		setDividerHeight(DisplayUtil.PixelFromDP(1));
 		setCanRepeat(true);
 		setFadingEdgeLength(0);
-		setBackgroundDrawable(getResources().getDrawable(R.drawable.comment_bg));
+		setSelector(new ColorDrawable(Color.TRANSPARENT));
+		setCacheColorHint(Color.TRANSPARENT);
 		
 		header = new PostHeader(getContext());
 		addHeaderView(header);

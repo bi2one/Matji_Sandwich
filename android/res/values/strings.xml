@@ -209,12 +209,6 @@
   <string name="search_store">맛집 검색</string>
   <string name="bookmarked_store">내맛집</string>
   
-  <!--  PostSliderActivity -->
-  <string name="all_post">실시간 메모</string>
-  <string name="near_post">주변 메모</string>
-  <string name="search_post">메모 검색</string>
-  <string name="my_post">내메모</string>
-
   <!-- GetMapPositionActivity -->
   <string name="get_map_position_complete">위치설정완료</string>
 
@@ -341,4 +335,15 @@
 
   <!-- simple_submit_location_bar.xml -->
   <string name="simple_submit_location_bar_submit">지역변경</string>
+  
+  <!-- Matji -->
+  <string name="main_tab_title_matmap">맛있는 지도</string>
+  <string name="main_tab_title_mattalk">맛있는 이야기</string>
+  <string name="main_tab_title_matist">맛티스트</string>
+  <string name="main_tab_title_mypage">내 정보</string>
+  
+  <!-- PostListView Subtitle -->
+  <string name="friend_post">친구들 이야기</string>
+  <string name="nearby_post">근처 이야기</string>
+  <string name="all_post">모든 이야기</string>
 </resources>

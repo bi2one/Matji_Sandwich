@@ -1,23 +1,20 @@
 package com.matji.sandwich.widget;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.UserMainActivity;
-import com.matji.sandwich.adapter.RankingAdapter;
-import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.PostHttpRequest;
-import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.User;
+import java.util.ArrayList;
 
-import android.os.Parcelable;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 
-import java.util.ArrayList;
+import com.matji.sandwich.R;
+import com.matji.sandwich.UserMainActivity;
+import com.matji.sandwich.adapter.UserRankingAdapter;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.User;
+import com.matji.sandwich.util.MatjiConstants;
 
 /**
  * View displaying the list with sectioned header.
@@ -29,10 +26,9 @@ public abstract class RankingListView extends RequestableMListView {
     private Context context;
     
     public RankingListView(Context context, AttributeSet attr) {
-	super(context, attr, new RankingAdapter(context), 10);
+	super(context, attr, new UserRankingAdapter(context), 10);
 
 	this.context = context;
-	setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
 	setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
 	setDividerHeight(1);
 	setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));

@@ -20,4 +20,12 @@ public class MainIndicator extends Indicator {
         iconView.setImageResource(drawableRef);
         labelView.setText(textRef);
     }
+    
+    public void setLabel(int textRef) {
+        labelView.setText(textRef);
+    }
+    
+    public void setLabel(String text) {
+        labelView.setText(text);
+    }
 }

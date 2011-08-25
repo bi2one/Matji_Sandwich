@@ -2,15 +2,15 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.ImageUtil;
-import com.matji.sandwich.util.MatjiConstants;
 
 /**
  * Thumnail 에 사용하기 위해 ImageView 를 확장한 클래스.
@@ -20,20 +20,18 @@ import com.matji.sandwich.util.MatjiConstants;
  */
 public class ProfileImageView extends ImageView {
 	private final MatjiImageDownloader downloader = new MatjiImageDownloader(getContext());
+	protected ImageView border;
 
 	public ProfileImageView(Context context) {
 		super(context);
-        setBackgroundRoundedBitmap();
 	}
 
 	public ProfileImageView(Context context, AttributeSet attr) {
 		super(context, attr, 0);
-        setBackgroundRoundedBitmap();
 	}
 	
 	public ProfileImageView(Context context, AttributeSet attr, int defStyle) {
 		super(context, attr, defStyle);
-	    setBackgroundRoundedBitmap();
 	}
 	
 	/**
@@ -43,22 +41,33 @@ public class ProfileImageView extends ImageView {
 		Drawable d = getDrawable();
 		if (d.getIntrinsicWidth() > 0 && d.getIntrinsicHeight() > 0) {
 			Bitmap bm = ImageUtil.getBitmap(d);
-			setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, 5));
+			setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, DisplayUtil.PixelFromDP(5), (int) getInset()));
 		}
 	}
 	
-	private void setBackgroundRoundedBitmap() {
-	    Drawable d = MatjiConstants.drawable(R.drawable.user_img90);
-	    Bitmap bm = ImageUtil.getBitmap(d);
-	    BitmapDrawable bd = new BitmapDrawable(ImageUtil.getRoundedCornerBitmap(bm, 10));
-	    setBackgroundDrawable(bd);
-	}
-
 	protected String getImageSize() {
 	    return MatjiImageDownloader.IMAGE_SSMALL;
 	}
 	
 	public void setUserId(int id) {
 		downloader.downloadUserImage(id, getImageSize(), this);
+	}
+	
+	public void findBorder() {
+	    border = (ImageView) ((View) getParent()).findViewById(R.id.profile_border);
+	}
+	
+	public void showInsetBackground() {
+	    if (border == null) findBorder();
+	    border.setImageResource(R.drawable.user_img54_bg02);
+	}
+	
+	public void showReliefBackground() {
+	    if (border == null) findBorder();
+	    border.setImageResource(R.drawable.user_img54_bg01);
+	}
+	
+	public float getInset() {
+	    return DisplayUtil.PixelFromDP(1);
 	}
 }

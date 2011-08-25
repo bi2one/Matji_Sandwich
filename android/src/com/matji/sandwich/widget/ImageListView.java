@@ -47,7 +47,7 @@ public abstract class ImageListView extends RequestableMListView implements View
 		setSelector(android.R.color.transparent);
 		setCacheColorHint(Color.TRANSPARENT);
 		setVerticalScrollBarEnabled(false);
-		setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
+		setBackgroundDrawable(MatjiConstants.drawable(R.drawable.bg_01));
 
 	}
 

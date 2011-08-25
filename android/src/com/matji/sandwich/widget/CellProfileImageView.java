@@ -3,6 +3,7 @@ package com.matji.sandwich.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 
 /**
@@ -13,9 +14,10 @@ import com.matji.sandwich.http.util.MatjiImageDownloader;
  *
  */
 public class CellProfileImageView extends ProfileImageView {
-    
+
     public CellProfileImageView(Context context) {
         super(context);
+        showInsetBackground();
     }
 
     public CellProfileImageView(Context context, AttributeSet attr) {
@@ -29,5 +31,19 @@ public class CellProfileImageView extends ProfileImageView {
     @Override
     protected String getImageSize() {
         return MatjiImageDownloader.IMAGE_SMALL;
+    }
+    
+    @Override
+    public void showInsetBackground() {
+        if (border == null) findBorder();
+        border.setImageResource(R.drawable.user_img90_bg);
+    }
+    
+    @Override
+    public void showReliefBackground() {}
+    
+    @Override
+    public float getInset() {
+        return 0;
     }
 }

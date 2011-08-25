@@ -23,17 +23,22 @@ import android.util.AttributeSet;
 public class PostListView extends RequestableMListView {
     private HttpRequest request;
 
+    protected String getSubtitle() {
+        return MatjiConstants.string(R.string.all_post);
+    }
+    
     public PostListView(Context context, AttributeSet attr) {
         super(context, attr, new PostSectionedAdapter(context), 10);
         init();
     }	
 
     protected void init() {
-        setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
+        setBackgroundDrawable(MatjiConstants.drawable(R.drawable.bg_01));
         setDivider(null);
         setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
         setCacheColorHint(Color.TRANSPARENT);
         setSelector(android.R.color.transparent);
+        ((PostSectionedAdapter) getMBaseAdapter()).setSubtitle(getSubtitle());
     }
 
     public HttpRequest request() {

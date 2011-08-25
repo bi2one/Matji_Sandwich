@@ -1,16 +1,16 @@
 package com.matji.sandwich.adapter;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.data.User;
-import com.matji.sandwich.widget.ProfileImageView;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class SimpleUserAdapter extends MBaseAdapter {
-    public SimpleUserAdapter(Context context) {
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.User;
+import com.matji.sandwich.widget.ProfileImageView;
+
+public class UserRankingAdapter extends MBaseAdapter {
+    public UserRankingAdapter(Context context) {
         super(context);
         this.context = context;
     }
@@ -21,7 +21,9 @@ public class SimpleUserAdapter extends MBaseAdapter {
 
         if (convertView == null) {
             userElement = new RankingElement();
-            convertView = getLayoutInflater().inflate(R.layout.row_simple_user, null);
+            convertView = getLayoutInflater().inflate(R.layout.row_ranked_user, null);
+
+            userElement.position = (TextView) convertView.findViewById(R.id.row_ranked_user_rank);
             userElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
             userElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
             userElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
@@ -29,12 +31,18 @@ public class SimpleUserAdapter extends MBaseAdapter {
             userElement.point = (TextView) convertView.findViewById(R.id.row_simple_user_point);
 
             userElement.profile.showInsetBackground();
-
+            
             convertView.setTag(userElement);
         } else {
             userElement = (RankingElement) convertView.getTag();
         }
 
+        userElement.position.setText("" + (position + 1));
+        if (position == 0) {
+            userElement.position.setBackgroundResource(R.drawable.ranking_bg_red);
+        } else {
+            userElement.position.setBackgroundResource(R.drawable.ranking_bg_yellow);
+        }
         userElement.profile.setUserId(user.getId());
         userElement.nickname.setText(user.getNick());
         userElement.likeCount.setText("" + user.getLikeStoreCount());
@@ -43,12 +51,9 @@ public class SimpleUserAdapter extends MBaseAdapter {
 
         return convertView;
     }
-
-    protected int getPositionVisibility() {
-        return View.GONE;
-    }
-
+    
     private class RankingElement {
+        TextView position;
         ProfileImageView profile;
         TextView nickname;
         TextView likeCount;

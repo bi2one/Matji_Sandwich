@@ -27,7 +27,7 @@ public class StoreListView extends RequestableMListView {
 		request = new StoreHttpRequest(getContext());
 		setPage(1);
 
-		setBackgroundDrawable(MatjiConstants.drawable(R.drawable.pattern_bg));
+		setBackgroundDrawable(MatjiConstants.drawable(R.drawable.bg_01));
 		setDivider(null);
 		setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
 		setCacheColorHint(Color.TRANSPARENT);

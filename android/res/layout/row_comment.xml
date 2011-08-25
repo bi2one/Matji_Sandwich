@@ -4,8 +4,7 @@
 	android:id="@+id/row_comment_wrapper"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
-	android:padding="@dimen/default_distance"
-	android:background="@drawable/comment_bg">
+	android:padding="@dimen/default_distance">
 	<include
 		layout="@layout/profile" />
 	<LinearLayout

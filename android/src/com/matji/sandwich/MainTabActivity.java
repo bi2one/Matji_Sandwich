@@ -1,20 +1,27 @@
 package com.matji.sandwich;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TabHost.OnTabChangeListener;
+
 import com.matji.sandwich.base.BaseTabActivity;
+import com.matji.sandwich.session.SessionTabHostUtil;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.MainTabHost;
-import com.matji.sandwich.session.SessionTabHostUtil;
+import com.matji.sandwich.widget.title.HomeTitle;
+import com.matji.sandwich.widget.title.MainTitle;
+import com.matji.sandwich.widget.title.UserTitle;
+import com.matji.sandwich.widget.title.WritePostTitle;
 
-import android.content.Intent;
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-
-public class MainTabActivity extends BaseTabActivity {
+public class MainTabActivity extends BaseTabActivity implements OnTabChangeListener {
     private MainTabHost tabHost;
     private SessionTabHostUtil sessionUtil;
     private Context context;
+
+    private LinearLayout mainTabWrapper;
 
     public static final String IF_INDEX = "MainTabActivity.index";
     public static final String IF_SUB_INDEX = "MainTabActivity.sub_index";
@@ -23,6 +30,11 @@ public class MainTabActivity extends BaseTabActivity {
     public static final int IV_INDEX_RANKING = 2;
     public static final int IV_INDEX_CONFIG = 3;
 
+    public static final String SPEC_LABEL1 = "tab1";
+    public static final String SPEC_LABEL2 = "tab2";
+    public static final String SPEC_LABEL3 = "tab3";
+    public static final String SPEC_LABEL4 = "tab4";
+    
     /**
      * Activity생성시 실행하는 메소드
      *
@@ -36,24 +48,29 @@ public class MainTabActivity extends BaseTabActivity {
         sessionUtil = new SessionTabHostUtil(context);
         setContentView(R.layout.activity_main_tab);
 
+        mainTabWrapper = (LinearLayout) findViewById(R.id.main_tab_wrapper);
+        mainTabWrapper.addView(new MainTitle(this), 0);
+
         tabHost = (MainTabHost)getTabHost();
 
-        tabHost.addTab("tab1",
+        tabHost.addTab(SPEC_LABEL1,
                 R.drawable.icon_tapbar_matmap_selector,
                 R.string.main_tab_map,
                 new Intent(this, MainMapActivity.class));
-        tabHost.addTab("tab2",
+        tabHost.addTab(SPEC_LABEL2,
                 R.drawable.icon_tapbar_matstory_selector,
                 R.string.main_tab_talk,
                 new Intent(this, PostTabActivity.class));
-        tabHost.addTab("tab3",
+        tabHost.addTab(SPEC_LABEL3,
                 R.drawable.icon_tapbar_matist_selector,
                 R.string.main_tab_ranking,
                 new Intent(this, RankingTabActivity.class));
-        tabHost.addTab("tab4",
+        tabHost.addTab(SPEC_LABEL4,
                 R.drawable.icon_tapbar_login_selector,
                 R.string.main_tab_config,
                 new Intent(this, SettingActivity.class));
+                
+        tabHost.setOnTabChangedListener(this);
     }
 
     /**
@@ -66,5 +83,30 @@ public class MainTabActivity extends BaseTabActivity {
         super.onNewIntent(intent);
         tabHost.setCurrentTab(intent.getIntExtra(IF_INDEX, 0));
         sessionUtil.setSubTabIndex(intent.getIntExtra(IF_SUB_INDEX, 0));
+    }
+
+    @Override
+    public void onTabChanged(String specLabel) {
+        if (specLabel.equals(SPEC_LABEL1)) {
+            MainTitle title = new MainTitle(this);
+            title.setTitle(R.string.main_tab_title_matmap);
+            mainTabWrapper.removeViewAt(0);
+            mainTabWrapper.addView(title, 0);
+        } else if (specLabel.equals(SPEC_LABEL2)) {
+            MainTitle title = new MainTitle(this);
+            title.setTitle(R.string.main_tab_title_mattalk);
+            mainTabWrapper.removeViewAt(0);
+            mainTabWrapper.addView(title, 0);
+         } else if (specLabel.equals(SPEC_LABEL3)) {
+             MainTitle title = new MainTitle(this);
+             title.setTitle(R.string.main_tab_title_matist);
+             mainTabWrapper.removeViewAt(0);
+             mainTabWrapper.addView(title, 0);
+         } else if (specLabel.equals(SPEC_LABEL4)) {
+             MainTitle title = new MainTitle(this);
+             title.setTitle(R.string.main_tab_title_mypage);
+             mainTabWrapper.removeViewAt(0);
+             mainTabWrapper.addView(title, 0);
+        }
     }
 }

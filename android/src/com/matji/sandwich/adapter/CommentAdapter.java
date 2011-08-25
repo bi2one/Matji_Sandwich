@@ -30,6 +30,9 @@ public class CommentAdapter extends MBaseAdapter {
 			commentElement.nick = (TextView) convertView.findViewById(R.id.row_comment_nick);
 			commentElement.dateAgo = (TextView) convertView.findViewById(R.id.row_comment_created_at);
 			commentElement.comment = (TextView) convertView.findViewById(R.id.row_comment_comment);
+			
+			commentElement.profile.showInsetBackground();
+			
 			convertView.setTag(commentElement);
 
 			setOnClickListener(commentElement, position);

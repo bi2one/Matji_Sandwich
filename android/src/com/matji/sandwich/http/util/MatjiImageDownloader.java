@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import com.matji.sandwich.R;
 import com.matji.sandwich.listener.ImageDownloaderListener;
 import com.matji.sandwich.util.ImageUtil;
-import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.ProfileImageView;
 
 public class MatjiImageDownloader implements ImageDownloaderListener {

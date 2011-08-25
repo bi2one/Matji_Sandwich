@@ -4,8 +4,7 @@
 	android:id="@+id/cell_user_Wrapper"
 	style="@style/cell_user_Wrapper">
 	<include
-		style="@style/cell_user_Profile"
-		layout="@layout/profile" />
+		layout="@layout/cell_profile" />
 	<RelativeLayout
 		style="@style/cell_user_InfoWrapper">
 		<LinearLayout
