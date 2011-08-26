@@ -10,14 +10,14 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.CoordinateRegion;
 import com.matji.sandwich.data.Like;
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.SimpleTag;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.db.request.DBStoreRequest;
-import com.matji.sandwich.data.provider.DataBaseHelper;
 
 public class DBProvider {
 	public static String STORE_TABLE_NAME = "matji_stores";
@@ -275,8 +275,8 @@ public class DBProvider {
 		ContentValues cv = new ContentValues();
 		cv.put("following_user_id", followingUId);
 
-		db.insert(FOLLOWING_TABLE_NAME, null, cv);
-
+		long res = db.insert(FOLLOWING_TABLE_NAME, null, cv);
+        Log.d("Matji", "result : " + res);
 		return true;
 	}
 
@@ -291,7 +291,7 @@ public class DBProvider {
 		for (index = 0; index < count; index++) {
 			followingUId = followings[index];
 			insertFollowing(Integer.parseInt(followingUId));
-		}
+			}
 		return true;
 	}
 

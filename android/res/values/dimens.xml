@@ -5,6 +5,7 @@
 	<dimen name="default_distance_half">5dp</dimen>
 	<dimen name="default_drawable_padding">3dp</dimen>
 	<dimen name="default_drawable_padding_half">1.5dp</dimen>
+	<dimen name="default_divider_height">1dp</dimen>
 	
 	<!-- Title Container -->
 	<dimen name="title_container_height">36.67dp</dimen>
@@ -28,6 +29,7 @@
 	<dimen name="input_bar_min_height">46.67dp</dimen>
 	<dimen name="input_bar_confirm_btn_width">49.33dp</dimen>
 	<dimen name="input_bar_item_height">32dp</dimen>
+	<dimen name="input_bar_text_size">16dp</dimen>
 	<dimen name="likehand_btn_width">40.67dp</dimen>
 	
 	<!-- User Profile -->
@@ -130,7 +132,13 @@
 	<!-- row_ranked_user -->
 	<dimen name="rank_size">20dp</dimen>
 	<dimen name="rank_margin_right">6.67dp</dimen>
+
+	<!-- row_simple_store -->
+	<dimen name="row_simple_store_height">69.33dp</dimen>
+	<dimen name="row_simple_store_name_size">16dp</dimen>
+	<dimen name="row_simple_store_text_size">12dp</dimen>
 	
-	<!-- Subtitl -->
+	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>
+	
 </resources>

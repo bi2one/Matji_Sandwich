@@ -23,6 +23,6 @@ public class RankingAllListActivity extends BaseActivity {
     }
 
     protected void onNotFlowResume() {
-	listView.dataRefresh();
+	listView.requestReload();
     }
 }

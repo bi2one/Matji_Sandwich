@@ -346,4 +346,17 @@
   <string name="friend_post">친구들 이야기</string>
   <string name="nearby_post">근처 이야기</string>
   <string name="all_post">모든 이야기</string>
+  
+  <!-- Path -->
+  <string name="path_palai">fonts/palai.ttf</string>
+
+  <!-- FollowingActivity -->
+  <string name="following_of">님의&#160;</string>
+  <string name="following_following">Following</string>
+  <string name="following_follower">Follower</string>
+  
+  <!-- PostSubHeader -->
+  <string name="header_post_sub_another">님 외&#160;</string>
+  <string name="header_post_sub_likes">명이 좋아합니다.</string>
+  <string name="header_post_sub_like">님이 좋아합니다.</string>
 </resources>

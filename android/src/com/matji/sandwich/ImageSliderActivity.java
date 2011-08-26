@@ -34,8 +34,11 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     private HttpRequestManager manager;
     private MatjiImageDownloader downloader;	
 	
-    private TextView count;
     
+    private TextView count;
+
+    private View postWrapper;
+    private View moresign;
     private TextView nick;
     private TextView at;
     private TextView storeName;
@@ -68,6 +71,8 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         
         count = (TextView) findViewById(R.id.image_slider_count);
         swipeView = (SwipeView) findViewById(R.id.SwipeView);
+        postWrapper= findViewById(R.id.image_slider_post_wrapper);
+        moresign = findViewById(R.id.image_slider_moresign);
         nick = (TextView) findViewById(R.id.image_slider_nick);
         at = (TextView) findViewById(R.id.image_slider_at);
         storeName = (TextView) findViewById(R.id.image_slider_store_name);
@@ -82,6 +87,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         swipeView.setCurrentPage(currentPage);
         setPage(currentPage);
         setImage(currentPage);
+        dismissPost();
         postRequest(attachFiles[currentPage].getPostId());
         super.init();
     }
@@ -171,16 +177,28 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 			manager.cancelTask(this);
 	        setPage(currentPage);
 			setImage(currentPage);
+			dismissPost();
 			postRequest(attachFiles[currentPage].getPostId());
 		}
 	}
 
+	public void showPost() {	
+        postWrapper.setVisibility(View.VISIBLE);
+        moresign.setVisibility(View.VISIBLE);
+	}
+	
+	public void dismissPost() {
+        postWrapper.setVisibility(View.GONE);
+        moresign.setVisibility(View.GONE);
+	}
+	
     @Override
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) {
         case HttpRequest.POST_SHOW_REQUEST:
             if (data != null) {
                 setPost((Post) data.get(0));
+                showPost();
             } else {
                 // TODO error message
             }

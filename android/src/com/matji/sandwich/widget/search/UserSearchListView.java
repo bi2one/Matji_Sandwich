@@ -12,6 +12,7 @@ import android.util.Log;
 public class UserSearchListView extends SimpleUserListView implements Searchable {
 	private UserHttpRequest userRequest;
 	private String keyword = "";
+    private SearchHighlightHeader indexbar;
 	
 	public UserSearchListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -21,7 +22,8 @@ public class UserSearchListView extends SimpleUserListView implements Searchable
 	protected void init() {
 	    super.init();
         userRequest = new UserHttpRequest(getContext());
-        addHeaderView(new SearchHighlightHeader(getContext()));
+        indexbar = new SearchHighlightHeader(getContext());
+        addHeaderView(indexbar);
 	}
 	
 	public HttpRequest request() {
@@ -34,5 +36,6 @@ public class UserSearchListView extends SimpleUserListView implements Searchable
 		Log.d("refresh", "Search: " + keyword);
 		this.keyword = keyword;
 		requestReload();
+        indexbar.search(keyword);
 	}
 }

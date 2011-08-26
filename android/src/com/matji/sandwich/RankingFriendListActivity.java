@@ -14,15 +14,15 @@ public class RankingFriendListActivity extends BaseActivity {
     private RankingListView listView;
 
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_ranking_friend_list);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ranking_friend_list);
 
-	listView = (RankingListView) findViewById(R.id.ranking_friend_list_view);
-	listView.setActivity(this);
-	listView.requestReload();
+        listView = (RankingListView) findViewById(R.id.ranking_friend_list_view);
+        listView.setActivity(this);
+        listView.requestReload();
     }
 
     protected void onNotFlowResume() {
-	listView.dataRefresh();
+        listView.requestReload();
     }
 }

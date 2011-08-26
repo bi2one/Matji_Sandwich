@@ -59,6 +59,9 @@ public class SimplePostAdapter extends MBaseAdapter {
             simplePostElement.at= (TextView) convertView.findViewById(R.id.row_simple_post_at);
             simplePostElement.storeName = (TextView) convertView.findViewById(R.id.row_simple_post_store_name);
             simplePostElement.post = (TextView) convertView.findViewById(R.id.row_simple_post_post);
+            
+            simplePostElement.profile.showInsetBackground();
+            
             convertView.setTag(simplePostElement);
         } else {
             simplePostElement = (SimplePostElement) convertView.getTag();

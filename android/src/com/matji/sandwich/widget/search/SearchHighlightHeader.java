@@ -15,4 +15,8 @@ public class SearchHighlightHeader extends HighlightHeader {
     public SearchHighlightHeader(Context context) {
         super(context, MatjiConstants.string(R.string.search_highlight));
     }
+    
+    public void search(String keyword) {
+        setTitle("'" + keyword + "' " + MatjiConstants.string(R.string.search_highlight));
+    }
 }

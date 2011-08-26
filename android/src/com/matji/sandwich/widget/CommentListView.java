@@ -29,6 +29,7 @@ public class CommentListView extends RequestableMListView {
 	private Post post;
 	
 	private PostHeader header;
+	private PostSubHeader subHeader;
 
 	private static final int COMMENT_DELETE_REQUEST = 11;
 
@@ -50,12 +51,15 @@ public class CommentListView extends RequestableMListView {
 		setCacheColorHint(Color.TRANSPARENT);
 		
 		header = new PostHeader(getContext());
+		subHeader = new PostSubHeader(getContext());
 		addHeaderView(header);
+		addHeaderView(subHeader);
 	}
 	
 	public void setPost(Post post) {
 		this.post = post;
 		header.setPost(post);
+		subHeader.setPost(post);
 	}
 
 	public void addComment(Comment comment) {

@@ -116,9 +116,9 @@ public class UserCell extends Cell {
             messageList.setText(user.getReceivedMessageCount()+"");
         } else {
             follow.setText(
-                    (followingListener.isExistFollower()) ? 
-                            R.string.cell_user_follow 
-                            : R.string.cell_user_unfollow);
+                    (followingListener.isExistFollowing()) ? 
+                            R.string.cell_user_unfollow
+                            : R.string.cell_user_follow);
         }
     }
 

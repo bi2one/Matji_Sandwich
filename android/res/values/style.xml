@@ -712,64 +712,55 @@
   </style>
 
   <!-- adapter_near_store.xml -->
-  <style name="adapter_near_store" parent="DefaultWidthFill">
+  <style name="row_simple_store">
+  	<item name="android:layout_width">fill_parent</item>
+  	<item name="android:layout_height">@dimen/row_simple_store_height</item>
+  	<item name="android:padding">@dimen/default_distance</item>
     <item name="android:background">@drawable/btn_white_to_lightpink</item>
   </style>
 
-  <style name="adapter_near_store_left_element" parent="DefaultWrap">
-    <item name="android:layout_marginLeft">7dp</item>
+  <style name="row_simple_store_Name" parent="DefaultWrap">
+    <item name="android:textSize">@dimen/row_simple_store_name_size</item>
+    <item name="android:textColor">@color/matji_gray</item>
+   	<item name="android:singleLine">true</item>
   </style>
   
-  <style name="adapter_near_store_name" parent="adapter_near_store_left_element">
-    <item name="android:layout_marginTop">7dp</item>
-    <item name="android:textSize">15dp</item>
-    <item name="android:textColor">@color/BLACK</item>
+  <style name="row_simple_store_Address" parent="DefaultWrap">
+  	<item name="android:singleLine">true</item>
+  	<item name="android:textSize">@dimen/row_simple_store_text_size</item> 	
+  	<item name="android:textColor">@color/matji_silver</item>
   </style>
 
-  <style name="adapter_near_store_desc" parent="adapter_near_store_left_element">
-    <item name="android:layout_marginTop">4dp</item>
-    <item name="android:layout_marginBottom">5dp</item>
+  <style name="row_simple_store_Counts" parent="DefaultWrap">
   </style>
 
-  <style name="adapter_near_store_heart" parent="DefaultWrap">
-    <item name="android:src">@drawable/img_heart</item>
-    <item name="android:layout_marginRight">2dp</item>
-  </style>
-
-  <style name="adapter_near_store_desc_text" parent="DefaultWrap">
-    <item name="android:textSize">12dp</item>
+  <style name="row_simple_store_CountText" parent="DefaultWrap">
+  	<item name="android:singleLine">true</item>
+    <item name="android:textSize">@dimen/row_simple_store_text_size</item>
     <item name="android:textColor">@color/matji_red</item>
-    <item name="android:gravity">center_vertical</item>
+  </style>
+  
+  <style name="row_simple_store_PostCount" parent="row_simple_store_CountText">
+  	<item name="android:drawableLeft">@drawable/img_heart</item>
+	<item name="android:drawablePadding">@dimen/default_drawable_padding</item>
   </style>
 
-  <style name="adapter_near_store_balloon" parent="DefaultWrap">
-    <item name="android:src">@drawable/img_post_cnt</item>
-    <item name="android:layout_marginRight">2dp</item>
-    <item name="android:layout_marginLeft">5dp</item>
+  <style name="row_simple_store_LikeCount" parent="row_simple_store_CountText">
+  	<item name="android:drawableLeft">@drawable/img_post_cnt</item>
+	<item name="android:drawablePadding">@dimen/default_drawable_padding</item>
+	<item name="android:layout_marginLeft">@dimen/default_distance</item>
   </style>
 
-  <style name="adapter_near_store_divider" parent="DefaultWidthFill">
-    <item name="android:layout_height">1dp</item>
-    <item name="android:background">@color/listview_divider1_gray</item>
-  </style>
-
-  <style name="adapter_near_store_bookmark" parent="DefaultWrap">
-    <item name="android:layout_marginRight">10dp</item>
+  <style name="row_simple_store_Bookmark" parent="DefaultWrap">
   </style>
 
   <!-- bookmark_star_toggle.xml -->
   <style name="bookmark_star_toggle_unchecked" parent="DefaultWrap">
-    <item name="android:src">@drawable/empty_star</item>
-    <item name="android:layout_width">100px</item>
-    <item name="android:layout_height">100px</item>
-    <item name="android:scaleType">fitXY</item>
+    <item name="android:src">@drawable/icon_favorite</item>
   </style>
 
   <style name="bookmark_star_toggle_checked" parent="DefaultWrap">
-    <item name="android:src">@drawable/full_star</item>
-    <item name="android:layout_width">100px</item>
-    <item name="android:layout_height">100px</item>
-    <item name="android:scaleType">fitXY</item>
+    <item name="android:src">@drawable/icon_favorite_touch</item>
   </style>
 
   <!-- activity_change_location.xml -->
@@ -830,7 +821,7 @@
     <item name="android:paddingRight">@dimen/default_distance</item>
     <item name="android:paddingLeft">@dimen/default_distance</item>
   </style>
-
+  
   <style name="row_ranked_user_Rank" parent="DefaultWrap">
     <item name="android:textSize">@dimen/rank_size</item>
     <item name="android:textColor">@color/matji_white</item>
@@ -851,7 +842,6 @@
   </style>
 
   <style name="row_simple_user_count_wrap" parent="DefaultWrap">
-    <item name="android:layout_marginBottom">10dp</item>
   </style>
 
  
@@ -867,12 +857,9 @@
   	<item name="android:drawablePadding">@dimen/default_drawable_padding</item>
   </style>
  
-  <style name="row_simple_user_desc_text" parent="adapter_near_store_desc_text">
+  <style name="row_simple_user_desc_text" parent="DefaultWrap">
   </style>
-
-  <style name="row_simple_user_balloon" parent="adapter_near_store_balloon">
-  </style>
-
+  
   <style name="row_simple_user_point" parent="DefaultWrap">
     <item name="android:textSize">14.67dp</item>
     <item name="android:textColor">@color/matji_light_gray</item>

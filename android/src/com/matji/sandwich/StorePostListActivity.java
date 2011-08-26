@@ -1,6 +1,9 @@
 package com.matji.sandwich;
 
+import java.util.ArrayList;
+
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.StorePostListView;
 
@@ -8,56 +11,43 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class StorePostListActivity extends BaseActivity {
-	private Store store;
-	private StorePostListView listView;
-	
-	public static final String STORE = "store";
+    private Store store;
+    private StorePostListView listView;
 
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_store_post);
-		store = (Store) getIntent().getParcelableExtra(STORE);
+    public static final String STORE = "store";
 
-		listView = (StorePostListView) findViewById(R.id.store_post_list);
-		listView.setStore(store);
-		listView.setActivity(this);
-		listView.requestReload();
-	}
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_store_post);
+        store = (Store) getIntent().getParcelableExtra(STORE);
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		listView.dataRefresh();
-	}
+        listView = (StorePostListView) findViewById(R.id.store_post_list);
+        listView.setStore(store);
+        listView.setActivity(this);
+        listView.requestReload();
+    }
 
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		switch (requestCode) {
-		case WRITE_POST_ACTIVITY:
-			if (resultCode == RESULT_OK) {
-				listView.requestReload();
-			}
-			break;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listView.dataRefresh();
+    }
 
-			
-		case POST_ACTIVITY:
-			if (resultCode == RESULT_OK) {
-				if (data != null) {
-					int position = data.getIntExtra("position", -1);
-					if (position >= 0) {
-//						listView.delete(position);
-					}
-				}
-			}
-			break;
-		}
-	}
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+        case WRITE_POST_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                listView.requestReload();
+            }
+            break;
 
-//	private void onWriteButtonClicked() {
-//		if (loginRequired()) {
-//			Intent intent = new Intent(getApplicationContext(), WritePostActivity.class);
-//			intent.putExtra("store_id", store.getId());
-//			startActivityForResult(intent, WRITE_POST_ACTIVITY);
-//		}
-//	}
+        case POST_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostActivity.POSTS);
+                listView.setPosts(posts);
+            }
+            break;
+        }
+    }
 }

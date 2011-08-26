@@ -39,7 +39,7 @@ public class MainMapActivity extends BaseMapActivity {
 
         context = getApplicationContext();
         sessionLocationUtil = new SessionRecentLocationUtil(context);
-	sessionMapUtil = new SessionMapUtil(context);
+        sessionMapUtil = new SessionMapUtil(context);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
         mapView = (MainMatjiMapView)findViewById(R.id.map_view);
         mapView.init(addressView, this);
@@ -81,7 +81,8 @@ public class MainMapActivity extends BaseMapActivity {
 
     public void onFlipClicked(View v) {
         if (currentViewIsMap) {
-            showStoreListView();
+//            mapView.onMapCenterChanged(mapView.getMapCenter());
+            showStoreListView();            
         } else {
             showMapView();
         }

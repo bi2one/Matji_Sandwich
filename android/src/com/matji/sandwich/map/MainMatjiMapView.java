@@ -89,7 +89,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     public void setCenterNotAnimate(GeoPoint point) {
 	mapController.setCenter(point);
     }
-
+    
     public void onMapCenterChanged(GeoPoint point) {
 	sessionUtil.setBound(getBound(BoundType.MAP_BOUND_NE),
 			     getBound(BoundType.MAP_BOUND_SW));
