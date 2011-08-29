@@ -64,16 +64,16 @@ public class TaskQueueManager implements TaskElement.ProgressListener {
     }
 
     public void onStart(TaskElement element) {
-    	Log.d("=====", "start : " + element.toString());
+    	// Log.d("=====", "start : " + element.toString());
     }
     
     public void onFinish(TaskElement element) {
-    	Log.d("=====", "finish: " + element.toString());
+    	// Log.d("=====", "finish: " + element.toString());
     	startNewTask();
     }
     
     public void onCancel(TaskElement element) {
-    	Log.d("=====", "cancel: " + element.toString());
+    	// Log.d("=====", "cancel: " + element.toString());
     	startNewTask();
     }
 }
