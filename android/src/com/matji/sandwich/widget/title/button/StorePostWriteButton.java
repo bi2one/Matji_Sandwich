@@ -1,10 +1,9 @@
 package com.matji.sandwich.widget.title.button;
 
-import com.matji.sandwich.R;
-
 import android.app.Dialog;
 import android.content.Context;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.widget.dialog.WritePostStoreMatjiDialog;
 
 /**
@@ -13,7 +12,7 @@ import com.matji.sandwich.widget.dialog.WritePostStoreMatjiDialog;
  * @author excgate
  *
  */
-public class StorePostWriteButton extends TitleButton {
+public class StorePostWriteButton extends TitleImageButton {
     Dialog writeDialog;
     
     public StorePostWriteButton(Context context) {
@@ -21,7 +20,7 @@ public class StorePostWriteButton extends TitleButton {
     }
 
     /**
-     * @see com.matji.sandwich.widget.title.button.TitleButton#init()
+     * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
      */
     public void init() {
 	super.init();

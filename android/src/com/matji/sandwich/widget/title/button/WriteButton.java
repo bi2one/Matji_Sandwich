@@ -1,9 +1,9 @@
 package com.matji.sandwich.widget.title.button;
 
-import com.matji.sandwich.R;
-
 import android.content.Context;
 import android.util.Log;
+
+import com.matji.sandwich.R;
 
 /**
  * 쓰기 버튼
@@ -11,14 +11,14 @@ import android.util.Log;
  * @author mozziluv
  *
  */
-public class WriteButton extends TitleButton {
+public class WriteButton extends TitleImageButton {
 //TODO 나중에 Post write, Comment write 등 나눠질 수 있으니 후에 수정
 	public WriteButton(Context context) {
 		super(context);
 	}
 
 	/**
-	 * @see com.matji.sandwich.widget.title.button.TitleButton#init()
+	 * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
 	 */
 	@Override
 	public void init() {

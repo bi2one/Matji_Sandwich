@@ -1,3 +1,7 @@
+//import android.content.Context;
+//import android.util.AttributeSet;
+//import android.view.View.OnClickListener;
+
 package com.matji.sandwich.widget.title;
 
 import android.content.Context;
@@ -44,3 +48,15 @@ public class WritePostTitle extends RelativeLayout implements View.OnClickListen
 	public void onCompleteClick();
     }
 }
+//
+//public class WritePostTitle extends CompleteTitle implements OnClickListener {
+//
+//    public WritePostTitle(Context context) {
+//        super(context);
+//    }
+//    
+//    public WritePostTitle(Context context, AttributeSet attr) {
+//        super(context, attr);
+//    }
+//   
+//}

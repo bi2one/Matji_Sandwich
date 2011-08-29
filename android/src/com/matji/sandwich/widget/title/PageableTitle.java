@@ -3,7 +3,7 @@ package com.matji.sandwich.widget.title;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.PageDownButton;
 import com.matji.sandwich.widget.title.button.PageUpButton;
-import com.matji.sandwich.widget.title.button.TitleButton;
+import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -33,17 +33,17 @@ public class PageableTitle extends TitleContainerTypeA {
 	}
 
     @Override
-    protected TitleButton getLeftButton1() {
+    protected TitleImageButton getLeftButton1() {
         return  new HomeButton(getContext());
     }
 
     @Override
-    protected TitleButton getRightButton1() {
+    protected TitleImageButton getRightButton1() {
         return new PageUpButton(getContext());
     }
 
     @Override
-    protected TitleButton getRightButton2() {
+    protected TitleImageButton getRightButton2() {
         return new PageDownButton(getContext());
     }
 }

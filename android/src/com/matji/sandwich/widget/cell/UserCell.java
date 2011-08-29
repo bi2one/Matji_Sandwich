@@ -41,7 +41,7 @@ public class UserCell extends Cell {
      */
     public UserCell(Context context) {
         super(context, R.layout.cell_user);
-	spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
+        spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
     }
 
     /**
@@ -52,7 +52,7 @@ public class UserCell extends Cell {
      */
     public UserCell(Context context, AttributeSet attr) {
         super(context, R.layout.cell_user);
-	spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
+        spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
         setId(R.id.UserCell);
     }
 
@@ -64,7 +64,7 @@ public class UserCell extends Cell {
      */
     public UserCell(Context context, User user) {
         super(context, R.layout.cell_user);
-	spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
+        spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
         setUser(user);
     }
 
@@ -135,5 +135,11 @@ public class UserCell extends Cell {
         Intent intent = new Intent(getContext(), UserProfileActivity.class);
         intent.putExtra(UserProfileActivity.USER, (Parcelable) user);
         return intent;
+    }
+    
+    
+    public void showLine() {
+        findViewById(R.id.cell_user_line).setVisibility(View.VISIBLE);
+        findViewById(R.id.cell_user_shadow).setVisibility(View.GONE);
     }
 }

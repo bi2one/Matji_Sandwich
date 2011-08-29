@@ -18,7 +18,9 @@ public class RankingFriendListView extends RankingListView {
     }
 
     public HttpRequest request() {
-        followingRequest.actionFollowingRankingList(session.getCurrentUser().getId(), getPage(), getLimit());
+        if (session.getCurrentUser() != null) {
+            followingRequest.actionFollowingRankingList(session.getCurrentUser().getId(), getPage(), getLimit());
+        }
         return followingRequest;
     }
 }

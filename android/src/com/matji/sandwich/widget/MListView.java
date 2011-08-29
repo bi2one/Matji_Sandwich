@@ -1,14 +1,14 @@
 package com.matji.sandwich.widget;
 
-import android.view.View;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
-import android.app.Activity;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.matji.sandwich.util.DisplayUtil;
 

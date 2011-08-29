@@ -1,10 +1,10 @@
 package com.matji.sandwich.widget.title.button;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.widget.title.PageableTitle.Pageable;
-
 import android.content.Context;
 import android.util.Log;
+
+import com.matji.sandwich.R;
+import com.matji.sandwich.widget.title.PageableTitle.Pageable;
 
 /**
  * {@link Pageable} 인터페이스를 구현한 객체를 전달받아 해당 객체의 {@link Pageable#next()} 메소드를 실행한다.
@@ -12,7 +12,7 @@ import android.util.Log;
  * @author mozziluv
  *
  */
-public class PageDownButton extends TitleButton {
+public class PageDownButton extends TitleImageButton {
 
 	private Pageable pageable;
 	
@@ -29,7 +29,7 @@ public class PageDownButton extends TitleButton {
 	}
 
 	/**
-	 * @see com.matji.sandwich.widget.title.button.TitleButton#init()
+	 * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
 	 */
 	@Override
 	public void init() {

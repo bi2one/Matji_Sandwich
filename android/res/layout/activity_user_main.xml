@@ -33,7 +33,7 @@
 	<TabWidget
 	    android:id="@android:id/tabs"
 	    style="@style/post_tab_TabBar"
-	    android:background="#fff"
+	    android:background="@drawable/tabbtn_bg_under"
 	    android:layout_weight="0" />
       </LinearLayout>
     </com.matji.sandwich.widget.RoundTabHost>

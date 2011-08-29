@@ -56,3 +56,25 @@
 			android:onClick="onSendButtonClicked" />
 	</LinearLayout>
 </com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>
+
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- <LinearLayout -->
+<!-- 	xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- 	style="@style/DefaultFill" -->
+<!-- 	android:orientation="vertical"> -->
+<!-- 	<com.matji.sandwich.widget.title.CompleteTitle -->
+<!-- 		android:id="@+id/Titlebar" -->
+<!-- 		style="@style/DefaultWidthFill" /> -->
+<!-- 	<LinearLayout -->
+<!-- 		style="@style/DefaultWrap" -->
+<!-- 		andorid:layout_padding="@dimen/default_distance"> -->
+<!-- 		<EditText -->
+<!-- 			android:id="@+id/message_field" -->
+<!-- 			style="@style/DefaultFill" /> -->
+<!-- 	</LinearLayout> -->
+<!-- 	<RelativeLayout> -->
+<!-- 		<TextView /> -->
+<!-- 		<ImageButton /> -->
+<!-- 		<ImageButton /> -->
+<!-- 	</RelativeLayout> -->
+<!-- </LinearLayout> -->

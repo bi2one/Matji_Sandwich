@@ -40,10 +40,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class WritePostTabActivity extends BaseTabActivity implements OnTabChangeListener,
-								     Requestable,
-								     RelativeLayoutThatDetectsSoftKeyboard.Listener,
-								     GetPictureLayout.OnClickListener,
-								     WritePostTitle.OnClickListener {
+Requestable,
+RelativeLayoutThatDetectsSoftKeyboard.Listener,
+GetPictureLayout.OnClickListener,
+WritePostTitle.OnClickListener {
     public static final String TAB_ID_POST = "WritePostTabActivity.tab_id_post";
     public static final String TAB_ID_STORE = "WritePostTabActivity.tab_id_store";
     public static final String TAB_ID_PICTURE = "WritePostTabActivity.tab_id_picture";
@@ -76,271 +76,271 @@ public class WritePostTabActivity extends BaseTabActivity implements OnTabChange
     private MatjiAlertDialog postEmptyDialog;
 
     public int setMainViewId() {
-	return R.id.activity_write_post_tab;
+        return R.id.activity_write_post_tab;
     }
-    
-    protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_write_post_tab);
 
-	context = getApplicationContext();
-	pictureKeyboard = (GetPictureLayout)findViewById(R.id.activity_write_post_tab_picture_keyboard);
-	pictureKeyboard.setOnClickListener(this);
-	requestManager = HttpRequestManager.getInstance(context);
-	sessionUtil = new SessionWritePostUtil(context);
-	sessionUtil.clear();
-	sessionMapUtil = new SessionMapUtil(context);
-	isShowPictureKeyboard = false;
-	isShowPictureKeyboardAfterHide = false;
-	keyboardBasicLayoutParams = new LayoutParams(LayoutParams.FILL_PARENT, 0);
-	keyboardBasicLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-	photoUtil = new PhotoUtil(this);
-	postEmptyDialog = new MatjiAlertDialog(this, R.string.write_post_tab_activity_post_empty);
-	
-	mainView = (RelativeLayoutThatDetectsSoftKeyboard)findViewById(R.id.activity_write_post_tab);
-	mainView.setListener(this);
-	titleBar = (WritePostTitle)findViewById(R.id.activity_write_post_tab_title);
-	titleBar.setOnClickListener(this);
-	
-	tabHost = (RoundTabHost)getTabHost();
-	tabHost.addLeftTab(TAB_ID_POST,
-			   R.string.default_string_post,
-			   new Intent(this, WritePostActivity.class));
-	tabHost.addCenterCheckTab(TAB_ID_STORE,
-				  R.string.default_string_store,
-				  new Intent(this, WritePostStoreActivity.class));
-	tabHost.addCenterCheckTab(TAB_ID_PICTURE,
-				  R.string.default_string_picture,
-				  new Intent(this, WritePostPictureActivity.class));
-	tabHost.addRightCheckTab(TAB_ID_TAG,
-				 R.string.default_string_tag,
-				 new Intent(this, WritePostTagActivity.class));
-	tabHost.setOnTabChangedListener(this);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_write_post_tab);
+
+        context = getApplicationContext();
+        pictureKeyboard = (GetPictureLayout)findViewById(R.id.activity_write_post_tab_picture_keyboard);
+        pictureKeyboard.setOnClickListener(this);
+        requestManager = HttpRequestManager.getInstance(context);
+        sessionUtil = new SessionWritePostUtil(context);
+        sessionUtil.clear();
+        sessionMapUtil = new SessionMapUtil(context);
+        isShowPictureKeyboard = false;
+        isShowPictureKeyboardAfterHide = false;
+        keyboardBasicLayoutParams = new LayoutParams(LayoutParams.FILL_PARENT, 0);
+        keyboardBasicLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        photoUtil = new PhotoUtil(this);
+        postEmptyDialog = new MatjiAlertDialog(this, R.string.write_post_tab_activity_post_empty);
+
+        mainView = (RelativeLayoutThatDetectsSoftKeyboard)findViewById(R.id.activity_write_post_tab);
+        mainView.setListener(this);
+        titleBar = (WritePostTitle)findViewById(R.id.activity_write_post_tab_title);
+        titleBar.setOnClickListener(this);
+
+        tabHost = (RoundTabHost)getTabHost();
+        tabHost.addLeftTab(TAB_ID_POST,
+                R.string.default_string_post,
+                new Intent(this, WritePostActivity.class));
+        tabHost.addCenterCheckTab(TAB_ID_STORE,
+                R.string.default_string_store,
+                new Intent(this, WritePostStoreActivity.class));
+        tabHost.addCenterCheckTab(TAB_ID_PICTURE,
+                R.string.default_string_picture,
+                new Intent(this, WritePostPictureActivity.class));
+        tabHost.addRightCheckTab(TAB_ID_TAG,
+                R.string.default_string_tag,
+                new Intent(this, WritePostTagActivity.class));
+        tabHost.setOnTabChangedListener(this);
     }
 
     protected void onResume() {
-	super.onResume();
-	requestManager.turnOn();
+        super.onResume();
+        requestManager.turnOn();
     }
 
     public void onTabChanged(String tabId) {
-	currentView = tabHost.getCurrentView();
-	isShowPictureKeyboardAfterHide = false;
-	if (tabId.equals(TAB_ID_STORE)) {
-	    KeyboardUtil.hideKeyboard(this);
-	    hidePictureKeyboard();
-	} else if (tabId.equals(TAB_ID_POST)) {
-	    View postText = currentView.findViewById(R.id.activity_write_post_text);
-	    if (!isKeyboardShowing) {
-		hidePictureKeyboardAfterHide();
-	    } else {
-		hidePictureKeyboard();
-	    }
-	    KeyboardUtil.showKeyboard(this, postText);
-	} else if (tabId.equals(TAB_ID_PICTURE)) {
-	    if (albumView == null) {
-		albumView = (AlbumView)currentView.findViewById(R.id.activity_write_post_picture_albumview);
-	    }
-	    
-	    KeyboardUtil.hideKeyboard(this);
-	    if (isKeyboardShowing) {
-		showPictureKeyboardAfterHide();
-	    } else {
-		showPictureKeyboard();
-	    }
-	} else if (tabId.equals(TAB_ID_TAG)) {
-	    KeyboardUtil.hideKeyboard(this);
-	    hidePictureKeyboard();
-	}
+        currentView = tabHost.getCurrentView();
+        isShowPictureKeyboardAfterHide = false;
+        if (tabId.equals(TAB_ID_STORE)) {
+            KeyboardUtil.hideKeyboard(this);
+            hidePictureKeyboard();
+        } else if (tabId.equals(TAB_ID_POST)) {
+            View postText = currentView.findViewById(R.id.activity_write_post_text);
+            if (!isKeyboardShowing) {
+                hidePictureKeyboardAfterHide();
+            } else {
+                hidePictureKeyboard();
+            }
+            KeyboardUtil.showKeyboard(this, postText);
+        } else if (tabId.equals(TAB_ID_PICTURE)) {
+            if (albumView == null) {
+                albumView = (AlbumView)currentView.findViewById(R.id.activity_write_post_picture_albumview);
+            }
+
+            KeyboardUtil.hideKeyboard(this);
+            if (isKeyboardShowing) {
+                showPictureKeyboardAfterHide();
+            } else {
+                showPictureKeyboard();
+            }
+        } else if (tabId.equals(TAB_ID_TAG)) {
+            KeyboardUtil.hideKeyboard(this);
+            hidePictureKeyboard();
+        }
     }
 
     public void onChecked(String tabId, boolean isCheck) {
-	Indicator indicator = tabHost.getIndicator(tabId);
-	if (indicator instanceof Checkable) {
-	    ((Checkable)indicator).setCheck(isCheck);
-	}
+        Indicator indicator = tabHost.getIndicator(tabId);
+        if (indicator instanceof Checkable) {
+            ((Checkable)indicator).setCheck(isCheck);
+        }
     }
 
     public void onSoftKeyboardShown(boolean isShowing) {
-	isKeyboardShowing = isShowing;
-	if (isShowing) {
-	    contentHeightWithoutKeyboard = mainView.getHeight();
-	} else {
-	    contentHeightWithKeyboard = mainView.getHeight();
-	}
+        isKeyboardShowing = isShowing;
+        if (isShowing) {
+            contentHeightWithoutKeyboard = mainView.getHeight();
+        } else {
+            contentHeightWithKeyboard = mainView.getHeight();
+        }
 
-	if (keyboardHeight <= 0 && contentHeightWithoutKeyboard > 0 && contentHeightWithKeyboard > 0) {
-	    keyboardHeight = contentHeightWithoutKeyboard - contentHeightWithKeyboard;
-	    keyboardLayoutParams = new LayoutParams(LayoutParams.FILL_PARENT, keyboardHeight);
-	    keyboardLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        if (keyboardHeight <= 0 && contentHeightWithoutKeyboard > 0 && contentHeightWithKeyboard > 0) {
+            keyboardHeight = contentHeightWithoutKeyboard - contentHeightWithKeyboard;
+            keyboardLayoutParams = new LayoutParams(LayoutParams.FILL_PARENT, keyboardHeight);
+            keyboardLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-	    if (isShowPictureKeyboard) {
-		showPictureKeyboard();
-		isShowPictureKeyboard = false;
-	    }
-	}
+            if (isShowPictureKeyboard) {
+                showPictureKeyboard();
+                isShowPictureKeyboard = false;
+            }
+        }
 
-	if (!isShowing && isShowPictureKeyboardAfterHide) {
-	    showPictureKeyboard();
-	}
+        if (!isShowing && isShowPictureKeyboardAfterHide) {
+            showPictureKeyboard();
+        }
 
-	if (isShowing && isHidePictureKeyboardAfterHide) {
-	    hidePictureKeyboard();
-	}
+        if (isShowing && isHidePictureKeyboardAfterHide) {
+            hidePictureKeyboard();
+        }
 
-	if (keyboardListener != null) {
-	    keyboardListener.onKeyboardStateChanged(isShowing);
-	}
+        if (keyboardListener != null) {
+            keyboardListener.onKeyboardStateChanged(isShowing);
+        }
     }
 
     public void setKeyboardListener(KeyboardListener keyboardListener) {
-	this.keyboardListener = keyboardListener;
+        this.keyboardListener = keyboardListener;
     }
 
     public void removeKeyboardListener() {
-	setKeyboardListener(null);
+        setKeyboardListener(null);
     }
 
     public void onCompleteClick() {
-	if (requestManager.isRunning()) {
-	    return ;
-	}
-	
-	String currentTab = tabHost.getCurrentTabTag();
-	View currentView = tabHost.getCurrentView();
-	WritePostHttpRequest postRequest = new WritePostHttpRequest(context);
-	Location centerLocation = new GeoPointToLocationAdapter(sessionMapUtil.getCenter());
+        if (requestManager.isRunning()) {
+            return ;
+        }
 
-	String post = findPost(currentTab);
-	int storeId = findStoreId(currentTab);
-	ArrayList<File> images = findImages(currentTab);
-	String tags = findTags(currentTab);
+        String currentTab = tabHost.getCurrentTabTag();
+        View currentView = tabHost.getCurrentView();
+        WritePostHttpRequest postRequest = new WritePostHttpRequest(context);
+        Location centerLocation = new GeoPointToLocationAdapter(sessionMapUtil.getCenter());
 
-	if (!isValidPost(post)) {
-	    return ;
-	}
-	
-	postRequest.actionNew(post, tags, storeId, centerLocation, images);
-	requestManager.request(getMainView(), postRequest, REQUEST_WRITE_POST, this);
+        String post = findPost(currentTab);
+        int storeId = findStoreId(currentTab);
+        ArrayList<File> images = findImages(currentTab);
+        String tags = findTags(currentTab);
+
+        if (!isValidPost(post)) {
+            return ;
+        }
+
+        postRequest.actionNew(post, tags, storeId, centerLocation, images);
+        requestManager.request(getMainView(), postRequest, REQUEST_WRITE_POST, this);
     }
 
     private boolean isValidPost(String post) {
-	if (post.trim().equals("")) {
-	    postEmptyDialog.show();
-	    return false;
-	}
-	return true;
+        if (post.trim().equals("")) {
+            postEmptyDialog.show();
+            return false;
+        }
+        return true;
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-	switch(tag) {
-	case REQUEST_WRITE_POST:
-	    finish();
-	}
+        switch(tag) {
+        case REQUEST_WRITE_POST:
+            finish();
+        }
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
-	e.performExceptionHandling(context);
+        e.performExceptionHandling(context);
     }
 
     private String findTags(String tabLabel) {
-	if (tabLabel.equals(TAB_ID_TAG)) {
-	    EditText tagsEditText = (EditText)findViewFromCurrentView(R.id.activity_write_post_tag_text);
-	    return tagsEditText.getText().toString().trim();
-	} else
-	    return sessionUtil.getTags();
+        if (tabLabel.equals(TAB_ID_TAG)) {
+            EditText tagsEditText = (EditText)findViewFromCurrentView(R.id.activity_write_post_tag_text);
+            return tagsEditText.getText().toString().trim();
+        } else
+            return sessionUtil.getTags();
     }
 
     private String findPost(String tabLabel) {
-	if (tabLabel.equals(TAB_ID_POST)) {
-	    TextView postTextView = (TextView)findViewFromCurrentView(R.id.activity_write_post_text);
-	    return postTextView.getText().toString();
-	} else
-	    return sessionUtil.getPost();
+        if (tabLabel.equals(TAB_ID_POST)) {
+            TextView postTextView = (TextView)findViewFromCurrentView(R.id.activity_write_post_text);
+            return postTextView.getText().toString();
+        } else
+            return sessionUtil.getPost();
     }
 
     private int findStoreId(String tabLabel) {
-	if (tabLabel.equals(TAB_ID_STORE)) {
-	    WritePostStoreView storeListView = (WritePostStoreView)findViewFromCurrentView(R.id.activity_write_post_store_listview);
-	    Store store = storeListView.getSelectedStore();
-	    
-	    if (store == null)
-		return 0;
-	    else
-		return store.getId();
-	} else
-	    return sessionUtil.getStoreId();
+        if (tabLabel.equals(TAB_ID_STORE)) {
+            WritePostStoreView storeListView = (WritePostStoreView)findViewFromCurrentView(R.id.activity_write_post_store_listview);
+            Store store = storeListView.getSelectedStore();
+
+            if (store == null)
+                return 0;
+            else
+                return store.getId();
+        } else
+            return sessionUtil.getStoreId();
     }
 
     private ArrayList<File> findImages(String tabLabel) {
-	if (tabLabel.equals(TAB_ID_PICTURE)) {
-	    AlbumView album = (AlbumView)findViewFromCurrentView(R.id.activity_write_post_picture_albumview);
-	    return album.getFiles();
-	} else
-	    return sessionUtil.getPictureFiles();
+        if (tabLabel.equals(TAB_ID_PICTURE)) {
+            AlbumView album = (AlbumView)findViewFromCurrentView(R.id.activity_write_post_picture_albumview);
+            return album.getFiles();
+        } else
+            return sessionUtil.getPictureFiles();
     }
 
     private View findViewFromCurrentView(int id) {
-	View currentView = tabHost.getCurrentView();
-	return currentView.findViewById(id);
+        View currentView = tabHost.getCurrentView();
+        return currentView.findViewById(id);
     }
 
     public void onCameraClick() {
-	Intent cameraIntent = photoUtil.getIntent(IntentType.FROM_CAMERA);
-	requestManager.turnOff();
-	startActivityForResult(cameraIntent, FROM_CAMERA);
+        Intent cameraIntent = photoUtil.getIntent(IntentType.FROM_CAMERA);
+        requestManager.turnOff();
+        startActivityForResult(cameraIntent, FROM_CAMERA);
     }
 
     public void onAlbumClick() {
-	Intent albumIntent = photoUtil.getIntent(IntentType.FROM_ALBUM);
-	requestManager.turnOff();
-	startActivityForResult(albumIntent, FROM_ALBUM);
+        Intent albumIntent = photoUtil.getIntent(IntentType.FROM_ALBUM);
+        requestManager.turnOff();
+        startActivityForResult(albumIntent, FROM_ALBUM);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	File imageFile = null;
-	if (resultCode == RESULT_OK) {
-	    switch(requestCode) {
-	    case FROM_CAMERA:
-		imageFile = photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_CAMERA, data);
-		if(albumView.pushImage(imageFile)) {
-		    onChecked(TAB_ID_PICTURE, true);
-		}
-		break;
-	    case FROM_ALBUM:
-		imageFile = photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_ALBUM, data);
-		if (albumView.pushImage(imageFile)) {
-		    onChecked(TAB_ID_PICTURE, true);
-		}
-	    }
-	}
+        File imageFile = null;
+        if (resultCode == RESULT_OK) {
+            switch(requestCode) {
+            case FROM_CAMERA:
+                imageFile = photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_CAMERA, data);
+                if(albumView.pushImage(imageFile)) {
+                    onChecked(TAB_ID_PICTURE, true);
+                }
+                break;
+            case FROM_ALBUM:
+                imageFile = photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_ALBUM, data);
+                if (albumView.pushImage(imageFile)) {
+                    onChecked(TAB_ID_PICTURE, true);
+                }
+            }
+        }
     }
 
     private void showPictureKeyboardAfterHide() {
-	isShowPictureKeyboardAfterHide = true;
+        isShowPictureKeyboardAfterHide = true;
     }
 
     private void hidePictureKeyboardAfterHide() {
-	isHidePictureKeyboardAfterHide = true;
+        isHidePictureKeyboardAfterHide = true;
     }
 
-    
-    
+
+
     private void showPictureKeyboard() {
-	if (keyboardLayoutParams == null) {
-	    isShowPictureKeyboard = true;
-	} else {
-	    pictureKeyboard.setLayoutParams(keyboardLayoutParams);
-	    pictureKeyboard.setVisibility(View.VISIBLE);
-	}
+        if (keyboardLayoutParams == null) {
+            isShowPictureKeyboard = true;
+        } else {
+            pictureKeyboard.setLayoutParams(keyboardLayoutParams);
+            pictureKeyboard.setVisibility(View.VISIBLE);
+        }
     }
 
     private void hidePictureKeyboard() {
-	pictureKeyboard.setVisibility(View.GONE);
-	pictureKeyboard.setLayoutParams(keyboardBasicLayoutParams);
+        pictureKeyboard.setVisibility(View.GONE);
+        pictureKeyboard.setLayoutParams(keyboardBasicLayoutParams);
     }
 
     public interface KeyboardListener {
-	public void onKeyboardStateChanged(boolean isShowing);
+        public void onKeyboardStateChanged(boolean isShowing);
     }
 }

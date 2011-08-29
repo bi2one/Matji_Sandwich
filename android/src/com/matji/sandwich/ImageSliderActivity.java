@@ -26,15 +26,15 @@ import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.widget.SwipeView;
 
 public class ImageSliderActivity extends BaseActivity implements OnScrollListener, Requestable {
-	private AttachFile[] attachFiles;
-	private int currentPage;
-	private SwipeView swipeView;
-    
+    private AttachFile[] attachFiles;
+    private int currentPage;
+    private SwipeView swipeView;
+
     private HttpRequest request;
     private HttpRequestManager manager;
     private MatjiImageDownloader downloader;	
-	
-    
+
+
     private TextView count;
 
     private View postWrapper;
@@ -46,20 +46,22 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     private TextView ago;
     private TextView commentCount;
     private TextView likeCount;    
-    
-	public static final String ATTACH_FILES = "attach_files";
-	public static final String POSITION = "position";
+
+    private int prevPostId = -1;
+
+    public static final String ATTACH_FILES = "attach_files";
+    public static final String POSITION = "position";
 
     public int setMainViewId() {
-	return R.id.activity_image_slider;
+        return R.id.activity_image_slider;
     }
-    
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
 
-    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+
     protected void init() {
         setContentView(R.layout.activity_image_slider);
 
@@ -68,11 +70,11 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         for (int i = 0; i < tmp.length; i++) {
             attachFiles[i] = (AttachFile) tmp[i];
         }
-        
+
         currentPage = getIntent().getIntExtra(POSITION, 0);
         downloader = new MatjiImageDownloader(this);        
         manager = HttpRequestManager.getInstance(this);
-        
+
         count = (TextView) findViewById(R.id.image_slider_count);
         swipeView = (SwipeView) findViewById(R.id.SwipeView);
         postWrapper= findViewById(R.id.image_slider_post_wrapper);
@@ -84,9 +86,9 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         ago = (TextView) findViewById(R.id.image_slider_created_at);
         commentCount = (TextView) findViewById(R.id.image_slider_comment_count);
         likeCount = (TextView) findViewById(R.id.image_slider_like_count);
-        
+
         swipeView.addOnScrollListener(this);
-        
+
         initImageView();
         swipeView.setCurrentPage(currentPage);
         setPage(currentPage);
@@ -95,36 +97,41 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         postRequest(attachFiles[currentPage].getPostId());
         super.init();
     }
-    
-	private void initImageView() {
-		for (int i = 0; i < attachFiles.length; i++) {
-			RelativeLayout rl = new RelativeLayout(this);
-			rl.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-			
-			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			params.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-			ImageView image = new ImageView(this);
-			image.setLayoutParams(params);
-			image.setScaleType(ScaleType.FIT_CENTER);
+    private void initImageView() {
+        for (int i = 0; i < attachFiles.length; i++) {
+            RelativeLayout rl = new RelativeLayout(this);
+            rl.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
-			rl.addView(image);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-			if (attachFiles[i] != null) {
-				swipeView.addView(rl);
-			}
-		}
-	}
+            ImageView image = new ImageView(this);
+            image.setLayoutParams(params);
+            image.setScaleType(ScaleType.FIT_CENTER);
+
+            rl.addView(image);
+
+            if (attachFiles[i] != null) {
+                swipeView.addView(rl);
+            }
+        }
+    }
 
     public void postRequest(int postId) {
-        if (request == null || !(request instanceof PostHttpRequest)) {
-            request = new PostHttpRequest(this);
+        if (!(postId == prevPostId)) {
+            dismissPost();
+
+            if (request == null || !(request instanceof PostHttpRequest)) {
+                request = new PostHttpRequest(this);
+            }
+
+            ((PostHttpRequest) request).actionShow(postId);
+            manager.request(getMainView(), request, HttpRequest.POST_SHOW_REQUEST, this);
+            prevPostId = postId;
         }
-        
-        ((PostHttpRequest) request).actionShow(postId);
-        manager.request(getMainView(), request, HttpRequest.POST_SHOW_REQUEST, this);
     }
-    
+
     public void setPost(Post post) {
         nick.setText(post.getUser().getNick());
         if (post.getStore() != null) {
@@ -139,63 +146,62 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         commentCount.setText(post.getCommentCount()+"");
         likeCount.setText(post.getLikeCount()+"");
     }
-    
+
     public void setPage(int currentPage) {
         count.setText(
                 MatjiConstants.string(R.string.default_string_image) 
                 + " " + (currentPage+1) + "/" + attachFiles.length);
         count.bringToFront();
     }
-    
-	public void setImage(int currentPage) {
-		int attach_file_id = attachFiles[currentPage].getId();
 
-		/* Set Current Page Image */
-		ImageView image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage)).getChildAt(0);
-		downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
+    public void setImage(int currentPage) {
+        int attach_file_id = attachFiles[currentPage].getId();
 
-		/* Set Previous Page Image */
-		if (currentPage > 0) {
-			attach_file_id = attachFiles[currentPage - 1].getId();
-			if (attachFiles[currentPage - 1] != null) {
-				image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage - 1)).getChildAt(0);
-				downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
-			}
-		}
+        /* Set Current Page Image */
+        ImageView image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage)).getChildAt(0);
+        downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
 
-		/* Set Next Page Image */
-		if (currentPage < attachFiles.length - 1) {
-			attach_file_id = attachFiles[currentPage + 1].getId();
-			if (attachFiles[currentPage + 1] != null) {
-				image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage + 1)).getChildAt(0);
-				downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
-			}
-		}
-	}
+        /* Set Previous Page Image */
+        if (currentPage > 0) {
+            attach_file_id = attachFiles[currentPage - 1].getId();
+            if (attachFiles[currentPage - 1] != null) {
+                image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage - 1)).getChildAt(0);
+                downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
+            }
+        }
 
-	public void onScroll(int scrollX) {}
+        /* Set Next Page Image */
+        if (currentPage < attachFiles.length - 1) {
+            attach_file_id = attachFiles[currentPage + 1].getId();
+            if (attachFiles[currentPage + 1] != null) {
+                image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage + 1)).getChildAt(0);
+                downloader.downloadAttachFileImage(attach_file_id, MatjiImageDownloader.IMAGE_XLARGE, image);
+            }
+        }
+    }
 
-	public void onViewScrollFinished(int currentPage) {
-		if (this.currentPage != currentPage) {
-			this.currentPage = currentPage;
-			manager.cancelTask();
-	        setPage(currentPage);
-			setImage(currentPage);
-			dismissPost();
-			postRequest(attachFiles[currentPage].getPostId());
-		}
-	}
+    public void onScroll(int scrollX) {}
 
-	public void showPost() {	
+    public void onViewScrollFinished(int currentPage) {
+        if (this.currentPage != currentPage) {
+            this.currentPage = currentPage;
+            manager.cancelTask();
+            setPage(currentPage);
+            setImage(currentPage);
+            postRequest(attachFiles[currentPage].getPostId());
+        }
+    }
+
+    public void showPost() {	
         postWrapper.setVisibility(View.VISIBLE);
         moresign.setVisibility(View.VISIBLE);
-	}
-	
-	public void dismissPost() {
+    }
+
+    public void dismissPost() {
         postWrapper.setVisibility(View.GONE);
         moresign.setVisibility(View.GONE);
-	}
-	
+    }
+
     @Override
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) {
@@ -208,7 +214,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
             }
         }
     }
-    
+
     @Override
     public void requestExceptionCallBack(int tag, MatjiException e) {
         e.performExceptionHandling(this);

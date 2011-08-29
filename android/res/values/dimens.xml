@@ -5,7 +5,7 @@
 	<dimen name="default_distance_half">5dp</dimen>
 	<dimen name="default_drawable_padding">3dp</dimen>
 	<dimen name="default_drawable_padding_half">1.5dp</dimen>
-	<dimen name="default_divider_height">1dp</dimen>
+	<dimen name="default_divider_height">0.67dp</dimen>
 	
 	<!-- Title Container -->
 	<dimen name="title_container_height">36.67dp</dimen>
@@ -23,6 +23,7 @@
 	<dimen name="user_cell_content_size">12dp</dimen>
 	<dimen name="user_cell_btn_margin">1.33dp</dimen>
 	<dimen name="user_cell_margin_left">13.33dp</dimen>
+	<dimen name="user_intro_cell_padding">14.67dp</dimen>
 		
 	<!-- Inputbar -->	
 	<dimen name="input_bar_margin">6.67dp</dimen>
@@ -137,6 +138,15 @@
 	<dimen name="row_simple_store_height">69.33dp</dimen>
 	<dimen name="row_simple_store_name_size">16dp</dimen>
 	<dimen name="row_simple_store_text_size">12dp</dimen>
+	
+	<!-- row message -->
+	<dimen name="row_message_height">53.33dp</dimen>
+	<dimen name="row_message_flow_width">39.33dp</dimen>
+	<dimen name="row_message_flow_line_width">1.33dp</dimen>
+	<dimen name="row_message_subject_list_size">16dp</dimen>
+	<dimen name="row_message_nick_size">12dp</dimen>
+	<dimen name="row_message_content_padding">14.67dp</dimen>
+	<dimen name="row_message_content_padding2">13.33dp</dimen>
 	
 	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>

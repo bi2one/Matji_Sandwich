@@ -1,7 +1,7 @@
 package com.matji.sandwich.widget.title.button;
 
 import android.content.Context;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.matji.sandwich.R;
@@ -13,12 +13,12 @@ import com.matji.sandwich.util.MatjiConstants;
  * @author mozziluv
  *
  */
-public abstract class TitleButton extends Button implements TitleItem {
+public abstract class TitleImageButton extends ImageButton implements TitleItem {
 	protected Context context;
 	private int width;
 	private int height;
 	
-	public TitleButton(Context context) {
+	public TitleImageButton(Context context) {
 		super(context);
 		this.context = context;
 		width = MatjiConstants.dimenInt(R.dimen.title_container_btn_min_width);
@@ -36,13 +36,4 @@ public abstract class TitleButton extends Button implements TitleItem {
 	 * TitleButton 을 initialize 한다. 생성자에서 해야 할 일이 있는 클래스들은 오버라이드 해 작성한다.
 	 */
 	protected void init() {}
-	
-	/**
-	 * 버튼의 크기를 늘린다.
-	 */
-	protected void enlarge() {
-	    width = MatjiConstants.dimenInt(R.dimen.title_container_btn_max_width);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
-        setLayoutParams(params);
-	}
 }

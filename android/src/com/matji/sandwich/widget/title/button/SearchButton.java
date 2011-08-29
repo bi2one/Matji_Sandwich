@@ -13,14 +13,14 @@ import android.util.Log;
  * @author mozziluv
  *
  */
-public class SearchButton extends TitleButton {
+public class SearchButton extends TitleImageButton {
 
 	public SearchButton(Context context) {
 		super(context);
 	}
 
 	/**
-	 * @see com.matji.sandwich.widget.title.button.TitleButton#init()
+	 * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
 	 */
 	@Override
 	public void init() {

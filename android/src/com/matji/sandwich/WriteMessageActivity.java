@@ -109,4 +109,4 @@ public class WriteMessageActivity extends BaseActivity implements Requestable {
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getApplicationContext());
 	}
-}
+} 

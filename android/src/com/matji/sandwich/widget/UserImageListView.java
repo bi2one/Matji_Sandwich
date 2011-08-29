@@ -1,12 +1,11 @@
 package com.matji.sandwich.widget;
 
+import android.content.Context;
+import android.util.AttributeSet;
+
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.AttachFilesHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.widget.cell.UserCell;
-
-import android.content.Context;
-import android.util.AttributeSet;
 
 /**
  * 유저가 올린 이미지를 보여주는 뷰
@@ -30,8 +29,6 @@ public class UserImageListView extends ImageListView {
 
 	public void setUser(User user) {
 		this.user = user;
-
-        addHeaderView(new UserCell(getContext(), user));
 		init();
 	}
 

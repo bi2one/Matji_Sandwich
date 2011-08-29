@@ -2,17 +2,21 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.widget.UserPostListView;
-
-import android.content.Intent;
-import android.os.Bundle;
+import com.matji.sandwich.widget.cell.UserCell;
+import com.matji.sandwich.widget.cell.UserIntroCell;
 
 public class UserPostListActivity extends BaseActivity {
     private User user;		
     private UserPostListView listView;
+    private UserCell userCell;
+    private UserIntroCell userIntroCell;
 
     public static final String USER = "user";
 
@@ -27,16 +31,22 @@ public class UserPostListActivity extends BaseActivity {
         setContentView(R.layout.activity_user_post);
 
         user = getIntent().getParcelableExtra(USER);
+        userCell = new UserCell(this, user);
+        userCell.showLine();
+        userIntroCell = new UserIntroCell(this, user);
 
         listView = (UserPostListView) findViewById(R.id.user_post_list_view);
         listView.setUser(user);
         listView.setActivity(this);
         listView.requestReload();
+        listView.addHeaderView(userCell);
+        listView.addHeaderView(userIntroCell);
     }
     @Override
     protected void onResume() {
         super.onResume();
         listView.dataRefresh();
+        userCell.refresh();
     }
 
     @Override

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.widget.title.button.HomeButton;
-import com.matji.sandwich.widget.title.button.TitleButton;
+import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 public class HomeTitle extends TitleContainerTypeC {
 
@@ -17,7 +17,7 @@ public class HomeTitle extends TitleContainerTypeC {
 	}
 
     @Override
-    protected TitleButton getLeftButton1() {
+    protected TitleImageButton getLeftButton1() {
         return new HomeButton(getContext());
     }
 }

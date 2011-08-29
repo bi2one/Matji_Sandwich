@@ -1,27 +1,22 @@
 package com.matji.sandwich;
 
-import android.os.Bundle;
-import android.view.View;
-import android.content.Intent;
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
+import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseTabActivity;
-import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.PostListView;
-import com.matji.sandwich.widget.MyPostListView;
-import com.matji.sandwich.widget.RoundTabHost;
-import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.session.SessionTabHostUtil;
+import com.matji.sandwich.widget.RoundTabHost;
 
 public class PostTabActivity extends BaseTabActivity {
     private RoundTabHost tabHost;
     private Context context;
     private SessionTabHostUtil sessionUtil;
+    private int lastTab = 0;
     private ActivityStartable lastStartedChild;
 
     public int setMainViewId() {
-	return R.id.activity_post_tab;
+        return R.id.activity_post_tab;
     }
 
     /**
@@ -31,28 +26,60 @@ public class PostTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void init() {
+        // TODO Auto-generated method stub
+        super.init();
         setContentView(R.layout.activity_post_tab);
         tabHost = (RoundTabHost)getTabHost();
         context = getApplicationContext();
         sessionUtil = new SessionTabHostUtil(context);
-
-        tabHost.addLeftTab("tab1",
-                R.string.post_tab_friend,
-                new Intent(this, PostListActivity.class));
-        tabHost.addCenterTab("tab2",
-                R.string.post_tab_near,
-                new Intent(this, PostNearListActivity.class));
-        tabHost.addRightTab("tab3",
-                R.string.post_tab_all,
-                new Intent(this, PostListActivity.class));
     }
 
     protected void onResume() {
-        super.onResume();
+        super.onResume();        
+
+
+        tabHost.setCurrentTab(0);
+        tabHost.clearAllTabs();
+
+        if (sessionUtil.isLogin()) {
+            tabHost.addLeftTab("tab1",
+                    R.string.post_tab_friend,
+                    new Intent(this, PostListActivity.class));
+            tabHost.addCenterTab("tab2",
+                    R.string.post_tab_near,
+                    new Intent(this, PostNearListActivity.class));
+        } else {
+            tabHost.addLeftTab("tab2",
+                    R.string.post_tab_near,
+                    new Intent(this, PostNearListActivity.class));
+        }
+
+        tabHost.addRightTab("tab3",
+                R.string.post_tab_all,
+                new Intent(this, PostListActivity.class));
+
+        if (!sessionUtil.isLogin() && lastTab > getTabWidget().getTabCount()-1) {
+            lastTab = getTabWidget().getTabCount()-1;
+        }
+        tabHost.setCurrentTab(lastTab);
+        
         int baseIndex = sessionUtil.getSubTabIndex();
         sessionUtil.flush();
+        if (!sessionUtil.isLogin()) {
+            baseIndex = 0;
+        }
         if (baseIndex >= 0)  {
             tabHost.setCurrentTab(baseIndex);
         }
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        lastTab = tabHost.getCurrentTab();
     }
 }

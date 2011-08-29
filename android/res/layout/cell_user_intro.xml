@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultWidthFill"
-	android:id="@+id/cell_user_intro_Wrapper"
-	android:padding="@dimen/default_distance"
-	android:background="@drawable/selector">
-	<TextView
-		style="@style/DefaultFill"
-		android:id="@+id/cell_user_intro"
-		android:textColor="@color/matji_light_gray"
-		android:minLines="2"
-		android:maxLines="2"
-		android:drawablePadding="@dimen/default_distance"
-		android:drawableRight="@drawable/icon_flow" />
-</LinearLayout>
+	style="@style/DefaultWrap">
+	<LinearLayout
+		style="@style/DefaultWidthFill"
+		android:id="@+id/cell_user_intro_Wrapper"
+		android:paddingRight="@dimen/default_distance"
+		android:paddingLeft="@dimen/default_distance"
+		android:paddingTop="@dimen/user_intro_cell_padding"
+		android:paddingBottom="@dimen/user_intro_cell_padding"
+		android:background="@color/matji_white">
+		<TextView
+			style="@style/DefaultFill"
+			android:id="@+id/cell_user_intro"
+			android:textColor="@color/matji_silver"
+			android:minLines="2"
+			android:maxLines="2"
+			android:drawablePadding="@dimen/default_distance"
+			android:drawableRight="@drawable/icon_flow" />
+	</LinearLayout>
+
+	<ImageView
+		android:src="@drawable/img_shadow"
+		style="@style/DefaultWidthFill"
+		android:layout_alignParentBottom="true" />
+</RelativeLayout>

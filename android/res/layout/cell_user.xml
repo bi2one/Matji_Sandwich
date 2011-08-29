@@ -1,82 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cell_user_Wrapper"
-    style="@style/cell_user_Wrapper">
-  <include
-      layout="@layout/cell_profile" />
-  <RelativeLayout
-      android:id="@+id/cell_user_InfoWrapper"
-      style="@style/cell_user_InfoWrapper">
-    <LinearLayout
-	android:layout_toRightOf="@+id/profile"
-	style="@style/DefaultVerticalWrap">
-      <TextView
-	  android:id="@+id/cell_user_nick"
-	  style="@style/cell_user_Nickname" />
-      <LinearLayout
-	  style="@style/DefaultWrap">
-	<TextView
-	    style="@style/cell_user_PointLabel" />
-	<TextView
-	    android:id="@+id/cell_user_point"
-	    style="@style/cell_user_LabelValue" />
-      </LinearLayout>
-      <LinearLayout
-	  style="@style/DefaultWrap">
-	<TextView
-	    style="@style/cell_user_AreaLabel" />
-	<TextView
-	    android:id="@+id/cell_user_area"
-	    style="@style/cell_user_LabelValue" />
-      </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-	android:layout_alignParentRight="true"
-	style="@style/DefaultVerticalWrap">
-      <Button
-	  android:id="@+id/cell_user_like_list"
-	  style="@style/cell_user_LikeListButton" />
-      <Button
-	  android:id="@+id/cell_user_follow"
-	  style="@style/cell_user_FollowButton" />
-      <Button
-	  android:id="@+id/cell_user_message_list"
-	  style="@style/cell_user_MessageListButton" />
-    </LinearLayout>
-  </RelativeLayout>
-</LinearLayout>
-
-
-<!-- <TextView -->
-<!-- style="@style/cell_user_Name" -->
-<!-- android:id="@+id/cell_user_name" -->
-<!-- android:singleLine="true" /> -->
-<!-- <TextView -->
-<!-- style="@style/cell_user_Grade" -->
-<!-- android:id="@+id/cell_user_grade" -->
-<!-- android:layout_below="@id/cell_user_name" /> -->
-<!-- <TextView -->
-<!-- style="@style/cell_user_PointText" -->
-<!-- android:id="@+id/cell_user_point_text" -->
-<!-- android:layout_below="@id/cell_user_grade" -->
-<!-- android:layout_toRightOf="@id/cell_user_grade" /> -->
-<!-- <TextView -->
-<!-- style="@style/cell_user_Title" -->
-<!-- android:id="@+id/cell_user_title" -->
-<!-- android:layout_below="@id/cell_user_grade" /> -->
-<!-- <TextView -->
-<!-- style="@style/cell_user_Intro" -->
-<!-- android:id="@+id/cell_user_intro" -->
-<!-- android:layout_below="@id/cell_user_title" /> -->
-<!-- <Button -->
-<!-- style="@style/LikeButton" -->
-<!-- android:id="@+id/cell_user_like_btn" -->
-<!-- android:layout_alignParentRight="true" -->
-<!-- android:onClick="onLikeButtonClicked" /> -->
-<!-- <Button -->
-<!-- style="@style/cell_user_FollowButton" -->
-<!-- android:id="@+id/user_main_follow_btn" -->
-<!-- android:layout_alignParentRight="true" -->
-<!-- android:layout_below="@id/cell_user_like_btn" -->
-<!-- android:onClick="onFollowButtonClicked" /> -->
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWrap">
+	<LinearLayout
+		android:id="@+id/cell_user_Wrapper"
+		style="@style/cell_user_Wrapper">
+		<include
+			android:id="@+id/cell_user_profile"
+			layout="@layout/cell_profile" />
+		<RelativeLayout
+			android:id="@+id/cell_user_InfoWrapper"
+			style="@style/cell_user_InfoWrapper"
+			android:layout_toRightOf="@id/cell_user_profile">
+			<LinearLayout
+				android:layout_toRightOf="@+id/profile"
+				style="@style/DefaultVerticalWrap">
+				<TextView
+					android:id="@+id/cell_user_nick"
+					style="@style/cell_user_Nickname" />
+				<LinearLayout
+					style="@style/DefaultWrap">
+					<TextView
+						style="@style/cell_user_PointLabel" />
+					<TextView
+						android:id="@+id/cell_user_point"
+						style="@style/cell_user_LabelValue" />
+				</LinearLayout>
+				<LinearLayout
+					style="@style/DefaultWrap">
+					<TextView
+						style="@style/cell_user_AreaLabel" />
+					<TextView
+						android:id="@+id/cell_user_area"
+						style="@style/cell_user_LabelValue" />
+				</LinearLayout>
+			</LinearLayout>
+			<LinearLayout
+				android:layout_alignParentRight="true"
+				style="@style/DefaultVerticalWrap">
+				<Button
+					android:id="@+id/cell_user_like_list"
+					style="@style/cell_user_LikeListButton" />
+				<Button
+					android:id="@+id/cell_user_follow"
+					style="@style/cell_user_FollowButton" />
+				<Button
+					android:id="@+id/cell_user_message_list"
+					style="@style/cell_user_MessageListButton" />
+			</LinearLayout>
+		</RelativeLayout>
+	</LinearLayout>
+	<ImageView
+		android:id="@+id/cell_user_line"
+		android:background="@color/listview_divider1_gray"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/default_divider_height"
+		android:visibility="gone"
+		android:layout_alignParentBottom="true" />
+	<ImageView
+		android:id="@+id/cell_user_shadow"
+		android:src="@drawable/img_shadow"
+		style="@style/DefaultWidthFill"
+		android:layout_alignParentBottom="true" />
+</RelativeLayout>

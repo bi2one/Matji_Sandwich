@@ -1,9 +1,9 @@
 package com.matji.sandwich.widget.title.button;
 
-import com.matji.sandwich.R;
-
 import android.content.Context;
 import android.util.Log;
+
+import com.matji.sandwich.R;
 
 /**
  * TODO
@@ -11,14 +11,14 @@ import android.util.Log;
  * @author mozziluv
  *
  */
-public class SettingsButton extends TitleButton {
+public class SettingsButton extends TitleImageButton {
 
 	public SettingsButton(Context context) {
 		super(context);
 	}
 
 	/**
-	 * @see com.matji.sandwich.widget.title.button.TitleButton#init()
+	 * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
 	 */
 	@Override
 	public void init() {

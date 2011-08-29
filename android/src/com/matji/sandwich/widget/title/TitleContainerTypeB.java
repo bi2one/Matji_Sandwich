@@ -1,6 +1,6 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.widget.title.button.TitleButton;
+import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -13,13 +13,13 @@ import android.util.AttributeSet;
  */
 public abstract class TitleContainerTypeB extends TypedTitleContainer {
 
-    protected abstract TitleButton getRightButton1();
-    protected abstract TitleButton getRightButton2();
-    protected abstract TitleButton getRightButton3();
+    protected abstract TitleImageButton getRightButton1();
+    protected abstract TitleImageButton getRightButton2();
+    protected abstract TitleImageButton getRightButton3();
     
-	protected TitleButton rightButton1;
-	protected TitleButton rightButton2;
-	protected TitleButton rightButton3;
+	protected TitleImageButton rightButton1;
+	protected TitleImageButton rightButton2;
+	protected TitleImageButton rightButton3;
 	
 	public TitleContainerTypeB(Context context) {
 		super(context);
@@ -34,9 +34,9 @@ public abstract class TitleContainerTypeB extends TypedTitleContainer {
 	 */
 	@Override
 	final protected void addButtons() {
-		addRightButton(rightButton1);
-		addRightButton(rightButton2);
-		addRightButton(rightButton3);
+		addViewInRightContainer(rightButton1);
+		addViewInRightContainer(rightButton2);
+		addViewInRightContainer(rightButton3);
 	}
 	
 	/**

@@ -1,12 +1,12 @@
 package com.matji.sandwich.widget.title.button;
 
-import com.matji.sandwich.LikeUserListActivity;
-import com.matji.sandwich.R;
-import com.matji.sandwich.data.MatjiData;
-
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import com.matji.sandwich.LikeUserListActivity;
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.MatjiData;
 
 /**
  * {@link LikeUserListActivity}로 이동하게 하는 버튼
@@ -14,7 +14,7 @@ import android.util.Log;
  * @author mozziluv
  *
  */
-public class LikeUserListButton extends TitleButton {
+public class LikeUserListButton extends TitleImageButton {
     private final MatjiData data;
     
 	public LikeUserListButton(Context context, MatjiData data) {
@@ -23,7 +23,7 @@ public class LikeUserListButton extends TitleButton {
 	}
 
 	/**
-	 * @see com.matji.sandwich.widget.title.button.TitleButton#init()
+	 * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
 	 */
 	@Override
 	public void init() {

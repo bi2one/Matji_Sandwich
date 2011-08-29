@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.widget.title.button.TitleButton;
 
 /**
  * Custom Titlebar Container
@@ -50,28 +49,25 @@ public abstract class TitleContainer extends RelativeLayout {
 	}
 
 	/**
-	 * 오른쪽 끝에 버튼을 추가한다.
-	 * line도 함께 추가해준다.
+	 * 오른쪽 컨테이너에 뷰를 추가한다.
 	 * 
-	 * @param resourceId Drawable image 의 resource id
-	 * @param listener Button 을 클릭 했을 때 이벤트를 처리할 OnClickListener
+	 * @param v 추가할 뷰
 	 */
-	protected final void addRightButton(TitleButton button) {
+	protected final void addViewInRightContainer(View v) {
 	    ImageView line = new ImageView(getContext());
         line.setPadding(0, 0, 0, 0);
         line.setImageResource(R.drawable.navigationbar_bg_line);
 	    rightContainer.addView(line);
-		rightContainer.addView(button);
+		rightContainer.addView(v);
 	}
 
 	/**
-	 * 왼쪽 끝에 버튼을 추가한다.
+	 * 왼쪽 컨테이너에 뷰를 추가한다.
 	 * 
-	 * @param resourceId Drawable image 의 resource id
-	 * @param listener Button 을 클릭 했을 때 이벤트를 처리할 OnClickListener
+	 * @param v 추가할 뷰
 	 */
-	protected final void addLeftButton(TitleButton button) {
-		leftContainer.addView(button);
+	protected final void addViewInLeftContainer(View v) {
+		leftContainer.addView(v);
 	}
 
 	/**

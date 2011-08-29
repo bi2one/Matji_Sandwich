@@ -10,5 +10,6 @@
 		style="@style/DefaultWidthFill" />
 	<com.matji.sandwich.widget.FollowingListView
 		style="@style/DefaultFill"
-		android:id="@+id/following_activity_list" />
+		android:id="@+id/following_activity_list"
+		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

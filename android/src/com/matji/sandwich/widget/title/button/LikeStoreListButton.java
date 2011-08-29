@@ -15,7 +15,7 @@ import com.matji.sandwich.data.User;
  * @author mozziluv
  *
  */
-public class LikeStoreListButton extends TitleButton {
+public class LikeStoreListButton extends TitleImageButton {
     private User user;
 
     public LikeStoreListButton(Context context) {
@@ -23,7 +23,7 @@ public class LikeStoreListButton extends TitleButton {
     }
 
     /**
-     * @see com.matji.sandwich.widget.title.button.TitleButton#init()
+     * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
      */
     @Override
     public void init() {

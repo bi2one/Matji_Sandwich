@@ -27,9 +27,13 @@ public class MatjiConstants {
     }
 	
     public static final float dimen(int id) {
-	return mContext.getResources().getDimension(id);
+        return mContext.getResources().getDimension(id);
     }
 	
+    public static final int dimenInt(int id) {
+        return mContext.getResources().getDimensionPixelSize(id);
+    }
+    
     public static final int color(int id) {
 	return mContext.getResources().getColor(id);
     }

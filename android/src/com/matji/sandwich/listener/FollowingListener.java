@@ -34,7 +34,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      * Unfollow 요청 후 처리할 작업을 수행하는 메소드
      */
     public abstract void postUnfollowRequest();
-    
+
     private User user;
     private Identifiable identifiable;
     private Context context;
@@ -56,7 +56,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
         followingRequest = new FollowingHttpRequest(context);
         manager = HttpRequestManager.getInstance(context);
         dbProvider = DBProvider.getInstance(context);
-	this.spinnerContainer = spinnerContainer;
+        this.spinnerContainer = spinnerContainer;
     }
 
     /**
@@ -82,7 +82,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
     @Override
     public void onClick(View v) {
         if (identifiable.loginRequired() && !manager.isRunning()) {
-            if (dbProvider.isExistFollower(user.getId())){
+            if (dbProvider.isExistFollowing(user.getId())){
                 unfollowRequest();
             } else {
                 followRequest();
@@ -132,7 +132,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
     public void requestExceptionCallBack(int tag, MatjiException e) {
         e.showToastMsg(context);
     }
-    
+
     public boolean isExistFollowing() {
         return (dbProvider.isExistFollowing(user.getId())) ? true : false;
     }

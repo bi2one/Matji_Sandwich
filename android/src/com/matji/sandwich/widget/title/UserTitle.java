@@ -7,7 +7,7 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.LikeStoreListButton;
 import com.matji.sandwich.widget.title.button.MessageButton;
-import com.matji.sandwich.widget.title.button.TitleButton;
+import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 /**
  * UserMainActivity에서 사용하는 Titlebar.
@@ -36,19 +36,19 @@ public class UserTitle extends TitleContainerTypeA {
 	}
 
     @Override
-    protected TitleButton getLeftButton1() {
+    protected TitleImageButton getLeftButton1() {
         // TODO Auto-generated method stub
         return new HomeButton(getContext());
     }
 
     @Override
-    protected TitleButton getRightButton1() {
+    protected TitleImageButton getRightButton1() {
         // TODO Auto-generated method stub
         return new LikeStoreListButton(getContext());
     }
 
     @Override
-    protected TitleButton getRightButton2() {
+    protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
         return new MessageButton(getContext());
     }

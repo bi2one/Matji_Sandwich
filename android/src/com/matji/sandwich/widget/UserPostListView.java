@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
-import com.matji.sandwich.widget.cell.UserCell;
-import com.matji.sandwich.widget.cell.UserIntroCell;
 
 public class UserPostListView extends PostListView {
 	private HttpRequest request;
@@ -26,9 +24,6 @@ public class UserPostListView extends PostListView {
 
 	public void setUser(User user) {
 		this.user = user;
-		
-		addHeaderView(new UserCell(getContext(), user));
-		addHeaderView(new UserIntroCell(getContext(), user));
 	}
 	
 	@Override

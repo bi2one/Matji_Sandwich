@@ -1,9 +1,9 @@
 package com.matji.sandwich.widget.title.button;
 
-import com.matji.sandwich.R;
-
 import android.content.Context;
 import android.util.Log;
+
+import com.matji.sandwich.R;
 
 /**
  * 좋아요 버튼
@@ -11,14 +11,14 @@ import android.util.Log;
  * @author mozziluv
  *
  */
-public class LikeButton extends TitleButton {
+public class LikeButton extends TitleImageButton {
 //TODO 나중에 Like가 여러개로  나눠질 수 있으니 후에 수정
 	public LikeButton(Context context) {
 		super(context);
 	}
 
 	/**
-	 * @see com.matji.sandwich.widget.title.button.TitleButton#init()
+	 * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
 	 */
 	@Override
 	public void init() {

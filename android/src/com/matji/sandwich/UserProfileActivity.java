@@ -13,6 +13,7 @@ import com.matji.sandwich.widget.cell.UserCell;
 
 public class UserProfileActivity extends BaseActivity {
 	private User user;
+	private UserCell userCell;
 	
 	public final static String USER = "user";
 	
@@ -37,8 +38,9 @@ public class UserProfileActivity extends BaseActivity {
 		setContentView(R.layout.activity_user_profile);
 		
 		user = (User) getIntent().getParcelableExtra(USER);
-		((UserCell) findViewById(R.id.UserCell)).setUser(user);
-		((UserCell) findViewById(R.id.UserCell)).setClickable(false);
+		userCell = ((UserCell) findViewById(R.id.UserCell));
+		userCell.setUser(user);
+		userCell.setClickable(false);
 		intro = (TextView) findViewById(R.id.user_profile_intro);
 		blog = (TextView) findViewById(R.id.user_profile_blog);
 		followingCount = (TextView) findViewById(R.id.user_profile_following_count);
@@ -48,8 +50,15 @@ public class UserProfileActivity extends BaseActivity {
 
         refresh();
 	}
+
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    refresh();
+	}
 	
 	final public void refresh() {
+	    userCell.refresh();
 	    intro.setText(user.getIntro());
 	    blog.setText("블로그는??????????");
 	    followingCount.setText(user.getFollowingCount()+"");

@@ -7,7 +7,7 @@ import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.LikeButton;
-import com.matji.sandwich.widget.title.button.TitleButton;
+import com.matji.sandwich.widget.title.button.TitleImageButton;
 import com.matji.sandwich.widget.title.button.WriteButton;
 
 /**
@@ -30,19 +30,19 @@ public class StoreTitle extends TitleContainerTypeA {
 	}
 
     @Override
-    protected TitleButton getLeftButton1() {
+    protected TitleImageButton getLeftButton1() {
         // TODO Auto-generated method stub
         return new HomeButton(getContext());
     }
 
     @Override
-    protected TitleButton getRightButton1() {
+    protected TitleImageButton getRightButton1() {
         // TODO Auto-generated method stub
         return new WriteButton(getContext());
     }
 
     @Override
-    protected TitleButton getRightButton2() {
+    protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
         return new LikeButton(getContext());
     }
