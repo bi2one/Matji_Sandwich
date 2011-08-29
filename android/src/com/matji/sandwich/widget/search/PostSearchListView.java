@@ -12,6 +12,7 @@ import android.util.Log;
 public class PostSearchListView extends SimplePostListView implements Searchable {
 	private PostHttpRequest postRequest;
 	private String keyword = "";
+    private SearchHighlightHeader indexbar;
 	
 	public PostSearchListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -23,7 +24,8 @@ public class PostSearchListView extends SimplePostListView implements Searchable
 	    super.init();
 
         postRequest = new PostHttpRequest(getContext());
-        addHeaderView(new SearchHighlightHeader(getContext()));
+        indexbar = new SearchHighlightHeader(getContext());
+        addHeaderView(indexbar);
 	}
 	
 	public HttpRequest request() {
@@ -35,5 +37,6 @@ public class PostSearchListView extends SimplePostListView implements Searchable
 		Log.d("refresh", "Search: " + keyword);
 		this.keyword = keyword;
 		requestReload();
+        indexbar.search(keyword);
 	}
 }

@@ -21,6 +21,7 @@ public class LikeUserListView extends RequestableMListView {
 
     public LikeUserListView(Context context, AttributeSet attrs) {
         super(context, attrs, new SimpleUserAdapter(context), 10);
+        setBackgroundColor(MatjiConstants.color(R.color.matji_white));
     }
 
     public void setData(MatjiData data) {

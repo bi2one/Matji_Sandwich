@@ -12,6 +12,7 @@ import android.util.Log;
 public class StoreSearchListView extends StoreListView implements Searchable {
     private StoreHttpRequest storeRequest;
     private String keyword = "";
+    private SearchHighlightHeader indexbar;
 
     public StoreSearchListView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -20,15 +21,17 @@ public class StoreSearchListView extends StoreListView implements Searchable {
     @Override
     protected void init() {
         super.init();
-        
+
         storeRequest = new StoreHttpRequest(getContext());
-        addHeaderView(new SearchHighlightHeader(getContext()));
+        indexbar = new SearchHighlightHeader(getContext());
+        addHeaderView(indexbar);
     }
 
     public void search(String keyword) {
         Log.d("refresh", "Search: " + keyword);
         this.keyword = keyword;
         requestReload();
+        indexbar.search(keyword);
     }
 
     public HttpRequest request() {

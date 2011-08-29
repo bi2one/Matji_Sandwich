@@ -114,12 +114,12 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) {
         case HttpRequest.FOLLOW_REQUEST:
-            dbProvider.insertFollower(user.getId());
+            dbProvider.insertFollowing(user.getId());
 
             postFollowRequest();
             break;
         case HttpRequest.UN_FOLLOW_REQUEST:
-            dbProvider.deleteFollower(user.getId());
+            dbProvider.deleteFollowing(user.getId());
 
             postUnfollowRequest();
             break;
@@ -133,11 +133,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
         e.showToastMsg(context);
     }
     
-    public boolean isExistFollower() {
-        if (dbProvider.isExistFollower(user.getId())) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean isExistFollowing() {
+        return (dbProvider.isExistFollowing(user.getId())) ? true : false;
     }
 }

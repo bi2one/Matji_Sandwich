@@ -19,7 +19,7 @@
 		android:background="@drawable/indexbar_day"
 		android:textColor="@color/matji_white"
 		android:shadowColor="@color/matji_black"
-		android:shadowRadius="1.4"
-		android:shadowDy="-1.3"
+		android:shadowRadius="1"
+		android:shadowDy="-1.2"
 		android:gravity="center" />
 </RelativeLayout>

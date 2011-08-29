@@ -135,6 +135,9 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable 
             if (data != null && data.size() > 0) {
                 Comment newComment = (Comment) data.get(0);
                 commentListView.addComment(newComment);
+                currentPost.setCommentCount(currentPost.getCommentCount()+1);
+                commentListView.setPost(currentPost);
+                commentListView.dataRefresh();
             } else {
                 Log.d("Matji", "not exist data ...");
             }

@@ -1,13 +1,14 @@
 package com.matji.sandwich.adapter;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.data.User;
-import com.matji.sandwich.widget.ProfileImageView;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.User;
+import com.matji.sandwich.listener.GotoUserMainAction;
+import com.matji.sandwich.widget.ProfileImageView;
 
 public class SimpleUserAdapter extends MBaseAdapter {
     public SimpleUserAdapter(Context context) {
@@ -22,6 +23,8 @@ public class SimpleUserAdapter extends MBaseAdapter {
         if (convertView == null) {
             userElement = new RankingElement();
             convertView = getLayoutInflater().inflate(R.layout.row_simple_user, null);
+            
+            userElement.wrapper = convertView.findViewById(R.id.row_simple_user_wrapper);
             userElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
             userElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
             userElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
@@ -35,6 +38,7 @@ public class SimpleUserAdapter extends MBaseAdapter {
             userElement = (RankingElement) convertView.getTag();
         }
 
+        userElement.wrapper.setOnClickListener(new GotoUserMainAction(context, user));
         userElement.profile.setUserId(user.getId());
         userElement.nickname.setText(user.getNick());
         userElement.likeCount.setText("" + user.getLikeStoreCount());
@@ -49,6 +53,7 @@ public class SimpleUserAdapter extends MBaseAdapter {
     }
 
     private class RankingElement {
+        View wrapper;
         ProfileImageView profile;
         TextView nickname;
         TextView likeCount;

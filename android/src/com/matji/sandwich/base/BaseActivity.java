@@ -20,6 +20,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 	public static final int WRITE_COMMENT_ACTIVITY = 103;	
 	public static final int RECEIVED_USER_ACTIVITY = 104;
     private RelativeLayout mainViewGroup;
+
     private boolean isFlow;
 
     public abstract int setMainViewId();
@@ -34,23 +35,23 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     }
 
     public void setIsFlow(boolean isFlow) {
-	this.isFlow = isFlow;
+        this.isFlow = isFlow;
     }
-	
+
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
     }
-	
-    @Override
-	public boolean loginRequired(){
-	Session session = Session.getInstance(this);
-	if (!session.isLogin()) {
-	    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-	    return false;
-	}
 
-	return true;
+    @Override
+    public boolean loginRequired(){
+        Session session = Session.getInstance(this);
+        if (!session.isLogin()) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            return false;
+        }
+
+        return true;
     }
 
     public void didEnterForeGround(){
@@ -61,26 +62,26 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     }
 
     @Override
-	protected void onRestart() {
-	// TODO Auto-generated method stub
-	super.onRestart();
-	Log.d("LifeCycle", "onRestart at " + this.getClass());
+    protected void onRestart() {
+        // TODO Auto-generated method stub
+        super.onRestart();
+        Log.d("LifeCycle", "onRestart at " + this.getClass());
     }
 
     @Override
-	protected void onPause() {
-	// TODO Auto-generated method stub
-	super.onPause();
-	Log.d("LifeCycle", "onPause at " + this.getClass());
-	ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+        Log.d("LifeCycle", "onPause at " + this.getClass());
+        ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
     }
 
     @Override
-	protected void onStop() {
-	// TODO Auto-generated method stub
-	super.onStop();
-	Log.d("LifeCycle", "onStop at " + this.getClass());
-	ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        super.onStop();
+        Log.d("LifeCycle", "onStop at " + this.getClass());
+        ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
     }
 
 
@@ -95,33 +96,33 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     }
 
     @Override
-	protected void onResume() {
-	// TODO Auto-generated method stub
-	super.onResume();
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
 
-	Log.d("LifeCycle", "onResume at " + this.getClass());
-	ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
+        Log.d("LifeCycle", "onResume at " + this.getClass());
+        ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
 
-	if (!isFlow) {
-	    Log.d("LifeCycle", "onNotFlowResume at " + this.getClass());
-	    onNotFlowResume();
-	} else {
-	    Log.d("LifeCycle", "onFlowResume at " + this.getClass());
-	    onFlowResume();
-	}
-	setIsFlow(false);
+        if (!isFlow) {
+            Log.d("LifeCycle", "onNotFlowResume at " + this.getClass());
+            onNotFlowResume();
+        } else {
+            Log.d("LifeCycle", "onFlowResume at " + this.getClass());
+            onFlowResume();
+        }
+        setIsFlow(false);
     }
 
     protected void onNotFlowResume() { }
     protected void onFlowResume() { }
 
     public void startActivity(Intent intent) {
-	setIsFlow(true);
-	super.startActivity(intent);
+        setIsFlow(true);
+        super.startActivity(intent);
     }
 
     public void startActivityForResult(Intent intent, int requestCode) {
-	setIsFlow(true);
-	super.startActivityForResult(intent, requestCode);
+        setIsFlow(true);
+        super.startActivityForResult(intent, requestCode);
     }
 }

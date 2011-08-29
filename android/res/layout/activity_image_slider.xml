@@ -21,59 +21,61 @@
 		android:layout_alignParentBottom="true"
 		android:background="@color/matji_translucent_white"
 		style="@style/DefaultWidthFill">
+		<RelativeLayout
+			android:id="@+id/image_slider_post_wrapper"
+			style="@style/DefaultWidthFill"
+			android:layout_toLeftOf="@+id/image_slider_moresign">
+			<TextView
+				android:id="@+id/image_slider_nick"
+				style="@style/LinkifyName" />
+			<TextView
+				android:id="@+id/image_slider_at"
+				style="@style/row_post_At"
+				android:layout_toRightOf="@id/image_slider_nick" />
+			<TextView
+				android:id="@+id/image_slider_store_name"
+				style="@style/LinkifyName"
+				android:layout_toRightOf="@id/image_slider_at" />
 
-		<TextView
-			android:id="@+id/image_slider_nick"
-			style="@style/LinkifyName" />
-		<TextView
-			android:id="@+id/image_slider_at"
-			style="@style/row_post_At"
-			android:layout_toRightOf="@id/image_slider_nick" />
-		<TextView
-			android:id="@+id/image_slider_store_name"
-			style="@style/LinkifyName"
-			android:layout_toRightOf="@id/image_slider_at"
-			android:layout_toLeftOf="@+id/image_slider_moresign" />
+			<!-- Post -->
+			<TextView
+				android:id="@+id/image_slider_post"
+				style="@style/TalkContent"
+				android:textColor="@color/matji_white"
+				android:layout_below="@id/image_slider_nick" />
 
-		<!-- Post -->
-		<TextView
-			android:id="@+id/image_slider_post"
-			style="@style/TalkContent"
-			android:textColor="@color/matji_white"
-			android:layout_below="@id/image_slider_nick"
-			android:layout_toLeftOf="@id/image_slider_moresign" />
-
-		<!-- Ago and Count -->
-		<TextView
-			android:id="@+id/image_slider_created_at"
-			android:layout_below="@id/image_slider_post"
-			style="@style/row_post_CreatedAt" />
-		<TextView
-			android:id="@+id/image_slider_comment"
-			android:layout_toRightOf="@id/image_slider_created_at"
-			android:layout_below="@id/image_slider_post"
-			style="@style/row_post_Comment" />
-		<TextView
-			android:id="@+id/image_slider_comment_count"
-			android:layout_toRightOf="@id/image_slider_comment"
-			android:layout_below="@id/image_slider_post"
-			style="@style/row_post_Count" />
-		<TextView
-			android:id="@+id/image_slider_like"
-			android:layout_below="@id/image_slider_post"
-			android:layout_toRightOf="@id/image_slider_comment_count"
-			style="@style/row_post_Like" />
-		<TextView
-			android:id="@+id/image_slider_like_count"
-			android:layout_below="@id/image_slider_post"
-			style="@style/row_post_Count"
-			android:layout_toRightOf="@id/image_slider_like"
-			android:layout_toLeftOf="@id/image_slider_moresign" />
-		<ImageView
-			android:id="@id/image_slider_moresign"
-			android:src="@drawable/icon_flow"
-			android:layout_alignParentRight="true"
-			android:layout_centerVertical="true"
-			style="@style/DefaultWrap" />
+			<!-- Ago and Count -->
+			<TextView
+				android:id="@+id/image_slider_created_at"
+				android:layout_below="@id/image_slider_post"
+				style="@style/row_post_CreatedAt" />
+			<TextView
+				android:id="@+id/image_slider_comment"
+				android:layout_toRightOf="@id/image_slider_created_at"
+				android:layout_below="@id/image_slider_post"
+				style="@style/row_post_Comment" />
+			<TextView
+				android:id="@+id/image_slider_comment_count"
+				android:layout_toRightOf="@id/image_slider_comment"
+				android:layout_below="@id/image_slider_post"
+				style="@style/row_post_Count" />
+			<TextView
+				android:id="@+id/image_slider_like"
+				android:layout_below="@id/image_slider_post"
+				android:layout_toRightOf="@id/image_slider_comment_count"
+				style="@style/row_post_Like" />
+			<TextView
+				android:id="@+id/image_slider_like_count"
+				android:layout_below="@id/image_slider_post"
+				style="@style/row_post_Count"
+				android:layout_toRightOf="@id/image_slider_like"
+				android:layout_toLeftOf="@id/image_slider_moresign" />
+			<ImageView
+				android:id="@id/image_slider_moresign"
+				android:src="@drawable/icon_flow"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				style="@style/DefaultWrap" />
+		</RelativeLayout>
 	</RelativeLayout>
 </RelativeLayout>

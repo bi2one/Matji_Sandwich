@@ -1,7 +1,7 @@
 package com.matji.sandwich.session;
 
-import java.io.*;
-import java.util.*;
+import java.io.NotSerializableException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,11 @@ import android.util.Log;
 
 import com.matji.sandwich.*;
 import com.matji.sandwich.data.*;
+import com.matji.sandwich.Loginable;
+import com.matji.sandwich.Requestable;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Me;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.exception.MatjiException;
@@ -153,12 +158,14 @@ public class Session implements Requestable {
 			mPrefs.commit();
 			
 			removePrivateDataFromDatabase();
-			
+
 			DBProvider dbProvider = DBProvider.getInstance(mContext);				
-			return dbProvider.insertBookmarks(me.getBookmarks()) && 
-			dbProvider.insertLikes(me.getLikes()) &&
-			dbProvider.insertFollowers(me.getFollowers()) &&
+			dbProvider.insertBookmarks(me.getBookmarks());  
+			dbProvider.insertLikes(me.getLikes());
+			dbProvider.insertFollowers(me.getFollowers());
 			dbProvider.insertFollowings(me.getFollowings());
+			
+			return true;
 		}
 		
 		

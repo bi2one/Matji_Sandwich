@@ -14,7 +14,7 @@ import com.matji.sandwich.R;
  * @author mozziluv
  */
 public class HighlightHeader extends LinearLayout {
-	private String title = "";
+	protected String title = "";
 	private int count = -1;
 
     /**
@@ -77,6 +77,22 @@ public class HighlightHeader extends LinearLayout {
 	    this.title = title;
 	    setTitle();
 	}
+
+	/**
+     * 현재 타이틀 뒤에 전달받은 문자열을 추가한다.
+     */
+    public void appendTitleAfter(String appendString) {
+        this.title = this.title + appendString;
+        setTitle();
+    }
+    
+    /**
+     * 현재 타이틀 앞에 전달받은 문자열을 추가한다.
+     */
+    public void appendTitleBefore(String appendString) {
+        this.title = appendString + this.title;
+        setTitle();
+    }    
 	
 	/**
 	 * 파라미터로 전달받은 카운트를 저장하고, 현재 보여지는 카운트를 전달받은 카운트로 변경한다.
