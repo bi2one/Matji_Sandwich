@@ -49,7 +49,7 @@ Requestable {
     private StoreHttpRequest storeRequest;
 
     public StoreMapNearListView(Context context, AttributeSet attrs) {
-	super(context, attrs, new MapStoreSectionedAdapter(context), 10);
+	super(context, attrs, new SimpleStoreAdapter(context), 10);
 	this.context = context;
 	sessionUtil = new SessionMapUtil(context);
         storeRequest = new StoreHttpRequest(context);
@@ -57,8 +57,7 @@ Requestable {
 	requestManager = HttpRequestManager.getInstance(context);
 	setOnTouchListener(this);
 	setPage(1);
-	adapter = (MapStoreSectionedAdapter)getMBaseAdapter();
-	adapter.init(storeRequest, getLoadingFooterView());
+	// adapter.init(storeRequest, getLoadingFooterView());
     }
 
     public void init(TextView addressView, MainMapActivity activity) {
