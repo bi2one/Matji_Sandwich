@@ -123,17 +123,19 @@ public class PostSectionedAdapter extends SectionedAdapter {
             postSectionElement.section.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.indexbar_day));
         }
         
+        int padding = (int) MatjiConstants.dimen(R.dimen.default_distance);
         if (getSectionName(0).equals(section)) {
             if (postSectionElement.subtitle == null) {
                 postSectionElement.subtitle = (TextView) convertView.findViewById(R.id.row_date_section_subtitle);
             }
             postSectionElement.subtitle.setText(subtitle);
             postSectionElement.subtitle.setVisibility(View.VISIBLE);
-            int padding = (int) MatjiConstants.dimen(R.dimen.default_distance);
             convertView.setPadding(padding, padding, 0, 0);
         } else {
-            if (postSectionElement.subtitle != null)
+            if (postSectionElement.subtitle != null) {
                 postSectionElement.subtitle.setVisibility(View.GONE);
+                convertView.setPadding(0, 0, 0, 0);
+            }
         }
         
         return convertView;
