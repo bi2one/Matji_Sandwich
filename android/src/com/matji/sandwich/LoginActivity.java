@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.EditText;
 
 public class LoginActivity extends BaseActivity implements Loginable {
+    public int setMainViewId() {
+	return R.id.activity_login;
+    }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,7 +27,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
 		EditText passwordField = (EditText) findViewById(R.id.password);
 		
 		Session session = Session.getInstance(this);
-		session.login(this, this, usernameField.getText().toString(), passwordField.getText().toString());
+		session.login(this, getMainView(), usernameField.getText().toString(), passwordField.getText().toString());
 	}
 
 	public void cancelButtonClicked(View v) {

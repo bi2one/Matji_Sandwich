@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_change_location"
     style="@style/activity_change_location">
   <com.matji.sandwich.widget.title.MainTitle
       android:id="@+id/activity_change_location_title"
+      android:layout_alignParentTop="true"
       style="@style/DefaultWrap" />
-  <RelativeLayout style="@style/DefaultWidthFill">
+  <RelativeLayout style="@style/DefaultWidthFill"
+		  android:id="@+id/activity_change_location_search"
+		  android:layout_below="@id/activity_change_location_title" >
     <EditText
 	style="@style/DefaultWidthFill"
 	android:hint="@string/activity_change_location_hint"
@@ -22,5 +26,6 @@
   </RelativeLayout>
   <com.matji.sandwich.widget.RecentChangedLocationView
       android:id="@+id/activity_change_location_recent_view"
+      android:layout_below="@id/activity_change_location_search"
       style="@style/DefaultFill" />
-</LinearLayout>
+</RelativeLayout>

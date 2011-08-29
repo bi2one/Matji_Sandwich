@@ -16,6 +16,10 @@ public class StorePostListActivity extends BaseActivity {
 
     public static final String STORE = "store";
 
+    public int setMainViewId() {
+	return R.id.activity_store_post;
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_post);

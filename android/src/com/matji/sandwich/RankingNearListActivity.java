@@ -49,6 +49,10 @@ ActivityStartable {
     private Location prevLocation;
     private boolean isFirst;
 
+    public int setMainViewId() {
+	return R.id.activity_ranking_near_list;
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking_near_list);
@@ -68,10 +72,10 @@ ActivityStartable {
     }
 
     private void setCenter(GeoPoint centerPoint) {
-        geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
-        requestManager.request(this, geocodeRequest, GET_ADDRESS_TAG, this);
-        sessionUtil.setCenter(centerPoint);
-        listView.requestReload();
+	geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
+	requestManager.request(getMainView(), geocodeRequest, GET_ADDRESS_TAG, this);
+	sessionUtil.setCenter(centerPoint);
+	listView.requestReload();
     }
 
     protected void onNotFlowResume() {

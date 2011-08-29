@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultFill">
-	<com.matji.sandwich.widget.search.UserSearchListView
-		style="@style/DefaultFill"
-		android:id="@+id/UserSearchListView" />
-</LinearLayout>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_user_search"
+    style="@style/DefaultFill">
+  <com.matji.sandwich.widget.search.UserSearchListView
+      style="@style/DefaultFill"
+      android:id="@+id/UserSearchListView" />
+</RelativeLayout>

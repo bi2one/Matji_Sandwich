@@ -20,6 +20,10 @@ public class LikeUserListActivity extends BaseActivity {
     
     public static final String DATA = "data";
 
+    public int setMainViewId() {
+	return R.id.activity_like_user_list;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub

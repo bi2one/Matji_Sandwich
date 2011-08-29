@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.matji.sandwich.widget.MatjiScrollView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="@color/matji_transparent"
-	style="@style/DefaultFill">
-	<LinearLayout
-		style="@style/DefaultLinearFill"
-		android:background="@drawable/bg_01"		
-		android:padding="@dimen/default_distance">
-		<TextView
-			android:id="@+id/user_tag_count"
-			android:layout_margin="@dimen/default_distance"
-			style="@style/SubTitle" />
-		<com.matji.sandwich.widget.tag.TagCloudView
-			android:id="@+id/user_tag_cloud"
-			style="@style/DefaultFill" />
-	</LinearLayout>
-</com.matji.sandwich.widget.MatjiScrollView>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_user_tag"
+    style="@style/DefaultFill" >
+  <com.matji.sandwich.widget.MatjiScrollView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:background="@color/matji_transparent"
+      style="@style/DefaultFill">
+    <LinearLayout
+	style="@style/DefaultLinearFill"
+	android:background="@drawable/bg_01"		
+	android:padding="@dimen/default_distance">
+      <TextView
+	  android:id="@+id/user_tag_count"
+	  android:layout_margin="@dimen/default_distance"
+	  style="@style/SubTitle" />
+      <com.matji.sandwich.widget.tag.TagCloudView
+	  android:id="@+id/user_tag_cloud"
+	  style="@style/DefaultFill" />
+    </LinearLayout>
+  </com.matji.sandwich.widget.MatjiScrollView>
+</RelativeLayout>

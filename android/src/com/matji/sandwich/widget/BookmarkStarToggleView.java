@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ImageView;
 import android.widget.BaseAdapter;
 import android.content.Context;
@@ -37,6 +38,7 @@ public class BookmarkStarToggleView extends LinearLayout implements OnClickListe
     private Session session;
     private HttpRequestManager requestManager;
     private BookmarkHttpRequest bookmarkRequest;
+    private RelativeLayout spinnerContainer;
 
     public BookmarkStarToggleView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -51,10 +53,11 @@ public class BookmarkStarToggleView extends LinearLayout implements OnClickListe
 	bookmarkRequest = new BookmarkHttpRequest(context);
     }
 
-    public void init(BaseAdapter adapter, ArrayList<MatjiData> bookmarkedList, Store store) {
+    public void init(BaseAdapter adapter, ArrayList<MatjiData> bookmarkedList, Store store, RelativeLayout spinnerContainer) {
     	this.store = store;
 	this.bookmarkedList = bookmarkedList;
 	this.adapter = adapter;
+	this.spinnerContainer = spinnerContainer;
     	if (isBookmarked(bookmarkedList, store)) {
     	    showCheckedView();
 	    isUnchecked = false;
@@ -131,12 +134,12 @@ public class BookmarkStarToggleView extends LinearLayout implements OnClickListe
 
     private void requestBookmark(Store store) {
 	bookmarkRequest.actionBookmark(store.getId());
-	requestManager.request(context, bookmarkRequest, REQUEST_TAG_BOOKMARK, this);
+	requestManager.request(spinnerContainer, bookmarkRequest, REQUEST_TAG_BOOKMARK, this);
     }
 
     private void requestUnBookmark(Store store) {
 	bookmarkRequest.actionUnBookmark(store.getId());
-	requestManager.request(context, bookmarkRequest, REQUEST_TAG_UNBOOKMARK, this);
+	requestManager.request(spinnerContainer, bookmarkRequest, REQUEST_TAG_UNBOOKMARK, this);
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {

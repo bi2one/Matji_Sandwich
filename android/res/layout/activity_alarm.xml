@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
+	android:id="@+id/activity_alarm"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<com.matji.sandwich.widget.AlarmListView
 		style="@style/DefaultFill"
 		android:id="@+id/alarm_list" />
-</LinearLayout>
+</RelativeLayout>

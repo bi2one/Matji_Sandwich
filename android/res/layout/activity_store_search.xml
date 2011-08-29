@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_store_search"
 	style="@style/DefaultFill">
 	<com.matji.sandwich.widget.search.StoreSearchListView
 		style="@style/DefaultFill"
 		android:id="@+id/StoreSearchListView" />
-</LinearLayout>
+</RelativeLayout>

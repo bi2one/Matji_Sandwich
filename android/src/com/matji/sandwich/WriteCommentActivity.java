@@ -26,6 +26,10 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 
 	private int post_id;
 
+    public int setMainViewId() {
+	return R.id.contentWrapper;
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,7 +46,7 @@ public class WriteCommentActivity extends BaseActivity implements Requestable {
 			Toast.makeText(getApplicationContext(), R.string.writing_content_comment, Toast.LENGTH_SHORT).show();
 		} else {
 			((CommentHttpRequest) commentHttpRequest).actionNew(post_id, commentField.getText().toString().trim(), "ANDROID");
-			manager.request(this, commentHttpRequest, COMMENT_WRITE_REQUEST, this);
+			manager.request(getMainView(), commentHttpRequest, COMMENT_WRITE_REQUEST, this);
 		}
 	}
 

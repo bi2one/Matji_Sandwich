@@ -20,6 +20,10 @@ import com.matji.sandwich.widget.PostListView;
 public class PostListActivity extends BaseActivity implements ActivityStartable {
     private PostListView listView;
 
+    public int setMainViewId() {
+	return R.id.activity_post_list;
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub

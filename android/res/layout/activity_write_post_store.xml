@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/activity_write_post_store"
 		style="@style/DefaultFill" >
   <com.matji.sandwich.widget.WritePostStoreView
       android:id="@+id/activity_write_post_store_listview"

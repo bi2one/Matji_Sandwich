@@ -29,6 +29,10 @@ public class WriteMessageActivity extends BaseActivity implements Requestable {
 	private int user_id;
 	
 	private static final int USER_ID_IS_NULL = -1;
+
+    public int setMainViewId() {
+	return R.id.contentWrapper;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +92,7 @@ public class WriteMessageActivity extends BaseActivity implements Requestable {
 		} else if (user_id == USER_ID_IS_NULL) {
 			Toast.makeText(getApplicationContext(), R.string.writing_content_received_user, Toast.LENGTH_SHORT).show();
 		} else {
-			manager.request(this, sendRequest(), MESSAGE_WRITE_REQUEST, this);
+		    manager.request(getMainView(), sendRequest(), MESSAGE_WRITE_REQUEST, this);
 		}
 	}
 

@@ -5,6 +5,10 @@ import android.os.Bundle;
 import com.matji.sandwich.base.BaseActivity;
 
 public class IntroActivity extends BaseActivity {
+    public int setMainViewId() {
+	return R.id.activity_main;
+    }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

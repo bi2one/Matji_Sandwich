@@ -20,6 +20,10 @@ public class RankingTabActivity extends BaseTabActivity {
     private SessionTabHostUtil sessionUtil;
     private Session session;
     private int lastTab;
+
+    public int setMainViewId() {
+	return R.id.activity_ranking_tab;
+    }
     
     /**
      * Activity생성시 실행하는 메소드

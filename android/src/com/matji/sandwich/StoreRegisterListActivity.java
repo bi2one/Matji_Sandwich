@@ -19,6 +19,10 @@ public class StoreRegisterListActivity extends BaseActivity {
     private double mCenterLat;
     private double mCenterLng;
     private String mCenterAddr;
+
+    public int setMainViewId() {
+	return R.id.activity_store_register_list;
+    }
     
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);

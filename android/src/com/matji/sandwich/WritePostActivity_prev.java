@@ -77,6 +77,10 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 	private int postId;
 	private int storeId;
 
+    public int setMainViewId() {
+	return R.id.contentWrapper;
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -153,7 +157,7 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 						  tagText, PostHttpRequest.Device.ANDROID, storeId);
 			}
 			
-			manager.request(this, postHttpRequest, POST_WRITE_REQUEST, this);
+			manager.request(getMainView(), postHttpRequest, POST_WRITE_REQUEST, this);
 			KeyboardUtil.hideKeyboard(this);
 		}
 	}
@@ -183,7 +187,7 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 			AttachFileHttpRequest request = new AttachFileHttpRequest(mContext);
 			request.setFileUploadProgressListener(this);
 			request.actionUpload(file, postId);
-			manager.request(this, request, IMAGE_UPLOAD_REQUEST, this);
+			manager.request(getMainView(), request, IMAGE_UPLOAD_REQUEST, this);
 			Log.d("Matji", "request");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

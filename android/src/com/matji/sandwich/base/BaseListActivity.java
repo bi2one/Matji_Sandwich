@@ -10,11 +10,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+import android.widget.RelativeLayout;
 
 public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener, Identifiable {	
     protected static final int LOGIN_ACTIVITY = 1;
     protected static final int WRITE_POST_ACTIVITY = 2;
     private boolean isFlow;
+    private RelativeLayout mainViewGroup;
+    
+    public abstract int setMainViewId();
+
+    protected RelativeLayout getMainView() {
+	return mainViewGroup;
+    }
 
     public void setIsFlow(boolean isFlow) {
 	this.isFlow = isFlow;
@@ -22,13 +30,13 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 	
     protected void init() {
 	setIsFlow(false);
+	mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
     }
 	
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 	// TODO Auto-generated method stub
 	super.onCreate(savedInstanceState);
-	init();
     }
 	
     @Override
@@ -45,7 +53,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
     public void didEnterForeGround(){
 	Session session  = Session.getInstance(this);
 	if (session.isLogin()){
-	    session.sessionValidate(null, this);
+	    session.sessionValidate(null, getMainView());
 	}
     }
 
@@ -81,6 +89,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 	    setTheme(R.style.Theme_RemoveOverlay);
 	}
 	super.setContentView(layoutResID);
+	init();
     }
 	
     @Override

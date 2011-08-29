@@ -1,4 +1,4 @@
-package com.matji.sandwich;
+ package com.matji.sandwich;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -43,6 +43,10 @@ public class StoreRegisterActivity extends BaseActivity implements Requestable {
 	private EditText telText;
 	private EditText websiteText;
 	private EditText coverText;
+
+    public int setMainViewId() {
+	return R.id.activity_store_register;
+    }
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -118,7 +122,7 @@ public class StoreRegisterActivity extends BaseActivity implements Requestable {
 					telText.getText().toString(),
 					websiteText.getText().toString(),
 					coverText.getText().toString());
-			mRequestManager.request(this, request, REGIST_STORE, this);
+			mRequestManager.request(getMainView(), request, REGIST_STORE, this);
 		} catch(MatjiException e) {
 			e.performExceptionHandling(mContext);
 		}

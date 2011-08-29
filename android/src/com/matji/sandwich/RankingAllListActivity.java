@@ -13,6 +13,10 @@ import com.matji.sandwich.widget.RankingListView;
 public class RankingAllListActivity extends BaseActivity {
     private RankingListView listView;
 
+    public int setMainViewId() {
+	return R.id.activity_ranking_all_list;
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_ranking_all_list);

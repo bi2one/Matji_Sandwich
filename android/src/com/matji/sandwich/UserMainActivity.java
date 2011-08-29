@@ -19,6 +19,10 @@ public class UserMainActivity extends BaseTabActivity {
 
     public static final String USER = "user";
 
+    public int setMainViewId() {
+	return R.id.activity_user_main;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

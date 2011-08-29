@@ -9,6 +9,7 @@ import com.matji.sandwich.session.Session;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.widget.RelativeLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -19,9 +20,17 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     protected static final int WRITE_POST_ACTIVITY = 2;
     private ActivityStartable lastStartedChild;
     private boolean isFlow;
+    private RelativeLayout mainViewGroup;
+
+    public abstract int setMainViewId();
+
+    protected RelativeLayout getMainView() {
+	return mainViewGroup;
+    }
 
     protected void init() {
 	setIsFlow(false);
+	mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
     }
 
     public void setIsFlow(boolean isFlow) {
@@ -31,7 +40,6 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	init();
     }
 	
     @Override
@@ -60,7 +68,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     public void didEnterForeGround(){
 	Session session  = Session.getInstance(this);
 	if (session.isLogin()){
-	    session.sessionValidate(null, this);
+	    session.sessionValidate(null, getMainView());
 	}
     }
 	
@@ -121,6 +129,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
 	setTheme(R.style.Theme_RemoveOverlay);
 	super.setContentView(layoutResID);
+	init();
     }
 
     public void tabStartActivityForResult(Intent intent, int requestCode, ActivityStartable activityStartable) {

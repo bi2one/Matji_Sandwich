@@ -8,18 +8,19 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Region;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONCodeMatjiException;
+import com.matji.sandwich.base.BaseActivity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.content.Intent;
 import android.content.Context;
 import android.graphics.Color;
 
 import java.util.ArrayList;
-public class BookmarkListActivity extends Activity implements Requestable {
+public class BookmarkListActivity extends BaseActivity implements Requestable {
     public static final String IF_LAT_NE = "BookmarkListActivity.lat_ne";
     public static final String IF_LNG_NE = "BookmarkListActivity.lng_ne";
     public static final String IF_LAT_SW = "BookmarkListActivity.lat_sw";
@@ -40,6 +41,10 @@ public class BookmarkListActivity extends Activity implements Requestable {
     private double lngNe;
     private double latSw;
     private double lngSw;
+
+    public int setMainViewId() {
+	return R.id.layout_main;
+    }
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -98,7 +103,7 @@ public class BookmarkListActivity extends Activity implements Requestable {
     private void registerDescription(String desc) {
 	RegionHttpRequest request = new RegionHttpRequest(mContext);
 	request.actionBookmark(latSw, latNe, lngSw, lngNe, desc);
-	mRequestManager.request(this, request, REGISTER_TAG, this);
+	mRequestManager.request(getMainView(), request, REGISTER_TAG, this);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {

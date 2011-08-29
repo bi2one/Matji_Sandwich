@@ -1,63 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/DefaultFill"
-    android:orientation="vertical">
+    android:id="@+id/activity_store_register"
+    style="@style/DefaultFill" >
+  
+  <LinearLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      style="@style/DefaultFill"
+      android:orientation="vertical">
 
-  <RelativeLayout style="@style/DefaultWidthFill"
-		  android:background="@color/DODGER_BLUE">
-    <TextView
-	style="@style/DefaultWrap"
-	android:id="@+id/address_head"
-	android:layout_alignParentLeft="true"
-	android:text="@string/default_string_address" />
-    <TextView
-	style="@style/DefaultWidthFill"
-	android:singleLine="true"
-	android:layout_toRightOf="@id/address_head"
-	android:layout_toLeftOf="@+id/address_change_btn"
-	android:id="@+id/address_text" />
-    <Button
-	style="@style/DefaultWrap"
-	android:id="@id/address_change_btn"
-	android:layout_alignParentRight="true"
-	android:onClick="onChangeAddressClick"
-	android:text="@string/default_string_change" />
-  </RelativeLayout>
-
-  <ScrollView style="@style/DefaultWidthFill">
-    <LinearLayout
-	style="@style/DefaultFill"
-	android:orientation="vertical">
-      <EditText
+    <RelativeLayout style="@style/DefaultWidthFill"
+		    android:background="@color/DODGER_BLUE">
+      <TextView
+	  style="@style/DefaultWrap"
+	  android:id="@+id/address_head"
+	  android:layout_alignParentLeft="true"
+	  android:text="@string/default_string_address" />
+      <TextView
 	  style="@style/DefaultWidthFill"
-	  android:id="@+id/add_address_textbox"
-	  android:hint="@string/store_register_add_address"
-	  android:singleLine="true" />
-      <EditText
-	  style="@style/DefaultWidthFill"
-	  android:id="@+id/name_textbox"
-	  android:hint="@string/store_register_name"
-	  android:singleLine="true" />
-      <EditText
-	  style="@style/DefaultWidthFill"
-	  android:id="@+id/tel_textbox"
-	  android:hint="@string/store_register_tel"
-	  android:singleLine="true" />
-      <EditText
-	  style="@style/DefaultWidthFill"
-	  android:id="@+id/website_textbox"
-	  android:hint="@string/store_register_website"
-	  android:singleLine="true" />
-      <EditText
-	  style="@style/DefaultWidthFill"
-	  android:id="@+id/cover_textbox"
-	  android:lines="4"
-	  android:gravity="top" />
+	  android:singleLine="true"
+	  android:layout_toRightOf="@id/address_head"
+	  android:layout_toLeftOf="@+id/address_change_btn"
+	  android:id="@+id/address_text" />
       <Button
-	  style="@style/DefaultWidthFill"
-	  android:onClick="onRegisterSubmitClick"
-	  android:text="@string/store_register_submit" />
-    </LinearLayout>
-  </ScrollView>
-</LinearLayout>
+	  style="@style/DefaultWrap"
+	  android:id="@id/address_change_btn"
+	  android:layout_alignParentRight="true"
+	  android:onClick="onChangeAddressClick"
+	  android:text="@string/default_string_change" />
+    </RelativeLayout>
+
+    <ScrollView style="@style/DefaultWidthFill">
+      <LinearLayout
+	  style="@style/DefaultFill"
+	  android:orientation="vertical">
+	<EditText
+	    style="@style/DefaultWidthFill"
+	    android:id="@+id/add_address_textbox"
+	    android:hint="@string/store_register_add_address"
+	    android:singleLine="true" />
+	<EditText
+	    style="@style/DefaultWidthFill"
+	    android:id="@+id/name_textbox"
+	    android:hint="@string/store_register_name"
+	    android:singleLine="true" />
+	<EditText
+	    style="@style/DefaultWidthFill"
+	    android:id="@+id/tel_textbox"
+	    android:hint="@string/store_register_tel"
+	    android:singleLine="true" />
+	<EditText
+	    style="@style/DefaultWidthFill"
+	    android:id="@+id/website_textbox"
+	    android:hint="@string/store_register_website"
+	    android:singleLine="true" />
+	<EditText
+	    style="@style/DefaultWidthFill"
+	    android:id="@+id/cover_textbox"
+	    android:lines="4"
+	    android:gravity="top" />
+	<Button
+	    style="@style/DefaultWidthFill"
+	    android:onClick="onRegisterSubmitClick"
+	    android:text="@string/store_register_submit" />
+      </LinearLayout>
+    </ScrollView>
+  </LinearLayout>
+</RelativeLayout>

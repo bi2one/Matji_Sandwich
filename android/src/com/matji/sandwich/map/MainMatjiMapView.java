@@ -2,6 +2,7 @@ package com.matji.sandwich.map;
 
 import android.content.Context;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.location.Location;
 import android.view.View;
 import android.view.MotionEvent;
@@ -24,6 +25,7 @@ import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.overlay.StoreItemizedOverlay;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
@@ -52,6 +54,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     private ArrayList<MatjiData> stores;
     private GpsManager gpsManager;
     private Location prevLocation;
+    private RelativeLayout spinnerLayout;
     
     public MainMatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -60,12 +63,15 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	setOnTouchListener(this);
     }
 
-    public void init(TextView addressView, BaseMapActivity activity) {
+    // public void init(TextView addressView, BaseMapActivity activity) {
+    public void init(TextView addressView, BaseMapActivity activity, RelativeLayout spinnerLayout) {
 	setAddressView(addressView);
 	setBaseMapActivity(activity);
 
+	this.spinnerLayout = spinnerLayout;
 	storeItemizedOverlay = new StoreItemizedOverlay(context, activity, this);
 	mapController = getController();
+	// requestManager = HttpRequestManager.getInstance(context);
 	requestManager = HttpRequestManager.getInstance(context);
 	sessionUtil = new SessionMapUtil(context);
 	gpsManager = new GpsManager(context, this);
@@ -194,8 +200,8 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
 	    geocodeRequest.actionReverseGeocodingByGeoPoint(getMapCenter(), sessionUtil.getCurrentCountry());
-	    requestManager.request(activity, request, NEARBY_STORE, requestable);
-	    requestManager.request(activity, geocodeRequest, GEOCODE, requestable);
+	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, geocodeRequest, GEOCODE, requestable);
+	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
 	}
     }
 }

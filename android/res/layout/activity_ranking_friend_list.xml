@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/matji_white"
-    android:orientation="vertical">
+    android:id="@+id/activity_ranking_friend_list"
+    style="@style/DefaultFill"
+    android:background="@color/matji_white">
   <com.matji.sandwich.widget.RankingFriendListView
       style="@style/DefaultFill"
       android:id="@+id/ranking_friend_list_view" />
-</LinearLayout>
+</RelativeLayout>

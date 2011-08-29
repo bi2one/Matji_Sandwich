@@ -21,6 +21,10 @@ public class FollowingActivity extends BaseActivity {
     private HomeTitle title;
     private User user;
 
+    public int setMainViewId() {
+	return R.id.layout_main;
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

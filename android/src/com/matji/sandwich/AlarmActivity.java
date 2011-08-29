@@ -6,7 +6,10 @@ import com.matji.sandwich.widget.AlarmListView;
 import android.os.Bundle;
 
 public class AlarmActivity extends BaseActivity {
-	
+    public int setMainViewId() {
+	return R.id.activity_alarm;
+    }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

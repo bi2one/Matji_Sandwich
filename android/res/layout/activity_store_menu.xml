@@ -26,41 +26,46 @@
 		</LinearLayout>			
 	</LinearLayout>
 </com.matji.sandwich.widget.MatjiScrollView> -->
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_store_menu"
+    style="DefaultFill">
+  
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent">
+    <LinearLayout
+	android:id="@+id/store_menu_add_wrapper"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<LinearLayout
-		android:id="@+id/store_menu_add_wrapper"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:visibility="gone">
-		<EditText
-			android:id="@+id/store_menu_menu_field"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="99"
-			android:maxLength="15"
-			android:singleLine="true"
-			android:scrollbars="vertical"
-			android:gravity="top"
-			android:textColor="@color/BLACK"
-			android:hint="@string/store_menu_ex" />
-		<Button
-			android:background="@drawable/selector"
-			android:id="@+id/store_menu_confirm_btn"
-			android:layout_width="wrap_content"
-			android:layout_height="fill_parent"
-			android:layout_weight="1"
-			android:layout_marginLeft="3dp"
-			android:layout_marginRight="3dp"
-			android:layout_marginBottom="5dp"
-			android:text="@string/store_menu_confirm"
-			android:onClick="onConfirmButtonClicked" />
-	</LinearLayout>
-	<com.matji.sandwich.widget.StoreMenuListView
-		android:id="@+id/store_menu_list"
-		style="@style/DefaultFill"
-		android:isScrollContainer="false" />
-</LinearLayout>
+	android:layout_height="wrap_content"
+	android:visibility="gone">
+      <EditText
+	  android:id="@+id/store_menu_menu_field"
+	  android:layout_width="0dp"
+	  android:layout_height="wrap_content"
+	  android:layout_weight="99"
+	  android:maxLength="15"
+	  android:singleLine="true"
+	  android:scrollbars="vertical"
+	  android:gravity="top"
+	  android:textColor="@color/BLACK"
+	  android:hint="@string/store_menu_ex" />
+      <Button
+	  android:background="@drawable/selector"
+	  android:id="@+id/store_menu_confirm_btn"
+	  android:layout_width="wrap_content"
+	  android:layout_height="fill_parent"
+	  android:layout_weight="1"
+	  android:layout_marginLeft="3dp"
+	  android:layout_marginRight="3dp"
+	  android:layout_marginBottom="5dp"
+	  android:text="@string/store_menu_confirm"
+	  android:onClick="onConfirmButtonClicked" />
+    </LinearLayout>
+    <com.matji.sandwich.widget.StoreMenuListView
+	android:id="@+id/store_menu_list"
+	style="@style/DefaultFill"
+	android:isScrollContainer="false" />
+  </LinearLayout>
+</RelativeLayout>

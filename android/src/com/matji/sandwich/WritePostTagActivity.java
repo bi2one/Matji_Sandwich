@@ -32,6 +32,10 @@ public class WritePostTagActivity extends BaseActivity implements OnItemClickLis
     private ListView listView;
     private EditText editText;
     private String[] tagList;
+
+    public int setMainViewId() {
+	return R.id.activity_write_post_tag;
+    }
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

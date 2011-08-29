@@ -22,13 +22,17 @@ public class UserTagActivity extends BaseActivity implements Requestable {
 	
 	private final int USER_TAG_LIST_REQUEST = 11;
 	public static final String USER = "user";
+
+    public int setMainViewId() {
+	return R.id.activity_user_tag;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_tag);
 		user = (User) getIntent().getParcelableExtra(USER);
-		HttpRequestManager.getInstance(this).request(this, request(), USER_TAG_LIST_REQUEST, this);
+		HttpRequestManager.getInstance(this).request(getMainView(), request(), USER_TAG_LIST_REQUEST, this);
 		
 		tagCloudView = (TagCloudView) findViewById(R.id.user_tag_cloud);
 		

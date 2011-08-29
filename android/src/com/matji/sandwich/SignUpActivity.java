@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 
 public class SignUpActivity extends BaseActivity {
+    public int setMainViewId() {
+	return R.id.activity_signup;
+    }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

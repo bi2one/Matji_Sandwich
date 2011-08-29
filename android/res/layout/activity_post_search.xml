@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_post_search"
 	style="@style/DefaultFill">
 	<com.matji.sandwich.widget.search.PostSearchListView
 		style="@style/DefaultFill"
 		android:id="@+id/PostSearchListView" />
-</LinearLayout>
+</RelativeLayout>

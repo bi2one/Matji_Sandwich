@@ -49,14 +49,15 @@ Requestable {
     private StoreHttpRequest storeRequest;
 
     public StoreMapNearListView(Context context, AttributeSet attrs) {
-        super(context, attrs, new SimpleStoreAdapter(context), 10);
-        this.context = context;
-        sessionUtil = new SessionMapUtil(context);
+	super(context, attrs, new SimpleStoreAdapter(context), 10);
+	this.context = context;
+	sessionUtil = new SessionMapUtil(context);
         storeRequest = new StoreHttpRequest(context);
-        gpsManager = new GpsManager(context, this);
-        requestManager = HttpRequestManager.getInstance(context);
-        setOnTouchListener(this);
-        setPage(1);
+	gpsManager = new GpsManager(context, this);
+	requestManager = HttpRequestManager.getInstance(context);
+	setOnTouchListener(this);
+	setPage(1);
+	// adapter.init(storeRequest, getLoadingFooterView());
     }
 
     public void init(TextView addressView, MainMapActivity activity) {
@@ -132,14 +133,14 @@ Requestable {
     }
 
     public void setCenter(Location location) {
-        GeoPoint locationPoint = new LocationToGeoPointAdapter(location);
-        GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
-
-        sessionUtil.setCenter(locationPoint);
-        sessionUtil.setNearBound(locationPoint);
-        geocodeRequest.actionReverseGeocodingByGeoPoint(locationPoint, COUNTRY);
-        requestManager.cancelTask();
-        requestManager.request(activity, geocodeRequest, GEOCODE, this);
+	GeoPoint locationPoint = new LocationToGeoPointAdapter(location);
+	GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
+	
+	sessionUtil.setCenter(locationPoint);
+	sessionUtil.setNearBound(locationPoint);
+	geocodeRequest.actionReverseGeocodingByGeoPoint(locationPoint, COUNTRY);
+	requestManager.cancelTask();
+	requestManager.request(getLoadingFooterView(), geocodeRequest, GEOCODE, this);
     }
 
     public void onListItemClick(int position) {

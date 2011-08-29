@@ -47,6 +47,11 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable 
     public static final String POSITION = "position";
     private static final int NOT_POSITIONED = -1;
 
+
+    public int setMainViewId() {
+	return R.id.activity_post;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +91,7 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable 
         if (showKeyboard) {
             commentInputBar.requestFocusToTextField();                      // showKeyboard 값에 따라 키보드를 보여주거나 보여주지 않음
         }
-        commentInputBar.setLikeListener(new LikeListener(this, this, currentPost) { // LikeListener를 등록. 리스너의 Post 객체는 currentPost
+        commentInputBar.setLikeListener(new LikeListener(this, this, currentPost, getMainView()) { // LikeListener를 등록. 리스너의 Post 객체는 currentPost
 
             @Override
             public void postUnlikeRequest() {
@@ -108,7 +113,7 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable 
     }
 
     public void onConfirmButtonClicked(View v) {
-        if (loginRequired() && !manager.isRunning(this)) {
+        if (loginRequired() && !manager.isRunning()) {
             if (request == null || !(request instanceof CommentHttpRequest)) {
                 request = new CommentHttpRequest(getApplicationContext());
             }
@@ -117,7 +122,7 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable 
                 Toast.makeText(getApplicationContext(), R.string.writing_content_comment, Toast.LENGTH_SHORT).show();
             } else {
                 ((CommentHttpRequest) request).actionNew(((Post) posts.get(position)).getId(), commentInputBar.getText().trim(), MatjiConstants.string(R.string.android));
-                manager.request(this, request, COMMENT_WRITE_REQUEST, this);
+                manager.request(getMainView(), request, COMMENT_WRITE_REQUEST, this);
                 commentInputBar.setText("");
                 KeyboardUtil.hideKeyboard(this);
             }
@@ -145,7 +150,7 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable 
 
     @Override
     public void prev() {
-        if (!manager.isRunning(this)) {
+        if (!manager.isRunning()) {
             if (position-1 < 0) {
                 toast.setText(MatjiConstants.string(R.string.does_not_exist_prev_post));
                 toast.show();
@@ -161,7 +166,7 @@ public class PostActivity extends BaseActivity implements Requestable, Pageable 
 
     @Override
     public void next() {
-        if (!manager.isRunning(this)) {
+        if (!manager.isRunning()) {
             if (position+1 >= posts.size()) {
                 toast.setText(MatjiConstants.string(R.string.does_not_exist_next_post));
                 toast.show();

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:orientation="vertical">
+	android:id="@+id/activity_user_image_list"
+	style="@style/DefaultFill">
 	<com.matji.sandwich.widget.UserImageListView
 		style="@style/DefaultFill"
 		android:id="@+id/user_image_list_view" />
-</LinearLayout>
+</RelativeLayout>

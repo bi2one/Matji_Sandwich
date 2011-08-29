@@ -5,9 +5,12 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.RelativeLayout;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.matji.sandwich.*;
+import com.matji.sandwich.data.*;
 import com.matji.sandwich.Loginable;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
@@ -52,22 +55,21 @@ public class Session implements Requestable {
 	    return session;
 	}
 	
-	
-	public void sessionValidate(Loginable loginable, Activity activity){
+    public void sessionValidate(Loginable loginable, RelativeLayout layout){
 		this.mLoginable = loginable;
 		mManager = HttpRequestManager.getInstance(mContext);
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionMe();
-		mManager.request(activity, request, AUTHORIZE, this);
+		mManager.request(layout, request, AUTHORIZE, this);
 	}
 	
 	
-	public void login(Loginable loginable, Activity activity, String userid, String password){
+	public void login(Loginable loginable, RelativeLayout spinnerContainer, String userid, String password){
 		this.mLoginable = loginable;
 		mManager = HttpRequestManager.getInstance(mContext);
 		MeHttpRequest request = new MeHttpRequest(mContext);
 		request.actionAuthorize(userid, password);
-		mManager.request(activity, request, AUTHORIZE, this);
+		mManager.request(spinnerContainer, request, AUTHORIZE, this);
 	}
 	
 	

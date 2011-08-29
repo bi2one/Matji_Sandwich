@@ -16,6 +16,10 @@ public class UserPostListActivity extends BaseActivity {
 
     public static final String USER = "user";
 
+    public int setMainViewId() {
+	return R.id.activity_user_post;
+    }
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub

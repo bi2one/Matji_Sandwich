@@ -22,6 +22,10 @@ public class UserTabActivity extends BaseTabActivity {
 	public static final int SETTING_PAGE = 4;
 
 	public final static String USER = "user";
+
+    public int setMainViewId() {
+	return R.id.main_tab_wrapper;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

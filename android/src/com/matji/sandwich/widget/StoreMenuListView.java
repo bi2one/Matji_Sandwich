@@ -166,7 +166,7 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 		}
 
 		((LikeHttpRequest) request).actionFoodLike(currentClickedStoreFood.getId());
-		getHttpRequestManager().request(getActivity(), request, LIKE_REQUEST, this);
+		getHttpRequestManager().request(getLoadingFooterView(), request, LIKE_REQUEST, this);
 	}
 
 	private void unlikeRequest() {
@@ -175,7 +175,7 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 		}
 
 		((LikeHttpRequest) request).actionFoodUnLike(currentClickedStoreFood.getId());
-		getHttpRequestManager().request(getActivity(), request, UN_LIKE_REQUEST, this);
+		getHttpRequestManager().request(getLoadingFooterView(), request, UN_LIKE_REQUEST, this);
 	}	
 	
 	private void postLikeRequest() {
@@ -225,7 +225,7 @@ public class StoreMenuListView extends RequestableMListView implements OnClickLi
 		switch (v.getId()) {
 		case R.id.menu_adapter_like_btn:
 			if (((Identifiable) getActivity()).loginRequired()) {
-				if (!getHttpRequestManager().isRunning(getActivity())) {
+				if (!getHttpRequestManager().isRunning()) {
 					v.setClickable(false);
 					currentClickedView = v;
 					int position = Integer.parseInt((String) v.getTag());

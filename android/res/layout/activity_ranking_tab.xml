@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_ranking_tab"
     style="@style/DefaultLinearFill">
   <com.matji.sandwich.widget.RoundTabHost
       android:id="@android:id/tabhost"
@@ -21,4 +22,4 @@
 	  android:layout_weight="1" />
     </LinearLayout>
   </com.matji.sandwich.widget.RoundTabHost>
-</LinearLayout>
+</RelativeLayout>

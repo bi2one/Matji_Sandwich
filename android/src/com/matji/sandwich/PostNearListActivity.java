@@ -52,6 +52,10 @@ public class PostNearListActivity extends BaseActivity implements MatjiLocationL
     private SessionRecentLocationUtil sessionLocationUtil;
     private Location prevLocation;
 
+    public int setMainViewId() {
+	return R.id.activity_post_near_list;
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_post_near_list);
@@ -71,7 +75,7 @@ public class PostNearListActivity extends BaseActivity implements MatjiLocationL
 
     private void setCenter(GeoPoint centerPoint) {
 	geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
-	requestManager.request(this, geocodeRequest, GET_ADDRESS_TAG, this);
+	requestManager.request(getMainView(), geocodeRequest, GET_ADDRESS_TAG, this);
 	sessionUtil.setCenter(centerPoint);
 	listView.requestReload();
     }

@@ -81,7 +81,7 @@ public class CommentListView extends RequestableMListView {
 	public void onListItemClick(int position) {}
 
 	public void onDeleteButtonClicked(View v) {
-		if (session.isLogin() && !getHttpRequestManager().isRunning(getActivity())) {
+		if (session.isLogin() && !getHttpRequestManager().isRunning()) {
 			curDeletePos = Integer.parseInt((String) v.getTag());
 
 			AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
@@ -103,7 +103,7 @@ public class CommentListView extends RequestableMListView {
 	}
 
 	public void deleteComment(int comment_id) {
-		getHttpRequestManager().request(getActivity(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
+	    getHttpRequestManager().request(getLoadingFooterView(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
 	}
 
 	@Override
