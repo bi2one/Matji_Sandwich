@@ -1,98 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/row_post_wrapper"
-	style="@style/row_post_PostRowWrapper">
-	<include
-		layout="@layout/profile" />
-	<!-- Post Wrapper -->
-	<RelativeLayout
-		android:id="@+id/row_post_post_wrapper"
-		style="@style/row_post_PostWrapper">
-		<RelativeLayout
-			style="@style/row_post_PostWrapperInner"
-			android:layout_toLeftOf="@+id/row_post_menu_btn_wrapper">
-			<com.matji.sandwich.widget.BoldStyleTextView
-				android:id="@+id/row_post_nick"
-				style="@style/LinkifyName" />
-			<com.matji.sandwich.widget.BoldStyleTextView
-				android:id="@+id/row_post_at"
-				style="@style/row_post_At"
-				android:layout_toRightOf="@id/row_post_nick" />
-			<com.matji.sandwich.widget.BoldStyleTextView
-				android:id="@+id/row_post_store_name"
-				style="@style/LinkifyName"
-				android:layout_toRightOf="@id/row_post_at" />
-			<TextView
-				android:id="@+id/row_post_post"
-				style="@style/TalkContent"
-				android:layout_below="@id/row_post_nick" />
-			<com.matji.sandwich.widget.BoldStyleTextView
-				android:id="@+id/row_post_tag"
-				style="@style/row_post_Tags"
-				android:layout_below="@id/row_post_post" />
-			<TableLayout
-				android:id="@+id/row_post_previews"
-				style="@style/row_post_Previews"
-				android:shrinkColumns="*"
-				android:layout_below="@id/row_post_tag">
-				<TableRow>
-					<RelativeLayout
-						android:id="@+id/row_post_preview1"
-						android:layout_height="wrap_content"
-						android:paddingRight="@dimen/default_drawable_padding"
-						android:layout_gravity="center">
-					</RelativeLayout>
-					<RelativeLayout
-						android:id="@+id/row_post_preview2"
-						android:paddingLeft="@dimen/default_drawable_padding_half"
-						android:paddingRight="@dimen/default_drawable_padding_half"
-						android:layout_gravity="center">
-					</RelativeLayout>
-					<RelativeLayout
-						android:id="@+id/row_post_preview3"
-						android:paddingLeft="@dimen/default_drawable_padding"
-						android:layout_gravity="center">
-					</RelativeLayout>
-				</TableRow>
-			</TableLayout>
-			<com.matji.sandwich.widget.BoldStyleTextView
-				android:id="@+id/row_post_created_at"
-				style="@style/row_post_CreatedAt"
-				android:layout_below="@id/row_post_previews" />
-			<com.matji.sandwich.widget.BoldStyleTextView
-				android:id="@+id/row_post_comment"
-				style="@style/row_post_Comment"
-				android:layout_below="@id/row_post_previews"
-				android:layout_toRightOf="@id/row_post_created_at" />
-			<com.matji.sandwich.widget.BoldStyleTextView
-				android:id="@+id/row_post_comment_count"
-				style="@style/row_post_Count"
-				android:layout_marginRight="@dimen/default_drawable_padding"
-				android:layout_below="@id/row_post_previews"
-				android:layout_toRightOf="@id/row_post_comment" />
-			<com.matji.sandwich.widget.BoldStyleTextView
-				android:id="@+id/row_post_like_count"
-				style="@style/row_post_LikeCount"
-				android:layout_marginRight="@dimen/default_drawable_padding"
-				android:drawablePadding="@dimen/default_drawable_padding"
-				android:layout_below="@id/row_post_previews"
-				android:layout_toRightOf="@id/row_post_comment_count"
-				android:drawableLeft="@drawable/icon_hand01" />
-		</RelativeLayout>
-		<RelativeLayout
-			android:id="@id/row_post_menu_btn_wrapper"
-			android:layout_width="@dimen/quickaction_btn_width"
-			android:layout_height="@dimen/quickaction_btn_height"
-			android:layout_centerVertical="true"
-			android:layout_alignParentRight="true">
-			<ImageButton
-				android:id="@+id/row_post_menu_btn"
-				style="@style/DefaultWrap"
-				android:background="@color/matji_transparent"
-				android:src="@drawable/btn_quickaction"
-				android:layout_centerInParent="true">
-			</ImageButton>
-		</RelativeLayout>
-	</RelativeLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/row_post_wrapper"
+    style="@style/row_post_PostRowWrapper">
+  <include
+      layout="@layout/profile" />
+  <!-- Post Wrapper -->
+  <RelativeLayout
+      android:id="@+id/row_post_post_wrapper"
+      style="@style/row_post_PostWrapper">
+    <RelativeLayout
+	style="@style/row_post_PostWrapperInner"
+	android:layout_toLeftOf="@+id/row_post_menu_btn_wrapper">
+      <com.matji.sandwich.widget.BoldStyleTextView
+	  android:id="@+id/row_post_nick"
+	  style="@style/LinkifyName" />
+      <com.matji.sandwich.widget.BoldStyleTextView
+	  android:id="@+id/row_post_at"
+	  style="@style/row_post_At"
+	  android:layout_toRightOf="@id/row_post_nick" />
+      <com.matji.sandwich.widget.BoldStyleTextView
+	  android:id="@+id/row_post_store_name"
+	  style="@style/LinkifyName"
+	  android:layout_toRightOf="@id/row_post_at" />
+      <TextView
+	  android:id="@+id/row_post_post"
+	  style="@style/TalkContent"
+	  android:layout_below="@id/row_post_nick" />
+      <com.matji.sandwich.widget.BoldStyleTextView
+	  android:id="@+id/row_post_tag"
+	  style="@style/row_post_Tags"
+	  android:layout_below="@id/row_post_post" />
+      <TableLayout
+	  android:id="@+id/row_post_previews"
+	  style="@style/row_post_Previews"
+	  android:shrinkColumns="*"
+	  android:layout_below="@id/row_post_tag">
+	<TableRow>
+	  <RelativeLayout
+	      android:id="@+id/row_post_preview1"
+	      android:layout_height="wrap_content"
+	      android:paddingRight="@dimen/default_drawable_padding"
+	      android:layout_gravity="center">
+	  </RelativeLayout>
+	  <RelativeLayout
+	      android:id="@+id/row_post_preview2"
+	      android:paddingLeft="@dimen/default_drawable_padding_half"
+	      android:paddingRight="@dimen/default_drawable_padding_half"
+	      android:layout_gravity="center">
+	  </RelativeLayout>
+	  <RelativeLayout
+	      android:id="@+id/row_post_preview3"
+	      android:paddingLeft="@dimen/default_drawable_padding"
+	      android:layout_gravity="center">
+	  </RelativeLayout>
+	</TableRow>
+      </TableLayout>
+      <com.matji.sandwich.widget.BoldStyleTextView
+	  android:id="@+id/row_post_created_at"
+	  style="@style/row_post_CreatedAt"
+	  android:layout_below="@id/row_post_previews" />
+      <com.matji.sandwich.widget.BoldStyleTextView
+	  android:id="@+id/row_post_comment"
+	  style="@style/row_post_Comment"
+	  android:layout_below="@id/row_post_previews"
+	  android:layout_toRightOf="@id/row_post_created_at" />
+      <com.matji.sandwich.widget.BoldStyleTextView
+	  android:id="@+id/row_post_comment_count"
+	  style="@style/row_post_Count"
+	  android:layout_marginRight="@dimen/default_drawable_padding"
+	  android:layout_below="@id/row_post_previews"
+	  android:layout_toRightOf="@id/row_post_comment" />
+      <com.matji.sandwich.widget.BoldStyleTextView
+	  android:id="@+id/row_post_like_count"
+	  style="@style/row_post_LikeCount"
+	  android:layout_marginRight="@dimen/default_drawable_padding"
+	  android:drawablePadding="@dimen/default_drawable_padding"
+	  android:layout_below="@id/row_post_previews"
+	  android:layout_toRightOf="@id/row_post_comment_count"
+	  android:drawableLeft="@drawable/icon_hand01" />
+    </RelativeLayout>
+    <RelativeLayout
+	android:id="@id/row_post_menu_btn_wrapper"
+	android:layout_width="@dimen/quickaction_btn_width"
+	android:layout_height="@dimen/quickaction_btn_height"
+	android:layout_centerVertical="true"
+	android:layout_alignParentRight="true">
+      <ImageButton
+	  android:id="@+id/row_post_menu_btn"
+	  style="@style/DefaultWrap"
+	  android:background="@color/matji_transparent"
+	  android:src="@drawable/btn_quickaction"
+	  android:layout_centerInParent="true">
+      </ImageButton>
+    </RelativeLayout>
+  </RelativeLayout>
 </LinearLayout>
