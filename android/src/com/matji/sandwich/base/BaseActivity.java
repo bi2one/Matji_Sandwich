@@ -13,12 +13,12 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Identifiable {
-	public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
-	public static final int LOGIN_ACTIVITY = 100;
-	public static final int POST_ACTIVITY = 101;
-	public static final int WRITE_POST_ACTIVITY = 102;
-	public static final int WRITE_COMMENT_ACTIVITY = 103;	
-	public static final int RECEIVED_USER_ACTIVITY = 104;
+    public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
+    public static final int LOGIN_ACTIVITY = 100;
+    public static final int POST_ACTIVITY = 101;
+    public static final int WRITE_POST_ACTIVITY = 102;
+    public static final int WRITE_COMMENT_ACTIVITY = 103;	
+    public static final int RECEIVED_USER_ACTIVITY = 104;
     private RelativeLayout mainViewGroup;
 
     private boolean isFlow;
@@ -26,12 +26,11 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public abstract int setMainViewId();
 
     protected RelativeLayout getMainView() {
-	return mainViewGroup;
+        return mainViewGroup;
     }
 
     protected void init() {
-	setIsFlow(false);
-	mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
+        setIsFlow(false);
     }
 
     public void setIsFlow(boolean isFlow) {
@@ -39,8 +38,9 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     }
 
     @Override
-	protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
     }
 
     @Override
@@ -55,10 +55,10 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     }
 
     public void didEnterForeGround(){
-	Session session  = Session.getInstance(this);
-	if (session.isLogin()){
-	    session.sessionValidate(null, getMainView());
-	}
+        Session session  = Session.getInstance(this);
+        if (session.isLogin()){
+            session.sessionValidate(null, getMainView());
+        }
     }
 
     @Override
@@ -86,13 +86,13 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 
 
     @Override
-	public void setContentView(int layoutResID) {
-	if (this.getParent() == null){
-	    requestWindowFeature(Window.FEATURE_NO_TITLE);
-	    setTheme(R.style.Theme_RemoveOverlay);
-	}
-	super.setContentView(layoutResID);
-	init();
+    public void setContentView(int layoutResID) {
+        if (this.getParent() == null){
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            setTheme(R.style.Theme_RemoveOverlay);
+        }
+        super.setContentView(layoutResID);
+        mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
     }
 
     @Override

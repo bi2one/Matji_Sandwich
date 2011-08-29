@@ -27,7 +27,6 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 
     protected void init() {
 	setIsFlow(false);
-	mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
     }
 
     public void setIsFlow(boolean isFlow) {
@@ -37,6 +36,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
     @Override
@@ -89,7 +89,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
             setTheme(R.style.Theme_RemoveOverlay);
         }
         super.setContentView(layoutResID);
-        init();
+        mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
     }
 
     @Override
