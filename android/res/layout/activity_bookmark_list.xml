@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/transparent"
     android:id="@+id/layout_main">
   <RelativeLayout
+      android:id="@+id/activity_bookmark_list_register_wrap"
+      android:layout_alignParentTop="true"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content">
         <Button
@@ -47,6 +48,7 @@
   <com.matji.sandwich.widget.BookmarkListView
       style="@style/DefaultFill"
       android:focusable="false"
+      android:layout_below="@id/activity_bookmark_list_register_wrap"
       android:background="@color/transparent"
       android:id="@+id/bookmark_list" />
-</LinearLayout>
+</RelativeLayout>

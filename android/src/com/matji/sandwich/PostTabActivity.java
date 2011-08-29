@@ -20,6 +20,10 @@ public class PostTabActivity extends BaseTabActivity {
     private SessionTabHostUtil sessionUtil;
     private ActivityStartable lastStartedChild;
 
+    public int setMainViewId() {
+	return R.id.activity_post_tab;
+    }
+
     /**
      * Activity생성시 실행하는 메소드
      *

@@ -6,6 +6,10 @@ import com.matji.sandwich.widget.NoticeListView;
 import android.os.Bundle;
 
 public class NoticeActivity extends BaseActivity {
+    public int setMainViewId() {
+	return R.id.activity_notice;
+    }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

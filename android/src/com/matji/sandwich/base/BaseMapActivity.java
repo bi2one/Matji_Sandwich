@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+import android.widget.RelativeLayout;
 
 import com.google.android.maps.MapActivity;
 import com.matji.sandwich.LoginActivity;
@@ -16,9 +17,17 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
     protected static final int LOGIN_ACTIVITY = 1;
     protected static final int WRITE_POST_ACTIVITY = 2;
     private boolean isFlow;
+    private RelativeLayout mainViewGroup;
+
+    public abstract int setMainViewId();
+
+    protected RelativeLayout getMainView() {
+	return mainViewGroup;
+    }
 
     protected void init() {
-        setIsFlow(false);
+	setIsFlow(false);
+	mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
     }
 
     public void setIsFlow(boolean isFlow) {
@@ -28,7 +37,6 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
     }
 
     @Override
@@ -46,7 +54,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
         Log.d("LifeCycle", "ENTER");
         Session session  = Session.getInstance(this);
         if (session.isLogin()){
-            session.sessionValidate(null, this);
+            session.sessionValidate(null, getMainView());
         }
     }
 
@@ -81,6 +89,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
             setTheme(R.style.Theme_RemoveOverlay);
         }
         super.setContentView(layoutResID);
+        init();
     }
 
     @Override

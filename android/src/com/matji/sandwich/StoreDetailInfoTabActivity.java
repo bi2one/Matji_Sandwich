@@ -13,6 +13,10 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	private Store store;
 	
 	public static final String STORE = "store";
+
+    public int setMainViewId() {
+	return R.id.activity_store_detail_tab;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

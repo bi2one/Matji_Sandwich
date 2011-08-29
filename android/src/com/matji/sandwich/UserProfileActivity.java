@@ -22,6 +22,10 @@ public class UserProfileActivity extends BaseActivity {
     private TextView followerCount;
     private TextView findCount;
     private TextView bookmarkCount;
+
+    public int setMainViewId() {
+	return R.id.activity_user_profile;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

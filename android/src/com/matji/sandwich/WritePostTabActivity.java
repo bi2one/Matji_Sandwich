@@ -74,6 +74,10 @@ public class WritePostTabActivity extends BaseTabActivity implements OnTabChange
     private SessionMapUtil sessionMapUtil;
     private KeyboardListener keyboardListener;
     private MatjiAlertDialog postEmptyDialog;
+
+    public int setMainViewId() {
+	return R.id.activity_write_post_tab;
+    }
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -217,7 +221,7 @@ public class WritePostTabActivity extends BaseTabActivity implements OnTabChange
 	}
 	
 	postRequest.actionNew(post, tags, storeId, centerLocation, images);
-	requestManager.request(this, postRequest, REQUEST_WRITE_POST, this);
+	requestManager.request(getMainView(), postRequest, REQUEST_WRITE_POST, this);
     }
 
     private boolean isValidPost(String post) {

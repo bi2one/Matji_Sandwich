@@ -64,6 +64,10 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	
 	public final static String STORE = "store";
 
+    public int setMainViewId() {
+	return R.id.activity_store_main;
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -154,7 +158,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	 	    request = new BookmarkHttpRequest(this);
 	 	}
 	 	((BookmarkHttpRequest) request).actionBookmark(store.getId());
-	 	manager.request(this, request, BOOKMARK_REQUEST, this);
+	 	manager.request(getMainView(), request, BOOKMARK_REQUEST, this);
 	 	store.setBookmarkCount(store.getBookmarkCount() + 1);
 	 }
 
@@ -163,7 +167,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 	 	    request = new BookmarkHttpRequest(this);
 	 	}
 	 	((BookmarkHttpRequest) request).actionUnBookmark(store.getId());
-	 	manager.request(this, request, UN_BOOKMARK_REQUEST, this);
+	 	manager.request(getMainView(), request, UN_BOOKMARK_REQUEST, this);
 	 	store.setBookmarkCount(store.getBookmarkCount() - 1);
 	 }
 
@@ -172,7 +176,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 			request = new LikeHttpRequest(this);
 		}
 		((LikeHttpRequest) request).actionStoreLike(store.getId());
-		manager.request(this, request, LIKE_REQUEST, this);
+		manager.request(getMainView(), request, LIKE_REQUEST, this);
 	}
 
 	private void unlikeRequest() {
@@ -181,7 +185,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 		}
 
 		((LikeHttpRequest) request).actionStoreUnLike(store.getId());
-		manager.request(this, request, UN_LIKE_REQUEST, this);
+		manager.request(getMainView(), request, UN_LIKE_REQUEST, this);
 	}
 
 	 private void postBookmarkRequest() {
@@ -246,7 +250,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
 	public void onLikeButtonClicked(View view) {
 		if (loginRequired()) {
-			if (!manager.isRunning(this)) {
+			if (!manager.isRunning()) {
 				likeButton.setClickable(false);
 				if (dbProvider.isExistLike(store.getId(), "Store")){
 					// api request
@@ -261,7 +265,7 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
 
 	 public void onScrapButtonClicked(View view) {
 	 	if (loginRequired()) {
-	 	    if (!manager.isRunning(this)) {
+	 	    if (!manager.isRunning()) {
 	 		scrapButton.setClickable(false);
 	 		if (dbProvider.isExistBookmark(store.getId(), "Store")){
 	 		    // api request

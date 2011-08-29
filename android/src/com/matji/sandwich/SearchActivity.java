@@ -25,6 +25,10 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
     private RoundTabHost tabHost;
     private RelativeLayoutThatDetectsSoftKeyboard contentWrapper;
 
+    public int setMainViewId() {
+	return R.id.contentWrapper;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub

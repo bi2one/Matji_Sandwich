@@ -7,6 +7,10 @@ import android.os.Bundle;
 
 public class UserStoreListActivity extends BaseActivity {
 	private StoreBookmarkedListView listView;
+
+    public int setMainViewId() {
+	return R.id.activity_user_store;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

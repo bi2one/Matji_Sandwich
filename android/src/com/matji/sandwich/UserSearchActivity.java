@@ -8,6 +8,10 @@ import android.os.Bundle;
 
 public class UserSearchActivity extends BaseActivity implements Searchable {
 	private UserSearchListView searchView;
+
+    public int setMainViewId() {
+	return R.id.activity_user_search;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

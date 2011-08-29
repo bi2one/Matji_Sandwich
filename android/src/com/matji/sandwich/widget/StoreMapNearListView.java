@@ -63,7 +63,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	setOnTouchListener(this);
 	setPage(1);
 	adapter = (MapStoreSectionedAdapter)getMBaseAdapter();
-	adapter.init(storeRequest);
+	adapter.init(storeRequest, getLoadingFooterView());
     }
 
     public void init(TextView addressView, MainMapActivity activity) {
@@ -141,7 +141,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	sessionUtil.setNearBound(locationPoint);
 	geocodeRequest.actionReverseGeocodingByGeoPoint(locationPoint, COUNTRY);
 	requestManager.cancelTask();
-	requestManager.request(activity, geocodeRequest, GEOCODE, this);
+	requestManager.request(getLoadingFooterView(), geocodeRequest, GEOCODE, this);
     }
 
     public void onListItemClick(int position) {

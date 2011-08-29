@@ -34,6 +34,10 @@ public class StoreMenuActivity extends BaseActivity implements Requestable {
 	
 	public static final String STORE = "store";
 
+    public int setMainViewId() {
+	return R.id.activity_store_menu;
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

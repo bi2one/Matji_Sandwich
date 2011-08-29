@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/matji_white"
-    android:orientation="vertical">
-  
-  <include layout="@layout/location_title_bar" />
+    android:id="@+id/activity_ranking_near_list"
+    style="@style/DefaultFill"
+    android:background="@color/matji_white">
+  <include layout="@layout/location_title_bar"
+	   android:layout_alignParentTop="true"
+	   android:id="@+id/activity_ranking_near_list_title" />
   
   <com.matji.sandwich.widget.RankingNearListView
       style="@style/DefaultFill"
+      android:layout_below="@id/activity_ranking_near_list_title"
       android:id="@+id/ranking_near_list_view" />
-</LinearLayout>
+</RelativeLayout>

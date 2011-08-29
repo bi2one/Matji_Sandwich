@@ -11,6 +11,10 @@ public class UserPostListActivity extends BaseActivity {
 	private UserPostListView listView;
 	
 	public static final String USER = "user";
+
+    public int setMainViewId() {
+	return R.id.activity_user_post;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

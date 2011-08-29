@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/cell_user_Wrapper"
-	style="@style/cell_user_Wrapper">
-	<include
-		layout="@layout/cell_profile" />
-	<RelativeLayout
-		style="@style/cell_user_InfoWrapper">
-		<LinearLayout
-			android:layout_toRightOf="@+id/profile"
-			style="@style/DefaultVerticalWrap">
-			<TextView
-				android:id="@+id/cell_user_nick"
-				style="@style/cell_user_Nickname" />
-			<LinearLayout
-				style="@style/DefaultWrap">
-				<TextView
-					style="@style/cell_user_PointLabel" />
-				<TextView
-					android:id="@+id/cell_user_point"
-					style="@style/cell_user_LabelValue" />
-			</LinearLayout>
-			<LinearLayout
-				style="@style/DefaultWrap">
-				<TextView
-					style="@style/cell_user_AreaLabel" />
-				<TextView
-					android:id="@+id/cell_user_area"
-					style="@style/cell_user_LabelValue" />
-			</LinearLayout>
-		</LinearLayout>
-		<LinearLayout
-			android:layout_alignParentRight="true"
-			style="@style/DefaultVerticalWrap">
-			<Button
-				android:id="@+id/cell_user_like_list"
-				style="@style/cell_user_LikeListButton" />
-			<Button
-				android:id="@+id/cell_user_follow"
-				style="@style/cell_user_FollowButton" />
-			<Button
-				android:id="@+id/cell_user_message_list"
-				style="@style/cell_user_MessageListButton" />
-		</LinearLayout>
-	</RelativeLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cell_user_Wrapper"
+    style="@style/cell_user_Wrapper">
+  <include
+      layout="@layout/cell_profile" />
+  <RelativeLayout
+      android:id="@+id/cell_user_InfoWrapper"
+      style="@style/cell_user_InfoWrapper">
+    <LinearLayout
+	android:layout_toRightOf="@+id/profile"
+	style="@style/DefaultVerticalWrap">
+      <TextView
+	  android:id="@+id/cell_user_nick"
+	  style="@style/cell_user_Nickname" />
+      <LinearLayout
+	  style="@style/DefaultWrap">
+	<TextView
+	    style="@style/cell_user_PointLabel" />
+	<TextView
+	    android:id="@+id/cell_user_point"
+	    style="@style/cell_user_LabelValue" />
+      </LinearLayout>
+      <LinearLayout
+	  style="@style/DefaultWrap">
+	<TextView
+	    style="@style/cell_user_AreaLabel" />
+	<TextView
+	    android:id="@+id/cell_user_area"
+	    style="@style/cell_user_LabelValue" />
+      </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+	android:layout_alignParentRight="true"
+	style="@style/DefaultVerticalWrap">
+      <Button
+	  android:id="@+id/cell_user_like_list"
+	  style="@style/cell_user_LikeListButton" />
+      <Button
+	  android:id="@+id/cell_user_follow"
+	  style="@style/cell_user_FollowButton" />
+      <Button
+	  android:id="@+id/cell_user_message_list"
+	  style="@style/cell_user_MessageListButton" />
+    </LinearLayout>
+  </RelativeLayout>
 </LinearLayout>
 
 

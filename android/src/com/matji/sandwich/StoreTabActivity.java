@@ -23,6 +23,10 @@ public class StoreTabActivity extends BaseTabActivity {
 	
 	public static final String STORE = "store";
 
+    public int setMainViewId() {
+	return R.id.main_tab_wrapper;
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -70,6 +70,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
     private GotoStoreMainAction action2;
     private GotoImageSliderAction action3;
     private Activity activity;
+    private RelativeLayout spinnerContainer;
 
     private ListView parent;
 
@@ -89,6 +90,10 @@ public class PostSectionedAdapter extends SectionedAdapter {
     protected void init() {
         downloader = new MatjiImageDownloader(context);
 //        profileSize = (int) MatjiConstants.dimen(R.dimen.profile_size);
+    }
+
+    public void setSpinnerContainer(RelativeLayout spinnerContainer) {
+	this.spinnerContainer = spinnerContainer;
     }
 
     public void setSubtitle(String subtitle) {    
@@ -457,7 +462,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
          * 현재 이 이야기를 좋아요 했는지를 판단한 후 그에 따라 처리한다.
          */
         public void likePost() {
-            if (!manager.isRunning(context)) {
+            if (!manager.isRunning()) {
                 Post post = (Post) data.get(position);
                 if (dbProvider.isExistLike(post.getId(), DBProvider.POST)){
                     unlikeRequest(post);
@@ -477,7 +482,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             }
 
             ((LikeHttpRequest) request).actionPostLike(post.getId());
-            manager.request(context, request, LIKE_REQUEST, this);
+            manager.request(spinnerContainer, request, LIKE_REQUEST, this);
             ((Post) data.get(position)).setLikeCount(post.getLikeCount() + 1);
         }
 
@@ -491,7 +496,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             }
 
             ((LikeHttpRequest) request).actionPostUnLike(post.getId());
-            manager.request(context, request, UN_LIKE_REQUEST, this);
+            manager.request(spinnerContainer, request, UN_LIKE_REQUEST, this);
             ((Post) data.get(position)).setLikeCount(post.getLikeCount() - 1);
         }
 
@@ -527,13 +532,13 @@ public class PostSectionedAdapter extends SectionedAdapter {
          */
         public void deleteRequest(Post post) {
             // Alert 창 띄우기.
-            if (!manager.isRunning(context)) {
+            if (!manager.isRunning()) {
                 if (request == null || !(request instanceof PostHttpRequest)) {
                     request = new PostHttpRequest(context);
                 }
 
                 ((PostHttpRequest) request).actionDelete(post.getId());
-                manager.request(context, request, DELETE_REQUEST, this);
+                manager.request(spinnerContainer, request, DELETE_REQUEST, this);
             }
         }
 

@@ -9,6 +9,10 @@ import android.os.Bundle;
 public class UserImageListActivity extends BaseActivity {
 
 	public static final String USER = "user";
+
+    public int setMainViewId() {
+	return R.id.activity_user_image_list;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

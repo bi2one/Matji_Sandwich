@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultVerticalFill">
+    android:id="@+id/activity_like_user_list"
+    style="@style/DefaultVerticalFill">
   <com.matji.sandwich.widget.LikeUserListView
       style="@style/DefaultFill"
       android:id="@+id/like_user_list_view" />
-</LinearLayout>
+</RelativeLayout>

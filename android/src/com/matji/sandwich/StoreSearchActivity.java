@@ -8,6 +8,10 @@ import android.os.Bundle;
 
 public class StoreSearchActivity extends BaseActivity implements Searchable {
 	private StoreSearchListView searchView;
+
+    public int setMainViewId() {
+	return R.id.activity_store_search;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

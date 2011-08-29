@@ -16,6 +16,8 @@ import com.matji.sandwich.widget.title.MainTitle;
 import com.matji.sandwich.widget.title.UserTitle;
 import com.matji.sandwich.widget.title.WritePostTitle;
 
+// import com.matji.sandwich.http.AsyncTaskTest;
+
 public class MainTabActivity extends BaseTabActivity implements OnTabChangeListener {
     private MainTabHost tabHost;
     private SessionTabHostUtil sessionUtil;
@@ -34,7 +36,10 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     public static final String SPEC_LABEL2 = "tab2";
     public static final String SPEC_LABEL3 = "tab3";
     public static final String SPEC_LABEL4 = "tab4";
-    
+
+    public int setMainViewId() {
+	return R.id.main_tab_wrapper;
+    }
     /**
      * Activity생성시 실행하는 메소드
      *
@@ -42,13 +47,14 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_tab);
+	
         context = getApplicationContext();
         DisplayUtil.setContext(context); // DisplayUtil 초기화
         MatjiConstants.setContext(context); // MatjiContstants 초기화
         sessionUtil = new SessionTabHostUtil(context);
-        setContentView(R.layout.activity_main_tab);
 
-        mainTabWrapper = (LinearLayout) findViewById(R.id.main_tab_wrapper);
+        mainTabWrapper = (LinearLayout)findViewById(R.id.activity_main_tab_title_wrapper);
         mainTabWrapper.addView(new MainTitle(this), 0);
 
         tabHost = (MainTabHost)getTabHost();
@@ -71,6 +77,12 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
                 new Intent(this, SettingActivity.class));
                 
         tabHost.setOnTabChangedListener(this);
+
+	// AsyncTaskTest tasktest = new AsyncTaskTest();
+	// tasktest.execute("1st request");
+	// tasktest.execute("2nd request");
+	// tasktest.execute("3rd request");
+	// tasktest.execute("4th request");
     }
 
     /**

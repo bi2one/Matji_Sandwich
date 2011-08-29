@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	style="@style/DefaultFill" 
-	android:padding="30dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/activity_login"
+		style="@style/DefaultFill" 
+		android:padding="30dp">
 	<EditText android:id="@+id/username" 
 		android:text="test2"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:singleLine="true" 
+		android:singleLine="true"
+		android:layout_alignParentTop="true"
 		android:lines="1" /> 
 	<EditText android:id="@+id/password"  
 		android:text="test2"
@@ -15,9 +16,12 @@
 		android:layout_height="wrap_content" 
 		android:singleLine="true" 
 		android:password="true"
+		android:layout_below="@id/username"
 		android:lines="1" />
 	<LinearLayout style="@style/DefaultWidthFill"
-		android:orientation="horizontal" >
+		      android:id="@+id/activity_login_flow_buttons"
+		      android:layout_below="@id/password"
+		      android:orientation="horizontal" >
 		<Button android:id="@+id/ok" 
 			style="@style/DefaultWrap"
 			android:onClick="loginButtonClicked" 
@@ -31,7 +35,8 @@
 	</LinearLayout>
 	
 	<LinearLayout style="@style/DefaultFill"
-			android:orientation="horizontal">
+		      android:layout_below="@id/activity_login_flow_buttons"
+		      android:orientation="horizontal">
 		<Button android:id="@+id/twitterLogin"
 				style="@style/DefaultWrap"
 				android:text="Login via Twitter"
@@ -41,4 +46,4 @@
 				android:text="Login via Facebook"
 				android:onClick="facebookLoginClicked"/>				
 	</LinearLayout>		
-</LinearLayout>
+</RelativeLayout>

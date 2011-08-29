@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.UserProfileActivity;
@@ -31,6 +32,7 @@ public class UserCell extends Cell {
     private Session session;
 
     private FollowingListener followingListener;
+    private RelativeLayout spinnerContainer;
 
     /**
      * 기본 생성자 (Java Code)
@@ -39,6 +41,7 @@ public class UserCell extends Cell {
      */
     public UserCell(Context context) {
         super(context, R.layout.cell_user);
+	spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
     }
 
     /**
@@ -49,7 +52,8 @@ public class UserCell extends Cell {
      */
     public UserCell(Context context, AttributeSet attr) {
         super(context, R.layout.cell_user);
-        setId(R.id.UserCell);		
+	spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
+        setId(R.id.UserCell);
     }
 
     /**
@@ -60,6 +64,7 @@ public class UserCell extends Cell {
      */
     public UserCell(Context context, User user) {
         super(context, R.layout.cell_user);
+	spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
         setUser(user);
     }
 
@@ -84,7 +89,7 @@ public class UserCell extends Cell {
         follow = (Button) getRootView().findViewById(R.id.cell_user_follow);
         messageList = (Button) getRootView().findViewById(R.id.cell_user_message_list);
 
-        followingListener = new FollowingListener(((Identifiable) getContext()), getContext(), user) {
+        followingListener = new FollowingListener(((Identifiable) getContext()), getContext(), user, spinnerContainer) {
 
             @Override
             public void postUnfollowRequest() {

@@ -10,6 +10,10 @@ public class StoreUrlListActivity extends BaseActivity {
 	private StoreUrlListView listView;
 	
 	public static final String STORE = "store";
+
+    public int setMainViewId() {
+	return R.id.activity_store_url;
+    }
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

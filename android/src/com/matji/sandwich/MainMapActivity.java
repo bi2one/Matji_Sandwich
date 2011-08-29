@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
@@ -33,6 +34,10 @@ public class MainMapActivity extends BaseMapActivity {
     private Drawable flipMapViewImage;
     private Drawable flipNearStoreImage;
 
+    public int setMainViewId() {
+	return R.id.activity_main_map;
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_map);
@@ -42,7 +47,7 @@ public class MainMapActivity extends BaseMapActivity {
 	sessionMapUtil = new SessionMapUtil(context);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
         mapView = (MainMatjiMapView)findViewById(R.id.map_view);
-        mapView.init(addressView, this);
+        mapView.init(addressView, this, getMainView());
         storeListView = (StoreMapNearListView)findViewById(R.id.main_map_store_list);
         storeListView.init(addressView, this);
 

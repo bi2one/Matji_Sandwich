@@ -12,6 +12,10 @@ public class StoreNoteListActivity extends BaseActivity {
 	private BaseViewContainer header;
 
 	public static final String STORE = "store";
+
+    public int setMainViewId() {
+	return R.id.layout_main;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

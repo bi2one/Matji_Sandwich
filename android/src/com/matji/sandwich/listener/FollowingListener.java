@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.Identifiable;
@@ -40,6 +41,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
     private FollowingHttpRequest followingRequest;
     private HttpRequestManager manager;
     private DBProvider dbProvider;
+    private RelativeLayout spinnerContainer;
 
     /**
      * 기본 생성자. data의 전달 없이 {@link Identifiable}객체와 {@link Context}객체만 전달받는다.
@@ -48,12 +50,13 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      * @param identifiable login 확인을 위한 identifiable 객체
      * @param context
      */
-    public FollowingListener(Identifiable identifiable, Context context) {
+    public FollowingListener(Identifiable identifiable, Context context, RelativeLayout spinnerContainer) {
         this.identifiable = identifiable;
         this.context = context;
         followingRequest = new FollowingHttpRequest(context);
         manager = HttpRequestManager.getInstance(context);
         dbProvider = DBProvider.getInstance(context);
+	this.spinnerContainer = spinnerContainer;
     }
 
     /**
@@ -62,8 +65,8 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      * @param context
      * @param store follow, unfollow 할 {@link User}
      */
-    public FollowingListener(Identifiable identifiable, Context context, User user) {
-        this(identifiable, context);
+    public FollowingListener(Identifiable identifiable, Context context, User user, RelativeLayout spinnerContainer) {
+        this(identifiable, context, spinnerContainer);
         this.user = user;
     }
 
@@ -78,7 +81,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
 
     @Override
     public void onClick(View v) {
-        if (identifiable.loginRequired() && !manager.isRunning(context)) {
+        if (identifiable.loginRequired() && !manager.isRunning()) {
             if (dbProvider.isExistFollower(user.getId())){
                 unfollowRequest();
             } else {
@@ -92,7 +95,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      */
     private void followRequest() {
         followingRequest.actionNew(user.getId());
-        manager.request(context, followingRequest, HttpRequest.FOLLOW_REQUEST, this);
+        manager.request(spinnerContainer, followingRequest, HttpRequest.FOLLOW_REQUEST, this);
     }
 
     /**
@@ -100,7 +103,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      */
     private void unfollowRequest() {
         followingRequest.actionDelete(user.getId());
-        manager.request(context, followingRequest, HttpRequest.UN_FOLLOW_REQUEST, this);
+        manager.request(spinnerContainer, followingRequest, HttpRequest.UN_FOLLOW_REQUEST, this);
     }
 
 

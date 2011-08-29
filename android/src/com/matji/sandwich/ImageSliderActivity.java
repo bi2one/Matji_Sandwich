@@ -47,6 +47,10 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 	public static final String ATTACH_FILES = "attach_files";
 	public static final String POSITION = "position";
 
+    public int setMainViewId() {
+	return R.id.activity_image_slider;
+    }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -112,7 +116,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         }
         
         ((PostHttpRequest) request).actionShow(postId);
-        manager.request(this, request, HttpRequest.POST_SHOW_REQUEST, this);
+        manager.request(getMainView(), request, HttpRequest.POST_SHOW_REQUEST, this);
     }
     
     public void setPost(Post post) {
@@ -168,7 +172,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 	public void onViewScrollFinished(int currentPage) {
 		if (this.currentPage != currentPage) {
 			this.currentPage = currentPage;
-			manager.cancelTask(this);
+			manager.cancelTask();
 	        setPage(currentPage);
 			setImage(currentPage);
 			postRequest(attachFiles[currentPage].getPostId());

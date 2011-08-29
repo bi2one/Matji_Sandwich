@@ -23,6 +23,10 @@ public class SettingActivity extends BaseActivity {
 	private User user;
 	private MatjiImageDownloader downloader;
 
+    public int setMainViewId() {
+	return R.id.setting_layout;
+    }
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

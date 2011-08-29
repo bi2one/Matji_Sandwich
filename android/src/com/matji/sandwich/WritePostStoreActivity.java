@@ -33,6 +33,10 @@ public class WritePostStoreActivity extends BaseMapActivity implements WritePost
     private RadiusMatjiMapView radiusMapView;
     private SessionMapUtil sessionMapUtil;
     private View currentView;
+
+    public int setMainViewId() {
+	return R.id.activity_write_post_store;
+    }
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

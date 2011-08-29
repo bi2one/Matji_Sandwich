@@ -15,6 +15,10 @@ public class StoreDefaultInfoActivity extends BaseActivity {
 	private TextView tel;
 	private TextView address;
 	private TextView website;
+
+    public int setMainViewId() {
+	return R.id.activity_store_default_info;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

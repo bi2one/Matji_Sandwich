@@ -8,6 +8,10 @@ import android.os.Bundle;
 
 public class StoreImageListActivity extends BaseActivity {
 	public static final String STORE = "store";
+
+    public int setMainViewId() {
+	return R.id.activity_store_image_list;
+    }
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

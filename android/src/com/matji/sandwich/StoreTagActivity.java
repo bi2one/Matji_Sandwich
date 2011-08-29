@@ -24,11 +24,15 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 	private TextView tagCount;
 	
 	private Store store;
+
+    public int setMainViewId() {
+	return R.id.activity_store_tag;
+    }
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_tag);
-		HttpRequestManager.getInstance(this).request(this, request(), STORE_TAG_LIST_REQUEST, this);
+		HttpRequestManager.getInstance(this).request(getMainView(), request(), STORE_TAG_LIST_REQUEST, this);
 
 		tagCloudView = (TagCloudView) findViewById(R.id.store_tag_cloud);
 		

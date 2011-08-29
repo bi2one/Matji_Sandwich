@@ -18,6 +18,10 @@ public class UserNearRankingActivity extends BaseActivity {
     private static final int BASIC_LAT_SW = 1000;
     private static final int BASIC_LNG_SW = 1000;
     private RankingUserListView listView;
+
+    public int setMainViewId() {
+	return R.id.layout_main;
+    }
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

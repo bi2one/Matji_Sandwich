@@ -21,6 +21,10 @@ public class LikeStoreListActivity extends BaseActivity {
     
     public static final String USER = "user";
 
+    public int setMainViewId() {
+	return R.id.activity_like_store_list;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

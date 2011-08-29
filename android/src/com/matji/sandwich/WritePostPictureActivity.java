@@ -14,6 +14,10 @@ public class WritePostPictureActivity extends BaseActivity {
     private AlbumView albumView;
     // private WritePostTabActivity parentActivity;
     private SessionWritePostUtil sessionUtil;
+
+    public int setMainViewId() {
+	return R.id.activity_write_post_picture;
+    }
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

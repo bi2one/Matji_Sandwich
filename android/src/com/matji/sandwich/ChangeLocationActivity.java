@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.view.View;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -39,6 +40,10 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
     private AlertDialog inputEmptyStringDialog;
     private SessionMapUtil sessionMapUtil;
     private String lastSearchSeed;
+
+    public int setMainViewId() {
+	return R.id.activity_change_location;
+    }
     
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -72,7 +77,7 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
 
 	lastSearchSeed = input;
 	request.actionGeocoding(input, sessionMapUtil.getCurrentCountry());
-	requestManager.request(this, request, REQUEST_GEOCODING, this);
+	requestManager.request(getMainView(), request, REQUEST_GEOCODING, this);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {

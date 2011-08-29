@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:background="@color/comment_list_view_bg"
-	android:orientation="vertical">
-	<!-- Titlebar -->
-	<com.matji.sandwich.widget.title.PageableTitle
-		android:id="@id/Titlebar"
-		style="@style/DefaultWidthFill" />
-	<com.matji.sandwich.widget.CommentListView
-		android:id="@+id/comment_list"
-		style="@style/BottomBarListView" />
-	<com.matji.sandwich.widget.CommentInputBar
-		android:id="@+id/comment_input_bar"
-		style="@style/BottomBar" />
-</LinearLayout>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_post"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/comment_list_view_bg"
+      android:orientation="vertical">
+    <!-- Titlebar -->
+    <com.matji.sandwich.widget.title.PageableTitle
+	android:id="@id/Titlebar"
+	style="@style/DefaultWidthFill" />
+    <com.matji.sandwich.widget.CommentListView
+	android:id="@+id/comment_list"
+	style="@style/BottomBarListView" />
+    <com.matji.sandwich.widget.CommentInputBar
+	android:id="@+id/comment_input_bar"
+	style="@style/BottomBar" />
+  </LinearLayout>
+</RelativeLayout>

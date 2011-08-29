@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
@@ -27,6 +28,7 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
     private NearBookmarkStoreRequest storeRequest;
     private int nearByStoreIndex;
     private ArrayList<MatjiData> bookmarkedList;
+    private RelativeLayout spinnerContainer;
     
     public MapStoreSectionedAdapter(Context context) {
 	super(context);
@@ -34,8 +36,9 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
 	inflater = getLayoutInflater();
     }
 
-    public void init(NearBookmarkStoreRequest storeRequest) {
+    public void init(NearBookmarkStoreRequest storeRequest, RelativeLayout spinnerContainer) {
 	setNearBookmarkStoreRequest(storeRequest);
+	this.spinnerContainer = spinnerContainer;
     }
 
     public void setNearBookmarkStoreRequest(NearBookmarkStoreRequest storeRequest) {
@@ -93,7 +96,7 @@ public class MapStoreSectionedAdapter extends SectionedAdapter {
 	storeElement.name.setText(store.getName());
 	storeElement.likeCount.setText("" + store.getLikeCount());
 	storeElement.postCount.setText("" + store.getPostCount());
-	storeElement.bookmarkToggle.init(this, bookmarkedList, store);
+	storeElement.bookmarkToggle.init(this, bookmarkedList, store, spinnerContainer);
 	storeElement.listener.setStore(store);
 	convertView.setOnClickListener(storeElement.listener);
 

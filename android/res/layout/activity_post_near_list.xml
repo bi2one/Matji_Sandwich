@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_post_near_list"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
-  <include layout="@layout/location_title_bar" />
+    android:layout_height="fill_parent">
+  <include layout="@layout/location_title_bar"
+	   android:layout_alignParentTop="true"
+	   android:id="@+id/activity_post_near_list_title_bar" />
   
   <com.matji.sandwich.widget.PostNearListView
       style="@style/DefaultFill"
+      android:layout_below="@id/activity_post_near_list_title_bar"
       android:id="@+id/post_near_list_view" />
-</LinearLayout>
+</RelativeLayout>

@@ -12,6 +12,10 @@ public class WritePostActivity extends BaseActivity {
     private EditText editText;
     private SessionWritePostUtil sessionUtil;
     // private WritePostTabActivity parentActivity;
+
+    public int setMainViewId() {
+	return R.id.activity_write_post;
+    }
     
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

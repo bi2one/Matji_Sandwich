@@ -45,7 +45,7 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	this.context = context;
 	
 	LayoutInflater.from(context).inflate(R.layout.radius_matji_mapview, this, true);
-	geocodeRunnable = new GeocodeRunnable(context, this);
+	geocodeRunnable = new GeocodeRunnable(this, context, this);
 	mapView = (MatjiMapView)findViewById(R.id.radius_matji_mapview_map);
 	locationBar = (SimpleSubmitLocationBar)findViewById(R.id.radius_matji_mapview_location_bar);
 	requestManager = HttpRequestManager.getInstance(context);
@@ -121,10 +121,12 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	private Context context;
 	private Requestable requestable;
 	private GeoPoint center;
+	private RelativeLayout spinnerContainer;
 	
-	public GeocodeRunnable(Context context, Requestable requestable) {
+	public GeocodeRunnable(RelativeLayout spinnerContainer, Context context, Requestable requestable) {
 	    this.context = context;
 	    this.requestable = requestable;
+	    this.spinnerContainer = spinnerContainer;
 	}
 
 	public void setCenter(GeoPoint center) {
@@ -134,7 +136,7 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	public void run() {
     	    GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
     	    geocodeRequest.actionReverseGeocodingByGeoPoint(center, sessionMapUtil.getCurrentCountry());
-    	    requestManager.request(context, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
+    	    requestManager.request(spinnerContainer, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
 	}
     }
 
