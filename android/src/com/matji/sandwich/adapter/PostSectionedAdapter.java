@@ -173,7 +173,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             postElement.commentCount = (TextView) convertView.findViewById(R.id.row_post_comment_count);
             postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
             postElement.menu= (ImageButton) convertView.findViewById(R.id.row_post_menu_btn);
-            postElement.menuWrapper = (RelativeLayout) convertView.findViewById(R.id.row_post_menu_btn_wrapper);
+            // postElement.menuWrapper = (RelativeLayout) convertView.findViewById(R.id.row_post_menu_btn_wrapper);
             
             postElement.preview = new ImageView[previewWrapperIds.length];
             postElement.previewWrapper = new RelativeLayout[previewWrapperIds.length];
@@ -236,8 +236,8 @@ public class PostSectionedAdapter extends SectionedAdapter {
         PostQuickActionDialog dialog = new PostQuickActionDialog(position);
         holder.menu.setOnClickListener(dialog);
         holder.menu.setTag(holder.menu);
-        holder.menuWrapper.setOnClickListener(dialog);
-        holder.menuWrapper.setTag(holder.menu);
+        // holder.menuWrapper.setOnClickListener(dialog);
+        // holder.menuWrapper.setTag(holder.menu);
 
         for (int i = 0; i < holder.preview.length; i++) {
             holder.preview[i].setOnClickListener(action3);

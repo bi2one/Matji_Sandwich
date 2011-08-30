@@ -3,15 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/row_post_wrapper"
     style="@style/row_post_PostRowWrapper">
-  <include
-      layout="@layout/profile" />
+  <include layout="@layout/profile" />
   <!-- Post Wrapper -->
   <RelativeLayout
       android:id="@+id/row_post_post_wrapper"
       style="@style/row_post_PostWrapper">
     <RelativeLayout
 	style="@style/row_post_PostWrapperInner"
-	android:layout_toLeftOf="@+id/row_post_menu_btn_wrapper">
+	android:layout_toLeftOf="@+id/row_post_menu_btn">
       <com.matji.sandwich.widget.BoldStyleTextView
 	  android:id="@+id/row_post_nick"
 	  style="@style/LinkifyName" />
@@ -41,19 +40,16 @@
 	      android:id="@+id/row_post_preview1"
 	      android:layout_height="wrap_content"
 	      android:paddingRight="@dimen/default_drawable_padding"
-	      android:layout_gravity="center">
-	  </RelativeLayout>
+	      android:layout_gravity="center" />
 	  <RelativeLayout
 	      android:id="@+id/row_post_preview2"
 	      android:paddingLeft="@dimen/default_drawable_padding_half"
 	      android:paddingRight="@dimen/default_drawable_padding_half"
-	      android:layout_gravity="center">
-	  </RelativeLayout>
+	      android:layout_gravity="center" />
 	  <RelativeLayout
 	      android:id="@+id/row_post_preview3"
 	      android:paddingLeft="@dimen/default_drawable_padding"
-	      android:layout_gravity="center">
-	  </RelativeLayout>
+	      android:layout_gravity="center" />
 	</TableRow>
       </TableLayout>
       <com.matji.sandwich.widget.BoldStyleTextView
@@ -80,11 +76,13 @@
 	  android:layout_toRightOf="@id/row_post_comment_count"
 	  android:drawableLeft="@drawable/icon_hand01" />
     </RelativeLayout>
-    <RelativeLayout
-	android:id="@id/row_post_menu_btn_wrapper"
+    <ImageButton
+	android:id="@id/row_post_menu_btn"
 	android:layout_width="@dimen/quickaction_btn_width"
 	android:layout_height="@dimen/quickaction_btn_height"
+	android:layout_alignParentRight="true"
 	android:layout_centerVertical="true"
+<<<<<<< HEAD
 	android:layout_alignParentRight="true">
       <ImageButton
 	  android:id="@+id/row_post_menu_btn"
@@ -94,5 +92,9 @@
 	  android:layout_centerInParent="true">
       </ImageButton>
     </RelativeLayout>
+=======
+	android:background="@null"
+	android:src="@drawable/btn_quickaction" />
+>>>>>>> fce3a15c289ff0d795235f130e1489f2a51b4f81
   </RelativeLayout>
 </LinearLayout>

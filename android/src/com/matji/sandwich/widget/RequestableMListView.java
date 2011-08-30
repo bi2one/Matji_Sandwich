@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ViewGroup;
 
 import com.matji.sandwich.http.request.RequestCommand;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -116,6 +117,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	if (!manager.isRunning() || canRepeat) {
 	    Log.d("refresh", "requestReload()");
 	    initValue();
+	    // manager.request((ViewGroup)getParent(), request(), REQUEST_RELOAD, this);
 	    manager.request(loadingFooterView, request(), REQUEST_RELOAD, this);
 	    nextValue();
 	    setSelection(0);
@@ -127,6 +129,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	Log.d("refresh", "forceReload()");
 	Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
 	initValue();
+	// manager.request((ViewGroup)getParent(), request(), REQUEST_RELOAD, this);
 	manager.request(loadingFooterView, request(), REQUEST_RELOAD, this);
 	nextValue();
 	setSelection(0);

@@ -34,6 +34,7 @@ public class TaskElement implements ManagerAsyncTask.RequestStatusListener {
 
     public void onFinishRequest(ManagerAsyncTask task) {
 	spinner.stop();
+	// spinner = null;
 	if (listener != null) {
 	    listener.onFinish(this);
 	}
@@ -41,6 +42,7 @@ public class TaskElement implements ManagerAsyncTask.RequestStatusListener {
 
     public void onCancelRequest(ManagerAsyncTask task) {
 	spinner.stop();
+	// spinner = null;
 	if (listener != null) {
 	    listener.onCancel(this);
 	}
