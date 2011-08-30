@@ -1,14 +1,14 @@
 package com.matji.sandwich.http.spinner;
 
 import android.content.Context;
-import android.widget.RelativeLayout;
+import android.view.ViewGroup;
 
 public class SpinnerFactory {
     public enum SpinnerType {
 	NORMAL
     }
     
-    public Spinner createSpinner(Context context, SpinnerType type, RelativeLayout layout) {
+    public Spinner createSpinner(Context context, SpinnerType type, ViewGroup layout) {
 	switch(type) {
 	case NORMAL:
 	    return new NormalSpinner(context, layout);

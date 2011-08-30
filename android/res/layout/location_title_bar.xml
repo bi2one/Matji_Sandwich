@@ -3,10 +3,10 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/location_title_bar">
 	<ImageButton
-		style="@style/location_title_bar_locationButton"
-		android:onClick="onCurrentPositionClicked"
-		android:id="@+id/location_title_bar_location_button"
-		android:layout_alignParentLeft="true" />
+	    style="@style/location_title_bar_locationButton"
+	    android:onClick="onCurrentPositionClicked"
+	    android:id="@+id/location_title_bar_location_button"
+	    android:layout_alignParentLeft="true" />
 
 	<ImageView
 		style="@style/location_title_bar_line"

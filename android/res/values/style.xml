@@ -599,9 +599,9 @@
   <!-- location_title_bar.xml -->
   <!-- map_title_bar.xml -->
   <style name="location_title_bar">
-  	<item name="android:layout_width">fill_parent</item>
-  	<item name="android:layout_height">@dimen/minor_title_height</item>
-  	<item name="android:padding">0dp</item>
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">@dimen/minor_title_height</item>
+    <item name="android:padding">0dp</item>
     <item name="android:background">@drawable/locationsbar_bg</item>
   </style>
 
@@ -615,7 +615,7 @@
   	<item name="android:padding">0dp</item>
   	<item name="android:layout_margin">0dp</item>
   	<item name="android:gravity">center</item>
-  	<item name="android:background">@color/matji_transparent</item>
+  	<item name="android:background">@null</item>
   </style>
 
   <style name="location_title_bar_flipButton" parent="location_title_bar_button">

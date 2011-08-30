@@ -17,6 +17,7 @@ import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.session.SessionRecentLocationUtil;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.widget.StoreMapNearListView;
+import com.matji.sandwich.http.HttpRequestManager;
 
 public class MainMapActivity extends BaseMapActivity {
     private static final int REQUEST_CODE_LOCATION = 1;
@@ -30,6 +31,7 @@ public class MainMapActivity extends BaseMapActivity {
     private boolean currentViewIsMap;
     private SessionRecentLocationUtil sessionLocationUtil;
     private SessionMapUtil sessionMapUtil;
+    private HttpRequestManager requestManager;
 
     private Drawable flipMapViewImage;
     private Drawable flipNearStoreImage;
@@ -43,6 +45,7 @@ public class MainMapActivity extends BaseMapActivity {
         setContentView(R.layout.activity_main_map);
 
         context = getApplicationContext();
+	requestManager = HttpRequestManager.getInstance(context);
         sessionLocationUtil = new SessionRecentLocationUtil(context);
         sessionMapUtil = new SessionMapUtil(context);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
