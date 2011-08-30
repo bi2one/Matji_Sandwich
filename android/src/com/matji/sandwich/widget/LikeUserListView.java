@@ -29,9 +29,10 @@ public class LikeUserListView extends RequestableMListView {
         if (data instanceof Store) {
             type = MatjiData.STORE;
             Store store = (Store) data;
-            String title = 
-                "'" + store.getName() + "'" 
-                + MatjiConstants.string(R.string.highlight_store_like_users);
+            String title =
+                String.format(
+                        MatjiConstants.string(R.string.highlight_store_like_users),
+                        store.getName());
 
             addHeaderView(
                     new HighlightHeader(

@@ -51,11 +51,11 @@ public class AlarmAdapter extends MBaseAdapter {
 		downloader.downloadUserImage(sentUser.getId(), alarmElement.profile);
 		
 		if (type.equals("Following")) {
-			alarmElement.message.setText(R.string.alarm_following_you);
+//			alarmElement.message.setText(R.string.alarm_following_you);
 		} else if (type.equals("Comment")) {
-			alarmElement.message.setText(R.string.alarm_commented_post);
+//			alarmElement.message.setText(R.string.alarm_commented_post);
 		} else if (type.equals("PostLike")) {
-			alarmElement.message.setText(R.string.alarm_like_post);
+//			alarmElement.message.setText(R.string.alarm_like_post);
 		}
 
 		return convertView;

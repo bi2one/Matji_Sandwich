@@ -9,26 +9,26 @@
 		<TextView
 			android:id="@+id/header_post_sub_first_user_nick"
 			style="@style/DefaultWrap" />
-		<LinearLayout
-			android:id="@+id/header_post_sub_likes_wrapper"
-			style="@style/DefaultWrap">
-			<TextView
-				style="@style/DefaultWrap"
-				android:text="@string/header_post_sub_another" />
-			<TextView
-				android:id="@+id/header_post_sub_like_count"
-				style="@style/DefaultWrap" />
-			<TextView
-				style="@style/DefaultWrap"
-				android:text="@string/header_post_sub_likes" />
-		</LinearLayout>
-		<LinearLayout
-			android:id="@+id/header_post_sub_like_wrapper"
-			style="@style/DefaultWrap">
-			<TextView
-				style="@style/DefaultWrap"
-				android:text="@string/header_post_sub_like" />
-		</LinearLayout>
+<!-- 		<LinearLayout -->
+<!-- 			android:id="@+id/header_post_sub_likes_wrapper" -->
+<!-- 			style="@style/DefaultWrap"> -->
+<!-- 			<TextView -->
+<!-- 				style="@style/DefaultWrap" -->
+<!-- 				android:text="@string/header_post_sub_another" /> -->
+<!-- 			<TextView -->
+<!-- 				android:id="@+id/header_post_sub_like_count" -->
+<!-- 				style="@style/DefaultWrap" /> -->
+<!-- 			<TextView -->
+<!-- 				style="@style/DefaultWrap" -->
+<!-- 				android:text="@string/header_post_sub_likes" /> -->
+<!-- 		</LinearLayout> -->
+<!-- 		<LinearLayout -->
+<!-- 			android:id="@+id/header_post_sub_like_wrapper" -->
+<!-- 			style="@style/DefaultWrap"> -->
+<!-- 			<TextView -->
+<!-- 				style="@style/DefaultWrap" -->
+<!-- 				android:text="@string/header_post_sub_like" /> -->
+<!-- 		</LinearLayout> -->
 	</LinearLayout>
 	<ImageView
 		android:layout_width="fill_parent"

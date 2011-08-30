@@ -18,7 +18,7 @@ public abstract class TitleContainerTypeD extends TypedTitleContainer {
     protected abstract TitleButton getRightButton1();
     
     protected TitleImageButton leftButton1;
-    protected TitleImageButton rightButton1;
+    protected TitleButton rightButton1;
 	
 	public TitleContainerTypeD(Context context) {
 		super(context);

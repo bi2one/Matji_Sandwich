@@ -51,7 +51,7 @@ public class PostSubHeader extends ViewContainer {
 		holder = new LikeUsersElement();
 		
 		holder.firstUserNick = (TextView) getRootView().findViewById(R.id.header_post_sub_first_user_nick);
-		holder.likeCount = (TextView) getRootView().findViewById(R.id.header_post_sub_like_count);
+//		holder.likeCount = (TextView) getRootView().findViewById(R.id.header_post_sub_like_count);
 	}
 
 	public void setPost(Post post) {

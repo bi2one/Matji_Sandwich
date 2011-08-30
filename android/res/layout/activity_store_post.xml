@@ -2,7 +2,7 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_store_post"
-	style="DefaultFill" >
+	style="@style/DefaultFill" >
 	<com.matji.sandwich.widget.StorePostListView
 		style="@style/DefaultFill"
 		android:id="@+id/store_post_list" />

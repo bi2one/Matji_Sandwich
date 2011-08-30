@@ -1,8 +1,6 @@
 package com.matji.sandwich.adapter;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.TimeZone;
 
 import android.content.Context;
 import android.view.View;

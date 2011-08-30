@@ -1,10 +1,8 @@
 package com.matji.sandwich.widget.title.button;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
-import com.matji.sandwich.MessageListActivity;
 import com.matji.sandwich.R;
 
 /**
@@ -13,9 +11,9 @@ import com.matji.sandwich.R;
  * @author mozziluv
  *
  */
-public class MessageButton extends TitleImageButton {
+public class WriteMessageButton extends TitleImageButton {
     
-    public MessageButton(Context context) {
+    public WriteMessageButton(Context context) {
         super(context);
     }
 
@@ -35,7 +33,6 @@ public class MessageButton extends TitleImageButton {
     @Override
     public void onTitleItemClicked() {
         // TODO Auto-generated method stub
-        Log.d("Matji", "MessageButtonClicked");
-        context.startActivity(new Intent(context, MessageListActivity.class));
+        Log.d("Matji", "WriteMessageButtonClicked");
     }
 }

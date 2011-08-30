@@ -148,6 +148,9 @@
 	<dimen name="row_message_content_padding">14.67dp</dimen>
 	<dimen name="row_message_content_padding2">13.33dp</dimen>
 	
+	<!-- Write Message Activity -->
+	<dimen name="write_message_underbar_height">46.67dp</dimen>
+	
 	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>
 	

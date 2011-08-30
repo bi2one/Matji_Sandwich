@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.LikeStoreListButton;
-import com.matji.sandwich.widget.title.button.MessageButton;
+import com.matji.sandwich.widget.title.button.WriteMessageButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 /**
@@ -50,6 +50,6 @@ public class UserTitle extends TitleContainerTypeA {
     @Override
     protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
-        return new MessageButton(getContext());
+        return new WriteMessageButton(getContext());
     }
 }

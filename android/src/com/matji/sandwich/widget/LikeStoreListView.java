@@ -25,9 +25,7 @@ public class LikeStoreListView extends RequestableMListView {
 
     public void setUser(User user) {
         this.user = user;
-        String title =
-            "'" + user.getNick() + "'" 
-            + MatjiConstants.string(R.string.highlight_like_stores);
+        String title = String.format(MatjiConstants.string(R.string.highlight_like_stores), user.getNick());
         addHeaderView(
                 new HighlightHeader(getContext(), title, user.getLikeStoreCount()));
     }

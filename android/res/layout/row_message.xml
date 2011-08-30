@@ -27,21 +27,22 @@
 		<TextView
 			android:id="@+id/row_message_subject_list"
 			style="@style/DefaultWrap"
-			android:layout_marginLeft="@dimen/default_distance"
 			android:textSize="@dimen/row_message_subject_list_size"
 			android:textColor="@color/matji_gray"
 			android:singleLine="true"
-			android:layout_toRightOf="@id/row_message_flow_wrapper" />
+			android:layout_toRightOf="@id/row_message_flow_wrapper"
+			android:layout_marginTop="@dimen/default_distance_half"
+			android:layout_marginLeft="@dimen/row_message_content_padding" />
 		<TextView
 			android:id="@+id/row_message_nick"
 			style="@style/DefaultWrap"
-			android:layout_marginLeft="@dimen/default_distance"
 			android:singleLine="true"
 			android:textSize="@dimen/row_message_nick_size"
 			android:textColor="@color/matji_red"
 			android:layout_marginRight="@dimen/default_distance"
 			android:layout_toRightOf="@id/row_message_flow_wrapper"
-			android:layout_below="@id/row_message_subject_list" />
+			android:layout_below="@id/row_message_subject_list"
+			android:layout_marginLeft="@dimen/row_message_content_padding" />
 		<TextView
 			android:id="@+id/row_message_created_at_list"
 			style="@style/DefaultWrap"

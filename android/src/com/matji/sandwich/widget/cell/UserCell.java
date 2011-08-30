@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.RelativeLayout;
 
+import com.matji.sandwich.MessageListActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.UserProfileActivity;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.FollowingListener;
+import com.matji.sandwich.listener.LikeStoreListListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CellProfileImageView;
 
@@ -76,18 +78,19 @@ public class UserCell extends Cell {
     public void setUser(User user) {
         this.user = user;
 
-        ((CellProfileImageView) getRootView().findViewById(R.id.profile)).setUserId(user.getId());
-        ((CellProfileImageView) getRootView().findViewById(R.id.profile)).showInsetBackground();
-        ((TextView) getRootView().findViewById(R.id.cell_user_nick)).setText(user.getNick());
+        ((CellProfileImageView) findViewById(R.id.profile)).setUserId(user.getId());
+        ((CellProfileImageView) findViewById(R.id.profile)).showInsetBackground();
+        ((TextView) findViewById(R.id.cell_user_nick)).setText(user.getNick());
         if (user.getMileage() != null) 
-            ((TextView) getRootView().findViewById(R.id.cell_user_point)).setText(user.getMileage().getTotalPoint()+"");
+            ((TextView) findViewById(R.id.cell_user_point)).setText(user.getMileage().getTotalPoint()+"");
         else 
-            ((TextView) getRootView().findViewById(R.id.cell_user_point)).setText("0");
-        ((TextView) getRootView().findViewById(R.id.cell_user_area)).setText("KOREA");
-        ((TextView) getRootView().findViewById(R.id.cell_user_like_list)).setText(user.getLikeStoreCount()+"");
+            ((TextView) findViewById(R.id.cell_user_point)).setText("0");
+        ((TextView) findViewById(R.id.cell_user_area)).setText("KOREA");
+        ((TextView) findViewById(R.id.cell_user_like_list)).setText(user.getLikeStoreCount()+"");
+        ((TextView) findViewById(R.id.cell_user_like_list)).setOnClickListener(new LikeStoreListListener(getContext(), user));
 
-        follow = (Button) getRootView().findViewById(R.id.cell_user_follow);
-        messageList = (Button) getRootView().findViewById(R.id.cell_user_message_list);
+        follow = (Button) findViewById(R.id.cell_user_follow);
+        messageList = (Button) findViewById(R.id.cell_user_message_list);
 
         followingListener = new FollowingListener(((Identifiable) getContext()), getContext(), user, spinnerContainer) {
 
@@ -104,7 +107,14 @@ public class UserCell extends Cell {
             }
         };
         follow.setOnClickListener(followingListener);
-        session = Session.getInstance(getRootView().getContext());
+        session = Session.getInstance(getContext());
+        messageList.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                getContext().startActivity(new Intent(getContext(), MessageListActivity.class));
+            }
+        });
 
         refresh();
     }
@@ -136,8 +146,8 @@ public class UserCell extends Cell {
         intent.putExtra(UserProfileActivity.USER, (Parcelable) user);
         return intent;
     }
-    
-    
+
+
     public void showLine() {
         findViewById(R.id.cell_user_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_user_shadow).setVisibility(View.GONE);

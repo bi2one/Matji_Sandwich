@@ -97,16 +97,11 @@
   <string name="default_string_comment">댓글</string>
   <string name="default_string_like">Like</string>
   <string name="default_string_unlike">Unlike</string>
-  <string name="default_string_number_of_person">person</string>
-  <string name="default_string_like_this">like this.</string>
   <string name="default_string_image">이미지</string>
   <string name="default_string_map">지도</string>
   <string name="default_string_store">맛집</string>
   <string name="default_string_alarm">알람</string>
   <string name="default_string_search">검색</string>
-  <string name="default_string_number_of">개</string>
-  <string name="default_string_sent_message">보낸 쪽지</string>
-  <string name="default_string_recieved_message">받은 쪽지</string>
   <string name="default_string_write_note">영업시간, 예약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
   <string name="default_string_recent_post">등록한 메모가 없습니다.</string>
   <string name="default_string_bookmark">Bookmark</string>
@@ -155,12 +150,7 @@
      
   <!-- Activity memo -->
   <string name="activity_likes_the">likes the</string>
-  
-  <!-- AlarmActivity -->
-  <string name="alarm_following_you">is now following you.</string>
-  <string name="alarm_commented_post">commented on your post.</string>
-  <string name="alarm_like_post">likes your post.</string>
-  
+    
   <!-- Cell -->
   <string name="cell_user_point">Point</string>
   <string name="cell_user_area">Area</string>
@@ -186,8 +176,6 @@
   <!-- UserMainActivity -->
   <string name="user_main_following_you">follows you.</string>
   <string name="user_main_jjim_store">찜한 맛집</string>
-  <string name="user_main_not_exist_blog">님은 블로그를 운영하고 있지 않습니다.</string>
-  <string name="number_of_tag">개의 태그</string>
 
   <!-- MainTabActivity -->
   <string name="main_tab_map">맛지도</string>
@@ -305,10 +293,10 @@
   <string name="search_highlight">검색결과</string>
   
   <!-- Highlight Header -->
-  <string name="highlight_store_like_users">맛집을 좋아하는 사람들</string>
+  <string name="highlight_store_like_users">\'%1$s\' 맛집을 좋아하는 사람들</string>
   <string name="highlight_post_like_users">이 이야기를 좋아하는 사람들</string>
   <string name="highlight_store_food_like_users">메뉴를 좋아하는 사람들</string>
-  <string name="highlight_like_stores">님이 좋아하는 맛집들</string>
+  <string name="highlight_like_stores">\'%1$s\'님이 좋아하는 맛집</string>
 
   <!-- adapter_ranking.xml -->
   <string name="adapter_ranking_point_hint">P</string>
@@ -356,7 +344,7 @@
   <string name="following_follower">Follower</string>
   
   <!-- PostSubHeader -->
-  <string name="header_post_sub_another">님 외&#160;</string>
-  <string name="header_post_sub_likes">명이 좋아합니다.</string>
-  <string name="header_post_sub_like">님이 좋아합니다.</string>
+  
+  <!-- StoreTagActivity.java -->
+  <string name="number_of_tag">%1$d개의 태그</string>
 </resources>

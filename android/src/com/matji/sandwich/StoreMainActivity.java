@@ -26,7 +26,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
@@ -89,7 +88,6 @@ public class StoreMainActivity extends BaseTabActivity implements Requestable {
         downloader = new MatjiImageDownloader(this);
 
         storeImage = (ImageView) findViewById(R.id.cell_store_thumbnail);
-        scrapButton = (ImageButton) findViewById(R.id.cell_store_scrap_btn);
         likeButton = (Button) findViewById(R.id.cell_store_like_btn);
         tagText = (TextView) findViewById(R.id.cell_store_tag);
         foodText = (TextView) findViewById(R.id.cell_store_food);

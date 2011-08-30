@@ -5,13 +5,6 @@
 	style="@style/DefaultWidthFill"
 	android:padding="@dimen/default_distance"
 	android:gravity="center_vertical">
-	<ImageButton 
-		style="@style/DefaultWrap"
-		android:id="@+id/cell_store_scrap_btn"
-		android:layout_marginRight="7dp"
-		android:src="@drawable/btn_info_d"
-		android:background="#fff"
-		android:onClick="onScrapButtonClicked" />
 	<TextView
 		style="@style/Name"
 		android:singleLine="true"
@@ -21,7 +14,7 @@
 		style="@style/DefaultWidthFill"
 		android:gravity="right">
 		<Button
-			style="@style/LikeButton"
+		style="@style/DefaultWrap"
 			android:id="@+id/cell_store_like_btn"
 			android:onClick="onLikeButtonClicked" />
 	</LinearLayout>

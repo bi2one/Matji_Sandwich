@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.title.CompletableTitle.Completable;
+import com.matji.sandwich.widget.title.PageableTitle.Pageable;
 
 /**
  * 쓰기 버튼
@@ -12,9 +14,11 @@ import com.matji.sandwich.util.MatjiConstants;
  * @author mozziluv
  *
  */
-public class WritePostCompleteButton extends TitleButton {
-//TODO 나중에 Post write, Comment write 등 나눠질 수 있으니 후에 수정
-	public WritePostCompleteButton(Context context) {
+public class CompleteButton extends TitleButton {
+
+    private Completable completable;
+    
+	public CompleteButton(Context context) {
 		super(context);
 	}
 
@@ -29,6 +33,14 @@ public class WritePostCompleteButton extends TitleButton {
 		enlarge();
 	}
 	
+    /**
+     * 파라미터로 전달받은 {@link Completable}을 저장한다.
+     * @param completable 저장할 {@link Completable} 객체
+     */
+	public void setCompletable(Completable completable) {
+	    this.completable = completable;
+	}
+	
 	/**
 	 * @see com.matji.sandwich.widget.title.button.TitleItem#onTitleItemClicked()
 	 */
@@ -36,5 +48,6 @@ public class WritePostCompleteButton extends TitleButton {
 	public void onTitleItemClicked() {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "CompleteClicked");
+		completable.complete();
 	}
 }

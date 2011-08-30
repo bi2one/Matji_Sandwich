@@ -13,6 +13,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.tag.TagCloudView;
 
 public class UserTagActivity extends BaseActivity implements Requestable {
@@ -37,7 +38,11 @@ public class UserTagActivity extends BaseActivity implements Requestable {
 		tagCloudView = (TagCloudView) findViewById(R.id.user_tag_cloud);
 		
 		TextView tagCount = (TextView) findViewById(R.id.user_tag_count);
-		tagCount.setText(user.getTagCount()+getString(R.string.number_of_tag));
+
+        String numTag = String.format(
+                MatjiConstants.string(R.string.number_of_tag),
+                user.getTagCount());
+		tagCount.setText(numTag);
 	}
 	
 	private HttpRequest request() {

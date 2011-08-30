@@ -90,7 +90,7 @@
 	  android:id="@+id/row_post_menu_btn"
 	  style="@style/DefaultWrap"
 	  android:background="@color/matji_transparent"
-	  android:src="@drawable/btn_quickaction"
+	  android:src="@drawable/icon_menu"
 	  android:layout_centerInParent="true">
       </ImageButton>
     </RelativeLayout>

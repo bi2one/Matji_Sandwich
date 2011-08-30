@@ -1,80 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/contentWrapper"
-	style="@style/DefaultFill"
-	android:orientation="vertical">
-	<LinearLayout
-		android:id="@+id/write_message_received_user_wrapper"
+	style="@style/DefaultFill">
+	<com.matji.sandwich.widget.title.CompletableTitle
+		android:id="@+id/Titlebar"
+		style="@style/DefaultWidthFill" />
+	<EditText
+		android:id="@+id/message_field"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<EditText
-			android:id="@+id/write_message_received_user_field"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="99"
-			android:scrollbars="vertical"
-			android:singleLine="true"
-			android:editable="false"
-			android:hint="@string/writing_content_received_user" />
-		<Button
-			android:background="@drawable/selector"
-			android:id="@+id/received_user_add_btn"
-			android:layout_width="wrap_content"
-			android:layout_height="fill_parent"
-			android:layout_weight="1"
-			android:text="추가"
-			android:layout_marginLeft="3dp"
-			android:layout_marginRight="3dp"
-			android:layout_marginBottom="5dp"
-			android:onClick="onAddButtonClicked" />
-	</LinearLayout>
-	<LinearLayout
-		android:id="@+id/write_message_message_wrapper"
-		android:layout_below="@id/write_message_received_user_wrapper"
+		android:layout_height="fill_parent"
+		android:layout_above="@+id/write_message_underbar" />
+	<RelativeLayout
+		android:id="@id/write_message_underbar"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-		<EditText
-			android:id="@+id/write_message_message_field"
-			android:gravity="top"
-			android:layout_width="0dp"
-			android:layout_height="fill_parent"
-			android:layout_weight="99"
-			android:scrollbars="horizontal"
-			android:hint="@string/writing_content_message" />
-		<Button
-			android:background="@drawable/selector"
-			android:id="@+id/write_message_send_btn"
-			android:layout_width="wrap_content"
-			android:layout_height="fill_parent"
-			android:layout_weight="1"
-			android:text="전송"
-			android:layout_marginLeft="3dp"
-			android:layout_marginRight="3dp"
-			android:layout_marginBottom="5dp"
-			android:padding="5dp"
-			android:onClick="onSendButtonClicked" />
-	</LinearLayout>
-</com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>
+		android:layout_height="@dimen/write_message_underbar_height"
+		android:background="@drawable/story_bg"
+		android:layout_alignParentBottom="true">
+		<TextView
+			android:id="@+id/write_message_received_user"
+			style="@style/DefaultWrap" />
+		<ImageButton />
+		<ImageButton />
+	</RelativeLayout>
+</RelativeLayout>
 
 <!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- <com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard -->
+<!-- xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- android:id="@+id/contentWrapper" -->
+<!-- style="@style/DefaultFill" -->
+<!-- android:orientation="vertical"> -->
 <!-- <LinearLayout -->
-<!-- 	xmlns:android="http://schemas.android.com/apk/res/android" -->
-<!-- 	style="@style/DefaultFill" -->
-<!-- 	android:orientation="vertical"> -->
-<!-- 	<com.matji.sandwich.widget.title.CompleteTitle -->
-<!-- 		android:id="@+id/Titlebar" -->
-<!-- 		style="@style/DefaultWidthFill" /> -->
-<!-- 	<LinearLayout -->
-<!-- 		style="@style/DefaultWrap" -->
-<!-- 		andorid:layout_padding="@dimen/default_distance"> -->
-<!-- 		<EditText -->
-<!-- 			android:id="@+id/message_field" -->
-<!-- 			style="@style/DefaultFill" /> -->
-<!-- 	</LinearLayout> -->
-<!-- 	<RelativeLayout> -->
-<!-- 		<TextView /> -->
-<!-- 		<ImageButton /> -->
-<!-- 		<ImageButton /> -->
-<!-- 	</RelativeLayout> -->
+<!-- android:id="@+id/write_message_received_user_wrapper" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="wrap_content"> -->
+<!-- <EditText -->
+<!-- android:id="@+id/write_message_received_user_field" -->
+<!-- android:layout_width="0dp" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:layout_weight="99" -->
+<!-- android:scrollbars="vertical" -->
+<!-- android:singleLine="true" -->
+<!-- android:editable="false" -->
+<!-- android:hint="@string/writing_content_received_user" /> -->
+<!-- <Button -->
+<!-- android:background="@drawable/selector" -->
+<!-- android:id="@+id/received_user_add_btn" -->
+<!-- android:layout_width="wrap_content" -->
+<!-- android:layout_height="fill_parent" -->
+<!-- android:layout_weight="1" -->
+<!-- android:text="추가" -->
+<!-- android:layout_marginLeft="3dp" -->
+<!-- android:layout_marginRight="3dp" -->
+<!-- android:layout_marginBottom="5dp" -->
+<!-- android:onClick="onAddButtonClicked" /> -->
 <!-- </LinearLayout> -->
+<!-- <LinearLayout -->
+<!-- android:id="@+id/write_message_message_wrapper" -->
+<!-- android:layout_below="@id/write_message_received_user_wrapper" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="fill_parent"> -->
+<!-- <EditText -->
+<!-- android:id="@+id/write_message_message_field" -->
+<!-- android:gravity="top" -->
+<!-- android:layout_width="0dp" -->
+<!-- android:layout_height="fill_parent" -->
+<!-- android:layout_weight="99" -->
+<!-- android:scrollbars="horizontal" -->
+<!-- android:hint="@string/writing_content_message" /> -->
+<!-- <Button -->
+<!-- android:background="@drawable/selector" -->
+<!-- android:id="@+id/write_message_send_btn" -->
+<!-- android:layout_width="wrap_content" -->
+<!-- android:layout_height="fill_parent" -->
+<!-- android:layout_weight="1" -->
+<!-- android:text="전송" -->
+<!-- android:layout_marginLeft="3dp" -->
+<!-- android:layout_marginRight="3dp" -->
+<!-- android:layout_marginBottom="5dp" -->
+<!-- android:padding="5dp" -->
+<!-- android:onClick="onSendButtonClicked" /> -->
+<!-- </LinearLayout> -->
+<!-- </com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard> -->
+

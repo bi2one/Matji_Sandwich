@@ -43,8 +43,5 @@ public class LikeStoreListButton extends TitleImageButton {
     public void onTitleItemClicked() {
         // TODO Auto-generated method stub
         Log.d("Matji", "LikeStoreListButtonClicked");
-        Intent intent = new Intent(getContext(), LikeStoreListActivity.class);
-        intent.putExtra(LikeStoreListActivity.USER, (Parcelable) user);
-        getContext().startActivity(intent);
     }
 }

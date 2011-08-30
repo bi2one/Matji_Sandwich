@@ -59,7 +59,7 @@ public class CommentListView extends RequestableMListView {
 	public void setPost(Post post) {
 		this.post = post;
 		header.setPost(post);
-		subHeader.setPost(post);
+//		subHeader.setPost(post);
 	}
 
 	public void addComment(Comment comment) {
