@@ -13,26 +13,10 @@
 		<com.matji.sandwich.widget.title.StoreTitle
 			style="@style/DefaultWrap" />
 
-		<!-- Seperate Line -->
-		<RelativeLayout
-			style="@style/DefaultWidthFill">
-			<ImageView
-				style="@style/DefaultWidthFill"
-				android:background="@drawable/seperate_line" />
-		</RelativeLayout>
-
 		<!-- Store Info Cell -->
 		<com.matji.sandwich.widget.cell.StoreInfoCell
 			style="@style/DefaultWrap"
 			android:id="@+id/store_info_cell" />
-
-		<!-- Seperate Line -->
-		<RelativeLayout
-			style="@style/DefaultWidthFill">
-			<ImageView
-				style="@style/DefaultWidthFill"
-				android:background="@drawable/seperate_line" />
-		</RelativeLayout>
 
 		<!-- Tab -->
 		<com.matji.sandwich.widget.RoundTabHost

@@ -24,7 +24,7 @@ public class SettingsButton extends TitleImageButton {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_notification));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_setting));
 	}
 	
 	/**

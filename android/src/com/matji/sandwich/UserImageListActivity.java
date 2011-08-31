@@ -6,6 +6,7 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.widget.UserImageListView;
 import com.matji.sandwich.widget.cell.UserCell;
+import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserImageListActivity extends BaseActivity {
 
@@ -25,6 +26,9 @@ public class UserImageListActivity extends BaseActivity {
 
         user = (User) getIntent().getParcelableExtra(USER); 
         userCell = new UserCell(this, user);
+        
+        ((UserTitle) findViewById(R.id.Titlebar)).setUser(user);
+        ((UserTitle) findViewById(R.id.Titlebar)).setFollowable(userCell);
         
         UserImageListView listView = (UserImageListView) findViewById(R.id.user_image_list_view);
         listView.addHeaderView(userCell);

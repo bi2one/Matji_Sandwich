@@ -24,7 +24,7 @@ public class ActivityButton extends TitleImageButton {
 	protected void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_activity));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_activity));
 	}
 
 	/**

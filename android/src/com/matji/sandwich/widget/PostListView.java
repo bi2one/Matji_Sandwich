@@ -38,7 +38,7 @@ public class PostListView extends RequestableMListView {
         setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
         setCacheColorHint(Color.TRANSPARENT);
         setSelector(android.R.color.transparent);
-	((PostSectionedAdapter) getMBaseAdapter()).setSpinnerContainer(getLoadingFooterView());
+        ((PostSectionedAdapter) getMBaseAdapter()).setSpinnerContainer(getLoadingFooterView());
         ((PostSectionedAdapter) getMBaseAdapter()).setSubtitle(getSubtitle());
     }
 
@@ -46,6 +46,7 @@ public class PostListView extends RequestableMListView {
         if (request == null || !(request instanceof PostHttpRequest)) {
             request = new PostHttpRequest(getContext());
         }
+        
         ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
         return request;
     }

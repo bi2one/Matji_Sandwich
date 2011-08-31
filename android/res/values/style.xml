@@ -417,7 +417,7 @@
   </style>
 
   <style name="IndicatorRoundCheck">
-    <item name="android:src">@drawable/indicator_uncheck</item>
+    <item name="android:src">@drawable/icon_check_yellow</item>
     <item name="android:scaleType">centerCrop</item>
     <item name="android:layout_width">12.67dp</item>
     <item name="android:layout_height">12.67dp</item>
@@ -1034,6 +1034,6 @@
   </style>
   
   <style name="write_post_store_view_add" parent="write_post_store_view_imagebutton">
-    <item name="android:src">@drawable/btn_register_store</item>
+    <item name="android:src">@drawable/icon_navi_delicious_write</item>
   </style>
 </resources>

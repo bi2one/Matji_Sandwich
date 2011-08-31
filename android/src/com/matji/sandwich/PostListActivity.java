@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.widget.PostListView;
 
@@ -48,6 +49,9 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
             if (resultCode == RESULT_OK) {
                 ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostActivity.POSTS);
                 listView.setPosts(posts);
+                if (getParent() instanceof BaseTabActivity) {
+                    ((BaseTabActivity) getParent()).setIsFlow(true);
+                }
             }
         }
     }

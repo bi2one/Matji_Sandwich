@@ -81,13 +81,20 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
 
     @Override
     public void onClick(View v) {
+        following();
+    }
+    
+    /**
+     * follow, unfollow 요청을 한다.
+     */
+    public void following() {
         if (identifiable.loginRequired() && !manager.isRunning()) {
             if (dbProvider.isExistFollowing(user.getId())){
                 unfollowRequest();
             } else {
                 followRequest();
             }
-        }
+        }        
     }
 
     /**

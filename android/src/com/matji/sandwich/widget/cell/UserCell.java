@@ -18,6 +18,7 @@ import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.listener.LikeStoreListListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CellProfileImageView;
+import com.matji.sandwich.widget.title.UserTitle.Followable;
 
 /**
  * UI 상의 유저 셀 (유저 기본 정보가 보이는 곳)
@@ -25,7 +26,7 @@ import com.matji.sandwich.widget.CellProfileImageView;
  * @author mozziluv
  *
  */
-public class UserCell extends Cell {
+public class UserCell extends Cell implements Followable {
     private User user;
 
     private Button follow;
@@ -151,5 +152,10 @@ public class UserCell extends Cell {
     public void showLine() {
         findViewById(R.id.cell_user_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_user_shadow).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void following() {
+        followingListener.following();
     }
 }

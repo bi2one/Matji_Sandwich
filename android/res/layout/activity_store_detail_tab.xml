@@ -20,9 +20,9 @@
     <!-- Seperate Line -->
     <RelativeLayout 
 	style="@style/DefaultWidthFill">
-      <ImageView 
-	  style="@style/DefaultWidthFill"
-	  android:background="@drawable/seperate_line" />
+<!--       <ImageView  -->
+<!-- 	  style="@style/DefaultWidthFill" -->
+<!-- 	  android:background="@drawable/seperate_line" /> -->
     </RelativeLayout>
     
     <!-- Tab -->

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.widget.RoundTabHost;
-import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserMainActivity extends BaseTabActivity {
     private RoundTabHost tabHost;
@@ -62,9 +61,7 @@ public class UserMainActivity extends BaseTabActivity {
         tabHost.addRightTab("tab3",
                 R.string.store_main_review,
                 userUrlListIntent);
-
-        ((UserTitle) findViewById(R.id.Titlebar)).setUser(user);
-
+        
         LinearLayout wrapper = (LinearLayout) findViewById(R.id.user_talk_wrapper);
         wrapper.setOnTouchListener(new View.OnTouchListener() {
 

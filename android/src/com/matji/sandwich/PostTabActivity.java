@@ -38,9 +38,14 @@ public class PostTabActivity extends BaseTabActivity {
         sessionUtil = new SessionTabHostUtil(context);
     }
 
-    protected void onResume() {
-        super.onResume();        
+    @Override
+    protected void onFlowResume() {
+        super.onFlowResume();
+    }
 
+    @Override
+    protected void onNotFlowResume() {
+        super.onNotFlowResume();
 
         tabHost.setCurrentTab(0);
         tabHost.clearAllTabs();
@@ -66,7 +71,7 @@ public class PostTabActivity extends BaseTabActivity {
             lastTab = getTabWidget().getTabCount()-1;
         }
         tabHost.setCurrentTab(lastTab);
-        
+
         int baseIndex = sessionUtil.getSubTabIndex();
         sessionUtil.flush();
         if (!sessionUtil.isLogin()) {
@@ -76,7 +81,7 @@ public class PostTabActivity extends BaseTabActivity {
             tabHost.setCurrentTab(baseIndex);
         }
     }
-    
+
     @Override
     protected void onPause() {
         super.onPause();

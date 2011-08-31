@@ -4,8 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.widget.title.button.HomeButton;
-import com.matji.sandwich.widget.title.button.LikeStoreListButton;
+import com.matji.sandwich.widget.title.button.FollowButton;
 import com.matji.sandwich.widget.title.button.WriteMessageButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
@@ -32,9 +33,12 @@ public class UserTitle extends TitleContainerTypeA {
 	
 	public void setUser(User user) {
         setTitle(user.getNick());
-        ((LikeStoreListButton) rightButton1).setUser(user);
 	}
-
+	
+	public void setFollowable(Followable followable) {
+	    ((FollowButton) rightButton1).setFollowable(followable);
+	}
+	
     @Override
     protected TitleImageButton getLeftButton1() {
         // TODO Auto-generated method stub
@@ -44,12 +48,16 @@ public class UserTitle extends TitleContainerTypeA {
     @Override
     protected TitleImageButton getRightButton1() {
         // TODO Auto-generated method stub
-        return new LikeStoreListButton(getContext());
+        return new FollowButton(getContext());
     }
 
     @Override
     protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
         return new WriteMessageButton(getContext());
+    }
+    
+    public interface Followable {
+        public void following();
     }
 }

@@ -26,7 +26,7 @@ public class HomeButton extends TitleImageButton {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		setImageDrawable(context.getResources().getDrawable(R.drawable.btn_home));
+		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_home));
 	}
 	
 	/**

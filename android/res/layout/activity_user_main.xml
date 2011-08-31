@@ -10,11 +10,6 @@
       android:layout_height="fill_parent"
       android:background="@drawable/bg_01"
       android:orientation="vertical">
-
-    <!-- Main Title -->
-    <com.matji.sandwich.widget.title.UserTitle
-	android:id="@id/Titlebar"
-	style="@style/DefaultWrap" />
     
     <!-- User Tab -->
     <com.matji.sandwich.widget.RoundTabHost

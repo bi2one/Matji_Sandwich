@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import com.matji.sandwich.R;
 
 public abstract class CheckableIndicator extends Indicator implements Checkable {
-    public static final int CHECK_REFERENCE = R.drawable.indicator_check;
-    public static final int UNCHECK_REFERENCE = R.drawable.indicator_uncheck;
+    public static final int CHECK_REFERENCE = R.drawable.icon_check_red;
+    public static final int UNCHECK_REFERENCE = R.drawable.icon_check_yellow;
 
     public abstract ImageView getCheckView();
 

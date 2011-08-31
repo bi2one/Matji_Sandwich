@@ -3,7 +3,12 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_user_image_list"
 	style="@style/DefaultFill">
+	<!-- Main Title -->
+	<com.matji.sandwich.widget.title.UserTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWrap" />
 	<com.matji.sandwich.widget.UserImageListView
 		style="@style/DefaultFill"
-		android:id="@+id/user_image_list_view" />
+		android:id="@+id/user_image_list_view"
+		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

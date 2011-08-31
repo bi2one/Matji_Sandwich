@@ -11,6 +11,7 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.widget.UserPostListView;
 import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.cell.UserIntroCell;
+import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserPostListActivity extends BaseActivity {
     private User user;		
@@ -35,6 +36,9 @@ public class UserPostListActivity extends BaseActivity {
         userCell.showLine();
         userIntroCell = new UserIntroCell(this, user);
 
+        ((UserTitle) findViewById(R.id.Titlebar)).setUser(user);
+        ((UserTitle) findViewById(R.id.Titlebar)).setFollowable(userCell);
+        
         listView = (UserPostListView) findViewById(R.id.user_post_list_view);
         listView.setUser(user);
         listView.setActivity(this);
