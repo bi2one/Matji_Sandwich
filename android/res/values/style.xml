@@ -1071,7 +1071,7 @@
 
   <style name="post_edit_text_keyboard_toggle" parent="DefaultWrap">
     <item name="android:background">@drawable/btn_white_story</item>
-    <item name="android:paddingLeft">13.33dp</item>
+    <item name="android:paddingLeft">11.33dp</item>
     <item name="android:paddingRight">10.67dp</item>
   </style>
 
@@ -1081,11 +1081,13 @@
   </style>
 
   <style name="post_edit_text_toggle_element" parent="DefaultWrap">
-    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:layout_gravity">center</item>
   </style>
 
   <style name="post_edit_text_picture_button_image" parent="post_edit_text_toggle_element">
     <item name="android:background">@null</item>
+    <item name="android:layout_width">22.67dp</item>
+    <item name="android:layout_height">16dp</item>
     <item name="android:src">@drawable/icon_story_photo</item>
   </style>
 
@@ -1104,5 +1106,30 @@
     <item name="android:background">@null</item>
     <item name="android:layout_marginLeft">6.67dp</item>
     <item name="android:src">@drawable/icon_story_up</item>
+  </style>
+  
+  <!-- select_store_contents.xml -->
+  <style name="select_store_contents" parent="DefaultFill">
+    <item name="android:background">@color/WHITE</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="select_store_contents_selected" parent="DefaultWidthFill">
+    <item name="android:paddingLeft">@dimen/minor_title_location_padding</item>
+    <item name="android:paddingRight">@dimen/minor_title_location_padding</item>
+    <item name="android:textColor">@color/matji_brown_text</item>
+  </style>
+
+  <style name="select_store_contents_imagebutton" parent="DefaultHeightFill">
+    <item name="android:layout_width">@dimen/minor_title_button_width</item>
+    <item name="android:background">@color/invisible</item>
+  </style>
+
+  <style name="select_store_contents_search" parent="select_store_contents_imagebutton">
+    <item name="android:src">@drawable/icon_navi_search</item>
+  </style>
+  
+  <style name="select_store_contents_add" parent="select_store_contents_imagebutton">
+    <item name="android:src">@drawable/icon_navi_delicious_write</item>
   </style>
 </resources>

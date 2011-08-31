@@ -47,7 +47,8 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	setOnRefreshListener(this);
 	loadingFooterView = new RelativeLayout(context);
 	addFooterView(loadingFooterView);
-
+	setFooterDividersEnabled(false);
+	
 	this.limit = limit;
     }
 

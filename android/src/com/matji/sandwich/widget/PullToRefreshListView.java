@@ -29,7 +29,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 	private enum State { DEFAULT, START, PULL_TO_REFRESH, RELEASE_TO_REFRESH, REFRESHING };
 	private static final int FLIP_ANIMATION_DURATION = 250;
 	private static final int HEADER_REFRESH_LIMIT = 70;
-	private static final int LIST_BASE_INDEX = 1;
+	private static final int LIST_BASE_INDEX = 0;
 	private static final boolean IS_ON = false;
 	private OnScrollListener pullDownListener;
 	private OnRefreshListener onRefreshListener;
