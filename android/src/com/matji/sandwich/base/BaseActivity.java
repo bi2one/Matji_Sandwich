@@ -1,16 +1,16 @@
 package com.matji.sandwich.base;
 
-import com.matji.sandwich.LoginActivity;
-import com.matji.sandwich.R;
-import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
-import com.matji.sandwich.session.Session;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.RelativeLayout;
+
+import com.matji.sandwich.LoginActivity;
+import com.matji.sandwich.R;
+import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
+import com.matji.sandwich.session.Session;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Identifiable {
     public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
@@ -19,13 +19,13 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public static final int WRITE_POST_ACTIVITY = 102;
     public static final int WRITE_COMMENT_ACTIVITY = 103;	
     public static final int RECEIVED_USER_ACTIVITY = 104;
-    private RelativeLayout mainViewGroup;
+    private ViewGroup mainViewGroup;
 
     private boolean isFlow;
 
     public abstract int setMainViewId();
 
-    protected RelativeLayout getMainView() {
+    protected ViewGroup getMainView() {
         return mainViewGroup;
     }
 
@@ -92,7 +92,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
             setTheme(R.style.Theme_RemoveOverlay);
         }
         super.setContentView(layoutResID);
-        mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
+        mainViewGroup = (ViewGroup)findViewById(setMainViewId());
     }
 
     @Override

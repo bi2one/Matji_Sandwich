@@ -12,7 +12,7 @@ import com.matji.sandwich.widget.title.button.TitleImageButton;
  * @author mozziluv
  *
  */
-public abstract class TitleContainerTypeD extends TypedTitleContainer {
+public abstract class TitleContainerTypeLRt extends TypedTitleContainer {
 	
     protected abstract TitleImageButton getLeftButton1();
     protected abstract TitleButton getRightButton1();
@@ -20,11 +20,11 @@ public abstract class TitleContainerTypeD extends TypedTitleContainer {
     protected TitleImageButton leftButton1;
     protected TitleButton rightButton1;
 	
-	public TitleContainerTypeD(Context context) {
+	public TitleContainerTypeLRt(Context context) {
 		super(context);
 	}
 
-	public TitleContainerTypeD(Context context, AttributeSet attr) {
+	public TitleContainerTypeLRt(Context context, AttributeSet attr) {
 		super(context, attr);
 	}
 	

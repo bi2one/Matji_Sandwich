@@ -8,16 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.RelativeLayout;
-import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseMapActivity;
-import com.matji.sandwich.map.MainMatjiMapView;
-import com.matji.sandwich.session.SessionRecentLocationUtil;
-import com.matji.sandwich.session.SessionMapUtil;
-import com.matji.sandwich.widget.StoreMapNearListView;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.map.MainMatjiMapView;
+import com.matji.sandwich.session.SessionMapUtil;
+import com.matji.sandwich.session.SessionRecentLocationUtil;
+import com.matji.sandwich.widget.StoreMapNearListView;
 
 public class MainMapActivity extends BaseMapActivity {
     private static final int REQUEST_CODE_LOCATION = 1;

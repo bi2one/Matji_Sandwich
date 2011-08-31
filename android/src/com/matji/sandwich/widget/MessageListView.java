@@ -7,8 +7,7 @@ import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.MessageAdapter;
-import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.MessageHttpRequest;
+import com.matji.sandwich.adapter.MessageAdapter.MessageType;
 import com.matji.sandwich.util.MatjiConstants;
 
 /**
@@ -17,9 +16,7 @@ import com.matji.sandwich.util.MatjiConstants;
  * @author mozziluv
  * 
  */
-public class MessageListView extends RequestableMListView {
-    private HttpRequest request;
-
+public abstract class MessageListView extends RequestableMListView {
     public MessageListView(Context context, AttributeSet attr) {
         super(context, attr, new MessageAdapter(context), 10);
         init();
@@ -32,15 +29,10 @@ public class MessageListView extends RequestableMListView {
         setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
         setCacheColorHint(Color.TRANSPARENT);
         setSelector(android.R.color.transparent);
+        ((MessageAdapter) getMBaseAdapter()).setMessageType(getMessageType());
     }
 
-    public HttpRequest request() {
-        if (request == null || !(request instanceof MessageHttpRequest)) {
-            request = new MessageHttpRequest(getContext());
-        }
-        ((MessageHttpRequest) request).actionReceivedList(getPage(), getLimit());
-        return request;
-    }
-
+    protected abstract MessageType getMessageType();
+    
     public void onListItemClick(int position) {}
 }

@@ -1,8 +1,8 @@
 package com.matji.sandwich.http;
 
-import android.os.AsyncTask;
+import java.util.HashMap;
+
 import android.content.Context;
-import android.util.Log;
 import android.view.ViewGroup;
 
 import com.matji.sandwich.Requestable;
@@ -10,9 +10,16 @@ import com.matji.sandwich.http.request.RequestCommand;
 import com.matji.sandwich.http.spinner.Spinner;
 import com.matji.sandwich.http.spinner.SpinnerFactory;
 
-import java.util.HashMap;
-
 public class HttpRequestManager {
+    
+    // request tag
+    public static final int LIKE_REQUEST = 0;
+    public static final int UN_LIKE_REQUEST = 1;
+    public static final int FOLLOW_REQUEST = 2;
+    public static final int UN_FOLLOW_REQUEST = 3;
+    public static final int POST_SHOW_REQUEST = 4;
+    public static final int MESSAGE_NEW_REQUEST = 5;
+    
     private volatile static HashMap<Context, HttpRequestManager> managerPool = new HashMap<Context, HttpRequestManager>();
     private Context context;
     private TaskQueueManager queueManager;

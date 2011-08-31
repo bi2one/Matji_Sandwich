@@ -8,7 +8,7 @@ import com.matji.sandwich.widget.title.button.TitleImageButton;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class MainTitle extends TitleContainerTypeB {
+public class MainTitle extends TitleContainerTypeRRR {
 
 	public MainTitle(Context context) {
 		super(context);

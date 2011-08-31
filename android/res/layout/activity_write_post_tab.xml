@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_write_post_tab"
-    style="@style/DefaultFill">
-  <com.matji.sandwich.widget.title.WritePostTitle
-      android:layout_alignParentTop="true"
-      android:id="@+id/activity_write_post_tab_title"
-      style="@style/DefaultWidthFill" />
-  
-  <com.matji.sandwich.widget.RoundTabHost
-      android:id="@android:id/tabhost"
-      android:layout_below="@id/activity_write_post_tab_title"
-      android:layout_above="@+id/activity_write_post_tab_picture_keyboard"
-      style="@style/DefaultFill">
-    <LinearLayout
-	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-      <FrameLayout
-	  android:id="@android:id/tabcontent"
-	  android:layout_width="fill_parent"
-	  android:layout_height="wrap_content"
-	  android:layout_weight="1" />
-      <TabWidget
-	  android:id="@android:id/tabs"
-	  style="@style/post_tab_TabBar"
-	  android:layout_weight="0" />
-    </LinearLayout>
-  </com.matji.sandwich.widget.RoundTabHost>
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_write_post_tab"
+	style="@style/DefaultFill">
+	<com.matji.sandwich.widget.title.WritePostTitle
+		android:layout_alignParentTop="true"
+		android:id="@+id/activity_write_post_tab_title"
+		style="@style/DefaultWidthFill" />
 
-  <com.matji.sandwich.widget.GetPictureLayout
-      android:id="@id/activity_write_post_tab_picture_keyboard"
-      android:layout_alignParentBottom="true"
-      android:visibility="gone"
-      android:layout_height="0dp"
-      android:layout_width="fill_parent" />
+	<com.matji.sandwich.widget.RoundTabHost
+		android:id="@android:id/tabhost"
+		android:layout_below="@id/activity_write_post_tab_title"
+		android:layout_above="@+id/activity_write_post_tab_picture_keyboard"
+		style="@style/DefaultFill">
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<FrameLayout
+				android:id="@android:id/tabcontent"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_weight="1" />
+			<TabWidget
+				android:id="@android:id/tabs"
+				style="@style/RoundTabWidget"
+				android:layout_weight="0" />
+		</LinearLayout>
+	</com.matji.sandwich.widget.RoundTabHost>
+
+	<com.matji.sandwich.widget.GetPictureLayout
+		android:id="@id/activity_write_post_tab_picture_keyboard"
+		android:layout_alignParentBottom="true"
+		android:visibility="gone"
+		android:layout_height="0dp"
+		android:layout_width="fill_parent" />
 </com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

@@ -6,26 +6,27 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 /**
- * 오른쪽 버튼 3개가 있는 타이틀바
+ * 왼쪽 버튼 1개, 오른쪽 버튼 2개가 있는 타이틀바
  * 
  * @author mozziluv
  *
  */
-public abstract class TitleContainerTypeB extends TypedTitleContainer {
-
+public abstract class TitleContainerTypeLRR extends TypedTitleContainer {
+    
+    protected abstract TitleImageButton getLeftButton1();
     protected abstract TitleImageButton getRightButton1();
     protected abstract TitleImageButton getRightButton2();
-    protected abstract TitleImageButton getRightButton3();
     
+    protected TitleImageButton leftButton1;
 	protected TitleImageButton rightButton1;
 	protected TitleImageButton rightButton2;
-	protected TitleImageButton rightButton3;
 	
-	public TitleContainerTypeB(Context context) {
+	
+	public TitleContainerTypeLRR(Context context) {
 		super(context);
 	}
-	
-	public TitleContainerTypeB(Context context, AttributeSet attr) {
+
+	public TitleContainerTypeLRR(Context context, AttributeSet attr) {
 		super(context, attr);
 	}
 	
@@ -34,9 +35,9 @@ public abstract class TitleContainerTypeB extends TypedTitleContainer {
 	 */
 	@Override
 	final protected void addButtons() {
+		addViewInLeftContainer(leftButton1);
 		addViewInRightContainer(rightButton1);
 		addViewInRightContainer(rightButton2);
-		addViewInRightContainer(rightButton3);
 	}
 	
 	/**
@@ -44,16 +45,16 @@ public abstract class TitleContainerTypeB extends TypedTitleContainer {
 	 */
 	@Override
 	final protected void setButtons() {
+	    leftButton1 = getLeftButton1();
 	    rightButton1 = getRightButton1();
 	    rightButton2 = getRightButton2();
-	    rightButton3 = getRightButton3();
 	}
-	
-    /**
-     * @see com.matji.sandwich.widget.title.TypedTitleContainer#setButtons()
+
+	/**
+     * @see com.matji.sandwich.widget.title.TypedTitleContainer#isExistLeftButton()
      */
 	@Override
 	protected boolean isExistLeftButton() {
-	    return false;
+	    return true;
 	}
 }

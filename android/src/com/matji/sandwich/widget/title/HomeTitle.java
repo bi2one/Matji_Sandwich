@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
-public class HomeTitle extends TitleContainerTypeC {
+public class HomeTitle extends TitleContainerTypeL {
 
 	public HomeTitle(Context context) {
 		super(context);

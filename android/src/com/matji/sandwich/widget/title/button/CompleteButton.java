@@ -6,7 +6,6 @@ import android.util.Log;
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
-import com.matji.sandwich.widget.title.PageableTitle.Pageable;
 
 /**
  * 쓰기 버튼

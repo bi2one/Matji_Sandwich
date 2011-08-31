@@ -13,7 +13,7 @@
 	android:layout_height="fill_parent">
       <TabWidget
 	  android:id="@android:id/tabs"
-	  style="@style/post_tab_TabBar"
+	  style="@style/RoundTabWidget"
 	  android:layout_weight="0" />
       <FrameLayout
 	  android:id="@android:id/tabcontent"

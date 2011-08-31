@@ -127,7 +127,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
             }
 
             ((PostHttpRequest) request).actionShow(postId);
-            manager.request(getMainView(), request, HttpRequest.POST_SHOW_REQUEST, this);
+            manager.request(getMainView(), request, HttpRequestManager.POST_SHOW_REQUEST, this);
             prevPostId = postId;
         }
     }
@@ -205,7 +205,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     @Override
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) {
-        case HttpRequest.POST_SHOW_REQUEST:
+        case HttpRequestManager.POST_SHOW_REQUEST:
             if (data != null) {
                 setPost((Post) data.get(0));
                 showPost();

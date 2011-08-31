@@ -122,6 +122,8 @@
   <string name="default_string_camera">카메라</string>
   <string name="default_string_album">앨범</string>
   <string name="default_string_complete">완료</string>
+  <string name="default_string_message">쪽지</string>
+  
   
   <!-- Writing content -->
   <string name="writing_content_post">메모를 입력하세요.</string>
@@ -348,7 +350,12 @@
   <!-- StoreTagActivity.java -->
   <string name="number_of_tag">%1$d개의 태그</string>
   
+  
   <!-- WriteMessageActivity.java -->
   <string name="write_message_writing_content">내용 입력</string>
-  <string name="write_message_received_users">받는사람:\ </string>
+  <string name="write_message_received_users">받는사람:&#160;</string>
+  
+  <!-- MessageListActivity.java -->
+  <string name="received_message_list">받은 쪽지함</string>
+  <string name="sent_message_list">보낸 쪽지함</string>
 </resources>

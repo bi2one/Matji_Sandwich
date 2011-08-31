@@ -2,10 +2,12 @@ package com.matji.sandwich.widget.title.button;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.WriteMessageActivity;
+import com.matji.sandwich.data.User;
 
 /**
  * 메세지 버튼
@@ -14,6 +16,8 @@ import com.matji.sandwich.WriteMessageActivity;
  *
  */
 public class WriteMessageButton extends TitleImageButton {
+
+    private User user;
     
     public WriteMessageButton(Context context) {
         super(context);
@@ -29,6 +33,10 @@ public class WriteMessageButton extends TitleImageButton {
         setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_memo));
     }
     
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     /**
      * @see com.matji.sandwich.widget.title.button.TitleItem#onTitleItemClicked()
      */
@@ -37,6 +45,7 @@ public class WriteMessageButton extends TitleImageButton {
         // TODO Auto-generated method stub
         Log.d("Matji", "WriteMessageButtonClicked");
         Intent intent = new Intent(getContext(), WriteMessageActivity.class);
+        intent.putExtra(WriteMessageActivity.USER, (Parcelable) user);
         getContext().startActivity(intent);
     }
 }

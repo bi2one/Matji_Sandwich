@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.matji.sandwich.LikeStoreListActivity;
 import com.matji.sandwich.R;
+import com.matji.sandwich.base.Identifiable;
+import com.matji.sandwich.widget.title.Switchable;
 
 /**
  * {@link LikeStoreListActivity}로 이동하게 하는 버튼
@@ -12,12 +14,13 @@ import com.matji.sandwich.R;
  * @author mozziluv
  *
  */
-public class FollowButton extends TitleImageButton {
+public class FollowButton extends TitleImageButton implements Switchable {
 
-    public static final int FOLLOW = 30;
-    public static final int UNFOLLOW = 100;
+    private static final int ALPHA_FOLLOW_STATE = 0x1E;     // opacity 30%
+    private static final int ALPHA_UNFOLLOW_STATE = 0xff;   // opacity 100%
     
     private Followable followable;
+    private Identifiable identifiable;
     
     public FollowButton(Context context) {
         super(context);
@@ -32,10 +35,13 @@ public class FollowButton extends TitleImageButton {
         super.init();
         setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_follow));
     }
+    
+    public void setIdentifiable(Identifiable identifiable) {
+        this.identifiable = identifiable;
+    }
 
     public void setFollowable(Followable followable) {
         this.followable = followable;
-        toggle();
     }
 
     /**
@@ -45,13 +51,25 @@ public class FollowButton extends TitleImageButton {
     public void onTitleItemClicked() {
         // TODO Auto-generated method stub
         Log.d("Matji", "FollowButtonClicked");
-        followable.following();
+        if (identifiable.loginRequired()) followable.following();
     }
     
-    private void toggle() {
-//        setAlpha(followable.toggle());
+    /**
+     * Unfollow 요청 버튼
+     */
+    @Override
+    public void on() {
+        setAlpha(ALPHA_UNFOLLOW_STATE);
     }
-        
+    
+    /**
+     * Follow 요청 버튼
+     */
+    @Override
+    public void off() {
+        setAlpha(ALPHA_FOLLOW_STATE);
+    }
+    
     public interface Followable {
         public void following();
     }

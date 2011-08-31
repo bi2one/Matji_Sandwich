@@ -18,7 +18,7 @@ import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.listener.LikeStoreListListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CellProfileImageView;
-import com.matji.sandwich.widget.title.button.FollowButton;
+import com.matji.sandwich.widget.title.Switchable;
 import com.matji.sandwich.widget.title.button.FollowButton.Followable;
 
 /**
@@ -37,6 +37,8 @@ public class UserCell extends Cell implements Followable {
 
     private FollowingListener followingListener;
     private RelativeLayout spinnerContainer;
+    
+    private Switchable switchable;
 
     /**
      * 기본 생성자 (Java Code)
@@ -66,9 +68,10 @@ public class UserCell extends Cell implements Followable {
      * @param context
      * @param user 이 Cell의 유저 데이터
      */
-    public UserCell(Context context, User user) {
+    public UserCell(Context context, User user, Switchable switchable) {
         super(context, R.layout.cell_user);
         spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
+        setSwitchable(switchable);
         setUser(user);
     }
 
@@ -131,11 +134,21 @@ public class UserCell extends Cell implements Followable {
             follow.setVisibility(View.GONE);
             messageList.setVisibility(View.VISIBLE);
             messageList.setText(user.getReceivedMessageCount()+"");
+            switchable.off();
         } else {
             follow.setText(
                     (followingListener.isExistFollowing()) ? 
                             R.string.cell_user_unfollow
                             : R.string.cell_user_follow);
+
+            if (switchable != null) {
+                if (followingListener.isExistFollowing()) {
+                    switchable.on();
+                } else {
+                    switchable.off();
+                }
+            }
+
         }
     }
 
@@ -148,6 +161,10 @@ public class UserCell extends Cell implements Followable {
         intent.putExtra(UserProfileActivity.USER, (Parcelable) user);
         return intent;
     }
+    
+    public void setSwitchable(Switchable switchable) {
+        this.switchable = switchable;
+    }
 
 
     public void showLine() {
@@ -159,9 +176,4 @@ public class UserCell extends Cell implements Followable {
     public void following() {
         followingListener.following();
     }
-
-//    @Override
-//    public int toggle() {
-//        return (followingListener.isExistFollowing()) ? FollowButton.UNFOLLOW : FollowButton.FOLLOW;
-//    }
 }

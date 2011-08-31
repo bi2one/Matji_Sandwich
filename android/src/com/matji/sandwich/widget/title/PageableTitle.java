@@ -8,7 +8,7 @@ import com.matji.sandwich.widget.title.button.TitleImageButton;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class PageableTitle extends TitleContainerTypeA {
+public class PageableTitle extends TitleContainerTypeLRR {
 
 	public PageableTitle(Context context) {
 		super(context);

@@ -15,7 +15,6 @@ import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
-import com.matji.sandwich.http.request.HttpRequest;
 
 /**
  * Follow, Unfollow를 수행하는 리스너.
@@ -102,7 +101,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      */
     private void followRequest() {
         followingRequest.actionNew(user.getId());
-        manager.request(spinnerContainer, followingRequest, HttpRequest.FOLLOW_REQUEST, this);
+        manager.request(spinnerContainer, followingRequest, HttpRequestManager.FOLLOW_REQUEST, this);
     }
 
     /**
@@ -110,7 +109,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      */
     private void unfollowRequest() {
         followingRequest.actionDelete(user.getId());
-        manager.request(spinnerContainer, followingRequest, HttpRequest.UN_FOLLOW_REQUEST, this);
+        manager.request(spinnerContainer, followingRequest, HttpRequestManager.UN_FOLLOW_REQUEST, this);
     }
 
 
@@ -120,12 +119,12 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
     @Override
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) {
-        case HttpRequest.FOLLOW_REQUEST:
+        case HttpRequestManager.FOLLOW_REQUEST:
             dbProvider.insertFollowing(user.getId());
 
             postFollowRequest();
             break;
-        case HttpRequest.UN_FOLLOW_REQUEST:
+        case HttpRequestManager.UN_FOLLOW_REQUEST:
             dbProvider.deleteFollowing(user.getId());
 
             postUnfollowRequest();

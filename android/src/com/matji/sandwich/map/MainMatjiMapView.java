@@ -1,38 +1,36 @@
 package com.matji.sandwich.map;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import android.content.Context;
-import android.widget.TextView;
-import android.widget.RelativeLayout;
 import android.location.Location;
-import android.view.View;
-import android.view.MotionEvent;
-import android.view.View.OnTouchListener;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
-
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.BaseMapActivity;
-import com.matji.sandwich.util.GeocodeUtil;
-import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
-import com.matji.sandwich.data.GeocodeAddress;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.CoordinateRegion;
-import com.matji.sandwich.session.SessionMapUtil;
+import com.matji.sandwich.data.GeocodeAddress;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
-import com.matji.sandwich.overlay.StoreItemizedOverlay;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
-import com.matji.sandwich.exception.MatjiException;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import com.matji.sandwich.overlay.StoreItemizedOverlay;
+import com.matji.sandwich.session.SessionMapUtil;
+import com.matji.sandwich.util.GeocodeUtil;
+import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 
 public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterListener,
 							      MatjiLocationListener,
@@ -54,7 +52,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     private ArrayList<MatjiData> stores;
     private GpsManager gpsManager;
     private Location prevLocation;
-    private RelativeLayout spinnerLayout;
+    private ViewGroup spinnerLayout;
     
     public MainMatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -64,7 +62,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     }
 
     // public void init(TextView addressView, BaseMapActivity activity) {
-    public void init(TextView addressView, BaseMapActivity activity, RelativeLayout spinnerLayout) {
+    public void init(TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
 	setAddressView(addressView);
 	setBaseMapActivity(activity);
 

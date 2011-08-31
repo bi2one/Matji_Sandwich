@@ -1,4 +1,4 @@
-#Mon Aug 29 20:22:15 KST 2011
+#Wed Aug 31 17:01:11 KST 2011
 eclipse.preferences.version=1
 encoding//src/com/matji/sandwich/LikeStoreListActivity.java=UTF-8
 encoding//src/com/matji/sandwich/LikeUserListActivity.java=UTF-8
@@ -6,3 +6,5 @@ encoding//src/com/matji/sandwich/PostListActivity.java=UTF-8
 encoding//src/com/matji/sandwich/widget/MessageListView.java=UTF-8
 encoding//src/com/matji/sandwich/widget/PostListView.java=UTF-8
 encoding//src/com/matji/sandwich/widget/PullToRefreshListView.java=UTF-8
+encoding//src/com/matji/sandwich/widget/ReceivedMessageListView.java=UTF-8
+encoding//src/com/matji/sandwich/widget/SentMessageListView.java=UTF-8

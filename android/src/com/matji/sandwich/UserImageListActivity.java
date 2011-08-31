@@ -11,6 +11,7 @@ import com.matji.sandwich.widget.title.UserTitle;
 public class UserImageListActivity extends BaseActivity {
 
     private User user;
+    private UserTitle title;
     private UserCell userCell;
 
     public static final String USER = "user";
@@ -25,10 +26,12 @@ public class UserImageListActivity extends BaseActivity {
         setContentView(R.layout.activity_user_image_list);
 
         user = (User) getIntent().getParcelableExtra(USER); 
-        userCell = new UserCell(this, user);
-        
-        ((UserTitle) findViewById(R.id.Titlebar)).setUser(user);
-        ((UserTitle) findViewById(R.id.Titlebar)).setFollowable(userCell);
+
+        title = ((UserTitle) findViewById(R.id.Titlebar));
+        title.setUser(user);
+        title.setFollowable(userCell);
+        title.setIdentifiable(this);
+        userCell = new UserCell(this, user, title.getSwitchable());
         
         UserImageListView listView = (UserImageListView) findViewById(R.id.user_image_list_view);
         listView.addHeaderView(userCell);

@@ -11,12 +11,19 @@ import android.widget.TextView;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Message;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.GotoUserMainAction;
 import com.matji.sandwich.util.TimeUtil;
 
 public class MessageAdapter extends MBaseAdapter {
+
+    public enum MessageType {
+        SENT, 
+        RECEIVED,
+    }
     
     private HashMap<Integer, Boolean> isFoldMap;
+    private MessageType type;
     
     public MessageAdapter(Context context) {
         super(context);
@@ -24,6 +31,10 @@ public class MessageAdapter extends MBaseAdapter {
         isFoldMap = new HashMap<Integer, Boolean>();
     }
 
+    public void setMessageType(MessageType type) {
+        this.type = type;
+    }
+    
     public View getView(final int position, View convertView, ViewGroup parent) {
         MessageElement messageElement;
         Message message = (Message) data.get(position);
@@ -48,9 +59,18 @@ public class MessageAdapter extends MBaseAdapter {
             messageElement = (MessageElement) convertView.getTag();
         }
 
+        User user = null;
+        switch (type) {
+        case SENT:
+            user = message.getReceivedUser();
+            break;
+        case RECEIVED:
+            user = message.getSentUser();
+            break;
+        }
         messageElement.subjectList.setText(message.getMessage());
-        messageElement.nick.setText(message.getSentUser().getNick());
-        messageElement.nick.setOnClickListener(new GotoUserMainAction(context, message.getSentUser()));
+        messageElement.nick.setText(user.getNick());
+        messageElement.nick.setOnClickListener(new GotoUserMainAction(context, user));
         
         String createdAt = TimeUtil.parseString(
                 "yyyy-MM-dd hh:mm", 

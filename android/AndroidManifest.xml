@@ -29,6 +29,8 @@
 		<activity android:name="LikeUserListActivity"></activity>
 		<activity android:name="MainMapActivity"></activity>
 		<activity android:name="MessageListActivity"></activity>
+		<activity android:name="ReceivedMessageListActivity"></activity>
+		<activity android:name="SentMessageListActivity"></activity>
 		<activity android:name="NoticeActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
 		<activity android:name="PostActivity" 

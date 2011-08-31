@@ -1,11 +1,10 @@
 package com.matji.sandwich.base;
 
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.RelativeLayout;
 
 import com.google.android.maps.MapActivity;
 import com.matji.sandwich.LoginActivity;
@@ -17,11 +16,11 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
     protected static final int LOGIN_ACTIVITY = 1;
     protected static final int WRITE_POST_ACTIVITY = 2;
     private boolean isFlow;
-    private RelativeLayout mainViewGroup;
+    private ViewGroup mainViewGroup;
 
     public abstract int setMainViewId();
 
-    protected RelativeLayout getMainView() {
+    protected ViewGroup getMainView() {
 	return mainViewGroup;
     }
 
@@ -89,7 +88,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
             setTheme(R.style.Theme_RemoveOverlay);
         }
         super.setContentView(layoutResID);
-        mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
+        mainViewGroup = (ViewGroup)findViewById(setMainViewId());
     }
 
     @Override

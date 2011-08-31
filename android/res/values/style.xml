@@ -88,6 +88,8 @@
   	<item name="android:layout_height">wrap_content</item>
   	<item name="android:minHeight">@dimen/input_bar_min_height</item>
   	<item name="android:gravity">center_vertical</item>
+  	<item name="android:paddingTop">@dimen/input_bar_margin</item>
+  	<item name="android:paddingBottom">@dimen/input_bar_margin</item>
   </style>
       
   <style name="LinkifyName" parent="DefaultWrap">
@@ -461,12 +463,12 @@
     <item name="android:textSize">@dimen/tabbar_text_size</item>
   </style>
 
-  <!-- activity_post_tab.xml -->
-  <style name="post_tab_TabBar" parent="DefaultWidthFill">
-    <item name="android:padding">6dp</item>
+  <style name="RoundTabWidget" parent="DefaultWidthFill">
+    <item name="android:padding">@dimen/default_distance</item>
     <item name="android:background">@drawable/tabbtn_bg</item>
   </style>
-
+  
+  <!-- activity_post_tab.xml -->
   <style name="post_tab_DivisionBar" parent="DefaultFill">
     <item name="android:layout_height">2dp</item>
     <item name="android:background">@color/post_tab_division_bar</item>

@@ -17,7 +17,7 @@ import com.matji.sandwich.widget.title.button.WriteButton;
  * @author mozziluv
  *
  */
-public class StoreTitle extends TitleContainerTypeA {
+public class StoreTitle extends TitleContainerTypeLRR {
     private Store store;
     
 	public StoreTitle(Context context, Store store) {

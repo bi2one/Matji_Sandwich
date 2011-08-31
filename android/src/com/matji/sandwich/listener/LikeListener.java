@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
+import android.view.ViewGroup;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.Identifiable;
@@ -17,7 +17,6 @@ import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.NotSupportedMatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 
 /**
@@ -37,7 +36,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
      * Unlike 요청 후 처리할 작업을 수행하는 메소드
      */
     public abstract void postUnlikeRequest();
-    
+
     private int type = MatjiData.UNSELECTED;
     private MatjiData data;
     private Identifiable identifiable;
@@ -45,7 +44,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
     private LikeHttpRequest likeRequest;
     private HttpRequestManager manager;
     private DBProvider dbProvider;
-    private RelativeLayout spinnerContainer;
+    private ViewGroup spinnerContainer;
 
     /**
      * 기본 생성자. data의 전달 없이 {@link Identifiable}객체와 {@link Context}객체만 전달받는다.
@@ -54,13 +53,13 @@ public abstract class LikeListener implements OnClickListener, Requestable {
      * @param identifiable login 확인을 위한 identifiable 객체
      * @param context
      */
-    public LikeListener(Identifiable identifiable, Context context, RelativeLayout spinnerContainer) {
+    public LikeListener(Identifiable identifiable, Context context, ViewGroup spinnerContainer) {
         this.identifiable = identifiable;
         this.context = context;
         likeRequest = new LikeHttpRequest(context);
         manager = HttpRequestManager.getInstance(context);
         dbProvider = DBProvider.getInstance(context);
-	this.spinnerContainer = spinnerContainer;
+        this.spinnerContainer = spinnerContainer;
     }
 
     /**
@@ -69,11 +68,11 @@ public abstract class LikeListener implements OnClickListener, Requestable {
      * @param context
      * @param store like, unlike 할 store
      */
-    public LikeListener(Identifiable identifiable, Context context, Store store, RelativeLayout spinnerContainer) {
+    public LikeListener(Identifiable identifiable, Context context, Store store, ViewGroup spinnerContainer) {
         this(identifiable, context, spinnerContainer);
         type = MatjiData.STORE;
         data = store;
-	this.spinnerContainer = spinnerContainer;
+        this.spinnerContainer = spinnerContainer;
     }
 
     /**
@@ -82,11 +81,11 @@ public abstract class LikeListener implements OnClickListener, Requestable {
      * @param context
      * @param post like, unlike 할 post
      */
-    public LikeListener(Identifiable identifiable, Context context, Post post, RelativeLayout spinnerContainer) {
+    public LikeListener(Identifiable identifiable, Context context, Post post, ViewGroup spinnerContainer) {
         this(identifiable, context, spinnerContainer);
         type = MatjiData.POST;
         data = post;
-	this.spinnerContainer = spinnerContainer;
+        this.spinnerContainer = spinnerContainer;
     }
 
     /**
@@ -172,7 +171,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         default:
             notSupported();
         }
-        manager.request(spinnerContainer, likeRequest, HttpRequest.LIKE_REQUEST, this);
+        manager.request(spinnerContainer, likeRequest, HttpRequestManager.LIKE_REQUEST, this);
     }
 
     /**
@@ -189,7 +188,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         default:
             notSupported();
         }
-        manager.request(spinnerContainer, likeRequest, HttpRequest.UN_LIKE_REQUEST, this);
+        manager.request(spinnerContainer, likeRequest, HttpRequestManager.UN_LIKE_REQUEST, this);
     }
 
 
@@ -199,7 +198,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
     @Override
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) {
-        case HttpRequest.LIKE_REQUEST:
+        case HttpRequestManager.LIKE_REQUEST:
             Like like = new Like();
             like.setForeignKey(getDataId());
             like.setObject(getDBProviderObjectType());
@@ -207,7 +206,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
 
             postLikeRequest();
             break;
-        case HttpRequest.UN_LIKE_REQUEST:
+        case HttpRequestManager.UN_LIKE_REQUEST:
             dbProvider.deleteLike(getDataId(), getDBProviderObjectType());
 
             postUnlikeRequest();

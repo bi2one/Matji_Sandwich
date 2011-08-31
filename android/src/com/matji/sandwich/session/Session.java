@@ -3,14 +3,11 @@ package com.matji.sandwich.session;
 import java.io.NotSerializableException;
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
-import android.widget.RelativeLayout;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.ViewGroup;
 
-import com.matji.sandwich.*;
-import com.matji.sandwich.data.*;
 import com.matji.sandwich.Loginable;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
@@ -55,7 +52,7 @@ public class Session implements Requestable {
 	    return session;
 	}
 	
-    public void sessionValidate(Loginable loginable, RelativeLayout layout){
+    public void sessionValidate(Loginable loginable, ViewGroup layout){
 		this.mLoginable = loginable;
 		mManager = HttpRequestManager.getInstance(mContext);
 		MeHttpRequest request = new MeHttpRequest(mContext);
@@ -64,7 +61,7 @@ public class Session implements Requestable {
 	}
 	
 	
-	public void login(Loginable loginable, RelativeLayout spinnerContainer, String userid, String password){
+	public void login(Loginable loginable, ViewGroup spinnerContainer, String userid, String password){
 		this.mLoginable = loginable;
 		mManager = HttpRequestManager.getInstance(mContext);
 		MeHttpRequest request = new MeHttpRequest(mContext);

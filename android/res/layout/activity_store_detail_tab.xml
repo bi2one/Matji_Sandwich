@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_store_detail_tab"
-    style="@style/DefaultFill">
-  <LinearLayout
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:background="#FFF"
-      android:orientation="vertical">
-    
-    <!-- Main Title -->
-    <com.matji.sandwich.widget.title.StoreTitle
-	style="@style/DefaultWrap" />
-    
-    <!-- Store Name Cell -->
-    <com.matji.sandwich.widget.cell.StoreCell
-	style="@style/DefaultWidthFill"/>
-    
-    <!-- Seperate Line -->
-    <RelativeLayout 
-	style="@style/DefaultWidthFill">
-<!--       <ImageView  -->
-<!-- 	  style="@style/DefaultWidthFill" -->
-<!-- 	  android:background="@drawable/seperate_line" /> -->
-    </RelativeLayout>
-    
-    <!-- Tab -->
-    <com.matji.sandwich.widget.RoundTabHost
-	android:id="@android:id/tabhost" 
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-      <LinearLayout 
-	  android:orientation="vertical"
-	  android:layout_width="fill_parent" 
-	  android:layout_height="fill_parent">
-	<TabWidget 
-	    android:id="@android:id/tabs" 
-	    style="@style/post_tab_TabBar"
-	    android:layout_weight="0" />
-	<ImageView 
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content" />
-	<FrameLayout 
-	    android:id="@android:id/tabcontent"
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content"
-	    android:layout_weight="1" />
-      </LinearLayout>
-    </com.matji.sandwich.widget.RoundTabHost>
-  </LinearLayout>
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_store_detail_tab"
+	style="@style/DefaultFill">
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="#FFF"
+		android:orientation="vertical">
+
+		<!-- Main Title -->
+		<com.matji.sandwich.widget.title.StoreTitle
+			style="@style/DefaultWrap" />
+
+		<!-- Store Name Cell -->
+		<com.matji.sandwich.widget.cell.StoreCell
+			style="@style/DefaultWidthFill" />
+
+		<!-- Seperate Line -->
+		<RelativeLayout
+			style="@style/DefaultWidthFill">
+			<!-- <ImageView -->
+			<!-- style="@style/DefaultWidthFill" -->
+			<!-- android:background="@drawable/seperate_line" /> -->
+		</RelativeLayout>
+
+		<!-- Tab -->
+		<com.matji.sandwich.widget.RoundTabHost
+			android:id="@android:id/tabhost"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
+				<TabWidget
+					android:id="@android:id/tabs"
+					style="@style/RoundTabWidget"
+					android:layout_weight="0" />
+				<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" />
+				<FrameLayout
+					android:id="@android:id/tabcontent"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_weight="1" />
+			</LinearLayout>
+		</com.matji.sandwich.widget.RoundTabHost>
+	</LinearLayout>
 </RelativeLayout>
