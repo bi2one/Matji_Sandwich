@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.WritePostTabActivity;
+import com.matji.sandwich.WritePostActivity;
 
 public class WritePostActionButton extends ActionButton {
     private static final int STRING_REFERENCE = R.string.dialog_action_button_write_post;
@@ -21,7 +21,7 @@ public class WritePostActionButton extends ActionButton {
 
     public void onButtonClick(View v) {
 	// Log.d("=====", "write post action button clicked!!");
-	Intent writePostIntent = new Intent(getContext(), WritePostTabActivity.class);
+	Intent writePostIntent = new Intent(getContext(), WritePostActivity.class);
 	getContext().startActivity(writePostIntent);
     }
 }

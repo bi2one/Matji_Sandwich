@@ -9,7 +9,6 @@ import com.matji.sandwich.widget.title.button.TitleButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 public class CompletableTitle extends TitleContainerTypeD {
-
 	public CompletableTitle(Context context) {
 		super(context);
 	}
