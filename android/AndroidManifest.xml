@@ -83,6 +83,7 @@
 		<activity android:name="WritePostActivity"
 				  android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize"></activity>
+		<activity android:name="SelectStoreActivity"></activity>
 		<activity android:name="WritePostStoreActivity"
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="WritePostPictureActivity"

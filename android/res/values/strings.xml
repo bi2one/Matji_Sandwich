@@ -326,6 +326,9 @@
   <!-- WritePostActivity.java -->
   <string name="write_post_activity_title">이야기 쓰기</string>
 
+  <!-- SelectStoreActivity.java -->
+  <string name="select_store_activity_title">맛집 선택</string>
+
   <!-- post_edit_text.xml -->
   <string name="post_edit_text_empty">이야기를 입력해주세요.</string>
 

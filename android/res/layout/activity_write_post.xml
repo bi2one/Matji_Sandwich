@@ -11,5 +11,12 @@
   <com.matji.sandwich.widget.PostEditText
       android:id="@+id/activity_write_post_text"
       android:layout_below="@id/activity_write_post_title"
+      android:layout_above="@+id/activity_write_post_image_keyboard"
       style="@style/DefaultFill" />
+
+  <com.matji.sandwich.widget.GetPictureLayout
+      android:id="@id/activity_write_post_image_keyboard"
+      android:layout_alignParentBottom="true"
+      android:visibility="gone"
+      style="@style/DefaultWidthFill" />
 </com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

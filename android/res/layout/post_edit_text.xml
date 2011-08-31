@@ -25,6 +25,7 @@
 
     <LinearLayout
 	android:id="@+id/post_edit_text_picture_button"
+	android:clickable="true"
 	android:layout_alignParentRight="true"
 	android:layout_alignBottom="@id/post_edit_text_store_button"
 	style="@style/post_edit_text_picture_button">
@@ -37,6 +38,7 @@
 
     <LinearLayout
 	android:id="@+id/post_edit_text_keyboard_button"
+	android:clickable="true"
 	android:visibility="gone"
 	android:layout_alignParentRight="true"
 	android:layout_alignBottom="@id/post_edit_text_store_button"

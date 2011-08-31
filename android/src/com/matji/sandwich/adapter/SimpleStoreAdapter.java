@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.listener.StoreClickListener;
@@ -11,7 +12,8 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
 
 public class SimpleStoreAdapter extends MBaseAdapter {
-    private boolean isVisibleStar = false; 
+    private boolean isVisibleStar = false;
+    private boolean isClickable = true;
 
     public SimpleStoreAdapter(Context context) {
         super(context);
@@ -23,6 +25,10 @@ public class SimpleStoreAdapter extends MBaseAdapter {
 
     public void goneBookmarkView() {
         isVisibleStar = false;
+    }
+
+    public void setClickable(boolean isClickable) {
+	this.isClickable = isClickable;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -65,17 +71,30 @@ public class SimpleStoreAdapter extends MBaseAdapter {
             storeElement.bookmarkToggle.setVisibility(View.GONE);
         }
         storeElement.listener.setStore(store);
-        convertView.setOnClickListener(storeElement.listener);
+	storeElement.setStore(store);
+	
+	if (isClickable) {
+	    convertView.setOnClickListener(storeElement.listener);
+	}
 
         return convertView;
     }
 
-    private class StoreElement {
+    public class StoreElement {
         TextView name;
         TextView address;
         TextView likeCount;
         TextView postCount;
         BookmarkStarToggleView bookmarkToggle;
         StoreClickListener listener;
+	Store store;
+
+	public void setStore(Store store) {
+	    this.store = store;
+	}
+
+	public Store getStore() {
+	    return store;
+	}
     }
 }
