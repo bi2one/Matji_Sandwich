@@ -150,6 +150,8 @@
 	
 	<!-- Write Message Activity -->
 	<dimen name="write_message_underbar_height">46.67dp</dimen>
+	<dimen name="write_message_underbar_btn_width">47.33dp</dimen>
+	<dimen name="write_message_underbar_text_size">12dp</dimen>
 	
 	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>

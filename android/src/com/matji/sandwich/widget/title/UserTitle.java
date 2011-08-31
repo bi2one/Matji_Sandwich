@@ -4,11 +4,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.listener.FollowingListener;
-import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.FollowButton;
-import com.matji.sandwich.widget.title.button.WriteMessageButton;
+import com.matji.sandwich.widget.title.button.FollowButton.Followable;
+import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
+import com.matji.sandwich.widget.title.button.WriteMessageButton;
 
 /**
  * UserMainActivity에서 사용하는 Titlebar.
@@ -55,9 +55,5 @@ public class UserTitle extends TitleContainerTypeA {
     protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
         return new WriteMessageButton(getContext());
-    }
-    
-    public interface Followable {
-        public void following();
     }
 }

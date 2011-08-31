@@ -6,8 +6,8 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.matji.sandwich.MessageListActivity;
 import com.matji.sandwich.R;
@@ -18,7 +18,8 @@ import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.listener.LikeStoreListListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CellProfileImageView;
-import com.matji.sandwich.widget.title.UserTitle.Followable;
+import com.matji.sandwich.widget.title.button.FollowButton;
+import com.matji.sandwich.widget.title.button.FollowButton.Followable;
 
 /**
  * UI 상의 유저 셀 (유저 기본 정보가 보이는 곳)
@@ -158,4 +159,9 @@ public class UserCell extends Cell implements Followable {
     public void following() {
         followingListener.following();
     }
+
+//    @Override
+//    public int toggle() {
+//        return (followingListener.isExistFollowing()) ? FollowButton.UNFOLLOW : FollowButton.FOLLOW;
+//    }
 }

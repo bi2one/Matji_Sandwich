@@ -1,9 +1,11 @@
 package com.matji.sandwich.widget.title.button;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.WriteMessageActivity;
 
 /**
  * 메세지 버튼
@@ -34,5 +36,7 @@ public class WriteMessageButton extends TitleImageButton {
     public void onTitleItemClicked() {
         // TODO Auto-generated method stub
         Log.d("Matji", "WriteMessageButtonClicked");
+        Intent intent = new Intent(getContext(), WriteMessageActivity.class);
+        getContext().startActivity(intent);
     }
 }

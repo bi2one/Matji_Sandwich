@@ -353,4 +353,8 @@
   
   <!-- StoreTagActivity.java -->
   <string name="number_of_tag">%1$d개의 태그</string>
+  
+  <!-- WriteMessageActivity.java -->
+  <string name="write_message_writing_content">내용 입력</string>
+  <string name="write_message_received_users">받는사람:\ </string>
 </resources>

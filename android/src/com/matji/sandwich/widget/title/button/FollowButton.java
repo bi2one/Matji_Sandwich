@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.matji.sandwich.LikeStoreListActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.widget.title.UserTitle.Followable;
 
 /**
  * {@link LikeStoreListActivity}로 이동하게 하는 버튼
@@ -15,6 +14,9 @@ import com.matji.sandwich.widget.title.UserTitle.Followable;
  */
 public class FollowButton extends TitleImageButton {
 
+    public static final int FOLLOW = 30;
+    public static final int UNFOLLOW = 100;
+    
     private Followable followable;
     
     public FollowButton(Context context) {
@@ -33,6 +35,7 @@ public class FollowButton extends TitleImageButton {
 
     public void setFollowable(Followable followable) {
         this.followable = followable;
+        toggle();
     }
 
     /**
@@ -43,5 +46,13 @@ public class FollowButton extends TitleImageButton {
         // TODO Auto-generated method stub
         Log.d("Matji", "FollowButtonClicked");
         followable.following();
+    }
+    
+    private void toggle() {
+//        setAlpha(followable.toggle());
+    }
+        
+    public interface Followable {
+        public void following();
     }
 }
