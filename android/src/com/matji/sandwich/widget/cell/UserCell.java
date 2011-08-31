@@ -134,7 +134,7 @@ public class UserCell extends Cell implements Followable {
             follow.setVisibility(View.GONE);
             messageList.setVisibility(View.VISIBLE);
             messageList.setText(user.getReceivedMessageCount()+"");
-            switchable.off();
+            if (switchable != null) switchable.off();
         } else {
             follow.setText(
                     (followingListener.isExistFollowing()) ? 

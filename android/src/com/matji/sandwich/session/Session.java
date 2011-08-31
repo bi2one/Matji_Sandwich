@@ -102,8 +102,7 @@ public class Session implements Requestable {
 				
 				if (mLoginable != null)
 					mLoginable.loginCompleted();
-		}
-		
+		}		
 	}
 	
 	public void requestExceptionCallBack(int tag, MatjiException e) {

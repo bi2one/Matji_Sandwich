@@ -86,8 +86,8 @@ public class SettingActivity extends BaseActivity {
 	}
 
 	public void loginButtonClicked(View v) {
-		Intent intent = new Intent(this, LoginActivity.class);
-		startActivityForResult(intent, 1);
+//		Intent intent = new Intent(this, LoginActivity.class);
+//		startActivityForResult(intent, 1);
 	}
 
 	public void logoutButtonClicked(View v) {

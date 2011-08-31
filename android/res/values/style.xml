@@ -875,11 +875,6 @@
   </style>
 
   <!-- activity_write_post.xml -->
-  <style name="activity_write_post" parent="DefaultFill">
-    <item name="android:background">@color/matji_light_pink</item>
-    <item name="android:padding">10dp</item>
-  </style>
-
   <style name="activity_write_post_text" parent="DefaultFill">
     <item name="android:gravity">top</item>
   </style>
@@ -1037,5 +1032,79 @@
   
   <style name="write_post_store_view_add" parent="write_post_store_view_imagebutton">
     <item name="android:src">@drawable/icon_navi_delicious_write</item>
+  </style>
+
+  <!-- post_edit_text.xml -->
+  <style name="post_edit_text" parent="DefaultFill">
+    <item name="android:padding">10dp</item>
+    <item name="android:background">@color/matji_yellow_orange2</item>
+  </style>
+
+  <style name="post_edit_text_post" parent="DefaultFill">
+    <item name="android:background">@null</item>
+    <item name="android:padding">0dp</item>
+    <item name="android:gravity">top</item>
+  </style>
+
+  <style name="post_edit_text_contents" parent="DefaultFill">
+    <item name="android:background">@drawable/input_box_square</item>
+    <item name="android:padding">6.67dp</item>
+  </style>
+
+  <style name="post_edit_text_button" parent="DefaultWrap">
+    <item name="android:background">@drawable/btn_white</item>
+    <item name="android:layout_width">52.67dp</item>
+    <item name="android:layout_height">28dp</item>
+  </style>
+
+  <style name="post_edit_text_store_button" parent="post_edit_text_button">
+    <item name="android:src">@drawable/icon_story_restaurant</item>
+  </style>
+
+  <style name="post_edit_text_tag_button" parent="post_edit_text_button">
+    <item name="android:layout_marginLeft">6.67dp</item>
+    <item name="android:src">@drawable/icon_story_tag</item>
+  </style>
+
+  <style name="post_edit_text_service_button" parent="post_edit_text_button">
+    <item name="android:layout_marginLeft">6.67dp</item>
+    <item name="android:src">@drawable/icon_story_link</item>
+  </style>
+
+  <style name="post_edit_text_keyboard_toggle" parent="DefaultWrap">
+    <item name="android:background">@drawable/btn_white_story</item>
+    <item name="android:paddingLeft">13.33dp</item>
+    <item name="android:paddingRight">10.67dp</item>
+  </style>
+
+  <style name="post_edit_text_picture_button" parent="post_edit_text_keyboard_toggle">
+  </style>
+  <style name="post_edit_text_keyboard_button" parent="post_edit_text_keyboard_toggle">
+  </style>
+
+  <style name="post_edit_text_toggle_element" parent="DefaultWrap">
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
+
+  <style name="post_edit_text_picture_button_image" parent="post_edit_text_toggle_element">
+    <item name="android:background">@null</item>
+    <item name="android:src">@drawable/icon_story_photo</item>
+  </style>
+
+  <style name="post_edit_text_keyboard_button_image" parent="post_edit_text_toggle_element">
+    <item name="android:background">@null</item>
+    <item name="android:src">@drawable/icon_story_keyboard</item>
+  </style>
+
+  <style name="post_edit_text_down_arrow" parent="post_edit_text_toggle_element">
+    <item name="android:background">@null</item>
+    <item name="android:layout_marginLeft">6.67dp</item>
+    <item name="android:src">@drawable/icon_story_down</item>
+  </style>
+
+  <style name="post_edit_text_up_arrow" parent="post_edit_text_toggle_element">
+    <item name="android:background">@null</item>
+    <item name="android:layout_marginLeft">6.67dp</item>
+    <item name="android:src">@drawable/icon_story_up</item>
   </style>
 </resources>

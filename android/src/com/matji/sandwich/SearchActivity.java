@@ -1,17 +1,17 @@
 package com.matji.sandwich;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TabHost.OnTabChangeListener;
+
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.widget.MainSearchInputBar;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.RoundTabHost;
 import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 import com.matji.sandwich.widget.title.HomeTitle;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.TabHost.OnTabChangeListener;
 
 /**
  * activity for search (store, post, user).
@@ -24,6 +24,11 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
     private MainSearchInputBar searchInputBar;
     private RoundTabHost tabHost;
     private RelativeLayoutThatDetectsSoftKeyboard contentWrapper;
+    
+    public static final String PAGE = "page";
+    public static final int STORE = 0;
+    public static final int POST = 1;
+    public static final int USER = 2;
 
     public int setMainViewId() {
 	return R.id.contentWrapper;
@@ -56,11 +61,11 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
 
                 Searchable searchable = (Searchable) getCurrentActivity();
 
-                if (index == 0) {
+                if (index == STORE) {
                     searchInputBar.changeSearchType(MainSearchInputBar.STORE, searchable);
-                } else if (index == 1) {
+                } else if (index == POST) {
                     searchInputBar.changeSearchType(MainSearchInputBar.POST, searchable);
-                } else if (index == 2) {
+                } else if (index == USER) {
                     searchInputBar.changeSearchType(MainSearchInputBar.USER, searchable);
                 }
             }
@@ -80,10 +85,10 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
                 R.string.default_string_user,
                 userSearchIntent);
 
-        searchInputBar.changeSearchType(MainSearchInputBar.STORE, (Searchable) getCurrentActivity());
         contentWrapper = (RelativeLayoutThatDetectsSoftKeyboard) findViewById(R.id.contentWrapper);
         contentWrapper.setListener(this);
         searchInputBar.setSearchView((FrameLayout) findViewById(R.id.search_wrapper));
+        tabHost.setCurrentTab(getIntent().getIntExtra(PAGE, STORE));
         title.setVisibility(View.GONE);
     }
 

@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_write_post"
-    style="@style/activity_write_post" >
-  <EditText
+    style="@style/DefaultFill" >
+  <com.matji.sandwich.widget.title.CompletableTitle
+      android:layout_alignParentTop="true"
+      android:id="@+id/activity_write_post_title"
+      style="@style/DefaultWidthFill" />
+
+  <com.matji.sandwich.widget.PostEditText
       android:id="@+id/activity_write_post_text"
-      style="@style/activity_write_post_text" />
-</RelativeLayout>
+      android:layout_below="@id/activity_write_post_title"
+      style="@style/DefaultFill" />
+</com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

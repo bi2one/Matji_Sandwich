@@ -7,20 +7,61 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.LoginView;
+import com.matji.sandwich.widget.UserProfileView;
 
-public class LoginActivity extends BaseActivity implements Loginable {
+public class PrivateActivity extends BaseActivity implements Loginable {
+    
+    private int currentMainView;
+    
+    private UserProfileView userProfileView;
+    private LoginView loginView;
 
     public int setMainViewId() {
-        return R.id.activity_login;
+        return currentMainView;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    }
+
+    @Override
+    protected void init() {
+        setContentView(R.layout.activity_private);
+        userProfileView = (UserProfileView) findViewById(R.id.user_profile_view);
+        loginView = (LoginView) findViewById(R.id.login_view);
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    final public void refresh() {
+        if (Session.getInstance(this).isLogin()) {
+            showUserProfileView();
+        } else {
+            showLoginView();
+        }
+    }
+
+    public void showUserProfileView() {
+        userProfileView.setVisibility(View.VISIBLE);
+        userProfileView.setUser(Session.getInstance(this).getCurrentUser());
+        loginView.setVisibility(View.GONE);
+        currentMainView = userProfileView.getId();
+    }
+    
+    public void showLoginView() {
+        userProfileView.setVisibility(View.GONE);
+        loginView.setVisibility(View.VISIBLE);
+        currentMainView = loginView.getId(); 
     }
     
     public void loginButtonClicked(View v) {
@@ -28,18 +69,18 @@ public class LoginActivity extends BaseActivity implements Loginable {
         EditText passwordField = (EditText) findViewById(R.id.password);
         
         Session session = Session.getInstance(this);
-        session.login(this, getMainView(), usernameField.getText().toString(), passwordField.getText().toString());
+        session.login(this, loginView, usernameField.getText().toString(), passwordField.getText().toString());
     }
 
     public void cancelButtonClicked(View v) {
-        finish();
-
+//        finish();
     }
 
     /* Loginable Interface methods */
     public void loginCompleted() {
         this.setResult(RESULT_OK);
-        finish();
+        //TODO 싱크...?
+        showUserProfileView();
     }
 
     public void loginFailed() {
@@ -62,7 +103,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
         if (requestCode == BaseActivity.REQUEST_EXTERNAL_SERVICE_LOGIN){
             if (resultCode == Activity.RESULT_OK){
                 setResult(Activity.RESULT_OK);
-                finish();
+                refresh();
             }
         }
     }

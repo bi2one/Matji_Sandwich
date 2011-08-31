@@ -1,17 +1,15 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.widget.EditText;
 import android.content.Context;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.session.SessionWritePostUtil;
+import com.matji.sandwich.widget.title.CompletableTitle;
 
-public class WritePostActivity extends BaseActivity {
+public class WritePostActivity extends BaseActivity implements CompletableTitle.Completable {
     private Context context;
-    private EditText editText;
-    private SessionWritePostUtil sessionUtil;
-    // private WritePostTabActivity parentActivity;
+    private CompletableTitle titleBar;
 
     public int setMainViewId() {
 	return R.id.activity_write_post;
@@ -20,10 +18,10 @@ public class WritePostActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_write_post);
+	
 	context = getApplicationContext();
-	editText = (EditText)findViewById(R.id.activity_write_post_text);
-	sessionUtil = new SessionWritePostUtil(context);
-	// parentActivity = (WritePostTabActivity)getParent();
+	titleBar = (CompletableTitle)findViewById(R.id.activity_write_post_title);
+	titleBar.setTitle(R.string.write_post_activity_title);
     }
 
     protected void onResume() {
@@ -32,7 +30,11 @@ public class WritePostActivity extends BaseActivity {
 
     protected void onPause() {
 	super.onPause();
-	sessionUtil.setPost(editText.getText().toString());
+	// sessionUtil.setPost(editText.getText().toString());
 	// parentActivity.hideKeyboard();
+    }
+
+    public void complete() {
+	Log.d("=====", "complete");
     }
 }

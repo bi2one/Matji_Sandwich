@@ -15,9 +15,17 @@ import android.util.Log;
  */
 public class SearchButton extends TitleImageButton {
 
-	public SearchButton(Context context) {
-		super(context);
-	}
+    private final int page;
+    
+    public SearchButton(Context context) {
+        super(context);
+        this.page = 0;
+    }
+    
+    public SearchButton(Context context, int page) {
+        super(context);
+        this.page = page; 
+    }
 
 	/**
 	 * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
@@ -36,6 +44,9 @@ public class SearchButton extends TitleImageButton {
 	public void onTitleItemClicked() {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "SearchButtonClicked");
-		context.startActivity(new Intent(context, SearchActivity.class));
+		
+		Intent intent = new Intent(context, SearchActivity.class);
+		intent.putExtra(SearchActivity.PAGE, page);
+		context.startActivity(intent);
 	}
 }

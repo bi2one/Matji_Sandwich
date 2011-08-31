@@ -2,7 +2,7 @@ package com.matji.sandwich.widget.title;
 
 import com.matji.sandwich.widget.title.button.StorePostWriteButton;
 import com.matji.sandwich.widget.title.button.SearchButton;
-import com.matji.sandwich.widget.title.button.SettingsButton;
+import com.matji.sandwich.widget.title.button.SettingButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 import android.content.Context;
@@ -33,6 +33,6 @@ public class MainTitle extends TitleContainerTypeRRR {
     @Override
     protected TitleImageButton getRightButton3() {
         // TODO Auto-generated method stub
-        return new SettingsButton(getContext());
+        return new SettingButton(getContext());
     }
 }

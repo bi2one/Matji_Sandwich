@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/post_edit_text" >
+  <RelativeLayout style="@style/post_edit_text_contents">
+    <EditText android:id="@+id/post_edit_text_post"
+	      android:hint="@string/post_edit_text_empty"
+	      android:layout_alignParentTop="true"
+	      android:layout_above="@+id/post_edit_text_store_button"
+	      style="@style/post_edit_text_post" />
+    <ImageButton
+	android:id="@id/post_edit_text_store_button"
+	android:layout_alignParentBottom="true"
+	android:layout_alignParentLeft="true"
+	style="@style/post_edit_text_store_button" />
+    <ImageButton
+	android:id="@+id/post_edit_text_tag_button"
+	android:layout_toRightOf="@id/post_edit_text_store_button"
+	android:layout_alignBottom="@id/post_edit_text_store_button"
+	style="@style/post_edit_text_tag_button" />
+    <ImageButton
+	android:id="@+id/post_edit_text_service_button"
+	android:layout_toRightOf="@id/post_edit_text_tag_button"
+	android:layout_alignBottom="@id/post_edit_text_store_button"
+	style="@style/post_edit_text_service_button" />
+
+    <LinearLayout
+	android:id="@+id/post_edit_text_picture_button"
+	android:layout_alignParentRight="true"
+	android:layout_alignBottom="@id/post_edit_text_store_button"
+	style="@style/post_edit_text_picture_button">
+      <ImageView
+	  style="@style/post_edit_text_picture_button_image" />
+      <ImageView
+	  style="@style/post_edit_text_down_arrow" />
+    </LinearLayout>
+
+
+    <LinearLayout
+	android:id="@+id/post_edit_text_keyboard_button"
+	android:visibility="gone"
+	android:layout_alignParentRight="true"
+	android:layout_alignBottom="@id/post_edit_text_store_button"
+	style="@style/post_edit_text_keyboard_button">
+      <ImageView
+	  style="@style/post_edit_text_keyboard_button_image" />
+      <ImageView
+	  style="@style/post_edit_text_up_arrow" />
+    </LinearLayout>
+  </RelativeLayout>
+</RelativeLayout>

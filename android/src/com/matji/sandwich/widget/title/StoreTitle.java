@@ -7,8 +7,8 @@ import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.LikeButton;
+import com.matji.sandwich.widget.title.button.StorePostWriteButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
-import com.matji.sandwich.widget.title.button.WriteButton;
 
 /**
  * {@link StoreMainActivity}에서 사용하는 Titlebar.
@@ -38,7 +38,7 @@ public class StoreTitle extends TitleContainerTypeLRR {
     @Override
     protected TitleImageButton getRightButton1() {
         // TODO Auto-generated method stub
-        return new WriteButton(getContext());
+        return new StorePostWriteButton(getContext());
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.matji.sandwich.widget.title.button;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.SettingActivity;
 
 /**
  * TODO
@@ -11,9 +13,9 @@ import com.matji.sandwich.R;
  * @author mozziluv
  *
  */
-public class SettingsButton extends TitleImageButton {
+public class SettingButton extends TitleImageButton {
 
-	public SettingsButton(Context context) {
+	public SettingButton(Context context) {
 		super(context);
 	}
 
@@ -34,5 +36,7 @@ public class SettingsButton extends TitleImageButton {
 	public void onTitleItemClicked() {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "SettingsButtonClicked");
+		
+		getContext().startActivity(new Intent(getContext(), SettingActivity.class));
 	}
 }
