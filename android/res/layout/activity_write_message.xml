@@ -1,26 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultFill">
+	android:id="@+id/write_message_activity"
+	style="@style/DefaultFill"
+	android:background="@drawable/tabbtn_bg">
 	<com.matji.sandwich.widget.title.CompletableTitle
 		android:id="@+id/Titlebar"
 		style="@style/DefaultWidthFill" />
 	<EditText
-		android:id="@+id/message_field"
+		android:id="@+id/write_message_message_field"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:layout_above="@+id/write_message_underbar" />
+		android:hint="@string/write_message_writing_content"
+		android:gravity="top"
+		android:background="@drawable/input_box_square"
+		android:layout_above="@+id/write_message_underbar"
+		android:layout_below="@id/Titlebar"
+		android:layout_margin="@dimen/default_distance" />
 	<RelativeLayout
 		android:id="@id/write_message_underbar"
 		android:layout_width="fill_parent"
 		android:layout_height="@dimen/write_message_underbar_height"
 		android:background="@drawable/story_bg"
-		android:layout_alignParentBottom="true">
+		android:paddingLeft="@dimen/default_distance"
+		android:paddingRight="@dimen/default_distance"
+		android:layout_alignParentBottom="true"
+		android:gravity="center_vertical">
 		<TextView
-			android:id="@+id/write_message_received_user"
-			style="@style/DefaultWrap" />
-		<ImageButton />
-		<ImageButton />
+			android:id="@+id/write_message_received_user_list"
+			style="@style/DefaultHeightFill"
+			android:gravity="center_vertical"
+			android:textColor="@color/minor_tab_text_default"
+			android:textSize="@dimen/write_message_underbar_text_size"
+			android:singleLine="true"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true" />
+		<ImageButton
+			android:id="@+id/write_message_received_user_list_btn"
+			android:background="@drawable/tabbtn_left"
+			android:layout_width="@dimen/write_message_underbar_btn_width"
+			android:layout_height="wrap_content"
+			android:src="@drawable/icon_toolbar_userplus02"
+			android:layout_toLeftOf="@+id/write_message_received_message_list_btn"
+			android:layout_centerVertical="true" />
+		<ImageButton
+			android:id="@id/write_message_received_message_list_btn"
+			android:background="@drawable/tabbtn_right"
+			android:layout_width="@dimen/write_message_underbar_btn_width"
+			android:layout_height="wrap_content"
+			android:src="@drawable/icon_toolbar_memolist"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true" />
 	</RelativeLayout>
 </RelativeLayout>
 

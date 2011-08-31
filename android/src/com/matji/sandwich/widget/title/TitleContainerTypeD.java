@@ -33,7 +33,8 @@ public abstract class TitleContainerTypeD extends TypedTitleContainer {
 	 */
 	@Override
 	final protected void addButtons() {
-	    addViewInLeftContainer(leftButton1);
+        addViewInLeftContainer(leftButton1);
+        addViewInRightContainer(rightButton1);
 	}
 	
 	/**
@@ -42,6 +43,7 @@ public abstract class TitleContainerTypeD extends TypedTitleContainer {
 	@Override
 	final protected void setButtons() {
 	    leftButton1 = getLeftButton1();
+	    rightButton1 = getRightButton1();
 	}
 	
 	/**

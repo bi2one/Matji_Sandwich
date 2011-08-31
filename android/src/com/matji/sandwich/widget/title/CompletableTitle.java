@@ -18,19 +18,19 @@ public class CompletableTitle extends TitleContainerTypeD {
 		super(context, attr);
 	}
 
-    @Override
-    protected TitleImageButton getLeftButton1() {
-        return new HomeButton(getContext());
-    }
-    
     /**
      * {@link Completable} 객체를 각 버튼에 지정한다.
      * @param completable  버튼에 지정할 {@link Completable} 객체
      */
-    public void setPageable(Completable completable) {
+    public void setCompletable(Completable completable) {
         ((CompleteButton) rightButton1).setCompletable(completable);
     }
     
+    @Override
+    protected TitleImageButton getLeftButton1() {
+        return new HomeButton(getContext());
+    }
+        
     @Override
     protected TitleButton getRightButton1() {
         return new CompleteButton(getContext());
