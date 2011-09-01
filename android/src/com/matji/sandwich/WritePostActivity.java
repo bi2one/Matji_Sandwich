@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -33,10 +34,8 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
     private LayoutParams keyboardLayoutParams;
     private boolean isShowImageKeyboardAfterHide;
     private boolean isShowNormalKeyboardAfterHide;
-    // private boolean isShowNormalKeyboardRepeat;
     private Store store;
     private String tags;
-    
 
     public int setMainViewId() {
 	return R.id.activity_write_post;
@@ -60,7 +59,6 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 
     protected void onResume() {
     	super.onResume();
-	// showNormalKeyboardRepeat();
 	Handler handler = new Handler();
 	handler.postDelayed(new Runnable() {
 		public void run() {
@@ -70,20 +68,14 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	    }, 100);
     }
 
-    // protected void onPause() {
-    // 	super.onPause();
-	// sessionUtil.setPost(editText.getText().toString());
-	// parentActivity.hideKeyboard();
-    // }
-
     public void complete() {
 	Log.d("=====", "complete");
     }
 
     public void onStoreClicked(View v) {
 	Intent intent = new Intent(this, SelectStoreActivity.class);
+	intent.putExtra(SelectStoreActivity.DATA_STORE, (Parcelable)store);
 	startActivityForResult(intent, INTENT_SELECT_STORE);
-	// Log.d("=====", "store click");
     }
 
     public void onTagClicked(View v) {
@@ -110,8 +102,9 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	if (requestCode == INTENT_SELECT_STORE) {
 	    store = (Store)data.getParcelableExtra(SelectStoreActivity.DATA_STORE);
 	    if (store != null) {
-		Log.d("=====", "storeId: " + store.getId());
-		// check button! -- TODO
+		postText.checkButton(PostEditText.ButtonIndex.STORE);
+	    } else {
+		postText.unCheckButton(PostEditText.ButtonIndex.STORE);
 	    }
 	}
     }
@@ -136,11 +129,6 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	    showImageKeyboard();
 	}
 
-	// if (!isShowing && isShowNormalKeyboardRepeat) {
-	//     initKeyboardConstant();
-	//     showNormalKeyboard();
-	// }
-
 	if (isShowing && isShowNormalKeyboardAfterHide) {
 	    initKeyboardConstant();
 	    showNormalKeyboard();
@@ -149,7 +137,6 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 
     private void initKeyboardConstant() {
 	isShowImageKeyboardAfterHide = false;
-	// isShowNormalKeyboardRepeat = false;
 	isShowNormalKeyboardAfterHide = false;
     }
 
@@ -157,10 +144,6 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	KeyboardUtil.hideKeyboard(this);
 	isShowImageKeyboardAfterHide = true;
     }
-
-    // public void showNormalKeyboardRepeat() {
-    // 	isShowNormalKeyboardRepeat = true;
-    // }
 
     public void showNormalKeyboardAfterHide() {
 	KeyboardUtil.showKeyboard(this, postText.getEditText());

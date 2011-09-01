@@ -1117,21 +1117,23 @@
   </style>
 
   <style name="select_store_contents_selected" parent="DefaultWidthFill">
-    <item name="android:paddingLeft">@dimen/minor_title_location_padding</item>
+    <item name="android:paddingLeft">10dp</item>
     <item name="android:paddingRight">@dimen/minor_title_location_padding</item>
-    <item name="android:textColor">@color/matji_brown_text</item>
+    <item name="android:textColor">@color/map_title_bar_hint</item>
+    <item name="android:textSize">14dp</item>
+    <item name="android:singleLine">true</item>
   </style>
 
   <style name="select_store_contents_imagebutton" parent="DefaultHeightFill">
     <item name="android:layout_width">@dimen/minor_title_button_width</item>
-    <item name="android:background">@color/invisible</item>
+    <item name="android:background">@null</item>
   </style>
 
   <style name="select_store_contents_search" parent="select_store_contents_imagebutton">
-    <item name="android:src">@drawable/icon_navi_search</item>
+    <item name="android:src">@drawable/icon_mapview</item>
   </style>
   
   <style name="select_store_contents_add" parent="select_store_contents_imagebutton">
-    <item name="android:src">@drawable/icon_navi_delicious_write</item>
+    <item name="android:src">@drawable/icon_discovery</item>
   </style>
 </resources>

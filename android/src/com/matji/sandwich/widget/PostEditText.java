@@ -17,6 +17,10 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
     public enum ToggleIndex {
 	IMAGE, KEYBOARD
     }
+
+    public enum ButtonIndex {
+	STORE, TAG, SERVICE
+    }
     
     private Context context;
     private EditText postText;
@@ -46,6 +50,40 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
 	serviceButton.setOnClickListener(this);
 	pictureButton.setOnClickListener(this);
 	keyboardButton.setOnClickListener(this);
+    }
+
+    public void checkButton(ButtonIndex index) {
+	switch(index) {
+	case STORE:
+	    storeButton.setBackgroundResource(R.drawable.btn_white_touch);
+	    storeButton.setImageResource(R.drawable.icon_story_restaurant_touch);
+	    break;
+	case TAG:
+	    tagButton.setBackgroundResource(R.drawable.btn_white_touch);
+	    tagButton.setImageResource(R.drawable.icon_story_tag_touch);
+	    break;
+	case SERVICE:
+	    serviceButton.setBackgroundResource(R.drawable.btn_white_touch);
+	    serviceButton.setImageResource(R.drawable.icon_story_link_touch);
+	    break;
+	}
+    }
+
+    public void unCheckButton(ButtonIndex index) {
+	switch(index) {
+	case STORE:
+	    storeButton.setBackgroundResource(R.drawable.btn_white);
+	    storeButton.setImageResource(R.drawable.icon_story_restaurant);
+	    break;
+	case TAG:
+	    tagButton.setBackgroundResource(R.drawable.btn_white);
+	    tagButton.setImageResource(R.drawable.icon_story_tag);
+	    break;
+	case SERVICE:
+	    serviceButton.setBackgroundResource(R.drawable.btn_white);
+	    serviceButton.setImageResource(R.drawable.icon_story_link);
+	    break;
+	}
     }
 
     public void toggleTo(ToggleIndex index) {
