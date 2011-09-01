@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session;
@@ -68,8 +67,7 @@ public class PrivateActivity extends BaseActivity implements Loginable {
         EditText usernameField = (EditText) findViewById(R.id.username);
         EditText passwordField = (EditText) findViewById(R.id.password);
         
-        Session session = Session.getInstance(this);
-        session.login(this, loginView, usernameField.getText().toString(), passwordField.getText().toString());
+        new LoginAsyncTask(getParent(), this, loginView, usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
     }
 
     public void cancelButtonClicked(View v) {
@@ -79,7 +77,6 @@ public class PrivateActivity extends BaseActivity implements Loginable {
     /* Loginable Interface methods */
     public void loginCompleted() {
         this.setResult(RESULT_OK);
-        //TODO 싱크...?
         showUserProfileView();
     }
 

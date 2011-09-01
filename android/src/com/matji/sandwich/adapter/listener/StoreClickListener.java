@@ -15,16 +15,16 @@ public class StoreClickListener implements OnClickListener {
     private Intent targetIntent;
 
     public StoreClickListener(Context context) {
-	this.context = context;
-	targetIntent = new Intent(context, StoreMainActivity.class);
+        this.context = context;
+        targetIntent = new Intent(context, StoreMainActivity.class);
     }
 
     public void setStore(Store store) {
-	this.store = store;
+        this.store = store;
     }
-    
+
     public void onClick(View v) {
-	targetIntent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-	context.startActivity(targetIntent);
+        targetIntent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
+        context.startActivity(targetIntent);
     }
 }

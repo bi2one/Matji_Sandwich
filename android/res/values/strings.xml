@@ -367,4 +367,7 @@
   <!-- MessageListActivity.java -->
   <string name="received_message_list">받은 쪽지함</string>
   <string name="sent_message_list">보낸 쪽지함</string>
+  
+  <!-- LoginAsyncTask.java -->
+  <string name="login_loading">로그인 중입니다.</string>
 </resources>

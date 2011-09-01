@@ -9,7 +9,6 @@ import android.widget.EditText;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
-import com.matji.sandwich.session.Session;
 
 public class LoginActivity extends BaseActivity implements Loginable {
 
@@ -25,10 +24,9 @@ public class LoginActivity extends BaseActivity implements Loginable {
     
     public void loginButtonClicked(View v) {
         EditText usernameField = (EditText) findViewById(R.id.username);
-        EditText passwordField = (EditText) findViewById(R.id.password);
+        EditText passwordField = (EditText) findViewById(R.id.password);        
         
-        Session session = Session.getInstance(this);
-        session.login(this, getMainView(), usernameField.getText().toString(), passwordField.getText().toString());
+        new LoginAsyncTask(this, this, getMainView(), usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
     }
 
     public void cancelButtonClicked(View v) {

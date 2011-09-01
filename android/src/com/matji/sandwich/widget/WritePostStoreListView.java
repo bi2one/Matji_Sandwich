@@ -30,46 +30,46 @@ public class WritePostStoreListView extends RequestableMListView {
     private GeoPoint swBound;
 
     public WritePostStoreListView(Context context, AttributeSet attrs) {
-	super(context, attrs, new WritePostStoreAdapter(context), 10);
-	this.context = context;
+        super(context, attrs, new WritePostStoreAdapter(context), 10);
+        this.context = context;
 
-	request = new StoreHttpRequest(context);
-	sessionUtil = new SessionMapUtil(context);
+        request = new StoreHttpRequest(context);
+        sessionUtil = new SessionMapUtil(context);
 
-	setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
-	setDividerHeight(1);
-	setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
-	setCacheColorHint(Color.TRANSPARENT);
-	setSelector(android.R.color.transparent);
-	adapterData = getAdapterData();
-	
-	setPage(1);
+        setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
+        setDividerHeight(1);
+        setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
+        setCacheColorHint(Color.TRANSPARENT);
+        setSelector(android.R.color.transparent);
+        adapterData = getAdapterData();
+
+        setPage(1);
     }
 
     public void init(Activity activity) {
-	setActivity(activity);
+        setActivity(activity);
     }
 
     public void setNeBound(GeoPoint neBound) {
-	this.neBound = neBound;
+        this.neBound = neBound;
     }
 
     public void setSwBound(GeoPoint swBound) {
-	this.swBound = swBound;
+        this.swBound = swBound;
     }
 
     public void setBound(GeoPoint neBound, GeoPoint swBound) {
-	setNeBound(neBound);
-	setSwBound(swBound);
+        setNeBound(neBound);
+        setSwBound(swBound);
     }
 
     public HttpRequest request() {
-	request.actionNearbyList((double) swBound.getLatitudeE6() / 1E6,
-				 (double) neBound.getLatitudeE6() / 1E6,
-				 (double) swBound.getLongitudeE6() / 1E6,
-				 (double) neBound.getLongitudeE6() / 1E6,
-				 getPage(), getLimit());
-	return request;
+        request.actionNearbyList((double) swBound.getLatitudeE6() / 1E6,
+                (double) neBound.getLatitudeE6() / 1E6,
+                (double) swBound.getLongitudeE6() / 1E6,
+                (double) neBound.getLongitudeE6() / 1E6,
+                getPage(), getLimit());
+        return request;
     }
 
     public void onListItemClick(int position) { }

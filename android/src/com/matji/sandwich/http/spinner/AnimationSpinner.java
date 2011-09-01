@@ -1,12 +1,9 @@
 package com.matji.sandwich.http.spinner;
 
 import android.content.Context;
-import android.widget.ImageView;
-import android.view.ViewGroup;
-import android.util.Log;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.StateListDrawable;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.matji.sandwich.R;
 

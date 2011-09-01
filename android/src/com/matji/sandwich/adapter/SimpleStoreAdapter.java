@@ -2,9 +2,9 @@ package com.matji.sandwich.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.listener.StoreClickListener;
@@ -14,6 +14,8 @@ import com.matji.sandwich.widget.BookmarkStarToggleView;
 public class SimpleStoreAdapter extends MBaseAdapter {
     private boolean isVisibleStar = false;
     private boolean isClickable = true;
+    
+    private OnClickListener listener;
 
     public SimpleStoreAdapter(Context context) {
         super(context);
@@ -27,8 +29,12 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         isVisibleStar = false;
     }
 
+    public void setListener(OnClickListener listener) {
+        this.listener = listener;
+    }
+    
     public void setClickable(boolean isClickable) {
-	this.isClickable = isClickable;
+        this.isClickable = isClickable;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -71,11 +77,13 @@ public class SimpleStoreAdapter extends MBaseAdapter {
             storeElement.bookmarkToggle.setVisibility(View.GONE);
         }
         storeElement.listener.setStore(store);
-	storeElement.setStore(store);
-	
-	if (isClickable) {
-	    convertView.setOnClickListener(storeElement.listener);
-	}
+        storeElement.setStore(store);
+
+        if (isClickable) {
+            convertView.setOnClickListener(storeElement.listener);
+        } else {
+            convertView.setOnClickListener(listener);
+        }
 
         return convertView;
     }
@@ -87,14 +95,14 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         TextView postCount;
         BookmarkStarToggleView bookmarkToggle;
         StoreClickListener listener;
-	Store store;
+        Store store;
 
-	public void setStore(Store store) {
-	    this.store = store;
-	}
+        public void setStore(Store store) {
+            this.store = store;
+        }
 
-	public Store getStore() {
-	    return store;
-	}
+        public Store getStore() {
+            return store;
+        }
     }
 }
