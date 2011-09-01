@@ -1136,4 +1136,89 @@
   <style name="select_store_contents_add" parent="select_store_contents_imagebutton">
     <item name="android:src">@drawable/icon_discovery</item>
   </style>
+
+  <!-- simple_submit_location_bar.xml -->
+  <style name="simple_submit_location_bar_text" parent="select_store_contents_selected">
+    <item name="android:textColor">@color/map_title_bar_address</item>
+  </style>
+
+  <!-- <style name="simple_submit_location_bar_submit_btn" parent="DefaultWrap"> -->
+  <!--   <item name="android:paddingLeft">15.67dp</item> -->
+  <!--   <item name="android:paddingRight">15.67dp</item> -->
+  <!--   <item name="android:background">@null</item> -->
+  <!--   <item name="android:textSize">13.33dp</item> -->
+  <!--   <item name="android:textColor">@color/map_title_bar_hint</item> -->
+  <!-- </style> -->
+
+  <!-- write_store_matji_mapview.xml -->
+  <style name="write_store_matji_mapview" parent="DefaultFill">
+    <item name="android:background">@color/write_store_bg</item>
+  </style>
+
+  <style name="write_store_matji_mapview_text" parent="DefaultWidthFill">
+    <item name="android:paddingTop">7.33dp</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingBottom">7.33dp</item>
+    <item name="android:paddingRight">10dp</item>
+  </style>
+
+  <style name="write_store_matji_mapview_edittext" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/input_box_square</item>
+    <item name="android:paddingLeft">9dp</item>
+    <item name="android:paddingTop">6dp</item>
+    <item name="android:paddingRight">9dp</item>
+    <item name="android:paddingBottom">6dp</item>
+    <item name="android:textSize">15.33dp</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textColor">@color/BLACK</item>
+  </style>
+
+  <style name="write_store_matji_mapview_store_name" parent="write_store_matji_mapview_edittext">
+    <item name="android:layout_marginBottom">6.67dp</item>
+  </style>
+
+  <style name="write_store_matji_mapview_phone_number" parent="write_store_matji_mapview_edittext">
+    <item name="android:layout_marginTop">6.67dp</item>
+  </style>
+  
+  <style name="write_store_matji_mapview_edittext_empty" parent="write_store_matji_mapview_edittext">
+    <item name="android:background">@null</item>
+    <item name="android:paddingTop">2dp</item>
+    <item name="android:paddingRight">5dp</item>
+    <item name="android:paddingBottom">2dp</item>
+  </style>
+
+  <style name="write_store_matji_mapview_divider" parent="DefaultWidthFill">
+    <item name="android:layout_height">1px</item>
+    <item name="android:background">@color/write_store_divider</item>
+  </style>
+
+  <style name="write_store_matji_mapview_address" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/input_box_square</item>
+    <item name="android:paddingLeft">0dp</item>
+    <item name="android:paddingTop">4dp</item>
+    <item name="android:paddingRight">4dp</item>
+    <item name="android:paddingBottom">4dp</item>
+  </style>
+
+  <style name="write_store_matji_mapview_button" parent="DefaultWrap">
+    <item name="android:layout_width">63.33dp</item>
+    <item name="android:layout_height">50dp</item>
+    <item name="android:background">@drawable/btn_white_story</item>
+    <item name="android:paddingLeft">12dp</item>
+    <item name="android:paddingRight">8.67dp</item>
+    <item name="android:layout_marginLeft">12dp</item>
+  </style>
+
+  <style name="write_store_matji_mapview_btn_image" parent="DefaultWrap">
+    <item name="android:src">@drawable/icon_story_map</item>
+  </style>
+
+  <style name="write_store_matji_mapview_btn_arrow" parent="DefaultWrap">
+    <item name="android:src">@drawable/icon_story_down</item>
+  </style>
+
+  <style name="write_store_matji_mapview_overlay" parent="DefaultWrap">
+    <item name="android:src">@drawable/marker_04</item>
+  </style>
 </resources>

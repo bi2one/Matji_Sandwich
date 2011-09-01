@@ -14,7 +14,7 @@ import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.session.SessionMapUtil;
-import com.matji.sandwich.session.SessionRecentLocationUtil;
+// import com.matji.sandwich.session.SessionRecentLocationUtil;
 import com.matji.sandwich.widget.StoreMapNearListView;
 
 public class MainMapActivity extends BaseMapActivity {
@@ -27,7 +27,7 @@ public class MainMapActivity extends BaseMapActivity {
     private TextView addressView;
     private View flipButton;
     private boolean currentViewIsMap;
-    private SessionRecentLocationUtil sessionLocationUtil;
+    // private SessionRecentLocationUtil sessionLocationUtil;
     private SessionMapUtil sessionMapUtil;
     private HttpRequestManager requestManager;
 
@@ -44,7 +44,7 @@ public class MainMapActivity extends BaseMapActivity {
 
         context = getApplicationContext();
 	requestManager = HttpRequestManager.getInstance(context);
-        sessionLocationUtil = new SessionRecentLocationUtil(context);
+        // sessionLocationUtil = new SessionRecentLocationUtil(context);
         sessionMapUtil = new SessionMapUtil(context);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
         mapView = (MainMatjiMapView)findViewById(R.id.map_view);
@@ -126,8 +126,8 @@ public class MainMapActivity extends BaseMapActivity {
             if (resultCode == Activity.RESULT_OK) {
                 int searchedLat = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LATITUDE, BASIC_SEARCH_LOC_LAT);
                 int searchedLng = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE, BASIC_SEARCH_LOC_LNG);
-                String searchedLocation = data.getStringExtra(ChangeLocationActivity.INTENT_KEY_LOCATION_NAME);
-                sessionLocationUtil.push(searchedLocation, searchedLat, searchedLng);
+                // String searchedLocation = data.getStringExtra(ChangeLocationActivity.INTENT_KEY_LOCATION_NAME);
+                // sessionLocationUtil.push(searchedLocation, searchedLat, searchedLng);
                 if (currentViewIsMap) 
                     mapView.setCenter(new GeoPoint(searchedLat, searchedLng));
                 else {

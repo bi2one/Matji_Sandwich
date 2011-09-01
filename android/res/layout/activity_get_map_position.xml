@@ -2,27 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/activity_get_map_position"
 		style="@style/DefaultFill" >
-  <com.matji.sandwich.map.MatjiMapView
-      android:id="@+id/map_view"
+  <com.matji.sandwich.widget.title.CompletableTitle
+      android:id="@+id/activity_get_map_position_title"
+      android:layout_alignParentTop="true"
+      style="@style/DefaultWidthFill" />
+  
+  <com.matji.sandwich.map.RadiusMatjiMapView
+      android:id="@+id/activity_get_map_position_mapview"
       style="@style/DefaultFill"
+      android:layout_below="@id/activity_get_map_position_title"
       android:apiKey="@string/map_api_key"
       android:clickable="true"/>
-  <TextView
-      android:id="@+id/address"
-      android:layout_alignParentTop="true"
-      style="@style/get_map_position_addressText" />
-
-  <Button style="@style/get_map_position_currentPositionBtn"
-	  android:text="@string/default_string_current_position"
-	  android:onClick="onCurrentLocationClicked"
-	  android:layout_alignParentRight="true"
-	  android:layout_below="@id/address" />
-  
-  <Button
-      android:id="@+id/regist_main_regist"
-      style="@style/get_map_position_registSubmitBtn"
-      android:text="@string/get_map_position_complete"
-      android:onClick="onSubmitClicked"
-      android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true" />
 </RelativeLayout>

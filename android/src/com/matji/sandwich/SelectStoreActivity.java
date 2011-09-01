@@ -15,6 +15,8 @@ import com.matji.sandwich.session.SessionMapUtil;
 
 public class SelectStoreActivity extends BaseActivity implements CompletableTitle.Completable,
 								 SelectStoreContents.OnClickListener {
+    public static final int INTENT_SEARCH_LOCATION = 0;
+    public static final int INTENT_WRITE_STORE = 1;
     public static final String DATA_STORE = "SelectStoreActivity.store";
     private Context context;
     private CompletableTitle titleBar;
@@ -39,7 +41,7 @@ public class SelectStoreActivity extends BaseActivity implements CompletableTitl
 
         storeContents = (SelectStoreContents)findViewById(R.id.activity_write_post_store_contents);
         storeContents.init(this);
-        storeContents.refresh(sessionMapUtil.getNEBound(), sessionMapUtil.getSWBound());
+        // storeContents.refresh(sessionMapUtil.getNEBound(), sessionMapUtil.getSWBound());
         storeContents.setOnClickListener(this);
 
 	passedIntent = getIntent();
@@ -47,6 +49,11 @@ public class SelectStoreActivity extends BaseActivity implements CompletableTitl
 	if (passedStore != null) {
 	    storeContents.setStore(passedStore);
 	}
+    }
+
+    protected void onResume() {
+	super.onResume();
+	storeContents.refresh(sessionMapUtil.getNEBound(), sessionMapUtil.getSWBound());
     }
 
     public void complete() {
@@ -57,11 +64,34 @@ public class SelectStoreActivity extends BaseActivity implements CompletableTitl
     }
 
     public void onSearchLocationClick(View v) {
-	
-        Log.d("=====", "search location");
+	Intent intent = new Intent(this, GetMapPositionActivity.class);
+	startActivityForResult(intent, INTENT_SEARCH_LOCATION);
+        // Log.d("=====", "search location");
     }
 
     public void onWriteStoreClick(View v) {
-        Log.d("=====", "write store");
+	Intent intent = new Intent(this, WriteStoreActivity.class);
+	startActivityForResult(intent, INTENT_WRITE_STORE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
+	if (resultCode != RESULT_OK)
+	    return ;
+
+	switch(requestCode) {
+	case INTENT_SEARCH_LOCATION:
+	    int latNe = data.getIntExtra(GetMapPositionActivity.DATA_NE_LAT, GetMapPositionActivity.BASIC_NE_LAT);
+	    int latSw = data.getIntExtra(GetMapPositionActivity.DATA_SW_LAT, GetMapPositionActivity.BASIC_SW_LAT);
+	    int lngNe = data.getIntExtra(GetMapPositionActivity.DATA_NE_LNG, GetMapPositionActivity.BASIC_NE_LNG);
+	    int lngSw = data.getIntExtra(GetMapPositionActivity.DATA_SW_LNG, GetMapPositionActivity.BASIC_SW_LNG);
+	    storeContents.refresh(latNe, lngNe, latSw, lngSw);
+	    break;
+	case INTENT_WRITE_STORE:
+	    Store store = (Store)data.getParcelableExtra(WriteStoreActivity.DATA_STORE);
+	    storeContents.setStore(store);
+	    // Log.d("=====", "returned store: " + store.getName());
+	    break;
+	}
     }
 }

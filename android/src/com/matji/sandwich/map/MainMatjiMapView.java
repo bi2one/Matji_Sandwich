@@ -78,6 +78,11 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	gpsManager.start(GPS_START_TAG);
     }
 
+    public void reload() {
+	Runnable runnable = new MapRunnable(this);
+	activity.runOnUiThread(runnable);
+    }
+
     public void moveToGpsCenter() {
 	gpsManager.start(GPS_START_TAG);
     }

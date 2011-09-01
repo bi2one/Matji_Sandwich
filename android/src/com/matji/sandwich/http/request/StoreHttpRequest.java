@@ -61,6 +61,22 @@ public class StoreHttpRequest extends HttpRequest {
     	postHashtable.put("website", website);
     	postHashtable.put("cover", cover);
     }
+
+    public void actionNew(String name, String address, double lat, double lng,
+			  String add_address, String tel) {
+    	httpMethod = HttpMethod.HTTP_POST;
+    	action = "new";
+    	parser = new StoreParser(context);
+
+    	postHashtable.clear();
+    	postHashtable.put("name", name);
+    	postHashtable.put("address", address);
+    	postHashtable.put("lat", lat);
+    	postHashtable.put("lng", lng);
+    	postHashtable.put("add_address", add_address);
+    	postHashtable.put("tel", tel);
+    }
+
     
     public void actionModify(String name, String address, int lat, int lng, int store_id) {
     	httpMethod = HttpMethod.HTTP_POST;

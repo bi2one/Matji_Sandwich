@@ -9,6 +9,10 @@ import com.google.android.maps.GeoPoint;
 import android.util.Log;
 
 public class GeocodeUtil {
+    public static GeocodeAddress getDetailedAddress(ArrayList<MatjiData> addresses) {
+	return (GeocodeAddress)addresses.get(0);
+    }
+    
     public static GeocodeAddress approximateAddress(ArrayList<MatjiData> addresses, GeoPoint neBound, GeoPoint swBound) {
 	double currentDistance = getDistance(neBound.getLatitudeE6(), neBound.getLongitudeE6(),
 					     swBound.getLatitudeE6(), swBound.getLongitudeE6());
@@ -28,14 +32,7 @@ public class GeocodeUtil {
 	    }
 
 	    double geocodeDistance = getDistance(neLat, neLng, swLat, swLng);
-	    // Log.d("=====", "==========================================");
-	    // Log.d("=====", "neLat      : " + neLat);
-	    // Log.d("=====", "neLng      : " + neLng);
-	    // Log.d("=====", "swLat      : " + swLat);
-	    // Log.d("=====", "swLng      : " + swLng);
-	    // Log.d("=====", "geoDistance: " + geocodeDistance);
 	    double newDistance = Math.abs(geocodeDistance - currentDistance);
-	    // Log.d("=====", "newDistance: " + newDistance);
 	    if (shortestDistance == 0 || newDistance < shortestDistance) {
 		shortestDistance = newDistance;
 		result = address;
