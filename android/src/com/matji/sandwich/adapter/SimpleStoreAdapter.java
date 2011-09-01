@@ -13,8 +13,6 @@ import com.matji.sandwich.widget.BookmarkStarToggleView;
 
 public class SimpleStoreAdapter extends MBaseAdapter {
     private boolean isVisibleStar = false;
-    private boolean isClickable = true;
-    
     private OnClickListener listener;
 
     public SimpleStoreAdapter(Context context) {
@@ -29,14 +27,10 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         isVisibleStar = false;
     }
 
-    public void setListener(OnClickListener listener) {
+    public void setOnClickListener(OnClickListener listener) {
         this.listener = listener;
     }
     
-    public void setClickable(boolean isClickable) {
-        this.isClickable = isClickable;
-    }
-
     public View getView(int position, View convertView, ViewGroup parent) {
         StoreElement storeElement;
         Store store = (Store) data.get(position);
@@ -79,7 +73,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         storeElement.listener.setStore(store);
         storeElement.setStore(store);
 
-        if (isClickable) {
+        if (listener == null) {
             convertView.setOnClickListener(storeElement.listener);
         } else {
             convertView.setOnClickListener(listener);

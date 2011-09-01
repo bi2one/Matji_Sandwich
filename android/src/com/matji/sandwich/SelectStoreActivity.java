@@ -1,23 +1,27 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.SelectStoreContents;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.session.SessionMapUtil;
 
 public class SelectStoreActivity extends BaseActivity implements CompletableTitle.Completable,
-SelectStoreContents.OnClickListener {
+								 SelectStoreContents.OnClickListener {
     public static final String DATA_STORE = "SelectStoreActivity.store";
     private Context context;
     private CompletableTitle titleBar;
     private SelectStoreContents storeContents;
     private SessionMapUtil sessionMapUtil;
+    private Intent passedIntent;
+    private Store passedStore;
 
     public int setMainViewId() {
         return R.id.activity_select_store;
@@ -37,13 +41,23 @@ SelectStoreContents.OnClickListener {
         storeContents.init(this);
         storeContents.refresh(sessionMapUtil.getNEBound(), sessionMapUtil.getSWBound());
         storeContents.setOnClickListener(this);
+
+	passedIntent = getIntent();
+	passedStore = (Store)passedIntent.getParcelableExtra(DATA_STORE);
+	if (passedStore != null) {
+	    storeContents.setStore(passedStore);
+	}
     }
 
     public void complete() {
-        Log.d("=====", "select store activity complete");
+	Intent result = new Intent();
+	result.putExtra(DATA_STORE, (Parcelable)storeContents.getStore());
+	setResult(RESULT_OK, result);
+	finish();
     }
 
     public void onSearchLocationClick(View v) {
+	
         Log.d("=====", "search location");
     }
 

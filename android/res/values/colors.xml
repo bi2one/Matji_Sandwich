@@ -72,6 +72,7 @@
 	<color name="map_title_bar_address">#543100</color>
 	<color name="map_title_bar_address_shadow">#fff5d1</color>
 	<color name="map_title_bar_change_address">#B7924C</color>
+	<color name="map_title_bar_hint">#947E4B</color>
 
 	<!-- highlight view -->
 	<color name="highlight_text_shadow">#a62711</color>

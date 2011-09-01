@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.graphics.Color;
+import android.view.View;
 import android.graphics.drawable.ColorDrawable;
 
 import com.matji.sandwich.R;
@@ -22,13 +23,14 @@ import com.google.android.maps.GeoPoint;
 
 import java.util.ArrayList;
 
-public class SelectStoreListView extends RequestableMListView {
+public class SelectStoreListView extends RequestableMListView implements View.OnClickListener {
     private Context context;
     private StoreHttpRequest request;
     private SessionMapUtil sessionUtil;
     private ArrayList<MatjiData> adapterData;
     private GeoPoint neBound;
     private GeoPoint swBound;
+    private OnItemClickListener listener;
 
     public SelectStoreListView(Context context, AttributeSet attrs) {
 	super(context, attrs, new SimpleStoreAdapter(context), 10);
@@ -46,9 +48,13 @@ public class SelectStoreListView extends RequestableMListView {
 	adapterData = getAdapterData();
 	
 	SimpleStoreAdapter adapter = (SimpleStoreAdapter)getMBaseAdapter();
-	adapter.setClickable(false);
+	adapter.setOnClickListener(this);
 	
 	setPage(1);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+	this.listener = listener;
     }
 
     public void init(Activity activity) {
@@ -77,5 +83,14 @@ public class SelectStoreListView extends RequestableMListView {
 	return request;
     }
 
+    public void onClick(View v) {
+	if (listener != null)
+	    listener.onItemClick(v);
+    }
+
     public void onListItemClick(int position) { }
+
+    public interface OnItemClickListener {
+	public void onItemClick(View v);
+    }
 }

@@ -16,7 +16,8 @@ import com.matji.sandwich.adapter.SimpleStoreAdapter.StoreElement;
 import com.matji.sandwich.data.Store;
 
 //public class SelectStoreContents extends RelativeLayout implements AdapterView.OnItemClickListener,
-public class SelectStoreContents extends RelativeLayout implements View.OnClickListener {
+public class SelectStoreContents extends RelativeLayout implements View.OnClickListener,
+								   SelectStoreListView.OnItemClickListener {
     private Context context;
     private SelectStoreListView listView;
     private TextView selectText;
@@ -30,29 +31,26 @@ public class SelectStoreContents extends RelativeLayout implements View.OnClickL
         super(context, attrs);
         this.context = context;
         LayoutInflater.from(context).inflate(R.layout.select_store_contents, this, true);
-
+	
         listView = (SelectStoreListView)findViewById(R.id.select_store_contents_listview);
-//        listView.setOnItemClickListener(this);
-        ((SimpleStoreAdapter) listView.getMBaseAdapter()).setListener(new View.OnClickListener() {
-            
-            @Override
-            public void onClick(View v) {
-              StoreElement element = (StoreElement)v.getTag();
-              Store store = element.getStore();
-      
-              selectText.setText(store.getName());
-              selectedStore = store;
-      
-              if (selectListener != null)
-                  selectListener.onStoreSelect(store);
-            }
-        });
+	listView.setOnItemClickListener(this);
 
         selectText = (TextView)findViewById(R.id.select_store_contents_selected);
         searchLocationButton = (ImageButton)findViewById(R.id.select_store_contents_search);
         writeStoreButton = (ImageButton)findViewById(R.id.select_store_contents_add);
         searchLocationButton.setOnClickListener(this);
         writeStoreButton.setOnClickListener(this);
+    }
+
+    public void setStore(Store store) {
+	if (store == null) {
+	    selectText.setText(R.string.write_post_store_view_select);
+	    selectText.setTextColor(context.getResources().getColor(R.color.map_title_bar_hint));
+	} else {
+	    selectText.setText(store.getName());
+	    selectText.setTextColor(context.getResources().getColor(R.color.map_title_bar_address));
+	}
+	selectedStore = store;
     }
 
     public void init(Activity activity) {
@@ -72,20 +70,18 @@ public class SelectStoreContents extends RelativeLayout implements View.OnClickL
         this.clickListener = clickListener;
     }
 
-    public Store getSelectedStore() {
+    public Store getStore() {
         return selectedStore;
     }
 
-//    public void onItemClick(AdapterView parent, View view, int position, long id) {
-//        StoreElement element = (StoreElement)view.getTag();
-//        Store store = element.getStore();
-//
-//        selectText.setText(store.getName());
-//        selectedStore = store;
-//
-//        if (selectListener != null)
-//            selectListener.onStoreSelect(store);
-//    }
+    public void onItemClick(View v) {
+       StoreElement element = (StoreElement)v.getTag();
+       Store store = element.getStore();
+
+       setStore(store);
+       if (selectListener != null)
+           selectListener.onStoreSelect(store);
+    }
 
     public void onClick(View v) {
         if (clickListener == null)
