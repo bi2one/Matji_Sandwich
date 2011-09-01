@@ -2,7 +2,9 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MessageHttpRequest;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
@@ -49,6 +52,22 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
     }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                messageField.requestFocus();
+                KeyboardUtil.showKeyboard(WriteMessageActivity.this, messageField);
+            }
+        }, 100);
+    }
 
     @Override
     protected void init() {
@@ -61,6 +80,7 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
         
         receivedUsers = new User[MAX_RECEIVED_USER_SIZE];
         ((CompletableTitle) findViewById(R.id.Titlebar)).setCompletable(this);
+        ((CompletableTitle) findViewById(R.id.Titlebar)).setTitle(R.string.write_message);
         messageField = (EditText) findViewById(R.id.write_message_message_field);
         receivedUserListText = (TextView) findViewById(R.id.write_message_received_user_list);
         receivedUserListButton = (ImageButton) findViewById(R.id.write_message_received_user_list_btn);
@@ -81,7 +101,8 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
             
             @Override
             public void onClick(View v) {
-                selectUser();
+                startActivity(new Intent(WriteMessageActivity.this, ReceivedUserActivity.class));
+//                selectUser();
             }
         });
         receivedMessageListButton.setOnClickListener(new OnClickListener() {

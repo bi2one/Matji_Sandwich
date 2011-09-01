@@ -6,22 +6,17 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.adapter.ReceivedUserADapter;
+import com.matji.sandwich.adapter.SimpleUserAdapter;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 
 public class ReceivedUserListView extends RequestableMListView {
-	private Context context;
 	private HttpRequest request;
-	private int user_id;
 	
 	public ReceivedUserListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new ReceivedUserADapter(context), 10);
-		this.context = context;
-		
-		user_id = Session.getInstance(context).getCurrentUser().getId();
+		super(context, attrs, new SimpleUserAdapter(context), 10);
 		
 		setPage(1);
 	}
@@ -29,9 +24,10 @@ public class ReceivedUserListView extends RequestableMListView {
 	@Override
 	public HttpRequest request() {
 		if (request == null || !(request instanceof FollowingHttpRequest)) {
-			request = new FollowingHttpRequest(context);
+			request = new FollowingHttpRequest(getContext());
 		}
-		((FollowingHttpRequest) request).actionList(user_id, getPage(), getLimit());
+		
+		((FollowingHttpRequest) request).actionFollowingList(Session.getInstance(getContext()).getCurrentUser().getId(), getPage(), getLimit());
 		
 		return request;
 	}

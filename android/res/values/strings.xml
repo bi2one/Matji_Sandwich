@@ -363,6 +363,7 @@
   <!-- WriteMessageActivity.java -->
   <string name="write_message_writing_content">내용 입력</string>
   <string name="write_message_received_users">받는사람:&#160;</string>
+  <string name="write_message">쪽지 쓰기</string>
   
   <!-- MessageListActivity.java -->
   <string name="received_message_list">받은 쪽지함</string>
