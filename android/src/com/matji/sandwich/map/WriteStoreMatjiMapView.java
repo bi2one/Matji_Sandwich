@@ -3,8 +3,9 @@ package com.matji.sandwich.map;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.EditText;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.location.Location;
@@ -28,11 +29,11 @@ import com.matji.sandwich.location.MatjiLocationListener;
 
 import java.util.ArrayList;
 
-public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewInterface,
-								  SimpleSubmitLocationBar.OnClickListener,
-								  MatjiMapCenterListener,
-								  Requestable,
-								  MatjiLocationListener {
+public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapViewInterface,
+								      MatjiMapCenterListener,
+								      MatjiLocationListener,
+								      Requestable,
+								      View.OnClickListener {
     private static final int GPS_START_TAG = 0;
     private static final int REQUEST_REVERSE_GEOCODING = 0;
     private Context context;
@@ -43,41 +44,38 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
     private OnClickListener clickListener;
     private GeocodeRunnable geocodeRunnable;
     private HttpRequestManager requestManager;
-    private GeoPoint lastNEBound;
-    private GeoPoint lastSWBound;
-    private Location prevLocation;
     private SessionMapUtil sessionMapUtil;
+
+    private EditText storeNameText;
+    private TextView addressText;
+    private EditText addAddressText;
+    private EditText phoneNumberText;
+    private RelativeLayout downButton;
+    private Location prevLocation;
     private GpsManager gpsManager;
     
-    public RadiusMatjiMapView(Context context, AttributeSet attrs) {
+    public WriteStoreMatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	this.context = context;
 	
-	LayoutInflater.from(context).inflate(R.layout.radius_matji_mapview, this, true);
+	LayoutInflater.from(context).inflate(R.layout.write_store_matji_mapview, this, true);
+	
 	geocodeRunnable = new GeocodeRunnable(this, context, this);
-	mapView = (MatjiMapView)findViewById(R.id.radius_matji_mapview_map);
-	locationBar = (SimpleSubmitLocationBar)findViewById(R.id.radius_matji_mapview_location_bar);
-	requestManager = HttpRequestManager.getInstance(context);
-	sessionMapUtil = new SessionMapUtil(context);
-	gpsManager = new GpsManager(context, this);
+	mapView = (MatjiMapView)findViewById(R.id.write_store_matji_mapview_map);
+	storeNameText = (EditText)findViewById(R.id.write_store_matji_mapview_store_name);
+	addressText = (TextView)findViewById(R.id.write_store_matji_mapview_address);
+	addAddressText = (EditText)findViewById(R.id.write_store_matji_mapview_add_address);
+	phoneNumberText = (EditText)findViewById(R.id.write_store_matji_mapview_phone_number);
+	downButton = (RelativeLayout)findViewById(R.id.write_store_matji_mapview_down_button);
 
+	downButton.setOnClickListener(this);
+	requestManager = HttpRequestManager.getInstance(context);
+	gpsManager = new GpsManager(context, this);
+	sessionMapUtil = new SessionMapUtil(context);
 	mapController = mapView.getController();
-	locationBar.setOnClickListener(this);
 	setMapCenterListener(this);
 
 	gpsManager.start(GPS_START_TAG);
-    }
-
-    public void init(Activity activity) {
-	this.activity = activity;
-    }
-
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-	switch(tag) {
-	case REQUEST_REVERSE_GEOCODING:
-	    GeocodeAddress geocodeAddress = GeocodeUtil.approximateAddress(data, lastNEBound, lastSWBound);
-	    locationBar.setAddress(geocodeAddress.getShortenFormattedAddress());
-	}
     }
 
     public void onLocationChanged(int startedFromTag, Location location) {
@@ -95,24 +93,69 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	e.performExceptionHandling(context);
     }
 
+    public String getStoreName() {
+	return storeNameText.getText().toString();
+    }
+
+    public String getAddress() {
+	return addressText.getText().toString();
+    }
+
+    public String getAddAddress() {
+	return addAddressText.getText().toString();
+    }
+
+    public String getPhoneNumber() {
+	return phoneNumberText.getText().toString();
+    }
+
+    public GeoPoint getMapCenter() {
+	return mapView.getMapCenter();
+    }
+
+    public void moveToGpsCenter() {
+	gpsManager.start(GPS_START_TAG);
+    }
+
+    public void init(Activity activity) {
+	this.activity = activity;
+    }
+
+    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+	switch(tag) {
+	case REQUEST_REVERSE_GEOCODING:
+	    GeocodeAddress geocodeAddress = GeocodeUtil.getDetailedAddress(data);
+	    addressText.setText(geocodeAddress.getCountrySplitedAddress());
+	}
+    }
+
     public void requestExceptionCallBack(int tag, MatjiException e) {
 	e.performExceptionHandling(context);
     }
 
     public void onMapCenterChanged(GeoPoint point) {
-	lastNEBound = getBound(BoundType.MAP_BOUND_NE);
-	lastSWBound = getBound(BoundType.MAP_BOUND_SW);
 	geocodeRunnable.setCenter(point);
 	activity.runOnUiThread(geocodeRunnable);
     }
 
+    public void onClick(View v) {
+	if (clickListener == null) {
+	    return ;
+	}
+	
+	int vId = v.getId();
+	if (vId == downButton.getId()) {
+	    clickListener.onShowMapClick(v);
+	}
+    }
+
     public void setCenter(int lat, int lng) {
-	setCenter(new GeoPoint(lat, lng));
+    	setCenter(new GeoPoint(lat, lng));
     }
 
     public void setCenter(GeoPoint point) {
-	mapController.zoomToSpan(sessionMapUtil.getBasicLatSpan(), sessionMapUtil.getBasicLngSpan());
-	mapController.animateTo(point);
+    	mapController.zoomToSpan(sessionMapUtil.getBasicLatSpan(), sessionMapUtil.getBasicLngSpan());
+    	mapController.animateTo(point);
     }
 
     public void setOnClickListener(OnClickListener clickListener) {
@@ -147,16 +190,6 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	return mapView.getLongitudeSpan();
     }
 
-    public void onSubmitClick() {
-	if (clickListener != null) {
-	    clickListener.onSubmitClick(this, lastNEBound, lastSWBound);
-	}
-    }
-
-    public void onLocationClick() {
-	gpsManager.start(GPS_START_TAG);
-    }
-
     private class GeocodeRunnable implements Runnable {
 	private Context context;
 	private Requestable requestable;
@@ -181,6 +214,6 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
     }
 
     public interface OnClickListener {
-	public void onSubmitClick(View v, GeoPoint neBound, GeoPoint swBound);
+	public void onShowMapClick(View v);
     }
 }

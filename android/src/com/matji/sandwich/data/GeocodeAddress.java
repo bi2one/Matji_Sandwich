@@ -139,6 +139,11 @@ public class GeocodeAddress extends MatjiData {
 	}
     }
 
+    public String getCountrySplitedAddress() {
+	String country = getCountryLongName().trim();
+	return formattedAddress.replace(country, "").replace("  ", " ").trim();
+    }
+
     private String getCountryLongName() {
 	for (AddressComponent addressComponent : addressComponents) {
 	    ArrayList<String> types = addressComponent.getTypes();

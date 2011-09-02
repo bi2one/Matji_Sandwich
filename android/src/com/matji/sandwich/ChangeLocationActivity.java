@@ -22,6 +22,7 @@ import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.widget.RecentChangedLocationView;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.session.SessionMapUtil;
+import com.matji.sandwich.session.SessionRecentLocationUtil;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,7 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
     private GeocodeHttpRequest request;
     private AlertDialog inputEmptyStringDialog;
     private SessionMapUtil sessionMapUtil;
+    private SessionRecentLocationUtil sessionLocationUtil;
     private String lastSearchSeed;
 
     public int setMainViewId() {
@@ -58,6 +60,7 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
 	requestManager = HttpRequestManager.getInstance(context);
 	request = new GeocodeHttpRequest(context);
 	sessionMapUtil = new SessionMapUtil(context);
+	sessionLocationUtil = new SessionRecentLocationUtil(context);
 
 	inputEmptyStringDialog = new AlertDialog.Builder(this)
 	    .setMessage(R.string.change_location_activity_input_empty_string)
@@ -90,7 +93,9 @@ public class ChangeLocationActivity extends BaseActivity implements Requestable,
 	    result.putExtra(INTENT_KEY_LATITUDE, addrLat);
 	    result.putExtra(INTENT_KEY_LONGITUDE, addrLng);
 	    result.putExtra(INTENT_KEY_LOCATION_NAME, lastSearchSeed);
+	    
 	    setResult(Activity.RESULT_OK, result);
+	    sessionLocationUtil.push(lastSearchSeed, addrLat, addrLng);
 	    finish();
 	}
     }

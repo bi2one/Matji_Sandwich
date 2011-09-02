@@ -3,13 +3,14 @@
 		style="@style/DefaultMinorTitleBar" >
   <TextView android:id="@+id/simple_submit_location_bar_address"
 	    android:layout_alignParentLeft="true"
-	    android:layout_toLeftOf="@+id/simple_submit_location_bar_submit"
-	    style="@style/DefaultWidthFill" />
-	    <!-- style="@style/simple_submit_location_bar_address" /> -->
+	    android:layout_centerVertical="true"
+	    android:layout_toLeftOf="@+id/simple_submit_location_bar_location"
+	    android:drawableRight="@drawable/icon_location_mappoint_selector"
+	    style="@style/simple_submit_location_bar_text" />
   <ImageView style="@style/DefaultMinorTitleBarDivider"
-	     android:layout_toLeftOf="@id/simple_submit_location_bar_submit" />
-  <Button android:id="@id/simple_submit_location_bar_submit"
-	  android:text="@string/simple_submit_location_bar_submit"
-	  android:layout_alignParentRight="true"
-	  style="@style/DefaultWrap" />
+  	     android:layout_toLeftOf="@id/simple_submit_location_bar_location" />
+  <ImageButton
+      style="@style/location_title_bar_locationButton"
+      android:id="@id/simple_submit_location_bar_location"
+      android:layout_alignParentRight="true" />
 </RelativeLayout>

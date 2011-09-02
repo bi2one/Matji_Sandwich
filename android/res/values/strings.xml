@@ -201,7 +201,7 @@
   <string name="bookmarked_store">내맛집</string>
   
   <!-- GetMapPositionActivity -->
-  <string name="get_map_position_complete">위치설정완료</string>
+  <string name="get_map_position_title">지역 변경</string>
 
   <!-- StoreRegisterListActivity -->
   <string name="register_store_list_is_not_exist">맛집이 목록에 없다면?</string>
@@ -334,7 +334,7 @@
   <string name="post_edit_text_empty">이야기를 입력해주세요.</string>
 
   <!-- simple_submit_location_bar.xml -->
-  <string name="simple_submit_location_bar_submit">지역변경</string>
+  <string name="simple_submit_location_bar_submit">지역찾기</string>
   
   <!-- Matji -->
   <string name="main_tab_title_matmap">맛있는 지도</string>
@@ -376,4 +376,17 @@
   
   <!-- LoginAsyncTask.java -->
   <string name="login_loading">로그인 중입니다.</string>
+
+  <!-- WriteStoreActivity.java -->
+  <string name="write_store_title">맛집 추가</string>
+  <string name="write_store_invalidate_store">상점 이름을 입력해 주세요.</string>
+  <string name="write_store_success">맛집 등록에 성공하였습니다.</string>
+
+  <!-- write_store_matji_mapview.xml -->
+  <string name="write_store_matji_mapview_store_name">맛집명 입력</string>
+  <string name="write_store_matji_mapview_add_address">상세주소</string>
+  <string name="write_store_matji_mapview_phone_number">전화번호 입력</string>
+
+  <!-- com.matji.sandwich.http.DialogAsyncTask -->
+  <string name="dialog_async_task">요청중입니다...</string>
 </resources>

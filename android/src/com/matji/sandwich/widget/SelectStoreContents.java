@@ -62,6 +62,10 @@ public class SelectStoreContents extends RelativeLayout implements View.OnClickL
         listView.requestReload();
     }
 
+    public void refresh(int neLat, int neLng, int swLat, int swLng) {
+	refresh(new GeoPoint(neLat, neLng), new GeoPoint(swLat, swLng));
+    }
+
     public void setStoreSelectListener(StoreSelectListener selectListener) {
         this.selectListener = selectListener;
     }
