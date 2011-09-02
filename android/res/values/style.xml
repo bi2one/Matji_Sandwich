@@ -248,6 +248,7 @@
   <style name="cell_user_Nickname" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_gray</item>
   	<item name="android:textSize">@dimen/user_cell_nick_size</item>
+  	<item name="android:singleLine">true</item>
   </style>
   
   <style name="cell_user_Label" parent="DefaultWrap">

@@ -45,11 +45,11 @@ public class UserPostListActivity extends BaseActivity {
         userCell.showLine();
         
         listView = (UserPostListView) findViewById(R.id.user_post_list_view);
+        listView.addHeaderView(userCell);
+        listView.addHeaderView(userIntroCell);
         listView.setUser(user);
         listView.setActivity(this);
         listView.requestReload();
-        listView.addHeaderView(userCell);
-        listView.addHeaderView(userIntroCell);
     }
     @Override
     protected void onResume() {

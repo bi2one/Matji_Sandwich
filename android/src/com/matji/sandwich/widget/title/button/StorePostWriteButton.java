@@ -24,7 +24,7 @@ public class StorePostWriteButton extends TitleImageButton {
      */
     public void init() {
 	super.init();
-	setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_delicious_write));
+	setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_memowrite));
 	writeDialog = new WritePostStoreMatjiDialog(getContext());
 	setFocusable(false);
     }

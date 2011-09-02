@@ -9,7 +9,11 @@
 	<LinearLayout
 		android:id="@+id/title_container_title"
 		style="@style/TitleContainerItem"
-		android:layout_toRightOf="@id/title_container_left">
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/title_container_height"
+		android:layout_toRightOf="@id/title_container_left"
+		android:layout_toLeftOf="@+id/title_container_right"
+		android:gravity="left">
 		<ImageView
 			android:id="@+id/title_container_title_line"
 			android:layout_width="wrap_content"
@@ -20,13 +24,14 @@
 			android:id="@+id/title_container_text"
 			style="@style/TitleText"
 			android:layout_marginLeft="@dimen/default_distance"
+			android:singleLine="true"
 			android:textColor="@color/title_container_title"
 			android:shadowColor="@color/title_container_title_shadow"
 			android:shadowRadius="1"
 			android:shadowDy="1.3" />
 	</LinearLayout>
 	<LinearLayout
-		android:id="@+id/title_container_right"
+		android:id="@id/title_container_right"
 		style="@style/TitleContainerItem"
 		android:layout_alignParentRight="true" />
 </RelativeLayout>

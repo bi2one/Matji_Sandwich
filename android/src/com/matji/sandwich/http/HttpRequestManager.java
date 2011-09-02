@@ -19,6 +19,7 @@ public class HttpRequestManager {
     public static final int UN_FOLLOW_REQUEST = 3;
     public static final int POST_SHOW_REQUEST = 4;
     public static final int MESSAGE_NEW_REQUEST = 5;
+    public static final int STORE_TAG_LIST_REQUEST = 6;
     
     private volatile static HashMap<Context, HttpRequestManager> managerPool = new HashMap<Context, HttpRequestManager>();
     private Context context;

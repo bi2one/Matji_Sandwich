@@ -35,7 +35,7 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 		downloader.setDownloaderListsener(this);
         defaultUserImageSmall = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.user_img54));
         defaultUserImageLarge = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.user_img90));
-		defaultAttachedImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.img_thumbnail_bg));
+		defaultAttachedImage = ImageUtil.getBitmap(context.getResources().getDrawable(R.drawable.img_restaurant));
 	}
 	
 

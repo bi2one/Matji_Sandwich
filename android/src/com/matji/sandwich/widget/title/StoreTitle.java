@@ -38,12 +38,12 @@ public class StoreTitle extends TitleContainerTypeLRR {
     @Override
     protected TitleImageButton getRightButton1() {
         // TODO Auto-generated method stub
-        return new StorePostWriteButton(getContext());
+        return new LikeButton(getContext());
     }
 
     @Override
     protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
-        return new LikeButton(getContext());
+        return new StorePostWriteButton(getContext());
     }
 }

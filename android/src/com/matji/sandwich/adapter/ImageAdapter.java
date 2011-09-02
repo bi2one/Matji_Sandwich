@@ -1,86 +1,109 @@
 package com.matji.sandwich.adapter;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.data.AttachFiles;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
-import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.widget.ImageListView;
-import com.matji.sandwich.widget.WhiteBorderImageView;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.AttachFiles;
+import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.listener.GotoImageSliderAction;
 
 public class ImageAdapter extends MBaseAdapter {
 	private MatjiImageDownloader downloader;
-	private ImageListView parent;
 
-//	public static final int IMAGE_IS_NULL = -1;
-	private static final int MARGIN = (int)(MatjiConstants.dimen(R.dimen.default_distance_half));
-
-	private int[] imageIds = {
-			R.id.image_adapter_image1,
-			R.id.image_adapter_image2,
-			R.id.image_adapter_image3,
-			R.id.image_adapter_image4,
+	private ArrayList<AttachFile> fileList;
+	
+	private int[] imageWrapperIds = {
+			R.id.row_image_col1,
+			R.id.row_image_col2,
+			R.id.row_image_col3,
+			R.id.row_image_col4,
 	};
 
 	public ImageAdapter(Context context) {
 		super(context);
 		downloader = new MatjiImageDownloader(context);
-		this.context = context;		
+		this.context = context;
 	}
 
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageElement imageElement;
 
-		AttachFiles attachFileIds = (AttachFiles) data.get(position);
+		AttachFiles attachFiles = (AttachFiles) data.get(position);
 
 		if (convertView == null) {
 			imageElement = new ImageElement();
 			convertView = getLayoutInflater().inflate(R.layout.row_image, null);
-			this.parent = (ImageListView) parent;
-
-			imageElement.images = new WhiteBorderImageView[imageIds.length];
-			for (int i = 0; i < imageIds.length; i++) {
-				imageElement.images[i] = (WhiteBorderImageView) convertView.findViewById(imageIds[i]);
-				imageElement.images[i].setOnClickListener(this.parent);
+			imageElement.images = convertView.findViewById(R.id.row_image_images);
+			
+			imageElement.image = new ImageView[imageWrapperIds.length];
+			imageElement.imageWrapper = new ViewGroup[imageWrapperIds.length];
+			for (int i = 0; i < imageWrapperIds.length; i++) {
+			    imageElement.image[i] = new ImageView(context);
+			    imageElement.image[i].setScaleType(ScaleType.CENTER_CROP);
+				imageElement.imageWrapper[i] = (ViewGroup) convertView.findViewById(imageWrapperIds[i]);
+				imageElement.imageWrapper[i].addView(imageElement.image[i]);
 			}
+			
 			convertView.setTag(imageElement);
 		} else {
 			imageElement = (ImageElement) convertView.getTag();
 		}
+		
+		fileList = getAttachFiles();
+		
+		for (int i = 0; i < imageElement.image.length; i++) {
+		    imageElement.image[i].setOnClickListener(new GotoImageSliderAction(context, fileList));
+		}
+		
+		imageElement.images.setVisibility(View.GONE);
+		
+		for (int i = 0; i < imageElement.image.length; i++)
+		    imageElement.imageWrapper[i].setVisibility(View.GONE);
+		
+		for (int i = 0; (i < attachFiles.getFiles().length) && (i < imageElement.image.length); i++) {
+		    imageElement.images.setVisibility(View.VISIBLE);
+		    AttachFile file = attachFiles.getFiles()[i];
+		    if (file != null) { 
+		        imageElement.imageWrapper[i].setVisibility(View.VISIBLE);
+	            imageElement.image[i].setTag((imageWrapperIds.length * position + i)+"");
 
-
-		int width = context.getResources().getDisplayMetrics().widthPixels/imageIds.length - MARGIN*2;
-		int height = width;
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
-
-		for (int i = 0; i < imageIds.length; i++) {
-			int newMargin = (i == 0 || i == imageIds.length-1) ? MARGIN : MARGIN/2;
-			params.setMargins(newMargin, newMargin, newMargin, newMargin);
-			imageElement.images[i].setLayoutParams(params);
-			
-			if (attachFileIds.getFiles()[i] == null) {
-				imageElement.images[i].setTag(-1+"");
-				imageElement.images[i].getImageView().setImageDrawable(null);
-			}else {
-				imageElement.images[i].setTag((position * imageIds.length + i)+"");
-				imageElement.images[i].visibleBackground();
-				downloader.downloadAttachFileImage(attachFileIds.getFiles()[i].getId(), MatjiImageDownloader.IMAGE_MEDIUM, imageElement.images[i].getImageView());
-			}
+		        downloader.downloadAttachFileImage(
+		                file.getId(),
+		                MatjiImageDownloader.IMAGE_SMALL, 
+		                imageElement.image[i]);
+		    }		        
 		}
 
 		return convertView;
 	}
+	
+	private ArrayList<AttachFile> getAttachFiles() {
+	    ArrayList<AttachFile> attachFileList = new ArrayList<AttachFile>();
+	    for (int i = 0; i < data.size(); i++) {
+	        AttachFiles files = (AttachFiles) data.get(i);
+	        for (AttachFile file : files.getFiles()) {
+	            if (file != null) attachFileList.add(file);
+	        }
+	    }
+	    
+	    return attachFileList;
+	}
 
 	private class ImageElement {
-		WhiteBorderImageView[] images;
+	    View images;
+	    ViewGroup[] imageWrapper;
+		ImageView[] image;
 	}
 
 	public int getImageViewCount() {
-		return imageIds.length;
+		return imageWrapperIds.length;
 	}
 }

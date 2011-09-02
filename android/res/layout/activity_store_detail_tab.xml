@@ -9,13 +9,10 @@
 		android:background="#FFF"
 		android:orientation="vertical">
 
-		<!-- Main Title -->
+		<!-- Store Title -->
 		<com.matji.sandwich.widget.title.StoreTitle
+			android:id="@id/Titlebar"
 			style="@style/DefaultWrap" />
-
-		<!-- Store Name Cell -->
-		<com.matji.sandwich.widget.cell.StoreCell
-			style="@style/DefaultWidthFill" />
 
 		<!-- Seperate Line -->
 		<RelativeLayout

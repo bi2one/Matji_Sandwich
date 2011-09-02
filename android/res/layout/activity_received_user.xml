@@ -3,7 +3,37 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_received_user"
 	style="@style/DefaultFill">
+	<com.matji.sandwich.widget.title.CompletableTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWidthFill" />
 	<com.matji.sandwich.widget.ReceivedUserListView
+		android:id="@+id/received_user_list"
 		style="@style/DefaultFill"
-		android:id="@+id/received_user_list" />
+		android:layout_below="@id/Titlebar"
+		android:layout_above="@+id/received_user_underbar" />
+	<RelativeLayout
+		android:id="@id/received_user_underbar"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/write_message_underbar_height"
+		android:background="@drawable/story_bg"
+		android:paddingLeft="@dimen/default_distance"
+		android:paddingRight="@dimen/default_distance"
+		android:layout_alignParentBottom="true"
+		android:gravity="center_vertical">
+		<TextView
+			android:id="@+id/write_message_received_user"
+			style="@style/DefaultWrap"
+			android:text="@string/write_message_received_user2"
+			android:textColor="@color/minor_tab_text_default"
+			android:textSize="@dimen/write_message_underbar_text_size"
+			android:layout_alignParentLeft="true" />
+		<TextView
+			android:id="@+id/write_message_received_user_list"
+			style="@style/DefaultWrap"
+			android:textColor="@color/minor_tab_text_default"
+			android:textSize="@dimen/write_message_underbar_text_size"
+			android:maxLines="2"
+			android:ellipsize="end"
+			android:layout_toRightOf="@id/write_message_received_user" />
+	</RelativeLayout>
 </RelativeLayout>

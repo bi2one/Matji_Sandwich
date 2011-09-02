@@ -12,13 +12,29 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionNew(int received_user_id, String message){
-    	parser = new MessageParser(context);
-    	httpMethod = HttpMethod.HTTP_POST;
-    	action = "new";
-    	
-    	postHashtable.clear();
-		postHashtable.put("received_user_id",received_user_id+"");
-		postHashtable.put("message",message);
+        parser = new MessageParser(context);
+        httpMethod = HttpMethod.HTTP_POST;
+        action = "new";
+        
+        postHashtable.clear();
+        postHashtable.put("received_user_id",received_user_id+"");
+        postHashtable.put("message",message);
+    }
+    
+    public void actionNew(int[] received_user_ids, String message){
+        parser = new MessageParser(context);
+        httpMethod = HttpMethod.HTTP_POST;
+        action = "new";
+        
+        postHashtable.clear();
+        
+        String ids = "";
+        for (int id : received_user_ids) {
+            ids += id + ",";
+        }
+        
+        postHashtable.put("received_user_id",ids);
+        postHashtable.put("message",message);
     }
 
     public void actionDelete(int message_id){

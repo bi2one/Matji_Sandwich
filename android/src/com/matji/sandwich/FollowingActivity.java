@@ -35,22 +35,18 @@ public class FollowingActivity extends BaseActivity {
         FollowingListType type = (FollowingListType) getIntent().getSerializableExtra(TYPE);
 
         HighlightHeader header = null;
-        String headerTitle = 
-            "'" + user.getNick() + "'"
-            + MatjiConstants.string(R.string.following_of);
+        String headerTitle = "";
         switch(type) {
         case FOLLOWER:
             title.setTitle(R.string.following_follower);
             headerTitle = 
-                headerTitle
-                + MatjiConstants.string(R.string.following_follower);
+                String.format(MatjiConstants.string(R.string.following_followers_of), user.getNick());
             header = new HighlightHeader(this, headerTitle, user.getFollowerCount());
             break;
         case FOLLOWING:
             title.setTitle(R.string.following_following);
             headerTitle = 
-                headerTitle
-                + MatjiConstants.string(R.string.following_following);
+                String.format(MatjiConstants.string(R.string.following_followings_of), user.getNick());
             header = new HighlightHeader(this, headerTitle, user.getFollowingCount());
             break;
         }

@@ -17,8 +17,6 @@ import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.tag.TagCloudView;
 
 public class StoreTagActivity extends BaseActivity implements Requestable {
-	private final int STORE_TAG_LIST_REQUEST = 10;
-	
 	private HttpRequest request;
 	
 	private TagCloudView tagCloudView;
@@ -26,6 +24,8 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 	
 	private Store store;
 
+	public static final String STORE = "store";
+	
     public int setMainViewId() {
 	return R.id.activity_store_tag;
     }
@@ -33,7 +33,9 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_tag);
-		HttpRequestManager.getInstance(this).request(getMainView(), request(), STORE_TAG_LIST_REQUEST, this);
+		
+		store = getIntent().getParcelableExtra(STORE);
+		HttpRequestManager.getInstance(this).request(getMainView(), request(), HttpRequestManager.STORE_TAG_LIST_REQUEST, this);
 
 		tagCloudView = (TagCloudView) findViewById(R.id.store_tag_cloud);
 		

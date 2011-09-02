@@ -1,17 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<!-- <LinearLayout -->
+<!-- xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- style="@style/DefaultWidthFill"> -->
+<!-- <com.matji.sandwich.widget.WhiteBorderImageView -->
+<!-- android:id="@+id/image_adapter_image1" -->
+<!-- style="@style/DefaultWrap" /> -->
+<!-- <com.matji.sandwich.widget.WhiteBorderImageView -->
+<!-- android:id="@+id/image_adapter_image2" -->
+<!-- style="@style/DefaultWrap" /> -->
+<!-- <com.matji.sandwich.widget.WhiteBorderImageView -->
+<!-- android:id="@+id/image_adapter_image3" -->
+<!-- style="@style/DefaultWrap" /> -->
+<!-- <com.matji.sandwich.widget.WhiteBorderImageView -->
+<!-- android:id="@+id/image_adapter_image4" -->
+<!-- style="@style/DefaultWrap" /> -->
+<!-- </LinearLayout> -->
+
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultWidthFill">
-	<com.matji.sandwich.widget.WhiteBorderImageView
-		android:id="@+id/image_adapter_image1"
-		style="@style/DefaultWrap" />
-	<com.matji.sandwich.widget.WhiteBorderImageView
-		android:id="@+id/image_adapter_image2"
-		style="@style/DefaultWrap" />
-	<com.matji.sandwich.widget.WhiteBorderImageView
-		android:id="@+id/image_adapter_image3"
-		style="@style/DefaultWrap" />
-	<com.matji.sandwich.widget.WhiteBorderImageView
-		android:id="@+id/image_adapter_image4"
-		style="@style/DefaultWrap" />
-</LinearLayout>
+	style="@style/DefaultWidthFill"
+	android:paddingTop="@dimen/row_image_marginTop"
+	android:paddingRight="@dimen/default_distance"
+	android:paddingLeft="@dimen/default_distance">
+	<!-- <TableLayout -->
+	<!-- android:id="@+id/row_image_images" -->
+	<!-- android:layout_width="fill_parent" -->
+	<!-- android:layout_height="@dimen/row_image_height" -->
+	<!-- android:padding="0dp" -->
+	<!-- android:shrinkColumns="*"> -->
+	<TableLayout
+		android:id="@+id/row_image_images"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/row_image_height"
+		android:padding="0dp">
+		<TableRow>
+			<RelativeLayout
+				android:id="@+id/row_image_col1"
+				android:layout_width="@dimen/row_image_width"
+				android:layout_height="@dimen/row_image_height"
+				android:layout_marginRight="@dimen/row_image_marginSide"
+				android:background="@drawable/box_restaurant" />
+			<RelativeLayout
+				android:id="@+id/row_image_col2"
+				android:layout_width="@dimen/row_image_width"
+				android:layout_height="@dimen/row_image_height"
+				android:layout_marginRight="@dimen/row_image_marginSide"
+				android:background="@drawable/box_restaurant" />
+			<RelativeLayout
+				android:id="@+id/row_image_col3"
+				android:layout_width="@dimen/row_image_width"
+				android:layout_height="@dimen/row_image_height"
+				android:layout_marginRight="@dimen/row_image_marginSide"
+				android:background="@drawable/box_restaurant" />
+			<RelativeLayout
+				android:id="@+id/row_image_col4"
+				android:layout_width="@dimen/row_image_width"
+				android:layout_height="@dimen/row_image_height"
+				android:background="@drawable/box_restaurant" />
+		</TableRow>
+	</TableLayout>
+</RelativeLayout>

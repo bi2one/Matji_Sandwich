@@ -158,7 +158,8 @@
   <string name="cell_user_area">Area</string>
   <string name="cell_user_follow">Follow</string>
   <string name="cell_user_unfollow">Unfollow</string>
-  
+  <string name="cell_store_not_exist_tel">전화번호 미등록</string>
+  <string name="cell_store_not_exist_addr">주소 미등록</string>
   
   <!-- StoreMainActivity  -->
   <string name="store_main_unlike_store">내가 좋아하는 맛집</string>
@@ -350,7 +351,8 @@
   <string name="path_palai">fonts/palai.ttf</string>
 
   <!-- FollowingActivity -->
-  <string name="following_of">님의&#160;</string>
+  <string name="following_followings_of">\'%1$s\'님의 Following</string>
+  <string name="following_followers_of">\'%1$s\'님의 Follower</string>
   <string name="following_following">Following</string>
   <string name="following_follower">Follower</string>
   
@@ -362,8 +364,11 @@
   
   <!-- WriteMessageActivity.java -->
   <string name="write_message_writing_content">내용 입력</string>
-  <string name="write_message_received_users">받는사람:&#160;</string>
+  <string name="write_message_received_user">받는 사람</string>
+  <string name="write_message_received_user2">받는 사람:&#160;</string>
   <string name="write_message">쪽지 쓰기</string>
+  <string name="overflow_received_user">최대 %1$d명까지 추가가 가능합니다.</string>
+  <string name="write_message_select_user">받는 사람을 추가해주세요.</string>
   
   <!-- MessageListActivity.java -->
   <string name="received_message_list">받은 쪽지함</string>

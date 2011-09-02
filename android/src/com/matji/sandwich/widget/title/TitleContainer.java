@@ -57,6 +57,7 @@ public abstract class TitleContainer extends RelativeLayout {
 	    ImageView line = new ImageView(getContext());
         line.setPadding(0, 0, 0, 0);
         line.setImageResource(R.drawable.navigationbar_bg_line);
+        v.setTag(line); // line도 함께 remove하기 위해 tag로 달아준다.
 	    rightContainer.addView(line);
 		rightContainer.addView(v);
 	}
@@ -102,6 +103,17 @@ public abstract class TitleContainer extends RelativeLayout {
 		}	
 	}
 
+	/**
+	 * 버튼을 제거한다.
+	 * 버튼과 함께 버튼 옆의 line도 제거한다.
+	 * 
+	 * @param button 제거할 버튼
+	 */
+    public void removeRightButton(View button) {
+        rightContainer.removeView((View) button.getTag());
+        rightContainer.removeView(button);        
+    }
+	
 	/**
 	 * 버튼들을 클릭하지 못하도록 설정한다.
 	 */

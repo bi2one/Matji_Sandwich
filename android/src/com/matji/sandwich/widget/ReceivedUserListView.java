@@ -3,14 +3,18 @@ package com.matji.sandwich.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.SimpleUserAdapter;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
 
 public class ReceivedUserListView extends RequestableMListView {
 	private HttpRequest request;
@@ -18,7 +22,21 @@ public class ReceivedUserListView extends RequestableMListView {
 	public ReceivedUserListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new SimpleUserAdapter(context), 10);
 		
-		setPage(1);
+		init();
+	}
+
+	public void setAdapterOnClickListener(OnClickListener listener) {
+        ((SimpleUserAdapter) getMBaseAdapter()).setOnClickListener(listener);
+ 	}
+	
+	public void init() {
+	    setPage(1);
+        setBackgroundColor(MatjiConstants.color(R.color.matji_white));
+        setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
+	    setDividerHeight(1);
+	    setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
+	    setCacheColorHint(Color.TRANSPARENT);
+	    setSelector(android.R.color.transparent);
 	}
 	
 	@Override

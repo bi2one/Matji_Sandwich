@@ -14,12 +14,18 @@ public class ReceivedMessageListActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNotFlowResume() {
+        // TODO Auto-generated method stub
+        super.onFlowResume();
+        listView.requestReload();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_received_message_list);
         
         listView = (ReceivedMessageListView) findViewById(R.id.received_message_list_view);
         listView.setActivity(this);
-        listView.requestReload();
     }
 }

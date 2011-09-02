@@ -39,7 +39,7 @@ public class UserTitle extends TitleContainerTypeLRR {
         ((WriteMessageButton) rightButton2).setUser(user);
 
         if (Session.getInstance(getContext()).getCurrentUser().getId() == user.getId()) {
-            rightButton1.setClickable(false);
+            removeRightButton(rightButton1);
         }
 	}
 	

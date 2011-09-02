@@ -14,7 +14,9 @@
 			android:layout_toRightOf="@id/cell_user_profile">
 			<LinearLayout
 				android:layout_toRightOf="@+id/profile"
-				style="@style/DefaultVerticalWrap">
+				style="@style/DefaultVerticalWrap"
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@+id/cell_user_btn_wrapper">
 				<TextView
 					android:id="@+id/cell_user_nick"
 					style="@style/cell_user_Nickname" />
@@ -36,6 +38,7 @@
 				</LinearLayout>
 			</LinearLayout>
 			<LinearLayout
+				android:id="@id/cell_user_btn_wrapper"
 				android:layout_alignParentRight="true"
 				style="@style/DefaultVerticalWrap">
 				<Button
