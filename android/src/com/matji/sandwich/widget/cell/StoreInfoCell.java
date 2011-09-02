@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +15,7 @@ import com.matji.sandwich.StoreDetailInfoTabActivity;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.MatjiConstants;
 
@@ -86,17 +86,29 @@ public class StoreInfoCell extends Cell {
         ((TextView) findViewById(R.id.cell_store_address)).setText(addr);
         
         ArrayList<SimpleTag> simpleTags = store.getTags();
-        if (simpleTags.size() == 0)
-            ((TextView) findViewById(R.id.cell_store_tag)).setVisibility(View.GONE);
-        else {
+        if (simpleTags.size() == 0) {
+//            ((TextView) findViewById(R.id.cell_store_tag)).setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.cell_store_tag)).setText(MatjiConstants.string(R.string.cell_store_not_exist_tag));
+        } else {
             String tags = simpleTags.get(0).getTag();
             for (SimpleTag tag : simpleTags) 
-                tags += ", " + tag;
+                tags += ", " + tag.getTag();
             
             ((TextView) findViewById(R.id.cell_store_tag)).setText(tags);
         }
 
-//        		((TextView) findViewById(R.id.cell_store_food)).setText(store.getStoreFoods().toString());
+        ArrayList<StoreFood> storeFoods = store.getStoreFoods();
+        if (storeFoods.size() == 0) {
+            ((TextView) findViewById(R.id.cell_store_food)).setText(MatjiConstants.string(R.string.cell_store_not_exist_menu));
+        } else {
+            String foods = storeFoods.get(0).getFood().getName();
+            for (StoreFood food : storeFoods) 
+                foods += ", " + food.getFood().getName();
+            
+            ((TextView) findViewById(R.id.cell_store_tag)).setText(foods);
+            
+        }
+            
         refresh();
     }
 

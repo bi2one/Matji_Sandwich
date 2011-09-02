@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.StoreDefaultInfoActivity;
 import com.matji.sandwich.StoreDetailInfoTabActivity;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.widget.BookmarkStarToggleView;
 
 /**
  * UI 상의 유저 셀 (맛집 기본 정보가 보이는 곳)
@@ -23,6 +25,7 @@ public class StoreCell extends Cell {
     private Store store;
 
     private Button likeList;
+    private ViewGroup mainView;
 
     /**
      * 기본 생성자 (Java Code)
@@ -63,6 +66,11 @@ public class StoreCell extends Cell {
 
         likeList = (Button) findViewById(R.id.cell_store_like_list_btn);
     }
+    
+    public void setMainView(ViewGroup mainView) {
+        this.mainView = mainView;
+    }
+    
     /**
      * 이 StoreCell의 맛집 정보를 저장하고 해당 맛집변하지 않는 정보들을 뷰에 뿌려준다.
      * 
@@ -72,6 +80,7 @@ public class StoreCell extends Cell {
         this.store = store;
 
         ((TextView) findViewById(R.id.cell_store_name)).setText(store.getName());
+        ((BookmarkStarToggleView) findViewById(R.id.cell_store_toggle_star)).init(store, mainView);
 
         refresh();
     }

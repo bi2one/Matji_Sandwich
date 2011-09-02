@@ -160,6 +160,9 @@
   <string name="cell_user_unfollow">Unfollow</string>
   <string name="cell_store_not_exist_tel">전화번호 미등록</string>
   <string name="cell_store_not_exist_addr">주소 미등록</string>
+  <string name="cell_store_not_exist_tag">등록된 태그가 없습니다.</string>
+  <string name="cell_store_not_exist_menu">등록된 메뉴가 없습니다.</string>
+  
   
   <!-- StoreMainActivity  -->
   <string name="store_main_unlike_store">내가 좋아하는 맛집</string>

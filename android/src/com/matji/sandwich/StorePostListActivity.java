@@ -35,6 +35,7 @@ public class StorePostListActivity extends BaseActivity {
         title.setTitle(store.getName());
         storeCell = new StoreCell(this, store);
         storeInfoCell = new StoreInfoCell(this, store);
+        storeCell.setMainView(getMainView());
         storeCell.showLine();
         
         listView = (StorePostListView) findViewById(R.id.store_post_list);

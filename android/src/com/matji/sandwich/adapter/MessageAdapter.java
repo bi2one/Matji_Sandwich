@@ -3,6 +3,7 @@ package com.matji.sandwich.adapter;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.GotoUserMainAction;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 
 public class MessageAdapter extends MBaseAdapter {
@@ -21,20 +23,29 @@ public class MessageAdapter extends MBaseAdapter {
         SENT, 
         RECEIVED,
     }
-    
+
     private HashMap<Integer, Boolean> hasFoldedMap;
     private MessageType type;
     
+    private int lastReadMessageId;
+    private Drawable iconNew;
+
     public MessageAdapter(Context context) {
         super(context);
         this.context = context;
         hasFoldedMap = new HashMap<Integer, Boolean>();
+        iconNew = MatjiConstants.drawable(R.drawable.icon_new);
+        iconNew.setBounds(0, 0, iconNew.getIntrinsicWidth(), iconNew.getIntrinsicHeight());
     }
 
     public void setMessageType(MessageType type) {
         this.type = type;
     }
     
+    public void setLastReadMessageId(int lastReadMessageId) {
+        this.lastReadMessageId = lastReadMessageId;
+    }
+
     public View getView(final int position, View convertView, ViewGroup parent) {
         final MessageElement messageElement;
         Message message = (Message) data.get(position);
@@ -51,7 +62,7 @@ public class MessageAdapter extends MBaseAdapter {
             messageElement.subjectWrapper = (View) convertView.findViewById(R.id.row_message_subject_wrapper).getParent();
             messageElement.flow = (ImageView) messageElement.subjectWrapper.findViewById(R.id.row_message_flow); 
             messageElement.messageWrapper = messageElement.subjectWrapper.findViewById(R.id.row_message_message_wrapper);
-            
+
             convertView.setTag(messageElement);
 
         } else {
@@ -67,22 +78,28 @@ public class MessageAdapter extends MBaseAdapter {
             user = message.getSentUser();
             break;
         }
-        
+
         messageElement.subjectWrapper.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 folding(position, messageElement);
             }
         });
-        
+
         messageElement.subjectList.setText(message.getMessage());
         messageElement.nick.setText(user.getNick());
         messageElement.nick.setOnClickListener(new GotoUserMainAction(context, user));
-        
+
         String createdAt = TimeUtil.parseString(
                 "yyyy-MM-dd hh:mm", 
                 TimeUtil.getDateFromCreatedAt(message.getCreatedAt()));
-        
+
         messageElement.createdAtList.setText(createdAt);
+        if (type == MessageType.RECEIVED
+                && lastReadMessageId < message.getId()) {
+            messageElement.createdAtList.setCompoundDrawables(null, null, iconNew, null);
+        } else {
+            messageElement.createdAtList.setCompoundDrawables(null, null, null, null);
+        }
         messageElement.createdAt.setText(createdAt);
         messageElement.message.setText(message.getMessage());
         if (hasFolded(position)) {
@@ -107,7 +124,7 @@ public class MessageAdapter extends MBaseAdapter {
             fold(position, holder);
         }
     }
-    
+
     /**
      * 해당 위치의 아이템이 접혀져 있는지 맵에서 찾아본 후 결과 값 리턴
      * 
@@ -118,15 +135,15 @@ public class MessageAdapter extends MBaseAdapter {
         if (hasFoldedMap.get(position) == null) {
             hasFoldedMap.put(position, true);
         }
-        
+
         return hasFoldedMap.get(position);
     }
-    
+
     public void unfold(int position, MessageElement holder) {
         hasFoldedMap.put(position, false);
         unfold(holder);
     }
-    
+
     public void unfold(MessageElement holder) {
         holder.flow.setImageResource(R.drawable.icon_flow_bottom);
         holder.messageWrapper.setVisibility(View.VISIBLE);
@@ -136,7 +153,7 @@ public class MessageAdapter extends MBaseAdapter {
         hasFoldedMap.put(position, true);
         fold(holder);
     }
-    
+
     public void fold(MessageElement holder) {
         holder.flow.setImageResource(R.drawable.icon_flow);
         holder.messageWrapper.setVisibility(View.GONE);
@@ -151,5 +168,5 @@ public class MessageAdapter extends MBaseAdapter {
         ImageView flow;
         View messageWrapper;
         View subjectWrapper;
-     }
+    }
 }

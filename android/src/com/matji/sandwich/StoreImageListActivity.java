@@ -29,6 +29,8 @@ public class StoreImageListActivity extends BaseActivity {
         title = (StoreTitle) findViewById(R.id.Titlebar);
         title.setTitle(store.getName());
         storeCell = new StoreCell(this, store);
+        storeCell.setStore(store);
+        storeCell.setMainView(getMainView());
         
 		StoreImageListView listView = (StoreImageListView) findViewById(R.id.store_image_list_view);
         listView.addHeaderView(storeCell);
