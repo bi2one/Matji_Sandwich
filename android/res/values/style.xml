@@ -927,13 +927,13 @@
 
   <!-- album_image_view.xml -->
   <style name="album_image_view" parent="DefaultWrap">
-    <item name="android:background">@drawable/write_post_picture_frame</item>
+    <item name="android:background">@drawable/box_restaurant</item>
     <item name="android:layout_width">@dimen/album_view_frame_width</item>
     <item name="android:layout_height">@dimen/album_view_frame_height</item>
   </style>
 
   <style name="album_image_view_contents" parent="DefaultWrap">
-    <item name="android:src">@drawable/write_post_picture_empty</item>
+    <item name="android:src">@drawable/box_restaurant_plus</item>
     <item name="android:layout_width">@dimen/album_view_contents_width</item>
     <item name="android:layout_height">@dimen/album_view_contents_height</item>
     <item name="android:scaleType">fitXY</item>

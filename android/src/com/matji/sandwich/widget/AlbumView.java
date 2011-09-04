@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.util.AttributeSet;
@@ -15,20 +16,23 @@ import com.matji.sandwich.util.MatjiConstants;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.File;
 
-public class AlbumView extends LinearLayout {
+public class AlbumView extends LinearLayout implements View.OnClickListener {
     private static final int BACKGROUND_REFERENCE = R.color.album_view_bg;
     private static final int FRAME_WIDTH_REFERENCE = R.dimen.album_view_frame_width;
     private static final int FRAME_HEIGHT_REFERENCE = R.dimen.album_view_frame_height;
     private static final int PADDING_REFERENCE = R.dimen.album_view_padding;
-    private static final int FRAME_RIGHT_PADDING_REFERENCE = R.dimen.album_view_frame_right_padding;
+    private static final int FRAME_MARGIN_RIGHT_REFERENCE = R.dimen.album_view_frame_marginRight;
     private static final int BASIC_ROW = 2;
     private static final int BASIC_COLUMN = 4;
     private Context context;
     private LayoutParams rowParam;
     private LayoutParams frameParam;
+    private LayoutParams frameParamLast;
     private ArrayList<ArrayList<AlbumImageView>> albumImages;
+    private HashMap<File, Bitmap> thumbnailPool;
     private int currentRow;
     private int currentCol;
     private int rowSize;
@@ -47,10 +51,21 @@ public class AlbumView extends LinearLayout {
     private void init(Context context) {
 	this.context = context;
 	albumImages = new ArrayList<ArrayList<AlbumImageView>>();
+	thumbnailPool = new HashMap<File, Bitmap>();
 	setPadding(0, (int)MatjiConstants.dimen(PADDING_REFERENCE), 0, 0);
-	setSize(BASIC_ROW, BASIC_COLUMN);
+
 	currentRow = 0;
 	currentCol = 0;
+	rowParam = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+	frameParam = new LayoutParams((int)MatjiConstants.dimen(FRAME_WIDTH_REFERENCE),
+				      (int)MatjiConstants.dimen(FRAME_HEIGHT_REFERENCE));
+	frameParam.setMargins(0, 0, (int)MatjiConstants.dimen(FRAME_MARGIN_RIGHT_REFERENCE), 0);
+	
+	frameParamLast = new LayoutParams((int)MatjiConstants.dimen(FRAME_WIDTH_REFERENCE),
+					  (int)MatjiConstants.dimen(FRAME_HEIGHT_REFERENCE));
+	frameParamLast.setMargins(0, 0, 0, 0);
+	
+	setSize(BASIC_ROW, BASIC_COLUMN);
     }
 
     public void setSize(int row, int column) {
@@ -59,9 +74,6 @@ public class AlbumView extends LinearLayout {
 	this.context = context;
 	detachAllViewsFromParent();
 	albumImages.clear();
-	rowParam = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-	frameParam = new LayoutParams((int)MatjiConstants.dimen(FRAME_WIDTH_REFERENCE),
-				      (int)MatjiConstants.dimen(FRAME_HEIGHT_REFERENCE));
 	
 	setOrientation(VERTICAL);
 	setBackgroundColor(MatjiConstants.color(BACKGROUND_REFERENCE));
@@ -72,20 +84,65 @@ public class AlbumView extends LinearLayout {
 	    rowView.setPadding((int)MatjiConstants.dimen(PADDING_REFERENCE), 0,
 			       (int)MatjiConstants.dimen(PADDING_REFERENCE),
 			       (int)MatjiConstants.dimen(PADDING_REFERENCE));
-	    // rowView.setGravity(Gravity.CENTER_HORIZONTAL);
+	    rowView.setGravity(Gravity.CENTER_HORIZONTAL);
 	    addView(rowView, rowParam);
 	    for (int j = 0; j < column; j++) {
 		AlbumImageView frame = new AlbumImageView(context);
+		frame.setOnClickListener(this);
+		frame.setTag(new IndexTuple(i, j));
+		
 		rowImages.add(frame);
-		// if (j != column - 1) {
-		//     frame.setPadding(0, 0, (int)MatjiConstants.dimen(FRAME_RIGHT_PADDING_REFERENCE), 0);
-		// } else {
-		//     frame.setPadding(0, 0, 0, 0);
-		// }
-		rowView.addView(frame, frameParam);
+		if (j != column - 1) {
+		    rowView.addView(frame, frameParam);
+		} else {
+		    rowView.addView(frame, frameParamLast);
+		}
 	    }
 	    albumImages.add(rowImages);
 	}
+    }
+
+    public void removeImage(int row, int column) {
+	ArrayList<AlbumImageView> images = albumImages.get(row);
+	AlbumImageView image = images.get(column);
+	image.removeImage();
+
+	notifyDataSetChanged();
+    }
+
+    public void notifyDataSetChanged() {
+	ArrayList<File> files = getFiles();
+	int fileIndex = 0;
+	AlbumImageView image;
+	
+	for (int i = 0; i < rowSize; i++) {
+	    for (int j = 0; j < colSize; j++) {
+		image = albumImages.get(i).get(j);
+		if (fileIndex < files.size()) {
+		    File file = files.get(fileIndex++);
+		    image.setImage(file, thumbnailPool.get(file));
+		} else {
+		    image.removeImage();
+		}
+	    }
+	}
+
+	int nextCol = currentCol - 1;
+	if (nextCol < 0) {
+	    currentRow--;
+	    if (currentRow < 0) {
+		currentRow = 0;
+		currentCol = 0;
+	    } else {
+		currentCol = colSize - 1;
+	    }
+	} else {
+	    currentCol--;
+	}
+    }
+
+    public boolean isFull() {
+	return currentRow == rowSize;
     }
 
     public AlbumImageView getImageView(int row, int column) {
@@ -104,7 +161,9 @@ public class AlbumView extends LinearLayout {
 
     public boolean pushImage(File file) {
 	if (!isContains(file)) {
-	    getNextImageView().setImage(file);
+	    AlbumImageView imageView = getNextImageView();
+	    imageView.setImage(file);
+	    thumbnailPool.put(file, imageView.getThumbnail());
 	    return true;
 	}
 	return false;
@@ -120,7 +179,8 @@ public class AlbumView extends LinearLayout {
 		    return files;
 		else {
 		    AlbumImageView frame = rowImages.get(j);
-		    files.add(frame.getFile());
+		    if (!frame.isEmpty())
+			files.add(frame.getFile());
 		}
 	    }
 	}
@@ -140,5 +200,28 @@ public class AlbumView extends LinearLayout {
 
     private boolean isFileNameEquals(File file1, File file2) {
 	return file1.getAbsolutePath().equals(file2.getAbsolutePath());
+    }
+
+    public void onClick(View v) {
+	IndexTuple tuple = (IndexTuple)v.getTag();
+	removeImage(tuple.head(), tuple.tail());
+    }
+
+    private class IndexTuple {
+	private int i;
+	private int j;
+	
+	public IndexTuple(int i, int j) {
+	    this.i = i;
+	    this.j = j;
+	}
+
+	public int head() {
+	    return i;
+	}
+
+	public int tail() {
+	    return j;
+	}
     }
 }

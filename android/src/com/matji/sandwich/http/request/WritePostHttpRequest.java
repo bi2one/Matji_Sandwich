@@ -11,6 +11,7 @@ import com.matji.sandwich.exception.WritePostMatjiException;
 import com.matji.sandwich.exception.BitmapCompressMatjiException;
 import com.matji.sandwich.exception.BitmapCompressIOMatjiException;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Post;
 
 import java.util.ArrayList;
@@ -29,6 +30,14 @@ public class WritePostHttpRequest implements RequestCommand {
 	this.context = context;
 	fileRequest = new AttachFileHttpRequest(context);
 	postRequest = new PostHttpRequest(context);
+    }
+
+    public void actionNew(String post, String tags, Store store, Location location, ArrayList<File> images) {
+	if (store == null) {
+	    actionNew(post, tags, -1, location, images);
+	} else {
+	    actionNew(post, tags, store.getId(), location, images);
+	}
     }
 
     public void actionNew(String post, String tags, int storeId, Location location, ArrayList<File> images) {
@@ -66,9 +75,11 @@ public class WritePostHttpRequest implements RequestCommand {
 	}
 	
 	for (File file : images) {
-	    File compressedFile = compressFile(file);
-	    fileRequest.actionUpload(compressedFile, postId);
-	    confirmValidFileRequest(fileRequest.request());
+	    if (file != null) {
+		File compressedFile = compressFile(file);
+		fileRequest.actionUpload(compressedFile, postId);
+		confirmValidFileRequest(fileRequest.request());
+	    }
 	}
     }
 

@@ -41,6 +41,10 @@ public class GetPictureLayout extends RelativeLayout implements View.OnClickList
     }
 
     public void onClick(View v) {
+	if (listener == null) {
+	    return ;
+	}
+	
 	int vId = v.getId();
 	if (vId == cameraButton.getId()) {
 	    listener.onCameraClick();

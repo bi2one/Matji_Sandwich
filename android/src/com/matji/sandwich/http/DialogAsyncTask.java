@@ -25,6 +25,10 @@ public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
     private ArrayList<MatjiData> data;
     private MatjiException exception;
 
+    public DialogAsyncTask(Context context, Requestable requestable, RequestCommand request, int tag) {
+	this(context, requestable, null, request, tag);
+    }
+
     public DialogAsyncTask(Context context, Requestable requestable, ViewGroup spinnerContainer, RequestCommand request, int tag) {
         this.context = context;
         this.requestable = requestable;

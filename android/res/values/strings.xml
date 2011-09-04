@@ -336,6 +336,8 @@
 
   <!-- WritePostActivity.java -->
   <string name="write_post_activity_title">이야기 쓰기</string>
+  <string name="write_post_success">이야기 쓰기에 성공하였습니다.</string>
+  <string name="write_post_album_full">사진을 더 첨부할 수 없습니다.</string>
 
   <!-- SelectStoreActivity.java -->
   <string name="select_store_activity_title">맛집 선택</string>

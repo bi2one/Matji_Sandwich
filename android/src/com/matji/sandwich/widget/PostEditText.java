@@ -104,6 +104,10 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
 	return postText;
     }
 
+    public String getText() {
+	return postText.getText().toString();
+    }
+
     public void setOnClickListener(OnClickListener listener) {
 	this.listener = listener;
     }
