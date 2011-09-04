@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
+    android:id="@+id/activity_select_tag"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DefaultFill" >
+  <com.matji.sandwich.widget.title.CompletableTitle
+      android:id="@+id/activity_select_title"
+      android:layout_alignParentTop="true"
+      style="@style/DefaultWidthFill" />
+  <RelativeLayout
+      android:id="@+id/activity_select_tag_edittext_wrapper"
+      style="@style/activity_select_tag_edittext_wrapper"
+      android:layout_below="@id/activity_select_title" >
+    <EditText
+	android:id="@+id/activity_select_tag_text"
+	android:hint="@string/select_tag_hint"
+	android:layout_centerInParent="true"
+	style="@style/activity_select_tag_edittext" />
+  </RelativeLayout>
+  
+  <ImageView
+      android:id="@+id/activity_select_tag_divider1"
+      android:layout_below="@id/activity_select_tag_edittext_wrapper"
+      style="@style/activity_select_tag_divider1" />
+  <ImageView
+      android:id="@+id/activity_select_tag_divider2"
+      android:layout_below="@id/activity_select_tag_divider1"
+      style="@style/activity_select_tag_divider2" />
+
+  <ListView
+      android:id="@+id/activity_select_tag_listview"
+      android:layout_below="@id/activity_select_tag_divider2"
+      style="@style/DefaultFill" />
+
+  <ImageView
+      android:id="@+id/activity_select_tag_listview_wrapper"
+      android:layout_alignLeft="@id/activity_select_tag_listview"
+      android:layout_alignTop="@id/activity_select_tag_listview"
+      android:layout_alignRight="@id/activity_select_tag_listview"
+      android:layout_alignBottom="@id/activity_select_tag_listview"
+      android:visibility="gone"
+      style="@style/activity_select_tag_listview_wrapper" />
+</com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

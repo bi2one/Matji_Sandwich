@@ -85,6 +85,7 @@
                   android:windowSoftInputMode="adjustResize"></activity>
 		<activity android:name="WriteStoreActivity"></activity>
 		<activity android:name="SelectStoreActivity"></activity>
+		<activity android:name="SelectTagActivity"></activity>
 		<activity android:name="WritePostStoreActivity"
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="WritePostPictureActivity"

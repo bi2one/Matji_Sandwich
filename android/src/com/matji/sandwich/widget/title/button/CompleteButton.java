@@ -47,6 +47,8 @@ public class CompleteButton extends TitleButton {
 	public void onTitleItemClicked() {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "CompleteClicked");
-		completable.complete();
+		if (completable != null) {
+		    completable.complete();
+		}
 	}
 }

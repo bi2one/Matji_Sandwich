@@ -76,6 +76,7 @@ public class WriteStoreActivity extends BaseMapActivity implements CompletableTi
 	    request.actionNew(storeName, address, centerLat, centerLng, addAddress, phoneNumber);
 	    DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, TAG_WRITE_STORE);
 	    requestTask.execute();
+	    titleBar.setCompletable(null);
 	}
     }
 
@@ -92,6 +93,13 @@ public class WriteStoreActivity extends BaseMapActivity implements CompletableTi
 	mapView.requestFocus();
     }
 
+    public void onMapTouchDown(View v) {
+	KeyboardUtil.hideKeyboard(this);
+	mapView.requestFocus();
+    }
+
+    public void onMapTouchUp(View v) { }
+
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 	switch(tag) {
 	case TAG_WRITE_STORE:
@@ -103,6 +111,7 @@ public class WriteStoreActivity extends BaseMapActivity implements CompletableTi
     
     public void requestExceptionCallBack(int tag, MatjiException e) {
 	e.performExceptionHandling(context);
+	titleBar.setCompletable(this);
     }
 
     public void onConfirm(MatjiAlertDialog dialog) {

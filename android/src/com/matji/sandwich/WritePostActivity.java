@@ -22,12 +22,13 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 							       RelativeLayoutThatDetectsSoftKeyboard.Listener,
 							       PostEditText.OnClickListener {
     private static final int INTENT_SELECT_STORE = 0;
+    private static final int INTENT_SELECT_TAG = 1;
     private static final int BASIC_STORE_ID = -1;
     private Context context;
     private PostEditText postText;
     private RelativeLayoutThatDetectsSoftKeyboard mainView;
     private CompletableTitle titleBar;
-    private GetPictureLayout imageKeyboard;
+    private RelativeLayout imageKeyboard;
     private int contentHeightWithoutKeyboard;
     private int contentHeightWithKeyboard;
     private int keyboardHeight;
@@ -49,7 +50,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	mainView = (RelativeLayoutThatDetectsSoftKeyboard)getMainView();
 	mainView.setListener(this);
 
-	imageKeyboard = (GetPictureLayout)findViewById(R.id.activity_write_post_image_keyboard);
+	imageKeyboard = (RelativeLayout)findViewById(R.id.activity_write_post_image_keyboard);
 	postText = (PostEditText)findViewById(R.id.activity_write_post_text);
 	titleBar = (CompletableTitle)findViewById(R.id.activity_write_post_title);
 	titleBar.setTitle(R.string.write_post_activity_title);
@@ -79,7 +80,9 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
     }
 
     public void onTagClicked(View v) {
-	Log.d("=====", "tag click");
+	Intent intent = new Intent(this, SelectTagActivity.class);
+	intent.putExtra(SelectTagActivity.DATA_TAGS, tags);
+	startActivityForResult(intent, INTENT_SELECT_TAG);
     }
     
     public void onServiceClicked(View v) {
@@ -99,13 +102,23 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	if (resultCode != RESULT_OK)
 	    return ;
 
-	if (requestCode == INTENT_SELECT_STORE) {
+	switch(requestCode) {
+	case INTENT_SELECT_STORE:
 	    store = (Store)data.getParcelableExtra(SelectStoreActivity.DATA_STORE);
 	    if (store != null) {
 		postText.checkButton(PostEditText.ButtonIndex.STORE);
 	    } else {
 		postText.unCheckButton(PostEditText.ButtonIndex.STORE);
 	    }
+	    break;
+	case INTENT_SELECT_TAG:
+	    tags = data.getStringExtra(SelectTagActivity.DATA_TAGS);
+	    if (tags != null && !tags.trim().equals("")) {
+		postText.checkButton(PostEditText.ButtonIndex.TAG);
+	    } else {
+		postText.unCheckButton(PostEditText.ButtonIndex.TAG);
+	    }
+	    break;
 	}
     }
 

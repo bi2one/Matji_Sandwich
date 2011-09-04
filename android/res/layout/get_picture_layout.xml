@@ -2,14 +2,36 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/get_picture_layout">
-  <Button
+  <!-- camera button -->
+  <RelativeLayout
       android:id="@+id/get_picture_layout_camera"
-      android:text="@string/default_string_camera"
-      style="@style/get_picture_layout_button"
-      android:layout_alignParentLeft="true" />
-  <Button
+      android:layout_alignParentLeft="true"
+      style="@style/get_picture_layout_button">
+    <LinearLayout style="@style/DefaultWrap"
+		  android:layout_centerInParent="true" >
+      <ImageView style="@style/get_picture_layout_camera_img"
+		 android:layout_gravity="center_vertical" />
+      <TextView style="@style/get_picture_layout_btn_text"
+		android:text="@string/default_string_camera"
+		android:layout_gravity="center_vertical" />
+    </LinearLayout>
+  </RelativeLayout>
+  
+  <ImageView style="@style/get_picture_layout_divider"
+	     android:layout_centerInParent="true" />
+
+  <!-- album button -->  
+  <RelativeLayout
       android:id="@+id/get_picture_layout_album"
-      android:text="@string/default_string_album"
-      style="@style/get_picture_layout_button"
-      android:layout_alignParentRight="true" />
+      android:layout_alignParentRight="true"
+      style="@style/get_picture_layout_button">
+    <LinearLayout style="@style/DefaultWrap"
+		  android:layout_centerInParent="true" >
+      <ImageView style="@style/get_picture_layout_album_img"
+		 android:layout_gravity="center_vertical" />
+      <TextView style="@style/get_picture_layout_btn_text"
+		android:text="@string/default_string_album"
+		android:layout_gravity="center_vertical" />
+    </LinearLayout>
+  </RelativeLayout>
 </RelativeLayout>

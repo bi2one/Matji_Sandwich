@@ -941,25 +941,51 @@
   <!-- activity_write_post_picture.xml -->
   <style name="activity_write_post_picture" parent="DefaultFill">
     <item name="android:background">@color/matji_light_pink</item>
+    <item name="android:padding">1dp</item>
   </style>
 
   <!-- get_picture_layout.xml -->
   <style name="get_picture_layout" parent="DefaultFill">
-    <item name="android:background">@color/matji_yellow_orange</item>
-    <item name="android:padding">20dp</item>
+    <item name="android:background">@drawable/img_photo_bg</item>
+    <item name="android:layout_height">48dp</item>
+    <item name="android:padding">0dp</item>
   </style>
 
-  <style name="get_picture_layout_button" parent="DefaultWrap"> 
-   <item name="android:layout_width">80dp</item>
-    <item name="android:layout_height">60dp</item>
+  <style name="get_picture_layout_button" parent="DefaultFill">
+    <item name="android:background">@null</item>
+    <item name="android:layout_width">159.33dp</item>
   </style>
 
+  <style name="get_picture_layout_divider" parent="DefaultFill">
+    <item name="android:background">@drawable/img_photo_bg_line</item>
+    <item name="android:layout_width">2px</item>
+    <item name="android:layout_height">46dp</item>
+  </style>
+
+  <style name="get_picture_layout_camera_img" parent="DefaultWrap">
+    <item name="android:background">@null</item>
+    <item name="android:src">@drawable/img_photo_camera</item>
+  </style>
+
+  <style name="get_picture_layout_album_img" parent="DefaultWrap">
+    <item name="android:background">@null</item>
+    <item name="android:src">@drawable/img_photo_album</item>
+  </style>
+
+  <style name="get_picture_layout_btn_text" parent="DefaultWrap">
+    <item name="android:background">@null</item>
+    <item name="android:textSize">16dp</item>
+    <item name="android:textColor">@color/get_picture_layout_icon_text</item>
+    <item name="android:layout_marginLeft">10dp</item>
+  </style>
+  
   <!-- row_post_tag.xml -->
   <style name="row_post_tag" parent="DefaultWidthFill">
     <item name="android:background">@drawable/btn_white_to_lightpink</item>
-    <item name="android:paddingLeft">6.67dp</item>
-    <item name="android:paddingTop">10dp</item>
-    <item name="android:paddingBottom">10dp</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingTop">13.33dp</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:paddingBottom">13.33dp</item>
   </style>
 
   <style name="row_post_tag_text" parent="DefaultWrap">
@@ -1156,10 +1182,7 @@
   </style>
 
   <style name="write_store_matji_mapview_text" parent="DefaultWidthFill">
-    <item name="android:paddingTop">7.33dp</item>
-    <item name="android:paddingLeft">10dp</item>
-    <item name="android:paddingBottom">7.33dp</item>
-    <item name="android:paddingRight">10dp</item>
+    <item name="android:padding">10dp</item>
   </style>
 
   <style name="write_store_matji_mapview_edittext" parent="DefaultWidthFill">
@@ -1220,5 +1243,37 @@
 
   <style name="write_store_matji_mapview_overlay" parent="DefaultWrap">
     <item name="android:src">@drawable/marker_04</item>
+  </style>
+
+  <!-- activity_select_tag.xml -->
+  <style name="activity_select_tag_edittext_wrapper" parent="DefaultWidthFill">
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:paddingTop">6.67dp</item>
+    <item name="android:paddingBottom">6.67dp</item>
+    <item name="android:background">@color/select_tag_bg</item>
+  </style>
+
+  <style name="activity_select_tag_edittext" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/input_box_square</item>
+    <item name="android:paddingLeft">9dp</item>
+    <item name="android:paddingTop">6.67dp</item>
+    <item name="android:paddingRight">9dp</item>
+    <item name="android:paddingBottom">6.67dp</item>
+    <item name="android:textColor">@color/BLACK</item>
+    <item name="android:textSize">16.67dp</item>
+  </style>
+
+  <style name="activity_select_tag_listview_wrapper" parent="DefaultFill">
+    <item name="android:background">@color/transparent_black</item>
+  </style>
+
+  <style name="activity_select_tag_divider1" parent="DefaultWidthFill">
+    <item name="android:background">@color/select_tag_divider1</item>
+    <item name="android:layout_height">1px</item>
+  </style>
+  
+  <style name="activity_select_tag_divider2" parent="activity_select_tag_divider1">
+    <item name="android:background">@color/select_tag_divider2</item>
   </style>
 </resources>

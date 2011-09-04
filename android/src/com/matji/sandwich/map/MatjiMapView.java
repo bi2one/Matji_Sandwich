@@ -58,6 +58,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	    }
 	    asyncTask = null;
 	}
+	tempMapCenter = null;
     }
 
     public void setMapCenterListener(MatjiMapCenterListener listener) {
@@ -84,7 +85,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	    return cancel(mayInterruptIfRunning);
 	}
 
-	private boolean geoPointEquals(GeoPoint p1, GeoPoint p2) {
+	protected boolean geoPointEquals(GeoPoint p1, GeoPoint p2) {
 	    if (p1 == null || p2 == null) {
 		return false;
 	    }
@@ -102,6 +103,12 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 		if (listener != null) {
 		    threadSleep(MAP_CENTER_UPDATE_TICK);
 		    newMapCenter = getMapCenter();
+
+		    if (tempMapCenter != null) {
+			mapCenter = tempMapCenter;
+			listener.onMapCenterChanged(mapCenter);
+			tempMapCenter = null;
+		    }
 		    
 		    if (geoPointEquals(mapCenter, newMapCenter))
 		    	continue;

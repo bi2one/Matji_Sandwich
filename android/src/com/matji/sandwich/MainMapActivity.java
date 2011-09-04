@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseMapActivity;
@@ -30,6 +31,7 @@ public class MainMapActivity extends BaseMapActivity {
     // private SessionRecentLocationUtil sessionLocationUtil;
     private SessionMapUtil sessionMapUtil;
     private HttpRequestManager requestManager;
+    // private GeoPoint lastCenter;
 
     private Drawable flipMapViewImage;
     private Drawable flipNearStoreImage;
@@ -57,24 +59,27 @@ public class MainMapActivity extends BaseMapActivity {
 
         flipMapViewImage = getResources().getDrawable(R.drawable.icon_location_map_selector);
         flipNearStoreImage = getResources().getDrawable(R.drawable.icon_location_list_selector);
-    }
-
-    protected void onResume() {
-        super.onResume();
         mapView.startMapCenterThread();
-	mapView.setCenterNotAnimate(sessionMapUtil.getCenter());
+	// lastCenter = sessionMapUtil.getCenter();
     }
 
     protected void onNotFlowResume() {
         if (!currentViewIsMap) {
             storeListView.requestReload();
         }
+	// sessionMapUtil.setCenter(lastCenter);
+	// mapView.setCenterNotAnimate(lastCenter);
+	// mapView.requestMapCenterChanged(lastCenter);
+	mapView.startMapCenterThread();
     }
 
     protected void onPause() {
         super.onPause();
+	// lastCenter = mapView.getMapCenter();
+	mapView.stopMapCenterThread();
+	
 	// Log.d("=====", "mainmap activity pause");
-        mapView.stopMapCenterThread();
+        // mapView.stopMapCenterThread();
     }
 
     public void onCurrentPositionClicked(View v) {
@@ -88,7 +93,7 @@ public class MainMapActivity extends BaseMapActivity {
     public void onFlipClicked(View v) {
         if (currentViewIsMap) {
 //            mapView.onMapCenterChanged(mapView.getMapCenter());
-            showStoreListView();            
+            showStoreListView();
         } else {
             showMapView();
         }

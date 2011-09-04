@@ -102,4 +102,15 @@
 	<!-- write store -->
 	<color name="write_store_bg">#fff9a3</color>
 	<color name="write_store_divider">#c9c9c9</color>
+
+	<!-- activity_select_tag.xml -->
+	<color name="select_tag_bg">#fff195</color>
+	<color name="select_tag_divider1">#f4d074</color>
+	<color name="select_tag_divider2">#f1dab2</color>
+
+	<!-- get_picture_layout.xml -->
+	<color name="get_picture_layout_icon_text">#f06b00</color>
+
+	<!-- AlbumView.java -->
+	<color name="album_view_bg">#ffd753</color>
 </resources>

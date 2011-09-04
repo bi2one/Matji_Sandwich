@@ -14,9 +14,19 @@
       android:layout_above="@+id/activity_write_post_image_keyboard"
       style="@style/DefaultFill" />
 
-  <com.matji.sandwich.widget.GetPictureLayout
+  <RelativeLayout
       android:id="@id/activity_write_post_image_keyboard"
       android:layout_alignParentBottom="true"
       android:visibility="gone"
-      style="@style/DefaultWidthFill" />
+      style="@style/DefaultWidthFill">
+    <com.matji.sandwich.widget.GetPictureLayout
+	android:id="@+id/activity_write_post_image_btns"
+	android:layout_alignParentTop="true"
+	style="@style/DefaultWidthFill" />
+    <com.matji.sandwich.widget.AlbumView
+	android:id="@+id/activity_write_post_albumview"
+	android:layout_below="@id/activity_write_post_image_btns"
+	style="@style/DefaultFill" />
+  </RelativeLayout>
+      
 </com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>
