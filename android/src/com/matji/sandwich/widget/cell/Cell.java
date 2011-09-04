@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 /**
  * 
  * @author mozziluv
  */
-public abstract class Cell extends LinearLayout {
+public abstract class Cell extends RelativeLayout {
 	protected abstract Intent getIntent();
 	private int layout_id;
 	/**
@@ -45,7 +45,7 @@ public abstract class Cell extends LinearLayout {
 
 			@Override
 			public void onClick(View v) {
-				gotoDetailPage();				
+				gotoDetailPage();
 			}
 		});
 	}

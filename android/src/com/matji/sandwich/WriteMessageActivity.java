@@ -2,7 +2,8 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
-import android.os.Bundle;
+import android.content.Intent;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -17,37 +18,49 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MessageHttpRequest;
-import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
 
 public class WriteMessageActivity extends BaseActivity implements Completable, Requestable {
 
     public static final String USER = "user";
-    
-    private Toast toast;
-    
+
+    private Toast writingMessageToast;
+    private Toast selectReceivedUserToast;
+
     private HttpRequestManager manager;
     private HttpRequest request;
 
-    private final int MAX_RECEIVED_USER_SIZE = 5;
-    private int receivedUserCount = 0;
-    private User[] receivedUsers;
-    
+    private ArrayList<User> receivedUsers;
+
     private EditText messageField;
     private TextView receivedUserListText;    
     private ImageButton receivedUserListButton;
     private ImageButton receivedMessageListButton;
+
+    private CompletableTitle title;
+    
     @Override
     public int setMainViewId() {
-        // TODO Auto-generated method stub
         return R.id.write_message_activity;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onCreate(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                messageField.requestFocus();
+                KeyboardUtil.showKeyboard(WriteMessageActivity.this, messageField);
+            }
+        }, 100);
     }
 
     @Override
@@ -56,67 +69,91 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
         super.init();
         setContentView(R.layout.activity_write_message);
 
-        toast = Toast.makeText(this, R.string.writing_content_message, Toast.LENGTH_SHORT);
         manager = HttpRequestManager.getInstance(this);
-        
-        receivedUsers = new User[MAX_RECEIVED_USER_SIZE];
-        ((CompletableTitle) findViewById(R.id.Titlebar)).setCompletable(this);
+
+        receivedUsers = new ArrayList<User>();
+        title = (CompletableTitle) findViewById(R.id.Titlebar);
         messageField = (EditText) findViewById(R.id.write_message_message_field);
         receivedUserListText = (TextView) findViewById(R.id.write_message_received_user_list);
         receivedUserListButton = (ImageButton) findViewById(R.id.write_message_received_user_list_btn);
         receivedMessageListButton = (ImageButton) findViewById(R.id.write_message_received_message_list_btn);
+
+        writingMessageToast = Toast.makeText(this, R.string.writing_content_message, Toast.LENGTH_SHORT);
+        selectReceivedUserToast = Toast.makeText(this, R.string.write_message_select_user, Toast.LENGTH_SHORT);
         
-        receivedUserListText.setText(MatjiConstants.string(R.string.write_message_received_users));
+        title.setCompletable(this);
+        title.setTitle(R.string.write_message);        
+        
         User user = getIntent().getParcelableExtra(USER);
-        if (user != null) {
+        if (user != null && user.getId() != Session.getInstance(this).getCurrentUser().getId()) {
             // intent에 user가 추가되어 있으면 
             // 타이틀 바의 쪽지 보내기 버튼을 통해 온 것이므로
             // 받는 사람에 전달받은 user를 우선 추가해준다.
-            receivedUsers[receivedUserCount++] = user;
-            receivedUserListText.setText(
-                    receivedUserListText.getText() + user.getNick());
+            receivedUsers.add(user);
+            refresh();
         }
-        
+
         receivedUserListButton.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
-                selectUser();
+                Intent intent = new Intent(WriteMessageActivity.this, ReceivedUserActivity.class);
+                intent.putParcelableArrayListExtra(ReceivedUserActivity.RECEIVED_USERS, receivedUsers);
+                startActivityForResult(intent, RECEIVED_USER_ACTIVITY);
             }
         });
         receivedMessageListButton.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
-                showReceivedMessage();
             }
         });
     }
 
+    public void refresh() {
+        refreshReceivedUserListText();
+    }
+    
+    public void refreshReceivedUserListText() {
+        String receivedUserList = "";
+        if (receivedUsers.size() > 0) {
+            receivedUserList += receivedUsers.get(0).getNick();
+            for (int i = 1; i < receivedUsers.size(); i++) 
+                receivedUserList += ", " + receivedUsers.get(i).getNick();
+        }
+        receivedUserListText.setText(receivedUserList);
+    }
+
     public void selectUser() {
     }
-    
+
     public void showReceivedMessage() {
-        
+
     }
-    
-    public void send(User[] users, String message) {
+
+    public void send(ArrayList<User> receivedUsers, String message) {
         if (request == null || !(request instanceof MessageHttpRequest)) {
             request = new MessageHttpRequest(this);
         }
         
-        for (int i = 0; i < receivedUserCount; i++) {
-            ((MessageHttpRequest) request).actionNew(users[i].getId(), message);
-            manager.request(getMainView(), request, HttpRequestManager.MESSAGE_NEW_REQUEST, this);            
+        int[] receivedUserIds = new int[receivedUsers.size()];
+        for (int i = 0; i < receivedUserIds.length; i++) {
+            receivedUserIds[i] = receivedUsers.get(i).getId();
         }
+        
+        ((MessageHttpRequest) request).actionNew(receivedUserIds, message);
+        manager.request(getMainView(), request, HttpRequestManager.MESSAGE_NEW_REQUEST, this);
     }
 
     @Override
     public void complete() {
         String message = messageField.getText().toString().trim();
         if (message.equals("")) {
-            toast.show();
+            writingMessageToast.show();
+        } else if (receivedUsers.size() == 0) {
+            selectReceivedUserToast.show();
         } else {
+            title.lock();
             send(receivedUsers, message);
         }
     }
@@ -125,6 +162,7 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch(tag) {
         case HttpRequestManager.MESSAGE_NEW_REQUEST:
+            title.unlock();
             finish();
             break;
         }
@@ -133,5 +171,18 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
     @Override
     public void requestExceptionCallBack(int tag, MatjiException e) {
         e.performExceptionHandling(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+        case RECEIVED_USER_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                receivedUsers = data.getParcelableArrayListExtra(ReceivedUserActivity.RECEIVED_USERS);
+                refresh();
+            }
+            break;
+        }
     }
 }

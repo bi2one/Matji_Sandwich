@@ -12,7 +12,6 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Parcelable;
 import android.text.TextPaint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;

@@ -49,7 +49,8 @@
 			android:textSize="@dimen/row_message_nick_size"
 			android:textColor="@color/matji_light_gray"
 			android:layout_toRightOf="@id/row_message_nick"
-			android:layout_below="@id/row_message_subject_list" />
+			android:layout_below="@id/row_message_subject_list"
+			android:drawablePadding="@dimen/default_drawable_padding" />
 	</RelativeLayout>
 
 	<LinearLayout

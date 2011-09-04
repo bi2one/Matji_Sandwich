@@ -35,19 +35,21 @@ public class UserPostListActivity extends BaseActivity {
         user = getIntent().getParcelableExtra(USER);
 
         title = ((UserTitle) findViewById(R.id.Titlebar));
+        userCell = new UserCell(this, user, title.getSwitchable());
+        userIntroCell = new UserIntroCell(this, user);
+
         title.setUser(user);
         title.setFollowable(userCell);
         title.setIdentifiable(this);
-        userCell = new UserCell(this, user, title.getSwitchable());
+        
         userCell.showLine();
-        userIntroCell = new UserIntroCell(this, user);
         
         listView = (UserPostListView) findViewById(R.id.user_post_list_view);
+        listView.addHeaderView(userCell);
+        listView.addHeaderView(userIntroCell);
         listView.setUser(user);
         listView.setActivity(this);
         listView.requestReload();
-        listView.addHeaderView(userCell);
-        listView.addHeaderView(userIntroCell);
     }
     @Override
     protected void onResume() {

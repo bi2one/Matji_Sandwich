@@ -42,5 +42,5 @@ public class AttachFiles extends MatjiData {
 	
 	public AttachFile[] getFiles() {
 		return files;
-	}	
+	}
 }

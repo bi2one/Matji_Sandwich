@@ -1,19 +1,18 @@
 package com.matji.sandwich.widget;
 
+import java.util.ArrayList;
+
 import android.content.Context;
-import android.widget.RelativeLayout;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
-import com.matji.sandwich.http.request.RequestCommand;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.listener.ListRequestScrollListener;
+import com.matji.sandwich.adapter.MBaseAdapter;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.adapter.MBaseAdapter;
-
-import java.util.ArrayList;
+import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.RequestCommand;
+import com.matji.sandwich.listener.ListRequestScrollListener;
 
 public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
 										    PullToRefreshListView.OnRefreshListener {

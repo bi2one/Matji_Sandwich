@@ -28,10 +28,11 @@ public class UserImageListActivity extends BaseActivity {
         user = (User) getIntent().getParcelableExtra(USER); 
 
         title = ((UserTitle) findViewById(R.id.Titlebar));
+        userCell = new UserCell(this, user, title.getSwitchable());
+
         title.setUser(user);
         title.setFollowable(userCell);
         title.setIdentifiable(this);
-        userCell = new UserCell(this, user, title.getSwitchable());
         
         UserImageListView listView = (UserImageListView) findViewById(R.id.user_image_list_view);
         listView.addHeaderView(userCell);

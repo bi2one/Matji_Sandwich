@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.matji.sandwich.Loginable;
@@ -13,6 +14,7 @@ import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Me;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.data.provider.ConcretePreferenceProvider;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.exception.MatjiException;
@@ -28,6 +30,8 @@ public class Session implements Requestable {
     private static final String keyForAccessToken = "AccessToken";
 
     private PreferenceProvider mPrefs;
+    private ConcretePreferenceProvider mConcretePrefs;
+    private SessionPrivateUtil mPrivateUtil;
     private Context mContext;
     private HttpRequestManager mManager;
     private Loginable mLoginable;
@@ -37,6 +41,8 @@ public class Session implements Requestable {
     private Session(Context context){
         this.mContext = context;
         this.mPrefs = new PreferenceProvider(context);
+        this.mConcretePrefs = new ConcretePreferenceProvider(context);        
+        this.mPrivateUtil = new SessionPrivateUtil(context, this);
     }
 
 
@@ -69,6 +75,11 @@ public class Session implements Requestable {
             ArrayList<MatjiData> data = request.request();
             Me me = (Me)data.get(0);
             saveMe(me);
+            if (!mPrivateUtil.getLastLoginUserid().equals(me.getUser().getUserid())) {
+                mConcretePrefs.clear();
+                mPrivateUtil.setLastLoginUserid(me.getUser().getUserid());
+            }
+            
             return true;
         } catch (MatjiException e) {            
             return false;
@@ -78,6 +89,7 @@ public class Session implements Requestable {
 
 
     public boolean logout(){
+        mPrivateUtil.setLastLoginUserid(getCurrentUser().getUserid());
         mPrefs.clear();
         removePrivateDataFromDatabase();
         return mPrefs.commit();
@@ -130,7 +142,7 @@ public class Session implements Requestable {
             Me me = (Me)data.get(0);
             saveMe(me);
 
-            if (mLoginable != null)
+            if (mLoginable != null) 
                 mLoginable.loginCompleted();
         }
     }
@@ -151,6 +163,10 @@ public class Session implements Requestable {
         return mPrefs;
     }
 
+    public ConcretePreferenceProvider getConcretePreferenceProvider() {
+        return mConcretePrefs;
+    }
+
     public User getCurrentUser(){
         Object obj = mPrefs.getObject(keyForCurrentUser);
         if (obj == null)
@@ -158,8 +174,10 @@ public class Session implements Requestable {
 
         return (User)obj;
     }
-
-
+    
+    public SessionPrivateUtil getPrivateUtil() {
+        return mPrivateUtil;
+    }
 
 //
 //    /*

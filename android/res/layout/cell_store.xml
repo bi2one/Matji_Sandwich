@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/StoreCell"
+	android:layout_width="fill_parent"
+	android:layout_height="@dimen/store_cell_height">
+	<RelativeLayout
+		style="@style/DefaultFill"
+		android:paddingLeft="@dimen/default_distance"
+		android:paddingRight="@dimen/default_distance"
+		android:background="@color/matji_white"
+		android:gravity="center_vertical">
+		<com.matji.sandwich.widget.BookmarkStarToggleView
+			android:id="@+id/cell_store_toggle_star"
+			style="@style/DefaultWrap"
+			android:layout_marginRight="@dimen/default_distance"
+			android:layout_centerVertical="true" />
+		<TextView
+			android:id="@+id/cell_store_name"
+			style="@style/DefaultHeightFill"
+			android:textSize="@dimen/store_cell_name_size"
+			android:textColor="@color/matji_gray"
+			android:layout_toRightOf="@id/cell_store_toggle_star"
+			android:layout_toLeftOf="@+id/cell_store_like_list_btn"
+			android:gravity="center_vertical" />
+		<Button
+			android:id="@id/cell_store_like_list_btn"
+			style="@style/cell_user_LikeListButton"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true" />
+	</RelativeLayout>
+	
+	<ImageView
+		android:id="@+id/cell_store_line"
+		android:background="@color/listview_divider1_gray"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/default_divider_height"
+		android:visibility="gone"
+		android:layout_alignParentBottom="true" />
+		
+	<ImageView
+		android:id="@+id/cell_store_shadow"
+		android:src="@drawable/img_shadow"
+		style="@style/DefaultWidthFill"
+		android:layout_alignParentBottom="true" />
+</RelativeLayout>

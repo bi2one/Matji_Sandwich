@@ -9,15 +9,6 @@
 		android:background="#FFF"
 		android:orientation="vertical">
 
-		<!-- Main Title -->
-		<com.matji.sandwich.widget.title.StoreTitle
-			style="@style/DefaultWrap" />
-
-		<!-- Store Info Cell -->
-		<com.matji.sandwich.widget.cell.StoreInfoCell
-			style="@style/DefaultWrap"
-			android:id="@+id/store_info_cell" />
-
 		<!-- Tab -->
 		<com.matji.sandwich.widget.RoundTabHost
 			android:id="@android:id/tabhost"
@@ -27,18 +18,15 @@
 				android:orientation="vertical"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent">
-				<TabWidget
-					android:id="@android:id/tabs"
-					style="@style/RoundTabWidget"
-					android:layout_weight="0" />
-				<ImageView
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content" />
 				<FrameLayout
 					android:id="@android:id/tabcontent"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:layout_weight="1" />
+				<TabWidget
+					android:id="@android:id/tabs"
+					style="@style/RoundTabWidget"
+					android:layout_weight="0" />
 			</LinearLayout>
 		</com.matji.sandwich.widget.RoundTabHost>
 	</LinearLayout>

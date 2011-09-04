@@ -3,7 +3,12 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_store_image_list"
 	style="@style/DefaultFill" >
+	<!-- Store Title -->
+	<com.matji.sandwich.widget.title.StoreTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWrap" />
 	<com.matji.sandwich.widget.StoreImageListView
 		style="@style/DefaultFill"
-		android:id="@+id/store_image_list_view" />
+		android:id="@+id/store_image_list_view"
+		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

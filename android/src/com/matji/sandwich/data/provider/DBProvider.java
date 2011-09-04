@@ -30,6 +30,7 @@ public class DBProvider {
     public static final String POST = "Post";
     public static final String STORE = "Store";
     public static final String LIKE = "Like";
+    public static final String BOOKMARK = "Bookmark";
 
     private static DBProvider dbProvider;
     private static DataBaseHelper dbHelper;

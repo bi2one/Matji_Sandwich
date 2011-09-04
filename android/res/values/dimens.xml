@@ -13,7 +13,12 @@
 	<dimen name="title_container_btn_max_width">52.67dp</dimen>
 	
 	<!-- Store Cell -->
-	<dimen name="max_title_width">190dp</dimen>
+	<dimen name="store_cell_height">48dp</dimen>
+	<dimen name="store_cell_info_height">106.67dp</dimen>
+	<dimen name="store_cell_content_size">12dp</dimen>
+	<dimen name="store_cell_name_size">17.33dp</dimen>
+	<dimen name="store_cell_thumbnail_width">69.33dp</dimen>
+	<dimen name="store_cell_thumbnail_height">70dp</dimen>
 
 	<!-- User Cell -->
 	<dimen name="user_cell_profile_size">60dp</dimen>
@@ -140,7 +145,7 @@
 	<dimen name="row_simple_store_name_size">16dp</dimen>
 	<dimen name="row_simple_store_text_size">12dp</dimen>
 	
-	<!-- row message -->
+	<!-- row_message -->
 	<dimen name="row_message_height">53.33dp</dimen>
 	<dimen name="row_message_flow_width">39.33dp</dimen>
 	<dimen name="row_message_flow_line_width">1.33dp</dimen>
@@ -149,6 +154,12 @@
 	<dimen name="row_message_content_padding">14.67dp</dimen>
 	<dimen name="row_message_content_padding2">13.33dp</dimen>
 	
+	<!-- row_image -->
+	<dimen name="row_image_width">69.33dp</dimen>
+	<dimen name="row_image_height">70dp</dimen>
+	<dimen name="row_image_marginTop">9.33dp</dimen>
+	<dimen name="row_image_marginSide">7.33dp</dimen>
+	
 	<!-- Write Message Activity -->
 	<dimen name="write_message_underbar_height">46.67dp</dimen>
 	<dimen name="write_message_underbar_btn_width">47.33dp</dimen>
@@ -156,5 +167,7 @@
 	
 	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>
+	
+	
 	
 </resources>

@@ -28,7 +28,6 @@ public class MessageParser extends MatjiDataParser {
 		
 		/* Set Received User*/
 		message.setReceivedUser(userParser.getMatjiData(getObject(object, "received_user")));
-		Log.d("Matji", getString(object, "created_at"));
 		message.setCreatedAt(getString(object, "created_at"));
 		message.setUpdatedAt(getString(object, "updated_at"));
 		message.setAgo(getLong(object, "ago"));

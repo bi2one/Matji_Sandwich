@@ -27,4 +27,7 @@ public class SessionIndex {
     public static final String WRITE_POST_RADIUS_LAT_SPAN = "WritePostTabActivity.radius_lat_span";
     public static final String WRITE_POST_RADIUS_LNG_SPAN = "WritePostTabActivity.radius_lng_span";
     public static final String WRITE_POST_RADIUS_ADDRESS = "WritePostTabActivity.radius_address";
+    
+    public static final String PRIVATE_LAST_READ_MESSAGE_ID = "ReceivedMessageActivity.last_read_message_id";
+    public static final String PRIVATE_LAST_LOGIN_USER_ID = "LoginActivity.user_id";
 }

@@ -33,13 +33,18 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
 
         listView = (PostListView) findViewById(R.id.post_list_view);
         listView.setActivity(this);
-        listView.requestReload();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         listView.dataRefresh();
+    }
+    
+    @Override
+    protected void onNotFlowResume() {
+        super.onNotFlowResume();
+        listView.requestReload();
     }
 
     @Override

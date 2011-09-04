@@ -7,11 +7,11 @@ import android.util.*;
 
 public class PreferenceProvider {
 	//private final static String PRIMITIVE_PREFERENCE_NAME = "app_primitive_preference";
-	private final static String OBJECT_PREFERENCE_NAME = "app_object_preference";
+//    private final static String OBJECT_PREFERENCE_NAME = "app_object_preference";
 	
 	//private SharedPreferences sharedPref;
 	private Context context;
-	private HashMap<String, Object> sharedObjects; 
+	private HashMap<String, Object> sharedObjects;
 	
 	@SuppressWarnings("unused")
 	private PreferenceProvider(){}
@@ -20,15 +20,18 @@ public class PreferenceProvider {
 	public PreferenceProvider(Context context){
 		this.context = context;	
 		
-		initSharedPreferences();		
+		initSharedPreferences();
 	}
 	
+	protected String getFileName() {
+	    return "app_object_preference";
+	}
 	
 	private void initSharedPreferences(){
-		//sharedPref = context.getSharedPreferences(PRIMITIVE_PREFERENCE_NAME, 0);
-		sharedObjects = getSharedObjectPreferences();			
-	}
-	
+        //sharedPref = context.getSharedPreferences(PRIMITIVE_PREFERENCE_NAME, 0);
+        sharedObjects = getSharedObjectPreferences();           
+    }
+
 	@SuppressWarnings("unchecked")
 	private HashMap<String, Object> getSharedObjectPreferences(){
 	    // Log.d("=====", "load");
@@ -36,7 +39,7 @@ public class PreferenceProvider {
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
-			fis = context.openFileInput(OBJECT_PREFERENCE_NAME);
+			fis = context.openFileInput(getFileName());
 			ois = new ObjectInputStream(fis);
 			hmap = (HashMap<String, Object>)ois.readObject();
 			if (hmap == null){
@@ -66,34 +69,34 @@ public class PreferenceProvider {
 		return hmap;
 	}
 	
-	public int getInt(String key, int defValue){
-//		return sharedPref.getInt(key, defValue);
-		Integer intValue = (Integer)sharedObjects.get(key);
-		return (intValue == null) ?  defValue : intValue.intValue();
-	}
-
+    public int getInt(String key, int defValue){
+//      return sharedPref.getInt(key, defValue);
+        Integer intValue = (Integer)sharedObjects.get(key);
+        return (intValue == null) ?  defValue : intValue.intValue();
+    }
+    
 	public float getFloat(String key, float defValue){
 //		return sharedPref.getInt(key, defValue);
 		Float floatValue = (Float)sharedObjects.get(key);
 		return (floatValue == null) ?  defValue : floatValue.floatValue();
 	}
     
-	public String getString(String key ,String defValue){
-//		return sharedPref.getString(key, defValue);
-		String stringValue = (String)sharedObjects.get(key);
-		return (stringValue == null) ? defValue : stringValue;
- 	}
-	
+    public String getString(String key ,String defValue){
+//      return sharedPref.getString(key, defValue);
+        String stringValue = (String)sharedObjects.get(key);
+        return (stringValue == null) ? defValue : stringValue;
+    }
+
 	public boolean getBoolean(String key, boolean defValue){
 //		return sharedPref.getBoolean(key, defValue);
 		Boolean boolValue = (Boolean)sharedObjects.get(key);
 		return (boolValue == null) ? defValue : boolValue.booleanValue();
 	}
 	
-	public Object getObject(String key){
-		return sharedObjects.get(key);
-	}
-	
+    public Object getObject(String key){
+        return sharedObjects.get(key);
+    }
+    
 	public void setInt(String key, int value){
 //		sharedPref.edit().putInt(key, value);
 //		sharedPref.edit().commit();
@@ -114,17 +117,16 @@ public class PreferenceProvider {
 		sharedObjects.put(key, boolValue);
 	}
 
-	public void setString(String key, String value){
-//		sharedPref.edit().putString(key, value);
-//		sharedPref.edit().commit();		
-		sharedObjects.put(key, value);
-	}
-	
+    public void setString(String key, String value){
+//      sharedPref.edit().putString(key, value);
+//      sharedPref.edit().commit();     
+        sharedObjects.put(key, value);
+    }
+    
 	public void remove(String key){
-//		sharedPref.edit().remove(key);
 		sharedObjects.remove(key);
 	}
-
+	
 	public void setObject(String key, Object obj) throws NotSerializableException{
 		if (obj instanceof Serializable){
 			sharedObjects.put(key, obj);
@@ -133,14 +135,11 @@ public class PreferenceProvider {
 		}
 	}
 	
-	
-	
-	
 	public boolean commit(){
 	    // Log.d("=====", "commit!!");
 		boolean success = false;
 		try{
-            FileOutputStream fos = context.openFileOutput(OBJECT_PREFERENCE_NAME, Context.MODE_WORLD_WRITEABLE);
+            FileOutputStream fos = context.openFileOutput(getFileName(), Context.MODE_WORLD_WRITEABLE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(sharedObjects);
             oos.flush();
@@ -158,9 +157,7 @@ public class PreferenceProvider {
 	public void clear(){
 		//sharedPref.edit().clear();
 		sharedObjects.clear();
-		
-	}
-	
+	}	
 }
 
 

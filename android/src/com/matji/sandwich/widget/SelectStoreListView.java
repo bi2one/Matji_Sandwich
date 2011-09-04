@@ -1,27 +1,22 @@
 package com.matji.sandwich.widget;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.graphics.Color;
-import android.view.View;
 import android.graphics.drawable.ColorDrawable;
-
-import com.matji.sandwich.R;
-import com.matji.sandwich.StoreMainActivity;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.adapter.SimpleStoreAdapter;
-import com.matji.sandwich.adapter.WritePostStoreAdapter;
-import com.matji.sandwich.session.SessionMapUtil;
-import com.matji.sandwich.http.request.StoreHttpRequest;
-import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.util.MatjiConstants;
+import android.util.AttributeSet;
+import android.view.View;
 
 import com.google.android.maps.GeoPoint;
-
-import java.util.ArrayList;
+import com.matji.sandwich.R;
+import com.matji.sandwich.adapter.SimpleStoreAdapter;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.session.SessionMapUtil;
+import com.matji.sandwich.util.MatjiConstants;
 
 public class SelectStoreListView extends RequestableMListView implements View.OnClickListener {
     private Context context;

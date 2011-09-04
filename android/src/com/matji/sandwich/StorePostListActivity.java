@@ -2,16 +2,22 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.StorePostListView;
-
-import android.content.Intent;
-import android.os.Bundle;
+import com.matji.sandwich.widget.cell.StoreCell;
+import com.matji.sandwich.widget.cell.StoreInfoCell;
+import com.matji.sandwich.widget.title.StoreTitle;
 
 public class StorePostListActivity extends BaseActivity {
     private Store store;
+    private StoreTitle title;
+    private StoreCell storeCell;
+    private StoreInfoCell storeInfoCell;
     private StorePostListView listView;
 
     public static final String STORE = "store";
@@ -25,7 +31,16 @@ public class StorePostListActivity extends BaseActivity {
         setContentView(R.layout.activity_store_post);
         store = (Store) getIntent().getParcelableExtra(STORE);
 
+        title = (StoreTitle) findViewById(R.id.Titlebar);
+        title.setTitle(store.getName());
+        storeCell = new StoreCell(this, store);
+        storeInfoCell = new StoreInfoCell(this, store);
+        storeCell.setMainView(getMainView());
+        storeCell.showLine();
+        
         listView = (StorePostListView) findViewById(R.id.store_post_list);
+        listView.addHeaderView(storeCell);
+        listView.addHeaderView(storeInfoCell);
         listView.setStore(store);
         listView.setActivity(this);
         listView.requestReload();

@@ -21,7 +21,9 @@ public class UserProfileView extends RelativeLayout {
     
     private TextView intro;
     private TextView blog;
+    private View followingCountView;
     private TextView followingCount;
+    private View followerCountView;
     private TextView followerCount;
     private TextView findCount;
     private TextView bookmarkCount;
@@ -44,10 +46,28 @@ public class UserProfileView extends RelativeLayout {
         userCell.setClickable(false);
         intro = (TextView) findViewById(R.id.user_profile_intro);
         blog = (TextView) findViewById(R.id.user_profile_blog);
+        followingCountView = findViewById(R.id.user_profile_following);
         followingCount = (TextView) findViewById(R.id.user_profile_following_count);
+        followerCountView = findViewById(R.id.user_profile_follower);
         followerCount = (TextView) findViewById(R.id.user_profile_follower_count);
         findCount = (TextView) findViewById(R.id.user_profile_find_store_count);
         bookmarkCount = (TextView) findViewById(R.id.user_profile_bookmark_store_count);
+        
+        followingCountView.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                onFollowingButtonClicked(v);
+            }
+        });
+        
+        followerCountView.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                onFollowerButtonClicked(v);
+            }
+        });
     }
     
     public void setUser(User user) {

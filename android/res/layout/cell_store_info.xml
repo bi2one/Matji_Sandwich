@@ -1,47 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/cell_store_info_Wrapper"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content">
+	android:id="@+id/StoreInfoCell"
+	android:layout_width="fill_parent"
+	android:layout_height="@dimen/store_cell_info_height">
 	<RelativeLayout
-		style="@style/DefaultWidthFill"
-		android:padding="7dp">
-		<ImageView
-			style="@style/cell_store_Thumbnail"
-			android:id="@+id/cell_store_thumbnail" 
-			android:onClick="onImageClicked"/> 
+		style="@style/DefaultFill"
+		android:padding="@dimen/default_distance"
+		android:background="@color/matji_white">
+		<LinearLayout
+			android:id="@+id/cell_store_thumbnail_wrapper"
+			android:layout_width="@dimen/store_cell_thumbnail_width"
+			android:layout_height="@dimen/store_cell_thumbnail_height"
+			android:background="@drawable/box_restaurant"
+			android:layout_marginRight="@dimen/default_distance">
+			<ImageView
+				android:id="@+id/cell_store_thumbnail"
+				style="@style/DefaultFill"
+				android:scaleType="centerCrop" />
+		</LinearLayout>
+
 		<TextView
-			style="@style/cell_store_Info"
 			android:id="@+id/cell_store_tel"
-			android:maxWidth="@dimen/max_title_width"	
-			android:layout_toRightOf="@id/cell_store_thumbnail" />
-		<TextView
-			style="@style/cell_store_Info"
-			android:id="@+id/cell_store_address"
-			android:maxWidth="@dimen/max_title_width"
-			android:layout_below="@id/cell_store_tel"
-			android:layout_toRightOf="@id/cell_store_thumbnail"
-			android:layout_alignLeft="@id/cell_store_tel" />
-		<TextView
-			style="@style/cell_store_Info"
-			android:id="@+id/cell_store_tag"
-			android:maxWidth="@dimen/max_title_width"	
-			android:layout_below="@id/cell_store_address"
-			android:layout_toRightOf="@id/cell_store_thumbnail"
-			android:layout_alignLeft="@id/cell_store_tel" />
-		<TextView
-			style="@style/cell_store_Info"
-			android:id="@+id/cell_store_food"
-			android:maxWidth="@dimen/max_title_width"	
-			android:layout_below="@id/cell_store_tag"
-			android:layout_toRightOf="@id/cell_store_thumbnail"
-			android:layout_alignLeft="@id/cell_store_tel" />
-		<ImageView
 			style="@style/DefaultWrap"
-			android:background="@drawable/icon_flow"
-			android:layout_alignParentRight="true"
+			android:textSize="@dimen/store_cell_content_size"
+			android:textColor="@color/matji_silver"
+			android:singleLine="true"
+			android:layout_toRightOf="@id/cell_store_thumbnail_wrapper"
+			android:layout_toLeftOf="@+id/cell_store_flow" />
+
+		<TextView
+			android:id="@+id/cell_store_address"
+			style="@style/DefaultWrap"
+			android:textSize="@dimen/store_cell_content_size"
+			android:textColor="@color/matji_silver"
+			android:singleLine="true"
+			android:layout_toRightOf="@id/cell_store_thumbnail_wrapper"
+			android:layout_below="@id/cell_store_tel"
+			android:layout_toLeftOf="@id/cell_store_flow" />
+
+		<TextView
+			android:id="@+id/cell_store_tag"
+			style="@style/DefaultWrap"
+			android:textSize="@dimen/store_cell_content_size"
+			android:textColor="@color/matji_silver"
+			android:singleLine="true"
+			android:layout_toRightOf="@id/cell_store_thumbnail_wrapper"
+			android:layout_below="@id/cell_store_address"
+			android:layout_toLeftOf="@id/cell_store_flow" />
+
+		<TextView
+			android:id="@+id/cell_store_food"
+			style="@style/DefaultWrap"
+			android:textSize="@dimen/store_cell_content_size"
+			android:textColor="@color/matji_silver"
+			android:singleLine="true"
+			android:layout_toRightOf="@id/cell_store_thumbnail_wrapper"
+			android:layout_below="@id/cell_store_tag"
+			android:layout_toLeftOf="@id/cell_store_flow" />
+
+		<ImageView
+			android:id="@+id/cell_store_flow"
+			style="@style/DefaultWrap"
+			android:src="@drawable/icon_flow"
 			android:layout_centerVertical="true"
-			android:padding="5dp" />
+			android:layout_alignParentRight="true" />
 	</RelativeLayout>
-</LinearLayout>
+	<ImageView
+		android:src="@drawable/img_shadow"
+		style="@style/DefaultWidthFill"
+		android:layout_alignParentBottom="true" />
+</RelativeLayout>

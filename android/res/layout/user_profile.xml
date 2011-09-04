@@ -51,8 +51,7 @@
 						android:layout_height="wrap_content"
 						android:layout_width="0dp"
 						android:layout_weight="1"
-						android:layout_toLeftOf="@+id/user_profile_follower"
-						android:onClick="onFollowingButtonClicked">
+						android:layout_toLeftOf="@+id/user_profile_follower">
 						<TextView
 							android:id="@+id/user_profile_following_title"
 							style="@style/user_profile_Following"
@@ -74,8 +73,7 @@
 						android:id="@id/user_profile_follower"
 						android:layout_height="wrap_content"
 						android:layout_width="0dp"
-						android:layout_weight="1"
-						android:onClick="onFollowerButtonClicked">
+						android:layout_weight="1">
 						<TextView
 							android:id="@+id/user_profile_follower_title"
 							style="@style/user_profile_Follower"
@@ -150,10 +148,10 @@
 							style="@style/user_profile_Moresign" />
 					</RelativeLayout>
 				</LinearLayout>
-				<TextView
-					android:id="@+id/user_profile_recent_store"
-					style="@style/user_profile_RecentStore"
-					android:layout_below="@id/user_profile_store_info_wrapper" />
+<!-- 				<TextView -->
+<!-- 					android:id="@+id/user_profile_recent_store" -->
+<!-- 					style="@style/user_profile_RecentStore" -->
+<!-- 					android:layout_below="@id/user_profile_store_info_wrapper" /> -->
 			</RelativeLayout>
 		</LinearLayout>
 	</ScrollView>

@@ -2,13 +2,13 @@ package com.matji.sandwich.listener;
 
 import java.util.ArrayList;
 
-import com.matji.sandwich.ImageSliderActivity;
-import com.matji.sandwich.data.AttachFile;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.matji.sandwich.ImageSliderActivity;
+import com.matji.sandwich.data.AttachFile;
 
 /**
  * 클릭 시 {@link ImageSliderActivity}로 이동하도록 하는 클릭 리스너.
@@ -19,8 +19,8 @@ import android.view.View.OnClickListener;
 public class GotoImageSliderAction implements OnClickListener {
 	
 	private Context context;
-	private ArrayList<AttachFile> files;
-	
+	private ArrayList<AttachFile> filesList;
+
 	/**
 	 * 기본 생성자
 	 * 
@@ -29,7 +29,7 @@ public class GotoImageSliderAction implements OnClickListener {
 	 */
 	public GotoImageSliderAction(Context context, ArrayList<AttachFile> files) {
 		this.context = context;
-		this.files = files;
+		this.filesList = files;
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class GotoImageSliderAction implements OnClickListener {
 	 * @param files 변경 할 {@link AttachFile} 리스트
 	 */
 	public void setAttachFiles(ArrayList<AttachFile> files) {
-		this.files = files;
+		this.filesList = files;
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class GotoImageSliderAction implements OnClickListener {
 	 * @param position 가장 처음 보여 줄 Image의 files 내의 포지션 position.
 	 */
 	public void callImageViewer(int position){
-		AttachFile[] attachFiles = files.toArray(new AttachFile[]{});
+		AttachFile[] attachFiles = filesList.toArray(new AttachFile[]{});
 
 		Intent viewerIntent = new Intent(context, ImageSliderActivity.class);
 		viewerIntent.putExtra(ImageSliderActivity.ATTACH_FILES, attachFiles);

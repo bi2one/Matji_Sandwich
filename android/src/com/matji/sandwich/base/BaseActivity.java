@@ -17,8 +17,9 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public static final int LOGIN_ACTIVITY = 100;
     public static final int POST_ACTIVITY = 101;
     public static final int WRITE_POST_ACTIVITY = 102;
-    public static final int WRITE_COMMENT_ACTIVITY = 103;	
+    public static final int WRITE_COMMENT_ACTIVITY = 103;   
     public static final int RECEIVED_USER_ACTIVITY = 104;
+    
     private ViewGroup mainViewGroup;
 
     private boolean isFlow;
