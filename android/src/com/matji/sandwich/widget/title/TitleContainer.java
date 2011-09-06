@@ -67,14 +67,13 @@ public abstract class TitleContainer extends RelativeLayout {
         newIcon.setVisibility(View.GONE);
         
         RelativeLayout rl = new RelativeLayout(getContext());
-        
-        v.setTag(R.string.tag_button_wrapper, rl);
-        v.setTag(R.string.tag_new_icon, newIcon);
-        
+        rl.addView(v);
         rl.addView(line);
         rl.addView(newIcon);
-        rl.addView(v);
-        
+
+        v.setTag(R.string.tag_button_wrapper, rl);
+        v.setTag(R.string.tag_new_icon, newIcon);
+                
 		rightContainer.addView(rl);
 	}
 

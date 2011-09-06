@@ -1,20 +1,19 @@
 package com.matji.sandwich.base;
 
+import android.app.TabActivity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Window;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import com.matji.sandwich.ActivityStartable;
 import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.title.TitleContainer;
-
-import android.app.TabActivity;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.widget.RelativeLayout;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Window;
-import android.widget.Toast;
 
 public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener, Identifiable {
     protected static final int LOGIN_ACTIVITY = 1;

@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
         EditText usernameField = (EditText) findViewById(R.id.username);
         EditText passwordField = (EditText) findViewById(R.id.password);        
         
-        new LoginAsyncTask(this, this, getMainView(), usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
+        new LoginAsyncTask(this, this, usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
     }
 
     public void cancelButtonClicked(View v) {

@@ -8,14 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.session.SessionMapUtil;
-// import com.matji.sandwich.session.SessionRecentLocationUtil;
 import com.matji.sandwich.widget.StoreMapNearListView;
 
 public class MainMapActivity extends BaseMapActivity {
@@ -37,7 +35,7 @@ public class MainMapActivity extends BaseMapActivity {
     private Drawable flipNearStoreImage;
 
     public int setMainViewId() {
-	return R.id.activity_main_map;
+        return R.id.activity_main_map;
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +43,7 @@ public class MainMapActivity extends BaseMapActivity {
         setContentView(R.layout.activity_main_map);
 
         context = getApplicationContext();
-	requestManager = HttpRequestManager.getInstance(context);
+        requestManager = HttpRequestManager.getInstance(context);
         // sessionLocationUtil = new SessionRecentLocationUtil(context);
         sessionMapUtil = new SessionMapUtil(context);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
@@ -60,25 +58,25 @@ public class MainMapActivity extends BaseMapActivity {
         flipMapViewImage = getResources().getDrawable(R.drawable.icon_location_map_selector);
         flipNearStoreImage = getResources().getDrawable(R.drawable.icon_location_list_selector);
         mapView.startMapCenterThread();
-	// lastCenter = sessionMapUtil.getCenter();
+        // lastCenter = sessionMapUtil.getCenter();
     }
 
     protected void onNotFlowResume() {
         if (!currentViewIsMap) {
             storeListView.requestReload();
         }
-	// sessionMapUtil.setCenter(lastCenter);
-	// mapView.setCenterNotAnimate(lastCenter);
-	// mapView.requestMapCenterChanged(lastCenter);
-	mapView.startMapCenterThread();
+        // sessionMapUtil.setCenter(lastCenter);
+        // mapView.setCenterNotAnimate(lastCenter);
+        // mapView.requestMapCenterChanged(lastCenter);
+        mapView.startMapCenterThread();
     }
 
     protected void onPause() {
         super.onPause();
-	// lastCenter = mapView.getMapCenter();
-	mapView.stopMapCenterThread();
-	
-	// Log.d("=====", "mainmap activity pause");
+        // lastCenter = mapView.getMapCenter();
+        mapView.stopMapCenterThread();
+
+        // Log.d("=====", "mainmap activity pause");
         // mapView.stopMapCenterThread();
     }
 
@@ -92,7 +90,7 @@ public class MainMapActivity extends BaseMapActivity {
 
     public void onFlipClicked(View v) {
         if (currentViewIsMap) {
-//            mapView.onMapCenterChanged(mapView.getMapCenter());
+            //            mapView.onMapCenterChanged(mapView.getMapCenter());
             showStoreListView();
         } else {
             showMapView();

@@ -3,20 +3,12 @@ package com.matji.sandwich.widget.title;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.button.AlarmButton;
 import com.matji.sandwich.widget.title.button.SettingButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
-/**
- * UserMainActivity에서 사용하는 Titlebar.
- * Titlebar에서 {@link User} 객체를 사용해야 하므로 생성자에서 User 정보를 무조건 받도록 한다. 
- * 
- * @author mozziluv
- *
- */
-public class PrivateTitle extends TitleContainerTypeRR {
+public class PrivateTitle extends TitleContainerTypeRR implements MainTabTitle {
     public PrivateTitle(Context context) {
         super(context);
     }
@@ -36,12 +28,19 @@ public class PrivateTitle extends TitleContainerTypeRR {
         // TODO Auto-generated method stub
         return new SettingButton(getContext());
     }
-    
+ 
+    @Override
     public void notificationValidate() {
         if (Session.getInstance(getContext()).getPrivateUtil().getNewAlarmCount() > 0) {
             showNewIcon(rightButton1);
         } else {
             dismissNewIcon(rightButton1);
+        }
+
+        if (Session.getInstance(getContext()).getPrivateUtil().getNewNoticeCount() > 0) {
+            showNewIcon(rightButton2);
+        } else {
+            dismissNewIcon(rightButton2);
         }
     }
 }

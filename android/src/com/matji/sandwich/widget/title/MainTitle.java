@@ -1,14 +1,15 @@
 package com.matji.sandwich.widget.title;
 
-import com.matji.sandwich.widget.title.button.StorePostWriteButton;
-import com.matji.sandwich.widget.title.button.SearchButton;
-import com.matji.sandwich.widget.title.button.SettingButton;
-import com.matji.sandwich.widget.title.button.TitleImageButton;
-
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class MainTitle extends TitleContainerTypeRRR {
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.title.button.SearchButton;
+import com.matji.sandwich.widget.title.button.SettingButton;
+import com.matji.sandwich.widget.title.button.StorePostWriteButton;
+import com.matji.sandwich.widget.title.button.TitleImageButton;
+
+public class MainTitle extends TitleContainerTypeRRR implements MainTabTitle {
 
 	public MainTitle(Context context) {
 		super(context);
@@ -34,5 +35,14 @@ public class MainTitle extends TitleContainerTypeRRR {
     protected TitleImageButton getRightButton3() {
         // TODO Auto-generated method stub
         return new SettingButton(getContext());
+    }
+    
+    @Override
+    public void notificationValidate() {
+        if (Session.getInstance(getContext()).getPrivateUtil().getNewNoticeCount() > 0) {
+            showNewIcon(rightButton3);
+        } else {
+            dismissNewIcon(rightButton3);
+        }
     }
 }

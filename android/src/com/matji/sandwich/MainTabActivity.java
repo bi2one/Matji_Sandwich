@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
-import android.content.Context;
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
@@ -8,22 +9,22 @@ import android.widget.TabHost.OnTabChangeListener;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.Session.LoginListener;
 import com.matji.sandwich.session.SessionTabHostUtil;
-import com.matji.sandwich.util.DisplayUtil;
-import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.MainTabHost;
+import com.matji.sandwich.widget.title.MainTabTitle;
 import com.matji.sandwich.widget.title.MainTitle;
 import com.matji.sandwich.widget.title.MatistTitle;
 import com.matji.sandwich.widget.title.MatstoryTitle;
 import com.matji.sandwich.widget.title.PrivateTitle;
+import com.matji.sandwich.widget.title.SettingTitle;
 import com.matji.sandwich.widget.title.TitleContainer;
 
-// import com.matji.sandwich.http.AsyncTaskTest;
-
-public class MainTabActivity extends BaseTabActivity implements OnTabChangeListener {
+public class MainTabActivity extends BaseTabActivity implements OnTabChangeListener, LoginListener {
     private MainTabHost tabHost;
+    private Session session;
     private SessionTabHostUtil sessionUtil;
-    private Context context;
 
     private LinearLayout mainTabWrapper;
     private String curSpecLabel;
@@ -34,21 +35,23 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     public static final int IV_INDEX_POST = 1;
     public static final int IV_INDEX_RANKING = 2;
     public static final int IV_INDEX_CONFIG = 3;
+    public static final int IV_INDEX_LOGIN = 4;
 
     public static final String SPEC_LABEL1 = "tab1";
     public static final String SPEC_LABEL2 = "tab2";
     public static final String SPEC_LABEL3 = "tab3";
 
-    private TitleContainer curTitle;
+    private ArrayList<MainTabTitle> titles;
     private MainTitle mainTitle;
     private MatstoryTitle matstoryTitle;
     private MatistTitle matistTitle;
     private PrivateTitle privateTitle;
+    private SettingTitle settingTitle;    
 
     public int setMainViewId() {
         return R.id.main_tab_wrapper;
     }
-    
+
     /**
      * Activity생성시 실행하는 메소드
      *
@@ -57,11 +60,10 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tab);
-
-        context = getApplicationContext();
-        DisplayUtil.setContext(context); // DisplayUtil 초기화
-        MatjiConstants.setContext(context); // MatjiContstants 초기화
-        sessionUtil = new SessionTabHostUtil(context);
+        
+        session = Session.getInstance(this);
+        session.addLoginListener(this);
+        sessionUtil = new SessionTabHostUtil(this);
 
         mainTabWrapper = (LinearLayout)findViewById(R.id.activity_main_tab_title_wrapper);
         mainTabWrapper.addView(new MainTitle(this), 0);
@@ -87,14 +89,23 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
 
         tabHost.setOnTabChangedListener(this);
 
+        
+        titles = new ArrayList<MainTabTitle>();
         mainTitle = new MainTitle(this);
         mainTitle.setTitle(R.string.main_tab_title_matmap);
+        titles.add(mainTitle);
         matstoryTitle = new MatstoryTitle(this);
         matstoryTitle.setTitle(R.string.main_tab_title_mattalk);
+        titles.add(matstoryTitle);
         matistTitle = new MatistTitle(this);
         matistTitle.setTitle(R.string.main_tab_title_matist);
+        titles.add(matistTitle);
         privateTitle = new PrivateTitle(this);
         privateTitle.setTitle(R.string.main_tab_title_mypage);
+        titles.add(privateTitle);
+        settingTitle = new SettingTitle(this);
+        settingTitle.setTitle(R.string.main_tab_title_login);
+        titles.add(settingTitle);
         // AsyncTaskTest tasktest = new AsyncTaskTest();
         // tasktest.execute("1st request");
         // tasktest.execute("2nd request");
@@ -118,45 +129,66 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     public void onTabChanged(String specLabel) {
         curSpecLabel = specLabel;
         switchTitle(curSpecLabel);
-    }
-    
-    
-    public void switchTitle(String specLabel) {
-        if (curSpecLabel.equals(SPEC_LABEL1)) {
-            curTitle = mainTitle;
-            mainTabWrapper.removeViewAt(0);
-            mainTabWrapper.addView(mainTitle, 0);
-        } else if (curSpecLabel.equals(SPEC_LABEL2)) {
-            curTitle = matstoryTitle;
-            mainTabWrapper.removeViewAt(0);
-            mainTabWrapper.addView(matstoryTitle, 0);
-        } else if (curSpecLabel.equals(SPEC_LABEL3)) {
-            curTitle = matistTitle;
-            mainTabWrapper.removeViewAt(0);
-            mainTabWrapper.addView(matistTitle, 0);
-        } else if (curSpecLabel.equals(MainTabHost.LOGIN_TAB)) {
-            curTitle = privateTitle;
-            mainTabWrapper.removeViewAt(0);
-            mainTabWrapper.addView(privateTitle, 0);
-        }
+        KeyboardUtil.hideKeyboard(this);
     }
 
-    public TitleContainer getTitlebar() {
-        return curTitle;
+
+    public void switchTitle(String specLabel) {
+        if (curSpecLabel.equals(SPEC_LABEL1)) {
+            switchTitle(mainTitle);
+        } else if (curSpecLabel.equals(SPEC_LABEL2)) {
+            switchTitle(matstoryTitle);
+        } else if (curSpecLabel.equals(SPEC_LABEL3)) {
+            switchTitle(matistTitle);
+        } else if (curSpecLabel.equals(MainTabHost.LOGIN_TAB)) {
+            if (session.isLogin()) {
+                switchTitle(privateTitle);
+            } else {
+                switchTitle(settingTitle);
+            }
+        }
     }
     
+    public void switchTitle(TitleContainer title) {
+        mainTabWrapper.removeViewAt(0);
+        mainTabWrapper.addView(title, 0);
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
-        privateTitle.notificationValidate();
-        invalidateLoginTab();
+        for (MainTabTitle title : titles) {
+            title.notificationValidate();
+        }
+        
+        syncTitle();
+        loginTabValidate();
     }
-    
-    public void invalidateLoginTab() {
-        if (Session.getInstance(this).getPrivateUtil().getLastLoginState()) {
+
+    public void loginTabValidate() {
+        if (session.isLogin()) {
             tabHost.setTabLabel(
                     MainTabHost.LOGIN_TAB, 
-                    Session.getInstance(this).getPrivateUtil().getLastLoginUserNick());
+                    session.getPrivateUtil().getLastLoginUserNick());
         }
+    }
+
+    public void syncTitle() {
+        int curTabPos = tabHost.getCurrentTab();
+        if (curTabPos == IV_INDEX_CONFIG && !session.isLogin()) {
+            curTabPos = IV_INDEX_LOGIN;
+        }
+        
+        switchTitle((TitleContainer) titles.get(curTabPos));
+        titles.get(curTabPos).notificationValidate();
+    }
+    
+    @Override
+    public void preLogin() {}
+
+    @Override
+    public void postLogin() {
+        syncTitle();
     }
 }

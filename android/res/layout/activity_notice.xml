@@ -4,7 +4,11 @@
 	android:id="@+id/activity_notice"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	<com.matji.sandwich.widget.NoticeListView		
+	<com.matji.sandwich.widget.title.HomeTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWidthFill" />
+	<com.matji.sandwich.widget.NoticeListView
+		android:id="@+id/notice_list"
 		style="@style/DefaultFill"
-		android:id="@+id/notice_list" />
+		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

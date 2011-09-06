@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 
 import com.matji.sandwich.SearchActivity;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.button.SearchButton;
 import com.matji.sandwich.widget.title.button.SettingButton;
 import com.matji.sandwich.widget.title.button.StorePostWriteButton;
@@ -17,7 +18,7 @@ import com.matji.sandwich.widget.title.button.TitleImageButton;
  * @author mozziluv
  *
  */
-public class MatstoryTitle extends TitleContainerTypeRRR {
+public class MatstoryTitle extends TitleContainerTypeRRR implements MainTabTitle {
     public MatstoryTitle(Context context) {
         super(context);
     }
@@ -41,5 +42,14 @@ public class MatstoryTitle extends TitleContainerTypeRRR {
     protected TitleImageButton getRightButton3() {
         // TODO Auto-generated method stub
         return new SettingButton(getContext());
+    }
+ 
+    @Override
+    public void notificationValidate() {
+        if (Session.getInstance(getContext()).getPrivateUtil().getNewNoticeCount() > 0) {
+            showNewIcon(rightButton3);
+        } else {
+            dismissNewIcon(rightButton3);
+        }
     }
 }

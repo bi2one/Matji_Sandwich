@@ -89,6 +89,7 @@
   <string name="default_string_info">정보</string>
   <string name="default_string_popular_food">인기메뉴</string>
   <string name="default_string_not_exist_reg_user">미발굴 맛집</string>
+  <string name="default_string_notice">공지사항</string>
   <string name="default_string_reg_user">발굴자</string>
   <string name="default_string_owner_user">주인장</string>
   <string name="default_string_url">관련 URL</string>
@@ -359,6 +360,7 @@
   <string name="main_tab_title_mattalk">맛있는 이야기</string>
   <string name="main_tab_title_matist">맛티스트</string>
   <string name="main_tab_title_mypage">내 정보</string>
+  <string name="main_tab_title_login">로그인</string>
   
   <!-- PostListView Subtitle -->
   <string name="friend_post">친구들 이야기</string>

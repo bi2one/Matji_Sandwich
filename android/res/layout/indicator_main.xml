@@ -8,6 +8,8 @@
   <com.matji.sandwich.widget.indicator.MainIndicatorTextView
       android:id="@+id/indicator_main_label"
       android:singleLine="true"
+      android:layout_marginLeft="@dimen/default_distance_half"
+      android:layout_marginRight="@dimen/default_distance_half"
       android:layout_centerHorizontal="true"
       android:layout_below="@id/indicator_main_icon"
       style="@style/IndicatorMainText" />

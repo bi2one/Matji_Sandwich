@@ -93,11 +93,30 @@ public class Session implements Requestable {
         MeHttpRequest request = new MeHttpRequest(mContext);
         request.actionMe();
         mManager.request(layout, request, HttpRequestManager.AUTHORIZE, this);
-        notificationValidate(layout);
+        notificationValidate();
     }
 
+    public void unsyncSessionValidate() {
+        mManager = HttpRequestManager.getInstance(mContext);
+        MeHttpRequest request = new MeHttpRequest(mContext);
+        request.actionMe();
+        ArrayList<MatjiData> data = null;
+        try {
+            data = request.request();
+        } catch (MatjiException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        
+        if (data != null && !data.isEmpty() && data.size() > 0) {
+            Me me = (Me) data.get(0);
+            saveMe(me);
+        } else {
+            // TODO error
+        }
+    }
 
-    public boolean login(ViewGroup spinnerContainer, String userid, String password){
+    public boolean login(String userid, String password){
         mManager = HttpRequestManager.getInstance(mContext);
         MeHttpRequest request = new MeHttpRequest(mContext);
         request.actionAuthorize(userid, password);
@@ -178,11 +197,6 @@ public class Session implements Requestable {
 
             postLogin();
             break;
-        case HttpRequestManager.BADGE:
-            Badge badge = (Badge) data.get(0);
-            mPrivateUtil.setNewNoticeCount(badge.getNewNoticeCount());
-            mPrivateUtil.setNewAlarmCount(badge.getNewAlarmCount());
-            break;
         }
     }
 
@@ -224,10 +238,7 @@ public class Session implements Requestable {
 
     public void postLogin() {
         Log.d("Matji", "post login");
-        if (!mPrivateUtil.getLastLoginUserNick().equals(getCurrentUser().getNick())) {
-            mConcretePrefs.clear();
-            mPrivateUtil.setLastLoginUserNick(getCurrentUser().getNick());
-        }
+        mPrivateUtil.setLastLoginUserNick(getCurrentUser().getNick());
         mPrivateUtil.setLastLoginState(true);
 
         for (LoginListener listener : mLoginListeners) listener.postLogin();
@@ -244,11 +255,22 @@ public class Session implements Requestable {
         for (LogoutListener listener : mLogoutListeners) listener.postLogout();
     }
 
-    public void notificationValidate(ViewGroup layout) {
-        mManager = HttpRequestManager.getInstance(mContext);
+    public void notificationValidate() {
         NoticeHttpRequest request = new NoticeHttpRequest(mContext);
-        request.actionBadge(mPrivateUtil.getLastReadNoticeId(), mPrivateUtil.getLastReadAlarmId());
-        mManager.request(layout, request, HttpRequestManager.BADGE, this);
+        int lastReadAlarmId = (isLogin()) ? mPrivateUtil.getLastReadAlarmId() : 0;
+        request.actionBadge(mPrivateUtil.getLastReadNoticeId(), lastReadAlarmId);
+        ArrayList<MatjiData> data = null;
+        try {
+            data = request.request();
+        } catch (MatjiException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (data != null && !data.isEmpty() && data.size() > 0) {
+            Badge badge = (Badge) data.get(0);
+            mPrivateUtil.setNewNoticeCount(badge.getNewNoticeCount());
+            mPrivateUtil.setNewAlarmCount(badge.getNewAlarmCount());
+        }
     }
 
     public static class LoginAsyncTask extends AsyncTask<Object, Integer, Boolean> {
@@ -257,15 +279,13 @@ public class Session implements Requestable {
 
         private Context context;
         private Loginable loginable;
-        private ViewGroup spinnerContainer;
         private String userid;
         private String password;
         private boolean hasLogin;
 
-        public LoginAsyncTask(Context context, Loginable loginable, ViewGroup spinnerContainer, String userid, String password) {
+        public LoginAsyncTask(Context context, Loginable loginable, String userid, String password) {
             this.context = context;
             this.loginable = loginable;
-            this.spinnerContainer = spinnerContainer;
             this.userid = userid;
             this.password = password;
         }
@@ -289,7 +309,9 @@ public class Session implements Requestable {
             // TODO Auto-generated method stub
 
             Session session = Session.getInstance(context);
-            hasLogin = session.login(spinnerContainer, userid, password);
+            hasLogin = session.login(userid, password);
+            session.notificationValidate();
+
             return true;
         }
 

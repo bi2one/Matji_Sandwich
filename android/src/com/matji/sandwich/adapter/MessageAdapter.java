@@ -57,6 +57,7 @@ public class MessageAdapter extends MBaseAdapter {
             messageElement.subjectList = (TextView) convertView.findViewById(R.id.row_message_subject_list);
             messageElement.nick = (TextView) convertView.findViewById(R.id.row_message_nick);
             messageElement.createdAtList = (TextView) convertView.findViewById(R.id.row_message_created_at_list);
+            messageElement.subject = (TextView) convertView.findViewById(R.id.row_message_subject);
             messageElement.createdAt = (TextView) convertView.findViewById(R.id.row_message_created_at);
             messageElement.message = (TextView) convertView.findViewById(R.id.row_message_message);
             messageElement.subjectWrapper = (View) convertView.findViewById(R.id.row_message_subject_wrapper).getParent();
@@ -100,6 +101,7 @@ public class MessageAdapter extends MBaseAdapter {
         } else {
             messageElement.createdAtList.setCompoundDrawables(null, null, null, null);
         }
+        messageElement.subject.setVisibility(View.GONE);
         messageElement.createdAt.setText(createdAt);
         messageElement.message.setText(message.getMessage());
         if (hasFolded(position)) {
@@ -163,6 +165,7 @@ public class MessageAdapter extends MBaseAdapter {
         TextView subjectList;
         TextView nick; 
         TextView createdAtList;
+        TextView subject;
         TextView createdAt;
         TextView message;
         ImageView flow;

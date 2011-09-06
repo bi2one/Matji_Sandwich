@@ -1,14 +1,13 @@
 package com.matji.sandwich.http;
 
+import java.util.ArrayList;
+
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.http.request.RequestCommand;
 import com.matji.sandwich.exception.MatjiException;
-
-import java.util.ArrayList;
+import com.matji.sandwich.http.request.RequestCommand;
 
 public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayList<MatjiData>> {
     private RequestStatusListener listener;

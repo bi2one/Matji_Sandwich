@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseTabActivity;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionTabHostUtil;
 import com.matji.sandwich.widget.RoundTabHost;
 
 public class PostTabActivity extends BaseTabActivity {
     private RoundTabHost tabHost;
     private Context context;
+    private Session session;
     private SessionTabHostUtil sessionUtil;
     private int lastTab = 0;
     private ActivityStartable lastStartedChild;
@@ -35,6 +37,7 @@ public class PostTabActivity extends BaseTabActivity {
         setContentView(R.layout.activity_post_tab);
         tabHost = (RoundTabHost)getTabHost();
         context = getApplicationContext();
+        session = Session.getInstance(context);
         sessionUtil = new SessionTabHostUtil(context);
     }
 
@@ -50,7 +53,7 @@ public class PostTabActivity extends BaseTabActivity {
         tabHost.setCurrentTab(0);
         tabHost.clearAllTabs();
 
-        if (sessionUtil.isLogin()) {
+        if (session.isLogin()) {
             tabHost.addLeftTab("tab1",
                     R.string.post_tab_friend,
                     new Intent(this, PostListActivity.class));
@@ -67,14 +70,14 @@ public class PostTabActivity extends BaseTabActivity {
                 R.string.post_tab_all,
                 new Intent(this, PostListActivity.class));
 
-        if (!sessionUtil.isLogin() && lastTab > getTabWidget().getTabCount()-1) {
+        if (!session.isLogin() && lastTab > getTabWidget().getTabCount()-1) {
             lastTab = getTabWidget().getTabCount()-1;
         }
         tabHost.setCurrentTab(lastTab);
 
         int baseIndex = sessionUtil.getSubTabIndex();
         sessionUtil.flush();
-        if (!sessionUtil.isLogin()) {
+        if (!session.isLogin()) {
             baseIndex = 0;
         }
         if (baseIndex >= 0)  {

@@ -69,8 +69,8 @@ public class PrivateActivity extends BaseActivity implements Loginable {
     public void loginButtonClicked(View v) {
         EditText usernameField = (EditText) findViewById(R.id.username);
         EditText passwordField = (EditText) findViewById(R.id.password);
-        
-        new LoginAsyncTask(getParent(), this, loginView, usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
+
+        new LoginAsyncTask(getParent(), this, usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
     }
 
     public void cancelButtonClicked(View v) {

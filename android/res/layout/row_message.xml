@@ -20,19 +20,20 @@
 				android:layout_centerInParent="true" />
 		</RelativeLayout>
 		<ImageView
+			android:id="@+id/row_message_flow_line"
 			android:background="@color/row_message_flow_line"
 			android:layout_width="@dimen/row_message_flow_line_width"
 			android:layout_height="@dimen/row_message_height"
-			android:layout_toRightOf="@id/row_message_flow_wrapper" />
+			android:layout_toRightOf="@id/row_message_flow_wrapper"
+			android:layout_marginRight="@dimen/row_message_content_padding" />
 		<TextView
 			android:id="@+id/row_message_subject_list"
 			style="@style/DefaultWrap"
 			android:textSize="@dimen/row_message_subject_list_size"
 			android:textColor="@color/matji_gray"
 			android:singleLine="true"
-			android:layout_toRightOf="@id/row_message_flow_wrapper"
-			android:layout_marginTop="@dimen/default_distance_half"
-			android:layout_marginLeft="@dimen/row_message_content_padding" />
+			android:layout_toRightOf="@id/row_message_flow_line"
+			android:layout_marginTop="@dimen/default_distance_half" />
 		<TextView
 			android:id="@+id/row_message_nick"
 			style="@style/DefaultWrap"
@@ -40,9 +41,8 @@
 			android:textSize="@dimen/row_message_nick_size"
 			android:textColor="@color/matji_red"
 			android:layout_marginRight="@dimen/default_distance"
-			android:layout_toRightOf="@id/row_message_flow_wrapper"
-			android:layout_below="@id/row_message_subject_list"
-			android:layout_marginLeft="@dimen/row_message_content_padding" />
+			android:layout_toRightOf="@id/row_message_flow_line"
+			android:layout_below="@id/row_message_subject_list" />
 		<TextView
 			android:id="@+id/row_message_created_at_list"
 			style="@style/DefaultWrap"
@@ -71,12 +71,18 @@
 			android:paddingBottom="@dimen/row_message_content_padding"
 			android:background="@color/row_message_bg">
 			<TextView
+				android:id="@+id/row_message_subject"
+				style="@style/DefaultWrap"
+				android:textSize="@dimen/row_message_subject_size"
+				android:textColor="@color/matji_gray"
+				android:layout_below="@id/row_message_shadow" />
+			<TextView
 				android:id="@+id/row_message_created_at"
 				style="@style/DefaultWrap"
 				android:textSize="@dimen/row_message_nick_size"
-				android:textColor="@color/matji_red"
+				android:textColor="@color/matji_chocolate"
 				android:layout_marginBottom="@dimen/row_message_content_padding2"
-				android:layout_below="@id/row_message_shadow" />
+				android:layout_below="@id/row_message_subject" />
 			<TextView
 				android:id="@+id/row_message_message"
 				style="@style/DefaultWrap"

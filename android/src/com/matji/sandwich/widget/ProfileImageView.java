@@ -3,9 +3,9 @@ package com.matji.sandwich.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -52,7 +52,7 @@ public class ProfileImageView extends ImageView {
 	Drawable d = getDrawable();
 	if (d.getIntrinsicWidth() > 0 && d.getIntrinsicHeight() > 0) {
 	    Bitmap bm = ImageUtil.getBitmap(d);
-	    setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, DisplayUtil.PixelFromDP(5), (int) getInset()));
+	    setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, DisplayUtil.PixelFromDP(4), (int) getInset()));
 	}
     }
 
@@ -80,5 +80,12 @@ public class ProfileImageView extends ImageView {
 	
     public float getInset() {
 	return DisplayUtil.PixelFromDP(1);
+    }
+    
+    @Override
+    protected void onDraw(Canvas canvas) {
+        // TODO Auto-generated method stub
+        convertToRoundedCornerImage();
+        super.onDraw(canvas);
     }
 }

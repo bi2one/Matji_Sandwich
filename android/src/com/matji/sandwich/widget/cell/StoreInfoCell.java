@@ -98,13 +98,13 @@ public class StoreInfoCell extends Cell {
         }
 
         ArrayList<StoreFood> storeFoods = store.getStoreFoods();
-        if (storeFoods.size() == 0) {
+        if (storeFoods.isEmpty()) {
             ((TextView) findViewById(R.id.cell_store_food)).setText(MatjiConstants.string(R.string.cell_store_not_exist_menu));
         } else {
             String foods = storeFoods.get(0).getFood().getName();
-            for (StoreFood food : storeFoods) 
+            for (StoreFood food : storeFoods) {
                 foods += ", " + food.getFood().getName();
-            
+            }
             ((TextView) findViewById(R.id.cell_store_tag)).setText(foods);
             
         }

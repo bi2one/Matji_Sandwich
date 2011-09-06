@@ -1,74 +1,151 @@
 package com.matji.sandwich.adapter;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.data.Notice;
-import com.matji.sandwich.util.TimeUtil;
+import java.util.HashMap;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.Notice;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.util.TimeUtil;
+
 public class NoticeAdapter extends MBaseAdapter {
-	private int selectedNoticeId;	
-	
-	public NoticeAdapter(Context context) {
-		super(context);
-		this.context = context;
-	}
-	
-	public View getView(int position, View convertView, ViewGroup parent) {
-		NoticeElement noticeElement;
-		Notice notice = (Notice) data.get(position);
 
-		if (convertView == null) {
-			noticeElement = new NoticeElement();
-			convertView = getLayoutInflater().inflate(R.layout.adapter_notice, null);
+    private HashMap<Integer, Boolean> hasFoldedMap;
 
-			noticeElement.subject = (TextView) convertView.findViewById(R.id.notice_adapter_subject);
-			noticeElement.notice = (TextView) convertView.findViewById(R.id.notice_adapter_notice);
-			noticeElement.dateAgo = (TextView) convertView.findViewById(R.id.notice_adapter_date_ago);
-			
-			convertView.setTag(noticeElement);
-			
-			convertView.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					if (v.findViewById(R.id.notice_adapter_notice).getVisibility() == View.GONE)
-						v.findViewById(R.id.notice_adapter_notice).setVisibility(View.VISIBLE);
-					else
-						v.findViewById(R.id.notice_adapter_notice).setVisibility(View.GONE);
-				}
-			});
-		} else {
-			noticeElement = (NoticeElement) convertView.getTag();
-		}
+    private int lastReadNoticeId;
+    private Drawable iconNew;
 
-		noticeElement.subject.setText(notice.getSubject());
-		noticeElement.notice.setText(notice.getContent());
-		noticeElement.dateAgo.setText(TimeUtil.getAgoFromSecond(notice.getAgo()));
-		
-		if (notice.getId() == selectedNoticeId) {
-			noticeElement.notice.setVisibility(TextView.VISIBLE);
-		} else {
-			noticeElement.notice.setVisibility(TextView.GONE);
-		}
-		
-		return convertView;
-	}
+    public NoticeAdapter(Context context) {
+        super(context);
+        this.context = context;
+        hasFoldedMap = new HashMap<Integer, Boolean>();
+        iconNew = MatjiConstants.drawable(R.drawable.icon_new);
+        iconNew.setBounds(0, 0, iconNew.getIntrinsicWidth(), iconNew.getIntrinsicHeight());
+    }
 
-	public void extendNotice(int position) {
-		Notice notice = (Notice) data.get(position);
-		if (notice != null) {
-			Log.d("Matji", "A");
-			selectedNoticeId = notice.getId();
-		}
-	}
-	
-	private class NoticeElement {
-		TextView subject;
-		TextView notice;
-		TextView dateAgo;
-	}
+    public void setLastReadNoticeId(int lastReadNoticeId) {
+        this.lastReadNoticeId = lastReadNoticeId;
+    }
+
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final NoticeElement noticeElement;
+        Notice notice = (Notice) data.get(position);
+
+        if (convertView == null) {
+            noticeElement = new NoticeElement();
+            convertView = getLayoutInflater().inflate(R.layout.row_message, null);
+
+            noticeElement.subjectList = (TextView) convertView.findViewById(R.id.row_message_subject_list);
+            noticeElement.nick = (TextView) convertView.findViewById(R.id.row_message_nick);
+            noticeElement.createdAtList = (TextView) convertView.findViewById(R.id.row_message_created_at_list);
+            noticeElement.subject = (TextView) convertView.findViewById(R.id.row_message_subject);
+            noticeElement.createdAt = (TextView) convertView.findViewById(R.id.row_message_created_at);
+            noticeElement.message = (TextView) convertView.findViewById(R.id.row_message_message);
+            noticeElement.subjectWrapper = (View) convertView.findViewById(R.id.row_message_subject_wrapper).getParent();
+            noticeElement.flow = (ImageView) noticeElement.subjectWrapper.findViewById(R.id.row_message_flow); 
+            noticeElement.messageWrapper = noticeElement.subjectWrapper.findViewById(R.id.row_message_message_wrapper);
+
+            convertView.setTag(noticeElement);
+
+        } else {
+            noticeElement = (NoticeElement) convertView.getTag();
+        }
+
+        noticeElement.subjectWrapper.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                folding(position, noticeElement);
+            }
+        });
+
+        noticeElement.subjectList.setText(notice.getSubject());
+        noticeElement.nick.setVisibility(View.GONE);
+
+        String createdAt = TimeUtil.parseString(
+                "yyyy-MM-dd hh:mm", 
+                TimeUtil.getDateFromCreatedAt(notice.getCreatedAt()));
+
+        noticeElement.createdAtList.setText(createdAt);
+        if (lastReadNoticeId < notice.getId()) {
+            noticeElement.createdAtList.setCompoundDrawables(null, null, iconNew, null);
+        } else {
+            noticeElement.createdAtList.setCompoundDrawables(null, null, null, null);
+        }
+        noticeElement.subject.setText(notice.getSubject());
+        noticeElement.createdAt.setText(createdAt);
+        noticeElement.message.setText(notice.getContent());
+        if (hasFolded(position)) {
+            fold(noticeElement);
+        } else {
+            unfold(noticeElement);
+        }
+
+        return convertView;
+    }
+
+    /**
+     * 접혀 있으면 펼치고, 펼쳐져 있으면 접고...
+     * 
+     * @param position 접고 펼칠 아이템의 위치
+     * @param holder 조작할 뷰홀더
+     */
+    public void folding(int position, NoticeElement holder) {
+        if (hasFolded(position)) {
+            unfold(position, holder);
+        } else {
+            fold(position, holder);
+        }
+    }
+
+    /**
+     * 해당 위치의 아이템이 접혀져 있는지 맵에서 찾아본 후 결과 값 리턴
+     * 
+     * @param position 접혀져 있는 지 확인 할 아이템의 위치
+     * @return 졉혀져 있을 때 TRUE
+     */
+    public boolean hasFolded(int position) {
+        if (hasFoldedMap.get(position) == null) {
+            hasFoldedMap.put(position, true);
+        }
+
+        return hasFoldedMap.get(position);
+    }
+
+    public void unfold(int position, NoticeElement holder) {
+        hasFoldedMap.put(position, false);
+        unfold(holder);
+    }
+
+    public void unfold(NoticeElement holder) {
+        holder.flow.setImageResource(R.drawable.icon_flow_bottom);
+        holder.messageWrapper.setVisibility(View.VISIBLE);
+    }
+
+    public void fold(int position, NoticeElement holder) {
+        hasFoldedMap.put(position, true);
+        fold(holder);
+    }
+
+    public void fold(NoticeElement holder) {
+        holder.flow.setImageResource(R.drawable.icon_flow);
+        holder.messageWrapper.setVisibility(View.GONE);
+    }
+
+    private class NoticeElement {
+        TextView subjectList;
+        TextView nick;
+        TextView createdAtList;
+        TextView subject;
+        TextView createdAt;
+        TextView message;
+        ImageView flow;
+        View messageWrapper;
+        View subjectWrapper;
+    }
 }

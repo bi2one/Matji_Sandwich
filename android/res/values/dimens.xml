@@ -7,7 +7,7 @@
 	<dimen name="default_drawable_padding_half">1.5dp</dimen>
 	<dimen name="default_divider_height">0.67dp</dimen>
 	<dimen name="default_new_icon_x_position">24.67dp</dimen>
-	<dimen name="default_new_icon_y_position">21.33dp</dimen>
+	<dimen name="default_new_icon_y_position">4dp</dimen>
 	
 	<!-- Title Container -->
 	<dimen name="title_container_height">36.67dp</dimen>
@@ -158,6 +158,7 @@
 	<dimen name="row_message_flow_line_width">1.33dp</dimen>
 	<dimen name="row_message_subject_list_size">16dp</dimen>
 	<dimen name="row_message_nick_size">12dp</dimen>
+	<dimen name="row_message_subject_size">14dp</dimen>
 	<dimen name="row_message_content_padding">14.67dp</dimen>
 	<dimen name="row_message_content_padding2">13.33dp</dimen>
 	
