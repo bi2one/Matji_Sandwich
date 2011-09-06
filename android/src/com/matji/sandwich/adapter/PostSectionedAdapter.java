@@ -35,10 +35,10 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.listener.GotoImageSliderAction;
 import com.matji.sandwich.listener.GotoStoreMainAction;
 import com.matji.sandwich.listener.GotoUserMainAction;
@@ -64,13 +64,12 @@ public class PostSectionedAdapter extends SectionedAdapter {
     
     private String subtitle;
     
-    private MatjiImageDownloader downloader;
-
     private GotoUserMainAction action1;
     private GotoStoreMainAction action2;
     private GotoImageSliderAction action3;
     private Activity activity;
     private RelativeLayout spinnerContainer;
+    private ImageLoader imageLoader;
 
     private ListView parent;
 
@@ -88,7 +87,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
      * 초기화 메소드.
      */
     protected void init() {
-        downloader = new MatjiImageDownloader(context);
+	imageLoader = new ImageLoader(context);
 //        profileSize = (int) MatjiConstants.dimen(R.dimen.profile_size);
     }
 
@@ -304,7 +303,13 @@ public class PostSectionedAdapter extends SectionedAdapter {
             holder.previews.setVisibility(View.VISIBLE);
             holder.preview[i].setVisibility(View.VISIBLE);
             holder.preview[i].setTag(i+"");
-            downloader.downloadAttachFileImage(post.getAttachFiles().get(i).getId(), MatjiImageDownloader.IMAGE_SMALL, holder.preview[i]);
+
+	    int imageId = post.getAttachFiles().get(i).getId();
+	    imageLoader.DisplayImage((Activity)context,
+				     ImageLoader.UrlType.ATTACH_FILE,
+				     ImageLoader.ImageSize.SMALL,
+				     holder.preview[i],
+				     imageId);
         }
     }
 

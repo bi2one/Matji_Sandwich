@@ -100,11 +100,12 @@
 	<!-- com.matji.sandwich.widget.AlbumView.java -->
 	<dimen name="album_view_frame_width">69.33dp</dimen>
 	<dimen name="album_view_frame_height">70dp</dimen>
+	<dimen name="album_view_frame_marginRight">7.33dp</dimen>
 	<dimen name="album_view_contents_width">60dp</dimen>
 	<dimen name="album_view_contents_height">60dp</dimen>
-	<dimen name="album_view_frame_min_width">76.67dp</dimen>
-	<dimen name="album_view_frame_min_height">76.67dp</dimen>
-	<dimen name="album_view_padding">4.67dp</dimen>
+	<!-- <dimen name="album_view_frame_min_width">76.67dp</dimen> -->
+	<!-- <dimen name="album_view_frame_min_height">76.67dp</dimen> -->
+	<dimen name="album_view_padding">10dp</dimen>
 	
 	<!-- Overlay -->
 	<dimen name="popup_padding_right">23dp</dimen>

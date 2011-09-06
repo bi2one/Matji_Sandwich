@@ -21,7 +21,8 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
     public enum ButtonIndex {
 	STORE, TAG, SERVICE
     }
-    
+
+    private static final boolean isToggleable = false;
     private Context context;
     private EditText postText;
     private ImageButton storeButton;
@@ -30,6 +31,7 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
     private LinearLayout pictureButton;
     private LinearLayout keyboardButton;
     private OnClickListener listener;
+    private ToggleIndex currentToggleIndex;
 
     public PostEditText(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -50,6 +52,7 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
 	serviceButton.setOnClickListener(this);
 	pictureButton.setOnClickListener(this);
 	keyboardButton.setOnClickListener(this);
+	currentToggleIndex = ToggleIndex.IMAGE;
     }
 
     public void checkButton(ButtonIndex index) {
@@ -101,6 +104,10 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
 	return postText;
     }
 
+    public String getText() {
+	return postText.getText().toString();
+    }
+
     public void setOnClickListener(OnClickListener listener) {
 	this.listener = listener;
     }
@@ -120,8 +127,16 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
 	} else if (vId == serviceButton.getId()) {
 	    listener.onServiceClicked(this);
 	} else if (vId == pictureButton.getId()) {
-	    showKeyboardButton();
-	    listener.onPictureClicked(this);
+	    if (isToggleable) {
+		showKeyboardButton();
+		listener.onPictureClicked(this);
+	    } else if (currentToggleIndex == ToggleIndex.IMAGE) {
+		showKeyboardButton();
+		listener.onPictureClicked(this);
+	    } else if (currentToggleIndex == ToggleIndex.KEYBOARD) {
+		showPictureButton();
+		listener.onKeyboardClicked(this);
+	    }
 	} else if (vId == keyboardButton.getId()) {
 	    showPictureButton();
 	    listener.onKeyboardClicked(this);
@@ -129,13 +144,17 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
     }
 
     public void showKeyboardButton() {
-	pictureButton.setVisibility(View.GONE);
-	keyboardButton.setVisibility(View.VISIBLE);
+	if (isToggleable) {
+	    pictureButton.setVisibility(View.GONE);
+	    keyboardButton.setVisibility(View.VISIBLE);
+	}
+	currentToggleIndex = ToggleIndex.KEYBOARD;
     }
 
     public void showPictureButton() {
 	keyboardButton.setVisibility(View.GONE);
 	pictureButton.setVisibility(View.VISIBLE);
+	currentToggleIndex = ToggleIndex.IMAGE;
     }
 
     public interface OnClickListener {

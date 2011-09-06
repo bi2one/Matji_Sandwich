@@ -8,10 +8,13 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.view.View;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
+import com.google.android.maps.Overlay;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
@@ -28,11 +31,13 @@ import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapViewInterface,
 								      MatjiMapCenterListener,
 								      MatjiLocationListener,
 								      Requestable,
+								      ClickListenerOverlay.OnClickListener,
 								      View.OnClickListener {
     private static final int GPS_START_TAG = 0;
     private static final int REQUEST_REVERSE_GEOCODING = 0;
@@ -75,6 +80,11 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 	mapController = mapView.getController();
 	setMapCenterListener(this);
 
+	ClickListenerOverlay listenerOverlay = new ClickListenerOverlay();
+	listenerOverlay.setOnClickListener(this);
+	List<Overlay> overlays = mapView.getOverlays();
+	overlays.add(listenerOverlay);
+	
 	gpsManager.start(GPS_START_TAG);
     }
 
@@ -136,6 +146,22 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     public void onMapCenterChanged(GeoPoint point) {
 	geocodeRunnable.setCenter(point);
 	activity.runOnUiThread(geocodeRunnable);
+    }
+
+    public void onMapTouchUp(View v) {
+	if (clickListener == null) {
+	    return ;
+	} else {
+	    clickListener.onMapTouchUp(v);
+	}
+    }
+
+    public void onMapTouchDown(View v) {
+	if (clickListener == null) {
+	    return ;
+	} else {
+	    clickListener.onMapTouchDown(v);
+	}
     }
 
     public void onClick(View v) {
@@ -215,5 +241,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 
     public interface OnClickListener {
 	public void onShowMapClick(View v);
+	public void onMapTouchUp(View v);
+	public void onMapTouchDown(View v);
     }
 }

@@ -3,5 +3,6 @@
 		style="@style/row_post_tag">
   <TextView
       android:id="@+id/row_post_tag_text"
+      android:layout_centerVertical="true"
       style="@style/row_post_tag_text" />
 </RelativeLayout>

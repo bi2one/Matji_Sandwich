@@ -1,6 +1,7 @@
 package com.matji.sandwich.http;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
@@ -37,6 +38,7 @@ public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayLi
 
     protected ArrayList<MatjiData> doInBackground(RequestCommand... params) {
     	try {
+	    // Log.d("=====", "background: " + command.toString());
     	    return command.request();
     	} catch(MatjiException e) {
     	    occuredException = e;
@@ -51,11 +53,13 @@ public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayLi
     }
 
     protected void onPostExecute(ArrayList<MatjiData> result) {
-    	if (result == null) {
-    	    requestable.requestExceptionCallBack(tag, occuredException);
-    	} else {
-    	    requestable.requestCallBack(tag, result);
-    	}
+	if (requestable != null) {
+	    if (result == null) {
+		requestable.requestExceptionCallBack(tag, occuredException);
+	    } else {
+		requestable.requestCallBack(tag, result);
+	    }
+	}
 
 	if (listener != null)
 	    listener.onFinishRequest(this);

@@ -5,8 +5,8 @@ import android.view.ViewGroup;
 
 import com.matji.sandwich.R;
 
-public class NormalSpinner extends AnimationSpinner {
+public class NormalSpinner extends Spinner {
     public NormalSpinner(Context context, ViewGroup layout) {
-	super(context, layout, R.drawable.animationlist_loading_large);
+	super(context, layout, R.layout.popup_loading);
     }
 }

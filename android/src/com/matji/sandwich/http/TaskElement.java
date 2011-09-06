@@ -1,13 +1,13 @@
 package com.matji.sandwich.http;
 
-import com.matji.sandwich.http.spinner.Spinner;
+import com.matji.sandwich.http.spinner.Spinnable;
 
 public class TaskElement implements ManagerAsyncTask.RequestStatusListener {
     private ManagerAsyncTask task;
     private ProgressListener listener;
-    private Spinner spinner;
+    private Spinnable spinner;
     
-    public TaskElement(Spinner spinner, ManagerAsyncTask task) {
+    public TaskElement(Spinnable spinner, ManagerAsyncTask task) {
 	this.task = task;
 	this.spinner = spinner;
 	task.setRequestStatusListener(this);

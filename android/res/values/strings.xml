@@ -327,6 +327,13 @@
   <string name="array_write_post_tags_tv">TV에 나온 집</string>
   <string name="array_write_post_tags_time">시간때우기 좋아요</string>
 
+  <!-- arrays.xml.select_tags -->
+  <string name="array_select_tags_date">데이트장소</string>
+  <string name="array_select_tags_together">회사 회식 장소</string>
+  <string name="array_select_tags_sbs">SBS 맛대맛</string>
+  <string name="array_select_tags_tv">TV에 나온 집</string>
+  <string name="array_select_tags_time">시간때우기 좋아요</string>
+  
   <!-- activity_write_post_tag.xml -->
   <string name="activity_write_post_tag_hint">태그 입력</string>
 
@@ -335,6 +342,8 @@
 
   <!-- WritePostActivity.java -->
   <string name="write_post_activity_title">이야기 쓰기</string>
+  <string name="write_post_success">이야기 쓰기에 성공하였습니다.</string>
+  <string name="write_post_album_full">사진을 더 첨부할 수 없습니다.</string>
 
   <!-- SelectStoreActivity.java -->
   <string name="select_store_activity_title">맛집 선택</string>
@@ -388,7 +397,7 @@
 
   <!-- WriteStoreActivity.java -->
   <string name="write_store_title">맛집 추가</string>
-  <string name="write_store_invalidate_store">상점 이름을 입력해 주세요.</string>
+  <string name="write_store_invalidate_store">맛집 이름을 입력해 주세요.</string>
   <string name="write_store_success">맛집 등록에 성공하였습니다.</string>
 
   <!-- write_store_matji_mapview.xml -->
@@ -402,4 +411,8 @@
   <!-- TitleContainer.java -->
   <string name="tag_button_wrapper">TitleContainer.button_wrapper</string>
   <string name="tag_new_icon">TitleContainer.new_icon</string>
+  
+  <!-- SelectTagActivity.java -->
+  <string name="select_tag_title">태그 선택</string>
+  <string name="select_tag_hint">태그 입력</string>
 </resources>

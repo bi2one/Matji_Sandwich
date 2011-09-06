@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.http.util.ImageLoader;
 
 /**
  * Cell에서 사용하는 ProfileImageView
@@ -29,8 +29,8 @@ public class CellProfileImageView extends ProfileImageView {
     }
 
     @Override
-    protected String getImageSize() {
-        return MatjiImageDownloader.IMAGE_SMALL;
+    protected ImageLoader.ImageSize getImageSize() {
+        return ImageLoader.ImageSize.SMALL;
     }
     
     @Override
