@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/row_alarm"
+	style="@style/DefaultWrap"
+	android:background="@drawable/btn_white_to_lightpink"
+	android:paddingLeft="@dimen/default_distance"
+	android:paddingRight="@dimen/default_distance">
+	<ImageView
+		android:id="@+id/row_alarm_notic_icon"
+		style="@style/DefaultWrap"
+		android:layout_marginRight="@dimen/default_distance"
+		android:layout_centerVertical="true" />
+	<RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/row_alarm_height"
+		android:layout_toRightOf="@id/row_alarm_notic_icon"
+		android:layout_toLeftOf="@+id/row_alarm_flow"
+		android:layout_centerVertical="true"
+		android:gravity="center_vertical">
+		<TextView
+			android:id="@+id/row_alarm_content"
+			style="@style/DefaultWrap"
+			android:textSize="@dimen/row_alarm_content_size"
+			android:textColor="@color/matji_silver"
+			android:maxLines="2"
+			android:ellipsize="end"
+			android:layout_toRightOf="@id/row_alarm_notic_icon" />
+		<TextView
+			android:id="@+id/row_alarm_created_at"
+			style="@style/DefaultWrap"
+			android:textSize="@dimen/row_alarm_created_at_size"
+			android:textColor="@color/matji_light_gray"
+			android:drawablePadding="@dimen/default_drawable_padding"
+			android:layout_below="@id/row_alarm_content" />
+	</RelativeLayout>
+	<ImageView
+		android:id="@id/row_alarm_flow"
+		android:src="@drawable/icon_flow"
+		style="@style/DefaultWrap"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true" />
+</RelativeLayout>
