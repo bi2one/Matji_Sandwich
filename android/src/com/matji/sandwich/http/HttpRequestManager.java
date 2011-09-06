@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.http.request.RequestCommand;
-import com.matji.sandwich.http.spinner.Spinner;
+import com.matji.sandwich.http.spinner.Spinnable;
 import com.matji.sandwich.http.spinner.SpinnerFactory;
 
 public class HttpRequestManager {
@@ -50,6 +50,14 @@ public class HttpRequestManager {
 	return manager;
     }
 
+    public void request(RequestCommand request) {
+	request(null, SpinnerFactory.SpinnerType.NORMAL, request, 0, null);
+    }
+
+    public void request(RequestCommand request, int tag, Requestable requestable) {
+	request(null, SpinnerFactory.SpinnerType.NORMAL, request, tag, requestable);
+    }
+
     public void request(ViewGroup layout, RequestCommand request) {
 	request(layout, SpinnerFactory.SpinnerType.NORMAL, request, 0, null);
     }
@@ -66,7 +74,7 @@ public class HttpRequestManager {
 	}
 
 	ManagerAsyncTask task = new ManagerAsyncTask(request, requestable, tag);
-	Spinner spinner = spinnerFactory.createSpinner(context, spinnerType, layout);
+	Spinnable spinner = spinnerFactory.createSpinner(context, spinnerType, layout);
 	TaskElement element = new TaskElement(spinner, task);
 	
 	queueManager.offer(element);

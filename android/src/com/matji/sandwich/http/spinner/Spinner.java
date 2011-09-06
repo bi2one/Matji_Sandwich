@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.util.Log;
 
-public class Spinner extends RelativeLayout {
+public class Spinner extends RelativeLayout implements Spinnable {
     protected Context context;
     private LayoutParams layoutParams;
     private ViewGroup layout;

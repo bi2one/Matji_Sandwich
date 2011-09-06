@@ -52,7 +52,7 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
             downloader.setDefaultBitmap(defaultUserImageSmall);
             downloader.download(URL_USER_IMAGE, params, imageView);
 		} else {
-            downloader.setDefaultBitmap(defaultUserImageLarge);
+		    downloader.setDefaultBitmap(defaultUserImageLarge);
             downloader.download(URL_USER_IMAGE, params, imageView);
 		}
 	}
