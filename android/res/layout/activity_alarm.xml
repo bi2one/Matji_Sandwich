@@ -4,7 +4,11 @@
 	android:id="@+id/activity_alarm"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
+	<com.matji.sandwich.widget.title.HomeTitle
+		android:id="@+id/Titlebar"
+		style="@style/DefaultWidthFill" />
 	<com.matji.sandwich.widget.AlarmListView
+		android:id="@+id/alarm_list"
 		style="@style/DefaultFill"
-		android:id="@+id/alarm_list" />
+		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

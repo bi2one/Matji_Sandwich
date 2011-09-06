@@ -5,6 +5,7 @@ import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.title.TitleContainer;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -122,6 +123,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
         super.onStop();
         Log.d("LifeCycle", "onStop at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
+        Session.getInstance(this).getConcretePreferenceProvider().commit();
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.title.TitleContainer;
 
 public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener, Identifiable {	
     protected static final int LOGIN_ACTIVITY = 1;
@@ -19,7 +20,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
     private ViewGroup mainViewGroup;
 
     public abstract int setMainViewId();
-
+    
     protected ViewGroup getMainView() {
         return mainViewGroup;
     }
@@ -79,6 +80,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
         super.onStop();
         Log.d("LifeCycle", "onStop at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
+        Session.getInstance(this).getConcretePreferenceProvider().commit();
     }
 
 

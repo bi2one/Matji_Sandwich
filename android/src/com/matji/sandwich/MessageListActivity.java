@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.widget.RoundTabHost;
+import com.matji.sandwich.widget.title.TitleContainer;
 
 public class MessageListActivity extends BaseTabActivity {
     private RoundTabHost tabHost;

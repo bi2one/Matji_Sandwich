@@ -6,6 +6,8 @@
 	<dimen name="default_drawable_padding">3dp</dimen>
 	<dimen name="default_drawable_padding_half">1.5dp</dimen>
 	<dimen name="default_divider_height">0.67dp</dimen>
+	<dimen name="default_new_icon_x_position">24.67dp</dimen>
+	<dimen name="default_new_icon_y_position">21.33dp</dimen>
 	
 	<!-- Title Container -->
 	<dimen name="title_container_height">36.67dp</dimen>
@@ -144,6 +146,11 @@
 	<dimen name="row_simple_store_name_size">16dp</dimen>
 	<dimen name="row_simple_store_text_size">12dp</dimen>
 	
+	<!-- row_alarm -->
+	<dimen name="row_alarm_height">53.33dp</dimen>
+	<dimen name="row_alarm_content_size">14dp</dimen>
+	<dimen name="row_alarm_created_at_size">12dp</dimen>
+	
 	<!-- row_message -->
 	<dimen name="row_message_height">53.33dp</dimen>
 	<dimen name="row_message_flow_width">39.33dp</dimen>
@@ -166,7 +173,5 @@
 	
 	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>
-	
-	
 	
 </resources>

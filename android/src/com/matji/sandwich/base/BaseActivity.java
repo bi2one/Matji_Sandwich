@@ -83,6 +83,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
         super.onStop();
         Log.d("LifeCycle", "onStop at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
+        Session.getInstance(this).getConcretePreferenceProvider().commit();
     }
 
 

@@ -1,25 +1,34 @@
 package com.matji.sandwich.widget;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
-import android.view.View;
 
-import com.matji.sandwich.PostActivity;
-import com.matji.sandwich.UserTabActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.AlarmAdapter;
 import com.matji.sandwich.data.Alarm;
 import com.matji.sandwich.http.request.AlarmHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
 
-public class AlarmListView extends RequestableMListView implements View.OnClickListener {
+public class AlarmListView extends RequestableMListView {
 	private HttpRequest request;
 	
 	public AlarmListView(Context context, AttributeSet attrs) {
 		super(context, attrs, new AlarmAdapter(context), 10);
-
-		setPage(1);
+		
+		init();
+	}
+	
+	protected void init() {
+        setPage(1);
+        setBackgroundColor(MatjiConstants.color(R.color.matji_white));
+        setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
+        setDividerHeight(MatjiConstants.dimenInt(R.dimen.default_divider_height));
+        setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
+        setCacheColorHint(Color.TRANSPARENT);
+        setSelector(android.R.color.transparent);
 	}
 
 	public HttpRequest request() {
@@ -31,34 +40,17 @@ public class AlarmListView extends RequestableMListView implements View.OnClickL
 
 		return request;
 	}
-	
-	public void onListItemClick(int position) {
-		Alarm alarm = (Alarm) getAdapterData().get(position);
-		String type = alarm.getAlarmType();
 
-		if (type.equals("Comment") || type.equals("PostLike")) {
-			Intent intent = new Intent(getActivity(), PostActivity.class);
-			intent.putExtra("post_id", alarm.getForeignKey());
-			getActivity().startActivity(intent);
-		} else if (type.equals("Following")) {
-			if (alarm.getSentUser() != null) {
-				Intent intent = new Intent(getActivity(), UserTabActivity.class);
-				intent.putExtra(UserTabActivity.USER, (Parcelable) alarm.getSentUser());
-				getActivity().startActivity(intent);
-			}
-		}
-	}
-
-	
-	public void onClick(View v) {
-		int position = Integer.parseInt((String) v.getTag());
-
-		Alarm alarm = (Alarm) getAdapterData().get(position);
-
-		if (alarm.getSentUser() != null) {
-			Intent intent = new Intent(getActivity(), UserTabActivity.class);
-			intent.putExtra(UserTabActivity.USER, (Parcelable) alarm.getSentUser());
-			getActivity().startActivity(intent);
-		}
-	}
+    @Override
+    public void onListItemClick(int position) {}
+    
+    public void setLastReadAlarmId(int lastReadAlarmId) {
+        ((AlarmAdapter) getMBaseAdapter()).setLastReadAlarmId(lastReadAlarmId);
+    }
+    
+    public int getLastReadAlarmId() {
+        if (!getAdapterData().isEmpty())
+            return ((Alarm) getAdapterData().get(0)).getId();
+        else return 0;
+    }
 }

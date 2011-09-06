@@ -100,7 +100,7 @@
   <string name="default_string_image">이미지</string>
   <string name="default_string_map">지도</string>
   <string name="default_string_store">맛집</string>
-  <string name="default_string_alarm">알람</string>
+  <string name="default_string_alarm">소식</string>
   <string name="default_string_search">검색</string>
   <string name="default_string_write_note">영업시간, 예약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
   <string name="default_string_recent_post">등록한 메모가 없습니다.</string>
@@ -294,7 +294,13 @@
 
   <!-- row_simple_user.xml -->
   <string name="row_simple_user_point_hint">P</string>
-  
+
+  <!-- row_alarm.xml -->
+  <string name="row_alarm_like_post">%1$s님이 ##내 이야기를 추천했습니다.##</string>
+  <string name="row_alarm_reply">%1$s님이 ##내 이야기에 댓글을 달았습니다.##</string>
+  <string name="row_alarm_follow">%1$s님이 ##나를 Follow 합니다.##</string>
+  <string name="row_alarm_message">%1$s님으로부터 ##쪽지가 도착했습니다.##</string>
+
   <!-- Search Highlight Header-->
   <string name="search_highlight">검색결과</string>
   
@@ -392,4 +398,8 @@
 
   <!-- com.matji.sandwich.http.DialogAsyncTask -->
   <string name="dialog_async_task">요청중입니다...</string>
+
+  <!-- TitleContainer.java -->
+  <string name="tag_button_wrapper">TitleContainer.button_wrapper</string>
+  <string name="tag_new_icon">TitleContainer.new_icon</string>
 </resources>

@@ -13,15 +13,17 @@ import com.matji.sandwich.http.spinner.SpinnerFactory;
 public class HttpRequestManager {
     
     // request tag
-    public static final int LIKE_REQUEST = 0;
-    public static final int UN_LIKE_REQUEST = 1;
-    public static final int FOLLOW_REQUEST = 2;
-    public static final int UN_FOLLOW_REQUEST = 3;
-    public static final int BOOKMAR_REQUEST = 4;
-    public static final int UN_BOOKMARK_REQUEST = 5;
-    public static final int POST_SHOW_REQUEST = 10;
-    public static final int MESSAGE_NEW_REQUEST = 20;
-    public static final int STORE_TAG_LIST_REQUEST = 31;
+    public static final int AUTHORIZE = 0;
+    public static final int BADGE = 1;
+    public static final int LIKE_REQUEST = 10;
+    public static final int UN_LIKE_REQUEST = 11;
+    public static final int FOLLOW_REQUEST = 20;
+    public static final int UN_FOLLOW_REQUEST = 21;
+    public static final int BOOKMAR_REQUEST = 30;
+    public static final int UN_BOOKMARK_REQUEST = 31;
+    public static final int POST_SHOW_REQUEST = 41;
+    public static final int STORE_TAG_LIST_REQUEST = 52;
+    public static final int MESSAGE_NEW_REQUEST = 50;
     
     private volatile static HashMap<Context, HttpRequestManager> managerPool = new HashMap<Context, HttpRequestManager>();
     private Context context;

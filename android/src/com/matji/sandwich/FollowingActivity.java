@@ -8,6 +8,7 @@ import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.FollowingListView;
 import com.matji.sandwich.widget.HighlightHeader;
 import com.matji.sandwich.widget.title.HomeTitle;
+import com.matji.sandwich.widget.title.TitleContainer;
 
 public class FollowingActivity extends BaseActivity {
     private FollowingListView listView; 

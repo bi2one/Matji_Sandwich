@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
+import com.matji.sandwich.session.Session.LoginAsyncTask;
 
 public class LoginActivity extends BaseActivity implements Loginable {
 

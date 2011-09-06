@@ -40,6 +40,8 @@ public class ReceivedMessageListView extends MessageListView {
     }
     
     public int getFirstIndexMessageId() {
-        return ((Message) getAdapterData().get(0)).getId();
+        if (!getAdapterData().isEmpty())
+            return ((Message) getAdapterData().get(0)).getId();
+        else return 0;
     }
 }

@@ -120,7 +120,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             postSectionElement = (PostSectionElement)convertView.getTag();
         }
 
-        if (TimeUtil.isToday(section)) {
+        if (TimeUtil.isToday("yyyy.MM.dd", section)) {
             postSectionElement.section.setText(context.getResources().getString(R.string.default_string_today));
             postSectionElement.section.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.indexbar_today));
         } else {
@@ -213,7 +213,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
     public String putSectionName(int position) {
         Post post = (Post) data.get(position);
         Date date = TimeUtil.getDateFromCreatedAt(post.getCreatedAt());
-        String section = TimeUtil.parseString(date);
+        String section = TimeUtil.parseString("yyyy.MM.dd", date);
         return section;
     }
 

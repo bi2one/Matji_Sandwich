@@ -4,7 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.widget.title.button.ActivityButton;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.title.button.AlarmButton;
 import com.matji.sandwich.widget.title.button.SettingButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
@@ -27,12 +28,20 @@ public class PrivateTitle extends TitleContainerTypeRR {
     @Override
     protected TitleImageButton getRightButton1() {
         // TODO Auto-generated method stub
-        return new ActivityButton(getContext());
+        return new AlarmButton(getContext());
     }
 
     @Override
     protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
         return new SettingButton(getContext());
+    }
+    
+    public void notificationValidate() {
+        if (Session.getInstance(getContext()).getPrivateUtil().getNewAlarmCount() > 0) {
+            showNewIcon(rightButton1);
+        } else {
+            dismissNewIcon(rightButton1);
+        }
     }
 }

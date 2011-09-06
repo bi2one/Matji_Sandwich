@@ -4,14 +4,12 @@
 		style="@style/DefaultFill" 
 		android:padding="30dp">
 	<EditText android:id="@+id/username" 
-		android:text="test2"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:singleLine="true"
 		android:layout_alignParentTop="true"
 		android:lines="1" /> 
-	<EditText android:id="@+id/password"  
-		android:text="test2"
+	<EditText android:id="@+id/password"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:singleLine="true" 

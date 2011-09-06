@@ -5,7 +5,7 @@
 	style="@style/DefaultFill"
 	android:background="@drawable/tabbtn_bg">
 	<com.matji.sandwich.widget.title.CompletableTitle
-		android:id="@+id/Titlebar"
+		android:id="@id/Titlebar"
 		style="@style/DefaultWidthFill" />
 	<EditText
 		android:id="@+id/write_message_message_field"

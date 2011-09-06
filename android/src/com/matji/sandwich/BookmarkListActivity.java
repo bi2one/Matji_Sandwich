@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.widget.BookmarkListView;
+import com.matji.sandwich.widget.title.TitleContainer;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.RegionHttpRequest;

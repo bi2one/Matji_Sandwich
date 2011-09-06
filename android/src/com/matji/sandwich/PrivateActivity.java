@@ -10,6 +10,7 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.Session.LoginAsyncTask;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.UserProfileView;
@@ -24,7 +25,7 @@ public class PrivateActivity extends BaseActivity implements Loginable {
     public int setMainViewId() {
         return currentMainView;
     }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +60,10 @@ public class PrivateActivity extends BaseActivity implements Loginable {
     }
     
     public void showLoginView() {
+        loginView.initialize();
         userProfileView.setVisibility(View.GONE);
         loginView.setVisibility(View.VISIBLE);
-        currentMainView = loginView.getId(); 
+        currentMainView = loginView.getId();
     }
     
     public void loginButtonClicked(View v) {
@@ -76,12 +78,14 @@ public class PrivateActivity extends BaseActivity implements Loginable {
     }
 
     /* Loginable Interface methods */
+    @Override
     public void loginCompleted() {
         this.setResult(RESULT_OK);
         KeyboardUtil.hideKeyboard(this);
         showUserProfileView();
     }
 
+    @Override
     public void loginFailed() {
         // show toast -> id, pw 확인해라
     }

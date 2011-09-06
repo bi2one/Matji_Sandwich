@@ -3,11 +3,11 @@ package com.matji.sandwich;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.LinearLayout;
 import android.widget.TabHost.OnTabChangeListener;
 
 import com.matji.sandwich.base.BaseTabActivity;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionTabHostUtil;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.MatjiConstants;
@@ -16,6 +16,7 @@ import com.matji.sandwich.widget.title.MainTitle;
 import com.matji.sandwich.widget.title.MatistTitle;
 import com.matji.sandwich.widget.title.MatstoryTitle;
 import com.matji.sandwich.widget.title.PrivateTitle;
+import com.matji.sandwich.widget.title.TitleContainer;
 
 // import com.matji.sandwich.http.AsyncTaskTest;
 
@@ -25,6 +26,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     private Context context;
 
     private LinearLayout mainTabWrapper;
+    private String curSpecLabel;
 
     public static final String IF_INDEX = "MainTabActivity.index";
     public static final String IF_SUB_INDEX = "MainTabActivity.sub_index";
@@ -36,11 +38,17 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     public static final String SPEC_LABEL1 = "tab1";
     public static final String SPEC_LABEL2 = "tab2";
     public static final String SPEC_LABEL3 = "tab3";
-    public static final String SPEC_LABEL4 = "tab4";
+
+    private TitleContainer curTitle;
+    private MainTitle mainTitle;
+    private MatstoryTitle matstoryTitle;
+    private MatistTitle matistTitle;
+    private PrivateTitle privateTitle;
 
     public int setMainViewId() {
         return R.id.main_tab_wrapper;
     }
+    
     /**
      * Activity생성시 실행하는 메소드
      *
@@ -72,13 +80,21 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
                 R.drawable.icon_tapbar_matist_selector,
                 R.string.main_tab_ranking,
                 new Intent(this, RankingTabActivity.class));
-        tabHost.addTab(SPEC_LABEL4,
+        tabHost.addTab(MainTabHost.LOGIN_TAB,
                 R.drawable.icon_tapbar_login_selector,
                 R.string.main_tab_config,
                 new Intent(this, PrivateActivity.class));
 
         tabHost.setOnTabChangedListener(this);
 
+        mainTitle = new MainTitle(this);
+        mainTitle.setTitle(R.string.main_tab_title_matmap);
+        matstoryTitle = new MatstoryTitle(this);
+        matstoryTitle.setTitle(R.string.main_tab_title_mattalk);
+        matistTitle = new MatistTitle(this);
+        matistTitle.setTitle(R.string.main_tab_title_matist);
+        privateTitle = new PrivateTitle(this);
+        privateTitle.setTitle(R.string.main_tab_title_mypage);
         // AsyncTaskTest tasktest = new AsyncTaskTest();
         // tasktest.execute("1st request");
         // tasktest.execute("2nd request");
@@ -100,26 +116,47 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
 
     @Override
     public void onTabChanged(String specLabel) {
-        if (specLabel.equals(SPEC_LABEL1)) {
-            MainTitle title = new MainTitle(this);
-            title.setTitle(R.string.main_tab_title_matmap);
+        curSpecLabel = specLabel;
+        switchTitle(curSpecLabel);
+    }
+    
+    
+    public void switchTitle(String specLabel) {
+        if (curSpecLabel.equals(SPEC_LABEL1)) {
+            curTitle = mainTitle;
             mainTabWrapper.removeViewAt(0);
-            mainTabWrapper.addView(title, 0);
-        } else if (specLabel.equals(SPEC_LABEL2)) {
-            MatstoryTitle title = new MatstoryTitle(this);
-            title.setTitle(R.string.main_tab_title_mattalk);
+            mainTabWrapper.addView(mainTitle, 0);
+        } else if (curSpecLabel.equals(SPEC_LABEL2)) {
+            curTitle = matstoryTitle;
             mainTabWrapper.removeViewAt(0);
-            mainTabWrapper.addView(title, 0);
-        } else if (specLabel.equals(SPEC_LABEL3)) {
-            MatistTitle title = new MatistTitle(this);
-            title.setTitle(R.string.main_tab_title_matist);
+            mainTabWrapper.addView(matstoryTitle, 0);
+        } else if (curSpecLabel.equals(SPEC_LABEL3)) {
+            curTitle = matistTitle;
             mainTabWrapper.removeViewAt(0);
-            mainTabWrapper.addView(title, 0);
-        } else if (specLabel.equals(SPEC_LABEL4)) {
-            PrivateTitle title = new PrivateTitle(this);
-            title.setTitle(R.string.main_tab_title_mypage);
+            mainTabWrapper.addView(matistTitle, 0);
+        } else if (curSpecLabel.equals(MainTabHost.LOGIN_TAB)) {
+            curTitle = privateTitle;
             mainTabWrapper.removeViewAt(0);
-            mainTabWrapper.addView(title, 0);
+            mainTabWrapper.addView(privateTitle, 0);
+        }
+    }
+
+    public TitleContainer getTitlebar() {
+        return curTitle;
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        privateTitle.notificationValidate();
+        invalidateLoginTab();
+    }
+    
+    public void invalidateLoginTab() {
+        if (Session.getInstance(this).getPrivateUtil().getLastLoginState()) {
+            tabHost.setTabLabel(
+                    MainTabHost.LOGIN_TAB, 
+                    Session.getInstance(this).getPrivateUtil().getLastLoginUserNick());
         }
     }
 }

@@ -3,14 +3,18 @@ package com.matji.sandwich.session;
 import java.io.NotSerializableException;
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.ViewGroup;
 
 import com.matji.sandwich.Loginable;
+import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
+import com.matji.sandwich.data.Badge;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Me;
 import com.matji.sandwich.data.User;
@@ -20,11 +24,12 @@ import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.MeHttpRequest;
+import com.matji.sandwich.http.request.NoticeHttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
 
 public class Session implements Requestable {
 
     private volatile static Session session = null;
-    private static final int AUTHORIZE = 0;
 
     private static final String keyForCurrentUser = "CurrentUser";
     private static final String keyForAccessToken = "AccessToken";
@@ -36,6 +41,27 @@ public class Session implements Requestable {
     private HttpRequestManager mManager;
     private Loginable mLoginable;
 
+    private ArrayList<LoginListener> mLoginListeners; 
+    private ArrayList<LogoutListener> mLogoutListeners;
+
+    public interface LoginListener {
+        public void preLogin();
+        public void postLogin();
+    }
+
+    public interface LogoutListener {
+        public void preLogout();
+        public void postLogout();
+    }
+
+    public void addLoginListener(LoginListener listener) {
+        mLoginListeners.add(listener);
+    }
+
+    public void addLogoutListener(LogoutListener listener) {
+        mLogoutListeners.add(listener);
+    }
+
     private Session(){}
 
     private Session(Context context){
@@ -43,6 +69,8 @@ public class Session implements Requestable {
         this.mPrefs = new PreferenceProvider(context);
         this.mConcretePrefs = new ConcretePreferenceProvider(context);        
         this.mPrivateUtil = new SessionPrivateUtil(context, this);
+        this.mLoginListeners = new ArrayList<Session.LoginListener>();
+        this.mLogoutListeners = new ArrayList<Session.LogoutListener>();
     }
 
 
@@ -59,11 +87,13 @@ public class Session implements Requestable {
     }
 
     public void sessionValidate(Loginable loginable, ViewGroup layout){
+        preLogin();
         this.mLoginable = loginable;
         mManager = HttpRequestManager.getInstance(mContext);
         MeHttpRequest request = new MeHttpRequest(mContext);
         request.actionMe();
-        mManager.request(layout, request, AUTHORIZE, this);
+        mManager.request(layout, request, HttpRequestManager.AUTHORIZE, this);
+        notificationValidate(layout);
     }
 
 
@@ -75,23 +105,23 @@ public class Session implements Requestable {
             ArrayList<MatjiData> data = request.request();
             Me me = (Me)data.get(0);
             saveMe(me);
-            if (!mPrivateUtil.getLastLoginUserid().equals(me.getUser().getUserid())) {
-                mConcretePrefs.clear();
-                mPrivateUtil.setLastLoginUserid(me.getUser().getUserid());
-            }
-            
             return true;
         } catch (MatjiException e) {            
             return false;
         }
-//        mManager.request(spinnerContainer, request, AUTHORIZE, this);
+        //        mManager.request(spinnerContainer, request, AUTHORIZE, this);
     }
 
 
     public boolean logout(){
-        mPrivateUtil.setLastLoginUserid(getCurrentUser().getUserid());
+        preLogout();
+
+        mPrivateUtil.setLastLoginUserNick(getCurrentUser().getNick());
         mPrefs.clear();
         removePrivateDataFromDatabase();
+
+        postLogout();
+
         return mPrefs.commit();
     }
 
@@ -138,22 +168,30 @@ public class Session implements Requestable {
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-        if (tag == AUTHORIZE){
+        switch (tag) {
+        case HttpRequestManager.AUTHORIZE:
             Me me = (Me)data.get(0);
             saveMe(me);
 
             if (mLoginable != null) 
                 mLoginable.loginCompleted();
+
+            postLogin();
+            break;
+        case HttpRequestManager.BADGE:
+            Badge badge = (Badge) data.get(0);
+            mPrivateUtil.setNewNoticeCount(badge.getNewNoticeCount());
+            mPrivateUtil.setNewAlarmCount(badge.getNewAlarmCount());
+            break;
         }
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
-        if (tag == AUTHORIZE){
+        if (tag == HttpRequestManager.AUTHORIZE){
             if (mLoginable != null)
                 mLoginable.loginFailed();
         }
     }
-
 
     public String getToken() {
         return mPrefs.getString(keyForAccessToken, null);
@@ -174,72 +212,169 @@ public class Session implements Requestable {
 
         return (User)obj;
     }
-    
+
     public SessionPrivateUtil getPrivateUtil() {
         return mPrivateUtil;
     }
 
-//
-//    /*
-//     *  Async write Me info to local database
-//     */	
-//    private class SaveMeAsyncTask extends AsyncTask<Me, Integer, Boolean>{
-//        ProgressDialog dialog;
-//
-//        @Override
-//        protected void onPreExecute() {
-//            // TODO Auto-generated method stub
-//            super.onPreExecute();
-//        }
-//
-//
-//        private boolean save(Me me){
-//            try {
-//                mPrefs.setObject(keyForCurrentUser, me.getUser());
-//            } catch (NotSerializableException e) {
-//                e.printStackTrace();
-//            }
-//
-//            mPrefs.setString(keyForAccessToken, me.getToken());
-//            mPrefs.commit();
-//
-//            removePrivateDataFromDatabase();
-//
-//            DBProvider dbProvider = DBProvider.getInstance(mContext);               
-//            SQLiteDatabase db = dbProvider.getDatabase();
-//            try{
-//                db.beginTransaction();
-//                dbProvider.insertBookmarks(me.getBookmarks());  
-//                dbProvider.insertLikes(me.getLikes());
-//                dbProvider.insertFollowers(me.getFollowers());
-//                dbProvider.insertFollowings(me.getFollowings());
-//                db.setTransactionSuccessful();
-//            } catch (SQLException e){
-//            } finally {
-//                db.endTransaction();
-//            }
-//
-//            return true;
-//        }
-//
-//
-//        @Override
-//        protected Boolean doInBackground(Me... args) {
-//            // TODO Auto-generated method stub
-//            if (args.length == 0) return false;
-//
-//            return save(args[0]);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Boolean result) {
-//            // TODO Auto-generated method stub
-//            super.onPostExecute(result);
-//
-//            Log.d("Matji", "Me info saved properly");
-//            dialog.dismiss();
-//        }
-//    }
+    public void preLogin() {
+        Log.d("Matji", "pre login");
+        for (LoginListener listener : mLoginListeners) listener.preLogin();
+    }
+
+    public void postLogin() {
+        Log.d("Matji", "post login");
+        if (!mPrivateUtil.getLastLoginUserNick().equals(getCurrentUser().getNick())) {
+            mConcretePrefs.clear();
+            mPrivateUtil.setLastLoginUserNick(getCurrentUser().getNick());
+        }
+        mPrivateUtil.setLastLoginState(true);
+
+        for (LoginListener listener : mLoginListeners) listener.postLogin();
+    }
+
+    public void preLogout() {
+        Log.d("Matji", "pre logout");
+        for (LogoutListener listener : mLogoutListeners) listener.preLogout();
+    }
+
+    public void postLogout() {
+        Log.d("Matji", "post logout");
+        mPrivateUtil.setLastLoginState(false);
+        for (LogoutListener listener : mLogoutListeners) listener.postLogout();
+    }
+
+    public void notificationValidate(ViewGroup layout) {
+        mManager = HttpRequestManager.getInstance(mContext);
+        NoticeHttpRequest request = new NoticeHttpRequest(mContext);
+        request.actionBadge(mPrivateUtil.getLastReadNoticeId(), mPrivateUtil.getLastReadAlarmId());
+        mManager.request(layout, request, HttpRequestManager.BADGE, this);
+    }
+
+    public static class LoginAsyncTask extends AsyncTask<Object, Integer, Boolean> {
+
+        private ProgressDialog dialog;
+
+        private Context context;
+        private Loginable loginable;
+        private ViewGroup spinnerContainer;
+        private String userid;
+        private String password;
+        private boolean hasLogin;
+
+        public LoginAsyncTask(Context context, Loginable loginable, ViewGroup spinnerContainer, String userid, String password) {
+            this.context = context;
+            this.loginable = loginable;
+            this.spinnerContainer = spinnerContainer;
+            this.userid = userid;
+            this.password = password;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+
+            Session.getInstance(context).preLogin();
+
+            dialog = new ProgressDialog(context);
+            dialog.setMessage(MatjiConstants.string(R.string.login_loading));
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(false);
+            dialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(Object... arg0) {
+            // TODO Auto-generated method stub
+
+            Session session = Session.getInstance(context);
+            hasLogin = session.login(spinnerContainer, userid, password);
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+            dialog.dismiss();
+
+            if (hasLogin) {
+                loginable.loginCompleted();
+                Session.getInstance(context).postLogin();
+            } else {
+                loginable.loginFailed();
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            // TODO Auto-generated method stub
+            super.onProgressUpdate(values);
+        }
+    }
+
+    //
+    //    /*
+    //     *  Async write Me info to local database
+    //     */	
+    //    private class SaveMeAsyncTask extends AsyncTask<Me, Integer, Boolean>{
+    //        ProgressDialog dialog;
+    //
+    //        @Override
+    //        protected void onPreExecute() {
+    //            // TODO Auto-generated method stub
+    //            super.onPreExecute();
+    //        }
+    //
+    //
+    //        private boolean save(Me me){
+    //            try {
+    //                mPrefs.setObject(keyForCurrentUser, me.getUser());
+    //            } catch (NotSerializableException e) {
+    //                e.printStackTrace();
+    //            }
+    //
+    //            mPrefs.setString(keyForAccessToken, me.getToken());
+    //            mPrefs.commit();
+    //
+    //            removePrivateDataFromDatabase();
+    //
+    //            DBProvider dbProvider = DBProvider.getInstance(mContext);               
+    //            SQLiteDatabase db = dbProvider.getDatabase();
+    //            try{
+    //                db.beginTransaction();
+    //                dbProvider.insertBookmarks(me.getBookmarks());  
+    //                dbProvider.insertLikes(me.getLikes());
+    //                dbProvider.insertFollowers(me.getFollowers());
+    //                dbProvider.insertFollowings(me.getFollowings());
+    //                db.setTransactionSuccessful();
+    //            } catch (SQLException e){
+    //            } finally {
+    //                db.endTransaction();
+    //            }
+    //
+    //            return true;
+    //        }
+    //
+    //
+    //        @Override
+    //        protected Boolean doInBackground(Me... args) {
+    //            // TODO Auto-generated method stub
+    //            if (args.length == 0) return false;
+    //
+    //            return save(args[0]);
+    //        }
+    //
+    //        @Override
+    //        protected void onPostExecute(Boolean result) {
+    //            // TODO Auto-generated method stub
+    //            super.onPostExecute(result);
+    //
+    //            Log.d("Matji", "Me info saved properly");
+    //            dialog.dismiss();
+    //        }
+    //    }
 
 
 }

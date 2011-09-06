@@ -11,6 +11,7 @@ import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.title.TitleContainer;
 
 public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener, Identifiable {
     protected static final int LOGIN_ACTIVITY = 1;
@@ -79,6 +80,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
         super.onStop();
         Log.d("LifeCycle", "onStop at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
+        Session.getInstance(this).getConcretePreferenceProvider().commit();
     }
 
     @Override

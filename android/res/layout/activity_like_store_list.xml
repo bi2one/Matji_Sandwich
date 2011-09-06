@@ -4,7 +4,7 @@
 	android:id="@+id/activity_like_store_list"
 	style="@style/DefaultVerticalFill">
 	<com.matji.sandwich.widget.title.HomeTitle
-		android:id="@+id/Titlebar"
+		android:id="@id/Titlebar"
 		android:layout_alignParentTop="true"
 		style="@style/DefaultWrap" />
 	<com.matji.sandwich.widget.LikeStoreListView

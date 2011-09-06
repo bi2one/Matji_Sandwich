@@ -13,9 +13,9 @@ public class TimeUtil {
     final static String timezone = "UTC";	
     static int timeOffset = 0;
     
-    public static boolean isToday(String time) {
+    public static boolean isToday(String form, String time) {
         Date date = new Date(System.currentTimeMillis());
-        return parseString(date).equals(time);		
+        return parseString(form, date).equals(time);		
     }
 
     public static Date getDateFromCreatedAt(String created_at) {
@@ -128,10 +128,6 @@ public class TimeUtil {
         cal.set(Calendar.MILLISECOND, mbCal.get(Calendar.MILLISECOND));
 
         return cal.getTime();
-    }
-
-    public static String parseString(Date date) {
-        return (String) android.text.format.DateFormat.format("yyyy.MM.dd", date);
     }
     
     public static String parseString(String form, Date date) {

@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.util.MatjiConstants;
 
 /**
  * Custom Titlebar Container
@@ -57,9 +58,24 @@ public abstract class TitleContainer extends RelativeLayout {
 	    ImageView line = new ImageView(getContext());
         line.setPadding(0, 0, 0, 0);
         line.setImageResource(R.drawable.navigationbar_bg_line);
-        v.setTag(line); // line도 함께 remove하기 위해 tag로 달아준다.
-	    rightContainer.addView(line);
-		rightContainer.addView(v);
+        
+        ImageView newIcon = new ImageView(getContext());
+        int newIconXPos = MatjiConstants.dimenInt(R.dimen.default_new_icon_x_position);
+        int newIconYPos = MatjiConstants.dimenInt(R.dimen.default_new_icon_y_position);
+        newIcon.setPadding(newIconXPos, newIconYPos, 0, 0);
+        newIcon.setImageResource(R.drawable.icon_new_alert);
+        newIcon.setVisibility(View.GONE);
+        
+        RelativeLayout rl = new RelativeLayout(getContext());
+        
+        v.setTag(R.string.tag_button_wrapper, rl);
+        v.setTag(R.string.tag_new_icon, newIcon);
+        
+        rl.addView(line);
+        rl.addView(newIcon);
+        rl.addView(v);
+        
+		rightContainer.addView(rl);
 	}
 
 	/**
@@ -110,10 +126,17 @@ public abstract class TitleContainer extends RelativeLayout {
 	 * @param button 제거할 버튼
 	 */
     public void removeRightButton(View button) {
-        rightContainer.removeView((View) button.getTag());
-        rightContainer.removeView(button);        
+        rightContainer.removeView((View) button.getTag(R.string.tag_button_wrapper));
     }
-	
+    
+    public void showNewIcon(View button) {
+        ((View) button.getTag(R.string.tag_new_icon)).setVisibility(View.VISIBLE);
+    }
+    
+    public void dismissNewIcon(View button) {
+        ((View) button.getTag(R.string.tag_new_icon)).setVisibility(View.GONE);
+    }
+    
 	/**
 	 * 버튼들을 클릭하지 못하도록 설정한다.
 	 */

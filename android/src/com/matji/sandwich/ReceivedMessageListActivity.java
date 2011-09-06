@@ -39,6 +39,8 @@ public class ReceivedMessageListActivity extends BaseActivity {
     public void finish() {
         // TODO Auto-generated method stub
         super.finish();
-        sessionPrivateUtil.setLastReadMessageId(listView.getFirstIndexMessageId());
+        if (sessionPrivateUtil.getLastReadMessageId() < listView.getFirstIndexMessageId()) {
+            sessionPrivateUtil.setLastReadMessageId(listView.getFirstIndexMessageId());
+        }
     }
 }

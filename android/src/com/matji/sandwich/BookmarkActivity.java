@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.widget.title.TitleContainer;
 
 import android.os.Bundle;
 

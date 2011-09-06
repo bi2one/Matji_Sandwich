@@ -206,7 +206,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) {
         case HttpRequestManager.POST_SHOW_REQUEST:
-            if (data != null) {
+            if (data != null && !data.isEmpty()) {
                 setPost((Post) data.get(0));
                 showPost();
             } else {
