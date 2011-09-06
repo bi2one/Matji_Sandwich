@@ -27,13 +27,13 @@ public class AnimationSpinner extends Spinner {
 
     public void start() {
 	super.start();
-	if (animation != null)
-	    animation.start();
+	// if (animation != null)
+	//     animation.start();
     }
 
     public void stop() {
 	super.stop();
-	if (animation != null)
-	    animation.stop();
+	// if (animation != null)
+	//     animation.stop();
     }
 }

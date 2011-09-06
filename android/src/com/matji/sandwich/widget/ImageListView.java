@@ -28,7 +28,7 @@ public abstract class ImageListView extends RequestableMListView {
 	abstract protected String getTotalImageCountText();
 	
 	public ImageListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new ImageAdapter(context), LIMIT);
+	    super(context, attrs, new ImageAdapter(context), LIMIT);
 	}
 	
 	protected void init() {

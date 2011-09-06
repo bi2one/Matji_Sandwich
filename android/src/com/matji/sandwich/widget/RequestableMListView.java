@@ -12,6 +12,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.RequestCommand;
+import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.listener.ListRequestScrollListener;
 
 public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
@@ -103,7 +104,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	if (prevPage < page) {
 	    Log.d("refresh" , "requestNext()");
 	    Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-	    manager.request(loadingFooterView, request(), REQUEST_NEXT, this);
+	    manager.request(loadingFooterView, SpinnerFactory.SpinnerType.SMALL, request(), REQUEST_NEXT, this);
 	    nextValue();
 	} else if (prevPage == page) {
 	    prevPage = page - 1;

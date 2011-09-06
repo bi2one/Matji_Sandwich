@@ -50,6 +50,10 @@ public class HttpRequestManager {
 	return manager;
     }
 
+    public void request(ViewGroup layout, RequestCommand request) {
+	request(layout, SpinnerFactory.SpinnerType.NORMAL, request, 0, null);
+    }
+
     public void request(ViewGroup layout, RequestCommand request, int tag, Requestable requestable) {
 	request(layout, SpinnerFactory.SpinnerType.NORMAL, request, tag, requestable);
     }
