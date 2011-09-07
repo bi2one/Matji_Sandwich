@@ -30,7 +30,7 @@ public class CellProfileImageView extends ProfileImageView {
 
     @Override
     protected ImageLoader.ImageSize getImageSize() {
-        return ImageLoader.ImageSize.SMALL;
+        return ImageLoader.ImageSize.MEDIUM;
     }
     
     @Override

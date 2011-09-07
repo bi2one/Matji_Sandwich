@@ -1,6 +1,6 @@
 package com.matji.sandwich.widget;
 
-import com.matji.sandwich.PostActivity;
+import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.MatjiConstants;
 
@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 /**
- * {@link PostActivity}에서 사용하는 InputBar.
+ * {@link PostMainActivity}에서 사용하는 InputBar.
  * 
  * @author mozziluv
  *

@@ -56,4 +56,10 @@ public class StoreMainActivity extends BaseTabActivity {
 	private void refresh() {
 		
 	}
+	
+	@Override
+	public void finish() {
+	    setResult(RESULT_OK);
+	    super.finish();
+	}
 }

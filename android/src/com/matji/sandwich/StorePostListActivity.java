@@ -2,10 +2,12 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.StorePostListView;
@@ -13,7 +15,7 @@ import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.cell.StoreInfoCell;
 import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StorePostListActivity extends BaseActivity {
+public class StorePostListActivity extends BaseActivity implements Refreshable {
     private Store store;
     private StoreTitle title;
     private StoreCell storeCell;
@@ -34,16 +36,16 @@ public class StorePostListActivity extends BaseActivity {
         title = (StoreTitle) findViewById(R.id.Titlebar);
         storeCell = new StoreCell(this, store);
         storeInfoCell = new StoreInfoCell(this, store);
+        listView = (StorePostListView) findViewById(R.id.store_post_list);
         
         title.setIdentifiable(this);
         title.setSpinnerContainer(getMainView());
-        title.setRefreshable(storeCell);
+        title.setRefreshable(this);
         title.setStore(store);
         
         storeCell.setMainView(getMainView());
         storeCell.showLine();
         
-        listView = (StorePostListView) findViewById(R.id.store_post_list);
         listView.addHeaderView(storeCell);
         listView.addHeaderView(storeInfoCell);
         listView.setStore(store);
@@ -52,26 +54,71 @@ public class StorePostListActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNotFlowResume() {
+        // TODO Auto-generated method stub
+        super.onNotFlowResume();
+        refresh();
+    }
+    
+    @Override
     protected void onResume() {
         super.onResume();
         listView.dataRefresh();
     }
-
+    
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
         case WRITE_POST_ACTIVITY:
             if (resultCode == RESULT_OK) {
                 listView.requestReload();
+                setIsFlow(true);
             }
             break;
 
-        case POST_ACTIVITY:
+        case POST_MAIN_ACTIVITY:
             if (resultCode == RESULT_OK) {
-                ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostActivity.POSTS);
+                ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostMainActivity.POSTS);
                 listView.setPosts(posts);
+                setIsFlow(true);
+            }
+            break;        
+
+        case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:            
+            if (resultCode == Activity.RESULT_OK) {
+                setIsFlow(true);
             }
             break;
         }
+    }
+        
+    @Override
+    public void setIsFlow(boolean isFlow) {
+        if (getParent() instanceof BaseTabActivity) {
+            ((BaseTabActivity) getParent()).setIsFlow(true);
+        }
+        super.setIsFlow(isFlow);
+    }
+
+    @Override
+    public void refresh() {
+        storeCell.refresh();
+        listView.refresh();
+        title.syncSwitch();
+    }
+
+    @Override
+    public void refresh(MatjiData data) {
+        if (data instanceof Store) {
+            this.store = (Store) data;
+            storeCell.setStore(store);
+            listView.setStore(store);
+        }
+    }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {
+        // TODO Auto-generated method stub
+        
     }
 }

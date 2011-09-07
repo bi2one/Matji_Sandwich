@@ -1,7 +1,7 @@
 package com.matji.sandwich.adapter;
 
 import com.matji.sandwich.ActivityStartable;
-import com.matji.sandwich.PostActivity;
+import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
@@ -127,21 +127,21 @@ public class SimplePostAdapter extends MBaseAdapter {
 
     /**
      * 리스트 아이템을 클릭했을 때,
-     * {@link PostActivity}로 이동한다.
+     * {@link PostMainActivity}로 이동한다.
      * 
      * @param position 클릭된 아이템의 positoin
      */
     private void onListItemClick(int position) {
         Post post = (Post) data.get(position);
         if (post.getActivityId() == 0) {
-            Intent intent = new Intent(context, PostActivity.class);
-            intent.putExtra(PostActivity.POSTS, data);
-            intent.putExtra(PostActivity.POSITION, position);
+            Intent intent = new Intent(context, PostMainActivity.class);
+            intent.putExtra(PostMainActivity.POSTS, data);
+            intent.putExtra(PostMainActivity.POSITION, position);
             if (((Activity) context).getParent().getParent() instanceof BaseTabActivity) {
                 BaseTabActivity parent = (BaseTabActivity) ((Activity) context).getParent();
-                parent.tabStartActivityForResult(intent, BaseActivity.POST_ACTIVITY, (ActivityStartable) context);
+                parent.tabStartActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY, (ActivityStartable) context);
             } else {
-                ((Activity) context).startActivityForResult(intent, BaseActivity.POST_ACTIVITY);
+                ((Activity) context).startActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY);
             }
         }
     }

@@ -17,8 +17,6 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.http.util.ImageLoader;
 
 public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener, Identifiable {
-    protected static final int LOGIN_ACTIVITY = 1;
-    protected static final int WRITE_POST_ACTIVITY = 2;
     private ActivityStartable lastStartedChild;
     private boolean isFlow;
     private RelativeLayout mainViewGroup;

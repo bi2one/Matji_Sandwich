@@ -14,6 +14,7 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.tag.TagCloudView;
 import com.matji.sandwich.widget.title.StoreTitle;
 
@@ -21,12 +22,13 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 
     private HttpRequest request;
 	
-	private TagCloudView tagCloudView;
 	private TextView tagCount;
 	
 	private Store store;
 
 	private StoreTitle title;
+	private StoreCell storeCell;
+    private TagCloudView tagCloudView;
 	
 	public static final String STORE = "StoreTagActivity.store";
 	
@@ -50,11 +52,21 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 		tagCount.setText(numTag);
 		
 		title = (StoreTitle) findViewById(R.id.Titlebar);
-
+		storeCell = (StoreCell) findViewById(R.id.StoreCell);
+		storeCell.setStore(store);
+		storeCell.setMainView(getMainView());
+		
         title.setIdentifiable(this);
         title.setSpinnerContainer(getMainView());
         title.setRefreshable(this);
         title.setStore(store);
+	}
+	
+	@Override
+	protected void onNotFlowResume() {
+	    // TODO Auto-generated method stub
+	    super.onNotFlowResume();
+        refresh();
 	}
 	
 	public void setStore(Store store) {
@@ -91,19 +103,18 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 
     @Override
     public void refresh() {
-        // TODO Auto-generated method stub
-        
+        storeCell.refresh();
+        title.syncSwitch();
     }
 
     @Override
     public void refresh(MatjiData data) {
-        // TODO Auto-generated method stub
-        
+        if (data instanceof Store) {        
+            this.store = (Store) data;
+            storeCell.setStore(store);
+        }
     }
 
     @Override
-    public void refresh(ArrayList<MatjiData> data) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void refresh(ArrayList<MatjiData> data) {}
 }

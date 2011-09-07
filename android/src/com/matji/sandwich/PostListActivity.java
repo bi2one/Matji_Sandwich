@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -22,9 +23,9 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
     private PostListView listView;
 
     public int setMainViewId() {
-	return R.id.activity_post_list;
+        return R.id.activity_post_list;
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -40,7 +41,7 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
         super.onResume();
         listView.dataRefresh();
     }
-    
+
     @Override
     protected void onNotFlowResume() {
         super.onNotFlowResume();
@@ -50,14 +51,28 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
     @Override
     public void activityResultDelivered(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-        case POST_ACTIVITY:
+        case POST_MAIN_ACTIVITY:
             if (resultCode == RESULT_OK) {
-                ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostActivity.POSTS);
+                ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostMainActivity.POSTS);
                 listView.setPosts(posts);
                 if (getParent() instanceof BaseTabActivity) {
                     ((BaseTabActivity) getParent()).setIsFlow(true);
                 }
             }
+            break;
+        case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:            
+            if (resultCode == Activity.RESULT_OK) {
+                setIsFlow(true);
+            }
+            break;
         }
+    }
+
+    @Override
+    public void setIsFlow(boolean isFlow) {
+        if (getParent() instanceof BaseTabActivity) {
+            ((BaseTabActivity) getParent()).setIsFlow(true);
+        }
+        super.setIsFlow(isFlow);
     }
 }

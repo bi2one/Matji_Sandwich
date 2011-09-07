@@ -231,4 +231,10 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     public void requestExceptionCallBack(int tag, MatjiException e) {
         e.performExceptionHandling(this);
     }    
+    
+    @Override
+    public void finish() {
+        setResult(RESULT_OK);
+        super.finish();
+    }    
 }

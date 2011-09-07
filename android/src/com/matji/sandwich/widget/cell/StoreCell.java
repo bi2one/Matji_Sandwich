@@ -1,7 +1,5 @@
 package com.matji.sandwich.widget.cell;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -12,10 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.Refreshable;
-import com.matji.sandwich.StoreDefaultInfoActivity;
 import com.matji.sandwich.StoreDetailInfoTabActivity;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
 
@@ -25,11 +20,12 @@ import com.matji.sandwich.widget.BookmarkStarToggleView;
  * @author mozziluv
  *
  */
-public class StoreCell extends Cell implements Refreshable {
+public class StoreCell extends Cell {
     private Store store;
 
     private Button likeList;
     private ViewGroup mainView;
+    private BookmarkStarToggleView star;
 
     /**
      * 기본 생성자 (Java Code)
@@ -84,24 +80,15 @@ public class StoreCell extends Cell implements Refreshable {
         this.store = store;
 
         ((TextView) findViewById(R.id.cell_store_name)).setText(store.getName());
-        ((BookmarkStarToggleView) findViewById(R.id.cell_store_toggle_star)).init(store, mainView);
+        star = ((BookmarkStarToggleView) findViewById(R.id.cell_store_toggle_star));
 
         refresh();
     }
 
-    @Override
     public void refresh() {
         likeList.setText(store.getLikeCount()+"");
+        star.init(store, mainView);
     }
-    
-    @Override
-    public void refresh(MatjiData data) {
-        setStore((Store) data);
-        refresh();
-    }
-    
-    @Override
-    public void refresh(ArrayList<MatjiData> data) {}
 
     /**
      * 
@@ -109,7 +96,7 @@ public class StoreCell extends Cell implements Refreshable {
     @Override
     protected Intent getIntent() {
         Intent intent = new Intent(getContext(), StoreDetailInfoTabActivity.class);
-        intent.putExtra(StoreDefaultInfoActivity.STORE, (Parcelable) store);
+        intent.putExtra(StoreDetailInfoTabActivity.STORE, (Parcelable) store);
         return intent;
     }
     

@@ -8,15 +8,16 @@ import android.widget.TextView;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.title.StoreTitle;
 
 public class StoreDefaultInfoActivity extends BaseActivity implements Refreshable {
 	private Store store;
-	
 	private StoreTitle title;
+	private StoreCell storeCell;
 	
 	private TextView defaultInfo;
-	public static final String STORE  = "store";
+	public static final String STORE  = "StoreDetailInfoActivity.store";
 	private TextView fullName;
 	private TextView cover;
 	private TextView tel;
@@ -38,12 +39,17 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 		setContentView(R.layout.activity_store_default_info);
 		store = (Store) getIntent().getParcelableExtra(STORE);
 		title = (StoreTitle) findViewById(R.id.Titlebar);
+		storeCell = (StoreCell) findViewById(R.id.StoreCell);
+		
 		fullName = (TextView) findViewById(R.id.store_info_fullname);
 		cover = (TextView) findViewById(R.id.store_info_cover);
 		tel = (TextView) findViewById(R.id.store_info_tel);
 		address = (TextView) findViewById(R.id.store_info_address);
 		website = (TextView) findViewById(R.id.store_info_website);
 
+		storeCell.setStore(store);
+		storeCell.setMainView(getMainView());
+		
 		title.setIdentifiable(this);
 		title.setSpinnerContainer(getMainView());
 		title.setRefreshable(this);
@@ -64,16 +70,25 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 			website.setText("-");
 	}
 
+	@Override
+	protected void onNotFlowResume() {
+	    // TODO Auto-generated method stub
+	    super.onNotFlowResume();
+	    refresh();
+	}
+	
     @Override
     public void refresh() {
-        // TODO Auto-generated method stub
-        
+        storeCell.refresh();
+        title.syncSwitch();        
     }
 
     @Override
     public void refresh(MatjiData data) {
-        // TODO Auto-generated method stub
-        
+        if (data instanceof Store) {
+            this.store = (Store) data;
+            storeCell.setStore(store);
+        }        
     }
 
     @Override

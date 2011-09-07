@@ -72,12 +72,16 @@ public class StoreTitle extends TitleContainerTypeLRR implements Likeable {
         refresh();
 	}
 	
+	public void syncSwitch() {
+	       if (likeListener.isExistLike()) {
+	            ((Switchable) rightButton1).on();
+	        } else {
+	            ((Switchable) rightButton1).off();
+	        }
+	}
+	
 	public void refresh() {
-	    if (likeListener.isExistLike()) {
-            ((Switchable) rightButton1).on();
-	    } else {
-            ((Switchable) rightButton1).off();
-	    }
+	    syncSwitch();
 	    if (refreshable != null)
 	        refreshable.refresh(StoreTitle.this.store);
 	}

@@ -24,7 +24,7 @@ import com.matji.sandwich.widget.CommentListView;
 import com.matji.sandwich.widget.title.PageableTitle;
 import com.matji.sandwich.widget.title.PageableTitle.Pageable;
 
-public class PostActivity extends BaseActivity implements Requestable, Pageable {
+public class PostMainActivity extends BaseActivity implements Requestable, Pageable {
     private ArrayList<MatjiData> posts;
     private int position;
     private Post currentPost;
