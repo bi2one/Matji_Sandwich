@@ -124,6 +124,7 @@
   <string name="default_string_album">앨범</string>
   <string name="default_string_complete">완료</string>
   <string name="default_string_message">쪽지</string>
+  <string name="default_string_login">로그인</string>
   
   
   <!-- Writing content -->
@@ -198,12 +199,6 @@
   <string name="uncertain_menu">불확실한 메뉴</string>
   <string name="register_new_menu">등록된 메뉴</string>
   
-  <!-- StoreSliderActivity -->
-  <string name="all_store">전체 맛집</string>
-  <string name="near_store">주변 맛집</string>
-  <string name="search_store">맛집 검색</string>
-  <string name="bookmarked_store">내맛집</string>
-  
   <!-- GetMapPositionActivity -->
   <string name="get_map_position_title">지역 변경</string>
 
@@ -261,11 +256,14 @@
   <string name="map_store_sectioned_adapter_store">맛집</string>
 
   <!-- User Profile -->
+  <string name="user_profile_edit_profile">정보 변경</string>
   <string name="user_profile_friend_information">친구정보</string>
-  <string name="user_profile_following">following</string>
-  <string name="user_profile_follower">follower</string>
+  <string name="user_profile_following">Following</string>
+  <string name="user_profile_follower">Follower</string>
   <string name="user_profile_store_information">맛집정보</string>
   <string name="user_profile_find_store">발견맛집</string>
+  <string name="user_profile_my_find_store">내 발견맛집</string>
+  <string name="user_profile_my_bookmark_store">내 북마크맛집</string>
   <string name="user_profile_recent_store">최근맛집</string>
   
   <!-- ANDROID -->

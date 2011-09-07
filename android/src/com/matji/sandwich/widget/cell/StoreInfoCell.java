@@ -2,6 +2,7 @@ package com.matji.sandwich.widget.cell;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -13,10 +14,12 @@ import android.widget.TextView;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreDetailInfoTabActivity;
 import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.StoreFood;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.http.util.ImageLoader.ImageSize;
+import com.matji.sandwich.http.util.ImageLoader.UrlType;
 import com.matji.sandwich.util.MatjiConstants;
 
 /**
@@ -30,7 +33,7 @@ import com.matji.sandwich.util.MatjiConstants;
 public class StoreInfoCell extends Cell {
 
     private Store store;
-    private MatjiImageDownloader downloader;
+    private ImageLoader imgLoader;
     private ImageView thumbnail;
 
     /**
@@ -68,7 +71,7 @@ public class StoreInfoCell extends Cell {
     protected void init() {
         // TODO Auto-generated method stub
         super.init();
-        downloader = new MatjiImageDownloader(getContext());
+        imgLoader = new ImageLoader(getContext(), R.drawable.img_restaurant);
         thumbnail = (ImageView) findViewById(R.id.cell_store_thumbnail);
     }
 
@@ -87,7 +90,6 @@ public class StoreInfoCell extends Cell {
         
         ArrayList<SimpleTag> simpleTags = store.getTags();
         if (simpleTags.size() == 0) {
-//            ((TextView) findViewById(R.id.cell_store_tag)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.cell_store_tag)).setText(MatjiConstants.string(R.string.cell_store_not_exist_tag));
         } else {
             String tags = simpleTags.get(0).getTag();
@@ -97,15 +99,15 @@ public class StoreInfoCell extends Cell {
             ((TextView) findViewById(R.id.cell_store_tag)).setText(tags);
         }
 
-        ArrayList<StoreFood> storeFoods = store.getStoreFoods();
-        if (storeFoods.isEmpty()) {
+        ArrayList<Food> foodList = store.getFoods();
+        if (foodList.isEmpty()) {
             ((TextView) findViewById(R.id.cell_store_food)).setText(MatjiConstants.string(R.string.cell_store_not_exist_menu));
         } else {
-            String foods = storeFoods.get(0).getFood().getName();
-            for (StoreFood food : storeFoods) {
-                foods += ", " + food.getFood().getName();
+            String foods = foodList.get(0).getName();
+            for (Food food : foodList) {
+                foods += ", " + food.getName();
             }
-            ((TextView) findViewById(R.id.cell_store_tag)).setText(foods);
+            ((TextView) findViewById(R.id.cell_store_food)).setText(foods);
             
         }
             
@@ -128,7 +130,7 @@ public class StoreInfoCell extends Cell {
     public void refresh() {
         AttachFile file = store.getFile();
         if (file != null) {
-            downloader.downloadAttachFileImage(file.getId(), MatjiImageDownloader.IMAGE_SMALL, thumbnail);
+            imgLoader.DisplayImage((Activity) getContext(), UrlType.ATTACH_FILE, ImageSize.SMALL, thumbnail, file.getId());
         } else {
             Drawable defaultImage = getResources().getDrawable(R.drawable.img_restaurant);
             thumbnail.setImageDrawable(defaultImage);

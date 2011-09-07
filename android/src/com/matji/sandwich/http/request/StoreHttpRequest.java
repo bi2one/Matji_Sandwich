@@ -1,9 +1,8 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.StoreParser;
-import com.matji.sandwich.session.Session;
-
 import android.content.Context;
+
+import com.matji.sandwich.http.parser.StoreParser;
 
 public class StoreHttpRequest extends HttpRequest {
     public StoreHttpRequest(Context context) {
@@ -20,7 +19,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("q",keyword);
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
+    	getHashtable.put("include", "attach_file,user,tags,foods");
     }
     
     public void actionCount(int lat_sw, int lat_ne, int lng_sw, int lng_ne, String type){
@@ -42,7 +41,7 @@ public class StoreHttpRequest extends HttpRequest {
 
     	getHashtable.clear();
     	getHashtable.put("store_id", store_id + "");
-    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
+    	getHashtable.put("include", "attach_file,user,tags,foods");
     }
     
     public void actionNew(String name, String address, double lat, double lng,
@@ -92,16 +91,28 @@ public class StoreHttpRequest extends HttpRequest {
     }
     
     public void actionList(int page, int limit){
-    	httpMethod = HttpMethod.HTTP_GET;
-    	action = "list";
-    	parser = new StoreParser(context);
-    	
-    	getHashtable.clear();
-    	getHashtable.put("page", page + "");
-    	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "list";
+        parser = new StoreParser(context);
+        
+        getHashtable.clear();
+        getHashtable.put("page", page + "");
+        getHashtable.put("limit", limit + "");
+        getHashtable.put("include", "attach_file,user,tags,foods");
+    }    
+    
+    public void actionDiscoverList(int user_id, int page, int limit){
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "discover_list";
+        parser = new StoreParser(context);
+        
+        getHashtable.clear();
+        getHashtable.put("page", page + "");
+        getHashtable.put("limit", limit + "");
+        getHashtable.put("user_id", user_id + "");
+        getHashtable.put("include", "attach_file,user,tags,foods");
     }
-
+    
     public void actionNearbyList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "nearby_list";
@@ -115,19 +126,23 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("order", "like_count DESC,reg_user_id ASC");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
+    	getHashtable.put("include", "attach_file,user,tags,foods");
+    }
+
+    public void actionBookmarkList(int page, int limit){
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "bookmark_list";
+        parser = new StoreParser(context);
+        
+        getHashtable.clear();
+        getHashtable.put("page", page + "");
+        getHashtable.put("limit", limit + "");
+        getHashtable.put("include", "attach_file,user,tags,foods");
     }
     
     public void actionBookmarkList(int user_id, int page, int limit) {
-    	httpMethod = HttpMethod.HTTP_GET;
-    	action = "bookmark_list";
-    	parser = new StoreParser(context);
-
-    	getHashtable.clear();
+    	actionBookmarkList(page, limit);
     	getHashtable.put("user_id", user_id+ "");
-    	getHashtable.put("page", page + "");
-    	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
     }
     
     public void actionLikeList(int user_id, int page, int limit) {
@@ -139,12 +154,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("user_id", user_id+ "");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + "");
-    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
-    }
-
-    public void actionCurrentUserBookmarkedList(int page, int limit) {
-	Session session = Session.getInstance(context);
-	actionBookmarkList(session.getCurrentUser().getId() , page, limit);
+    	getHashtable.put("include", "attach_file,user,tags,foods");
     }
 
     public void actionNearbyBookmarkedList(int user_id, double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page) {
@@ -161,6 +171,6 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("order", "like_count DESC,reg_user_id ASC");
     	getHashtable.put("page", page + "");
     	// getHashtable.put("limit", limit + ""); 
-    	getHashtable.put("include", "attach_file,user,tags,store_foods,foods");
+    	getHashtable.put("include", "attach_file,user,tags,foods");
     }
 }

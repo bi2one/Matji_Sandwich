@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
@@ -25,6 +26,10 @@ public class MessageTitle extends TitleContainerTypeLR {
 	public MessageTitle(Context context, AttributeSet attr) {
 		super(context, attr);
 		setTitle(R.string.default_string_message);
+	}
+	
+	public void setIdentifiable(Identifiable identifiable) {
+	    ((WriteMessageButton) rightButton1).setIdentifiable(identifiable);
 	}
 	
     @Override

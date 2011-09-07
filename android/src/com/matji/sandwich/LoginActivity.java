@@ -10,6 +10,7 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session.LoginAsyncTask;
+import com.matji.sandwich.widget.title.HomeTitle;
 
 public class LoginActivity extends BaseActivity implements Loginable {
 
@@ -21,6 +22,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ((HomeTitle) findViewById(R.id.Titlebar)).setTitle(R.string.default_string_login);
     }
     
     public void loginButtonClicked(View v) {
@@ -32,7 +34,6 @@ public class LoginActivity extends BaseActivity implements Loginable {
 
     public void cancelButtonClicked(View v) {
         finish();
-
     }
 
     /* Loginable Interface methods */

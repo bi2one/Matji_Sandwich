@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.WriteMessageActivity;
+import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.User;
 
 /**
@@ -18,7 +19,8 @@ import com.matji.sandwich.data.User;
 public class WriteMessageButton extends TitleImageButton {
 
     private User user;
-    
+    private Identifiable identifiable;
+
     public WriteMessageButton(Context context) {
         super(context);
     }
@@ -32,11 +34,15 @@ public class WriteMessageButton extends TitleImageButton {
         super.init();
         setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_memo));
     }
-    
+
     public void setUser(User user) {
         this.user = user;
     }
-    
+
+    public void setIdentifiable(Identifiable identifiable) {
+        this.identifiable = identifiable;
+    }
+
     /**
      * @see com.matji.sandwich.widget.title.button.TitleItem#onTitleItemClicked()
      */
@@ -44,8 +50,10 @@ public class WriteMessageButton extends TitleImageButton {
     public void onTitleItemClicked() {
         // TODO Auto-generated method stub
         Log.d("Matji", "WriteMessageButtonClicked");
-        Intent intent = new Intent(getContext(), WriteMessageActivity.class);
-        intent.putExtra(WriteMessageActivity.USER, (Parcelable) user);
-        getContext().startActivity(intent);
+        if (identifiable.loginRequired()) {
+            Intent intent = new Intent(getContext(), WriteMessageActivity.class);
+            intent.putExtra(WriteMessageActivity.USER, (Parcelable) user);
+            getContext().startActivity(intent);
+        }
     }
 }

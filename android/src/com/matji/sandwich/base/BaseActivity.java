@@ -48,7 +48,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public boolean loginRequired(){
         Session session = Session.getInstance(this);
         if (!session.isLogin()) {
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             return false;
         }
 
@@ -60,6 +60,12 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
         if (session.isLogin()){
             session.sessionValidate(null, getMainView());
         }
+    }
+    
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("LifeCycle", "onStart at" + this.getClass());
     }
 
     @Override
@@ -126,5 +132,12 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public void startActivityForResult(Intent intent, int requestCode) {
         setIsFlow(true);
         super.startActivityForResult(intent, requestCode);
+    }
+    
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        Log.d("LifeCycle", "onDestroy at " + this.getClass());
     }
 }

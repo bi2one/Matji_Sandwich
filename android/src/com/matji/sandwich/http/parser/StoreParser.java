@@ -74,17 +74,13 @@ public class StoreParser extends MatjiDataParser {
 
 		FoodParser foodParser = new FoodParser(context);
 		dataList = foodParser.getMatjiDataList(getArray(object, "foods"));
-		// TODO 그냥 ArrayList<Food>를 Store 모델에 추가하거나, 더 간단한 알고리즘을 사용하도록 수정해야 할 듯
+		ArrayList<Food> foods = new ArrayList<Food>();
 		if (dataList != null){
 			for (MatjiData data : dataList) {
-				for (StoreFood storeFood : storeFoods) {
-					Food food = (Food) data;
-					if (storeFood.getFoodId() == food.getId()) {
-						storeFood.setFood(food);
-					}
-				}
+			    foods.add((Food) data);
 			}
 		}
+		store.setFoods(foods);
 
 		Log.d("Parser", "StoreParser:: called getMatjiData");
 

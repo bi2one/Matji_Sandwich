@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultFill">
+	style="@style/DefaultFill"
+	android:background="@drawable/bg_01">
 	<ScrollView
 		style="@style/DefaultFill">
 		<LinearLayout
@@ -20,47 +21,68 @@
 				<TextView
 					android:id="@+id/user_profile_basic_info"
 					style="@style/user_profile_BasicInfo" />
-				<TextView
-					android:id="@+id/user_profile_intro"
-					style="@style/DefaultWidthFill"
-					android:text="가"
-					android:layout_below="@id/user_profile_basic_info" />
-				<TextView
-					android:id="@+id/user_profile_blog"
-					style="@style/DefaultWidthFill"
-					android:text="나"
-					android:layout_below="@id/user_profile_intro" />
-				<TextView
-					android:id="@+id/user_profile_edit_info"
-					style="@style/DefaultWidthFill"
-					android:text="다"
-					android:layout_below="@id/user_profile_blog" />
+				<LinearLayout
+					android:id="@+id/user_profile_basic_info_wrapper"
+					style="@style/user_profile_Wrapper"
+					android:orientation="vertical"
+					android:layout_below="@id/user_profile_basic_info">
+					<TextView
+						android:id="@+id/user_profile_intro"
+						style="@style/DefaultWidthFill"
+						android:textSize="@dimen/user_profile_subtitle_size"
+						android:textColor="@color/matji_gray"
+						android:padding="@dimen/user_profile_wrapper_padding" />
+					<View
+						style="@style/user_profile_HorizontalLine" />
+					<TextView
+						android:id="@+id/user_profile_blog"
+						style="@style/DefaultWidthFill"
+						android:layout_below="@id/user_profile_intro"
+						android:singleLine="true"
+						android:textSize="@dimen/user_profile_url_size"
+						android:textColor="@color/matji_gray"
+						android:drawableLeft="@drawable/icon_web"
+						android:drawableRight="@drawable/icon_flow"
+						android:drawablePadding="@dimen/user_profile_drawable_padding"
 
+						android:padding="@dimen/user_profile_wrapper_padding" />
+					<View
+						style="@style/user_profile_HorizontalLine" />
+					<TextView
+						android:id="@+id/user_profile_edit_info"
+						style="@style/DefaultWidthFill"
+						android:layout_below="@id/user_profile_blog"
+						android:text="@string/user_profile_edit_profile"
+						android:textSize="@dimen/user_profile_url_size"
+						android:textColor="@color/matji_light_gray2"
+						android:padding="@dimen/user_profile_wrapper_padding"
+						android:drawableRight="@drawable/icon_flow"
+						android:drawablePadding="@dimen/user_profile_drawable_padding" />
+				</LinearLayout>
 				<!-- Friend Info -->
 				<TextView
 					android:id="@+id/user_profile_friend_info"
 					style="@style/user_profile_FriendInfo"
-					android:layout_below="@id/user_profile_edit_info" />
+					android:layout_below="@id/user_profile_basic_info_wrapper" />
 				<LinearLayout
 					android:id="@+id/user_profile_friend_info_wrapper"
-					style="@style/DefaultWidthFill"
+					style="@style/user_profile_Wrapper"
 					android:layout_below="@id/user_profile_friend_info">
 					<!-- Following -->
 					<RelativeLayout
 						android:id="@+id/user_profile_following"
-						android:layout_height="wrap_content"
 						android:layout_width="0dp"
+						android:layout_height="wrap_content"
 						android:layout_weight="1"
-						android:layout_toLeftOf="@+id/user_profile_follower">
+						android:layout_margin="@dimen/user_profile_wrapper_padding">
 						<TextView
 							android:id="@+id/user_profile_following_title"
 							style="@style/user_profile_Following"
 							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/user_profile_following_moresign" />
-						<TextView
+						<com.matji.sandwich.widget.PalatinoiFontTextView
 							android:id="@+id/user_profile_following_count"
 							style="@style/user_profile_Count"
-							android:text="마"
 							android:layout_alignParentLeft="true"
 							android:layout_below="@id/user_profile_following_title"
 							android:layout_toLeftOf="@id/user_profile_following_moresign" />
@@ -68,21 +90,26 @@
 							android:id="@id/user_profile_following_moresign"
 							style="@style/user_profile_Moresign" />
 					</RelativeLayout>
+
+					<View
+						android:id="@+id/user_profile_friend_info_line"
+						style="@style/user_profile_VerticalLine" />
+
 					<!-- Follower -->
 					<RelativeLayout
-						android:id="@id/user_profile_follower"
-						android:layout_height="wrap_content"
+						android:id="@+id/user_profile_follower"
 						android:layout_width="0dp"
-						android:layout_weight="1">
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:layout_margin="@dimen/user_profile_wrapper_padding">
 						<TextView
 							android:id="@+id/user_profile_follower_title"
 							style="@style/user_profile_Follower"
 							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/user_profile_follower_moresign" />
-						<TextView
+						<com.matji.sandwich.widget.PalatinoiFontTextView
 							android:id="@+id/user_profile_follower_count"
 							style="@style/user_profile_Count"
-							android:text="사"
 							android:layout_alignParentLeft="true"
 							android:layout_below="@id/user_profile_follower_title"
 							android:layout_toLeftOf="@id/user_profile_follower_moresign" />
@@ -99,24 +126,23 @@
 					android:layout_below="@id/user_profile_friend_info_wrapper" />
 				<LinearLayout
 					android:id="@+id/user_profile_store_info_wrapper"
-					style="@style/DefaultWidthFill"
+					style="@style/user_profile_Wrapper"
 					android:layout_below="@id/user_profile_store_info">
 					<!-- Find Store -->
 					<RelativeLayout
 						android:id="@+id/user_profile_find_store"
 						android:layout_width="0dp"
-						android:layout_height="fill_parent"
-						android:layout_weight="1">
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:padding="@dimen/user_profile_wrapper_padding">
 						<TextView
 							android:id="@+id/user_profile_find_store_title"
-							style="@style/user_profile_Subtitle"
-							android:text="카"
+							style="@style/user_profile_FindStore"
 							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/user_profile_find_store_moresign" />
-						<TextView
+						<com.matji.sandwich.widget.PalatinoiFontTextView
 							android:id="@+id/user_profile_find_store_count"
 							style="@style/user_profile_Count"
-							android:text="타"
 							android:layout_alignParentLeft="true"
 							android:layout_below="@id/user_profile_find_store_title"
 							android:layout_toLeftOf="@id/user_profile_find_store_moresign" />
@@ -124,34 +150,40 @@
 							android:id="@id/user_profile_find_store_moresign"
 							style="@style/user_profile_Moresign" />
 					</RelativeLayout>
+
+					<View
+						android:id="@+id/user_profile_store_info_line"
+						style="@style/user_profile_VerticalLine"
+						android:visibility="gone" />
+
 					<!-- Bookmark Store -->
 					<RelativeLayout
 						android:id="@+id/user_profile_bookmark"
 						android:layout_width="0dp"
-						android:layout_height="fill_parent"
+						android:layout_height="wrap_content"
 						android:layout_weight="1"
+						android:padding="@dimen/user_profile_wrapper_padding"
 						android:visibility="gone">
 						<TextView
 							android:id="@+id/user_profile_bookmark_store_title"
-							style="@style/user_profile_Subtitle"
-							android:text="파"
+							style="@style/user_profile_BookmarkStore"
 							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/user_profile_bookmark_store_moresign" />
-						<TextView
+						<com.matji.sandwich.widget.PalatinoiFontTextView
 							android:id="@+id/user_profile_bookmark_store_count"
 							style="@style/user_profile_Count"
-							android:text="하"
 							android:layout_alignParentLeft="true"
-							android:layout_below="@id/user_profile_bookmark_store_title" />
+							android:layout_below="@id/user_profile_bookmark_store_title"
+							android:layout_toLeftOf="@id/user_profile_follower_moresign" />
 						<ImageView
 							android:id="@id/user_profile_bookmark_store_moresign"
 							style="@style/user_profile_Moresign" />
 					</RelativeLayout>
 				</LinearLayout>
-<!-- 				<TextView -->
-<!-- 					android:id="@+id/user_profile_recent_store" -->
-<!-- 					style="@style/user_profile_RecentStore" -->
-<!-- 					android:layout_below="@id/user_profile_store_info_wrapper" /> -->
+				<!-- <TextView -->
+				<!-- android:id="@+id/user_profile_recent_store" -->
+				<!-- style="@style/user_profile_RecentStore" -->
+				<!-- android:layout_below="@id/user_profile_store_info_wrapper" /> -->
 			</RelativeLayout>
 		</LinearLayout>
 	</ScrollView>

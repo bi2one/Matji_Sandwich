@@ -5,10 +5,11 @@ import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.widget.RoundTabHost;
-import com.matji.sandwich.widget.title.TitleContainer;
+import com.matji.sandwich.widget.title.MessageTitle;
 
 public class MessageListActivity extends BaseTabActivity {
     private RoundTabHost tabHost;
+    private MessageTitle title;
 
     public int setMainViewId() {
         return R.id.activity_message_list;
@@ -28,6 +29,10 @@ public class MessageListActivity extends BaseTabActivity {
         // TODO Auto-generated method stub
         super.init();
         setContentView(R.layout.activity_message_list);
+        
+        title = (MessageTitle) findViewById(R.id.Titlebar);
+        title.setIdentifiable(this);
+        
         tabHost = (RoundTabHost) getTabHost();
 
         tabHost.addLeftTab("tab1",

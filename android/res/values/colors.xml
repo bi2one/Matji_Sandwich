@@ -37,6 +37,7 @@
 	<color name="matji_gray">#333333</color>
 	<color name="matji_silver">#666666</color>
 	<color name="matji_light_gray">#999999</color>
+	<color name="matji_light_gray2">#aaaaaa</color>
 	<color name="matji_white">#fff</color>
 	<color name="matji_black">#000</color>
 	<color name="matji_chocolate">#7f510a</color>

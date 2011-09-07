@@ -3,8 +3,8 @@
 	<!-- everywhere used dimens -->
 	<dimen name="default_distance">10dp</dimen>
 	<dimen name="default_distance_half">5dp</dimen>
-	<dimen name="default_drawable_padding">3dp</dimen>
-	<dimen name="default_drawable_padding_half">1.5dp</dimen>
+	<dimen name="default_drawable_padding">4dp</dimen>
+	<dimen name="default_drawable_padding_half">2dp</dimen>
 	<dimen name="default_divider_height">0.67dp</dimen>
 	<dimen name="default_new_icon_x_position">24.67dp</dimen>
 	<dimen name="default_new_icon_y_position">4dp</dimen>
@@ -16,7 +16,7 @@
 	
 	<!-- Store Cell -->
 	<dimen name="store_cell_height">48dp</dimen>
-	<dimen name="store_cell_info_height">106.67dp</dimen>
+	<dimen name="store_cell_info_height">93.33dp</dimen>
 	<dimen name="store_cell_content_size">12dp</dimen>
 	<dimen name="store_cell_name_size">17.33dp</dimen>
 	<dimen name="store_cell_thumbnail_width">69.33dp</dimen>
@@ -176,4 +176,13 @@
 	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>
 	
+	<!-- user_profile.xml -->
+    <dimen name="user_profile_subtitle_size">12dp</dimen>
+    <dimen name="user_profile_url_size">16dp</dimen>
+	<dimen name="user_profile_count_size">28dp</dimen>
+	<dimen name="user_profile_margin_top">10dp</dimen>
+	<dimen name="user_profile_margin_bottom">13.33dp</dimen>
+    <dimen name="user_profile_drawable_padding">7.33dp</dimen>
+    <dimen name="user_profile_wrapper_padding">14.67dp</dimen>
+    <dimen name="user_profile_line_size">0.67dp</dimen>
 </resources>

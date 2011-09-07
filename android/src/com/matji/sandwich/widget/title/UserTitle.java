@@ -38,13 +38,16 @@ public class UserTitle extends TitleContainerTypeLRR {
         setTitle(user.getNick());
         ((WriteMessageButton) rightButton2).setUser(user);
 
-        if (Session.getInstance(getContext()).getCurrentUser().getId() == user.getId()) {
-            removeRightButton(rightButton1);
+        Session session = Session.getInstance(getContext());
+        if (session.isLogin()) 
+            if (session.getCurrentUser().getId() == user.getId()) {
+                removeRightButton(rightButton1);
         }
 	}
 	
 	public void setIdentifiable(Identifiable identifiable) {
 	    ((FollowButton) rightButton1).setIdentifiable(identifiable);
+	    ((WriteMessageButton) rightButton2).setIdentifiable(identifiable);
 	}
 	
 	public void setFollowable(Followable followable) {

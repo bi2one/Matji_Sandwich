@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,19 +14,26 @@ import com.matji.sandwich.FollowingActivity;
 import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.cell.UserCell;
 
-public class UserProfileView extends RelativeLayout {
+public class UserProfileView extends RelativeLayout implements OnClickListener {
     private User user;
-    private UserCell userCell;
     
+    private Session session;
+    
+    private UserCell userCell;
     private TextView intro;
     private TextView blog;
     private View followingCountView;
     private TextView followingCount;
     private View followerCountView;
     private TextView followerCount;
+    private View findCountView; 
+    private TextView findTitle;
     private TextView findCount;
+    private View bookmarkDivider;
+    private View bookmarkCountView; 
     private TextView bookmarkCount;
     
     public UserProfileView(Context context) {
@@ -42,6 +50,8 @@ public class UserProfileView extends RelativeLayout {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.user_profile, this);
 
+        session = Session.getInstance(getContext());
+        
         userCell = ((UserCell) findViewById(R.id.UserCell));
         userCell.setClickable(false);
         intro = (TextView) findViewById(R.id.user_profile_intro);
@@ -50,24 +60,17 @@ public class UserProfileView extends RelativeLayout {
         followingCount = (TextView) findViewById(R.id.user_profile_following_count);
         followerCountView = findViewById(R.id.user_profile_follower);
         followerCount = (TextView) findViewById(R.id.user_profile_follower_count);
+        findCountView = findViewById(R.id.user_profile_find_store);
+        findTitle = (TextView) findViewById(R.id.user_profile_find_store_title);
         findCount = (TextView) findViewById(R.id.user_profile_find_store_count);
+        bookmarkDivider = findViewById(R.id.user_profile_store_info_line);
+        bookmarkCountView = findViewById(R.id.user_profile_bookmark);
         bookmarkCount = (TextView) findViewById(R.id.user_profile_bookmark_store_count);
         
-        followingCountView.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(View v) {
-                onFollowingButtonClicked(v);
-            }
-        });
-        
-        followerCountView.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(View v) {
-                onFollowerButtonClicked(v);
-            }
-        });
+        followingCountView.setOnClickListener(this);
+        followerCountView.setOnClickListener(this);        
+        findCountView.setOnClickListener(this);
+        bookmarkCountView.setOnClickListener(this);
     }
     
     public void setUser(User user) {
@@ -78,11 +81,21 @@ public class UserProfileView extends RelativeLayout {
     public void refresh() {
         userCell.setUser(user);
         intro.setText(user.getIntro());
-        blog.setText("블로그는??????????");
+        blog.setText("http://www.yummystory.......com");
         followingCount.setText(user.getFollowingCount()+"");
         followerCount.setText(user.getFollowerCount()+"");
         findCount.setText(user.getDiscoverStoreCount()+"");
         bookmarkCount.setText(user.getBookmarkStoreCount()+"");
+        
+        if (session.isLogin() && user.getId() == session.getCurrentUser().getId()) {
+            findTitle.setText(R.string.user_profile_my_find_store);
+            bookmarkDivider.setVisibility(View.VISIBLE);
+            bookmarkCountView.setVisibility(View.VISIBLE);
+        } else {
+            findTitle.setText(R.string.user_profile_find_store);
+            bookmarkDivider.setVisibility(View.GONE);
+            bookmarkCountView.setVisibility(View.GONE);
+        }
     }
     
     public void onFollowingButtonClicked(View v) {
@@ -98,4 +111,25 @@ public class UserProfileView extends RelativeLayout {
         intent.putExtra(FollowingActivity.TYPE, FollowingListType.FOLLOWER);
         getContext().startActivity(intent);
     }
+    
+    public void onFindStoreButtonClicked(View v) {
+        
+    }
+    
+    public void onBookmarkStoreButtonClicked(View v) {
+        
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == followingCountView.getId()) {
+            onFollowingButtonClicked(v);
+        } else if (v.getId() == followerCountView.getId()) {
+            onFollowerButtonClicked(v);
+        } else if (v.getId() == findCountView.getId()) {
+            onFindStoreButtonClicked(v);
+        } else if (v.getId() == bookmarkCountView.getId()) {
+            onBookmarkStoreButtonClicked(v);
+        }        
+     }
 }

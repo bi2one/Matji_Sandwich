@@ -886,7 +886,15 @@
   </style>
 
   <!-- User Profile (Detail information) -->
-  <style name="user_profile_Title" parent="DefaultWrap">
+  <style name="user_profile_Title" parent="DefaultWrap">  
+  	<item name="android:textSize">@dimen/subtitle_size</item>
+  	<item name="android:textColor">@color/matji_chocolate</item>
+  </style>
+  
+  <style name="user_profile_Wrapper" parent="DefaultWidthFill">
+  	<item name="android:layout_marginTop">@dimen/user_profile_margin_top</item>
+  	<item name="android:layout_marginBottom">@dimen/user_profile_margin_bottom</item>
+  	<item name="android:background">@drawable/txtbox</item>
   </style>
   
   <style name="user_profile_BasicInfo" parent="user_profile_Title">
@@ -912,6 +920,8 @@
   </style>
   
   <style name="user_profile_Subtitle" parent="DefaultWrap">
+    <item name="android:textSize">@dimen/user_profile_subtitle_size</item>
+    <item name="android:textColor">@color/matji_red</item>
   </style>
 
   <style name="user_profile_Following" parent="user_profile_Subtitle">
@@ -919,12 +929,34 @@
   </style>
 
   <style name="user_profile_Follower" parent="user_profile_Subtitle">
-  <item name="android:text">@string/user_profile_follower</item>
+    <item name="android:text">@string/user_profile_follower</item>
+  </style>
+  
+  <style name="user_profile_FindStore" parent="user_profile_Subtitle">
+    <item name="android:text">@string/user_profile_find_store</item>
+  </style>
+
+  <style name="user_profile_BookmarkStore" parent="user_profile_Subtitle">
+    <item name="android:text">@string/user_profile_my_bookmark_store</item>
   </style>
 
   <style name="user_profile_Count" parent="DefaultWrap">
+    <item name="android:textSize">@dimen/user_profile_count_size</item>
+    <item name="android:textColor">@color/matji_light_gray2</item>
   </style>
 
+  <style name="user_profile_VerticalLine">
+    <item name="android:background">@color/listview_divider1_gray</item>
+    <item name="android:layout_width">@dimen/user_profile_line_size</item>
+    <item name="android:layout_height">fill_parent</item>
+  </style>
+  
+  <style name="user_profile_HorizontalLine">
+    <item name="android:background">@color/listview_divider1_gray</item>
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">@dimen/user_profile_line_size</item>
+  </style>
+  
   <!-- album_image_view.xml -->
   <style name="album_image_view" parent="DefaultWrap">
     <item name="android:background">@drawable/box_restaurant</item>
