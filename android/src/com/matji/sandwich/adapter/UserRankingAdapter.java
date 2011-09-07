@@ -35,7 +35,7 @@ public class UserRankingAdapter extends MBaseAdapter {
             userElement.point = (TextView) convertView.findViewById(R.id.row_simple_user_point);
 
             userElement.profile.showInsetBackground();
-            userElement.wrapperInner.setBackgroundColor(MatjiConstants.color(R.color.matji_transparent));
+            // userElement.wrapperInner.setBackgroundColor(MatjiConstants.color(R.color.matji_transparent));
 
             convertView.setTag(userElement);
         } else {

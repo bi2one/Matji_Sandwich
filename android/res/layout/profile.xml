@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/ProfileWrapper">
-	<com.matji.sandwich.widget.ProfileImageView
-		android:id="@id/profile"
-		style="@style/Profile" />
-	<ImageView
-		android:id="@+id/profile_border"
-		style="@style/DefaultFill" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ProfileWrapper">
+  <com.matji.sandwich.widget.ProfileImageView
+      android:id="@id/profile"
+      style="@style/Profile" />
+  <ImageView
+      android:id="@+id/profile_border"
+      style="@style/DefaultFill" />
 </RelativeLayout>

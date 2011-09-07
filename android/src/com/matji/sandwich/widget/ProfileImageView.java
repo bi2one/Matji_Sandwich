@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,7 +21,7 @@ import com.matji.sandwich.util.ImageUtil;
  * @author mozziluv
  *
  */
-public class ProfileImageView extends ImageView {
+public class ProfileImageView extends ImageView implements ImageLoader.ImageConvertable {
     protected ImageView border;
     private Context context;
     private ImageLoader imageLoader;
@@ -43,23 +44,27 @@ public class ProfileImageView extends ImageView {
     private void init(Context context) {
 	this.context = context;
 	imageLoader = new ImageLoader(context, R.drawable.user_img54);
+	imageLoader.setImageConvertable(this);
     }
 	
     /**
      * 현재 ImageView 에 저장되어 있는 Bitmap 의 corner 를 rounded 하게 바꾸는 메소드.
      */
-    public void convertToRoundedCornerImage() {
-	Drawable d = getDrawable();
-	if (d.getIntrinsicWidth() > 0 && d.getIntrinsicHeight() > 0) {
-	    Bitmap bm = ImageUtil.getBitmap(d);
-	    setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, DisplayUtil.PixelFromDP(4), (int) getInset()));
-	}
+    public Bitmap convert(Bitmap bitmap) {
+	return ImageUtil.getRoundedCornerBitmap(bitmap, DisplayUtil.PixelFromDP(4), (int) getInset());
     }
+    // public void convertToRoundedCornerImage() {
+    // 	Drawable d = getDrawable();
+    // 	if (d.getIntrinsicWidth() > 0 && d.getIntrinsicHeight() > 0) {
+    // 	    Bitmap bm = ImageUtil.getBitmap(d);
+    // 	    setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, DisplayUtil.PixelFromDP(4), (int) getInset()));
+    // 	}
+    // }
 
     protected ImageLoader.ImageSize getImageSize() {
 	return ImageLoader.ImageSize.SSMALL;
     }
-	
+
     public void setUserId(int id) {
 	imageLoader.DisplayImage((Activity)context, ImageLoader.UrlType.USER, getImageSize(), this, id);
     }
@@ -82,10 +87,10 @@ public class ProfileImageView extends ImageView {
 	return DisplayUtil.PixelFromDP(1);
     }
     
-    @Override
-    protected void onDraw(Canvas canvas) {
+    // @Override
+    // protected void onDraw(Canvas canvas) {
         // TODO Auto-generated method stub
-        convertToRoundedCornerImage();
-        super.onDraw(canvas);
-    }
+        // convertToRoundedCornerImage();
+    //     super.onDraw(canvas);
+    // }
 }

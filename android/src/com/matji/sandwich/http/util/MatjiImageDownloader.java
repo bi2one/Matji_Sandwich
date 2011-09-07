@@ -72,7 +72,7 @@ public class MatjiImageDownloader implements ImageDownloaderListener {
 	@Override
 	public void postSetBitmap(ImageView view) {
 		if (view instanceof ProfileImageView) {
-			((ProfileImageView) view).convertToRoundedCornerImage();
+			// ((ProfileImageView) view).convertToRoundedCornerImage();
 		}
 	}
 }

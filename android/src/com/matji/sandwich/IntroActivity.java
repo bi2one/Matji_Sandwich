@@ -9,6 +9,7 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.http.util.ImageLoader;
 
 public class IntroActivity extends BaseActivity {
     /** Called when the activity is first created. */
@@ -36,6 +37,7 @@ public class IntroActivity extends BaseActivity {
                 Session session  = Session.getInstance(IntroActivity.this);
                 if (session.isLogin()) session.unsyncSessionValidate();
                 session.notificationValidate();
+		ImageLoader.clearCache(getApplicationContext());
                 startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
                 finish();
             }

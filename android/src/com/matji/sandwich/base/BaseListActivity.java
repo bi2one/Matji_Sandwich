@@ -12,6 +12,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.TitleContainer;
+import com.matji.sandwich.http.util.ImageLoader;
 
 public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener, Identifiable {	
     protected static final int LOGIN_ACTIVITY = 1;
@@ -52,6 +53,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
     }
 
     public void didEnterForeGround(){
+	ImageLoader.clearCache(getApplicationContext());
         Session session  = Session.getInstance(this);
         if (session.isLogin()){
             session.sessionValidate(null, getMainView());
