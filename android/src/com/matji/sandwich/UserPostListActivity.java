@@ -34,7 +34,7 @@ public class UserPostListActivity extends BaseActivity {
 
         user = getIntent().getParcelableExtra(USER);
 
-        title = ((UserTitle) findViewById(R.id.Titlebar));
+        title = (UserTitle) findViewById(R.id.Titlebar);
         userCell = new UserCell(this, user, title.getSwitchable());
         userIntroCell = new UserIntroCell(this, user);
 

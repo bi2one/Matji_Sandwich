@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.matji.sandwich.FollowingActivity;
 import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.R;
+import com.matji.sandwich.StoreBookmarkListActivity;
+import com.matji.sandwich.StoreDiscoverListActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.cell.UserCell;
@@ -113,11 +115,14 @@ public class UserProfileView extends RelativeLayout implements OnClickListener {
     }
     
     public void onFindStoreButtonClicked(View v) {
-        
+        Intent intent = new Intent(getContext(), StoreDiscoverListActivity.class);
+        intent.putExtra(StoreDiscoverListActivity.USER, (Parcelable) user);
+        getContext().startActivity(intent);
     }
     
     public void onBookmarkStoreButtonClicked(View v) {
-        
+        Intent intent = new Intent(getContext(), StoreBookmarkListActivity.class);
+        getContext().startActivity(intent);
     }
 
     @Override

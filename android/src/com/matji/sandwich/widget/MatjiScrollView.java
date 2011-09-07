@@ -1,12 +1,11 @@
 package com.matji.sandwich.widget;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.util.MatjiConstants;
-
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
+
+import com.matji.sandwich.R;
+import com.matji.sandwich.util.MatjiConstants;
 
 public class MatjiScrollView extends ScrollView {
 
@@ -22,13 +21,12 @@ public class MatjiScrollView extends ScrollView {
 	}
 	
 	
-	/**
-	 * ScrollView 의 기본 fade edge 색상(Scroll 위, 아래의 그림자 같은 부분)을 
-	 * 검은색으로 설정.
+	/**x
+	 * ScrollView 의 기본 fade edge 색상(Scroll 위, 아래의 그림자 같은 부분)을
+	 * 지정
 	 */
 	@Override
 	public int getSolidColor() {
-//		return super.getSolidColor();
-		return Color.rgb(0x0, 0x0, 0x0);
+		return MatjiConstants.color(R.color.listview_divider1_gray);
 	}
 }

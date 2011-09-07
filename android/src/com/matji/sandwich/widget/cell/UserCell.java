@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.MessageListActivity;
@@ -36,7 +36,7 @@ public class UserCell extends Cell implements Followable {
     private Session session;
 
     private FollowingListener followingListener;
-    private RelativeLayout spinnerContainer;
+    private ViewGroup spinnerContainer;
     
     private Switchable switchable;
 
@@ -47,7 +47,7 @@ public class UserCell extends Cell implements Followable {
      */
     public UserCell(Context context) {
         super(context, R.layout.cell_user);
-        spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
+        spinnerContainer = (ViewGroup) findViewById(R.id.UserCell);
     }
 
     /**
@@ -58,7 +58,7 @@ public class UserCell extends Cell implements Followable {
      */
     public UserCell(Context context, AttributeSet attr) {
         super(context, R.layout.cell_user);
-        spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
+        spinnerContainer = (ViewGroup) findViewById(R.id.UserCell);
         setId(R.id.UserCell);
     }
 
@@ -70,7 +70,7 @@ public class UserCell extends Cell implements Followable {
      */
     public UserCell(Context context, User user, Switchable switchable) {
         super(context, R.layout.cell_user);
-        spinnerContainer = (RelativeLayout)findViewById(R.id.cell_user_InfoWrapper);
+        spinnerContainer = (ViewGroup) findViewById(R.id.UserCell);
         setSwitchable(switchable);
         setUser(user);
     }
@@ -97,7 +97,7 @@ public class UserCell extends Cell implements Followable {
         follow = (Button) findViewById(R.id.cell_user_follow);
         messageList = (Button) findViewById(R.id.cell_user_message_list);
 
-        followingListener = new FollowingListener(((Identifiable) getContext()), getContext(), user, spinnerContainer) {
+        followingListener = new FollowingListener((Identifiable) getContext(), getContext(), user, spinnerContainer) {
 
             @Override
             public void postUnfollowRequest() {

@@ -175,7 +175,7 @@ public class Session implements Requestable {
         SQLiteDatabase db = dbProvider.getDatabase();
         try{
             db.beginTransaction();
-            dbProvider.insertBookmarks(me.getBookmarks());  
+            dbProvider.insertBookmarks(me.getBookmarks());
             dbProvider.insertLikes(me.getLikes());
             dbProvider.insertFollowers(me.getFollowers());
             dbProvider.insertFollowings(me.getFollowings());

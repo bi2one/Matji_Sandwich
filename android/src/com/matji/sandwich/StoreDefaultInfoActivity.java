@@ -1,13 +1,20 @@
 package com.matji.sandwich;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreDefaultInfoActivity extends BaseActivity {
+public class StoreDefaultInfoActivity extends BaseActivity implements Refreshable {
 	private Store store;
+	
+	private StoreTitle title;
+	
 	private TextView defaultInfo;
 	public static final String STORE  = "store";
 	private TextView fullName;
@@ -30,11 +37,17 @@ public class StoreDefaultInfoActivity extends BaseActivity {
 		super.init();
 		setContentView(R.layout.activity_store_default_info);
 		store = (Store) getIntent().getParcelableExtra(STORE);
+		title = (StoreTitle) findViewById(R.id.Titlebar);
 		fullName = (TextView) findViewById(R.id.store_info_fullname);
 		cover = (TextView) findViewById(R.id.store_info_cover);
 		tel = (TextView) findViewById(R.id.store_info_tel);
 		address = (TextView) findViewById(R.id.store_info_address);
 		website = (TextView) findViewById(R.id.store_info_website);
+
+		title.setIdentifiable(this);
+		title.setSpinnerContainer(getMainView());
+		title.setRefreshable(this);
+		title.setStore(store);
 		
 		fullName.setText(store.getName());
 		tel.setText(store.getTel());
@@ -50,4 +63,22 @@ public class StoreDefaultInfoActivity extends BaseActivity {
 		else
 			website.setText("-");
 	}
+
+    @Override
+    public void refresh() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void refresh(MatjiData data) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {
+        // TODO Auto-generated method stub
+        
+    }
 }

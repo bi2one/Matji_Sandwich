@@ -32,9 +32,14 @@ public class StorePostListActivity extends BaseActivity {
         store = (Store) getIntent().getParcelableExtra(STORE);
 
         title = (StoreTitle) findViewById(R.id.Titlebar);
-        title.setTitle(store.getName());
         storeCell = new StoreCell(this, store);
         storeInfoCell = new StoreInfoCell(this, store);
+        
+        title.setIdentifiable(this);
+        title.setSpinnerContainer(getMainView());
+        title.setRefreshable(storeCell);
+        title.setStore(store);
+        
         storeCell.setMainView(getMainView());
         storeCell.showLine();
         

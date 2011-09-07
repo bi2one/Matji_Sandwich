@@ -189,7 +189,7 @@ public class TagCloudView extends FlowLayout {
 	 * @param tags 이 뷰에서 보여질 태그들
 	 */
 	public void init(ArrayList<Tag> tags) {
-		setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_box));
+		setBackgroundDrawable(getResources().getDrawable(R.drawable.txtbox));
 		Collections.shuffle(tags);	// shuffling for tag cloud
 
 		if (tags.size() > 0) {
@@ -211,7 +211,7 @@ public class TagCloudView extends FlowLayout {
 		int line = getMeasuredHeight() / LINE_HEIGHT;
 
 		Paint p = new Paint();
-		p.setColor(getResources().getColor(R.color.matji_light_gray));
+		p.setColor(getResources().getColor(R.color.listview_divider1_gray));
 		for (int i = 1; i < line; i++)
 			canvas.drawLine(0, (LINE_HEIGHT+1)*i, getMeasuredWidth(), (LINE_HEIGHT+1)*i, p);
 

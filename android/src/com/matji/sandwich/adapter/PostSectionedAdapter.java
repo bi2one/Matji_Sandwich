@@ -88,7 +88,6 @@ public class PostSectionedAdapter extends SectionedAdapter {
      */
     protected void init() {
 	imageLoader = new ImageLoader(context);
-//        profileSize = (int) MatjiConstants.dimen(R.dimen.profile_size);
     }
 
     public void setSpinnerContainer(RelativeLayout spinnerContainer) {

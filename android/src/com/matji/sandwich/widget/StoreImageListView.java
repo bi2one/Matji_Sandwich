@@ -28,9 +28,4 @@ public class StoreImageListView extends ImageListView {
 		
 		init();
 	}
-	
-	@Override
-	protected String getTotalImageCountText() {
-		return store.getImageCount() + "개의 " + store.getName() + " 사진";
-	}
 }

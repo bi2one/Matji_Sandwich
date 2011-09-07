@@ -25,11 +25,11 @@ public class SimpleUserAdapter extends MBaseAdapter {
     }
     
     public View getView(int position, View convertView, ViewGroup parent) {
-        RankingElement userElement;
+        UserElement userElement;
         User user = (User) data.get(position);
 
         if (convertView == null) {
-            userElement = new RankingElement();
+            userElement = new UserElement();
             convertView = getLayoutInflater().inflate(R.layout.row_simple_user, null);
             
             userElement.wrapper = convertView.findViewById(R.id.row_simple_user_wrapper);
@@ -43,7 +43,7 @@ public class SimpleUserAdapter extends MBaseAdapter {
 
             convertView.setTag(userElement);
         } else {
-            userElement = (RankingElement) convertView.getTag();
+            userElement = (UserElement) convertView.getTag();
         }
 
 //        userElement.wrapper.setOnClickListener(new GotoUserMainAction(context, user));
@@ -63,11 +63,7 @@ public class SimpleUserAdapter extends MBaseAdapter {
         return convertView;
     }
 
-    protected int getPositionVisibility() {
-        return View.GONE;
-    }
-
-    private class RankingElement {
+    private class UserElement {
         View wrapper;
         ProfileImageView profile;
         TextView nickname;

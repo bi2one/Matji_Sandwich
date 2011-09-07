@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.GotoUserMainAction;
-import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.ProfileImageView;
 
 public class UserRankingAdapter extends MBaseAdapter {
@@ -26,16 +25,14 @@ public class UserRankingAdapter extends MBaseAdapter {
             convertView = getLayoutInflater().inflate(R.layout.row_ranked_user, null);
 
             userElement.wrapper = convertView.findViewById(R.id.row_ranked_user_wrapper);
-            userElement.wrapperInner = convertView.findViewById(R.id.row_simple_user_wrapper);
             userElement.position = (TextView) convertView.findViewById(R.id.row_ranked_user_rank);
             userElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
-            userElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
-            userElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
-            userElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_user_post_count);
-            userElement.point = (TextView) convertView.findViewById(R.id.row_simple_user_point);
+            userElement.nickname = (TextView) convertView.findViewById(R.id.row_ranked_user_nickname);
+            userElement.likeCount = (TextView) convertView.findViewById(R.id.row_ranked_user_like_count);
+            userElement.postCount = (TextView) convertView.findViewById(R.id.row_ranked_user_post_count);
+            userElement.point = (TextView) convertView.findViewById(R.id.row_ranked_user_point);
 
             userElement.profile.showInsetBackground();
-            // userElement.wrapperInner.setBackgroundColor(MatjiConstants.color(R.color.matji_transparent));
 
             convertView.setTag(userElement);
         } else {
@@ -60,7 +57,6 @@ public class UserRankingAdapter extends MBaseAdapter {
     
     private class RankingElement {
         View wrapper;
-        View wrapperInner;
         TextView position;
         ProfileImageView profile;
         TextView nickname;

@@ -16,7 +16,7 @@ import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.listener.ListRequestScrollListener;
 
 public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
-										    PullToRefreshListView.OnRefreshListener {
+PullToRefreshListView.OnRefreshListener {
     private ListRequestScrollListener scrollListener;
     private ArrayList<MatjiData> adapterData;
     private MBaseAdapter adapter;
@@ -33,172 +33,173 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
     public abstract RequestCommand request();
 
     public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
-	super(context, attrs);
-	this.adapter = adapter;
-	manager = HttpRequestManager.getInstance(context);
+        super(context, attrs);
+        this.adapter = adapter;
+        manager = HttpRequestManager.getInstance(context);
 
-	adapterData = new ArrayList<MatjiData>();
-	adapter.setData(adapterData);
-	setAdapter(adapter);
+        adapterData = new ArrayList<MatjiData>();
+        adapter.setData(adapterData);
+        setAdapter(adapter);
 
-	scrollListener = new ListRequestScrollListener(context, this);
-	setPullDownScrollListener(scrollListener);
+        scrollListener = new ListRequestScrollListener(context, this);
+        setPullDownScrollListener(scrollListener);
 
-	setOnRefreshListener(this);
-	loadingFooterView = new RelativeLayout(context);
-	loadingFooterView.setClickable(false);
-	loadingFooterView.setLongClickable(false);
-	
-	addFooterView(loadingFooterView);
-//	setFooterDividersEnabled(false);
-	
-	this.limit = limit;
+        setOnRefreshListener(this);
+        loadingFooterView = new RelativeLayout(context);
+        loadingFooterView.setBackgroundDrawable(null);
+        loadingFooterView.setClickable(false);
+        loadingFooterView.setLongClickable(false);
+
+        addFooterView(loadingFooterView);
+        //	setFooterDividersEnabled(false);
+
+        this.limit = limit;
     }
 
     protected void setPage(int page) {
-	this.page = page;
+        this.page = page;
     }
 
     protected void setLimit(int limit) {
-	this.limit = limit;
+        this.limit = limit;
     }
 
     protected int getPage() {
-	return page;
+        return page;
     }
 
     protected int getLimit() {
-	return limit;
+        return limit;
     }
 
     public void initValue() {
-	page = 1;
+        page = 1;
     }
 
     public void clearAdapter() {
-	adapter.clear();
+        adapter.clear();
     }
 
     public void nextValue() {			
-	prevPage = page;
-	page++;
+        prevPage = page;
+        page++;
     }
 
     private void syncValue() {
-	page = (adapterData.size() / limit) + 1;
+        page = (adapterData.size() / limit) + 1;
     }
 
     protected void requestSetOn() {
-	scrollListener.requestSetOn();
+        scrollListener.requestSetOn();
     }
 
     protected boolean isNextRequestable() {
-	return scrollListener.isNextRequestable();
+        return scrollListener.isNextRequestable();
     }
 
     public void requestNext() {
-	if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
-	    syncValue();
-	}
+        if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
+            syncValue();
+        }
 
-	if (prevPage < page) {
-	    Log.d("refresh" , "requestNext()");
-	    Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-	    manager.request(loadingFooterView, SpinnerFactory.SpinnerType.SMALL, request(), REQUEST_NEXT, this);
-	    nextValue();
-	} else if (prevPage == page) {
-	    prevPage = page - 1;
-	}
+        if (prevPage < page) {
+            Log.d("refresh" , "requestNext()");
+            Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
+            manager.request(loadingFooterView, SpinnerFactory.SpinnerType.SMALL, request(), REQUEST_NEXT, this);
+            nextValue();
+        } else if (prevPage == page) {
+            prevPage = page - 1;
+        }
     }
 
     public void setCanRepeat(boolean canRepeat) {
-	this.canRepeat = canRepeat;
+        this.canRepeat = canRepeat;
     }
 
     public void requestReload() {
-	hideRefreshView();
-	Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
-	if (!manager.isRunning() || canRepeat) {
-	    Log.d("refresh", "requestReload()");
-	    initValue();
-	    // manager.request((ViewGroup)getParent(), request(), REQUEST_RELOAD, this);
-	    manager.request(loadingFooterView, request(), REQUEST_RELOAD, this);
-	    nextValue();
-	    setSelection(0);
-	}
+        hideRefreshView();
+        Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
+        if (!manager.isRunning() || canRepeat) {
+            Log.d("refresh", "requestReload()");
+            initValue();
+            // manager.request((ViewGroup)getParent(), request(), REQUEST_RELOAD, this);
+            manager.request(loadingFooterView, request(), REQUEST_RELOAD, this);
+            nextValue();
+            setSelection(0);
+        }
     }
 
     public void forceReload() {
-	hideRefreshView();
-	Log.d("refresh", "forceReload()");
-	Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
-	initValue();
-	// manager.request((ViewGroup)getParent(), request(), REQUEST_RELOAD, this);
-	manager.request(loadingFooterView, request(), REQUEST_RELOAD, this);
-	nextValue();
-	setSelection(0);
-	setCanRepeat(true);
+        hideRefreshView();
+        Log.d("refresh", "forceReload()");
+        Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
+        initValue();
+        // manager.request((ViewGroup)getParent(), request(), REQUEST_RELOAD, this);
+        manager.request(loadingFooterView, request(), REQUEST_RELOAD, this);
+        nextValue();
+        setSelection(0);
+        setCanRepeat(true);
     }
 
     public RelativeLayout getLoadingFooterView() {
-	return loadingFooterView;
+        return loadingFooterView;
     }
 
     public void requestConditionally() {
-	if (adapterData == null || adapterData.size() == 0){
-	    requestReload();
-	}
+        if (adapterData == null || adapterData.size() == 0){
+            requestReload();
+        }
     }
 
 
     public int getVerticalScrollOffset() {
-	return computeVerticalScrollOffset();
+        return computeVerticalScrollOffset();
     }
 
     protected HttpRequestManager getHttpRequestManager() {
-	return manager;
+        return manager;
     }
 
     protected MBaseAdapter getMBaseAdapter() {
-	return adapter;
+        return adapter;
     }
 
     protected ArrayList<MatjiData> getAdapterData() {
-	return adapterData;
+        return adapterData;
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {		
-	if (tag == REQUEST_RELOAD || tag == REQUEST_NEXT) {
-	    if (tag == REQUEST_RELOAD) {
-		clearAdapter();
-	    }
-	    if (data.size() == 0 || data.size() < limit){
-		scrollListener.requestSetOff();
-	    }else{
-		scrollListener.requestSetOn();
-	    }
+        if (tag == REQUEST_RELOAD || tag == REQUEST_NEXT) {
+            if (tag == REQUEST_RELOAD) {
+                clearAdapter();
+            }
+            if (data.size() == 0 || data.size() < limit){
+                scrollListener.requestSetOff();
+            }else{
+                scrollListener.requestSetOn();
+            }
 
-	    adapter.addAll(data);
-	    adapter.notifyDataSetChanged();
+            adapter.addAll(data);
+            adapter.notifyDataSetChanged();
 
-	    // if (adapterData.size() <= limit) {
-	    // Log.d("refresh", "Will invoke onRefreshComplete()");
-	    onRefreshComplete();
-	    // }
-	}
+            // if (adapterData.size() <= limit) {
+            // Log.d("refresh", "Will invoke onRefreshComplete()");
+            onRefreshComplete();
+            // }
+        }
     }
 
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
-	e.performExceptionHandling(getContext());
+        e.performExceptionHandling(getContext());
     }
 
     public void onRefresh() {
-	Log.d("refresh", "OnRefresh!!!!");
-	requestReload();
+        Log.d("refresh", "OnRefresh!!!!");
+        requestReload();
     }
 
     public void dataRefresh() {
-	adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 }

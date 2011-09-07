@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.StoreImageListView;
+import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.title.StoreTitle;
 
@@ -27,15 +29,24 @@ public class StoreImageListActivity extends BaseActivity {
 
 		store = (Store) getIntent().getParcelableExtra(STORE);        
         title = (StoreTitle) findViewById(R.id.Titlebar);
-        title.setTitle(store.getName());
         storeCell = new StoreCell(this, store);
-        storeCell.setStore(store);
+
+        title.setIdentifiable(this);
+        title.setSpinnerContainer(getMainView());
+        title.setRefreshable(storeCell);
+        title.setStore(store);
+
         storeCell.setMainView(getMainView());
         
 		StoreImageListView listView = (StoreImageListView) findViewById(R.id.store_image_list_view);
-        listView.addHeaderView(storeCell);
 		listView.setStore(store);
-		listView.setActivity(this);
+        listView.addHeaderView(storeCell);
+        listView.addHeaderView(new SubtitleHeader(
+                this, 
+                String.format(
+                        MatjiConstants.string(R.string.subtitle_store_image),
+                        store.getImageCount())));
+        listView.setActivity(this);
 		listView.requestReload();
 	}
 }

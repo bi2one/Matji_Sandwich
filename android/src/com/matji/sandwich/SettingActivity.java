@@ -102,11 +102,11 @@ public class SettingActivity extends BaseActivity {
 	}
 
 	public void onMyPageButtonClicked(View view) {
-		Intent profileIntent = new Intent(this, UserTabActivity.class);
-		profileIntent.putExtra(UserTabActivity.USER, (Parcelable) user);
-		session = Session.getInstance(this);
-		user = session.getCurrentUser();
-		startActivity(profileIntent);
+//		Intent profileIntent = new Intent(this, UserTabActivity.class);
+//		profileIntent.putExtra(UserTabActivity.USER, (Parcelable) user);
+//		session = Session.getInstance(this);
+//		user = session.getCurrentUser();
+//		startActivity(profileIntent);
 	}
 	
 	public void onProfileButtonClicked(View view){

@@ -1,5 +1,7 @@
 package com.matji.sandwich.widget.cell;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -10,8 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreDefaultInfoActivity;
 import com.matji.sandwich.StoreDetailInfoTabActivity;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
 
@@ -21,7 +25,7 @@ import com.matji.sandwich.widget.BookmarkStarToggleView;
  * @author mozziluv
  *
  */
-public class StoreCell extends Cell {
+public class StoreCell extends Cell implements Refreshable {
     private Store store;
 
     private Button likeList;
@@ -85,12 +89,19 @@ public class StoreCell extends Cell {
         refresh();
     }
 
-    /**
-     * Refresh 가능한 정보들을 refresh
-     */
+    @Override
     public void refresh() {
         likeList.setText(store.getLikeCount()+"");
     }
+    
+    @Override
+    public void refresh(MatjiData data) {
+        setStore((Store) data);
+        refresh();
+    }
+    
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {}
 
     /**
      * 
@@ -101,7 +112,7 @@ public class StoreCell extends Cell {
         intent.putExtra(StoreDefaultInfoActivity.STORE, (Parcelable) store);
         return intent;
     }
-
+    
     public void showLine() {
         findViewById(R.id.cell_store_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_store_shadow).setVisibility(View.GONE);

@@ -15,16 +15,20 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.tag.TagCloudView;
+import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreTagActivity extends BaseActivity implements Requestable {
-	private HttpRequest request;
+public class StoreTagActivity extends BaseActivity implements Requestable, Refreshable {
+
+    private HttpRequest request;
 	
 	private TagCloudView tagCloudView;
 	private TextView tagCount;
 	
 	private Store store;
 
-	public static final String STORE = "store";
+	private StoreTitle title;
+	
+	public static final String STORE = "StoreTagActivity.store";
 	
     public int setMainViewId() {
 	return R.id.activity_store_tag;
@@ -44,6 +48,13 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 		        MatjiConstants.string(R.string.number_of_tag),
 		        store.getTagCount());
 		tagCount.setText(numTag);
+		
+		title = (StoreTitle) findViewById(R.id.Titlebar);
+
+        title.setIdentifiable(this);
+        title.setSpinnerContainer(getMainView());
+        title.setRefreshable(this);
+        title.setStore(store);
 	}
 	
 	public void setStore(Store store) {
@@ -77,4 +88,22 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 		// TODO Auto-generated method stub
 		e.performExceptionHandling(this);
 	}
+
+    @Override
+    public void refresh() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void refresh(MatjiData data) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {
+        // TODO Auto-generated method stub
+        
+    }
 }

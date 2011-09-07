@@ -1,25 +1,24 @@
 package com.matji.sandwich.widget;
 
-import android.widget.TabHost;
-import android.widget.TabHost.OnTabChangeListener;
+import java.util.HashMap;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.view.animation.AccelerateInterpolator;
+import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 
 import com.matji.sandwich.widget.indicator.Indicator;
-import com.matji.sandwich.widget.indicator.RoundLeftIndicator;
-import com.matji.sandwich.widget.indicator.RoundCenterIndicator;
-import com.matji.sandwich.widget.indicator.RoundRightIndicator;
-import com.matji.sandwich.widget.indicator.RoundLeftCheckIndicator;
 import com.matji.sandwich.widget.indicator.RoundCenterCheckIndicator;
+import com.matji.sandwich.widget.indicator.RoundCenterIndicator;
+import com.matji.sandwich.widget.indicator.RoundLeftCheckIndicator;
+import com.matji.sandwich.widget.indicator.RoundLeftIndicator;
 import com.matji.sandwich.widget.indicator.RoundRightCheckIndicator;
-
-import java.util.HashMap;
+import com.matji.sandwich.widget.indicator.RoundRightIndicator;
 
 public class RoundTabHost extends TabHost implements OnTabChangeListener {
     private static final long ANIMATION_DURATION = 300;

@@ -7,7 +7,7 @@ import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 
-public class StoreNearRadiusListView extends StoreListView {
+public class StoreNearRadiusListView extends SimpleStoreListView {
     private StoreHttpRequest storeRequest;
     private double BASIC_BOUND = 0.03;
     // private int BASIC_LATITUDE_SW = 37000000;

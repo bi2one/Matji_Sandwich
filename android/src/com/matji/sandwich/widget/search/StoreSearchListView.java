@@ -2,14 +2,14 @@ package com.matji.sandwich.widget.search;
 
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
-import com.matji.sandwich.widget.StoreListView;
+import com.matji.sandwich.widget.SimpleStoreListView;
 import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 
-public class StoreSearchListView extends StoreListView implements Searchable {
+public class StoreSearchListView extends SimpleStoreListView implements Searchable {
     private StoreHttpRequest storeRequest;
     private String keyword = "";
     private SearchHighlightHeader indexbar;

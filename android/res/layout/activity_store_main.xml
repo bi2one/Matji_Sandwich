@@ -6,7 +6,6 @@
 	<LinearLayout
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:background="#FFF"
 		android:orientation="vertical">
 
 		<!-- Tab -->
@@ -25,7 +24,7 @@
 					android:layout_weight="1" />
 				<TabWidget
 					android:id="@android:id/tabs"
-					style="@style/RoundTabWidget"
+					style="@style/RoundTabWidgetBottom"
 					android:layout_weight="0" />
 			</LinearLayout>
 		</com.matji.sandwich.widget.RoundTabHost>

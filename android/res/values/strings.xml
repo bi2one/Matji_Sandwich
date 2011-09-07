@@ -361,9 +361,16 @@
   <string name="main_tab_title_login">로그인</string>
   
   <!-- PostListView Subtitle -->
-  <string name="friend_post">친구들 이야기</string>
-  <string name="nearby_post">근처 이야기</string>
-  <string name="all_post">모든 이야기</string>
+  <string name="subtitle_friend_post">친구들 이야기</string>
+  <string name="subtitle_nearby_post">근처 이야기</string>
+  <string name="subtitle_all_post">모든 이야기</string>
+  <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
+  <string name="subtitle_user_post">%1$d개의 %2$s 이야기</string>
+  
+  <!-- ImageListView Subtitle -->
+  <string name="subtitle_user_image">%1$d개의 %2$s 사진</string>
+  <string name="subtitle_store_image">%1$d개의 맛집 사진</string>
+  
   
   <!-- Path -->
   <string name="path_palai">fonts/palai.ttf</string>
@@ -415,4 +422,11 @@
   <!-- SelectTagActivity.java -->
   <string name="select_tag_title">태그 선택</string>
   <string name="select_tag_hint">태그 입력</string>
+  
+  <!-- StoreBookmarkListActivity.java -->
+  <string name="store_bookmark_list">북마크 맛집</string>
+
+  <!-- StoreDiscoverListActivity.java -->
+  <string name="store_discover_list">발견 맛집</string>
+  
 </resources>

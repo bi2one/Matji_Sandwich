@@ -63,6 +63,7 @@
 			android:id="@+id/cell_store_flow"
 			style="@style/DefaultWrap"
 			android:src="@drawable/icon_flow"
+			android:layout_marginLeft="@dimen/default_distance"
 			android:layout_centerVertical="true"
 			android:layout_alignParentRight="true" />
 	</RelativeLayout>

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
+import android.view.ViewGroup;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.Identifiable;
@@ -40,7 +40,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
     private FollowingHttpRequest followingRequest;
     private HttpRequestManager manager;
     private DBProvider dbProvider;
-    private RelativeLayout spinnerContainer;
+    private ViewGroup spinnerContainer;
 
     /**
      * 기본 생성자. data의 전달 없이 {@link Identifiable}객체와 {@link Context}객체만 전달받는다.
@@ -49,7 +49,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      * @param identifiable login 확인을 위한 identifiable 객체
      * @param context
      */
-    public FollowingListener(Identifiable identifiable, Context context, RelativeLayout spinnerContainer) {
+    public FollowingListener(Identifiable identifiable, Context context, ViewGroup spinnerContainer) {
         this.identifiable = identifiable;
         this.context = context;
         followingRequest = new FollowingHttpRequest(context);
@@ -64,7 +64,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      * @param context
      * @param store follow, unfollow 할 {@link User}
      */
-    public FollowingListener(Identifiable identifiable, Context context, User user, RelativeLayout spinnerContainer) {
+    public FollowingListener(Identifiable identifiable, Context context, User user, ViewGroup spinnerContainer) {
         this(identifiable, context, spinnerContainer);
         this.user = user;
     }

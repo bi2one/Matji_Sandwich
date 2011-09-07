@@ -175,6 +175,7 @@
 	
 	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>
+	<dimen name="subtitle_margin_top">13.33dp</dimen>
 	
 	<!-- user_profile.xml -->
     <dimen name="user_profile_subtitle_size">12dp</dimen>

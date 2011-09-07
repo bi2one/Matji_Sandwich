@@ -1,98 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_store_default_info"
-    style="@style/DefaultFill">
-  <com.matji.sandwich.widget.MatjiScrollView
-      android:background="@color/matji_transparent"
-      style="@style/DefaultFill">
-    <LinearLayout
-	style="@style/DefaultLinearFill"
-	android:background="@drawable/bg_01"		
-	android:padding="@dimen/default_distance">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_store_default_info"
+	style="@style/DefaultFill">
 
-      <TextView
-	  android:id="@+id/store_default_basic_info"
-	  android:layout_margin="@dimen/default_distance"
-	  android:text="@string/default_string_basic_info"
-	  style="@style/SubTitle" />
+	<!-- Store Title -->
+	<com.matji.sandwich.widget.title.StoreTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWrap" />
 
-      <LinearLayout
-	  style="@style/DefaultWidthFill"
-	  android:layout_marginBottom="20dp"
-	  android:orientation="vertical">
-	<LinearLayout 
-	    style="@style/DefaultWidthFill"
-	    android:orientation="vertical"
-	    android:padding="@dimen/default_distance"
-	    android:background="@drawable/btn_top_corner">			
-	  <TextView
-	      style="@style/DefaultWidthFill"
-	      android:id="@+id/store_info_fullname"
-	      android:textColor="#F00" />
-	  <TextView
-	      style="@style/DefaultWidthFill"
-	      android:id="@+id/store_info_cover"
-	      android:textColor="@color/BLACK"
-	      android:text="sadf" /> 
-	</LinearLayout>
-	<TextView
-	    style="@style/DefaultWidthFill"
-	    android:id="@+id/store_info_tel"
-	    android:textColor="@color/BLACK"
-	    android:background="@drawable/btn_rectangle"
-	    android:padding="@dimen/default_distance"
-	    android:drawableLeft="@drawable/icon_tapbar_user_touch"
-	    android:drawablePadding="@dimen/default_distance_half"
-	    android:drawableRight="@drawable/icon_flow" />
-	<TextView
-	    style="@style/DefaultWidthFill"
-	    android:id="@+id/store_info_address"
-	    android:textColor="@color/BLACK"
-	    android:background="@drawable/btn_rectangle"
-	    android:padding="@dimen/default_distance"				
-	    android:drawableLeft="@drawable/marker_01"
-	    android:drawablePadding="@dimen/default_distance_half"
-	    android:drawableRight="@drawable/icon_flow" />
-	<TextView
-	    style="@style/DefaultWidthFill"
-	    android:id="@+id/store_info_website"
-	    android:textColor="@color/BLACK"
-	    android:background="@drawable/btn_rectangle"
-	    android:padding="@dimen/default_distance"				
-	    android:drawableLeft="@drawable/img_heart"
-	    android:drawablePadding="@dimen/default_distance_half"
-	    android:drawableRight="@drawable/icon_flow" />
-	<TextView
-	    style="@style/DefaultWidthFill"
-	    android:background="@drawable/btn_bottom_corner"
-	    android:padding="@dimen/default_distance"
-	    android:text="@string/request" 
-	    android:drawableRight="@drawable/icon_flow" />
-      </LinearLayout>
+	<com.matji.sandwich.widget.MatjiScrollView
+		android:background="@color/matji_transparent"
+		style="@style/DefaultFill"
+		android:layout_below="@id/Titlebar">
+		<LinearLayout
+			style="@style/DefaultLinearFill"
+			android:background="@drawable/bg_01"
+			android:padding="@dimen/default_distance">
 
-      <TextView
-	  android:id="@+id/store_default_more_info"
-	  android:layout_margin="@dimen/default_distance"
-	  android:text="@string/default_string_more_info"
-	  style="@style/SubTitle" />
-      
-      <LinearLayout 
-	  style="@style/DefaultWidthFill"
-	  android:orientation="vertical">			
-	<TextView
-	    style="@style/DefaultWidthFill"
-	    android:background="@drawable/btn_top_corner" />			
-	<TextView
-	    style="@style/DefaultWidthFill"
-	    android:background="@drawable/btn_rectangle"/>
-	<TextView  
-	    style="@style/DefaultWidthFill"
-	    android:background="@drawable/btn_bottom_corner"
-	    android:padding="@dimen/default_distance"
-	    android:text="@string/request" 
-	    android:drawableRight="@drawable/icon_flow" />
-      </LinearLayout>			
-    </LinearLayout>
-  </com.matji.sandwich.widget.MatjiScrollView>
+			<TextView
+				android:id="@+id/store_default_basic_info"
+				android:layout_margin="@dimen/default_distance"
+				android:text="@string/default_string_basic_info"
+				style="@style/SubTitle" />
+
+			<LinearLayout
+				style="@style/DefaultWidthFill"
+				android:layout_marginBottom="20dp"
+				android:orientation="vertical">
+				<LinearLayout
+					style="@style/DefaultWidthFill"
+					android:orientation="vertical"
+					android:padding="@dimen/default_distance"
+					android:background="@drawable/btn_top_corner">
+					<TextView
+						style="@style/DefaultWidthFill"
+						android:id="@+id/store_info_fullname"
+						android:textColor="#F00" />
+					<TextView
+						style="@style/DefaultWidthFill"
+						android:id="@+id/store_info_cover"
+						android:textColor="@color/BLACK"
+						android:text="sadf" />
+				</LinearLayout>
+				<TextView
+					style="@style/DefaultWidthFill"
+					android:id="@+id/store_info_tel"
+					android:textColor="@color/BLACK"
+					android:background="@drawable/btn_rectangle"
+					android:padding="@dimen/default_distance"
+					android:drawableLeft="@drawable/icon_tapbar_user_touch"
+					android:drawablePadding="@dimen/default_distance_half"
+					android:drawableRight="@drawable/icon_flow" />
+				<TextView
+					style="@style/DefaultWidthFill"
+					android:id="@+id/store_info_address"
+					android:textColor="@color/BLACK"
+					android:background="@drawable/btn_rectangle"
+					android:padding="@dimen/default_distance"
+					android:drawableLeft="@drawable/marker_01"
+					android:drawablePadding="@dimen/default_distance_half"
+					android:drawableRight="@drawable/icon_flow" />
+				<TextView
+					style="@style/DefaultWidthFill"
+					android:id="@+id/store_info_website"
+					android:textColor="@color/BLACK"
+					android:background="@drawable/btn_rectangle"
+					android:padding="@dimen/default_distance"
+					android:drawableLeft="@drawable/img_heart"
+					android:drawablePadding="@dimen/default_distance_half"
+					android:drawableRight="@drawable/icon_flow" />
+				<TextView
+					style="@style/DefaultWidthFill"
+					android:background="@drawable/btn_bottom_corner"
+					android:padding="@dimen/default_distance"
+					android:text="@string/request"
+					android:drawableRight="@drawable/icon_flow" />
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/store_default_more_info"
+				android:layout_margin="@dimen/default_distance"
+				android:text="@string/default_string_more_info"
+				style="@style/SubTitle" />
+
+			<LinearLayout
+				style="@style/DefaultWidthFill"
+				android:orientation="vertical">
+				<TextView
+					style="@style/DefaultWidthFill"
+					android:background="@drawable/btn_top_corner" />
+				<TextView
+					style="@style/DefaultWidthFill"
+					android:background="@drawable/btn_rectangle" />
+				<TextView
+					style="@style/DefaultWidthFill"
+					android:background="@drawable/btn_bottom_corner"
+					android:padding="@dimen/default_distance"
+					android:text="@string/request"
+					android:drawableRight="@drawable/icon_flow" />
+			</LinearLayout>
+		</LinearLayout>
+	</com.matji.sandwich.widget.MatjiScrollView>
 </RelativeLayout>

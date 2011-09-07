@@ -54,10 +54,10 @@ Requestable {
         dbProvider = DBProvider.getInstance(context);
     }
 
-    public void init(Store store, ViewGroup sippninerContainer) { 
+    public void init(Store store, ViewGroup spinnerContainer) { 
         this.store = store;
-        this.spinnerContainer = sippninerContainer;
-        if (dbProvider.isExistBookmark(store.getId(), DBProvider.BOOKMARK)) {
+        this.spinnerContainer = spinnerContainer;
+        if (dbProvider.isExistBookmark(store.getId(), DBProvider.STORE)) {
             showCheckedView();
             isUnchecked = false;
         } else {
@@ -159,12 +159,13 @@ Requestable {
             isUnchecked = false;
             Bookmark bookmark = new Bookmark();
             bookmark.setForeignKey(store.getId());
-            bookmark.setObject(DBProvider.BOOKMARK);
+            bookmark.setObject(DBProvider.STORE);
+            dbProvider.insertBookmark(bookmark);
             break;
         case HttpRequestManager.UN_BOOKMARK_REQUEST:
             showUncheckedView();
             isUnchecked = true;
-            dbProvider.deleteBookmark(store.getId(), DBProvider.BOOKMARK);
+            dbProvider.deleteBookmark(store.getId(), DBProvider.STORE);
             break;
         }
     }
