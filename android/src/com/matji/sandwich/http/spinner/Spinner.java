@@ -25,9 +25,12 @@ public class Spinner extends RelativeLayout implements Spinnable {
     }
 
     public void start() {
-        if (layout != null) layout.addView(this, layoutParams);
+        if (layout != null)
+	    layout.addView(this, layoutParams);
         setVisibility(View.VISIBLE);
         bringToFront();
+	requestFocus();
+	invalidate();
     }
 
     public void stop() {

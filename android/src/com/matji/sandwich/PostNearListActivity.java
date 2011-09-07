@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.location.Location;
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +20,11 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
+import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.session.SessionRecentLocationUtil;
 import com.matji.sandwich.util.GeocodeUtil;
+import com.matji.sandwich.util.GeoPointUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 
 import com.google.android.maps.GeoPoint;
@@ -29,7 +32,7 @@ import com.google.android.maps.GeoPoint;
 import java.util.ArrayList;
 
 /**
- * 전체 Post 리스트를 보여주는 액티비티.
+ * 주변 Post 리스트를 보여주는 액티비티.
  * 
  * @author mozziluv
  *
@@ -44,7 +47,7 @@ ActivityStartable {
     private static final int BASIC_SEARCH_LOC_LNG = 0;
     private PostNearListView listView;
     private TextView addressView;
-    private boolean isStartActivity;
+    private RelativeLayout addressWrapper;
     private Context context;
     private GpsManager gpsManager;
     private HttpRequestManager requestManager;
@@ -52,6 +55,7 @@ ActivityStartable {
     private SessionMapUtil sessionUtil;
     private SessionRecentLocationUtil sessionLocationUtil;
     private Location prevLocation;
+    private GeoPoint prevPoint;
 
     public int setMainViewId() {
         return R.id.activity_post_near_list;
@@ -68,29 +72,30 @@ ActivityStartable {
         requestManager = HttpRequestManager.getInstance(context);
         geocodeRequest = new GeocodeHttpRequest(context);
         addressView = (TextView)findViewById(R.id.location_title_bar_address);
+	addressWrapper = (RelativeLayout)findViewById(R.id.location_title_bar_address_wrapper);
 
-        isStartActivity = false;
         listView = (PostNearListView) findViewById(R.id.post_near_list_view);
         listView.setActivity(this);
     }
 
     private void setCenter(GeoPoint centerPoint) {
-        geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
-        requestManager.request(getMainView(), geocodeRequest, GET_ADDRESS_TAG, this);
         sessionUtil.setCenter(centerPoint);
-        listView.requestReload();
+	
+	if (GeoPointUtil.geoPointEquals(prevPoint, centerPoint)) {
+	    listView.requestReload();
+	} else {
+	    geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
+	    requestManager.request(addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
+	    listView.forceReload();
+	}
+	prevPoint = centerPoint;
     }
 
     @Override
     protected void onNotFlowResume() {
         // TODO Auto-generated method stub
         super.onNotFlowResume();
-
-        if (!isStartActivity) {
-            setCenter(sessionUtil.getCenter());
-        } else {
-            isStartActivity = false;
-        }
+	setCenter(sessionUtil.getCenter());
     }
     
     @Override
@@ -135,7 +140,6 @@ ActivityStartable {
     }
 
     public void onChangeLocationClicked(View v) {
-        isStartActivity = true;
         ((PostTabActivity) getParent()).tabStartActivityForResult(new Intent(context, ChangeLocationActivity.class),
                 REQUEST_CODE_LOCATION,
                 this);

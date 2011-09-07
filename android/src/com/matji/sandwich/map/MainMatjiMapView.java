@@ -61,7 +61,6 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	setOnTouchListener(this);
     }
 
-    // public void init(TextView addressView, BaseMapActivity activity) {
     public void init(TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
 	setAddressView(addressView);
 	setBaseMapActivity(activity);

@@ -13,7 +13,6 @@ import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.listener.GotoImageSliderAction;
 import com.matji.sandwich.listener.GotoStoreMainAction;
 import com.matji.sandwich.listener.GotoUserMainAction;
@@ -26,8 +25,6 @@ public class PostSubHeader extends ViewContainer {
 			R.id.header_post_preview2,
 			R.id.header_post_preview3
 	};
-
-	private MatjiImageDownloader downloader;
 
 	private Post post;
 	private LikeUsersElement holder;

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseActivity;
@@ -18,6 +19,7 @@ import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
@@ -44,6 +46,7 @@ ActivityStartable {
     private HttpRequestManager requestManager;
     private SessionMapUtil sessionUtil;
     private SessionRecentLocationUtil sessionLocationUtil;
+    private RelativeLayout addressWrapper;
     private TextView addressView;
     private GeocodeHttpRequest geocodeRequest;
     private Location prevLocation;
@@ -65,6 +68,7 @@ ActivityStartable {
         geocodeRequest = new GeocodeHttpRequest(context);
 
         addressView = (TextView)findViewById(R.id.location_title_bar_address);
+	addressWrapper = (RelativeLayout)findViewById(R.id.location_title_bar_address_wrapper);
         listView = (RankingListView) findViewById(R.id.ranking_near_list_view);
         listView.setActivity(this);
         isFirst = true;
@@ -73,7 +77,7 @@ ActivityStartable {
 
     private void setCenter(GeoPoint centerPoint) {
 	geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
-	requestManager.request(getMainView(), geocodeRequest, GET_ADDRESS_TAG, this);
+	requestManager.request(addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
 	sessionUtil.setCenter(centerPoint);
 	listView.requestReload();
     }

@@ -3,7 +3,7 @@ package com.matji.sandwich;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
+import com.matji.sandwich.http.util.ImageLoader;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ public class SettingActivity extends BaseActivity {
 	private Button signup;
 	private Session session;
 	private User user;
-	private MatjiImageDownloader downloader;
+    private ImageLoader imageLoader;
 
     public int setMainViewId() {
 	return R.id.setting_layout;
@@ -33,6 +33,7 @@ public class SettingActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
+		imageLoader = new ImageLoader(this);
 	}
 
 	protected void onResume() {
@@ -66,8 +67,7 @@ public class SettingActivity extends BaseActivity {
 			
 		} else {
 			user = session.getCurrentUser();
-			downloader = new MatjiImageDownloader(this);
-			downloader.downloadUserImage(user.getId(), myPageImage);
+			imageLoader.DisplayImage(this, ImageLoader.UrlType.USER, ImageLoader.ImageSize.SSMALL, myPageImage, user.getId());
 			myPage.setText(user.getNick());
 
 			signin.setVisibility(Button.GONE);

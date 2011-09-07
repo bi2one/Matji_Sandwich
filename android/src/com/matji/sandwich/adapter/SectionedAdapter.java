@@ -13,7 +13,6 @@ import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.util.MatjiImageDownloader;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.PostListView;

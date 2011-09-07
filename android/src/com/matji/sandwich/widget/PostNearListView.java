@@ -2,11 +2,13 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.R;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.MatjiConstants;
 
@@ -15,7 +17,7 @@ public class PostNearListView extends PostListView {
     private SessionMapUtil sessionUtil;
     private GeoPoint neBound;
     private GeoPoint swBound;
-
+    private HttpRequestManager requestManager;
 
     protected String getSubtitle() {
         return MatjiConstants.string(R.string.subtitle_nearby_post);
@@ -23,6 +25,7 @@ public class PostNearListView extends PostListView {
 
     public PostNearListView(Context context, AttributeSet attrs) {
         super(context, attrs);
+	requestManager = HttpRequestManager.getInstance(context);
         postRequest = new PostHttpRequest(context);
         sessionUtil = new SessionMapUtil(context);
 
@@ -31,10 +34,19 @@ public class PostNearListView extends PostListView {
     }
 
     public void requestReload() {
-        neBound = sessionUtil.getNEBound();
-        swBound = sessionUtil.getSWBound();
+	if (!requestManager.isRunning()) {
+	    neBound = sessionUtil.getNEBound();
+	    swBound = sessionUtil.getSWBound();
 
-        super.forceReload();
+	    super.requestReload();
+	}
+    }
+
+    public void forceReload() {
+	neBound = sessionUtil.getNEBound();
+	swBound = sessionUtil.getSWBound();
+
+	super.forceReload();
     }
 
     public HttpRequest request() {
