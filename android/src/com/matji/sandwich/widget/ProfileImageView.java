@@ -49,17 +49,17 @@ public class ProfileImageView extends ImageView {
      * 현재 ImageView 에 저장되어 있는 Bitmap 의 corner 를 rounded 하게 바꾸는 메소드.
      */
     public void convertToRoundedCornerImage() {
-	Drawable d = getDrawable();
-	if (d.getIntrinsicWidth() > 0 && d.getIntrinsicHeight() > 0) {
-	    Bitmap bm = ImageUtil.getBitmap(d);
-	    setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, DisplayUtil.PixelFromDP(4), (int) getInset()));
-	}
+    	Drawable d = getDrawable();
+    	if (d.getIntrinsicWidth() > 0 && d.getIntrinsicHeight() > 0) {
+    	    Bitmap bm = ImageUtil.getBitmap(d);
+    	    setImageBitmap(ImageUtil.getRoundedCornerBitmap(bm, DisplayUtil.PixelFromDP(4), (int) getInset()));
+    	}
     }
 
     protected ImageLoader.ImageSize getImageSize() {
 	return ImageLoader.ImageSize.SSMALL;
     }
-	
+
     public void setUserId(int id) {
 	imageLoader.DisplayImage((Activity)context, ImageLoader.UrlType.USER, getImageSize(), this, id);
     }
@@ -82,10 +82,10 @@ public class ProfileImageView extends ImageView {
 	return DisplayUtil.PixelFromDP(1);
     }
     
-    @Override
-    protected void onDraw(Canvas canvas) {
+    // @Override
+    // protected void onDraw(Canvas canvas) {
         // TODO Auto-generated method stub
-        convertToRoundedCornerImage();
-        super.onDraw(canvas);
-    }
+        // convertToRoundedCornerImage();
+    //     super.onDraw(canvas);
+    // }
 }

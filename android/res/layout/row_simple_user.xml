@@ -1,55 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/row_simple_user_wrapper"
-	style="@style/row_simple_user">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/row_simple_user_wrapper"
+    style="@style/row_simple_user">
 
-	<!-- profile image -->
-	<include
-		android:id="@+id/row_simple_user_profile"
-		layout="@layout/profile"
-		style="@style/ProfileWrapper"
-		android:layout_alignParentLeft="true"
-		android:layout_centerVertical="true" />
-	<!-- ranking body -->
-	<RelativeLayout
-		android:id="@+id/row_simple_user_body"
-		style="@style/DefaultFill"
-		android:layout_marginTop="@dimen/default_distance"
-		android:layout_marginLeft="@dimen/default_distance"
-		android:layout_toRightOf="@+id/row_simple_user_profile"
-		android:layout_toLeftOf="@+id/row_simple_user_point"
-		android:layout_centerVertical="true">
+  <!-- profile image -->
+  <include
+      android:id="@+id/row_simple_user_profile"
+      layout="@layout/profile"
+      style="@style/ProfileWrapper"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true" />
+  <!-- ranking body -->
+  <!-- nickname -->
+  <TextView
+      android:id="@+id/row_simple_user_nickname"
+      android:layout_marginTop="@dimen/default_distance_half"
+      android:layout_marginLeft="@dimen/default_distance"
+      android:layout_toRightOf="@id/row_simple_user_profile"
+      android:layout_toLeftOf="@+id/row_simple_user_point"
+      android:layout_alignParentTop="true"
+      style="@style/row_simple_user_nickname" />
 
-		<!-- nickname -->
-		<TextView
-			android:id="@+id/row_simple_user_nickname"
-			style="@style/row_simple_user_nickname" />
+  <!-- heart and balloon -->
+  <TextView
+      android:id="@+id/row_simple_user_like_count"
+      android:layout_alignLeft="@id/row_simple_user_nickname"
+      android:layout_below="@id/row_simple_user_nickname"
+      style="@style/row_simple_user_like_count" />
+  <TextView
+      android:id="@+id/row_simple_user_post_count"
+      android:layout_marginLeft="@dimen/default_distance"
+      android:layout_toRightOf="@id/row_simple_user_like_count"
+      android:layout_alignBaseline="@id/row_simple_user_like_count"
+      style="@style/row_simple_user_post_count" />
 
-		<!-- heart and balloon -->
-		<LinearLayout
-			android:layout_below="@id/row_simple_user_nickname"
-			style="@style/row_simple_user_count_wrap">
-			<TextView
-				android:id="@+id/row_simple_user_like_count"
-				style="@style/row_simple_user_like_count" />
-			<TextView
-				android:id="@+id/row_simple_user_post_count"
-				android:layout_marginLeft="@dimen/default_distance"
-				style="@style/row_simple_user_post_count" />
-		</LinearLayout>
-	</RelativeLayout>
-
-	<!-- ranking point -->
-	<com.matji.sandwich.widget.BoldStyleTextView
-		android:id="@+id/row_simple_user_point"
-		android:layout_toLeftOf="@+id/row_simple_user_point_hint"
-		android:layout_centerVertical="true"
-		style="@style/row_simple_user_point" />
-	<TextView
-		android:id="@id/row_simple_user_point_hint"
-		android:layout_alignParentRight="true"
-		android:layout_centerVertical="true"
-		android:text="@string/row_simple_user_point_hint"
-		style="@style/row_simple_user_point_hint" />
+  <!-- ranking point -->
+  <com.matji.sandwich.widget.BoldStyleTextView
+      android:id="@+id/row_simple_user_point"
+      android:layout_toLeftOf="@+id/row_simple_user_point_hint"
+      android:layout_centerVertical="true"
+      style="@style/row_simple_user_point" />
+  <TextView
+      android:id="@id/row_simple_user_point_hint"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:text="@string/row_simple_user_point_hint"
+      style="@style/row_simple_user_point_hint" />
 </RelativeLayout>
