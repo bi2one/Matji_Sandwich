@@ -14,6 +14,7 @@ import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.http.util.ImageLoader;
 
 public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener, Identifiable {
     protected static final int LOGIN_ACTIVITY = 1;
@@ -66,6 +67,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     }
 
     public void didEnterForeGround(){
+	ImageLoader.clearCache(getApplicationContext());
         Session session  = Session.getInstance(this);
         if (session.isLogin()){
             session.sessionValidate(null, getMainView());

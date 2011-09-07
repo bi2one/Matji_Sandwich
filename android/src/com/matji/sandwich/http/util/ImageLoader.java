@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Collections;
@@ -68,11 +69,12 @@ public class ImageLoader {
 	}
     }
     
-    MemoryCache memoryCache=new MemoryCache();
-    FileCache fileCache;
+    private static MemoryCache memoryCache=new MemoryCache();
+    private static FileCache fileCache;
     private Map<ImageView, String> imageViews=Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
     private Map<String, String> params = Collections.synchronizedMap(new HashMap<String, String>());
     private int stub_id = -1;
+    private ImageConvertable convertable;
 
     public ImageLoader(Context context) {
         //Make the background thead low priority. This way it will not affect the UI performance
@@ -84,6 +86,10 @@ public class ImageLoader {
     public ImageLoader(Context context, int stub_id){
 	this(context);
 	this.stub_id = stub_id;
+    }
+
+    public void setImageConvertable(ImageConvertable convertable) {
+	this.convertable = convertable;
     }
     
     private String createUrl(UrlType type, ImageSize size, int id) {
@@ -148,12 +154,25 @@ public class ImageLoader {
             OutputStream os = new FileOutputStream(f);
             Utils.CopyStream(is, os);
             os.close();
-            bitmap = decodeFile(f);
+	    bitmap = applyConvert(f);
             return bitmap;
         } catch (Exception ex){
            ex.printStackTrace();
            return null;
         }
+    }
+
+    private Bitmap applyConvert(File f) {
+	Bitmap bitmap = decodeFile(f);
+	if (convertable != null) {
+	    bitmap = convertable.convert(bitmap);
+	    try {
+		FileOutputStream out = new FileOutputStream(f);
+		bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+		out.close();
+	    } catch(IOException e) { }
+	}
+	return bitmap;
     }
 
     //decodes image and scales it to reduce memory consumption
@@ -179,7 +198,8 @@ public class ImageLoader {
             //decode with inSampleSize
             BitmapFactory.Options o2 = new BitmapFactory.Options();
             o2.inSampleSize=scale;
-            return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+	    Bitmap result = BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+            return result;
         } catch (FileNotFoundException e) {}
         return null;
     }
@@ -240,7 +260,7 @@ public class ImageLoader {
                         String tag=imageViews.get(photoToLoad.imageView);
                         if(tag!=null && tag.equals(photoToLoad.url)){
                             BitmapDisplayer bd=new BitmapDisplayer(bmp, photoToLoad.imageView);
-                            Activity a=(Activity)photoToLoad.imageView.getContext();
+                            Activity a = (Activity)photoToLoad.imageView.getContext();
                             a.runOnUiThread(bd);
                         }
                     }
@@ -273,8 +293,14 @@ public class ImageLoader {
         }
     }
 
-    public void clearCache() {
+    public static void clearCache(Context context) {
         memoryCache.clear();
-        fileCache.clear();
+	if (fileCache == null) {
+	    (new FileCache(context)).clear();
+	}
+    }
+
+    public interface ImageConvertable {
+	public Bitmap convert(Bitmap bitmap);
     }
 }

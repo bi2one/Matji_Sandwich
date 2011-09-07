@@ -11,6 +11,7 @@ import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.http.util.ImageLoader;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Identifiable {
     public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;	
@@ -57,6 +58,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 
     public void didEnterForeGround(){
         Session session  = Session.getInstance(this);
+	ImageLoader.clearCache(getApplicationContext());
         if (session.isLogin()){
             session.sessionValidate(null, getMainView());
         }
