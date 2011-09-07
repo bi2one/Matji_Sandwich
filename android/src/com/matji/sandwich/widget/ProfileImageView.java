@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.http.util.RoundRectConvertable;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.ImageUtil;
 
@@ -44,7 +45,7 @@ public class ProfileImageView extends ImageView implements ImageLoader.ImageConv
     private void init(Context context) {
 	this.context = context;
 	imageLoader = new ImageLoader(context, R.drawable.user_img54);
-	imageLoader.setImageConvertable(this);
+	imageLoader.setImageConvertable(new RoundRectConvertable());
     }
 	
     /**

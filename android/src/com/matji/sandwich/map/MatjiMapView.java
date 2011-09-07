@@ -13,12 +13,11 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 
 import com.matji.sandwich.session.SessionMapUtil;
+import com.matji.sandwich.util.GeoPointUtil;
 
 public class MatjiMapView extends MapView implements MatjiMapViewInterface {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
     private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
-    private static final int MAP_CENTER_CHANGE_BOUND_LAT = 100;
-    private static final int MAP_CENTER_CHANGE_BOUND_LNG = 100;
     private MatjiMapCenterListener listener;
     private MapAsyncTask asyncTask;
     private GeoPoint mapCenter;
@@ -85,19 +84,6 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	    return cancel(mayInterruptIfRunning);
 	}
 
-	protected boolean geoPointEquals(GeoPoint p1, GeoPoint p2) {
-	    if (p1 == null || p2 == null) {
-		return false;
-	    }
-	    
-	    int p1Lat = p1.getLatitudeE6();
-	    int p1Lng = p1.getLongitudeE6();
-	    int p2Lat = p2.getLatitudeE6();
-	    int p2Lng = p2.getLongitudeE6();
-	    return (p1Lat <= p2Lat + MAP_CENTER_CHANGE_BOUND_LAT && p1Lat >= p2Lat - MAP_CENTER_CHANGE_BOUND_LAT &&
-		    p1Lng <= p2Lng + MAP_CENTER_CHANGE_BOUND_LNG && p1Lng >= p2Lng - MAP_CENTER_CHANGE_BOUND_LNG);
-	}
-	
 	protected Integer doInBackground(Integer... params) {
 	    while(!stopFlag) {
 		if (listener != null) {
@@ -110,10 +96,10 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 			tempMapCenter = null;
 		    }
 		    
-		    if (geoPointEquals(mapCenter, newMapCenter))
+		    if (GeoPointUtil.geoPointEquals(mapCenter, newMapCenter))
 		    	continue;
 		    
-		    while (!geoPointEquals(mapCenter, newMapCenter)) {
+		    while (!GeoPointUtil.geoPointEquals(mapCenter, newMapCenter)) {
 		    	mapCenter = newMapCenter;
 		    	threadSleep(MAP_CENTER_UPDATE_ANIMATION_TICK);
 		    	newMapCenter = getMapCenter();

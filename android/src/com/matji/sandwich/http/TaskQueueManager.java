@@ -18,40 +18,40 @@ public class TaskQueueManager implements TaskElement.ProgressListener {
 	if (manager == null) {
 	    synchronized(TaskQueueManager.class) {
 		if (manager == null) {
-		    return new TaskQueueManager();
+		    manager = new TaskQueueManager();
 		}
 	    }
 	}
 	return manager;
     }
 
-    public void offer(TaskElement element) {
+    public synchronized void offer(TaskElement element) {
 	taskQueue.offer(element);
     }
 
-    public TaskElement getRunningTask() {
+    public synchronized TaskElement getRunningTask() {
 	return runningTask;
     }
 
-    public void cancelTask() {
+    public synchronized void cancelTask() {
 	stop();
 	taskQueue.clear();
     }
 
-    public void stop() {
+    public synchronized void stop() {
 	if (runningTask != null) {
 	    runningTask.stop();
 	    runningTask = null;
 	}
     }
 
-    public void start() {
+    public synchronized void start() {
 	if (runningTask == null) {
 	    startNewTask();
 	}
     }
 
-    public void startNewTask() {
+    public synchronized void startNewTask() {
 	runningTask = taskQueue.poll();
 	if (runningTask != null) {
 	    runningTask.setProgressListener(this);

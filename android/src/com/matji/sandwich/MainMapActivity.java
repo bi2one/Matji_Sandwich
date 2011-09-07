@@ -74,7 +74,7 @@ public class MainMapActivity extends BaseMapActivity {
     protected void onPause() {
         super.onPause();
         // lastCenter = mapView.getMapCenter();
-        mapView.stopMapCenterThread();
+        // mapView.stopMapCenterThread();
 
         // Log.d("=====", "mainmap activity pause");
         // mapView.stopMapCenterThread();

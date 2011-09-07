@@ -11,7 +11,6 @@ import com.matji.sandwich.http.spinner.Spinnable;
 import com.matji.sandwich.http.spinner.SpinnerFactory;
 
 public class HttpRequestManager {
-    
     // request tag
     public static final int AUTHORIZE = 0;
     public static final int BADGE = 1;

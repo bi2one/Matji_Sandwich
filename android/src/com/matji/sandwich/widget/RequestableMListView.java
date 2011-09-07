@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.RelativeLayout;
+import android.view.ViewGroup;
 
 import com.matji.sandwich.adapter.MBaseAdapter;
 import com.matji.sandwich.data.MatjiData;
@@ -26,6 +27,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
     private int page = 1;
     private int limit = 10;
     private RelativeLayout loadingFooterView;
+    private RelativeLayout loadingHeaderView;
 
     protected final static int REQUEST_NEXT = 0;
     protected final static int REQUEST_RELOAD = 1;
@@ -48,8 +50,13 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	loadingFooterView = new RelativeLayout(context);
 	loadingFooterView.setClickable(false);
 	loadingFooterView.setLongClickable(false);
+
+	loadingHeaderView = new RelativeLayout(context);
+	loadingHeaderView.setClickable(false);
+	loadingHeaderView.setLongClickable(false);
 	
 	addFooterView(loadingFooterView);
+	addHeaderView(loadingHeaderView);
 //	setFooterDividersEnabled(false);
 	
 	this.limit = limit;
@@ -121,8 +128,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	if (!manager.isRunning() || canRepeat) {
 	    Log.d("refresh", "requestReload()");
 	    initValue();
-	    // manager.request((ViewGroup)getParent(), request(), REQUEST_RELOAD, this);
-	    manager.request(loadingFooterView, request(), REQUEST_RELOAD, this);
+	    manager.request(loadingHeaderView, request(), REQUEST_RELOAD, this);
 	    nextValue();
 	    setSelection(0);
 	}
@@ -133,8 +139,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 	Log.d("refresh", "forceReload()");
 	Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
 	initValue();
-	// manager.request((ViewGroup)getParent(), request(), REQUEST_RELOAD, this);
-	manager.request(loadingFooterView, request(), REQUEST_RELOAD, this);
+	manager.request(loadingHeaderView, request(), REQUEST_RELOAD, this);
 	nextValue();
 	setSelection(0);
 	setCanRepeat(true);
