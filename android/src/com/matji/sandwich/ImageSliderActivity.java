@@ -73,7 +73,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
         currentPage = getIntent().getIntExtra(POSITION, 0);
         manager = HttpRequestManager.getInstance(this);
-	imageLoader = new ImageLoader(this);
+        imageLoader = new ImageLoader(this);
 
         count = (TextView) findViewById(R.id.image_slider_count);
         swipeView = (SwipeView) findViewById(R.id.SwipeView);
