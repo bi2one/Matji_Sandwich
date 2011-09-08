@@ -18,19 +18,24 @@
 	<ImageView
 		style="@style/location_title_bar_line"
 		android:layout_toRightOf="@id/map_title_bar_location_button" />
-	<TextView
+	<RelativeLayout
+	    android:id="@+id/map_title_bar_address_wrapper"
+	    style="@style/DefaultWrap"
+	    android:layout_toRightOf="@id/map_title_bar_location_button"
+	    android:layout_toLeftOf="@+id/map_title_bar_near_post_button"
+	    android:layout_centerVertical="true" >
+	    <TextView
 		style="@style/location_title_bar_address_text"
-		android:layout_toRightOf="@id/map_title_bar_location_button"
-		android:layout_toLeftOf="@+id/map_title_bar_near_post_button"
-		android:layout_centerVertical="true"
 		android:gravity="left|center_vertical"
 		android:onClick="onChangeLocationClicked"
 		android:id="@+id/map_title_bar_address"
 		android:clickable="true"
 		android:drawableRight="@drawable/icon_location_mappoint_selector" />
+	</RelativeLayout>
+	
 	<ImageView
 		style="@style/location_title_bar_line"
-		android:layout_toRightOf="@id/map_title_bar_address" />
+		android:layout_toRightOf="@id/map_title_bar_address_wrapper" />
 	<ImageButton
 		style="@style/location_title_bar_nearPostButton"
 		android:onClick="onMoveToNearPostClicked"

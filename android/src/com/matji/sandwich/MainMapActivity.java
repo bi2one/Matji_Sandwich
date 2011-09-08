@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,9 +16,12 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.widget.StoreMapNearListView;
+import com.matji.sandwich.overlay.OverlayClickListener;
+import com.matji.sandwich.data.Store;
 
-public class MainMapActivity extends BaseMapActivity {
+public class MainMapActivity extends BaseMapActivity implements OverlayClickListener {
     private static final int REQUEST_CODE_LOCATION = 1;
+    private static final int REQUEST_CODE_STORE = 2;
     private static final int BASIC_SEARCH_LOC_LAT = 0;
     private static final int BASIC_SEARCH_LOC_LNG = 0;
     private Context context;
@@ -49,6 +53,7 @@ public class MainMapActivity extends BaseMapActivity {
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
         mapView = (MainMatjiMapView)findViewById(R.id.map_view);
         mapView.init(addressView, this, getMainView());
+	mapView.setOverlayClickListener(this);
         storeListView = (StoreMapNearListView)findViewById(R.id.main_map_store_list);
         storeListView.init(addressView, this);
 
@@ -90,7 +95,6 @@ public class MainMapActivity extends BaseMapActivity {
 
     public void onFlipClicked(View v) {
         if (currentViewIsMap) {
-            //            mapView.onMapCenterChanged(mapView.getMapCenter());
             showStoreListView();
         } else {
             showMapView();
@@ -118,7 +122,7 @@ public class MainMapActivity extends BaseMapActivity {
 
     private void showStoreListView() {
         ((ImageButton) flipButton).setImageDrawable(flipMapViewImage);
-        storeListView.requestReload();
+        storeListView.forceReload();
         mapView.setVisibility(View.GONE);
         storeListView.setVisibility(View.VISIBLE);
     }
@@ -138,6 +142,19 @@ public class MainMapActivity extends BaseMapActivity {
                     storeListView.forceReload();
                 }
             }
+	    break;
+	case REQUEST_CODE_STORE:
+	    if (resultCode == Activity.RESULT_OK) {
+		Store store = (Store)data.getParcelableExtra(StoreMainActivity.DATA_STORE);
+		mapView.updatePopupOverlay(store);
+	    }
+	    break;
         }
+    }
+
+    public void onOverlayClick(View v, Object data) {
+	Intent intent = new Intent(this, StoreMainActivity.class);
+	intent.putExtra(StoreMainActivity.STORE, (Parcelable) data);
+	startActivityForResult(intent, REQUEST_CODE_STORE);
     }
 }

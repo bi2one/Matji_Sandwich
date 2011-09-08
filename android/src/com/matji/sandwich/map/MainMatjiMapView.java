@@ -28,6 +28,7 @@ import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.overlay.StoreItemizedOverlay;
+import com.matji.sandwich.overlay.OverlayClickListener;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
@@ -66,7 +67,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	setBaseMapActivity(activity);
 
 	this.spinnerLayout = spinnerLayout;
-	storeItemizedOverlay = new StoreItemizedOverlay(context, activity, this);
+	storeItemizedOverlay = new StoreItemizedOverlay(context, this);
 	mapController = getController();
 	// requestManager = HttpRequestManager.getInstance(context);
 	requestManager = HttpRequestManager.getInstance(context);
@@ -75,6 +76,10 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	mapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
 	gpsManager.start(GPS_START_TAG);
+    }
+
+    public void setOverlayClickListener(OverlayClickListener listener) {
+	storeItemizedOverlay.setOverlayClickListener(listener);
     }
 
     public void reload() {
@@ -105,6 +110,10 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	Runnable runnable = new MapRunnable(this);
 	activity.runOnUiThread(runnable);
+    }
+
+    public void updatePopupOverlay(Store store) {
+	storeItemizedOverlay.updateLastPopupOverlay(store);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {

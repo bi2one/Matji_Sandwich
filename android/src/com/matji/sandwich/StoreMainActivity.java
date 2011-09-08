@@ -9,23 +9,24 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.RoundTabHost;
 
 public class StoreMainActivity extends BaseTabActivity {
-	private RoundTabHost tabHost;
-	private Store store;
+    public final static String DATA_STORE = "StoreMainActivity.store";
+    private RoundTabHost tabHost;
+    private Store store;
 	
-	public final static String STORE = "store";
+    public final static String STORE = "store";
 
     public int setMainViewId() {
 	return R.id.activity_store_main;
     }
 
-	@Override
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+	super.onCreate(savedInstanceState);
+    }
 	
-	@Override
+    @Override
 	protected void init() {
-	    super.init();	    
+	super.init();	    
 
         setContentView(R.layout.activity_store_main);
 
@@ -42,24 +43,25 @@ public class StoreMainActivity extends BaseTabActivity {
         storeUrlListIntent.putExtra(StoreUrlListActivity.STORE, (Parcelable) store);
                 
         tabHost.addLeftTab("tab1",
-                R.string.store_main_post_list_view,
-                storePostListIntent);
+			   R.string.store_main_post_list_view,
+			   storePostListIntent);
         tabHost.addCenterTab("tab2",
-                R.string.store_main_img,
-                storeImageListIntent);
+			     R.string.store_main_img,
+			     storeImageListIntent);
         tabHost.addRightTab("tab3",
-                R.string.store_main_review,
-                storeUrlListIntent);
+			    R.string.store_main_review,
+			    storeUrlListIntent);
         refresh();
-	}
+    }
 	
-	private void refresh() {
+    private void refresh() {
 		
-	}
+    }
 	
-	@Override
-	public void finish() {
-	    setResult(RESULT_OK);
-	    super.finish();
-	}
+    public void finish() {
+	Intent result = new Intent();
+	result.putExtra(DATA_STORE, (Parcelable)store);
+	setResult(RESULT_OK, result);
+	super.finish();
+    }
 }
