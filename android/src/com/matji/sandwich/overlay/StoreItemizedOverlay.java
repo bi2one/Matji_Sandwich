@@ -148,15 +148,23 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 
 	LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         popupOverlay = (View)inflater.inflate(R.layout.store_popup_overlay, null);
-	
-        MapView.LayoutParams layoutParam = new MapView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                itemPoint,
-                0, -(POPUP_OVERLAY_OFFSET_Y + UNLOCK_BITMAP_OFFSET_Y),
-                MapView.LayoutParams.CENTER_HORIZONTAL);
-        layoutParam.mode = MapView.LayoutParams.MODE_MAP;
 
         Store popupStore = lastPopupItem.getStore();
+	int yOffset = 0;
+	
+	if (popupStore.isLocked()) {
+	    yOffset = -(POPUP_OVERLAY_OFFSET_Y + LOCK_BITMAP_OFFSET_Y);
+	} else {
+	    yOffset = -(POPUP_OVERLAY_OFFSET_Y + UNLOCK_BITMAP_OFFSET_Y);
+	}
+	
+        MapView.LayoutParams layoutParam = new MapView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+								    ViewGroup.LayoutParams.WRAP_CONTENT,
+								    itemPoint,
+								    0, yOffset,
+								    MapView.LayoutParams.CENTER_HORIZONTAL);
+        layoutParam.mode = MapView.LayoutParams.MODE_MAP;
+
         TextView title = (TextView)popupOverlay.findViewById(R.id.popup_item_title);
         TextView likeCount = (TextView)popupOverlay.findViewById(R.id.popup_item_like_count);
         TextView postCount = (TextView)popupOverlay.findViewById(R.id.popup_item_post_count);

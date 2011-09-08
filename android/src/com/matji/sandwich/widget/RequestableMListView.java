@@ -127,7 +127,7 @@ PullToRefreshListView.OnRefreshListener {
         if (!manager.isRunning() || canRepeat) {
             Log.d("refresh", "requestReload()");
             initValue();
-            manager.request(loadingHeaderView, request(), REQUEST_RELOAD, this);
+            manager.request(loadingHeaderView, SpinnerFactory.SpinnerType.HEIGHT_SCALE_NORMAL, request(), REQUEST_RELOAD, this);
             nextValue();
             setSelection(0);
         }
@@ -138,7 +138,7 @@ PullToRefreshListView.OnRefreshListener {
         Log.d("refresh", "forceReload()");
         Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
         initValue();
-        manager.request(loadingHeaderView, request(), REQUEST_RELOAD, this);
+	manager.request(loadingHeaderView, SpinnerFactory.SpinnerType.HEIGHT_SCALE_NORMAL, request(), REQUEST_RELOAD, this);
         nextValue();
         setSelection(0);
         setCanRepeat(true);

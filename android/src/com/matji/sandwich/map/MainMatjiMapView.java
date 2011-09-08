@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
@@ -46,6 +47,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     private MapController mapController;
     private Context context;
     private TextView addressView;
+    private RelativeLayout addressWrapper;
     private BaseMapActivity activity;
     private HttpRequestManager requestManager;
     private StoreItemizedOverlay storeItemizedOverlay;
@@ -62,11 +64,12 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	setOnTouchListener(this);
     }
 
-    public void init(TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
+    public void init(RelativeLayout addressWrapper, TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
 	setAddressView(addressView);
 	setBaseMapActivity(activity);
 
 	this.spinnerLayout = spinnerLayout;
+	this.addressWrapper = addressWrapper;
 	storeItemizedOverlay = new StoreItemizedOverlay(context, this);
 	mapController = getController();
 	// requestManager = HttpRequestManager.getInstance(context);
@@ -211,7 +214,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
 	    geocodeRequest.actionReverseGeocodingByGeoPoint(getMapCenter(), sessionUtil.getCurrentCountry());
-	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, geocodeRequest, GEOCODE, requestable);
+	    requestManager.request(addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
 	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
 	}
     }

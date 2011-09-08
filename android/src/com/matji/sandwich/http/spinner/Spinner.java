@@ -35,6 +35,8 @@ public class Spinner extends RelativeLayout implements Spinnable {
 
     public void stop() {
         // setVisibility(View.GONE);
-        if (layout != null) layout.removeView(this);
+        if (layout != null) {
+	    layout.removeView(this);
+	}
     }
 }
