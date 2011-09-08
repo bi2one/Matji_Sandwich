@@ -70,12 +70,19 @@ public class HttpRequestManager {
     public void request(ViewGroup layout,
 			SpinnerFactory.SpinnerType spinnerType,
 			RequestCommand request, int tag, Requestable requestable) {
+	request(SpinnerFactory.createSpinner(context, spinnerType, layout),
+		request, tag, requestable);
+    }
+
+    public void request(Spinnable spinner,
+			RequestCommand request,
+			int tag,
+			Requestable requestable) {
 	if (isTurnOff) {
 	    return ;
 	}
 
 	ManagerAsyncTask task = new ManagerAsyncTask(request, requestable, tag);
-	Spinnable spinner = spinnerFactory.createSpinner(context, spinnerType, layout);
 	TaskElement element = new TaskElement(spinner, task);
 	
 	queueManager.offer(element);

@@ -8,7 +8,7 @@ public class SpinnerFactory {
 	NORMAL, SMALL, HEIGHT_SCALE_NORMAL
     }
     
-    public Spinnable createSpinner(Context context, SpinnerType type, ViewGroup layout) {
+    public static Spinnable createSpinner(Context context, SpinnerType type, ViewGroup layout) {
 	if (layout == null) {
 	    return new NullSpinner();
 	}

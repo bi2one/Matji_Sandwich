@@ -14,10 +14,13 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.RequestCommand;
 import com.matji.sandwich.http.spinner.SpinnerFactory;
+import com.matji.sandwich.http.spinner.Spinnable;
 import com.matji.sandwich.listener.ListRequestScrollListener;
+import com.matji.sandwich.util.AnimationUtil;
 
 public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
-PullToRefreshListView.OnRefreshListener {
+										    PullToRefreshListView.OnRefreshListener,
+										    Spinnable.SpinListener {
     private ListRequestScrollListener scrollListener;
     private ArrayList<MatjiData> adapterData;
     private MBaseAdapter adapter;
@@ -28,6 +31,7 @@ PullToRefreshListView.OnRefreshListener {
     private int limit = 10;
     private RelativeLayout loadingFooterView;
     private RelativeLayout loadingHeaderView;
+    private Spinnable reloadSpinner;
 
     protected final static int REQUEST_NEXT = 0;
     protected final static int REQUEST_RELOAD = 1;
@@ -56,6 +60,9 @@ PullToRefreshListView.OnRefreshListener {
 
         addFooterView(loadingFooterView);
         addHeaderView(loadingHeaderView);
+
+	reloadSpinner = SpinnerFactory.createSpinner(context, SpinnerFactory.SpinnerType.NORMAL, loadingHeaderView);
+	// reloadSpinner.setSpinListener(this);
         //	setFooterDividersEnabled(false);
 
         this.limit = limit;
@@ -127,7 +134,7 @@ PullToRefreshListView.OnRefreshListener {
         if (!manager.isRunning() || canRepeat) {
             Log.d("refresh", "requestReload()");
             initValue();
-            manager.request(loadingHeaderView, SpinnerFactory.SpinnerType.HEIGHT_SCALE_NORMAL, request(), REQUEST_RELOAD, this);
+            manager.request(reloadSpinner, request(), REQUEST_RELOAD, this);
             nextValue();
             setSelection(0);
         }
@@ -138,7 +145,7 @@ PullToRefreshListView.OnRefreshListener {
         Log.d("refresh", "forceReload()");
         Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
         initValue();
-	manager.request(loadingHeaderView, SpinnerFactory.SpinnerType.HEIGHT_SCALE_NORMAL, request(), REQUEST_RELOAD, this);
+	manager.request(reloadSpinner, request(), REQUEST_RELOAD, this);
         nextValue();
         setSelection(0);
         setCanRepeat(true);
