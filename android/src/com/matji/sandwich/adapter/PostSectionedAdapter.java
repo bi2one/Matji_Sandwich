@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.ActivityStartable;
-import com.matji.sandwich.PostActivity;
+import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.BaseActivity;
@@ -88,7 +88,6 @@ public class PostSectionedAdapter extends SectionedAdapter {
      */
     protected void init() {
 	imageLoader = new ImageLoader(context);
-//        profileSize = (int) MatjiConstants.dimen(R.dimen.profile_size);
     }
 
     public void setSpinnerContainer(RelativeLayout spinnerContainer) {
@@ -315,21 +314,21 @@ public class PostSectionedAdapter extends SectionedAdapter {
 
     /**
      * 리스트 아이템을 클릭했을 때,
-     * {@link PostActivity}로 이동한다.
+     * {@link PostMainActivity}로 이동한다.
      * 
      * @param position 클릭된 아이템의 positoin
      */
     private void onListItemClick(int position) {
         Post post = (Post) data.get(position);
         if (post.getActivityId() == 0) {
-            Intent intent = new Intent(context, PostActivity.class);
-            intent.putExtra(PostActivity.POSTS, data);
-            intent.putExtra(PostActivity.POSITION, position);
+            Intent intent = new Intent(context, PostMainActivity.class);
+            intent.putExtra(PostMainActivity.POSTS, data);
+            intent.putExtra(PostMainActivity.POSITION, position);
             if (((Activity) context).getParent().getParent() instanceof BaseTabActivity) {
                 BaseTabActivity parent = (BaseTabActivity) ((Activity) context).getParent();
-                parent.tabStartActivityForResult(intent, BaseActivity.POST_ACTIVITY, (ActivityStartable) context);
+                parent.tabStartActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY, (ActivityStartable) context);
             } else {
-                ((Activity) context).startActivityForResult(intent, BaseActivity.POST_ACTIVITY);
+                ((Activity) context).startActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY);
             }
         }
     }
@@ -453,10 +452,10 @@ public class PostSectionedAdapter extends SectionedAdapter {
          * 댓글 페이지로 이동하고 키보드가 바로 올라오도록 한다.
          */
         public void gotoCommentActivity() {
-            Intent intent = new Intent(context, PostActivity.class);
-            intent.putExtra(PostActivity.POSTS, data);
-            intent.putExtra(PostActivity.POSITION, position);
-            intent.putExtra(PostActivity.SHOW_KEYBOARD, true);
+            Intent intent = new Intent(context, PostMainActivity.class);
+            intent.putExtra(PostMainActivity.POSTS, data);
+            intent.putExtra(PostMainActivity.POSITION, position);
+            intent.putExtra(PostMainActivity.SHOW_KEYBOARD, true);
             context.startActivity(intent);
         }
 

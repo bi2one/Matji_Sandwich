@@ -2,12 +2,14 @@ package com.matji.sandwich.listener;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.matji.sandwich.ImageSliderActivity;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.AttachFile;
 
 /**
@@ -62,6 +64,6 @@ public class GotoImageSliderAction implements OnClickListener {
 		Intent viewerIntent = new Intent(context, ImageSliderActivity.class);
 		viewerIntent.putExtra(ImageSliderActivity.ATTACH_FILES, attachFiles);
 		viewerIntent.putExtra(ImageSliderActivity.POSITION, position);
-		context.startActivity(viewerIntent);
+		((Activity) context).startActivityForResult(viewerIntent, BaseActivity.IMAGE_SLIDER_ACTIVITY);
 	}
 }

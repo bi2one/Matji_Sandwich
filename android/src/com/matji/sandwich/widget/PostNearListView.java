@@ -20,7 +20,7 @@ public class PostNearListView extends PostListView {
     private HttpRequestManager requestManager;
 
     protected String getSubtitle() {
-        return MatjiConstants.string(R.string.nearby_post);
+        return MatjiConstants.string(R.string.subtitle_nearby_post);
     }
 
     public PostNearListView(Context context, AttributeSet attrs) {

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/activity_store_url"
+	android:id="@+id/activity_store_discover"
 	style="@style/DefaultFill">
-	<com.matji.sandwich.widget.title.StoreTitle
+	<!-- Store Title -->
+	<com.matji.sandwich.widget.title.HomeTitle
 		android:id="@id/Titlebar"
-		style="@style/DefaultWidthFill" />
-	<com.matji.sandwich.widget.StoreUrlListView
+		style="@style/DefaultWrap" />
+	<com.matji.sandwich.widget.StoreDiscoverListView
 		style="@style/DefaultFill"
-		android:id="@+id/store_url_list"
+		android:id="@+id/store_discover_list"
 		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.StoreDefaultInfoActivity;
 import com.matji.sandwich.StoreDetailInfoTabActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
@@ -26,6 +25,7 @@ public class StoreCell extends Cell {
 
     private Button likeList;
     private ViewGroup mainView;
+    private BookmarkStarToggleView star;
 
     /**
      * 기본 생성자 (Java Code)
@@ -80,16 +80,14 @@ public class StoreCell extends Cell {
         this.store = store;
 
         ((TextView) findViewById(R.id.cell_store_name)).setText(store.getName());
-        ((BookmarkStarToggleView) findViewById(R.id.cell_store_toggle_star)).init(store, mainView);
+        star = ((BookmarkStarToggleView) findViewById(R.id.cell_store_toggle_star));
 
         refresh();
     }
 
-    /**
-     * Refresh 가능한 정보들을 refresh
-     */
     public void refresh() {
         likeList.setText(store.getLikeCount()+"");
+        star.init(store, mainView);
     }
 
     /**
@@ -98,10 +96,10 @@ public class StoreCell extends Cell {
     @Override
     protected Intent getIntent() {
         Intent intent = new Intent(getContext(), StoreDetailInfoTabActivity.class);
-        intent.putExtra(StoreDefaultInfoActivity.STORE, (Parcelable) store);
+        intent.putExtra(StoreDetailInfoTabActivity.STORE, (Parcelable) store);
         return intent;
     }
-
+    
     public void showLine() {
         findViewById(R.id.cell_store_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_store_shadow).setVisibility(View.GONE);

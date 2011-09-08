@@ -31,9 +31,4 @@ public class UserImageListView extends ImageListView {
 		this.user = user;
 		init();
 	}
-
-	@Override
-	protected String getTotalImageCountText() {
-		return user.getImageCount() + "개의 " + user.getNick() + " 사진";
-	}
 }

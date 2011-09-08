@@ -15,14 +15,14 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
 
-public class StoreListView extends RequestableMListView {
-	private HttpRequest request;
+public class SimpleStoreListView extends RequestableMListView {
+	protected HttpRequest request;
 
-	public StoreListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new SimpleStoreAdapter(context), 10);
+	public SimpleStoreListView(Context context, AttributeSet attrs) {
+        super(context, attrs, new SimpleStoreAdapter(context), 10);
 
-		init();
-	}
+        init();
+    }
 	
 	protected void init() {
 		request = new StoreHttpRequest(getContext());

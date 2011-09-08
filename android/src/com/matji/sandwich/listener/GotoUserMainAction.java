@@ -1,13 +1,15 @@
 package com.matji.sandwich.listener;
 
-import com.matji.sandwich.UserMainActivity;
-import com.matji.sandwich.data.User;
-
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.matji.sandwich.UserMainActivity;
+import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.User;
 
 /**
  * 클릭 시 UserMainActivity로 이동하도록 하는 클릭 리스너.
@@ -47,6 +49,6 @@ public class GotoUserMainAction implements OnClickListener {
 	public void onClick(View v) {
 		Intent intent = new Intent(context, UserMainActivity.class);
 		intent.putExtra(UserMainActivity.USER, (Parcelable) user);
-		context.startActivity(intent);
+		((Activity) context).startActivityForResult(intent, BaseActivity.USER_MAIN_ACTIVITY);
 	}
 }

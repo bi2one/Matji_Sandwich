@@ -11,7 +11,6 @@
       style="@style/ProfileWrapper"
       android:layout_alignParentLeft="true"
       android:layout_centerVertical="true" />
-  <!-- ranking body -->
   <!-- nickname -->
   <TextView
       android:id="@+id/row_simple_user_nickname"
@@ -35,7 +34,7 @@
       android:layout_alignBaseline="@id/row_simple_user_like_count"
       style="@style/row_simple_user_post_count" />
 
-  <!-- ranking point -->
+  <!-- point -->
   <com.matji.sandwich.widget.BoldStyleTextView
       android:id="@+id/row_simple_user_point"
       android:layout_toLeftOf="@+id/row_simple_user_point_hint"

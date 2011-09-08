@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.UserImageListView;
 import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.title.UserTitle;
@@ -33,9 +35,15 @@ public class UserImageListActivity extends BaseActivity {
         title.setUser(user);
         title.setFollowable(userCell);
         title.setIdentifiable(this);
-        
+
         UserImageListView listView = (UserImageListView) findViewById(R.id.user_image_list_view);
         listView.addHeaderView(userCell);
+        listView.addHeaderView(new SubtitleHeader(
+                this,
+                String.format(
+                        MatjiConstants.string(R.string.subtitle_user_image),
+                        user.getImageCount(),
+                        user.getNick())));
         listView.setUser(user);
         listView.setActivity(this);
         listView.requestReload();

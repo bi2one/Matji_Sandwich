@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.base.Identifiable;
+import com.matji.sandwich.widget.title.Switchable;
 
 /**
  * 좋아요 버튼
@@ -11,12 +13,23 @@ import com.matji.sandwich.R;
  * @author mozziluv
  *
  */
-public class LikeButton extends TitleImageButton {
-//TODO 나중에 Like가 여러개로  나눠질 수 있으니 후에 수정
+public class LikeButton extends TitleImageButton implements Switchable {
+    
+    private Likeable likeable;
+    private Identifiable identifiable;
+    
 	public LikeButton(Context context) {
 		super(context);
 	}
 
+    public void setLikeable(Likeable likeable) {
+        this.likeable = likeable;
+    }
+    	
+	public void setIdentifiable(Identifiable identifiable) {
+	    this.identifiable = identifiable;
+	}
+	
 	/**
 	 * @see com.matji.sandwich.widget.title.button.TitleImageButton#init()
 	 */
@@ -34,5 +47,20 @@ public class LikeButton extends TitleImageButton {
 	public void onTitleItemClicked() {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "LikeButtonClicked");
+		if (identifiable.loginRequired()) likeable.like();
 	}
+
+    @Override
+    public void on() {
+        setImageResource(R.drawable.icon_navi_like_touch);
+    }
+
+    @Override
+    public void off() {
+        setImageResource(R.drawable.icon_navi_like);
+    }
+    
+    public interface Likeable {
+        public void like();
+    }
 }

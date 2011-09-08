@@ -2,6 +2,10 @@
 <LinearLayout
     android:id="@+id/relativelayout_loading"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="0dp"
+    android:paddingRight="@dimen/default_distance"
+    android:paddingTop="@dimen/default_distance"
+    android:paddingBottom="@dimen/default_distance"
     style="@style/DefaultWrap">
   <ImageView
       android:id="@+id/bookmark_star_toggle_unchecked"

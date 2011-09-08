@@ -18,7 +18,7 @@ public class StoreUrlListView extends RequestableMListView {
 		setPage(1);
 	}
 
-	public void setUserId(int store_id) {
+	public void setStoreId(int store_id) {
 		this.store_id = store_id;
 	}
 	

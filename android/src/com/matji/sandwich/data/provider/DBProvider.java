@@ -7,8 +7,8 @@ import java.util.Iterator;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.DatabaseUtils.InsertHelper;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,7 +30,6 @@ public class DBProvider {
     public static final String POST = "Post";
     public static final String STORE = "Store";
     public static final String LIKE = "Like";
-    public static final String BOOKMARK = "Bookmark";
 
     private static DBProvider dbProvider;
     private static DataBaseHelper dbHelper;

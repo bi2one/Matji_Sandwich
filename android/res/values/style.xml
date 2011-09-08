@@ -469,6 +469,11 @@
     <item name="android:background">@drawable/tabbtn_bg</item>
   </style>
   
+  <style name="RoundTabWidgetBottom" parent="DefaultWidthFill">
+    <item name="android:padding">@dimen/default_distance</item>
+    <item name="android:background">@drawable/tabbtn_bg_under</item>
+  </style>
+  
   <!-- activity_post_tab.xml -->
   <style name="post_tab_DivisionBar" parent="DefaultFill">
     <item name="android:layout_height">2dp</item>
@@ -802,7 +807,6 @@
     <item name="android:shadowRadius">1.4</item>
     <item name="android:shadowColor">@color/matji_black</item>
     <item name="android:gravity">center_horizontal</item>
-    <item name="android:layout_marginRight">@dimen/rank_margin_right</item>
   </style>
 
   <style name="row_simple_user_body" parent="DefaultWidthFill">

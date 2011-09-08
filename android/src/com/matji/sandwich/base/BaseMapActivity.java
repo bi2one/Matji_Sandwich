@@ -15,8 +15,6 @@ import com.matji.sandwich.widget.title.TitleContainer;
 import com.matji.sandwich.http.util.ImageLoader;
 
 public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener, Identifiable {
-    protected static final int LOGIN_ACTIVITY = 1;
-    protected static final int WRITE_POST_ACTIVITY = 2;
     private boolean isFlow;
     private ViewGroup mainViewGroup;
 

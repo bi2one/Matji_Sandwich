@@ -107,6 +107,13 @@ public abstract class LikeListener implements OnClickListener, Requestable {
 
     @Override
     public void onClick(View v) {
+        like();
+    }
+
+    /**
+     * like, unlike 요청을 한다.
+     */
+    public void like() {
         if (identifiable.loginRequired() && !manager.isRunning()) {
             if (dbProvider.isExistLike(getDataId(), getDBProviderObjectType())) {
                 unlikeRequest();
@@ -115,7 +122,6 @@ public abstract class LikeListener implements OnClickListener, Requestable {
             }
         }
     }
-
     /**
      * 현재 타입에 따라 object type String을 리턴한다.
      * @return
@@ -227,5 +233,9 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         } catch (NotSupportedMatjiException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isExistLike() {
+        return (dbProvider.isExistLike(getDataId(), getDBProviderObjectType())) ? true : false;
     }
 }

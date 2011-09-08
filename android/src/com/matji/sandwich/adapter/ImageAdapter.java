@@ -6,18 +6,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.AttachFiles;
-import com.matji.sandwich.listener.GotoImageSliderAction;
 import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.listener.GotoImageSliderAction;
 
 public class ImageAdapter extends MBaseAdapter {
-    private ViewGroup spinnerContainer;
     private ImageLoader imageLoader;
 
     private ArrayList<AttachFile> fileList;
@@ -50,6 +49,7 @@ public class ImageAdapter extends MBaseAdapter {
 	    for (int i = 0; i < imageWrapperIds.length; i++) {
 		imageElement.image[i] = new ImageView(context);
 		imageElement.image[i].setScaleType(ScaleType.CENTER_CROP);
+		imageElement.image[i].setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		imageElement.imageWrapper[i] = (ViewGroup) convertView.findViewById(imageWrapperIds[i]);
 		imageElement.imageWrapper[i].addView(imageElement.image[i]);
 	    }

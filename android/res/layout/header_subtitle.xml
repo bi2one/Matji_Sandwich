@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWidthFill"
+	android:layout_marginTop="@dimen/subtitle_margin_top"
+	android:layout_marginLeft="@dimen/default_distance">
+	<TextView
+		android:id="@+id/header_subtitle"
+		style="@style/DefaultWrap"
+		android:textSize="@dimen/subtitle_size"
+		android:textColor="@color/matji_chocolate" />
+</RelativeLayout>

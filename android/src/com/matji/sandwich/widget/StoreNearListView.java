@@ -8,7 +8,7 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionIndex;
 
-public class StoreNearListView extends StoreListView {
+public class StoreNearListView extends SimpleStoreListView {
     private StoreHttpRequest storeRequest;
     private int BASIC_LATITUDE_SW = 37000000;
     private int BASIC_LATITUDE_NE = 126600000;

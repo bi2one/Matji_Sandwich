@@ -12,7 +12,7 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	private RoundTabHost tabHost;
 	private Store store;
 	
-	public static final String STORE = "store";
+	public static final String STORE = "StoreDetailIfoTabActivity.store";
 
     public int setMainViewId() {
 	return R.id.activity_store_detail_tab;
@@ -27,7 +27,9 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	protected void init() {
 		super.init();
 		setContentView(R.layout.activity_store_detail_tab);
+		
 		store = (Store) getIntent().getParcelableExtra(STORE);
+
 		setTabHost();
 	}
 	

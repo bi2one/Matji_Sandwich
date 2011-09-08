@@ -35,7 +35,7 @@
 		<activity android:name="SentMessageListActivity"></activity>
 		<activity android:name="NoticeActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
-		<activity android:name="PostActivity" 
+		<activity android:name="PostMainActivity" 
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="PostSliderActivity"></activity>
 		<activity android:name="PostListActivity"></activity>
@@ -55,7 +55,9 @@
 		<activity android:name="StoreNearListActivity"></activity>
 		<activity android:name="StoreTabActivity" 
 				  android:screenOrientation="portrait"></activity>
-		<activity android:name="StoreMainActivity"></activity>
+        <activity android:name="StoreMainActivity"></activity>				  
+        <activity android:name="StoreBookmarkListActivity"></activity>
+        <activity android:name="StoreDiscoverListActivity"></activity>
 		<activity android:name="StoreDetailInfoTabActivity" 
 			 	  android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreNoteListActivity"></activity>

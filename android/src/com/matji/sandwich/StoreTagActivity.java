@@ -14,17 +14,23 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.tag.TagCloudView;
+import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreTagActivity extends BaseActivity implements Requestable {
-	private HttpRequest request;
+public class StoreTagActivity extends BaseActivity implements Requestable, Refreshable {
+
+    private HttpRequest request;
 	
-	private TagCloudView tagCloudView;
 	private TextView tagCount;
 	
 	private Store store;
 
-	public static final String STORE = "store";
+	private StoreTitle title;
+	private StoreCell storeCell;
+    private TagCloudView tagCloudView;
+	
+	public static final String STORE = "StoreTagActivity.store";
 	
     public int setMainViewId() {
 	return R.id.activity_store_tag;
@@ -44,6 +50,23 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 		        MatjiConstants.string(R.string.number_of_tag),
 		        store.getTagCount());
 		tagCount.setText(numTag);
+		
+		title = (StoreTitle) findViewById(R.id.Titlebar);
+		storeCell = (StoreCell) findViewById(R.id.StoreCell);
+		storeCell.setStore(store);
+		storeCell.setMainView(getMainView());
+		
+        title.setIdentifiable(this);
+        title.setSpinnerContainer(getMainView());
+        title.setRefreshable(this);
+        title.setStore(store);
+	}
+	
+	@Override
+	protected void onNotFlowResume() {
+	    // TODO Auto-generated method stub
+	    super.onNotFlowResume();
+        refresh();
 	}
 	
 	public void setStore(Store store) {
@@ -77,4 +100,21 @@ public class StoreTagActivity extends BaseActivity implements Requestable {
 		// TODO Auto-generated method stub
 		e.performExceptionHandling(this);
 	}
+
+    @Override
+    public void refresh() {
+        storeCell.refresh();
+        title.syncSwitch();
+    }
+
+    @Override
+    public void refresh(MatjiData data) {
+        if (data instanceof Store) {        
+            this.store = (Store) data;
+            storeCell.setStore(store);
+        }
+    }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {}
 }

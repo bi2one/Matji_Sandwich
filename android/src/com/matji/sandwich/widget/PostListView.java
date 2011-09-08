@@ -24,7 +24,7 @@ public class PostListView extends RequestableMListView {
     private HttpRequest request;
 
     protected String getSubtitle() {
-        return MatjiConstants.string(R.string.all_post);
+        return MatjiConstants.string(R.string.subtitle_all_post);
     }
     
     public PostListView(Context context, AttributeSet attr) {
@@ -38,8 +38,12 @@ public class PostListView extends RequestableMListView {
         setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
         setCacheColorHint(Color.TRANSPARENT);
         setSelector(android.R.color.transparent);
+        setSubtitle(getSubtitle());
+    }
+    
+    public void setSubtitle(String subtitle) {
         ((PostSectionedAdapter) getMBaseAdapter()).setSpinnerContainer(getLoadingFooterView());
-        ((PostSectionedAdapter) getMBaseAdapter()).setSubtitle(getSubtitle());
+        ((PostSectionedAdapter) getMBaseAdapter()).setSubtitle(subtitle);
     }
 
     public HttpRequest request() {

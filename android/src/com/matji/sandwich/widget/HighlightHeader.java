@@ -63,9 +63,7 @@ public class HighlightHeader extends LinearLayout {
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.row_highlight, this);
         ((TextView) findViewById(R.id.row_highlight_title)).setText(title);
-		if (count >= 0) {
-		    setCount();
-		}
+        setCount();
 	}
 	
 	/**
