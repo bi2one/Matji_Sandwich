@@ -53,20 +53,23 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 		
 		title = (StoreTitle) findViewById(R.id.Titlebar);
 		storeCell = (StoreCell) findViewById(R.id.StoreCell);
-		storeCell.setStore(store);
-		storeCell.setMainView(getMainView());
-		
+
+        
         title.setIdentifiable(this);
-        title.setSpinnerContainer(getMainView());
-        title.setRefreshable(this);
         title.setStore(store);
+        title.setLikeable(storeCell);
+
+        storeCell.setStore(store);
+        storeCell.setIdentifiable(this);
+        storeCell.addRefreshable(this);
+        storeCell.addRefreshable(title);
 	}
 	
 	@Override
 	protected void onNotFlowResume() {
 	    // TODO Auto-generated method stub
 	    super.onNotFlowResume();
-        refresh();
+        storeCell.refresh();
 	}
 	
 	public void setStore(Store store) {
@@ -92,7 +95,7 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 			tags.add((Tag) d);
 		}
 		
-		tagCloudView.init(tags);
+		tagCloudView.show(tags);
 	}
 
 	@Override
@@ -103,15 +106,13 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 
     @Override
     public void refresh() {
-        storeCell.refresh();
-        title.syncSwitch();
     }
 
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {        
             this.store = (Store) data;
-            storeCell.setStore(store);
+            refresh();
         }
     }
 

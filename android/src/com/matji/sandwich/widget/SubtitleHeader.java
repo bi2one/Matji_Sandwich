@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import com.matji.sandwich.R;
  */
 public class SubtitleHeader extends LinearLayout {
 	protected String title = "";
+	protected TextView subtitle;
 	
     /**
      * Java Code 기본 생성자.
@@ -25,8 +27,21 @@ public class SubtitleHeader extends LinearLayout {
         super(context);
         this.title = title;
         init();
+        setTitle(title);
     }
-	
+    
+    /**
+     * XML 기본 생성자.
+     * 
+     * @param context
+     * @param attr
+     */
+    public SubtitleHeader(Context context, AttributeSet attr) {
+        super(context, attr);
+        this.title = "";
+        init();
+    }
+    
 	/**
 	 * 이 {@link View}를 초기화시킨다.
 	 * 생성자에서 입력받은 문자열을 TextView에 그린다.
@@ -34,7 +49,7 @@ public class SubtitleHeader extends LinearLayout {
 	protected void init() {
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.header_subtitle, this);
-        ((TextView) findViewById(R.id.header_subtitle)).setText(title);
+        subtitle = ((TextView) findViewById(R.id.header_subtitle));
 	}
 	
 	/**
@@ -51,6 +66,6 @@ public class SubtitleHeader extends LinearLayout {
      * 현재 저장된 문자열을 TextView에 저장한다.
      */
     private void setTitle() {
-        ((TextView) findViewById(R.id.row_highlight_title)).setText(title);
+        subtitle.setText(title);
     }   
 }

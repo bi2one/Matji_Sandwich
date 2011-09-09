@@ -2,7 +2,6 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -18,9 +17,9 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
@@ -73,8 +72,8 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
         currentPage = getIntent().getIntExtra(POSITION, 0);
         manager = HttpRequestManager.getInstance(this);
-	imageLoader = new ImageLoader(this);
-	imageLoader.setScalable(false);
+        imageLoader = new ImageLoader(this);
+        imageLoader.setScalable(false);
 
         count = (TextView) findViewById(R.id.image_slider_count);
         swipeView = (SwipeView) findViewById(R.id.SwipeView);
@@ -160,22 +159,22 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
         /* Set Current Page Image */
         ImageView image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage)).getChildAt(0);
-	imageLoader.DisplayImage(this,
-				 ImageLoader.UrlType.ATTACH_FILE,
-				 ImageLoader.ImageSize.XLARGE,
-				 image,
-				 attach_file_id);
+        imageLoader.DisplayImage(this,
+                ImageLoader.UrlType.ATTACH_FILE,
+                ImageLoader.ImageSize.XLARGE,
+                image,
+                attach_file_id);
 
         /* Set Previous Page Image */
         if (currentPage > 0) {
             attach_file_id = attachFiles[currentPage - 1].getId();
             if (attachFiles[currentPage - 1] != null) {
                 image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage - 1)).getChildAt(0);
-		imageLoader.DisplayImage(this,
-					 ImageLoader.UrlType.ATTACH_FILE,
-					 ImageLoader.ImageSize.XLARGE,
-					 image,
-					 attach_file_id);
+                imageLoader.DisplayImage(this,
+                        ImageLoader.UrlType.ATTACH_FILE,
+                        ImageLoader.ImageSize.XLARGE,
+                        image,
+                        attach_file_id);
             }
         }
 
@@ -184,11 +183,11 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
             attach_file_id = attachFiles[currentPage + 1].getId();
             if (attachFiles[currentPage + 1] != null) {
                 image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage + 1)).getChildAt(0);
-		imageLoader.DisplayImage(this,
-					 ImageLoader.UrlType.ATTACH_FILE,
-					 ImageLoader.ImageSize.XLARGE,
-					 image,
-					 attach_file_id);
+                imageLoader.DisplayImage(this,
+                        ImageLoader.UrlType.ATTACH_FILE,
+                        ImageLoader.ImageSize.XLARGE,
+                        image,
+                        attach_file_id);
             }
         }
     }
@@ -232,7 +231,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     public void requestExceptionCallBack(int tag, MatjiException e) {
         e.performExceptionHandling(this);
     }    
-    
+
     @Override
     public void finish() {
         setResult(RESULT_OK);

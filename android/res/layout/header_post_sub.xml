@@ -1,37 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/header_post_wrapper"
 	android:orientation="vertical"
 	style="@style/DefaultWidthFill">
-	<LinearLayout
-		style="@style/DefaultWidthFill">
-		<TextView
-			android:id="@+id/header_post_sub_first_user_nick"
-			style="@style/DefaultWrap" />
-<!-- 		<LinearLayout -->
-<!-- 			android:id="@+id/header_post_sub_likes_wrapper" -->
-<!-- 			style="@style/DefaultWrap"> -->
-<!-- 			<TextView -->
-<!-- 				style="@style/DefaultWrap" -->
-<!-- 				android:text="@string/header_post_sub_another" /> -->
-<!-- 			<TextView -->
-<!-- 				android:id="@+id/header_post_sub_like_count" -->
-<!-- 				style="@style/DefaultWrap" /> -->
-<!-- 			<TextView -->
-<!-- 				style="@style/DefaultWrap" -->
-<!-- 				android:text="@string/header_post_sub_likes" /> -->
-<!-- 		</LinearLayout> -->
-<!-- 		<LinearLayout -->
-<!-- 			android:id="@+id/header_post_sub_like_wrapper" -->
-<!-- 			style="@style/DefaultWrap"> -->
-<!-- 			<TextView -->
-<!-- 				style="@style/DefaultWrap" -->
-<!-- 				android:text="@string/header_post_sub_like" /> -->
-<!-- 		</LinearLayout> -->
-	</LinearLayout>
+	<TextView
+		android:id="@+id/header_post_sub_text"
+		style="@style/DefaultWrap" />
+
 	<ImageView
 		android:layout_width="fill_parent"
 		android:layout_height="1dp"
-		android:background="@color/matji_white" />
-</LinearLayout>
+		android:background="@color/matji_white"
+		android:layout_alignParentBottom="true" />
+</RelativeLayout>

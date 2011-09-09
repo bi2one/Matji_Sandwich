@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.matji.sandwich.http.request.HttpUtility;
@@ -105,6 +106,7 @@ public class ImageLoader {
 	params.clear();
 	params.put(type.getIdString(), id + "");
 	params.put("size", size.toString());
+	Log.d("Matji", HttpUtility.getUrlStringWithQuery(type.toString(), params));
 	return HttpUtility.getUrlStringWithQuery(type.toString(), params);
     }
 

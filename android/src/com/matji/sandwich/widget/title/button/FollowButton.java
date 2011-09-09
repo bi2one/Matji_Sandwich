@@ -70,7 +70,16 @@ public class FollowButton extends TitleImageButton implements Switchable {
         setAlpha(ALPHA_FOLLOW_STATE);
     }
     
+    public void refresh() {
+        if (followable.isFollow()) {
+            on();
+        } else {
+            off();
+        }
+    }
+    
     public interface Followable {
         public void following();
+        public boolean isFollow();
     }
 }

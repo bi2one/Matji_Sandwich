@@ -47,53 +47,48 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 		address = (TextView) findViewById(R.id.store_info_address);
 		website = (TextView) findViewById(R.id.store_info_website);
 
-		storeCell.setStore(store);
-		storeCell.setMainView(getMainView());
-		
 		title.setIdentifiable(this);
-		title.setSpinnerContainer(getMainView());
-		title.setRefreshable(this);
 		title.setStore(store);
-		
-		fullName.setText(store.getName());
-		tel.setText(store.getTel());
-		address.setText(store.getAddress());
-		
-		if(store.getCover() != null)
-			cover.setText(store.getCover());
-		else	
-			cover.setText("-");
-		
-		if(store.getWebsite() != null)
-			website.setText(store.getWebsite());
-		else
-			website.setText("-");
+		title.setLikeable(storeCell);
+
+        storeCell.setStore(store);
+		storeCell.setIdentifiable(this);
+		storeCell.addRefreshable(this);
+        storeCell.addRefreshable(title);
 	}
 
 	@Override
 	protected void onNotFlowResume() {
 	    // TODO Auto-generated method stub
 	    super.onNotFlowResume();
-	    refresh();
+	    storeCell.refresh();
 	}
-	
+
     @Override
     public void refresh() {
-        storeCell.refresh();
-        title.syncSwitch();        
-    }
-
+        fullName.setText(store.getName());
+        tel.setText(store.getTel());
+        address.setText(store.getAddress());
+        
+        if(store.getCover() != null)
+            cover.setText(store.getCover());
+        else    
+            cover.setText("-");
+        
+        if(store.getWebsite() != null)
+            website.setText(store.getWebsite());
+        else
+            website.setText("-");
+	}
+	
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
             this.store = (Store) data;
-            storeCell.setStore(store);
+            refresh();
         }        
     }
 
     @Override
-    public void refresh(ArrayList<MatjiData> data) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void refresh(ArrayList<MatjiData> data) {}
 }

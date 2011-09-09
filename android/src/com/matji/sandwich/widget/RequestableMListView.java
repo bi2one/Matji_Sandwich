@@ -6,20 +6,18 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.RelativeLayout;
-import android.view.ViewGroup;
 
 import com.matji.sandwich.adapter.MBaseAdapter;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.RequestCommand;
-import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.http.spinner.Spinnable;
+import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.listener.ListRequestScrollListener;
-import com.matji.sandwich.util.AnimationUtil;
 
 public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
-										    PullToRefreshListView.OnRefreshListener {
+										    PullToRefreshListView.OnRefreshListener{
     private ListRequestScrollListener scrollListener;
     private ArrayList<MatjiData> adapterData;
     private MBaseAdapter adapter;

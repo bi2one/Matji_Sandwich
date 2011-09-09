@@ -1,8 +1,11 @@
 package com.matji.sandwich;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.widget.RankingListView;
 
 /**
@@ -10,7 +13,7 @@ import com.matji.sandwich.widget.RankingListView;
  * 
  * @author bizone
  */
-public class RankingFriendListActivity extends BaseActivity {
+public class RankingFriendListActivity extends BaseActivity implements ActivityStartable {
     private RankingListView listView;
 
     public int setMainViewId() {
@@ -25,8 +28,27 @@ public class RankingFriendListActivity extends BaseActivity {
         listView.setActivity(this);
         listView.requestReload();
     }
+    
+    @Override
+    public void activityResultDelivered(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+        case USER_MAIN_ACTIVITY:        
+            if (resultCode == Activity.RESULT_OK) {
+                setIsFlow(true);
+            }
+            break;
+        }
+    }
 
+    @Override
+    public void setIsFlow(boolean isFlow) {
+        if (getParent() instanceof BaseTabActivity) {
+            ((BaseTabActivity) getParent()).setIsFlow(true);
+        }
+        super.setIsFlow(isFlow);
+    }
+    
     protected void onNotFlowResume() {
-        listView.requestReload();
+        listView.refresh();
     }
 }

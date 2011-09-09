@@ -19,7 +19,7 @@ public class LikeStoreListView extends RequestableMListView {
         super(context, attrs, new SimpleStoreAdapter(context), 10);
         setBackgroundColor(MatjiConstants.color(R.color.matji_white));
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
-        setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_height));
+        setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_size));
         storeRequest = new StoreHttpRequest(context);
     }
 

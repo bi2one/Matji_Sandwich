@@ -1,6 +1,6 @@
 package com.matji.sandwich.data;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.os.Parcel;
@@ -30,6 +30,7 @@ public class User extends MatjiData implements Serializable {
 	private Post post;
 	private ArrayList<AttachFile> attach_files;
 	private ArrayList<Store> stores;
+    private AlarmSetting user_alarm_setting;
 
 	public User() {}
 
@@ -74,6 +75,7 @@ public class User extends MatjiData implements Serializable {
 		dest.writeValue(post);
 		dest.writeTypedList(attach_files);
 		dest.writeTypedList(stores);
+		dest.writeValue(user_alarm_setting);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -101,6 +103,7 @@ public class User extends MatjiData implements Serializable {
 		in.readTypedList(attach_files, AttachFile.CREATOR);
 		stores = new ArrayList<Store>();
 		in.readTypedList(stores, Store.CREATOR);
+		user_alarm_setting = AlarmSetting.class.cast(in.readValue(AlarmSetting.class.getClassLoader()));
 	}
 
 	public void setId(int id) {
@@ -277,5 +280,13 @@ public class User extends MatjiData implements Serializable {
 	
 	public ArrayList<Store> getStores() {
 		return stores;
-	}
+	}	
+
+    public void setAlarmSetting(AlarmSetting user_alarm_setting) {
+        this.user_alarm_setting = user_alarm_setting;
+    }
+    
+    public AlarmSetting getAlarmSetting() {
+        return user_alarm_setting;
+    }
 }

@@ -25,7 +25,7 @@ public class AlarmListView extends RequestableMListView {
         setPage(1);
         setBackgroundColor(MatjiConstants.color(R.color.matji_white));
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
-        setDividerHeight(MatjiConstants.dimenInt(R.dimen.default_divider_height));
+        setDividerHeight(MatjiConstants.dimenInt(R.dimen.default_divider_size));
         setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
         setCacheColorHint(Color.TRANSPARENT);
         setSelector(android.R.color.transparent);

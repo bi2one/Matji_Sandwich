@@ -15,7 +15,7 @@ import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.cell.UserIntroCell;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserPostListActivity extends BaseActivity {
+public class UserPostListActivity extends BaseActivity implements Refreshable {
     private User user;		
     private UserTitle title;
     private UserPostListView listView;
@@ -37,13 +37,16 @@ public class UserPostListActivity extends BaseActivity {
         user = getIntent().getParcelableExtra(USER);
 
         title = (UserTitle) findViewById(R.id.Titlebar);
-        userCell = new UserCell(this, user, title.getSwitchable());
+        userCell = new UserCell(this, user);
         userIntroCell = new UserIntroCell(this, user);
 
+        title.setIdentifiable(this);
         title.setUser(user);
         title.setFollowable(userCell);
-        title.setIdentifiable(this);
 
+        userCell.setIdentifiable(this);
+        userCell.addRefreshable(this);
+        userCell.addRefreshable(title);
         userCell.showLine();
 
         listView = (UserPostListView) findViewById(R.id.user_post_list_view);
@@ -53,6 +56,7 @@ public class UserPostListActivity extends BaseActivity {
         listView.setActivity(this);
         listView.requestReload();
     }
+    
     @Override
     protected void onResume() {
         super.onResume();
@@ -85,4 +89,18 @@ public class UserPostListActivity extends BaseActivity {
         }
         super.setIsFlow(isFlow);
     }
+
+    @Override
+    public void refresh() {}
+
+    @Override
+    public void refresh(MatjiData data) {
+        if (data instanceof User){
+            this.user = (User) data;
+            refresh();
+        }
+    }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {}
 }

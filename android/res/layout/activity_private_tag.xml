@@ -4,18 +4,14 @@
 	android:id="@+id/activity_user_tag"
 	style="@style/DefaultFill"
 	android:background="@drawable/bg_01">
-	<com.matji.sandwich.widget.title.UserTitle
-		android:id="@id/Titlebar"
-		style="@style/DefaultWidthFill" />
 	<com.matji.sandwich.widget.MatjiScrollView
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:background="@color/matji_transparent"
-		style="@style/DefaultFill"
-		android:layout_below="@id/Titlebar">
+		style="@style/DefaultFill">
 		<LinearLayout
 			style="@style/DefaultLinearFill">
 			<com.matji.sandwich.widget.cell.UserCell
-				android:id="@id/UserCell"
+				android:id="@+id/UserCell"
 				style="@style/DefaultWidthFill" />
 			<com.matji.sandwich.widget.SubtitleHeader
 				android:id="@+id/user_tag_count"

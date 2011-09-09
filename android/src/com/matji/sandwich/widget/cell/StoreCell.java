@@ -1,5 +1,7 @@
 package com.matji.sandwich.widget.cell;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -10,9 +12,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreDetailInfoTabActivity;
+import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.listener.LikeListener;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
+import com.matji.sandwich.widget.title.button.LikeButton.Likeable;
 
 /**
  * UI 상의 유저 셀 (맛집 기본 정보가 보이는 곳)
@@ -20,13 +26,19 @@ import com.matji.sandwich.widget.BookmarkStarToggleView;
  * @author mozziluv
  *
  */
-public class StoreCell extends Cell {
+public class StoreCell extends Cell implements Likeable {
     private Store store;
 
+    private Identifiable identifiable;
+    
     private Button likeList;
-    private ViewGroup mainView;
     private BookmarkStarToggleView star;
-
+    
+    private LikeListener likeListener;
+    private ViewGroup spinnerContainer;
+    
+    private ArrayList<Refreshable> refreshables;
+    
     /**
      * 기본 생성자 (Java Code)
      * 
@@ -63,12 +75,10 @@ public class StoreCell extends Cell {
     protected void init() {
         // TODO Auto-generated method stub
         super.init();
-
+        
+        spinnerContainer = (ViewGroup) findViewById(R.id.StoreCell);
         likeList = (Button) findViewById(R.id.cell_store_like_list_btn);
-    }
-    
-    public void setMainView(ViewGroup mainView) {
-        this.mainView = mainView;
+        refreshables = new ArrayList<Refreshable>();
     }
     
     /**
@@ -81,13 +91,34 @@ public class StoreCell extends Cell {
 
         ((TextView) findViewById(R.id.cell_store_name)).setText(store.getName());
         star = ((BookmarkStarToggleView) findViewById(R.id.cell_store_toggle_star));
-
-        refresh();
+        likeListener = new LikeListener(identifiable, getContext(), store, spinnerContainer) {
+            
+            @Override
+            public void postUnlikeRequest() {
+                StoreCell.this.store.setLikeCount(StoreCell.this.store.getLikeCount() - 1);
+                refresh();
+            }
+            
+            @Override
+            public void postLikeRequest() {
+                StoreCell.this.store.setLikeCount(StoreCell.this.store.getLikeCount() + 1);
+                refresh();
+            }
+        };
+    }
+    
+    public void setIdentifiable(Identifiable identifiable) {
+        this.identifiable = identifiable;
+        likeListener.setIdentifiable(identifiable);
     }
 
     public void refresh() {
         likeList.setText(store.getLikeCount()+"");
-        star.init(store, mainView);
+        star.init(store, spinnerContainer);
+        
+        for (Refreshable refreshable : refreshables) {
+            refreshable.refresh(store);
+        }
     }
 
     /**
@@ -103,5 +134,19 @@ public class StoreCell extends Cell {
     public void showLine() {
         findViewById(R.id.cell_store_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_store_shadow).setVisibility(View.GONE);
+    }
+    
+    public void addRefreshable(Refreshable refreshable) {
+        refreshables.add(refreshable);
+    }
+
+    @Override
+    public void like() {
+        likeListener.like();
+    }
+
+    @Override
+    public boolean isLike() {
+        return likeListener.isExistLike();
     }
 }

@@ -1,14 +1,15 @@
 package com.matji.sandwich.widget.title;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.base.Identifiable;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.listener.LikeListener;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.LikeButton;
 import com.matji.sandwich.widget.title.button.LikeButton.Likeable;
@@ -17,87 +18,38 @@ import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 /**
  * {@link StoreMainActivity}에서 사용하는 Titlebar.
- * Titlebar에서 {@link Store} 객체를 사용해야 하므로 생성자에서 Store 정보를 무조건 받도록 한다. 
  * 
  * @author mozziluv
  *
  */
-public class StoreTitle extends TitleContainerTypeLRR implements Likeable {    
-	
-    private LikeListener likeListener;
-    private Refreshable refreshable;
-    private Store store;
-    private ViewGroup spinnerContainer;
+public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {    
     
-    public StoreTitle(Context context, Store store) {
+    public StoreTitle(Context context) {
 		super(context);
-		init();
 	}
 
-	public StoreTitle(Context context, Store store, Identifiable identifiable, ViewGroup pinnerContainer) {
+	public StoreTitle(Context context, Store store, Identifiable identifiable) {
 	    super(context);
-	    init();
         setIdentifiable(identifiable);
-        setSpinnerContainer(spinnerContainer);
-        setRefreshable(refreshable);
         setStore(store);
 	}
 	
 	public StoreTitle(Context context, AttributeSet attr) {
 	    super(context, attr);
-	    init();
-	}
-
-	protected void init() {
-	    ((LikeButton) rightButton1).setLikeable(this);
 	}
 	
 	public void setStore(Store store) {
-	    this.store = store;
-        likeListener = new LikeListener((Identifiable) getContext(), getContext(), store, spinnerContainer) {
-            
-            @Override
-            public void postUnlikeRequest() {
-                StoreTitle.this.store.setLikeCount(StoreTitle.this.store.getLikeCount() - 1);
-                refresh();
-            }
-            
-            @Override
-            public void postLikeRequest() {
-                StoreTitle.this.store.setLikeCount(StoreTitle.this.store.getLikeCount() + 1);
-                refresh();
-            }
-        };
 	    setTitle(store.getName());
-        refresh();
-	}
-	
-	public void syncSwitch() {
-	       if (likeListener.isExistLike()) {
-	            ((Switchable) rightButton1).on();
-	        } else {
-	            ((Switchable) rightButton1).off();
-	        }
-	}
-	
-	public void refresh() {
-	    syncSwitch();
-	    if (refreshable != null)
-	        refreshable.refresh(StoreTitle.this.store);
 	}
 	
 	public void setIdentifiable(Identifiable identifiable) {
 	    ((LikeButton) rightButton1).setIdentifiable(identifiable);
 	}
 
-    public void setSpinnerContainer(ViewGroup spinnierContainer) {
-        this.spinnerContainer = spinnierContainer;
+    public void setLikeable(Likeable likeable) {
+        ((LikeButton) rightButton1).setLikeable(likeable);
     }
     
-    public void setRefreshable(Refreshable refreshable) {
-        this.refreshable = refreshable;
-    }
-	
     @Override
     protected TitleImageButton getLeftButton1() {
         // TODO Auto-generated method stub
@@ -117,7 +69,18 @@ public class StoreTitle extends TitleContainerTypeLRR implements Likeable {
     }
 
     @Override
-    public void like() {
-        likeListener.like();
+    public void refresh() {
+        ((LikeButton) rightButton1).refresh();
+    } 
+
+    @Override
+    public void refresh(MatjiData data) {
+        if (data instanceof Store) {
+            setStore((Store) data);
+            refresh();
+        }        
     }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {}
 }

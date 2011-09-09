@@ -39,7 +39,8 @@ public class PostParser extends MatjiDataParser {
 		
 		/* Set User */
 		UserParser userParser = new UserParser(context);
-		post.setUser(userParser.getMatjiData(getObject(object, "user")));
+		post.setUser(userParser.getMatjiData(getObject(object, "user")));          // posting user
+		post.setLikeUser(userParser.getMatjiData(getObject(object, "like_user"))); // like user
 		
 		/* Set Store */
 		StoreParser storeParser = new StoreParser(context);

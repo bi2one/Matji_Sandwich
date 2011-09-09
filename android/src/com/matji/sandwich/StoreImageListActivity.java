@@ -37,12 +37,14 @@ public class StoreImageListActivity extends BaseActivity implements Refreshable 
         listView = (StoreImageListView) findViewById(R.id.store_image_list_view);
 
         title.setIdentifiable(this);
-        title.setSpinnerContainer(getMainView());
-        title.setRefreshable(this);
         title.setStore(store);
+        title.setLikeable(storeCell);
 
-        storeCell.setMainView(getMainView());
-
+        storeCell.setIdentifiable(this);
+        storeCell.setStore(store);
+        storeCell.addRefreshable(this);
+        storeCell.addRefreshable(title);
+        
         listView.setStore(store);
         listView.addHeaderView(storeCell);
         listView.addHeaderView(new SubtitleHeader(
@@ -58,22 +60,20 @@ public class StoreImageListActivity extends BaseActivity implements Refreshable 
     protected void onNotFlowResume() {
         // TODO Auto-generated method stub
         super.onNotFlowResume();
-        refresh();
+        storeCell.refresh();
     }
 
     @Override
     public void refresh() {
-        storeCell.refresh();
         listView.refresh();
-        title.syncSwitch();
     }
 
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
             this.store = (Store) data;
-            storeCell.setStore(store);
             listView.setStore(store);
+            refresh();
         }
     }
 

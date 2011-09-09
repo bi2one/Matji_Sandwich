@@ -22,8 +22,11 @@ public class HttpRequestManager {
     public static final int UN_BOOKMARK_REQUEST = 31;
     public static final int POST_SHOW_REQUEST = 41;
     public static final int STORE_TAG_LIST_REQUEST = 52;
-    public static final int MESSAGE_NEW_REQUEST = 50;
-    
+    public static final int USER_TAG_LIST_REQUEST = 62;
+    public static final int MESSAGE_NEW_REQUEST = 70;
+    public static final int UPDATE_ALARM_PERMIT_REQUEST = 81;
+
+
     private volatile static HashMap<Context, HttpRequestManager> managerPool = new HashMap<Context, HttpRequestManager>();
     private Context context;
     private TaskQueueManager queueManager;

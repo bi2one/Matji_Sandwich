@@ -161,11 +161,13 @@ Requestable {
             bookmark.setForeignKey(store.getId());
             bookmark.setObject(DBProvider.STORE);
             dbProvider.insertBookmark(bookmark);
+            session.getCurrentUser().setBookmarkStoreCount(session.getCurrentUser().getBookmarkStoreCount() + 1);
             break;
         case HttpRequestManager.UN_BOOKMARK_REQUEST:
             showUncheckedView();
             isUnchecked = true;
             dbProvider.deleteBookmark(store.getId(), DBProvider.STORE);
+            session.getCurrentUser().setBookmarkStoreCount(session.getCurrentUser().getBookmarkStoreCount() - 1);
             break;
         }
     }

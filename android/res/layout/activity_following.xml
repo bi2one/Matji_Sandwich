@@ -6,7 +6,7 @@
 	android:background="#fff"
 	android:id="@+id/layout_main">
 	<com.matji.sandwich.widget.title.HomeTitle
-		android:id="@+id/Titlebar"
+		android:id="@id/Titlebar"
 		style="@style/DefaultWidthFill" />
 	<com.matji.sandwich.widget.FollowingListView
 		style="@style/DefaultFill"

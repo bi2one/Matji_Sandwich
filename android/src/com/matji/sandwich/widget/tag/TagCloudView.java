@@ -170,7 +170,7 @@ public class TagCloudView extends FlowLayout {
 	 */
 	public TagCloudView(Context context, ArrayList<Tag> tags) {
 		super(context);
-		init(tags);
+		show(tags);
 	}
 
 	/**
@@ -188,7 +188,8 @@ public class TagCloudView extends FlowLayout {
 	 *  
 	 * @param tags 이 뷰에서 보여질 태그들
 	 */
-	public void init(ArrayList<Tag> tags) {
+	public void show(ArrayList<Tag> tags) {
+	    removeAllViews();
 		setBackgroundDrawable(getResources().getDrawable(R.drawable.txtbox));
 		Collections.shuffle(tags);	// shuffling for tag cloud
 

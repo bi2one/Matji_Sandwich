@@ -1,5 +1,7 @@
 package com.matji.sandwich.widget.cell;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -11,14 +13,14 @@ import android.widget.TextView;
 
 import com.matji.sandwich.MessageListActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.UserProfileActivity;
+import com.matji.sandwich.Refreshable;
+import com.matji.sandwich.UserProfileTabActivity;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.listener.LikeStoreListListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.CellProfileImageView;
-import com.matji.sandwich.widget.title.Switchable;
 import com.matji.sandwich.widget.title.button.FollowButton.Followable;
 
 /**
@@ -30,6 +32,8 @@ import com.matji.sandwich.widget.title.button.FollowButton.Followable;
 public class UserCell extends Cell implements Followable {
     private User user;
 
+    private Identifiable identifiable;
+    
     private Button follow;
     private Button messageList;
 
@@ -38,8 +42,13 @@ public class UserCell extends Cell implements Followable {
     private FollowingListener followingListener;
     private ViewGroup spinnerContainer;
     
-    private Switchable switchable;
-
+    private CellProfileImageView profile;
+    private TextView nick;
+    private TextView point;
+    private TextView area;
+    private TextView likeList;
+    
+    private ArrayList<Refreshable> refreshables;
     /**
      * 기본 생성자 (Java Code)
      * 
@@ -47,7 +56,6 @@ public class UserCell extends Cell implements Followable {
      */
     public UserCell(Context context) {
         super(context, R.layout.cell_user);
-        spinnerContainer = (ViewGroup) findViewById(R.id.UserCell);
     }
 
     /**
@@ -58,7 +66,6 @@ public class UserCell extends Cell implements Followable {
      */
     public UserCell(Context context, AttributeSet attr) {
         super(context, R.layout.cell_user);
-        spinnerContainer = (ViewGroup) findViewById(R.id.UserCell);
         setId(R.id.UserCell);
     }
 
@@ -68,46 +75,35 @@ public class UserCell extends Cell implements Followable {
      * @param context
      * @param user 이 Cell의 유저 데이터
      */
-    public UserCell(Context context, User user, Switchable switchable) {
+    public UserCell(Context context, User user) {
         super(context, R.layout.cell_user);
-        spinnerContainer = (ViewGroup) findViewById(R.id.UserCell);
-        setSwitchable(switchable);
         setUser(user);
     }
 
-    /**
-     * 이 UserCell의 user 정보를 저장하고 해당 유저의 변하지 않는 정보들을 뷰에 뿌려준다.
-     * 
-     * @param user
-     */
-    public void setUser(User user) {
-        this.user = user;
-
-        ((CellProfileImageView) findViewById(R.id.profile)).setUserId(user.getId());
-        ((CellProfileImageView) findViewById(R.id.profile)).showInsetBackground();
-        ((TextView) findViewById(R.id.cell_user_nick)).setText(user.getNick());
-        if (user.getMileage() != null) 
-            ((TextView) findViewById(R.id.cell_user_point)).setText(user.getMileage().getTotalPoint()+"");
-        else 
-            ((TextView) findViewById(R.id.cell_user_point)).setText("0");
-        ((TextView) findViewById(R.id.cell_user_area)).setText("KOREA");
-        ((TextView) findViewById(R.id.cell_user_like_list)).setText(user.getLikeStoreCount()+"");
-        ((TextView) findViewById(R.id.cell_user_like_list)).setOnClickListener(new LikeStoreListListener(getContext(), user));
-
+    @Override
+    protected void init() {
+        super.init();
+        spinnerContainer = (ViewGroup) findViewById(R.id.UserCell);
+        refreshables = new ArrayList<Refreshable>();
+        
+        profile = ((CellProfileImageView) findViewById(R.id.profile));
+        nick = ((TextView) findViewById(R.id.cell_user_nick));
+        point = ((TextView) findViewById(R.id.cell_user_point));
+        area = ((TextView) findViewById(R.id.cell_user_area));
+        likeList = ((TextView) findViewById(R.id.cell_user_like_list));
         follow = (Button) findViewById(R.id.cell_user_follow);
         messageList = (Button) findViewById(R.id.cell_user_message_list);
-
-        followingListener = new FollowingListener((Identifiable) getContext(), getContext(), user, spinnerContainer) {
+        followingListener = new FollowingListener(identifiable, getContext(), user, spinnerContainer) {
 
             @Override
             public void postUnfollowRequest() {
-                UserCell.this.user.setFollowingCount(UserCell.this.user.getFollowerCount() - 1);
+                UserCell.this.user.setFollowerCount(UserCell.this.user.getFollowerCount() - 1);
                 refresh();
             }
 
             @Override
             public void postFollowRequest() {
-                UserCell.this.user.setFollowingCount(UserCell.this.user.getFollowerCount() + 1);
+                UserCell.this.user.setFollowerCount(UserCell.this.user.getFollowerCount() + 1);
                 refresh();
             }
         };
@@ -120,10 +116,33 @@ public class UserCell extends Cell implements Followable {
                 getContext().startActivity(new Intent(getContext(), MessageListActivity.class));
             }
         });
-
-        refresh();
     }
 
+    /**
+     * 이 UserCell에 user 정보를 저장하고 해당 유저의 변하지 않는 정보들을 뷰에 뿌려준다.
+     * 
+     * @param user
+     */
+    public void setUser(User user) {
+        this.user = user;
+        profile.setUserId(user.getId());
+        profile.showInsetBackground();
+        nick.setText(user.getNick());
+        if (user.getMileage() != null) 
+            point.setText(user.getMileage().getTotalPoint()+"");
+        else 
+            point.setText("0");
+        area.setText("KOREA");
+        likeList.setText(user.getLikeStoreCount()+"");
+        likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
+        followingListener.setUser(user);
+    }
+
+    public void setIdentifiable(Identifiable identifiable) {
+        this.identifiable = identifiable;
+        followingListener.setIdentifiable(identifiable);
+    }
+    
     /**
      * Refresh 가능한 정보들을 refresh
      * 
@@ -134,21 +153,15 @@ public class UserCell extends Cell implements Followable {
             follow.setVisibility(View.GONE);
             messageList.setVisibility(View.VISIBLE);
             messageList.setText(user.getReceivedMessageCount()+"");
-            if (switchable != null) switchable.off();
         } else {
             follow.setText(
                     (followingListener.isExistFollowing()) ? 
                             R.string.cell_user_unfollow
                             : R.string.cell_user_follow);
+        }
 
-            if (switchable != null) {
-                if (followingListener.isExistFollowing()) {
-                    switchable.on();
-                } else {
-                    switchable.off();
-                }
-            }
-
+        for (Refreshable refreshable : refreshables) {
+            refreshable.refresh(user);
         }
     }
 
@@ -157,23 +170,27 @@ public class UserCell extends Cell implements Followable {
      */
     @Override
     protected Intent getIntent() {
-        Intent intent = new Intent(getContext(), UserProfileActivity.class);
-        intent.putExtra(UserProfileActivity.USER, (Parcelable) user);
+        Intent intent = new Intent(getContext(), UserProfileTabActivity.class);
+        intent.putExtra(UserProfileTabActivity.USER, (Parcelable) user);
         return intent;
     }
     
-    public void setSwitchable(Switchable switchable) {
-        this.switchable = switchable;
-    }
-
-
     public void showLine() {
         findViewById(R.id.cell_user_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_user_shadow).setVisibility(View.GONE);
     }
 
+    public void addRefreshable(Refreshable refreshable) {
+        refreshables.add(refreshable);
+    }
+
     @Override
     public void following() {
         followingListener.following();
+    }
+
+    @Override
+    public boolean isFollow() {
+        return followingListener.isExistFollowing();
     }
 }

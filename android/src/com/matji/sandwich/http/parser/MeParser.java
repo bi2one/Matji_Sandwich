@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
+import com.matji.sandwich.data.AlarmSetting;
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
@@ -70,6 +71,12 @@ public class MeParser extends MatjiDataParser {
 		if (token != null)
 			me.setToken(token);
 
+		/* Set Alarm Setting */
+		AlarmSettingParser alarmSettingParser = new AlarmSettingParser(context);
+		matjiData = alarmSettingParser.getMatjiData(getObject(object, "user_alarm_setting"));
+        if (matjiData != null)
+            me.getUser().setAlarmSetting((AlarmSetting) matjiData);
+		
 		Log.d("Parser", "MeParser:: called getMatjiData");
 		
 		return me;

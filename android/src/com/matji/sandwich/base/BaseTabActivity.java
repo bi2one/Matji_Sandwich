@@ -18,6 +18,7 @@ import com.matji.sandwich.http.util.ImageLoader;
 
 public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener, Identifiable {
     private ActivityStartable lastStartedChild;
+    private boolean isFirstResume = true;
     private boolean isFlow;
     private RelativeLayout mainViewGroup;
 
@@ -127,7 +128,8 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
 
     @Override
     public void setContentView(int layoutResID) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if (isFirstResume) requestWindowFeature(Window.FEATURE_NO_TITLE);
+        isFirstResume = false;
         setTheme(R.style.Theme_RemoveOverlay);
         super.setContentView(layoutResID);
         mainViewGroup = (RelativeLayout)findViewById(setMainViewId());

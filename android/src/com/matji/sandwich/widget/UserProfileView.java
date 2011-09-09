@@ -1,5 +1,7 @@
 package com.matji.sandwich.widget;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -13,20 +15,24 @@ import android.widget.TextView;
 import com.matji.sandwich.FollowingActivity;
 import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.R;
+import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreBookmarkListActivity;
 import com.matji.sandwich.StoreDiscoverListActivity;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.cell.UserCell;
 
-public class UserProfileView extends RelativeLayout implements OnClickListener {
+public class UserProfileView extends RelativeLayout implements OnClickListener, Refreshable {
     private User user;
-    
+
     private Session session;
-    
+
     private UserCell userCell;
     private TextView intro;
     private TextView blog;
+    private View editInfoDivider;
+    private TextView editInfo;
     private View followingCountView;
     private TextView followingCount;
     private View followerCountView;
@@ -37,7 +43,7 @@ public class UserProfileView extends RelativeLayout implements OnClickListener {
     private View bookmarkDivider;
     private View bookmarkCountView; 
     private TextView bookmarkCount;
-    
+
     public UserProfileView(Context context) {
         super(context);
         init();
@@ -53,11 +59,13 @@ public class UserProfileView extends RelativeLayout implements OnClickListener {
         inflater.inflate(R.layout.user_profile, this);
 
         session = Session.getInstance(getContext());
-        
+
         userCell = ((UserCell) findViewById(R.id.UserCell));
         userCell.setClickable(false);
         intro = (TextView) findViewById(R.id.user_profile_intro);
         blog = (TextView) findViewById(R.id.user_profile_blog);
+        editInfoDivider = findViewById(R.id.user_profile_edit_info_divider);
+        editInfo = (TextView) findViewById(R.id.user_profile_edit_info);
         followingCountView = findViewById(R.id.user_profile_following);
         followingCount = (TextView) findViewById(R.id.user_profile_following_count);
         followerCountView = findViewById(R.id.user_profile_follower);
@@ -68,38 +76,17 @@ public class UserProfileView extends RelativeLayout implements OnClickListener {
         bookmarkDivider = findViewById(R.id.user_profile_store_info_line);
         bookmarkCountView = findViewById(R.id.user_profile_bookmark);
         bookmarkCount = (TextView) findViewById(R.id.user_profile_bookmark_store_count);
-        
+
         followingCountView.setOnClickListener(this);
         followerCountView.setOnClickListener(this);        
         findCountView.setOnClickListener(this);
         bookmarkCountView.setOnClickListener(this);
     }
-    
+
     public void setUser(User user) {
         this.user = user;
-        refresh();
     }
-    
-    public void refresh() {
-        userCell.setUser(user);
-        intro.setText(user.getIntro());
-        blog.setText("http://www.yummystory.......com");
-        followingCount.setText(user.getFollowingCount()+"");
-        followerCount.setText(user.getFollowerCount()+"");
-        findCount.setText(user.getDiscoverStoreCount()+"");
-        bookmarkCount.setText(user.getBookmarkStoreCount()+"");
-        
-        if (session.isLogin() && user.getId() == session.getCurrentUser().getId()) {
-            findTitle.setText(R.string.user_profile_my_find_store);
-            bookmarkDivider.setVisibility(View.VISIBLE);
-            bookmarkCountView.setVisibility(View.VISIBLE);
-        } else {
-            findTitle.setText(R.string.user_profile_find_store);
-            bookmarkDivider.setVisibility(View.GONE);
-            bookmarkCountView.setVisibility(View.GONE);
-        }
-    }
-    
+
     public void onFollowingButtonClicked(View v) {
         Intent intent = new Intent(getContext(), FollowingActivity.class);
         intent.putExtra(FollowingActivity.USER, (Parcelable) user);
@@ -113,13 +100,13 @@ public class UserProfileView extends RelativeLayout implements OnClickListener {
         intent.putExtra(FollowingActivity.TYPE, FollowingListType.FOLLOWER);
         getContext().startActivity(intent);
     }
-    
+
     public void onFindStoreButtonClicked(View v) {
         Intent intent = new Intent(getContext(), StoreDiscoverListActivity.class);
         intent.putExtra(StoreDiscoverListActivity.USER, (Parcelable) user);
         getContext().startActivity(intent);
     }
-    
+
     public void onBookmarkStoreButtonClicked(View v) {
         Intent intent = new Intent(getContext(), StoreBookmarkListActivity.class);
         getContext().startActivity(intent);
@@ -136,5 +123,44 @@ public class UserProfileView extends RelativeLayout implements OnClickListener {
         } else if (v.getId() == bookmarkCountView.getId()) {
             onBookmarkStoreButtonClicked(v);
         }        
-     }
+    }
+    
+    @Override
+    public void refresh() {
+        intro.setText(user.getIntro());
+        blog.setText("http://www.yummystory.......com");
+        followingCount.setText(user.getFollowingCount()+"");
+        followerCount.setText(user.getFollowerCount()+"");
+        findCount.setText(user.getDiscoverStoreCount()+"");
+        bookmarkCount.setText(user.getBookmarkStoreCount()+"");
+
+        if (session.isLogin() && user.getId() == session.getCurrentUser().getId()) {
+            findTitle.setText(R.string.user_profile_my_find_store);
+            editInfoDivider.setVisibility(View.VISIBLE);
+            editInfo.setVisibility(View.VISIBLE);
+            bookmarkDivider.setVisibility(View.VISIBLE);
+            bookmarkCountView.setVisibility(View.VISIBLE);
+        } else {
+            findTitle.setText(R.string.user_profile_find_store);
+            editInfoDivider.setVisibility(View.GONE);
+            editInfo.setVisibility(View.GONE);
+            bookmarkDivider.setVisibility(View.GONE);
+            bookmarkCountView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void refresh(MatjiData data) {
+        // TODO Auto-generated method stub
+        if (data instanceof User) {
+            user = (User) data;
+            refresh();
+        }
+    }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {
+        // TODO Auto-generated method stub
+        
+    }
 }

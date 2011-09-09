@@ -155,6 +155,7 @@ ActivityStartable {
         startActivity(intent);
     }
 
+    @Override
     public void activityResultDelivered(int requestCode, int resultCode, Intent data) {
         switch(requestCode) {
         case REQUEST_CODE_LOCATION:
