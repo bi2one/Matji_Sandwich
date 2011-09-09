@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_user_profile_tab"
+	style="@style/DefaultFill">
+	<!-- Tab -->
+	<com.matji.sandwich.widget.RoundTabHost
+		android:id="@android:id/tabhost"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<FrameLayout
+				android:id="@android:id/tabcontent"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_weight="1" />
+			<TabWidget
+				android:id="@android:id/tabs"
+				style="@style/RoundTabWidgetBottom"
+				android:layout_weight="0" />
+		</LinearLayout>
+	</com.matji.sandwich.widget.RoundTabHost>
+	<com.matji.sandwich.widget.LoginView
+		android:id="@+id/login_view"
+		style="@style/DefaultFill" />
+</RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/StoreCell"
+	android:id="@id/StoreCell"
 	android:layout_width="fill_parent"
 	android:layout_height="@dimen/store_cell_height">
 	<RelativeLayout
@@ -33,7 +33,7 @@
 		android:id="@+id/cell_store_line"
 		android:background="@color/listview_divider1_gray"
 		android:layout_width="fill_parent"
-		android:layout_height="@dimen/default_divider_height"
+		android:layout_height="@dimen/default_divider_size"
 		android:visibility="gone"
 		android:layout_alignParentBottom="true" />
 		

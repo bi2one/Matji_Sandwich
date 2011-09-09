@@ -14,6 +14,8 @@ import com.matji.sandwich.widget.title.HomeTitle;
 
 public class LoginActivity extends BaseActivity implements Loginable {
 
+    private HomeTitle title;
+
     public int setMainViewId() {
         return R.id.activity_login;
     }
@@ -22,7 +24,9 @@ public class LoginActivity extends BaseActivity implements Loginable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ((HomeTitle) findViewById(R.id.Titlebar)).setTitle(R.string.default_string_login);
+        
+        title = ((HomeTitle) findViewById(R.id.Titlebar));
+        title.setTitle(R.string.default_string_login);
     }
     
     public void loginButtonClicked(View v) {

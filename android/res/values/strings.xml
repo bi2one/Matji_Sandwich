@@ -382,6 +382,8 @@
   <string name="following_follower">Follower</string>
   
   <!-- PostSubHeader -->
+  <string name="post_sub_header_txt_one">%1$s님이 좋아합니다.</string>
+  <string name="post_sub_header_txt_other">%1$s님 외 %2$d명이 좋아합니다.</string>
   
   <!-- StoreTagActivity.java -->
   <string name="number_of_tag">%1$d개의 태그</string>
@@ -428,5 +430,36 @@
 
   <!-- StoreDiscoverListActivity.java -->
   <string name="store_discover_list">발견 맛집</string>
+
+  <!-- PrivateTabActivity.java -->
+  <string name="private_tab_my_info">내 정보</string>
+  <string name="private_tab_my_tag">내 태그</string>
   
+  <!-- activity_settings.xml -->
+  <string name="settings_account_manages">계정 관리</string>
+  <string name="settings_account_login">로그인</string>
+  <string name="settings_account_register">회원가입</string>
+  <string name="settings_account_forget">아이디/비밀번호 찾기</string>
+  <string name="settings_account_logout">로그아웃</string>
+  <string name="settings_account_link_twitter">twitter 계정 연동</string>
+  <string name="settings_account_link_facebook">facebook 계정 연동</string>
+  <string name="settings_account_edit_profile">정보 변경</string>
+  <string name="settings_account_find_friends">친구 찾기</string>
+  <string name="settings_location_setting">위치 설정</string>
+  <string name="settings_location_information_available">위치정보 사용</string>
+  <string name="settings_location_country">국가 설정</string>
+  <string name="settings_alarm_setting">알림 설정</string>
+  <string name="settings_alarm_new_post">새글 알림</string>
+  <string name="settings_alarm_new_comment">댓글 알림</string>
+  <string name="settings_alarm_new_like">좋아요 알림</string>
+  <string name="settings_alarm_new_follow">Follow 알림</string>
+  <string name="settings_alarm_new_message">쪽지 알림</string>
+  <string name="settings_service_information">서비스 정보</string>
+  <string name="settings_service_notice">공지사항</string>
+  <string name="settings_service_guide">서비스 안내</string>
+  <string name="settings_service_report">버그신고 및 기능제안</string>
+  <string name="settings_service_version">Ver.%1$s Build %2$d</string>
+  
+  <string name="setting_alarm_permit">permit</string>
+  <string name="setting_alarm_view">view</string>
 </resources>

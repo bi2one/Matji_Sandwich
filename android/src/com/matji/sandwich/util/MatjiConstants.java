@@ -1,6 +1,7 @@
 package com.matji.sandwich.util;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
 /**
@@ -11,33 +12,37 @@ import android.graphics.drawable.Drawable;
  *
  */
 public class MatjiConstants {
-    private static Context mContext;
+    private static Resources mResources;
 
     public static void setContext(Context context) {
-	mContext = context;
+        mResources = context.getResources();
     }
 
     public static final String[] stringArray(int id) {
-	return mContext.getResources().getStringArray(id);
+	return mResources.getStringArray(id);
     }
 	
     public static final String string(int id) {
-	return mContext.getResources().getString(id);
+	return mResources.getString(id);
+    }
+    
+    public static final String plurals(int id, int quantity) {
+        return mResources.getQuantityString(id, quantity);
     }
 
     public static final float dimen(int id) {
-        return mContext.getResources().getDimension(id);
+        return mResources.getDimension(id);
     }
 	
     public static final int dimenInt(int id) {
-        return mContext.getResources().getDimensionPixelSize(id);
+        return mResources.getDimensionPixelSize(id);
     }
     
     public static final int color(int id) {
-	return mContext.getResources().getColor(id);
+	return mResources.getColor(id);
     }
 	
     public static final Drawable drawable(int id) {
-	return mContext.getResources().getDrawable(id);
+	return mResources.getDrawable(id);
     }
 }

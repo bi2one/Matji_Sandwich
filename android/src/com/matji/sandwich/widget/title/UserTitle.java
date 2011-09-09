@@ -1,9 +1,13 @@
 package com.matji.sandwich.widget.title;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.base.Identifiable;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.button.FollowButton;
@@ -14,12 +18,11 @@ import com.matji.sandwich.widget.title.button.WriteMessageButton;
 
 /**
  * UserMainActivity에서 사용하는 Titlebar.
- * Titlebar에서 {@link User} 객체를 사용해야 하므로 생성자에서 User 정보를 무조건 받도록 한다. 
  * 
  * @author mozziluv
  *
  */
-public class UserTitle extends TitleContainerTypeLRR {
+public class UserTitle extends TitleContainerTypeLRR implements Refreshable {
     public UserTitle(Context context) {
         super(context);
     }
@@ -54,10 +57,6 @@ public class UserTitle extends TitleContainerTypeLRR {
 	    ((FollowButton) rightButton1).setFollowable(followable);
 	}
 	
-	public Switchable getSwitchable() {
-	    return (FollowButton) rightButton1;
-	}
-	
     @Override
     protected TitleImageButton getLeftButton1() {
         // TODO Auto-generated method stub
@@ -75,4 +74,20 @@ public class UserTitle extends TitleContainerTypeLRR {
         // TODO Auto-generated method stub
         return new WriteMessageButton(getContext());
     }
+
+    @Override
+    public void refresh() {
+        ((FollowButton) rightButton1).refresh();
+    }
+
+    @Override
+    public void refresh(MatjiData data) {
+        if (data instanceof User) {
+            setUser((User) data);
+            refresh();
+        }
+    }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {}
 }

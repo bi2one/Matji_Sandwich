@@ -1,160 +1,364 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/setting_layout"
-    style="@style/DefaultFill"
-    android:padding="10dp">
-
-  <ScrollView
-      style="@style/DefaultFill"
-      android:fadingEdgeLength="5dp">
-
-    <!-- Wrapper -->
-    <LinearLayout
-	android:orientation="vertical"
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_settings"
+	android:background="@drawable/bg_01"
 	style="@style/DefaultFill">
-
-      <!-- User Section -->
-      <LinearLayout
-	  android:layout_marginBottom="20dp"
-	  android:orientation="vertical"
-	  android:visibility="gone"
-	  android:id="@+id/user_settings"
-	  style="@style/DefaultWidthFill">
-
 	<LinearLayout
-	    style="@style/SettingButton"
-	    android:background="@drawable/btn_top_corner"
-	    android:onClick="onMyPageButtonClicked">
-	  <ImageView
-	      android:id="@+id/mypage_img"
-	      android:layout_width="30dp"
-	      android:layout_height="30dp"
-	      android:scaleType="fitXY" />
-	  <TextView
-	      android:id="@+id/mypage_txt"
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-	      android:layout_margin="5dp"
-	      android:textColor="@color/BLACK" />
+		style="@style/DefaultLinearFill">
+		<!-- Settings Wrapper -->
+		<RelativeLayout
+			style="@style/DefaultFill"
+			android:padding="@dimen/default_distance">
+
+			<TextView
+				android:id="@+id/settings_account_manages"
+				style="@style/settings_AccountManages" />
+
+			<RelativeLayout
+				android:id="@+id/settings_account_manages_all"
+				style="@style/settings_Wrapper"
+				android:layout_below="@id/settings_account_manages">
+				<!-- Account Settings (Logoff State) -->
+				<LinearLayout
+					android:id="@+id/settings_account_manages_wrapper"
+					style="@style/DefaultWrap"
+					android:orientation="vertical">
+					<!-- Login -->
+					<TextView
+						android:id="@+id/settings_account_login"
+						style="@style/settings_Row"
+						android:text="@string/settings_account_login"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:drawableRight="@drawable/icon_flow"
+						android:drawablePadding="@dimen/default_drawable_padding_long" />
+					<View
+						style="@style/HorizontalLine" />
+					<!-- Register -->
+					<TextView
+						android:id="@+id/settings_account_register"
+						style="@style/settings_Row"
+						android:text="@string/settings_account_register"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:drawableRight="@drawable/icon_flow"
+						android:drawablePadding="@dimen/default_drawable_padding_long"
+						android:layout_below="@id/settings_account_login" />
+					<View
+						style="@style/HorizontalLine" />
+					<!-- Forget your ID/PASS -->
+					<TextView
+						android:id="@+id/settings_account_forget"
+						style="@style/settings_Row"
+						android:text="@string/settings_account_forget"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:drawableRight="@drawable/icon_flow"
+						android:drawablePadding="@dimen/default_drawable_padding_long"
+						android:layout_below="@id/settings_account_register" />
+				</LinearLayout>
+
+				<!-- Account Settings (Logon State) -->
+				<LinearLayout
+					android:id="@+id/settings_account_manages_wrapper_atho"
+					style="@style/DefaultWrap"
+					android:orientation="vertical">
+					<!-- Logout -->
+					<RelativeLayout
+						android:id="@+id/settings_account_logout"
+						style="@style/settings_Row">
+						<TextView
+							android:id="@+id/settings_account_nick"
+							style="@style/DefaultWrap"
+							android:textSize="@dimen/settings_content_size"
+							android:textColor="@color/matji_red"
+							android:layout_alignBaseline="@+id/settings_account_logout_btn"
+							android:layout_alignParentLeft="true"
+							android:layout_toLeftOf="@id/settings_account_logout_btn" />
+						<Button
+							android:id="@id/settings_account_logout_btn"
+							android:layout_width="wrap_content"
+							android:layout_height="@dimen/settings_logout_btn_height"
+							android:background="@drawable/btn_yellow"
+							android:text="@string/settings_account_logout"
+							android:textSize="@dimen/settings_logout_btn_txt_size"
+							android:textColor="@color/matji_white"
+							android:shadowColor="@color/settings_logout_btn_txt_shadow"
+							android:shadowDy="-1.3"
+							android:shadowRadius="1"
+							android:layout_alignParentRight="true" />
+					</RelativeLayout>
+					<View
+						style="@style/HorizontalLine" />
+					<!-- Link Twitter -->
+					<TextView
+						android:id="@+id/settings_account_link_twitter"
+						style="@style/settings_Row"
+						android:text="@string/settings_account_link_twitter"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:drawableLeft="@drawable/icon_twitter"
+						android:drawableRight="@drawable/icon_flow"
+						android:drawablePadding="@dimen/default_drawable_padding_long"
+						android:layout_below="@id/settings_account_logout" />
+					<View
+						style="@style/HorizontalLine" />
+					<!-- Link Facebook -->
+					<TextView
+						android:id="@+id/settings_account_link_facebook"
+						style="@style/settings_Row"
+						android:text="@string/settings_account_link_facebook"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:drawableLeft="@drawable/icon_facebook"
+						android:drawableRight="@drawable/icon_flow"
+						android:drawablePadding="@dimen/default_drawable_padding_long"
+						android:layout_below="@id/settings_account_link_twitter" />
+					<View
+						style="@style/HorizontalLine" />
+					<!-- Edit Profile -->
+					<TextView
+						android:id="@+id/settings_account_edit_profile"
+						style="@style/settings_Row"
+						android:text="@string/settings_account_edit_profile"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:drawablePadding="@dimen/default_drawable_padding_long"
+						android:layout_below="@id/settings_account_link_facebook" />
+					<View
+						style="@style/HorizontalLine" />
+					<!-- Find Friends -->
+					<TextView
+						android:id="@+id/settings_account_find_friends"
+						style="@style/settings_Row"
+						android:text="@string/settings_account_find_friends"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:drawablePadding="@dimen/default_drawable_padding_long"
+						android:layout_below="@id/settings_account_edit_profile" />
+				</LinearLayout>
+			</RelativeLayout>
+			<!-- Location Settings -->
+<!-- 			<TextView -->
+<!-- 				android:id="@+id/settings_location_settings" -->
+<!-- 				style="@style/settings_LocationSettings" -->
+<!-- 				android:layout_below="@id/settings_account_manages_all" /> -->
+<!-- 			<LinearLayout -->
+<!-- 				android:id="@+id/settings_location_settings_wrapper" -->
+<!-- 				style="@style/settings_Wrapper" -->
+<!-- 				android:orientation="vertical" -->
+<!-- 				android:layout_below="@id/settings_location_settings"> -->
+				<!-- Using Location Information -->
+<!-- 				<RelativeLayout -->
+<!-- 					style="@style/settings_Row"> -->
+<!-- 					<TextView -->
+<!-- 						android:id="@+id/settings_location_information_available" -->
+<!-- 						style="@style/DefaultWrap" -->
+<!-- 						android:text="@string/settings_location_information_available" -->
+<!-- 						android:textSize="@dimen/settings_content_size" -->
+<!-- 						android:textColor="@color/matji_gray" -->
+<!-- 						android:layout_centerVertical="true" -->
+<!-- 						android:layout_alignParentLeft="true" -->
+<!-- 						android:layout_toLeftOf="@+id/settings_location_information_available_check" /> -->
+<!-- 					<CheckBox -->
+<!-- 						android:id="@id/settings_location_information_available_check" -->
+<!-- 						style="@style/DefaultWrap" -->
+<!-- 						android:button="@drawable/icon_check_selector" -->
+<!-- 						android:layout_centerVertical="true" -->
+<!-- 						android:layout_alignParentRight="true" /> -->
+<!-- 				</RelativeLayout> -->
+<!-- 				<View -->
+<!-- 					style="@style/HorizontalLine" /> -->
+				<!-- Country Setting -->
+<!-- 				<RelativeLayout -->
+<!-- 					style="@style/settings_Row"> -->
+<!-- 					<TextView -->
+<!-- 						android:id="@+id/settings_location_setting" -->
+<!-- 						style="@style/DefaultWrap" -->
+<!-- 						android:text="@string/settings_location_country" -->
+<!-- 						android:textSize="@dimen/settings_content_size" -->
+<!-- 						android:textColor="@color/matji_gray" -->
+<!-- 						android:layout_centerVertical="true" -->
+<!-- 						android:layout_alignParentLeft="true" -->
+<!-- 						android:layout_toLeftOf="@+id/settings_current_location_name" /> -->
+<!-- 					<TextView -->
+<!-- 						android:id="@id/settings_current_location_name" -->
+<!-- 						style="@style/DefaultWrap" -->
+<!-- 						android:textColor="@color/matji_red" -->
+<!-- 						android:layout_centerVertical="true" -->
+<!-- 						android:layout_alignParentRight="true" -->
+<!-- 						android:drawableRight="@drawable/icon_flow" -->
+<!-- 						android:drawablePadding="@dimen/default_drawable_padding_long" /> -->
+<!-- 				</RelativeLayout> -->
+<!-- 			</LinearLayout> -->
+
+			<!-- Alarm Settings -->
+			<TextView
+				android:id="@+id/settings_alarm_settings"
+				style="@style/settings_AlarmSettings"
+				android:layout_below="@id/settings_account_manages_all" />
+			<LinearLayout
+				android:id="@+id/settings_alarm_settings_wrapper"
+				style="@style/settings_Wrapper"
+				android:orientation="vertical"
+				android:layout_below="@id/settings_alarm_settings">
+				<!-- New Post Alarm -->
+<!-- 				<RelativeLayout -->
+<!-- 					style="@style/settings_Row"> -->
+<!-- 					<TextView -->
+<!-- 						android:id="@+id/settings_alarm_new_post_alarm" -->
+<!-- 						style="@style/DefaultWrap" -->
+<!-- 						android:text="@string/settings_alarm_new_post" -->
+<!-- 						android:textSize="@dimen/settings_content_size" -->
+<!-- 						android:textColor="@color/matji_gray" -->
+<!-- 						android:layout_centerVertical="true" -->
+<!-- 						android:layout_alignParentLeft="true" -->
+<!-- 						android:layout_toLeftOf="@+id/settings_alarm_new_post_alarm_check" /> -->
+<!-- 					<CheckBox -->
+<!-- 						android:id="@id/settings_alarm_new_post_alarm_check" -->
+<!-- 						style="@style/DefaultWrap" -->
+<!-- 						android:button="@drawable/icon_check_selector" -->
+<!-- 						android:layout_centerVertical="true" -->
+<!-- 						android:layout_alignParentRight="true" /> -->
+<!-- 				</RelativeLayout> -->
+<!-- 				<View -->
+<!-- 					style="@style/HorizontalLine" /> -->
+				<!-- New Comment Alarm -->
+				<RelativeLayout
+					android:id="@+id/settings_alarm_new_comment_alarm"
+					style="@style/settings_Row">
+					<TextView
+						style="@style/DefaultWrap"
+						android:text="@string/settings_alarm_new_comment"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:layout_centerVertical="true"
+						android:layout_alignParentLeft="true"
+						android:layout_toLeftOf="@+id/settings_alarm_new_comment_alarm_check" />
+					<CheckBox
+						android:id="@id/settings_alarm_new_comment_alarm_check"
+						style="@style/DefaultWrap"
+						android:button="@drawable/icon_check_selector"
+						android:layout_centerVertical="true"
+						android:layout_alignParentRight="true" />
+				</RelativeLayout>
+				<View
+					style="@style/HorizontalLine" />
+				<!-- New Like Alarm -->
+				<RelativeLayout
+					android:id="@+id/settings_alarm_new_like_alarm"
+					style="@style/settings_Row">
+					<TextView
+						style="@style/DefaultWrap"
+						android:text="@string/settings_alarm_new_like"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:layout_centerVertical="true"
+						android:layout_alignParentLeft="true"
+						android:layout_toLeftOf="@+id/settings_alarm_new_like_alarm_check" />
+					<CheckBox
+						android:id="@id/settings_alarm_new_like_alarm_check"
+						style="@style/DefaultWrap"
+						android:button="@drawable/icon_check_selector"
+						android:layout_centerVertical="true"
+						android:layout_alignParentRight="true" />
+				</RelativeLayout>
+				<View
+					style="@style/HorizontalLine" />
+				<!-- New Follow Alarm -->
+				<RelativeLayout
+					android:id="@+id/settings_alarm_new_follow_alarm"
+					style="@style/settings_Row">
+					<TextView
+						style="@style/DefaultWrap"
+						android:text="@string/settings_alarm_new_follow"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:layout_alignParentLeft="true"
+						android:layout_centerVertical="true"
+						android:layout_toLeftOf="@+id/settings_alarm_new_follow_alarm_check" />
+					<CheckBox
+						android:id="@id/settings_alarm_new_follow_alarm_check"
+						style="@style/DefaultWrap"
+						android:button="@drawable/icon_check_selector"
+						android:layout_centerVertical="true"
+						android:layout_alignParentRight="true" />
+				</RelativeLayout>
+				<View
+					style="@style/HorizontalLine" />
+				<!-- New Message Alarm -->
+				<RelativeLayout
+					android:id="@+id/settings_alarm_new_message_alarm"
+					style="@style/settings_Row">
+					<TextView
+						style="@style/DefaultWrap"
+						android:text="@string/settings_alarm_new_message"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:layout_centerVertical="true"
+						android:layout_alignParentLeft="true"
+						android:layout_toLeftOf="@+id/settings_alarm_new_message_alarm_check" />
+					<CheckBox
+						android:id="@id/settings_alarm_new_message_alarm_check"
+						style="@style/DefaultWrap"
+						android:button="@drawable/icon_check_selector"
+						android:layout_centerVertical="true"
+						android:layout_alignParentRight="true" />
+				</RelativeLayout>
+			</LinearLayout>
+
+			<!-- Service Information -->
+			<TextView
+				android:id="@+id/settings_service_information"
+				style="@style/settings_ServiceInformation"
+				android:layout_below="@id/settings_alarm_settings_wrapper" />
+			<LinearLayout
+				android:id="@+id/settings_service_information_wrapper"
+				style="@style/settings_Wrapper"
+				android:orientation="vertical"
+				android:layout_below="@id/settings_service_information">
+				<!-- Notice -->
+				<TextView
+					android:id="@+id/settings_service_notice"
+					style="@style/settings_Row"
+					android:text="@string/settings_service_notice"
+					android:textSize="@dimen/settings_content_size"
+					android:textColor="@color/matji_gray"
+					android:drawableRight="@drawable/icon_flow"
+					android:drawablePadding="@dimen/default_drawable_padding_long" />
+				<View
+					style="@style/HorizontalLine" />
+				<!-- Service Guide -->
+				<TextView
+					android:id="@+id/settings_service_guide"
+					style="@style/settings_Row"
+					android:text="@string/settings_service_guide"
+					android:textSize="@dimen/settings_content_size"
+					android:textColor="@color/matji_gray"
+					android:drawableRight="@drawable/icon_flow"
+					android:drawablePadding="@dimen/default_drawable_padding_long" />
+				<View
+					style="@style/HorizontalLine" />
+				<!-- Report -->
+				<TextView
+					android:id="@+id/settings_service_report"
+					style="@style/settings_Row"
+					android:text="@string/settings_service_report"
+					android:textSize="@dimen/settings_content_size"
+					android:textColor="@color/matji_gray"
+					android:drawableRight="@drawable/icon_flow"
+					android:drawablePadding="@dimen/default_drawable_padding_long" />
+				<View
+					style="@style/HorizontalLine" />
+				<!-- Version -->
+				<TextView
+					android:id="@+id/settings_service_version"
+					style="@style/settings_Row"
+					android:text="@string/settings_service_version"
+					android:textSize="@dimen/settings_content_size"
+					android:textColor="@color/matji_gray" />
+			</LinearLayout>
+		</RelativeLayout>
 	</LinearLayout>
-	<Button
-	    android:id="@+id/notifications"
-	    style="@style/SettingButton"
-	    android:padding="10dp"
-	    android:onClick="onProfileButtonClicked"
-	    android:text="My Profile" />
-	<Button
-	    android:id="@+id/notifications"
-	    style="@style/SettingButton"
-	    android:onClick="onNotificationsButtonClicked"
-	    android:padding="10dp"
-	    android:text="Notifications" />
-	<Button
-	    android:id="@+id/messages"
-	    style="@style/SettingButton"
-	    android:padding="10dp"
-	    android:onClick="onMessagesButtonClicked"
-	    android:background="@drawable/btn_bottom_corner"
-	    android:text="Messages" />
-      </LinearLayout>
-
-      <!-- Notice Section -->
-      <LinearLayout
-	  android:layout_marginBottom="20dp"
-	  android:orientation="vertical"
-	  style="@style/DefaultWidthFill">
-	<Button
-	    android:id="@+id/notices"
-	    android:padding="10dp"
-	    style="@style/SettingButton"
-	    android:background="@drawable/btn_all_corner"
-	    android:onClick="onNoticesButtonClicked"
-	    android:text="Notices" />
-      </LinearLayout>
-
-
-      <!-- Sync Section -->
-      <LinearLayout
-	  android:layout_marginBottom="20dp"
-	  android:orientation="vertical"
-	  style="@style/DefaultWidthFill">
-	<Button
-	    android:id="@+id/sync"
-	    android:padding="10dp"
-	    style="@style/SettingButton"
-	    android:background="@drawable/btn_all_corner"
-	    android:onClick="onSyncButtonClicked"
-	    android:text="Sync" />
-      </LinearLayout>
-
-      <!-- Default Section -->
-      <LinearLayout
-	  android:layout_marginBottom="20dp"
-	  android:orientation="vertical"
-	  style="@style/DefaultWidthFill">
-
-	<Button
-	    android:id="@+id/manual"
-	    android:padding="10dp"
-	    style="@style/SettingButton"
-	    android:background="@drawable/btn_top_corner"
-	    android:onClick="onManualButtonClicked"
-	    android:text="manual" />
-
-	<Button
-	    android:id="@+id/version"
-	    android:padding="10dp"
-	    style="@style/SettingButton"
-	    android:onClick="onVersionButtonClicked"
-	    android:text="Version" />
-
-
-	<RelativeLayout
-	    style="@style/SettingButton"
-	    android:padding="10dp"
-	    android:background="@drawable/btn_bottom_corner"
-	    android:onClick="onAboutButtonClicked">
-	  <TextView
-	      android:id="@+id/about"
-	      style="@style/DefaultWrap"
-	      android:text="About" />
-	  <TextView
-	      style="@style/DefaultWrap"
-	      android:layout_marginLeft="80dp"
-	      android:text="BananaWiki" />
-	</RelativeLayout>
-
-      </LinearLayout>
-
-      <LinearLayout
-	  android:id="@+id/login_settings"
-	  style="@style/DefaultWidthFill">
-
-	<Button
-	    android:id="@+id/signin"
-	    style="@style/DefaultWidthFill"
-	    android:onClick="loginButtonClicked"
-	    android:layout_weight="1"
-	    android:text="로그인"
-	    android:layout_alignParentLeft="true" />
-	<Button
-	    android:id="@+id/signout"
-	    style="@style/DefaultWidthFill"
-	    android:onClick="logoutButtonClicked"
-	    android:layout_weight="1"
-	    android:text="로그아웃" />
-	<Button
-	    android:id="@+id/signup"
-	    style="@style/DefaultWidthFill"
-	    android:onClick="signupButtonClicked"
-	    android:layout_weight="1"
-	    android:text="회원가입"
-	    android:layout_alignParentRight="true" />
-      </LinearLayout>
-    </LinearLayout>
-
-  </ScrollView>
-
-
-</RelativeLayout>
+</ScrollView>

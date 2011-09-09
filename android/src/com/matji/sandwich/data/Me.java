@@ -71,8 +71,7 @@ public class Me extends MatjiData{
 		return user;
 	}
 	
-	
-	public void setBookmarks(ArrayList<Bookmark> bookmarks) {
+    public void setBookmarks(ArrayList<Bookmark> bookmarks) {
 		this.bookmarks = bookmarks;
 	}
 	

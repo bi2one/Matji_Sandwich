@@ -114,4 +114,7 @@
 
 	<!-- AlbumView.java -->
 	<color name="album_view_bg">#ffd753</color>
+	
+	<!-- activity_settings.xml -->
+	<color name="settings_logout_btn_txt_shadow">#c26200</color>
 </resources>

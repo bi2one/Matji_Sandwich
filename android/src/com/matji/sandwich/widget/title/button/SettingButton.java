@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.SettingActivity;
+import com.matji.sandwich.SettingsActivity;
 
 /**
  * TODO
@@ -37,6 +37,6 @@ public class SettingButton extends TitleImageButton {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "SettingsButtonClicked");
 		
-		getContext().startActivity(new Intent(getContext(), SettingActivity.class));
+		getContext().startActivity(new Intent(getContext(), SettingsActivity.class));
 	}
 }

@@ -35,11 +35,12 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
         storeCell = new StoreCell(this, store);
 
         title.setIdentifiable(this);
-        title.setSpinnerContainer(getMainView());
-        title.setRefreshable(this);
         title.setStore(store);
+        title.setLikeable(storeCell);
 
-        storeCell.setMainView(getMainView());
+        storeCell.setIdentifiable(this);
+        storeCell.addRefreshable(this);
+        storeCell.addRefreshable(title);
 
         listView = (StoreUrlListView) findViewById(R.id.store_url_list);
         listView.setStoreId(store.getId());
@@ -51,21 +52,20 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
     @Override
     protected void onNotFlowResume() {
         super.onNotFlowResume();
-        refresh();
+        storeCell.refresh();
     }
     
     @Override
     public void refresh() {
-        storeCell.refresh();
         listView.refresh();
-        title.syncSwitch();
     }
 
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
             this.store = (Store) data;
-            storeCell.setStore(store);
+            listView.setStoreId(store.getId());
+            refresh();
         }
 
     }

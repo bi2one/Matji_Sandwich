@@ -65,7 +65,7 @@ Requestable {
         this.addressView = addressView;
         this.activity = activity;
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
-        setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_height));
+        setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_size));
         addHeaderView(new HighlightHeader(activity, MatjiConstants.string(R.string.default_string_store)));
         ((SimpleStoreAdapter) getMBaseAdapter()).visibleBookmarkView();
     }

@@ -39,11 +39,12 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
         listView = (StorePostListView) findViewById(R.id.store_post_list);
         
         title.setIdentifiable(this);
-        title.setSpinnerContainer(getMainView());
-        title.setRefreshable(this);
         title.setStore(store);
+        title.setLikeable(storeCell);
         
-        storeCell.setMainView(getMainView());
+        storeCell.setIdentifiable(this);
+        storeCell.addRefreshable(this);
+        storeCell.addRefreshable(title);
         storeCell.showLine();
         
         listView.addHeaderView(storeCell);
@@ -57,7 +58,7 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
     protected void onNotFlowResume() {
         // TODO Auto-generated method stub
         super.onNotFlowResume();
-        refresh();
+        storeCell.refresh();
     }
     
     @Override
@@ -103,22 +104,16 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
     @Override
     public void refresh() {
         storeCell.refresh();
-        listView.refresh();
-        title.syncSwitch();
     }
 
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
             this.store = (Store) data;
-            storeCell.setStore(store);
             listView.setStore(store);
         }
     }
 
     @Override
-    public void refresh(ArrayList<MatjiData> data) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void refresh(ArrayList<MatjiData> data) {}
 }

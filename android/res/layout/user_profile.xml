@@ -10,7 +10,7 @@
 
 			<!-- User Cell -->
 			<com.matji.sandwich.widget.cell.UserCell
-				android:id="@+id/UserCell"
+				android:id="@id/UserCell"
 				style="@style/DefaultWrap" />
 
 			<!-- User Profile Wrapper -->
@@ -33,7 +33,7 @@
 						android:textColor="@color/matji_gray"
 						android:padding="@dimen/user_profile_wrapper_padding" />
 					<View
-						style="@style/user_profile_HorizontalLine" />
+						style="@style/HorizontalLine" />
 					<TextView
 						android:id="@+id/user_profile_blog"
 						style="@style/DefaultWidthFill"
@@ -43,11 +43,11 @@
 						android:textColor="@color/matji_gray"
 						android:drawableLeft="@drawable/icon_web"
 						android:drawableRight="@drawable/icon_flow"
-						android:drawablePadding="@dimen/user_profile_drawable_padding"
-
+						android:drawablePadding="@dimen/default_drawable_padding_long"
 						android:padding="@dimen/user_profile_wrapper_padding" />
 					<View
-						style="@style/user_profile_HorizontalLine" />
+						android:id="@+id/user_profile_edit_info_divider"
+						style="@style/HorizontalLine" />
 					<TextView
 						android:id="@+id/user_profile_edit_info"
 						style="@style/DefaultWidthFill"
@@ -57,7 +57,7 @@
 						android:textColor="@color/matji_light_gray2"
 						android:padding="@dimen/user_profile_wrapper_padding"
 						android:drawableRight="@drawable/icon_flow"
-						android:drawablePadding="@dimen/user_profile_drawable_padding" />
+						android:drawablePadding="@dimen/default_drawable_padding_long" />
 				</LinearLayout>
 				<!-- Friend Info -->
 				<TextView
@@ -93,7 +93,7 @@
 
 					<View
 						android:id="@+id/user_profile_friend_info_line"
-						style="@style/user_profile_VerticalLine" />
+						style="@style/VerticalLine" />
 
 					<!-- Follower -->
 					<RelativeLayout
@@ -153,7 +153,7 @@
 
 					<View
 						android:id="@+id/user_profile_store_info_line"
-						style="@style/user_profile_VerticalLine"
+						style="@style/VerticalLine"
 						android:visibility="gone" />
 
 					<!-- Bookmark Store -->

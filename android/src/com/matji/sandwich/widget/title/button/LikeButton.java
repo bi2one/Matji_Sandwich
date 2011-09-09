@@ -60,7 +60,17 @@ public class LikeButton extends TitleImageButton implements Switchable {
         setImageResource(R.drawable.icon_navi_like);
     }
     
+    
+    public void refresh() {
+        if (likeable.isLike()) {
+            on();
+        } else {
+            off();
+        }
+    }
+    
     public interface Likeable {
         public void like();
+        public boolean isLike();
     }
 }

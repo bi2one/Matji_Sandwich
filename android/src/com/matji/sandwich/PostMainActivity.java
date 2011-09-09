@@ -17,6 +17,7 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.listener.LikeListener;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.CommentInputBar;
@@ -96,6 +97,9 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             @Override
             public void postUnlikeRequest() {
                 // like 요청 후 post의 likeCount를 줄여준다.
+                if (currentPost.getLikeCount() == 1) {
+                    currentPost.setLikeUser(null);
+                }
                 currentPost.setLikeCount(currentPost.getLikeCount() - 1);
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();
@@ -105,6 +109,9 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             @Override
             public void postLikeRequest() {
                 // unlike 요청 후 post의 likeCount를 늘려준다.
+                if (currentPost.getLikeCount() == 0) {
+                    currentPost.setLikeUser(Session.getInstance(PostMainActivity.this).getCurrentUser());
+                }
                 currentPost.setLikeCount(currentPost.getLikeCount() + 1);
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();

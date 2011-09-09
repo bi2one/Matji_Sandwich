@@ -39,9 +39,11 @@ public class RankingTabActivity extends BaseTabActivity {
         sessionUtil = new SessionTabHostUtil(context);
         session = Session.getInstance(context);
     }
-
-    protected void onResume() {
-        super.onResume();
+    
+    @Override
+    protected void onNotFlowResume() {
+        // TODO Auto-generated method stub
+        super.onNotFlowResume();
         tabHost.setCurrentTab(0);
         tabHost.clearAllTabs();
         if (session.isLogin()) {

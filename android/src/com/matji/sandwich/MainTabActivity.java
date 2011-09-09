@@ -82,10 +82,14 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
                 R.drawable.icon_tapbar_matist_selector,
                 R.string.main_tab_ranking,
                 new Intent(this, RankingTabActivity.class));
+        
+
+        Intent userTabIntent = new Intent(this, UserProfileTabActivity.class);
+        userTabIntent.putExtra(UserProfileTabActivity.IS_MAIN_TAB_ACTIVITY, true);
         tabHost.addTab(MainTabHost.LOGIN_TAB,
                 R.drawable.icon_tapbar_login_selector,
                 R.string.main_tab_config,
-                new Intent(this, PrivateActivity.class));
+                userTabIntent);
 
         tabHost.setOnTabChangedListener(this);
 
@@ -163,10 +167,10 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
         }
         
         syncTitle();
-        loginTabValidate();
+        loginTabSync();
     }
 
-    public void loginTabValidate() {
+    public void loginTabSync() {
         if (session.isLogin()) {
             tabHost.setTabLabel(
                     MainTabHost.LOGIN_TAB, 

@@ -3,73 +3,95 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.TagHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.widget.tag.TagCloudView;
+import com.matji.sandwich.widget.SubtitleHeader;
+import com.matji.sandwich.widget.cell.UserCell;
+import com.matji.sandwich.widget.tag.UserTagCloudView;
+import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserTagActivity extends BaseActivity implements Requestable {
-	private HttpRequest request;
-	private TagCloudView tagCloudView;
-	private User user;
-	
-	private final int USER_TAG_LIST_REQUEST = 11;
-	public static final String USER = "user";
+public class UserTagActivity extends BaseActivity implements Refreshable {
+
+    private boolean isMainTabActivity;
+    private User user;
+    private UserTitle title;
+    private UserCell userCell;
+    private SubtitleHeader tagCount;
+    private UserTagCloudView tagCloudView;
+
+    public static final String USER = "UserTagActivity.user";
+    public static final String IS_MAIN_TAB_ACTIVITY = "UserTagActivity.is_main_tab_activity";
 
     public int setMainViewId() {
-	return R.id.activity_user_tag;
+        return R.id.activity_user_tag;
     }
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_user_tag);
-		user = (User) getIntent().getParcelableExtra(USER);
-		HttpRequestManager.getInstance(this).request(getMainView(), request(), USER_TAG_LIST_REQUEST, this);
-		
-		tagCloudView = (TagCloudView) findViewById(R.id.user_tag_cloud);
-		
-		TextView tagCount = (TextView) findViewById(R.id.user_tag_count);
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_tag);
+        isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
+        user = (User) getIntent().getParcelableExtra(USER);
+
+        title = (UserTitle) findViewById(R.id.Titlebar);
+        userCell = (UserCell) findViewById(R.id.UserCell);
+        tagCount = (SubtitleHeader) findViewById(R.id.user_tag_count);
+        tagCloudView = (UserTagCloudView) findViewById(R.id.user_tag_cloud);
+
+        if (!isMainTabActivity) {
+            title.setIdentifiable(this);
+            title.setUser(user);
+            title.setFollowable(userCell);
+        }
+
+        userCell.setUser(user);
+        userCell.setClickable(false);
+        userCell.setIdentifiable(this);
+        userCell.addRefreshable(this);
+        if (!isMainTabActivity) userCell.addRefreshable(title);
+        else dismissTitle();
+        userCell.addRefreshable(tagCloudView);
+
+        tagCloudView.setSpinnerContainer(getMainView());
+
+    }
+
+    public void showTitle() {
+        title.setVisibility(View.VISIBLE);
+    }
+
+    public void dismissTitle() {
+        title.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        userCell.refresh();
+    }
+
+    @Override
+    public void refresh() {
         String numTag = String.format(
                 MatjiConstants.string(R.string.number_of_tag),
                 user.getTagCount());
-		tagCount.setText(numTag);
-	}
-	
-	private HttpRequest request() {
-		if (request == null || !(request instanceof TagHttpRequest)) {
-			request = new TagHttpRequest(this);
-		}
-		
-		((TagHttpRequest) request).actionUserTagListForCloud(user.getId());
 
-		return request;
-	}
-	
-	
-	@Override
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		// TODO Auto-generated method stub
-		ArrayList<Tag> tags = new ArrayList<Tag>();
-		for (MatjiData d : data) {
-			tags.add((Tag) d);
-		}
-		
-		tagCloudView.init(tags);
-	}
+        tagCount.setTitle(numTag);
+    }
 
-	@Override
-	public void requestExceptionCallBack(int tag, MatjiException e) {
-		// TODO Auto-generated method stub
-		e.performExceptionHandling(this);
-	}
+    @Override
+    public void refresh(MatjiData data) {
+        if (data instanceof User) {
+            this.user = (User) data;
+            refresh();
+        }
+    }
+
+    @Override
+    public void refresh(ArrayList<MatjiData> data) {}
 }

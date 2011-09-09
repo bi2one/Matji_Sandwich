@@ -15,6 +15,7 @@ import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
+import com.matji.sandwich.session.Session;
 
 /**
  * Follow, Unfollow를 수행하는 리스너.
@@ -39,6 +40,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
     private Context context;
     private FollowingHttpRequest followingRequest;
     private HttpRequestManager manager;
+    private Session session;
     private DBProvider dbProvider;
     private ViewGroup spinnerContainer;
 
@@ -54,6 +56,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
         this.context = context;
         followingRequest = new FollowingHttpRequest(context);
         manager = HttpRequestManager.getInstance(context);
+        session = Session.getInstance(context);
         dbProvider = DBProvider.getInstance(context);
         this.spinnerContainer = spinnerContainer;
     }
@@ -78,6 +81,10 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
         this.user = user;
     }
 
+    public void setIdentifiable(Identifiable identifiable) {
+        this.identifiable = identifiable;
+    }
+    
     @Override
     public void onClick(View v) {
         following();
@@ -121,11 +128,13 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
         switch (tag) {
         case HttpRequestManager.FOLLOW_REQUEST:
             dbProvider.insertFollowing(user.getId());
-
+            session.getCurrentUser().setFollowingCount(session.getCurrentUser().getFollowingCount() + 1);
+            
             postFollowRequest();
             break;
         case HttpRequestManager.UN_FOLLOW_REQUEST:
             dbProvider.deleteFollowing(user.getId());
+            session.getCurrentUser().setFollowingCount(session.getCurrentUser().getFollowingCount() - 1);
 
             postUnfollowRequest();
             break;

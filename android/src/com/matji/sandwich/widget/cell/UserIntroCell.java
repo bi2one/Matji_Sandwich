@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.UserProfileActivity;
+import com.matji.sandwich.UserProfileTabActivity;
 import com.matji.sandwich.data.User;
 
 /**
@@ -49,8 +49,8 @@ public class UserIntroCell extends Cell {
 	 */
 	@Override
 	protected Intent getIntent() {
-		Intent intent = new Intent(getContext(), UserProfileActivity.class);
-		intent.putExtra(UserProfileActivity.USER, (Parcelable) user);
+		Intent intent = new Intent(getContext(), UserProfileTabActivity.class);
+		intent.putExtra(UserProfileTabActivity.USER, (Parcelable) user);
 		return intent;
 	}
 	

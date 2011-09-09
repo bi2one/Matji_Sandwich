@@ -14,8 +14,8 @@
 			style="@style/DefaultFill"
 			android:id="@+id/cell_user_intro"
 			android:textColor="@color/matji_silver"
-			android:minLines="2"
 			android:maxLines="2"
+			android:ellipsize="end"
 			android:drawablePadding="@dimen/default_distance"
 			android:drawableRight="@drawable/icon_flow" />
 	</LinearLayout>

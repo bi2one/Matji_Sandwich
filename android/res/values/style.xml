@@ -139,7 +139,18 @@
 	<item name="android:textSize">@dimen/text_xxlarge</item>
   	<item name="android:textColor">@color/BLACK</item>
   </style>
+    
+  <style name="HorizontalLine">
+    <item name="android:background">@color/listview_divider1_gray</item>
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">@dimen/default_divider_size</item>
+  </style>
   
+  <style name="VerticalLine">
+    <item name="android:background">@color/listview_divider1_gray</item>
+    <item name="android:layout_width">@dimen/default_divider_size</item>
+    <item name="android:layout_height">fill_parent</item>
+  </style>
   
   <!-- Buttons -->
   <style name="WhiteButton">
@@ -949,18 +960,42 @@
     <item name="android:textColor">@color/matji_light_gray2</item>
   </style>
 
-  <style name="user_profile_VerticalLine">
-    <item name="android:background">@color/listview_divider1_gray</item>
-    <item name="android:layout_width">@dimen/user_profile_line_size</item>
-    <item name="android:layout_height">fill_parent</item>
+  <!-- activity_settings.xml -->
+  <style name="settings_Title" parent="DefaultWrap">  
+    <item name="android:textSize">@dimen/subtitle_size</item>
+    <item name="android:textColor">@color/matji_chocolate</item>
   </style>
   
-  <style name="user_profile_HorizontalLine">
-    <item name="android:background">@color/listview_divider1_gray</item>
+  <style name="settings_Wrapper" parent="DefaultWidthFill">
+    <item name="android:layout_marginTop">@dimen/settings_margin_top</item>
+    <item name="android:layout_marginBottom">@dimen/settings_margin_bottom</item>
+    <item name="android:background">@drawable/txtbox</item>
+  </style>
+  
+  <style name="settings_Row">
     <item name="android:layout_width">fill_parent</item>
-    <item name="android:layout_height">@dimen/user_profile_line_size</item>
+    <item name="android:layout_height">@dimen/settings_row_height</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:paddingLeft">@dimen/settings_row_padding</item>
+    <item name="android:paddingRight">@dimen/settings_row_padding</item>
   </style>
   
+  <style name="settings_AccountManages" parent="settings_Title">
+    <item name="android:text">@string/settings_account_manages</item>
+  </style> 
+  
+  <style name="settings_LocationSettings" parent="settings_Title">
+    <item name="android:text">@string/settings_location_setting</item>
+  </style> 
+  
+  <style name="settings_AlarmSettings" parent="settings_Title">
+    <item name="android:text">@string/settings_alarm_setting</item>
+  </style>
+    
+  <style name="settings_ServiceInformation" parent="settings_Title">
+    <item name="android:text">@string/settings_service_information</item>
+  </style>   
+
   <!-- album_image_view.xml -->
   <style name="album_image_view" parent="DefaultWrap">
     <item name="android:background">@drawable/box_restaurant</item>
