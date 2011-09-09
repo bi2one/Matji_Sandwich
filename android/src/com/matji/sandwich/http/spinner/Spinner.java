@@ -11,6 +11,7 @@ public class Spinner extends RelativeLayout implements Spinnable {
     protected Context context;
     private LayoutParams layoutParams;
     private ViewGroup layout;
+    private SpinListener listener;
 
     public Spinner(Context context, ViewGroup layout, int layoutReference) {
         super(context);
@@ -24,7 +25,15 @@ public class Spinner extends RelativeLayout implements Spinnable {
         layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
     }
 
+    public void setSpinListener(SpinListener listener) {
+	this.listener = listener;
+    }
+
     public void start() {
+	if (listener != null) {
+	    listener.onStart(this);
+	}
+	
         if (layout != null)
 	    layout.addView(this, layoutParams);
         setVisibility(View.VISIBLE);
@@ -34,7 +43,12 @@ public class Spinner extends RelativeLayout implements Spinnable {
     }
 
     public void stop() {
+	if (listener != null) {
+	    listener.onStop(this);
+	}
         // setVisibility(View.GONE);
-        if (layout != null) layout.removeView(this);
+        if (layout != null) {
+	    layout.removeView(this);
+	}
     }
 }

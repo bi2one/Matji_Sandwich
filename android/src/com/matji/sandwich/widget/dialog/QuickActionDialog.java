@@ -77,7 +77,6 @@ public class QuickActionDialog extends PopupWindows {
 		mRootView	= (ViewGroup) inflater.inflate(id, null);
 		mTrack 		= (ViewGroup) mRootView.findViewById(R.id.tracks);
 
-
 		setContentView(mRootView);
 	}
 

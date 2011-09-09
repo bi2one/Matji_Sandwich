@@ -290,6 +290,8 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 
     public void onConfirm(MatjiAlertDialog dialog) {
 	if (dialog == successDialog) {
+	    Intent result = new Intent();
+	    setResult(RESULT_OK, result);
 	    finish();
 	} else if (dialog == postEmptyDialog) {
 	    showKeyboardPostDelay();

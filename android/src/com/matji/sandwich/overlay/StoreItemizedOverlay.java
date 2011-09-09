@@ -15,7 +15,6 @@ import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -26,7 +25,7 @@ import com.google.android.maps.OverlayItem;
 import com.google.android.maps.Projection;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreMainActivity;
-import com.matji.sandwich.base.BaseMapActivity;
+// import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.util.MatjiConstants;
 
@@ -36,7 +35,7 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
     private MapView mMapView;
     private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
     private Context mContext;
-    private BaseMapActivity mActivity;
+    // private BaseMapActivity mActivity;
     private TextPaint mTextPaint;
     private String mCount;
     private Bitmap mMarkerLocked; // 미발굴 
@@ -51,14 +50,15 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
     private int LOCK_BITMAP_OFFSET_X;
     private int LOCK_BITMAP_OFFSET_Y;
     private StoreOverlayItem lastPopupItem;
+    private OverlayClickListener overlayClickListener;
     public enum MARKER_TYPE {MARKER_TYPE_UNLOCKED, MARKER_TYPE_LOCKED, MARKER_TYPE_BOOKMARKED};
 
-    public StoreItemizedOverlay(Context context, BaseMapActivity activity, MapView mapview) {
+    public StoreItemizedOverlay(Context context, MapView mapview) {
         super(boundCenterBottom(context.getResources().getDrawable(R.drawable.marker_01)));
 
         this.mContext = context;
         this.mMapView = mapview;
-        this.mActivity = activity;
+        // this.mActivity = activity;
 
         mMarkerLocked= BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_02);
         mMarkerUnLocked = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_01);
@@ -79,6 +79,10 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
         mTextPaint.setAntiAlias(true);
         mTextPaint.setTextSize(18);
         mTextPaint.setTypeface(Typeface.DEFAULT_BOLD);
+    }
+
+    public void setOverlayClickListener(OverlayClickListener listener) {
+	overlayClickListener = listener;
     }
 
     public void addOverlay(Store store)
@@ -126,47 +130,51 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
     }
 
     protected boolean onTap(final int index) {
-        lastPopupItem = (StoreOverlayItem)getItem(index);
-        GeoPoint itemPoint = lastPopupItem.getPoint();
-        
-        LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        popupOverlay = (View)inflater.inflate(R.layout.store_popup_overlay, null);
-              
-        MapView.LayoutParams layoutParam = new MapView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                itemPoint,
-                0, -(POPUP_OVERLAY_OFFSET_Y + UNLOCK_BITMAP_OFFSET_Y),
-                MapView.LayoutParams.CENTER_HORIZONTAL);
-        layoutParam.mode = MapView.LayoutParams.MODE_MAP;
-        
+	updatePopupOverlay((StoreOverlayItem)getItem(index));
+        return false;
+    }
 
-//        <item name="android:minHeight">@dimen/popup_min_height</item>
-//        <item name="android:maxHeight">@dimen/popup_max_height</item>
-//        <item name="android:paddingLeft">@dimen/default_distance</item>
-//        <item name="android:paddingRight">@dimen/popup_padding_right</item>
-//        <item name="android:paddingTop">@dimen/popup_padding</item>
-//        <item name="android:paddingBottom">@dimen/popup_padding</item>
+    public void updateLastPopupOverlay(Store store) {
+	if (lastPopupItem != null) {
+	    lastPopupItem.setStore(store);
+	    updatePopupOverlay(lastPopupItem);
+	}
+    }
+
+    private void updatePopupOverlay(StoreOverlayItem storeItem) {
+	removePopupOverlay();
+	lastPopupItem = storeItem;
+	GeoPoint itemPoint = lastPopupItem.getPoint();
+
+	LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        popupOverlay = (View)inflater.inflate(R.layout.store_popup_overlay, null);
 
         Store popupStore = lastPopupItem.getStore();
+	int yOffset = 0;
+	
+	if (popupStore.isLocked()) {
+	    yOffset = -(POPUP_OVERLAY_OFFSET_Y + LOCK_BITMAP_OFFSET_Y);
+	} else {
+	    yOffset = -(POPUP_OVERLAY_OFFSET_Y + UNLOCK_BITMAP_OFFSET_Y);
+	}
+	
+        MapView.LayoutParams layoutParam = new MapView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+								    ViewGroup.LayoutParams.WRAP_CONTENT,
+								    itemPoint,
+								    0, yOffset,
+								    MapView.LayoutParams.CENTER_HORIZONTAL);
+        layoutParam.mode = MapView.LayoutParams.MODE_MAP;
+
         TextView title = (TextView)popupOverlay.findViewById(R.id.popup_item_title);
         TextView likeCount = (TextView)popupOverlay.findViewById(R.id.popup_item_like_count);
         TextView postCount = (TextView)popupOverlay.findViewById(R.id.popup_item_post_count);
-
-        // Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/pala.ttf");
-        // likeCount.setTypeface(tf);
 
         title.setText(lastPopupItem.getTitle());
         likeCount.setText("" + popupStore.getLikeCount());
         postCount.setText("" + popupStore.getPostCount());
 
-        popupOverlay.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Store store = ((StoreOverlayItem)getItem(index)).getStore();
-                Intent intent = new Intent(mActivity, StoreMainActivity.class);
-                intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-                mActivity.startActivity(intent);
-            }
-        });
+        popupOverlay.setOnClickListener(new StoreItemClickListener(storeItem.getStore(),
+								   overlayClickListener));
         
         popupOverlay.setLayoutParams(layoutParam);
         popupOverlay.setMinimumHeight((int) MatjiConstants.dimen(R.dimen.popup_min_height));
@@ -177,8 +185,6 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
         popupOverlay.setPadding(paddingLeft, padding, paddingRight, padding);
         mMapView.addView(popupOverlay);
         mMapView.getController().animateTo(itemPoint);
-
-        return false;
     }
 
     public boolean onTouchEvent(MotionEvent event, MapView mapView) {
@@ -252,9 +258,13 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 
         public StoreOverlayItem(GeoPoint point, String title, String snippet, Store store) {
             super(point, title, snippet);
-            this.count = store.getLikeCount();
-            this.store = store;
+	    setStore(store);
         }
+
+	public void setStore(Store store) {
+	    this.store = store;
+	    this.count = store.getLikeCount();
+	}
 
         public int getCount() {
             return count;
@@ -267,5 +277,20 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
         public boolean equals(StoreOverlayItem item) {
             return getPoint().equals(item.getPoint()) && getTitle().equals(item.getTitle());
         }
+    }
+
+    public class StoreItemClickListener implements View.OnClickListener {
+	private Store store;
+	private OverlayClickListener listener;
+	
+	public StoreItemClickListener(Store store, OverlayClickListener listener) {
+	    this.store = store;
+	    this.listener = listener;
+	}
+	
+	public void onClick(View v) {
+	    if (listener != null) 
+		listener.onOverlayClick(v, store);
+	}
     }
 }

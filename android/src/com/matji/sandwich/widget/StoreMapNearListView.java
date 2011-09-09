@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.MainMapActivity;
@@ -23,6 +24,7 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.http.request.RequestCommand;
 import com.matji.sandwich.http.request.StoreHttpRequest;
+import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.session.SessionMapUtil;
@@ -45,6 +47,7 @@ Requestable {
     private Context context;
     private MainMapActivity activity;
     private TextView addressView;
+    private RelativeLayout addressWrapper;
     private HttpRequestManager requestManager;
     private StoreHttpRequest storeRequest;
 
@@ -60,10 +63,11 @@ Requestable {
 	// adapter.init(storeRequest, getLoadingFooterView());
     }
 
-    public void init(TextView addressView, MainMapActivity activity) {
+    public void init(RelativeLayout addressWrapper, TextView addressView, MainMapActivity activity) {
         setActivity(activity);
         this.addressView = addressView;
         this.activity = activity;
+	this.addressWrapper = addressWrapper;
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
         setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_size));
         addHeaderView(new HighlightHeader(activity, MatjiConstants.string(R.string.default_string_store)));
@@ -140,7 +144,7 @@ Requestable {
 	sessionUtil.setNearBound(locationPoint);
 	geocodeRequest.actionReverseGeocodingByGeoPoint(locationPoint, COUNTRY);
 	requestManager.cancelTask();
-	requestManager.request(getLoadingFooterView(), geocodeRequest, GEOCODE, this);
+	requestManager.request(addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, this);
     }
 
     public void onListItemClick(int position) {

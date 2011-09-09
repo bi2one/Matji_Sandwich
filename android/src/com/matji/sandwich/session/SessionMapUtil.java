@@ -1,6 +1,7 @@
 package com.matji.sandwich.session;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 

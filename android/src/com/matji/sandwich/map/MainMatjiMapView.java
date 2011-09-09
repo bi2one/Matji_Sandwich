@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
@@ -28,6 +29,7 @@ import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.overlay.StoreItemizedOverlay;
+import com.matji.sandwich.overlay.OverlayClickListener;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
@@ -45,6 +47,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     private MapController mapController;
     private Context context;
     private TextView addressView;
+    private RelativeLayout addressWrapper;
     private BaseMapActivity activity;
     private HttpRequestManager requestManager;
     private StoreItemizedOverlay storeItemizedOverlay;
@@ -61,12 +64,13 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	setOnTouchListener(this);
     }
 
-    public void init(TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
+    public void init(RelativeLayout addressWrapper, TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
 	setAddressView(addressView);
 	setBaseMapActivity(activity);
 
 	this.spinnerLayout = spinnerLayout;
-	storeItemizedOverlay = new StoreItemizedOverlay(context, activity, this);
+	this.addressWrapper = addressWrapper;
+	storeItemizedOverlay = new StoreItemizedOverlay(context, this);
 	mapController = getController();
 	// requestManager = HttpRequestManager.getInstance(context);
 	requestManager = HttpRequestManager.getInstance(context);
@@ -75,6 +79,10 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	mapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
 	gpsManager.start(GPS_START_TAG);
+    }
+
+    public void setOverlayClickListener(OverlayClickListener listener) {
+	storeItemizedOverlay.setOverlayClickListener(listener);
     }
 
     public void reload() {
@@ -105,6 +113,10 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	Runnable runnable = new MapRunnable(this);
 	activity.runOnUiThread(runnable);
+    }
+
+    public void updatePopupOverlay(Store store) {
+	storeItemizedOverlay.updateLastPopupOverlay(store);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
@@ -202,7 +214,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
 	    geocodeRequest.actionReverseGeocodingByGeoPoint(getMapCenter(), sessionUtil.getCurrentCountry());
-	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, geocodeRequest, GEOCODE, requestable);
+	    requestManager.request(addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
 	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
 	}
     }

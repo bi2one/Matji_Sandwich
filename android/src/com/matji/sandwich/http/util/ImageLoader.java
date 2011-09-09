@@ -76,6 +76,7 @@ public class ImageLoader {
     private int stub_id = -1;
     private ImageConvertable convertable;
     private boolean isScaleFile = true;
+    private boolean isCacheEnable = true;
 
     public ImageLoader(Context context) {
         //Make the background thead low priority. This way it will not affect the UI performance
@@ -91,6 +92,10 @@ public class ImageLoader {
 
     public void setScalable(boolean isScaleFile) {
 	this.isScaleFile = isScaleFile;
+    }
+
+    public void setCacheEnable(boolean isCacheEnable) {
+	this.isCacheEnable = isCacheEnable;
     }
 
     public void setImageConvertable(ImageConvertable convertable) {
@@ -112,7 +117,11 @@ public class ImageLoader {
     public void DisplayImage(String url, Activity activity, ImageView imageView)
     {
         imageViews.put(imageView, url);
-        Bitmap bitmap=memoryCache.get(url);
+	Bitmap bitmap = null;
+	
+	if (isCacheEnable)
+	    bitmap=memoryCache.get(url);
+	
         if(bitmap!=null)
             imageView.setImageBitmap(bitmap);
         else
@@ -141,10 +150,13 @@ public class ImageLoader {
     
     private Bitmap getBitmap(String url) 
     {
-        File f=fileCache.getFile(url);
-        
-        //from SD cache
-        Bitmap b = decodeFile(f);
+	File f=fileCache.getFile(url);
+	Bitmap b = null;
+	if (isCacheEnable) {
+	    //from SD cache
+	    b = decodeFile(f);
+	}
+	
         if(b!=null) {
             return b;
 	}

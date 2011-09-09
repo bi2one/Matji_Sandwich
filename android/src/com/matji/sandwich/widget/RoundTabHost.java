@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 
@@ -19,6 +17,7 @@ import com.matji.sandwich.widget.indicator.RoundLeftCheckIndicator;
 import com.matji.sandwich.widget.indicator.RoundLeftIndicator;
 import com.matji.sandwich.widget.indicator.RoundRightCheckIndicator;
 import com.matji.sandwich.widget.indicator.RoundRightIndicator;
+import com.matji.sandwich.util.AnimationUtil;
 
 public class RoundTabHost extends TabHost implements OnTabChangeListener {
     private static final long ANIMATION_DURATION = 300;
@@ -138,62 +137,6 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
     }
 
     /**
-     * 오른쪽에서 나타나는 애니메이션
-     *
-     * @return 오른쪽에서 나타나게 하는 애니메이션 객체
-     */
-    private Animation inFromRightAnimation() {
-        return getAccelerateAnimation(+1.0f, 0.0f, 0.0f, 0.0f);
-    }
-
-    /**
-     * 왼쪽에서 나타나는 애니메이션
-     *
-     * @return 왼쪽에서 나타나게 하는 애니메이션 객체
-     */
-    private Animation inFromLeftAnimation() {
-        return getAccelerateAnimation(-1.0f, 0.0f, 0.0f, 0.0f);
-    }
-
-    /**
-     * 왼쪽으로 사라지는 애니메이션
-     *
-     * @return 왼쪽으로 사라지게 하는 애니메이션 객체
-     */
-    private Animation outToLeftAnimation() {
-        return getAccelerateAnimation(0.0f, -1.0f, 0.0f, 0.0f);
-    }
-
-    /**
-     * 오른쪽으로 사라지는 애니메이션
-     *
-     * @return 오른쪽으로 사라지게 하는 애니메이션 객체
-     */
-    private Animation outToRightAnimation() {
-        return getAccelerateAnimation(0.0f, +1.0f, 0.0f, 0.0f);
-    }
-
-    /**
-     * 관성이 적용된 slide애니메이션 객체를 리턴한다.
-     *
-     * @param fromXDelta 움직일 X좌표의 시작점
-     * @param toXDelta 움직일 X좌표의 끝점
-     * @param fromYDelta 움직일 Y좌표의 시작점
-     * @param toYDelta 움직일 Y좌표의 끝점
-     *
-     * @return 관성이 적용된 slide애니메이션 객체
-     */
-    private Animation getAccelerateAnimation(float fromXDelta, float toXDelta, float fromYDelta, float toYDelta) {
-        Animation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, fromXDelta,
-                Animation.RELATIVE_TO_PARENT, toXDelta,
-                Animation.RELATIVE_TO_PARENT, fromYDelta,
-                Animation.RELATIVE_TO_PARENT, toYDelta);
-        animation.setDuration(ANIMATION_DURATION);
-        animation.setInterpolator(new AccelerateInterpolator());
-        return animation;
-    }
-
-    /**
      * 탭이 바뀔 때, 탭뷰에 애니메이션을 걸어준다.
      *
      * @param tabId TabSpec등록시 명시한 탭의 label
@@ -209,11 +152,11 @@ public class RoundTabHost extends TabHost implements OnTabChangeListener {
 
             // tabId가 prevTabId보다 왼쪽에 있는 탭일 때
             if (tabId.compareTo(prevTabId) < 0) {
-                prevTabView.setAnimation(outToRightAnimation());
-                currentTabView.setAnimation(inFromLeftAnimation());
+                prevTabView.setAnimation(AnimationUtil.outToRightAnimation());
+                currentTabView.setAnimation(AnimationUtil.inFromLeftAnimation());
             } else {
-                prevTabView.setAnimation(outToLeftAnimation());
-                currentTabView.setAnimation(inFromRightAnimation());
+                prevTabView.setAnimation(AnimationUtil.outToLeftAnimation());
+                currentTabView.setAnimation(AnimationUtil.inFromRightAnimation());
             }
             prevTabId = tabId;
             prevTabView = currentTabView;
