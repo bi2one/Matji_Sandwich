@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -34,8 +35,8 @@ import com.matji.sandwich.util.adapter.GeoPointToLocationAdapter;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 
 public class StoreMapNearListView extends RequestableMListView implements MatjiLocationListener,
-OnTouchListener,
-Requestable {
+									  OnTouchListener,
+									  Requestable {
     private static final GeocodeHttpRequest.Country COUNTRY = GeocodeHttpRequest.Country.KOREA;
     private static final int LAT_HALVE_SPAN = (int)(0.005 * 1E6) / 2;
     private static final int LNG_HALVE_SPAN = (int)(0.005 * 1E6) / 2;

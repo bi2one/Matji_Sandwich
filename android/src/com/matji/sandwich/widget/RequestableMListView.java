@@ -19,8 +19,7 @@ import com.matji.sandwich.listener.ListRequestScrollListener;
 import com.matji.sandwich.util.AnimationUtil;
 
 public abstract class RequestableMListView extends PullToRefreshListView implements ListScrollRequestable,
-										    PullToRefreshListView.OnRefreshListener,
-										    Spinnable.SpinListener {
+										    PullToRefreshListView.OnRefreshListener {
     private ListRequestScrollListener scrollListener;
     private ArrayList<MatjiData> adapterData;
     private MBaseAdapter adapter;
