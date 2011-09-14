@@ -19,6 +19,7 @@
 		</activity>
 		<activity android:name="ChangeLocationActivity"></activity>
 		<activity android:name="ExternalServiceWebViewActivity"></activity>
+		<activity android:name=".UserEditActivity"></activity>
 		<activity android:name="AlarmActivity"></activity>
 		<activity android:name="AddMenuActivity"
 				  android:launchMode="singleTask"></activity>

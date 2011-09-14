@@ -20,7 +20,6 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.listener.LikeStoreListListener;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.CellProfileImageView;
 import com.matji.sandwich.widget.title.button.FollowButton.Followable;
 
 /**

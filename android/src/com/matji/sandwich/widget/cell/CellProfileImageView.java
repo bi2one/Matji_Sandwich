@@ -1,10 +1,11 @@
-package com.matji.sandwich.widget;
+package com.matji.sandwich.widget.cell;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.widget.ProfileImageView;
 
 /**
  * Cell에서 사용하는 ProfileImageView

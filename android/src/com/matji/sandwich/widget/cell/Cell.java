@@ -54,6 +54,7 @@ public abstract class Cell extends RelativeLayout {
 	 * DetailPageActivity를 실행하는 메소드.
 	 */
 	public void gotoDetailPage() {
-	    getRootView().getContext().startActivity(getIntent());
+		if (getIntent() != null)
+			getRootView().getContext().startActivity(getIntent());
 	}
 }

@@ -33,6 +33,9 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     public static final String USER = "UserProfileTabActivity.user";
     public static final String IS_MAIN_TAB_ACTIVITY = "UserProfileTabActivity.is_main_tab_activity";
 
+    private EditText usernameField;
+    private EditText passwordField;
+    
     public int setMainViewId() {
         return R.id.activity_user_profile_tab;
     }
@@ -52,7 +55,9 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
 
         tabHost = (RoundTabHost) getTabHost();
         loginView = (LoginView) findViewById(R.id.login_view);
-
+        usernameField = (EditText) findViewById(R.id.username);
+        passwordField = (EditText) findViewById(R.id.password);
+        
         user = (isMainTabActivity) ? session.getCurrentUser() : (User) getIntent().getParcelableExtra(USER);
         setUser(user);
     }
@@ -66,25 +71,22 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         tagIntent = new Intent(this, UserTagActivity.class);
         tagIntent.putExtra(UserTagActivity.USER, (Parcelable) user);
         tagIntent.putExtra(UserTagActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
-    }    
+    }
     
     private void syncTab() {        // 로그인 화면을 위해 어쩔수 없이 이렇게... ㅠㅠ
-        KeyboardUtil.hideKeyboard(this);    
-        isMyPage = 
-            session.isLogin()
-            && session.getCurrentUser().getId() == user.getId();
-        if (user == null || !session.isLogin()) {
+        KeyboardUtil.hideKeyboard(this);
+        if ((user == null || !session.isLogin()) && isMainTabActivity) {
             loginTypeInit();        // 메인 탭 내의 프로필 액티비티이고, 로그인이 필요할 경우
-        } else {
+        } else {    
+            isMyPage = 
+                session.isLogin()
+                && session.getCurrentUser().getId() == user.getId();
             if (isMyPage) {
                 privateTypeInit();  // 자기 자신의 프로필 액티비티일 경우
             } else {
                 publicTypeInit();   // 이외의 유저의 프로필 액티비티일 경우
             }
         }
-        
-//        loginView.invalidate();
-//        tabHost.invalidate();
     }
     
     
@@ -103,6 +105,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     }
 
     protected void loginTypeInit() {
+    	tabHost.setCurrentTab(0);
         tabHost.clearAllTabs();
         getTabWidget().setVisibility(View.GONE);
         loginView.setVisibility(View.VISIBLE);
@@ -112,6 +115,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     protected void publicTypeInit() {
         getTabWidget().setVisibility(View.VISIBLE);
         loginView.setVisibility(View.GONE);
+        tabHost.setCurrentTab(0);
         tabHost.clearAllTabs();
         tabHost.addLeftTab(
                 "tab1",
@@ -127,6 +131,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     protected void privateTypeInit() {
         getTabWidget().setVisibility(View.VISIBLE);
         loginView.setVisibility(View.GONE);
+        tabHost.setCurrentTab(0);
         tabHost.clearAllTabs();
         tabHost.addLeftTab(
                 "tab1",
@@ -149,10 +154,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     }
 
 
-    public void loginButtonClicked(View v) {
-        EditText usernameField = (EditText) findViewById(R.id.username);
-        EditText passwordField = (EditText) findViewById(R.id.password);        
-        
+    public void loginButtonClicked(View v) {        
         new LoginAsyncTask(this, this, usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
     }
 
@@ -160,10 +162,17 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
 //        finish();
     }
 
+    public void clearField() {
+    	usernameField.setText("");
+    	passwordField.setText("");
+    }
+    
     /* Loginable Interface methods */
     public void loginCompleted() {
         setUser(session.getCurrentUser());
+        clearField();
         syncTab();
+        
     }
 
     public void loginFailed() {
@@ -178,7 +187,6 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     public void facebookLoginClicked(View v){
         MeHttpRequest request = new MeHttpRequest(this);
         request.authorizeViaExternalService(this, Service.FACEBOOK);
-        
     }    
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

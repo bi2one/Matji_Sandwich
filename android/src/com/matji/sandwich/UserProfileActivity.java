@@ -5,11 +5,13 @@ import android.view.View;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.Session.LoginListener;
 import com.matji.sandwich.widget.UserProfileView;
 import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserProfileActivity extends BaseActivity {
+public class UserProfileActivity extends BaseActivity implements LoginListener {
     
     private boolean isMainTabActivity;
     
@@ -17,6 +19,8 @@ public class UserProfileActivity extends BaseActivity {
     private UserTitle title;
     private UserCell userCell;    
     private UserProfileView userProfileView;
+
+    private Session session;
     
     public static final String USER = "UserProfileActivity.user";
     public static final String IS_MAIN_TAB_ACTIVITY = "UserProfileActivity.is_main_tab_activity";
@@ -34,6 +38,8 @@ public class UserProfileActivity extends BaseActivity {
 	protected void init() {
 	    setContentView(R.layout.activity_user_profile);
 
+	    session = Session.getInstance(this);
+	    session.addLoginListener(this);
         user = (User) getIntent().getParcelableExtra(USER);
         isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
         
@@ -67,4 +73,15 @@ public class UserProfileActivity extends BaseActivity {
 	    super.onResume();
 	    userCell.refresh();
 	}
+
+	@Override
+	public void preLogin() {}
+
+	@Override
+	public void postLogin() {
+		if (isMainTabActivity) {
+			userCell.setUser(session.getCurrentUser());
+			userCell.refresh();
+		}
+	}	
 }

@@ -190,8 +190,20 @@
     <dimen name="settings_content_size">16dp</dimen>
     <dimen name="settings_margin_top">10dp</dimen>
     <dimen name="settings_margin_bottom">13.33dp</dimen>
+    <dimen name="settings_check_box_width">24dp</dimen>
+    <dimen name="settings_check_box_height">24dp</dimen>
     <dimen name="settings_row_height">44.67dp</dimen>
     <dimen name="settings_logout_btn_height">30.67dp</dimen>
+    <dimen name="settings_logout_btn_padding">24dp</dimen>
     <dimen name="settings_logout_btn_txt_size">12.67dp</dimen>
     <dimen name="settings_row_padding">13.33dp</dimen>
+    
+    <!-- activity_image_slider.xml -->
+    <dimen name="image_slider_count_height">36.67dp</dimen>
+    <dimen name="image_slider_post_height">108dp</dimen>
+    <dimen name="image_slider_padding">13.33dp</dimen>
+    <dimen name="image_slider_post_margin">20dp</dimen>
+
+    <!-- activity_edit.xml -->    
+    <dimen name="edit_content_size">13.33dp</dimen>
 </resources>

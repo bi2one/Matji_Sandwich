@@ -82,8 +82,9 @@
   <string name="default_string_delete">삭제</string>
   <string name="default_string_check_delete">삭제할까요?</string>
   <string name="default_string_tag">태그</string>
-  <string name="default_string_title">의 맛집기행</string>
-  <string name="default_string_intro">소개가 없습니다.</string>
+  <string name="default_string_title">%1$s의 맛집기행</string>
+  <string name="default_string_intro">소개글</string>
+  <string name="default_string_not_exist_intro">소개글이 없습니다.</string>
   <string name="default_string_basic_info">기본정보</string>
   <string name="default_string_more_info">부가정보</string>
   <string name="default_string_info">정보</string>
@@ -111,7 +112,7 @@
   <string name="default_string_store_register">Register</string>
   <string name="default_string_current_position">GPS</string>
   <string name="default_string_near_store">Store</string>
-  <string name="default_string_configure">설정</string>
+  <string name="default_string_settings">설정</string>
   <string name="default_string_address">주소</string>
   <string name="default_string_change">변경</string>
   <string name="default_string_edit">수정</string>
@@ -156,14 +157,17 @@
   <string name="activity_likes_the">likes the</string>
     
   <!-- Cell -->
-  <string name="cell_user_point">Point</string>
-  <string name="cell_user_area">Area</string>
+  <string name="cell_user_point">포인트</string>
+  <string name="cell_user_area">활동지역</string>
   <string name="cell_user_follow">Follow</string>
   <string name="cell_user_unfollow">Unfollow</string>
   <string name="cell_store_not_exist_tel">전화번호 미등록</string>
   <string name="cell_store_not_exist_addr">주소 미등록</string>
   <string name="cell_store_not_exist_tag">등록된 태그가 없습니다.</string>
   <string name="cell_store_not_exist_menu">등록된 메뉴가 없습니다.</string>
+  <string name="cell_user_edit_nickname">닉네임 변경</string>
+  <string name="cell_user_edit_userid">계정</string>
+  <string name="cell_user_edit_usermail">이메일</string>
   
   
   <!-- StoreMainActivity  -->
@@ -462,4 +466,8 @@
   
   <string name="setting_alarm_permit">permit</string>
   <string name="setting_alarm_view">view</string>
+  
+  <string name="edit_blog_hompage">블로그/홈페이지</string>
+  <string name="edit_password">비밀번호 변경</string>
+  <string name="edit_withdrawal">회원 탈퇴</string>
 </resources>

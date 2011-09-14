@@ -2,8 +2,8 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/CellProfileWrapper">
-	<com.matji.sandwich.widget.cell.CellProfileImageView
-		android:id="@+id/profile"
+	<com.matji.sandwich.widget.cell.CellEditProfileImageView
+		android:id="@+id/edit_profile"
 		style="@style/CellProfile" />
 	<ImageView
 		android:id="@+id/profile_border"

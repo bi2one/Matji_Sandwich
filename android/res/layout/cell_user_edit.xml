@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@id/UserCell"
+	style="@style/DefaultWrap">
+	<LinearLayout
+		android:id="@+id/cell_user_edit_Wrapper"
+		style="@style/cell_user_Wrapper">
+		<include
+			android:id="@+id/cell_user_edit_profile"
+			layout="@layout/cell_edit_profile" />
+		<RelativeLayout
+			android:id="@+id/cell_user_edit_info_wrapper"
+			style="@style/cell_user_InfoWrapper"
+			android:layout_toRightOf="@id/cell_user_edit_profile">
+			<LinearLayout
+				android:layout_toRightOf="@+id/profile"
+				style="@style/DefaultVerticalWrap"
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@+id/cell_user_edit_btn_wrapper"
+				android:layout_marginRight="@dimen/default_distance">
+				<TextView
+					android:id="@+id/cell_user_edit_nick"
+					style="@style/cell_user_Nickname" />
+				<LinearLayout
+					style="@style/DefaultWrap">
+					<TextView
+						style="@style/cell_user_edit_UseridLabel" />
+					<TextView
+						android:id="@+id/cell_user_edit_userid"
+						style="@style/cell_user_LabelValue" />
+				</LinearLayout>
+				<LinearLayout
+					style="@style/DefaultWrap">
+					<TextView
+						style="@style/cell_user_edit_UsermailLabel" />
+					<TextView
+						android:id="@+id/cell_user_edit_usermail"
+						style="@style/cell_user_LabelValue" />
+				</LinearLayout>
+			</LinearLayout>
+			<LinearLayout
+				android:id="@id/cell_user_edit_btn_wrapper"
+				android:layout_alignParentRight="true"
+				style="@style/DefaultVerticalWrap">
+				<Button
+					android:id="@+id/cell_user_edit_nick_btn"
+					style="@style/cell_user_edit_EditNickButton" />
+			</LinearLayout>
+		</RelativeLayout>
+	</LinearLayout>
+	<ImageView
+		android:id="@+id/cell_user_edit_line"
+		android:background="@color/listview_divider1_gray"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/default_divider_size"
+		android:visibility="gone"
+		android:layout_alignParentBottom="true" />
+	<ImageView
+		android:id="@+id/cell_user_edit_shadow"
+		android:src="@drawable/img_shadow"
+		style="@style/DefaultWidthFill"
+		android:layout_alignParentBottom="true" />
+</RelativeLayout>

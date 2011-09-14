@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
@@ -25,8 +27,10 @@ import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.widget.SwipeView;
 
-public class ImageSliderActivity extends BaseActivity implements OnScrollListener, Requestable {
-    private AttachFile[] attachFiles;
+public class ImageSliderActivity extends BaseActivity implements OnScrollListener, Requestable, OnClickListener {
+    
+	private AttachFile[] attachFiles;
+	private boolean isShowingPost = true;
     private int currentPage;
     private SwipeView swipeView;
 
@@ -36,7 +40,8 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
     private TextView count;
 
-    private View postWrapper;
+    private View contentWrapper;
+    private View postContentWrapper;
     private View moresign;
     private TextView nick;
     private TextView at;
@@ -77,7 +82,8 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
         count = (TextView) findViewById(R.id.image_slider_count);
         swipeView = (SwipeView) findViewById(R.id.SwipeView);
-        postWrapper= findViewById(R.id.image_slider_post_wrapper);
+        contentWrapper = findViewById(R.id.image_slider_content_wrapper);
+        postContentWrapper= findViewById(R.id.image_slider_post_wrapper);
         moresign = findViewById(R.id.image_slider_moresign);
         nick = (TextView) findViewById(R.id.image_slider_nick);
         at = (TextView) findViewById(R.id.image_slider_at);
@@ -93,7 +99,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         swipeView.setCurrentPage(currentPage);
         setPage(currentPage);
         setImage(currentPage);
-        dismissPost();
+        preLoading();
         postRequest(attachFiles[currentPage].getPostId());
         super.init();
     }
@@ -109,6 +115,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
             ImageView image = new ImageView(this);
             image.setLayoutParams(params);
             image.setScaleType(ScaleType.FIT_CENTER);
+            image.setOnClickListener(this);
 
             rl.addView(image);
 
@@ -120,14 +127,14 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
     public void postRequest(int postId) {
         if (!(postId == prevPostId)) {
-            dismissPost();
+            preLoading();
 
             if (request == null || !(request instanceof PostHttpRequest)) {
                 request = new PostHttpRequest(this);
             }
 
             ((PostHttpRequest) request).actionShow(postId);
-            manager.request(getMainView(), request, HttpRequestManager.POST_SHOW_REQUEST, this);
+            manager.request((ViewGroup) contentWrapper, request, HttpRequestManager.POST_SHOW_REQUEST, this);
             prevPostId = postId;
         }
     }
@@ -204,14 +211,14 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         }
     }
 
-    public void showPost() {	
-        postWrapper.setVisibility(View.VISIBLE);
-        moresign.setVisibility(View.VISIBLE);
+    public void preLoading() {
+        postContentWrapper.setVisibility(View.GONE);
+        moresign.setVisibility(View.GONE);
     }
 
-    public void dismissPost() {
-        postWrapper.setVisibility(View.GONE);
-        moresign.setVisibility(View.GONE);
+    public void postLoading() {
+        postContentWrapper.setVisibility(View.VISIBLE);
+        moresign.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -220,7 +227,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         case HttpRequestManager.POST_SHOW_REQUEST:
             if (data != null && !data.isEmpty()) {
                 setPost((Post) data.get(0));
-                showPost();
+                postLoading();
             } else {
                 // TODO error message
             }
@@ -236,5 +243,27 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     public void finish() {
         setResult(RESULT_OK);
         super.finish();
-    }    
+    }
+
+ 
+    public void showPost() {
+    	count.setVisibility(View.VISIBLE);
+    	contentWrapper.setVisibility(View.VISIBLE);
+    	isShowingPost = true;
+    }
+    
+    public void dismissPost() {
+    	count.setVisibility(View.GONE);
+    	contentWrapper.setVisibility(View.GONE);
+    	isShowingPost = false;
+    }
+
+	@Override
+	public void onClick(View v) {
+		if (isShowingPost) {
+			dismissPost();
+		} else {
+			showPost();
+		}		
+	}    
 }

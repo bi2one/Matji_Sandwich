@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.matji.sandwich.UserEditActivity;
 import com.matji.sandwich.FollowingActivity;
 import com.matji.sandwich.FollowingActivity.FollowingListType;
 import com.matji.sandwich.R;
@@ -76,7 +77,8 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
         bookmarkDivider = findViewById(R.id.user_profile_store_info_line);
         bookmarkCountView = findViewById(R.id.user_profile_bookmark);
         bookmarkCount = (TextView) findViewById(R.id.user_profile_bookmark_store_count);
-
+        
+        editInfo.setOnClickListener(this);
         followingCountView.setOnClickListener(this);
         followerCountView.setOnClickListener(this);        
         findCountView.setOnClickListener(this);
@@ -112,9 +114,17 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
         getContext().startActivity(intent);
     }
 
+    public void onEditInfoButtonClicked(View v) {
+    	Intent intent = new Intent(getContext(), UserEditActivity.class);
+    	intent.putExtra(UserEditActivity.USER, (Parcelable) user);
+    	getContext().startActivity(intent);
+    }
+    
     @Override
     public void onClick(View v) {
-        if (v.getId() == followingCountView.getId()) {
+    	if (v.getId() == editInfo.getId()) {
+        	onEditInfoButtonClicked(v);
+        } else if (v.getId() == followingCountView.getId()) {
             onFollowingButtonClicked(v);
         } else if (v.getId() == followerCountView.getId()) {
             onFollowerButtonClicked(v);
@@ -122,7 +132,7 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
             onFindStoreButtonClicked(v);
         } else if (v.getId() == bookmarkCountView.getId()) {
             onBookmarkStoreButtonClicked(v);
-        }        
+        } 
     }
     
     @Override

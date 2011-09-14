@@ -8,14 +8,17 @@ import android.view.View;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.Session.LoginListener;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.tag.UserTagCloudView;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserTagActivity extends BaseActivity implements Refreshable {
+public class UserTagActivity extends BaseActivity implements Refreshable, LoginListener {
 
+	private Session session;
     private boolean isMainTabActivity;
     private User user;
     private UserTitle title;
@@ -34,6 +37,9 @@ public class UserTagActivity extends BaseActivity implements Refreshable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_tag);
+        
+        session = Session.getInstance(this);
+        session.addLoginListener(this);
         isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
         user = (User) getIntent().getParcelableExtra(USER);
 
@@ -94,4 +100,16 @@ public class UserTagActivity extends BaseActivity implements Refreshable {
 
     @Override
     public void refresh(ArrayList<MatjiData> data) {}
+    
+
+	@Override
+	public void preLogin() {}
+
+	@Override
+	public void postLogin() {
+		if (isMainTabActivity) {
+			userCell.setUser(session.getCurrentUser());
+			userCell.refresh();
+		}
+	}
 }

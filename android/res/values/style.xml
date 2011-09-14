@@ -302,6 +302,19 @@
   	<item name="android:drawableLeft">@drawable/icon_note</item>
   	<item name="android:visibility">gone</item>
   </style>
+
+  <!-- cell_user_edit.xml -->
+  <style name="cell_user_edit_EditNickButton" parent="cell_user_WhiteButton">
+    <item name="android:text">@string/cell_user_edit_nickname</item>
+  </style>
+
+  <style name="cell_user_edit_UseridLabel" parent="cell_user_Label">
+    <item name="android:text">@string/cell_user_point</item>
+  </style>
+
+  <style name="cell_user_edit_UsermailLabel" parent="cell_user_Label">
+    <item name="android:text">@string/cell_user_area</item>
+  </style>
    
   <!-- header_comment.xml -->
   <style name="header_post_Wrapper" parent="DefaultWidthFill">
@@ -531,11 +544,8 @@
     <item name="android:scaleType">centerCrop</item>
   </style>
   
-  <style name="CellProfile">
-    <item name="android:layout_width">fill_parent</item>
-    <item name="android:layout_height">fill_parent</item>
+  <style name="CellProfile" parent="Profile">
     <item name="android:src">@drawable/user_img90</item>
-    <item name="android:scaleType">centerCrop</item>
   </style>
   
   <!-- Post List Row -->

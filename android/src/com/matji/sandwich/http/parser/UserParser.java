@@ -28,25 +28,24 @@ public class UserParser extends MatjiDataParser {
 
 		/* Set Title */
 		String tmp = getString(object, "title");
-		if (tmp == null) {
-			user.setTitle(user.getNick() + context.getString(R.string.default_string_title));
+		if (tmp != null && !tmp.equals("")) {
+			user.setTitle(tmp);
 		} else {
-			if (!tmp.equals("")) {
-				user.setTitle(tmp);
-			} else {
-				user.setTitle(user.getNick() + context.getString(R.string.default_string_title));	
-			}
+			user.setTitle(
+					String.format(
+							context.getString(R.string.default_string_title),
+							user.getNick()));
 		}
 
 		/* Set Intro */
 		tmp = getString(object, "intro");
 		if (tmp == null) {
-			user.setIntro(context.getString(R.string.default_string_intro));
+			user.setIntro(context.getString(R.string.default_string_not_exist_intro));
 		} else {
 			if (!tmp.equals("")) {
 				user.setIntro(tmp);
 			} else {
-				user.setIntro(context.getString(R.string.default_string_intro));	
+				user.setIntro(context.getString(R.string.default_string_not_exist_intro));
 			}
 		}
 		user.setPostCount(getInt(object, "post_count"));
