@@ -1,9 +1,10 @@
 package com.matji.sandwich.data;
 
+import java.io.Serializable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class AlarmSetting extends MatjiData{
+public class AlarmSetting extends MatjiData implements Serializable {
     
     public enum AlarmSettingType {
         COMMENT,

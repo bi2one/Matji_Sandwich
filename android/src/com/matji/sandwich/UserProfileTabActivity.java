@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
@@ -27,7 +28,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     private boolean isMyPage;
 
     private LoginView loginView;
-    private Intent profileIntent; 
+    private Intent profileIntent;
     private Intent tagIntent;
 
     public static final String USER = "UserProfileTabActivity.user";
@@ -74,6 +75,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
             session.isLogin()
             && session.getCurrentUser().getId() == user.getId();
         if (user == null || !session.isLogin()) {
+	    Log.d("=====", "login tab");
             loginTypeInit();        // 메인 탭 내의 프로필 액티비티이고, 로그인이 필요할 경우
         } else {
             if (isMyPage) {
@@ -132,10 +134,10 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
                 "tab1",
                 R.string.private_tab_my_info,
                 profileIntent);
-        tabHost.addRightTab(
-                "tab2",
-                R.string.private_tab_my_tag,
-                tagIntent);
+        // tabHost.addRightTab(
+        //         "tab2",
+        //         R.string.private_tab_my_tag,
+        //         tagIntent);
     }
 
     public void refresh() {
