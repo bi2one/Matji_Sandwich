@@ -29,44 +29,42 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
         return R.id.activity_user_profile;
     }
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+    protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+    }
 	
-	@Override
-	protected void init() {
-	    setContentView(R.layout.activity_user_profile);
+    protected void init() {
+	setContentView(R.layout.activity_user_profile);
 
 	    session = Session.getInstance(this);
 	    session.addLoginListener(this);
         user = (User) getIntent().getParcelableExtra(USER);
         isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
         
-	    title = (UserTitle) findViewById(R.id.Titlebar);
-	    userCell = (UserCell) findViewById(R.id.UserCell);
-	    userProfileView = (UserProfileView) findViewById(R.id.user_profile_view);
+	title = (UserTitle) findViewById(R.id.Titlebar);
+	userCell = (UserCell) findViewById(R.id.UserCell);
+	userProfileView = (UserProfileView) findViewById(R.id.user_profile_view);
 
-	    if (!isMainTabActivity) {
-	        title.setIdentifiable(this);
-	        title.setUser(user);
-	        title.setFollowable(userCell);
-	    }
+	if (!isMainTabActivity) {
+	    title.setIdentifiable(this);
+	    title.setUser(user);
+	    title.setFollowable(userCell);
+	}
         
-        userCell.setUser(user);        
+        userCell.setUser(user);
         userCell.setIdentifiable(this);
-	    userCell.addRefreshable(userProfileView);
-	    if (!isMainTabActivity) userCell.addRefreshable(title);
-	    else dismissTitle();
-	}
+	userCell.addRefreshable(userProfileView);
+	if (!isMainTabActivity) userCell.addRefreshable(title);
+	else dismissTitle();
+    }
 	
-	public void showTitle() {
-	    title.setVisibility(View.VISIBLE);
-	}
+    public void showTitle() {
+	title.setVisibility(View.VISIBLE);
+    }
 	
-	public void dismissTitle() {
-	    title.setVisibility(View.GONE);
-	}
+    public void dismissTitle() {
+	title.setVisibility(View.GONE);
+    }
 
 	@Override
 	protected void onResume() {
@@ -83,5 +81,5 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
 			userCell.setUser(session.getCurrentUser());
 			userCell.refresh();
 		}
-	}	
+	}
 }

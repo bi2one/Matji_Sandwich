@@ -78,6 +78,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         // sessionMapUtil.setCenter(lastCenter);
         // mapView.setCenterNotAnimate(lastCenter);
         // mapView.requestMapCenterChanged(lastCenter);
+	mapView.reload();
         mapView.startMapCenterThread();
     }
 

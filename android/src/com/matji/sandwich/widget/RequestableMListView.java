@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.matji.sandwich.adapter.MBaseAdapter;
@@ -56,13 +58,19 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
         loadingHeaderView.setLongClickable(false);
 
         addFooterView(loadingFooterView);
-        addHeaderView(loadingHeaderView);
+        super.addHeaderView(loadingHeaderView);
 
 	reloadSpinner = SpinnerFactory.createSpinner(context, SpinnerFactory.SpinnerType.NORMAL, loadingHeaderView);
 	// reloadSpinner.setSpinListener(this);
         //	setFooterDividersEnabled(false);
 
         this.limit = limit;
+    }
+
+    public void addHeaderView(View v) {
+	deleteHeaderView(loadingHeaderView);
+	super.addHeaderView(v);
+	super.addHeaderView(loadingHeaderView);
     }
 
     protected void setPage(int page) {

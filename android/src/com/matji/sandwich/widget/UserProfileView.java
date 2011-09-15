@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,6 +58,7 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
 
     private void init() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        // inflater.inflate(R.layout.user_profile_bak, this);
         inflater.inflate(R.layout.user_profile, this);
 
         session = Session.getInstance(getContext());
@@ -80,9 +82,22 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
         
         editInfo.setOnClickListener(this);
         followingCountView.setOnClickListener(this);
-        followerCountView.setOnClickListener(this);        
+        followerCountView.setOnClickListener(this);
         findCountView.setOnClickListener(this);
         bookmarkCountView.setOnClickListener(this);
+
+
+	// bak
+        // userCell = ((UserCell) findViewById(R.id.UserCell));
+        // userCell.setClickable(false);
+        // intro = (TextView) findViewById(R.id.user_profile_intro);
+        // blog = (TextView) findViewById(R.id.user_profile_blog);
+        // editInfo = (TextView) findViewById(R.id.user_profile_edit_info);
+        // followingCount = (TextView) findViewById(R.id.user_profile_following_count);
+        // followerCount = (TextView) findViewById(R.id.user_profile_follower_count);
+        // findTitle = (TextView) findViewById(R.id.user_profile_find_store_title);
+        // findCount = (TextView) findViewById(R.id.user_profile_find_store_count);
+        // bookmarkCount = (TextView) findViewById(R.id.user_profile_bookmark_store_count);
     }
 
     public void setUser(User user) {
@@ -139,7 +154,7 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
     public void refresh() {
         intro.setText(user.getIntro());
         blog.setText("http://www.yummystory.......com");
-        followingCount.setText(user.getFollowingCount()+"");
+        followingCount.setText(user.getFollowingCount() + "");
         followerCount.setText(user.getFollowerCount()+"");
         findCount.setText(user.getDiscoverStoreCount()+"");
         bookmarkCount.setText(user.getBookmarkStoreCount()+"");

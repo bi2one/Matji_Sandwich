@@ -27,7 +27,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     private boolean isMyPage;
 
     private LoginView loginView;
-    private Intent profileIntent; 
+    private Intent profileIntent;
     private Intent tagIntent;
 
     public static final String USER = "UserProfileTabActivity.user";
@@ -137,10 +137,10 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
                 "tab1",
                 R.string.private_tab_my_info,
                 profileIntent);
-        tabHost.addRightTab(
-                "tab2",
-                R.string.private_tab_my_tag,
-                tagIntent);
+        // tabHost.addRightTab(
+        //         "tab2",
+        //         R.string.private_tab_my_tag,
+        //         tagIntent);
     }
 
     public void refresh() {

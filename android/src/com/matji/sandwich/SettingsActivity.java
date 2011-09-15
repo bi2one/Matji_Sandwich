@@ -86,7 +86,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
 		logoutButton = (Button) findViewById(R.id.settings_account_logout_btn);
 		editProfileWrapper = findViewById(R.id.settings_account_edit_profile);
 		noticeWrapper = findViewById(R.id.settings_service_notice);
-		noticeText = (TextView) findViewById(R.id.settings_service_notice_txt);
 		//        availableCheck = (CheckBox) findViewById(R.id.settings_location_information_available_check);
 
 		alarmTitle = findViewById(R.id.settings_alarm_settings);
