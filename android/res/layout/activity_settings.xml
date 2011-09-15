@@ -78,9 +78,8 @@
 								style="@style/DefaultWrap"
 								android:textSize="@dimen/settings_content_size"
 								android:textColor="@color/matji_red"
-								android:layout_alignBaseline="@+id/settings_account_logout_btn"
 								android:layout_alignParentLeft="true"
-								android:layout_toLeftOf="@id/settings_account_logout_btn"
+								android:layout_toLeftOf="@+id/settings_account_logout_btn"
 								android:layout_centerVertical="true" />
 							<Button
 								android:id="@id/settings_account_logout_btn"
@@ -348,9 +347,9 @@
 							style="@style/DefaultWrap"
 							android:layout_alignParentRight="true"
 							android:layout_centerVertical="true" />
-						<View
-							style="@style/HorizontalLine" />
 					</RelativeLayout>
+					<View
+						style="@style/HorizontalLine" />
 					<!-- Service Guide -->
 					<TextView
 						android:id="@+id/settings_service_guide"
