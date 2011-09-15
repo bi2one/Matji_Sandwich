@@ -16,13 +16,10 @@ import com.matji.sandwich.widget.cell.UserIntroCell;
 import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserPostListActivity extends BaseActivity implements Refreshable {
-    private User user;		
     private UserTitle title;
     private UserPostListView listView;
     private UserCell userCell;
     private UserIntroCell userIntroCell;
-
-    public static final String USER = "user";
 
     public int setMainViewId() {
         return R.id.activity_user_post;
@@ -34,14 +31,12 @@ public class UserPostListActivity extends BaseActivity implements Refreshable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_post);
 
-        user = getIntent().getParcelableExtra(USER);
-
         title = (UserTitle) findViewById(R.id.Titlebar);
-        userCell = new UserCell(this, user);
-        userIntroCell = new UserIntroCell(this, user);
+        userCell = new UserCell(this, UserMainActivity.user);
+        userIntroCell = new UserIntroCell(this, UserMainActivity.user);
 
         title.setIdentifiable(this);
-        title.setUser(user);
+        title.setUser(UserMainActivity.user);
         title.setFollowable(userCell);
 
         userCell.setIdentifiable(this);
@@ -52,7 +47,7 @@ public class UserPostListActivity extends BaseActivity implements Refreshable {
         listView = (UserPostListView) findViewById(R.id.user_post_list_view);
         listView.addHeaderView(userCell);
         listView.addHeaderView(userIntroCell);
-        listView.setUser(user);
+        listView.setUser(UserMainActivity.user);
         listView.setActivity(this);
         listView.requestReload();
     }
@@ -72,6 +67,13 @@ public class UserPostListActivity extends BaseActivity implements Refreshable {
                 ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostMainActivity.POSTS);
                 listView.setPosts(posts);
                 setIsFlow(true);
+            }
+            break;
+        case USER_PROFILE_TAB_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                UserMainActivity.user = (User) data.getParcelableExtra(UserMainActivity.USER);
+                userCell.setUser(UserMainActivity.user);
+                userCell.refresh();
             }
             break;
         case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:            
@@ -96,7 +98,7 @@ public class UserPostListActivity extends BaseActivity implements Refreshable {
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof User){
-            this.user = (User) data;
+            UserMainActivity.user = (User) data;
             refresh();
         }
     }

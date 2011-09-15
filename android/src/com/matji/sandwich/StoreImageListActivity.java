@@ -2,6 +2,8 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -15,9 +17,7 @@ import com.matji.sandwich.widget.title.StoreTitle;
 
 public class StoreImageListActivity extends BaseActivity implements Refreshable {
 
-    public static final String STORE = "store";
-
-    private Store store;
+    //    public static final String STORE = "store";
     private StoreTitle title;
     private StoreCell storeCell;
     private StoreImageListView listView;
@@ -31,27 +31,27 @@ public class StoreImageListActivity extends BaseActivity implements Refreshable 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_image_list);
 
-        store = (Store) getIntent().getParcelableExtra(STORE);        
+        //        store = (Store) getIntent().getParcelableExtra(STORE);
         title = (StoreTitle) findViewById(R.id.Titlebar);
-        storeCell = new StoreCell(this, store);
+        storeCell = new StoreCell(this, StoreMainActivity.store);
         listView = (StoreImageListView) findViewById(R.id.store_image_list_view);
 
         title.setIdentifiable(this);
-        title.setStore(store);
+        title.setStore(StoreMainActivity.store);
         title.setLikeable(storeCell);
 
         storeCell.setIdentifiable(this);
-        storeCell.setStore(store);
+        storeCell.setStore(StoreMainActivity.store);
         storeCell.addRefreshable(this);
         storeCell.addRefreshable(title);
-        
-        listView.setStore(store);
+
+        listView.setStore(StoreMainActivity.store);
         listView.addHeaderView(storeCell);
         listView.addHeaderView(new SubtitleHeader(
                 this, 
                 String.format(
                         MatjiConstants.string(R.string.subtitle_store_image),
-                        store.getImageCount())));
+                        StoreMainActivity.store.getImageCount())));
         listView.setActivity(this);
         listView.requestReload();
     }
@@ -71,12 +71,25 @@ public class StoreImageListActivity extends BaseActivity implements Refreshable 
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
-            this.store = (Store) data;
-            listView.setStore(store);
+            StoreMainActivity.store = (Store) data;
+            listView.setStore(StoreMainActivity.store);
             refresh();
         }
     }
 
     @Override
     public void refresh(ArrayList<MatjiData> data) {}
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+        case STORE_DETAIL_INFO_TAB_ACTIVITY:
+            if (resultCode == Activity.RESULT_OK) {
+                StoreMainActivity.store = (Store) data.getParcelableExtra(StoreMainActivity.STORE);
+                setIsFlow(true);
+            }
+            break;
+        }
+    }
 }

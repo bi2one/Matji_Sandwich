@@ -44,7 +44,6 @@ public abstract class LikeListener implements OnClickListener, Requestable {
     private Context context;
     private LikeHttpRequest likeRequest;
     private HttpRequestManager manager;
-    private Session session;
     private DBProvider dbProvider;
     private ViewGroup spinnerContainer;
 
@@ -60,7 +59,6 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         this.context = context;
         likeRequest = new LikeHttpRequest(context);
         manager = HttpRequestManager.getInstance(context);
-        session = Session.getInstance(context);
         dbProvider = DBProvider.getInstance(context);
         this.spinnerContainer = spinnerContainer;
     }
@@ -216,14 +214,12 @@ public abstract class LikeListener implements OnClickListener, Requestable {
             like.setForeignKey(getDataId());
             like.setObject(getDBProviderObjectType());
             dbProvider.insertLike(like);
-            session.getCurrentUser().setLikeStoreCount(session.getCurrentUser().getLikeStoreCount() + 1);
 
             postLikeRequest();
             break;
         case HttpRequestManager.UN_LIKE_REQUEST:
             dbProvider.deleteLike(getDataId(), getDBProviderObjectType());
-            session.getCurrentUser().setLikeStoreCount(session.getCurrentUser().getLikeStoreCount() - 1);
-
+            
             postUnlikeRequest();
             break;
         }

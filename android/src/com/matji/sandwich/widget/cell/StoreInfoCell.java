@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreDetailInfoTabActivity;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.SimpleTag;
@@ -118,12 +119,12 @@ public class StoreInfoCell extends Cell {
      * 
      */
     @Override
-    protected Intent getIntent() {
+    public void gotoDetailPage() {
         Intent intent = new Intent(getContext(), StoreDetailInfoTabActivity.class);
         intent.putExtra(StoreDetailInfoTabActivity.STORE, (Parcelable) store);
-        return intent;
+        ((Activity) getContext()).startActivityForResult(intent, BaseActivity.STORE_DETAIL_INFO_TAB_ACTIVITY);
     }
-
+    
     /**
      * Refresh 가능한 정보들을 refresh
      */

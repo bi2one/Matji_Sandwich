@@ -39,7 +39,13 @@ public class PostSubHeader extends ViewContainer {
     public void setViewData() {
         if (post.getLikeCount() > 0) {
             getRootView().setVisibility(View.VISIBLE);
-            if (post.getLikeCount() == 1) {        
+
+            if (post.getLikeUser() == null) {
+                shText.setText(
+                        String.format(
+                                MatjiConstants.string(R.string.post_sub_header_txt),
+                                post.getLikeCount()));
+            } else  if (post.getLikeCount() == 1) {
                 shText.setText(
                         String.format(
                                 MatjiConstants.string(R.string.post_sub_header_txt_one),

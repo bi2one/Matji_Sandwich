@@ -2,17 +2,23 @@ package com.matji.sandwich.widget.cell;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.matji.sandwich.ActivityStartable;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.UserNickEditActivity;
+import com.matji.sandwich.UserProfileTabActivity;
+import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
 
@@ -108,10 +114,10 @@ public class UserEditCell extends Cell implements OnClickListener {
      * 
      */
     @Override
-    protected Intent getIntent() {
-        return null;
+    public void gotoDetailPage() {
     }
 
+    
     public void showLine() {
         findViewById(R.id.cell_user_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_user_shadow).setVisibility(View.GONE);

@@ -32,6 +32,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
 
     private boolean showKeyboard;
 
+    private Session session;
     private HttpRequest request;
     private HttpRequestManager manager;
 
@@ -70,6 +71,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         super.init();
         setContentView(R.layout.activity_post);
 
+        session = Session.getInstance(this);
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         manager = HttpRequestManager.getInstance(this);
 
@@ -101,18 +103,24 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                     currentPost.setLikeUser(null);
                 }
                 currentPost.setLikeCount(currentPost.getLikeCount() - 1);
+                if (currentPost.getLikeUser().getId()
+                        == session.getCurrentUser().getId()) {
+                    currentPost.setLikeUser(null);
+                }
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();
-
             }
 
             @Override
             public void postLikeRequest() {
                 // unlike 요청 후 post의 likeCount를 늘려준다.
                 if (currentPost.getLikeCount() == 0) {
-                    currentPost.setLikeUser(Session.getInstance(PostMainActivity.this).getCurrentUser());
+                    currentPost.setLikeUser(session.getCurrentUser());
                 }
                 currentPost.setLikeCount(currentPost.getLikeCount() + 1);
+                if (currentPost.getLikeUser() == null) {
+                    currentPost.setLikeUser(session.getCurrentUser());
+                }
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();
             }

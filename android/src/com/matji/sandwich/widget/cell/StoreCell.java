@@ -2,6 +2,7 @@ package com.matji.sandwich.widget.cell;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreDetailInfoTabActivity;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.listener.LikeListener;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
 import com.matji.sandwich.widget.title.button.LikeButton.Likeable;
 
@@ -30,15 +33,17 @@ public class StoreCell extends Cell implements Likeable {
     private Store store;
 
     private Identifiable identifiable;
-    
+    private Session session;
+
     private Button likeList;
+    private TextView name;
     private BookmarkStarToggleView star;
-    
+
     private LikeListener likeListener;
     private ViewGroup spinnerContainer;
-    
+
     private ArrayList<Refreshable> refreshables;
-    
+
     /**
      * 기본 생성자 (Java Code)
      * 
@@ -75,12 +80,16 @@ public class StoreCell extends Cell implements Likeable {
     protected void init() {
         // TODO Auto-generated method stub
         super.init();
-        
+
+        session = Session.getInstance(getContext());
         spinnerContainer = (ViewGroup) findViewById(R.id.StoreCell);
         likeList = (Button) findViewById(R.id.cell_store_like_list_btn);
         refreshables = new ArrayList<Refreshable>();
+        name = (TextView) findViewById(R.id.cell_store_name);
+        star = (BookmarkStarToggleView) findViewById(R.id.cell_store_toggle_star);
+
     }
-    
+
     /**
      * 이 StoreCell의 맛집 정보를 저장하고 해당 맛집변하지 않는 정보들을 뷰에 뿌려준다.
      * 
@@ -88,34 +97,35 @@ public class StoreCell extends Cell implements Likeable {
      */
     public void setStore(Store store) {
         this.store = store;
-
-        ((TextView) findViewById(R.id.cell_store_name)).setText(store.getName());
-        star = ((BookmarkStarToggleView) findViewById(R.id.cell_store_toggle_star));
         likeListener = new LikeListener(identifiable, getContext(), store, spinnerContainer) {
-            
+
             @Override
             public void postUnlikeRequest() {
                 StoreCell.this.store.setLikeCount(StoreCell.this.store.getLikeCount() - 1);
+                session.getCurrentUser().setLikeStoreCount(session.getCurrentUser().getLikeStoreCount() - 1);
+                setStore(StoreCell.this.store);
                 refresh();
             }
-            
+
             @Override
             public void postLikeRequest() {
                 StoreCell.this.store.setLikeCount(StoreCell.this.store.getLikeCount() + 1);
+                session.getCurrentUser().setLikeStoreCount(session.getCurrentUser().getLikeStoreCount() + 1);
+                setStore(StoreCell.this.store);
                 refresh();
             }
         };
+        name.setText(store.getName());
+        likeList.setText(store.getLikeCount()+"");
+        star.init(store, spinnerContainer);
     }
-    
+
     public void setIdentifiable(Identifiable identifiable) {
         this.identifiable = identifiable;
         likeListener.setIdentifiable(identifiable);
     }
 
     public void refresh() {
-        likeList.setText(store.getLikeCount()+"");
-        star.init(store, spinnerContainer);
-        
         for (Refreshable refreshable : refreshables) {
             refreshable.refresh(store);
         }
@@ -125,17 +135,17 @@ public class StoreCell extends Cell implements Likeable {
      * 
      */
     @Override
-    protected Intent getIntent() {
+    public void gotoDetailPage() {
         Intent intent = new Intent(getContext(), StoreDetailInfoTabActivity.class);
         intent.putExtra(StoreDetailInfoTabActivity.STORE, (Parcelable) store);
-        return intent;
+        ((Activity) getContext()).startActivityForResult(intent, BaseActivity.STORE_DETAIL_INFO_TAB_ACTIVITY);
     }
-    
+
     public void showLine() {
         findViewById(R.id.cell_store_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_store_shadow).setVisibility(View.GONE);
     }
-    
+
     public void addRefreshable(Refreshable refreshable) {
         refreshables.add(refreshable);
     }

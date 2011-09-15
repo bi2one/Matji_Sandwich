@@ -23,6 +23,8 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public static final int STORE_MAIN_ACTIVITY = 105;
     public static final int USER_MAIN_ACTIVITY = 106;
     public static final int IMAGE_SLIDER_ACTIVITY = 107;
+    public static final int STORE_DETAIL_INFO_TAB_ACTIVITY = 108;
+    public static final int USER_PROFILE_TAB_ACTIVITY = 109;
     
     private ViewGroup mainViewGroup;
 

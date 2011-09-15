@@ -12,12 +12,11 @@ import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.title.StoreTitle;
 
 public class StoreDefaultInfoActivity extends BaseActivity implements Refreshable {
-	private Store store;
 	private StoreTitle title;
 	private StoreCell storeCell;
 	
 	private TextView defaultInfo;
-	public static final String STORE  = "StoreDetailInfoActivity.store";
+//	public static final String STORE  = "StoreDetailInfoActivity.store";
 	private TextView fullName;
 	private TextView cover;
 	private TextView tel;
@@ -37,9 +36,10 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 	protected void init() {
 		super.init();
 		setContentView(R.layout.activity_store_default_info);
-		store = (Store) getIntent().getParcelableExtra(STORE);
+//		store = (Store) getIntent().getParcelableExtra(STORE);
 		title = (StoreTitle) findViewById(R.id.Titlebar);
 		storeCell = (StoreCell) findViewById(R.id.StoreCell);
+		storeCell.setClickable(false);
 		
 		fullName = (TextView) findViewById(R.id.store_info_fullname);
 		cover = (TextView) findViewById(R.id.store_info_cover);
@@ -48,10 +48,10 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 		website = (TextView) findViewById(R.id.store_info_website);
 
 		title.setIdentifiable(this);
-		title.setStore(store);
+		title.setStore(StoreDetailInfoTabActivity.store);
 		title.setLikeable(storeCell);
 
-        storeCell.setStore(store);
+        storeCell.setStore(StoreDetailInfoTabActivity.store);
 		storeCell.setIdentifiable(this);
 		storeCell.addRefreshable(this);
         storeCell.addRefreshable(title);
@@ -66,17 +66,17 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 
     @Override
     public void refresh() {
-        fullName.setText(store.getName());
-        tel.setText(store.getTel());
-        address.setText(store.getAddress());
+        fullName.setText(StoreDetailInfoTabActivity.store.getName());
+        tel.setText(StoreDetailInfoTabActivity.store.getTel());
+        address.setText(StoreDetailInfoTabActivity.store.getAddress());
         
-        if(store.getCover() != null)
-            cover.setText(store.getCover());
+        if(StoreDetailInfoTabActivity.store.getCover() != null)
+            cover.setText(StoreDetailInfoTabActivity.store.getCover());
         else    
             cover.setText("-");
         
-        if(store.getWebsite() != null)
-            website.setText(store.getWebsite());
+        if(StoreDetailInfoTabActivity.store.getWebsite() != null)
+            website.setText(StoreDetailInfoTabActivity.store.getWebsite());
         else
             website.setText("-");
 	}
@@ -84,7 +84,7 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
-            this.store = (Store) data;
+            StoreDetailInfoTabActivity.store = (Store) data;
             refresh();
         }        
     }

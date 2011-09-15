@@ -20,7 +20,7 @@ import com.matji.sandwich.widget.RoundTabHost;
 
 public class UserProfileTabActivity extends BaseTabActivity implements Loginable {
 
-    private User user;
+    public static User user;
     private RoundTabHost tabHost;
     private Session session;
     private boolean isMainTabActivity;
@@ -63,13 +63,11 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     }
 
     public void setUser(User user) {    // user가 저장되면 탭도 같이 바뀌어야 함.
-        this.user = user;
+        UserProfileTabActivity.user = user;
         profileIntent = new Intent(this, UserProfileActivity.class);
-        profileIntent.putExtra(UserProfileActivity.USER, (Parcelable) user);
         profileIntent.putExtra(UserProfileActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
 
         tagIntent = new Intent(this, UserTagActivity.class);
-        tagIntent.putExtra(UserTagActivity.USER, (Parcelable) user);
         tagIntent.putExtra(UserTagActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
     }
     
@@ -149,10 +147,11 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
 
     @Override
     public void finish() {
-        setResult(RESULT_OK);
+        Intent intent = new Intent();
+        intent.putExtra(UserMainActivity.USER, (Parcelable) user);
+        setResult(RESULT_OK, intent);
         super.finish();
     }
-
 
     public void loginButtonClicked(View v) {        
         new LoginAsyncTask(this, this, usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
@@ -197,5 +196,5 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
                 syncTab();
             }
         }
-    }
+    }    
 }

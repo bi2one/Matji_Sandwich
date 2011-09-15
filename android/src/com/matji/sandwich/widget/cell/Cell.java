@@ -1,7 +1,6 @@
 package com.matji.sandwich.widget.cell;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,13 @@ import android.widget.RelativeLayout;
  * @author mozziluv
  */
 public abstract class Cell extends RelativeLayout {
-	protected abstract Intent getIntent();
-	private int layout_id;
+
+    /**
+     * DetailPageActivity를 실행하는 메소드.
+     */
+    public abstract void gotoDetailPage();
+	
+    private int layout_id;
 	/**
 	 * 기본 생성자(Java Code)
 	 * 
@@ -48,13 +52,5 @@ public abstract class Cell extends RelativeLayout {
 				gotoDetailPage();
 			}
 		});
-	}
-
-	/**
-	 * DetailPageActivity를 실행하는 메소드.
-	 */
-	public void gotoDetailPage() {
-		if (getIntent() != null)
-			getRootView().getContext().startActivity(getIntent());
 	}
 }

@@ -11,6 +11,7 @@
 	<EditText
 		android:id="@+id/user_intro_edit_field"
 		android:lines="3"
+		android:gravity="top"
 		style="@style/DefaultWidthFill"
 		android:layout_below="@id/Titlebar"
 		android:background="@drawable/input_box_square" />

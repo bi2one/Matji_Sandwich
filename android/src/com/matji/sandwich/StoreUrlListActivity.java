@@ -2,6 +2,8 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -14,11 +16,10 @@ import com.matji.sandwich.widget.title.StoreTitle;
 public class StoreUrlListActivity extends BaseActivity implements Refreshable {
 
     private StoreTitle title;
-    private Store store;
     private StoreCell storeCell;
     private StoreUrlListView listView;
 
-    public static final String STORE = "StoreUrlListActivity.store";
+    //    public static final String STORE = "StoreUrlListActivity.store";
 
     public int setMainViewId() {
         return R.id.activity_store_url;
@@ -31,11 +32,11 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
         setContentView(R.layout.activity_store_url);
 
         title = (StoreTitle) findViewById(R.id.Titlebar);
-        store = (Store) getIntent().getParcelableExtra(STORE);
-        storeCell = new StoreCell(this, store);
+        //        store = (Store) getIntent().getParcelableExtra(STORE);
+        storeCell = new StoreCell(this, StoreMainActivity.store);
 
         title.setIdentifiable(this);
-        title.setStore(store);
+        title.setStore(StoreMainActivity.store);
         title.setLikeable(storeCell);
 
         storeCell.setIdentifiable(this);
@@ -43,7 +44,7 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
         storeCell.addRefreshable(title);
 
         listView = (StoreUrlListView) findViewById(R.id.store_url_list);
-        listView.setStoreId(store.getId());
+        listView.setStoreId(StoreMainActivity.store.getId());
         listView.addHeaderView(storeCell);
         listView.setActivity(this);
         listView.requestReload();
@@ -54,7 +55,7 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
         super.onNotFlowResume();
         storeCell.refresh();
     }
-    
+
     @Override
     public void refresh() {
         listView.refresh();
@@ -63,8 +64,8 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
-            this.store = (Store) data;
-            listView.setStoreId(store.getId());
+            StoreMainActivity.store = (Store) data;
+            listView.setStoreId(StoreMainActivity.store.getId());
             refresh();
         }
 
@@ -72,4 +73,19 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
 
     @Override
     public void refresh(ArrayList<MatjiData> data) {}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+        case STORE_DETAIL_INFO_TAB_ACTIVITY:
+            if (resultCode == Activity.RESULT_OK) {
+                StoreMainActivity.store = (Store) data.getParcelableExtra(StoreMainActivity.STORE);
+                storeCell.setStore(StoreMainActivity.store);
+                storeCell.refresh();
+                setIsFlow(true);
+            }
+            break;
+        }        
+    }
 }

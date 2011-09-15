@@ -2,7 +2,6 @@ package com.matji.sandwich;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,7 +13,7 @@ import com.matji.sandwich.widget.RoundTabHost;
 
 public class UserMainActivity extends BaseTabActivity {
     private RoundTabHost tabHost;
-    private User user;
+    public static User user;
 
     public static final String USER = "user";
 
@@ -42,13 +41,8 @@ public class UserMainActivity extends BaseTabActivity {
         user = getIntent().getParcelableExtra(USER);
 
         Intent userPostListIntent = new Intent(this, UserPostListActivity.class);
-        userPostListIntent.putExtra(UserPostListActivity.USER, (Parcelable) user);
-
         Intent userImageListIntent = new Intent(this, UserImageListActivity.class);
-        userImageListIntent.putExtra(UserImageListActivity.USER, (Parcelable) user);
-
         Intent userUrlListIntent = new Intent(this, UserTagActivity.class);
-        userUrlListIntent.putExtra(UserTagActivity.USER, (Parcelable) user);
 
         tabHost = (RoundTabHost) getTabHost();
 
@@ -76,8 +70,8 @@ public class UserMainActivity extends BaseTabActivity {
                 return false;
             }
         });
-    }
-
+     }
+    
     public void refresh() {
 
     }

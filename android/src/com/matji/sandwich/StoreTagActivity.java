@@ -23,14 +23,12 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
     private HttpRequest request;
 	
 	private TextView tagCount;
-	
-	private Store store;
 
 	private StoreTitle title;
 	private StoreCell storeCell;
     private TagCloudView tagCloudView;
 	
-	public static final String STORE = "StoreTagActivity.store";
+//	public static final String STORE = "StoreTagActivity.store";
 	
     public int setMainViewId() {
 	return R.id.activity_store_tag;
@@ -40,7 +38,7 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_tag);
 		
-		store = getIntent().getParcelableExtra(STORE);
+//		store = getIntent().getParcelableExtra(STORE);
 		HttpRequestManager.getInstance(this).request(getMainView(), request(), HttpRequestManager.STORE_TAG_LIST_REQUEST, this);
 
 		tagCloudView = (TagCloudView) findViewById(R.id.store_tag_cloud);
@@ -48,18 +46,18 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 		tagCount = (TextView) findViewById(R.id.store_tag_count);
 		String numTag = String.format(
 		        MatjiConstants.string(R.string.number_of_tag),
-		        store.getTagCount());
+		        StoreDetailInfoTabActivity.store.getTagCount());
 		tagCount.setText(numTag);
 		
 		title = (StoreTitle) findViewById(R.id.Titlebar);
 		storeCell = (StoreCell) findViewById(R.id.StoreCell);
-
+		storeCell.setClickable(false);
         
         title.setIdentifiable(this);
-        title.setStore(store);
+        title.setStore(StoreDetailInfoTabActivity.store);
         title.setLikeable(storeCell);
 
-        storeCell.setStore(store);
+        storeCell.setStore(StoreDetailInfoTabActivity.store);
         storeCell.setIdentifiable(this);
         storeCell.addRefreshable(this);
         storeCell.addRefreshable(title);
@@ -73,7 +71,7 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 	}
 	
 	public void setStore(Store store) {
-		this.store = store;
+		StoreDetailInfoTabActivity.store = store;
 	}
 	
 	private HttpRequest request() {
@@ -81,7 +79,7 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 			request = new TagHttpRequest(this);
 		}
 		
-		((TagHttpRequest) request).actionStoreTagList(store.getId(), 1, 50);
+		((TagHttpRequest) request).actionStoreTagList(StoreDetailInfoTabActivity.store.getId(), 1, 50);
 
 		return request;
 	}
@@ -111,7 +109,7 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {        
-            this.store = (Store) data;
+            StoreDetailInfoTabActivity.store = (Store) data;
             refresh();
         }
     }

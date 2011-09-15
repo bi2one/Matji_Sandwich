@@ -390,6 +390,7 @@
   <string name="following_follower">Follower</string>
   
   <!-- PostSubHeader -->
+  <string name="post_sub_header_txt">%1$d명이 좋아합니다.</string>
   <string name="post_sub_header_txt_one">%1$s님이 좋아합니다.</string>
   <string name="post_sub_header_txt_other">%1$s님 외 %2$d명이 좋아합니다.</string>
   

@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,13 +21,11 @@ public class UserTagActivity extends BaseActivity implements Refreshable, LoginL
 
 	private Session session;
     private boolean isMainTabActivity;
-    private User user;
     private UserTitle title;
     private UserCell userCell;
     private SubtitleHeader tagCount;
     private UserTagCloudView tagCloudView;
 
-    public static final String USER = "UserTagActivity.user";
     public static final String IS_MAIN_TAB_ACTIVITY = "UserTagActivity.is_main_tab_activity";
 
     public int setMainViewId() {
@@ -41,7 +40,6 @@ public class UserTagActivity extends BaseActivity implements Refreshable, LoginL
         session = Session.getInstance(this);
         session.addLoginListener(this);
         isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
-        user = (User) getIntent().getParcelableExtra(USER);
 
         title = (UserTitle) findViewById(R.id.Titlebar);
         userCell = (UserCell) findViewById(R.id.UserCell);
@@ -50,11 +48,11 @@ public class UserTagActivity extends BaseActivity implements Refreshable, LoginL
 
         if (!isMainTabActivity) {
             title.setIdentifiable(this);
-            title.setUser(user);
+            title.setUser(UserProfileTabActivity.user);
             title.setFollowable(userCell);
         }
 
-        userCell.setUser(user);
+        userCell.setUser(UserProfileTabActivity.user);
         userCell.setClickable(false);
         userCell.setIdentifiable(this);
         userCell.addRefreshable(this);
@@ -85,7 +83,7 @@ public class UserTagActivity extends BaseActivity implements Refreshable, LoginL
     public void refresh() {
         String numTag = String.format(
                 MatjiConstants.string(R.string.number_of_tag),
-                user.getTagCount());
+                UserProfileTabActivity.user.getTagCount());
 
         tagCount.setTitle(numTag);
     }
@@ -93,7 +91,7 @@ public class UserTagActivity extends BaseActivity implements Refreshable, LoginL
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof User) {
-            this.user = (User) data;
+            UserProfileTabActivity.user = (User) data;
             refresh();
         }
     }
@@ -111,5 +109,20 @@ public class UserTagActivity extends BaseActivity implements Refreshable, LoginL
 			userCell.setUser(session.getCurrentUser());
 			userCell.refresh();
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    // TODO Auto-generated method stub
+	    super.onActivityResult(requestCode, resultCode, data);
+	    switch (requestCode) {
+        case USER_PROFILE_TAB_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                UserMainActivity.user = (User) data.getParcelableExtra(UserMainActivity.USER);
+                userCell.setUser(UserMainActivity.user);
+                userCell.refresh();
+            }
+            break;
+	    }
 	}
 }

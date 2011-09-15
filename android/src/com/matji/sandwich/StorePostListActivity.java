@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
@@ -16,40 +17,39 @@ import com.matji.sandwich.widget.cell.StoreInfoCell;
 import com.matji.sandwich.widget.title.StoreTitle;
 
 public class StorePostListActivity extends BaseActivity implements Refreshable {
-    private Store store;
     private StoreTitle title;
     private StoreCell storeCell;
     private StoreInfoCell storeInfoCell;
     private StorePostListView listView;
 
-    public static final String STORE = "store";
+    //    public static final String STORE = "store";
 
     public int setMainViewId() {
-	return R.id.activity_store_post;
+        return R.id.activity_store_post;
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_post);
-        store = (Store) getIntent().getParcelableExtra(STORE);
+        //        store = (Store) getIntent().getParcelableExtra(STORE);
 
         title = (StoreTitle) findViewById(R.id.Titlebar);
-        storeCell = new StoreCell(this, store);
-        storeInfoCell = new StoreInfoCell(this, store);
+        storeCell = new StoreCell(this, StoreMainActivity.store);
+        storeInfoCell = new StoreInfoCell(this, StoreMainActivity.store);
         listView = (StorePostListView) findViewById(R.id.store_post_list);
-        
+
         title.setIdentifiable(this);
-        title.setStore(store);
+        title.setStore(StoreMainActivity.store);
         title.setLikeable(storeCell);
-        
+
         storeCell.setIdentifiable(this);
         storeCell.addRefreshable(this);
         storeCell.addRefreshable(title);
         storeCell.showLine();
-        
+
         listView.addHeaderView(storeCell);
         listView.addHeaderView(storeInfoCell);
-        listView.setStore(store);
+        listView.setStore(StoreMainActivity.store);
         listView.setActivity(this);
         listView.requestReload();
     }
@@ -60,13 +60,13 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
         super.onNotFlowResume();
         storeCell.refresh();
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
         listView.dataRefresh();
     }
-    
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
@@ -85,14 +85,23 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
             }
             break;        
 
+        case STORE_DETAIL_INFO_TAB_ACTIVITY:
+            if (resultCode == Activity.RESULT_OK) {
+                StoreMainActivity.store = (Store) data.getParcelableExtra(StoreMainActivity.STORE);
+                storeCell.setStore(StoreMainActivity.store);
+                storeCell.refresh();
+                setIsFlow(true);
+            }
+            break;
         case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:            
             if (resultCode == Activity.RESULT_OK) {
                 setIsFlow(true);
             }
             break;
+
         }
     }
-        
+
     @Override
     public void setIsFlow(boolean isFlow) {
         if (getParent() instanceof BaseTabActivity) {
@@ -109,8 +118,8 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
-            this.store = (Store) data;
-            listView.setStore(store);
+            StoreMainActivity.store = (Store) data;
+            listView.setStore(StoreMainActivity.store);
         }
     }
 

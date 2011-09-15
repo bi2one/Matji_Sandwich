@@ -2,6 +2,7 @@ package com.matji.sandwich.widget.cell;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -15,6 +16,7 @@ import com.matji.sandwich.MessageListActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.UserProfileTabActivity;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.FollowingListener;
@@ -32,7 +34,7 @@ public class UserCell extends Cell implements Followable {
     private User user;
 
     private Identifiable identifiable;
-    
+
     private Button follow;
     private Button messageList;
 
@@ -40,13 +42,13 @@ public class UserCell extends Cell implements Followable {
 
     private FollowingListener followingListener;
     private ViewGroup spinnerContainer;
-    
+
     private CellProfileImageView profile;
     private TextView nick;
     private TextView point;
     private TextView area;
     private TextView likeList;
-    
+
     private ArrayList<Refreshable> refreshables;
     /**
      * 기본 생성자 (Java Code)
@@ -84,7 +86,7 @@ public class UserCell extends Cell implements Followable {
         super.init();
         spinnerContainer = (ViewGroup) findViewById(R.id.UserCell);
         refreshables = new ArrayList<Refreshable>();
-        
+
         profile = ((CellProfileImageView) findViewById(R.id.profile));
         nick = ((TextView) findViewById(R.id.cell_user_nick));
         point = ((TextView) findViewById(R.id.cell_user_point));
@@ -141,7 +143,7 @@ public class UserCell extends Cell implements Followable {
         this.identifiable = identifiable;
         followingListener.setIdentifiable(identifiable);
     }
-    
+
     /**
      * Refresh 가능한 정보들을 refresh
      * 
@@ -169,12 +171,12 @@ public class UserCell extends Cell implements Followable {
      * 
      */
     @Override
-    protected Intent getIntent() {
+    public void gotoDetailPage() {
         Intent intent = new Intent(getContext(), UserProfileTabActivity.class);
         intent.putExtra(UserProfileTabActivity.USER, (Parcelable) user);
-        return intent;
+        ((Activity) getContext()).startActivityForResult(intent, BaseActivity.USER_PROFILE_TAB_ACTIVITY);
     }
-    
+
     public void showLine() {
         findViewById(R.id.cell_user_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_user_shadow).setVisibility(View.GONE);

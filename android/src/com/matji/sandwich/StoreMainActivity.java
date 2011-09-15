@@ -11,22 +11,22 @@ import com.matji.sandwich.widget.RoundTabHost;
 public class StoreMainActivity extends BaseTabActivity {
     public final static String DATA_STORE = "StoreMainActivity.store";
     private RoundTabHost tabHost;
-    private Store store;
-	
+    public static Store store;
+
     public final static String STORE = "store";
 
     public int setMainViewId() {
-	return R.id.activity_store_main;
+        return R.id.activity_store_main;
     }
 
     @Override
-	protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
-	
+
     @Override
-	protected void init() {
-	super.init();	    
+    protected void init() {
+        super.init();	    
 
         setContentView(R.layout.activity_store_main);
 
@@ -34,34 +34,29 @@ public class StoreMainActivity extends BaseTabActivity {
         store = (Store) getIntent().getParcelableExtra(STORE);
 
         Intent storePostListIntent = new Intent(this, StorePostListActivity.class);
-        storePostListIntent.putExtra(StorePostListActivity.STORE, (Parcelable) store);
-        
         Intent storeImageListIntent = new Intent(this, StoreImageListActivity.class);
-        storeImageListIntent.putExtra(StoreImageListActivity.STORE, (Parcelable) store);
-        
         Intent storeUrlListIntent = new Intent(this, StoreUrlListActivity.class);
-        storeUrlListIntent.putExtra(StoreUrlListActivity.STORE, (Parcelable) store);
-                
+
         tabHost.addLeftTab("tab1",
-			   R.string.store_main_post_list_view,
-			   storePostListIntent);
+                R.string.store_main_post_list_view,
+                storePostListIntent);
         tabHost.addCenterTab("tab2",
-			     R.string.store_main_img,
-			     storeImageListIntent);
+                R.string.store_main_img,
+                storeImageListIntent);
         tabHost.addRightTab("tab3",
-			    R.string.store_main_review,
-			    storeUrlListIntent);
+                R.string.store_main_review,
+                storeUrlListIntent);
         refresh();
     }
-	
+
     private void refresh() {
-		
+
     }
-	
+    
     public void finish() {
-	Intent result = new Intent();
-	result.putExtra(DATA_STORE, (Parcelable)store);
-	setResult(RESULT_OK, result);
-	super.finish();
+        Intent result = new Intent();
+        result.putExtra(DATA_STORE, (Parcelable)store);
+        setResult(RESULT_OK, result);
+        super.finish();
     }
 }
