@@ -543,7 +543,7 @@
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">fill_parent</item>
     <item name="android:src">@drawable/user_img54</item>
-    <item name="android:scaleType">centerCrop</item>
+    <item name="android:scaleType">fitXY</item>
   </style>
   
   <style name="CellProfile" parent="Profile">
@@ -921,6 +921,7 @@
   <style name="user_profile_Wrapper" parent="DefaultWidthFill">
   	<item name="android:layout_marginTop">@dimen/user_profile_margin_top</item>
   	<item name="android:layout_marginBottom">@dimen/user_profile_margin_bottom</item>
+	<item name="android:layout_height">wrap_content</item>
   	<item name="android:background">@drawable/txtbox</item>
   </style>
   
@@ -941,10 +942,10 @@
   </style>
 
   <style name="user_profile_Moresign" parent="DefaultWrap">
-	<item name="android:src">@drawable/icon_flow</item>
-	<item name="android:background">@null</item>
-	<item name="android:layout_alignParentRight">true</item>
-	<item name="android:layout_centerVertical">true</item>
+    <item name="android:src">@drawable/icon_flow</item>
+    <item name="android:background">@null</item>
+    <item name="android:layout_alignParentRight">true</item>
+    <item name="android:layout_centerVertical">true</item>
   </style>
   
   <style name="user_profile_Subtitle" parent="DefaultWrap">
