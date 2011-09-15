@@ -70,5 +70,4 @@ public class MeHttpRequest extends HttpRequest {
     	activity.startActivityForResult(intent, BaseActivity.REQUEST_EXTERNAL_SERVICE_LOGIN);
 
     }
-    
 }

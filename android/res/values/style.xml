@@ -279,6 +279,7 @@
   <style name="cell_user_LabelValue" parent="DefaultWrap">
   	<item name="android:textColor">@color/matji_light_gray</item>
   	<item name="android:textSize">@dimen/user_cell_content_size</item>
+  	<item name="android:singleLine">true</item>
   </style>
   
   <style name="cell_user_WhiteButton" parent="WhiteButtonNumber">
@@ -304,16 +305,17 @@
   </style>
 
   <!-- cell_user_edit.xml -->
-  <style name="cell_user_edit_EditNickButton" parent="cell_user_WhiteButton">
+  <style name="cell_user_edit_EditNickButton" parent="WhiteButtonText">
+    <item name="android:layout_width">@dimen/user_edit_cell_btn_width</item>
     <item name="android:text">@string/cell_user_edit_nickname</item>
   </style>
 
   <style name="cell_user_edit_UseridLabel" parent="cell_user_Label">
-    <item name="android:text">@string/cell_user_point</item>
+    <item name="android:text">@string/cell_user_edit_userid</item>
   </style>
 
   <style name="cell_user_edit_UsermailLabel" parent="cell_user_Label">
-    <item name="android:text">@string/cell_user_area</item>
+    <item name="android:text">@string/cell_user_edit_usermail</item>
   </style>
    
   <!-- header_comment.xml -->

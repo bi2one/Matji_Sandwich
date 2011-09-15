@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import com.matji.sandwich.R;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.http.util.RoundRectConvertable;
-import com.matji.sandwich.util.DisplayUtil;
 
 /**
  * Thumnail 에 사용하기 위해 ImageView 를 확장한 클래스.
@@ -19,8 +18,8 @@ import com.matji.sandwich.util.DisplayUtil;
  */
 public class ProfileImageView extends ImageView {
     protected ImageView border;
-    private Context context;
-    private ImageLoader imageLoader;
+    protected Context context;
+    protected ImageLoader imageLoader;
 
     public ProfileImageView(Context context) {
         super(context);
@@ -37,7 +36,7 @@ public class ProfileImageView extends ImageView {
         init(context);
     }
 
-    private void init(Context context) {
+    protected void init(Context context) {
         this.context = context;
         imageLoader = new ImageLoader(context, R.drawable.user_img54);
         imageLoader.setImageConvertable(new RoundRectConvertable());
@@ -63,10 +62,6 @@ public class ProfileImageView extends ImageView {
     public void showReliefBackground() {
         if (border == null) findBorder();
         border.setImageResource(R.drawable.user_img54_bg01);
-    }
-
-    public float getInset() {
-        return DisplayUtil.PixelFromDP(1);
     }
 
     // @Override

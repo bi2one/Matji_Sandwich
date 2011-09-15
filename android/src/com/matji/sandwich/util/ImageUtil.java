@@ -12,7 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 public class ImageUtil {
-	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels, int inset) {
+	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float pixels, int inset) {
 		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
 		Canvas canvas = new Canvas(output);
 

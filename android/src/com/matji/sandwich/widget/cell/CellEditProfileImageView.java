@@ -2,6 +2,8 @@ package com.matji.sandwich.widget.cell;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
 
 import com.matji.sandwich.R;
 
@@ -28,7 +30,8 @@ public class CellEditProfileImageView extends CellProfileImageView {
     
     @Override
     public void showInsetBackground() {
-        if (border == null) findBorder();
-        border.setImageResource(R.drawable.user_img90_bg_edit);
+        TextView border = (TextView) ((View) getParent()).findViewById(R.id.profile_border);
+        border.setBackgroundResource(R.drawable.user_img90_bg_edit);
+        ((TextView) border).setText(R.string.default_string_edit);
     }
 }

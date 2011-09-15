@@ -28,6 +28,7 @@
 					android:layout_below="@id/UserEditCell">
 					<!-- Intro -->
 					<RelativeLayout
+						android:id="@+id/edit_intro_wrapper"
 						style="@style/settings_Row">
 						<RelativeLayout
 							style="@style/DefaultWrap"
@@ -57,23 +58,24 @@
 						style="@style/HorizontalLine" />
 					<!-- Blog/Hompage -->
 					<RelativeLayout
+						android:id="@+id/edit_website_wrapper"
 						style="@style/settings_Row">
 						<RelativeLayout
 							style="@style/DefaultWrap"
 							android:layout_centerVertical="true"
 							android:layout_marginRight="@dimen/default_drawable_padding_long">
 							<TextView
-								android:id="@+id/edit_blog_hompage"
+								android:id="@+id/edit_website"
 								style="@style/DefaultWrap"
-								android:text="@string/edit_blog_hompage"
+								android:text="@string/edit_website"
 								android:textSize="@dimen/settings_content_size"
 								android:textColor="@color/matji_gray" />
 							<TextView
-								android:id="@+id/edit_blog_hompage_content"
+								android:id="@+id/edit_website_content"
 								style="@style/DefaultWrap"
 								android:textSize="@dimen/edit_content_size"
 								android:textColor="@color/matji_red"
-								android:layout_below="@id/edit_blog_hompage" />
+								android:layout_below="@id/edit_website" />
 						</RelativeLayout>
 						<ImageView
 							style="@style/DefaultWrap"
@@ -85,6 +87,7 @@
 						style="@style/HorizontalLine" />
 					<!-- Area -->
 					<RelativeLayout
+						android:id="@+id/edit_area_wrapper"
 						style="@style/settings_Row">
 						<RelativeLayout
 							style="@style/DefaultWrap"

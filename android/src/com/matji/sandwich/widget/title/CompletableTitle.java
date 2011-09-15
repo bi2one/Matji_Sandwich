@@ -3,6 +3,8 @@ package com.matji.sandwich.widget.title;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.matji.sandwich.R;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.title.button.CompleteButton;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.TitleButton;
@@ -38,5 +40,15 @@ public class CompletableTitle extends TitleContainerTypeLRt {
         
     public interface Completable {
         public void complete();
+    }
+    
+    public void lockCompletableButton() {
+        rightButton1.setTextColor(MatjiConstants.color(R.color.title_container_title_lock));
+        rightButton1.setClickable(false);
+    }
+    
+    public void unlockCompletableButton() {
+        rightButton1.setTextColor(MatjiConstants.color(R.color.title_container_title));
+        rightButton1.setClickable(true);
     }
 }

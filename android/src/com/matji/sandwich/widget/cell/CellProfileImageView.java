@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.http.util.RoundRectConvertable;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.ProfileImageView;
 
 /**
@@ -28,6 +30,17 @@ public class CellProfileImageView extends ProfileImageView {
     public CellProfileImageView(Context context, AttributeSet attr, int defStyle) {
         super(context, attr, defStyle);
     }
+    
+
+    @Override
+    protected void init(Context context) {
+        this.context = context;
+        imageLoader = new ImageLoader(context, R.drawable.user_img90);
+        imageLoader.setImageConvertable(new RoundRectConvertable(
+                MatjiConstants.dimen(R.dimen.default_round_pixel2),
+                MatjiConstants.dimenInt(R.dimen.default_round_inset2)));
+    }
+
 
     @Override
     protected ImageLoader.ImageSize getImageSize() {
@@ -42,9 +55,4 @@ public class CellProfileImageView extends ProfileImageView {
     
     @Override
     public void showReliefBackground() {}
-    
-    @Override
-    public float getInset() {
-        return 0;
-    }
 }

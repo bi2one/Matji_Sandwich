@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_user_website_edit"
+	android:background="@drawable/bg_01"
+	style="@style/DefaultFill">
+
+	<com.matji.sandwich.widget.title.CompletableTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWidthFill" />
+	<EditText
+		android:id="@+id/user_website_edit_field"
+		style="@style/DefaultWidthFill"
+		android:singleLine="true"
+		android:layout_below="@id/Titlebar"
+        android:background="@drawable/input_box_square" />
+</RelativeLayout>

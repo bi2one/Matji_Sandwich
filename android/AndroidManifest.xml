@@ -69,7 +69,10 @@
 		<activity android:name="StoreMoreActivity"></activity>
 		<activity android:name="StoreUrlListActivity" 
 				  android:screenOrientation="portrait"></activity>		
-		<activity android:name="UserMainActivity"></activity>
+        <activity android:name="UserMainActivity"></activity>
+        <activity android:name="UserNickEditActivity"></activity>
+        <activity android:name="UserIntroEditActivity"></activity>
+        <activity android:name="UserWebsiteEditActivity"></activity>
 		<activity android:name="UserStoreListActivity"></activity>
 		<activity android:name="UserSearchActivity"
 				  android:theme="@style/Theme.NoBackground"></activity>		

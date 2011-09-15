@@ -14,6 +14,7 @@ public class User extends MatjiData implements Serializable {
 	private String email;
 	private String title;
 	private String intro;
+	private String website;
 	private int post_count;
 	private int tag_count;
 	private int like_store_count;
@@ -58,7 +59,8 @@ public class User extends MatjiData implements Serializable {
 		dest.writeString(nick);
 		dest.writeString(email);
 		dest.writeString(title);
-		dest.writeString(intro);
+        dest.writeString(intro);
+        dest.writeString(website);
 		dest.writeInt(post_count);
 		dest.writeInt(tag_count);
         dest.writeInt(like_store_count);
@@ -85,6 +87,7 @@ public class User extends MatjiData implements Serializable {
 		email = in.readString();
 		title = in.readString();
 		intro = in.readString();
+		website = in.readString();
 		post_count = in.readInt();
 		tag_count = in.readInt();
         like_store_count = in.readInt();
@@ -154,7 +157,15 @@ public class User extends MatjiData implements Serializable {
 		return intro;
 	}
 
-	public void setPostCount(int post_count) {
+	public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setPostCount(int post_count) {
 		this.post_count = post_count;
 	}
 

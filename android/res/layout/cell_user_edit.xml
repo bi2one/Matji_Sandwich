@@ -14,6 +14,7 @@
 			style="@style/cell_user_InfoWrapper"
 			android:layout_toRightOf="@id/cell_user_edit_profile">
 			<LinearLayout
+				android:id="@+id/cell_user_edit_info_wrapper_inner"
 				android:layout_toRightOf="@+id/profile"
 				style="@style/DefaultVerticalWrap"
 				android:layout_alignParentLeft="true"
@@ -30,14 +31,15 @@
 						android:id="@+id/cell_user_edit_userid"
 						style="@style/cell_user_LabelValue" />
 				</LinearLayout>
-				<LinearLayout
-					style="@style/DefaultWrap">
-					<TextView
-						style="@style/cell_user_edit_UsermailLabel" />
-					<TextView
-						android:id="@+id/cell_user_edit_usermail"
-						style="@style/cell_user_LabelValue" />
-				</LinearLayout>
+			</LinearLayout>
+			<LinearLayout
+				android:layout_below="@id/cell_user_edit_info_wrapper_inner"
+				style="@style/DefaultWrap">
+				<TextView
+					style="@style/cell_user_edit_UsermailLabel" />
+				<TextView
+					android:id="@+id/cell_user_edit_usermail"
+					style="@style/cell_user_LabelValue" />
 			</LinearLayout>
 			<LinearLayout
 				android:id="@id/cell_user_edit_btn_wrapper"

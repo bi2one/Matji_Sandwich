@@ -174,7 +174,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
         if (session.isLogin()) {
             tabHost.setTabLabel(
                     MainTabHost.LOGIN_TAB, 
-                    session.getPrivateUtil().getLastLoginUserNick());
+                    session.getCurrentUser().getNick());
         }
     }
 

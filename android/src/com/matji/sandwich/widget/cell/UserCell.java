@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -150,6 +149,7 @@ public class UserCell extends Cell implements Followable {
      */
     public void refresh() {
         if (session.isLogin() && session.getCurrentUser().getId() == user.getId()) {
+            setUser(session.getCurrentUser());
             follow.setVisibility(View.GONE);
             messageList.setVisibility(View.VISIBLE);
             messageList.setText(user.getReceivedMessageCount()+"");

@@ -8,8 +8,12 @@
     <dimen name="default_drawable_padding_long">7.33dp</dimen>
 	<dimen name="default_divider_size">0.67dp</dimen>
 	<dimen name="default_new_icon_x_position">24.67dp</dimen>
-	<dimen name="default_new_icon_y_position">4dp</dimen>
-	
+	<dimen name="default_new_icon_y_position">4dp</dimen>	
+	<dimen name="default_round_pixel">5.33dp</dimen>
+	<dimen name="default_round_inset">0dp</dimen>
+	<dimen name="default_round_pixel2">8dp</dimen>
+    <dimen name="default_round_inset2">0.17dp</dimen>
+    
 	<!-- Title Container -->
 	<dimen name="title_container_height">36.67dp</dimen>
 	<dimen name="title_container_btn_min_width">38.67dp</dimen>
@@ -32,7 +36,8 @@
 	<dimen name="user_cell_btn_margin">1.33dp</dimen>
 	<dimen name="user_cell_margin_left">13.33dp</dimen>
 	<dimen name="user_intro_cell_padding">14.67dp</dimen>
-		
+    <dimen name="user_edit_cell_btn_width">100dp</dimen>
+    
 	<!-- Inputbar -->	
 	<dimen name="input_bar_margin">6.67dp</dimen>
 	<dimen name="input_bar_min_height">46.67dp</dimen>
@@ -193,6 +198,7 @@
     <dimen name="settings_check_box_width">24dp</dimen>
     <dimen name="settings_check_box_height">24dp</dimen>
     <dimen name="settings_row_height">44.67dp</dimen>
+    <dimen name="settings_logout_btn_width">100dp</dimen>
     <dimen name="settings_logout_btn_height">30.67dp</dimen>
     <dimen name="settings_logout_btn_padding">24dp</dimen>
     <dimen name="settings_logout_btn_txt_size">12.67dp</dimen>
@@ -206,4 +212,7 @@
 
     <!-- activity_edit.xml -->    
     <dimen name="edit_content_size">13.33dp</dimen>
+    
+    <!-- cell_edit_profile.xml -->
+    <dimen name="cell_edit_profile_txt_size">11.33dp</dimen>
 </resources>

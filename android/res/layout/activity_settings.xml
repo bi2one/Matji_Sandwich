@@ -83,7 +83,7 @@
 								android:layout_centerVertical="true" />
 							<Button
 								android:id="@id/settings_account_logout_btn"
-								android:layout_width="wrap_content"
+								android:layout_width="@dimen/settings_logout_btn_width"
 								android:layout_height="@dimen/settings_logout_btn_height"
 								android:background="@drawable/btn_yellow"
 								android:text="@string/settings_account_logout"

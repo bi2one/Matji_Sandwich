@@ -79,12 +79,15 @@
   <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
 
   <!-- default String... -->
+  <string name="default_string_nickname">닉네임</string>
+  <string name="default_string_website">웹사이트</string>
   <string name="default_string_delete">삭제</string>
   <string name="default_string_check_delete">삭제할까요?</string>
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">%1$s의 맛집기행</string>
   <string name="default_string_intro">소개글</string>
   <string name="default_string_not_exist_intro">소개글이 없습니다.</string>
+  <string name="default_string_not_exist_website">웹사이트를 등록하지 않았습니다.</string>
   <string name="default_string_basic_info">기본정보</string>
   <string name="default_string_more_info">부가정보</string>
   <string name="default_string_info">정보</string>
@@ -115,7 +118,8 @@
   <string name="default_string_settings">설정</string>
   <string name="default_string_address">주소</string>
   <string name="default_string_change">변경</string>
-  <string name="default_string_edit">수정</string>
+  <string name="default_string_revision">수정</string>
+  <string name="default_string_edit">편집</string>
   <string name="default_string_confirm">확인</string>
   <string name="default_string_today">Today</string>
   <string name="default_string_cancel">취소</string>
@@ -467,7 +471,7 @@
   <string name="setting_alarm_permit">permit</string>
   <string name="setting_alarm_view">view</string>
   
-  <string name="edit_blog_hompage">블로그/홈페이지</string>
+  <string name="edit_website">블로그/홈페이지</string>
   <string name="edit_password">비밀번호 변경</string>
   <string name="edit_withdrawal">회원 탈퇴</string>
 </resources>

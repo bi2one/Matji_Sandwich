@@ -121,7 +121,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(SettingsActivity.this, UserEditActivity.class);
-				intent.putExtra(UserEditActivity.USER, (Parcelable) session.getCurrentUser());
 				startActivity(intent);
 			}
 		});

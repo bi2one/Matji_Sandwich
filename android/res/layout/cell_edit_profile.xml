@@ -5,7 +5,11 @@
 	<com.matji.sandwich.widget.cell.CellEditProfileImageView
 		android:id="@+id/edit_profile"
 		style="@style/CellProfile" />
-	<ImageView
+	<TextView
 		android:id="@+id/profile_border"
-		style="@style/DefaultFill" />
+		style="@style/DefaultFill"
+		android:text="@string/default_string_edit"
+		android:gravity="center"
+		android:textColor="@color/cell_edit_profile_txt_color"
+		android:textSize="@dimen/cell_edit_profile_txt_size" />
 </RelativeLayout>

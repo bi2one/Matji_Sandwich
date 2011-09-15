@@ -60,7 +60,8 @@
 	<color name="tag_color5">#ff1100</color>
 	
 	<!-- Title Container -->
-	<color name="title_container_title">#543100</color>
+    <color name="title_container_title">#543100</color>
+    <color name="title_container_title_lock">#55543100</color>
 	<color name="title_container_title_shadow">#fff1be</color>
 	
 	<!-- Tabbar -->
@@ -117,4 +118,7 @@
 	
 	<!-- activity_settings.xml -->
 	<color name="settings_logout_btn_txt_shadow">#c26200</color>
+	
+	<!-- cell_edit_profile.xml -->
+	<color name="cell_edit_profile_txt_color">#ffd450</color>
 </resources>
