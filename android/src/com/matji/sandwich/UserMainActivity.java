@@ -52,9 +52,9 @@ public class UserMainActivity extends BaseTabActivity {
         tabHost.addCenterTab("tab2",
                 R.string.store_main_img,
                 userImageListIntent);
-        tabHost.addRightTab("tab3",
-                R.string.store_main_review,
-                userUrlListIntent);
+//        tabHost.addRightTab("tab3",
+//                R.string.store_main_review,
+//                userUrlListIntent);
         
         LinearLayout wrapper = (LinearLayout) findViewById(R.id.user_talk_wrapper);
         wrapper.setOnTouchListener(new View.OnTouchListener() {

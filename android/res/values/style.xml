@@ -986,9 +986,8 @@
     <item name="android:background">@drawable/txtbox</item>
   </style>
   
-  <style name="settings_Row">
-    <item name="android:layout_width">fill_parent</item>
-    <item name="android:layout_height">@dimen/settings_row_height</item>
+  <style name="settings_Row" parent="DefaultWidthFill">
+    <item name="android:minHeight">@dimen/settings_row_height</item>
     <item name="android:gravity">center_vertical</item>
     <item name="android:paddingLeft">@dimen/settings_row_padding</item>
     <item name="android:paddingRight">@dimen/settings_row_padding</item>

@@ -22,6 +22,7 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.listener.GotoPostMainAction;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
@@ -152,6 +153,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         ago.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
         commentCount.setText(post.getCommentCount()+"");
         likeCount.setText(post.getLikeCount()+"");
+        contentWrapper.setOnClickListener(new GotoPostMainAction(this, post));
     }
 
     public void setPage(int currentPage) {

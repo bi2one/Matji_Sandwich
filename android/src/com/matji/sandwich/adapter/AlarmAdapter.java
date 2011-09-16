@@ -1,18 +1,25 @@
 package com.matji.sandwich.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.matji.sandwich.MessageListTabActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Alarm;
+import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.listener.GotoPostMainAction;
+import com.matji.sandwich.listener.GotoUserMainAction;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 
@@ -25,6 +32,7 @@ public class AlarmAdapter extends MBaseAdapter {
         Comment,        
     }
 
+    private Toast toast;
     private int lastReadAlarmId;
     private Drawable iconNew;
 
@@ -32,6 +40,8 @@ public class AlarmAdapter extends MBaseAdapter {
         super(context);
         iconNew = MatjiConstants.drawable(R.drawable.icon_new);
         iconNew.setBounds(0, 0, iconNew.getIntrinsicWidth(), iconNew.getIntrinsicHeight());
+        toast = new Toast(context);
+        toast = Toast.makeText(context, R.string.alarm_deleted_post, Toast.LENGTH_SHORT);
     }
 
     public void setLastReadAlarmId(int lastReadAlarmId) {
@@ -58,6 +68,7 @@ public class AlarmAdapter extends MBaseAdapter {
         /* Set User */
         User sentUser = alarm.getSentUser();
         String type = alarm.getAlarmType();
+        Post post = alarm.getPost();
 
         switch (AlarmType.valueOf(type)) {
         case Following:
@@ -66,6 +77,7 @@ public class AlarmAdapter extends MBaseAdapter {
                     getContent(
                             R.string.row_alarm_follow, 
                             sentUser.getNick()));
+            convertView.setOnClickListener(new GotoUserMainAction(context, sentUser));
             break;
         case Comment:
             alarmElement.noticon.setImageResource(R.drawable.icon_notic_reply);
@@ -73,6 +85,18 @@ public class AlarmAdapter extends MBaseAdapter {
                     getContent(
                             R.string.row_alarm_reply, 
                             sentUser.getNick()));
+            if (post == null) {
+                convertView.setOnClickListener(new OnClickListener() {
+                    
+                    @Override
+                    public void onClick(View v) {
+                        toast.show();                        
+                    }
+                });
+            } else {
+                convertView.setOnClickListener(new GotoPostMainAction(context, post));
+            }
+            
             break;
         case LikePost:
             alarmElement.noticon.setImageResource(R.drawable.icon_notic_love);
@@ -80,6 +104,18 @@ public class AlarmAdapter extends MBaseAdapter {
                     getContent(
                             R.string.row_alarm_like_post, 
                             sentUser.getNick()));
+            if (post == null) {
+                // TODO error message alert.
+                convertView.setOnClickListener(new OnClickListener() {
+                    
+                    @Override
+                    public void onClick(View v) {
+                        toast.show();
+                    }
+                });
+            } else {
+                convertView.setOnClickListener(new GotoPostMainAction(context, post));
+            }
             break;
         case Message:
             alarmElement.noticon.setImageResource(R.drawable.icon_notic_notic);
@@ -87,6 +123,14 @@ public class AlarmAdapter extends MBaseAdapter {
                     getContent(
                             R.string.row_alarm_message, 
                             sentUser.getNick()));
+            convertView.setOnClickListener(new OnClickListener() {  // 메세지함으로 이동하는 리스너
+                
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MessageListTabActivity.class);
+                    context.startActivity(intent);
+                }
+            });
             break;
         }
 
@@ -103,7 +147,7 @@ public class AlarmAdapter extends MBaseAdapter {
 
         return convertView;
     }
-
+    
     private SpannableStringBuilder getContent(int resId, String nick) {
         // TODO 나중에 좀더 범용적으로 사용할 수 있게 수정...
         

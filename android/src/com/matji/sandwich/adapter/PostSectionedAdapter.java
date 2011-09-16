@@ -18,12 +18,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.matji.sandwich.ActivityStartable;
 import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Like;
@@ -35,11 +32,12 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.LikeHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.listener.GotoImageSliderAction;
+import com.matji.sandwich.listener.GotoPostMainAction;
 import com.matji.sandwich.listener.GotoStoreMainAction;
 import com.matji.sandwich.listener.GotoUserMainAction;
 import com.matji.sandwich.session.Session;
@@ -149,6 +147,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
      * 
      * @see SectionedAdapter#getItemView(int, View, ViewGroup)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public View getItemView(final int position, View convertView, final ViewGroup parent) {
         PostElement postElement;
@@ -188,12 +187,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             postElement = (PostElement) convertView.getTag();
         }
 
-        postElement.postWrapper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onListItemClick(position);
-            }
-        });
+        postElement.postWrapper.setOnClickListener(new GotoPostMainAction(context, data, position));
 
         setActions(postElement, position);
         setViewData(postElement, position);
@@ -309,27 +303,6 @@ public class PostSectionedAdapter extends SectionedAdapter {
 				     ImageLoader.ImageSize.SMALL,
 				     holder.preview[i],
 				     imageId);
-        }
-    }
-
-    /**
-     * 리스트 아이템을 클릭했을 때,
-     * {@link PostMainActivity}로 이동한다.
-     * 
-     * @param position 클릭된 아이템의 positoin
-     */
-    private void onListItemClick(int position) {
-        Post post = (Post) data.get(position);
-        if (post.getActivityId() == 0) {
-            Intent intent = new Intent(context, PostMainActivity.class);
-            intent.putExtra(PostMainActivity.POSTS, data);
-            intent.putExtra(PostMainActivity.POSITION, position);
-            if (((Activity) context).getParent().getParent() instanceof BaseTabActivity) {
-                BaseTabActivity parent = (BaseTabActivity) ((Activity) context).getParent();
-                parent.tabStartActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY, (ActivityStartable) context);
-            } else {
-                ((Activity) context).startActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY);
-            }
         }
     }
 

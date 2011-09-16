@@ -475,4 +475,7 @@
   <string name="edit_website">블로그/홈페이지</string>
   <string name="edit_password">비밀번호 변경</string>
   <string name="edit_withdrawal">회원 탈퇴</string>
+  
+  <!-- AlarmAdapter.java -->
+  <string name="alarm_deleted_post">삭제된 메모입니다.</string>
 </resources>

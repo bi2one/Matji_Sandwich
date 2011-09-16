@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.matji.sandwich.MessageListActivity;
+import com.matji.sandwich.MessageListTabActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.UserProfileTabActivity;
@@ -114,7 +114,7 @@ public class UserCell extends Cell implements Followable {
 
             @Override
             public void onClick(View arg0) {
-                getContext().startActivity(new Intent(getContext(), MessageListActivity.class));
+                getContext().startActivity(new Intent(getContext(), MessageListTabActivity.class));
             }
         });
     }

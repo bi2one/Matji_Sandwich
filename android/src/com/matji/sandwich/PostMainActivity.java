@@ -16,6 +16,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.listener.LikeListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
@@ -44,10 +45,12 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
 
     private static final int COMMENT_WRITE_REQUEST = 10;
 
-    public static final String SHOW_KEYBOARD = "show_keyboard"; 
-    public static final String POSTS = "posts";
-    public static final String POSITION = "position";
-    private static final int NOT_POSITIONED = -1;
+    public static final String SHOW_KEYBOARD = "PostMainActivity.show_keyboard"; 
+    public static final String POSTS = "PostMainActivity.posts";
+    public static final String POSITION = "PostMainActivity.position";
+    public static final String POST_ID = "PostMainActivity.post_id";
+    private static final int NOT_INITIALIZED = -1;
+    private int post_id = -1;
 
 
     public int setMainViewId() {
@@ -75,22 +78,41 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         manager = HttpRequestManager.getInstance(this);
 
-        posts = getIntent().getParcelableArrayListExtra(POSTS);
-        position = getIntent().getIntExtra(POSITION, NOT_POSITIONED);
-        if (position == NOT_POSITIONED) {
+        position = getIntent().getIntExtra(POSITION, NOT_INITIALIZED);
+        post_id = getIntent().getIntExtra(POST_ID, NOT_INITIALIZED);
+
+        if (position == NOT_INITIALIZED) {
             // TODO finish activity
         }
-        currentPost = (Post) posts.get(position);                           // 전달받은 position에 있는 Post 객체를 가져와 currentPost에 저장
+        
+        if (post_id == NOT_INITIALIZED) {
+            posts = getIntent().getParcelableArrayListExtra(POSTS);
+            currentPost = (Post) posts.get(position);                           // 전달받은 position에 있는 Post 객체를 가져와 currentPost에 저장
+        } else {
+            Log.d("Matji", "AA");
+            request = new PostHttpRequest(this);
+            
+            try {
+                currentPost = (Post) request.request().get(0);
+            } catch (MatjiException e) {
+                e.printStackTrace();
+            } 
+            posts = new ArrayList<MatjiData>();
+            posts.add(currentPost);
+        }
+        
         showKeyboard = getIntent().getBooleanExtra(SHOW_KEYBOARD, false);
+
         pageableTitle = (PageableTitle) findViewById(R.id.Titlebar);
+        commentListView = (CommentListView) findViewById(R.id.comment_list);
+        commentInputBar = (CommentInputBar) findViewById(R.id.comment_input_bar);
+
         pageableTitle.setPageable(this);                                    // Pageable 객체를 등록 
         pageableTitle.setTitle(R.string.default_string_post);               // 타이틀 설정
-        commentListView = (CommentListView) findViewById(R.id.comment_list);
         commentListView.setPost(currentPost);                               // currentPost를 commentListView의 post로 저장
         commentListView.setActivity(this);
         commentListView.requestReload();
 
-        commentInputBar = (CommentInputBar) findViewById(R.id.comment_input_bar);
         if (showKeyboard) {
             commentInputBar.requestFocusToTextField();                      // showKeyboard 값에 따라 키보드를 보여주거나 보여주지 않음
         }
@@ -99,9 +121,6 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             @Override
             public void postUnlikeRequest() {
                 // like 요청 후 post의 likeCount를 줄여준다.
-                if (currentPost.getLikeCount() == 1) {
-                    currentPost.setLikeUser(null);
-                }
                 currentPost.setLikeCount(currentPost.getLikeCount() - 1);
                 if (currentPost.getLikeUser().getId()
                         == session.getCurrentUser().getId()) {
