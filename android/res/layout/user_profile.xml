@@ -29,7 +29,7 @@
 					style="@style/DefaultWidthFill"
 					android:textSize="@dimen/user_profile_subtitle_size"
 					android:textColor="@color/matji_gray"
-					android:padding="@dimen/user_profile_wrapper_padding" />
+					android:padding="@dimen/default_distance_long" />
 				<View
 					style="@style/HorizontalLine" />
 
@@ -43,7 +43,7 @@
 					android:drawableLeft="@drawable/icon_web"
 					android:drawableRight="@drawable/icon_flow"
 					android:drawablePadding="@dimen/default_drawable_padding_long"
-					android:padding="@dimen/user_profile_wrapper_padding" />
+					android:padding="@dimen/default_distance_long" />
 			</LinearLayout>
 			<!-- Friend Info -->
 			<TextView
@@ -61,7 +61,7 @@
 					style="@style/DefaultWidthFill"
 					android:layout_weight="1"
 					android:layout_centerVertical="true"
-					android:layout_margin="@dimen/user_profile_wrapper_padding">
+					android:layout_margin="@dimen/default_distance_long">
 					<TextView
 						android:id="@+id/user_profile_following_title"
 						style="@style/user_profile_Following"
@@ -90,7 +90,7 @@
 					android:layout_weight="1"
 					android:layout_toRightOf="@id/user_profile_friend_info_line"
 					android:layout_centerVertical="true"
-					android:layout_margin="@dimen/user_profile_wrapper_padding">
+					android:layout_margin="@dimen/default_distance_long">
 					<TextView
 						android:id="@+id/user_profile_follower_title"
 						style="@style/user_profile_Follower"
@@ -123,7 +123,7 @@
 					style="@style/DefaultWidthFill"
 					android:layout_weight="1"
 					android:layout_centerVertical="true"
-					android:layout_margin="@dimen/user_profile_wrapper_padding">
+					android:layout_margin="@dimen/default_distance_long">
 					<TextView
 						android:id="@+id/user_profile_find_store_title"
 						style="@style/user_profile_FindStore"
@@ -153,7 +153,7 @@
 					android:layout_toRightOf="@id/user_profile_store_info_line"
 					android:layout_weight="1"
 					android:layout_centerVertical="true"
-					android:layout_margin="@dimen/user_profile_wrapper_padding"
+					android:layout_margin="@dimen/default_distance_long"
 					android:visibility="gone">
 					<TextView
 						android:id="@+id/user_profile_bookmark_store_title"

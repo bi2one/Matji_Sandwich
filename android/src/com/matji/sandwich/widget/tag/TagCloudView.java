@@ -49,7 +49,7 @@ public class TagCloudView extends FlowLayout {
 		private final int PADDING = (int) MatjiConstants.dimen(R.dimen.default_distance);
 		private final int MAX_TAG_LENGTH = 10;				// 최대 태그 글자 수
 		private final int[] TAG_STEP = new int[] {			// 태그 Count 스탭
-				0, 2, 4, 7, 10,
+				0, 2, 4, 7,
 		};
 		                                        
 		private final int[] TAG_TEXT_COLOR = new int[] {	// 태그 색
@@ -57,14 +57,12 @@ public class TagCloudView extends FlowLayout {
 				MatjiConstants.color(R.color.tag_color2),
 				MatjiConstants.color(R.color.tag_color3),
 				MatjiConstants.color(R.color.tag_color4),
-				MatjiConstants.color(R.color.tag_color5),
 		};
 		private final int[] TAG_TEXT_SIZE = new int[] {		// 태그 크기
-				(int) MatjiConstants.dimen(R.dimen.text_small),
-				(int) MatjiConstants.dimen(R.dimen.text_small),
-				(int) MatjiConstants.dimen(R.dimen.text_medium),
-				(int) MatjiConstants.dimen(R.dimen.text_large),
-				(int) MatjiConstants.dimen(R.dimen.text_xlarge),
+				(int) MatjiConstants.dimen(R.dimen.tag_size1),
+				(int) MatjiConstants.dimen(R.dimen.tag_size2),
+				(int) MatjiConstants.dimen(R.dimen.tag_size3),
+				(int) MatjiConstants.dimen(R.dimen.tag_size4),
 		};
 
 		/**

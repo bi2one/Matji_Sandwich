@@ -3,18 +3,20 @@
 	<!-- everywhere used dimens -->
 	<dimen name="default_distance">10dp</dimen>
 	<dimen name="default_distance_half">5dp</dimen>
+    <dimen name="default_distance_long">14.67dp</dimen>
 	<dimen name="default_drawable_padding">3dp</dimen>
 	<dimen name="default_drawable_padding_half">1.5dp</dimen>
     <dimen name="default_drawable_padding_long">7.33dp</dimen>
 	<dimen name="default_divider_size">0.67dp</dimen>
 	<dimen name="default_new_icon_x_position">24.67dp</dimen>
-	<dimen name="default_new_icon_y_position">4dp</dimen>	
+	<dimen name="default_new_icon_y_position">4dp</dimen>
 	<dimen name="default_round_pixel">5.33dp</dimen>
 	<dimen name="default_round_inset">0dp</dimen>
 	<dimen name="default_round_pixel2">8dp</dimen>
     <dimen name="default_round_inset2">0.17dp</dimen>
     
 	<!-- Title Container -->
+	<dimen name="title_container_txt_size">17.33dp</dimen>
 	<dimen name="title_container_height">36.67dp</dimen>
 	<dimen name="title_container_btn_min_width">38.67dp</dimen>
 	<dimen name="title_container_btn_max_width">52.67dp</dimen>
@@ -35,7 +37,6 @@
 	<dimen name="user_cell_content_size">12dp</dimen>
 	<dimen name="user_cell_btn_margin">1.33dp</dimen>
 	<dimen name="user_cell_margin_left">13.33dp</dimen>
-	<dimen name="user_intro_cell_padding">14.67dp</dimen>
     <dimen name="user_edit_cell_btn_width">100dp</dimen>
     
 	<!-- Inputbar -->	
@@ -50,18 +51,16 @@
 	<dimen name="profile_size">36dp</dimen>
 
 	<!-- Post List Row -->
-	<dimen name="linkify_name_size">12dp</dimen>
+    <dimen name="row_post_text_size">12dp</dimen>
 	<dimen name="talkcontent_size">14dp</dimen>
 	<dimen name="row_post_distance">1dp</dimen>
 	<dimen name="row_post_previews_margin">5dp</dimen>
 	
-	<!-- Text Size -->
-	<dimen name="text_ssmall">9dp</dimen>
-	<dimen name="text_small">11dp</dimen>
-	<dimen name="text_medium">14dp</dimen>
-	<dimen name="text_large">17dp</dimen>
-	<dimen name="text_xlarge">20dp</dimen>
-	<dimen name="text_xxlarge">22dp</dimen>
+	<!-- Tag Cloud-->
+	<dimen name="tag_size1">12dp</dimen>
+	<dimen name="tag_size2">12dp</dimen>
+	<dimen name="tag_size3">16dp</dimen>
+	<dimen name="tag_size4">20dp</dimen>
 	
 	<!-- Fade Edge -->
 	<dimen name="fade_edge_length">3dp</dimen>
@@ -165,8 +164,7 @@
 	<dimen name="row_message_subject_list_size">16dp</dimen>
 	<dimen name="row_message_nick_size">12dp</dimen>
 	<dimen name="row_message_subject_size">14dp</dimen>
-	<dimen name="row_message_content_padding">14.67dp</dimen>
-	<dimen name="row_message_content_padding2">13.33dp</dimen>
+	<dimen name="row_message_content_padding_bottom">13.33dp</dimen>
 	
 	<!-- row_image -->
 	<dimen name="row_image_width">69.33dp</dimen>
@@ -189,7 +187,6 @@
 	<dimen name="user_profile_count_size">28dp</dimen>
 	<dimen name="user_profile_margin_top">10dp</dimen>
 	<dimen name="user_profile_margin_bottom">13.33dp</dimen>
-    <dimen name="user_profile_wrapper_padding">14.67dp</dimen>
     
     <!-- activity_setting.xml -->
     <dimen name="settings_content_size">16dp</dimen>
@@ -215,4 +212,11 @@
     
     <!-- cell_edit_profile.xml -->
     <dimen name="cell_edit_profile_txt_size">11.33dp</dimen>
+    
+    <!-- row_food.xml -->
+    <dimen name="row_food_name_size">16dp</dimen>
+    <dimen name="row_food_like_size">12dp</dimen>
+    
+    <!-- activity_store_food.xml -->
+    <dimen name="store_food_caution_size">11.33dp</dimen>
 </resources>

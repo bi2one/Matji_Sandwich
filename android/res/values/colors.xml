@@ -53,11 +53,10 @@
 	<color name="cell_user_bg">#ffffff</color>
 	
 	<!-- Tag Cloud -->
-	<color name="tag_color1">#bfbfbf</color>
-	<color name="tag_color2">#000000</color>
-	<color name="tag_color3">#ffaa55</color>
-	<color name="tag_color4">#ff5500</color>
-	<color name="tag_color5">#ff1100</color>
+	<color name="tag_color1">#777777</color>
+	<color name="tag_color2">#333333</color>
+	<color name="tag_color3">#ff7700</color>
+	<color name="tag_color4">#f44526</color>
 	
 	<!-- Title Container -->
     <color name="title_container_title">#543100</color>
@@ -121,4 +120,7 @@
 	
 	<!-- cell_edit_profile.xml -->
 	<color name="cell_edit_profile_txt_color">#ffd450</color>
+	
+	<!-- activity_store_food.xml -->
+	<color name="store_food_caution_color">#9a825c</color>
 </resources>

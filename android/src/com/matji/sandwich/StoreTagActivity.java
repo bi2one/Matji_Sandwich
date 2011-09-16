@@ -103,8 +103,7 @@ public class StoreTagActivity extends BaseActivity implements Requestable, Refre
 	}
 
     @Override
-    public void refresh() {
-    }
+    public void refresh() {}
 
     @Override
     public void refresh(MatjiData data) {

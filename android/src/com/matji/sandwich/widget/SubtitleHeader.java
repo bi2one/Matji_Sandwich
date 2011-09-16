@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.util.MatjiConstants;
 
 /**
  * 
@@ -17,7 +18,7 @@ public class SubtitleHeader extends LinearLayout {
 	protected String title = "";
 	protected TextView subtitle;
 	
-    /**
+	/**
      * Java Code 기본 생성자.
      * 
      * @param context
@@ -29,6 +30,19 @@ public class SubtitleHeader extends LinearLayout {
         init();
         setTitle(title);
     }
+    
+    /**
+     * Java Code 기본 생성자.
+     * 
+     * @param context
+     * @param resId {@link SubtitleHeader}에서 보여 줄 타이틀의 리소스 id
+     */
+    public SubtitleHeader(Context context, int resId) {
+        super(context);
+        this.title = MatjiConstants.string(resId);
+        init();
+        setTitle(title);
+    }    
     
     /**
      * XML 기본 생성자.
@@ -67,5 +81,10 @@ public class SubtitleHeader extends LinearLayout {
      */
     private void setTitle() {
         subtitle.setText(title);
-    }   
+    }
+    
+    public SubtitleHeader paddingBottom() {
+        setPadding(0, 0, 0, MatjiConstants.dimenInt(R.dimen.default_distance));
+        return this;
+    }
 }

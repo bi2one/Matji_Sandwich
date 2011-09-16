@@ -32,8 +32,9 @@
 						style="@style/settings_Row">
 						<RelativeLayout
 							style="@style/DefaultWrap"
-							android:layout_centerVertical="true"
-							android:layout_marginRight="@dimen/default_drawable_padding_long">
+							android:layout_marginRight="@dimen/default_drawable_padding_long"
+                            android:layout_alignParentLeft="true"
+							android:layout_toLeftOf="@+id/edit_intro_icon_flow">
 							<TextView
 								android:id="@+id/edit_intro"
 								style="@style/DefaultWrap"
@@ -45,14 +46,14 @@
 								style="@style/DefaultWrap"
 								android:textSize="@dimen/edit_content_size"
 								android:textColor="@color/matji_light_gray"
-								android:layout_centerVertical="true"
 								android:layout_below="@id/edit_intro" />
 						</RelativeLayout>
 						<ImageView
+							android:id="@id/edit_intro_icon_flow"
 							style="@style/DefaultWrap"
 							android:src="@drawable/icon_flow"
-							android:layout_centerVertical="true"
-							android:layout_alignParentRight="true" />
+							android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true" />
 					</RelativeLayout>
 					<View
 						style="@style/HorizontalLine" />
@@ -62,8 +63,9 @@
 						style="@style/settings_Row">
 						<RelativeLayout
 							style="@style/DefaultWrap"
-							android:layout_centerVertical="true"
-							android:layout_marginRight="@dimen/default_drawable_padding_long">
+							android:layout_marginRight="@dimen/default_drawable_padding_long"
+                            android:layout_alignParentLeft="true"
+							android:layout_toLeftOf="@+id/edit_website_icon_flow">
 							<TextView
 								android:id="@+id/edit_website"
 								style="@style/DefaultWrap"
@@ -78,10 +80,11 @@
 								android:layout_below="@id/edit_website" />
 						</RelativeLayout>
 						<ImageView
+							android:id="@id/edit_website_icon_flow"
 							style="@style/DefaultWrap"
 							android:src="@drawable/icon_flow"
-							android:layout_centerVertical="true"
-							android:layout_alignParentRight="true" />
+							android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true" />
 					</RelativeLayout>
 					<View
 						style="@style/HorizontalLine" />
@@ -91,8 +94,9 @@
 						style="@style/settings_Row">
 						<RelativeLayout
 							style="@style/DefaultWrap"
-							android:layout_centerVertical="true"
-							android:layout_marginRight="@dimen/default_drawable_padding_long">
+							android:layout_marginRight="@dimen/default_drawable_padding_long"
+                            android:layout_alignParentLeft="true"
+							android:layout_toLeftOf="@+id/edit_area_icon_flow">
 							<TextView
 								android:id="@+id/edit_area"
 								style="@style/DefaultWrap"
@@ -107,10 +111,11 @@
 								android:layout_below="@id/edit_area" />
 						</RelativeLayout>
 						<ImageView
+							android:id="@id/edit_area_icon_flow"
 							style="@style/DefaultWrap"
 							android:src="@drawable/icon_flow"
-							android:layout_centerVertical="true"
-							android:layout_alignParentRight="true" />
+							android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true" />
 					</RelativeLayout>
 				</LinearLayout>
 				<LinearLayout
@@ -126,7 +131,6 @@
 						android:text="@string/edit_password"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_light_gray"
-						android:layout_centerVertical="true"
 						android:layout_alignParentLeft="true"
 						android:drawableRight="@drawable/icon_flow"
 						android:drawablePadding="@dimen/default_drawable_padding_long" />
@@ -139,7 +143,6 @@
 						android:text="@string/edit_withdrawal"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_light_gray"
-						android:layout_centerVertical="true"
 						android:layout_alignParentLeft="true"
 						android:drawableRight="@drawable/icon_flow"
 						android:drawablePadding="@dimen/default_drawable_padding_long" />

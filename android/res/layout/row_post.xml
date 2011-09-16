@@ -57,6 +57,10 @@
 				android:id="@+id/row_post_created_at"
 				style="@style/row_post_CreatedAt"
 				android:layout_below="@id/row_post_previews" />
+			<View
+				style="@style/VerticalLine"
+				android:layout_height="@dimen/row_post_text_size"
+				android:layout_toRightOf="@id/row_post_created_at" />
 			<com.matji.sandwich.widget.BoldStyleTextView
 				android:id="@+id/row_post_comment"
 				style="@style/row_post_Comment"

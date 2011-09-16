@@ -478,4 +478,13 @@
   
   <!-- AlarmAdapter.java -->
   <string name="alarm_deleted_post">삭제된 메모입니다.</string>
+  
+  <!-- StoreFoodListView.java -->
+  <string name="store_food_list_menu">등록된 메뉴</string>
+    
+  <!-- StoreFoodAdapter.java -->
+  <string name="store_food_add">신규 메뉴 추가</string>
+    
+  <!-- activity_store_food.xml -->
+  <string name="store_food_caution">메뉴 중 흐린 글씨는 불확실 하다고 신고된 정보입니다.</string>
 </resources>

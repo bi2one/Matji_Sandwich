@@ -21,7 +21,6 @@ public class Post extends MatjiData {
 	private String created_at;
 	private String updated_at;
 	private User user;
-	private User like_user;
 	private Store store;
 	private Activity activity;
 	private ArrayList<SimpleTag> tags;
@@ -64,7 +63,6 @@ public class Post extends MatjiData {
 		dest.writeString(created_at);
 		dest.writeString(updated_at);
         dest.writeValue(user);
-        dest.writeValue(like_user);
 		dest.writeValue(store);
 		dest.writeValue(activity);
 		dest.writeTypedList(tags);
@@ -88,7 +86,6 @@ public class Post extends MatjiData {
 		created_at = in.readString();
 		updated_at = in.readString();
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
-		like_user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
 		activity = Activity.class.cast(in.readValue(Activity.class.getClassLoader()));
 		tags = new ArrayList<SimpleTag>();
@@ -188,13 +185,6 @@ public class Post extends MatjiData {
 	public User getUser() {
 		return user;
 	}
-	public void setLikeUser(User like_user) {
-        this.like_user = like_user;
-    }
-
-    public User getLikeUser() {
-        return like_user;
-    }
 
     public void setStore(Store store) {
 		this.store = store;
