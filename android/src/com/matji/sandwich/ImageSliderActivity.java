@@ -32,7 +32,6 @@ import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.widget.SwipeView;
 
 public class ImageSliderActivity extends BaseActivity implements OnScrollListener, Requestable, OnClickListener {
-
     private AttachFile[] attachFiles;
     private boolean isShowingPost = true;
     private int currentPage;
@@ -68,7 +67,6 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     protected void init() {
         setContentView(R.layout.activity_image_slider);
@@ -109,8 +107,8 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     }
 
     private void initImageView() {
-        // for (int i = 0; i < attachFiles.length; i++) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < attachFiles.length; i++) {
+        // for (int i = 0; i < 3; i++) {
             RelativeLayout rl = new RelativeLayout(this);
             rl.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
@@ -124,9 +122,9 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
             rl.addView(image);
 
-            // if (attachFiles[i] != null) {
+            if (attachFiles[i] != null) {
                 swipeView.addView(rl);
-            // }
+            }
         }
     }
 
