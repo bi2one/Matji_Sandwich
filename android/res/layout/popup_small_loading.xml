@@ -11,4 +11,9 @@
       android:layout_height="16.67dip"
       android:layout_centerInParent="true"
       android:background="@android:color/transparent"/>
+  <Button
+      android:text="text"
+      android:visibility="invisible"
+      android:layout_toLeftOf="@id/progress_loading"
+      style="@style/DefaultWrap" />
 </RelativeLayout>

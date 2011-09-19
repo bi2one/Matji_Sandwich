@@ -232,8 +232,8 @@
 
   <!-- PostTabActivity -->
   <string name="post_tab_friend">친구</string>
-  <string name="post_tab_near">지역</string>
-  <string name="post_tab_all">전체</string>
+  <string name="post_tab_near">주변</string>
+  <string name="post_tab_all">전국</string>
   
   <!-- section list view test -->
   <string name="standard_list">standard_list</string>
@@ -364,7 +364,7 @@
   <!-- Matji -->
   <string name="main_tab_title_matmap">맛있는 지도</string>
   <string name="main_tab_title_mattalk">맛있는 이야기</string>
-  <string name="main_tab_title_matist">맛티스트</string>
+  <string name="main_tab_title_matist">식도락가</string>
   <string name="main_tab_title_mypage">내 정보</string>
   <string name="main_tab_title_login">로그인</string>
   
