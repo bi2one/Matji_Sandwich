@@ -1,20 +1,16 @@
 package com.matji.sandwich;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.http.request.MeHttpRequest;
-import com.matji.sandwich.http.request.MeHttpRequest.Service;
-import com.matji.sandwich.session.Session.LoginAsyncTask;
+import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.title.HomeTitle;
 
 public class LoginActivity extends BaseActivity implements Loginable {
 
     private HomeTitle title;
+    private LoginView loginView;
 
     public int setMainViewId() {
         return R.id.activity_login;
@@ -27,17 +23,11 @@ public class LoginActivity extends BaseActivity implements Loginable {
         
         title = ((HomeTitle) findViewById(R.id.Titlebar));
         title.setTitle(R.string.default_string_login);
+        loginView = (LoginView) findViewById(R.id.login_view);
     }
     
     public void loginButtonClicked(View v) {
-        EditText usernameField = (EditText) findViewById(R.id.username);
-        EditText passwordField = (EditText) findViewById(R.id.password);        
-        
-        new LoginAsyncTask(this, this, usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
-    }
-
-    public void cancelButtonClicked(View v) {
-        finish();
+    	loginView.login(this, this);
     }
 
     /* Loginable Interface methods */
@@ -48,26 +38,5 @@ public class LoginActivity extends BaseActivity implements Loginable {
 
     public void loginFailed() {
         // show toast -> id, pw 확인해라
-    }
-
-    public void twitterLoginClicked(View v){
-        MeHttpRequest request = new MeHttpRequest(this);
-        request.authorizeViaExternalService(this, Service.TWITTER);
-    }
-    
-    public void facebookLoginClicked(View v){
-        MeHttpRequest request = new MeHttpRequest(this);
-        request.authorizeViaExternalService(this, Service.FACEBOOK);
-        
-    }    
-    
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        if (requestCode == BaseActivity.REQUEST_EXTERNAL_SERVICE_LOGIN){
-            if (resultCode == Activity.RESULT_OK){
-                setResult(Activity.RESULT_OK);
-                finish();
-            }
-        }
     }
 }

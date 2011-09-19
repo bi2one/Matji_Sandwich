@@ -50,18 +50,10 @@
 		</RelativeLayout>
 		<ImageButton
 			android:id="@+id/write_message_received_user_list_btn"
-			android:background="@drawable/tabbtn_left"
+			android:background="@drawable/btn_tab_selector"
 			android:layout_width="@dimen/write_message_underbar_btn_width"
 			android:layout_height="wrap_content"
 			android:src="@drawable/icon_toolbar_userplus02"
-			android:layout_toLeftOf="@+id/write_message_received_message_list_btn"
-			android:layout_centerVertical="true" />
-		<ImageButton
-			android:id="@id/write_message_received_message_list_btn"
-			android:background="@drawable/tabbtn_right"
-			android:layout_width="@dimen/write_message_underbar_btn_width"
-			android:layout_height="wrap_content"
-			android:src="@drawable/icon_toolbar_memolist"
 			android:layout_alignParentRight="true"
 			android:layout_centerVertical="true" />
 	</RelativeLayout>

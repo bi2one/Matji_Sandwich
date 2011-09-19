@@ -219,4 +219,15 @@
     
     <!-- activity_store_food.xml -->
     <dimen name="store_food_caution_size">11.33dp</dimen>
+    
+    <!-- login.xml -->
+    <dimen name="login_box_margin">3.33dp</dimen>
+    <dimen name="login_btn_width">76.67dp</dimen>
+    <dimen name="login_btn_height">71.33dp</dimen>
+    <dimen name="login_btn_txt_size">14dp</dimen>
+    <dimen name="login_input_box_margin">6.67dp</dimen>
+    <dimen name="login_account_txt_size">12dp</dimen>
+    <dimen name="login_via_height">46.67dp</dimen>
+    <dimen name="login_via_txt_size">14.67dp</dimen>
+    <dimen name="login_horizontal_line">1.33dp</dimen>
 </resources>

@@ -43,7 +43,7 @@ public class StoreFoodAdapter extends MBaseAdapter {
             foodElement.name.setText(storeFood.getFood().getName());
             foodElement.count.setText(storeFood.getLikeCount()+"");
             foodElement.line.setVisibility(View.VISIBLE);
-            // food like listener            
+            // food like listener
         }
 
         return convertView;
