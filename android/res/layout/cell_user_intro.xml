@@ -7,8 +7,8 @@
 		android:id="@+id/cell_user_intro_Wrapper"
 		android:paddingRight="@dimen/default_distance"
 		android:paddingLeft="@dimen/default_distance"
-		android:paddingTop="@dimen/user_intro_cell_padding"
-		android:paddingBottom="@dimen/user_intro_cell_padding"
+		android:paddingTop="@dimen/default_distance_long"
+		android:paddingBottom="@dimen/default_distance_long"
 		android:background="@color/matji_white">
 		<TextView
 			style="@style/DefaultFill"

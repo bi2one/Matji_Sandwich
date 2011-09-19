@@ -89,7 +89,6 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             posts = getIntent().getParcelableArrayListExtra(POSTS);
             currentPost = (Post) posts.get(position);                           // 전달받은 position에 있는 Post 객체를 가져와 currentPost에 저장
         } else {
-            Log.d("Matji", "AA");
             request = new PostHttpRequest(this);
             
             try {
@@ -122,10 +121,6 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             public void postUnlikeRequest() {
                 // like 요청 후 post의 likeCount를 줄여준다.
                 currentPost.setLikeCount(currentPost.getLikeCount() - 1);
-                if (currentPost.getLikeUser().getId()
-                        == session.getCurrentUser().getId()) {
-                    currentPost.setLikeUser(null);
-                }
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();
             }
@@ -133,13 +128,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             @Override
             public void postLikeRequest() {
                 // unlike 요청 후 post의 likeCount를 늘려준다.
-                if (currentPost.getLikeCount() == 0) {
-                    currentPost.setLikeUser(session.getCurrentUser());
-                }
                 currentPost.setLikeCount(currentPost.getLikeCount() + 1);
-                if (currentPost.getLikeUser() == null) {
-                    currentPost.setLikeUser(session.getCurrentUser());
-                }
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();
             }

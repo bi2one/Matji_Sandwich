@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_store_food"
+	style="@style/DefaultFill"
+	android:background="@drawable/bg_01">
+	<!-- Store Title -->
+	<com.matji.sandwich.widget.title.StoreTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWrap" />
+	<com.matji.sandwich.widget.StoreFoodListView
+		style="@style/DefaultFill"
+		android:id="@+id/store_food_list"
+		android:layout_below="@id/Titlebar"
+		android:layout_above="@+id/store_food_caution" />
+	<TextView
+		android:id="@id/store_food_caution"
+		style="@style/DefaultWrap"
+		android:text="@string/store_food_caution"
+		android:textSize="@dimen/store_food_caution_size"
+		android:textColor="@color/store_food_caution_color"
+		android:drawableLeft="@drawable/icon_report"
+		android:drawablePadding="@dimen/default_drawable_padding"
+		android:layout_margin="@dimen/default_distance"
+		android:layout_alignParentBottom="true" />
+</RelativeLayout>

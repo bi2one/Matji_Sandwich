@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -23,15 +24,17 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.listener.GotoPostMainAction;
+import com.matji.sandwich.listener.GotoStoreMainAction;
+import com.matji.sandwich.listener.GotoUserMainAction;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.widget.SwipeView;
 
 public class ImageSliderActivity extends BaseActivity implements OnScrollListener, Requestable, OnClickListener {
-    
-	private AttachFile[] attachFiles;
-	private boolean isShowingPost = true;
+
+    private AttachFile[] attachFiles;
+    private boolean isShowingPost = true;
     private int currentPage;
     private SwipeView swipeView;
 
@@ -143,12 +146,15 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
     public void setPost(Post post) {
         nick.setText(post.getUser().getNick());
+        nick.setOnClickListener(new GotoUserMainAction(this, post.getUser()));
         if (post.getStore() != null) {
             at.setVisibility(View.VISIBLE);
             storeName.setText(post.getStore().getName());
+            storeName.setOnClickListener(new GotoStoreMainAction(this, post.getStore()));
         } else {
             at.setVisibility(View.GONE);
             storeName.setText("");
+            storeName.setOnClickListener(null);
         }
         this.post.setText(post.getPost());
         ago.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
@@ -248,25 +254,37 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         super.finish();
     }
 
- 
+
     public void showPost() {
-    	count.setVisibility(View.VISIBLE);
-    	contentWrapper.setVisibility(View.VISIBLE);
-    	isShowingPost = true;
-    }
-    
-    public void dismissPost() {
-    	count.setVisibility(View.GONE);
-    	contentWrapper.setVisibility(View.GONE);
-    	isShowingPost = false;
+        count.setVisibility(View.VISIBLE);
+        contentWrapper.setVisibility(View.VISIBLE);
+        isShowingPost = true;
     }
 
-	@Override
-	public void onClick(View v) {
-		if (isShowingPost) {
-			dismissPost();
-		} else {
-			showPost();
-		}		
-	}    
+    public void dismissPost() {
+        count.setVisibility(View.GONE);
+        contentWrapper.setVisibility(View.GONE);
+        isShowingPost = false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (isShowingPost) {
+            dismissPost();
+        } else {
+            showPost();
+        }		
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+        case POST_MAIN_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                setPost((Post) data.getParcelableArrayListExtra(PostMainActivity.POSTS).get(0));
+            }
+            break;
+        }
+    }
 }

@@ -46,9 +46,7 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                if (count == 0 
-                        && field.getText().toString().trim().equals(
-                                session.getCurrentUser().getNick())) {
+                if (field.getText().toString().trim().equals(session.getCurrentUser().getNick())) {
                     title.lockCompletableButton();
                 } else {
                     title.unlockCompletableButton();

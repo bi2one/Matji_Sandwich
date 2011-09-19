@@ -23,7 +23,8 @@ public class TimeUtil {
         created_at = created_at.replaceAll("Z", "");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        TimeZone zone = TimeZone.getTimeZone(timezone);
+//        TimeZone zone = TimeZone.getTimeZone(timezone);
+        TimeZone zone = TimeZone.getDefault();
         format.setTimeZone(zone);
 
         Date date = null;  

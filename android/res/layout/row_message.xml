@@ -25,7 +25,7 @@
 			android:layout_width="@dimen/row_message_flow_line_width"
 			android:layout_height="@dimen/row_message_height"
 			android:layout_toRightOf="@id/row_message_flow_wrapper"
-			android:layout_marginRight="@dimen/row_message_content_padding" />
+			android:layout_marginRight="@dimen/default_distance_long" />
 		<TextView
 			android:id="@+id/row_message_subject_list"
 			style="@style/DefaultWrap"
@@ -67,8 +67,8 @@
 			style="@style/DefaultWidthFill"
 			android:paddingRight="@dimen/default_distance"
 			android:paddingLeft="@dimen/default_distance"
-			android:paddingTop="@dimen/row_message_content_padding"
-			android:paddingBottom="@dimen/row_message_content_padding"
+			android:paddingTop="@dimen/default_distance_long"
+			android:paddingBottom="@dimen/default_distance_long"
 			android:background="@color/row_message_bg">
 			<TextView
 				android:id="@+id/row_message_subject"
@@ -81,7 +81,7 @@
 				style="@style/DefaultWrap"
 				android:textSize="@dimen/row_message_nick_size"
 				android:textColor="@color/matji_chocolate"
-				android:layout_marginBottom="@dimen/row_message_content_padding2"
+				android:layout_marginBottom="@dimen/row_message_content_padding_bottom"
 				android:layout_below="@id/row_message_subject" />
 			<TextView
 				android:id="@+id/row_message_message"
