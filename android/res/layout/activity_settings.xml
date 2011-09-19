@@ -73,8 +73,7 @@
 						<RelativeLayout
 							android:id="@+id/settings_account_logout"
 							android:gravity="center_vertical"
-							style="@style/settings_Row"
-							android:background="#000">
+							style="@style/settings_Row">
 							<TextView
 								android:id="@+id/settings_account_nick"
 								style="@style/DefaultWrap"
@@ -245,8 +244,8 @@
 							android:layout_toLeftOf="@+id/settings_alarm_new_comment_alarm_check" />
 						<CheckBox
 							android:id="@id/settings_alarm_new_comment_alarm_check"
-							android:layout_width="@dimen/settings_check_box_width"
-							android:layout_height="@dimen/settings_check_box_height"
+							style="@style/DefaultWrap"
+							android:background="@drawable/btn_check_label_background"
 							android:button="@drawable/icon_check_selector"
 							android:layout_alignParentRight="true" />
 					</RelativeLayout>
@@ -265,8 +264,8 @@
 							android:layout_toLeftOf="@+id/settings_alarm_new_like_alarm_check" />
 						<CheckBox
 							android:id="@id/settings_alarm_new_like_alarm_check"
-							android:layout_width="@dimen/settings_check_box_width"
-							android:layout_height="@dimen/settings_check_box_height"
+							style="@style/DefaultWrap"
+							android:background="@drawable/btn_check_label_background"
 							android:button="@drawable/icon_check_selector"
 							android:layout_alignParentRight="true" />
 					</RelativeLayout>
@@ -285,8 +284,8 @@
 							android:layout_toLeftOf="@+id/settings_alarm_new_follow_alarm_check" />
 						<CheckBox
 							android:id="@id/settings_alarm_new_follow_alarm_check"
-							android:layout_width="@dimen/settings_check_box_width"
-							android:layout_height="@dimen/settings_check_box_height"
+							style="@style/DefaultWrap"
+							android:background="@drawable/btn_check_label_background"
 							android:button="@drawable/icon_check_selector"
 							android:layout_alignParentRight="true" />
 					</RelativeLayout>
@@ -305,8 +304,8 @@
 							android:layout_toLeftOf="@+id/settings_alarm_new_message_alarm_check" />
 						<CheckBox
 							android:id="@id/settings_alarm_new_message_alarm_check"
-							android:layout_width="@dimen/settings_check_box_width"
-							android:layout_height="@dimen/settings_check_box_height"
+							style="@style/DefaultWrap"
+							android:background="@drawable/btn_check_label_background"
 							android:button="@drawable/icon_check_selector"
 							android:layout_alignParentRight="true" />
 					</RelativeLayout>

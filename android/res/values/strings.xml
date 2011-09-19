@@ -282,6 +282,8 @@
   <string name="hint_search_stor_tag_menu">맛집명, 태그, 메뉴 검색</string>
   <string name="hint_search_post">이야기 검색</string>
   <string name="hint_search_user">사람 검색</string>
+  <string name="hint_write_usermail">이메일 입력</string>  
+  <string name="hint_write_password">비밀번호 입력</string>  
 
   <!-- activity_change_location -->
   <string name="activity_change_location_hint">지명이나 지역 입력</string>
@@ -487,4 +489,12 @@
     
   <!-- activity_store_food.xml -->
   <string name="store_food_caution">메뉴 중 흐린 글씨는 불확실 하다고 신고된 정보입니다.</string>
+  
+  <!-- login.xml -->
+  <string name="login_login">로그인</string>
+  <string name="login_save_id">아이디 저장</string>
+  <string name="login_find_password">비밀번호찾기</string>
+  <string name="login_register">회원가입</string>
+  <string name="login_twitter">Twitter 로그인</string>
+  <string name="login_facebook">Facebook 로그인</string>
 </resources>

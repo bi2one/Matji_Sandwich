@@ -38,7 +38,6 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
     private EditText messageField;
     private TextView receivedUserListText;    
     private ImageButton receivedUserListButton;
-    private ImageButton receivedMessageListButton;
 
     private CompletableTitle title;
     
@@ -76,7 +75,6 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
         messageField = (EditText) findViewById(R.id.write_message_message_field);
         receivedUserListText = (TextView) findViewById(R.id.write_message_received_user_list);
         receivedUserListButton = (ImageButton) findViewById(R.id.write_message_received_user_list_btn);
-        receivedMessageListButton = (ImageButton) findViewById(R.id.write_message_received_message_list_btn);
 
         writingMessageToast = Toast.makeText(this, R.string.writing_content_message, Toast.LENGTH_SHORT);
         selectReceivedUserToast = Toast.makeText(this, R.string.write_message_select_user, Toast.LENGTH_SHORT);
@@ -102,12 +100,6 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
                 startActivityForResult(intent, RECEIVED_USER_ACTIVITY);
             }
         });
-        receivedMessageListButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-            }
-        });
     }
 
     public void refresh() {
@@ -123,14 +115,6 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
         }
         receivedUserListText.setText(receivedUserList);
     }
-
-    public void selectUser() {
-    }
-
-    public void showReceivedMessage() {
-
-    }
-
     public void send(ArrayList<User> receivedUsers, String message) {
         if (request == null || !(request instanceof MessageHttpRequest)) {
             request = new MessageHttpRequest(this);

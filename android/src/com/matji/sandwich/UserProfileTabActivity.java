@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
-import android.widget.EditText;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
@@ -13,7 +12,6 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.session.Session.LoginAsyncTask;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.RoundTabHost;
@@ -32,9 +30,6 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
 
     public static final String USER = "UserProfileTabActivity.user";
     public static final String IS_MAIN_TAB_ACTIVITY = "UserProfileTabActivity.is_main_tab_activity";
-
-    private EditText usernameField;
-    private EditText passwordField;
     
     public int setMainViewId() {
         return R.id.activity_user_profile_tab;
@@ -55,8 +50,6 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
 
         tabHost = (RoundTabHost) getTabHost();
         loginView = (LoginView) findViewById(R.id.login_view);
-        usernameField = (EditText) findViewById(R.id.username);
-        passwordField = (EditText) findViewById(R.id.password);
         
         user = (isMainTabActivity) ? session.getCurrentUser() : (User) getIntent().getParcelableExtra(USER);
         setUser(user);
@@ -154,47 +147,17 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     }
 
     public void loginButtonClicked(View v) {        
-        new LoginAsyncTask(this, this, usernameField.getText().toString(), passwordField.getText().toString()).execute(new Object());
+        loginView.login(this, this);
     }
 
-    public void cancelButtonClicked(View v) {
-//        finish();
-    }
-
-    public void clearField() {
-    	usernameField.setText("");
-    	passwordField.setText("");
-    }
-    
     /* Loginable Interface methods */
     public void loginCompleted() {
         setUser(session.getCurrentUser());
-        clearField();
+        loginView.clearField();
         syncTab();
-        
     }
 
     public void loginFailed() {
         // show toast -> id, pw 확인해라
-    }
-
-    public void twitterLoginClicked(View v){
-        MeHttpRequest request = new MeHttpRequest(this);
-        request.authorizeViaExternalService(this, Service.TWITTER);
-    }
-    
-    public void facebookLoginClicked(View v){
-        MeHttpRequest request = new MeHttpRequest(this);
-        request.authorizeViaExternalService(this, Service.FACEBOOK);
-    }    
-    
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        if (requestCode == BaseActivity.REQUEST_EXTERNAL_SERVICE_LOGIN){
-            if (resultCode == Activity.RESULT_OK){
-                setUser(session.getCurrentUser());
-                syncTab();
-            }
-        }
     }    
 }

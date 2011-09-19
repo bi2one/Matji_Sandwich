@@ -123,4 +123,9 @@
 	
 	<!-- activity_store_food.xml -->
 	<color name="store_food_caution_color">#9a825c</color>
+	
+	<!-- login.xml -->
+	<color name="login_btn_txt_shadow">#c26200</color>
+	<color name="login_account_txt">#8a6501</color>
+	<color name="login_via_txt">#8a6501</color>
 </resources>
