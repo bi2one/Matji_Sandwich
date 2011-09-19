@@ -106,7 +106,8 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     }
 
     private void initImageView() {
-        for (int i = 0; i < attachFiles.length; i++) {
+        // for (int i = 0; i < attachFiles.length; i++) {
+        for (int i = 0; i < 3; i++) {
             RelativeLayout rl = new RelativeLayout(this);
             rl.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
@@ -120,9 +121,9 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
             rl.addView(image);
 
-            if (attachFiles[i] != null) {
+            // if (attachFiles[i] != null) {
                 swipeView.addView(rl);
-            }
+            // }
         }
     }
 

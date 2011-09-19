@@ -279,8 +279,9 @@ public class ImageLoader {
                         memoryCache.put(photoToLoad.url, bmp);
                         String tag=imageViews.get(photoToLoad.imageView);
                         if(tag!=null && tag.equals(photoToLoad.url)){
-                            BitmapDisplayer bd=new BitmapDisplayer(bmp, photoToLoad.imageView);
+                            BitmapDisplayer bd = new BitmapDisplayer(bmp, photoToLoad.imageView);
                             Activity a = (Activity)photoToLoad.imageView.getContext();
+
                             a.runOnUiThread(bd);
                         }
                     }
