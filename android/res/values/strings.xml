@@ -282,7 +282,7 @@
   <string name="hint_search_stor_tag_menu">맛집명, 태그, 메뉴 검색</string>
   <string name="hint_search_post">이야기 검색</string>
   <string name="hint_search_user">사람 검색</string>
-  <string name="hint_write_usermail">이메일 입력</string>  
+  <string name="hint_write_usermail">이메일 입력</string>
   <string name="hint_write_password">비밀번호 입력</string>  
 
   <!-- activity_change_location -->
@@ -366,7 +366,7 @@
   <!-- Matji -->
   <string name="main_tab_title_matmap">맛있는 지도</string>
   <string name="main_tab_title_mattalk">맛있는 이야기</string>
-  <string name="main_tab_title_matist">식도락가</string>
+  <string name="main_tab_title_matist">맛티스트</string>
   <string name="main_tab_title_mypage">내 정보</string>
   <string name="main_tab_title_login">로그인</string>
   

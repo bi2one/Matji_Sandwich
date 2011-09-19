@@ -56,3 +56,8 @@
 *** 내용
     탭 제목 -> 친구 | 주변 | 전국 | 지구
     맛티스트 -> 식도락가(gurume)
+
+
+* NEED TO DO
+** TODO HttpRequestManager를 context마다 queue를 갖고 있게 할것
+   [2011-09-19 Mon 21:57]
