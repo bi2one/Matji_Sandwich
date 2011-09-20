@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Matji_Sandwich</string>
+
+  <!-- map api key -->
+  <!-- bizone: 0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw -->
+  <!-- mozzliuv: 0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg -->
+  <!-- jihun: 0mYEJyQuX49uQdz0KqLHqC8lOjaMmZ0nqCLX7EQ -->
+  <!-- release 0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg -->
+
+  <!-- release!!!! -->
+  <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
+  <!-- development!!!! -->
+  <string name="map_api_key">
+    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw    
+  </string>
+  <!-- MatjiException -->
+  <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
+  <string name="exception_GpsEnabledMatjiException">GPS서비스를 사용할 수 있습니다</string>
+  <string name="exception_GpsOutOfServiceMatjiException">GPS서비스 지역에서 벗어났습니다</string>
+  <string name="exception_GpsServiceNotPossibleMatjiException">
+    GPS사용이 불가능합니다. 하늘을 볼 수 있거나, 네트워크가 안정적인 곳에서 다시 로딩해 주세요
+  </string>
+  <string name="exception_GpsTemporarilyUnavailableMatjiException">
+    내부 문제로, GPS를 일시적으로 중지합니다. 잠시만 기다려주세요
+  </string>
+  <string name="exception_HttpConnectMatjiException">
+    접속 상태가 불량합니다. 접속상태를 확인하세요
+  </string>
+  <string name="exception_InterruptedMatjiException">
+    Interrupted Exception: 연산을 중지합니다
+  </string>
+  <string name="exception_NotPossibleMatjiException">
+    일어날 수 없는 행동입니다
+  </string>
+  <string name="exception_JSONCodeMatjiException">
+    JSON리턴 결과가 올바르지 않습니다
+  </string>
+  <string name="exception_JSONMatjiException">
+    JSON Parsing Error
+  </string>
+  <string name="exception_NotSupportedMatjiException">
+    지원하지 않는 기능입니다
+  </string>
+  <string name="exception_UseNetworkGpsMatjiException">
+    GPS수신이 불안정합니다. 네트워크로 현재위치를 추정합니다
+  </string>
+  <string name="exception_GeocodeLocationInvalidMatjiException">
+    해당 위치는 주소를 받아올 수 없는 지역입니다
+  </string>
+  <string name="exception_GeocodeSearchInvalidMatjiException">
+    주소 검색이 올바르지 않습니다
+  </string>
+  <string name="exception_RegistStoreNameInvalidMatjiException">
+    맛집 이름을 입력해주셔야 합니다
+  </string>
+  <string name="exception_store_address_is_null">
+    기본 주소가 잘못되었습니다. 
+  </string>
+  <string name="exception_WritePostMatjiException">
+    내부 오류로 인해 맛이야기가 제대로 등록되지 않았습니다
+  </string>
+  <string name="exception_BitmapCompressMatjiException">
+    내부 문제로 이미지가 압축되지 않습니다
+  </string>
+  <string name="exception_BitmapCompressIOMatjiException">
+    이미지 압축 대상 파일을 생성할 수 없습니다
+  </string>
+
+  <!-- server exception -->
+  <string name="exception_failed_to_save_region">
+    북마크를 이미 한 지역입니다.
+  </string>
+
+  <!-- pull_to_refresh -->
+  <string name="pull_to_refresh_pull_label">Pull to refresh...</string>
+  <string name="pull_to_refresh_release_label">Release to refresh...</string>
+  <string name="pull_to_refresh_refreshing_label">Loading...</string>
+  <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
+
+  <!-- default String... -->
+  <string name="default_string_nickname">닉네임</string>
+  <string name="default_string_website">웹사이트</string>
+  <string name="default_string_delete">삭제</string>
+  <string name="default_string_check_delete">삭제할까요?</string>
+  <string name="default_string_tag">태그</string>
+  <string name="default_string_title">%1$s의 맛집기행</string>
+  <string name="default_string_intro">소개글</string>
+  <string name="default_string_not_exist_intro">소개글이 없습니다.</string>
+  <string name="default_string_not_exist_website">웹사이트를 등록하지 않았습니다.</string>
+  <string name="default_string_basic_info">기본정보</string>
+  <string name="default_string_more_info">부가정보</string>
+  <string name="default_string_info">정보</string>
+  <string name="default_string_popular_food">인기메뉴</string>
+  <string name="default_string_not_exist_reg_user">미발굴 맛집</string>
+  <string name="default_string_notice">공지사항</string>
+  <string name="default_string_reg_user">발굴자</string>
+  <string name="default_string_owner_user">주인장</string>
+  <string name="default_string_url">관련 URL</string>
+  <string name="default_string_memo">메모</string>
+  <string name="default_string_menu">메뉴</string>
+  <string name="default_string_comment">댓글</string>
+  <string name="default_string_like">Like</string>
+  <string name="default_string_unlike">Unlike</string>
+  <string name="default_string_image">이미지</string>
+  <string name="default_string_map">지도</string>
+  <string name="default_string_store">맛집</string>
+  <string name="default_string_alarm">소식</string>
+  <string name="default_string_search">검색</string>
+  <string name="default_string_write_note">영업시간, 예약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
+  <string name="default_string_recent_post">등록한 메모가 없습니다.</string>
+  <string name="default_string_bookmark">Bookmark</string>
+  <string name="default_string_ranking">Ranking</string>
+  <string name="default_string_post">이야기</string>
+  <string name="default_string_store_register">Register</string>
+  <string name="default_string_current_position">GPS</string>
+  <string name="default_string_near_store">Store</string>
+  <string name="default_string_settings">설정</string>
+  <string name="default_string_address">주소</string>
+  <string name="default_string_change">변경</string>
+  <string name="default_string_revision">수정</string>
+  <string name="default_string_edit">편집</string>
+  <string name="default_string_confirm">확인</string>
+  <string name="default_string_today">Today</string>
+  <string name="default_string_cancel">취소</string>
+  <string name="default_string_user">사람</string>
+  <string name="default_string_picture">사진</string>
+  <string name="default_string_camera">카메라</string>
+  <string name="default_string_album">앨범</string>
+  <string name="default_string_complete">완료</string>
+  <string name="default_string_message">쪽지</string>
+  <string name="default_string_login">로그인</string>
+  
+  
+  <!-- Writing content -->
+  <string name="writing_content_post">메모를 입력하세요.</string>
+  <string name="writing_content_comment">댓글을 입력하세요.</string>
+  <string name="writing_content_message">메세지를 입력하세요.</string>
+  <string name="writing_content_received_user">받는 사람을 추가하세요.</string>
+  <string name="writing_content_menu">메뉴를 입력하세요.</string>
+  <string name="writing_content_search">검색할 단어를 입력하세요.</string>
+  
+  <!-- StoreMenuActivity -->
+  <string name="store_menu_confirm">확인</string>
+  <string name="store_menu_ex">ex</string>
+  <string name="store_menu_already_exist_menu">이미 존재하는 메뉴입니다.</string>
+  
+  <!-- PostActivity -->
+  <string name="post_does_not_exist">메모가 존재하지 않습니다!</string>
+  <string name="does_not_exist_prev_post">이전 이야기가 존재하지 않습니다.</string>
+  <string name="does_not_exist_next_post">현재 로드된 이야기의 마지막입니다.</string>
+
+  <!-- ChatActivity -->
+  <string name="chat_waiting_input">메세지를 입력해주세요.</string>
+  <string name="chat_send">보내기</string>
+
+  <!-- target --> 
+  <string name="target_common">COMMON</string>
+     
+  <!-- Activity memo -->
+  <string name="activity_likes_the">likes the</string>
+    
+  <!-- Cell -->
+  <string name="cell_user_point">포인트</string>
+  <string name="cell_user_area">활동지역</string>
+  <string name="cell_user_follow">Follow</string>
+  <string name="cell_user_unfollow">Unfollow</string>
+  <string name="cell_store_not_exist_tel">전화번호 미등록</string>
+  <string name="cell_store_not_exist_addr">주소 미등록</string>
+  <string name="cell_store_not_exist_tag">등록된 태그가 없습니다.</string>
+  <string name="cell_store_not_exist_menu">등록된 메뉴가 없습니다.</string>
+  <string name="cell_user_edit_nickname">닉네임 변경</string>
+  <string name="cell_user_edit_userid">계정</string>
+  <string name="cell_user_edit_usermail">이메일</string>
+  
+  
+  <!-- StoreMainActivity  -->
+  <string name="store_main_unlike_store">내가 좋아하는 맛집</string>
+  <string name="store_main_like_store">♥좋아요</string>
+  <string name="store_main_scrap">스크랩</string>
+  <string name="store_main_bookmark">스크랩</string>
+  <string name="store_main_unbookmark">취소</string>
+  <string name="store_main_map">지도</string>
+  <string name="store_main_phone">전화</string>
+  <string name="store_main_web">웹</string>
+  <string name="store_main_info_view">맛집정보 보기</string>
+  <string name="store_main_post_list_view">이야기</string>
+  <string name="store_main_img">사진</string>
+  <string name="store_main_review">웹리뷰</string>
+
+  
+  <!-- UserMainActivity -->
+  <string name="user_main_following_you">follows you.</string>
+  <string name="user_main_jjim_store">찜한 맛집</string>
+
+  <!-- MainTabActivity -->
+  <string name="main_tab_map">맛지도</string>
+  <string name="main_tab_talk">맛이야기</string>
+  <string name="main_tab_ranking">맛티스트</string>
+  <string name="main_tab_config">개인설정</string>
+
+  <!-- StoreDetailInfoTabActivity  -->
+  <string name="store_detail_info_default">맛집 기본 정보</string>
+  <string name="store_detail_info_note">맛집 노트</string>
+  <string name="request">정보 등록/수정 요청</string>
+  <string name="registered_menu">등록된 메뉴</string>
+  <string name="uncertain_menu">불확실한 메뉴</string>
+  <string name="register_new_menu">등록된 메뉴</string>
+  
+  <!-- GetMapPositionActivity -->
+  <string name="get_map_position_title">지역 변경</string>
+
+  <!-- StoreRegisterListActivity -->
+  <string name="register_store_list_is_not_exist">맛집이 목록에 없다면?</string>
+  <string name="register_store_list_register_new_store">새 맛집 등록</string>
+
+  <!-- StoreRegisterActivity -->
+  <string name="store_register_add_address">상세주소</string>
+  <string name="store_register_name">맛집이름</string>
+  <string name="store_register_tel">전화번호</string>
+  <string name="store_register_website">홈페이지</string>
+  <string name="store_register_submit">맛집 등록하기</string>
+  <string name="store_register_ok">맛집 등록에 성공하였습니다</string>
+
+  <!-- MainMapActivity -->
+  <string name="main_map_search_map">Search Map</string>
+
+  <!-- BookmarkListActivity -->
+  <string name="bookmark_list_register">이곳을 북마크하기</string>
+  <string name="bookmark_list_register_hint">북마크 이름을 입력하세요.</string>
+  <string name="bookmark_list_register_alert">북마크 이름은 빈칸이 올 수 없습니다</string>
+
+  <!-- PostTabActivity -->
+  <string name="post_tab_friend">친구</string>
+  <string name="post_tab_near">주변</string>
+  <string name="post_tab_all">전국</string>
+  
+  <!-- section list view test -->
+  <string name="standard_list">standard_list</string>
+  <string name="empty_list">empty_list</string>
+  <string name="at">in</string>
+  
+  <!-- map_title_bar.xml -->
+  <string name="change_location">위치변경</string>
+  
+  
+  <!-- TimeUtil -->
+  <string name="about">약</string>
+  <string name="year_ago">년 전</string>
+  <string name="years_ago">년 전</string>
+  <string name="month_ago">달 전</string>
+  <string name="months_ago">달 전</string>
+  <string name="week_ago">주 전</string>
+  <string name="weeks_ago">주 전</string>
+  <string name="day_ago">일 전</string>
+  <string name="days_ago">일 전</string>
+  <string name="hour_ago">시간 전</string>
+  <string name="hours_ago">시간 전</string>
+  <string name="min_ago">분 전</string>
+  <string name="sec_ago">초 전</string>
+
+  <!-- MapStoreSectionedAdapter.java -->
+  <string name="map_store_sectioned_adapter_bookmarked_store">북마크 맛집</string>
+  <string name="map_store_sectioned_adapter_store">맛집</string>
+
+  <!-- User Profile -->
+  <string name="user_profile_edit_profile">정보 변경</string>
+  <string name="user_profile_friend_information">친구정보</string>
+  <string name="user_profile_following">Following</string>
+  <string name="user_profile_follower">Follower</string>
+  <string name="user_profile_store_information">맛집정보</string>
+  <string name="user_profile_find_store">발견맛집</string>
+  <string name="user_profile_my_find_store">내 발견맛집</string>
+  <string name="user_profile_my_bookmark_store">내 북마크맛집</string>
+  <string name="user_profile_recent_store">최근맛집</string>
+  
+  <!-- ANDROID -->
+  <string name="android">ANDROID</string>
+  
+  <!-- hint -->
+  <string name="hint_write_comment">댓글 입력</string>
+  <string name="hint_search_stor_tag_menu">맛집명, 태그, 메뉴 검색</string>
+  <string name="hint_search_post">이야기 검색</string>
+  <string name="hint_search_user">사람 검색</string>
+  <string name="hint_write_usermail">이메일 입력</string>
+  <string name="hint_write_password">비밀번호 입력</string>  
+
+  <!-- activity_change_location -->
+  <string name="activity_change_location_hint">지명이나 지역 입력</string>
+
+  <!-- ChangeLocationActivity.java -->
+  <string name="change_location_activity_input_empty_string">주소를 입력해 주세요.</string>
+
+  <!-- recent_changed_location.xml -->
+  <string name="recent_changed_location_empty">최근 변경한 지역이 없습니다.</string>
+  <string name="recent_changed_location_filled">최근 변경한 지역</string>
+
+  <!-- RankingTabActivity.java -->
+  <string name="ranking_tab_friend">친구</string>
+  <string name="ranking_tab_near">지역</string>
+  <string name="ranking_tab_country">전국</string>
+  <string name="ranking_tab_all">전체</string>
+
+  <!-- row_simple_user.xml -->
+  <string name="row_simple_user_point_hint">P</string>
+
+  <!-- row_alarm.xml -->
+  <string name="row_alarm_like_post">%1$s님이 ##내 이야기를 추천했습니다.##</string>
+  <string name="row_alarm_reply">%1$s님이 ##내 이야기에 댓글을 달았습니다.##</string>
+  <string name="row_alarm_follow">%1$s님이 ##나를 Follow 합니다.##</string>
+  <string name="row_alarm_message">%1$s님으로부터 ##쪽지가 도착했습니다.##</string>
+
+  <!-- Search Highlight Header-->
+  <string name="search_highlight">검색결과</string>
+  
+  <!-- Highlight Header -->
+  <string name="highlight_store_like_users">\'%1$s\' 맛집을 좋아하는 사람들</string>
+  <string name="highlight_post_like_users">이 이야기를 좋아하는 사람들</string>
+  <string name="highlight_store_food_like_users">메뉴를 좋아하는 사람들</string>
+  <string name="highlight_like_stores">\'%1$s\'님이 좋아하는 맛집</string>
+
+  <!-- adapter_ranking.xml -->
+  <string name="adapter_ranking_point_hint">P</string>
+
+  <!-- dialog action buttons -->
+  <string name="dialog_action_button_write_post">이야기 쓰기</string>
+  <string name="dialog_action_button_write_store">맛집 발견하기</string>
+
+  <!-- write_post_store_view.xml -->
+  <string name="write_post_store_view_select">맛집을 선택해주세요.</string>
+
+  <!-- arrays.xml.write_post_tags -->
+  <string name="array_write_post_tags_date">데이트장소</string>
+  <string name="array_write_post_tags_together">회사 회식 장소</string>
+  <string name="array_write_post_tags_sbs">SBS 맛대맛</string>
+  <string name="array_write_post_tags_tv">TV에 나온 집</string>
+  <string name="array_write_post_tags_time">시간때우기 좋아요</string>
+
+  <!-- arrays.xml.select_tags -->
+  <string name="array_select_tags_date">데이트장소</string>
+  <string name="array_select_tags_together">회사 회식 장소</string>
+  <string name="array_select_tags_sbs">SBS 맛대맛</string>
+  <string name="array_select_tags_tv">TV에 나온 집</string>
+  <string name="array_select_tags_time">시간때우기 좋아요</string>
+  
+  <!-- activity_write_post_tag.xml -->
+  <string name="activity_write_post_tag_hint">태그 입력</string>
+
+  <!-- WritePostTabActivity.java -->
+  <string name="write_post_tab_activity_post_empty">이야기를 입력해 주세요.</string>
+
+  <!-- WritePostActivity.java -->
+  <string name="write_post_activity_title">이야기 쓰기</string>
+  <string name="write_post_success">이야기 쓰기에 성공하였습니다.</string>
+  <string name="write_post_album_full">사진을 더 첨부할 수 없습니다.</string>
+
+  <!-- SelectStoreActivity.java -->
+  <string name="select_store_activity_title">맛집 선택</string>
+
+  <!-- post_edit_text.xml -->
+  <string name="post_edit_text_empty">이야기를 입력해주세요.</string>
+
+  <!-- simple_submit_location_bar.xml -->
+  <string name="simple_submit_location_bar_submit">지역찾기</string>
+  
+  <!-- Matji -->
+  <string name="main_tab_title_matmap">맛있는 지도(en)</string>
+  <string name="main_tab_title_mattalk">맛있는 이야기(en)</string>
+  <string name="main_tab_title_matist">맛티스트(en)</string>
+  <string name="main_tab_title_mypage">내 정보(en)</string>
+  <string name="main_tab_title_login">로그인(en)</string>
+  
+  <!-- PostListView Subtitle -->
+  <string name="subtitle_friend_post">친구들 이야기</string>
+  <string name="subtitle_nearby_post">근처 이야기</string>
+  <string name="subtitle_all_post">모든 이야기</string>
+  <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
+  <string name="subtitle_user_post">%1$d개의 %2$s 이야기</string>
+  
+  <!-- ImageListView Subtitle -->
+  <string name="subtitle_user_image">%1$d개의 %2$s 사진</string>
+  <string name="subtitle_store_image">%1$d개의 맛집 사진</string>
+  
+  
+  <!-- Path -->
+  <string name="path_palai">fonts/palai.ttf</string>
+
+  <!-- FollowingActivity -->
+  <string name="following_followings_of">\'%1$s\'님의 Following</string>
+  <string name="following_followers_of">\'%1$s\'님의 Follower</string>
+  <string name="following_following">Following</string>
+  <string name="following_follower">Follower</string>
+  
+  <!-- PostSubHeader -->
+  <string name="post_sub_header_txt">%1$d명이 좋아합니다.</string>
+  <string name="post_sub_header_txt_one">%1$s님이 좋아합니다.</string>
+  <string name="post_sub_header_txt_other">%1$s님 외 %2$d명이 좋아합니다.</string>
+  
+  <!-- StoreTagActivity.java -->
+  <string name="number_of_tag">%1$d개의 태그</string>
+  
+  
+  <!-- WriteMessageActivity.java -->
+  <string name="write_message_writing_content">내용 입력</string>
+  <string name="write_message_received_user">받는 사람</string>
+  <string name="write_message_received_user2">받는 사람:&#160;</string>
+  <string name="write_message">쪽지 쓰기</string>
+  <string name="overflow_received_user">최대 %1$d명까지 추가가 가능합니다.</string>
+  <string name="write_message_select_user">받는 사람을 추가해주세요.</string>
+  
+  <!-- MessageListActivity.java -->
+  <string name="received_message_list">받은 쪽지함</string>
+  <string name="sent_message_list">보낸 쪽지함</string>
+  
+  <!-- LoginAsyncTask.java -->
+  <string name="login_loading">로그인 중입니다.</string>
+
+  <!-- WriteStoreActivity.java -->
+  <string name="write_store_title">맛집 추가</string>
+  <string name="write_store_invalidate_store">맛집 이름을 입력해 주세요.</string>
+  <string name="write_store_success">맛집 등록에 성공하였습니다.</string>
+
+  <!-- write_store_matji_mapview.xml -->
+  <string name="write_store_matji_mapview_store_name">맛집명 입력</string>
+  <string name="write_store_matji_mapview_add_address">상세주소</string>
+  <string name="write_store_matji_mapview_phone_number">전화번호 입력</string>
+
+  <!-- com.matji.sandwich.http.DialogAsyncTask -->
+  <string name="dialog_async_task">요청중입니다...</string>
+
+  <!-- TitleContainer.java -->
+  <string name="tag_button_wrapper">TitleContainer.button_wrapper</string>
+  <string name="tag_new_icon">TitleContainer.new_icon</string>
+  
+  <!-- SelectTagActivity.java -->
+  <string name="select_tag_title">태그 선택</string>
+  <string name="select_tag_hint">태그 입력</string>
+  
+  <!-- StoreBookmarkListActivity.java -->
+  <string name="store_bookmark_list">북마크 맛집</string>
+
+  <!-- StoreDiscoverListActivity.java -->
+  <string name="store_discover_list">발견 맛집</string>
+
+  <!-- PrivateTabActivity.java -->
+  <string name="private_tab_my_info">내 정보</string>
+  <string name="private_tab_my_tag">내 태그</string>
+  
+  <!-- activity_settings.xml -->
+  <string name="settings_account_manages">계정 관리</string>
+  <string name="settings_account_login">로그인</string>
+  <string name="settings_account_register">회원가입</string>
+  <string name="settings_account_forget">아이디/비밀번호 찾기</string>
+  <string name="settings_account_logout">로그아웃</string>
+  <string name="settings_account_link_twitter">twitter 계정 연동</string>
+  <string name="settings_account_link_facebook">facebook 계정 연동</string>
+  <string name="settings_account_edit_profile">정보 변경</string>
+  <string name="settings_account_find_friends">친구 찾기</string>
+  <string name="settings_location_setting">위치 설정</string>
+  <string name="settings_location_information_available">위치정보 사용</string>
+  <string name="settings_location_country">국가 설정</string>
+  <string name="settings_alarm_setting">알림 설정</string>
+  <string name="settings_alarm_new_post">새글 알림</string>
+  <string name="settings_alarm_new_comment">댓글 알림</string>
+  <string name="settings_alarm_new_like">좋아요 알림</string>
+  <string name="settings_alarm_new_follow">Follow 알림</string>
+  <string name="settings_alarm_new_message">쪽지 알림</string>
+  <string name="settings_service_information">서비스 정보</string>
+  <string name="settings_service_notice">공지사항</string>
+  <string name="settings_service_guide">서비스 안내</string>
+  <string name="settings_service_report">버그신고 및 기능제안</string>
+  <string name="settings_service_version">Ver.%1$s Build %2$d</string>
+  
+  <string name="setting_alarm_permit">permit</string>
+  <string name="setting_alarm_view">view</string>
+  
+  <string name="edit_website">블로그/홈페이지</string>
+  <string name="edit_password">비밀번호 변경</string>
+  <string name="edit_withdrawal">회원 탈퇴</string>
+  
+  <!-- AlarmAdapter.java -->
+  <string name="alarm_deleted_post">삭제된 메모입니다.</string>
+  
+  <!-- StoreFoodListView.java -->
+  <string name="store_food_list_menu">등록된 메뉴</string>
+    
+  <!-- StoreFoodAdapter.java -->
+  <string name="store_food_add">신규 메뉴 추가</string>
+    
+  <!-- activity_store_food.xml -->
+  <string name="store_food_caution">메뉴 중 흐린 글씨는 불확실 하다고 신고된 정보입니다.</string>
+  
+  <!-- login.xml -->
+  <string name="login_login">로그인</string>
+  <string name="login_save_id">아이디 저장</string>
+  <string name="login_find_password">비밀번호찾기</string>
+  <string name="login_register">회원가입</string>
+  <string name="login_twitter">Twitter 로그인</string>
+  <string name="login_facebook">Facebook 로그인</string>
+  <string name="login_writing_id_password">아이디 혹은 비밀번호를 입력해주세요.</string>
+</resources>

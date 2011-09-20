@@ -121,7 +121,6 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-	Log.d("=====", "mapview request callback");
 	switch (tag) {
 	case NEARBY_STORE:
 	    stores = data;

@@ -86,15 +86,20 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
         if (!isFlow) {
             Log.d("LifeCycle", "onNotFlowResume at " + this.getClass());
             onNotFlowResume();
+            Log.d("LifeCycle", "onAfterResume at " + this.getClass());
+	    onAfterResume();
         } else {
             Log.d("LifeCycle", "onFlowResume at " + this.getClass());
             onFlowResume();
+            Log.d("LifeCycle", "onAfterResume at " + this.getClass());
+	    onAfterResume();
         }
         setIsFlow(false);
     }
 
     protected void onNotFlowResume() { }
     protected void onFlowResume() { }
+    protected void onAfterResume() { }
 
     public void startActivity(Intent intent) {
         setIsFlow(true);

@@ -7,6 +7,7 @@
 		android:id="@id/Titlebar"
 		style="@style/DefaultWidthFill" />
 	<com.matji.sandwich.widget.LoginView
+	    android:id="@+id/login_view"
 		style="@style/DefaultFill"
 		android:layout_below="@id/Titlebar" />
 </RelativeLayout>
