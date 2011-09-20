@@ -497,4 +497,5 @@
   <string name="login_register">회원가입</string>
   <string name="login_twitter">Twitter 로그인</string>
   <string name="login_facebook">Facebook 로그인</string>
+  <string name="login_writing_id_password">아이디 혹은 비밀번호를 입력해주세요.</string>
 </resources>
