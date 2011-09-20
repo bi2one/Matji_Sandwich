@@ -1,7 +1,6 @@
 package com.matji.sandwich.http;
 
 import java.util.HashMap;
-import java.util.Collection;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -26,7 +25,9 @@ public class HttpRequestManager {
     public static final int USER_TAG_LIST_REQUEST = 62;
     public static final int USER_UPDATE_REQUEST = 63;
     public static final int MESSAGE_NEW_REQUEST = 70;
-    public static final int UPDATE_ALARM_PERMIT_REQUEST = 81;
+    public static final int MESSAGE_READ_REQUEST = 71;
+    public static final int ALARM_READ_REQUEST = 81;
+    public static final int UPDATE_ALARM_PERMIT_REQUEST = 82;
 
     private volatile static HashMap<Context, HttpRequestManager> managerPool = new HashMap<Context, HttpRequestManager>();
     private Context context;

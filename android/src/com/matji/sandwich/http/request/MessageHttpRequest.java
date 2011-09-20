@@ -1,8 +1,12 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.MessageParser;
+import java.util.ArrayList;
 
 import android.content.Context;
+
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Message;
+import com.matji.sandwich.http.parser.MessageParser;
 
 public class MessageHttpRequest extends HttpRequest {
     public MessageHttpRequest(Context context) {
@@ -113,5 +117,27 @@ public class MessageHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("page", page+"");
     	getHashtable.put("limit", limit+"");
+    }
+    
+    public void actionRead(ArrayList<MatjiData> messages) {
+    	parser = new MessageParser(context);
+    	httpMethod = HttpMethod.HTTP_POST;
+    	action = "read";
+    	
+    	String ids = "";
+    	for (MatjiData message : messages) {
+    		ids += ((Message) message).getId() + ",";
+    	}
+    	postHashtable.clear();
+    	postHashtable.put("message_id", ids);
+    }
+    
+    public void actionRead(int message_id) {
+    	parser = new MessageParser(context);
+    	httpMethod = HttpMethod.HTTP_POST;
+    	action = "read";
+    	
+    	postHashtable.clear();
+    	postHashtable.put("message_id", message_id);
     }
 }

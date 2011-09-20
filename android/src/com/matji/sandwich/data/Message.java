@@ -14,6 +14,7 @@ public class Message extends MatjiData implements Comparable<Message>{
 	private String created_at;
 	private String updated_at;
 	private long ago;
+	private boolean msg_read;
 
 	public Message() {}
 	
@@ -46,6 +47,7 @@ public class Message extends MatjiData implements Comparable<Message>{
 		dest.writeString(created_at);
 		dest.writeString(updated_at);
 		dest.writeLong(ago);
+		dest.writeInt(msg_read ? 1 : 0);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -59,6 +61,7 @@ public class Message extends MatjiData implements Comparable<Message>{
 		created_at = in.readString();	
 		updated_at = in.readString();
 		ago = in.readLong();
+		msg_read = in.readInt() != 0;
 	}
 	
 	public void setId(int id) {
@@ -122,6 +125,14 @@ public class Message extends MatjiData implements Comparable<Message>{
 
 	public long getAgo() {
 		return ago;
+	}
+
+	public void setMsgRead(boolean msg_read) {
+		this.msg_read = msg_read;
+	}
+
+	public boolean isMsgRead() {
+		return msg_read;
 	}
 
 	@Override

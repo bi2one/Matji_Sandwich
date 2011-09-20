@@ -6,7 +6,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.matji.sandwich.adapter.MBaseAdapter;
@@ -23,7 +22,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
     private ListRequestScrollListener scrollListener;
     private ArrayList<MatjiData> adapterData;
     private MBaseAdapter adapter;
-    private HttpRequestManager manager;
+    protected HttpRequestManager manager;
     private boolean canRepeat = false;
     private int prevPage = 0;
     private int page = 1;

@@ -239,7 +239,6 @@ public class Session implements Requestable {
     public void postLogin() {
         Log.d("Matji", "post login");
         mPrivateUtil.setLastLoginUserNick(getCurrentUser().getNick());
-        mPrivateUtil.setLastLoginState(true);
 
         for (LoginListener listener : mLoginListeners) listener.postLogin();
     }
@@ -251,14 +250,12 @@ public class Session implements Requestable {
 
     public void postLogout() {
         Log.d("Matji", "post logout");
-        mPrivateUtil.setLastLoginState(false);
         for (LogoutListener listener : mLogoutListeners) listener.postLogout();
     }
 
     public void notificationValidate() {
         NoticeHttpRequest request = new NoticeHttpRequest(mContext);
-        int lastReadAlarmId = (isLogin()) ? mPrivateUtil.getLastReadAlarmId() : 0;
-        request.actionBadge(mPrivateUtil.getLastReadNoticeId(), lastReadAlarmId);
+        request.actionBadge(mPrivateUtil.getLastReadNoticeId());
         ArrayList<MatjiData> data = null;
         try {
             data = request.request();
