@@ -1,16 +1,12 @@
 package com.matji.sandwich;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 
-import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.request.MeHttpRequest;
-import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.LoginView;
@@ -147,7 +143,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     }
 
     public void loginButtonClicked(View v) {        
-        loginView.login(this, this);
+        loginView.login(this);
     }
 
     /* Loginable Interface methods */

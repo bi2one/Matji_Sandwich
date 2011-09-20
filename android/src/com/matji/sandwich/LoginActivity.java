@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
     }
     
     public void loginButtonClicked(View v) {
-    	loginView.login(this, this);
+    	loginView.login(this);
     }
 
     /* Loginable Interface methods */
