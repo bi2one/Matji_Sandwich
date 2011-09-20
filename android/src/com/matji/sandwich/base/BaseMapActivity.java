@@ -12,11 +12,13 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.TitleContainer;
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.util.ImageLoader;
 
 public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener, Identifiable {
     private boolean isFlow;
     private ViewGroup mainViewGroup;
+    private HttpRequestManager requestManager = HttpRequestManager.getInstance(this);
 
     public abstract int setMainViewId();
 
@@ -70,6 +72,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
         // TODO Auto-generated method stub
         super.onPause();
         Log.d("LifeCycle", "onPause at " + this.getClass());
+	requestManager.cancelAllTask();
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
 
     }

@@ -6,6 +6,7 @@ import java.util.Collections;
 import android.content.Context;
 import android.location.Location;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -120,6 +121,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+	Log.d("=====", "mapview request callback");
 	switch (tag) {
 	case NEARBY_STORE:
 	    stores = data;

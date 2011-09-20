@@ -12,6 +12,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.http.HttpRequestManager;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Identifiable {
     public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;
@@ -27,6 +28,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public static final int USER_PROFILE_TAB_ACTIVITY = 109;
     
     private ViewGroup mainViewGroup;
+    private HttpRequestManager requestManager = HttpRequestManager.getInstance(this);
 
     private boolean isFlow;
 
@@ -87,6 +89,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
         // TODO Auto-generated method stub
         super.onPause();
         Log.d("LifeCycle", "onPause at " + this.getClass());
+	requestManager.cancelAllTask();
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);
     }
 
