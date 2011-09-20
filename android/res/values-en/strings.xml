@@ -364,11 +364,11 @@
   <string name="simple_submit_location_bar_submit">지역찾기</string>
   
   <!-- Matji -->
-  <string name="main_tab_title_matmap">맛있는 지도</string>
-  <string name="main_tab_title_mattalk">맛있는 이야기</string>
-  <string name="main_tab_title_matist">맛티스트</string>
-  <string name="main_tab_title_mypage">내 정보</string>
-  <string name="main_tab_title_login">로그인</string>
+  <string name="main_tab_title_matmap">맛있는 지도(en)</string>
+  <string name="main_tab_title_mattalk">맛있는 이야기(en)</string>
+  <string name="main_tab_title_matist">맛티스트(en)</string>
+  <string name="main_tab_title_mypage">내 정보(en)</string>
+  <string name="main_tab_title_login">로그인(en)</string>
   
   <!-- PostListView Subtitle -->
   <string name="subtitle_friend_post">친구들 이야기</string>

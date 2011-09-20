@@ -14,6 +14,7 @@ import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.util.ImageLoader;
 
 public abstract class BaseTabActivity extends TabActivity implements ActivityEnterForeGroundListener, Identifiable {
@@ -21,6 +22,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     private boolean isFirstResume = true;
     private boolean isFlow;
     private RelativeLayout mainViewGroup;
+    private HttpRequestManager requestManager = HttpRequestManager.getInstance(this);
 
     public abstract int setMainViewId();
 
@@ -84,15 +86,20 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
         if (!isFlow) {
             Log.d("LifeCycle", "onNotFlowResume at " + this.getClass());
             onNotFlowResume();
+            Log.d("LifeCycle", "onAfterResume at " + this.getClass());
+	    onAfterResume();
         } else {
             Log.d("LifeCycle", "onFlowResume at " + this.getClass());
             onFlowResume();
+            Log.d("LifeCycle", "onAfterResume at " + this.getClass());
+	    onAfterResume();
         }
         setIsFlow(false);
     }
 
     protected void onNotFlowResume() { }
     protected void onFlowResume() { }
+    protected void onAfterResume() { }
 
     public void startActivity(Intent intent) {
         setIsFlow(true);
@@ -114,6 +121,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     protected void onPause() {
         super.onPause();
         Log.d("LifeCycle", "onPause at " + this.getClass());
+	requestManager.cancelAllTask();
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);		
     }
 

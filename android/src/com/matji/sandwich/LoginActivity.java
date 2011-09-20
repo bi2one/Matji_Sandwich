@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import android.os.Bundle;
 import android.view.View;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.LoginView;
@@ -27,7 +28,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
     }
     
     public void loginButtonClicked(View v) {
-    	loginView.login(this, this);
+    	loginView.login(this);
     }
 
     /* Loginable Interface methods */
