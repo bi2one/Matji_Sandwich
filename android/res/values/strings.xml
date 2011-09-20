@@ -232,8 +232,8 @@
 
   <!-- PostTabActivity -->
   <string name="post_tab_friend">친구</string>
-  <string name="post_tab_near">지역</string>
-  <string name="post_tab_all">전체</string>
+  <string name="post_tab_near">주변</string>
+  <string name="post_tab_all">전국</string>
   
   <!-- section list view test -->
   <string name="standard_list">standard_list</string>
@@ -282,7 +282,7 @@
   <string name="hint_search_stor_tag_menu">맛집명, 태그, 메뉴 검색</string>
   <string name="hint_search_post">이야기 검색</string>
   <string name="hint_search_user">사람 검색</string>
-  <string name="hint_write_usermail">이메일 입력</string>  
+  <string name="hint_write_usermail">이메일 입력</string>
   <string name="hint_write_password">비밀번호 입력</string>  
 
   <!-- activity_change_location -->

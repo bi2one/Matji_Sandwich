@@ -1,6 +1,7 @@
 package com.matji.sandwich.http;
 
 import java.util.HashMap;
+import java.util.Collection;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -29,13 +30,15 @@ public class HttpRequestManager {
 
     private volatile static HashMap<Context, HttpRequestManager> managerPool = new HashMap<Context, HttpRequestManager>();
     private Context context;
-    private TaskQueueManager queueManager;
+    private TaskPoolManager taskPoolManager;
+    // private TaskQueueManager queueManager;
     private SpinnerFactory spinnerFactory;
     private boolean isTurnOff;
 
     private HttpRequestManager(Context context) {
 	setContext(context);
-	queueManager = TaskQueueManager.getInstance();
+	taskPoolManager = TaskPoolManager.getInstance(context);
+	// queueManager = TaskQueueManager.getInstance();
 	spinnerFactory = new SpinnerFactory();
 	isTurnOff = false;
     }
@@ -88,17 +91,24 @@ public class HttpRequestManager {
 	ManagerAsyncTask task = new ManagerAsyncTask(request, requestable, tag);
 	TaskElement element = new TaskElement(spinner, task);
 	
-	queueManager.offer(element);
-	queueManager.start();
+	// queueManager.offer(element);
+	// queueManager.start();
+	taskPoolManager.start(element);
     }
 
     public boolean isRunning() {
-	return queueManager.isRunning();
+	return taskPoolManager.isRunning();
+	// return queueManager.isRunning();
     }
 
     public void cancelTask() {
-	queueManager.cancelTask();
+	taskPoolManager.cancelTask();
+	// queueManager.cancelTask();
     }
+
+    // public void cancelAllTask() {
+    // 	Collection<HttpRequestManager> managerCollection = managerPool.values();
+    // }
 
     /**
      * Manager에 들어오는 request요청들을 전부 수행하지 않도록 꺼둔다

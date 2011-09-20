@@ -13,6 +13,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.AttachFile;
@@ -36,6 +37,10 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     private boolean isShowingPost = true;
     private int currentPage;
     private SwipeView swipeView;
+    
+    private ImageView leftImage;
+    private ImageView centerImage;
+    private ImageView rightImage;
 
     private HttpRequest request;
     private HttpRequestManager manager;
@@ -107,20 +112,35 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     }
 
     private void initImageView() {
+	// leftLayout = (RelativeLayout)findViewById(R.id.image_slider_left_layout);
+	// centerLayout = (RelativeLayout)findViewById(R.id.image_slider_center_layout);
+	// rightLayout = (RelativeLayout)findViewById(R.id.image_slider_right_layout);
+
+	// leftImage = (ImageView)findViewById(R.id.image_slider_left_image);
+	// centerImage = (ImageView)findViewById(R.id.image_slider_center_image);
+	// rightImage = (ImageView)findViewById(R.id.image_slider_right_image);
+
+	// centerImage.setOnClickListener(this);
+	
+	RelativeLayout.LayoutParams imageParam = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+	imageParam.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+	leftImage = new ImageView(this);
+	leftImage.setLayoutParams(imageParam);
+	leftImage.setScaleType(ScaleType.FIT_CENTER);
+
+	centerImage = new ImageView(this);
+	centerImage.setLayoutParams(imageParam);
+	centerImage.setScaleType(ScaleType.FIT_CENTER);
+	centerImage.setOnClickListener(this);
+	
+	rightImage = new ImageView(this);
+	rightImage.setLayoutParams(imageParam);
+	rightImage.setScaleType(ScaleType.FIT_CENTER);
+
         for (int i = 0; i < attachFiles.length; i++) {
-        // for (int i = 0; i < 3; i++) {
             RelativeLayout rl = new RelativeLayout(this);
             rl.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            params.addRule(RelativeLayout.CENTER_IN_PARENT);
-
-            ImageView image = new ImageView(this);
-            image.setLayoutParams(params);
-            image.setScaleType(ScaleType.FIT_CENTER);
-            image.setOnClickListener(this);
-
-            rl.addView(image);
 
             if (attachFiles[i] != null) {
                 swipeView.addView(rl);
@@ -168,45 +188,87 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         count.bringToFront();
     }
 
+    private void removeView(View view) {
+	ViewGroup parent = (ViewGroup)view.getParent();
+	if (parent != null)
+	    parent.removeView(view);
+    }
+
+    private void replaceView(ViewGroup viewGroup, View view) {
+	if (viewGroup != null) {
+	    viewGroup.removeAllViews();
+	    viewGroup.addView(view);
+	}
+    }
+
+    private RelativeLayout imageLayoutAt(int index) {
+	return (RelativeLayout) swipeView.getChildAt(index);
+    }
+
     public void setImage(int currentPage) {
         int attach_file_id = attachFiles[currentPage].getId();
 
-        /* Set Current Page Image */
-        ImageView image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage)).getChildAt(0);
-        imageLoader.DisplayImage(this,
-                ImageLoader.UrlType.ATTACH_FILE,
-                ImageLoader.ImageSize.XLARGE,
-                image,
-                attach_file_id);
+        /* Set Previous Page Image */
+	if (currentPage > 0 && attachFiles[currentPage - 1] != null)
+	    imageLoader.DisplayImage(this, ImageLoader.UrlType.ATTACH_FILE,
+				     ImageLoader.ImageSize.XLARGE,
+				     leftImage,
+				     attachFiles[currentPage - 1].getId());
+        /* Set Center Page Image */
+	imageLoader.DisplayImage(this, ImageLoader.UrlType.ATTACH_FILE,
+				 ImageLoader.ImageSize.XLARGE,
+				 centerImage,
+				 attach_file_id);
+        /* Set Next Page Image */
+	if (attachFiles.length > currentPage + 1 && attachFiles[currentPage + 1] != null)
+	    imageLoader.DisplayImage(this, ImageLoader.UrlType.ATTACH_FILE,
+				     ImageLoader.ImageSize.XLARGE,
+				     rightImage,
+				     attachFiles[currentPage + 1].getId());
+
+	removeView(leftImage);
+	removeView(centerImage);
+	removeView(rightImage);
+	
+	replaceView(imageLayoutAt(currentPage - 1), leftImage);
+	replaceView(imageLayoutAt(currentPage), centerImage);
+	replaceView(imageLayoutAt(currentPage + 1), rightImage);
+	
+        // ImageView image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage)).getChildAt(0);
+        // imageLoader.DisplayImage(this,
+        //         ImageLoader.UrlType.ATTACH_FILE,
+        //         ImageLoader.ImageSize.XLARGE,
+        //         image,
+        //         attach_file_id);
 
         /* Set Previous Page Image */
-        if (currentPage > 0) {
-            attach_file_id = attachFiles[currentPage - 1].getId();
-            if (attachFiles[currentPage - 1] != null) {
-                image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage - 1)).getChildAt(0);
-                imageLoader.DisplayImage(this,
-                        ImageLoader.UrlType.ATTACH_FILE,
-                        ImageLoader.ImageSize.XLARGE,
-                        image,
-                        attach_file_id);
-            }
-        }
+        // if (currentPage > 0) {
+        //     attach_file_id = attachFiles[currentPage - 1].getId();
+        //     if (attachFiles[currentPage - 1] != null) {
+        //         image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage - 1)).getChildAt(0);
+        //         imageLoader.DisplayImage(this,
+        //                 ImageLoader.UrlType.ATTACH_FILE,
+        //                 ImageLoader.ImageSize.XLARGE,
+        //                 image,
+        //                 attach_file_id);
+        //     }
+        // }
 
         /* Set Next Page Image */
-        if (currentPage < attachFiles.length - 1) {
-            attach_file_id = attachFiles[currentPage + 1].getId();
-            if (attachFiles[currentPage + 1] != null) {
-                image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage + 1)).getChildAt(0);
-                imageLoader.DisplayImage(this,
-                        ImageLoader.UrlType.ATTACH_FILE,
-                        ImageLoader.ImageSize.XLARGE,
-                        image,
-                        attach_file_id);
-            }
-        }
+        // if (currentPage < attachFiles.length - 1) {
+        //     attach_file_id = attachFiles[currentPage + 1].getId();
+        //     if (attachFiles[currentPage + 1] != null) {
+        //         image = (ImageView) ((RelativeLayout) swipeView.getChildAt(currentPage + 1)).getChildAt(0);
+        //         imageLoader.DisplayImage(this,
+        //                 ImageLoader.UrlType.ATTACH_FILE,
+        //                 ImageLoader.ImageSize.XLARGE,
+        //                 image,
+        //                 attach_file_id);
+        //     }
+        // }
     }
 
-    public void onScroll(int scrollX) {}
+    public void onScroll(int scrollX) { }
 
     public void onViewScrollFinished(int currentPage) {
         if (this.currentPage != currentPage) {
