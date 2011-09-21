@@ -89,6 +89,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     public void reload() {
 	Runnable runnable = new MapRunnable(this);
 	activity.runOnUiThread(runnable);
+	setCenter(sessionUtil.getCenter());
     }
 
     public void moveToGpsCenter() {
@@ -214,7 +215,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	    double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
 
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
-	    geocodeRequest.actionReverseGeocodingByGeoPoint(getMapCenter(), sessionUtil.getCurrentCountry());
+	    geocodeRequest.actionReverseGeocodingByGeoPoint(sessionUtil.getCenter(), sessionUtil.getCurrentCountry());
 	    requestManager.request(addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
 	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
 	}

@@ -22,59 +22,64 @@ import com.matji.sandwich.widget.title.button.TitleImageButton;
  * @author mozziluv
  *
  */
-public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {    
+public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
+    private StorePostWriteButton storePostWriteButton;
+    private Store store;
     
     public StoreTitle(Context context) {
-		super(context);
-	}
+	super(context);
+    }
 
-	public StoreTitle(Context context, Store store, Identifiable identifiable) {
-	    super(context);
+    public StoreTitle(Context context, Store store, Identifiable identifiable) {
+	super(context);
         setIdentifiable(identifiable);
         setStore(store);
-	}
+    }
 	
-	public StoreTitle(Context context, AttributeSet attr) {
-	    super(context, attr);
-	}
+    public StoreTitle(Context context, AttributeSet attr) {
+	super(context, attr);
+    }
 	
-	public void setStore(Store store) {
-	    setTitle(store.getName());
-	}
+    public void setStore(Store store) {
+	this.store = store;
+	setTitle(store.getName());
+    }
 	
-	public void setIdentifiable(Identifiable identifiable) {
-	    ((LikeButton) rightButton1).setIdentifiable(identifiable);
-	}
+    public void setIdentifiable(Identifiable identifiable) {
+	((LikeButton) rightButton1).setIdentifiable(identifiable);
+    }
 
     public void setLikeable(Likeable likeable) {
         ((LikeButton) rightButton1).setLikeable(likeable);
     }
     
     @Override
-    protected TitleImageButton getLeftButton1() {
+	protected TitleImageButton getLeftButton1() {
         // TODO Auto-generated method stub
         return new HomeButton(getContext());
     }
 
     @Override
-    protected TitleImageButton getRightButton1() {
+	protected TitleImageButton getRightButton1() {
         // TODO Auto-generated method stub
         return new LikeButton(getContext());
     }
 
     @Override
-    protected TitleImageButton getRightButton2() {
+	protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
-        return new StorePostWriteButton(getContext());
+	StorePostWriteButton writeButton = new StorePostWriteButton(getContext());
+	writeButton.setData(store, null);
+        return writeButton;
     }
 
     @Override
-    public void refresh() {
+	public void refresh() {
         ((LikeButton) rightButton1).refresh();
     } 
 
     @Override
-    public void refresh(MatjiData data) {
+	public void refresh(MatjiData data) {
         if (data instanceof Store) {
             setStore((Store) data);
             refresh();
@@ -82,5 +87,5 @@ public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
     }
 
     @Override
-    public void refresh(ArrayList<MatjiData> data) {}
+	public void refresh(ArrayList<MatjiData> data) {}
 }

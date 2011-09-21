@@ -5,9 +5,11 @@ import android.widget.Toast;
 
 public class MatjiException extends Exception {
     private int msgRef;
+    private ToastPool toastPool;
 
     public MatjiException(int msgRef) {
 	setMsg(msgRef);
+	toastPool = ToastPool.getInstance();
     }
 
     protected void setMsg(int msgRef) {
@@ -19,7 +21,7 @@ public class MatjiException extends Exception {
     }
 
     public void showToastMsg(Context context) {
-	Toast toast = Toast.makeText(context, getMsg(), Toast.LENGTH_SHORT);
+	Toast toast = toastPool.getToast(context, getMsg(), Toast.LENGTH_SHORT);
 	toast.show();
     }
 
