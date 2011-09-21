@@ -1,6 +1,7 @@
 package com.matji.sandwich.http;
 
 import java.util.HashMap;
+import java.util.Collection;
 
 import android.content.Context;
 import android.view.ViewGroup;
