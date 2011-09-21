@@ -1,8 +1,12 @@
 package com.matji.sandwich.http.request;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 
+import com.matji.sandwich.data.Alarm;
 import com.matji.sandwich.data.AlarmSetting.AlarmSettingType;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.parser.AlarmParser;
 import com.matji.sandwich.http.parser.AlarmSettingParser;
 
@@ -47,5 +51,19 @@ public class AlarmHttpRequest extends HttpRequest {
         
         getHashtable.clear();
         getHashtable.put(model, bool + "");
+    }
+    
+    public void actionRead(ArrayList<MatjiData> alarms) {
+    	parser = new AlarmParser(context);
+    	httpMethod = HttpMethod.HTTP_POST;
+    	action = "read";
+    	
+    	String ids = "";
+    	for (MatjiData alarm : alarms) {
+    		ids += ((Alarm) alarm).getId() + ",";
+    	}
+    	
+    	postHashtable.clear();
+    	postHashtable.put("alarm_id", ids);
     }
 }

@@ -18,7 +18,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.NotSupportedMatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.LikeHttpRequest;
-import com.matji.sandwich.session.Session;
+import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 
 /**
  * Like, Unlike를 수행하는 리스너.
@@ -182,7 +182,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         default:
             notSupported();
         }
-        manager.request(spinnerContainer, likeRequest, HttpRequestManager.LIKE_REQUEST, this);
+        manager.request(spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.LIKE_REQUEST, this);
     }
 
     /**
@@ -199,7 +199,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         default:
             notSupported();
         }
-        manager.request(spinnerContainer, likeRequest, HttpRequestManager.UN_LIKE_REQUEST, this);
+        manager.request(spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.UN_LIKE_REQUEST, this);
     }
 
 

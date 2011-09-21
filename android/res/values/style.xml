@@ -93,6 +93,7 @@
   </style>
       
   <style name="LinkifyName" parent="DefaultWrap">
+	<item name="android:maxWidth">@dimen/default_nick_max_width_half</item>
 	<item name="android:singleLine">true</item>
 	<item name="@android:textSize">@dimen/row_post_text_size</item>
 	<item name="android:textColor">@color/matji_red</item>
@@ -968,7 +969,6 @@
   <style name="settings_Wrapper" parent="DefaultWidthFill">
     <item name="android:layout_marginTop">@dimen/settings_margin_top</item>
     <item name="android:layout_marginBottom">@dimen/settings_margin_bottom</item>
-    <item name="android:background">@drawable/txtbox</item>
   </style>
   
   <style name="settings_Row" parent="DefaultWidthFill">

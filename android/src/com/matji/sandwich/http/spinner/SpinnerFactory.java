@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 public class SpinnerFactory {
     public enum SpinnerType {
-	NORMAL, SMALL, HEIGHT_SCALE_NORMAL
+	NORMAL, SMALL, SSMALL, HEIGHT_SCALE_NORMAL,
     }
     
     public static Spinnable createSpinner(Context context, SpinnerType type, ViewGroup layout) {
@@ -18,6 +18,8 @@ public class SpinnerFactory {
 	    return new NormalSpinner(context, layout);
 	case SMALL:
 	    return new SmallSpinner(context, layout);
+	case SSMALL:
+	    return new SSmallSpinner(context, layout);
 	case HEIGHT_SCALE_NORMAL:
 	    return new HeightScaleAnimationSpinner(context, layout, new NormalSpinner(context, layout));
 	default:

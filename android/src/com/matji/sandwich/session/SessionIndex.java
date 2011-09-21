@@ -28,11 +28,9 @@ public class SessionIndex {
     public static final String WRITE_POST_RADIUS_LNG_SPAN = "WritePostTabActivity.radius_lng_span";
     public static final String WRITE_POST_RADIUS_ADDRESS = "WritePostTabActivity.radius_address";
     
-    public static final String PRIVATE_LAST_READ_MESSAGE_ID = "NewIcon.last_read_message_id";
-    public static final String PRIVATE_LAST_READ_ALARM_ID = "NewIcon.last_read_activity_id";
     public static final String PRIVATE_LAST_READ_NOTICE_ID = "NewIcon.last_read_notice_id";
-    public static final String PRIVATE_LAST_LOGIN_USER_ID = "Login.user_id";
-    public static final String PRIVATE_IS_LOGIN = "Login.is_login";
     public static final String PRIVATE_NEW_ALARM_COUNT = "NewIcon.new_alarm_count";
     public static final String PRIVATE_NEW_NOTICE_COUNT = "NewIcon.new_notice_count";
+    public static final String PRIVATE_SAVED_USER_ID = "SessionPrivateUtil.user_id";
+    public static final String PRIVATE_IS_CHECKED_SAVE_USER_ID = "SessionPrivateUtil.is_checked_save_user_id";
 }

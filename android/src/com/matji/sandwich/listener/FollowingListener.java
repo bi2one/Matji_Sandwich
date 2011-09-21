@@ -15,6 +15,7 @@ import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
+import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.session.Session;
 
 /**
@@ -108,7 +109,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      */
     private void followRequest() {
         followingRequest.actionNew(user.getId());
-        manager.request(spinnerContainer, followingRequest, HttpRequestManager.FOLLOW_REQUEST, this);
+        manager.request(spinnerContainer, SpinnerType.SMALL, followingRequest, HttpRequestManager.FOLLOW_REQUEST, this);
     }
 
     /**
@@ -116,7 +117,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      */
     private void unfollowRequest() {
         followingRequest.actionDelete(user.getId());
-        manager.request(spinnerContainer, followingRequest, HttpRequestManager.UN_FOLLOW_REQUEST, this);
+        manager.request(spinnerContainer, SpinnerType.SMALL, followingRequest, HttpRequestManager.UN_FOLLOW_REQUEST, this);
     }
 
 

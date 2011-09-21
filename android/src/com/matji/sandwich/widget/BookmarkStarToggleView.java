@@ -23,6 +23,7 @@ import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.BookmarkHttpRequest;
+import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.session.Session;
 
 public class BookmarkStarToggleView extends LinearLayout implements OnClickListener,
@@ -190,12 +191,12 @@ Requestable {
 
     private void requestBookmark(Store store) {
         bookmarkRequest.actionBookmark(store.getId());
-        requestManager.request(spinnerContainer, bookmarkRequest, HttpRequestManager.BOOKMAR_REQUEST, this);
+        requestManager.request(spinnerContainer, SpinnerType.SMALL, bookmarkRequest, HttpRequestManager.BOOKMAR_REQUEST, this);
     }
 
     private void requestUnBookmark(Store store) {
         bookmarkRequest.actionUnBookmark(store.getId());
-        requestManager.request(spinnerContainer, bookmarkRequest, HttpRequestManager.UN_BOOKMARK_REQUEST, this);
+        requestManager.request(spinnerContainer, SpinnerType.SMALL, bookmarkRequest, HttpRequestManager.UN_BOOKMARK_REQUEST, this);
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {

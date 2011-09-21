@@ -1,24 +1,24 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.http.parser.MatjiParser;
-import com.matji.sandwich.listener.FileUploadProgressListener;
-import com.matji.sandwich.session.Session;
-import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.HttpConnectMatjiException;
-import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.content.Context;
 import android.util.Log;
+
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.exception.HttpConnectMatjiException;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.parser.MatjiParser;
+import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
+import com.matji.sandwich.listener.FileUploadProgressListener;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
 
 enum HttpMethod { HTTP_POST, HTTP_GET, HTTP_GET_VIA_WEB_BROWSER }
 

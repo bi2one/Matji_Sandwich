@@ -473,7 +473,7 @@
   <string name="settings_service_version">Ver.%1$s Build %2$d</string>
   
   <string name="setting_alarm_permit">permit</string>
-  <string name="setting_alarm_view">view</string>
+  <string name="setting_alarm_spinner">view</string>
   
   <string name="edit_website">블로그/홈페이지</string>
   <string name="edit_password">비밀번호 변경</string>

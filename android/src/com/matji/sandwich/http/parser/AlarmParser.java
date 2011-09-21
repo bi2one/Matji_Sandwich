@@ -34,7 +34,8 @@ public class AlarmParser extends MatjiDataParser {
 		
 		PostParser postParser = new PostParser(context);
 		alarm.setPost(postParser.getMatjiData(getObject(object, "post")));
-
+		alarm.setAlarmRead(getInt(object, "alarm_read") != 0);
+		
 		Log.d("Parser", "AlarmParser:: called getMatjiData");
 		
 		return alarm;

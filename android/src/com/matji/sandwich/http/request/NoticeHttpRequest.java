@@ -2,8 +2,10 @@ package com.matji.sandwich.http.request;
 
 import android.content.Context;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.http.parser.BadgeParser;
 import com.matji.sandwich.http.parser.NoticeParser;
+import com.matji.sandwich.util.MatjiConstants;
 
 public class NoticeHttpRequest extends HttpRequest {
 	public NoticeHttpRequest(Context context) {
@@ -28,15 +30,16 @@ public class NoticeHttpRequest extends HttpRequest {
 		getHashtable.clear();
 		getHashtable.put("page", page+"");
 		getHashtable.put("limit", limit+"");
+		getHashtable.put("target", MatjiConstants.string(R.string.android));
+		getHashtable.put("language", MatjiConstants.lang());
 	}
 	
-	public void actionBadge(int last_notice_id, int last_alarm_id) {
+	public void actionBadge(int last_notice_id) {
 	    httpMethod = HttpMethod.HTTP_GET;
 	    action = "badge";
         parser = new BadgeParser(context);
 
 	    getHashtable.clear();
         getHashtable.put("last_notice_id", last_notice_id+"");
-        getHashtable.put("last_alarm_id", last_alarm_id+"");	    
 	}
 }

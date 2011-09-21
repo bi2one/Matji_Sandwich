@@ -16,6 +16,7 @@
     <dimen name="default_round_inset2">0.17dp</dimen>
     <dimen name="default_edit_text_size">16dp</dimen>
     <dimen name="default_nick_max_width">133.33dp</dimen>
+    <dimen name="default_nick_max_width_half">66.67dp</dimen>
     
 	<!-- Title Container -->
 	<dimen name="title_container_txt_size">17.33dp</dimen>
@@ -214,9 +215,10 @@
     <!-- cell_edit_profile.xml -->
     <dimen name="cell_edit_profile_txt_size">11.33dp</dimen>
     
-    <!-- row_food.xml -->
-    <dimen name="row_food_name_size">16dp</dimen>
-    <dimen name="row_food_like_size">12dp</dimen>
+    <!-- row_store_food.xml -->
+    <dimen name="row_store_food_name_size">16dp</dimen>
+    <dimen name="row_store_food_like_size">12dp</dimen>
+    <dimen name="row_store_food_min_height">46.67dp</dimen>
     
     <!-- activity_store_food.xml -->
     <dimen name="store_food_caution_size">11.33dp</dimen>

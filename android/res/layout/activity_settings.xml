@@ -85,9 +85,10 @@
 								android:gravity="center_vertical"
 								android:layout_marginRight="@dimen/default_distance"
 								android:layout_width="wrap_content"
+								android:layout_alignParentLeft="true"
 								android:layout_toLeftOf="@+id/settings_account_logout_btn"
 								android:layout_alignTop="@id/settings_account_logout_btn"
-								android:layout_alignBottom="@id/settings_account_logout_btn"/>
+								android:layout_alignBottom="@id/settings_account_logout_btn" />
 							<Button
 								android:id="@id/settings_account_logout_btn"
 								android:shadowRadius="1"
@@ -249,6 +250,10 @@
 							android:textColor="@color/matji_gray"
 							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/settings_alarm_new_comment_alarm_check" />
+						<LinearLayout
+							android:id="@+id/settings_alarm_new_comment_alarm_spinner"
+							style="@style/DefaultWrap"
+							android:layout_toLeftOf="@id/settings_alarm_new_comment_alarm_check" />
 						<CheckBox
 							android:id="@id/settings_alarm_new_comment_alarm_check"
 							style="@style/DefaultWrap"
@@ -269,6 +274,10 @@
 							android:textColor="@color/matji_gray"
 							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/settings_alarm_new_like_alarm_check" />
+						<LinearLayout
+							android:id="@+id/settings_alarm_new_like_alarm_spinner"
+							style="@style/DefaultWrap"
+							android:layout_toLeftOf="@id/settings_alarm_new_like_alarm_check" />
 						<CheckBox
 							android:id="@id/settings_alarm_new_like_alarm_check"
 							style="@style/DefaultWrap"
@@ -289,6 +298,10 @@
 							android:textColor="@color/matji_gray"
 							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/settings_alarm_new_follow_alarm_check" />
+						<LinearLayout
+							android:id="@+id/settings_alarm_new_follow_alarm_spinner"
+							style="@style/DefaultWrap"
+							android:layout_toLeftOf="@id/settings_alarm_new_follow_alarm_check" />
 						<CheckBox
 							android:id="@id/settings_alarm_new_follow_alarm_check"
 							style="@style/DefaultWrap"
@@ -309,6 +322,10 @@
 							android:textColor="@color/matji_gray"
 							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/settings_alarm_new_message_alarm_check" />
+						<LinearLayout
+							android:id="@+id/settings_alarm_new_message_alarm_spinner"
+							style="@style/DefaultWrap"
+							android:layout_toLeftOf="@id/settings_alarm_new_message_alarm_check" />
 						<CheckBox
 							android:id="@id/settings_alarm_new_message_alarm_check"
 							style="@style/DefaultWrap"

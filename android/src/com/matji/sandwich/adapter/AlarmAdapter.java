@@ -33,7 +33,6 @@ public class AlarmAdapter extends MBaseAdapter {
     }
 
     private Toast toast;
-    private int lastReadAlarmId;
     private Drawable iconNew;
 
     public AlarmAdapter(Context context) {
@@ -42,10 +41,6 @@ public class AlarmAdapter extends MBaseAdapter {
         iconNew.setBounds(0, 0, iconNew.getIntrinsicWidth(), iconNew.getIntrinsicHeight());
         toast = new Toast(context);
         toast = Toast.makeText(context, R.string.alarm_deleted_post, Toast.LENGTH_SHORT);
-    }
-
-    public void setLastReadAlarmId(int lastReadAlarmId) {
-        this.lastReadAlarmId = lastReadAlarmId;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -138,7 +133,7 @@ public class AlarmAdapter extends MBaseAdapter {
                 TimeUtil.parseString(
                         "yyyy-MM-dd hh:mm", 
                         TimeUtil.getDateFromCreatedAt(alarm.getCreatedAt())));
-        if (lastReadAlarmId < alarm.getId()) {
+        if (!alarm.isAlarmRead()) {
             alarmElement.createdAt.setCompoundDrawables(null, null, iconNew, null);
         } else {
             alarmElement.createdAt.setCompoundDrawables(null, null, null, null);

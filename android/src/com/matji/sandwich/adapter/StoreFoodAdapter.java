@@ -24,13 +24,24 @@ public class StoreFoodAdapter extends MBaseAdapter {
 
         if (convertView == null) {
             foodElement = new FoodElement();
-            convertView = getLayoutInflater().inflate(R.layout.row_food, null);
-            foodElement.name = (TextView) convertView.findViewById(R.id.row_food_name);
-            foodElement.count = (TextView) convertView.findViewById(R.id.row_food_like_count);
-            foodElement.line = convertView.findViewById(R.id.row_food_horizontal_line);
+            convertView = getLayoutInflater().inflate(R.layout.row_store_food, null);
+            foodElement.wrapper = convertView.findViewById(R.id.row_store_food_wrapper);
+            foodElement.name = (TextView) convertView.findViewById(R.id.row_store_food_name);
+            foodElement.count = (TextView) convertView.findViewById(R.id.row_store_food_like_count);
+            foodElement.line = convertView.findViewById(R.id.row_store_food_horizontal_line);
             convertView.setTag(foodElement);
         } else {
             foodElement = (FoodElement) convertView.getTag();
+        }
+        
+        if (data.size() == 1) {
+            foodElement.wrapper.setBackgroundResource(R.drawable.txtbox_selector);
+        } else if (position == 0) {
+            foodElement.wrapper.setBackgroundResource(R.drawable.txtbox_t_selector);
+        } else if (position == data.size() - 1) {
+            foodElement.wrapper.setBackgroundResource(R.drawable.txtbox_u_selector);
+        } else {
+            foodElement.wrapper.setBackgroundResource(R.drawable.txtbox_c_selector);
         }
 
         String name = storeFood.getFood().getName();
@@ -52,6 +63,7 @@ public class StoreFoodAdapter extends MBaseAdapter {
     private class FoodElement {
         TextView name;
         TextView count;
+        View wrapper;
         View line;
     }
 }
