@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.session.Session;
@@ -16,6 +17,8 @@ public class PostTabActivity extends BaseTabActivity {
     private SessionTabHostUtil sessionUtil;
     private int lastTab = 0;
     private ActivityStartable lastStartedChild;
+    private boolean lastLoginState;
+    private boolean isNotFirst;
 
     public int setMainViewId() {
         return R.id.activity_post_tab;
@@ -28,6 +31,7 @@ public class PostTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+	isNotFirst = false;
     }
 
     @Override
@@ -41,48 +45,63 @@ public class PostTabActivity extends BaseTabActivity {
         sessionUtil = new SessionTabHostUtil(context);
     }
 
-    @Override
-    protected void onFlowResume() {
-        super.onFlowResume();
+    protected void onResume() {
+	super.onResume();
+	if (isNotFirst && lastLoginState != session.isLogin()) {
+	    reload();
+	}
+
+	lastLoginState = session.isLogin();
+	isNotFirst = true;
     }
 
-    @Override
-    protected void onNotFlowResume() {
-        super.onNotFlowResume();
-
-        tabHost.setCurrentTab(0);
-        tabHost.clearAllTabs();
-
-        if (session.isLogin()) {
-            tabHost.addLeftTab("tab1",
-                    R.string.post_tab_friend,
-                    new Intent(this, PostListActivity.class));
-            tabHost.addCenterTab("tab2",
-                    R.string.post_tab_near,
-                    new Intent(this, PostNearListActivity.class));
-        } else {
-            tabHost.addLeftTab("tab2",
-                    R.string.post_tab_near,
-                    new Intent(this, PostNearListActivity.class));
-        }
-
-        tabHost.addRightTab("tab3",
-                R.string.post_tab_all,
-                new Intent(this, PostListActivity.class));
-
-        if (!session.isLogin() && lastTab > getTabWidget().getTabCount()-1) {
-            lastTab = getTabWidget().getTabCount()-1;
-        }
-        tabHost.setCurrentTab(lastTab);
-
+    protected void onAfterResume() {
         int baseIndex = sessionUtil.getSubTabIndex();
         sessionUtil.flush();
-        if (!session.isLogin()) {
+        if (baseIndex >= 0 && !session.isLogin()) {
             baseIndex = 0;
         }
         if (baseIndex >= 0)  {
             tabHost.setCurrentTab(baseIndex);
         }
+    }
+
+    @Override
+    protected void onFlowResume() {
+        super.onFlowResume();
+    }
+
+    private void reload() {
+        tabHost.setCurrentTab(0);
+        tabHost.clearAllTabs();
+
+        if (session.isLogin()) {
+            tabHost.addLeftTab("tab1",
+			       R.string.post_tab_friend,
+			       new Intent(this, PostListActivity.class));
+            tabHost.addCenterTab("tab2",
+				 R.string.post_tab_near,
+				 new Intent(this, PostNearListActivity.class));
+        } else {
+            tabHost.addLeftTab("tab2",
+			       R.string.post_tab_near,
+			       new Intent(this, PostNearListActivity.class));
+        }
+
+        tabHost.addRightTab("tab3",
+			    R.string.post_tab_all,
+			    new Intent(this, PostListActivity.class));
+
+        if (!session.isLogin() && lastTab > getTabWidget().getTabCount()-1) {
+            lastTab = getTabWidget().getTabCount()-1;
+        }
+        tabHost.setCurrentTab(lastTab);
+    }
+
+    @Override
+    protected void onNotFlowResume() {
+        super.onNotFlowResume();
+	reload();
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.map.MainMatjiMapView;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.widget.StoreMapNearListView;
 import com.matji.sandwich.overlay.OverlayClickListener;
@@ -35,8 +36,11 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     private View flipButton;
     private boolean currentViewIsMap;
     // private SessionRecentLocationUtil sessionLocationUtil;
+    private Session session;
     private SessionMapUtil sessionMapUtil;
     private HttpRequestManager requestManager;
+    private GeoPoint lastNeBound;
+    private GeoPoint lastSwBound;
     // private GeoPoint lastCenter;
 
     private Drawable flipMapViewImage;
@@ -53,6 +57,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         context = getApplicationContext();
         requestManager = HttpRequestManager.getInstance(context);
         // sessionLocationUtil = new SessionRecentLocationUtil(context);
+	session = Session.getInstance(this);
         sessionMapUtil = new SessionMapUtil(context);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
 	addressWrapper = (RelativeLayout)findViewById(R.id.map_title_bar_address_wrapper);
@@ -78,12 +83,25 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         // sessionMapUtil.setCenter(lastCenter);
         // mapView.setCenterNotAnimate(lastCenter);
         // mapView.requestMapCenterChanged(lastCenter);
+	if (lastNeBound != null && lastSwBound != null) {
+	    sessionMapUtil.setBound(lastNeBound, lastSwBound);
+	    lastNeBound = null;
+	    lastSwBound = null;
+	}
+	
 	mapView.reload();
         mapView.startMapCenterThread();
     }
 
+    protected void onResume() {
+	super.onResume();
+    }
+
     protected void onPause() {
         super.onPause();
+	lastNeBound = sessionMapUtil.getNEBound();
+	lastSwBound = sessionMapUtil.getSWBound();
+	
         // lastCenter = mapView.getMapCenter();
         // mapView.stopMapCenterThread();
 
@@ -113,9 +131,13 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     }
 
     public void onMoveToNearPostClicked(View v) {
+	sessionMapUtil.setCenter(mapView.getMapCenter());
         Intent intent = new Intent(context, MainTabActivity.class);
         intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
-        intent.putExtra(MainTabActivity.IF_SUB_INDEX, 1);
+	
+	int subIndex = (session.isLogin())? 1 : 0;
+	Log.d("=====", "subindex: " + subIndex);
+        intent.putExtra(MainTabActivity.IF_SUB_INDEX, subIndex);
         startActivity(intent);
     }
 

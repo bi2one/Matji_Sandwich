@@ -2,8 +2,11 @@ package com.matji.sandwich.widget.title.button;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.LoginActivity;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.WritePostStoreMatjiDialog;
 
 /**
@@ -14,6 +17,7 @@ import com.matji.sandwich.widget.dialog.WritePostStoreMatjiDialog;
  */
 public class StorePostWriteButton extends TitleImageButton {
     Dialog writeDialog;
+    Session session;
     
     public StorePostWriteButton(Context context) {
 	super(context);
@@ -27,13 +31,19 @@ public class StorePostWriteButton extends TitleImageButton {
 	setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_memowrite));
 	writeDialog = new WritePostStoreMatjiDialog(getContext());
 	setFocusable(false);
+	session = Session.getInstance(context);
     }
 	
     /**
      * @see com.matji.sandwich.widget.title.button.TitleItem#onTitleItemClicked()
      */
     public void onTitleItemClicked() {
-	writeDialog.show();
+	if (session.isLogin()) {
+	    writeDialog.show();
+	} else {
+	    Intent intent = new Intent(context, LoginActivity.class);
+	    context.startActivity(intent);
+	}
 	// Log.d("=====", "MapWriteButtonClicked");
     }
 }

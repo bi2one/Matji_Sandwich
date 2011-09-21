@@ -107,9 +107,12 @@ public class HttpRequestManager {
 	// queueManager.cancelTask();
     }
 
-    // public void cancelAllTask() {
-    // 	Collection<HttpRequestManager> managerCollection = managerPool.values();
-    // }
+    public void cancelAllTask() {
+    	Collection<HttpRequestManager> managerCollection = managerPool.values();
+	for (HttpRequestManager manager : managerCollection) {
+	    manager.cancelTask();
+	}
+    }
 
     /**
      * Manager에 들어오는 request요청들을 전부 수행하지 않도록 꺼둔다
