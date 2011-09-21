@@ -1,5 +1,7 @@
 package com.matji.sandwich.util;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -45,4 +47,10 @@ public class MatjiConstants {
     public static final Drawable drawable(int id) {
 	return mResources.getDrawable(id);
     }
+    
+    public static final String lang() {
+    	Locale locale = mResources.getConfiguration().locale;
+    	return locale.getLanguage();
+    }
+
 }

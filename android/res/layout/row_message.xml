@@ -37,6 +37,7 @@
 		<TextView
 			android:id="@+id/row_message_nick"
 			style="@style/DefaultWrap"
+			android:maxWidth="@dimen/default_nick_max_width"
 			android:singleLine="true"
 			android:textSize="@dimen/row_message_nick_size"
 			android:textColor="@color/matji_red"

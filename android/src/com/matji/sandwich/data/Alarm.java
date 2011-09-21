@@ -14,6 +14,7 @@ public class Alarm extends MatjiData{
 	private String updated_at;
 	private int foreign_key;
 	private Post post;
+	private boolean alarm_read;
 	
 	public Alarm() {}
 	
@@ -46,6 +47,7 @@ public class Alarm extends MatjiData{
 		dest.writeString(updated_at);
 		dest.writeInt(foreign_key);
         dest.writeValue(post);
+        dest.writeInt(alarm_read ? 1 : 0);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -59,6 +61,7 @@ public class Alarm extends MatjiData{
 		updated_at = in.readString();
 		foreign_key = in.readInt();
 		post = Post.class.cast(in.readValue(Post.class.getClassLoader()));
+		alarm_read = in.readInt() != 0;
 	}
 	
 	public void setId(int id) {
@@ -125,4 +128,12 @@ public class Alarm extends MatjiData{
     public Post getPost() {
         return post;
     }
+
+	public void setAlarmRead(boolean alarm_read) {
+		this.alarm_read = alarm_read;
+	}
+
+	public boolean isAlarmRead() {
+		return alarm_read;
+	}
 }

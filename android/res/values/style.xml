@@ -93,6 +93,8 @@
   </style>
       
   <style name="LinkifyName" parent="DefaultWrap">
+  
+	<item name="android:maxWidth">@dimen/default_nick_max_width</item>
 	<item name="android:singleLine">true</item>
 	<item name="@android:textSize">@dimen/row_post_text_size</item>
 	<item name="android:textColor">@color/matji_red</item>
