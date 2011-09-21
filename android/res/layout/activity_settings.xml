@@ -33,6 +33,7 @@
 						<TextView
 							android:id="@+id/settings_account_login"
 							style="@style/settings_Row"
+							android:background="@drawable/txtbox_t_selector"
 							android:text="@string/settings_account_login"
 							android:textSize="@dimen/settings_content_size"
 							android:textColor="@color/matji_gray"
@@ -44,6 +45,7 @@
 						<TextView
 							android:id="@+id/settings_account_register"
 							style="@style/settings_Row"
+                            android:background="@drawable/txtbox_c_selector"
 							android:text="@string/settings_account_register"
 							android:textSize="@dimen/settings_content_size"
 							android:textColor="@color/matji_gray"
@@ -56,6 +58,7 @@
 						<TextView
 							android:id="@+id/settings_account_forget"
 							style="@style/settings_Row"
+                            android:background="@drawable/txtbox_u_selector"
 							android:text="@string/settings_account_forget"
 							android:textSize="@dimen/settings_content_size"
 							android:textColor="@color/matji_gray"
@@ -74,6 +77,7 @@
 							android:id="@+id/settings_account_logout"
 							android:gravity="center_vertical"
 							style="@style/settings_Row"
+                            android:background="@drawable/txtbox_t_selector"
 							android:layout_width="fill_parent"
 							android:layout_height="@dimen/settings_row_height">
 							<TextView
@@ -108,6 +112,7 @@
 						<TextView
 							android:id="@+id/settings_account_link_twitter"
 							style="@style/settings_Row"
+                            android:background="@drawable/txtbox_c_selector"
 							android:text="@string/settings_account_link_twitter"
 							android:textSize="@dimen/settings_content_size"
 							android:textColor="@color/matji_gray"
@@ -121,6 +126,7 @@
 						<TextView
 							android:id="@+id/settings_account_link_facebook"
 							style="@style/settings_Row"
+                            android:background="@drawable/txtbox_c_selector"
 							android:text="@string/settings_account_link_facebook"
 							android:textSize="@dimen/settings_content_size"
 							android:textColor="@color/matji_gray"
@@ -134,6 +140,7 @@
 						<TextView
 							android:id="@+id/settings_account_edit_profile"
 							style="@style/settings_Row"
+                            android:background="@drawable/txtbox_c_selector"
 							android:text="@string/settings_account_edit_profile"
 							android:textSize="@dimen/settings_content_size"
 							android:textColor="@color/matji_gray"
@@ -145,6 +152,7 @@
 						<TextView
 							android:id="@+id/settings_account_find_friends"
 							style="@style/settings_Row"
+                            android:background="@drawable/txtbox_c_selector"
 							android:text="@string/settings_account_find_friends"
 							android:textSize="@dimen/settings_content_size"
 							android:textColor="@color/matji_gray"
@@ -242,7 +250,8 @@
 					<!-- New Comment Alarm -->
 					<RelativeLayout
 						android:id="@+id/settings_alarm_new_comment_alarm"
-						style="@style/settings_Row">
+						style="@style/settings_Row"                           
+                        android:background="@drawable/txtbox_t_selector">
 						<TextView
 							style="@style/DefaultWrap"
 							android:text="@string/settings_alarm_new_comment"
@@ -266,7 +275,8 @@
 					<!-- New Like Alarm -->
 					<RelativeLayout
 						android:id="@+id/settings_alarm_new_like_alarm"
-						style="@style/settings_Row">
+						style="@style/settings_Row"      
+                        android:background="@drawable/txtbox_c_selector">
 						<TextView
 							style="@style/DefaultWrap"
 							android:text="@string/settings_alarm_new_like"
@@ -290,7 +300,8 @@
 					<!-- New Follow Alarm -->
 					<RelativeLayout
 						android:id="@+id/settings_alarm_new_follow_alarm"
-						style="@style/settings_Row">
+						style="@style/settings_Row"      
+                        android:background="@drawable/txtbox_c_selector">
 						<TextView
 							style="@style/DefaultWrap"
 							android:text="@string/settings_alarm_new_follow"
@@ -314,7 +325,8 @@
 					<!-- New Message Alarm -->
 					<RelativeLayout
 						android:id="@+id/settings_alarm_new_message_alarm"
-						style="@style/settings_Row">
+						style="@style/settings_Row"
+                        android:background="@drawable/txtbox_u_selector">
 						<TextView
 							style="@style/DefaultWrap"
 							android:text="@string/settings_alarm_new_message"
@@ -348,7 +360,8 @@
 					<!-- Notice -->
 					<RelativeLayout
 						android:id="@+id/settings_service_notice_wrapper"
-						style="@style/settings_Row">
+						style="@style/settings_Row"
+                        android:background="@drawable/txtbox_t_selector">
 						<TextView
 							android:id="@+id/settings_service_notice"
 							style="@style/DefaultWrap"
@@ -367,6 +380,7 @@
 					<TextView
 						android:id="@+id/settings_service_guide"
 						style="@style/settings_Row"
+                        android:background="@drawable/txtbox_c_selector"						
 						android:text="@string/settings_service_guide"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_gray"
@@ -377,7 +391,8 @@
 					<!-- Report -->
 					<TextView
 						android:id="@+id/settings_service_report"
-						style="@style/settings_Row"
+						style="@style/settings_Row"					
+                        android:background="@drawable/txtbox_c_selector"
 						android:text="@string/settings_service_report"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_gray"
@@ -389,6 +404,7 @@
 					<TextView
 						android:id="@+id/settings_service_version"
 						style="@style/settings_Row"
+                        android:background="@drawable/txtbox_c_selector"
 						android:text="@string/settings_service_version"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_gray" />
