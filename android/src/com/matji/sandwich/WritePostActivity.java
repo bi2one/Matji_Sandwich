@@ -39,6 +39,8 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 							       GetPictureLayout.OnClickListener,
 							       Requestable,
 							       MatjiAlertDialog.OnConfirmHook {
+    public static final String INTENT_STORE = "WritePostActivity.store";
+    public static final String INTENT_TAGS = "WritePostActivity.tags";
     private static final int TAG_WRITE_POST = 0;
     private static final int INTENT_SELECT_STORE = 0;
     private static final int INTENT_SELECT_TAG = 1;
@@ -67,6 +69,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
     private MatjiAlertDialog postEmptyDialog;
     private MatjiAlertDialog successDialog;
     private MatjiAlertDialog albumFullDialog;
+    private Intent inputIntent;
 
     public int setMainViewId() {
 	return R.id.activity_write_post;
@@ -77,6 +80,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	setContentView(R.layout.activity_write_post);
 	
 	context = getApplicationContext();
+	
         photoUtil = new PhotoUtil(this);
 	requestManager = HttpRequestManager.getInstance(context);
 	sessionMapUtil = new SessionMapUtil(context);
@@ -97,6 +101,13 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	albumFullDialog = new MatjiAlertDialog(this, R.string.write_post_album_full);
 	successDialog.setOnConfirmHook(this);
 	postEmptyDialog.setOnConfirmHook(this);
+
+	inputIntent = getIntent();
+	store = (Store)inputIntent.getParcelableExtra(INTENT_STORE);
+	tags = inputIntent.getStringExtra(INTENT_TAGS);
+
+	checkStore(store);
+	checkTags(tags);
     }
 
     protected void onResume() {
@@ -189,19 +200,11 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	switch(requestCode) {
 	case INTENT_SELECT_STORE:
 	    store = (Store)data.getParcelableExtra(SelectStoreActivity.DATA_STORE);
-	    if (store != null) {
-		postText.checkButton(PostEditText.ButtonIndex.STORE);
-	    } else {
-		postText.unCheckButton(PostEditText.ButtonIndex.STORE);
-	    }
+	    checkStore(store);
 	    break;
 	case INTENT_SELECT_TAG:
 	    tags = data.getStringExtra(SelectTagActivity.DATA_TAGS);
-	    if (tags != null && !tags.trim().equals("")) {
-		postText.checkButton(PostEditText.ButtonIndex.TAG);
-	    } else {
-		postText.unCheckButton(PostEditText.ButtonIndex.TAG);
-	    }
+	    checkTags(tags);
 	    break;
 	case INTENT_CAMERA:
 	    albumView.pushImage(photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_CAMERA, data));
@@ -209,6 +212,22 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	case INTENT_ALBUM:
 	    albumView.pushImage(photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_ALBUM, data));
 	    break;
+	}
+    }
+
+    private void checkStore(Store store) {
+	if (store != null) {
+	    postText.checkButton(PostEditText.ButtonIndex.STORE);
+	} else {
+	    postText.unCheckButton(PostEditText.ButtonIndex.STORE);
+	}
+    }
+
+    private void checkTags(String tags) {
+	if (tags != null && !tags.trim().equals("")) {
+	    postText.checkButton(PostEditText.ButtonIndex.TAG);
+	} else {
+	    postText.unCheckButton(PostEditText.ButtonIndex.TAG);
 	}
     }
 

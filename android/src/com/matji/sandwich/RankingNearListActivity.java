@@ -49,7 +49,7 @@ ActivityStartable {
     private TextView addressView;
     private GeocodeHttpRequest geocodeRequest;
     private Location prevLocation;
-    private boolean isFirst;
+    private boolean isFirst = true;
 
     public int setMainViewId() {
         return R.id.activity_ranking_near_list;
@@ -70,7 +70,6 @@ ActivityStartable {
         addressWrapper = (RelativeLayout)findViewById(R.id.location_title_bar_address_wrapper);
         listView = (RankingListView) findViewById(R.id.ranking_near_list_view);
         listView.setActivity(this);
-        isFirst = true;
         setCenter(sessionUtil.getCenter());
     }
 
@@ -92,9 +91,9 @@ ActivityStartable {
 
     protected void onNotFlowResume() {
         if (!isFirst) {
-            isFirst = false;
-            listView.requestReload();
+	    setCenter(sessionUtil.getCenter());
         }
+	isFirst = false;
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
@@ -129,7 +128,9 @@ ActivityStartable {
     }
 
     public void onCurrentPositionClicked(View v) {
-        gpsManager.start(GPS_START_TAG);
+	if (!gpsManager.isRunning()) {
+	    gpsManager.start(GPS_START_TAG);
+	}
     }
 
     public void onChangeLocationClicked(View v) {

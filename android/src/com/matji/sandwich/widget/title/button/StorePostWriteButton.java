@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.LoginActivity;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.WritePostStoreMatjiDialog;
 
@@ -16,7 +17,7 @@ import com.matji.sandwich.widget.dialog.WritePostStoreMatjiDialog;
  *
  */
 public class StorePostWriteButton extends TitleImageButton {
-    Dialog writeDialog;
+    WritePostStoreMatjiDialog writeDialog;
     Session session;
     
     public StorePostWriteButton(Context context) {
@@ -32,6 +33,10 @@ public class StorePostWriteButton extends TitleImageButton {
 	writeDialog = new WritePostStoreMatjiDialog(getContext());
 	setFocusable(false);
 	session = Session.getInstance(context);
+    }
+
+    public void setData(Store store, String tags) {
+	writeDialog.setPostData(store, tags);
     }
 	
     /**
