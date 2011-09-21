@@ -83,11 +83,9 @@ public class GotoPostMainAction implements OnClickListener {
         case POSTS:
             intent.putExtra(PostMainActivity.POSTS, posts);
             intent.putExtra(PostMainActivity.POSITION, position);
-            if (((Activity) context).getParent() != null) {
-                if (((Activity) context).getParent().getParent() instanceof BaseTabActivity) {
+            if (((Activity) context).getParent() != null && ((Activity) context).getParent().getParent() instanceof BaseTabActivity) {
                     BaseTabActivity parent = (BaseTabActivity) ((Activity) context).getParent();
                     parent.tabStartActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY, (ActivityStartable) context);
-                }
             } else {
                 ((Activity) context).startActivityForResult(intent, BaseActivity.POST_MAIN_ACTIVITY);
             }

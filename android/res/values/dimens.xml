@@ -15,6 +15,7 @@
 	<dimen name="default_round_pixel2">8dp</dimen>
     <dimen name="default_round_inset2">0.17dp</dimen>
     <dimen name="default_edit_text_size">16dp</dimen>
+    <dimen name="default_nick_max_width">133.33dp</dimen>
     
 	<!-- Title Container -->
 	<dimen name="title_container_txt_size">17.33dp</dimen>
