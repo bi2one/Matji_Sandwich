@@ -10,6 +10,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.UserProfileTabActivity;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.util.MatjiConstants;
 
 /**
  * UI 상의 유저 인트로 셀.
@@ -43,7 +44,12 @@ public class UserIntroCell extends Cell {
 
     public void setUser(User user) {
         this.user = user;
-        ((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(user.getIntro());
+        
+        String intro = user.getIntro();
+        if (intro.equals("")) {
+            intro = MatjiConstants.string(R.string.default_string_not_exist_intro);
+        }
+        ((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(intro);
     }
 
     /**

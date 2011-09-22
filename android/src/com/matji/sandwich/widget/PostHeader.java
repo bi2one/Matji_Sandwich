@@ -18,6 +18,7 @@ import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.listener.GotoImageSliderAction;
 import com.matji.sandwich.listener.GotoStoreMainAction;
 import com.matji.sandwich.listener.GotoUserMainAction;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 
 public class PostHeader extends ViewContainer {
@@ -108,10 +109,12 @@ public class PostHeader extends ViewContainer {
 
 
         if (store != null) {
+            holder.nickText.setMaxWidth(MatjiConstants.dimenInt(R.dimen.default_nick_max_width_half));
             holder.atText.setVisibility(View.VISIBLE);
             holder.storeNameText.setText(" "+store.getName());
         }
-        else { 
+        else {
+            holder.nickText.setMaxWidth(9999);
             holder.atText.setVisibility(View.GONE);
             holder.storeNameText.setText("");
         }

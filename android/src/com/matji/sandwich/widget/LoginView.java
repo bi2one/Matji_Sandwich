@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,16 +9,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.matji.sandwich.Loginable;
 import com.matji.sandwich.R;
+import com.matji.sandwich.RegisterActivity;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.session.SessionPrivateUtil;
 import com.matji.sandwich.session.Session.LoginAsyncTask;
+import com.matji.sandwich.session.SessionPrivateUtil;
 
 public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener {
 
@@ -25,6 +27,8 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 
     private EditText idField;
     private EditText pwdField;
+    
+    private View register;
 
     private CheckBox saveidCheckBox;
     private View loginTwitter;
@@ -50,6 +54,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         idField = (EditText) findViewById(R.id.login_username);
         pwdField = (EditText) findViewById(R.id.login_password);
         saveidCheckBox = (CheckBox) findViewById(R.id.login_save_id);
+        register = findViewById(R.id.login_register);
         loginTwitter = findViewById(R.id.login_twitter);
         loginFacebook = findViewById(R.id.login_facebook);
 
@@ -57,6 +62,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         idField.setText(privateUtil.getSavedUserId());
         saveidCheckBox.setChecked(privateUtil.isCheckedSaveId());        
         saveidCheckBox.setOnCheckedChangeListener(this);
+        register.setOnClickListener(this);
         loginTwitter.setOnClickListener(this);
         loginFacebook.setOnClickListener(this);
     }
@@ -91,13 +97,20 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         //        request.authorizeViaExternalService(this, Service.FACEBOOK);        
     }
 
+    public void registerClicked(View v) {
+        Intent intent = new Intent(getContext(), RegisterActivity.class);
+        getContext().startActivity(intent);        
+    }
+    
     @Override
     public void onClick(View v) {
-        if (v.getId() == loginTwitter.getId()) {
+        if (v.getId() == register.getId()) {
+            registerClicked(v);
+        } else if (v.getId() == loginTwitter.getId()) {
             loginViaTiwtter(v);
         } else if (v.getId() == loginFacebook.getId()) {
             loginViaFacebook(v);
-        }
+        } 
     }
 
     @Override

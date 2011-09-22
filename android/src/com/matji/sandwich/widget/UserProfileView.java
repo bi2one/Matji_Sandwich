@@ -21,6 +21,7 @@ import com.matji.sandwich.StoreDiscoverListActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.cell.UserCell;
 
 public class UserProfileView extends RelativeLayout implements OnClickListener, Refreshable {
@@ -29,8 +30,8 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
     private Session session;
 
     private UserCell userCell;
-    private TextView intro;
-    private TextView blog;
+    private TextView introText;
+    private TextView websiteText;
     private View followingCountView;
     private TextView followingCount;
     private View followerCountView;
@@ -61,8 +62,8 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
 
         userCell = ((UserCell) findViewById(R.id.UserCell));
         userCell.setClickable(false);
-        intro = (TextView) findViewById(R.id.user_profile_intro);
-        blog = (TextView) findViewById(R.id.user_profile_blog);
+        introText = (TextView) findViewById(R.id.user_profile_intro);
+        websiteText = (TextView) findViewById(R.id.user_profile_blog);
         followingCountView = findViewById(R.id.user_profile_following);
         followingCount = (TextView) findViewById(R.id.user_profile_following_count);
         followerCountView = findViewById(R.id.user_profile_follower);
@@ -137,8 +138,17 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
     
     @Override
     public void refresh() {
-        intro.setText(user.getIntro());
-        blog.setText(user.getWebsite());
+        String intro = user.getIntro();
+        if (intro.equals("")) {
+            intro = MatjiConstants.string(R.string.default_string_not_exist_intro);
+        }
+        introText.setText(intro);
+        
+        String website = user.getWebsite();
+        if (website.equals("")) {
+            website = MatjiConstants.string(R.string.default_string_not_exist_website);
+        }
+        websiteText.setText(website);
         followingCount.setText(user.getFollowingCount() + "");
         followerCount.setText(user.getFollowerCount()+"");
         findCount.setText(user.getDiscoverStoreCount()+"");

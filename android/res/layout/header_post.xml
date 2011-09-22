@@ -60,21 +60,35 @@
 			android:id="@+id/header_post_created_at"
 			style="@style/row_post_CreatedAt"
 			android:layout_below="@id/header_post_previews" />
+		<View
+			android:id="@+id/header_post_divider1"
+			style="@style/row_post_Divider"
+			android:layout_alignTop="@id/header_post_created_at"
+			android:layout_alignBottom="@id/header_post_created_at"
+			android:layout_below="@id/header_post_previews"
+			android:layout_toRightOf="@id/header_post_created_at" />
 		<com.matji.sandwich.widget.BoldStyleTextView
 			android:id="@+id/header_post_comment"
 			style="@style/row_post_Comment"
 			android:layout_below="@id/header_post_previews"
-			android:layout_toRightOf="@id/header_post_created_at" />
+			android:layout_toRightOf="@id/header_post_divider1" />
 		<com.matji.sandwich.widget.BoldStyleTextView
 			android:id="@+id/header_post_comment_count"
 			style="@style/row_post_Count"
 			android:layout_below="@id/header_post_previews"
 			android:layout_toRightOf="@id/header_post_comment" />
+		<View
+			android:id="@+id/header_post_divider2"
+			style="@style/row_post_Divider"
+			android:layout_alignTop="@id/header_post_created_at"
+			android:layout_alignBottom="@id/header_post_created_at"
+			android:layout_below="@id/header_post_previews"
+			android:layout_toRightOf="@id/header_post_comment_count" />
 		<com.matji.sandwich.widget.BoldStyleTextView
 			android:id="@+id/header_post_like_count"
 			style="@style/row_post_Count"
 			android:layout_below="@id/header_post_previews"
-			android:layout_toRightOf="@id/header_post_comment_count"
+			android:layout_toRightOf="@id/header_post_divider2"
 			android:drawableLeft="@drawable/icon_hand01" />
 	</RelativeLayout>
 	<RelativeLayout

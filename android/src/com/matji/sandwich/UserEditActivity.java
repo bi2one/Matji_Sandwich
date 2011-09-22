@@ -11,65 +11,75 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.cell.UserEditCell;
 import com.matji.sandwich.widget.title.HomeTitle;
 
 public class UserEditActivity extends BaseActivity implements OnClickListener, Refreshable {
 
-	private UserEditCell userEditCell;
-	private Session session;
-	
-	private HomeTitle title;
-	private View introWrapper;
-	private TextView introText;
-	private View websiteWrapper;
-	private TextView websiteText;
-	private View areaWrapper;
-	private TextView areaText;
-	
-	public int setMainViewId() {
-		return R.id.activity_user_edit;
-	}
+    private UserEditCell userEditCell;
+    private Session session;
 
-	@Override
-	protected void init() {
-		super.init();
+    private HomeTitle title;
+    private View introWrapper;
+    private TextView introText;
+    private View websiteWrapper;
+    private TextView websiteText;
+    private View areaWrapper;
+    private TextView areaText;
 
-		setContentView(R.layout.activity_user_edit);
-		session = Session.getInstance(this);
-		
-		title = (HomeTitle) findViewById(R.id.Titlebar);
-		title.setTitle(R.string.settings_account_edit_profile);
-		userEditCell = (UserEditCell) findViewById(R.id.UserEditCell);
+    public int setMainViewId() {
+        return R.id.activity_user_edit;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        setContentView(R.layout.activity_user_edit);
+        session = Session.getInstance(this);
+
+        title = (HomeTitle) findViewById(R.id.Titlebar);
+        title.setTitle(R.string.settings_account_edit_profile);
+        userEditCell = (UserEditCell) findViewById(R.id.UserEditCell);
         introWrapper = findViewById(R.id.edit_intro_wrapper);
         introText = (TextView) findViewById(R.id.edit_intro_content);
         websiteWrapper = findViewById(R.id.edit_website_wrapper);
-		websiteText = (TextView) findViewById(R.id.edit_website_content);
-		areaWrapper = findViewById(R.id.edit_area_wrapper);
-		areaText = (TextView) findViewById(R.id.edit_area_content);
-		
-		introWrapper.setOnClickListener(this);
-		websiteWrapper.setOnClickListener(this);
-		areaWrapper.setOnClickListener(this);
-		
-		userEditCell.addRefreshable(this);
-		
-		setUser(session.getCurrentUser());
-	}
-	
-	public void setUser(User user) {
-		userEditCell.setUser(user);
-		introText.setText(user.getIntro());
-		websiteText.setText(user.getWebsite());
-		areaText.setText("한국인가?");
-	}
-	
-	@Override
-	protected void onResume() {
-	    super.onResume();
-	    userEditCell.refresh();
-	}
-	
+        websiteText = (TextView) findViewById(R.id.edit_website_content);
+        areaWrapper = findViewById(R.id.edit_area_wrapper);
+        areaText = (TextView) findViewById(R.id.edit_area_content);
+
+        introWrapper.setOnClickListener(this);
+        websiteWrapper.setOnClickListener(this);
+        areaWrapper.setOnClickListener(this);
+
+        userEditCell.addRefreshable(this);
+
+        setUser(session.getCurrentUser());
+    }
+
+    public void setUser(User user) {
+        userEditCell.setUser(user);
+        String intro = user.getIntro();
+        if (intro.equals("")) {
+            intro = MatjiConstants.string(R.string.default_string_not_exist_intro);
+        }
+        introText.setText(intro);
+
+        String website = user.getWebsite();
+        if (website.equals("")) {
+            website = MatjiConstants.string(R.string.default_string_not_exist_website);
+        }
+        websiteText.setText(website);
+        areaText.setText("한국인가?");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userEditCell.refresh();
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == introWrapper.getId()) {
@@ -90,14 +100,14 @@ public class UserEditActivity extends BaseActivity implements OnClickListener, R
         Intent intent = new Intent(this, UserWebsiteEditActivity.class);
         startActivity(intent);
     }
-    
+
     public void onAreaWrapperClicked(View v) {
-        
+
     }
 
     @Override
     public void refresh() {
-        
+
     }
 
     @Override
@@ -111,6 +121,6 @@ public class UserEditActivity extends BaseActivity implements OnClickListener, R
     @Override
     public void refresh(ArrayList<MatjiData> data) {
         // TODO Auto-generated method stub
-        
+
     }
 }

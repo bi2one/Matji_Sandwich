@@ -16,7 +16,8 @@
 			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_comment_nick"
-				style="@style/LinkifyName" />
+				style="@style/LinkifyName"
+				android:maxWidth="@dimen/default_nick_max_width" />
 			<TextView
 				android:id="@+id/row_comment_created_at"
 				style="@style/DefaultWrap"

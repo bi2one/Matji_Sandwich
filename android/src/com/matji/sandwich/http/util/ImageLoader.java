@@ -22,7 +22,9 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.http.request.HttpUtility;
+import com.matji.sandwich.util.MatjiConstants;
 
 public class ImageLoader {
     public static enum UrlType {
@@ -31,9 +33,9 @@ public class ImageLoader {
 	public String toString() {
 	    switch(this) {
 	    case USER:
-		return "http://222.122.205.227/v2/users/profile";
+		return MatjiConstants.string(R.string.server_domain) + "users/profile";
 	    case ATTACH_FILE:
-		return "http://222.122.205.227/v2/attach_files/image";
+		return MatjiConstants.string(R.string.server_domain) + "attach_files/image";
 	    }
 	    return null;
 	}

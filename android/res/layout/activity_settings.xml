@@ -82,7 +82,11 @@
 							style="@style/settings_Row"
 							android:background="@drawable/txtbox_t_selector"
 							android:layout_width="fill_parent"
-							android:layout_height="@dimen/settings_row_height">
+							android:layout_height="@dimen/settings_row_height"
+							android:paddingLeft="@dimen/settings_row_padding"
+							android:paddingRight="@dimen/settings_row_padding"
+							android:paddingTop="0dp"
+							android:paddingBottom="0dp">
 							<TextView
 								android:id="@+id/settings_account_nick"
 								style="@style/DefaultWrap"
