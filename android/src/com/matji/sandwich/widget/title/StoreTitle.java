@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreMainActivity;
@@ -23,9 +24,6 @@ import com.matji.sandwich.widget.title.button.TitleImageButton;
  *
  */
 public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
-    private StorePostWriteButton storePostWriteButton;
-    private Store store;
-    
     public StoreTitle(Context context) {
 	super(context);
     }
@@ -39,12 +37,12 @@ public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
     public StoreTitle(Context context, AttributeSet attr) {
 	super(context, attr);
     }
-	
+
     public void setStore(Store store) {
-	this.store = store;
+	((StorePostWriteButton)rightButton2).setData(store, null);
 	setTitle(store.getName());
     }
-	
+
     public void setIdentifiable(Identifiable identifiable) {
 	((LikeButton) rightButton1).setIdentifiable(identifiable);
     }
@@ -68,9 +66,7 @@ public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
     @Override
 	protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
-	StorePostWriteButton writeButton = new StorePostWriteButton(getContext());
-	writeButton.setData(store, null);
-        return writeButton;
+        return new StorePostWriteButton(getContext());
     }
 
     @Override

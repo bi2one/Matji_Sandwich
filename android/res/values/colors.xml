@@ -128,4 +128,11 @@
 	<color name="login_btn_txt_shadow">#c26200</color>
 	<color name="login_account_txt">#8a6501</color>
 	<color name="login_via_txt">#8a6501</color>
+
+	<!-- activity_store_location_map -->
+	<color name="store_location_text">#4d391f</color>
+	<color name="store_location_shadow">#ffd893</color>
+
+	<!-- matji dialog -->
+	<color name="matji_dialog_gray">#947e4c</color>
 </resources>

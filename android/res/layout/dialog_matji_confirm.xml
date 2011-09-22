@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/dialog_matji" >
+  <TextView android:id="@+id/dialog_matji_confirm_contents"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    android:gravity="center_horizontal"
+	    style="@style/dialog_matji_alert_contents" />
+  <LinearLayout style="@style/DefaultWrap"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@id/dialog_matji_confirm_contents">
+    <Button android:id="@+id/dialog_matji_confirm_ok"
+	    android:text="@string/default_string_confirm"
+	    style="@style/dialog_matji_confirm_ok" />
+    <Button android:id="@+id/dialog_matji_confirm_cancel"
+	    android:text="@string/default_string_cancel"
+	    style="@style/dialog_matji_confirm_cancel" />
+  </LinearLayout>
+</RelativeLayout>

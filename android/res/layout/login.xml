@@ -18,6 +18,7 @@
 				android:layout_height="wrap_content"
 				android:hint="@string/hint_write_usermail"
 				android:textSize="@dimen/default_edit_text_size"
+				android:text="test2"
 				android:singleLine="true"
 				android:background="@drawable/input_box_square"
 				android:layout_marginRight="@dimen/login_input_box_margin"

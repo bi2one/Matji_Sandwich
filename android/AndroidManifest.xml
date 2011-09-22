@@ -48,6 +48,7 @@
 		<activity android:name="RankingAllListActivity"></activity>
 		<activity android:name="SearchActivity"></activity>
 		<activity android:name="StoreSearchActivity"></activity>
+		<activity android:name="StoreLocationMapActivity"></activity>
 		<activity android:name="StoreFoodListActivity"></activity>
 		<activity android:name="PostSearchActivity"></activity>
 		<activity android:name="SettingsActivity"></activity>
