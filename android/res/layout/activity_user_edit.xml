@@ -29,7 +29,8 @@
 					<!-- Intro -->
 					<RelativeLayout
 						android:id="@+id/edit_intro_wrapper"
-						style="@style/settings_Row">
+						style="@style/settings_Row"
+						android:background="@drawable/txtbox_t_selector">
 						<RelativeLayout
 							style="@style/DefaultWrap"
 							android:layout_marginRight="@dimen/default_drawable_padding_long"
@@ -60,7 +61,8 @@
 					<!-- Blog/Hompage -->
 					<RelativeLayout
 						android:id="@+id/edit_website_wrapper"
-						style="@style/settings_Row">
+						style="@style/settings_Row"
+                        android:background="@drawable/txtbox_c_selector">
 						<RelativeLayout
 							style="@style/DefaultWrap"
 							android:layout_marginRight="@dimen/default_drawable_padding_long"
@@ -91,7 +93,8 @@
 					<!-- Area -->
 					<RelativeLayout
 						android:id="@+id/edit_area_wrapper"
-						style="@style/settings_Row">
+						style="@style/settings_Row"
+                        android:background="@drawable/txtbox_u_selector">
 						<RelativeLayout
 							style="@style/DefaultWrap"
 							android:layout_marginRight="@dimen/default_drawable_padding_long"
@@ -128,6 +131,8 @@
 					<TextView
 						android:id="@+id/edit_password"
 						style="@style/settings_Row"
+                        android:background="@drawable/txtbox_t_selector"
+                        android:gravity="center_vertical"
 						android:text="@string/edit_password"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_light_gray"
@@ -140,6 +145,8 @@
 					<TextView
 						android:id="@+id/edit_withdrawal"
 						style="@style/settings_Row"
+                        android:background="@drawable/txtbox_u_selector"
+                        android:gravity="center_vertical"
 						android:text="@string/edit_withdrawal"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_light_gray"

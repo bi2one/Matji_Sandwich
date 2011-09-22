@@ -233,4 +233,7 @@
     <dimen name="login_via_height">46.67dp</dimen>
     <dimen name="login_via_txt_size">14.67dp</dimen>
     <dimen name="login_horizontal_line">1.33dp</dimen>
+    
+    <!-- Spinner -->
+    <dimen name="small_spinner_size">16.67dp</dimen>
 </resources>

@@ -209,10 +209,12 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
             ((AlarmHttpRequest) request).actionUpdateAlarmPermit(
                     (AlarmSettingType) cb.getTag(R.string.setting_alarm_permit), 
                     isChecked);
-            manager.request((ViewGroup) cb.getTag(R.string.setting_alarm_spinner),
-                    SpinnerType.SSMALL,
-                    request, HttpRequestManager.UPDATE_ALARM_PERMIT_REQUEST,
-                    this);
+            if (!manager.isRunning()) {
+                manager.request((ViewGroup) cb.getTag(R.string.setting_alarm_spinner),
+                        SpinnerType.SSMALL,
+                        request, HttpRequestManager.UPDATE_ALARM_PERMIT_REQUEST,
+                        this);
+            }
         }
     }
 
