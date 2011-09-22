@@ -17,6 +17,8 @@ import com.matji.sandwich.widget.title.CompletableTitle.Completable;
 
 public class UserNickEditActivity extends BaseActivity implements Completable, Requestable {
 
+    private final int MIN_NICK_LENGTH = 2;
+    
     private Session session;
     private UserHttpRequest request;
     private HttpRequestManager manager;
@@ -46,7 +48,7 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                if (field.getText().toString().trim().equals(session.getCurrentUser().getNick())) {
+                if (field.getText().length() < MIN_NICK_LENGTH || field.getText().toString().trim().equals(session.getCurrentUser().getNick())) {
                     title.lockCompletableButton();
                 } else {
                     title.unlockCompletableButton();

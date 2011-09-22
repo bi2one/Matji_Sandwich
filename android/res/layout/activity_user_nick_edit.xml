@@ -2,16 +2,30 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_user_nick_edit"
-	android:background="@drawable/bg_01"
+	android:background="@drawable/bg_02"
 	style="@style/DefaultFill">
-
 	<com.matji.sandwich.widget.title.CompletableTitle
 		android:id="@id/Titlebar"
 		style="@style/DefaultWidthFill" />
-	<EditText
-		android:id="@+id/user_nick_edit_field"
-		style="@style/DefaultWidthFill"
-		android:singleLine="true"
-		android:layout_below="@id/Titlebar"
-        android:background="@drawable/input_box_square" />
+	<RelativeLayout
+		style="@style/DefaultFill"
+		android:padding="@dimen/default_distance"
+		android:layout_below="@id/Titlebar">
+		<EditText
+			android:id="@+id/user_nick_edit_field"
+			style="@style/DefaultWidthFill"
+			android:hint="@string/hint_write_nick"
+			android:singleLine="true"
+			android:maxLength="12"
+			android:background="@drawable/input_box_square" />
+		<TextView
+			style="@style/DefaultFill"
+			android:layout_marginTop="@dimen/default_distance"
+			android:text="@string/edit_nick_guide"
+			android:textSize="@dimen/edit_guide_size"
+			android:textColor="@color/matji_orange"
+			android:gravity="center"
+			android:background="@drawable/input_box_rounding"
+			android:layout_below="@id/user_nick_edit_field" />
+	</RelativeLayout>
 </RelativeLayout>

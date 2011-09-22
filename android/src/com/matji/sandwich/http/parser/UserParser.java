@@ -28,27 +28,27 @@ public class UserParser extends MatjiDataParser {
 
         /* Set Title */
         String tmp = getString(object, "title");
-        if (tmp != null && !tmp.equals("")) {
-            user.setTitle(tmp);
-        } else {
+        if (tmp == null) {
             user.setTitle(
                     String.format(
                             context.getString(R.string.default_string_title),
                             user.getNick()));
+        } else {
+            user.setTitle(tmp);
         }
 
         /* Set Intro */
         tmp = getString(object, "intro");
-        if (tmp == null || tmp.equals("")) {
-            user.setIntro(context.getString(R.string.default_string_not_exist_intro));
+        if (tmp == null) {
+            user.setIntro("");
         } else {
             user.setIntro(tmp);
         }
 
         /* Set Intro */
         tmp = getString(object, "website");
-        if (tmp == null || tmp.equals("")) {
-            user.setWebsite(context.getString(R.string.default_string_not_exist_website));
+        if (tmp == null) {
+            user.setWebsite("");
         } else {
             user.setWebsite(tmp);
         }

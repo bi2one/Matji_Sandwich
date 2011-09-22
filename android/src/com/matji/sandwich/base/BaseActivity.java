@@ -10,9 +10,11 @@ import android.view.Window;
 import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.ActivityEnterForeGroundDetector.ActivityEnterForeGroundListener;
-import com.matji.sandwich.session.Session;
-import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.DisplayUtil;
+import com.matji.sandwich.util.MatjiConstants;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Identifiable {
     public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;
@@ -116,7 +118,10 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub
-        super.onResume();
+        super.onResume();               
+        
+        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
+        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
 
         Log.d("LifeCycle", "onResume at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);

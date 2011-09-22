@@ -93,7 +93,6 @@
   </style>
       
   <style name="LinkifyName" parent="DefaultWrap">
-	<item name="android:maxWidth">@dimen/default_nick_max_width_half</item>
 	<item name="android:singleLine">true</item>
 	<item name="@android:textSize">@dimen/row_post_text_size</item>
 	<item name="android:textColor">@color/matji_red</item>
@@ -571,7 +570,6 @@
   <style name="row_post_CreatedAt" parent="DefaultWrap">
     <item name="android:textSize">@dimen/row_post_text_size</item>
     <item name="android:textColor">@color/matji_light_gray</item>
-    <item name="android:layout_marginRight">@dimen/default_distance_half</item>
   </style>
 
   <style name="row_post_Comment" parent="DefaultWrap">
@@ -593,6 +591,11 @@
     <item name="android:textSize">@dimen/row_post_text_size</item>
     <item name="android:textColor">@color/matji_red</item>
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
+  </style>  
+
+  <style name="row_post_Divider" parent="VerticalLine">
+    <item name="android:layout_marginLeft">@dimen/default_drawable_padding_long</item>
+    <item name="android:layout_marginRight">@dimen/default_drawable_padding_long</item>
   </style>
 
   <!-- location_title_bar.xml -->
@@ -977,7 +980,10 @@
   
   <style name="settings_Row" parent="DefaultWidthFill">
     <item name="android:minHeight">@dimen/settings_row_height</item>
-    <item name="android:padding">@dimen/settings_row_padding</item>
+    <item name="android:paddingLeft">@dimen/settings_row_padding</item>
+    <item name="android:paddingRight">@dimen/settings_row_padding</item>
+    <item name="android:paddingTop">@dimen/settings_row_padding</item>
+    <item name="android:paddingBottom">@dimen/settings_row_padding</item>
   </style>
   
   <style name="settings_AccountManages" parent="settings_Title">
