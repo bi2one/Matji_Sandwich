@@ -8,6 +8,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -19,22 +20,23 @@ import com.matji.sandwich.map.WriteStoreMatjiMapView;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.adapter.GeoPointToLocationAdapter;
-import com.matji.sandwich.widget.dialog.MatjiAlertDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
+import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.title.CompletableTitle;
 
 public class WriteStoreActivity extends BaseMapActivity implements CompletableTitle.Completable,
-WriteStoreMatjiMapView.OnClickListener,
-Requestable,
-MatjiAlertDialog.OnConfirmHook {
+								   WriteStoreMatjiMapView.OnClickListener,
+								   Requestable,
+								   SimpleAlertDialog.OnClickListener {
     public static final String DATA_STORE = "WriteStoreActivity.store";
     private static final int TAG_WRITE_STORE = 0;
     private Context context;
     private CompletableTitle titleBar;
     private WriteStoreMatjiMapView mapView;
-    private MatjiAlertDialog storeAlertDialog;
-    private MatjiAlertDialog successDialog;
+    private SimpleAlertDialog storeAlertDialog;
+    private SimpleAlertDialog successDialog;
     private Store storeData;
-    private Session session;    
+    private Session session;
 
     public int setMainViewId() {
         return R.id.activity_write_store;
@@ -55,10 +57,10 @@ MatjiAlertDialog.OnConfirmHook {
         mapView.startMapCenterThread();
         mapView.setOnClickListener(this);
 
-        storeAlertDialog = new MatjiAlertDialog(this, R.string.write_store_invalidate_store);
-        successDialog = new MatjiAlertDialog(this, R.string.write_store_success);
+        storeAlertDialog = new SimpleAlertDialog(this, R.string.write_store_invalidate_store);
+        successDialog = new SimpleAlertDialog(this, R.string.write_store_success);
 
-        successDialog.setOnConfirmHook(this);
+        successDialog.setOnClickListener(this);
         // 이 함수를 call하면 지도가 gps중앙으로 이동한다.
         // mapView.moveToGpsCenter();
         
@@ -117,7 +119,7 @@ MatjiAlertDialog.OnConfirmHook {
         titleBar.setCompletable(this);
     }
 
-    public void onConfirm(MatjiAlertDialog dialog) {
+    public void onConfirmClick(SimpleDialog dialog) {
         if (dialog == successDialog) {
             session.getCurrentUser().setDiscoverStoreCount(session.getCurrentUser().getDiscoverStoreCount() + 1);
             Intent result = new Intent();

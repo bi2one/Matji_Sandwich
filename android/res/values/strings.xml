@@ -507,7 +507,7 @@
   <string name="login_twitter">Twitter 로그인</string>
   <string name="login_facebook">Facebook 로그인</string>
   <string name="login_writing_id_password">아이디 혹은 비밀번호를 입력해주세요.</string>
-  
+
   <!-- edit guide -->
   <string name="edit_website_guide">친구들에게 보여질\n블로그, 혹은 개인 홈페이지\n주소를 입력하세요.</string>
   <string name="edit_nick_guide">친구들에게 보여질\n닉네임을 입력하세요.</string>
@@ -518,4 +518,16 @@
   <string name="register_write_password">비밀번호를 입력해 주세요.</string>
   <string name="register_clause">약관동의</string>
   <string name="register_view_clause">(약관보기)</string>
+
+  <!-- StoreLocationMapActivity.java -->
+  <string name="store_location_header">\'%1$s\'의 지도</string>
+
+  <!-- StoreLocationTitle.java -->
+  <string name="store_location_title">맛집 지도</string>
+
+  <!-- ScreenShotButton.java -->
+  <string name="screen_shot_button_success">화면을 저장하였습니다.\n\'갤러리\'에서 확인해 보세요.</string>
+
+  <!-- PhoneCallUtil.java -->
+  <string name="phone_call_confirm">이곳에 전화를 거시겠습니까?</string>
 </resources>

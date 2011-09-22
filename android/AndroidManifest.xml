@@ -70,6 +70,8 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="SearchActivity"
                   android:screenOrientation="portrait"></activity>
+		<activity android:name="StoreLocationMapActivity"
+			  android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreSearchActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreFoodListActivity"

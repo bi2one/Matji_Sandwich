@@ -18,43 +18,43 @@ public abstract class TitleContainerTypeLRR extends TypedTitleContainer {
     protected abstract TitleImageButton getRightButton2();
     
     protected TitleImageButton leftButton1;
-	protected TitleImageButton rightButton1;
-	protected TitleImageButton rightButton2;
+    protected TitleImageButton rightButton1;
+    protected TitleImageButton rightButton2;
 	
 	
-	public TitleContainerTypeLRR(Context context) {
-		super(context);
-	}
+    public TitleContainerTypeLRR(Context context) {
+	super(context);
+    }
 
-	public TitleContainerTypeLRR(Context context, AttributeSet attr) {
-		super(context, attr);
-	}
-	
-	/**
-	 * @see com.matji.sandwich.widget.title.TypedTitleContainer#addButtons()
-	 */
-	@Override
+    public TitleContainerTypeLRR(Context context, AttributeSet attr) {
+	super(context, attr);
+    }
+
+    /**
+     * @see com.matji.sandwich.widget.title.TypedTitleContainer#addButtons()
+     */
+    @Override
 	final protected void addButtons() {
-		addViewInLeftContainer(leftButton1);
-		addViewInRightContainer(rightButton1);
-		addViewInRightContainer(rightButton2);
-	}
+	addViewInLeftContainer(leftButton1);
+	addViewInRightContainer(rightButton1);
+	addViewInRightContainer(rightButton2);
+    }
 	
-	/**
-	 * @see com.matji.sandwich.widget.title.TypedTitleContainer#setButtons()
-	 */
-	@Override
+    /**
+     * @see com.matji.sandwich.widget.title.TypedTitleContainer#setButtons()
+     */
+    @Override
 	final protected void setButtons() {
-	    leftButton1 = getLeftButton1();
-	    rightButton1 = getRightButton1();
-	    rightButton2 = getRightButton2();
-	}
+	leftButton1 = getLeftButton1();
+	rightButton1 = getRightButton1();
+	rightButton2 = getRightButton2();
+    }
 
-	/**
+    /**
      * @see com.matji.sandwich.widget.title.TypedTitleContainer#isExistLeftButton()
      */
-	@Override
+    @Override
 	protected boolean isExistLeftButton() {
-	    return true;
-	}
+	return true;
+    }
 }
