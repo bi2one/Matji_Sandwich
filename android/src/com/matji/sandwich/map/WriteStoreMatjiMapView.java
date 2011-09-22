@@ -23,6 +23,7 @@ import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.widget.SimpleSubmitLocationBar;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
@@ -53,6 +54,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 
     private EditText storeNameText;
     private TextView addressText;
+    private RelativeLayout spinnerWrapper;
     private EditText addAddressText;
     private EditText phoneNumberText;
     private RelativeLayout downButton;
@@ -65,15 +67,16 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 	
 	LayoutInflater.from(context).inflate(R.layout.write_store_matji_mapview, this, true);
 	
-	geocodeRunnable = new GeocodeRunnable(this, context, this);
 	mapView = (MatjiMapView)findViewById(R.id.write_store_matji_mapview_map);
 	storeNameText = (EditText)findViewById(R.id.write_store_matji_mapview_store_name);
 	addressText = (TextView)findViewById(R.id.write_store_matji_mapview_address);
+	spinnerWrapper = (RelativeLayout)findViewById(R.id.write_store_matji_mapview_spinner_wrapper);
 	addAddressText = (EditText)findViewById(R.id.write_store_matji_mapview_add_address);
 	phoneNumberText = (EditText)findViewById(R.id.write_store_matji_mapview_phone_number);
 	downButton = (RelativeLayout)findViewById(R.id.write_store_matji_mapview_down_button);
 
 	downButton.setOnClickListener(this);
+	geocodeRunnable = new GeocodeRunnable(spinnerWrapper, context, this);
 	requestManager = HttpRequestManager.getInstance(context);
 	gpsManager = new GpsManager(context, this);
 	sessionMapUtil = new SessionMapUtil(context);
@@ -235,7 +238,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 	public void run() {
     	    GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
     	    geocodeRequest.actionReverseGeocodingByGeoPoint(center, sessionMapUtil.getCurrentCountry());
-    	    requestManager.request(spinnerContainer, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
+    	    requestManager.request(spinnerContainer, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
 	}
     }
 
