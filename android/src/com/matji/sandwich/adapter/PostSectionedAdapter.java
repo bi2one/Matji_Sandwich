@@ -248,10 +248,12 @@ public class PostSectionedAdapter extends SectionedAdapter {
         User user = post.getUser();
 
         if (store != null) {
+            holder.nick.setMaxWidth(MatjiConstants.dimenInt(R.dimen.default_nick_max_width_half));
             holder.at.setVisibility(View.VISIBLE);
             holder.storeName.setText(" "+store.getName());
         }
         else {
+            holder.nick.setMaxWidth(9999);
             holder.at.setVisibility(View.GONE);
             holder.storeName.setText("");
         }

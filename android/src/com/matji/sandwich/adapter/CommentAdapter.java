@@ -65,7 +65,7 @@ public class CommentAdapter extends MBaseAdapter {
 		User user = comment.getUser();
 		holder.profile.setUserId(user.getId());
 		holder.nick.setText(user.getNick());
-		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()) + " " +comment.getFromWhere() + "에서");
+		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()));
 		holder.comment.setText(comment.getComment());
 	}
 	

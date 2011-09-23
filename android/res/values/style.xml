@@ -93,7 +93,6 @@
   </style>
       
   <style name="LinkifyName" parent="DefaultWrap">
-	<item name="android:maxWidth">@dimen/default_nick_max_width_half</item>
 	<item name="android:singleLine">true</item>
 	<item name="@android:textSize">@dimen/row_post_text_size</item>
 	<item name="android:textColor">@color/matji_red</item>
@@ -214,10 +213,6 @@
   	<item name="android:textSize">16dp</item>
   </style>
   
-  
-  
-  
-
   <!-- Cell -->  
   <style name="Cell" parent="DefaultWidthFill">
   	<item name="android:padding">@dimen/default_distance</item>
@@ -498,10 +493,15 @@
   </style>
   
   <style name="TitleText" parent="DefaultHeightFill">
-  	<item name="android:gravity">center_vertical</item>
-  	<item name="android:text">맛있는 지도</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:text">맛있는 지도</item>
     <item name="android:textSize">@dimen/title_container_txt_size</item>
-  	<item name="android:textColor">@color/BLACK</item>
+    <item name="android:textColor">@color/BLACK</item>
+  </style>
+
+  <style name="TitleLogo" parent="DefaultWrap">
+    <item name="android:background">@null</item>
+    <item name="android:src">@drawable/navigationbar_logo</item>
   </style>
   
   <!-- Profile -->
@@ -570,7 +570,6 @@
   <style name="row_post_CreatedAt" parent="DefaultWrap">
     <item name="android:textSize">@dimen/row_post_text_size</item>
     <item name="android:textColor">@color/matji_light_gray</item>
-    <item name="android:layout_marginRight">@dimen/default_distance_half</item>
   </style>
 
   <style name="row_post_Comment" parent="DefaultWrap">
@@ -592,6 +591,11 @@
     <item name="android:textSize">@dimen/row_post_text_size</item>
     <item name="android:textColor">@color/matji_red</item>
    	<item name="android:drawableLeft">@drawable/img_like_cnt</item>
+  </style>  
+
+  <style name="row_post_Divider" parent="VerticalLine">
+    <item name="android:layout_marginLeft">@dimen/default_drawable_padding_long</item>
+    <item name="android:layout_marginRight">@dimen/default_drawable_padding_long</item>
   </style>
 
   <!-- location_title_bar.xml -->
@@ -881,11 +885,14 @@
   <style name="dialog_matji_action_button" parent="dialog_matji_action_button_text">
     <item name="android:layout_width">@dimen/dialog_button_width</item>
     <item name="android:layout_height">@dimen/dialog_button_height</item>
-    <item name="android:background">@drawable/dialog_matji_button_bg</item>
+    <!-- <item name="android:background">@drawable/dialog_matji_button_bg</item> -->
+    <item name="android:background">@drawable/btn_white</item>
     <item name="android:layout_marginBottom">4dp</item>
   </style>    
 
   <style name="dialog_matji_cancel" parent="dialog_matji_action_button">
+    <item name="android:background">@drawable/btn_lemon</item>
+    <item name="android:textColor">@color/matji_dialog_gray</item>
   </style>
 
   <!-- activity_write_post.xml -->
@@ -973,7 +980,10 @@
   
   <style name="settings_Row" parent="DefaultWidthFill">
     <item name="android:minHeight">@dimen/settings_row_height</item>
-    <item name="android:padding">@dimen/settings_row_padding</item>
+    <item name="android:paddingLeft">@dimen/settings_row_padding</item>
+    <item name="android:paddingRight">@dimen/settings_row_padding</item>
+    <item name="android:paddingTop">@dimen/settings_row_padding</item>
+    <item name="android:paddingBottom">@dimen/settings_row_padding</item>
   </style>
   
   <style name="settings_AccountManages" parent="settings_Title">
@@ -1083,6 +1093,7 @@
   <style name="dialog_matji_alert" parent="dialog_matji"></style>
 
   <style name="dialog_matji_alert_contents" parent="dialog_matji_action_button_text">
+    <item name="android:maxWidth">240dp</item>
     <item name="android:layout_marginBottom">10dp</item>
   </style>
 
@@ -1343,5 +1354,39 @@
   
   <style name="activity_select_tag_divider2" parent="activity_select_tag_divider1">
     <item name="android:background">@color/select_tag_divider2</item>
+  </style>
+
+  <!-- activity_store_location_map.xml -->
+  <style name="activity_store_location_footer" parent="DefaultWidthFill">
+    <item name="android:background">@drawable/story_bg</item>
+    <item name="android:layout_height">46.67dp</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
+  </style>
+
+  <style name="activity_store_location_text" parent="DefaultWidthFill">
+    <item name="android:layout_height">45dp</item>
+    <item name="android:textColor">@color/store_location_text</item>
+    <item name="android:textSize">12dp</item>
+    <item name="android:shadowColor">@color/store_location_shadow</item>
+    <item name="android:shadowDx">1.3</item>
+    <item name="android:shadowDy">1.3</item>
+    <item name="android:shadowRadius">1</item>
+    <item name="android:drawablePadding">6dp</item>
+  </style>
+  
+  <style name="activity_store_location_phone" parent="activity_store_location_text">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_marginLeft">9dp</item>
+    <item name="android:maxWidth">140dp</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <!-- dialog_matji_confirm.xml -->
+  <style name="dialog_matji_confirm_ok" parent="dialog_matji_alert_confirm">
+  </style>
+
+  <style name="dialog_matji_confirm_cancel" parent="dialog_matji_alert_confirm">
+    <item name="android:layout_marginLeft">9dp</item>
   </style>
 </resources>

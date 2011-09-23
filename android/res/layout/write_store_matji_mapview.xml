@@ -2,13 +2,13 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    style="@style/write_store_matji_mapview" >
+    style="@style/write_store_matji_mapview">
   <!-- text fields -->
   <LinearLayout
       android:id="@+id/write_store_matji_mapview_text"
       android:layout_alignParentTop="true"
       android:orientation="vertical"
-      style="@style/write_store_matji_mapview_text" >
+      style="@style/write_store_matji_mapview_text">
     <!-- store name -->
     <EditText
 	android:id="@+id/write_store_matji_mapview_store_name"
@@ -16,12 +16,14 @@
 	android:hint="@string/write_store_matji_mapview_store_name" />
 
     <!-- address -->
-    <RelativeLayout style="@style/write_store_matji_mapview_address" >
-      <TextView style="@style/write_store_matji_mapview_edittext_empty"
-		android:id="@+id/write_store_matji_mapview_address"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentTop="true"
-		android:layout_toLeftOf="@+id/write_store_matji_mapview_down_button" />
+    <RelativeLayout
+	style="@style/write_store_matji_mapview_address">
+      <TextView
+	  style="@style/write_store_matji_mapview_edittext_empty"
+	  android:layout_alignParentLeft="true"
+	  android:layout_alignParentTop="true"
+	  android:layout_toLeftOf="@+id/write_store_matji_mapview_down_button"
+	  android:id="@+id/write_store_matji_mapview_address" />
       <ImageView
 	  android:id="@+id/write_store_matji_mapview_divider"
 	  style="@style/write_store_matji_mapview_divider"
@@ -29,24 +31,37 @@
 	  android:layout_centerVertical="true"
 	  android:layout_alignParentLeft="true"
 	  android:layout_toLeftOf="@+id/write_store_matji_mapview_down_button" />
-      <EditText style="@style/write_store_matji_mapview_edittext_empty"
-		android:id="@+id/write_store_matji_mapview_add_address"
-		android:hint="@string/write_store_matji_mapview_add_address"
-		android:layout_alignParentLeft="true"
-		android:layout_below="@id/write_store_matji_mapview_divider"
-		android:layout_toLeftOf="@id/write_store_matji_mapview_down_button" />
-      <RelativeLayout style="@style/write_store_matji_mapview_button"
-		      android:id="@id/write_store_matji_mapview_down_button"
-		      android:clickable="true"
-		      android:layout_centerVertical="true"
-		      android:layout_alignParentRight="true" >
-	<ImageView style="@style/write_store_matji_mapview_btn_image"
-		   android:layout_centerVertical="true"
-		   android:layout_alignParentLeft="true" />
-	<ImageView style="@style/write_store_matji_mapview_btn_arrow"
-		   android:layout_centerVertical="true"
-		   android:layout_alignParentRight="true" />
+      <EditText
+	  style="@style/write_store_matji_mapview_edittext_empty"
+	  android:id="@+id/write_store_matji_mapview_add_address"
+	  android:hint="@string/write_store_matji_mapview_add_address"
+	  android:layout_alignParentLeft="true"
+	  android:layout_below="@id/write_store_matji_mapview_divider"
+	  android:layout_toLeftOf="@id/write_store_matji_mapview_down_button" />
+      <RelativeLayout
+	  style="@style/write_store_matji_mapview_button"
+	  android:id="@id/write_store_matji_mapview_down_button"
+	  android:clickable="true"
+	  android:layout_centerVertical="true"
+	  android:layout_alignParentRight="true">
+	<ImageView
+	    style="@style/write_store_matji_mapview_btn_image"
+	    android:layout_centerVertical="true"
+	    android:layout_alignParentLeft="true" />
+	<ImageView
+	    style="@style/write_store_matji_mapview_btn_arrow"
+	    android:layout_centerVertical="true"
+	    android:layout_alignParentRight="true" />
       </RelativeLayout>
+
+      <!-- address spinner wrapper -->
+      <RelativeLayout
+	  android:id="@+id/write_store_matji_mapview_spinner_wrapper"
+	  android:layout_alignParentTop="true"
+	  android:layout_alignRight="@id/write_store_matji_mapview_address"
+	  android:layout_alignLeft="@id/write_store_matji_mapview_address"
+	  android:layout_marginTop="-8dp"
+	  style="@style/DefaultWidthFill" />
     </RelativeLayout>
 
     <!-- phone number -->
@@ -60,7 +75,7 @@
   <!-- mapview -->
   <RelativeLayout
       android:layout_below="@id/write_store_matji_mapview_text"
-      style="@style/DefaultFill" >
+      style="@style/DefaultFill">
     <com.matji.sandwich.map.MatjiMapView
 	android:id="@+id/write_store_matji_mapview_map"
 	style="@style/DefaultFill"
@@ -70,7 +85,8 @@
 	android:focusable="true"
 	android:apiKey="@string/map_api_key" />
 
-    <ImageView style="@style/write_store_matji_mapview_overlay"
-	       android:layout_centerInParent="true" />
+    <ImageView
+	style="@style/write_store_matji_mapview_overlay"
+	android:layout_centerInParent="true" />
   </RelativeLayout>
 </RelativeLayout>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -85,6 +84,7 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         loginText = (TextView) findViewById(R.id.settings_account_login);
         nickText = (TextView) findViewById(R.id.settings_account_nick);
         logoutButton = (Button) findViewById(R.id.settings_account_logout_btn);
+        registerText = (TextView) findViewById(R.id.settings_account_register);
         editProfileWrapper = findViewById(R.id.settings_account_edit_profile);
         noticeWrapper = findViewById(R.id.settings_service_notice_wrapper);
         noticeText = (TextView) findViewById(R.id.settings_service_notice);
@@ -152,6 +152,15 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
                 startActivity(intent);
             }
         });
+        
+        registerText.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(SettingsActivity.this, RegisterActivity.class);
+                startActivity(intent);                
+            }
+        });
     }
 
     @Override
@@ -199,7 +208,7 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
             isForceChecked = false;
         }
     }
-
+    
     @Override
     public void onCheckedChanged(CompoundButton cb, boolean isChecked) {
         if (!isForceChecked) {

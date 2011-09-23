@@ -21,7 +21,7 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="ExternalServiceWebViewActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name=".UserEditActivity"
+		<activity android:name="UserEditActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="AlarmActivity"
                   android:screenOrientation="portrait"></activity>
@@ -70,6 +70,8 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="SearchActivity"
                   android:screenOrientation="portrait"></activity>
+		<activity android:name="StoreLocationMapActivity"
+			  android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreSearchActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreFoodListActivity"
@@ -112,10 +114,13 @@
         <activity android:name="UserMainActivity"
                   android:screenOrientation="portrait"></activity>
         <activity android:name="UserNickEditActivity"
+                  android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait"></activity>
         <activity android:name="UserIntroEditActivity"
+                  android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait"></activity>
         <activity android:name="UserWebsiteEditActivity"
+                  android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="UserStoreListActivity"
                   android:screenOrientation="portrait"></activity>
@@ -164,6 +169,8 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="ReceivedUserActivity"
                   android:screenOrientation="portrait"></activity>
+        <activity android:name="RegisterActivity"
+                  android:screenOrientation="portrait"></activity>
 		<activity android:name="widget.SlideGalleryActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="GridGalleryActivity"
@@ -187,7 +194,6 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

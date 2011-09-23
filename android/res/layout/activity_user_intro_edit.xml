@@ -2,7 +2,7 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_user_intro_edit"
-	android:background="@drawable/bg_01"
+	android:background="@drawable/bg_02"
 	style="@style/DefaultFill">
 
 	<com.matji.sandwich.widget.title.CompletableTitle
@@ -10,9 +10,10 @@
 		style="@style/DefaultWidthFill" />
 	<EditText
 		android:id="@+id/user_intro_edit_field"
-		android:lines="3"
 		android:gravity="top"
-		style="@style/DefaultWidthFill"
+		android:hint="@string/hint_write_intro"
+		style="@style/DefaultFill"
 		android:layout_below="@id/Titlebar"
-		android:background="@drawable/input_box_square" />
+		android:background="@drawable/input_box_square"
+		android:layout_margin="@dimen/default_distance" />
 </RelativeLayout>

@@ -187,5 +187,5 @@ public abstract class MatjiDataParser implements MatjiParser {
 		JsonElement element = object.get(key);
 
 		return (isArray(element)) ? element.getAsJsonArray() : null;
-	}	
+	}
 }

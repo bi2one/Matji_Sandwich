@@ -22,7 +22,8 @@ import com.matji.sandwich.widget.AlbumView;
 import com.matji.sandwich.widget.GetPictureLayout;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.title.CompletableTitle;
-import com.matji.sandwich.widget.dialog.MatjiAlertDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
+import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.DialogAsyncTask;
 import com.matji.sandwich.http.request.WritePostHttpRequest;
@@ -38,7 +39,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 							       PostEditText.OnClickListener,
 							       GetPictureLayout.OnClickListener,
 							       Requestable,
-							       MatjiAlertDialog.OnConfirmHook {
+							       SimpleAlertDialog.OnClickListener {
     public static final String INTENT_STORE = "WritePostActivity.store";
     public static final String INTENT_TAGS = "WritePostActivity.tags";
     private static final int TAG_WRITE_POST = 0;
@@ -66,9 +67,9 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
     private boolean isFlowIsCamera = false;
     private Store store;
     private String tags = "";
-    private MatjiAlertDialog postEmptyDialog;
-    private MatjiAlertDialog successDialog;
-    private MatjiAlertDialog albumFullDialog;
+    private SimpleAlertDialog postEmptyDialog;
+    private SimpleAlertDialog successDialog;
+    private SimpleAlertDialog albumFullDialog;
     private Intent inputIntent;
 
     public int setMainViewId() {
@@ -96,11 +97,11 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	titleBar.setCompletable(this);
 	postText.setOnClickListener(this);
 	pictureButtons.setOnClickListener(this);
-	postEmptyDialog = new MatjiAlertDialog(this, R.string.post_edit_text_empty);
-	successDialog = new MatjiAlertDialog(this, R.string.write_post_success);
-	albumFullDialog = new MatjiAlertDialog(this, R.string.write_post_album_full);
-	successDialog.setOnConfirmHook(this);
-	postEmptyDialog.setOnConfirmHook(this);
+	postEmptyDialog = new SimpleAlertDialog(this, R.string.post_edit_text_empty);
+	successDialog = new SimpleAlertDialog(this, R.string.write_post_success);
+	albumFullDialog = new SimpleAlertDialog(this, R.string.write_post_album_full);
+	successDialog.setOnClickListener(this);
+	postEmptyDialog.setOnClickListener(this);
 
 	inputIntent = getIntent();
 	store = (Store)inputIntent.getParcelableExtra(INTENT_STORE);
@@ -138,6 +139,10 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 
 	if (!isValidPost(post)) {
 	    return ;
+	}
+
+	if (tags == null) {
+	    tags = "";
 	}
 	
 	postRequest.actionNew(post, tags, store, centerLocation, imageFiles);
@@ -307,7 +312,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
         startActivityForResult(albumIntent, INTENT_ALBUM);
     }
 
-    public void onConfirm(MatjiAlertDialog dialog) {
+    public void onConfirmClick(SimpleDialog dialog) {
 	if (dialog == successDialog) {
 	    Intent result = new Intent();
 	    setResult(RESULT_OK, result);

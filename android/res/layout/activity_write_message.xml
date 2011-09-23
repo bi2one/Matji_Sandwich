@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/write_message_activity"
 	style="@style/DefaultFill"
-	android:background="@drawable/tabbtn_bg">
+	android:background="@drawable/bg_02">
 	<com.matji.sandwich.widget.title.CompletableTitle
 		android:id="@id/Titlebar"
 		style="@style/DefaultWidthFill" />

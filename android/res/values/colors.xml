@@ -34,6 +34,7 @@
 	<color name="matji_yellow_orange">#FFE851</color>
 	<color name="matji_yellow_orange2">#FFF6AC</color>
 	<color name="matji_red">#F44526</color>
+	<color name="matji_orange">#ff9610</color>
 	<color name="matji_gray">#333333</color>
 	<color name="matji_silver">#666666</color>
 	<color name="matji_light_gray">#999999</color>
@@ -128,4 +129,11 @@
 	<color name="login_btn_txt_shadow">#c26200</color>
 	<color name="login_account_txt">#8a6501</color>
 	<color name="login_via_txt">#8a6501</color>
+
+	<!-- activity_store_location_map -->
+	<color name="store_location_text">#4d391f</color>
+	<color name="store_location_shadow">#ffd893</color>
+
+	<!-- matji dialog -->
+	<color name="matji_dialog_gray">#947e4c</color>
 </resources>

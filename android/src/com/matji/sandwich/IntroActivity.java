@@ -6,10 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.session.Session;
-import com.matji.sandwich.util.DisplayUtil;
-import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.session.Session;
 
 public class IntroActivity extends BaseActivity {
     /** Called when the activity is first created. */
@@ -32,8 +30,6 @@ public class IntroActivity extends BaseActivity {
         Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
-                MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
                 Session session  = Session.getInstance(IntroActivity.this);
                 if (session.isLogin()) session.unsyncSessionValidate();
                 session.notificationValidate();

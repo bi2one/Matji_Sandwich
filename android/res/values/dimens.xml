@@ -7,7 +7,8 @@
 	<dimen name="default_drawable_padding">3dp</dimen>
 	<dimen name="default_drawable_padding_half">1.5dp</dimen>
     <dimen name="default_drawable_padding_long">7.33dp</dimen>
-	<dimen name="default_divider_size">0.67dp</dimen>
+    <dimen name="default_divider_size">0.67dp</dimen>
+    <dimen name="default_divider_size2">1.33dp</dimen>
 	<dimen name="default_new_icon_x_position">24.67dp</dimen>
 	<dimen name="default_new_icon_y_position">4dp</dimen>
 	<dimen name="default_round_pixel">5.33dp</dimen>
@@ -16,7 +17,7 @@
     <dimen name="default_round_inset2">0.17dp</dimen>
     <dimen name="default_edit_text_size">16dp</dimen>
     <dimen name="default_nick_max_width">133.33dp</dimen>
-    <dimen name="default_nick_max_width_half">66.67dp</dimen>
+    <dimen name="default_nick_max_width_half">93.33dp</dimen>
     
 	<!-- Title Container -->
 	<dimen name="title_container_txt_size">17.33dp</dimen>
@@ -54,6 +55,7 @@
 
 	<!-- Post List Row -->
     <dimen name="row_post_text_size">12dp</dimen>
+    <dimen name="row_post_divider_size">6.67dp</dimen>
 	<dimen name="talkcontent_size">14dp</dimen>
 	<dimen name="row_post_distance">1dp</dimen>
 	<dimen name="row_post_previews_margin">5dp</dimen>
@@ -236,4 +238,12 @@
     
     <!-- Spinner -->
     <dimen name="small_spinner_size">16.67dp</dimen>
+    
+    <!-- Edit Guide -->
+    <dimen name="edit_guide_size">12dp</dimen>
+    
+    <!-- activity_register.xml -->
+    <dimen name="register_subtitle_size">12dp</dimen>
+    <dimen name="register_margin_top">13.33dp</dimen>
+    <dimen name="register_margin_bottom">6.67dp</dimen>
 </resources>
