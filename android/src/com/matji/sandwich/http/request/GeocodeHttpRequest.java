@@ -6,6 +6,7 @@ import android.content.Context;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import com.google.android.maps.GeoPoint;
 
@@ -20,27 +21,6 @@ public class GeocodeHttpRequest extends HttpRequest {
     private static final String REQUEST_URL = "http://maps.googleapis.com/maps/api/geocode/json";
     private String sensor = "true";
 
-    /**
-     * Geocoding지원 가능한 국가들. 이곳에 추가하면 바로 적용이 가능하다.
-     */
-    public static enum Country {
-	CHINA, JAPAN, USA, KOREA;
-	public String toLanguageCode() {
-	    switch(this) {
-	    case CHINA:
-		return "zh-CN";
-	    case JAPAN:
-		return "ja";
-	    case USA:
-		return "en";
-	    case KOREA:
-		return "ko";
-	    default:
-		return null;
-	    }
-	}
-    }
-
     public GeocodeHttpRequest(Context context) {
 	super(context);
 	serverDomain = REQUEST_URL;
@@ -52,13 +32,13 @@ public class GeocodeHttpRequest extends HttpRequest {
      * @param address 위치를 지정할 address
      * @param country geocoding결과 언어의 국가
      */
-    public void actionGeocoding(String address, Country country) {
+    public void actionGeocoding(String address, Locale locale) {
 	httpMethod = HttpMethod.HTTP_GET;
 
 	getHashtable.clear();
 	getHashtable.put("address", address);
 	getHashtable.put("sensor", sensor);
-	getHashtable.put("language", country.toLanguageCode());
+	getHashtable.put("language", locale.getLanguage());
 	parser = new GeocodeParser(context);
     }
 
@@ -68,10 +48,10 @@ public class GeocodeHttpRequest extends HttpRequest {
      * @param location 위치를 지정할 Location
      * @param country geocoding결과 언어의 국가
      */
-    public void actionReverseGeocodingByLocation(Location location, Country country) {
+    public void actionReverseGeocodingByLocation(Location location, Locale locale) {
 	actionReverseGeocodingByGeoPoint(new GeoPoint((int)(location.getLatitude() * 1E6),
 						      (int)(location.getLongitude() * 1E6)),
-					 country);
+					 locale);
     }
 
     /**
@@ -80,7 +60,7 @@ public class GeocodeHttpRequest extends HttpRequest {
      * @param point 위치를 지정할 GeoPoint
      * @param country geocoding결과 언어의 국가
      */
-    public void actionReverseGeocodingByGeoPoint(GeoPoint point, Country country) {
+    public void actionReverseGeocodingByGeoPoint(GeoPoint point, Locale locale) {
 	Double lat = (double)point.getLatitudeE6() / 1E6;
 	Double lng = (double)point.getLongitudeE6() / 1E6;
 	httpMethod = HttpMethod.HTTP_GET;
@@ -88,7 +68,7 @@ public class GeocodeHttpRequest extends HttpRequest {
 	getHashtable.clear();
 	getHashtable.put("latlng", lat + "," + lng);
 	getHashtable.put("sensor", sensor);
-	getHashtable.put("language", country.toLanguageCode());
+	getHashtable.put("language", locale.getLanguage());
 	parser = new GeocodeParser(context);
     }
 }

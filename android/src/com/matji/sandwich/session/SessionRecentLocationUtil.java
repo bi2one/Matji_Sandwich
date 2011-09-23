@@ -7,7 +7,6 @@ import com.google.android.maps.GeoPoint;
 
 import com.matji.sandwich.data.LocationSearchToken;
 import com.matji.sandwich.data.provider.PreferenceProvider;
-import com.matji.sandwich.http.request.GeocodeHttpRequest.Country;
 
 import java.util.LinkedList;
 import java.util.ArrayList;
