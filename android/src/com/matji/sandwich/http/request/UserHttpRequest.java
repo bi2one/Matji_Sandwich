@@ -116,8 +116,16 @@ public class UserHttpRequest extends HttpRequest {
 
     }
 
-    public void actionCreate() {
-
+    public void actionCreate(String email, String nick, String password, String password_confirmation) {
+        httpMethod = HttpMethod.HTTP_POST;
+        action = "create";
+        parser = new UserParser(context);
+        
+        postHashtable.clear();
+        postHashtable.put("user[email]", email);
+        postHashtable.put("user[nick]", nick);
+        postHashtable.put("user[password]", password);
+        postHashtable.put("user[password_confirmation]", password_confirmation);
     }
 
     public void actionProfile() {

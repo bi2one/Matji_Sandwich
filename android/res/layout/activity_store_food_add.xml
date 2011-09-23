@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/activity_user_nick_edit"
+	android:id="@+id/activity_store_food_add"
 	android:background="@drawable/bg_02"
 	style="@style/DefaultFill">
 	<com.matji.sandwich.widget.title.CompletableTitle
@@ -12,19 +12,19 @@
 		android:padding="@dimen/default_distance"
 		android:layout_below="@id/Titlebar">
 		<EditText
-			android:id="@+id/user_nick_edit_field"
+			android:id="@+id/store_food_name_field"
 			style="@style/DefaultWidthFill"
-			android:hint="@string/hint_write_nick"
+			android:hint="@string/hint_write_store_food"
 			android:singleLine="true"
 			android:background="@drawable/input_box_square" />
 		<TextView
+			android:id="@+id/store_food_add_guide"
 			style="@style/DefaultFill"
 			android:layout_marginTop="@dimen/default_distance"
-			android:text="@string/edit_nick_guide"
 			android:textSize="@dimen/edit_guide_size"
 			android:textColor="@color/matji_orange"
 			android:gravity="center"
 			android:background="@drawable/input_box_rounding"
-			android:layout_below="@id/user_nick_edit_field" />
+			android:layout_below="@id/store_food_name_field" />
 	</RelativeLayout>
 </RelativeLayout>

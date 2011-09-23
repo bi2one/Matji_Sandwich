@@ -20,20 +20,20 @@ import com.matji.sandwich.util.MatjiConstants;
  */
 public abstract class TitleContainer extends RelativeLayout {
     protected abstract boolean isExistLeftButton();
-    
+
     private LinearLayout leftContainer;
     private LinearLayout rightContainer;
     private TextView titleContainer;
     private ImageView titleLogo;
-	
+
     public TitleContainer(Context context) {
-	super(context);
-	init();
+        super(context);
+        init();
     }
 
     public TitleContainer(Context context, AttributeSet attr) {
-	super(context, attr);
-	init();
+        super(context, attr);
+        init();
     }
 
     /**
@@ -41,14 +41,14 @@ public abstract class TitleContainer extends RelativeLayout {
      * 
      */
     private void init() {
-	LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	inflater.inflate(R.layout.title_container, this);
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.title_container, this);
 
-	leftContainer = (LinearLayout) findViewById(R.id.title_container_left);
-	rightContainer = (LinearLayout) findViewById(R.id.title_container_right);
-	titleContainer = (TextView) findViewById(R.id.title_container_text);
-	titleLogo = (ImageView) findViewById(R.id.title_container_logo);
-	if (isExistLeftButton()) ((ImageView) findViewById(R.id.title_container_title_line)).setVisibility(View.VISIBLE);
+        leftContainer = (LinearLayout) findViewById(R.id.title_container_left);
+        rightContainer = (LinearLayout) findViewById(R.id.title_container_right);
+        titleContainer = (TextView) findViewById(R.id.title_container_text);
+        titleLogo = (ImageView) findViewById(R.id.title_container_logo);
+        if (isExistLeftButton()) ((ImageView) findViewById(R.id.title_container_title_line)).setVisibility(View.VISIBLE);
     }
 
     /**
@@ -57,17 +57,17 @@ public abstract class TitleContainer extends RelativeLayout {
      * @param v 추가할 뷰
      */
     protected final void addViewInRightContainer(View v) {
-	ImageView line = new ImageView(getContext());
+        ImageView line = new ImageView(getContext());
         line.setPadding(0, 0, 0, 0);
         line.setImageResource(R.drawable.navigationbar_bg_line);
-        
+
         ImageView newIcon = new ImageView(getContext());
         int newIconXPos = MatjiConstants.dimenInt(R.dimen.default_new_icon_x_position);
         int newIconYPos = MatjiConstants.dimenInt(R.dimen.default_new_icon_y_position);
         newIcon.setPadding(newIconXPos, newIconYPos, 0, 0);
         newIcon.setImageResource(R.drawable.icon_new_alert);
         newIcon.setVisibility(View.GONE);
-        
+
         RelativeLayout rl = new RelativeLayout(getContext());
         rl.addView(v);
         rl.addView(line);
@@ -75,8 +75,8 @@ public abstract class TitleContainer extends RelativeLayout {
 
         v.setTag(R.string.tag_button_wrapper, rl);
         v.setTag(R.string.tag_new_icon, newIcon);
-                
-	rightContainer.addView(rl);
+
+        rightContainer.addView(rl);
     }
 
     /**
@@ -85,12 +85,12 @@ public abstract class TitleContainer extends RelativeLayout {
      * @param v 추가할 뷰
      */
     protected final void addViewInLeftContainer(View v) {
-	leftContainer.addView(v);
+        leftContainer.addView(v);
     }
 
     public void setLogo() {
-	titleContainer.setVisibility(View.GONE);
-	titleLogo.setVisibility(View.VISIBLE);
+        titleContainer.setVisibility(View.GONE);
+        titleLogo.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -99,9 +99,9 @@ public abstract class TitleContainer extends RelativeLayout {
      * @param title 타이틀로 사용 할 문자열
      */
     public void setTitle(String title) {
-	titleContainer.setText(title);
-	titleContainer.setVisibility(View.VISIBLE);
-	titleLogo.setVisibility(View.GONE);
+        titleContainer.setText(title);
+        titleContainer.setVisibility(View.VISIBLE);
+        titleLogo.setVisibility(View.GONE);
     }
 
     /**
@@ -110,7 +110,7 @@ public abstract class TitleContainer extends RelativeLayout {
      * @param titleRes 타이틀로 사용할 문자열의 아이디
      */
     public void setTitle(int titleRes) {
-	setTitle(MatjiConstants.string(titleRes));
+        setTitle(MatjiConstants.string(titleRes));
     }
 
     /**
@@ -118,13 +118,13 @@ public abstract class TitleContainer extends RelativeLayout {
      * 
      * @param clickable
      */
-    private void childrenClickable(boolean clickable) {
-	for (int i = 0; i < rightContainer.getChildCount(); i++) {
-	    rightContainer.getChildAt(i).setClickable(clickable);
-	}
-	for (int i = 0; i < leftContainer.getChildCount(); i++) {
-	    leftContainer.getChildAt(i).setClickable(clickable);
-	}	
+    private void setChildrenClickable(boolean clickable) {
+        for (int i = 0; i < rightContainer.getChildCount(); i++) {
+            rightContainer.getChildAt(i).setClickable(clickable);
+        }
+        for (int i = 0; i < leftContainer.getChildCount(); i++) {
+            leftContainer.getChildAt(i).setClickable(clickable);
+        }	
     }
 
     /**
@@ -136,26 +136,26 @@ public abstract class TitleContainer extends RelativeLayout {
     public void removeRightButton(View button) {
         rightContainer.removeView((View) button.getTag(R.string.tag_button_wrapper));
     }
-    
+
     public void showNewIcon(View button) {
         ((View) button.getTag(R.string.tag_new_icon)).setVisibility(View.VISIBLE);
     }
-    
+
     public void dismissNewIcon(View button) {
         ((View) button.getTag(R.string.tag_new_icon)).setVisibility(View.GONE);
     }
-    
+
     /**
      * 버튼들을 클릭하지 못하도록 설정한다.
      */
     public void lock() {
-	childrenClickable(false);
+        setChildrenClickable(false);
     }
 
     /**
      * 버튼들을 클릭할 수 있도록 설정한다.
      */
     public void unlock() {
-	childrenClickable(true);
+        setChildrenClickable(true);
     }
 }
