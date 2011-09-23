@@ -98,8 +98,8 @@ public class UserCell extends Cell implements Followable {
 
             @Override
             public void postUnfollowRequest() {
-                UserCell.this.user.setFollowerCount(UserCell.this.user.getFollowerCount() - 1);
-                refresh();
+            	UserCell.this.user.setFollowerCount(UserCell.this.user.getFollowerCount() - 1);
+            	refresh();
             }
 
             @Override

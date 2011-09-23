@@ -493,10 +493,15 @@
   </style>
   
   <style name="TitleText" parent="DefaultHeightFill">
-  	<item name="android:gravity">center_vertical</item>
-  	<item name="android:text">맛있는 지도</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:text">맛있는 지도</item>
     <item name="android:textSize">@dimen/title_container_txt_size</item>
-  	<item name="android:textColor">@color/BLACK</item>
+    <item name="android:textColor">@color/BLACK</item>
+  </style>
+
+  <style name="TitleLogo" parent="DefaultWrap">
+    <item name="android:background">@null</item>
+    <item name="android:src">@drawable/navigationbar_logo</item>
   </style>
   
   <!-- Profile -->

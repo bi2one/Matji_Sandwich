@@ -2,9 +2,11 @@ package com.matji.sandwich.session;
 
 import android.content.Context;
 import android.util.Log;
+import android.location.Location;
 
 import com.google.android.maps.GeoPoint;
 
+import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.http.request.GeocodeHttpRequest.Country;
 

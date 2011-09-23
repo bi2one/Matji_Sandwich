@@ -107,6 +107,10 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     public void setCenterNotAnimate(GeoPoint point) {
 	mapController.setCenter(point);
     }
+
+    public void setCenterNotAnimate(Location location) {
+	setCenterNotAnimate(new LocationToGeoPointAdapter(location));
+    }
     
     public void onMapCenterChanged(GeoPoint point) {
 	sessionUtil.setBound(getBound(BoundType.MAP_BOUND_NE),
@@ -143,10 +147,15 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	    }
 	}
 
-	prevLocation = location;
 	sessionUtil.setNearBound(new LocationToGeoPointAdapter(location));
 	mapController.zoomToSpan(sessionUtil.getBasicLatSpan(), sessionUtil.getBasicLngSpan());
-	setCenter(location);
+	
+	if (prevLocation == null) {
+	    setCenterNotAnimate(location);
+	} else {
+	    setCenter(location);
+	}
+	prevLocation = location;
     }
 
     public void onLocationExceptionDelivered(int startedFromTag, MatjiException e) {

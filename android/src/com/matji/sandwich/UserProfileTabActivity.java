@@ -11,6 +11,7 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.RoundTabHost;
+import com.matji.sandwich.widget.UserProfileView;
 
 public class UserProfileTabActivity extends BaseTabActivity implements Loginable {
 
@@ -23,7 +24,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     private LoginView loginView;
     private Intent profileIntent;
     private Intent tagIntent;
-
+    
     public static final String USER = "UserProfileTabActivity.user";
     public static final String IS_MAIN_TAB_ACTIVITY = "UserProfileTabActivity.is_main_tab_activity";
     
@@ -52,7 +53,8 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     }
 
     public void setUser(User user) {    // user가 저장되면 탭도 같이 바뀌어야 함.
-        UserProfileTabActivity.user = user;
+    	
+    	UserProfileTabActivity.user = user;
         profileIntent = new Intent(this, UserProfileActivity.class);
         profileIntent.putExtra(UserProfileActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
 
@@ -131,7 +133,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     }
 
     public void refresh() {
-
+    	
     }
 
     @Override

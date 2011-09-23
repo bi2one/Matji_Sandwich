@@ -60,42 +60,42 @@ public class GpsManager implements LocationListener {
     }
 
     private void notifyLastKnownLocation() {
-		Location gpsLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		Location netLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-		Location lastLoc = null;
+	Location gpsLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+	Location netLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+	Location lastLoc = null;
 		
-		if (gpsLoc != null && netLoc != null){
-			if (gpsLoc.getTime() > netLoc.getTime()){
-				lastLoc = gpsLoc;
-			} else {
-				lastLoc = netLoc;
-			}
+	if (gpsLoc != null && netLoc != null){
+	    if (gpsLoc.getTime() > netLoc.getTime()){
+		lastLoc = gpsLoc;
+	    } else {
+		lastLoc = netLoc;
+	    }
 		
-		}else if (gpsLoc != null){
-			lastLoc = gpsLoc;	
-		}else if (netLoc != null){
-			lastLoc = netLoc;
-		}
+	}else if (gpsLoc != null){
+	    lastLoc = gpsLoc;	
+	}else if (netLoc != null){
+	    lastLoc = netLoc;
+	}
 		
-		if (lastLoc != null){
-			lastLoc.setAccuracy(1000);
-			notifyLocationChanged(lastLoc);
-		}
+	if (lastLoc != null){
+	    lastLoc.setAccuracy(1000);
+	    notifyLocationChanged(lastLoc);
+	}
     }
 
     private void requestLocationUpdatesGps() throws MatjiException {
-		majorProvider = LocationManager.GPS_PROVIDER;
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-						       GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-						       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
+	majorProvider = LocationManager.GPS_PROVIDER;
+	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+					       GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
+	locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+					       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
     }
 
     private void requestLocationUpdatesNetwork() throws MatjiException {
-		majorProvider = LocationManager.NETWORK_PROVIDER;
-		matjiListener.onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-						       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
+	majorProvider = LocationManager.NETWORK_PROVIDER;
+	matjiListener.onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
+	locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+					       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
     }
 
     private void notifyLocationChanged(Location loc) {
@@ -130,41 +130,41 @@ public class GpsManager implements LocationListener {
     }
     
     public void onStatusChanged(String provider, int status, Bundle extras) {
-		if (provider.equals(majorProvider)) {
-		    switch(status) {
-		    	case LocationProvider.OUT_OF_SERVICE:
-			    matjiListener.onLocationExceptionDelivered(startFromTag, new GpsOutOfServiceMatjiException());
-			    break;
-		    	case LocationProvider.TEMPORARILY_UNAVAILABLE:
-			    matjiListener.onLocationExceptionDelivered(startFromTag, new GpsTemporarilyUnavailableMatjiException());
-			    break;
-		    	case LocationProvider.AVAILABLE:
-			    matjiListener.onLocationExceptionDelivered(startFromTag, new GpsAvailableMatjiException());
-			    break;
-		    }
-		}
+	if (provider.equals(majorProvider)) {
+	    switch(status) {
+	    case LocationProvider.OUT_OF_SERVICE:
+		matjiListener.onLocationExceptionDelivered(startFromTag, new GpsOutOfServiceMatjiException());
+		break;
+	    case LocationProvider.TEMPORARILY_UNAVAILABLE:
+		matjiListener.onLocationExceptionDelivered(startFromTag, new GpsTemporarilyUnavailableMatjiException());
+		break;
+	    case LocationProvider.AVAILABLE:
+		matjiListener.onLocationExceptionDelivered(startFromTag, new GpsAvailableMatjiException());
+		break;
+	    }
+	}
     }
 
     public void onLocationChanged(Location location) {
     	Log.d("GPS", location.getProvider().toString() + " ; Accuracy is " +location.getAccuracy());
-		if (!gpsPerformed && location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
-		    gpsPerformed = true;
-		    // Log.d("LOCATION_CHANGED", "gps_provider");
-		    locationManager.removeUpdates(this);
-		    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-							   GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
-		} else if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER)) {
-		    // Log.d("LOCATION_CHANGED", "network_provider");
-		    matjiListener.onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
-		}
-		// Log.d("LOCATION_CHANGED", "final");
-		notifyLocationChanged(location);
+	if (!gpsPerformed && location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
+	    gpsPerformed = true;
+	    // Log.d("LOCATION_CHANGED", "gps_provider");
+	    locationManager.removeUpdates(this);
+	    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+						   GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
+	} else if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER)) {
+	    // Log.d("LOCATION_CHANGED", "network_provider");
+	    matjiListener.onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
+	}
+	// Log.d("LOCATION_CHANGED", "final");
+	notifyLocationChanged(location);
     }
 
     private void startLocationSettingsActivity() {
-		Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.addCategory(Intent.CATEGORY_DEFAULT);
-		context.startActivity(intent);
+	Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	intent.addCategory(Intent.CATEGORY_DEFAULT);
+	context.startActivity(intent);
     }
 }
