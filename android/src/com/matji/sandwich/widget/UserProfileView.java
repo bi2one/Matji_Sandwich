@@ -140,7 +140,7 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
         intro.setText(user.getIntro());
         blog.setText(user.getWebsite());
         followingCount.setText(user.getFollowingCount() + "");
-        followerCount.setText(user.getFollowerCount()+"");
+        followerCount.setText(user.getFollowerCount() + "");
         findCount.setText(user.getDiscoverStoreCount()+"");
         bookmarkCount.setText(user.getBookmarkStoreCount()+"");
 

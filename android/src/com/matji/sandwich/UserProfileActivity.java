@@ -1,7 +1,10 @@
 package com.matji.sandwich;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.session.Session;
@@ -17,7 +20,7 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
     private UserTitle title;
     private UserCell userCell;    
     private UserProfileView userProfileView;
-
+    
     private Session session;
 
     public static final String USER = "UserProfileActivity.user";
@@ -41,7 +44,7 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
         title = (UserTitle) findViewById(R.id.Titlebar);
         userCell = (UserCell) findViewById(R.id.UserCell);
         userProfileView = (UserProfileView) findViewById(R.id.user_profile_view);
-
+        
         if (!isMainTabActivity) {
             title.setIdentifiable(this);
             title.setUser(UserProfileTabActivity.user);
