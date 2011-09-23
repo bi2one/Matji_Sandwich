@@ -130,14 +130,16 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
         case HttpRequestManager.FOLLOW_REQUEST:
             dbProvider.insertFollowing(user.getId());
             session.getCurrentUser().setFollowingCount(session.getCurrentUser().getFollowingCount() + 1);
-            
+
             postFollowRequest();
+            
             break;
         case HttpRequestManager.UN_FOLLOW_REQUEST:
             dbProvider.deleteFollowing(user.getId());
             session.getCurrentUser().setFollowingCount(session.getCurrentUser().getFollowingCount() - 1);
 
             postUnfollowRequest();
+
             break;
         }
     }
