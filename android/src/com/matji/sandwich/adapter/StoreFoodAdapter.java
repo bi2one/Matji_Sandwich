@@ -80,6 +80,7 @@ public class StoreFoodAdapter extends MBaseAdapter {
         } else {
             foodElement.name.setText(storeFood.getFood().getName());
             foodElement.count.setText(storeFood.getLikeCount()+"");
+            foodElement.count.setVisibility(View.VISIBLE);
             foodElement.line.setVisibility(View.VISIBLE);
             foodElement.wrapper.setOnClickListener(new OnClickListener() {
 
