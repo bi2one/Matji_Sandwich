@@ -14,7 +14,15 @@ import android.graphics.drawable.Drawable;
  *
  */
 public class MatjiConstants {
+
     private static Resources mResources;
+    
+    public static final int MIN_NICK_LENGTH = 2;
+    public static final int MAX_NICK_LENGTH = 12;
+    public static final int MIN_PASSWORD_LENGTH = 6;
+    public static final int MAX_PASSWORD_LENGTH = 20;
+    public static final int MIN_FOOD_NAME_LENGTH = 1;
+    public static final int MAX_FOOD_NAME_LENGTH = 12;
 
     public static void setContext(Context context) {
         mResources = context.getResources();

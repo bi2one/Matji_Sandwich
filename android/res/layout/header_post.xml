@@ -11,7 +11,7 @@
 		style="@style/DefaultWrap"
 		android:layout_marginLeft="@dimen/user_cell_margin_left"
 		android:layout_toRightOf="@id/header_post_profile_wrapper"
-		android:layout_toLeftOf="@+id/header_post_menu_btn_wrapper">
+		android:layout_toLeftOf="@+id/header_post_menu_btn">
 		<com.matji.sandwich.widget.BoldStyleTextView
 			android:id="@+id/header_post_nick"
 			style="@style/LinkifyName" />
@@ -87,22 +87,18 @@
 		<com.matji.sandwich.widget.BoldStyleTextView
 			android:id="@+id/header_post_like_count"
 			style="@style/row_post_Count"
+			android:drawableLeft="@drawable/icon_hand01"
+			android:drawablePadding="@dimen/default_drawable_padding"
 			android:layout_below="@id/header_post_previews"
-			android:layout_toRightOf="@id/header_post_divider2"
-			android:drawableLeft="@drawable/icon_hand01" />
+			android:layout_toRightOf="@id/header_post_divider2" />
 	</RelativeLayout>
-	<RelativeLayout
-		android:id="@id/header_post_menu_btn_wrapper"
+
+	<ImageButton
+		android:id="@id/header_post_menu_btn"
 		android:layout_width="@dimen/quickaction_btn_width"
 		android:layout_height="@dimen/quickaction_btn_height"
+		android:layout_alignParentRight="true"
 		android:layout_centerVertical="true"
-		android:layout_alignParentRight="true">
-		<ImageButton
-			android:id="@+id/header_post_menu_btn"
-			style="@style/DefaultWrap"
-			android:background="@color/matji_transparent"
-			android:src="@drawable/icon_menu"
-			android:layout_centerInParent="true">
-		</ImageButton>
-	</RelativeLayout>
+		android:background="@null"
+		android:src="@drawable/icon_menu" />
 </RelativeLayout>

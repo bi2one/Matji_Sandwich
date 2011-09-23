@@ -109,7 +109,7 @@ public abstract class TitleContainer extends RelativeLayout {
 	 * 
 	 * @param clickable
 	 */
-	private void childrenClickable(boolean clickable) {
+	private void setChildrenClickable(boolean clickable) {
 		for (int i = 0; i < rightContainer.getChildCount(); i++) {
 			rightContainer.getChildAt(i).setClickable(clickable);
 		}
@@ -140,13 +140,13 @@ public abstract class TitleContainer extends RelativeLayout {
 	 * 버튼들을 클릭하지 못하도록 설정한다.
 	 */
 	public void lock() {
-		childrenClickable(false);
+		setChildrenClickable(false);
 	}
 
 	/**
 	 * 버튼들을 클릭할 수 있도록 설정한다.
 	 */
 	public void unlock() {
-		childrenClickable(true);
+		setChildrenClickable(true);
 	}
 }

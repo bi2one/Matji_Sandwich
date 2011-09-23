@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +44,8 @@ import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.ProfileImageView;
 import com.matji.sandwich.widget.dialog.ActionItem;
 import com.matji.sandwich.widget.dialog.QuickActionDialog;
+import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
 
 /**
  * {@link Post} Adapter.
@@ -361,10 +361,6 @@ public class PostSectionedAdapter extends SectionedAdapter {
 
         private int position;
 
-        private static final int LIKE_REQUEST = 10;
-        private static final int UN_LIKE_REQUEST = 11;
-        private static final int DELETE_REQUEST = 12;
-
         /**
          * 기본 생성자.
          * 
@@ -459,7 +455,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             }
 
             ((LikeHttpRequest) request).actionPostLike(post.getId());
-            manager.request(spinnerContainer, request, LIKE_REQUEST, this);
+            manager.request(spinnerContainer, request, HttpRequestManager.LIKE_REQUEST, this);
             ((Post) data.get(position)).setLikeCount(post.getLikeCount() + 1);
         }
 
@@ -473,7 +469,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             }
 
             ((LikeHttpRequest) request).actionPostUnLike(post.getId());
-            manager.request(spinnerContainer, request, UN_LIKE_REQUEST, this);
+            manager.request(spinnerContainer, request, HttpRequestManager.UN_LIKE_REQUEST, this);
             ((Post) data.get(position)).setLikeCount(post.getLikeCount() - 1);
         }
 
@@ -487,20 +483,19 @@ public class PostSectionedAdapter extends SectionedAdapter {
             if (activity.getParent() != null) {
                 activity = activity.getParent();
             }
-            AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-            alert.setTitle(R.string.default_string_delete);
-            alert.setMessage(R.string.default_string_check_delete);
-            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            
+            SimpleConfirmDialog dialog = new SimpleConfirmDialog(activity, R.string.default_string_check_delete);
+            dialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
+                
                 @Override
-                public void onClick(DialogInterface arg0, int arg1) {
+                public void onConfirmClick(SimpleDialog dialog) {
                     deleteRequest(post);
                 }
-            }); 
-            alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                
                 @Override
-                public void onClick(DialogInterface arg0, int arg1) {}
+                public void onCancelClick(SimpleDialog dialog) {}
             });
-            alert.show();
+            dialog.show();
         }
 
         /**
@@ -515,7 +510,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
                 }
 
                 ((PostHttpRequest) request).actionDelete(post.getId());
-                manager.request(spinnerContainer, request, DELETE_REQUEST, this);
+                manager.request(spinnerContainer, request, HttpRequestManager.POST_DELETE_REQUEST, this);
             }
         }
 
@@ -537,16 +532,16 @@ public class PostSectionedAdapter extends SectionedAdapter {
 
             switch (tag) {
             // TODO Auto-generated method stub
-            case LIKE_REQUEST:
+            case HttpRequestManager.LIKE_REQUEST:
                 Like like = new Like();
                 like.setForeignKey(((Post) PostSectionedAdapter.this.data.get(position)).getId());
                 like.setObject(DBProvider.POST);
                 dbProvider.insertLike(like);
                 break;
-            case UN_LIKE_REQUEST:
+            case HttpRequestManager.UN_LIKE_REQUEST:
                 dbProvider.deleteLike(((Post) PostSectionedAdapter.this.data.get(position)).getId(), DBProvider.POST);
                 break;
-            case DELETE_REQUEST:
+            case HttpRequestManager.POST_DELETE_REQUEST:
                 PostSectionedAdapter.this.data.remove(position);
                 break;
             }
