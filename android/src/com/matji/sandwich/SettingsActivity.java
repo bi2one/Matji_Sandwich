@@ -3,7 +3,10 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -57,7 +60,8 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     private TextView guideText;
     private TextView reportText;
     private TextView versionText;
-
+    private Button updateButton;
+    
     private boolean isForceChecked = false;
 
     public HttpRequest request;
@@ -88,6 +92,9 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         editProfileWrapper = findViewById(R.id.settings_account_edit_profile);
         noticeWrapper = findViewById(R.id.settings_service_notice_wrapper);
         noticeText = (TextView) findViewById(R.id.settings_service_notice);
+        versionText = (TextView) findViewById(R.id.settings_service_version_name);
+        versionText.setText("Ver " + this.getResources().getString(R.string.settings_service_version_name));
+        updateButton = (Button) findViewById(R.id.settings_service_update_btn);
         //        availableCheck = (CheckBox) findViewById(R.id.settings_location_information_available_check);
 
         alarmTitle = findViewById(R.id.settings_alarm_settings);
@@ -161,6 +168,15 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
                 startActivity(intent);                
             }
         });
+        
+        updateButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=맛있는지도"));
+                startActivity(intent);
+			}
+		});
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.listener.LikeStoreListListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.widget.title.UserTitle;
 import com.matji.sandwich.widget.title.button.FollowButton.Followable;
 
 /**
@@ -98,13 +99,13 @@ public class UserCell extends Cell implements Followable {
 
             @Override
             public void postUnfollowRequest() {
-            	UserCell.this.user.setFollowerCount(UserCell.this.user.getFollowerCount() - 1);
+            	UserTitle.title_user.setFollowerCount(UserTitle.title_user.getFollowerCount() - 1);
             	refresh();
             }
 
             @Override
             public void postFollowRequest() {
-                UserCell.this.user.setFollowerCount(UserCell.this.user.getFollowerCount() + 1);
+                UserTitle.title_user.setFollowerCount(UserTitle.title_user.getFollowerCount() + 1);
                 refresh();
             }
         };

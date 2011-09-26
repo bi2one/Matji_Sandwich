@@ -23,6 +23,7 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.cell.UserCell;
+import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserProfileView extends RelativeLayout implements OnClickListener, Refreshable {
     private User user;
@@ -95,7 +96,7 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.user = UserTitle.title_user;
     }
 
     public void onFollowingButtonClicked(View v) {
