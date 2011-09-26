@@ -78,6 +78,8 @@ ActivityStartable {
         sessionUtil.setCenter(centerPoint);
 
         if (GeoPointUtil.geoPointEquals(prevPoint, centerPoint)) {
+            geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
+            requestManager.request(addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
             listView.requestReload();
         } else {
             geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
