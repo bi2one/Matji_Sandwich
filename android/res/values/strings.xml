@@ -82,7 +82,6 @@
   <!-- default String... -->
   <string name="default_string_nickname">닉네임</string>
   <string name="default_string_website">웹사이트</string>
-  <string name="default_string_delete">삭제</string>
   <string name="default_string_check_delete">삭제할까요?</string>
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">%1$s의 맛집기행</string>
@@ -289,6 +288,7 @@
   <string name="hint_write_nick">닉네임 입력 (최소 2자 ~ 최대 12자)</string>
   <string name="hint_write_intro">소개글 입력</string>
   <string name="hint_write_website">블로그, 웹사이트 주소 입력</string>
+  <string name="hint_write_store_food">메뉴명 입력</string>
   <string name="hint_email">이메일</string>
   <string name="hint_nickname">닉네임</string>
   <string name="hint_password">비밀번호</string>
@@ -495,7 +495,7 @@
   <string name="store_food_list_menu">등록된 메뉴</string>
     
   <!-- StoreFoodAdapter.java -->
-  <string name="store_food_add">신규 메뉴 추가</string>
+  <string name="store_food_add">신규 메뉴 등록</string>
     
   <!-- activity_store_food.xml -->
   <string name="store_food_caution">메뉴 중 흐린 글씨는 불확실 하다고 신고된 정보입니다.</string>
@@ -517,8 +517,8 @@
   <string name="register_write_email">이메일을 입력해 주세요.</string>
   <string name="register_write_nickname">닉네임을 입력해 주세요. 12자까지 가능합니다.</string>
   <string name="register_write_password">비밀번호를 입력해 주세요.</string>
-  <string name="register_clause">약관동의</string>
-  <string name="register_view_clause">(약관보기)</string>
+  <string name="register_acceptance_of_terms">약관동의</string>
+  <string name="register_view_acceptance_of_terms">(약관보기)</string>
 
   <!-- StoreLocationMapActivity.java -->
   <string name="store_location_header">\'%1$s\'의 지도</string>
@@ -531,4 +531,22 @@
 
   <!-- PhoneCallUtil.java -->
   <string name="phone_call_confirm">이곳에 전화를 거시겠습니까?</string>
+  
+  <!-- RegisterActivity.java -->
+  <string name="register_email_is_null">이메일을 입력해 주세요.</string>
+  <string name="register_email_is_incorrect">이메일이 올바르지 않습니다.</string>
+  <string name="register_nickname_is_null">닉네임을 입력해 주세요.</string>
+  <string name="register_nickname_too_short_or_too_long">닉네임의 길이를 확인해 주세요.\n최소 2자 ~ 최대 12자</string>
+  <string name="register_password_is_null">비밀번호를 입력해 주세요.</string>
+  <string name="register_password_too_short_or_too_long">비밀번호의 길이를 확인해 주세요.\n최소 6자 ~ 최대 20자</string>
+  <string name="register_password_is_incorrect">비밀번호를 확인해 주세요.</string>
+  <string name="register_plz_accept">약관에 동의해 주세요.</string>
+  <string name="register_success">회원가입이 완료되었습니다.</string>
+  
+  <!-- activity_store_food_add.xml -->
+  <string name="store_food_add_guide">\'%1$s\'에\n추가할 메뉴명을 입력하세요.</string>
+  
+  <!-- Title -->
+  <string name="title_store_food_add">메뉴추가</string>
+  
 </resources>

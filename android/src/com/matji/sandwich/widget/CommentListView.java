@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +20,8 @@ import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.DisplayUtil;
+import com.matji.sandwich.widget.PostHeader.PostDeleteListener;
+import com.matji.sandwich.widget.PostHeader.PostEditListener;
 
 public class CommentListView extends RequestableMListView {
 	private HttpRequest request;
@@ -51,6 +54,20 @@ public class CommentListView extends RequestableMListView {
 		
 		header = new PostHeader(getContext());
 		addHeaderView(header);
+	}
+
+    public void setPostDeleteListener(PostDeleteListener listener) {
+        header.setPostDeleteListener(listener);
+    }
+    
+	public void setPostEditListener(PostEditListener listener) {
+	    header.setPostEditListener(listener);
+	}
+	
+	@Override
+	public void setActivity(Activity activity) {
+	    super.setActivity(activity);
+	    header.setActivity(activity);
 	}
 	
 	public void setPost(Post post) {

@@ -105,8 +105,8 @@ public class StoreInfoCell extends Cell {
             ((TextView) findViewById(R.id.cell_store_food)).setText(MatjiConstants.string(R.string.cell_store_not_exist_menu));
         } else {
             String foods = foodList.get(0).getName();
-            for (Food food : foodList) {
-                foods += ", " + food.getName();
+            for (int i = 1; i < foodList.size(); i++) {
+                foods += ", " + foodList.get(i).getName();
             }
             ((TextView) findViewById(R.id.cell_store_food)).setText(foods);
             

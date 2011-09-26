@@ -2,11 +2,14 @@ package com.matji.sandwich.session;
 
 import android.content.Context;
 import android.util.Log;
+import android.location.Location;
 
 import com.google.android.maps.GeoPoint;
 
+import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 import com.matji.sandwich.data.provider.PreferenceProvider;
-import com.matji.sandwich.http.request.GeocodeHttpRequest.Country;
+
+import java.util.Locale;
 
 public class SessionMapUtil {
     private static final int LAT_NEAR_BASIC_SPAN = 3000;
@@ -82,7 +85,7 @@ public class SessionMapUtil {
 	return new GeoPoint(latSW, lngSW);
     }
 
-    public Country getCurrentCountry() {
-	return Country.KOREA;
+    public Locale getCurrentCountry() {
+	return Locale.getDefault();
     }
 }

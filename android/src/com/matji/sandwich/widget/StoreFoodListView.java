@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.adapter.StoreFoodAdapter;
+import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
@@ -35,8 +36,13 @@ public class StoreFoodListView extends RequestableMListView {
 
     public void setStore(Store store) {
         this.store = store;
+        ((StoreFoodAdapter) getMBaseAdapter()).setStore(store);
     }
 
+    public void setIdentifiable(Identifiable identifiable) {
+        ((StoreFoodAdapter) getMBaseAdapter()).setIdentifiable(identifiable);
+    }
+    
     @Override
     public RequestCommand request() {
         if (request == null || !(request instanceof StoreFoodHttpRequest)) {

@@ -3,52 +3,58 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.UserHttpRequest;
-import com.matji.sandwich.session.Session;
+import com.matji.sandwich.http.request.StoreFoodHttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
 
-public class UserIntroEditActivity extends BaseActivity implements Completable, Requestable {
+public class StoreFoodAddActivity extends BaseActivity implements Completable, Requestable {
 
-    private Session session;
-    private UserHttpRequest request;
+    private StoreFoodHttpRequest request;
     private HttpRequestManager manager;
 
     private CompletableTitle title;
     private EditText field;
-    
+    private TextView guide;
+    private Store store;
+
+    public static final String STORE = "StoreFoodAddActivity.store";
+
     public int setMainViewId() {
-        return R.id.activity_user_intro_edit;
+        return R.id.activity_store_food_add;
     }
 
     @Override
     protected void init() {
-        setContentView(R.layout.activity_user_intro_edit);
+        setContentView(R.layout.activity_store_food_add);
 
-        session = Session.getInstance(this);
-        request = new UserHttpRequest(this);
+        store = (Store) getIntent().getParcelableExtra(STORE);
+
+        request = new StoreFoodHttpRequest(this);
         manager = HttpRequestManager.getInstance(this);
 
         title = (CompletableTitle) findViewById(R.id.Titlebar);
-        field = (EditText) findViewById(R.id.user_intro_edit_field);
+        field = (EditText) findViewById(R.id.store_food_name_field);
+        guide = (TextView) findViewById(R.id.store_food_add_guide);
 
-        title.setTitle(R.string.default_string_intro);
+        title.setTitle(R.string.title_store_food_add);
         title.setCompletable(this);
         title.lockCompletableButton();
         TextWatcher tw = new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                if (count == 0 
-                        && field.getText().toString().trim().equals(
-                                session.getCurrentUser().getIntro())) {
+                if (field.getText().length() < MatjiConstants.MIN_FOOD_NAME_LENGTH) {
                     title.lockCompletableButton();
                 } else {
                     title.unlockCompletableButton();
@@ -61,25 +67,26 @@ public class UserIntroEditActivity extends BaseActivity implements Completable, 
             @Override
             public void afterTextChanged(Editable s) {}
         };
+        field.setFilters(new InputFilter[] {
+                new InputFilter.LengthFilter(MatjiConstants.MAX_FOOD_NAME_LENGTH)
+        });
         field.addTextChangedListener(tw);
-        field.setText(session.getCurrentUser().getIntro());
+        guide.setText(
+                String.format(
+                        MatjiConstants.string(R.string.store_food_add_guide),
+                        store.getName()));
     }
 
     @Override
     public void complete() {
         title.lockCompletableButton();
-        request.actionUpdateIntro(field.getText().toString().trim());
-        manager.request(getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
+        request.actionNew(store.getId(), field.getText().toString().trim());
+        manager.request(getMainView(), request, 0, this);
     }
 
     @Override
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-        switch (tag) { 
-        case HttpRequestManager.USER_UPDATE_REQUEST:
-            session.getCurrentUser().setIntro(field.getText().toString().trim());
-            finish();
-            break;
-        }
+        finish();
     }
 
     @Override

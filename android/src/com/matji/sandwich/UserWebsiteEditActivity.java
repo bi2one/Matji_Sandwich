@@ -67,6 +67,7 @@ public class UserWebsiteEditActivity extends BaseActivity implements Completable
 
     @Override
     public void complete() {
+        title.lockCompletableButton();
         request.actionUpdateWebsite(field.getText().toString().trim());
         manager.request(getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
     }
@@ -83,6 +84,7 @@ public class UserWebsiteEditActivity extends BaseActivity implements Completable
 
     @Override
     public void requestExceptionCallBack(int tag, MatjiException e) {
+        title.unlockCompletableButton();
         e.performExceptionHandling(this);
     }
 }

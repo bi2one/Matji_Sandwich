@@ -25,9 +25,6 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="AlarmActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name="AddMenuActivity"
-				  android:launchMode="singleTask"
-                  android:screenOrientation="portrait"></activity>
 		<activity android:name="LoginActivity"
 				  android:launchMode="singleTask"
                   android:screenOrientation="portrait"></activity>
@@ -74,7 +71,10 @@
 			  android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreSearchActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name="StoreFoodListActivity"
+        <activity android:name="StoreFoodAddActivity"
+                  android:windowSoftInputMode="adjustResize"
+                  android:screenOrientation="portrait"></activity>
+        <activity android:name="StoreFoodListActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="PostSearchActivity"
                   android:screenOrientation="portrait"></activity>

@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
@@ -12,12 +13,11 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.UserHttpRequest;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
 
 public class UserNickEditActivity extends BaseActivity implements Completable, Requestable {
-
-    private final int MIN_NICK_LENGTH = 2;
     
     private Session session;
     private UserHttpRequest request;
@@ -48,7 +48,7 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                if (field.getText().length() < MIN_NICK_LENGTH || field.getText().toString().trim().equals(session.getCurrentUser().getNick())) {
+                if (field.getText().length() < MatjiConstants.MIN_NICK_LENGTH || field.getText().toString().equals(session.getCurrentUser().getNick())) {
                     title.lockCompletableButton();
                 } else {
                     title.unlockCompletableButton();
@@ -61,12 +61,16 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
             @Override
             public void afterTextChanged(Editable s) {}
         };
+        field.setFilters(new InputFilter[] {
+           new InputFilter.LengthFilter(MatjiConstants.MAX_NICK_LENGTH)
+        });
         field.addTextChangedListener(tw);
         field.setText(session.getCurrentUser().getNick());
     }
 
     @Override
     public void complete() {
+        title.lockCompletableButton();
         request.actionUpdateNick(field.getText().toString().trim());
         manager.request(getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
     }
@@ -83,6 +87,7 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
 
     @Override
     public void requestExceptionCallBack(int tag, MatjiException e) {
+        title.unlockCompletableButton();
         e.performExceptionHandling(this);
     }
 }

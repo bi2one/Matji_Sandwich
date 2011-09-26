@@ -41,6 +41,7 @@ public class StoreFoodListActivity extends BaseActivity implements Refreshable {
         storeCell.addRefreshable(title);
 
         listView = (StoreFoodListView) findViewById(R.id.store_food_list);
+        listView.setIdentifiable(this);
         listView.addHeaderView(storeCell);
         listView.addHeaderView(new SubtitleHeader(this, R.string.store_food_list_menu).paddingBottom());
         listView.setStore(StoreDetailInfoTabActivity.store);
@@ -54,6 +55,12 @@ public class StoreFoodListActivity extends BaseActivity implements Refreshable {
         storeCell.refresh();
     }
 
+    @Override
+    protected void onFlowResume() {
+        super.onFlowResume();
+        storeCell.refresh();
+    }
+    
     @Override
     public void refresh() {
         listView.requestReload();

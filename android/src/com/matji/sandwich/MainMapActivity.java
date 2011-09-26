@@ -35,6 +35,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     private RelativeLayout addressWrapper;
     private View flipButton;
     private boolean currentViewIsMap;
+    private boolean isFirst;
     // private SessionRecentLocationUtil sessionLocationUtil;
     private Session session;
     private SessionMapUtil sessionMapUtil;
@@ -73,7 +74,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         flipMapViewImage = getResources().getDrawable(R.drawable.icon_location_map_selector);
         flipNearStoreImage = getResources().getDrawable(R.drawable.icon_location_list_selector);
         mapView.startMapCenterThread();
-        // lastCenter = sessionMapUtil.getCenter();
+	isFirst = true;
     }
 
     protected void onNotFlowResume() {
@@ -88,9 +89,13 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
 	    lastNeBound = null;
 	    lastSwBound = null;
 	}
+
+	if (!isFirst) {
+	    mapView.reload();
+	}
 	
-	mapView.reload();
         mapView.startMapCenterThread();
+	isFirst = false;
     }
 
     protected void onResume() {
@@ -136,7 +141,6 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
 	
 	int subIndex = (session.isLogin())? 1 : 0;
-	Log.d("=====", "subindex: " + subIndex);
         intent.putExtra(MainTabActivity.IF_SUB_INDEX, subIndex);
         startActivity(intent);
     }

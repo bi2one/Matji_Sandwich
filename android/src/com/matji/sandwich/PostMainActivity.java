@@ -18,22 +18,22 @@ import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.listener.LikeListener;
-import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.CommentInputBar;
 import com.matji.sandwich.widget.CommentListView;
+import com.matji.sandwich.widget.PostHeader.PostDeleteListener;
+import com.matji.sandwich.widget.PostHeader.PostEditListener;
 import com.matji.sandwich.widget.title.PageableTitle;
 import com.matji.sandwich.widget.title.PageableTitle.Pageable;
 
-public class PostMainActivity extends BaseActivity implements Requestable, Pageable {
+public class PostMainActivity extends BaseActivity implements Requestable, Pageable, PostDeleteListener, PostEditListener {
     private ArrayList<MatjiData> posts;
     private int position;
     private Post currentPost;
 
     private boolean showKeyboard;
 
-    private Session session;
     private HttpRequest request;
     private HttpRequestManager manager;
 
@@ -74,7 +74,6 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         super.init();
         setContentView(R.layout.activity_post);
 
-        session = Session.getInstance(this);
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         manager = HttpRequestManager.getInstance(this);
 
@@ -109,6 +108,8 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         pageableTitle.setPageable(this);                                    // Pageable 객체를 등록 
         pageableTitle.setTitle(R.string.default_string_post);               // 타이틀 설정
         commentListView.setPost(currentPost);                               // currentPost를 commentListView의 post로 저장
+        commentListView.setPostDeleteListener(this);
+        commentListView.setPostEditListener(this);
         commentListView.setActivity(this);
         commentListView.requestReload();
 
@@ -200,5 +201,16 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                 commentListView.requestReload();
             }
         }
+    }
+
+    @Override
+    public void postDelete() {
+        posts.remove(position);
+        finish();
+    }
+    
+    @Override
+    public void postEdit() {
+
     }
 }
