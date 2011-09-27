@@ -20,6 +20,7 @@ import com.matji.sandwich.data.AddressComponent;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
 import com.matji.sandwich.exception.GeocodeLocationInvalidMatjiException;
+import com.matji.sandwich.exception.GeocodeZeroResultMatjiException;
 import com.matji.sandwich.exception.GeocodeSearchInvalidMatjiException;
 
 import org.json.JSONException;
@@ -159,7 +160,7 @@ public class GeocodeParser implements MatjiParser {
     private void assertStatusOk(String status) throws MatjiException {
 	if (status.equals("OK")) {
 	} else if (status.equals("ZERO_RESULTS")) {
-	    throw new GeocodeSearchInvalidMatjiException();
+	    throw new GeocodeZeroResultMatjiException();
 	} else if (status.equals("OVER_QUERY_LIMIT")) {
 	    throw new GeocodeLocationInvalidMatjiException();
 	} else if (status.equals("REQUEST_DENIED")) {

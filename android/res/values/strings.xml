@@ -54,6 +54,9 @@
   <string name="exception_GeocodeSearchInvalidMatjiException">
     주소 검색이 올바르지 않습니다
   </string>
+  <string name="exception_GeocodeZeroResultMatjiException">
+    검색 결과가 없습니다
+  </string>
   <string name="exception_RegistStoreNameInvalidMatjiException">
     맛집 이름을 입력해주셔야 합니다
   </string>
@@ -556,5 +559,8 @@
   
   <!-- Title -->
   <string name="title_store_food_add">메뉴추가</string>
-  
+
+  <!-- search_result.xml -->
+  <string name="search_result_filled">검색 결과</string>
+  <string name="search_result_empty">검색 결과가 없습니다.</string>
 </resources>

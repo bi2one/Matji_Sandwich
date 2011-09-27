@@ -29,14 +29,19 @@
 	android:layout_alignParentRight="true" />
   </RelativeLayout>
 
-  <RelativeLayout style="@style/DefaultFill"
-		  android:id="@+id/activity_change_location_contents"
-		  android:layout_below="@id/activity_change_location_search" >
-    <com.matji.sandwich.widget.RecentChangedLocationView
-	android:id="@+id/activity_change_location_recent_view"
-	android:layout_below="@id/activity_change_location_search"
-	style="@style/DefaultFill" />
-  </RelativeLayout>
+  <ScrollView style="@style/DefaultWidthFill"
+	      android:layout_below="@id/activity_change_location_search" >
+    <RelativeLayout style="@style/DefaultFill"
+		    android:id="@+id/activity_change_location_contents">
+      <com.matji.sandwich.widget.SearchResultView
+	  android:id="@+id/activity_change_location_result"
+	  style="@style/DefaultWidthFill" />
+      <com.matji.sandwich.widget.RecentChangedLocationView
+	  android:id="@+id/activity_change_location_recent_view"
+	  android:layout_below="@id/activity_change_location_result"
+	  style="@style/DefaultWidthFill" />
+    </RelativeLayout>
+  </ScrollView>
   
   <ImageView style="@style/DefaultFill"
 	     android:id="@+id/activity_change_location_holder"

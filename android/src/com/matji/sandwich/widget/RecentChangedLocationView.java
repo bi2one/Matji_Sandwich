@@ -23,8 +23,6 @@ import java.util.ArrayList;
 public class RecentChangedLocationView extends LinearLayout implements MultiRoundButtonView.OnItemClickListener {
     private Activity activity;
     private Context context;
-    private View emptyView;
-    private View filledView;
     private MultiRoundButtonView locationButtons;
     private SessionRecentLocationUtil sessionUtil;
     private ArrayList<LocationSearchToken> recentSearchedList;
@@ -33,18 +31,15 @@ public class RecentChangedLocationView extends LinearLayout implements MultiRoun
 	super(context, attrs);
 	this.context = context;
 	LayoutInflater.from(context).inflate(R.layout.recent_changed_location, this, true);
-	emptyView = findViewById(R.id.recent_changed_location_empty);
-	filledView = findViewById(R.id.recent_changed_location_filled);
 	locationButtons = (MultiRoundButtonView) findViewById(R.id.recent_changed_location_locations);
 	locationButtons.init(this);
 	sessionUtil = new SessionRecentLocationUtil(context);
 	recentSearchedList = sessionUtil.getRecentList();
 
-	if (recentSearchedList.size() == 0) {
-	    showEmptyText();
-	} else {
-	    showFilledText();
-	}
+	if (recentSearchedList.size() != 0)
+	    setVisibility(View.VISIBLE);
+	else
+	    setVisibility(View.GONE);
 	
 	for (LocationSearchToken token : recentSearchedList) {
 	    Intent intent = new Intent();
@@ -60,17 +55,10 @@ public class RecentChangedLocationView extends LinearLayout implements MultiRoun
 	this.activity = activity;
     }
 
-    private void showEmptyText() {
-	emptyView.setVisibility(View.VISIBLE);
-	 filledView.setVisibility(View.GONE);
-    }
-
-    private void showFilledText() {
-	emptyView.setVisibility(View.GONE);
-	filledView.setVisibility(View.VISIBLE);
-    }
-
     public void onItemClick(View v, Intent intent) {
+	sessionUtil.push(intent.getStringExtra(ChangeLocationActivity.INTENT_KEY_LOCATION_NAME),
+			 intent.getIntExtra(ChangeLocationActivity.INTENT_KEY_LATITUDE, 0),
+			 intent.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE, 0));
 	activity.setResult(Activity.RESULT_OK, intent);
     	activity.finish();
     }

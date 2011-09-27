@@ -136,7 +136,4 @@
 
 	<!-- matji dialog -->
 	<color name="matji_dialog_gray">#947e4c</color>
-
-	<!-- change_location_activity.java -->
-	<color name="change_location_text_wrapper">#ffed9e</color>
 </resources>

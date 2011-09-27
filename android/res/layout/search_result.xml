@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/search_result">
+  <TextView style="@style/search_result_header"
+	    android:visibility="gone"
+	    android:id="@+id/search_result_filled"
+	    android:text="@string/search_result_filled" />
+  <TextView style="@style/search_result_header"
+	    android:visibility="gone"
+	    android:id="@+id/search_result_empty"
+	    android:text="@string/search_result_empty" />
+  <com.matji.sandwich.widget.MultiRoundButtonView
+      android:id="@+id/search_result_locations"
+      android:layout_below="@id/search_result_filled"
+      style="@style/DefaultWidthFill" />
+</RelativeLayout>
