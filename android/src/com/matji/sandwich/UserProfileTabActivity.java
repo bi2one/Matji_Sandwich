@@ -11,7 +11,7 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.RoundTabHost;
-import com.matji.sandwich.widget.UserProfileView;
+import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserProfileTabActivity extends BaseTabActivity implements Loginable {
 
@@ -48,7 +48,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         tabHost = (RoundTabHost) getTabHost();
         loginView = (LoginView) findViewById(R.id.login_view);
         
-        user = (isMainTabActivity) ? session.getCurrentUser() : (User) getIntent().getParcelableExtra(USER);
+        user = (isMainTabActivity) ? session.getCurrentUser() : UserTitle.title_user;
         setUser(user);
     }
 

@@ -96,7 +96,6 @@
 								android:gravity="center_vertical"
 								android:layout_centerVertical="true"
 								android:layout_marginRight="@dimen/default_distance"
-								android:layout_width="wrap_content"
 								android:layout_alignParentLeft="true"
 								android:layout_toLeftOf="@+id/settings_account_logout_btn"
 								android:layout_alignTop="@id/settings_account_logout_btn"
@@ -438,14 +437,45 @@
 					<View
 						style="@style/HorizontalLine" />
 					<!-- Version -->
-					<TextView
-						android:id="@+id/settings_service_version"
-						style="@style/settings_Row"
-						android:gravity="center_vertical"
-						android:background="@drawable/txtbox_u_selector"
-						android:text="@string/settings_service_version"
-						android:textSize="@dimen/settings_content_size"
-						android:textColor="@color/matji_gray" />
+					<RelativeLayout
+							android:id="@+id/settings_service_version"
+							android:gravity="center_vertical"
+							style="@style/settings_Row"
+							android:background="@drawable/txtbox_u_selector"
+							android:layout_width="fill_parent"
+							android:layout_height="@dimen/settings_row_height"
+							android:paddingLeft="@dimen/settings_row_padding"
+							android:paddingRight="@dimen/settings_row_padding"
+							android:paddingTop="0dp"
+							android:paddingBottom="0dp">
+							<TextView
+								android:id="@+id/settings_service_version_name"
+								style="@style/DefaultWrap"
+								android:singleLine="true"
+								android:gravity="center_vertical"
+								android:layout_centerVertical="true"
+								android:layout_marginRight="@dimen/default_distance"
+								android:layout_alignParentLeft="true"
+								android:layout_toLeftOf="@+id/settings_service_update_btn"
+								android:layout_alignTop="@id/settings_service_update_btn"
+								android:layout_alignBottom="@id/settings_service_update_btn"
+								android:text="@string/settings_service_version_name"
+								android:textSize="@dimen/settings_content_size"
+								android:textColor="@color/matji_gray" />
+							<Button
+								android:id="@id/settings_service_update_btn"
+                                android:layout_width="@dimen/settings_logout_btn_width"
+                                android:layout_height="@dimen/settings_logout_btn_height"
+								android:shadowRadius="1"
+								android:textColor="@color/matji_white"
+								android:textSize="@dimen/settings_logout_btn_txt_size"
+								android:shadowColor="@color/settings_logout_btn_txt_shadow"
+								android:shadowDy="-1.3"
+								android:background="@drawable/btn_yellow"
+								android:text="@string/settings_service_version_update"
+								android:layout_centerVertical="true"
+								android:layout_alignParentRight="true"></Button>
+						</RelativeLayout>
 				</LinearLayout>
 			</RelativeLayout>
 		</LinearLayout>

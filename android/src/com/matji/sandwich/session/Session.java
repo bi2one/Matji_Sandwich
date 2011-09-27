@@ -116,7 +116,7 @@ public class Session implements Requestable {
         }
     }
 
-    public boolean login(String userid, String password){
+    public boolean login(String userid, String password) {
         mManager = HttpRequestManager.getInstance(mContext);
         MeHttpRequest request = new MeHttpRequest(mContext);
         request.actionAuthorize(userid, password);
@@ -125,7 +125,7 @@ public class Session implements Requestable {
             Me me = (Me)data.get(0);
             saveMe(me);
             return true;
-        } catch (MatjiException e) {            
+        } catch (MatjiException e) {
             return false;
         }
         //        mManager.request(spinnerContainer, request, AUTHORIZE, this);

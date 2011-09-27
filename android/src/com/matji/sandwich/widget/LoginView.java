@@ -22,7 +22,6 @@ import com.matji.sandwich.session.Session.LoginAsyncTask;
 import com.matji.sandwich.session.SessionPrivateUtil;
 
 public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener {
-
     private Toast toast;
 
     private EditText idField;

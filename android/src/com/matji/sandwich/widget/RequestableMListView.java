@@ -136,22 +136,21 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
         hideRefreshView();
         Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
         if (!manager.isRunning() || canRepeat) {
+	    setSelection(1);
             Log.d("refresh", "requestReload()");
             initValue();
             manager.request(reloadSpinner, request(), REQUEST_RELOAD, this);
             nextValue();
-            setSelection(0);
         }
     }
 
     public void forceReload() {
         hideRefreshView();
-        Log.d("refresh", "forceReload()");
         Log.d("refresh", (getActivity() == null) ? "activity is null" : "activity is ok");
         initValue();
 	manager.request(reloadSpinner, request(), REQUEST_RELOAD, this);
+	loadingHeaderView.requestFocus();
         nextValue();
-        setSelection(0);
         setCanRepeat(true);
     }
 
@@ -196,6 +195,10 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
             adapter.addAll(data);
             adapter.notifyDataSetChanged();
 
+            if (tag == REQUEST_RELOAD) {
+		setSelection(0);
+            }
+	    
             // if (adapterData.size() <= limit) {
             // Log.d("refresh", "Will invoke onRefreshComplete()");
             onRefreshComplete();

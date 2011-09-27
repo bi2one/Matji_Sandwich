@@ -96,7 +96,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
         
         titles = new ArrayList<MainTabTitle>();
         mainTitle = new MainTitle(this);
-	mainTitle.setLogo();
+        mainTitle.setLogo();
         titles.add(mainTitle);
         matstoryTitle = new MatstoryTitle(this);
         matstoryTitle.setTitle(R.string.main_tab_title_mattalk);
