@@ -4,29 +4,27 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.UserTagPostListActivity;
+import com.matji.sandwich.StoreTagPostListActivity;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Tag;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
 
-public class UserTagCloudView extends TagCloudView implements Requestable, Refreshable {
+public class StoreTagCloudView extends TagCloudView implements Requestable, Refreshable {
     
     private HttpRequest request;
     private HttpRequestManager manager;
 
-    private User user;
+    private Store store;
 
     private ViewGroup spinnerContainer;
     
@@ -35,7 +33,7 @@ public class UserTagCloudView extends TagCloudView implements Requestable, Refre
      * 
      * @param context
      */
-    public UserTagCloudView(Context context, ArrayList<Tag> tags) {
+    public StoreTagCloudView(Context context, ArrayList<Tag> tags) {
         super(context, tags);
         init();
         show(tags);        
@@ -47,7 +45,7 @@ public class UserTagCloudView extends TagCloudView implements Requestable, Refre
      * @param context
      * @param attr
      */
-    public UserTagCloudView(Context context, AttributeSet attr) {
+    public StoreTagCloudView(Context context, AttributeSet attr) {
         super(context, attr);
         init();
     }
@@ -57,8 +55,8 @@ public class UserTagCloudView extends TagCloudView implements Requestable, Refre
     }
     
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setStore(Store store) {
+        this.store = store;
     }
     
     public void setSpinnerContainer(ViewGroup spinnerContainer) {
@@ -70,24 +68,20 @@ public class UserTagCloudView extends TagCloudView implements Requestable, Refre
             request = new TagHttpRequest(getContext());
         }
         
-        ((TagHttpRequest) request).actionUserTagListForCloud(user.getId());
+        ((TagHttpRequest) request).actionStoreTagListForCloud(store.getId());
 
         return request;
     }
     
     @Override
-    protected OnClickListener getListener(final Tag tag) {
+    protected OnClickListener getListener(Tag tag) {
         return new OnClickListener() {
             
             @Override
             public void onClick(View v) {
-                Log.d("Matji", tag.getTag()+"");
-                Log.d("Matji", tag.getCreatedAt()+"");
-                Log.d("Matji", tag.getCount()+"");
-                Log.d("Matji", tag.getTagId()+"");
-                Intent intent = new Intent(getContext(), UserTagPostListActivity.class);
-                intent.putExtra(UserTagPostListActivity.TAG, (Parcelable) tag);
-                getContext().startActivity(intent);
+//                Intent intent = new Intent(getContext(), StoreTagPostListActivity.class);
+//                intent.putExtra()
+//                getContext().startActivity(intent);
             }
         };
     }
@@ -118,8 +112,8 @@ public class UserTagCloudView extends TagCloudView implements Requestable, Refre
     
     @Override
     public void refresh(MatjiData data) {
-        if (data instanceof User) {
-            this.user = (User) data;
+        if (data instanceof Store) {
+            this.store = (Store) data;
             refresh();
         }        
     }

@@ -1,5 +1,8 @@
 package com.matji.sandwich.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Tag extends MatjiData {
 	protected int id;
 	protected int tag_id;
@@ -7,7 +10,45 @@ public class Tag extends MatjiData {
 	protected String updated_at;
 	protected int count;	
 	protected SimpleTag tag;
+
+	public Tag() {}
 	
+    public Tag(Parcel in) {
+        readFromParcel(in);
+    }
+
+    public static final Parcelable.Creator<Tag> CREATOR = new Parcelable.Creator<Tag>() {
+        public Tag createFromParcel(Parcel in) {
+            return new Tag(in);
+        }
+
+        public Tag[] newArray(int size) {
+            return new Tag[size];
+        }
+    };
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel dest, int arg1) {
+        dest.writeInt(id);
+        dest.writeInt(tag_id);
+        dest.writeString(created_at);
+        dest.writeString(updated_at);
+        dest.writeInt(count);
+        dest.writeValue(tag);
+    }
+
+    protected void readFromParcel(Parcel in) {
+        id = in.readInt();
+        tag_id = in.readInt();
+        created_at = in.readString();
+        updated_at = in.readString();
+        count = in.readInt();
+        tag = SimpleTag.class.cast(in.readValue(SimpleTag.class.getClassLoader()));
+    }
+    
 	public int getId() {
 		return id;
 	}

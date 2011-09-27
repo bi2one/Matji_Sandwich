@@ -17,7 +17,7 @@ import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.tag.UserTagCloudView;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserTagActivity extends BaseActivity implements Refreshable, LoginListener {
+public class UserTagCloudActivity extends BaseActivity implements Refreshable, LoginListener {
 
 	private Session session;
     private boolean isMainTabActivity;
@@ -29,13 +29,13 @@ public class UserTagActivity extends BaseActivity implements Refreshable, LoginL
     public static final String IS_MAIN_TAB_ACTIVITY = "UserTagActivity.is_main_tab_activity";
 
     public int setMainViewId() {
-        return R.id.activity_user_tag;
+        return R.id.activity_user_tag_cloud;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_tag);
+        setContentView(R.layout.activity_user_tag_cloud);
         
         session = Session.getInstance(this);
         session.addLoginListener(this);

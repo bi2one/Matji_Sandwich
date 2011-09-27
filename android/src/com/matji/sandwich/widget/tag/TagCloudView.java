@@ -3,11 +3,6 @@ package com.matji.sandwich.widget.tag;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.data.Tag;
-import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.widget.FlowLayout;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -19,6 +14,11 @@ import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
+
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.FlowLayout;
 
 /**
  * 태그 클라우드를 위한 뷰.
@@ -36,184 +36,191 @@ import android.widget.TextView;
  * 
  */
 public class TagCloudView extends FlowLayout {
-	private final int LINE_HEIGHT = (int) MatjiConstants.dimen(R.dimen.tag_line_height);		// TagCloudView 의 각 line 별 높이
 
-	/**
-	 * TagCloudView 에서 사용 되는 TextView.
-	 * Tag 를 전달 했을 때, 이 뷰에서 자동으로 처리해 Tag Cloud 를 해준다. 
-	 * 
-	 * @author mozziluv
-	 * @version 1.0
-	 */
-	class TagView extends TextView {
-		private final int PADDING = (int) MatjiConstants.dimen(R.dimen.default_distance);
-		private final int MAX_TAG_LENGTH = 10;				// 최대 태그 글자 수
-		private final int[] TAG_STEP = new int[] {			// 태그 Count 스탭
-				0, 2, 4, 7,
-		};
-		                                        
-		private final int[] TAG_TEXT_COLOR = new int[] {	// 태그 색
-				MatjiConstants.color(R.color.tag_color1),
-				MatjiConstants.color(R.color.tag_color2),
-				MatjiConstants.color(R.color.tag_color3),
-				MatjiConstants.color(R.color.tag_color4),
-		};
-		private final int[] TAG_TEXT_SIZE = new int[] {		// 태그 크기
-				(int) MatjiConstants.dimen(R.dimen.tag_size1),
-				(int) MatjiConstants.dimen(R.dimen.tag_size2),
-				(int) MatjiConstants.dimen(R.dimen.tag_size3),
-				(int) MatjiConstants.dimen(R.dimen.tag_size4),
-		};
+    private final int LINE_HEIGHT = (int) MatjiConstants.dimen(R.dimen.tag_line_height);		// TagCloudView 의 각 line 별 높이
 
-		/**
-		 * 태그가 존재 할 때, 태그를 넘겨주어 자동으로 옵션이 정해진 TextView 를 넘긴다.
-		 * 
-		 * @param context
-		 * @param tag
-		 */
-		public TagView(Context context, Tag tag) {
-			super(context);
-			init(tag);
-		}
+    /**
+     * TagCloudView 에서 사용 되는 TextView.
+     * Tag 를 전달 했을 때, 이 뷰에서 자동으로 처리해 Tag Cloud 를 해준다. 
+     * 
+     * @author mozziluv
+     * @version 1.0
+     */
+    class TagView extends TextView {
+        private final int PADDING = (int) MatjiConstants.dimen(R.dimen.default_distance);
+        private final int MAX_TAG_LENGTH = 10;				// 최대 태그 글자 수
+        private final int[] TAG_STEP = new int[] {			// 태그 Count 스탭
+                0, 2, 4, 7,
+        };
 
-		/**
-		 * 태그가 존재하지 않을 때, 메세지를 출력하도록 한다.
-		 * 
-		 * @param context
-		 * @param str
-		 */
-		public TagView(Context context, String str) {
-			super(context);
-			init(str);
-		}
+        private final int[] TAG_TEXT_COLOR = new int[] {	// 태그 색
+                MatjiConstants.color(R.color.tag_color1),
+                MatjiConstants.color(R.color.tag_color2),
+                MatjiConstants.color(R.color.tag_color3),
+                MatjiConstants.color(R.color.tag_color4),
+        };
+        private final int[] TAG_TEXT_SIZE = new int[] {		// 태그 크기
+                (int) MatjiConstants.dimen(R.dimen.tag_size1),
+                (int) MatjiConstants.dimen(R.dimen.tag_size2),
+                (int) MatjiConstants.dimen(R.dimen.tag_size3),
+                (int) MatjiConstants.dimen(R.dimen.tag_size4),
+        };
 
-		/**
-		 * 초기화 메소드.
-		 * 기본 크기 지정 및 콘텐츠의 정렬을 실행한다.
-		 * 
-		 */
-		protected void init() {
-			setMinHeight(LINE_HEIGHT);
-			setMaxHeight(LINE_HEIGHT);
-			setGravity(Gravity.CENTER);
-			setPadding(PADDING, PADDING, PADDING, PADDING);
-		}
+        /**
+         * 태그가 존재 할 때, 태그를 넘겨주어 자동으로 옵션이 정해진 TextView 를 넘긴다.
+         * 
+         * @param context
+         * @param tag
+         */
+        public TagView(Context context, Tag tag) {
+            super(context);
+            init(tag);
+        }
 
-		/**
-		 * 생성자 파라미터로 태그를 넘겼을 때, 태그 count 에 따라 색과 크기를 지정한 후 저장하고 초기화 한다.
-		 * 
-		 * @param tag 이 View 에서 보여 줄 Tag class
-		 */
-		private void init(Tag tag) {
-			String shortTag = "";
-			if (tag.getTag() != null)
-				shortTag = getShortTag(tag.getTag().getTag());
-			int length = shortTag.length();
-			int color = TAG_TEXT_COLOR[getIndex(tag.getCount())];
-			int size = TAG_TEXT_SIZE[getIndex(tag.getCount())];
+        /**
+         * 태그가 존재하지 않을 때, 메세지를 출력하도록 한다.
+         * 
+         * @param context
+         * @param str
+         */
+        public TagView(Context context, String str) {
+            super(context);
+            init(str);
+        }
 
-			SpannableString ss = new SpannableString(shortTag);
-			//글자색 변경
-			ss.setSpan(new ForegroundColorSpan(color), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			//글자크기 변경
-			ss.setSpan(new AbsoluteSizeSpan(size), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			setText(ss);
-			init();
-		}
+        /**
+         * 초기화 메소드.
+         * 기본 크기 지정 및 콘텐츠의 정렬을 실행한다.
+         * 
+         */
+        protected void init() {
+            setMinHeight(LINE_HEIGHT);
+            setMaxHeight(LINE_HEIGHT);
+            setGravity(Gravity.CENTER);
+            setPadding(PADDING, PADDING, PADDING, PADDING);
+        }
 
-		/**
-		 * 생성자 파라미터로 문자열을 넘겼을 때, 해당 문자열을 저장하고 초기화한다.
-		 * 
-		 * @param str 이 View 에서 보여 줄 String
-		 */
-		protected void init(String str) {
-			setText(str);
-			init();
-		}
+        /**
+         * 생성자 파라미터로 태그를 넘겼을 때, 태그 count 에 따라 색과 크기를 지정한 후 저장하고 초기화 한다.
+         * 
+         * @param tag 이 View 에서 보여 줄 Tag class
+         */
+        private void init(Tag tag) {
+            String shortTag = "";
+            if (tag.getTag() != null)
+                shortTag = getShortTag(tag.getTag().getTag());
+            int length = shortTag.length();
+            int color = TAG_TEXT_COLOR[getIndex(tag.getCount())];
+            int size = TAG_TEXT_SIZE[getIndex(tag.getCount())];
 
-		/**
-		 * 태그의 글자 수가 MAX_TAG_LENGTH 보다 많을 경우 줄여준다.
-		 * 
-		 * @param tag 길이를 조정할 태그
-		 * @return 길이가 조정 된 태그
-		 */
-		private String getShortTag(String tag) {
-			if (tag.length() > MAX_TAG_LENGTH) {
-				return tag.substring(0, MAX_TAG_LENGTH) + "...";
-			} else return tag;
-		}
+            SpannableString ss = new SpannableString(shortTag);
+            //글자색 변경
+            ss.setSpan(new ForegroundColorSpan(color), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            //글자크기 변경
+            ss.setSpan(new AbsoluteSizeSpan(size), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            setText(ss);
+            init();
+        }
 
-		/**
-		 * 파라미터로 전달받은 count를 가지고 
-		 * TAG_TEXT_COLOR, TAG_TEXT_SIZE 의 item을 얻기 위한 index를 계산해 리턴한다. 
-		 * 
-		 * @param count 옵션 index를 구할 태그의 count
-		 * @return count 에 맞는 index
-		 */
-		private int getIndex(int count) {
-			for (int i = TAG_STEP.length-1; i >= 0; i--) {
-				if (count > TAG_STEP[i]) {
-					return i;
-				}
-			}
-			
-			return 0;
-		}
-	}
+        /**
+         * 생성자 파라미터로 문자열을 넘겼을 때, 해당 문자열을 저장하고 초기화한다.
+         * 
+         * @param str 이 View 에서 보여 줄 String
+         */
+        protected void init(String str) {
+            setText(str);
+            init();
+        }
 
-	/**
-	 * 기본 생성자 (Java Code)
-	 * 
-	 * @param context
-	 */
-	public TagCloudView(Context context, ArrayList<Tag> tags) {
-		super(context);
-		show(tags);
-	}
+        /**
+         * 태그의 글자 수가 MAX_TAG_LENGTH 보다 많을 경우 줄여준다.
+         * 
+         * @param tag 길이를 조정할 태그
+         * @return 길이가 조정 된 태그
+         */
+        private String getShortTag(String tag) {
+            if (tag.length() > MAX_TAG_LENGTH) {
+                return tag.substring(0, MAX_TAG_LENGTH) + "...";
+            } else return tag;
+        }
 
-	/**
-	 * 기본 생성자 (XML)
-	 * 
-	 * @param context
-	 * @param attr
-	 */
-	public TagCloudView(Context context, AttributeSet attr) {
-		super(context, attr);
-	}
+        /**
+         * 파라미터로 전달받은 count를 가지고 
+         * TAG_TEXT_COLOR, TAG_TEXT_SIZE 의 item을 얻기 위한 index를 계산해 리턴한다. 
+         * 
+         * @param count 옵션 index를 구할 태그의 count
+         * @return count 에 맞는 index
+         */
+        private int getIndex(int count) {
+            for (int i = TAG_STEP.length-1; i >= 0; i--) {
+                if (count > TAG_STEP[i]) {
+                    return i;
+                }
+            }
 
-	/**
-	 * 전달받은 태그를 가지고 Tag Cloud 를 보여준다.
-	 *  
-	 * @param tags 이 뷰에서 보여질 태그들
-	 */
-	public void show(ArrayList<Tag> tags) {
-	    removeAllViews();
-		setBackgroundDrawable(getResources().getDrawable(R.drawable.txtbox));
-		Collections.shuffle(tags);	// shuffling for tag cloud
+            return 0;
+        }
+    }
 
-		if (tags.size() > 0) {
-			for (Tag tag : tags) {
-				addView(new TagView(getContext(), tag));
-			}
-		} else {
-			addView(new TagView(getContext(), "태그가 존재하지 않습니다."));
-		}
-	}
+    /**
+     * 기본 생성자 (Java Code)
+     * 
+     * @param context
+     */
+    public TagCloudView(Context context, ArrayList<Tag> tags) {
+        super(context);
+        show(tags);
+    }
 
-	/**
-	 * 라인의 수-1개 만큼 줄을 그어준다.
-	 */
-	@Override
-	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
+    /**
+     * 기본 생성자 (XML)
+     * 
+     * @param context
+     * @param attr
+     */
+    public TagCloudView(Context context, AttributeSet attr) {
+        super(context, attr);
+    }
 
-		int line = getMeasuredHeight() / LINE_HEIGHT;
+    /**
+     * 전달받은 태그를 가지고 Tag Cloud 를 보여준다.
+     *  
+     * @param tags 이 뷰에서 보여질 태그들
+     */
+    public void show(ArrayList<Tag> tags) {
+        removeAllViews();
+        setBackgroundDrawable(getResources().getDrawable(R.drawable.txtbox));
+        Collections.shuffle(tags);  // shuffling for tag cloud
 
-		Paint p = new Paint();
-		p.setColor(getResources().getColor(R.color.listview_divider1_gray));
-		for (int i = 1; i < line; i++)
-			canvas.drawLine(0, (LINE_HEIGHT+1)*i, getMeasuredWidth(), (LINE_HEIGHT+1)*i, p);
+        if (tags.size() > 0) {
+            for (Tag tag : tags) {
+                TagView tagView = new TagView(getContext(), tag);
+                tagView.setOnClickListener(getListener(tag));
+                addView(tagView);
+            }
+        } else {
+            addView(new TagView(getContext(), "태그가 존재하지 않습니다."));
+        }
+    }
 
-		super.onDraw(canvas);
-	}
+    /**
+     * 라인의 수-1개 만큼 줄을 그어준다.
+     */
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        int line = getMeasuredHeight() / LINE_HEIGHT;
+
+        Paint p = new Paint();
+        p.setColor(getResources().getColor(R.color.listview_divider1_gray));
+        for (int i = 1; i < line; i++)
+            canvas.drawLine(0, (LINE_HEIGHT+1)*i, getMeasuredWidth(), (LINE_HEIGHT+1)*i, p);
+
+        super.onDraw(canvas);
+    }
+
+    protected OnClickListener getListener(Tag tag) {
+        return null;
+    }
 }

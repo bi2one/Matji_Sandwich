@@ -51,6 +51,9 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
+        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
+
         super.onCreate(savedInstanceState);
         init();
     }
@@ -120,9 +123,6 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();               
-        
-        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
-        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
 
         Log.d("LifeCycle", "onResume at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);

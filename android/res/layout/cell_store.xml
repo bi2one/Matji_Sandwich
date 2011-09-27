@@ -8,7 +8,7 @@
 		style="@style/DefaultFill"
 		android:paddingLeft="@dimen/default_distance"
 		android:paddingRight="@dimen/default_distance"
-		android:background="@color/matji_white"
+        android:background="@drawable/btn_white_to_lightpink"
 		android:gravity="center_vertical">
 		<com.matji.sandwich.widget.BookmarkStarToggleView
 			android:id="@+id/cell_store_toggle_star"

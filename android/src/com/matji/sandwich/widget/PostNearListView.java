@@ -2,13 +2,12 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.R;
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
-import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.MatjiConstants;
 
@@ -50,7 +49,7 @@ public class PostNearListView extends PostListView {
     }
 
     public HttpRequest request() {
-        postRequest.actionNearbyListWithAttachFiles((double) neBound.getLatitudeE6() / 1E6,
+        postRequest.actionNearbyList((double) neBound.getLatitudeE6() / 1E6,
                 (double) swBound.getLatitudeE6() / 1E6,
                 (double) swBound.getLongitudeE6() / 1E6,
                 (double) neBound.getLongitudeE6() / 1E6,

@@ -42,6 +42,7 @@ public class SimpleTag extends MatjiData {
 		updated_at = in.readString();
 		id = in.readInt();
 	}
+	
 	public void setTag(String tag) {
 		this.tag = tag;
 	}

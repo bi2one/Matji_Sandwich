@@ -37,6 +37,10 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
+        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
+
         super.onCreate(savedInstanceState);
         init();
     }
@@ -100,9 +104,6 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
     @Override
     protected void onResume() {
         super.onResume();
-
-        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
-        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
 
         Log.d("LifeCycle", "onResume at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);

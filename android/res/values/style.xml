@@ -220,7 +220,7 @@
   
   <style name="cell_user_Wrapper" parent="Cell">
   	<item name="android:layout_height">@dimen/user_cell_height</item>
-  	<item name="android:background">@color/matji_white</item>
+  	<item name="android:background">@drawable/btn_white_to_lightpink</item>
   </style>
   
   <style name="cell_user_InfoWrapper" parent="DefaultWrap">

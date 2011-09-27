@@ -58,7 +58,7 @@ public class PostListView extends RequestableMListView {
 
 	switch(type) {
 	case ALL:
-	    ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
+	    ((PostHttpRequest) request).actionList(getPage(), getLimit());
 	    break;
 	case FRIEND:
 	    ((PostHttpRequest) request).actionFriendList(getPage(), getLimit());
@@ -69,9 +69,8 @@ public class PostListView extends RequestableMListView {
 							  getContext().getResources().getConfiguration().locale.getCountry());
 	    break;
 	default:
-	    ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
+	    ((PostHttpRequest) request).actionList(getPage(), getLimit());
 	}
-	
         return request;
     }
 

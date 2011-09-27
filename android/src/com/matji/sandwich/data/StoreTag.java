@@ -4,15 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class StoreTag extends Tag {
-	private int store_id;
-	private Store store;
-	
-	public StoreTag() {}
-	
-	public StoreTag(Parcel in) {
-		readFromParcel(in);
-	}
 
+    private int store_id;
+	private Store store;
+
+    public StoreTag() {
+        super();
+    }
+		
+    public StoreTag(Parcel in) {
+        super(in);
+    }
+    
 	public static final Parcelable.Creator<StoreTag> CREATOR = new Parcelable.Creator<StoreTag>() {
 		public StoreTag createFromParcel(Parcel in) {
 			return new StoreTag(in);
@@ -27,6 +30,7 @@ public class StoreTag extends Tag {
 		return 0;
 	}
 
+	@Override
 	public void writeToParcel(Parcel dest, int arg1) {
 		dest.writeInt(id);
 		dest.writeInt(tag_id);
@@ -38,7 +42,8 @@ public class StoreTag extends Tag {
 		dest.writeValue(store);
 	}
 
-	private void readFromParcel(Parcel in) {
+	@Override
+	protected void readFromParcel(Parcel in) {
 		id = in.readInt();
 		tag_id = in.readInt();
 		store_id = in.readInt();

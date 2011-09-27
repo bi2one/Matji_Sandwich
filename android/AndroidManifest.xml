@@ -136,9 +136,13 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="UserProfileActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name="UserTagActivity"
+        <activity android:name="UserTagPostListActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name="StoreTagActivity"
+		<activity android:name="UserTagCloudActivity"
+                  android:screenOrientation="portrait"></activity>
+        <activity android:name="StoreTagPostListActivity"
+                  android:screenOrientation="portrait"></activity>
+		<activity android:name="StoreTagCloudActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="FollowingActivity"
                   android:screenOrientation="portrait"></activity>
