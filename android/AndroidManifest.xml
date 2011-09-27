@@ -18,7 +18,8 @@
 			</intent-filter>
 		</activity>
 		<activity android:name="ChangeLocationActivity"
-                  android:screenOrientation="portrait"></activity>
+			  android:windowSoftInputMode="adjustResize|stateHidden"
+			  android:screenOrientation="portrait"></activity>
 		<activity android:name="ExternalServiceWebViewActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="UserEditActivity"

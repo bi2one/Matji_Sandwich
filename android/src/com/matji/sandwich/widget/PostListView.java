@@ -22,6 +22,10 @@ import android.util.AttributeSet;
  */
 public class PostListView extends RequestableMListView {
     private HttpRequest request;
+    private Type type;
+    public enum Type {
+	ALL, FRIEND, DOMESTIC;
+    };
 
     protected String getSubtitle() {
         return MatjiConstants.string(R.string.subtitle_all_post);
@@ -39,6 +43,7 @@ public class PostListView extends RequestableMListView {
         setCacheColorHint(Color.TRANSPARENT);
         setSelector(android.R.color.transparent);
         setSubtitle(getSubtitle());
+	type = Type.ALL;
     }
     
     public void setSubtitle(String subtitle) {
@@ -50,9 +55,28 @@ public class PostListView extends RequestableMListView {
         if (request == null || !(request instanceof PostHttpRequest)) {
             request = new PostHttpRequest(getContext());
         }
-        
-        ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
+
+	switch(type) {
+	case ALL:
+	    ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
+	    break;
+	case FRIEND:
+	    ((PostHttpRequest) request).actionFriendList(getPage(), getLimit());
+	    break;
+	case DOMESTIC:
+	    ((PostHttpRequest) request).actionCountryList(getPage(),
+							  getLimit(),
+							  getContext().getResources().getConfiguration().locale.getCountry());
+	    break;
+	default:
+	    ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
+	}
+	
         return request;
+    }
+
+    public void setType(Type type) {
+	this.type = type;
     }
 
     public void setActivity(Activity activity) {

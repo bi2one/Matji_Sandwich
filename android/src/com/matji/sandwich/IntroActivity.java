@@ -1,15 +1,29 @@
 package com.matji.sandwich;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.util.async.TimeAsyncTask;
+import com.matji.sandwich.util.async.SimpleAsyncTask;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.session.Session;
 
-public class IntroActivity extends BaseActivity {
+public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener,
+							   SimpleAsyncTask.ProgressListener {
+    private static final long LOADING_MIN_TIME = 1000;
+    private static final long DIALOG_MIN_TIME = 1500;
+    private ProgressDialog dialog;
+    private TimeAsyncTask timeAsyncTask;
+    private SimpleAsyncTask simpleAsyncTask;
+    private long lastElapsedTime;
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,32 +33,61 @@ public class IntroActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
+	MatjiConstants.setContext(getApplicationContext());
         setContentView(R.layout.activity_intro);
+	dialog = new ProgressDialog(this);
+	dialog.setMessage(MatjiConstants.string(R.string.dialog_intro_loading));
+	dialog.setIndeterminate(true);
+	dialog.setCancelable(false);
+	
+	timeAsyncTask = new TimeAsyncTask();
+	timeAsyncTask.setTimeListener(this);
+	
+	simpleAsyncTask = new SimpleAsyncTask(new SessionRunnable());
+	simpleAsyncTask.setProgressListener(this);
     }
+
+    public void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
+	lastElapsedTime = elapsedTime;
+	if (elapsedTime > DIALOG_MIN_TIME) {
+	    dialog.show();
+	}
+    }
+
+    public void onStart(AsyncTask task) { }
+    public void onFinish(AsyncTask task) {
+	timeAsyncTask.setTimeListener(null);
+	if (lastElapsedTime < LOADING_MIN_TIME) {
+	    try {
+		Thread.sleep(LOADING_MIN_TIME - lastElapsedTime);
+	    } catch(InterruptedException e) {
+		e.printStackTrace();
+	    }
+	}
+	dialog.dismiss();
+    }
+    public void onCancel(AsyncTask task) { }
 
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
-
-        Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                Session session  = Session.getInstance(IntroActivity.this);
-                if (session.isLogin()) session.unsyncSessionValidate();
-                session.notificationValidate();
-		ImageLoader.clearCache(getApplicationContext());
-                startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
-                finish();
-            }
-        };
-
-        handler.sendEmptyMessageDelayed(0, 1000);
+	timeAsyncTask.execute();
+	simpleAsyncTask.execute();
     }
 
     @Override
     public int setMainViewId() {
-        // TODO Auto-generated method stub
         return R.id.activity_intro;
+    }
+
+    public class SessionRunnable implements Runnable {
+	public void run() {
+	    Session session = Session.getInstance(IntroActivity.this);
+	    if (session.isLogin()) session.unsyncSessionValidate();
+	    session.notificationValidate();
+	    ImageLoader.clearCache(getApplicationContext());
+	    startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
+	    finish();
+	}
     }
 }

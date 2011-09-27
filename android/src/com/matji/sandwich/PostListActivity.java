@@ -20,7 +20,13 @@ import com.matji.sandwich.widget.PostListView;
 
 
 public class PostListActivity extends BaseActivity implements ActivityStartable {
+    public static final String TYPE = "PostListActivity.type";
+    public static final String TYPE_ALL = "PostListActivity.type_all";
+    public static final String TYPE_FRIEND = "PostListActivity.type_friend";
+    public static final String TYPE_DOMESTIC = "PostListActivity.type_domestic";
+    
     private PostListView listView;
+    private String type;
 
     public int setMainViewId() {
         return R.id.activity_post_list;
@@ -34,6 +40,19 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
 
         listView = (PostListView) findViewById(R.id.post_list_view);
         listView.setActivity(this);
+	Intent intent = getIntent();
+	type = intent.getStringExtra(TYPE);
+	if (type == null) type = TYPE_ALL;
+
+	if (type.equals(TYPE_ALL)) {
+	    listView.setType(PostListView.Type.ALL);
+	} else if (type.equals(TYPE_FRIEND)) {
+	    listView.setType(PostListView.Type.FRIEND);
+	} else if (type.equals(TYPE_DOMESTIC)) {
+	    listView.setType(PostListView.Type.DOMESTIC);
+	} else {
+	    listView.setType(PostListView.Type.ALL);
+	}
     }
 
     @Override
@@ -60,7 +79,7 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
                 }
             }
             break;
-        case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:            
+        case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:
             if (resultCode == Activity.RESULT_OK) {
                 setIsFlow(true);
             }

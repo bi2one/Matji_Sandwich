@@ -68,6 +68,18 @@ public class PostHttpRequest extends HttpRequest {
     	postHashtable.clear();
     	postHashtable.put("post_id",post_id + "");
     }
+
+    public void actionCountryList(int page, int limit, String countryCode) {
+    	httpMethod = HttpMethod.HTTP_GET;	
+    	action = "country_list";
+    	parser = new PostParser(context);
+    	
+    	getHashtable.clear();
+    	getHashtable.put("page", "" + page);
+    	getHashtable.put("limit", "" + limit);
+    	getHashtable.put("country_code", "" + countryCode);
+    	getHashtable.put("include", "user,store,tags");
+    }
     
     public void actionList(int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;	
@@ -78,10 +90,21 @@ public class PostHttpRequest extends HttpRequest {
     	getHashtable.put("page", "" + page);
     	getHashtable.put("limit", "" + limit);
     	getHashtable.put("include", "user,store,tags");
-    }    
+    }
+
+    public void actionFriendList(int page, int limit) {
+    	httpMethod = HttpMethod.HTTP_GET;
+    	action = "friend_list";
+    	parser = new PostParser(context);
+    	
+    	getHashtable.clear();
+    	getHashtable.put("page", "" + page);
+    	getHashtable.put("limit", "" + limit);
+    	getHashtable.put("include", "user,store,tags");
+    }
     
     public void actionListWithAttachFiles(int page, int limit) {
-    	httpMethod = HttpMethod.HTTP_GET;	
+    	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	parser = new PostParser(context);
     	

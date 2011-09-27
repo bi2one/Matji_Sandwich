@@ -235,8 +235,9 @@
 
   <!-- PostTabActivity -->
   <string name="post_tab_friend">친구</string>
-  <string name="post_tab_near">주변</string>
-  <string name="post_tab_all">전국</string>
+  <string name="post_tab_near">지역</string>
+  <string name="post_tab_country">전국</string>
+  <string name="post_tab_all">전체</string>
   
   <!-- section list view test -->
   <string name="standard_list">standard_list</string>
@@ -300,6 +301,7 @@
   <string name="activity_change_location_hint">지명이나 지역 입력</string>
 
   <!-- ChangeLocationActivity.java -->
+  <string name="change_location_activity_title">위치변경</string>
   <string name="change_location_activity_input_empty_string">주소를 입력해 주세요.</string>
 
   <!-- recent_changed_location.xml -->
@@ -438,6 +440,9 @@
 
   <!-- com.matji.sandwich.http.DialogAsyncTask -->
   <string name="dialog_async_task">요청중입니다...</string>
+
+  <!-- IntroActivity.java -->
+  <string name="dialog_intro_loading">잠시만 기다려주세요...</string>
 
   <!-- TitleContainer.java -->
   <string name="tag_button_wrapper">TitleContainer.button_wrapper</string>

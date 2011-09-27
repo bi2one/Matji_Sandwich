@@ -760,6 +760,28 @@
     <item name="android:orientation">vertical</item>
   </style>
 
+  <style name="activity_change_location_text_wrapper" parent="DefaultWidthFill">
+    <item name="android:layout_height">46.67dp</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:background">@color/change_location_text_wrapper</item>
+  </style>
+
+  <style name="activity_change_location_text" parent="DefaultWidthFill">
+    <item name="android:layout_marginRight">6.67dp</item>
+    <item name="android:background">@drawable/input_box_square</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:textSize">16dp</item>
+  </style>
+
+  <style name="activity_change_location_btn" parent="DefaultWrap">
+    <item name="android:layout_width">49.33dp</item>
+    <item name="android:layout_height">28.67dp</item>
+    <item name="android:textColor">@color/WHITE</item>
+    <item name="android:textSize">14dp</item>
+    <item name="android:background">@drawable/btn_red</item>
+  </style>
+
   <!-- rounded_button common attributes -->
   <style name="rounded_button" parent="DefaultWidthFill">
     <item name="android:textSize">18dp</item>
