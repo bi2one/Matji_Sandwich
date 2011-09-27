@@ -39,6 +39,7 @@
       <com.matji.sandwich.widget.RecentChangedLocationView
 	  android:id="@+id/activity_change_location_recent_view"
 	  android:layout_below="@id/activity_change_location_result"
+	  android:paddingBottom="15dp"
 	  style="@style/DefaultWidthFill" />
     </RelativeLayout>
   </ScrollView>
