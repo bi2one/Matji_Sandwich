@@ -7,10 +7,12 @@ public class UserTag extends Tag {
 	private int user_id;
 	private User user;
 	
-	public UserTag() {}
+	public UserTag() {
+	    super();
+	}
 	
 	public UserTag(Parcel in) {
-		readFromParcel(in);
+		super(in);
 	}
 
 	public static final Parcelable.Creator<UserTag> CREATOR = new Parcelable.Creator<UserTag>() {
@@ -27,6 +29,7 @@ public class UserTag extends Tag {
 		return 0;
 	}
 
+	@Override
 	public void writeToParcel(Parcel dest, int arg1) {
 		dest.writeInt(id);
 		dest.writeInt(tag_id);
@@ -36,7 +39,8 @@ public class UserTag extends Tag {
 		dest.writeString(updated_at);
 	}
 
-	private void readFromParcel(Parcel in) {
+	@Override
+	protected void readFromParcel(Parcel in) {
 		id = in.readInt();
 		tag_id = in.readInt();
 		user_id = in.readInt();

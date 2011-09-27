@@ -42,7 +42,7 @@ public class UserMainActivity extends BaseTabActivity {
 
         Intent userPostListIntent = new Intent(this, UserPostListActivity.class);
         Intent userImageListIntent = new Intent(this, UserImageListActivity.class);
-        Intent userUrlListIntent = new Intent(this, UserTagActivity.class);
+        Intent userUrlListIntent = new Intent(this, UserTagCloudActivity.class);
 
         tabHost = (RoundTabHost) getTabHost();
 

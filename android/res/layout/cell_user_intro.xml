@@ -9,7 +9,7 @@
 		android:paddingLeft="@dimen/default_distance"
 		android:paddingTop="@dimen/default_distance_long"
 		android:paddingBottom="@dimen/default_distance_long"
-		android:background="@color/matji_white">
+		android:background="@drawable/btn_white_to_lightpink">
 		<TextView
 			style="@style/DefaultFill"
 			android:id="@+id/cell_user_intro"

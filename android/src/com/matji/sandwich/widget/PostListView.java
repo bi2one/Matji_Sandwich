@@ -51,7 +51,7 @@ public class PostListView extends RequestableMListView {
             request = new PostHttpRequest(getContext());
         }
         
-        ((PostHttpRequest) request).actionListWithAttachFiles(getPage(), getLimit());
+        ((PostHttpRequest) request).actionList(getPage(), getLimit());
         return request;
     }
 

@@ -37,7 +37,9 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
+        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
+        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
+
         super.onCreate(savedInstanceState);
         init();
     }
@@ -102,9 +104,6 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-
-        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
-        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
 
         Log.d("LifeCycle", "onResume at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);

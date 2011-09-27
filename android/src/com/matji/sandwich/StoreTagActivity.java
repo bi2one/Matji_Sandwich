@@ -3,111 +3,72 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.Tag;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.TagHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.cell.StoreCell;
-import com.matji.sandwich.widget.tag.TagCloudView;
+import com.matji.sandwich.widget.tag.StoreTagCloudView;
 import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreTagActivity extends BaseActivity implements Requestable, Refreshable {
+public class StoreTagActivity extends BaseActivity implements Refreshable {
 
-    private HttpRequest request;
-	
-	private TextView tagCount;
+    private StoreTitle title;
+    private StoreCell storeCell;
+    private SubtitleHeader tagCount;
+    private StoreTagCloudView tagCloudView;
 
-	private StoreTitle title;
-	private StoreCell storeCell;
-    private TagCloudView tagCloudView;
-	
-//	public static final String STORE = "StoreTagActivity.store";
-	
     public int setMainViewId() {
-	return R.id.activity_store_tag;
+        return R.id.activity_store_tag_cloud;
     }
-	
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_store_tag);
-		
-//		store = getIntent().getParcelableExtra(STORE);
-		HttpRequestManager.getInstance(this).request(getMainView(), request(), HttpRequestManager.STORE_TAG_LIST_REQUEST, this);
 
-		tagCloudView = (TagCloudView) findViewById(R.id.store_tag_cloud);
-		
-		tagCount = (TextView) findViewById(R.id.store_tag_count);
-		String numTag = String.format(
-		        MatjiConstants.string(R.string.number_of_tag),
-		        StoreDetailInfoTabActivity.store.getTagCount());
-		tagCount.setText(numTag);
-		
-		title = (StoreTitle) findViewById(R.id.Titlebar);
-		storeCell = (StoreCell) findViewById(R.id.StoreCell);
-		storeCell.setClickable(false);
-        
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_store_tag_cloud);
+
+        title = (StoreTitle) findViewById(R.id.Titlebar);
+        storeCell = (StoreCell) findViewById(R.id.StoreCell);
+        tagCloudView = (StoreTagCloudView) findViewById(R.id.store_tag_cloud);
+
+        tagCount = (SubtitleHeader) findViewById(R.id.store_tag_count);
+
         title.setIdentifiable(this);
         title.setStore(StoreDetailInfoTabActivity.store);
         title.setLikeable(storeCell);
 
         storeCell.setStore(StoreDetailInfoTabActivity.store);
+        storeCell.setClickable(false);
         storeCell.setIdentifiable(this);
         storeCell.addRefreshable(this);
         storeCell.addRefreshable(title);
-	}
-	
-	@Override
-	protected void onNotFlowResume() {
-	    // TODO Auto-generated method stub
-	    super.onNotFlowResume();
-        storeCell.refresh();
-	}
-	
-	public void setStore(Store store) {
-		StoreDetailInfoTabActivity.store = store;
-	}
-	
-	private HttpRequest request() {
-		if (request == null || !(request instanceof TagHttpRequest)) {
-			request = new TagHttpRequest(this);
-		}
-		
-		((TagHttpRequest) request).actionStoreTagList(StoreDetailInfoTabActivity.store.getId(), 1, 50);
-
-		return request;
-	}
-	
-	
-	@Override
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		// TODO Auto-generated method stub
-		ArrayList<Tag> tags = new ArrayList<Tag>();
-		for (MatjiData d : data) {
-			tags.add((Tag) d);
-		}
-		
-		tagCloudView.show(tags);
-	}
-
-	@Override
-	public void requestExceptionCallBack(int tag, MatjiException e) {
-		// TODO Auto-generated method stub
-		e.performExceptionHandling(this);
-	}
+        
+        tagCloudView.setSpinnerContainer(getMainView());
+    }
 
     @Override
-    public void refresh() {}
+    protected void onNotFlowResume() {
+        // TODO Auto-generated method stub
+        super.onNotFlowResume();
+        storeCell.refresh();
+    }
+
+    public void setStore(Store store) {
+        StoreDetailInfoTabActivity.store = store;
+    }
+
+    @Override
+    public void refresh() {
+        String numTag = String.format(
+                MatjiConstants.string(R.string.number_of_tag),
+                StoreDetailInfoTabActivity.store.getTagCount());
+        tagCount.setTitle(numTag);
+    }
 
     @Override
     public void refresh(MatjiData data) {
-        if (data instanceof Store) {        
+        if (data instanceof Store) {
             StoreDetailInfoTabActivity.store = (Store) data;
             refresh();
         }

@@ -385,6 +385,7 @@
   <string name="subtitle_all_post">모든 이야기</string>
   <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
   <string name="subtitle_user_post">%1$d개의 %2$s 이야기</string>
+  <string name="subtitle_tag_post">\'%1$s\'태그 이야기</string>
   
   <!-- ImageListView Subtitle -->
   <string name="subtitle_user_image">%1$d개의 %2$s 사진</string>

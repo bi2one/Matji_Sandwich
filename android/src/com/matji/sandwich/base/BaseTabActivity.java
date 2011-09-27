@@ -41,7 +41,10 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {        
+        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
+        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
+
         super.onCreate(savedInstanceState);
         init();
     }
@@ -70,7 +73,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     }
 
     public void didEnterForeGround(){
-	ImageLoader.clearCache(getApplicationContext());
+        ImageLoader.clearCache(getApplicationContext());
         Session session  = Session.getInstance(this);
         if (session.isLogin()){
             session.sessionValidate(null, getMainView());
@@ -82,9 +85,6 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
         // TODO Auto-generated method stub
         super.onResume();
 
-        DisplayUtil.setContext(getApplicationContext()); // DisplayUtil 초기화
-        MatjiConstants.setContext(getApplicationContext()); // MatjiContstants 초기화
-
         Log.d("LifeCycle", "onResume at " + this.getClass());
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONRESUME, this);
 
@@ -92,12 +92,12 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
             Log.d("LifeCycle", "onNotFlowResume at " + this.getClass());
             onNotFlowResume();
             Log.d("LifeCycle", "onAfterResume at " + this.getClass());
-	    onAfterResume();
+            onAfterResume();
         } else {
             Log.d("LifeCycle", "onFlowResume at " + this.getClass());
             onFlowResume();
             Log.d("LifeCycle", "onAfterResume at " + this.getClass());
-	    onAfterResume();
+            onAfterResume();
         }
         setIsFlow(false);
     }
@@ -126,7 +126,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     protected void onPause() {
         super.onPause();
         Log.d("LifeCycle", "onPause at " + this.getClass());
-	requestManager.cancelAllTask();
+        requestManager.cancelAllTask();
         ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONPAUSE, this);		
     }
 
