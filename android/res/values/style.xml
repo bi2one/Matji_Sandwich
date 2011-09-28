@@ -760,49 +760,75 @@
     <item name="android:orientation">vertical</item>
   </style>
 
+  <style name="activity_change_location_text_wrapper" parent="DefaultWidthFill">
+    <item name="android:layout_height">46.67dp</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
+    <item name="android:background">@drawable/tabbtn_bg</item>
+  </style>
+
+  <style name="activity_change_location_text" parent="DefaultWidthFill">
+    <item name="android:layout_marginRight">6.67dp</item>
+    <item name="android:background">@drawable/input_box_square</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:textSize">16dp</item>
+  </style>
+
+  <style name="activity_change_location_btn" parent="DefaultWrap">
+    <item name="android:layout_width">49.33dp</item>
+    <item name="android:layout_height">28.67dp</item>
+    <item name="android:textColor">@color/WHITE</item>
+    <item name="android:textSize">14dp</item>
+    <item name="android:background">@drawable/btn_red</item>
+  </style>
+
   <!-- rounded_button common attributes -->
   <style name="rounded_button" parent="DefaultWidthFill">
-    <item name="android:textSize">18dp</item>
+    <item name="android:layout_height">44.67dp</item>
+    <item name="android:textSize">16dp</item>
     <item name="android:textColor">@color/BLACK</item>
-    <item name="android:gravity">left</item>
-    <item name="android:paddingTop">4dp</item>
-    <item name="android:paddingBottom">4dp</item>
-    <item name="android:paddingLeft">8dp</item>
-    <item name="android:paddingRight">8dp</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:paddingLeft">14.67dp</item>
+    <item name="android:paddingRight">14.67dp</item>
   </style>
   
   <!-- top_rounded_button.xml -->
   <style name="top_rounded_button" parent="rounded_button">
-    <item name="android:background">@drawable/btn_top_corner</item>
+    <item name="android:background">@drawable/txtbox_t_selector</item>
   </style>
 
   <!-- middle_rounded_button.xml -->
   <style name="middle_rounded_button" parent="rounded_button">
-    <item name="android:background">@drawable/btn_rectangle</item>
+    <item name="android:background">@drawable/txtbox_c_selector</item>
   </style>
 
   <!-- bottom_rounded_button.xml -->
   <style name="bottom_rounded_button" parent="rounded_button">
-    <item name="android:background">@drawable/btn_bottom_corner</item>
+    <item name="android:background">@drawable/txtbox_u_selector</item>
   </style>
 
   <!-- all_rounded_button.xml -->
   <style name="all_rounded_button" parent="rounded_button">
-    <item name="android:background">@drawable/btn_all_corner</item>
+    <item name="android:background">@drawable/txtbox_selector</item>
   </style>
 
   <!-- recent_change_location.xml -->
-  <style name="recent_changed_location" parent="DefaultFill">
+  <style name="recent_changed_location" parent="DefaultWidthFill">
     <item name="android:orientation">vertical</item>
-    <item name="android:paddingTop">10dp</item>
-    <item name="android:paddingLeft">8dp</item>
-    <item name="android:paddingRight">8dp</item>
+    <item name="android:paddingLeft">10dp</item>
+    <item name="android:paddingRight">10dp</item>
   </style>
 
   <style name="recent_changed_location_header" parent="DefaultWidthFill">
-    <item name="android:textSize">16dp</item>
-    <item name="android:textColor">@color/matji_dark_brown</item>
+    <item name="android:layout_height">38dp</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:textSize">14dp</item>
+    <item name="android:textColor">@color/matji_chocolate</item>
   </style>
+
+  <!-- search_result.xml -->
+  <style name="search_result" parent="recent_changed_location"></style>
+  <style name="search_result_header" parent="recent_changed_location_header"></style>
 
   <!-- row_simple_user.xml -->
   <style name="row_simple_user">

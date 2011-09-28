@@ -1,23 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- <LinearLayout -->
-<!--     xmlns:android="http://schemas.android.com/apk/res/android" -->
-<!--     style="@style/DefaultLinearFill" > -->
-<!--   <include layout="@layout/map_title_bar" /> -->
-<!--   <FrameLayout -->
-<!--       style="@style/DefaultFill"> -->
-<!--     <com.matji.sandwich.map.MainMatjiMapView -->
-<!-- 	android:id="@+id/map_view" -->
-<!-- 	style="@style/DefaultFill" -->
-<!-- 	android:enabled="true" -->
-<!-- 	android:clickable="true" -->
-<!-- 	android:focusable="true" -->
-<!-- 	android:apiKey="@string/map_api_key" /> -->
-<!--     <com.matji.sandwich.widget.StoreMapNearListView -->
-<!-- 	style="@style/main_map_listView" -->
-<!-- 	android:id="@+id/main_map_store_list" -->
-<!-- 	android:visibility="gone" /> -->
-<!--   </FrameLayout> -->
-<!-- </LinearLayout> -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main_map"

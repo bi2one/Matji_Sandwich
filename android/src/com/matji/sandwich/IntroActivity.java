@@ -1,93 +1,94 @@
 package com.matji.sandwich;
 
-import java.util.ArrayList;
-
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.AppVersion;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.VersionHttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.util.async.TimeAsyncTask;
+import com.matji.sandwich.util.async.SimpleAsyncTask;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 
-public class IntroActivity extends BaseActivity implements Requestable {
-	private String ver;
-	private String update_ver;
-	private HttpRequest request;
-	private HttpRequestManager manager;
-	private static final int a = 1;
-	
-	/** Called when the activity is first created. */
+public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener,
+							   SimpleAsyncTask.ProgressListener {
+    private static final long LOADING_MIN_TIME = 1000;
+    private static final long DIALOG_MIN_TIME = 1500;
+    private ProgressDialog dialog;
+    private TimeAsyncTask timeAsyncTask;
+    private SimpleAsyncTask simpleAsyncTask;
+    private long lastElapsedTime;
+    
+    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
-    	manager = HttpRequestManager.getInstance(this);
-    	request = new VersionHttpRequest(getApplicationContext());
-    	((VersionHttpRequest) request).actionAppVersion("ANDROID", ver);
-    	manager.request(getMainView(), request, a, this);
     }
 
     @Override
     protected void init() {
         super.init();
-    	ver = getResources().getString(R.string.settings_service_version_name);
-        SimpleAlertDialog dialog = new SimpleAlertDialog(this, ver + update_ver);
-        
-        dialog.show();
+	MatjiConstants.setContext(getApplicationContext());
         setContentView(R.layout.activity_intro);
+	dialog = new ProgressDialog(this);
+	dialog.setMessage(MatjiConstants.string(R.string.dialog_intro_loading));
+	dialog.setIndeterminate(true);
+	dialog.setCancelable(false);
+	
+	timeAsyncTask = new TimeAsyncTask();
+	timeAsyncTask.setTimeListener(this);
+	
+	simpleAsyncTask = new SimpleAsyncTask(new SessionRunnable());
+	simpleAsyncTask.setProgressListener(this);
     }
+
+    public void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
+	lastElapsedTime = elapsedTime;
+	if (elapsedTime > DIALOG_MIN_TIME) {
+	    dialog.show();
+	}
+    }
+
+    public void onStart(AsyncTask task) { }
+    public void onFinish(AsyncTask task) {
+	timeAsyncTask.setTimeListener(null);
+	if (lastElapsedTime < LOADING_MIN_TIME) {
+	    try {
+		Thread.sleep(LOADING_MIN_TIME - lastElapsedTime);
+	    } catch(InterruptedException e) {
+		e.printStackTrace();
+	    }
+	}
+	dialog.dismiss();
+    }
+    public void onCancel(AsyncTask task) { }
 
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
-
-        Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                Session session  = Session.getInstance(IntroActivity.this);
-                if (session.isLogin()) session.unsyncSessionValidate();
-                session.notificationValidate();
-                ImageLoader.clearCache(getApplicationContext());
-                startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
-                finish();
-            }
-        };
-
-        handler.sendEmptyMessageDelayed(0, 1000);
+	timeAsyncTask.execute();
+	simpleAsyncTask.execute();
     }
 
     @Override
     public int setMainViewId() {
-        // TODO Auto-generated method stub
         return R.id.activity_intro;
     }
 
-	@Override
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		switch (tag) {
-		case a:
-			if (data != null && data.size() > 0) {
-				AppVersion app_version = (AppVersion)data.get(0);
-				Log.d("asdfasdf",app_version+"");
-			} else {
-				Log.d("Matji", "not exist data ...");
-			}
-		}
+    public class SessionRunnable implements Runnable {
+	public void run() {
+	    Session session = Session.getInstance(IntroActivity.this);
+	    if (session.isLogin()) session.unsyncSessionValidate();
+	    session.notificationValidate();
+	    ImageLoader.clearCache(getApplicationContext());
+	    startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
+	    finish();
 	}
-
-	@Override
-	public void requestExceptionCallBack(int tag, MatjiException e) {
-		e.performExceptionHandling(this);
-		
-	}
+    }
 }

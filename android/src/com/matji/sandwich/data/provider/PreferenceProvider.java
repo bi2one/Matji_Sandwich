@@ -50,7 +50,7 @@ public class PreferenceProvider {
 			}
 			
 		}catch (Throwable e){
-		    Log.d("=====", e.getMessage());
+		    // Log.d("=====", e.getMessage());
 		    // file not found exception 발생함. 아래 있는 commit method를
 		    // 실행하면 나지 않을 것 같음. --TODO--
 			hmap = new HashMap<String, Object>();

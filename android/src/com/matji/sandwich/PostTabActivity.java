@@ -76,9 +76,12 @@ public class PostTabActivity extends BaseTabActivity {
         tabHost.clearAllTabs();
 
         if (session.isLogin()) {
+	    Intent friendIntent = new Intent(this, PostListActivity.class);
+	    friendIntent.putExtra(PostListActivity.TYPE, PostListActivity.TYPE_FRIEND);
             tabHost.addLeftTab("tab1",
 			       R.string.post_tab_friend,
-			       new Intent(this, PostListActivity.class));
+			       friendIntent);
+	    
             tabHost.addCenterTab("tab2",
 				 R.string.post_tab_near,
 				 new Intent(this, PostNearListActivity.class));
@@ -88,7 +91,13 @@ public class PostTabActivity extends BaseTabActivity {
 			       new Intent(this, PostNearListActivity.class));
         }
 
-        tabHost.addRightTab("tab3",
+	Intent domesticIntent = new Intent(this, PostListActivity.class);
+	domesticIntent.putExtra(PostListActivity.TYPE, PostListActivity.TYPE_DOMESTIC);
+        tabHost.addCenterTab("tab3",
+			     R.string.post_tab_country,
+			     domesticIntent);
+
+        tabHost.addRightTab("tab4",
 			    R.string.post_tab_all,
 			    new Intent(this, PostListActivity.class));
 
