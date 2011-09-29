@@ -19,14 +19,15 @@ import com.matji.sandwich.util.async.TimeAsyncTask;
 import com.matji.sandwich.util.async.SimpleAsyncTask;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.VersionHttpRequest;
+import com.matji.sandwich.util.async.Threadable;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener,
-							   SimpleAsyncTask.ProgressListener, Requestable {
+							   SimpleAsyncTask.ProgressListener {
     private static final long LOADING_MIN_TIME = 100;
-    private static final long DIALOG_MIN_TIME = 150;
+    private static final long DIALOG_MIN_TIME = 500;
     private ProgressDialog dialog;
     private TimeAsyncTask timeAsyncTask;
     private SimpleAsyncTask simpleAsyncTask;
@@ -69,8 +70,8 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 	}
     }
 
-    public void onStart(AsyncTask task) { }
-    public void onFinish(AsyncTask task) {
+    public void onStart(Threadable task) { }
+    public void onFinish(Threadable task) {
 	timeAsyncTask.setTimeListener(null);
 	if (lastElapsedTime < LOADING_MIN_TIME) {
 	    try {
@@ -80,8 +81,8 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 	    }
 	}
 	dialog.dismiss();
+	finish();
     }
-    public void onCancel(AsyncTask task) { }
 
     @Override
     protected void onResume() {
@@ -102,7 +103,6 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 	    session.notificationValidate();
 	    ImageLoader.clearCache(getApplicationContext());
 	    startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
-	    finish();
 	}
     }
 
