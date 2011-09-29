@@ -2,6 +2,8 @@ package com.matji.sandwich.util;
 
 import java.util.Locale;
 
+import com.matji.sandwich.R;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -16,7 +18,7 @@ import android.graphics.drawable.Drawable;
 public class MatjiConstants {
 
     private static Resources mResources;
-    
+
     public static final int MIN_NICK_LENGTH = 2;
     public static final int MAX_NICK_LENGTH = 12;
     public static final int MIN_PASSWORD_LENGTH = 6;
@@ -29,13 +31,13 @@ public class MatjiConstants {
     }
 
     public static final String[] stringArray(int id) {
-	return mResources.getStringArray(id);
+        return mResources.getStringArray(id);
     }
-	
+
     public static final String string(int id) {
-	return mResources.getString(id);
+        return mResources.getString(id);
     }
-    
+
     public static final String plurals(int id, int quantity) {
         return mResources.getQuantityString(id, quantity);
     }
@@ -43,22 +45,23 @@ public class MatjiConstants {
     public static final float dimen(int id) {
         return mResources.getDimension(id);
     }
-	
+
     public static final int dimenInt(int id) {
         return mResources.getDimensionPixelSize(id);
     }
-    
+
     public static final int color(int id) {
-	return mResources.getColor(id);
-    }
-	
-    public static final Drawable drawable(int id) {
-	return mResources.getDrawable(id);
-    }
-    
-    public static final String lang() {
-    	Locale locale = mResources.getConfiguration().locale;
-    	return locale.getLanguage();
+        return mResources.getColor(id);
     }
 
+    public static final Drawable drawable(int id) {
+        return mResources.getDrawable(id);
+    }
+
+    public static final String target() {
+        return mResources.getString(R.string.target);
+    }
+    public static final String language() {
+        return mResources.getConfiguration().locale.getLanguage();
+    }
 }

@@ -32,25 +32,15 @@ public class StoreTag extends Tag {
 
 	@Override
 	public void writeToParcel(Parcel dest, int arg1) {
-		dest.writeInt(id);
-		dest.writeInt(tag_id);
+	    super.writeToParcel(dest, arg1);
 		dest.writeInt(store_id);
-		dest.writeInt(count);
-		dest.writeString(created_at);
-		dest.writeString(updated_at);
-		dest.writeValue(tag);
 		dest.writeValue(store);
 	}
 
 	@Override
 	protected void readFromParcel(Parcel in) {
-		id = in.readInt();
-		tag_id = in.readInt();
+	    super.readFromParcel(in);
 		store_id = in.readInt();
-		count = in.readInt();
-		created_at = in.readString();
-		updated_at = in.readString();
-		tag = SimpleTag.class.cast(in.readValue(SimpleTag.class.getClassLoader()));
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
 	}
 	

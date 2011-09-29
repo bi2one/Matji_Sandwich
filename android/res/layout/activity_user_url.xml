@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/activity_user_tag_post"
+	android:id="@+id/activity_user_url"
 	style="@style/DefaultFill">
-	<!-- Main Title -->
 	<com.matji.sandwich.widget.title.UserTitle
 		android:id="@id/Titlebar"
-		style="@style/DefaultWrap" />
-	<com.matji.sandwich.widget.TagPostListView
+		style="@style/DefaultWidthFill" />
+	<com.matji.sandwich.widget.UrlListView
 		style="@style/DefaultFill"
-		android:id="@+id/user_tag_post_list_view"
+		android:id="@+id/user_url_list"
 		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

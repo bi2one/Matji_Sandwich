@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,7 +25,7 @@ import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserProfileView extends RelativeLayout implements OnClickListener, Refreshable {
+public class UserProfileView extends RelativeLayout implements Refreshable {
     private User user;
 
     private Session session;
@@ -60,7 +60,11 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
         inflater.inflate(R.layout.user_profile, this);
 
         session = Session.getInstance(getContext());
+        findViews();
+        setlisteners();
+    }
 
+    private void findViews() {
         userCell = ((UserCell) findViewById(R.id.UserCell));
         userCell.setClickable(false);
         introText = (TextView) findViewById(R.id.user_profile_intro);
@@ -75,68 +79,64 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
         bookmarkDivider = findViewById(R.id.user_profile_store_info_line);
         bookmarkCountView = findViewById(R.id.user_profile_bookmark);
         bookmarkCount = (TextView) findViewById(R.id.user_profile_bookmark_store_count);
-        
-        followingCountView.setOnClickListener(this);
-        followerCountView.setOnClickListener(this);
-        findCountView.setOnClickListener(this);
-        bookmarkCountView.setOnClickListener(this);
+    }
 
+    private void setlisteners() {
+        websiteText.setOnClickListener(new OnClickListener() {
 
-	// bak
-        // userCell = ((UserCell) findViewById(R.id.UserCell));
-        // userCell.setClickable(false);
-        // intro = (TextView) findViewById(R.id.user_profile_intro);
-        // blog = (TextView) findViewById(R.id.user_profile_blog);
-        // editInfo = (TextView) findViewById(R.id.user_profile_edit_info);
-        // followingCount = (TextView) findViewById(R.id.user_profile_following_count);
-        // followerCount = (TextView) findViewById(R.id.user_profile_follower_count);
-        // findTitle = (TextView) findViewById(R.id.user_profile_find_store_title);
-        // findCount = (TextView) findViewById(R.id.user_profile_find_store_count);
-        // bookmarkCount = (TextView) findViewById(R.id.user_profile_bookmark_store_count);
+            @Override
+            public void onClick(View arg0) {
+                if (!user.getWebsite().equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    Uri uri = Uri.parse(user.getWebsite());
+                    intent.setData(uri);
+                    getContext().startActivity(intent);
+                }
+            }
+        });
+        followingCountView.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getContext(), FollowingActivity.class);
+                intent.putExtra(FollowingActivity.USER, (Parcelable) user);
+                intent.putExtra(FollowingActivity.TYPE, FollowingListType.FOLLOWING);
+                getContext().startActivity(intent);
+            }
+        });
+        followerCountView.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getContext(), FollowingActivity.class);
+                intent.putExtra(FollowingActivity.USER, (Parcelable) user);
+                intent.putExtra(FollowingActivity.TYPE, FollowingListType.FOLLOWER);
+                getContext().startActivity(intent);                
+            }
+        });
+        findCountView.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getContext(), StoreDiscoverListActivity.class);
+                intent.putExtra(StoreDiscoverListActivity.USER, (Parcelable) user);
+                getContext().startActivity(intent);                
+            }
+        });
+        bookmarkCountView.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getContext(), StoreBookmarkListActivity.class);
+                getContext().startActivity(intent);                
+            }
+        });
     }
 
     public void setUser(User user) {
         this.user = UserTitle.title_user;
     }
 
-    public void onFollowingButtonClicked(View v) {
-        Intent intent = new Intent(getContext(), FollowingActivity.class);
-        intent.putExtra(FollowingActivity.USER, (Parcelable) user);
-        intent.putExtra(FollowingActivity.TYPE, FollowingListType.FOLLOWING);
-        getContext().startActivity(intent);
-    }
-
-    public void onFollowerButtonClicked(View v) {
-        Intent intent = new Intent(getContext(), FollowingActivity.class);
-        intent.putExtra(FollowingActivity.USER, (Parcelable) user);
-        intent.putExtra(FollowingActivity.TYPE, FollowingListType.FOLLOWER);
-        getContext().startActivity(intent);
-    }
-
-    public void onFindStoreButtonClicked(View v) {
-        Intent intent = new Intent(getContext(), StoreDiscoverListActivity.class);
-        intent.putExtra(StoreDiscoverListActivity.USER, (Parcelable) user);
-        getContext().startActivity(intent);
-    }
-
-    public void onBookmarkStoreButtonClicked(View v) {
-        Intent intent = new Intent(getContext(), StoreBookmarkListActivity.class);
-        getContext().startActivity(intent);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == followingCountView.getId()) {
-            onFollowingButtonClicked(v);
-        } else if (v.getId() == followerCountView.getId()) {
-            onFollowerButtonClicked(v);
-        } else if (v.getId() == findCountView.getId()) {
-            onFindStoreButtonClicked(v);
-        } else if (v.getId() == bookmarkCountView.getId()) {
-            onBookmarkStoreButtonClicked(v);
-        } 
-    }
-    
     @Override
     public void refresh() {
         String intro = user.getIntro();
@@ -144,7 +144,7 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
             intro = MatjiConstants.string(R.string.default_string_not_exist_intro);
         }
         introText.setText(intro);
-        
+
         String website = user.getWebsite();
         if (website.equals("")) {
             website = MatjiConstants.string(R.string.default_string_not_exist_website);
@@ -178,6 +178,6 @@ public class UserProfileView extends RelativeLayout implements OnClickListener, 
     @Override
     public void refresh(ArrayList<MatjiData> data) {
         // TODO Auto-generated method stub
-        
+
     }
 }

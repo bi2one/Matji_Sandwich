@@ -2,16 +2,17 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.widget.TextView;
-import android.content.Intent;
 import android.view.View;
-import android.util.Log;
+import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.PhoneCallUtil;
 import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.title.StoreTitle;
@@ -19,78 +20,79 @@ import com.matji.sandwich.widget.title.StoreTitle;
 public class StoreDefaultInfoActivity extends BaseActivity implements Refreshable {
     private StoreTitle title;
     private StoreCell storeCell;
-	
-    private TextView defaultInfo;
-    //	public static final String STORE  = "StoreDetailInfoActivity.store";
-    private TextView fullName;
-    private TextView cover;
-    private TextView tel;
-    private TextView address;
-    private TextView website;
+
+    private TextView tvName;
+    private TextView tvCover;
+    private TextView tvTel;
+    private TextView tvAddress;
+    private TextView tvWebsite;
     private PhoneCallUtil phoneCallUtil;
 
     public int setMainViewId() {
-	return R.id.activity_store_default_info;
-    }
-	
-    @Override
-	protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+        return R.id.activity_store_default_info;
     }
 
     @Override
-	protected void init() {
-	super.init();
-	setContentView(R.layout.activity_store_default_info);
-	//		store = (Store) getIntent().getParcelableExtra(STORE);
-	title = (StoreTitle) findViewById(R.id.Titlebar);
-	storeCell = (StoreCell) findViewById(R.id.StoreCell);
-	storeCell.setClickable(false);
-		
-	fullName = (TextView) findViewById(R.id.store_info_fullname);
-	cover = (TextView) findViewById(R.id.store_info_cover);
-	tel = (TextView) findViewById(R.id.store_info_tel);
-	address = (TextView) findViewById(R.id.store_info_address);
-	website = (TextView) findViewById(R.id.store_info_website);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-	title.setIdentifiable(this);
-	title.setStore(StoreDetailInfoTabActivity.store);
-	title.setLikeable(storeCell);
+    @Override
+    protected void init() {
+        super.init();
+        setContentView(R.layout.activity_store_default_info);
+        title = (StoreTitle) findViewById(R.id.Titlebar);
+        storeCell = (StoreCell) findViewById(R.id.StoreCell);
+        storeCell.setClickable(false);
+
+        tvName = (TextView) findViewById(R.id.store_default_info_name);
+        tvCover = (TextView) findViewById(R.id.store_default_info_cover);
+        tvTel = (TextView) findViewById(R.id.store_default_info_tel);
+        tvAddress = (TextView) findViewById(R.id.store_default_info_address);
+        tvWebsite = (TextView) findViewById(R.id.store_default_info_website);
+
+        title.setIdentifiable(this);
+        title.setStore(StoreDetailInfoTabActivity.store);
+        title.setLikeable(storeCell);
 
         storeCell.setStore(StoreDetailInfoTabActivity.store);
-	storeCell.setIdentifiable(this);
-	storeCell.addRefreshable(this);
+        storeCell.setIdentifiable(this);
+        storeCell.addRefreshable(this);
         storeCell.addRefreshable(title);
 
-	phoneCallUtil = new PhoneCallUtil(this);
+        phoneCallUtil = new PhoneCallUtil(this);
     }
 
     @Override
-	protected void onNotFlowResume() {
-	// TODO Auto-generated method stub
-	super.onNotFlowResume();
-	storeCell.refresh();
+    protected void onNotFlowResume() {
+        // TODO Auto-generated method stub
+        super.onNotFlowResume();
+        storeCell.refresh();
     }
 
     @Override
-	public void refresh() {
-        fullName.setText(StoreDetailInfoTabActivity.store.getName());
-        tel.setText(StoreDetailInfoTabActivity.store.getTel());
-        address.setText(StoreDetailInfoTabActivity.store.getAddress());
+    public void refresh() {
+        Store store = StoreDetailInfoTabActivity.store;
+        String cover = store.getCover();
+        String website = store.getWebsite();
         
-        if(StoreDetailInfoTabActivity.store.getCover() != null)
-            cover.setText(StoreDetailInfoTabActivity.store.getCover());
-        else    
-            cover.setText("-");
-        
-        if(StoreDetailInfoTabActivity.store.getWebsite() != null)
-            website.setText(StoreDetailInfoTabActivity.store.getWebsite());
-        else
-            website.setText("-");
+        tvName.setText(StoreDetailInfoTabActivity.store.getName());
+        if(cover == null || cover.equals("")) {
+            tvCover.setText(MatjiConstants.string(R.string.default_string_not_exist_cover));
+        } else {
+            tvCover.setText(StoreDetailInfoTabActivity.store.getCover());
+        }
+        tvTel.setText(StoreDetailInfoTabActivity.store.getTel());
+        tvAddress.setText(StoreDetailInfoTabActivity.store.getAddress());
+        if(website == null || website.equals("")) {
+            tvWebsite.setText(MatjiConstants.string(R.string.default_string_not_exist_website));
+        } else {
+            tvWebsite.setText(StoreDetailInfoTabActivity.store.getWebsite());
+        }
     }
-	
+
     @Override
-	public void refresh(MatjiData data) {
+    public void refresh(MatjiData data) {
         if (data instanceof Store) {
             StoreDetailInfoTabActivity.store = (Store) data;
             refresh();
@@ -98,15 +100,26 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     }
 
     @Override
-	public void refresh(ArrayList<MatjiData> data) {}
+    public void refresh(ArrayList<MatjiData> data) {}
 
-    public void onAddressClick(View v) {
-	Intent intent = new Intent(this, StoreLocationMapActivity.class);
-	intent.putExtra(StoreLocationMapActivity.INTENT_STORE, (Parcelable)StoreDetailInfoTabActivity.store);
-	startActivity(intent);
+    public void onAddressClicked(View v) {
+        Intent intent = new Intent(this, StoreLocationMapActivity.class);
+        intent.putExtra(StoreLocationMapActivity.INTENT_STORE, (Parcelable)StoreDetailInfoTabActivity.store);
+        startActivity(intent);
     }
 
-    public void onPhoneClick(View v) {
-	phoneCallUtil.call(StoreDetailInfoTabActivity.store.getTelNotDashed());
+    public void onTelClicked(View v) {
+        phoneCallUtil.call(StoreDetailInfoTabActivity.store.getTelNotDashed());
+    }
+    
+    public void onWebsiteClicked(View v) {
+        Uri uri = Uri.parse(StoreDetailInfoTabActivity.store.getWebsite());
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(uri);
+        startActivity(intent);
+    }
+    
+    public void onReportClick(View v) {
+        
     }
 }

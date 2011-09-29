@@ -54,7 +54,7 @@ public class MessageParser extends MatjiDataParser {
 	    JSONObject obj;
         try {
             obj = new JSONObject(msg);
-            return obj.getString(MatjiConstants.lang());
+            return obj.getString(MatjiConstants.language());
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

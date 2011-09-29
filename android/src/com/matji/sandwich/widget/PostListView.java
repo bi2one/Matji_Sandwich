@@ -2,17 +2,16 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.util.AttributeSet;
+
 import com.matji.sandwich.R;
-import com.matji.sandwich.adapter.PostSectionedAdapter;
+import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
-
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
-import android.util.AttributeSet;
 
 /**
  * View displaying the list with sectioned header.
@@ -28,7 +27,7 @@ public class PostListView extends RequestableMListView {
     }
     
     public PostListView(Context context, AttributeSet attr) {
-        super(context, attr, new PostSectionedAdapter(context), 10);
+        super(context, attr, new PostAdapter(context), 10);
         init();
     }	
 
@@ -42,8 +41,8 @@ public class PostListView extends RequestableMListView {
     }
     
     public void setSubtitle(String subtitle) {
-        ((PostSectionedAdapter) getMBaseAdapter()).setSpinnerContainer(getLoadingFooterView());
-        ((PostSectionedAdapter) getMBaseAdapter()).setSubtitle(subtitle);
+//        ((PostAdapter) getMBaseAdapter()).setSpinnerContainer(getLoadingFooterView());
+        ((PostAdapter) getMBaseAdapter()).setSubtitle(subtitle);
     }
 
     public HttpRequest request() {
@@ -55,10 +54,10 @@ public class PostListView extends RequestableMListView {
         return request;
     }
 
-    public void setActivity(Activity activity) {
-        super.setActivity(activity);
-        ((PostSectionedAdapter) getMBaseAdapter()).setActivity(getActivity());
-    }
+//    public void setActivity(Activity activity) {
+//        super.setActivity(activity);
+//        ((PostAdapter) getMBaseAdapter()).setActivity(getActivity());
+//    }
 
     public void setPosts(ArrayList<MatjiData> data) {
         getMBaseAdapter().setData(data);

@@ -12,8 +12,7 @@
 		android:id="@+id/row_post_post_wrapper"
 		style="@style/row_post_PostWrapper">
 		<RelativeLayout
-			style="@style/row_post_PostWrapperInner"
-			android:layout_toLeftOf="@+id/row_post_menu_btn">
+			style="@style/row_post_PostWrapperInner">
 			<com.matji.sandwich.widget.BoldStyleTextView
 				android:id="@+id/row_post_nick"
 				style="@style/LinkifyName" />
@@ -92,13 +91,13 @@
 				android:layout_toRightOf="@id/row_post_divider2"
 				android:drawableLeft="@drawable/icon_hand01" />
 		</RelativeLayout>
-		<ImageButton
-			android:id="@id/row_post_menu_btn"
-			android:layout_width="@dimen/quickaction_btn_width"
-			android:layout_height="@dimen/quickaction_btn_height"
-			android:layout_alignParentRight="true"
-			android:layout_centerVertical="true"
-			android:background="@null"
-			android:src="@drawable/icon_menu" />
+<!-- 		<ImageButton -->
+<!-- 			android:id="@id/row_post_menu_btn" -->
+<!-- 			android:layout_width="@dimen/quickaction_btn_width" -->
+<!-- 			android:layout_height="@dimen/quickaction_btn_height" -->
+<!-- 			android:layout_alignParentRight="true" -->
+<!-- 			android:layout_centerVertical="true" -->
+<!-- 			android:background="@null" -->
+<!-- 			android:src="@drawable/icon_menu" /> -->
 	</RelativeLayout>
 </LinearLayout>

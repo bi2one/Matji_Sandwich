@@ -9,12 +9,6 @@ import android.view.View.OnClickListener;
 import com.matji.sandwich.LikeStoreListActivity;
 import com.matji.sandwich.data.User;
 
-/**
- * Like, Unlike를 수행하는 리스너.
- * 
- * @author mozziluv
- *
- */
 public class LikeStoreListListener implements OnClickListener {
 
     private Context context;

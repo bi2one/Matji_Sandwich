@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -81,10 +80,6 @@ public class UserTagCloudView extends TagCloudView implements Requestable, Refre
             
             @Override
             public void onClick(View v) {
-                Log.d("Matji", tag.getTag()+"");
-                Log.d("Matji", tag.getCreatedAt()+"");
-                Log.d("Matji", tag.getCount()+"");
-                Log.d("Matji", tag.getTagId()+"");
                 Intent intent = new Intent(getContext(), UserTagPostListActivity.class);
                 intent.putExtra(UserTagPostListActivity.TAG, (Parcelable) tag);
                 getContext().startActivity(intent);

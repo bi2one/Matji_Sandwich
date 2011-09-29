@@ -15,7 +15,7 @@ public class UserMainActivity extends BaseTabActivity {
     private RoundTabHost tabHost;
     public static User user;
 
-    public static final String USER = "user";
+    public static final String USER = "UserMainActivity.user";
 
     public int setMainViewId() {
 	return R.id.activity_user_main;
@@ -42,19 +42,19 @@ public class UserMainActivity extends BaseTabActivity {
 
         Intent userPostListIntent = new Intent(this, UserPostListActivity.class);
         Intent userImageListIntent = new Intent(this, UserImageListActivity.class);
-        Intent userUrlListIntent = new Intent(this, UserTagCloudActivity.class);
+        Intent userUrlListIntent = new Intent(this, UserUrlListActivity.class);
 
         tabHost = (RoundTabHost) getTabHost();
 
         tabHost.addLeftTab("tab1",
-                R.string.store_main_post_list_view, 
+                R.string.default_string_post, 
                 userPostListIntent);
         tabHost.addCenterTab("tab2",
-                R.string.store_main_img,
+                R.string.default_string_picture,
                 userImageListIntent);
-//        tabHost.addRightTab("tab3",
-//                R.string.store_main_review,
-//                userUrlListIntent);
+        tabHost.addRightTab("tab3",
+                R.string.default_string_webreview,
+                userUrlListIntent);
         
         LinearLayout wrapper = (LinearLayout) findViewById(R.id.user_talk_wrapper);
         wrapper.setOnTouchListener(new View.OnTouchListener() {

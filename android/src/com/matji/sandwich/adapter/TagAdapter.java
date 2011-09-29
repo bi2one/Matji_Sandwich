@@ -4,7 +4,7 @@ import com.matji.sandwich.data.SimpleTag;
 
 import android.content.Context;
 
-public class TagAdapter extends DefaultAdapter {
+public class TagAdapter extends SimpleAdapter {
 
 	public TagAdapter(Context context) {
 		super(context);

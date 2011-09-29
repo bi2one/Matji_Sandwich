@@ -21,10 +21,9 @@
 				style="@style/DefaultFill"
 				android:padding="@dimen/default_distance">
 				<!-- User Information Edit -->
-				<LinearLayout
+				<RelativeLayout
 					android:id="@+id/edit_user_info"
 					style="@style/settings_Wrapper"
-					android:orientation="vertical"
 					android:layout_below="@id/UserEditCell">
 					<!-- Intro -->
 					<RelativeLayout
@@ -34,7 +33,7 @@
 						<RelativeLayout
 							style="@style/DefaultWrap"
 							android:layout_marginRight="@dimen/default_drawable_padding_long"
-                            android:layout_alignParentLeft="true"
+							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/edit_intro_icon_flow">
 							<TextView
 								android:id="@+id/edit_intro"
@@ -54,19 +53,18 @@
 							style="@style/DefaultWrap"
 							android:src="@drawable/icon_flow"
 							android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true" />
+							android:layout_centerVertical="true" />
 					</RelativeLayout>
-					<View
-						style="@style/HorizontalLine" />
 					<!-- Blog/Hompage -->
 					<RelativeLayout
 						android:id="@+id/edit_website_wrapper"
 						style="@style/settings_Row"
-                        android:background="@drawable/txtbox_c_selector">
+						android:background="@drawable/txtbox_c_selector"
+						android:layout_below="@id/edit_intro_wrapper">
 						<RelativeLayout
 							style="@style/DefaultWrap"
 							android:layout_marginRight="@dimen/default_drawable_padding_long"
-                            android:layout_alignParentLeft="true"
+							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/edit_website_icon_flow">
 							<TextView
 								android:id="@+id/edit_website"
@@ -86,19 +84,18 @@
 							style="@style/DefaultWrap"
 							android:src="@drawable/icon_flow"
 							android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true" />
+							android:layout_centerVertical="true" />
 					</RelativeLayout>
-					<View
-						style="@style/HorizontalLine" />
 					<!-- Area -->
 					<RelativeLayout
 						android:id="@+id/edit_area_wrapper"
 						style="@style/settings_Row"
-                        android:background="@drawable/txtbox_u_selector">
+						android:background="@drawable/txtbox_u_selector"
+						android:layout_below="@id/edit_website_wrapper">
 						<RelativeLayout
 							style="@style/DefaultWrap"
 							android:layout_marginRight="@dimen/default_drawable_padding_long"
-                            android:layout_alignParentLeft="true"
+							android:layout_alignParentLeft="true"
 							android:layout_toLeftOf="@+id/edit_area_icon_flow">
 							<TextView
 								android:id="@+id/edit_area"
@@ -118,42 +115,49 @@
 							style="@style/DefaultWrap"
 							android:src="@drawable/icon_flow"
 							android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true" />
+							android:layout_centerVertical="true" />
 					</RelativeLayout>
-				</LinearLayout>
-				<LinearLayout
+					<View
+						style="@style/HorizontalLine"
+						android:layout_below="@id/edit_intro_wrapper" />
+					<View
+						style="@style/HorizontalLine"
+						android:layout_below="@id/edit_website_wrapper" />
+				</RelativeLayout>
+				<RelativeLayout
 					android:id="@+id/edit_account"
 					style="@style/settings_Wrapper"
 					android:layout_marginTop="0dp"
-					android:orientation="vertical"
 					android:layout_below="@id/edit_user_info">
 					<!-- Edit Password -->
 					<TextView
 						android:id="@+id/edit_password"
 						style="@style/settings_Row"
-                        android:background="@drawable/txtbox_t_selector"
-                        android:gravity="center_vertical"
+						android:background="@drawable/txtbox_t_selector"
+						android:gravity="center_vertical"
 						android:text="@string/edit_password"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_light_gray"
 						android:layout_alignParentLeft="true"
 						android:drawableRight="@drawable/icon_flow"
 						android:drawablePadding="@dimen/default_drawable_padding_long" />
-					<View
-						style="@style/HorizontalLine" />
 					<!-- Withdrawal -->
 					<TextView
 						android:id="@+id/edit_withdrawal"
 						style="@style/settings_Row"
-                        android:background="@drawable/txtbox_u_selector"
-                        android:gravity="center_vertical"
+						android:background="@drawable/txtbox_u_selector"
+						android:gravity="center_vertical"
 						android:text="@string/edit_withdrawal"
 						android:textSize="@dimen/settings_content_size"
 						android:textColor="@color/matji_light_gray"
 						android:layout_alignParentLeft="true"
 						android:drawableRight="@drawable/icon_flow"
-						android:drawablePadding="@dimen/default_drawable_padding_long" />
-				</LinearLayout>
+						android:drawablePadding="@dimen/default_drawable_padding_long"
+						android:layout_below="@id/edit_password" />
+					<View
+						style="@style/HorizontalLine"
+						android:layout_below="@id/edit_password" />
+				</RelativeLayout>
 			</RelativeLayout>
 		</LinearLayout>
 	</ScrollView>

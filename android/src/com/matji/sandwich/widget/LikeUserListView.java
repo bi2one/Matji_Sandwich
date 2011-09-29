@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
@@ -21,9 +22,16 @@ public class LikeUserListView extends RequestableMListView {
 
     public LikeUserListView(Context context, AttributeSet attrs) {
         super(context, attrs, new SimpleUserAdapter(context), 10);
-        setBackgroundColor(MatjiConstants.color(R.color.matji_white));
+        init();
     }
 
+    public void init() {
+        setBackgroundColor(MatjiConstants.color(R.color.matji_white));
+        setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
+        setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_size));
+        userRequest = new UserHttpRequest(getContext());
+    }
+    
     public void setData(MatjiData data) {
         this.data = data;
         if (data instanceof Store) {

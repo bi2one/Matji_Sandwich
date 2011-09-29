@@ -5,47 +5,27 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.matji.sandwich.PostMainActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.Requestable;
-import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.AttachFile;
-import com.matji.sandwich.data.Like;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.data.provider.DBProvider;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.LikeHttpRequest;
-import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.listener.GotoImageSliderAction;
 import com.matji.sandwich.listener.GotoPostMainAction;
 import com.matji.sandwich.listener.GotoStoreMainAction;
 import com.matji.sandwich.listener.GotoUserMainAction;
-import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.ProfileImageView;
-import com.matji.sandwich.widget.dialog.ActionItem;
-import com.matji.sandwich.widget.dialog.QuickActionDialog;
-import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
-import com.matji.sandwich.widget.dialog.SimpleDialog;
 
 /**
  * {@link Post} Adapter.
@@ -53,7 +33,7 @@ import com.matji.sandwich.widget.dialog.SimpleDialog;
  * @author mozziluv
  *
  */
-public class PostSectionedAdapter extends SectionedAdapter {
+public class PostAdapter extends SectionedAdapter {
     private int[] previewWrapperIds = new int[]{
             R.id.row_post_preview1,
             R.id.row_post_preview2,
@@ -65,8 +45,8 @@ public class PostSectionedAdapter extends SectionedAdapter {
     private GotoUserMainAction action1;
     private GotoStoreMainAction action2;
     private GotoImageSliderAction action3;
-    private Activity activity;
-    private RelativeLayout spinnerContainer;
+//    private Activity activity;
+//    private RelativeLayout spinnerContainer;
     private ImageLoader imageLoader;
 
     private ListView parent;
@@ -76,7 +56,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
      * 
      * @param context
      */
-    public PostSectionedAdapter(Context context) {
+    public PostAdapter(Context context) {
         super(context);
         init();
     }
@@ -88,9 +68,9 @@ public class PostSectionedAdapter extends SectionedAdapter {
 	imageLoader = new ImageLoader(context);
     }
 
-    public void setSpinnerContainer(RelativeLayout spinnerContainer) {
-	this.spinnerContainer = spinnerContainer;
-    }
+//    public void setSpinnerContainer(RelativeLayout spinnerContainer) {
+//	this.spinnerContainer = spinnerContainer;
+//    }
 
     public void setSubtitle(String subtitle) {    
         this.subtitle= subtitle;
@@ -169,7 +149,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
             postElement.dateAgo = (TextView) convertView.findViewById(R.id.row_post_created_at);
             postElement.commentCount = (TextView) convertView.findViewById(R.id.row_post_comment_count);
             postElement.likeCount = (TextView) convertView.findViewById(R.id.row_post_like_count);
-            postElement.menu= (ImageButton) convertView.findViewById(R.id.row_post_menu_btn);
+//            postElement.menu= (ImageButton) convertView.findViewById(R.id.row_post_menu_btn);
             
             postElement.preview = new ImageView[previewWrapperIds.length];
             postElement.previewWrapper = new RelativeLayout[previewWrapperIds.length];
@@ -224,9 +204,9 @@ public class PostSectionedAdapter extends SectionedAdapter {
         holder.nick.setOnClickListener(action1);
         holder.storeName.setOnClickListener(action2);
         holder.post.setLinksClickable(false);
-        PostQuickActionDialog dialog = new PostQuickActionDialog(position);
-        holder.menu.setOnClickListener(dialog);
-        holder.menu.setTag(holder.menu);
+//        PostQuickActionDialog dialog = new PostQuickActionDialog(position);
+//        holder.menu.setOnClickListener(dialog);
+//        holder.menu.setTag(holder.menu);
 
         for (int i = 0; i < holder.preview.length; i++) {
             holder.preview[i].setOnClickListener(action3);
@@ -308,14 +288,14 @@ public class PostSectionedAdapter extends SectionedAdapter {
         }
     }
 
-    /**
-     * Dialog를 show 하기 위해 activity를 저장한다.
-     * 
-     * @param activity
-     */
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
+//    /**
+//     * Dialog를 show 하기 위해 activity를 저장한다.
+//     * 
+//     * @param activity
+//     */
+//    public void setActivity(Activity activity) {
+//        this.activity = activity;
+//    }
 
     /**
      * {@link Post} 뷰 홀더
@@ -337,7 +317,7 @@ public class PostSectionedAdapter extends SectionedAdapter {
         View previews;
         RelativeLayout[] previewWrapper;
         ImageView[] preview;
-        ImageButton menu;
+//        ImageButton menu;
     }
 
     private class PostSectionElement {
@@ -345,224 +325,224 @@ public class PostSectionedAdapter extends SectionedAdapter {
         TextView section;
     }
 
-    /**
-     * QuickAction 버튼을 클릭했을 때, 다이얼로그를 보여주고
-     * 다이얼로그 내의 버튼을 클릭했을 때 각 버튼에 대한 행동을 취한다.
-     *  
-     * @author mozziluv
-     *
-     */
-    class PostQuickActionDialog implements Requestable, OnClickListener {
-        private QuickActionDialog quickaction;
-        private Session session;
-        private HttpRequest request;
-        private HttpRequestManager manager;
-        private DBProvider dbProvider;
-
-        private int position;
-
-        /**
-         * 기본 생성자.
-         * 
-         * @param position 현재 QuickAction 버튼이 눌린 position
-         */
-        public PostQuickActionDialog(int position) {
-            this.quickaction = new QuickActionDialog(context);
-            this.session = Session.getInstance(context);
-            this.manager = HttpRequestManager.getInstance(context);
-            this.dbProvider = DBProvider.getInstance(context);
-
-            this.position = position;
-
-            // 아이템(버튼) 추가.
-            ActionItem commentAction = new ActionItem();
-            commentAction.setIcon(MatjiConstants.drawable(R.drawable.icon_memo_talk));
-            quickaction.addActionItem(commentAction);
-
-            ActionItem likeAction = new ActionItem();
-            likeAction.setIcon(MatjiConstants.drawable(R.drawable.icon_memo_likehand));
-            quickaction.addActionItem(likeAction);
-
-            // 자신이 작성한 이야기일 경우 수정, 삭제 버튼도 추가.
-            if (isMine((Post) data.get(position))) {
-                ActionItem editAction = new ActionItem();
-                editAction.setIcon(MatjiConstants.drawable(R.drawable.icon_memo_write));
-                quickaction.addActionItem(editAction);
-
-                ActionItem deleteAction = new ActionItem();
-                deleteAction.setIcon(MatjiConstants.drawable(R.drawable.icon_memo_del));
-                quickaction.addActionItem(deleteAction);
-            }
-
-            // 클릭 리스너 등록.
-            quickaction.setOnActionItemClickListener(new QuickActionDialog.OnActionItemClickListener() {
-
-                @Override
-                public void onItemClick(int pos) {
-                    if (((Identifiable) context).loginRequired()) {
-                        if (pos == 0) {
-                            Log.d("Matji", "comment button click");
-                            gotoCommentActivity();
-                        } else if (pos == 1) {
-                            Log.d("Matji", "like button click");
-                            likePost();
-                        } else if (pos == 2) {
-                            Log.d("Matji", "edit button click");
-
-                        } else if (pos == 3) {
-                            Log.d("Matji", "delete button click");
-                            deletePost();
-                        }
-                    }
-                }
-            });
-        }
-
-        /**
-         * 댓글 작성 버튼을 클릭했을 때,
-         * 댓글 페이지로 이동하고 키보드가 바로 올라오도록 한다.
-         */
-        public void gotoCommentActivity() {
-            Intent intent = new Intent(context, PostMainActivity.class);
-            intent.putExtra(PostMainActivity.POSTS, data);
-            intent.putExtra(PostMainActivity.POSITION, position);
-            intent.putExtra(PostMainActivity.SHOW_KEYBOARD, true);
-            context.startActivity(intent);
-        }
-
-        /**
-         * 좋아요 버튼을 클릭했을 때,
-         * 현재 이 이야기를 좋아요 했는지를 판단한 후 그에 따라 처리한다.
-         */
-        public void likePost() {
-            if (!manager.isRunning()) {
-                Post post = (Post) data.get(position);
-                if (dbProvider.isExistLike(post.getId(), DBProvider.POST)){
-                    unlikeRequest(post);
-                } else {
-                    likeRequest(post);
-                }
-            }
-        }
-
-        /**
-         * Like 요청
-         * @param post Like할 이야기
-         */
-        private void likeRequest(Post post) {
-            if (request == null || !(request instanceof LikeHttpRequest)) {
-                request = new LikeHttpRequest(context);
-            }
-
-            ((LikeHttpRequest) request).actionPostLike(post.getId());
-            manager.request(spinnerContainer, request, HttpRequestManager.LIKE_REQUEST, this);
-            ((Post) data.get(position)).setLikeCount(post.getLikeCount() + 1);
-        }
-
-        /**
-         * Unlike 요청
-         * @param post UnLike할 이야기
-         */
-        private void unlikeRequest(Post post) {
-            if (request == null || !(request instanceof LikeHttpRequest)) {
-                request = new LikeHttpRequest(context);
-            }
-
-            ((LikeHttpRequest) request).actionPostUnLike(post.getId());
-            manager.request(spinnerContainer, request, HttpRequestManager.UN_LIKE_REQUEST, this);
-            ((Post) data.get(position)).setLikeCount(post.getLikeCount() - 1);
-        }
-
-        /**
-         * 이야기 삭제 버튼을 클릭했을 때,
-         * 현재 이 이야기를 삭제할 것인지를 묻는 Alert 윈도우를 띄우고,
-         * 확인 했을 때 삭제요청을 한다.
-         */
-        public void deletePost() {
-            final Post post = (Post) data.get(position);
-            if (activity.getParent() != null) {
-                activity = activity.getParent();
-            }
-            
-            SimpleConfirmDialog dialog = new SimpleConfirmDialog(activity, R.string.default_string_check_delete);
-            dialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
-                
-                @Override
-                public void onConfirmClick(SimpleDialog dialog) {
-                    deleteRequest(post);
-                }
-                
-                @Override
-                public void onCancelClick(SimpleDialog dialog) {}
-            });
-            dialog.show();
-        }
-
-        /**
-         * Delete 요청
-         * @param post Delete할 이야기
-         */
-        public void deleteRequest(Post post) {
-            // Alert 창 띄우기.
-            if (!manager.isRunning()) {
-                if (request == null || !(request instanceof PostHttpRequest)) {
-                    request = new PostHttpRequest(context);
-                }
-
-                ((PostHttpRequest) request).actionDelete(post.getId());
-                manager.request(spinnerContainer, request, HttpRequestManager.POST_DELETE_REQUEST, this);
-            }
-        }
-
-        /**
-         * 파라미터로 전달받은 {@link Post}가 현재 로그인 된 {@link User}의 {@link Post}인지 확인한다.
-         * 
-         * @param post 확인 할 {@link Post}
-         * @return 전달받은 {@link Post}가 로그인 된 {@link User}의 {@link Post}일 때 true
-         */
-        public boolean isMine(Post post) {
-            return session.isLogin() && session.getCurrentUser().getId() == post.getUserId();
-        }
-
-        /**
-         * @see Requestable#requestCallBack(int, ArrayList)
-         */
-        @Override
-        public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-
-            switch (tag) {
-            // TODO Auto-generated method stub
-            case HttpRequestManager.LIKE_REQUEST:
-                Like like = new Like();
-                like.setForeignKey(((Post) PostSectionedAdapter.this.data.get(position)).getId());
-                like.setObject(DBProvider.POST);
-                dbProvider.insertLike(like);
-                break;
-            case HttpRequestManager.UN_LIKE_REQUEST:
-                dbProvider.deleteLike(((Post) PostSectionedAdapter.this.data.get(position)).getId(), DBProvider.POST);
-                break;
-            case HttpRequestManager.POST_DELETE_REQUEST:
-                PostSectionedAdapter.this.data.remove(position);
-                break;
-            }
-            notifyDataSetChanged();
-        }
-
-        /**
-         * @see Requestable#requestExceptionCallBack(int, MatjiException)
-         */
-        @Override
-        public void requestExceptionCallBack(int tag, MatjiException e) {
-            // TODO Auto-generated method stub
-            e.performExceptionHandling(context);
-        }
-
-        /**
-         * Quick Action Dialog를 보여준다.
-         */
-        @Override
-        public void onClick(View v) {
-            quickaction.show((View) v.getTag());
-        }
-    }
+//    /**
+//     * QuickAction 버튼을 클릭했을 때, 다이얼로그를 보여주고
+//     * 다이얼로그 내의 버튼을 클릭했을 때 각 버튼에 대한 행동을 취한다.
+//     *  
+//     * @author mozziluv
+//     *
+//     */
+//    class PostQuickActionDialog implements Requestable, OnClickListener {
+//        private QuickActionDialog quickaction;
+//        private Session session;
+//        private HttpRequest request;
+//        private HttpRequestManager manager;
+//        private DBProvider dbProvider;
+//
+//        private int position;
+//
+//        /**
+//         * 기본 생성자.
+//         * 
+//         * @param position 현재 QuickAction 버튼이 눌린 position
+//         */
+//        public PostQuickActionDialog(int position) {
+//            this.quickaction = new QuickActionDialog(context);
+//            this.session = Session.getInstance(context);
+//            this.manager = HttpRequestManager.getInstance(context);
+//            this.dbProvider = DBProvider.getInstance(context);
+//
+//            this.position = position;
+//
+//            // 아이템(버튼) 추가.
+//            ActionItem commentAction = new ActionItem();
+//            commentAction.setIcon(MatjiConstants.drawable(R.drawable.icon_memo_talk));
+//            quickaction.addActionItem(commentAction);
+//
+//            ActionItem likeAction = new ActionItem();
+//            likeAction.setIcon(MatjiConstants.drawable(R.drawable.icon_memo_likehand));
+//            quickaction.addActionItem(likeAction);
+//
+//            // 자신이 작성한 이야기일 경우 수정, 삭제 버튼도 추가.
+//            if (isMine((Post) data.get(position))) {
+//                ActionItem editAction = new ActionItem();
+//                editAction.setIcon(MatjiConstants.drawable(R.drawable.icon_memo_write));
+//                quickaction.addActionItem(editAction);
+//
+//                ActionItem deleteAction = new ActionItem();
+//                deleteAction.setIcon(MatjiConstants.drawable(R.drawable.icon_memo_del));
+//                quickaction.addActionItem(deleteAction);
+//            }
+//
+//            // 클릭 리스너 등록.
+//            quickaction.setOnActionItemClickListener(new QuickActionDialog.OnActionItemClickListener() {
+//
+//                @Override
+//                public void onItemClick(int pos) {
+//                    if (((Identifiable) context).loginRequired()) {
+//                        if (pos == 0) {
+//                            Log.d("Matji", "comment button click");
+//                            gotoCommentActivity();
+//                        } else if (pos == 1) {
+//                            Log.d("Matji", "like button click");
+//                            likePost();
+//                        } else if (pos == 2) {
+//                            Log.d("Matji", "edit button click");
+//
+//                        } else if (pos == 3) {
+//                            Log.d("Matji", "delete button click");
+//                            deletePost();
+//                        }
+//                    }
+//                }
+//            });
+//        }
+//
+//        /**
+//         * 댓글 작성 버튼을 클릭했을 때,
+//         * 댓글 페이지로 이동하고 키보드가 바로 올라오도록 한다.
+//         */
+//        public void gotoCommentActivity() {
+//            Intent intent = new Intent(context, PostMainActivity.class);
+//            intent.putExtra(PostMainActivity.POSTS, data);
+//            intent.putExtra(PostMainActivity.POSITION, position);
+//            intent.putExtra(PostMainActivity.SHOW_KEYBOARD, true);
+//            context.startActivity(intent);
+//        }
+//
+//        /**
+//         * 좋아요 버튼을 클릭했을 때,
+//         * 현재 이 이야기를 좋아요 했는지를 판단한 후 그에 따라 처리한다.
+//         */
+//        public void likePost() {
+//            if (!manager.isRunning()) {
+//                Post post = (Post) data.get(position);
+//                if (dbProvider.isExistLike(post.getId(), DBProvider.POST)){
+//                    unlikeRequest(post);
+//                } else {
+//                    likeRequest(post);
+//                }
+//            }
+//        }
+//
+//        /**
+//         * Like 요청
+//         * @param post Like할 이야기
+//         */
+//        private void likeRequest(Post post) {
+//            if (request == null || !(request instanceof LikeHttpRequest)) {
+//                request = new LikeHttpRequest(context);
+//            }
+//
+//            ((LikeHttpRequest) request).actionPostLike(post.getId());
+//            manager.request(spinnerContainer, request, HttpRequestManager.LIKE_REQUEST, this);
+//            ((Post) data.get(position)).setLikeCount(post.getLikeCount() + 1);
+//        }
+//
+//        /**
+//         * Unlike 요청
+//         * @param post UnLike할 이야기
+//         */
+//        private void unlikeRequest(Post post) {
+//            if (request == null || !(request instanceof LikeHttpRequest)) {
+//                request = new LikeHttpRequest(context);
+//            }
+//
+//            ((LikeHttpRequest) request).actionPostUnLike(post.getId());
+//            manager.request(spinnerContainer, request, HttpRequestManager.UN_LIKE_REQUEST, this);
+//            ((Post) data.get(position)).setLikeCount(post.getLikeCount() - 1);
+//        }
+//
+//        /**
+//         * 이야기 삭제 버튼을 클릭했을 때,
+//         * 현재 이 이야기를 삭제할 것인지를 묻는 Alert 윈도우를 띄우고,
+//         * 확인 했을 때 삭제요청을 한다.
+//         */
+//        public void deletePost() {
+//            final Post post = (Post) data.get(position);
+//            if (activity.getParent() != null) {
+//                activity = activity.getParent();
+//            }
+//            
+//            SimpleConfirmDialog dialog = new SimpleConfirmDialog(activity, R.string.default_string_check_delete);
+//            dialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
+//                
+//                @Override
+//                public void onConfirmClick(SimpleDialog dialog) {
+//                    deleteRequest(post);
+//                }
+//                
+//                @Override
+//                public void onCancelClick(SimpleDialog dialog) {}
+//            });
+//            dialog.show();
+//        }
+//
+//        /**
+//         * Delete 요청
+//         * @param post Delete할 이야기
+//         */
+//        public void deleteRequest(Post post) {
+//            // Alert 창 띄우기.
+//            if (!manager.isRunning()) {
+//                if (request == null || !(request instanceof PostHttpRequest)) {
+//                    request = new PostHttpRequest(context);
+//                }
+//
+//                ((PostHttpRequest) request).actionDelete(post.getId());
+//                manager.request(spinnerContainer, request, HttpRequestManager.POST_DELETE_REQUEST, this);
+//            }
+//        }
+//
+//        /**
+//         * 파라미터로 전달받은 {@link Post}가 현재 로그인 된 {@link User}의 {@link Post}인지 확인한다.
+//         * 
+//         * @param post 확인 할 {@link Post}
+//         * @return 전달받은 {@link Post}가 로그인 된 {@link User}의 {@link Post}일 때 true
+//         */
+//        public boolean isMine(Post post) {
+//            return session.isLogin() && session.getCurrentUser().getId() == post.getUserId();
+//        }
+//
+//        /**
+//         * @see Requestable#requestCallBack(int, ArrayList)
+//         */
+//        @Override
+//        public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+//
+//            switch (tag) {
+//            // TODO Auto-generated method stub
+//            case HttpRequestManager.LIKE_REQUEST:
+//                Like like = new Like();
+//                like.setForeignKey(((Post) PostAdapter.this.data.get(position)).getId());
+//                like.setObject(DBProvider.POST);
+//                dbProvider.insertLike(like);
+//                break;
+//            case HttpRequestManager.UN_LIKE_REQUEST:
+//                dbProvider.deleteLike(((Post) PostAdapter.this.data.get(position)).getId(), DBProvider.POST);
+//                break;
+//            case HttpRequestManager.POST_DELETE_REQUEST:
+//                PostAdapter.this.data.remove(position);
+//                break;
+//            }
+//            notifyDataSetChanged();
+//        }
+//
+//        /**
+//         * @see Requestable#requestExceptionCallBack(int, MatjiException)
+//         */
+//        @Override
+//        public void requestExceptionCallBack(int tag, MatjiException e) {
+//            // TODO Auto-generated method stub
+//            e.performExceptionHandling(context);
+//        }
+//
+//        /**
+//         * Quick Action Dialog를 보여준다.
+//         */
+//        @Override
+//        public void onClick(View v) {
+//            quickaction.show((View) v.getTag());
+//        }
+//    }
 }

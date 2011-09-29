@@ -7,14 +7,16 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.http.request.PostHttpRequest.TagByType;
 import com.matji.sandwich.util.MatjiConstants;
 
-public class StoreTagPostListView extends PostListView {
+public class TagPostListView extends PostListView {
 
     private HttpRequest request;
     private Tag tag;
+    private TagByType type;
 
-    public StoreTagPostListView(Context context, AttributeSet attrs) {
+    public TagPostListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -23,13 +25,18 @@ public class StoreTagPostListView extends PostListView {
         setPage(1);
     }
     
-    public void setStoreTag(Tag tag) {
-        this.tag = tag;
+    public void setType(TagByType type) {
+        this.type = type;
     }
-
+    
+    public void setTag(Tag tag) {
+        this.tag = tag;
+        super.init();
+    }    
+    
     @Override
     public HttpRequest request() {
-        ((PostHttpRequest) request).actionUserTagByList(tag.getId(), getPage(), getLimit());
+        ((PostHttpRequest) request).actionTagByList(type, tag.getId(), getPage(), getLimit());
         return request;
     }
 

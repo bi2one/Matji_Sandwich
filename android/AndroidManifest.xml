@@ -116,6 +116,9 @@
         <activity android:name="UserNickEditActivity"
                   android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait"></activity>
+        <activity android:name="UserPasswordEditActivity"
+                  android:windowSoftInputMode="adjustResize"
+                  android:screenOrientation="portrait"></activity>
         <activity android:name="UserIntroEditActivity"
                   android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait"></activity>
@@ -130,6 +133,8 @@
 		<activity android:name="UserImageListActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="UserPostListActivity"
+                  android:screenOrientation="portrait"></activity>
+        <activity android:name="UserUrlListActivity"
                   android:screenOrientation="portrait"></activity>
         <activity android:name="UserProfileTabActivity" 
                   android:screenOrientation="portrait"></activity>

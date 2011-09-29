@@ -13,6 +13,16 @@ public class AttachFileHttpRequest extends HttpRequest {
     	controller = "attach_files";
     }
     
+    public void actionProfileUpload(File imageFile) {
+        parser = new AttachFileParser(context);
+        httpMethod = HttpMethod.HTTP_POST;        
+        action = "profile_upload";
+        
+        postHashtable.clear();
+        
+        postHashtable.put("upload_file", imageFile);
+    }
+    
     public void actionUpload(File imageFile, int postId){
     	parser = new AttachFileParser(context);
     	httpMethod = HttpMethod.HTTP_POST;

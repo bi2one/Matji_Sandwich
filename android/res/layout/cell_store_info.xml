@@ -2,6 +2,7 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/StoreInfoCell"
+	android:background="@drawable/btn_white_to_lightpink"
 	android:layout_width="fill_parent"
 	android:layout_height="@dimen/store_cell_info_height">
 	<RelativeLayout

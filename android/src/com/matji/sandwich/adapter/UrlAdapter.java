@@ -4,7 +4,7 @@ import com.matji.sandwich.data.Url;
 
 import android.content.Context;
 
-public class UrlAdapter extends DefaultAdapter {
+public class UrlAdapter extends SimpleAdapter {
 
 	public UrlAdapter(Context context) {
 		super(context);

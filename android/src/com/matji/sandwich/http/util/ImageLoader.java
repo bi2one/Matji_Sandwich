@@ -28,49 +28,49 @@ import com.matji.sandwich.util.MatjiConstants;
 
 public class ImageLoader {
     public static enum UrlType {
-	USER, ATTACH_FILE;
+        USER, ATTACH_FILE;
 
-	public String toString() {
-	    switch(this) {
-	    case USER:
-		return MatjiConstants.string(R.string.server_domain) + "users/profile";
-	    case ATTACH_FILE:
-		return MatjiConstants.string(R.string.server_domain) + "attach_files/image";
-	    }
-	    return null;
-	}
-	
-	public String getIdString() {
-	    switch(this) {
-	    case USER:
-		return "user_id";
-	    case ATTACH_FILE:
-		return "attach_file_id";
-	    }
-	    return null;
-	}
+        public String toString() {
+            switch(this) {
+            case USER:
+                return MatjiConstants.string(R.string.server_domain) + "users/profile";
+            case ATTACH_FILE:
+                return MatjiConstants.string(R.string.server_domain) + "attach_files/image";
+            }
+            return null;
+        }
+
+        public String getIdString() {
+            switch(this) {
+            case USER:
+                return "user_id";
+            case ATTACH_FILE:
+                return "attach_file_id";
+            }
+            return null;
+        }
     }
 
     public static enum ImageSize {
-	SSMALL, SMALL, MEDIUM, LARGE, XLARGE;
+        SSMALL, SMALL, MEDIUM, LARGE, XLARGE;
 
-	public String toString() {
-	    switch(this) {
-	    case SSMALL:
-		return "ss";
-	    case SMALL:
-		return "s";
-	    case MEDIUM:
-		return "m";
-	    case LARGE:
-		return "l";
-	    case XLARGE:
-		return "xl";
-	    }
-	    return null;
-	}
+        public String toString() {
+            switch(this) {
+            case SSMALL:
+                return "ss";
+            case SMALL:
+                return "s";
+            case MEDIUM:
+                return "m";
+            case LARGE:
+                return "l";
+            case XLARGE:
+                return "xl";
+            }
+            return null;
+        }
     }
-    
+
     private static MemoryCache memoryCache=new MemoryCache();
     private static FileCache fileCache;
     private Map<ImageView, String> imageViews=Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
@@ -83,58 +83,58 @@ public class ImageLoader {
     public ImageLoader(Context context) {
         //Make the background thead low priority. This way it will not affect the UI performance
         photoLoaderThread.setPriority(Thread.NORM_PRIORITY-1);
-        
+
         fileCache=new FileCache(context);
     }
-    
+
     public ImageLoader(Context context, int stub_id){
-	this(context);
-	this.stub_id = stub_id;
+        this(context);
+        this.stub_id = stub_id;
     }
 
     public void setScalable(boolean isScaleFile) {
-	this.isScaleFile = isScaleFile;
+        this.isScaleFile = isScaleFile;
     }
 
     public void setCacheEnable(boolean isCacheEnable) {
-	this.isCacheEnable = isCacheEnable;
+        this.isCacheEnable = isCacheEnable;
     }
 
     public void setImageConvertable(ImageConvertable convertable) {
-	this.convertable = convertable;
+        this.convertable = convertable;
     }
-    
+
     private String createUrl(UrlType type, ImageSize size, int id) {
-	params.clear();
-	params.put(type.getIdString(), id + "");
-	params.put("size", size.toString());
-	Log.d("Matji", HttpUtility.getUrlStringWithQuery(type.toString(), params));
-	return HttpUtility.getUrlStringWithQuery(type.toString(), params);
+        params.clear();
+        params.put(type.getIdString(), id + "");
+        params.put("size", size.toString());
+        Log.d("Matji", HttpUtility.getUrlStringWithQuery(type.toString(), params));
+        return HttpUtility.getUrlStringWithQuery(type.toString(), params);
     }
 
     public void DisplayImage(Activity activity, UrlType type, ImageSize size, ImageView imageView, int id) {
-	DisplayImage(createUrl(type, size, id), activity, imageView);
+        DisplayImage(createUrl(type, size, id), activity, imageView);
     }
 
     public void DisplayImage(String url, Activity activity, ImageView imageView)
     {
         imageViews.put(imageView, url);
-	Bitmap bitmap = null;
-	
-	if (isCacheEnable)
-	    bitmap=memoryCache.get(url);
-	
+        Bitmap bitmap = null;
+
+        if (isCacheEnable)
+            bitmap=memoryCache.get(url);
+
         if(bitmap!=null)
             imageView.setImageBitmap(bitmap);
         else
         {
             queuePhoto(url, activity, imageView);
-	    if (stub_id != -1) {
-		imageView.setImageResource(stub_id);
-	    }
+            if (stub_id != -1) {
+                imageView.setImageResource(stub_id);
+            }
         }    
     }
-        
+
     private void queuePhoto(String url, Activity activity, ImageView imageView)
     {
         //This ImageView may be used for other images before. So there may be some old tasks in the queue. We need to discard them. 
@@ -144,25 +144,25 @@ public class ImageLoader {
             photosQueue.photosToLoad.push(p);
             photosQueue.photosToLoad.notifyAll();
         }
-        
+
         //start thread if it's not started yet
         if(photoLoaderThread.getState()==Thread.State.NEW)
             photoLoaderThread.start();
     }
-    
+
     private Bitmap getBitmap(String url) 
     {
-	File f=fileCache.getFile(url);
-	Bitmap b = null;
-	if (isCacheEnable) {
-	    //from SD cache
-	    b = decodeFile(f);
-	}
-	
+        File f=fileCache.getFile(url);
+        Bitmap b = null;
+        if (isCacheEnable) {
+            //from SD cache
+            b = decodeFile(f);
+        }
+
         if(b!=null) {
             return b;
-	}
-        
+        }
+
         //from web
         try {
             Bitmap bitmap=null;
@@ -174,25 +174,25 @@ public class ImageLoader {
             OutputStream os = new FileOutputStream(f);
             Utils.CopyStream(is, os);
             os.close();
-	    bitmap = applyConvert(f);
+            bitmap = applyConvert(f);
             return bitmap;
         } catch (Exception ex){
-           ex.printStackTrace();
-           return null;
+            ex.printStackTrace();
+            return null;
         }
     }
 
     private Bitmap applyConvert(File f) {
-	Bitmap bitmap = decodeFile(f);
-	if (convertable != null) {
-	    bitmap = convertable.convert(bitmap);
-	    try {
-		FileOutputStream out = new FileOutputStream(f);
-		bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-		out.close();
-	    } catch(IOException e) { }
-	}
-	return bitmap;
+        Bitmap bitmap = decodeFile(f);
+        if (convertable != null) {
+            bitmap = convertable.convert(bitmap);
+            try {
+                FileOutputStream out = new FileOutputStream(f);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+                out.close();
+            } catch(IOException e) { }
+        }
+        return bitmap;
     }
 
     //decodes image and scales it to reduce memory consumption
@@ -207,25 +207,25 @@ public class ImageLoader {
             final int REQUIRED_SIZE=70;
             int width_tmp=o.outWidth, height_tmp=o.outHeight;
             int scale=1;
-	    if (isScaleFile) {
-		while(true){
-		    if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
-			break;
-		    width_tmp/=2;
-		    height_tmp/=2;
-		    scale*=2;
-		}
-	    }
-            
+            if (isScaleFile) {
+                while(true){
+                    if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
+                        break;
+                    width_tmp/=2;
+                    height_tmp/=2;
+                    scale*=2;
+                }
+            }
+
             //decode with inSampleSize
             BitmapFactory.Options o2 = new BitmapFactory.Options();
             o2.inSampleSize=scale;
-	    Bitmap result = BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+            Bitmap result = BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
             return result;
         } catch (FileNotFoundException e) {}
         return null;
     }
-    
+
     //Task for the queue
     private class PhotoToLoad
     {
@@ -236,19 +236,19 @@ public class ImageLoader {
             imageView=i;
         }
     }
-    
+
     PhotosQueue photosQueue=new PhotosQueue();
-    
+
     public void stopThread()
     {
         photoLoaderThread.interrupt();
     }
-    
+
     //stores list of photos to download
     class PhotosQueue
     {
         private Stack<PhotoToLoad> photosToLoad=new Stack<PhotoToLoad>();
-        
+
         //removes all instances of this ImageView
         public void Clean(ImageView image)
         {
@@ -260,7 +260,7 @@ public class ImageLoader {
             }
         }
     }
-    
+
     class PhotosLoader extends Thread {
         public void run() {
             try {
@@ -295,9 +295,9 @@ public class ImageLoader {
             }
         }
     }
-    
+
     PhotosLoader photoLoaderThread=new PhotosLoader();
-    
+
     //Used to display bitmap in the UI thread
     class BitmapDisplayer implements Runnable
     {
@@ -309,21 +309,21 @@ public class ImageLoader {
             if(bitmap!=null)
                 imageView.setImageBitmap(bitmap);
             else {
-		if (stub_id != -1) {
-		    imageView.setImageResource(stub_id);
-		}
-	    }
+                if (stub_id != -1) {
+                    imageView.setImageResource(stub_id);
+                }
+            }
         }
     }
 
     public static void clearCache(Context context) {
         memoryCache.clear();
-	if (fileCache == null) {
-	    (new FileCache(context)).clear();
-	}
+        if (fileCache == null) {
+            (new FileCache(context)).clear();
+        }
     }
 
     public interface ImageConvertable {
-	public Bitmap convert(Bitmap bitmap);
+        public Bitmap convert(Bitmap bitmap);
     }
 }

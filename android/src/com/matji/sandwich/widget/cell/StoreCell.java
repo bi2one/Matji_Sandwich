@@ -19,6 +19,7 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.listener.LikeListener;
+import com.matji.sandwich.listener.LikeUserListListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
 import com.matji.sandwich.widget.title.button.LikeButton.Likeable;
@@ -117,6 +118,7 @@ public class StoreCell extends Cell implements Likeable {
         };
         name.setText(store.getName());
         likeList.setText(store.getLikeCount()+"");
+        likeList.setOnClickListener(new LikeUserListListener(getContext(), store));
         star.init(store, spinnerContainer);
     }
 

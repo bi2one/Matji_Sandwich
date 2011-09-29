@@ -217,6 +217,9 @@
     <!-- cell_edit_profile.xml -->
     <dimen name="cell_edit_profile_txt_size">11.33dp</dimen>
     
+    <!-- row_simple.xml -->
+    <dimen name="row_simple_txt_size">20dp</dimen>
+    
     <!-- row_store_food.xml -->
     <dimen name="row_store_food_name_size">16dp</dimen>
     <dimen name="row_store_food_like_size">12dp</dimen>
@@ -246,4 +249,9 @@
     <dimen name="register_subtitle_size">12dp</dimen>
     <dimen name="register_margin_top">13.33dp</dimen>
     <dimen name="register_margin_bottom">6.67dp</dimen>
+    
+    <!-- activity_store_default_info.xml -->
+    <dimen name="store_default_info_name_size">14dp</dimen>
+    <dimen name="store_default_info_cover_size">12dp</dimen>
+    <dimen name="store_default_info_content_size">16dp</dimen>
 </resources>

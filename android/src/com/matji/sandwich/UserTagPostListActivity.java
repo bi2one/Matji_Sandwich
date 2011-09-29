@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.data.User;
-import com.matji.sandwich.widget.UserTagPostListView;
+import com.matji.sandwich.http.request.PostHttpRequest.TagByType;
+import com.matji.sandwich.widget.TagPostListView;
 import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserTagPostListActivity extends BaseActivity implements Refreshable {
     
     private UserTitle title;
-    private UserTagPostListView listView;
+    private TagPostListView listView;
     private UserCell userCell;
     private Tag tag;
     public static final String TAG = "UserTagPostListActivity.tag";
@@ -38,7 +38,8 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
         
         title = (UserTitle) findViewById(R.id.Titlebar);
         userCell = new UserCell(this, UserMainActivity.user);
-
+        listView = (TagPostListView) findViewById(R.id.user_tag_post_list_view);
+        
         title.setIdentifiable(this);
         title.setUser(UserMainActivity.user);
         title.setFollowable(userCell);
@@ -48,10 +49,9 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
         userCell.addRefreshable(title);
         userCell.showLine();
 
-        listView = (UserTagPostListView) findViewById(R.id.user_tag_post_list_view);
         listView.addHeaderView(userCell);
-        Log.d("Matji", tag.getTag()+"");
-        listView.setUserTag(tag);
+        listView.setTag(tag);
+        listView.setType(TagByType.USER);
         listView.setActivity(this);
         listView.requestReload();
     }
