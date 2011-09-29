@@ -38,7 +38,6 @@ Requestable,
 ActivityStartable {
     private static final int GPS_START_TAG = 0;
     private static final int GET_ADDRESS_TAG = 0;
-    private static final int REQUEST_CODE_LOCATION = 0;
     private Context context;
     private RankingListView listView;
     private GpsManager gpsManager;
@@ -86,6 +85,7 @@ ActivityStartable {
         geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
         requestManager.request(addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
         sessionUtil.setCenter(centerPoint);
+	sessionUtil.setNearBound(centerPoint);
         listView.requestReload();
     }
 
@@ -135,7 +135,7 @@ ActivityStartable {
 
     public void onChangeLocationClicked(View v) {
         ((BaseTabActivity) getParent()).tabStartActivityForResult(new Intent(context, ChangeLocationActivity.class),
-                REQUEST_CODE_LOCATION,
+                CHANGE_LOCATION_ACTIVITY,
                 this);
     }
 
@@ -147,12 +147,21 @@ ActivityStartable {
 
     @Override
     public void activityResultDelivered(int requestCode, int resultCode, Intent data) {
+	if (resultCode != Activity.RESULT_OK)
+	    return ;
+	
         switch(requestCode) {
-        case USER_MAIN_ACTIVITY:      
-            if (resultCode == Activity.RESULT_OK) {
-                setIsFlow(true);
-            }
+        case USER_MAIN_ACTIVITY:
+	    setIsFlow(true);
             break;
+	case CHANGE_LOCATION_ACTIVITY:
+	    setIsFlow(true);
+	    int centerLat = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LATITUDE,
+					     ChangeLocationActivity.BASIC_SEARCH_LOC_LAT);
+	    int centerLng = data.getIntExtra(ChangeLocationActivity.INTENT_KEY_LONGITUDE,
+					     ChangeLocationActivity.BASIC_SEARCH_LOC_LNG);
+	    setCenter(new GeoPoint(centerLat, centerLng));
+	    break;
         }
     }
 

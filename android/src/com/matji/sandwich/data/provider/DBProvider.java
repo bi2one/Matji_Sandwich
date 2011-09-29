@@ -205,7 +205,7 @@ public class DBProvider {
         InsertHelper in = new InsertHelper(db, BOOKMARK_TABLE_NAME);
         final int objColumn = in.getColumnIndex("object");
         final int objIdColumn = in.getColumnIndex("object_id");
-        
+
         for (Bookmark bookmark : bookmarks) {
             in.prepareForInsert();
             in.bind(objColumn, bookmark.getObject());

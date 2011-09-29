@@ -81,6 +81,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         if (!currentViewIsMap) {
             storeListView.requestReload();
         }
+	
         // sessionMapUtil.setCenter(lastCenter);
         // mapView.setCenterNotAnimate(lastCenter);
         // mapView.requestMapCenterChanged(lastCenter);
@@ -98,12 +99,16 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
 	isFirst = false;
     }
 
+    protected void onFlowResume() {
+	Log.d("=====", "====");
+    }
+
     protected void onResume() {
 	super.onResume();
     }
 
     protected void onPause() {
-        super.onPause();
+	super.onPause();
 	lastNeBound = sessionMapUtil.getNEBound();
 	lastSwBound = sessionMapUtil.getSWBound();
 	

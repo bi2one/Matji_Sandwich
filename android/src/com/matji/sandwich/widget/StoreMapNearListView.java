@@ -59,6 +59,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	gpsManager = new GpsManager(context, this);
 	requestManager = HttpRequestManager.getInstance(context);
 	setOnTouchListener(this);
+	setSelector(R.color.transparent);
 	setPage(1);
 	// adapter.init(storeRequest, getLoadingFooterView());
     }

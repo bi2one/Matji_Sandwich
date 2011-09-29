@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.ImageButton;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
 import com.matji.sandwich.R;
@@ -15,6 +16,7 @@ public class SimpleSubmitLocationBar extends RelativeLayout implements View.OnCl
     private TextView addressView;
     private ImageButton locationButton;
     private OnClickListener listener;
+    private RelativeLayout spinnerContainer;
     
     public SimpleSubmitLocationBar(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -22,9 +24,14 @@ public class SimpleSubmitLocationBar extends RelativeLayout implements View.OnCl
 	LayoutInflater.from(context).inflate(R.layout.simple_submit_location_bar, this, true);
 	addressView = (TextView)findViewById(R.id.simple_submit_location_bar_address);
 	locationButton = (ImageButton)findViewById(R.id.simple_submit_location_bar_location);
+	spinnerContainer = (RelativeLayout)findViewById(R.id.simple_submit_location_bar_spinner);
 	
 	addressView.setOnClickListener(this);
 	locationButton.setOnClickListener(this);
+    }
+
+    public ViewGroup getSpinnerContainer() {
+	return spinnerContainer;
     }
 
     public void setAddress(String address) {
