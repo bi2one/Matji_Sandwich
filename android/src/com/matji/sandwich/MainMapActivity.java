@@ -99,10 +99,6 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
 	isFirst = false;
     }
 
-    protected void onFlowResume() {
-	Log.d("=====", "====");
-    }
-
     protected void onResume() {
 	super.onResume();
     }
@@ -148,6 +144,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
 	int subIndex = (session.isLogin())? 1 : 0;
         intent.putExtra(MainTabActivity.IF_SUB_INDEX, subIndex);
         startActivity(intent);
+	setIsFlow(false);
     }
 
     private void showMapView() {

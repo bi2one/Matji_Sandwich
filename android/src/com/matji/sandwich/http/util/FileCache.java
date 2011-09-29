@@ -28,6 +28,12 @@ public class FileCache {
     // 	String filename = String.valueOf(url.hashCode());
 	
     // }
+
+    public boolean remove(String url) {
+	String filename = String.valueOf(url.hashCode());
+	File f = new File(cacheDir, filename);
+	return f.delete();
+    }
     
     public void clear(){
         File[] files=cacheDir.listFiles();
