@@ -15,7 +15,7 @@
     0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw    
   </string>
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
-  <string name="server_domain">http://222.122.205.227:3000/v2/</string>
+  <string name="server_domain">http://222.122.205.227/v2/</string>
   
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
