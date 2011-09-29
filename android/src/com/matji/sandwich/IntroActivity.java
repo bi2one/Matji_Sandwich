@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -25,95 +26,118 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener,
-							   SimpleAsyncTask.ProgressListener {
-    private static final long LOADING_MIN_TIME = 100;
-    private static final long DIALOG_MIN_TIME = 500;
-    private ProgressDialog dialog;
-    private TimeAsyncTask timeAsyncTask;
-    private SimpleAsyncTask simpleAsyncTask;
-    private long lastElapsedTime;
-    private String update_ver;
-    
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
-    }
+SimpleAsyncTask.ProgressListener, Requestable {
+	private static final long LOADING_MIN_TIME = 100;
+	private static final long DIALOG_MIN_TIME = 500;
+	private ProgressDialog dialog;
+	private TimeAsyncTask timeAsyncTask;
+	private SimpleAsyncTask simpleAsyncTask;
+	private long lastElapsedTime;
+	private String current_ver;
 
-    @Override
-    protected void init() {
-        super.init();
-	MatjiConstants.setContext(getApplicationContext());
-        setContentView(R.layout.activity_intro);
-	dialog = new ProgressDialog(this);
-	dialog.setMessage(MatjiConstants.string(R.string.dialog_intro_loading));
-	dialog.setIndeterminate(true);
-	dialog.setCancelable(false);
-	
-	timeAsyncTask = new TimeAsyncTask();
-	timeAsyncTask.setTimeListener(this);
-	
-	simpleAsyncTask = new SimpleAsyncTask(new SessionRunnable());
-	simpleAsyncTask.setProgressListener(this);
-	
-	String ver = MatjiConstants.string(R.string.settings_service_version_name);
-	HttpRequestManager manager = HttpRequestManager.getInstance(this);
-	VersionHttpRequest request = new VersionHttpRequest(this);
-	request.actionAppVersion("ANDROID", ver);
-	manager.request(getMainView(), request, 0, this);
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 	}
 
-    public void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
-	lastElapsedTime = elapsedTime;
-	if (elapsedTime > DIALOG_MIN_TIME) {
-	    dialog.show();
+	@Override
+	protected void init() {
+		super.init();
+		MatjiConstants.setContext(getApplicationContext());
+		setContentView(R.layout.activity_intro);
+		dialog = new ProgressDialog(this);
+		dialog.setMessage(MatjiConstants.string(R.string.dialog_intro_loading));
+		dialog.setIndeterminate(true);
+		dialog.setCancelable(false);
+
+		timeAsyncTask = new TimeAsyncTask();
+		timeAsyncTask.setTimeListener(this);
+
+		simpleAsyncTask = new SimpleAsyncTask(new SessionRunnable());
+		simpleAsyncTask.setProgressListener(this);
+
+		current_ver = MatjiConstants.string(R.string.settings_service_version_name);
+		HttpRequestManager manager = HttpRequestManager.getInstance(this);
+		VersionHttpRequest request = new VersionHttpRequest(this);
+		request.actionAppVersion("ANDROID", current_ver);
+		manager.request(getMainView(), request, 0, this);
 	}
-    }
 
-    public void onStart(Threadable task) { }
-    public void onFinish(Threadable task) {
-	timeAsyncTask.setTimeListener(null);
-	if (lastElapsedTime < LOADING_MIN_TIME) {
-	    try {
-		Thread.sleep(LOADING_MIN_TIME - lastElapsedTime);
-	    } catch(InterruptedException e) {
-		e.printStackTrace();
-	    }
+	public void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
+		lastElapsedTime = elapsedTime;
+		if (elapsedTime > DIALOG_MIN_TIME) {
+			dialog.show();
+		}
 	}
-	dialog.dismiss();
-	finish();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-	timeAsyncTask.execute();
-	simpleAsyncTask.execute();
-    }
-
-    @Override
-    public int setMainViewId() {
-        return R.id.activity_intro;
-    }
-
-    public class SessionRunnable implements Runnable {
-	public void run() {
-	    Session session = Session.getInstance(IntroActivity.this);
-	    if (session.isLogin()) session.unsyncSessionValidate();
-	    session.notificationValidate();
-	    ImageLoader.clearCache(getApplicationContext());
-	    startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
+	public void onStart(Threadable task) { }
+	public void onFinish(Threadable task) {
+		timeAsyncTask.setTimeListener(null);
+		if (lastElapsedTime < LOADING_MIN_TIME) {
+			try {
+				Thread.sleep(LOADING_MIN_TIME - lastElapsedTime);
+			} catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		dialog.dismiss();
+		finish();
 	}
-    }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		timeAsyncTask.execute();
+		simpleAsyncTask.execute();
+	}
+
+	@Override
+	public int setMainViewId() {
+		return R.id.activity_intro;
+	}
+
+	public class SessionRunnable implements Runnable {
+		public void run() {
+			Session session = Session.getInstance(IntroActivity.this);
+			if (session.isLogin()) session.unsyncSessionValidate();
+			session.notificationValidate();
+			ImageLoader.clearCache(getApplicationContext());
+			startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
+		}
+	}
 
 	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		
+		if (data != null && data.size() > 0) {
+			AppVersion app_version = (AppVersion) data.get(0);
+			String update_ver = app_version.getVersion();
+
+			SimpleAlertDialog saDialog = new SimpleAlertDialog(this, update_ver);
+			saDialog.show();
+			compare(current_ver, update_ver);
+		} else {
+			Log.d("Matji", "not exist data ...");
+		}
 	}
 
 	@Override
 	public void requestExceptionCallBack(int tag, MatjiException e) {
-		// TODO Auto-generated method stub
-		
+
 	}
+
+	private Boolean compare(String current_ver, String update_ver) {
+		String cv = current_ver.replaceAll("\\.","");
+		String uv = update_ver.replaceAll("\\.","");
+		while (cv.length() != uv.length()){
+			if (cv.length() > uv.length()) {
+				cv += "0";
+			} else {
+				uv += "0";
+			}
+		}
+		
+		return true;
+	}
+
 }

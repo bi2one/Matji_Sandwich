@@ -20,8 +20,8 @@ public class AppVersionParser extends MatjiDataParser {
 		AppVersion app_version = new AppVersion();
 		app_version.setId(getInt(object, "id"));
 		app_version.setTarget(getString(object, "target"));
-		app_version.setUrgent(getInt(object, "urgent") != 0);
-		app_version.setVersion(getString(object, "url"));
+		app_version.setUrgent(getBoolean(object, "urgent"));
+		app_version.setVersion(getString(object, "version"));
 		
 		Log.d("Parser", "AppVersionParser:: called getMatjiData");
 		
