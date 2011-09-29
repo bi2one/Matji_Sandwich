@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/DefaultWidthFill">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/DefaultWidthFill">
   <Button android:id="@+id/top_rounded_button"
+	  android:drawableRight="@drawable/icon_flow"
 	  style="@style/top_rounded_button" />
-</LinearLayout>
+  <ImageView style="@style/HorizontalLine"
+	     android:layout_marginLeft="0.8dp"
+	     android:layout_marginRight="0.8dp"
+	     android:layout_alignBottom="@id/top_rounded_button"
+	     android:layout_alignLeft="@id/top_rounded_button"
+	     android:layout_alignRight="@id/top_rounded_button" />
+</RelativeLayout>

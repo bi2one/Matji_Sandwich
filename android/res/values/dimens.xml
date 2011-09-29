@@ -2,6 +2,7 @@
 <resources>
 	<!-- everywhere used dimens -->
 	<dimen name="default_distance">10dp</dimen>
+	<dimen name="minus_default_distance">-10dp</dimen>
 	<dimen name="default_distance_half">5dp</dimen>
     <dimen name="default_distance_long">14.67dp</dimen>
 	<dimen name="default_drawable_padding">3dp</dimen>

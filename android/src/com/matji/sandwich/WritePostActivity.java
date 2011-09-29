@@ -183,7 +183,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
     }
     
     public void onServiceClicked(View v) {
-	// TODO: implement
+	// TODO
 	Log.d("Matji", "service click");
     }
     

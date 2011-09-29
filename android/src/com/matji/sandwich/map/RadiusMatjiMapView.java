@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.RelativeLayout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.location.Location;
 
@@ -19,6 +20,7 @@ import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.widget.SimpleSubmitLocationBar;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
@@ -54,9 +56,9 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	this.context = context;
 	
 	LayoutInflater.from(context).inflate(R.layout.radius_matji_mapview, this, true);
-	geocodeRunnable = new GeocodeRunnable(this, context, this);
 	mapView = (MatjiMapView)findViewById(R.id.radius_matji_mapview_map);
 	locationBar = (SimpleSubmitLocationBar)findViewById(R.id.radius_matji_mapview_location_bar);
+	geocodeRunnable = new GeocodeRunnable(locationBar.getSpinnerContainer(), context, this);
 	requestManager = HttpRequestManager.getInstance(context);
 	sessionMapUtil = new SessionMapUtil(context);
 	gpsManager = new GpsManager(context, this);
@@ -161,9 +163,9 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	private Context context;
 	private Requestable requestable;
 	private GeoPoint center;
-	private RelativeLayout spinnerContainer;
+	private ViewGroup spinnerContainer;
 	
-	public GeocodeRunnable(RelativeLayout spinnerContainer, Context context, Requestable requestable) {
+	public GeocodeRunnable(ViewGroup spinnerContainer, Context context, Requestable requestable) {
 	    this.context = context;
 	    this.requestable = requestable;
 	    this.spinnerContainer = spinnerContainer;
@@ -176,7 +178,7 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	public void run() {
     	    GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
     	    geocodeRequest.actionReverseGeocodingByGeoPoint(center, sessionMapUtil.getCurrentCountry());
-    	    requestManager.request(spinnerContainer, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
+    	    requestManager.request(spinnerContainer, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
 	}
     }
 

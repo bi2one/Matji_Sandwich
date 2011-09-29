@@ -15,7 +15,6 @@ import com.matji.sandwich.R;
 import java.util.ArrayList;
 
 public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
-
     private ProgressDialog dialog;
     private Context context;
     private Requestable requestable;
@@ -80,7 +79,6 @@ public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
 
     // @Override
     // protected void onProgressUpdate(Integer... values) {
-    //     // TODO Auto-generated method stub
     //     super.onProgressUpdate(values);
     // }
 }

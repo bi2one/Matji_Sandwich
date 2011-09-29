@@ -13,7 +13,7 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.title.button.HomeButton;
 import com.matji.sandwich.widget.title.button.LikeButton;
 import com.matji.sandwich.widget.title.button.LikeButton.Likeable;
-import com.matji.sandwich.widget.title.button.StorePostWriteButton;
+import com.matji.sandwich.widget.title.button.PostWriteButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 /**
@@ -38,7 +38,7 @@ public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
     }
 
     public void setStore(Store store) {
-	((StorePostWriteButton)rightButton2).setData(store, null);
+	((PostWriteButton)rightButton2).setData(store, null);
 	setTitle(store.getName());
     }
 
@@ -65,7 +65,7 @@ public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
     @Override
 	protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
-        return new StorePostWriteButton(getContext());
+        return new PostWriteButton(getContext());
     }
 
     @Override

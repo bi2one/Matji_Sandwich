@@ -4,5 +4,6 @@
     style="@style/DefaultWidthFill"
     android:clickable="true">
   <Button android:id="@+id/all_rounded_button"
+	  android:drawableRight="@drawable/icon_flow"
 	  style="@style/all_rounded_button" />
 </LinearLayout>

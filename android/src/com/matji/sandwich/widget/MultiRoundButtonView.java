@@ -8,15 +8,11 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
-// import android.view.View;
-// import android.view.View.OnClickListener;
 import android.util.AttributeSet;
 import android.util.Log;
 
 import com.matji.sandwich.R;
-// import com.matji.sandwich.LoginActivity;
 import com.matji.sandwich.Requestable;
-// import com.matji.sandwich.session.Session;
 
 import java.util.ArrayList;
 
@@ -46,6 +42,11 @@ public class MultiRoundButtonView extends LinearLayout implements View.OnClickLi
 	buttons.add(new IntentTitlePair(intent, titleRef));
     }
 
+    public void clear() {
+	buttons.clear();
+	updateView();
+    }
+
     public void updateView() {
 	int buttonSize = buttons.size();
 	if (buttonSize == 1) {
@@ -63,6 +64,8 @@ public class MultiRoundButtonView extends LinearLayout implements View.OnClickLi
 		    addButtonView(new MiddleRoundButtonView(context), pair.getTitle(), pair.getIntent());
 		}
 	    }
+	} else if (buttonSize == 0) {
+	    removeAllViews();
 	}
     }
 

@@ -23,10 +23,12 @@ public class SessionMapUtil {
     
     private Session session;
     private PreferenceProvider preferenceProvider;
+    private PreferenceProvider concretePreferenceProvider;
     
     public SessionMapUtil(Context context) {
 	session = Session.getInstance(context);
 	preferenceProvider = session.getPreferenceProvider();
+	concretePreferenceProvider = session.getConcretePreferenceProvider();
     }
 
     public int getBasicLatSpan() {
@@ -45,12 +47,12 @@ public class SessionMapUtil {
     }
 
     public void setCenter(GeoPoint centerPoint) {
-	preferenceProvider.setInt(SessionIndex.MAP_BOUND_CENTER_LATITUDE, centerPoint.getLatitudeE6());
-	preferenceProvider.setInt(SessionIndex.MAP_BOUND_CENTER_LONGITUDE, centerPoint.getLongitudeE6());
+	concretePreferenceProvider.setInt(SessionIndex.MAP_BOUND_CENTER_LATITUDE, centerPoint.getLatitudeE6());
+	concretePreferenceProvider.setInt(SessionIndex.MAP_BOUND_CENTER_LONGITUDE, centerPoint.getLongitudeE6());
     }
 
     public void setCenterAddress(String address) {
-	preferenceProvider.setString(SessionIndex.MAP_ADDRESS, address);
+	concretePreferenceProvider.setString(SessionIndex.MAP_ADDRESS, address);
     }
 
     public String getCenterAddress() {
@@ -58,8 +60,8 @@ public class SessionMapUtil {
     }
 
     public GeoPoint getCenter() {
-	int centerLat = preferenceProvider.getInt(SessionIndex.MAP_BOUND_CENTER_LATITUDE, BASIC_CENTER_LAT);
-	int centerLng = preferenceProvider.getInt(SessionIndex.MAP_BOUND_CENTER_LONGITUDE, BASIC_CENTER_LNG);
+	int centerLat = concretePreferenceProvider.getInt(SessionIndex.MAP_BOUND_CENTER_LATITUDE, BASIC_CENTER_LAT);
+	int centerLng = concretePreferenceProvider.getInt(SessionIndex.MAP_BOUND_CENTER_LONGITUDE, BASIC_CENTER_LNG);
 	return new GeoPoint(centerLat, centerLng);
     }
 

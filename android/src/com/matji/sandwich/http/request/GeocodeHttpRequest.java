@@ -4,6 +4,7 @@ import com.google.android.maps.GeoPoint;
 
 import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Locale;

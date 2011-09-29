@@ -15,7 +15,6 @@
 			<RelativeLayout
 				style="@style/DefaultFill"
 				android:padding="@dimen/default_distance">
-
 				<!-- Notice -->
 				<RelativeLayout
 					android:id="@+id/settings_service_notice_wrapper"

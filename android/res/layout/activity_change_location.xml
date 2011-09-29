@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_change_location"
     style="@style/activity_change_location">
-  <com.matji.sandwich.widget.title.MainTitle
+  <com.matji.sandwich.widget.title.HomeTitle
       android:id="@+id/activity_change_location_title"
       android:layout_alignParentTop="true"
-      style="@style/DefaultWrap" />
-  <RelativeLayout style="@style/DefaultWidthFill"
+      style="@style/DefaultWidthFill" />
+
+  <!-- input -->
+  <RelativeLayout style="@style/activity_change_location_text_wrapper"
 		  android:id="@+id/activity_change_location_search"
 		  android:layout_below="@id/activity_change_location_title" >
     <EditText
-	style="@style/DefaultWidthFill"
+	style="@style/activity_change_location_text"
 	android:hint="@string/activity_change_location_hint"
 	android:id="@+id/activity_change_location_input"
 	android:singleLine="true"
 	android:layout_alignParentLeft="true"
-	android:layout_toLeftOf="@+id/activity_change_location_confirm" />
+	android:layout_centerVertical="true"
+	android:layout_toLeftOf="@+id/activity_change_location_cancel" />
     <Button
-	android:id="@id/activity_change_location_confirm"
-	style="@style/DefaultWrap"
+	android:id="@id/activity_change_location_cancel"
+	style="@style/activity_change_location_btn"
 	android:onClick="onCancelClicked"
 	android:text="@string/default_string_cancel"
+	android:layout_centerVertical="true"
 	android:layout_alignParentRight="true" />
   </RelativeLayout>
-  <com.matji.sandwich.widget.RecentChangedLocationView
-      android:id="@+id/activity_change_location_recent_view"
-      android:layout_below="@id/activity_change_location_search"
-      style="@style/DefaultFill" />
-</RelativeLayout>
+
+  <ScrollView style="@style/DefaultWidthFill"
+	      android:layout_below="@id/activity_change_location_search" >
+    <RelativeLayout style="@style/DefaultFill"
+		    android:id="@+id/activity_change_location_contents">
+      <com.matji.sandwich.widget.SearchResultView
+	  android:id="@+id/activity_change_location_result"
+	  style="@style/DefaultWidthFill" />
+      <com.matji.sandwich.widget.RecentChangedLocationView
+	  android:id="@+id/activity_change_location_recent_view"
+	  android:layout_below="@id/activity_change_location_result"
+	  android:paddingBottom="15dp"
+	  style="@style/DefaultWidthFill" />
+    </RelativeLayout>
+  </ScrollView>
+  
+  <ImageView style="@style/DefaultFill"
+	     android:id="@+id/activity_change_location_holder"
+	     android:visibility="gone"
+	     android:layout_below="@id/activity_change_location_search"
+	     android:background="@color/transparent_black" />
+</com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

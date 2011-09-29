@@ -3,5 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/DefaultWidthFill">
   <Button android:id="@+id/bottom_rounded_button"
+	  android:drawableRight="@drawable/icon_flow"
 	  style="@style/bottom_rounded_button" />
 </LinearLayout>
