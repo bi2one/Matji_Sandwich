@@ -24,10 +24,11 @@ import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 
-public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener,
+public class IntroActivity extends BaseActivity implements Requestable,
+							   TimeAsyncTask.TimeListener,
 							   SimpleAsyncTask.ProgressListener {
-    private static final long LOADING_MIN_TIME = 100;
-    private static final long DIALOG_MIN_TIME = 500;
+    private static final long LOADING_MIN_TIME = 1000;
+    private static final long DIALOG_MIN_TIME = 1500;
     private ProgressDialog dialog;
     private TimeAsyncTask timeAsyncTask;
     private SimpleAsyncTask simpleAsyncTask;
