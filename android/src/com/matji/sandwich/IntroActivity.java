@@ -1,5 +1,7 @@
 package com.matji.sandwich;
 
+import java.util.ArrayList;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +11,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.AppVersion;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.async.TimeAsyncTask;
 import com.matji.sandwich.util.async.SimpleAsyncTask;
+import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.VersionHttpRequest;
 import com.matji.sandwich.util.async.Threadable;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.session.Session;
@@ -25,6 +32,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
     private TimeAsyncTask timeAsyncTask;
     private SimpleAsyncTask simpleAsyncTask;
     private long lastElapsedTime;
+    private String update_ver;
     
     /** Called when the activity is first created. */
     @Override
@@ -47,7 +55,13 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 	
 	simpleAsyncTask = new SimpleAsyncTask(new SessionRunnable());
 	simpleAsyncTask.setProgressListener(this);
-    }
+	
+	String ver = MatjiConstants.string(R.string.settings_service_version_name);
+	HttpRequestManager manager = HttpRequestManager.getInstance(this);
+	VersionHttpRequest request = new VersionHttpRequest(this);
+	request.actionAppVersion("ANDROID", ver);
+	manager.request(getMainView(), request, 0, this);
+	}
 
     public void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
 	lastElapsedTime = elapsedTime;
@@ -91,4 +105,15 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 	    startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
 	}
     }
+
+	@Override
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		
+	}
+
+	@Override
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
