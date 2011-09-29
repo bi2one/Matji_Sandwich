@@ -49,12 +49,12 @@ public class SelectStoreActivity extends BaseActivity implements CompletableTitl
 	if (passedStore != null) {
 	    storeContents.setStore(passedStore);
 	}
+    	storeContents.refresh(sessionMapUtil.getNEBound(), sessionMapUtil.getSWBound());
     }
 
-    protected void onResume() {
-	super.onResume();
-	storeContents.refresh(sessionMapUtil.getNEBound(), sessionMapUtil.getSWBound());
-    }
+    // protected void onNotFlowResume() {
+    // 	storeContents.refresh(sessionMapUtil.getNEBound(), sessionMapUtil.getSWBound());
+    // }
 
     public void complete() {
 	Intent result = new Intent();

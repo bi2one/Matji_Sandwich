@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.listener.StoreClickListener;
@@ -51,6 +52,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
             storeElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_store_like_count);
             storeElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_store_post_count);
             storeElement.bookmarkToggle = (BookmarkStarToggleView) convertView.findViewById(R.id.row_simple_store_bookmark);
+	    storeElement.spinnerWrapper = (RelativeLayout) convertView.findViewById(R.id.row_simple_store_spinner_wrapper);
             storeElement.listener = new StoreClickListener(context);
             convertView.setTag(storeElement);
         } else {
@@ -65,6 +67,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         storeElement.likeCount.setText("" + store.getLikeCount());
         storeElement.postCount.setText("" + store.getPostCount());
         if (isVisibleStar) {
+	    storeElement.bookmarkToggle.init(store, storeElement.spinnerWrapper);
             //        storeElement.bookmarkToggle.init(this, bookmarkedList, store);
             storeElement.bookmarkToggle.setVisibility(View.VISIBLE);
         } else {
@@ -87,6 +90,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         TextView address;
         TextView likeCount;
         TextView postCount;
+	RelativeLayout spinnerWrapper;
         BookmarkStarToggleView bookmarkToggle;
         StoreClickListener listener;
         Store store;

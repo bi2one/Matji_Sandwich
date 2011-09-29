@@ -67,19 +67,19 @@ Requestable {
         }
     }
     
-    public void init(BaseAdapter adapter, ArrayList<MatjiData> bookmarkedList, Store store, ViewGroup spinnerContainer) {
-        this.store = store;
-        this.bookmarkedList = bookmarkedList;
-        this.adapter = adapter;
-        this.spinnerContainer = spinnerContainer;
-        if (isBookmarked(bookmarkedList, store)) {
-            showCheckedView();
-            isUnchecked = false;
-        } else {
-            showUncheckedView();
-            isUnchecked = true;
-        }
-    }
+    // public void init(BaseAdapter adapter, ArrayList<MatjiData> bookmarkedList, Store store, ViewGroup spinnerContainer) {
+    //     this.store = store;
+    //     this.bookmarkedList = bookmarkedList;
+    //     this.adapter = adapter;
+    //     this.spinnerContainer = spinnerContainer;
+    //     if (isBookmarked(bookmarkedList, store)) {
+    //         showCheckedView();
+    //         isUnchecked = false;
+    //     } else {
+    //         showUncheckedView();
+    //         isUnchecked = true;
+    //     }
+    // }
 
     private boolean isBookmarked(ArrayList<MatjiData> bookmarkedList, Store store) {
         for (MatjiData bookmarkedStore : bookmarkedList) {

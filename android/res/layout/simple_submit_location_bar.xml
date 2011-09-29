@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		style="@style/DefaultMinorTitleBar" >
+  <RelativeLayout
+      android:id="@+id/simple_submit_location_bar_spinner"
+      android:layout_centerInParent="true"
+      style="@style/DefaultWrap" />
   <TextView android:id="@+id/simple_submit_location_bar_address"
 	    android:layout_alignParentLeft="true"
 	    android:layout_centerVertical="true"
