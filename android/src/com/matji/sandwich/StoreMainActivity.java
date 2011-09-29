@@ -38,13 +38,13 @@ public class StoreMainActivity extends BaseTabActivity {
         Intent storeUrlListIntent = new Intent(this, StoreUrlListActivity.class);
 
         tabHost.addLeftTab("tab1",
-                R.string.store_main_post_list_view,
+                R.string.default_string_post,
                 storePostListIntent);
         tabHost.addCenterTab("tab2",
-                R.string.store_main_img,
+                R.string.default_string_picture,
                 storeImageListIntent);
         tabHost.addRightTab("tab3",
-                R.string.store_main_review,
+                R.string.default_string_webreview,
                 storeUrlListIntent);
         refresh();
     }

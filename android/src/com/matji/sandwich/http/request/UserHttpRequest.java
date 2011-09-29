@@ -145,6 +145,21 @@ public class UserHttpRequest extends HttpRequest {
         getHashtable.put("nick", nick);        
     }
 
+    public void actionChangePassword(String password, String new_password, String new_password_confirmation) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action="change_password";
+        parser = new UserParser(context);
+
+        getHashtable.clear();
+        Session session = Session.getInstance(context);
+
+        if (session != null && session.isLogin())
+            getHashtable.put("access_token", "" + session.getToken());
+        getHashtable.put("password", password);
+        getHashtable.put("new_password", new_password);
+        getHashtable.put("new_password_confirmation", new_password_confirmation);
+    }
+
     public void actionUpdateIntro(String intro) {
         httpMethod = HttpMethod.HTTP_GET;
         action="update";

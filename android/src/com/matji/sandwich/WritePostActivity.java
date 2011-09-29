@@ -200,8 +200,6 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	if (resultCode != RESULT_OK)
 	    return ;
 
-	File imageFile;
-
 	switch(requestCode) {
 	case INTENT_SELECT_STORE:
 	    store = (Store)data.getParcelableExtra(SelectStoreActivity.DATA_STORE);

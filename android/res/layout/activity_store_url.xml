@@ -6,7 +6,7 @@
 	<com.matji.sandwich.widget.title.StoreTitle
 		android:id="@id/Titlebar"
 		style="@style/DefaultWidthFill" />
-	<com.matji.sandwich.widget.StoreUrlListView
+	<com.matji.sandwich.widget.UrlListView
 		style="@style/DefaultFill"
 		android:id="@+id/store_url_list"
 		android:layout_below="@id/Titlebar" />

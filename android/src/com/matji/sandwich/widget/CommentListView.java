@@ -3,9 +3,7 @@ package com.matji.sandwich.widget;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
@@ -22,111 +20,109 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.widget.PostHeader.PostDeleteListener;
 import com.matji.sandwich.widget.PostHeader.PostEditListener;
+import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
 
 public class CommentListView extends RequestableMListView {
-	private HttpRequest request;
-	private Session session;
+    private HttpRequest request;
+    private Session session;
 
-	private int curDeletePos;
+    private int curDeletePos;
 
-	private Post post;
-	
-	private PostHeader header;
+    private Post post;
 
-	private static final int COMMENT_DELETE_REQUEST = 11;
+    private PostHeader header;
 
-	public CommentListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new CommentAdapter(context), 10);
-		init();
-	}
+    private static final int COMMENT_DELETE_REQUEST = 11;
+    private SimpleAlertDialog deleteDialog;
 
-	private void init() {
-		request = new CommentHttpRequest(getContext());
-		session = Session.getInstance(getContext());
+    public CommentListView(Context context, AttributeSet attrs) {
+        super(context, attrs, new CommentAdapter(context), 10);
+        init();
+    }
 
-		setPage(1);
-		setDivider(new ColorDrawable(Color.WHITE));
-		setDividerHeight(DisplayUtil.PixelFromDP(1));
-		setCanRepeat(true);
-		setFadingEdgeLength(0);
-		setSelector(new ColorDrawable(Color.TRANSPARENT));
-		setCacheColorHint(Color.TRANSPARENT);
-		
-		header = new PostHeader(getContext());
-		addHeaderView(header);
-	}
+    private void init() {
+        request = new CommentHttpRequest(getContext());
+        session = Session.getInstance(getContext());
+
+        setPage(1);
+        setDivider(new ColorDrawable(Color.WHITE));
+        setDividerHeight(DisplayUtil.PixelFromDP(1));
+        setCanRepeat(true);
+        setFadingEdgeLength(0);
+        setSelector(new ColorDrawable(Color.TRANSPARENT));
+        setCacheColorHint(Color.TRANSPARENT);
+
+        header = new PostHeader(getContext());
+        addHeaderView(header);
+    }
 
     public void setPostDeleteListener(PostDeleteListener listener) {
         header.setPostDeleteListener(listener);
     }
-    
-	public void setPostEditListener(PostEditListener listener) {
-	    header.setPostEditListener(listener);
-	}
-	
-	@Override
-	public void setActivity(Activity activity) {
-	    super.setActivity(activity);
-	    header.setActivity(activity);
-	}
-	
-	public void setPost(Post post) {
-		this.post = post;
-		header.setPost(post);
-	}
 
-	public void addComment(Comment comment) {
-		getAdapterData().add(0, comment);
-		((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
-		setSelection(0);
-	}
+    public void setPostEditListener(PostEditListener listener) {
+        header.setPostEditListener(listener);
+    }
 
-	public HttpRequest request() {
-		((CommentHttpRequest) request).actionList(post.getId(), getPage(), getLimit());
-		return request;
-	}
+    @Override
+    public void setActivity(Activity activity) {
+        deleteDialog = new SimpleAlertDialog(activity, R.string.default_string_check_delete);
+        deleteDialog.setOnClickListener(new SimpleAlertDialog.OnClickListener() {
 
-	public HttpRequest deleteRequest(int comment_id) {
-		((CommentHttpRequest) request).actionDelete(comment_id);
-		return request;
-	}
+            @Override
+            public void onConfirmClick(SimpleDialog dialog) {
+                int comment_id= ((Comment) getAdapterData().get(curDeletePos)).getId();
+                deleteComment(comment_id);
+            }
+        });
+        super.setActivity(activity);
+        header.setActivity(activity);
+    }
 
-	public void onListItemClick(int position) {}
+    public void setPost(Post post) {
+        this.post = post;
+        header.setPost(post);
+    }
 
-	public void onDeleteButtonClicked(View v) {
-		if (session.isLogin() && !getHttpRequestManager().isRunning()) {
-			curDeletePos = Integer.parseInt((String) v.getTag());
+    public void addComment(Comment comment) {
+        getAdapterData().add(0, comment);
+        ((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
+        setSelection(0);
+    }
 
-			AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-			alert.setTitle(R.string.default_string_delete);
-			alert.setMessage(R.string.default_string_check_delete);
-			alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface arg0, int arg1) {
-					int comment_id= ((Comment) getAdapterData().get(curDeletePos)).getId();
-					deleteComment(comment_id);
-				}
-			}); 
-			alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface arg0, int arg1) {}
-			});
-			alert.show();
-		}
-	}
+    public HttpRequest request() {
+        ((CommentHttpRequest) request).actionList(post.getId(), getPage(), getLimit());
+        return request;
+    }
 
-	public void deleteComment(int comment_id) {
-	    getHttpRequestManager().request(getLoadingFooterView(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
-	}
+    public HttpRequest deleteRequest(int comment_id) {
+        ((CommentHttpRequest) request).actionDelete(comment_id);
+        return request;
+    }
 
-	@Override
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		switch (tag) {
-		case COMMENT_DELETE_REQUEST:
-			getAdapterData().remove(curDeletePos);
-			getMBaseAdapter().notifyDataSetChanged();
-		}
+    public void onListItemClick(int position) {}
 
-		super.requestCallBack(tag, data);
-	}
+    public void onDeleteButtonClicked(View v) {
+        if (session.isLogin() && !getHttpRequestManager().isRunning()) {
+            curDeletePos = Integer.parseInt((String) v.getTag());
+
+            deleteDialog.show();
+        }
+    }
+
+    public void deleteComment(int comment_id) {
+        getHttpRequestManager().request(getLoadingFooterView(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
+    }
+
+    @Override
+    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+        switch (tag) {
+        case COMMENT_DELETE_REQUEST:
+            getAdapterData().remove(curDeletePos);
+            getMBaseAdapter().notifyDataSetChanged();
+        }
+
+        super.requestCallBack(tag, data);
+    }
 }

@@ -38,7 +38,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     private SimpleAlertDialog nicknameLengthErrorDialog;
     private SimpleAlertDialog passwordIsNullDialog;
     private SimpleAlertDialog passwordLengthErrorDialog;
-    private SimpleAlertDialog passwordIsIncorrectDialog;
+    private SimpleAlertDialog passwordIsNotEqualsDialog;
     private SimpleAlertDialog plzAcceptDialog;
     private SimpleAlertDialog successDialog;
     
@@ -100,7 +100,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         nicknameLengthErrorDialog = new SimpleAlertDialog(this, R.string.register_nickname_too_short_or_too_long);
         passwordIsNullDialog = new SimpleAlertDialog(this, R.string.register_password_is_null);
         passwordLengthErrorDialog = new SimpleAlertDialog(this, R.string.register_password_too_short_or_too_long);
-        passwordIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_password_is_incorrect);
+        passwordIsNotEqualsDialog = new SimpleAlertDialog(this, R.string.register_password_is_not_equals);
         plzAcceptDialog = new SimpleAlertDialog(this, R.string.register_plz_accept);
         successDialog = new SimpleAlertDialog(this, R.string.register_success);
     }
@@ -131,7 +131,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
                 || passwordConfirm.length() > MatjiConstants.MAX_PASSWORD_LENGTH) {
             passwordLengthErrorDialog.show();
         } else if (!password.equals(passwordConfirm)) {        
-            passwordIsIncorrectDialog.show();
+            passwordIsNotEqualsDialog.show();
         } else if (!cbAccept.isChecked()) {
             plzAcceptDialog.show();
         } else {

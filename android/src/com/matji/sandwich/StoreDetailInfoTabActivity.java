@@ -36,17 +36,17 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	
 	private void setTabHost() {
 		Intent defaultInfoIntent = new Intent(this, StoreDefaultInfoActivity.class);
-        Intent tagIntent = new Intent(this, StoreTagActivity.class);
         Intent storeFoodIntent = new Intent(this, StoreFoodListActivity.class);
+        Intent tagIntent = new Intent(this, StoreTagCloudActivity.class);
         
 		tabHost = (RoundTabHost)getTabHost();
 		
 		tabHost.addLeftTab("tab1", 
 				R.string.default_string_info, defaultInfoIntent);
 		tabHost.addCenterTab("tab2", 
-				R.string.default_string_tag, tagIntent);
-		tabHost.addRightTab("tab3", 
 				R.string.default_string_menu, storeFoodIntent);
+        tabHost.addRightTab("tab3", 
+                R.string.default_string_tag, tagIntent);
 	}
 	
 	@Override

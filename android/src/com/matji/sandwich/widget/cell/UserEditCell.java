@@ -2,25 +2,23 @@ package com.matji.sandwich.widget.cell;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.matji.sandwich.ActivityStartable;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.UserNickEditActivity;
-import com.matji.sandwich.UserProfileTabActivity;
-import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
+import com.matji.sandwich.widget.dialog.SimpleListDialog;
 
 /**
  * 
@@ -28,9 +26,9 @@ import com.matji.sandwich.session.Session;
  *
  */
 public class UserEditCell extends Cell implements OnClickListener {
-    
+
     private Session session;
-    
+
     private CellEditProfileImageView profile;
     private TextView nickText;
     private TextView useridText;
@@ -38,7 +36,10 @@ public class UserEditCell extends Cell implements OnClickListener {
     private Button editNickButton;
 
     private ArrayList<Refreshable> refreshables;
-    
+
+    private SimpleListDialog selectImgDialog;
+    private UserEditCell.OnItemClickListener listener;
+
     /**
      * 기본 생성자 (Java Code)
      * 
@@ -73,15 +74,50 @@ public class UserEditCell extends Cell implements OnClickListener {
     @Override
     protected void init() {
         super.init();
-        
+
         session = Session.getInstance(getContext());
         refreshables = new ArrayList<Refreshable>();
 
+        final CharSequence[] items = {
+                MatjiConstants.string(R.string.default_string_camera),
+                MatjiConstants.string(R.string.default_string_album),
+                MatjiConstants.string(R.string.default_string_cancel),
+        };
+        
+        selectImgDialog = new SimpleListDialog(getContext(), MatjiConstants.string(R.string.cell_user_edit_img), items);
         profile = (CellEditProfileImageView) findViewById(R.id.edit_profile);
         nickText = (TextView) findViewById(R.id.cell_user_edit_nick);
         useridText = (TextView) findViewById(R.id.cell_user_edit_userid);
         usermailText = (TextView) findViewById(R.id.cell_user_edit_usermail);
         editNickButton = (Button) findViewById(R.id.cell_user_edit_nick_btn);
+
+        
+        listener = new OnItemClickListener() {
+            
+            @Override
+            public void onCameraClicked() {
+                Log.d("Matji", "onCameraClicked");
+            }
+            
+            @Override
+            public void onAlbumClicked() {
+                Log.d("Matji", "onAlbumClicked");
+            }
+        };
+        selectImgDialog.setOnClickListener(new SimpleListDialog.OnClickListener() {
+
+            @Override
+            public void onItemClick(SimpleDialog dialog, int position) {
+                if (position == 0) {
+                    listener.onCameraClicked();
+                } else if (position == 1) {
+                    listener.onAlbumClicked();
+                } else if (position == 2) {
+                    selectImgDialog.cancel();
+                }
+            }
+        });
+        profile.setOnClickListener(this);
         editNickButton.setOnClickListener(this);
     }
 
@@ -98,6 +134,10 @@ public class UserEditCell extends Cell implements OnClickListener {
         usermailText.setText(user.getEmail());
     }
 
+    public void setEditProfileClickListener(UserEditCell.OnItemClickListener listener) {    
+        this.listener = listener;
+    }
+
     /**
      * Refresh 가능한 정보들을 refresh
      * 
@@ -110,17 +150,17 @@ public class UserEditCell extends Cell implements OnClickListener {
         }
     }
 
-    /**
-     * 
-     */
     @Override
-    public void gotoDetailPage() {
-    }
+    public void gotoDetailPage() {}
 
-    
+
     public void showLine() {
         findViewById(R.id.cell_user_line).setVisibility(View.VISIBLE);
         findViewById(R.id.cell_user_shadow).setVisibility(View.GONE);
+    }
+
+    public void onProfileClicked(View v) {
+        selectImgDialog.show();
     }
 
     public void onEditNickButtonClicked(View v) {
@@ -130,13 +170,19 @@ public class UserEditCell extends Cell implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == editNickButton.getId()) {
+        if (v.getId() == profile.getId()) {
+            onProfileClicked(v);
+        } else if (v.getId() == editNickButton.getId()) {
             onEditNickButtonClicked(v);
         }
     }
-    
+
     public void addRefreshable(Refreshable refreshable) {
         refreshables.add(refreshable);
     }
-
+    
+    public interface OnItemClickListener {
+        public void onCameraClicked();
+        public void onAlbumClicked();
+    }
 }

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_like_user_list"
-    style="@style/DefaultVerticalFill">
-  <com.matji.sandwich.widget.LikeUserListView
-      style="@style/DefaultFill"
-      android:id="@+id/like_user_list_view" />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_like_user_list"
+	style="@style/DefaultVerticalFill">
+	<com.matji.sandwich.widget.title.HomeTitle
+		style="@style/DefaultWidthFill"
+		android:id="@id/Titlebar" />
+	<com.matji.sandwich.widget.LikeUserListView
+		style="@style/DefaultFill"
+		android:id="@+id/like_user_list_view"
+		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

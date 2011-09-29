@@ -41,7 +41,7 @@ public class ReceivedUserActivity extends BaseActivity implements Completable {
         overflowToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         
         ((CompletableTitle) findViewById(R.id.Titlebar)).setCompletable(this);
-        ((CompletableTitle) findViewById(R.id.Titlebar)).setTitle(R.string.write_message_received_user2);
+        ((CompletableTitle) findViewById(R.id.Titlebar)).setTitle(R.string.write_message_received_user);
         receivedUserListText = (TextView) findViewById(R.id.write_message_received_user_list);
 
         ReceivedUserListView listView = (ReceivedUserListView) findViewById(R.id.received_user_list);

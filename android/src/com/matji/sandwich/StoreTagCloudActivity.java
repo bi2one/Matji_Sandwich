@@ -13,7 +13,7 @@ import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.tag.StoreTagCloudView;
 import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreTagActivity extends BaseActivity implements Refreshable {
+public class StoreTagCloudActivity extends BaseActivity implements Refreshable {
 
     private StoreTitle title;
     private StoreCell storeCell;
@@ -43,6 +43,7 @@ public class StoreTagActivity extends BaseActivity implements Refreshable {
         storeCell.setIdentifiable(this);
         storeCell.addRefreshable(this);
         storeCell.addRefreshable(title);
+        storeCell.addRefreshable(tagCloudView);
         
         tagCloudView.setSpinnerContainer(getMainView());
     }

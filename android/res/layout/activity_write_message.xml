@@ -35,7 +35,7 @@
 			<TextView
 				android:id="@+id/write_message_received_user"
 				style="@style/DefaultWrap"
-				android:text="@string/write_message_received_user2"
+				android:text="@string/write_message_received_user"
 				android:textColor="@color/minor_tab_text_default"
 				android:textSize="@dimen/write_message_underbar_text_size"
 				android:layout_alignParentLeft="true" />

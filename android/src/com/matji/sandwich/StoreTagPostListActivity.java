@@ -9,45 +9,47 @@ import android.os.Bundle;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.User;
-import com.matji.sandwich.widget.UserPostListView;
-import com.matji.sandwich.widget.cell.UserCell;
-import com.matji.sandwich.widget.cell.UserIntroCell;
-import com.matji.sandwich.widget.title.UserTitle;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.Tag;
+import com.matji.sandwich.http.request.PostHttpRequest.TagByType;
+import com.matji.sandwich.widget.TagPostListView;
+import com.matji.sandwich.widget.cell.StoreCell;
+import com.matji.sandwich.widget.title.StoreTitle;
 
 public class StoreTagPostListActivity extends BaseActivity implements Refreshable {
-    private UserTitle title;
-    private UserPostListView listView;
-    private UserCell userCell;
-    private UserIntroCell userIntroCell;
+    private StoreTitle title;
+    private TagPostListView listView;
+    private StoreCell storeCell;
+    private Tag tag;
+    public static final String TAG = "StoreTagPostListActivity.tag";
 
     public int setMainViewId() {
-        return R.id.activity_user_post;
+        return R.id.activity_store_tag_post;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_post);
+        setContentView(R.layout.activity_store_tag_post);
+        
+        tag = getIntent().getParcelableExtra(TAG);
 
-        title = (UserTitle) findViewById(R.id.Titlebar);
-        userCell = new UserCell(this, UserMainActivity.user);
-        userIntroCell = new UserIntroCell(this, UserMainActivity.user);
+        title = (StoreTitle) findViewById(R.id.Titlebar);
+        storeCell = new StoreCell(this, StoreMainActivity.store);
+        listView = (TagPostListView) findViewById(R.id.store_tag_post_list_view);
 
         title.setIdentifiable(this);
-        title.setUser(UserMainActivity.user);
-        title.setFollowable(userCell);
+        title.setStore(StoreMainActivity.store);
+        title.setLikeable(storeCell);
 
-        userCell.setIdentifiable(this);
-        userCell.addRefreshable(this);
-        userCell.addRefreshable(title);
-        userCell.showLine();
+        storeCell.setIdentifiable(this);
+        storeCell.addRefreshable(this);
+        storeCell.addRefreshable(title);
 
-        listView = (UserPostListView) findViewById(R.id.user_post_list_view);
-        listView.addHeaderView(userCell);
-        listView.addHeaderView(userIntroCell);
-        listView.setUser(UserMainActivity.user);
+        listView.addHeaderView(storeCell);
+        listView.setTag(tag);
+        listView.setType(TagByType.STORE);
         listView.setActivity(this);
         listView.requestReload();
     }
@@ -56,7 +58,7 @@ public class StoreTagPostListActivity extends BaseActivity implements Refreshabl
     protected void onResume() {
         super.onResume();
         listView.dataRefresh();
-        userCell.refresh();
+        storeCell.refresh();
     }
 
     @Override
@@ -71,9 +73,9 @@ public class StoreTagPostListActivity extends BaseActivity implements Refreshabl
             break;
         case USER_PROFILE_TAB_ACTIVITY:
             if (resultCode == RESULT_OK) {
-                UserMainActivity.user = (User) data.getParcelableExtra(UserMainActivity.USER);
-                userCell.setUser(UserMainActivity.user);
-                userCell.refresh();
+                StoreMainActivity.store = (Store) data.getParcelableExtra(StoreMainActivity.STORE);
+                storeCell.setStore(StoreMainActivity.store);
+                storeCell.refresh();
             }
             break;
         case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:            
@@ -97,8 +99,8 @@ public class StoreTagPostListActivity extends BaseActivity implements Refreshabl
 
     @Override
     public void refresh(MatjiData data) {
-        if (data instanceof User){
-            UserMainActivity.user = (User) data;
+        if (data instanceof Store){
+            StoreMainActivity.store= (Store) data;
             refresh();
         }
     }

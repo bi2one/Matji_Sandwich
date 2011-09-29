@@ -29,6 +29,8 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public static final int STORE_DETAIL_INFO_TAB_ACTIVITY = 108;
     public static final int USER_PROFILE_TAB_ACTIVITY = 109;
     public static final int USER_PROFILE_ACTIVITY = 110;
+    public static final int FROM_CAMERA = 200;
+    public static final int FROM_ALBUM = 201;
     public static final int CHANGE_LOCATION_ACTIVITY = 111;
     
     private ViewGroup mainViewGroup;

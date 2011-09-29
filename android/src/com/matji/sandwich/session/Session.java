@@ -229,6 +229,10 @@ public class Session implements Requestable {
     public SessionPrivateUtil getPrivateUtil() {
         return mPrivateUtil;
     }
+    
+    public boolean isCurrentUser(User user) {
+        return isLogin() && (getCurrentUser().getId() == user.getId());
+    }
 
     public void preLogin() {
         Log.d("Matji", "pre login");
@@ -292,7 +296,7 @@ public class Session implements Requestable {
             Session.getInstance(context).preLogin();
 
             dialog = new ProgressDialog(context);
-            dialog.setMessage(MatjiConstants.string(R.string.login_loading));
+            dialog.setMessage(MatjiConstants.string(R.string.progress_login));
             dialog.setIndeterminate(true);
             dialog.setCancelable(false);
             dialog.show();

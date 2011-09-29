@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,14 +75,14 @@ public class StoreTagCloudView extends TagCloudView implements Requestable, Refr
     }
     
     @Override
-    protected OnClickListener getListener(Tag tag) {
+    protected OnClickListener getListener(final Tag tag) {
         return new OnClickListener() {
             
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), StoreTagPostListActivity.class);
-//                intent.putExtra()
-//                getContext().startActivity(intent);
+                Intent intent = new Intent(getContext(), StoreTagPostListActivity.class);
+                intent.putExtra(StoreTagPostListActivity.TAG, (Parcelable) tag);
+                getContext().startActivity(intent);
             }
         };
     }

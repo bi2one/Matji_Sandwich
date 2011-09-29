@@ -145,7 +145,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             if(commentInputBar.getText().trim().equals("")) {
                 Toast.makeText(getApplicationContext(), R.string.writing_content_comment, Toast.LENGTH_SHORT).show();
             } else {
-                ((CommentHttpRequest) request).actionNew(((Post) posts.get(position)).getId(), commentInputBar.getText().trim(), MatjiConstants.string(R.string.android));
+                ((CommentHttpRequest) request).actionNew(((Post) posts.get(position)).getId(), commentInputBar.getText().trim(), MatjiConstants.target());
                 manager.request(getMainView(), request, COMMENT_WRITE_REQUEST, this);
                 commentInputBar.setText("");
                 KeyboardUtil.hideKeyboard(this);

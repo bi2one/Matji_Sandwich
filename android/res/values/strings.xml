@@ -93,6 +93,7 @@
   <string name="default_string_intro">소개글</string>
   <string name="default_string_not_exist_intro">소개글이 없습니다.</string>
   <string name="default_string_not_exist_website">웹사이트를 등록하지 않았습니다.</string>
+  <string name="default_string_not_exist_cover">커버가 없습니다.</string>
   <string name="default_string_basic_info">기본정보</string>
   <string name="default_string_more_info">부가정보</string>
   <string name="default_string_info">정보</string>
@@ -105,8 +106,8 @@
   <string name="default_string_memo">메모</string>
   <string name="default_string_menu">메뉴</string>
   <string name="default_string_comment">댓글</string>
-  <string name="default_string_like">Like</string>
-  <string name="default_string_unlike">Unlike</string>
+  <string name="default_string_like">좋아요</string>
+  <string name="default_string_unlike">좋아요 취소</string>
   <string name="default_string_image">이미지</string>
   <string name="default_string_map">지도</string>
   <string name="default_string_store">맛집</string>
@@ -136,6 +137,8 @@
   <string name="default_string_message">쪽지</string>
   <string name="default_string_login">로그인</string>
   <string name="default_string_register">회원가입</string>
+  <string name="default_string_webreview">웹리뷰</string>
+  
   
   
   <!-- Writing content -->
@@ -145,11 +148,6 @@
   <string name="writing_content_received_user">받는 사람을 추가하세요.</string>
   <string name="writing_content_menu">메뉴를 입력하세요.</string>
   <string name="writing_content_search">검색할 단어를 입력하세요.</string>
-  
-  <!-- StoreMenuActivity -->
-  <string name="store_menu_confirm">확인</string>
-  <string name="store_menu_ex">ex</string>
-  <string name="store_menu_already_exist_menu">이미 존재하는 메뉴입니다.</string>
   
   <!-- PostActivity -->
   <string name="post_does_not_exist">메모가 존재하지 않습니다!</string>
@@ -173,28 +171,13 @@
   <string name="cell_user_unfollow">Unfollow</string>
   <string name="cell_store_not_exist_tel">전화번호 미등록</string>
   <string name="cell_store_not_exist_addr">주소 미등록</string>
-  <string name="cell_store_not_exist_tag">등록된 태그가 없습니다.</string>
-  <string name="cell_store_not_exist_menu">등록된 메뉴가 없습니다.</string>
+  <string name="cell_store_not_exist_tag"> </string>
+  <string name="cell_store_not_exist_menu"> </string>
   <string name="cell_user_edit_nickname">닉네임 변경</string>
   <string name="cell_user_edit_userid">계정</string>
   <string name="cell_user_edit_usermail">이메일</string>
-  
-  
-  <!-- StoreMainActivity  -->
-  <string name="store_main_unlike_store">내가 좋아하는 맛집</string>
-  <string name="store_main_like_store">♥좋아요</string>
-  <string name="store_main_scrap">스크랩</string>
-  <string name="store_main_bookmark">스크랩</string>
-  <string name="store_main_unbookmark">취소</string>
-  <string name="store_main_map">지도</string>
-  <string name="store_main_phone">전화</string>
-  <string name="store_main_web">웹</string>
-  <string name="store_main_info_view">맛집정보 보기</string>
-  <string name="store_main_post_list_view">이야기</string>
-  <string name="store_main_img">사진</string>
-  <string name="store_main_review">웹리뷰</string>
-
-  
+  <string name="cell_user_edit_img">사진 선택</string>
+    
   <!-- UserMainActivity -->
   <string name="user_main_following_you">follows you.</string>
   <string name="user_main_jjim_store">찜한 맛집</string>
@@ -282,13 +265,14 @@
   <string name="user_profile_recent_store">최근맛집</string>
   
   <!-- ANDROID -->
-  <string name="android">ANDROID</string>
+  <string name="target">ANDROID</string>
   
   <!-- hint -->
-  <string name="hint_write_comment">댓글 입력</string>
+  <string name="hint_current_password">현재 비밀번호</string>
   <string name="hint_search_stor_tag_menu">맛집명, 태그, 메뉴 검색</string>
   <string name="hint_search_post">이야기 검색</string>
   <string name="hint_search_user">사람 검색</string>
+  <string name="hint_write_comment">댓글 입력</string>
   <string name="hint_write_usermail">이메일 입력</string>
   <string name="hint_write_password">비밀번호 입력</string>
   <string name="hint_write_nick">닉네임 입력 (최소 2자 ~ 최대 12자)</string>
@@ -326,14 +310,21 @@
   <string name="row_alarm_follow">%1$s님이 ##나를 Follow 합니다.##</string>
   <string name="row_alarm_message">%1$s님으로부터 ##쪽지가 도착했습니다.##</string>
 
-  <!-- Search Highlight Header-->
-  <string name="search_highlight">검색결과</string>
-  
   <!-- Highlight Header -->
-  <string name="highlight_store_like_users">\'%1$s\' 맛집을 좋아하는 사람들</string>
-  <string name="highlight_post_like_users">이 이야기를 좋아하는 사람들</string>
-  <string name="highlight_store_food_like_users">메뉴를 좋아하는 사람들</string>
-  <string name="highlight_like_stores">\'%1$s\'님이 좋아하는 맛집</string>
+  <string name="highlight_search_result">검색결과</string>
+  <string name="highlight_store_like_users">\'%1$s\' 맛집을 좋아한 사람들</string>
+  <string name="highlight_post_like_users">이 이야기를 좋아한 사람들</string>
+  <string name="highlight_store_food_like_users">메뉴를 좋아한 사람들</string>
+  <string name="highlight_like_stores">\'%1$s\'님이 좋아한 맛집</string>
+  <string name="highlight_like_stores_me">내가 좋아한 맛집</string>
+  <string name="highlight_bookmark_stores">내가 북마크한 맛집</string>
+  <string name="highlight_find_stores">\'%1$s\'님이 발견한 맛집</string>
+  <string name="highlight_find_stores_me">내가 발견한 맛집</string>
+  <string name="highlight_followings">\'%1$s\'님의 Following</string>
+  <string name="highlight_followers">\'%1$s\'님의 Follower</string>
+  <string name="highlight_followings_me">나의 Following</string>
+  <string name="highlight_followers_me">나의 Follower</string>
+  
 
   <!-- adapter_ranking.xml -->
   <string name="adapter_ranking_point_hint">P</string>
@@ -403,8 +394,6 @@
   <string name="path_palai">fonts/palai.ttf</string>
 
   <!-- FollowingActivity -->
-  <string name="following_followings_of">\'%1$s\'님의 Following</string>
-  <string name="following_followers_of">\'%1$s\'님의 Follower</string>
   <string name="following_following">Following</string>
   <string name="following_follower">Follower</string>
   
@@ -419,8 +408,7 @@
   
   <!-- WriteMessageActivity.java -->
   <string name="write_message_writing_content">내용 입력</string>
-  <string name="write_message_received_user">받는 사람</string>
-  <string name="write_message_received_user2">받는 사람:&#160;</string>
+  <string name="write_message_received_user">받는 사람:&#160;</string>
   <string name="write_message">쪽지 쓰기</string>
   <string name="overflow_received_user">최대 %1$d명까지 추가가 가능합니다.</string>
   <string name="write_message_select_user">받는 사람을 추가해주세요.</string>
@@ -430,7 +418,10 @@
   <string name="sent_message_list">보낸 쪽지함</string>
   
   <!-- LoginAsyncTask.java -->
-  <string name="login_loading">로그인 중입니다.</string>
+  <string name="progress_login">로그인 중입니다.</string>
+
+  <!-- FileUploadAsyncTask.java -->
+  <string name="progress_upload">잠시만 기다려주세요...</string>
 
   <!-- WriteStoreActivity.java -->
   <string name="write_store_title">맛집 추가</string>
@@ -455,9 +446,6 @@
   <!-- SelectTagActivity.java -->
   <string name="select_tag_title">태그 선택</string>
   <string name="select_tag_hint">태그 입력</string>
-  
-  <!-- StoreBookmarkListActivity.java -->
-  <string name="store_bookmark_list">북마크 맛집</string>
 
   <!-- StoreDiscoverListActivity.java -->
   <string name="store_discover_list">발견 맛집</string>
@@ -551,6 +539,7 @@
   <string name="register_password_is_null">비밀번호를 입력해 주세요.</string>
   <string name="register_password_too_short_or_too_long">비밀번호의 길이를 확인해 주세요.\n최소 6자 ~ 최대 20자</string>
   <string name="register_password_is_incorrect">비밀번호를 확인해 주세요.</string>
+  <string name="register_password_is_not_equals">비밀번호가 일치하지 않습니다.</string>
   <string name="register_plz_accept">약관에 동의해 주세요.</string>
   <string name="register_success">회원가입이 완료되었습니다.</string>
   
@@ -559,6 +548,15 @@
   
   <!-- Title -->
   <string name="title_store_food_add">메뉴추가</string>
+  <string name="title_received_user">받는 사람</string>
+  <string name="title_find_store">발견 맛집</string>
+  <string name="title_bookmark_store">북마크 맛집</string>
+  
+  <!-- UserPasswordEditActivity.java -->
+  <string name="user_password_edit_password_changed">비밀번호가 성공적으로 변경되었습니다.</string>
+  
+  <!-- activity_store_default_info.xml -->
+  <string name="store_default_info_report">정보 등록/수정 요청</string>
 
   <!-- search_result.xml -->
   <string name="search_result_filled">검색 결과</string>

@@ -31,22 +31,16 @@ public class UserTag extends Tag {
 
 	@Override
 	public void writeToParcel(Parcel dest, int arg1) {
-		dest.writeInt(id);
-		dest.writeInt(tag_id);
-		dest.writeInt(user_id);
-		dest.writeInt(count);
-		dest.writeString(created_at);
-		dest.writeString(updated_at);
+		super.writeToParcel(dest, arg1);
+	    dest.writeInt(user_id);
+		dest.writeValue(user);
 	}
 
 	@Override
 	protected void readFromParcel(Parcel in) {
-		id = in.readInt();
-		tag_id = in.readInt();
+	    super.readFromParcel(in);
 		user_id = in.readInt();
-		count = in.readInt();
-		created_at = in.readString();
-		updated_at = in.readString();
+		user = User.class.cast(in.readValue(User.class.getClassLoader()));
 	}
 	
 	public void setUserId(int user_id) {

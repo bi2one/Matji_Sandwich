@@ -4,28 +4,23 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.matji.sandwich.R;
-import com.matji.sandwich.util.MatjiConstants;
-
-public class SimpleAlertDialog implements SimpleDialog, DialogInterface.OnClickListener {
+public class SimpleListDialog implements SimpleDialog, DialogInterface.OnClickListener {
+        
     Context context;
     AlertDialog dialog;
     OnClickListener listener;
 
-    public SimpleAlertDialog(Context context, int msgId) {
-        this(context, MatjiConstants.string(msgId));
-    }
-
-    public SimpleAlertDialog(Context context, String message) {
+    public SimpleListDialog(Context context, String title, CharSequence[] items) {
         this.context = context;
         listener = new OnClickListener() {
-            public void onConfirmClick(SimpleDialog dialog) { }
+            
+            @Override
+            public void onItemClick(SimpleDialog dialog, int position) {}
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(message)
-        .setCancelable(true)
-        .setNeutralButton(R.string.default_string_confirm, this);
+        builder.setTitle(title);
+        builder.setItems(items, this).setCancelable(true);
         dialog = builder.create();
     }
 
@@ -35,7 +30,7 @@ public class SimpleAlertDialog implements SimpleDialog, DialogInterface.OnClickL
 
     public void onClick(DialogInterface dialog, int id) {
         cancel();
-        listener.onConfirmClick(this);
+        listener.onItemClick(this, id);
     }
 
     public void show() {
@@ -47,6 +42,6 @@ public class SimpleAlertDialog implements SimpleDialog, DialogInterface.OnClickL
     }
 
     public interface OnClickListener {
-        public void onConfirmClick(SimpleDialog dialog);
+        public void onItemClick(SimpleDialog dialog, int position);
     }
 }

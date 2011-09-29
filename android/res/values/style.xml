@@ -127,6 +127,8 @@
     <item name="android:background">@color/listview_divider1_gray</item>
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">@dimen/default_divider_size</item>
+    <item name="android:layout_marginRight">@dimen/default_divider_size</item>
+    <item name="android:layout_marginLeft">@dimen/default_divider_size</item>
   </style>
   
   <style name="VerticalLine">
@@ -826,6 +828,21 @@
     <item name="android:textColor">@color/matji_chocolate</item>
   </style>
 
+  <!-- row_simple.xml -->
+  <style name="row_simple" parent="DefaultWrap">
+    <item name="android:background">@drawable/btn_white_to_lightpink</item>
+    <item name="android:paddingRight">@dimen/default_distance</item>
+    <item name="android:paddingLeft">@dimen/default_distance</item>
+  </style>
+  
+  <style name="row_simple_Item">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">@dimen/row_simple_user_height</item>
+    <item name="android:textSize">@dimen/row_simple_txt_size</item>
+    <item name="android:textColor">@color/matji_gray</item>
+    <item name="android:gravity">center</item>
+  </style>
+  
   <!-- search_result.xml -->
   <style name="search_result" parent="recent_changed_location"></style>
   <style name="search_result_header" parent="recent_changed_location_header"></style>

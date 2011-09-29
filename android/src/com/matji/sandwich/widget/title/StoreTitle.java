@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreMainActivity;
