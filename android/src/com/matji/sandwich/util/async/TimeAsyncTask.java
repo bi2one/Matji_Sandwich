@@ -3,7 +3,7 @@ package com.matji.sandwich.util.async;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class TimeAsyncTask extends AsyncTask<Object, Long, Long> {
+public class TimeAsyncTask extends AsyncTask<Object, Long, Long> implements Threadable {
     public long startTime;
     public long currentTime;
     public long elapsedTime;

@@ -1,15 +1,11 @@
 package com.matji.sandwich.util.async;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
-public class SimpleAsyncTask extends AsyncTask<Object, Object, Object> {
-    public long startTime;
-    public long currentTime;
-    public long elapsedTime;
-    public Runnable runnable;
-    public ProgressListener listener;
-
+public class SimpleAsyncTask extends Thread implements Threadable {
+    private Runnable runnable;
+    private ProgressListener listener;
+    
     public SimpleAsyncTask(Runnable runnable) {
 	this.runnable = runnable;
     }
@@ -18,33 +14,18 @@ public class SimpleAsyncTask extends AsyncTask<Object, Object, Object> {
 	this.listener = listener;
     }
 
-    protected void onPreExecute() {
-	if (listener != null)
-	    listener.onStart(this);
-    }
-
-    protected void onCancelled() {
-	if (listener != null)
-	    listener.onCancel(this);
-    }
-
-    protected void onPostExecute(Object result) {
-	if (listener != null)
-	    listener.onFinish(this);
-    }
-    
-    public void execute() {
-	execute(new Object());
-    }
-
-    protected Object doInBackground(Object... arg0) {
+    public void run() {
 	runnable.run();
-	return null;
+	if (listener != null) listener.onFinish(this);
     }
 
     public interface ProgressListener {
-	public void onStart(AsyncTask task);
-	public void onFinish(AsyncTask task);
-	public void onCancel(AsyncTask task);
+	public void onStart(Threadable task);
+	public void onFinish(Threadable task);
+    }
+
+    public void execute() {
+	if (listener != null) listener.onStart(this);
+	start();
     }
 }
