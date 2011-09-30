@@ -24,6 +24,7 @@ public class HttpRequestManager {
     public static final int POST_SHOW_REQUEST = 41;
     public static final int POST_DELETE_REQUEST = 43;
     public static final int STORE_TAG_LIST_REQUEST = 52;
+    public static final int STORE_FOOD_ACCURACY_REQUEST = 55;
     public static final int USER_TAG_LIST_REQUEST = 62;
     public static final int USER_UPDATE_REQUEST = 63;
     public static final int USER_CHANGE_PASSWORD_REQUEST = 64;

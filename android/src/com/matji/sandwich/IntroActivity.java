@@ -95,30 +95,18 @@
 
 package com.matji.sandwich;
 
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.AppVersion;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.util.async.TimeAsyncTask;
-import com.matji.sandwich.util.async.SimpleAsyncTask;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.request.VersionHttpRequest;
-import com.matji.sandwich.util.async.Threadable;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.util.async.SimpleAsyncTask;
+import com.matji.sandwich.util.async.Threadable;
+import com.matji.sandwich.util.async.TimeAsyncTask;
 
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener,
 							   SimpleAsyncTask.ProgressListener {

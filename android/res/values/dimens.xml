@@ -12,6 +12,9 @@
     <dimen name="default_divider_size2">1.33dp</dimen>
 	<dimen name="default_new_icon_x_position">24.67dp</dimen>
 	<dimen name="default_new_icon_y_position">4dp</dimen>
+	<dimen name="default_count_icon_x_position">3.33dp</dimen>
+    <dimen name="default_count_icon_y_position">3.33dp</dimen>
+    <dimen name="default_count_icon_padding">3.33dp</dimen>
 	<dimen name="default_round_pixel">5.33dp</dimen>
 	<dimen name="default_round_inset">0dp</dimen>
 	<dimen name="default_round_pixel2">8dp</dimen>

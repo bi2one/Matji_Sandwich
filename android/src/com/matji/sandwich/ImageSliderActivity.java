@@ -13,7 +13,6 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.AttachFile;

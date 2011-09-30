@@ -7,7 +7,6 @@ import android.content.Context;
 public class LikeHttpRequest extends HttpRequest {
 	public LikeHttpRequest(Context context) {	
 		super(context);
-		controller = "foods";
 	}
 
 	public void actionFoodUnLike(int store_food_id) {

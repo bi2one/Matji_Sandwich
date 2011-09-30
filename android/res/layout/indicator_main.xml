@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		style="@style/IndicatorMain">
-  <ImageView
-      android:id="@+id/indicator_main_icon"
-      android:layout_centerHorizontal="true"
-      style="@style/IndicatorMainIcon" />
-  <com.matji.sandwich.widget.indicator.MainIndicatorTextView
-      android:id="@+id/indicator_main_label"
-      android:singleLine="true"
-      android:layout_marginLeft="@dimen/default_distance_half"
-      android:layout_marginRight="@dimen/default_distance_half"
-      android:layout_centerHorizontal="true"
-      android:layout_below="@id/indicator_main_icon"
-      style="@style/IndicatorMainText" />
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/IndicatorMain">
+
+	<RelativeLayout
+		style="@style/DefaultWrap"
+		android:layout_centerInParent="true">
+		<ImageView
+			android:id="@+id/indicator_main_icon"
+			style="@style/IndicatorMainIcon"
+			android:src="@drawable/icon_tapbar_matist"
+			android:layout_centerHorizontal="true" />
+		<com.matji.sandwich.widget.indicator.MainIndicatorTextView
+			android:id="@+id/indicator_main_label"
+			android:singleLine="true"
+			android:layout_below="@id/indicator_main_icon"
+			style="@style/IndicatorMainText"
+			android:layout_centerHorizontal="true" />
+	</RelativeLayout>
+	<TextView
+		android:id="@+id/indicator_main_count"
+		style="@style/DefaultWrap"
+		android:background="@drawable/new_bg"
+		android:textColor="@color/matji_white"
+		android:padding="@dimen/default_count_icon_padding"
+		android:layout_alignParentRight="true"		
+        android:layout_marginTop="@dimen/default_count_icon_y_position"
+        android:layout_marginRight="@dimen/default_count_icon_x_position"
+		android:gravity="center"
+		android:visibility="gone" />
 </RelativeLayout>
+
+
+<!-- <com.matji.sandwich.widget.indicator.MainIndicatorTextView -->
+<!-- android:id="@+id/indicator_main_label" -->
+<!-- android:singleLine="true" -->
+<!-- android:layout_below="@id/indicator_main_icon" -->
+<!-- style="@style/IndicatorMainText" /> -->
+
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- style="@style/IndicatorMain"> -->
+<!-- <ImageView -->
+<!-- android:id="@+id/indicator_main_icon" -->
+<!-- android:layout_centerHorizontal="true" -->
+<!-- style="@style/IndicatorMainIcon" /> -->
+<!-- <com.matji.sandwich.widget.indicator.MainIndicatorTextView -->
+<!-- android:id="@+id/indicator_main_label" -->
+<!-- android:singleLine="true" -->
+<!-- android:layout_marginLeft="@dimen/default_distance_half" -->
+<!-- android:layout_marginRight="@dimen/default_distance_half" -->
+<!-- android:layout_centerHorizontal="true" -->
+<!-- android:layout_below="@id/indicator_main_icon" -->
+<!-- style="@style/IndicatorMainText" /> -->
+<!-- </RelativeLayout> -->

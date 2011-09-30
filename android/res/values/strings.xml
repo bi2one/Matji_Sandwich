@@ -15,7 +15,7 @@
     0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw    
   </string>
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
-  <string name="server_domain">http://222.122.205.227:3000/v2/</string>
+  <string name="server_domain">http://api.yummystory.com/</string>
   
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -92,7 +92,7 @@
   <string name="default_string_title">%1$s의 맛집기행</string>
   <string name="default_string_intro">소개글</string>
   <string name="default_string_not_exist_intro">소개글이 없습니다.</string>
-  <string name="default_string_not_exist_website">웹사이트를 등록하지 않았습니다.</string>
+  <string name="default_string_not_exist_website">웹사이트가 없습니다.</string>
   <string name="default_string_not_exist_cover">커버가 없습니다.</string>
   <string name="default_string_basic_info">기본정보</string>
   <string name="default_string_more_info">부가정보</string>
@@ -495,6 +495,9 @@
   
   <!-- StoreFoodAdapter.java -->
   <string name="store_food_add">신규 메뉴 등록</string>
+  <string name="store_food_delicious">맛있어요!</string>
+  <string name="store_food_not_accuracy">부정확한 메뉴 String</string>
+  <string name="store_food_accuracy">정확한 메뉴 String</string>
   
   <!-- activity_store_food.xml -->
   <string name="store_food_caution">메뉴 중 흐린 글씨는 불확실 하다고 신고된 정보입니다.</string>
@@ -561,7 +564,7 @@
   <!-- search_result.xml -->
   <string name="search_result_filled">검색 결과</string>
   <string name="search_result_empty">검색 결과가 없습니다.</string>
-
+  
   <!-- country codes -->
   <string name="country_code_AD">AD</string>
   <string name="country_name_AD">Andorra</string>
