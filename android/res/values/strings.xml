@@ -15,11 +15,7 @@
     0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw    
   </string>
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
-<<<<<<< HEAD
   <string name="server_domain">http://api.yummystory.com/</string>
-=======
-  <string name="server_domain">http://222.122.205.227/v2/</string>
->>>>>>> 85b67857a40929a5b950260659800093e56e3918
   
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
