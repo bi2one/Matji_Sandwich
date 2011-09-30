@@ -8,7 +8,7 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.button.SearchButton;
 import com.matji.sandwich.widget.title.button.SettingButton;
-import com.matji.sandwich.widget.title.button.StorePostWriteButton;
+import com.matji.sandwich.widget.title.button.PostWriteButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 /**
@@ -35,7 +35,7 @@ public class MatstoryTitle extends TitleContainerTypeRRR implements MainTabTitle
     @Override
     protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
-        return new StorePostWriteButton(getContext());
+        return new PostWriteButton(getContext());
     }
 
     @Override

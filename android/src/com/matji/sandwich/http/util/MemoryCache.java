@@ -18,6 +18,10 @@ public class MemoryCache {
         cache.put(id, new SoftReference<Bitmap>(bitmap));
     }
 
+    public void remove(String id) {
+	cache.remove(id);
+    }
+
     public void clear() {
         cache.clear();
     }

@@ -143,6 +143,7 @@ ActivityStartable {
         Intent intent = new Intent(context, MainTabActivity.class);
         intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_MAP);
         startActivity(intent);
+	setIsFlow(false);
     }
 
     @Override

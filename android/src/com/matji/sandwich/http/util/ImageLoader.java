@@ -114,6 +114,12 @@ public class ImageLoader {
         return HttpUtility.getUrlStringWithQuery(type.toString(), params);
     }
 
+    public boolean remove(UrlType type, ImageSize size, int id) {
+	String url = createUrl(type, size, id);
+	memoryCache.remove(url);
+	return fileCache.remove(url);
+    }
+
     public void DisplayImage(Activity activity, UrlType type, ImageSize size, ImageView imageView, int id) {
         DisplayImage(createUrl(type, size, id), activity, imageView);
     }

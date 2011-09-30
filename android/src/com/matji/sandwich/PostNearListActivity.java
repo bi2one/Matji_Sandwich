@@ -2,14 +2,15 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseActivity;
@@ -155,6 +156,7 @@ ActivityStartable {
         Intent intent = new Intent(context, MainTabActivity.class);
         intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_MAP);
         startActivity(intent);
+	setIsFlow(false);
     }
 
     @Override

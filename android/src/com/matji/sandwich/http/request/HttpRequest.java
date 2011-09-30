@@ -123,7 +123,6 @@ public abstract class HttpRequest implements RequestCommand {
 	}
 
 	if (httpResponse == null) {
-	    Log.d("=====", "here");
 	    throw new HttpConnectMatjiException();
 	} else
 	    return httpResponse;

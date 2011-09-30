@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.ExifInterface;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -62,6 +63,14 @@ public class PhotoUtil {
 	case FROM_CAMERA:
 	    return tempTakedPhoto;
 	case FROM_ALBUM:
+	    try {
+		ExifInterface exif = new ExifInterface(getRealPathFromURI(data.getData()));
+		Log.d("=====", "exif attr: " + exif.getAttribute(ExifInterface.TAG_ORIENTATION));
+		exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL + "");
+	    } catch(IOException e) {
+		Log.d("=====", "exif error: " + e.toString());
+		return null;
+	    }
 	    return new File(getRealPathFromURI(data.getData()));
 	default:
 	    return null;
@@ -70,7 +79,7 @@ public class PhotoUtil {
 
     private String getRealPathFromURI(Uri contentUri){
 	String [] proj={MediaStore.Images.Media.DATA};
-	Cursor cursor = activity.managedQuery(contentUri, proj, null, null, null); 
+	Cursor cursor = activity.managedQuery(contentUri, proj, null, null, null);
 	int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 	cursor.moveToFirst();
 	return cursor.getString(column_index);
