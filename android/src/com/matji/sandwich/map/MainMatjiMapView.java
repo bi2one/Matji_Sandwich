@@ -227,6 +227,14 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	    geocodeRequest.actionReverseGeocodingByGeoPoint(sessionUtil.getCenter(), sessionUtil.getCurrentCountry());
 	    requestManager.request(addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
 	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
+	    // try {
+	    // 	Log.d("=====", "request start");
+	    // 	requestCallBack(GEOCODE, geocodeRequest.request());
+	    // 	requestCallBack(NEARBY_STORE, request.request());
+	    // 	Log.d("=====", "request end");
+	    // } catch(MatjiException e) {
+	    // 	e.performExceptionHandling(context);
+	    // }
 	}
     }
 }

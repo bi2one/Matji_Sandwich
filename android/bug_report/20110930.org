@@ -1,0 +1,13 @@
+
+* 새로 발견한 버그
+
+* TODO 맵 조금씩 움직이니까 맵 리로딩이 안되
+  GPS running중에만 범위 잡게 할 것.
+* TODO 비밀번호 틀린거 틀렸다고 하기
+* TODO 이야기쓰기 -> 이미지 클릭시 빈칸을 눌러도 지워짐.
+* TODO 서비스 띄워놓기(전체 정보 업데이트 하는거. 로컬 서비스로...)
+* TODO HttpRequestManager에서 Context를 받아놓지 않기.
+  Activity LifeCycle 문제 같음...
+* TODO Request Background안되는 문제
+  경로: 앱을 처음 켜고 -> 백 버튼 -> 다시 켜 -> 홈버튼 -> 다시켜.. 일때 안됨!
+  

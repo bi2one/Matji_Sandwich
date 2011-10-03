@@ -35,6 +35,7 @@ public class TaskPoolManager implements TaskElement.ProgressListener {
     }
 
     public synchronized void start(TaskElement element) {
+	Log.d("=====", "AsyncTask gooooooooooo");
 	element.setProgressListener(this);
 	element.start();
 	runningTaskPool.add(element);
