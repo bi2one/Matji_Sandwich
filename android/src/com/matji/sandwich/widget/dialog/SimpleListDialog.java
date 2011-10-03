@@ -41,6 +41,14 @@ public class SimpleListDialog implements SimpleDialog, DialogInterface.OnClickLi
         dialog.cancel();
     }
 
+    public void setTitle(CharSequence title) {
+        dialog.setTitle(title);
+    }
+    
+    public void setTitle(int titleId) {
+        dialog.setTitle(titleId);
+    }
+    
     public interface OnClickListener {
         public void onItemClick(SimpleDialog dialog, int position);
     }

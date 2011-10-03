@@ -162,10 +162,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     @Override
     protected void onResume() {
         super.onResume();
-        for (MainTabTitle title : titles) {
-            title.notificationValidate();
-        }
-        
+        notificationValidate();
         syncTitle();
         loginTabSync();
     }
@@ -194,5 +191,14 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     @Override
     public void postLogin() {
         syncTitle();
+    }
+    
+    protected void notificationValidate() {
+        for (MainTabTitle title : titles) {
+            title.notificationValidate();
+        }
+        
+        int alarmCount = session.getPrivateUtil().getNewNoticeCount() + session.getPrivateUtil().getNewAlarmCount();
+        tabHost.setAlarmCount(alarmCount);
     }
 }

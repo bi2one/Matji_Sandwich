@@ -75,7 +75,7 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
         Store store = StoreDetailInfoTabActivity.store;
         String cover = store.getCover();
         String website = store.getWebsite();
-        
+
         tvName.setText(StoreDetailInfoTabActivity.store.getName());
         if(cover == null || cover.equals("")) {
             tvCover.setText(MatjiConstants.string(R.string.default_string_not_exist_cover));
@@ -111,15 +111,18 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     public void onTelClicked(View v) {
         phoneCallUtil.call(StoreDetailInfoTabActivity.store.getTelNotDashed());
     }
-    
+
     public void onWebsiteClicked(View v) {
-        Uri uri = Uri.parse(StoreDetailInfoTabActivity.store.getWebsite());
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(uri);
-        startActivity(intent);
+        String website = StoreDetailInfoTabActivity.store.getWebsite();
+        if (!website.equals("")) {
+            Uri uri = Uri.parse(website);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(uri);
+            startActivity(intent);
+        }
     }
-    
-    public void onReportClick(View v) {
-        
+
+    public void onReportClicked(View v) {
+
     }
 }

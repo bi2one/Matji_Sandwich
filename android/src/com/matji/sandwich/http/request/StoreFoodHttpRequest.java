@@ -39,4 +39,22 @@ public class StoreFoodHttpRequest extends HttpRequest {
 		getHashtable.put("page", page + "");
 		getHashtable.put("limit", limit + "");
 	}
+
+    public void actionAccuracyUp(int store_food_id) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "accuracy_up";
+        parser = new StoreFoodParser(context);
+        
+        getHashtable.clear();
+        getHashtable.put("store_food_id", store_food_id+"");
+    }
+    
+    public void actionAccuracyDown(int store_food_id) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "accuracy_down";
+        parser = new StoreFoodParser(context);
+        
+        getHashtable.clear();
+        getHashtable.put("store_food_id", store_food_id+"");
+    }
 }

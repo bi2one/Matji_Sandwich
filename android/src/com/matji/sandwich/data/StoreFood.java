@@ -9,7 +9,7 @@ public class StoreFood extends MatjiData{
 	private int food_id;
 	private int store_id;
 	private int like_count;
-	private boolean blind;
+	private boolean accuracy;
 	private Store store;
 	private Food food;
 	private User user;
@@ -40,7 +40,7 @@ public class StoreFood extends MatjiData{
 		dest.writeInt(food_id);
 		dest.writeInt(store_id);
 		dest.writeInt(like_count);
-		dest.writeInt(blind ? 1 : 0);
+		dest.writeInt(accuracy ? 1 : 0);
 		dest.writeValue(store);
 		dest.writeValue(food);
 		dest.writeValue(user);
@@ -52,7 +52,7 @@ public class StoreFood extends MatjiData{
 		food_id = in.readInt();
 		store_id = in.readInt();
 		like_count = in.readInt();
-		blind = in.readInt() != 0;
+		accuracy = in.readInt() != 0;
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));
 		food = Food.class.cast(in.readValue(Food.class.getClassLoader()));
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
@@ -88,11 +88,11 @@ public class StoreFood extends MatjiData{
 	public int getLikeCount() {
 		return like_count;
 	}
-	public void setBlind(boolean blind) {
-		this.blind = blind;
+	public void setAccuracy(boolean blind) {
+		this.accuracy = blind;
 	}
-	public boolean getBlind() {
-		return blind;
+	public boolean isAccuracy() {
+		return accuracy;
 	}
 	public void setStore(Store store) {
 		this.store = store;
