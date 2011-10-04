@@ -59,7 +59,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         this.identifiable = identifiable;
         this.context = context;
         likeRequest = new LikeHttpRequest(context);
-        manager = HttpRequestManager.getInstance(context);
+        manager = HttpRequestManager.getInstance();
         dbProvider = DBProvider.getInstance(context);
         this.spinnerContainer = spinnerContainer;
     }
@@ -205,7 +205,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         default:
             notSupported();
         }
-        manager.request(spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.LIKE_REQUEST, this);
+        manager.request(context, spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.LIKE_REQUEST, this);
     }
 
     /**
@@ -225,7 +225,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         default:
             notSupported();
         }
-        manager.request(spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.UN_LIKE_REQUEST, this);
+        manager.request(context, spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.UN_LIKE_REQUEST, this);
     }
 
 

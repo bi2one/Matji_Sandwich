@@ -22,7 +22,7 @@ public class TaskElement implements ManagerAsyncTask.RequestStatusListener {
     }
 
     public void stop() {
-	task.cancel(true);
+	task.forceCancel();
     }
 
     public void onStartRequest(ManagerAsyncTask task) {

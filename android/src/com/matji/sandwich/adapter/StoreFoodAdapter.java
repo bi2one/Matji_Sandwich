@@ -42,7 +42,7 @@ public class StoreFoodAdapter extends MBaseAdapter {
     public StoreFoodAdapter(Context context) {
         super(context);
         this.context = context;
-        manager = HttpRequestManager.getInstance(context);
+        manager = HttpRequestManager.getInstance();
     }
 
     public void setStore(Store store) {
@@ -196,7 +196,7 @@ public class StoreFoodAdapter extends MBaseAdapter {
                     accuracyUpRequest(storeFood.getId());
                 }
                 
-                manager.request(spinnerContainer, SpinnerType.SMALL, request, HttpRequestManager.STORE_FOOD_ACCURACY_REQUEST, this);
+                manager.request(context, spinnerContainer, SpinnerType.SMALL, request, HttpRequestManager.STORE_FOOD_ACCURACY_REQUEST, this);
                 break;
             default: // cancel
                 break;

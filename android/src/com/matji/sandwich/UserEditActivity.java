@@ -50,7 +50,7 @@ public class UserEditActivity extends BaseActivity implements OnClickListener, R
         setContentView(R.layout.activity_user_edit);
         session = Session.getInstance(this);
         photoUtil = new PhotoUtil(this);
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
         fileRequest = new AttachFileHttpRequest(this);
 
         title = (HomeTitle) findViewById(R.id.Titlebar);

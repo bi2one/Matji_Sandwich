@@ -34,7 +34,7 @@ public class UserIntroEditActivity extends BaseActivity implements Completable, 
 
         session = Session.getInstance(this);
         request = new UserHttpRequest(this);
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
 
         title = (CompletableTitle) findViewById(R.id.Titlebar);
         field = (EditText) findViewById(R.id.user_intro_edit_field);
@@ -69,7 +69,7 @@ public class UserIntroEditActivity extends BaseActivity implements Completable, 
     public void complete() {
         title.lockCompletableButton();
         request.actionUpdateIntro(field.getText().toString().trim());
-        manager.request(getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
+        manager.request(getApplicationContext(), getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
     }
 
     @Override

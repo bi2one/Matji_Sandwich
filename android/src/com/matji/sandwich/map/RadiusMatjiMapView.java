@@ -59,7 +59,7 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	mapView = (MatjiMapView)findViewById(R.id.radius_matji_mapview_map);
 	locationBar = (SimpleSubmitLocationBar)findViewById(R.id.radius_matji_mapview_location_bar);
 	geocodeRunnable = new GeocodeRunnable(locationBar.getSpinnerContainer(), context, this);
-	requestManager = HttpRequestManager.getInstance(context);
+	requestManager = HttpRequestManager.getInstance();
 	sessionMapUtil = new SessionMapUtil(context);
 	gpsManager = new GpsManager(context, this);
 
@@ -178,7 +178,7 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	public void run() {
     	    GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
     	    geocodeRequest.actionReverseGeocodingByGeoPoint(center, sessionMapUtil.getCurrentCountry());
-    	    requestManager.request(spinnerContainer, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
+    	    requestManager.request(context, spinnerContainer, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
 	}
     }
 

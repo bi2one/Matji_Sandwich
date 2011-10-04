@@ -50,7 +50,7 @@ Requestable {
         uncheckedView = (ImageView)findViewById(R.id.bookmark_star_toggle_unchecked);
         checkedView = (ImageView)findViewById(R.id.bookmark_star_toggle_checked);
         session = Session.getInstance(context);
-        requestManager = HttpRequestManager.getInstance(context);
+        requestManager = HttpRequestManager.getInstance();
         bookmarkRequest = new BookmarkHttpRequest(context);
         dbProvider = DBProvider.getInstance(context);
     }
@@ -191,12 +191,12 @@ Requestable {
 
     private void requestBookmark(Store store) {
         bookmarkRequest.actionBookmark(store.getId());
-        requestManager.request(spinnerContainer, SpinnerType.SMALL, bookmarkRequest, HttpRequestManager.BOOKMAR_REQUEST, this);
+        requestManager.request(getContext(), spinnerContainer, SpinnerType.SMALL, bookmarkRequest, HttpRequestManager.BOOKMAR_REQUEST, this);
     }
 
     private void requestUnBookmark(Store store) {
         bookmarkRequest.actionUnBookmark(store.getId());
-        requestManager.request(spinnerContainer, SpinnerType.SMALL, bookmarkRequest, HttpRequestManager.UN_BOOKMARK_REQUEST, this);
+        requestManager.request(getContext(), spinnerContainer, SpinnerType.SMALL, bookmarkRequest, HttpRequestManager.UN_BOOKMARK_REQUEST, this);
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {

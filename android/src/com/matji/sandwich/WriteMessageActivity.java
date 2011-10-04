@@ -68,7 +68,7 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
         super.init();
         setContentView(R.layout.activity_write_message);
 
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
 
         receivedUsers = new ArrayList<User>();
         title = (CompletableTitle) findViewById(R.id.Titlebar);
@@ -126,7 +126,7 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
         }
         
         ((MessageHttpRequest) request).actionNew(receivedUserIds, message);
-        manager.request(getMainView(), request, HttpRequestManager.MESSAGE_NEW_REQUEST, this);
+        manager.request(getApplicationContext(), getMainView(), request, HttpRequestManager.MESSAGE_NEW_REQUEST, this);
     }
 
     @Override

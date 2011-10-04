@@ -89,15 +89,15 @@ public class Session implements Requestable {
     public void sessionValidate(Loginable loginable, ViewGroup layout){
         preLogin();
         this.mLoginable = loginable;
-        mManager = HttpRequestManager.getInstance(mContext);
+        mManager = HttpRequestManager.getInstance();
         MeHttpRequest request = new MeHttpRequest(mContext);
         request.actionMe();
-        mManager.request(layout, request, HttpRequestManager.AUTHORIZE, this);
+        mManager.request(mContext, layout, request, HttpRequestManager.AUTHORIZE, this);
         notificationValidate();
     }
 
     public void unsyncSessionValidate() {
-        mManager = HttpRequestManager.getInstance(mContext);
+        mManager = HttpRequestManager.getInstance();
         MeHttpRequest request = new MeHttpRequest(mContext);
         request.actionMe();
         ArrayList<MatjiData> data = null;
@@ -117,7 +117,7 @@ public class Session implements Requestable {
     }
 
     public boolean login(String userid, String password) {
-        mManager = HttpRequestManager.getInstance(mContext);
+        mManager = HttpRequestManager.getInstance();
         MeHttpRequest request = new MeHttpRequest(mContext);
         request.actionAuthorize(userid, password);
         try {

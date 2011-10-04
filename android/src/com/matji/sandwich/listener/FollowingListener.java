@@ -56,7 +56,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
         this.identifiable = identifiable;
         this.context = context;
         followingRequest = new FollowingHttpRequest(context);
-        manager = HttpRequestManager.getInstance(context);
+        manager = HttpRequestManager.getInstance();
         session = Session.getInstance(context);
         dbProvider = DBProvider.getInstance(context);
         this.spinnerContainer = spinnerContainer;
@@ -109,7 +109,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      */
     private void followRequest() {
         followingRequest.actionNew(user.getId());
-        manager.request(spinnerContainer, SpinnerType.SMALL, followingRequest, HttpRequestManager.FOLLOW_REQUEST, this);
+        manager.request(context, spinnerContainer, SpinnerType.SMALL, followingRequest, HttpRequestManager.FOLLOW_REQUEST, this);
     }
 
     /**
@@ -117,7 +117,7 @@ public abstract class FollowingListener implements OnClickListener, Requestable 
      */
     private void unfollowRequest() {
         followingRequest.actionDelete(user.getId());
-        manager.request(spinnerContainer, SpinnerType.SMALL, followingRequest, HttpRequestManager.UN_FOLLOW_REQUEST, this);
+        manager.request(context, spinnerContainer, SpinnerType.SMALL, followingRequest, HttpRequestManager.UN_FOLLOW_REQUEST, this);
     }
 
 

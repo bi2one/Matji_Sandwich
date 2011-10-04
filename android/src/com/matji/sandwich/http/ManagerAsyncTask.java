@@ -75,6 +75,11 @@ public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayLi
 	this.listener = listener;
     }
 
+    public void forceCancel() {
+	cancel(true);
+	command.cancel();
+    }
+
     protected ArrayList<MatjiData> doInBackground(RequestCommand... params) {
     	try {
 	    Log.d("=====", "async background");
@@ -86,7 +91,6 @@ public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayLi
     }
 
     protected void onCancelled() {
-    	command.cancel();
 	if (listener != null)
 	    listener.onCancelRequest(this);
     }

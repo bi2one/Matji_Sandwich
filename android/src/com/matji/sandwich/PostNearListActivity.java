@@ -66,7 +66,7 @@ ActivityStartable {
         gpsManager = new GpsManager(context, this);
         sessionUtil = new SessionMapUtil(context);
         sessionLocationUtil = new SessionRecentLocationUtil(context);
-        requestManager = HttpRequestManager.getInstance(context);
+        requestManager = HttpRequestManager.getInstance();
         geocodeRequest = new GeocodeHttpRequest(context);
         addressView = (TextView)findViewById(R.id.location_title_bar_address);
         addressWrapper = (RelativeLayout)findViewById(R.id.location_title_bar_address_wrapper);
@@ -80,11 +80,11 @@ ActivityStartable {
 
         if (GeoPointUtil.geoPointEquals(prevPoint, centerPoint)) {
             geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
-            requestManager.request(addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
+            requestManager.request(getApplicationContext(), addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
             listView.requestReload();
         } else {
             geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
-            requestManager.request(addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
+            requestManager.request(getApplicationContext(), addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
             listView.forceReload();
         }
         prevPoint = centerPoint;

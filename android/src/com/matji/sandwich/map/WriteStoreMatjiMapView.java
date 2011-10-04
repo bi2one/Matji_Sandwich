@@ -77,7 +77,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 
 	downButton.setOnClickListener(this);
 	geocodeRunnable = new GeocodeRunnable(spinnerWrapper, context, this);
-	requestManager = HttpRequestManager.getInstance(context);
+	requestManager = HttpRequestManager.getInstance();
 	gpsManager = new GpsManager(context, this);
 	sessionMapUtil = new SessionMapUtil(context);
 	mapController = mapView.getController();
@@ -238,7 +238,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 	public void run() {
     	    GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
     	    geocodeRequest.actionReverseGeocodingByGeoPoint(center, sessionMapUtil.getCurrentCountry());
-    	    requestManager.request(spinnerContainer, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
+    	    requestManager.request(context, spinnerContainer, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
 	}
     }
 

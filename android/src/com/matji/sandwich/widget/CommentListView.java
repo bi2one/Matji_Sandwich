@@ -112,7 +112,7 @@ public class CommentListView extends RequestableMListView {
     }
 
     public void deleteComment(int comment_id) {
-        getHttpRequestManager().request(getLoadingFooterView(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
+        getHttpRequestManager().request(getContext(), getLoadingFooterView(), deleteRequest(comment_id), COMMENT_DELETE_REQUEST, this);
     }
 
     @Override

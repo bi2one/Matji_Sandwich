@@ -52,7 +52,7 @@ public class StoreTagCloudView extends TagCloudView implements Requestable, Refr
     }
     
     protected void init() {
-        manager = HttpRequestManager.getInstance(getContext());
+        manager = HttpRequestManager.getInstance();
     }
     
 
@@ -108,7 +108,7 @@ public class StoreTagCloudView extends TagCloudView implements Requestable, Refr
 
     @Override
     public void refresh() {
-        manager.request(spinnerContainer, request(), HttpRequestManager.USER_TAG_LIST_REQUEST, this);
+        manager.request(getContext(), spinnerContainer, request(), HttpRequestManager.USER_TAG_LIST_REQUEST, this);
     }    
     
     @Override

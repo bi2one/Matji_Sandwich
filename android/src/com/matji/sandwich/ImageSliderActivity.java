@@ -82,7 +82,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         }
 
         currentPage = getIntent().getIntExtra(POSITION, 0);
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
         imageLoader = new ImageLoader(this);
         imageLoader.setScalable(false);
 
@@ -156,7 +156,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
             }
 
             ((PostHttpRequest) request).actionShow(postId);
-            manager.request((ViewGroup) contentWrapper, request, HttpRequestManager.POST_SHOW_REQUEST, this);
+            manager.request(getApplicationContext(), (ViewGroup) contentWrapper, request, HttpRequestManager.POST_SHOW_REQUEST, this);
             prevPostId = postId;
         }
     }

@@ -78,7 +78,7 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         super.init();
         setContentView(R.layout.activity_settings);
 
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
 
         iconNew = MatjiConstants.drawable(R.drawable.icon_new);
         iconNew.setBounds(0, 0, iconNew.getIntrinsicWidth(), iconNew.getIntrinsicHeight());
@@ -235,7 +235,7 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
                     (AlarmSettingType) cb.getTag(R.string.setting_alarm_permit), 
                     isChecked);
             if (!manager.isRunning()) {
-                manager.request((ViewGroup) cb.getTag(R.string.setting_alarm_spinner),
+                manager.request(getApplicationContext(), (ViewGroup) cb.getTag(R.string.setting_alarm_spinner),
                         SpinnerType.SSMALL,
                         request, HttpRequestManager.UPDATE_ALARM_PERMIT_REQUEST,
                         this);

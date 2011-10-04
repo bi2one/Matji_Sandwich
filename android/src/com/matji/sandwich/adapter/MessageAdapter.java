@@ -48,7 +48,7 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 		hasFoldedMap = new HashMap<Integer, Boolean>();
 		iconNew = MatjiConstants.drawable(R.drawable.icon_new);
 		iconNew.setBounds(0, 0, iconNew.getIntrinsicWidth(), iconNew.getIntrinsicHeight());
-		manager = HttpRequestManager.getInstance(context);
+		manager = HttpRequestManager.getInstance();
 		privateUtil = Session.getInstance(context).getPrivateUtil();
 	}
 
@@ -160,7 +160,7 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 	public void unfold(MessageElement holder) {
 		holder.flow.setImageResource(R.drawable.icon_flow_bottom);
 		holder.messageWrapper.setVisibility(View.VISIBLE);
-		manager.request(readRequest(holder.message), HttpRequestManager.MESSAGE_READ_REQUEST, this);
+		manager.request(context, readRequest(holder.message), HttpRequestManager.MESSAGE_READ_REQUEST, this);
 		holder.message.setMsgRead(true);
 		holder.createdAtList.setCompoundDrawables(null, null, null, null);
 	}
