@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -25,6 +27,11 @@ public class UserTagCloudActivity extends BaseActivity implements Refreshable, L
     private UserCell userCell;
     private SubtitleHeader tagCount;
     private UserTagCloudView tagCloudView;
+    
+    private View cloudWrapper;
+    private View listWrapper;
+    private Button tagListButton;
+    private Button tagCloudButton;
 
     public static final String IS_MAIN_TAB_ACTIVITY = "UserTagActivity.is_main_tab_activity";
 
@@ -45,6 +52,10 @@ public class UserTagCloudActivity extends BaseActivity implements Refreshable, L
         userCell = (UserCell) findViewById(R.id.UserCell);
         tagCount = (SubtitleHeader) findViewById(R.id.user_tag_count);
         tagCloudView = (UserTagCloudView) findViewById(R.id.user_tag_cloud);
+        listWrapper = findViewById(R.id.user_tag_all_wrapper);
+        cloudWrapper = findViewById(R.id.user_tag_cloud_wrapper);
+        tagListButton = (Button) findViewById(R.id.user_tag_all_btn);
+        tagCloudButton = (Button) findViewById(R.id.user_tag_cloud_btn);
 
         if (!isMainTabActivity) {
             title.setIdentifiable(this);
@@ -61,7 +72,23 @@ public class UserTagCloudActivity extends BaseActivity implements Refreshable, L
         userCell.addRefreshable(tagCloudView);
 
         tagCloudView.setSpinnerContainer(getMainView());
-
+        
+        tagListButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				listWrapper.setVisibility(View.VISIBLE);
+				cloudWrapper.setVisibility(View.GONE);
+			}
+		});
+        tagCloudButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				listWrapper.setVisibility(View.GONE);
+				cloudWrapper.setVisibility(View.VISIBLE);
+			}
+		});
     }
 
     public void showTitle() {

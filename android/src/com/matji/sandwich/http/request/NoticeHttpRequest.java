@@ -41,5 +41,6 @@ public class NoticeHttpRequest extends HttpRequest {
 	    getHashtable.clear();
         getHashtable.put("last_notice_id", last_notice_id+"");
         getHashtable.put("target", MatjiConstants.target());
+        getHashtable.put("language", MatjiConstants.language());
 	}
 }

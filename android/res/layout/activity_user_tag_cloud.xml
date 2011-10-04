@@ -16,13 +16,39 @@
 			<com.matji.sandwich.widget.cell.UserCell
 				android:id="@id/UserCell"
 				style="@style/DefaultWidthFill" />
-			<com.matji.sandwich.widget.SubtitleHeader
-				android:id="@+id/user_tag_count"
-				style="@style/DefaultWrap" />
-			<com.matji.sandwich.widget.tag.UserTagCloudView
-				android:id="@+id/user_tag_cloud"
-				style="@style/DefaultFill"
-				android:layout_margin="@dimen/default_distance" />
+			<RelativeLayout
+				android:id="@+id/user_tag_cloud_wrapper"
+				style="@style/DefaultWrap">
+				<com.matji.sandwich.widget.SubtitleHeader
+					android:id="@+id/user_tag_count"
+					style="@style/DefaultWrap" />
+				<Button
+					android:id="@+id/user_tag_all_btn"
+					style="@style/DefaultWrap"
+					android:layout_toRightOf="@id/user_tag_count" />
+				<com.matji.sandwich.widget.tag.UserTagCloudView
+					android:id="@+id/user_tag_cloud"
+					style="@style/DefaultFill"
+					android:layout_margin="@dimen/default_distance"
+					android:layout_below="@id/user_tag_count" />
+			</RelativeLayout>
+			<RelativeLayout
+				android:id="@+id/user_tag_all_wrapper"
+				style="@style/DefaultWrap"
+				android:visibility="gone">
+				<com.matji.sandwich.widget.SubtitleHeader
+					android:id="@+id/user_tag_count"
+					style="@style/DefaultWrap" />
+				<Button
+					android:id="@+id/user_tag_cloud_btn"
+					style="@style/DefaultWrap"
+					android:layout_toRightOf="@id/user_tag_count" />
+				<com.matji.sandwich.widget.tag.TagListView
+					android:id="@+id/user_tag_all"
+					style="@style/DefaultFill"
+					android:layout_margin="@dimen/default_distance"
+					android:layout_below="@id/user_tag_count" />
+			</RelativeLayout>
 		</LinearLayout>
 	</com.matji.sandwich.widget.MatjiScrollView>
 </RelativeLayout>

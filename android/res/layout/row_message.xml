@@ -57,8 +57,7 @@
 	<LinearLayout
 		android:id="@+id/row_message_message_wrapper"
 		style="@style/DefaultWrap"
-		android:orientation="vertical"
-		android:visibility="gone">
+		android:orientation="vertical">
 		<ImageView
 			android:id="@+id/row_message_shadow"
 			style="@style/DefaultWidthFill"
@@ -74,22 +73,58 @@
 			<TextView
 				android:id="@+id/row_message_subject"
 				style="@style/DefaultWrap"
+				android:singleLine="true"
 				android:textSize="@dimen/row_message_subject_size"
 				android:textColor="@color/matji_gray"
 				android:layout_below="@id/row_message_shadow" />
-			<TextView
-				android:id="@+id/row_message_created_at"
+			<LinearLayout
+            android:id="@+id/row_message_created_at_wrapper"
+				style="@style/DefaultWidthFill"
+				android:gravity="center_vertical"
+				android:layout_below="@id/row_message_subject"
+				android:layout_toLeftOf="@+id/row_message_menu_btn"
+				android:paddingBottom="@dimen/row_message_content_padding_bottom">
+				<TextView
+					android:id="@+id/row_message_sent_user_nick"
+					style="@style/DefaultWrap"
+					android:text="보낸사람"
+					android:maxWidth="@dimen/default_nick_max_width"
+					android:singleLine="true"
+					android:textSize="@dimen/row_message_nick_size"
+					android:textColor="@color/matji_red" />
+				<ImageView
+					android:layout_marginLeft="@dimen/default_drawable_padding"
+					android:layout_marginRight="@dimen/default_drawable_padding"
+					style="@style/DefaultWrap"
+					android:src="@drawable/icon_to" />
+				<TextView
+					android:id="@+id/row_message_received_user_nick"
+					style="@style/DefaultWrap"
+					android:maxWidth="@dimen/default_nick_max_width"
+					android:singleLine="true"
+					android:text="받는사람"
+					android:textSize="@dimen/row_message_nick_size"
+					android:textColor="@color/matji_red" />
+				<TextView
+					android:id="@+id/row_message_created_at"
+					style="@style/DefaultWrap"
+					android:textSize="@dimen/row_message_nick_size"
+					android:textColor="@color/matji_chocolate"
+					android:layout_marginLeft="@dimen/default_distance" />
+			</LinearLayout>
+			<ImageButton
+				android:id="@id/row_message_menu_btn"
 				style="@style/DefaultWrap"
-				android:textSize="@dimen/row_message_nick_size"
-				android:textColor="@color/matji_chocolate"
-				android:layout_marginBottom="@dimen/row_message_content_padding_bottom"
+				android:src="@drawable/icon_menu"
+				android:background="@null"
+				android:layout_alignParentRight="true"
 				android:layout_below="@id/row_message_subject" />
 			<TextView
 				android:id="@+id/row_message_message"
 				style="@style/DefaultWrap"
 				android:textSize="@dimen/row_message_nick_size"
 				android:textColor="@color/matji_gray"
-				android:layout_below="@id/row_message_created_at" />
+				android:layout_below="@id/row_message_created_at_wrapper" />
 		</RelativeLayout>
 	</LinearLayout>
 </LinearLayout>

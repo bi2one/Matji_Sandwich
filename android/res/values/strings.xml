@@ -565,6 +565,8 @@
   <string name="search_result_filled">검색 결과</string>
   <string name="search_result_empty">검색 결과가 없습니다.</string>
   
+  <!-- TagListView.java -->
+  <string name="tag_list_more">More</string>
   <!-- country codes -->
   <string name="country_code_AD">AD</string>
   <string name="country_name_AD">Andorra</string>
