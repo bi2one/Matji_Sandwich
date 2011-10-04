@@ -58,7 +58,6 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 
 		current_ver = MatjiConstants.string(R.string.settings_service_version_name);
 		
-		setListeners();
 	}
 
 	public void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
@@ -79,16 +78,24 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 			}
 		}
 		dialog.dismiss();
-		finish();
+		if (compare(current_ver, update_ver)) { // it should be changed  
+			setListeners();
+		} else {
+			finish();
+		}
 	}
 
-	@Override
 	protected void onResume() {
 		super.onResume();
 		timeAsyncTask.execute();
 		simpleAsyncTask.execute();
 	}
 
+	public void onStop() {
+		super.onStop();
+		updateDialog.cancel();
+	}
+	
 	@Override
 	public int setMainViewId() {
 		return R.id.activity_intro;
@@ -104,24 +111,26 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 			request.actionAppVersion("ANDROID", current_ver);
 			try {
 				ArrayList<MatjiData> data = request.request();
-				if (data.size() > 0) {
-				    AppVersion app_version = (AppVersion) data.get(0);
-				    update_ver = app_version.getVersion();
+
+				if (data != null && data.size() > 0) {
+					AppVersion app_version = (AppVersion) data.get(0);
+					update_ver = app_version.getVersion();
+				} else {
+					update_ver = current_ver;
 				}
 			} catch (MatjiException e) {
 				e.performExceptionHandling(IntroActivity.this);
 			}
 
-//			if (compare(current_ver, update_ver)) {
-//				runOnUiThread(new A());
-//				updateDialog.show();
-//			} else {
+			if (compare(current_ver, update_ver)) { // it should be changed  
+				runOnUiThread(new UpdateMessage());
+			} else {
 				startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
-//			}
+			}
 		}
 	}
 
-	public class A extends Thread implements Runnable {
+	public class UpdateMessage extends Thread implements Runnable {
 		public void run() {
 			updateDialog.show();
 		}
@@ -131,7 +140,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 		updateDialog.setOnClickListener(new SimpleAlertDialog.OnClickListener() {
             @Override
             public void onConfirmClick(SimpleDialog dialog) {
-                finish();
+        		IntroActivity.this.finish();
             }
         });
 	}
