@@ -74,7 +74,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	storeItemizedOverlay = new StoreItemizedOverlay(context, this);
 	mapController = getController();
 	// requestManager = HttpRequestManager.getInstance(context);
-	requestManager = HttpRequestManager.getInstance(context);
+	requestManager = HttpRequestManager.getInstance();
 	sessionUtil = new SessionMapUtil(context);
 	gpsManager = new GpsManager(context, this);
 
@@ -225,8 +225,16 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
 	    request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
 	    geocodeRequest.actionReverseGeocodingByGeoPoint(sessionUtil.getCenter(), sessionUtil.getCurrentCountry());
-	    requestManager.request(addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
-	    requestManager.request(spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
+	    requestManager.request(getContext(), addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
+	    requestManager.request(getContext(), spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
+	    // try {
+	    // 	Log.d("=====", "request start");
+	    // 	requestCallBack(GEOCODE, geocodeRequest.request());
+	    // 	requestCallBack(NEARBY_STORE, request.request());
+	    // 	Log.d("=====", "request end");
+	    // } catch(MatjiException e) {
+	    // 	e.performExceptionHandling(context);
+	    // }
 	}
     }
 }

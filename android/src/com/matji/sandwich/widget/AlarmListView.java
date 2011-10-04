@@ -55,7 +55,7 @@ public class AlarmListView extends RequestableMListView {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		if (tag != HttpRequestManager.ALARM_READ_REQUEST) {
 			super.requestCallBack(tag, data);
-			manager.request(readRequest(data), HttpRequestManager.ALARM_READ_REQUEST, this);
+			manager.request(getContext(), readRequest(data), HttpRequestManager.ALARM_READ_REQUEST, this);
 			lastReadAlarmCount = data.size();
 		} else {
 			int newAlarmCount = privateUtil.getNewAlarmCount()-lastReadAlarmCount;

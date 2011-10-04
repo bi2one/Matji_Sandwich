@@ -141,10 +141,10 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
 
     private void requestRegister(String email, String nick, String password, String password_confirmation) {
         title.lockCompletableButton();
-        HttpRequestManager manager = HttpRequestManager.getInstance(this);
+        HttpRequestManager manager = HttpRequestManager.getInstance();
         UserHttpRequest request = new UserHttpRequest(this);
         request.actionCreate(email, nick, password, password_confirmation);
-        manager.request(getMainView(), request, 0, this);
+        manager.request(getApplicationContext(), getMainView(), request, 0, this);
     }
     
     /**

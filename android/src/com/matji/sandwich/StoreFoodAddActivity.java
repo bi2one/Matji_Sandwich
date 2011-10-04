@@ -41,7 +41,7 @@ public class StoreFoodAddActivity extends BaseActivity implements Completable, R
         store = (Store) getIntent().getParcelableExtra(STORE);
 
         request = new StoreFoodHttpRequest(this);
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
 
         title = (CompletableTitle) findViewById(R.id.Titlebar);
         field = (EditText) findViewById(R.id.store_food_name_field);
@@ -81,7 +81,7 @@ public class StoreFoodAddActivity extends BaseActivity implements Completable, R
     public void complete() {
         title.lockCompletableButton();
         request.actionNew(store.getId(), field.getText().toString().trim());
-        manager.request(getMainView(), request, 0, this);
+        manager.request(getApplicationContext(), getMainView(), request, 0, this);
     }
 
     @Override

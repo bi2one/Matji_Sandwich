@@ -13,6 +13,7 @@ import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.NotSupportedMatjiException;
@@ -58,7 +59,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         this.identifiable = identifiable;
         this.context = context;
         likeRequest = new LikeHttpRequest(context);
-        manager = HttpRequestManager.getInstance(context);
+        manager = HttpRequestManager.getInstance();
         dbProvider = DBProvider.getInstance(context);
         this.spinnerContainer = spinnerContainer;
     }
@@ -73,6 +74,19 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         this(identifiable, context, spinnerContainer);
         type = MatjiData.STORE;
         data = store;
+        this.spinnerContainer = spinnerContainer;
+    }    
+
+    /**
+     * 
+     * @param identifiable login 확인을 위한 identifiable 객체
+     * @param context
+     * @param storeFood like, unlike 할 storeFood
+     */
+    public LikeListener(Identifiable identifiable, Context context, StoreFood storeFood, ViewGroup spinnerContainer) {
+        this(identifiable, context, spinnerContainer);
+        type = MatjiData.STORE_FOOD;
+        data = storeFood;
         this.spinnerContainer = spinnerContainer;
     }
 
@@ -101,15 +115,17 @@ public abstract class LikeListener implements OnClickListener, Requestable {
             type = MatjiData.STORE;
         } else if (data instanceof Post) {
             type = MatjiData.POST;
-        } else {
+        } else if (data instanceof StoreFood) {
+            type = MatjiData.STORE_FOOD;
+        }else {
             notSupported();
         }
     }
-    
+
     public void setIdentifiable(Identifiable identifiable) {
         this.identifiable = identifiable;
     }
-    
+
     @Override
     public void onClick(View v) {
         like();
@@ -140,6 +156,9 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         case MatjiData.POST:
             objType = DBProvider.POST;
             break;
+        case MatjiData.STORE_FOOD:
+            objType = DBProvider.STORE_FOOD;
+            break;
         default:
             notSupported();
         }
@@ -161,6 +180,8 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         case MatjiData.POST:
             id = ((Post) data).getId();
             break;
+        case MatjiData.STORE_FOOD:
+            id = ((StoreFood) data).getId();
         default:
             notSupported();
         }
@@ -179,10 +200,12 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         case MatjiData.POST:
             likeRequest.actionPostLike(getDataId());
             break;
+        case MatjiData.STORE_FOOD:
+            likeRequest.actionFoodLike(getDataId());
         default:
             notSupported();
         }
-        manager.request(spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.LIKE_REQUEST, this);
+        manager.request(context, spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.LIKE_REQUEST, this);
     }
 
     /**
@@ -196,10 +219,13 @@ public abstract class LikeListener implements OnClickListener, Requestable {
         case MatjiData.POST:
             likeRequest.actionPostUnLike(getDataId());
             break;
+        case MatjiData.STORE_FOOD:
+            likeRequest.actionFoodUnLike(getDataId());
+            break;
         default:
             notSupported();
         }
-        manager.request(spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.UN_LIKE_REQUEST, this);
+        manager.request(context, spinnerContainer, SpinnerType.SMALL, likeRequest, HttpRequestManager.UN_LIKE_REQUEST, this);
     }
 
 
@@ -219,7 +245,7 @@ public abstract class LikeListener implements OnClickListener, Requestable {
             break;
         case HttpRequestManager.UN_LIKE_REQUEST:
             dbProvider.deleteLike(getDataId(), getDBProviderObjectType());
-            
+
             postUnlikeRequest();
             break;
         }

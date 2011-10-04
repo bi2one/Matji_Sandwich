@@ -24,7 +24,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     private boolean isFirstResume = true;
     private boolean isFlow;
     private RelativeLayout mainViewGroup;
-    private HttpRequestManager requestManager = HttpRequestManager.getInstance(this);
+    private HttpRequestManager requestManager = HttpRequestManager.getInstance();
 
     public abstract int setMainViewId();
 

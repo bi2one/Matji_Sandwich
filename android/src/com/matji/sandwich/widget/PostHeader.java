@@ -244,7 +244,7 @@ public class PostHeader extends ViewContainer {
         public PostHeaderQuickActionDialog() {
             this.quickaction = new QuickActionDialog(context);
             this.session = Session.getInstance(context);
-            this.manager = HttpRequestManager.getInstance(context);
+            this.manager = HttpRequestManager.getInstance();
             this.spinnerContainer = (ViewGroup) getRootView().findViewById(R.id.header_post_wrapper);
 
             // 자신이 작성한 이야기일 경우 수정, 삭제 버튼도 추가.
@@ -311,7 +311,7 @@ public class PostHeader extends ViewContainer {
                 }
 
                 ((PostHttpRequest) request).actionDelete(post.getId());
-                manager.request(spinnerContainer, request, HttpRequestManager.POST_DELETE_REQUEST, this);
+                manager.request(context, spinnerContainer, request, HttpRequestManager.POST_DELETE_REQUEST, this);
             }
         }
 

@@ -24,6 +24,7 @@ public class HttpRequestManager {
     public static final int POST_SHOW_REQUEST = 41;
     public static final int POST_DELETE_REQUEST = 43;
     public static final int STORE_TAG_LIST_REQUEST = 52;
+    public static final int STORE_FOOD_ACCURACY_REQUEST = 55;
     public static final int USER_TAG_LIST_REQUEST = 62;
     public static final int USER_UPDATE_REQUEST = 63;
     public static final int USER_CHANGE_PASSWORD_REQUEST = 64;
@@ -32,52 +33,50 @@ public class HttpRequestManager {
     public static final int ALARM_READ_REQUEST = 81;
     public static final int UPDATE_ALARM_PERMIT_REQUEST = 82;
 
-    private volatile static HashMap<Context, HttpRequestManager> managerPool = new HashMap<Context, HttpRequestManager>();
+    private volatile static HttpRequestManager manager;
     private Context context;
     private TaskPoolManager taskPoolManager;
     // private TaskQueueManager queueManager;
     private SpinnerFactory spinnerFactory;
     private boolean isTurnOff;
 
-    private HttpRequestManager(Context context) {
+    private HttpRequestManager() {
 	setContext(context);
-	taskPoolManager = TaskPoolManager.getInstance(context);
+	taskPoolManager = TaskPoolManager.getInstance();
 	// queueManager = TaskQueueManager.getInstance();
 	spinnerFactory = new SpinnerFactory();
 	isTurnOff = false;
     }
 
-    public static HttpRequestManager getInstance(Context context) {
-	HttpRequestManager manager = managerPool.get(context);
-	
+    public static HttpRequestManager getInstance() {
 	if (manager == null) {
 	    synchronized(HttpRequestManager.class) {
 		if (manager == null) {
-		    manager = new HttpRequestManager(context);
-		    managerPool.put(context, manager);
+		    manager = new HttpRequestManager();
 		}
 	    }
 	}
 	return manager;
     }
 
-    public void request(RequestCommand request) {
-	request(null, SpinnerFactory.SpinnerType.NORMAL, request, 0, null);
+    public void request(Context context, RequestCommand request) {
+	request(context, null, SpinnerFactory.SpinnerType.NORMAL, request, 0, null);
     }
 
-    public void request(RequestCommand request, int tag, Requestable requestable) {
-	request(null, SpinnerFactory.SpinnerType.NORMAL, request, tag, requestable);
+    public void request(Context context, RequestCommand request, int tag, Requestable requestable) {
+	request(context, null, SpinnerFactory.SpinnerType.NORMAL, request, tag, requestable);
     }
 
-    public void request(ViewGroup layout, RequestCommand request) {
-	request(layout, SpinnerFactory.SpinnerType.NORMAL, request, 0, null);
+    public void request(Context context, ViewGroup layout, RequestCommand request) {
+	request(context, layout, SpinnerFactory.SpinnerType.NORMAL, request, 0, null);
     }
 
-    public void request(ViewGroup layout, RequestCommand request, int tag, Requestable requestable) {
-	request(layout, SpinnerFactory.SpinnerType.NORMAL, request, tag, requestable);
+    public void request(Context context, ViewGroup layout, RequestCommand request, int tag, Requestable requestable) {
+	request(context, layout, SpinnerFactory.SpinnerType.NORMAL, request, tag, requestable);
     }
 
-    public void request(ViewGroup layout,
+    public void request(Context context,
+			ViewGroup layout,
 			SpinnerFactory.SpinnerType spinnerType,
 			RequestCommand request, int tag, Requestable requestable) {
 	request(SpinnerFactory.createSpinner(context, spinnerType, layout),
@@ -94,7 +93,7 @@ public class HttpRequestManager {
 
 	ManagerAsyncTask task = new ManagerAsyncTask(request, requestable, tag);
 	TaskElement element = new TaskElement(spinner, task);
-	
+
 	// queueManager.offer(element);
 	// queueManager.start();
 	taskPoolManager.start(element);
@@ -106,15 +105,12 @@ public class HttpRequestManager {
     }
 
     public void cancelTask() {
-	taskPoolManager.cancelTask();
 	// queueManager.cancelTask();
+	taskPoolManager.cancelTask();
     }
 
     public void cancelAllTask() {
-    	Collection<HttpRequestManager> managerCollection = managerPool.values();
-	for (HttpRequestManager manager : managerCollection) {
-	    manager.cancelTask();
-	}
+	manager.cancelTask();
     }
 
     /**

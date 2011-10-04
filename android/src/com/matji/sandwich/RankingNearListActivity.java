@@ -62,7 +62,7 @@ ActivityStartable {
         gpsManager = new GpsManager(context, this);
         sessionUtil = new SessionMapUtil(context);
         sessionLocationUtil = new SessionRecentLocationUtil(context);
-        requestManager = HttpRequestManager.getInstance(context);
+        requestManager = HttpRequestManager.getInstance();
         geocodeRequest = new GeocodeHttpRequest(context);
 
         addressView = (TextView)findViewById(R.id.location_title_bar_address);
@@ -83,7 +83,7 @@ ActivityStartable {
     
     private void setCenter(GeoPoint centerPoint) {
         geocodeRequest.actionReverseGeocodingByGeoPoint(centerPoint, sessionUtil.getCurrentCountry());
-        requestManager.request(addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
+        requestManager.request(getApplicationContext(), addressWrapper, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, GET_ADDRESS_TAG, this);
         sessionUtil.setCenter(centerPoint);
 	sessionUtil.setNearBound(centerPoint);
         listView.requestReload();

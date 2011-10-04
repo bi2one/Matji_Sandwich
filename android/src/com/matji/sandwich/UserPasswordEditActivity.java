@@ -41,7 +41,7 @@ public class UserPasswordEditActivity extends BaseActivity implements Completabl
         setContentView(R.layout.activity_user_password_edit);
 
         request = new UserHttpRequest(this);
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
 //        pwdIncorrectDialog = new SimpleAlertDialog(this, R.string.register_password_is_incorrect);
         pwdNotEqualDialog = new SimpleAlertDialog(this, R.string.register_password_is_not_equals);
         pwdChangedDialog = new SimpleAlertDialog(this, R.string.user_password_edit_password_changed);
@@ -100,7 +100,7 @@ public class UserPasswordEditActivity extends BaseActivity implements Completabl
             pwdNotEqualDialog.show();
         } else {
             request.actionChangePassword(curPwdField.getText().toString(), newPwdField.getText().toString(), newPwdField.getText().toString());
-            manager.request(getMainView(), request, HttpRequestManager.USER_CHANGE_PASSWORD_REQUEST, this);
+            manager.request(getApplicationContext(), getMainView(), request, HttpRequestManager.USER_CHANGE_PASSWORD_REQUEST, this);
         }
     }
 

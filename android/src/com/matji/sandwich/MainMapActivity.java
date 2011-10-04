@@ -56,7 +56,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         setContentView(R.layout.activity_main_map);
 
         context = getApplicationContext();
-        requestManager = HttpRequestManager.getInstance(context);
+        requestManager = HttpRequestManager.getInstance();
         // sessionLocationUtil = new SessionRecentLocationUtil(context);
 	session = Session.getInstance(this);
         sessionMapUtil = new SessionMapUtil(context);

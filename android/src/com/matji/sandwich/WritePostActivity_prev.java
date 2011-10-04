@@ -99,7 +99,7 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 		uploadImages = new ArrayList<String>();
 		thumbImages = new ArrayList<Bitmap>();
 
-		manager = HttpRequestManager.getInstance(mContext);
+		manager = HttpRequestManager.getInstance();
 		session = Session.getInstance(this);
 		mGpsManager = new GpsManager(mContext, this);
 		mGpsManager.start(1);
@@ -157,7 +157,7 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 						  tagText, PostHttpRequest.Device.ANDROID, storeId);
 			}
 			
-			manager.request(getMainView(), postHttpRequest, POST_WRITE_REQUEST, this);
+			manager.request(getApplicationContext(), getMainView(), postHttpRequest, POST_WRITE_REQUEST, this);
 			KeyboardUtil.hideKeyboard(this);
 		}
 	}
@@ -187,7 +187,7 @@ public class WritePostActivity_prev extends BaseActivity implements Requestable,
 			AttachFileHttpRequest request = new AttachFileHttpRequest(mContext);
 			request.setFileUploadProgressListener(this);
 			request.actionUpload(file, postId);
-			manager.request(getMainView(), request, IMAGE_UPLOAD_REQUEST, this);
+			manager.request(getApplicationContext(), getMainView(), request, IMAGE_UPLOAD_REQUEST, this);
 			Log.d("Matji", "request");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

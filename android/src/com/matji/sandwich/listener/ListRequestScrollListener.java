@@ -38,7 +38,7 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
 
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 			if (isSet &&
-			    !HttpRequestManager.getInstance(context).isRunning() &&
+			    !HttpRequestManager.getInstance().isRunning() &&
 			    (firstVisibleItem + visibleItemCount) == totalItemCount &&
 			    totalItemCount > 0 &&
 			    firstVisibleItem != curFirstVisibleItem) {

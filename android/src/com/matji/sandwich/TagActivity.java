@@ -55,7 +55,7 @@ public class TagActivity extends BaseActivity implements Requestable, TextView.O
 	locationInput.setOnEditorActionListener(this);
 	locationView = (RecentChangedLocationView)findViewById(R.id.activity_change_location_recent_view);
 	locationView.init(this);
-	requestManager = HttpRequestManager.getInstance(context);
+	requestManager = HttpRequestManager.getInstance();
 	request = new GeocodeHttpRequest(context);
 	sessionMapUtil = new SessionMapUtil(context);
 
@@ -77,7 +77,7 @@ public class TagActivity extends BaseActivity implements Requestable, TextView.O
 
 	lastSearchSeed = input;
 	request.actionGeocoding(input, sessionMapUtil.getCurrentCountry());
-	requestManager.request(getMainView(), request, REQUEST_GEOCODING, this);
+	requestManager.request(getApplicationContext(), getMainView(), request, REQUEST_GEOCODING, this);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {

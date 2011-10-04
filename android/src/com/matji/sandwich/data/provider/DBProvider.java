@@ -22,6 +22,7 @@ import com.matji.sandwich.data.db.request.DBStoreRequest;
 
 public class DBProvider {
     public static String STORE_TABLE_NAME = "matji_stores";
+    public static String STORE_FOOD_TABLE_NAME = "matji_store_foods";
     public static String BOOKMARK_TABLE_NAME = "matji_bookmarks";
     public static String LIKE_TABLE_NAME = "matji_likes";
     public static String FOLLOWING_TABLE_NAME = "matji_followings";
@@ -29,6 +30,7 @@ public class DBProvider {
 
     public static final String POST = "Post";
     public static final String STORE = "Store";
+    public static final String STORE_FOOD = "StoreFood";
     public static final String LIKE = "Like";
 
     private static DBProvider dbProvider;
@@ -75,7 +77,6 @@ public class DBProvider {
 
         return jcount;
     }
-
     public boolean isExistStore(int storeId) {
         return getRecordNums(STORE_TABLE_NAME, "store_id = " + storeId) > 0;
     }

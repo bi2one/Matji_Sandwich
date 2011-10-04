@@ -34,7 +34,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
     public static final int CHANGE_LOCATION_ACTIVITY = 111;
     
     private ViewGroup mainViewGroup;
-    private HttpRequestManager requestManager = HttpRequestManager.getInstance(this);
+    private HttpRequestManager requestManager = HttpRequestManager.getInstance();
 
     private boolean isFlow;
 

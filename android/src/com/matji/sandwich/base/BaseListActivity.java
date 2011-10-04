@@ -19,7 +19,7 @@ import com.matji.sandwich.util.MatjiConstants;
 public abstract class BaseListActivity extends ListActivity implements ActivityEnterForeGroundListener, Identifiable {	
     private boolean isFlow;
     private ViewGroup mainViewGroup;
-    private HttpRequestManager requestManager = HttpRequestManager.getInstance(this);
+    private HttpRequestManager requestManager = HttpRequestManager.getInstance();
 
     public abstract int setMainViewId();
     

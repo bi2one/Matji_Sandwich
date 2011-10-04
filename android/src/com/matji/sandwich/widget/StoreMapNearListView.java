@@ -57,7 +57,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	sessionUtil = new SessionMapUtil(context);
         storeRequest = new StoreHttpRequest(context);
 	gpsManager = new GpsManager(context, this);
-	requestManager = HttpRequestManager.getInstance(context);
+	requestManager = HttpRequestManager.getInstance();
 	setOnTouchListener(this);
 	setSelector(R.color.transparent);
 	setPage(1);
@@ -145,7 +145,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
 	sessionUtil.setNearBound(locationPoint);
 	geocodeRequest.actionReverseGeocodingByGeoPoint(locationPoint, sessionUtil.getCurrentCountry());
 	requestManager.cancelTask();
-	requestManager.request(addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, this);
+	requestManager.request(getContext(), addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, this);
     }
 
     public void onListItemClick(int position) {

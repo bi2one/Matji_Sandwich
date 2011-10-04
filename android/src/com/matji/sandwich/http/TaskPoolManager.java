@@ -7,20 +7,18 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class TaskPoolManager implements TaskElement.ProgressListener {
-    private volatile static HashMap<Context, TaskPoolManager> managerPool = new HashMap();
+    private volatile static TaskPoolManager manager;
     private ArrayList<TaskElement> runningTaskPool;
 
     private TaskPoolManager() {
 	runningTaskPool = new ArrayList<TaskElement>();
     }
 
-    public static TaskPoolManager getInstance(Context context) {
-	TaskPoolManager manager = managerPool.get(context);
+    public static TaskPoolManager getInstance() {
 	if (manager == null) {
-	    synchronized(TaskQueueManager.class) {
+	    synchronized(TaskPoolManager.class) {
 		if (manager == null) {
 		    manager = new TaskPoolManager();
-		    managerPool.put(context, manager);
 		}
 	    }
 	}
@@ -35,6 +33,7 @@ public class TaskPoolManager implements TaskElement.ProgressListener {
     }
 
     public synchronized void start(TaskElement element) {
+	// Log.d("=====", "AsyncTask gooooooooooo");
 	element.setProgressListener(this);
 	element.start();
 	runningTaskPool.add(element);

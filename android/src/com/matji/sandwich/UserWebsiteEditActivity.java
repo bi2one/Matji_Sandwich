@@ -34,7 +34,7 @@ public class UserWebsiteEditActivity extends BaseActivity implements Completable
 
         session = Session.getInstance(this);
         request = new UserHttpRequest(this);
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
 
         title = (CompletableTitle) findViewById(R.id.Titlebar);
         field = (EditText) findViewById(R.id.user_website_edit_field);
@@ -69,7 +69,7 @@ public class UserWebsiteEditActivity extends BaseActivity implements Completable
     public void complete() {
         title.lockCompletableButton();
         request.actionUpdateWebsite(field.getText().toString().trim());
-        manager.request(getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
+        manager.request(getApplicationContext(), getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
     }
 
     @Override

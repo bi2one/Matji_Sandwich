@@ -3,6 +3,7 @@ package com.matji.sandwich.http;
 import java.util.ArrayList;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;
@@ -73,9 +74,13 @@ public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayLi
 	this.listener = listener;
     }
 
+    public void forceCancel() {
+	cancel(true);
+	command.cancel();
+    }
+
     protected ArrayList<MatjiData> doInBackground(RequestCommand... params) {
     	try {
-	    // Log.d("=====", "background: " + command.toString());
     	    return command.request();
     	} catch(MatjiException e) {
     	    occuredException = e;
@@ -84,7 +89,6 @@ public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayLi
     }
 
     protected void onCancelled() {
-    	command.cancel();
 	if (listener != null)
 	    listener.onCancelRequest(this);
     }

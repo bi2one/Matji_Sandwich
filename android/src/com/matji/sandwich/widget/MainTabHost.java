@@ -31,9 +31,9 @@ public class MainTabHost extends TabHost implements LoginListener, LogoutListene
     public void init() {
         Session.getInstance(getContext()).addLoginListener(this);
         Session.getInstance(getContext()).addLogoutListener(this);
-        
+
     }
-    
+
     public void addTab(String specLabel, int drawableRef, int textRef, Intent content) {
         TabHost.TabSpec spec = newTabSpec(specLabel);
         indicators.put(specLabel, new MainIndicator(getContext(), drawableRef, textRef));
@@ -64,5 +64,9 @@ public class MainTabHost extends TabHost implements LoginListener, LogoutListene
     @Override
     public void postLogout() {
         setTabLabel(LOGIN_TAB, R.string.main_tab_config);
+    }
+
+    public void setAlarmCount(int count) {
+        indicators.get(LOGIN_TAB).setCount(count);
     }
 }

@@ -39,7 +39,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
     public RequestableMListView(Context context, AttributeSet attrs, MBaseAdapter adapter, int limit) {
         super(context, attrs);
         this.adapter = adapter;
-        manager = HttpRequestManager.getInstance(context);
+        manager = HttpRequestManager.getInstance();
 
         adapterData = new ArrayList<MatjiData>();
         adapter.setData(adapterData);
@@ -121,7 +121,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
         if (prevPage < page) {
             Log.d("refresh" , "requestNext()");
             Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
-            manager.request(loadingFooterView, SpinnerFactory.SpinnerType.SMALL, request(), REQUEST_NEXT, this);
+            manager.request(getContext(), loadingFooterView, SpinnerFactory.SpinnerType.SMALL, request(), REQUEST_NEXT, this);
             nextValue();
         } else if (prevPage == page) {
             prevPage = page - 1;

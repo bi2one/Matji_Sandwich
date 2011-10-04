@@ -75,7 +75,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         setContentView(R.layout.activity_post);
 
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
 
         position = getIntent().getIntExtra(POSITION, NOT_INITIALIZED);
         post_id = getIntent().getIntExtra(POST_ID, NOT_INITIALIZED);
@@ -146,7 +146,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                 Toast.makeText(getApplicationContext(), R.string.writing_content_comment, Toast.LENGTH_SHORT).show();
             } else {
                 ((CommentHttpRequest) request).actionNew(((Post) posts.get(position)).getId(), commentInputBar.getText().trim(), MatjiConstants.target());
-                manager.request(getMainView(), request, COMMENT_WRITE_REQUEST, this);
+                manager.request(getApplicationContext(), getMainView(), request, COMMENT_WRITE_REQUEST, this);
                 commentInputBar.setText("");
                 KeyboardUtil.hideKeyboard(this);
             }

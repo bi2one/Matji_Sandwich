@@ -28,7 +28,6 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	
     public MatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	// setOnTouchListener(this);
 	sessionUtil = new SessionMapUtil(context);
 	mapController = getController();
     }
@@ -36,7 +35,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
     public void startMapCenterThread() {
 	if (asyncTask == null) {
 	    asyncTask = new MapAsyncTask();
-	    asyncTask.execute(0);
+	    asyncTask.start();
 	}
     }
 
@@ -52,9 +51,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 
     public void stopMapCenterThread() {
 	if (asyncTask != null) {
-	    if (!asyncTask.isCancelled()) {
-		asyncTask.stopTask(true);
-	    }
+	    asyncTask.interrupt();
 	    asyncTask = null;
 	}
 	tempMapCenter = null;
@@ -68,9 +65,9 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	this.tempMapCenter = tempMapCenter;
     }
 
-    private class MapAsyncTask extends AsyncTask<Integer, Integer, Integer> {
+    private class MapAsyncTask extends Thread {
 	private boolean stopFlag = false;
-	
+
 	private void threadSleep(int time) {
 	    try {
 		Thread.sleep(time);
@@ -78,43 +75,32 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 		e.printStackTrace();
 	    }
 	}
-
-	public boolean stopTask(boolean mayInterruptIfRunning) {
-	    stopFlag = true;
-	    return cancel(mayInterruptIfRunning);
-	}
-
-	protected Integer doInBackground(Integer... params) {
+	
+	public void run() {
 	    while(!stopFlag) {
-		if (listener != null) {
-		    threadSleep(MAP_CENTER_UPDATE_TICK);
-		    newMapCenter = getMapCenter();
+	    	if (listener != null) {
+	    	    threadSleep(MAP_CENTER_UPDATE_TICK);
+	    	    newMapCenter = getMapCenter();
 
-		    if (tempMapCenter != null) {
-			mapCenter = tempMapCenter;
-			listener.onMapCenterChanged(mapCenter);
-			tempMapCenter = null;
-		    }
+	    	    if (tempMapCenter != null) {
+	    		mapCenter = tempMapCenter;
+	    		listener.onMapCenterChanged(mapCenter);
+	    		tempMapCenter = null;
+	    	    }
 		    
-		    if (GeoPointUtil.geoPointEquals(mapCenter, newMapCenter))
-		    	continue;
+	    	    if (GeoPointUtil.geoPointEquals(mapCenter, newMapCenter))
+	    	    	continue;
 		    
-		    while (!GeoPointUtil.geoPointEquals(mapCenter, newMapCenter)) {
-		    	mapCenter = newMapCenter;
-		    	threadSleep(MAP_CENTER_UPDATE_ANIMATION_TICK);
-		    	newMapCenter = getMapCenter();
-		    }
-		    mapCenter = newMapCenter;
-		    listener.onMapCenterChanged(mapCenter);
-		}
+	    	    while (!GeoPointUtil.geoPointEquals(mapCenter, newMapCenter)) {
+	    	    	mapCenter = newMapCenter;
+	    	    	threadSleep(MAP_CENTER_UPDATE_ANIMATION_TICK);
+	    	    	newMapCenter = getMapCenter();
+	    	    }
+	    	    mapCenter = newMapCenter;
+	    	    listener.onMapCenterChanged(mapCenter);
+	    	}
 	    }
-            return 0;
 	}
-
-	protected void onCancelled() { }
-	protected void onPostExecute(Integer result) { }
-	protected void onPreExecute() {	}
-	protected void onProgressUpdate(Integer... values) { }
     }
 
     public GeoPoint getBound(BoundType type) {
@@ -138,15 +124,4 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	}
 	return null;
     }
-
-    // public boolean onTouch(View v, MotionEvent e) {
-	// switch(e.getAction()) {
-	// case MotionEvent.ACTION_DOWN:
-	//     stopMapCenterThread();
-	//     break;
-	// case MotionEvent.ACTION_UP:
-	//     startMapCenterThread();
-	// }
-    // 	return false;
-    // }
 }

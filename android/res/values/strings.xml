@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Matji_Sandwich</string>
+  <string name="app_name">야미스토리</string>
 
   <!-- map api key -->
   <!-- bizone: 0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw -->
@@ -15,14 +15,14 @@
     0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw    
   </string>
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
-  <string name="server_domain">http://222.122.205.227/v2/</string>
+  <string name="server_domain">http://api.yummystory.com/</string>
   
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
-  <string name="exception_GpsEnabledMatjiException">GPS서비스를 사용할 수 있습니다</string>
-  <string name="exception_GpsOutOfServiceMatjiException">GPS서비스 지역에서 벗어났습니다</string>
+  <string name="exception_GpsEnabledMatjiException">GPS 서비스를 사용할 수 있습니다</string>
+  <string name="exception_GpsOutOfServiceMatjiException">GPS 서비스 지역에서 벗어났습니다</string>
   <string name="exception_GpsServiceNotPossibleMatjiException">
-    GPS사용이 불가능합니다. 하늘을 볼 수 있거나, 네트워크가 안정적인 곳에서 다시 로딩해 주세요
+    GPS 사용이 불가능합니다. 하늘을 볼 수 있거나, 네트워크가 안정적인 곳에서 다시 로딩해 주세요
   </string>
   <string name="exception_GpsTemporarilyUnavailableMatjiException">
     내부 문제로, GPS를 일시적으로 중지합니다. 잠시만 기다려주세요
@@ -46,7 +46,7 @@
     지원하지 않는 기능입니다
   </string>
   <string name="exception_UseNetworkGpsMatjiException">
-    GPS수신이 불안정합니다. 네트워크로 현재위치를 추정합니다
+    GPS수신이 불안정합니다. 네트워크로 현재 위치를 추정합니다
   </string>
   <string name="exception_GeocodeLocationInvalidMatjiException">
     해당 위치는 주소를 받아올 수 없는 지역입니다
@@ -64,7 +64,7 @@
     기본 주소가 잘못되었습니다. 
   </string>
   <string name="exception_WritePostMatjiException">
-    내부 오류로 인해 맛이야기가 제대로 등록되지 않았습니다
+    내부 오류로 인해 이야기가 제대로 등록되지 않았습니다
   </string>
   <string name="exception_BitmapCompressMatjiException">
     내부 문제로 이미지가 압축되지 않습니다
@@ -79,10 +79,10 @@
   </string>
 
   <!-- pull_to_refresh -->
-  <string name="pull_to_refresh_pull_label">Pull to refresh...</string>
-  <string name="pull_to_refresh_release_label">Release to refresh...</string>
-  <string name="pull_to_refresh_refreshing_label">Loading...</string>
-  <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
+  <string name="pull_to_refresh_pull_label">당겨서 새로고침</string>
+  <string name="pull_to_refresh_release_label">손을 떼면 새로 고침</string>
+  <string name="pull_to_refresh_refreshing_label">불러오는 중...</string>
+  <string name="pull_to_refresh_tap_label">눌러서 새로고침</string>
 
   <!-- default String... -->
   <string name="default_string_nickname">닉네임</string>
@@ -92,7 +92,7 @@
   <string name="default_string_title">%1$s의 맛집기행</string>
   <string name="default_string_intro">소개글</string>
   <string name="default_string_not_exist_intro">소개글이 없습니다.</string>
-  <string name="default_string_not_exist_website">웹사이트를 등록하지 않았습니다.</string>
+  <string name="default_string_not_exist_website">웹사이트가 없습니다.</string>
   <string name="default_string_not_exist_cover">커버가 없습니다.</string>
   <string name="default_string_basic_info">기본정보</string>
   <string name="default_string_more_info">부가정보</string>
@@ -150,9 +150,9 @@
   <string name="writing_content_search">검색할 단어를 입력하세요.</string>
   
   <!-- PostActivity -->
-  <string name="post_does_not_exist">메모가 존재하지 않습니다!</string>
+  <string name="post_does_not_exist">이야기가 존재하지 않습니다!</string>
   <string name="does_not_exist_prev_post">이전 이야기가 존재하지 않습니다.</string>
-  <string name="does_not_exist_next_post">현재 로드된 이야기의 마지막입니다.</string>
+  <string name="does_not_exist_next_post">마지막 이야기입니다.</string>
 
   <!-- ChatActivity -->
   <string name="chat_waiting_input">메세지를 입력해주세요.</string>
@@ -183,10 +183,10 @@
   <string name="user_main_jjim_store">찜한 맛집</string>
 
   <!-- MainTabActivity -->
-  <string name="main_tab_map">맛지도</string>
-  <string name="main_tab_talk">맛이야기</string>
-  <string name="main_tab_ranking">맛티스트</string>
-  <string name="main_tab_config">개인설정</string>
+  <string name="main_tab_map">맛집</string>
+  <string name="main_tab_talk">이야기</string>
+  <string name="main_tab_ranking">식도락가</string>
+  <string name="main_tab_config">설정</string>
 
   <!-- StoreDetailInfoTabActivity  -->
   <string name="store_detail_info_default">맛집 기본 정보</string>
@@ -209,7 +209,7 @@
   <string name="store_register_tel">전화번호</string>
   <string name="store_register_website">홈페이지</string>
   <string name="store_register_submit">맛집 등록하기</string>
-  <string name="store_register_ok">맛집 등록에 성공하였습니다</string>
+  <string name="store_register_ok">맛집 정보 등록에 성공하였습니다</string>
 
   <!-- MainMapActivity -->
   <string name="main_map_search_map">Search Map</string>
@@ -223,7 +223,7 @@
   <string name="post_tab_friend">친구</string>
   <string name="post_tab_near">지역</string>
   <string name="post_tab_country">전국</string>
-  <string name="post_tab_all">전체</string>
+  <string name="post_tab_all">세계</string>
   
   <!-- section list view test -->
   <string name="standard_list">standard_list</string>
@@ -259,9 +259,9 @@
   <string name="user_profile_following">Following</string>
   <string name="user_profile_follower">Follower</string>
   <string name="user_profile_store_information">맛집정보</string>
-  <string name="user_profile_find_store">발견맛집</string>
-  <string name="user_profile_my_find_store">내 발견맛집</string>
-  <string name="user_profile_my_bookmark_store">내 북마크맛집</string>
+  <string name="user_profile_find_store">발견한 맛집</string>
+  <string name="user_profile_my_find_store">발견한 맛집</string>
+  <string name="user_profile_my_bookmark_store">북마크 맛집</string>
   <string name="user_profile_recent_store">최근맛집</string>
   
   <!-- ANDROID -->
@@ -371,15 +371,15 @@
   <string name="simple_submit_location_bar_submit">지역찾기</string>
   
   <!-- Matji -->
-  <string name="main_tab_title_matmap">맛있는 지도</string>
-  <string name="main_tab_title_mattalk">맛있는 이야기</string>
-  <string name="main_tab_title_matist">맛티스트</string>
-  <string name="main_tab_title_mypage">내 정보</string>
+  <string name="main_tab_title_matmap">맛집</string>
+  <string name="main_tab_title_mattalk">이야기</string>
+  <string name="main_tab_title_matist">식도락가</string>
+  <string name="main_tab_title_mypage">설정</string>
   <string name="main_tab_title_login">로그인</string>
   
   <!-- PostListView Subtitle -->
   <string name="subtitle_friend_post">친구들 이야기</string>
-  <string name="subtitle_nearby_post">근처 이야기</string>
+  <string name="subtitle_nearby_post">주변 이야기</string>
   <string name="subtitle_all_post">모든 이야기</string>
   <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
   <string name="subtitle_user_post">%1$d개의 %2$s 이야기</string>
@@ -426,7 +426,7 @@
   <!-- WriteStoreActivity.java -->
   <string name="write_store_title">맛집 추가</string>
   <string name="write_store_invalidate_store">맛집 이름을 입력해 주세요.</string>
-  <string name="write_store_success">맛집 등록에 성공하였습니다.</string>
+  <string name="write_store_success">맛집 정보 등록에 성공하였습니다.</string>
 
   <!-- write_store_matji_mapview.xml -->
   <string name="write_store_matji_mapview_store_name">맛집명 입력</string>
@@ -460,8 +460,8 @@
   <string name="settings_account_register">회원가입</string>
   <string name="settings_account_forget">아이디/비밀번호 찾기</string>
   <string name="settings_account_logout">로그아웃</string>
-  <string name="settings_account_link_twitter">twitter 계정 연동</string>
-  <string name="settings_account_link_facebook">facebook 계정 연동</string>
+  <string name="settings_account_link_twitter">Twitter 계정 연동</string>
+  <string name="settings_account_link_facebook">Facebook 계정 연동</string>
   <string name="settings_account_edit_profile">정보 변경</string>
   <string name="settings_account_find_friends">친구 찾기</string>
   <string name="settings_location_setting">위치 설정</string>
@@ -495,9 +495,12 @@
   
   <!-- StoreFoodAdapter.java -->
   <string name="store_food_add">신규 메뉴 등록</string>
+  <string name="store_food_delicious">맛있어요!</string>
+  <string name="store_food_not_accuracy">부정확한 메뉴 String</string>
+  <string name="store_food_accuracy">정확한 메뉴 String</string>
   
   <!-- activity_store_food.xml -->
-  <string name="store_food_caution">메뉴 중 흐린 글씨는 불확실 하다고 신고된 정보입니다.</string>
+  <string name="store_food_caution">메뉴 중 흐린 글씨는 불확실하다고 신고된 정보입니다.</string>
   
   <!-- login.xml -->
   <string name="login_login">로그인</string>
@@ -561,7 +564,7 @@
   <!-- search_result.xml -->
   <string name="search_result_filled">검색 결과</string>
   <string name="search_result_empty">검색 결과가 없습니다.</string>
-
+  
   <!-- country codes -->
   <string name="country_code_AD">AD</string>
   <string name="country_name_AD">Andorra</string>

@@ -35,7 +35,7 @@ public class PostHttpRequest extends HttpRequest {
         action = "show";
         parser = new PostParser(context);
 
-        getHashtable.clear();
+	getHashtable.clear();
         getHashtable.put("post_id", post_id + "");
         getHashtable.put("include", "user,store,tags");
     }

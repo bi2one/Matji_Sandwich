@@ -36,7 +36,7 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
 
         session = Session.getInstance(this);
         request = new UserHttpRequest(this);
-        manager = HttpRequestManager.getInstance(this);
+        manager = HttpRequestManager.getInstance();
 
         title = (CompletableTitle) findViewById(R.id.Titlebar);
         field = (EditText) findViewById(R.id.user_nick_edit_field);
@@ -72,7 +72,7 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
     public void complete() {
         title.lockCompletableButton();
         request.actionUpdateNick(field.getText().toString().trim());
-        manager.request(getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
+        manager.request(getApplicationContext(), getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
     }
 
     @Override

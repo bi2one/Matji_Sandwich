@@ -24,7 +24,7 @@ public class PostNearListView extends PostListView {
 
     public PostNearListView(Context context, AttributeSet attrs) {
         super(context, attrs);
-	requestManager = HttpRequestManager.getInstance(context);
+	requestManager = HttpRequestManager.getInstance();
         postRequest = new PostHttpRequest(context);
         sessionUtil = new SessionMapUtil(context);
 

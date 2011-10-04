@@ -51,7 +51,7 @@ public class SearchResultView extends RelativeLayout implements MultiRoundButton
 	
 	sessionUtil = new SessionRecentLocationUtil(context);
 	sessionMapUtil = new SessionMapUtil(context);
-	requestManager = HttpRequestManager.getInstance(context);
+	requestManager = HttpRequestManager.getInstance();
 	geocodeRequest = new GeocodeHttpRequest(context);
     }
 
@@ -65,7 +65,7 @@ public class SearchResultView extends RelativeLayout implements MultiRoundButton
 	    return ;
 	}
 	geocodeRequest.actionGeocoding(input, sessionMapUtil.getCurrentCountry());
-	requestManager.request(this, geocodeRequest, REQUEST_GEOCODING, this);
+	requestManager.request(getContext(), this, geocodeRequest, REQUEST_GEOCODING, this);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {

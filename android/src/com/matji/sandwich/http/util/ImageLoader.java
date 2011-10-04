@@ -19,7 +19,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 
 import com.matji.sandwich.R;
@@ -121,7 +123,17 @@ public class ImageLoader {
     public void DisplayImage(Activity activity, UrlType type, ImageSize size, ImageView imageView, int id) {
         DisplayImage(createUrl(type, size, id), activity, imageView);
     }
+    
+    public void DisplayImage(UrlType type, ImageSize size, ImageSwitcher imageSwitcher, int id) {
+        DisplayImage(createUrl(type, size, id), imageSwitcher);
+    }
 
+    public void DisplayImage(String url, ImageSwitcher imageSwitcher)
+    {
+        Uri uri = Uri.parse(getFile(url).getPath());
+        imageSwitcher.setImageURI(uri);
+    }
+    
     public void DisplayImage(String url, Activity activity, ImageView imageView)
     {
         imageViews.put(imageView, url);
@@ -154,6 +166,31 @@ public class ImageLoader {
         //start thread if it's not started yet
         if(photoLoaderThread.getState()==Thread.State.NEW)
             photoLoaderThread.start();
+    }
+
+
+    public File getFile(UrlType type, ImageSize size, int id) {
+        return getFile(createUrl(type, size, id));
+    }
+    
+    private File getFile(String url) {
+        File f=fileCache.getFile(url);
+        try {
+            URL imageUrl = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection)imageUrl.openConnection();
+            conn.setConnectTimeout(30000);
+            conn.setReadTimeout(30000);
+            InputStream is=conn.getInputStream();
+            OutputStream os = new FileOutputStream(f);
+            Utils.CopyStream(is, os);
+            applyConvert(f);
+            os.close();
+            
+            return f;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private Bitmap getBitmap(String url) 
