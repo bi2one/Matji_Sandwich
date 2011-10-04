@@ -16,15 +16,13 @@ import com.matji.sandwich.exception.HttpConnectMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.parser.MatjiParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.listener.FileUploadProgressListener;
+import com.matji.sandwich.listener.ProgressListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 
 enum HttpMethod { HTTP_POST, HTTP_GET, HTTP_GET_VIA_WEB_BROWSER }
 
 public abstract class HttpRequest implements RequestCommand {
-    
-    private FileUploadProgressListener progressListener;
     protected Context context = null;
     // protected String serverDomain = "http://api.matji.com/v2/";
     protected String serverDomain = MatjiConstants.string(R.string.server_domain);
@@ -69,8 +67,8 @@ public abstract class HttpRequest implements RequestCommand {
 	return requestHttpResponse(getUrl(), header, param, null, HttpUtility.ASYNC_METHOD_POST);
     }
 
-    public void setFileUploadProgressListener(FileUploadProgressListener listener) {
-	progressListener = listener;
+    public void setProgressListener(int progressTag, ProgressListener listener) {
+	HttpUtility.getInstance().setProgressListener(progressTag, listener);
     }
 
     private SimpleHttpResponse requestHttpResponse(String url,
@@ -100,7 +98,7 @@ public abstract class HttpRequest implements RequestCommand {
 	    Session session = Session.getInstance(context);
 	    if (postParam != null) {
 		if (session != null && session.isLogin())
-		    postParam.put("access_token", "" + session.getToken());   
+		    postParam.put("access_token", "" + session.getToken());
 		postParam.put("format", "json");
 	    }else if (getParam != null) {
 		if (session != null && session.isLogin())
@@ -111,10 +109,7 @@ public abstract class HttpRequest implements RequestCommand {
 
 	    if(method == HttpUtility.ASYNC_METHOD_POST) {
 		HttpUtility utility = HttpUtility.getInstance();
-		utility.setFileUploadProgressListener(progressListener);
-		// httpResponse = utility.post(url, baseHeader, postParam, tag);
 		httpResponse = utility.post(url, baseHeader, postParam, this);
-		utility.removeFileUploadProgressListener();
 	    } else {
 		httpResponse = HttpUtility.getInstance().get(url, baseHeader, getParam, this);
 	    }

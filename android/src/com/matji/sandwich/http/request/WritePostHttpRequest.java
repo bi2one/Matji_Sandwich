@@ -10,6 +10,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.WritePostMatjiException;
 import com.matji.sandwich.exception.BitmapCompressMatjiException;
 import com.matji.sandwich.exception.BitmapCompressIOMatjiException;
+import com.matji.sandwich.listener.ProgressListener;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Post;
@@ -20,7 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class WritePostHttpRequest implements RequestCommand {
+public class WritePostHttpRequest implements ProgressRequestCommand {
     private Context context;
     private AttachFileHttpRequest fileRequest;
     private PostHttpRequest postRequest;
@@ -48,6 +49,14 @@ public class WritePostHttpRequest implements RequestCommand {
         } else {
             postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID, storeId);
         }
+    }
+
+    public void setProgressListener(int tag, ProgressListener listener) {
+	fileRequest.setProgressListener(tag, listener);
+    }
+
+    public int getTotalCount() {
+	return images.size();
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {

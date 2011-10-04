@@ -104,8 +104,10 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 			request.actionAppVersion("ANDROID", current_ver);
 			try {
 				ArrayList<MatjiData> data = request.request();
-				AppVersion app_version = (AppVersion) data.get(0);
-				update_ver = app_version.getVersion();
+				if (data.size() > 0) {
+				    AppVersion app_version = (AppVersion) data.get(0);
+				    update_ver = app_version.getVersion();
+				}
 			} catch (MatjiException e) {
 				e.performExceptionHandling(IntroActivity.this);
 			}
