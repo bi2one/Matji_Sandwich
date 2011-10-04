@@ -95,7 +95,7 @@ ActivityStartable {
         // TODO Auto-generated method stub
         super.onNotFlowResume();
         setCenter(sessionUtil.getCenter());
-        listView.refresh();
+        listView.forceReload();
     }
 
     @Override

@@ -7,13 +7,20 @@ import android.provider.MediaStore;
 import android.net.Uri;
 import android.util.Log;
 import android.database.Cursor;
+import android.graphics.Matrix;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.File;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class PhotoUtil {
     public static enum IntentType {
@@ -58,20 +65,68 @@ public class PhotoUtil {
 	return result;
     }
 
+    private Bitmap rotateBitmap(Bitmap bitmap, int angle) {
+	Matrix matrix = new Matrix();
+	matrix.postRotate(angle);
+	return Bitmap.createBitmap(bitmap,
+				   0,
+				   0,
+				   bitmap.getWidth(),
+				   bitmap.getHeight(),
+				   matrix,
+				   true);
+    }
+
+    private void saveBitmap(File file, Bitmap bitmap) {
+	// try {
+	    // FileOutputStream outputStream = new FileOutputStream(file.getAbsolutePath());
+	    // bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream);
+	// } catch(IOException e) {
+	    // Log.d("Matji", e.toString());
+	// }
+    }
+
+    public File rotateBitmapFile(File bitmapFile) {
+	ExifInterface exif = null;
+	int orientation = ExifInterface.ORIENTATION_NORMAL;
+	
+	try {
+	    exif = new ExifInterface(bitmapFile.getAbsolutePath());
+	    orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+					       ExifInterface.ORIENTATION_NORMAL);
+	} catch(IOException e) {
+	    Log.d("Matji", e.toString());
+	    return bitmapFile;
+	}
+	Log.d("=====", "orientation: " + orientation);
+
+	// try {
+	    // Bitmap bitmap = BitmapFactory.decodeStream(new BufferedInputStream(new FileInputStream(bitmapFile)));
+
+	    switch(orientation) {
+	    case ExifInterface.ORIENTATION_ROTATE_90:
+		// saveBitmap(bitmapFile, rotateBitmap(bitmap, 90));
+		break;
+	    case ExifInterface.ORIENTATION_ROTATE_180:
+		// saveBitmap(bitmapFile, rotateBitmap(bitmap, 180));
+		break;
+	    case ExifInterface.ORIENTATION_ROTATE_270:
+		// saveBitmap(bitmapFile, rotateBitmap(bitmap, 270));
+		break;
+	    }
+	// } catch(FileNotFoundException e) {
+	//     Log.d("Matji", e.toString());
+	// }
+
+	return bitmapFile;
+    }
+
     public File getFileFromIntent(IntentType intentType, Intent data) {
 	switch(intentType) {
 	case FROM_CAMERA:
-	    return tempTakedPhoto;
+	    return rotateBitmapFile(tempTakedPhoto);
 	case FROM_ALBUM:
-	    try {
-		ExifInterface exif = new ExifInterface(getRealPathFromURI(data.getData()));
-		Log.d("=====", "exif attr: " + exif.getAttribute(ExifInterface.TAG_ORIENTATION));
-		exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL + "");
-	    } catch(IOException e) {
-		Log.d("=====", "exif error: " + e.toString());
-		return null;
-	    }
-	    return new File(getRealPathFromURI(data.getData()));
+	    return rotateBitmapFile(new File(getRealPathFromURI(data.getData())));
 	default:
 	    return null;
 	}

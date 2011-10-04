@@ -26,6 +26,7 @@ import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.DialogAsyncTask;
+import com.matji.sandwich.http.ProgressDialogAsyncTask;
 import com.matji.sandwich.http.request.WritePostHttpRequest;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
@@ -146,7 +147,8 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	}
 	
 	postRequest.actionNew(post, tags, store, centerLocation, imageFiles);
-	DialogAsyncTask requestTask = new DialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
+	// DialogAsyncTask requestTask = new DialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
+	ProgressDialogAsyncTask requestTask = new ProgressDialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
 	requestTask.execute();
         // requestManager.request(getMainView(), postRequest, TAG_WRITE_POST, this);
     }

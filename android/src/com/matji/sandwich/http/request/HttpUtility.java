@@ -22,7 +22,7 @@ import org.apache.http.util.ByteArrayBuffer;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import com.matji.sandwich.listener.FileUploadProgressListener;
+import com.matji.sandwich.listener.ProgressListener;
 
 /**
  * @author meinside@skcomms.co.kr
@@ -52,8 +52,9 @@ final public class HttpUtility
     public static final int READ_BUFFER_SIZE = 8 * 1024;
 
     private volatile static HttpUtility httpUtility = null;
-    private FileUploadProgressListener progressListener;
-
+    private ProgressListener progressListener;
+    private int progressTag;
+    
     //default connection values
     private static int connectionTimeoutMillis = 10000;
     private static int readTimeoutMillis = 5000;
@@ -102,12 +103,9 @@ final public class HttpUtility
 	return httpUtility;
     }
 
-    public void setFileUploadProgressListener(FileUploadProgressListener listener) {
+    public synchronized void setProgressListener(int progressTag, ProgressListener listener) {
+	this.progressTag = progressTag;
 	progressListener = listener;
-    }
-
-    public void removeFileUploadProgressListener() {
-	progressListener = null;
     }
 	
     /**
@@ -409,11 +407,15 @@ final public class HttpUtility
 						byte[] buffer = new byte[FILE_BUFFER_SIZE];
 							
 						int bytesRead = 0;
+						int accumulatedBytes = 0;
+
 						while((bytesRead = fis.read(buffer, 0, FILE_BUFFER_SIZE)) > 0)
 						    {
+							accumulatedBytes += bytesRead;
 							dos.write(buffer, 0, bytesRead);
-							// if (progressListener != null)
-							// progressListener.onFileWritten(tag, totalSize, bytesRead);
+							if (progressListener != null) {
+							    progressListener.onWritten(progressTag, totalSize, accumulatedBytes);
+							}
 						    }
 						fis.close();
 					    }
