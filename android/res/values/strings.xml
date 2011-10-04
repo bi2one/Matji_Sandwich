@@ -477,7 +477,7 @@
   <string name="settings_service_notice">공지사항</string>
   <string name="settings_service_guide">서비스 안내</string>
   <string name="settings_service_report">버그신고 및 기능제안</string>
-  <string name="settings_service_version_name">1.0</string>
+  <string name="settings_service_version_name">1.2.3</string>
   <string name="settings_service_version_update">업데이트</string>
   
   <string name="setting_alarm_permit">permit</string>
