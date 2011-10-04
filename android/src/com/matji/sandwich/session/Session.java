@@ -272,7 +272,6 @@ public class Session implements Requestable {
     }
 
     public static class LoginAsyncTask extends AsyncTask<Object, Integer, Boolean> {
-
         private ProgressDialog dialog;
 
         private Context context;
