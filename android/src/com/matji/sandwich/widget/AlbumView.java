@@ -105,9 +105,11 @@ public class AlbumView extends LinearLayout implements View.OnClickListener {
     public void removeImage(int row, int column) {
 	ArrayList<AlbumImageView> images = albumImages.get(row);
 	AlbumImageView image = images.get(column);
-	image.removeImage();
-
-	notifyDataSetChanged();
+	
+	if (!image.isEmpty()) {
+	    image.removeImage();
+	    notifyDataSetChanged();
+	}
     }
 
     public void notifyDataSetChanged() {
@@ -123,22 +125,13 @@ public class AlbumView extends LinearLayout implements View.OnClickListener {
 		    image.setImage(file, thumbnailPool.get(file));
 		} else {
 		    image.removeImage();
+		    break;
 		}
 	    }
 	}
 
-	int nextCol = currentCol - 1;
-	if (nextCol < 0) {
-	    currentRow--;
-	    if (currentRow < 0) {
-		currentRow = 0;
-		currentCol = 0;
-	    } else {
-		currentCol = colSize - 1;
-	    }
-	} else {
-	    currentCol--;
-	}
+	currentRow = files.size() / colSize;
+	currentCol = files.size() % colSize;
     }
 
     public boolean isFull() {

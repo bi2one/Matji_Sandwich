@@ -62,7 +62,6 @@ public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayLi
     }
 
     public void execute() {
-	Log.d("=====", "execute");
 	super.execute(command);
     }
 
@@ -82,7 +81,6 @@ public class ManagerAsyncTask extends AsyncTask<RequestCommand, Integer, ArrayLi
 
     protected ArrayList<MatjiData> doInBackground(RequestCommand... params) {
     	try {
-	    Log.d("=====", "async background");
     	    return command.request();
     	} catch(MatjiException e) {
     	    occuredException = e;
