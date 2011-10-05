@@ -78,7 +78,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 			}
 		}
 		dialog.dismiss();
-		if (compare(current_ver, update_ver)) { // it should be changed  
+		if (compare(current_ver, update_ver)) {
 			setListeners();
 		} else {
 			finish();
@@ -122,7 +122,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 				e.performExceptionHandling(IntroActivity.this);
 			}
 
-			if (compare(current_ver, update_ver)) { // it should be changed  
+			if (compare(current_ver, update_ver)) { 
 				runOnUiThread(new UpdateMessage());
 			} else {
 				startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
