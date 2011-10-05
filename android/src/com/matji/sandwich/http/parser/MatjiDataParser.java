@@ -54,8 +54,7 @@ public abstract class MatjiDataParser implements MatjiParser {
             int code = json.getInt("code");
             if (code == HttpUtility.HTTP_STATUS_OK) {
                 return json.getString("result");
-            }
-            else {
+            } else {
                 String message = json.getString("description");
                 throw new JSONCodeMatjiException(message);
             }

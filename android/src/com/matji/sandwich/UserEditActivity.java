@@ -43,6 +43,7 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     private View vArea;
     private TextView tvArea;
     private TextView tvEditPassword;
+    private User user;
     
     public int setMainViewId() {
         return R.id.activity_user_edit;
@@ -83,6 +84,7 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     }
 
     public void setUser(User user) {
+	this.user = user;
         userEditCell.setUser(user);
         String intro = user.getIntro();
         if (intro.equals("")) {
@@ -195,6 +197,8 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 	switch(tag) {
 	case REQUEST_CHANGE_IMAGE:
+	    imageLoader.clear(ImageLoader.UrlType.USER, user.getId());
+	    userEditCell.reloadProfile();
 	    break;
 	}
     }

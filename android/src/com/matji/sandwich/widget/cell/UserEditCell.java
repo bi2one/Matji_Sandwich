@@ -134,6 +134,10 @@ public class UserEditCell extends Cell implements OnClickListener {
         usermailText.setText(user.getEmail());
     }
 
+    public void reloadProfile() {
+	profile.reload();
+    }
+
     public void setEditProfileClickListener(UserEditCell.OnItemClickListener listener) {    
         this.listener = listener;
     }
