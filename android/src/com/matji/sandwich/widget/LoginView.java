@@ -50,6 +50,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         inflater.inflate(R.layout.login, this);
 
         toast = Toast.makeText(getContext(), R.string.login_writing_id_password, Toast.LENGTH_SHORT);
+
         idField = (EditText) findViewById(R.id.login_username);
         pwdField = (EditText) findViewById(R.id.login_password);
         saveidCheckBox = (CheckBox) findViewById(R.id.login_save_id);
@@ -64,6 +65,8 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         register.setOnClickListener(this);
         loginTwitter.setOnClickListener(this);
         loginFacebook.setOnClickListener(this);
+        loginTwitter.setVisibility(GONE);
+        loginFacebook.setVisibility(GONE);
     }
 
     public void clearField() {
@@ -109,7 +112,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
             loginViaTiwtter(v);
         } else if (v.getId() == loginFacebook.getId()) {
             loginViaFacebook(v);
-        } 
+        }
     }
 
     @Override

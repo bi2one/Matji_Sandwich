@@ -50,6 +50,7 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
 	storeButton.setOnClickListener(this);
 	tagButton.setOnClickListener(this);
 	serviceButton.setOnClickListener(this);
+	serviceButton.setVisibility(GONE); // should be removed
 	pictureButton.setOnClickListener(this);
 	keyboardButton.setOnClickListener(this);
 	currentToggleIndex = ToggleIndex.IMAGE;
