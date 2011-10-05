@@ -132,6 +132,19 @@ public class UserHttpRequest extends HttpRequest {
 
     }
 
+    public void actionUpdateCountry(String country_code) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action="update";
+        parser = new UserParser(context);
+
+        getHashtable.clear();
+        Session session = Session.getInstance(context);
+
+        if (session != null && session.isLogin())
+            getHashtable.put("access_token", "" + session.getToken());
+        getHashtable.put("country_code", country_code);
+    }
+    
     public void actionUpdateNick(String nick) {
         httpMethod = HttpMethod.HTTP_GET;
         action="update";

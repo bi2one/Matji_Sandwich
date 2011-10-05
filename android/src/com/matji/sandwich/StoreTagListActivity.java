@@ -13,7 +13,7 @@ import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.tag.StoreTagCloudView;
 import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreTagCloudActivity extends BaseActivity implements Refreshable {
+public class StoreTagListActivity extends BaseActivity implements Refreshable {
 
     private StoreTitle title;
     private StoreCell storeCell;
@@ -21,12 +21,12 @@ public class StoreTagCloudActivity extends BaseActivity implements Refreshable {
     private StoreTagCloudView tagCloudView;
 
     public int setMainViewId() {
-        return R.id.activity_store_tag_cloud;
+        return R.id.activity_store_tag_list;
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_tag_cloud);
+        setContentView(R.layout.activity_store_tag_list);
 
         title = (StoreTitle) findViewById(R.id.Titlebar);
         storeCell = (StoreCell) findViewById(R.id.StoreCell);

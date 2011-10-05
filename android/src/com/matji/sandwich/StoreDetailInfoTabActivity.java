@@ -37,7 +37,7 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	private void setTabHost() {
 		Intent defaultInfoIntent = new Intent(this, StoreDefaultInfoActivity.class);
         Intent storeFoodIntent = new Intent(this, StoreFoodListActivity.class);
-        Intent tagIntent = new Intent(this, StoreTagCloudActivity.class);
+        Intent tagIntent = new Intent(this, StoreTagListActivity.class);
         
 		tabHost = (RoundTabHost)getTabHost();
 		

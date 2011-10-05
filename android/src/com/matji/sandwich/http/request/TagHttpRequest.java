@@ -58,6 +58,7 @@ public class TagHttpRequest extends HttpRequest {
         getHashtable.put("user_id", user_id+ "");		
         getHashtable.put("page", page+ "");
         getHashtable.put("limit", limit+ "");
+        getHashtable.put("order", "count DESC");
     }
 
     public void actionUserTagListForCloud(int user_id) {

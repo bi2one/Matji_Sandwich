@@ -58,8 +58,8 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         profileIntent = new Intent(this, UserProfileActivity.class);
         profileIntent.putExtra(UserProfileActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
 
-        tagIntent = new Intent(this, UserTagCloudActivity.class);
-        tagIntent.putExtra(UserTagCloudActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
+        tagIntent = new Intent(this, UserTagListActivity.class);
+        tagIntent.putExtra(UserTagListActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
     }
     
     private void syncTab() {        // 로그인 화면을 위해 어쩔수 없이 이렇게... ㅠㅠ

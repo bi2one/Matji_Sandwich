@@ -27,6 +27,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MessageHttpRequest;
+import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.listener.GotoUserMainAction;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionPrivateUtil;
@@ -88,6 +89,7 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 			messageElement.flow = (ImageView) messageElement.subjectWrapper.findViewById(R.id.row_message_flow); 
 			messageElement.messageWrapper = messageElement.subjectWrapper.findViewById(R.id.row_message_message_wrapper);
 			messageElement.menu = (ImageButton) convertView.findViewById(R.id.row_message_menu_btn);
+			messageElement.spinnerContainer = (ViewGroup) convertView.findViewById(R.id.SpinnerContainer);
 			convertView.setTag(messageElement);
 
 		} else {
@@ -131,7 +133,7 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 		}
 		messageElement.createdAt.setText(createdAt);
 		messageElement.messageContent.setText(message.getMessage());
-		messageElement.menu.setOnClickListener(new MessageAdapterQuickActionDialog(position, (ViewGroup) messageElement.messageWrapper));
+		messageElement.menu.setOnClickListener(new MessageAdapterQuickActionDialog(position, messageElement.spinnerContainer));
         messageElement.menu.setTag(messageElement.menu);
         
 		if (hasFolded(position)) {
@@ -212,6 +214,7 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 		View messageWrapper;
 		View subjectWrapper;
 		ImageButton menu;
+		ViewGroup spinnerContainer;
 	}
 
 	public HttpRequest readRequest(Message message) {
@@ -294,7 +297,7 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 				@Override				public void onConfirmClick(SimpleDialog dialog) {					deleteRequest(curMsg);				}
 				@Override				public void onCancelClick(SimpleDialog dialog) {}			});			dialog.show();		}
 		/**		 * Delete 요청		 * @param message Delete할 Message		 */		public void deleteRequest(Message message) {			// Alert 창 띄우기.			if (!manager.isRunning()) {				if (request == null || !(request instanceof MessageHttpRequest)) {					request = new MessageHttpRequest(context);				}
-				((MessageHttpRequest) request).actionDelete(message.getId());				manager.request(context, spinnerContainer, request, HttpRequestManager.POST_DELETE_REQUEST, this);			}		}
+				((MessageHttpRequest) request).actionDelete(message.getId());				manager.request(context, spinnerContainer, SpinnerType.SSMALL, request, HttpRequestManager.POST_DELETE_REQUEST, this);			}		}
 		/**		 * 파라미터로 전달받은 {@link Message}가 현재 로그인 된 {@link User}의 {@link Message}인지 확인한다.		 * 		 * @param post 확인 할 {@link Message}		 * @return 전달받은 {@link Message}의 ReceivedUser가 로그인 된 {@link User}의 {@link Message}일 때 true		 */		public boolean isReceivedMessage(Message message) {			return session.isLogin() && session.getCurrentUser().getId() == message.getReceivedUserId();		}
 		/**		 * @see Requestable#requestCallBack(int, ArrayList)		 */		@Override		public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 			switch (tag) {			// TODO Auto-generated method stub			case HttpRequestManager.POST_DELETE_REQUEST:				postDelete();				break;			}		}

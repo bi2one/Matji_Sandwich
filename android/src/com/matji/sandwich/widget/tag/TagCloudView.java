@@ -37,8 +37,9 @@ import com.matji.sandwich.widget.FlowLayout;
  */
 public class TagCloudView extends FlowLayout {
 
-    private final int LINE_HEIGHT = (int) MatjiConstants.dimen(R.dimen.tag_line_height);		// TagCloudView 의 각 line 별 높이
-
+    protected final int LINE_HEIGHT = MatjiConstants.dimenInt(R.dimen.tag_line_height);		// TagCloudView 의 각 line 별 높이
+    protected final int PADDING = MatjiConstants.dimenInt(R.dimen.default_distance);
+    
     /**
      * TagCloudView 에서 사용 되는 TextView.
      * Tag 를 전달 했을 때, 이 뷰에서 자동으로 처리해 Tag Cloud 를 해준다. 
@@ -47,7 +48,6 @@ public class TagCloudView extends FlowLayout {
      * @version 1.0
      */
     class TagView extends TextView {
-        private final int PADDING = (int) MatjiConstants.dimen(R.dimen.default_distance);
         private final int MAX_TAG_LENGTH = 10;				// 최대 태그 글자 수
         private final int[] TAG_STEP = new int[] {			// 태그 Count 스탭
                 0, 2, 4, 7,

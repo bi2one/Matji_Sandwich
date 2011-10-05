@@ -28,7 +28,7 @@ public class SimpleStoreListView extends RequestableMListView {
 		request = new StoreHttpRequest(getContext());
 		setPage(1);
 
-		setBackgroundDrawable(new ColorDrawable(MatjiConstants.color(R.color.matji_white)));
+		setBackgroundResource(R.color.matji_white);
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
         setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_size));
 		setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));

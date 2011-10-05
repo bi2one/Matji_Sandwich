@@ -85,6 +85,7 @@ public class UserParser extends MatjiDataParser {
                 attach_files.add((AttachFile) data);
         }
         user.setAttchFiles(attach_files);
+        user.setCountryCode(getString(object, "country_code"));
 
         Log.d("Parser", "UserParser:: called getMatjiData");
 

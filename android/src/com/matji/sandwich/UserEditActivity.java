@@ -88,7 +88,8 @@ public class UserEditActivity extends BaseActivity implements OnClickListener, R
             website = MatjiConstants.string(R.string.default_string_not_exist_website);
         }
         tvWebsite.setText(website);
-        tvArea.setText("한국인가?");
+        String country = MatjiConstants.countryName(user.getCountryCode());
+        if (country != null) tvArea.setText(country);
     }
 
     @Override
@@ -122,7 +123,8 @@ public class UserEditActivity extends BaseActivity implements OnClickListener, R
     }
 
     public void onAreaWrapperClicked(View v) {
-
+        Intent intent = new Intent(this, UserAreaEditActivity.class);
+        startActivity(intent);
     }
     
     public void onEditPasswordClicked(View v) {

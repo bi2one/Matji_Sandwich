@@ -32,6 +32,7 @@ public class User extends MatjiData implements Serializable {
 	private ArrayList<AttachFile> attach_files;
 	private ArrayList<Store> stores;
     private AlarmSetting user_alarm_setting;
+    private String country_code;
 
 	public User() {}
 
@@ -77,7 +78,8 @@ public class User extends MatjiData implements Serializable {
 		dest.writeValue(post);
 		dest.writeTypedList(attach_files);
 		dest.writeTypedList(stores);
-		dest.writeValue(user_alarm_setting);
+        dest.writeValue(user_alarm_setting);
+        dest.writeString(country_code);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -107,6 +109,7 @@ public class User extends MatjiData implements Serializable {
 		stores = new ArrayList<Store>();
 		in.readTypedList(stores, Store.CREATOR);
 		user_alarm_setting = AlarmSetting.class.cast(in.readValue(AlarmSetting.class.getClassLoader()));
+		country_code = in.readString();
 	}
 
 	public void setId(int id) {
@@ -299,5 +302,13 @@ public class User extends MatjiData implements Serializable {
     
     public AlarmSetting getAlarmSetting() {
         return user_alarm_setting;
+    }
+
+    public void setCountryCode(String country_code) {
+        this.country_code = country_code;
+    }
+
+    public String getCountryCode() {
+        return country_code;
     }
 }

@@ -839,7 +839,6 @@
     <item name="android:layout_height">@dimen/row_simple_user_height</item>
     <item name="android:textSize">@dimen/row_simple_txt_size</item>
     <item name="android:textColor">@color/matji_gray</item>
-    <item name="android:gravity">center</item>
   </style>
   
   <!-- search_result.xml -->
