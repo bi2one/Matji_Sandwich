@@ -118,8 +118,12 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 				} else {
 					update_ver = current_ver;
 				}
-			} catch (MatjiException e) {
-				e.performExceptionHandling(IntroActivity.this);
+			} catch (final MatjiException e) {
+			    runOnUiThread(new Runnable() {
+				    public void run() {
+					e.performExceptionHandling(IntroActivity.this);
+				    }
+				});
 			}
 
 			if (compare(current_ver, update_ver)) { // it should be changed  

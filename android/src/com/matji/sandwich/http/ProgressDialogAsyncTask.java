@@ -57,7 +57,6 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
     protected void onPreExecute() {
         super.onPreExecute();
 	request.setProgressListener(tag, this);
-	progressDialog.setMax(request.getRequestCount());
         progressDialog.show();
     }
 
@@ -104,10 +103,10 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
     }
 
     public void onUnitWritten(int tag, int totalCount, int readCount) {
-	publishProgress(PRIMARY, tag, totalCount, readCount);
+	// publishProgress(PRIMARY, tag, totalCount, readCount);
     }
 
     public void onWritten(int tag, int totalBytes, int readBytes) {
-	publishProgress(SECONDARY, tag, totalBytes, readBytes);
+	publishProgress(PRIMARY, tag, totalBytes, readBytes);
     }
 }
