@@ -1,5 +1,6 @@
 package com.matji.sandwich.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -32,6 +33,13 @@ public abstract class MessageListView extends RequestableMListView {
         ((MessageAdapter) getMBaseAdapter()).setMessageType(getMessageType());
     }
 
+    @Override
+    public void setActivity(Activity activity) {
+        ((MessageAdapter) getMBaseAdapter()).setActivity(activity);
+
+    	super.setActivity(activity);
+    }
+    
     protected abstract MessageType getMessageType();
     
     public void onListItemClick(int position) {}

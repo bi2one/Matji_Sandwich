@@ -22,6 +22,7 @@ import org.apache.http.util.ByteArrayBuffer;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.listener.ProgressListener;
 
 /**
@@ -396,25 +397,31 @@ final public class HttpUtility
 					    {
 							
 						// File send
-						File file = (File)value;							
+						File file = (File)value;
+						File compressedFile = ImageUtil.compressFile(file);
+						if (compressedFile != null) {
+						    file = compressedFile;
+						}
+						
 						dos.writeBytes("Content-Disposition: form-data; name=\"" + key + "\"; filename=\"" + file.getName() + "\"\r\n");
-						dos.writeBytes("Content-Type: " + getMimeType(file) + "\r\n");
+						dos.writeBytes("Content-Type: " + getMimeType((File)value) + "\r\n");
 						dos.writeBytes("Content-Transfer-Encoding: binary\r\n\r\n");
-							
-						FileInputStream fis = new FileInputStream((File)value);
-							
+						
+						FileInputStream fis = new FileInputStream(file);
+						
 						int totalSize = fis.available();
 						byte[] buffer = new byte[FILE_BUFFER_SIZE];
 							
 						int bytesRead = 0;
-						int accumulatedBytes = 0;
+						// int accumulatedBytes = 0;
 
 						while((bytesRead = fis.read(buffer, 0, FILE_BUFFER_SIZE)) > 0)
 						    {
-							accumulatedBytes += bytesRead;
+							// accumulatedBytes += bytesRead;
 							dos.write(buffer, 0, bytesRead);
 							if (progressListener != null) {
-							    progressListener.onWritten(progressTag, totalSize, accumulatedBytes);
+							    // progressListener.onWritten(progressTag, totalSize, accumulatedBytes);
+							    progressListener.onWritten(progressTag, totalSize, bytesRead);
 							}
 						    }
 						fis.close();

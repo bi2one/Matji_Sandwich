@@ -202,7 +202,7 @@ public class TagCloudView extends FlowLayout {
             addView(new TagView(getContext(), "태그가 존재하지 않습니다."));
         }
     }
-
+    
     /**
      * 라인의 수-1개 만큼 줄을 그어준다.
      */

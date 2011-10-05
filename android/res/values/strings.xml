@@ -16,6 +16,8 @@
   </string>
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
   <string name="server_domain">http://api.yummystory.com/</string>
+  <string name="client_id">fcdfa51a14</string>
+  <string name="client_secret">331d96e8ac924cab59b314d134645b</string>
   
   <!-- MatjiException -->
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
@@ -423,6 +425,10 @@
   <!-- FileUploadAsyncTask.java -->
   <string name="progress_upload">잠시만 기다려주세요...</string>
 
+  <!-- ProgressDialogAsyncTask.java -->
+  <string name="progress_dialog">잠시만 기다려주세요...</string>
+  <string name="progress_dialog_counter">(%1$d / %2$d)</string>
+
   <!-- WriteStoreActivity.java -->
   <string name="write_store_title">맛집 추가</string>
   <string name="write_store_invalidate_store">맛집 이름을 입력해 주세요.</string>
@@ -565,6 +571,8 @@
   <string name="search_result_filled">검색 결과</string>
   <string name="search_result_empty">검색 결과가 없습니다.</string>
   
+  <!-- TagListView.java -->
+  <string name="tag_list_more">More</string>
   <!-- country codes -->
   <string name="country_code_AD">AD</string>
   <string name="country_name_AD">Andorra</string>

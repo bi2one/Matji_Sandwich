@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.content.Context;
 import android.view.ViewGroup;
+import android.util.Log;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.http.request.RequestCommand;
@@ -32,6 +33,9 @@ public class HttpRequestManager {
     public static final int MESSAGE_READ_REQUEST = 71;
     public static final int ALARM_READ_REQUEST = 81;
     public static final int UPDATE_ALARM_PERMIT_REQUEST = 82;
+    
+    public static final int REQUEST_RELOAD = 100;
+    public static final int REQUEST_NEXT = 101;
 
     private volatile static HttpRequestManager manager;
     private Context context;
