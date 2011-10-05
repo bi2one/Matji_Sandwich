@@ -83,7 +83,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	
 	context = getApplicationContext();
 	
-        photoUtil = new PhotoUtil(this);
+	photoUtil = new PhotoUtil(this);
 	requestManager = HttpRequestManager.getInstance();
 	sessionMapUtil = new SessionMapUtil(context);
 	mainView = (RelativeLayoutThatDetectsSoftKeyboard)getMainView();
