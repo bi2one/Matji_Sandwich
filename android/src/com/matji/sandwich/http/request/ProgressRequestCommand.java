@@ -4,5 +4,5 @@ import com.matji.sandwich.listener.ProgressListener;
 
 public interface ProgressRequestCommand extends RequestCommand {
     public void setProgressListener(int tag, ProgressListener listener);
-    public int getTotalCount();
+    public int getRequestCount();
 }

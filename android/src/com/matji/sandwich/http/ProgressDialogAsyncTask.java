@@ -18,6 +18,8 @@ import com.matji.sandwich.R;
 import java.util.ArrayList;
 
 public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean> implements ProgressListener {
+    private static final int PRIMARY = 0;
+    private static final int SECONDARY = 1;
     private ProgressDialog progressDialog;
     private Context context;
     private Requestable requestable;
@@ -55,6 +57,7 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
     protected void onPreExecute() {
         super.onPreExecute();
 	request.setProgressListener(tag, this);
+	progressDialog.setMax(request.getRequestCount());
         progressDialog.show();
     }
 
@@ -84,16 +87,27 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
 
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-	
+	int which = values[0];
 	int tag = values[0];
-	int totalBytes = values[1];
-	int readBytes = values[2];
-	int totalCount = values[3];
+	int total = values[1];
+	int read = values[2];
+	int progress = (int)((float)read / (float)total * 1000f);
 
-	progressDialog.setProgress((totalBytes / readBytes) * 1000);
+	switch(which) {
+	case PRIMARY:
+	    progressDialog.setProgress(progress);
+	    break;
+	case SECONDARY:
+	    progressDialog.setSecondaryProgress(progress);
+	    break;
+	}
+    }
+
+    public void onUnitWritten(int tag, int totalCount, int readCount) {
+	publishProgress(PRIMARY, tag, totalCount, readCount);
     }
 
     public void onWritten(int tag, int totalBytes, int readBytes) {
-	publishProgress(tag, totalBytes, readBytes, request.getTotalCount());
+	publishProgress(SECONDARY, tag, totalBytes, readBytes);
     }
 }

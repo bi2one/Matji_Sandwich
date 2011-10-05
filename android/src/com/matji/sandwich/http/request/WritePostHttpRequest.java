@@ -26,6 +26,10 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
     private AttachFileHttpRequest fileRequest;
     private PostHttpRequest postRequest;
     private ArrayList<File> images;
+    private int tag;
+    private ProgressListener listener;
+    private int readCount;
+    private int totalCount;
 
     public WritePostHttpRequest(Context context) {
         this.context = context;
@@ -53,14 +57,25 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
 
     public void setProgressListener(int tag, ProgressListener listener) {
 	fileRequest.setProgressListener(tag, listener);
+	this.tag = tag;
+	this.listener = listener;
     }
 
-    public int getTotalCount() {
-	return images.size();
+    public int getRequestCount() {
+	return totalCount;
+    }
+
+    private void writeUnit() {
+	if (listener != null) {
+	    listener.onUnitWritten(tag, totalCount, ++readCount);
+	}
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
+	totalCount = images.size() + 1;
+	
         ArrayList<MatjiData> postRequestData = postRequest.request();
+	writeUnit();
         int postId = getPostId(postRequestData);
 
         if (postId <= 0) {
@@ -88,6 +103,7 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
                 File compressedFile = compressFile(file);
                 fileRequest.actionUpload(compressedFile, postId);
                 confirmValidFileRequest(fileRequest.request());
+		writeUnit();
             }
         }
     }
