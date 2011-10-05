@@ -22,7 +22,7 @@ import com.matji.sandwich.util.MatjiConstants;
 
 enum HttpMethod { HTTP_POST, HTTP_GET, HTTP_GET_VIA_WEB_BROWSER }
 
-public abstract class HttpRequest implements RequestCommand {
+public abstract class HttpRequest implements ProgressRequestCommand {
     protected Context context = null;
     // protected String serverDomain = "http://api.matji.com/v2/";
     protected String serverDomain = MatjiConstants.string(R.string.server_domain);
@@ -34,6 +34,9 @@ public abstract class HttpRequest implements RequestCommand {
 
     protected String action;
     protected String controller;
+
+    private ProgressListener progressListener;
+    private int progressTag;
 
     @SuppressWarnings("unused")
 	private HttpRequest(){}
@@ -54,7 +57,11 @@ public abstract class HttpRequest implements RequestCommand {
 	Log.d("request", getClass() + " resultBody:" + resultBody);
 	Log.d("request", getClass() + " resultCode: " + resultCode);
 
-	return parser.parseToMatjiDataList(resultBody);
+	ArrayList<MatjiData> result = parser.parseToMatjiDataList(resultBody);
+	if (progressListener != null) {
+	    progressListener.onUnitWritten(progressTag, getRequestCount(), 1);
+	}
+	return result;
     }
 
     protected SimpleHttpResponse requestHttpResponseGet(Map<String, String> header, Map<String, String> param)
@@ -69,8 +76,14 @@ public abstract class HttpRequest implements RequestCommand {
 
     public void setProgressListener(int progressTag, ProgressListener listener) {
 	HttpUtility.getInstance().setProgressListener(progressTag, listener);
+	this.progressTag = progressTag;
+	this.progressListener = listener;
     }
 
+    public int getRequestCount() {
+	return 1;
+    }
+    
     private SimpleHttpResponse requestHttpResponse(String url,
 						   Map<String, String> header,
 						   Map<String, Object> postMap,
@@ -88,7 +101,7 @@ public abstract class HttpRequest implements RequestCommand {
 	   (netInfo_wifi.getState() == NetworkInfo.State.CONNECTED)) {
 	    Map<String,String> baseHeader = new HashMap<String,String>();
 
-	    baseHeader.put("Agent", "MAJTI_ANDROID");
+	    baseHeader.put("Agent", "MATJI_ANDROID");
 	    baseHeader.put("Content-Type", "text/xml");
 
 	    if(header != null) {

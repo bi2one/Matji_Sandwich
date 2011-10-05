@@ -8,13 +8,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.matji.sandwich.FileUploadAsyncTask.FileUploader;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.ProgressDialogAsyncTask;
 import com.matji.sandwich.http.request.AttachFileHttpRequest;
+import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.PhotoUtil;
@@ -22,8 +23,12 @@ import com.matji.sandwich.util.PhotoUtil.IntentType;
 import com.matji.sandwich.widget.cell.UserEditCell;
 import com.matji.sandwich.widget.title.HomeTitle;
 
-public class UserEditActivity extends BaseActivity implements OnClickListener, Refreshable, UserEditCell.OnItemClickListener, Requestable, FileUploader {
-
+public class UserEditActivity extends BaseActivity implements OnClickListener,
+							      Refreshable,
+							      UserEditCell.OnItemClickListener,
+							      Requestable {
+    private static final int REQUEST_CHANGE_IMAGE = 0;
+    private ImageLoader imageLoader;
     private UserEditCell userEditCell;
     private Session session;
     private PhotoUtil photoUtil;
@@ -73,6 +78,8 @@ public class UserEditActivity extends BaseActivity implements OnClickListener, R
         userEditCell.setEditProfileClickListener(this);
 
         setUser(session.getCurrentUser());
+
+	imageLoader = new ImageLoader(getApplicationContext());
     }
 
     public void setUser(User user) {
@@ -146,20 +153,17 @@ public class UserEditActivity extends BaseActivity implements OnClickListener, R
     @Override
     public void refresh(ArrayList<MatjiData> data) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onCameraClicked() {
         Intent intent = photoUtil.getIntent(IntentType.FROM_CAMERA);
-        manager.turnOff();
         startActivityForResult(intent, FROM_CAMERA);
     }
 
     @Override
     public void onAlbumClicked() {
         Intent intent = photoUtil.getIntent(IntentType.FROM_ALBUM);
-        manager.turnOff();
         startActivityForResult(intent, FROM_ALBUM);
     }
 
@@ -179,29 +183,28 @@ public class UserEditActivity extends BaseActivity implements OnClickListener, R
             imageFile = photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_ALBUM, data);
             break;
         }
-        
-        new FileUploadAsyncTask(this, this).execute(imageFile);
+
+	if (imageFile != null) {
+	    fileRequest.actionProfileUpload(imageFile);
+	    new ProgressDialogAsyncTask(this, this, fileRequest, REQUEST_CHANGE_IMAGE).execute();
+	}
     }
 
 
     @Override
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-        // cache clear.
+	switch(tag) {
+	case REQUEST_CHANGE_IMAGE:
+	    break;
+	}
     }
 
     @Override
     public void requestExceptionCallBack(int tag, MatjiException e) {
+	switch(tag) {
+	case REQUEST_CHANGE_IMAGE:
+	    break;
+	}
         e.performExceptionHandling(this);
-    }
-
-    @Override
-    public void upload(File file) {
-        fileRequest.actionProfileUpload(file);
-        try {
-            fileRequest.request();
-        } catch (MatjiException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } 
     }
 }

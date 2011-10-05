@@ -7,9 +7,10 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.exception.WritePostMatjiException;
-import com.matji.sandwich.exception.BitmapCompressMatjiException;
-import com.matji.sandwich.exception.BitmapCompressIOMatjiException;
+// import com.matji.sandwich.exception.BitmapCompressMatjiException;
+// import com.matji.sandwich.exception.BitmapCompressIOMatjiException;
 import com.matji.sandwich.listener.ProgressListener;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
@@ -17,9 +18,9 @@ import com.matji.sandwich.data.Post;
 
 import java.util.ArrayList;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+// import java.io.FileInputStream;
+// import java.io.FileOutputStream;
+// import java.io.IOException;
 
 public class WritePostHttpRequest implements ProgressRequestCommand {
     private Context context;
@@ -62,20 +63,17 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
     }
 
     public int getRequestCount() {
-	return totalCount;
+	return images.size();
     }
 
-    private void writeUnit() {
+    private void writeUnit(int totalCount, int readCount) {
 	if (listener != null) {
-	    listener.onUnitWritten(tag, totalCount, ++readCount);
+	    listener.onUnitWritten(tag, totalCount, readCount);
 	}
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
-	totalCount = images.size() + 1;
-	
         ArrayList<MatjiData> postRequestData = postRequest.request();
-	writeUnit();
         int postId = getPostId(postRequestData);
 
         if (postId <= 0) {
@@ -100,39 +98,39 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
 
         for (File file : images) {
             if (file != null) {
-                File compressedFile = compressFile(file);
-                fileRequest.actionUpload(compressedFile, postId);
+                // File compressedFile = ImageUtil.compressFile(file);
+                fileRequest.actionUpload(file, postId);
                 confirmValidFileRequest(fileRequest.request());
-		writeUnit();
+		writeUnit(getRequestCount(), ++readCount);
             }
         }
     }
 
     private void confirmValidFileRequest(ArrayList<MatjiData> data) throws MatjiException { }
 
-    private File compressFile(File file) throws MatjiException {
-        File result;
-        FileOutputStream resultStream;
-        FileInputStream fileStream;
-        try {
-            result = File.createTempFile("matji_", "_compressed.jpg");
-            resultStream = new FileOutputStream(result);
-            fileStream = new FileInputStream(file);
-        } catch(IOException e) {
-            throw new BitmapCompressIOMatjiException();
-        }
+    // public static File compressFile(File file) throws MatjiException {
+    //     File result;
+    //     FileOutputStream resultStream;
+    //     FileInputStream fileStream;
+    //     try {
+    //         result = File.createTempFile("matji_", "_compressed.jpg");
+    //         resultStream = new FileOutputStream(result);
+    //         fileStream = new FileInputStream(file);
+    //     } catch(IOException e) {
+    //         throw new BitmapCompressIOMatjiException();
+    //     }
 
-        Bitmap bitmap = BitmapFactory.decodeStream(fileStream);
+    //     Bitmap bitmap = BitmapFactory.decodeStream(fileStream);
 
-        try {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, resultStream);
-            resultStream.flush();
-            resultStream.close();
-            return result;
-        } catch(IOException e) {
-            throw new BitmapCompressMatjiException();
-        }
-    }
+    //     try {
+    //         bitmap.compress(Bitmap.CompressFormat.JPEG, 80, resultStream);
+    //         resultStream.flush();
+    //         resultStream.close();
+    //         return result;
+    //     } catch(IOException e) {
+    //         throw new BitmapCompressMatjiException();
+    //     }
+    // }
 
     public void cancel() {
         fileRequest.cancel();

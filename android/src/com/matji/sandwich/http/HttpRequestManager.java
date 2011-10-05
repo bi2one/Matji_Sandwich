@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.content.Context;
 import android.view.ViewGroup;
+import android.util.Log;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.http.request.RequestCommand;
