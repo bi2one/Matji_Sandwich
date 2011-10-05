@@ -22,6 +22,7 @@ import org.apache.http.util.ByteArrayBuffer;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.listener.ProgressListener;
 
 /**
@@ -40,6 +41,7 @@ final public class HttpUtility
     public static final int HTTP_STATUS_BAD_REQUEST = 400; // 파라미터 오류 등, 요청이 잘못됐을 때
     public static final int HTTP_STATUS_LOGIN_FAIL = 401; // 로그인 실패
     public static final int HTTP_STATUS_FORBIDDEN = 403; // 권한 오류 (게시물 공개여부, 댓글 권한 등등)
+    public static final int HTTP_STATUS_NOT_ACCEPTABLE = 406; // 클라이언트 파일 받기 오류
     public static final int HTTP_STATUS_CONFLICT = 409; // spam 
     public static final int HTTP_STATUS_SERVER_BUSY = 410; // 중복 (이미 존재하는 값에 대한 생성 요청 등등 시에 발생)
     public static final int HTTP_STATUS_INTERNAL_SERVER_ERROR = 500 ; // 서버 오류 - 내부 오류 또는 유/무선 인터페이스에서 알 수 없는 오류 발생
@@ -339,7 +341,9 @@ final public class HttpUtility
 		connection.setUseCaches(getUseCaches());
 		connection.setConnectTimeout(getConnectionTimeout());
 		connection.setReadTimeout(getReadTimeout());
-		connection.setRequestProperty("Accept", "text/html,application/json,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		// connection.setRequestProperty("Accept", "text/html,application/json,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		// connection.setRequestProperty("Accept", "*");
+		// connection.setRequestProperty("Accept-Encoding", "*");
 		connectionPool.put(request, connection);
 	    }
 	catch(Exception e)
@@ -379,9 +383,7 @@ final public class HttpUtility
 				String endBoundary = "\r\n";
 				String finalEndBoundary = "\r\n--" + boundary + "--\r\n";
 					
-					
 				connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
- 					
  					
 				dos = new DataOutputStream(connection.getOutputStream());
 	
@@ -396,25 +398,31 @@ final public class HttpUtility
 					    {
 							
 						// File send
-						File file = (File)value;							
+						File file = (File)value;
+						File compressedFile = ImageUtil.compressFile(file);
+						if (compressedFile != null) {
+						    file = compressedFile;
+						}
+						
 						dos.writeBytes("Content-Disposition: form-data; name=\"" + key + "\"; filename=\"" + file.getName() + "\"\r\n");
-						dos.writeBytes("Content-Type: " + getMimeType(file) + "\r\n");
+						dos.writeBytes("Content-Type: " + getMimeType((File)value) + "\r\n");
 						dos.writeBytes("Content-Transfer-Encoding: binary\r\n\r\n");
-							
-						FileInputStream fis = new FileInputStream((File)value);
-							
+						
+						FileInputStream fis = new FileInputStream(file);
+						
 						int totalSize = fis.available();
 						byte[] buffer = new byte[FILE_BUFFER_SIZE];
 							
 						int bytesRead = 0;
-						int accumulatedBytes = 0;
+						// int accumulatedBytes = 0;
 
 						while((bytesRead = fis.read(buffer, 0, FILE_BUFFER_SIZE)) > 0)
 						    {
-							accumulatedBytes += bytesRead;
+							// accumulatedBytes += bytesRead;
 							dos.write(buffer, 0, bytesRead);
 							if (progressListener != null) {
-							    progressListener.onWritten(progressTag, totalSize, accumulatedBytes);
+							    // progressListener.onWritten(progressTag, totalSize, accumulatedBytes);
+							    progressListener.onWritten(progressTag, totalSize, bytesRead);
 							}
 						    }
 						fis.close();

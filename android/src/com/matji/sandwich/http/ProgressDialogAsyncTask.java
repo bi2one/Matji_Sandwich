@@ -18,8 +18,10 @@ import com.matji.sandwich.R;
 import java.util.ArrayList;
 
 public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean> implements ProgressListener {
-    private static final int PRIMARY = 0;
-    private static final int SECONDARY = 1;
+    private static final int UPDATE_BYTES = 0;
+    private static final int UPDATE_COUNT = 1;
+    private static final int TITLE_ID = R.string.progress_dialog;
+    private static final int COUNTER_ID = R.string.progress_dialog_counter;
     private ProgressDialog progressDialog;
     private Context context;
     private Requestable requestable;
@@ -36,16 +38,22 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
 
 	progressDialog = new ProgressDialog(context);
 	progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-	setMessage(R.string.dialog_intro_loading);
+	setMessage(TITLE_ID);
 	progressDialog.setCancelable(false);
 	progressDialog.setProgress(0);
     }
 
-    public void setMessage(int strId) {
+    private void setMessage(int titleId, int counterId, int totalCount, int readingCount) {
+	String baseTitle = MatjiConstants.string(titleId);
+	String progressTitle = String.format(MatjiConstants.string(counterId), readingCount, totalCount);
+	setMessage(baseTitle + " " + progressTitle);
+    }
+				  
+    private void setMessage(int strId) {
 	progressDialog.setMessage(MatjiConstants.string(strId));
     }
 
-    public void setMessage(String msg) {
+    private void setMessage(String msg) {
 	progressDialog.setMessage(msg);
     }
 
@@ -57,7 +65,7 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
     protected void onPreExecute() {
         super.onPreExecute();
 	request.setProgressListener(tag, this);
-	progressDialog.setMax(request.getRequestCount());
+	setMessage(TITLE_ID, COUNTER_ID, request.getRequestCount(), 1);
         progressDialog.show();
     }
 
@@ -88,26 +96,30 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
 	int which = values[0];
-	int tag = values[0];
-	int total = values[1];
-	int read = values[2];
-	int progress = (int)((float)read / (float)total * 1000f);
+	int tag = values[1];
+	int total = values[2];
+	int read = values[3];
 
 	switch(which) {
-	case PRIMARY:
-	    progressDialog.setProgress(progress);
+	case UPDATE_BYTES:
+	    progressDialog.setMax(total);
+	    progressDialog.incrementProgressBy(read);
 	    break;
-	case SECONDARY:
-	    progressDialog.setSecondaryProgress(progress);
+	case UPDATE_COUNT:
+	    if (total != read) {
+		progressDialog.setMax(100);
+		progressDialog.setProgress(0);
+		setMessage(TITLE_ID, COUNTER_ID, total, read + 1);
+	    }
 	    break;
 	}
     }
 
     public void onUnitWritten(int tag, int totalCount, int readCount) {
-	publishProgress(PRIMARY, tag, totalCount, readCount);
+	publishProgress(UPDATE_COUNT, tag, totalCount, readCount);
     }
 
     public void onWritten(int tag, int totalBytes, int readBytes) {
-	publishProgress(SECONDARY, tag, totalBytes, readBytes);
+	publishProgress(UPDATE_BYTES, tag, totalBytes, readBytes);
     }
 }

@@ -36,11 +36,11 @@ public class NoticeHttpRequest extends HttpRequest {
 	public void actionBadge(int last_notice_id) {
 	    httpMethod = HttpMethod.HTTP_GET;
 	    action = "badge";
-        parser = new BadgeParser(context);
+	    parser = new BadgeParser(context);
 
 	    getHashtable.clear();
-        getHashtable.put("last_notice_id", last_notice_id+"");
-        getHashtable.put("target", MatjiConstants.target());
-        getHashtable.put("language", MatjiConstants.language());
+	    getHashtable.put("last_notice_id", last_notice_id+"");
+	    getHashtable.put("target", MatjiConstants.target());
+	    getHashtable.put("language", MatjiConstants.language());
 	}
 }

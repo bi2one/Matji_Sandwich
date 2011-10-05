@@ -3,14 +3,16 @@ package com.matji.sandwich.exception;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.WeakHashMap;
+import java.util.Collections;
 
 public class ToastPool {
     private static volatile ToastPool obj;
-    private HashMap<Context, Toast> pool;
+    private Map<Context, Toast> pool;
 
     private ToastPool() {
-	pool = new HashMap();
+	pool = Collections.synchronizedMap(new WeakHashMap());
     }
     
     public static ToastPool getInstance() {

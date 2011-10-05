@@ -1,25 +1,29 @@
 package com.matji.sandwich.http.request;
 
+import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.http.parser.AttachFileParser;
+import com.matji.sandwich.listener.ProgressListener;
 
 import java.io.File;
 
 import android.content.Context;
 
 public class AttachFileHttpRequest extends HttpRequest {
+    private ProgressListener listener;
+    private int progressTag;
+    
     public AttachFileHttpRequest(Context context) {
     	super(context);
     	parser = new AttachFileParser(context);
     	controller = "attach_files";
     }
-    
+
     public void actionProfileUpload(File imageFile) {
         parser = new AttachFileParser(context);
-        httpMethod = HttpMethod.HTTP_POST;        
+        httpMethod = HttpMethod.HTTP_POST;
         action = "profile_upload";
         
         postHashtable.clear();
-        
         postHashtable.put("upload_file", imageFile);
     }
     

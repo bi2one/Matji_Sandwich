@@ -21,6 +21,7 @@ public class ProfileImageView extends ImageView {
     protected ImageView border;
     protected Context context;
     protected ImageLoader imageLoader;
+    private int userId;
 
     public ProfileImageView(Context context) {
         super(context);
@@ -48,7 +49,12 @@ public class ProfileImageView extends ImageView {
     }
 
     public void setUserId(int id) {
+	userId = id;
         imageLoader.DisplayImage((Activity)context, ImageLoader.UrlType.USER, getImageSize(), this, id);
+    }
+
+    public void reload() {
+	setUserId(userId);
     }
 
     public void findBorder() {

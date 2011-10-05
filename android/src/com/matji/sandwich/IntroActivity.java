@@ -24,7 +24,7 @@ import com.matji.sandwich.widget.dialog.SimpleDialog;
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener, 
 														SimpleAsyncTask.ProgressListener {
 	private static final long LOADING_MIN_TIME = 1000;
-	private static final long DIALOG_MIN_TIME = 1500;
+	private static final long DIALOG_MIN_TIME = 2000;
 	private ProgressDialog dialog;
 	private TimeAsyncTask timeAsyncTask;
 	private SimpleAsyncTask simpleAsyncTask;
@@ -78,7 +78,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 			}
 		}
 		dialog.dismiss();
-		if (compare(current_ver, update_ver)) { // it should be changed  
+		if (compare(current_ver, update_ver)) {
 			setListeners();
 		} else {
 			finish();
@@ -120,13 +120,13 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 				}
 			} catch (final MatjiException e) {
 			    runOnUiThread(new Runnable() {
-                    public void run() {
-                        e.performExceptionHandling(IntroActivity.this);
-                    }
-                });
+				    public void run() {
+					e.performExceptionHandling(IntroActivity.this);
+				    }
+				});
 			}
 
-			if (compare(current_ver, update_ver)) { // it should be changed  
+			if (compare(current_ver, update_ver)) { 
 				runOnUiThread(new UpdateMessage());
 			} else {
 				startActivity(new Intent(IntroActivity.this, MainTabActivity.class));

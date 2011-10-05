@@ -144,7 +144,8 @@
 							android:drawableLeft="@drawable/icon_twitter"
 							android:drawableRight="@drawable/icon_flow"
 							android:drawablePadding="@dimen/default_drawable_padding_long"
-							android:layout_below="@id/settings_account_logout" />
+							android:layout_below="@id/settings_account_logout" 
+							android:visibility="gone" />
 						<!-- Link Facebook -->
 						<TextView
 							android:id="@+id/settings_account_link_facebook"
@@ -157,7 +158,8 @@
 							android:drawableLeft="@drawable/icon_facebook"
 							android:drawableRight="@drawable/icon_flow"
 							android:drawablePadding="@dimen/default_drawable_padding_long"
-							android:layout_below="@id/settings_account_link_twitter" />
+							android:layout_below="@id/settings_account_link_twitter" 
+							android:visibility="gone" />
 						<!-- Edit Profile -->
 						<TextView
 							android:id="@+id/settings_account_edit_profile"
