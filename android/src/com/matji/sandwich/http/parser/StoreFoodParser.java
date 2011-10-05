@@ -20,7 +20,7 @@ public class StoreFoodParser extends MatjiDataParser {
 		storeFood.setFoodId(getInt(object, "food_id"));
 		storeFood.setStoreId(getInt(object, "store_id"));
 		storeFood.setLikeCount(getInt(object, "like_count"));
-		storeFood.setAccuracy(getInt(object, "accuracy") != 0);
+		storeFood.setAccuracy(getBoolean(object, "accuracy"));
 
 		/* Set Store */
 		StoreParser storeParser = new StoreParser(context);
