@@ -11,6 +11,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.exception.ExceptionFactory;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.JSONMatjiException;
 import com.matji.sandwich.exception.JSONCodeMatjiException;
@@ -52,11 +53,16 @@ public abstract class MatjiDataParser implements MatjiParser {
         try {
             JSONObject json = new JSONObject(data);
             int code = json.getInt("code");
-            if (code == HttpUtility.HTTP_STATUS_OK) {
+            if (code == ExceptionFactory.STATUS_OK) {
                 return json.getString("result");
             } else {
-                String message = json.getString("description");
-                throw new JSONCodeMatjiException(message);
+            	MatjiException codeException = ExceptionFactory.create(code);
+            	if (codeException != null)
+            		throw codeException;
+            	else {
+            		String message = json.getString("description");
+                	throw new JSONCodeMatjiException(message);
+            	}
             }
         } catch (JSONException e) {
             throw new JSONMatjiException();
