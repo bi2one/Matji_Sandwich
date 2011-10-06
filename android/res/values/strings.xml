@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw    
+    0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
   </string>
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
   <string name="server_domain">http://api.yummystory.com/</string>
@@ -74,6 +74,9 @@
   </string>
   <string name="exception_BitmapCompressIOMatjiException">
     이미지 압축 대상 파일을 생성할 수 없습니다
+  </string>
+  <string name="exception_InvalidPasswordMatjiException">
+    아이디 혹은 비밀번호를 확인해주세요.
   </string>
 
   <!-- server exception -->

@@ -3,6 +3,8 @@ package com.matji.sandwich.exception;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.matji.sandwich.util.MatjiConstants;
+
 public class MatjiException extends Exception {
     private int msgRef;
     private ToastPool toastPool;
@@ -18,6 +20,10 @@ public class MatjiException extends Exception {
 
     public int getMsg() {
 	return msgRef;
+    }
+    
+    public String getMsgString() {
+    	return MatjiConstants.string(getMsg());
     }
 
     public void showToastMsg(Context context) {

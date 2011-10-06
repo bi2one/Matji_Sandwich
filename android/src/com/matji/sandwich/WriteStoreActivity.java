@@ -54,17 +54,19 @@ public class WriteStoreActivity extends BaseMapActivity implements CompletableTi
         titleBar.setCompletable(this);
 
         mapView.init(this);
-        mapView.startMapCenterThread();
         mapView.setOnClickListener(this);
 
         storeAlertDialog = new SimpleAlertDialog(this, R.string.write_store_invalidate_store);
         successDialog = new SimpleAlertDialog(this, R.string.write_store_success);
 
         successDialog.setOnClickListener(this);
-        // 이 함수를 call하면 지도가 gps중앙으로 이동한다.
-        // mapView.moveToGpsCenter();
-        
+	
         session = Session.getInstance(this);
+    }
+
+    public void finish() {
+	mapView.stopMapCenterThread();
+	super.finish();
     }
 
     public void complete() {

@@ -8,7 +8,6 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.util.MatjiConstants;
 
 public class SimpleConfirmDialog implements SimpleDialog, DialogInterface.OnClickListener {
-    Context context;
     AlertDialog dialog;
     OnClickListener listener;
 
@@ -17,7 +16,6 @@ public class SimpleConfirmDialog implements SimpleDialog, DialogInterface.OnClic
     }
 
     public SimpleConfirmDialog(Context context, String message) {
-        this.context = context;
         listener = new OnClickListener() {
             public void onConfirmClick(SimpleDialog dialog) { }
             public void onCancelClick(SimpleDialog dialog) { }

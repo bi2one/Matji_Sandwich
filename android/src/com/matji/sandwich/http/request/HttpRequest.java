@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -24,7 +25,7 @@ import com.matji.sandwich.util.MatjiConstants;
 enum HttpMethod { HTTP_POST, HTTP_GET, HTTP_GET_VIA_WEB_BROWSER }
 
 public abstract class HttpRequest implements ProgressRequestCommand {
-    protected Context context = null;
+    protected WeakReference<Context> contextRef = null;
     // protected String serverDomain = "http://api.matji.com/v2/";
     protected String serverDomain = MatjiConstants.string(R.string.server_domain);
 
@@ -43,9 +44,13 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 	private HttpRequest(){}
 
     public HttpRequest(Context context) {
-	this.context = context;
+	this.contextRef = new WeakReference(context);
 	postHashtable = new Hashtable<String, Object>();
 	getHashtable = new Hashtable<String, String>();
+    }
+
+    public Context getContext() {
+	return contextRef.get();
     }
 
     private boolean confirmStatusCode(int code) {
@@ -118,7 +123,7 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 						   Map<String, String> getMap,
 						   int method) throws HttpConnectMatjiException {
 	SimpleHttpResponse httpResponse = null;
-	ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	ConnectivityManager cm = (ConnectivityManager)contextRef.get().getSystemService(Context.CONNECTIVITY_SERVICE);
 	NetworkInfo netInfo_mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 	NetworkInfo netInfo_wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
@@ -133,7 +138,7 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 		baseHeader.putAll(header);
 	    }
 
-	    Session session = Session.getInstance(context);
+	    Session session = Session.getInstance(contextRef.get());
 	    if (postParam != null) {
 		if (session != null && session.isLogin())
 		    postParam.put("access_token", "" + session.getToken());

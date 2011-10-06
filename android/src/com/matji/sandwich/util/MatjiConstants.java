@@ -1,6 +1,7 @@
 package com.matji.sandwich.util;
 
 import java.util.Locale;
+import java.lang.ref.WeakReference;
 
 import com.matji.sandwich.R;
 
@@ -16,8 +17,7 @@ import android.graphics.drawable.Drawable;
  *
  */
 public class MatjiConstants {
-
-    private static Resources mResources;
+    private static WeakReference<Resources> mResourcesRef;
 
     public static final int MIN_NICK_LENGTH = 2;
     public static final int MAX_NICK_LENGTH = 12;
@@ -27,42 +27,42 @@ public class MatjiConstants {
     public static final int MAX_FOOD_NAME_LENGTH = 12;
 
     public static void setContext(Context context) {
-        mResources = context.getResources();
+        mResourcesRef = new WeakReference(context.getResources());
     }
 
     public static final String[] stringArray(int id) {
-        return mResources.getStringArray(id);
+        return mResourcesRef.get().getStringArray(id);
     }
 
     public static final String string(int id) {
-        return mResources.getString(id);
+        return mResourcesRef.get().getString(id);
     }
 
     public static final String plurals(int id, int quantity) {
-        return mResources.getQuantityString(id, quantity);
+        return mResourcesRef.get().getQuantityString(id, quantity);
     }
 
     public static final float dimen(int id) {
-        return mResources.getDimension(id);
+        return mResourcesRef.get().getDimension(id);
     }
 
     public static final int dimenInt(int id) {
-        return mResources.getDimensionPixelSize(id);
+        return mResourcesRef.get().getDimensionPixelSize(id);
     }
 
     public static final int color(int id) {
-        return mResources.getColor(id);
+        return mResourcesRef.get().getColor(id);
     }
 
     public static final Drawable drawable(int id) {
-        return mResources.getDrawable(id);
+        return mResourcesRef.get().getDrawable(id);
     }
 
     public static final String target() {
-        return mResources.getString(R.string.target);
+        return mResourcesRef.get().getString(R.string.target);
     }
     public static final String language() {
-        return mResources.getConfiguration().locale.getLanguage();
+        return mResourcesRef.get().getConfiguration().locale.getLanguage();
     }
     
     public static final String countryName(String code) {

@@ -2,6 +2,7 @@ package com.matji.sandwich.map;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.location.Location;
@@ -49,7 +50,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     private Context context;
     private TextView addressView;
     private RelativeLayout addressWrapper;
-    private BaseMapActivity activity;
+    private WeakReference<BaseMapActivity> activityRef;
     private HttpRequestManager requestManager;
     private StoreItemizedOverlay storeItemizedOverlay;
     private SessionMapUtil sessionUtil;
@@ -88,7 +89,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 
     public void reload() {
 	Runnable runnable = new MapRunnable(this);
-	activity.runOnUiThread(runnable);
+	activityRef.get().runOnUiThread(runnable);
 	setCenter(sessionUtil.getCenter());
     }
 
@@ -118,7 +119,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	sessionUtil.setCenter(point);
 
 	Runnable runnable = new MapRunnable(this);
-	activity.runOnUiThread(runnable);
+	activityRef.get().runOnUiThread(runnable);
     }
 
     public void updatePopupOverlay(Store store) {
@@ -143,6 +144,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     public void onLocationChanged(int startedFromTag, Location location) {
 	if (prevLocation != null) {
 	    if (prevLocation.getAccuracy() >= location.getAccuracy()) {
+		startMapCenterThread(new LocationToGeoPointAdapter(location));
 		gpsManager.stop();
 	    }
 	}
@@ -196,7 +198,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     }
 
     private void setBaseMapActivity(BaseMapActivity activity) {
-	this.activity = activity;
+	this.activityRef = new WeakReference(activity);
     }
 
     public class MapRunnable implements Runnable{

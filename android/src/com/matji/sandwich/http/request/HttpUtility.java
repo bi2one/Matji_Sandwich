@@ -45,6 +45,7 @@ final public class HttpUtility
     public static final int HTTP_STATUS_CONFLICT = 409; // spam 
     public static final int HTTP_STATUS_SERVER_BUSY = 410; // 중복 (이미 존재하는 값에 대한 생성 요청 등등 시에 발생)
     public static final int HTTP_STATUS_INTERNAL_SERVER_ERROR = 500 ; // 서버 오류 - 내부 오류 또는 유/무선 인터페이스에서 알 수 없는 오류 발생
+    public static final int HTTP_STATUS_INVALID_DATA = 501;
     public static final int HTTP_STATUS_SERVICE_UNAVAILABLE = 503 ; // 게이트웨이 서버측 정기점검
     public static final int HTTP_STATUS_SERVER_BUSY_SUCESS = 411; // 중복 (이미 존재하는 값에 대한 생성 요청 등등 시에 발생)
 

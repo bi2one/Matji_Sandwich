@@ -5,13 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 public class SimpleListDialog implements SimpleDialog, DialogInterface.OnClickListener {
-        
-    Context context;
     AlertDialog dialog;
     OnClickListener listener;
 
     public SimpleListDialog(Context context, String title, CharSequence[] items) {
-        this.context = context;
         listener = new OnClickListener() {
             
             @Override

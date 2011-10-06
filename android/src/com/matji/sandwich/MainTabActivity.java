@@ -201,4 +201,8 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
         int alarmCount = session.getPrivateUtil().getNewNoticeCount() + session.getPrivateUtil().getNewAlarmCount();
         tabHost.setAlarmCount(alarmCount);
     }
+
+    public void finish() {
+	System.exit(0);
+    }
 }

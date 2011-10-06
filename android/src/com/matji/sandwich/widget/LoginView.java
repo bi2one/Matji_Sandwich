@@ -1,5 +1,7 @@
 package com.matji.sandwich.widget;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -15,13 +17,19 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.matji.sandwich.Loginable;
+import com.matji.sandwich.Requestable;
 import com.matji.sandwich.R;
 import com.matji.sandwich.RegisterActivity;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Me;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.DialogAsyncTask;
+import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.session.Session.LoginAsyncTask;
 import com.matji.sandwich.session.SessionPrivateUtil;
 
-public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener {
+public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener, Requestable {
+	private static final int REQUEST_LOGIN = 0;
     private Toast toast;
 
     private EditText idField;
@@ -33,6 +41,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 //    private View loginTwitter;
 //    private View loginFacebook;
 
+    private Session session;
     private SessionPrivateUtil privateUtil;
 
     public LoginView(Context context) {
@@ -65,6 +74,8 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         register.setOnClickListener(this);
 //        loginTwitter.setOnClickListener(this);
 //        loginFacebook.setOnClickListener(this);
+
+        session = Session.getInstance(getContext());
     }
 
     public void clearField() {
@@ -80,7 +91,13 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
             if (saveidCheckBox.isChecked()) {
                 privateUtil.setSavedUserId(idField.getText().toString());
             }
-            new LoginAsyncTask(getContext(), loginable, idField.getText().toString(), pwdField.getText().toString()).execute(new Object());
+            
+            MeHttpRequest request = new MeHttpRequest(getContext());
+            request.actionAuthorize(idField.getText().toString(), pwdField.getText().toString());
+
+            DialogAsyncTask dialogTask = new DialogAsyncTask(getContext(), this, request, REQUEST_LOGIN);
+            //new LoginAsyncTask(getContext(), loginable, idField.getText().toString(), pwdField.getText().toString()).execute(new Object());
+            dialogTask.execute();
         }
     }
 
@@ -90,6 +107,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         //        MeHttpRequest request = new MeHttpRequest(this);
         //        request.authorizeViaExternalService(this, Service.TWITTER);
     }
+    
 
     public void loginViaFacebook(View v){
         Log.d("Matji", "login via facebook");
@@ -120,7 +138,20 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
             privateUtil.setSavedUserId("");
         }
 
-    }    
+    }
+
+	@Override
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		// TODO Auto-generated method stub
+		Me me = (Me)data.get(0);
+        session.saveMe(me);		
+	}
+
+	@Override
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.performExceptionHandling(getContext());
+		// TODO Auto-generated method stub
+	}    
 
     //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     //         TODO Auto-generated method stub

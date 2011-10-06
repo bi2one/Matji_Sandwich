@@ -5,37 +5,40 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<com.matji.sandwich.widget.SwipeView
-		style="@style/DefaultFill"
-		android:id="@+id/SwipeView">
-		<RelativeLayout
-			style="@style/DefaultFill"
-			android:id="@+id/image_slider_left_layout">
-			<ImageView
-				style="@style/DefaultWrap"
-				android:layout_centerInParent="true"
-				android:scaleType="fitCenter"
-				android:id="@+id/image_slider_left_image" />
-		</RelativeLayout>
-		<RelativeLayout
-			style="@style/DefaultFill"
-			android:id="@+id/image_slider_center_layout">
-			<ImageView
-				style="@style/DefaultWrap"
-				android:layout_centerInParent="true"
-				android:scaleType="fitCenter"
-				android:id="@+id/image_slider_center_image" />
-		</RelativeLayout>
-		<RelativeLayout
-			style="@style/DefaultFill"
-			android:id="@+id/image_slider_right_layout">
-			<ImageView
-				style="@style/DefaultWrap"
-				android:layout_centerInParent="true"
-				android:scaleType="fitCenter"
-				android:id="@+id/image_slider_right_image" />
-		</RelativeLayout>
-	</com.matji.sandwich.widget.SwipeView>
+   <com.matji.sandwich.widget.SwipeView
+       style="@style/DefaultFill"
+       android:id="@+id/SwipeView" />
+<!-- 	<com.matji.sandwich.widget.SwipeView -->
+<!-- 		style="@style/DefaultFill" -->
+<!-- 		android:id="@+id/SwipeView"> -->
+<!-- 		<RelativeLayout -->
+<!-- 			style="@style/DefaultFill" -->
+<!-- 			android:id="@+id/image_slider_left_layout"> -->
+<!-- 			<ImageView -->
+<!-- 				style="@style/DefaultWrap" -->
+<!-- 				android:layout_centerInParent="true" -->
+<!-- 				android:scaleType="fitCenter" -->
+<!-- 				android:id="@+id/image_slider_left_image" /> -->
+<!-- 		</RelativeLayout> -->
+<!-- 		<RelativeLayout -->
+<!-- 			style="@style/DefaultFill" -->
+<!-- 			android:id="@+id/image_slider_center_layout"> -->
+<!-- 			<ImageView -->
+<!-- 				style="@style/DefaultWrap" -->
+<!-- 				android:layout_centerInParent="true" -->
+<!-- 				android:scaleType="fitCenter" -->
+<!-- 				android:id="@+id/image_slider_center_image" /> -->
+<!-- 		</RelativeLayout> -->
+<!-- 		<RelativeLayout -->
+<!-- 			style="@style/DefaultFill" -->
+<!-- 			android:id="@+id/image_slider_right_layout"> -->
+<!-- 			<ImageView -->
+<!-- 				style="@style/DefaultWrap" -->
+<!-- 				android:layout_centerInParent="true" -->
+<!-- 				android:scaleType="fitCenter" -->
+<!-- 				android:id="@+id/image_slider_right_image" /> -->
+<!-- 		</RelativeLayout> -->
+<!-- 	</com.matji.sandwich.widget.SwipeView> -->
 
 	<TextView
 		android:id="@+id/image_slider_count"
@@ -102,11 +105,11 @@
 			<TextView
 				android:id="@+id/image_slider_like_count"
 				style="@style/row_post_Count"
-                android:drawableLeft="@drawable/icon_hand01"
-                android:drawablePadding="@dimen/default_drawable_padding"
+				android:drawableLeft="@drawable/icon_hand01"
+				android:drawablePadding="@dimen/default_drawable_padding"
 				android:layout_below="@id/image_slider_post_content_wrapper"
 				android:layout_toRightOf="@id/image_slider_comment_count"
-                android:layout_marginLeft="@dimen/default_distance_long" />
+				android:layout_marginLeft="@dimen/default_distance_long" />
 		</RelativeLayout>
 		<ImageView
 			android:id="@id/image_slider_moresign"
