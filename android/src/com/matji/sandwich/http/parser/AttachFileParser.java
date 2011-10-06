@@ -12,7 +12,7 @@ public class AttachFileParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected AttachFile getMatjiData(JsonObject object) throws MatjiException {
+	public AttachFile getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		AttachFile attachFile = new AttachFile();

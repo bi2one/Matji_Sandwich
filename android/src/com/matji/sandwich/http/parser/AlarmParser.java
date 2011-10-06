@@ -12,7 +12,7 @@ public class AlarmParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Alarm getMatjiData(JsonObject object) throws MatjiException {
+	public Alarm getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Alarm alarm = new Alarm();
@@ -34,7 +34,7 @@ public class AlarmParser extends MatjiDataParser {
 		
 		PostParser postParser = new PostParser(context);
 		alarm.setPost(postParser.getMatjiData(getObject(object, "post")));
-		alarm.setAlarmRead(getInt(object, "alarm_read") != 0);
+		alarm.setAlarmRead(getBoolean(object, "alarm_read"));
 		
 		Log.d("Parser", "AlarmParser:: called getMatjiData");
 		

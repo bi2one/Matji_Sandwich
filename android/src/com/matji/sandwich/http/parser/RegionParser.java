@@ -12,7 +12,7 @@ public class RegionParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Region getMatjiData(JsonObject object) throws MatjiException {
+	public Region getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Region region = new Region();

@@ -48,7 +48,7 @@ public class StoreMainActivity extends BaseTabActivity {
                 storeUrlListIntent);
         refresh();
     }
-
+    
     private void refresh() {
 
     }

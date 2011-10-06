@@ -20,7 +20,7 @@ public class StoreParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Store getMatjiData(JsonObject object) throws MatjiException {
+	public Store getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 
 		Store store = new Store();

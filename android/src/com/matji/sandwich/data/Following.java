@@ -59,7 +59,7 @@ public class Following extends MatjiData{
 		dest.writeValue(followed_user);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		created_at = in.readString();
 		following_user_id = in.readInt();		
 		updated_at = in.readString();

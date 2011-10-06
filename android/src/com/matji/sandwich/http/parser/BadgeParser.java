@@ -13,7 +13,7 @@ public class BadgeParser extends MatjiDataParser {
 		this.context = context;
 	}
 
-	protected Badge getMatjiData(JsonObject object) throws MatjiException {
+	public Badge getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 
 		Badge badge = new Badge();

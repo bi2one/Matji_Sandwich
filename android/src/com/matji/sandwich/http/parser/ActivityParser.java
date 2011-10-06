@@ -12,7 +12,7 @@ public class ActivityParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Activity getMatjiData(JsonObject object) throws MatjiException {
+	public Activity getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Activity activity = new Activity();

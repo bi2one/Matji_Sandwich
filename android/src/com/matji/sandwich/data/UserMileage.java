@@ -40,7 +40,7 @@ public class UserMileage extends MatjiData implements Serializable {
 		dest.writeValue(user);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		id = in.readInt();
 		user_id = in.readInt();
 		total_point = in.readInt();

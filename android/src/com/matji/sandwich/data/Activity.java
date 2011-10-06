@@ -50,7 +50,7 @@ public class Activity extends MatjiData {
 		dest.writeString(updated_at);
 	}	
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		id = in.readInt();
 		user_name = in.readString();
 		user_id = in.readInt();

@@ -12,7 +12,7 @@ public class TagParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected SimpleTag getMatjiData(JsonObject object) throws MatjiException {
+	public SimpleTag getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		SimpleTag tag = new SimpleTag();

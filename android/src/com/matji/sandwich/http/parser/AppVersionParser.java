@@ -15,7 +15,7 @@ public class AppVersionParser extends MatjiDataParser {
 	}
 
 	@Override
-	protected MatjiData getMatjiData(JsonObject object) throws MatjiException {
+	public MatjiData getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		AppVersion app_version = new AppVersion();
 		app_version.setId(getInt(object, "id"));

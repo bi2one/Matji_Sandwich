@@ -31,7 +31,7 @@ public class AttachFiles extends MatjiData {
 		dest.writeTypedArray(files, files.length);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		files = new AttachFile[in.readInt()];
 		in.readTypedArray(files, AttachFile.CREATOR);
 	}

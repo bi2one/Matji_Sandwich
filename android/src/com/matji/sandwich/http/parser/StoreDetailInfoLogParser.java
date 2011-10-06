@@ -12,7 +12,7 @@ public class StoreDetailInfoLogParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected StoreDetailInfoLog getMatjiData(JsonObject object) throws MatjiException {
+	public StoreDetailInfoLog getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		StoreDetailInfoLog infoLog = new StoreDetailInfoLog();

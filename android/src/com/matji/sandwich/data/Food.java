@@ -36,7 +36,7 @@ public class Food extends MatjiData{
 		dest.writeString(name);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		created_at = in.readString();	
 		updated_at = in.readString();
 		id = in.readInt();

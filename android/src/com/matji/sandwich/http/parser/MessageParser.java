@@ -19,7 +19,7 @@ public class MessageParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Message getMatjiData(JsonObject object) throws MatjiException {
+	public Message getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Message message = new Message();

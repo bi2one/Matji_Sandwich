@@ -17,7 +17,7 @@ public class UserParser extends MatjiDataParser {
         super(context);
     }
 
-    protected User getMatjiData(JsonObject object) throws MatjiException {
+    public User getMatjiData(JsonObject object) throws MatjiException {
         if (object == null) return null;
 
         User user = new User();

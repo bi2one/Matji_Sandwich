@@ -22,14 +22,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public abstract class MatjiDataParser implements MatjiParser {
-    protected abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
+    public abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
     public Context context;
 
     public MatjiDataParser(Context context) {
         this.context = context;
     }
 
-    public ArrayList<MatjiData> getMatjiDataList(JsonElement jsonElement) throws MatjiException{
+    public ArrayList<MatjiData> getMatjiDataList(JsonElement jsonElement) throws MatjiException {
         if (!isArray(jsonElement)) {
             return new ArrayList<MatjiData>();
         }
@@ -186,5 +186,5 @@ public abstract class MatjiDataParser implements MatjiParser {
         JsonElement element = object.get(key);
 
         return (isArray(element)) ? element.getAsJsonArray() : null;
-    }
+    }    
 }

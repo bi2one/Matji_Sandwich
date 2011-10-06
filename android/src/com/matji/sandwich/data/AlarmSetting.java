@@ -1,11 +1,17 @@
 package com.matji.sandwich.data;
 
 import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class AlarmSetting extends MatjiData implements Serializable {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8061769695512361962L;
+
     public enum AlarmSettingType {
         COMMENT,
         FOLLOWING,
@@ -49,7 +55,7 @@ public class AlarmSetting extends MatjiData implements Serializable {
         dest.writeInt((message) ? 1 : 0);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 	    id = in.readInt();
 	    user_id = in.readInt();
         comment = in.readInt() != 0;

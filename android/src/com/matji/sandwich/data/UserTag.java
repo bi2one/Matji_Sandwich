@@ -37,7 +37,7 @@ public class UserTag extends Tag {
 	}
 
 	@Override
-	protected void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 	    super.readFromParcel(in);
 		user_id = in.readInt();
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));

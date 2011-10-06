@@ -3,6 +3,10 @@ package com.matji.sandwich.data;
 import java.io.Serializable;
 
 public class LocationSearchToken extends MatjiData implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6519128496993134145L;
     private String seed;
     private int latitude;
     private int longitude;

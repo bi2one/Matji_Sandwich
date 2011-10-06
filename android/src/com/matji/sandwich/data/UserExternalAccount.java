@@ -38,7 +38,7 @@ public class UserExternalAccount extends MatjiData{
 		dest.writeValue(user);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		id = in.readInt();
 		user_id = in.readInt();
 		service = in.readString();

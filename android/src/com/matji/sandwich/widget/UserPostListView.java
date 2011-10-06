@@ -25,19 +25,15 @@ public class UserPostListView extends PostListView {
     public void setUser(User user) {
         this.user = user;
         super.init();
+        setSubtitle(String.format(
+                MatjiConstants.string(R.string.subtitle_user_post),
+                user.getPostCount(),
+                user.getNick()));
     }
 
     @Override
     public HttpRequest request() {
         ((PostHttpRequest) request).actionUserList(user.getId(), getPage(), getLimit());
         return request;
-    }
-
-    @Override
-    protected String getSubtitle() {
-        return String.format(
-                MatjiConstants.string(R.string.subtitle_user_post),
-                user.getPostCount(),
-                user.getNick());
     }
 }

@@ -12,7 +12,7 @@ public class UserExternalAccountParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected UserExternalAccount getMatjiData(JsonObject object) throws MatjiException {
+	public UserExternalAccount getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		UserExternalAccount externalAccount = new UserExternalAccount();

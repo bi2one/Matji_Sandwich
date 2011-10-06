@@ -12,7 +12,7 @@ public class StoreTagParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected StoreTag getMatjiData(JsonObject object) throws MatjiException {
+	public StoreTag getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		StoreTag storeTag = new StoreTag();

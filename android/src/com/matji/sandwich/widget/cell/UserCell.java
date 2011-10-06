@@ -22,6 +22,7 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.FollowingListener;
 import com.matji.sandwich.listener.LikeStoreListListener;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.title.UserTitle;
 import com.matji.sandwich.widget.title.button.FollowButton.Followable;
 
@@ -134,7 +135,7 @@ public class UserCell extends Cell implements Followable {
             point.setText(user.getMileage().getTotalPoint()+"");
         else 
             point.setText("0");
-        area.setText("KOREA");
+        area.setText(MatjiConstants.countryName(user.getCountryCode()));
         likeList.setText(user.getLikeStoreCount()+"");
         likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
         followingListener.setUser(user);

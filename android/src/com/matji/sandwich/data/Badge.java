@@ -32,7 +32,7 @@ public class Badge extends MatjiData{
 	    dest.writeInt(new_alarm_count);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
         new_notice_count = in.readInt();
         new_alarm_count = in.readInt();
 	}

@@ -18,34 +18,32 @@ public class PostNearListView extends PostListView {
     private GeoPoint swBound;
     private HttpRequestManager requestManager;
 
-    protected String getSubtitle() {
-        return MatjiConstants.string(R.string.subtitle_nearby_post);
-    }
-
     public PostNearListView(Context context, AttributeSet attrs) {
         super(context, attrs);
-	requestManager = HttpRequestManager.getInstance();
+        requestManager = HttpRequestManager.getInstance();
         postRequest = new PostHttpRequest(context);
         sessionUtil = new SessionMapUtil(context);
 
         neBound = sessionUtil.getNEBound();
         swBound = sessionUtil.getSWBound();
+        
+        setSubtitle(MatjiConstants.string(R.string.subtitle_nearby_post));
     }
 
     public void requestReload() {
-	if (!requestManager.isRunning()) {
-	    neBound = sessionUtil.getNEBound();
-	    swBound = sessionUtil.getSWBound();
+        if (!requestManager.isRunning()) {
+            neBound = sessionUtil.getNEBound();
+            swBound = sessionUtil.getSWBound();
 
-	    super.requestReload();
-	}
+            super.requestReload();
+        }
     }
 
     public void forceReload() {
-	neBound = sessionUtil.getNEBound();
-	swBound = sessionUtil.getSWBound();
+        neBound = sessionUtil.getNEBound();
+        swBound = sessionUtil.getSWBound();
 
-	super.forceReload();
+        super.forceReload();
     }
 
     public HttpRequest request() {

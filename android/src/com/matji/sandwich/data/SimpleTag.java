@@ -36,7 +36,7 @@ public class SimpleTag extends MatjiData {
 		dest.writeInt(id);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		tag = in.readString();
 		created_at = in.readString();
 		updated_at = in.readString();

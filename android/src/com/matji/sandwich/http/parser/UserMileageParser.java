@@ -12,7 +12,7 @@ public class UserMileageParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected UserMileage getMatjiData(JsonObject object) throws MatjiException {
+	public UserMileage getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		UserMileage mileage = new UserMileage();

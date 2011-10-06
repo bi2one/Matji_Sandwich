@@ -12,7 +12,7 @@ public class CountParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Count getMatjiData(JsonObject object) throws MatjiException {
+	public Count getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Count count = new Count();

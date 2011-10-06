@@ -12,7 +12,7 @@ public class UrlParser extends MatjiDataParser {
 		super(context);
 	}
 	
-	protected Url getMatjiData(JsonObject object) throws MatjiException {
+	public Url getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Url url = new Url();

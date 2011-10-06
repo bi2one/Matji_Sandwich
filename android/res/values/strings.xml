@@ -384,6 +384,7 @@
   <string name="subtitle_friend_post">친구들 이야기</string>
   <string name="subtitle_nearby_post">주변 이야기</string>
   <string name="subtitle_all_post">모든 이야기</string>
+  <string name="subtitle_domestic_post">전국 이야기</string>
   <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
   <string name="subtitle_user_post">%1$d개의 %2$s 이야기</string>
   <string name="subtitle_tag_post">\'%1$s\'태그 이야기</string>

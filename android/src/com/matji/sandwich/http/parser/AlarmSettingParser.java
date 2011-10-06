@@ -13,7 +13,7 @@ public class AlarmSettingParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected AlarmSetting getMatjiData(JsonObject object) throws MatjiException {
+	public AlarmSetting getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		AlarmSetting alarmSetting = new AlarmSetting();

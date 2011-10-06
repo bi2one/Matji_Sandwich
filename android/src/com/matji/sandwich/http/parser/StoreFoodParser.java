@@ -11,7 +11,7 @@ public class StoreFoodParser extends MatjiDataParser {
 	public StoreFoodParser(Context context) {
 		super(context);	}
 
-	protected StoreFood getMatjiData(JsonObject object) throws MatjiException {
+	public StoreFood getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 
 		StoreFood storeFood = new StoreFood();

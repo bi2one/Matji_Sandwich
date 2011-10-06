@@ -12,7 +12,7 @@ public class CommentParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Comment getMatjiData(JsonObject object) throws MatjiException {
+	public Comment getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Comment comment = new Comment();

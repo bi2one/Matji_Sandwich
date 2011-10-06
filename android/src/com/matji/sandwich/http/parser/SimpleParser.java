@@ -42,7 +42,7 @@ public class SimpleParser extends MatjiDataParser {
 	}
 
 	@Override
-	protected MatjiData getMatjiData(JsonObject object) {
+	public MatjiData getMatjiData(JsonObject object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

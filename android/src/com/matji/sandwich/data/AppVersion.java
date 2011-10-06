@@ -38,7 +38,7 @@ public class AppVersion extends MatjiData {
 		dest.writeString(url);
 	}
 	
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		setId(in.readInt());
 		setTarget(in.readString());
 		setVersion(in.readString());

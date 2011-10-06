@@ -24,26 +24,22 @@ public class TagPostListView extends PostListView {
         request = new PostHttpRequest(getContext());
         setPage(1);
     }
-    
+
     public void setType(TagByType type) {
         this.type = type;
     }
-    
+
     public void setTag(Tag tag) {
         this.tag = tag;
         super.init();
+        setSubtitle(String.format(
+                MatjiConstants.string(R.string.subtitle_tag_post),
+                tag.getTag().getTag()));
     }    
-    
+
     @Override
     public HttpRequest request() {
         ((PostHttpRequest) request).actionTagByList(type, tag.getId(), getPage(), getLimit());
         return request;
-    }
-
-    @Override
-    protected String getSubtitle() {
-        return String.format(
-                MatjiConstants.string(R.string.subtitle_tag_post),
-                tag.getTag().getTag());
     }
 }

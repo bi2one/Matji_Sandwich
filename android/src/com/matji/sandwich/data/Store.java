@@ -80,7 +80,7 @@ public class Store extends MatjiData implements Serializable {
 	dest.writeTypedList(foods);
     }
 
-    private void readFromParcel(Parcel in) {
+    public void readFromParcel(Parcel in) {
 	id = in.readInt();
 	name = in.readString();
 	reg_user_id = in.readInt();

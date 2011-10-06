@@ -26,8 +26,13 @@ public class PostListView extends RequestableMListView {
         ALL, FRIEND, DOMESTIC;
     };
 
-    protected String getSubtitle() {
-        return MatjiConstants.string(R.string.subtitle_all_post);
+    protected String getSubtitle(Type type) {
+        switch (type) {
+        case ALL: return MatjiConstants.string(R.string.subtitle_all_post);
+        case FRIEND: return MatjiConstants.string(R.string.subtitle_friend_post);
+        case DOMESTIC: return MatjiConstants.string(R.string.subtitle_domestic_post);
+        default : return "";
+        }
     }
 
     public PostListView(Context context, AttributeSet attr) {
@@ -41,8 +46,6 @@ public class PostListView extends RequestableMListView {
         setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
         setCacheColorHint(Color.TRANSPARENT);
         setSelector(android.R.color.transparent);
-        setSubtitle(getSubtitle());
-        type = Type.ALL;
     }
 
     public void setSubtitle(String subtitle) {
@@ -72,14 +75,10 @@ public class PostListView extends RequestableMListView {
         }
         return request;
     }
-    
-    //    public void setActivity(Activity activity) {
-    //        super.setActivity(activity);
-    //        ((PostAdapter) getMBaseAdapter()).setActivity(getActivity());
-    //    }
 
     public void setType(Type type) {
         this.type = type;
+        setSubtitle(getSubtitle(type));
     }
 
     public void setPosts(ArrayList<MatjiData> data) {

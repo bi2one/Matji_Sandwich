@@ -31,7 +31,7 @@ public class PostTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-	isNotFirst = false;
+        isNotFirst = false;
     }
 
     @Override
@@ -46,13 +46,13 @@ public class PostTabActivity extends BaseTabActivity {
     }
 
     protected void onResume() {
-	super.onResume();
-	if (isNotFirst && lastLoginState != session.isLogin()) {
-	    reload();
-	}
+        super.onResume();
+        if (isNotFirst && lastLoginState != session.isLogin()) {
+            reload();
+        }
 
-	lastLoginState = session.isLogin();
-	isNotFirst = true;
+        lastLoginState = session.isLogin();
+        isNotFirst = true;
     }
 
     protected void onAfterResume() {
@@ -76,30 +76,30 @@ public class PostTabActivity extends BaseTabActivity {
         tabHost.clearAllTabs();
 
         if (session.isLogin()) {
-	    Intent friendIntent = new Intent(this, PostListActivity.class);
-	    friendIntent.putExtra(PostListActivity.TYPE, PostListActivity.TYPE_FRIEND);
+            Intent friendIntent = new Intent(this, PostListActivity.class);
+            friendIntent.putExtra(PostListActivity.TYPE, PostListActivity.TYPE_FRIEND);
             tabHost.addLeftTab("tab1",
-			       R.string.post_tab_friend,
-			       friendIntent);
-	    
+                    R.string.post_tab_friend,
+                    friendIntent);
+
             tabHost.addCenterTab("tab2",
-				 R.string.post_tab_near,
-				 new Intent(this, PostNearListActivity.class));
+                    R.string.post_tab_near,
+                    new Intent(this, PostNearListActivity.class));
         } else {
             tabHost.addLeftTab("tab2",
-			       R.string.post_tab_near,
-			       new Intent(this, PostNearListActivity.class));
+                    R.string.post_tab_near,
+                    new Intent(this, PostNearListActivity.class));
         }
 
-	Intent domesticIntent = new Intent(this, PostListActivity.class);
-	domesticIntent.putExtra(PostListActivity.TYPE, PostListActivity.TYPE_DOMESTIC);
+        Intent domesticIntent = new Intent(this, PostListActivity.class);
+        domesticIntent.putExtra(PostListActivity.TYPE, PostListActivity.TYPE_DOMESTIC);
         tabHost.addCenterTab("tab3",
-			     R.string.post_tab_country,
-			     domesticIntent);
+                R.string.post_tab_country,
+                domesticIntent);
 
         tabHost.addRightTab("tab4",
-			    R.string.post_tab_all,
-			    new Intent(this, PostListActivity.class));
+                R.string.post_tab_all,
+                new Intent(this, PostListActivity.class));
 
         if (!session.isLogin() && lastTab > getTabWidget().getTabCount()-1) {
             lastTab = getTabWidget().getTabCount()-1;
@@ -110,7 +110,7 @@ public class PostTabActivity extends BaseTabActivity {
     @Override
     protected void onNotFlowResume() {
         super.onNotFlowResume();
-	reload();
+        reload();
     }
 
     @Override

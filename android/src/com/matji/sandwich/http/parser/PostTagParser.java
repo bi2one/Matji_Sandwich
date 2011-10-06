@@ -12,7 +12,7 @@ public class PostTagParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected PostTag getMatjiData(JsonObject object) throws MatjiException {
+	public PostTag getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		PostTag postTag = new PostTag();

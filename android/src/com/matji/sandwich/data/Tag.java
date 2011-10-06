@@ -40,7 +40,7 @@ public class Tag extends MatjiData {
         dest.writeValue(tag);
     }
 
-    protected void readFromParcel(Parcel in) {
+    public void readFromParcel(Parcel in) {
         id = in.readInt();
         tag_id = in.readInt();
         created_at = in.readString();

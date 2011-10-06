@@ -50,7 +50,7 @@ public class Message extends MatjiData implements Comparable<Message>{
 		dest.writeInt(msg_read ? 1 : 0);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		id = in.readInt();
 		sent_user_id = in.readInt();
 		received_user_id = in.readInt();

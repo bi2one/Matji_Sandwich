@@ -82,7 +82,7 @@ public class User extends MatjiData implements Serializable {
         dest.writeString(country_code);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		id = in.readInt();
 		userid = in.readString();
 		nick = in.readString();

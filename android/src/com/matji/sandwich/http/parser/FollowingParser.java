@@ -12,7 +12,7 @@ public class FollowingParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Following getMatjiData(JsonObject object) throws MatjiException {
+	public Following getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Following following = new Following();

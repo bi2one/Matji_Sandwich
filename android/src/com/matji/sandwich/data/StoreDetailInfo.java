@@ -46,7 +46,7 @@ public class StoreDetailInfo extends MatjiData{
 		dest.writeLong(ago);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		id = in.readInt();
 		user_id = in.readInt();
 		store_id = in.readInt();

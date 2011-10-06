@@ -38,7 +38,7 @@ public class StoreTag extends Tag {
 	}
 
 	@Override
-	protected void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 	    super.readFromParcel(in);
 		store_id = in.readInt();
 		store = Store.class.cast(in.readValue(Store.class.getClassLoader()));

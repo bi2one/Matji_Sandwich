@@ -13,7 +13,7 @@ public class NoticeParser extends MatjiDataParser {
 		this.context = context;
 	}
 
-	protected Notice getMatjiData(JsonObject object) throws MatjiException {
+	public Notice getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 
 		Notice notice = new Notice();

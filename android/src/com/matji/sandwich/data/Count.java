@@ -32,7 +32,7 @@ public class Count extends MatjiData{
 		dest.writeInt(count);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		count = in.readInt();
 	}
 	

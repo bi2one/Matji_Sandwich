@@ -30,7 +30,7 @@ public class Simple extends MatjiData {
 		dest.writeString(content);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		content = in.readString();
 	}
 	

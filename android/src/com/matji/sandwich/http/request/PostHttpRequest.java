@@ -1,8 +1,9 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.PostParser;
-
 import android.content.Context;
+
+import com.matji.sandwich.http.parser.PostParser;
+import com.matji.sandwich.http.parser.SearchResultParser;
 
 public class PostHttpRequest extends HttpRequest {
     public static enum Device {
@@ -195,7 +196,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionSearch(String keyword, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "search";
-        parser = new PostParser(context);
+        parser = new SearchResultParser(new PostParser(context));
 
         getHashtable.clear();
         getHashtable.put("q", keyword);

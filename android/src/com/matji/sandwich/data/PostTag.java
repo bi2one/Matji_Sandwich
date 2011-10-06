@@ -42,7 +42,7 @@ public class PostTag extends MatjiData{
 		dest.writeValue(post);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		id = in.readInt();
 		tag_id = in.readInt();
 		post_id = in.readInt();

@@ -12,7 +12,7 @@ public class FoodParser extends MatjiDataParser {
 		super(context);
 	}
 
-	protected Food getMatjiData(JsonObject object) throws MatjiException {
+	public Food getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Food food = new Food();

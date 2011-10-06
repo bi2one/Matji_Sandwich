@@ -50,7 +50,7 @@ public class AttachFile extends MatjiData {
 		dest.writeString(updated_at);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		id = in.readInt();
 		user_id = in.readInt();
 		store_id= in.readInt();

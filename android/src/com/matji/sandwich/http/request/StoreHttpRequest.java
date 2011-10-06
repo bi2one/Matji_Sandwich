@@ -2,6 +2,7 @@ package com.matji.sandwich.http.request;
 
 import android.content.Context;
 
+import com.matji.sandwich.http.parser.SearchResultParser;
 import com.matji.sandwich.http.parser.StoreParser;
 
 public class StoreHttpRequest extends HttpRequest {
@@ -13,7 +14,7 @@ public class StoreHttpRequest extends HttpRequest {
     public void actionSearch(String keyword, int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "search";
-    	parser = new StoreParser(context);
+    	parser = new SearchResultParser(new StoreParser(context));
     	
     	getHashtable.clear();
     	getHashtable.put("q",keyword);

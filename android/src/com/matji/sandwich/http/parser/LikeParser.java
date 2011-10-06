@@ -13,7 +13,7 @@ public class LikeParser extends MatjiDataParser {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected Like getMatjiData(JsonObject object) throws MatjiException {
+	public Like getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Like like = new Like();

@@ -46,7 +46,7 @@ public class Notice extends MatjiData{
 		dest.writeLong(ago);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		start_date = in.readString();
 		created_at = in.readString();
 		updated_at = in.readString();

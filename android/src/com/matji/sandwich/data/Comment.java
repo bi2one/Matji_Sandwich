@@ -48,7 +48,7 @@ public class Comment extends MatjiData{
 		dest.writeLong(ago);
 	}
 
-	private void readFromParcel(Parcel in) {
+	public void readFromParcel(Parcel in) {
 		comment = in.readString();
 		created_at = in.readString();
 		updated_at = in.readString();

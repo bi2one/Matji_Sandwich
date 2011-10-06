@@ -10,34 +10,30 @@ import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
 
 public class StorePostListView extends PostListView {
-	private HttpRequest request;
-	private Store store;	
-	
-	public StorePostListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    private HttpRequest request;
+    private Store store;	
 
-	@Override
-	protected void init() {
+    public StorePostListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    @Override
+    protected void init() {
         request = new PostHttpRequest(getContext());
         setPage(1);
-	}
-	
-	public void setStore(Store store) {
-		this.store = store;
-		super.init();
-	}
-	
-	@Override
-	public HttpRequest request() {
-		((PostHttpRequest) request).actionStoreList(store.getId(), getPage(), getLimit());
-		return request;
-	}
-	
-	@Override
-	protected String getSubtitle() {
-	    return String.format(
-	            MatjiConstants.string(R.string.subtitle_store_post), 
-	            store.getPostCount());
-	}
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+        super.init();
+        setSubtitle(String.format(
+                MatjiConstants.string(R.string.subtitle_store_post), 
+                store.getPostCount()));
+    }
+
+    @Override
+    public HttpRequest request() {
+        ((PostHttpRequest) request).actionStoreList(store.getId(), getPage(), getLimit());
+        return request;
+    }
 }

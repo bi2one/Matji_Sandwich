@@ -17,7 +17,7 @@ public class PostParser extends MatjiDataParser {
 		super(context);
 	}
 	
-	protected Post getMatjiData(JsonObject object) throws MatjiException {
+	public Post getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
 		Post post = new Post();
