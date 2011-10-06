@@ -130,8 +130,7 @@ public class Session implements Requestable {
         }
         //        mManager.request(spinnerContainer, request, AUTHORIZE, this);
     }
-
-
+    
     public boolean logout(){
         preLogout();
 
@@ -271,73 +270,11 @@ public class Session implements Requestable {
         }
     }
 
-    public static class LoginAsyncTask extends AsyncTask<Object, Integer, Boolean> {
-        private ProgressDialog dialog;
-
-        private Context context;
-        private Loginable loginable;
-        private String userid;
-        private String password;
-        private boolean hasLogin;
-
-        public LoginAsyncTask(Context context, Loginable loginable, String userid, String password) {
-            this.context = context;
-            this.loginable = loginable;
-            this.userid = userid;
-            this.password = password;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // TODO Auto-generated method stub
-            super.onPreExecute();
-
-            Session.getInstance(context).preLogin();
-
-            dialog = new ProgressDialog(context);
-            dialog.setMessage(MatjiConstants.string(R.string.progress_login));
-            dialog.setIndeterminate(true);
-            dialog.setCancelable(false);
-            dialog.show();
-        }
-
-        @Override
-        protected Boolean doInBackground(Object... arg0) {
-            // TODO Auto-generated method stub
-
-            Session session = Session.getInstance(context);
-            hasLogin = session.login(userid, password);
-            session.notificationValidate();
-
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            // TODO Auto-generated method stub
-            super.onPostExecute(result);
-            dialog.dismiss();
-
-            if (hasLogin) {
-                loginable.loginCompleted();
-                Session.getInstance(context).postLogin();
-            } else {
-                loginable.loginFailed();
-            }
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            // TODO Auto-generated method stub
-            super.onProgressUpdate(values);
-        }
-    }
-
     //
     //    /*
     //     *  Async write Me info to local database
     //     */	
-    //    private class SaveMeAsyncTask extends AsyncTask<Me, Integer, Boolean>{
+    //    private class AsyncTask extends AsyncTask<Me, Integer, Boolean>{
     //        ProgressDialog dialog;
     //
     //        @Override

@@ -74,6 +74,9 @@
   <string name="exception_BitmapCompressIOMatjiException">
     이미지 압축 대상 파일을 생성할 수 없습니다
   </string>
+  <string name="exception_InvalidPasswordMatjiException">
+    아이디 혹은 비밀번호를 확인해주세요.
+  </string>
 
   <!-- server exception -->
   <string name="exception_failed_to_save_region">
