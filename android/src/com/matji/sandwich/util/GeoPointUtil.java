@@ -3,8 +3,8 @@ package com.matji.sandwich.util;
 import com.google.android.maps.GeoPoint;
 
 public class GeoPointUtil {
-    private static final int EQUAL_BOUND_LAT = 100;
-    private static final int EQUAL_BOUND_LNG = 100;
+    private static final int EQUAL_BOUND_LAT = 20;
+    private static final int EQUAL_BOUND_LNG = 20;
     
     public static boolean geoPointEquals(GeoPoint p1, GeoPoint p2) {
 	if (p1 == null || p2 == null) {

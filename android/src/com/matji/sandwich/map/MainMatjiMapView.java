@@ -143,6 +143,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     public void onLocationChanged(int startedFromTag, Location location) {
 	if (prevLocation != null) {
 	    if (prevLocation.getAccuracy() >= location.getAccuracy()) {
+		startMapCenterThread(new LocationToGeoPointAdapter(location));
 		gpsManager.stop();
 	    }
 	}

@@ -73,7 +73,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
 
         flipMapViewImage = getResources().getDrawable(R.drawable.icon_location_map_selector);
         flipNearStoreImage = getResources().getDrawable(R.drawable.icon_location_list_selector);
-        mapView.startMapCenterThread();
+        // mapView.startMapCenterThread();
 	isFirst = true;
     }
 
@@ -92,10 +92,10 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
 	}
 
 	if (!isFirst) {
+	    // mapView.startMapCenterThread(mapView.getMapCenter());
 	    mapView.reload();
 	}
 	
-        mapView.startMapCenterThread();
 	isFirst = false;
     }
 
@@ -112,7 +112,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         // mapView.stopMapCenterThread();
 
         // Log.d("=====", "mainmap activity pause");
-        // mapView.stopMapCenterThread();
+        mapView.stopMapCenterThread();
     }
 
     public void onCurrentPositionClicked(View v) {
