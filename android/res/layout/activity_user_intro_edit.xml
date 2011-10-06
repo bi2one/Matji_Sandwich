@@ -13,6 +13,7 @@
 		android:gravity="top"
 		android:hint="@string/hint_write_intro"
 		style="@style/DefaultFill"
+		android:textSize="@dimen/default_edit_text_size"
 		android:layout_below="@id/Titlebar"
 		android:background="@drawable/input_box_square"
 		android:layout_margin="@dimen/default_distance" />

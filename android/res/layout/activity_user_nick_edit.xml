@@ -15,6 +15,7 @@
 			android:id="@+id/user_nick_edit_field"
 			style="@style/DefaultWidthFill"
 			android:hint="@string/hint_write_nick"
+			android:textSize="@dimen/default_edit_text_size"
 			android:singleLine="true"
 			android:background="@drawable/input_box_square" />
 		<TextView

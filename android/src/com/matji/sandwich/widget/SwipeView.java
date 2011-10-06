@@ -1,70 +1,65 @@
 package com.matji.sandwich.widget;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
-public class SwipeView extends HorizontalPager {
-    // private GestureDetector gestureDetector;
-    private Context mContext;
-    //private Scroller scroller;
+import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
+
+public class SwipeView extends HorizontalPager implements OnScrollListener {
+
+    private int currentPage = 0;
+    private Set<OnPageChangedListener> listeners = new HashSet<OnPageChangedListener>();
 
     public SwipeView(Context context, AttributeSet attrs) {
-		super(context, attrs, 0);
-		this.mContext = getContext();
-		// gestureDetector = new GestureDetector(new GestureListener());
-		// scroller = new Scroller(context);
+        super(context, attrs, 0);
+        init();
+    }
+    
+    public SwipeView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init();
+    }
+    
+    private void init() {
+        addOnScrollListener(this);
     }
 
-    // protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    //     int childLeft = 0;
+    public void addOnPageChangedListener(OnPageChangedListener listener) {    
+        listeners.add(listener);
+    }
 
-    //     final int count = getChildCount();
-    // 	Log.d("====count", "count: " + count);
-	
-    //     for (int i = 0; i < count; i++) {
-    //         final View child = getChildAt(i);
-    //         if (child.getVisibility() != View.GONE) {
-    //             final int childWidth = this.getMeasuredWidth();
-    // 		// Log.d("====width", "width: " + this.getMeasuredWidth());
-		
-    //             // child.layout(childLeft, 0, childLeft + childWidth, child.getMeasuredHeight());
-    //             child.layout(childLeft, 0, childLeft + childWidth, this.getMeasuredHeight());
-    //             childLeft += childWidth;
-    //         }
-    //     }
-    // }
+    public void removeOnPageChangedListener(OnPageChangedListener listener) {    
+        listeners.remove(listener);
+    }
 
-    // public static class GestureListener extends SimpleOnGestureListener {
-    // 	private float downX;
-	
-    // 	public boolean onDown(MotionEvent e) {
-    // 	    downX = e.getX();
-    // 	    return false;
-    // 	}
+    @Override
+    public void onScroll(int scrollX) {
+        int width = getResources().getDisplayMetrics().widthPixels;
+        if (width/2 < Math.abs(scrollX)) {
+            if (scrollX < 0 && currentPage > 0) {
+                Log.d("scroll", "Scroll to previous page");
+                for (OnPageChangedListener listener : listeners) {
+                    listener.prev();
+                }
+            } else if (scrollX > 0 && currentPage < getChildCount()) {
+                Log.d("scroll", "Scroll to next page");
+                for (OnPageChangedListener listener : listeners) {
+                    listener.next();
+                }
+            }
+        }
+    }
 
-    // 	public boolean onSingleTapUp(MotionEvent e) {
-    // 	    // Log.d("++++++", "up     :" + e.getX() + ", " + e.getY());
-    // 	    return false;
-    // 	}
-	
-    // 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-    // 	    // Log.d("======", "fling  :" + e1.getX() + ", " + e2.getY());
-    // 	    return false;
-    // 	}
-	
-    // 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-    // 	    Log.d("======", "distance: " + ((downX - e2.getX()) + distanceX));
-    // 	    // Log.d("======", "aaaaaaaa: " + distanceX);
-    // 	    // e2좌표지점으로 view를 옮겨주는 작업이 필요함.
-    // 	    // scrollBy((int)(downX - e2.getX()), 0);
-    // 	    // Log.d("======", "start  : " + e1.getX() + ", " + e1.getY());
-    // 	    // Log.d("======", "scroll :" + distanceX + ", " + distanceY);
-    // 	    // Log.d("======", "down   : " + downEvent.getX() + ", " + downEvent.getY());
-    // 	    // Log.d("======", "end    : " + e2.getX() + ", " + e2.getY());
-    // 	    // Log.d("======", "=======================================");
-    // 	    // Log.d("======", context.test);
-	    
-    // 	    return false;
-    // 	}
- //    }
+    @Override
+    public void onViewScrollFinished(int currentPage) {
+    }
+
+    public static interface OnPageChangedListener {
+        public void prev();
+        public void next();
+    }
 }

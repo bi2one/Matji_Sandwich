@@ -20,4 +20,9 @@ public class Utils {
         }
         catch(Exception ex){}
     }
+    
+    public static String getCorrectUrl(String url) {
+        return (!url.startsWith("http://") && !url.startsWith("https://")) ? "http://" + url : url;
+        
+    }
 }

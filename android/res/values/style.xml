@@ -107,21 +107,6 @@
   <style name="SimpleTalkContent" parent="TalkContent">
   	<item name="android:singleLine">true</item>
   </style>
-  
-  <style name="ETCButton">
-  	<item name="android:layout_width">150dp</item>
-  	<item name="android:layout_height">40dp</item>
-  	<item name="android:padding">7dp</item>
-  	<item name="android:textSize">16dp</item>
-  	<item name="android:gravity">left|center</item>
-  	<item name="android:drawableRight">@drawable/icon_flow</item>
-  </style>
-  
-  <style name="SettingButton" parent="ETCButton">
-  	<item name="android:background">@drawable/btn_rectangle</item>
-  	<item name="android:layout_width">fill_parent</item>
-  	<item name="android:layout_height">wrap_content</item>
-  </style>
     
   <style name="HorizontalLine">
     <item name="android:background">@color/listview_divider1_gray</item>
@@ -425,11 +410,6 @@
     <item name="android:layout_height">12.67dp</item>
     <item name="android:layout_marginRight">2dp</item>
   </style>
-    
-  <!-- indicator_round_head.xml -->
-  <style name="IndicatorRoundHead" parent="IndicatorRound">
-    <item name="android:background">@drawable/btn_left_corner</item>
-  </style>
 
   <!-- indicator_round_left.xml -->
   <style name="IndicatorRoundLeft" parent="IndicatorRound">
@@ -571,13 +551,6 @@
   <style name="row_post_CreatedAt" parent="DefaultWrap">
     <item name="android:textSize">@dimen/row_post_text_size</item>
     <item name="android:textColor">@color/matji_light_gray</item>
-  </style>
-
-  <style name="row_post_Comment" parent="DefaultWrap">
-    <item name="android:textSize">@dimen/row_post_text_size</item>
-    <item name="android:textColor">@color/matji_red</item>
-    <item name="android:text">@string/default_string_comment</item>
-    <item name="android:layout_marginRight">@dimen/default_drawable_padding</item>
   </style>
   
   <style name="row_post_Count" parent="DefaultWrap">

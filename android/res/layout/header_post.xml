@@ -68,15 +68,12 @@
 			android:layout_below="@id/header_post_previews"
 			android:layout_toRightOf="@id/header_post_created_at" />
 		<com.matji.sandwich.widget.BoldStyleTextView
-			android:id="@+id/header_post_comment"
-			style="@style/row_post_Comment"
-			android:layout_below="@id/header_post_previews"
-			android:layout_toRightOf="@id/header_post_divider1" />
-		<com.matji.sandwich.widget.BoldStyleTextView
 			android:id="@+id/header_post_comment_count"
 			style="@style/row_post_Count"
+            android:drawableLeft="@drawable/icon_reply"
+            android:drawablePadding="@dimen/default_drawable_padding"
 			android:layout_below="@id/header_post_previews"
-			android:layout_toRightOf="@id/header_post_comment" />
+            android:layout_toRightOf="@id/header_post_divider1" />
 		<View
 			android:id="@+id/header_post_divider2"
 			style="@style/row_post_Divider"

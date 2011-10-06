@@ -3,10 +3,10 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,6 +31,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     private EditText etPasswordConfirm;
     private TextView tvAccept;
     private CheckBox cbAccept;
+    private Button bRegister;
 
     private SimpleAlertDialog emailIsNullDialog;
     private SimpleAlertDialog emailIsIncorrectDialog;
@@ -44,12 +45,6 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     
     public int setMainViewId() {
         return R.id.activity_register;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -73,6 +68,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         etPasswordConfirm = (EditText) findViewById(R.id.register_password_confirm_field);
         tvAccept = (TextView) findViewById(R.id.register_view_acceptance_of_terms);
         cbAccept = (CheckBox) findViewById(R.id.register_acceptance_of_terms_check);
+        bRegister = (Button) findViewById(R.id.register_btn);
     }
 
     private void setListeners() {
@@ -81,6 +77,14 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
             @Override
             public void onClick(View v) {
                 // move to clause activity
+            }
+        });
+        
+        bRegister.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+                complete();
             }
         });
         

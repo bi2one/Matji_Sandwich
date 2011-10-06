@@ -11,6 +11,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.UserHttpRequest;
+import com.matji.sandwich.http.util.Utils;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
@@ -68,7 +69,7 @@ public class UserWebsiteEditActivity extends BaseActivity implements Completable
     @Override
     public void complete() {
         title.lockCompletableButton();
-        request.actionUpdateWebsite(field.getText().toString().trim());
+        request.actionUpdateWebsite(Utils.getCorrectUrl(field.getText().toString().trim()));
         manager.request(getApplicationContext(), getMainView(), request, HttpRequestManager.USER_UPDATE_REQUEST, this);
     }
 
@@ -76,7 +77,7 @@ public class UserWebsiteEditActivity extends BaseActivity implements Completable
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) { 
         case HttpRequestManager.USER_UPDATE_REQUEST:
-            session.getCurrentUser().setWebsite(field.getText().toString().trim());
+            session.getCurrentUser().setWebsite(Utils.getCorrectUrl(field.getText().toString().trim()));
             finish();
             break;
         }

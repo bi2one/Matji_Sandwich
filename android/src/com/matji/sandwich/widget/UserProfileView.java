@@ -20,6 +20,7 @@ import com.matji.sandwich.StoreBookmarkListActivity;
 import com.matji.sandwich.StoreDiscoverListActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.http.util.Utils;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.cell.UserCell;
@@ -88,7 +89,7 @@ public class UserProfileView extends RelativeLayout implements Refreshable {
             public void onClick(View arg0) {
                 if (!user.getWebsite().equals("")) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    Uri uri = Uri.parse(user.getWebsite());
+                    Uri uri = Uri.parse(Utils.getCorrectUrl(user.getWebsite()));
                     intent.setData(uri);
                     getContext().startActivity(intent);
                 }

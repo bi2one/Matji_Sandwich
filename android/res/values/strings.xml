@@ -97,6 +97,7 @@
   <string name="default_string_not_exist_intro">소개글이 없습니다.</string>
   <string name="default_string_not_exist_website">웹사이트가 없습니다.</string>
   <string name="default_string_not_exist_cover">커버가 없습니다.</string>
+  <string name="default_string_not_exist_tel">전화번호가 없습니다.</string>
   <string name="default_string_basic_info">기본정보</string>
   <string name="default_string_more_info">부가정보</string>
   <string name="default_string_info">정보</string>
@@ -531,6 +532,7 @@
   <string name="register_write_password">비밀번호를 입력해 주세요.</string>
   <string name="register_acceptance_of_terms">약관동의</string>
   <string name="register_view_acceptance_of_terms">(약관보기)</string>
+  <string name="register_complete">가입완료</string>
 
   <!-- StoreLocationMapActivity.java -->
   <string name="store_location_header">\'%1$s\'의 지도</string>
@@ -591,8 +593,8 @@
   <string name="country_name_AI">Anguilla</string>
   <string name="country_code_AL">AL</string>
   <string name="country_name_AL">Shqipëria</string>
-  <string name="country_code_AM">AM</string>
-  <string name="country_name_AM">Հայաստան</string>
+<!--   <string name="country_code_AM">AM</string> -->
+<!--   <string name="country_name_AM">Հայաստան</string> -->
   <string name="country_code_AN">AN</string>
   <string name="country_name_AN">Netherlands Antilles</string>
   <string name="country_code_AO">AO</string>
@@ -733,8 +735,8 @@
   <string name="country_name_GB">United Kingdom</string>
   <string name="country_code_GD">GD</string>
   <string name="country_name_GD">Grenada</string>
-  <string name="country_code_GE">GE</string>
-  <string name="country_name_GE">საქართველო</string>
+<!--   <string name="country_code_GE">GE</string> -->
+<!--   <string name="country_name_GE">საქართველო</string> -->
   <string name="country_code_GF">GF</string>
   <string name="country_name_GF">French Guiana</string>
   <string name="country_code_GG">GG</string>
@@ -881,8 +883,8 @@
   <string name="country_name_MT">Malta</string>
   <string name="country_code_MU">MU</string>
   <string name="country_name_MU">Mauritius</string>
-  <string name="country_code_MV">MV</string>
-  <string name="country_name_MV">ގުޖޭއްރާ ޔާއްރިހޫމްޖ</string>
+<!--   <string name="country_code_MV">MV</string> -->
+<!--   <string name="country_name_MV">ގުޖޭއްރާ ޔާއްރިހޫމްޖ</string> -->
   <string name="country_code_MW">MW</string>
   <string name="country_name_MW">Malawi</string>
   <string name="country_code_MX">MX</string>

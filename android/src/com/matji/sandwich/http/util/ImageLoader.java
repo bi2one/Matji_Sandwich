@@ -19,9 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.util.Log;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 
 import com.matji.sandwich.R;
@@ -114,34 +112,28 @@ public class ImageLoader {
         return HttpUtility.getUrlStringWithQuery(type.toString(), params);
     }
 
+    public void cancel(ImageView imageView) {
+        photosQueue.Clean(imageView);
+    }
+    
     public void clear(UrlType type, int id) {
-	clear(type, ImageSize.SSMALL, id);
-	clear(type, ImageSize.SMALL, id);
-	clear(type, ImageSize.MEDIUM, id);
-	clear(type, ImageSize.LARGE, id);
-	clear(type, ImageSize.XLARGE, id);
+        clear(type, ImageSize.SSMALL, id);
+        clear(type, ImageSize.SMALL, id);
+        clear(type, ImageSize.MEDIUM, id);
+        clear(type, ImageSize.LARGE, id);
+        clear(type, ImageSize.XLARGE, id);
     }
 
     public void clear(UrlType type, ImageSize size, int id) {
-	String url = createUrl(type, size, id);
-	memoryCache.remove(url);
-	fileCache.remove(url);
+        String url = createUrl(type, size, id);
+        memoryCache.remove(url);
+        fileCache.remove(url);
     }
 
     public void DisplayImage(Activity activity, UrlType type, ImageSize size, ImageView imageView, int id) {
         DisplayImage(createUrl(type, size, id), activity, imageView);
     }
-    
-    public void DisplayImage(UrlType type, ImageSize size, ImageSwitcher imageSwitcher, int id) {
-        DisplayImage(createUrl(type, size, id), imageSwitcher);
-    }
 
-    public void DisplayImage(String url, ImageSwitcher imageSwitcher)
-    {
-        Uri uri = Uri.parse(getFile(url).getPath());
-        imageSwitcher.setImageURI(uri);
-    }
-    
     public void DisplayImage(String url, Activity activity, ImageView imageView)
     {
         imageViews.put(imageView, url);
@@ -180,7 +172,7 @@ public class ImageLoader {
     public File getFile(UrlType type, ImageSize size, int id) {
         return getFile(createUrl(type, size, id));
     }
-    
+
     private File getFile(String url) {
         File f=fileCache.getFile(url);
         try {
@@ -193,7 +185,7 @@ public class ImageLoader {
             Utils.CopyStream(is, os);
             applyConvert(f);
             os.close();
-            
+
             return f;
         } catch(Exception e) {
             e.printStackTrace();
@@ -366,7 +358,7 @@ public class ImageLoader {
             }
         }
     }
-
+    
     public static void clearCache(Context context) {
         memoryCache.clear();
         if (fileCache == null) {

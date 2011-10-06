@@ -130,7 +130,7 @@
 								android:background="@drawable/btn_yellow"
 								android:text="@string/settings_account_logout"
 								android:layout_centerVertical="true"
-								android:layout_alignParentRight="true"></Button>
+								android:layout_alignParentRight="true"/>
 						</RelativeLayout>
 						<!-- Link Twitter -->
 						<TextView

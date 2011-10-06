@@ -74,21 +74,25 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     public void refresh() {
         Store store = StoreDetailInfoTabActivity.store;
         String cover = store.getCover();
+        String tel = store.getTel();
         String website = store.getWebsite();
 
         tvName.setText(StoreDetailInfoTabActivity.store.getName());
-        if(cover == null || cover.equals("")) {
-            tvCover.setText(MatjiConstants.string(R.string.default_string_not_exist_cover));
-        } else {
-            tvCover.setText(StoreDetailInfoTabActivity.store.getCover());
-        }
-        tvTel.setText(StoreDetailInfoTabActivity.store.getTel());
+        tvCover.setText(
+                (cover == null || cover.equals("")) ?
+                        MatjiConstants.string(R.string.default_string_not_exist_cover)
+                        :StoreDetailInfoTabActivity.store.getCover());
+
+        tvTel.setText(
+                (tel == null || tel.equals("")) ?
+                        MatjiConstants.string(R.string.default_string_not_exist_tel)
+                        : StoreDetailInfoTabActivity.store.getTel());
         tvAddress.setText(StoreDetailInfoTabActivity.store.getAddress());
-        if(website == null || website.equals("")) {
-            tvWebsite.setText(MatjiConstants.string(R.string.default_string_not_exist_website));
-        } else {
-            tvWebsite.setText(StoreDetailInfoTabActivity.store.getWebsite());
-        }
+
+        tvWebsite.setText(
+                (website == null || website.equals("")) ?
+                        MatjiConstants.string(R.string.default_string_not_exist_website)
+                        : StoreDetailInfoTabActivity.store.getWebsite());
     }
 
     @Override

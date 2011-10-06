@@ -35,7 +35,7 @@
     <item>@string/country_code_AG</item>
     <item>@string/country_code_AI</item>
     <item>@string/country_code_AL</item>
-    <item>@string/country_code_AM</item>
+<!--     <item>@string/country_code_AM</item> -->
     <item>@string/country_code_AN</item>
     <item>@string/country_code_AO</item>
     <item>@string/country_code_AQ</item>
@@ -106,7 +106,7 @@
     <item>@string/country_code_GA</item>
     <item>@string/country_code_GB</item>
     <item>@string/country_code_GD</item>
-    <item>@string/country_code_GE</item>
+<!--     <item>@string/country_code_GE</item> -->
     <item>@string/country_code_GF</item>
     <item>@string/country_code_GG</item>
     <item>@string/country_code_GH</item>
@@ -180,7 +180,7 @@
     <item>@string/country_code_MS</item>
     <item>@string/country_code_MT</item>
     <item>@string/country_code_MU</item>
-    <item>@string/country_code_MV</item>
+<!--     <item>@string/country_code_MV</item> -->
     <item>@string/country_code_MW</item>
     <item>@string/country_code_MX</item>
     <item>@string/country_code_MY</item>
@@ -282,7 +282,7 @@
     <item>@string/country_name_AG</item>
     <item>@string/country_name_AI</item>
     <item>@string/country_name_AL</item>
-    <item>@string/country_name_AM</item>
+<!--     <item>@string/country_name_AM</item> -->
     <item>@string/country_name_AN</item>
     <item>@string/country_name_AO</item>
     <item>@string/country_name_AQ</item>
@@ -353,7 +353,7 @@
     <item>@string/country_name_GA</item>
     <item>@string/country_name_GB</item>
     <item>@string/country_name_GD</item>
-    <item>@string/country_name_GE</item>
+<!--     <item>@string/country_name_GE</item> -->
     <item>@string/country_name_GF</item>
     <item>@string/country_name_GG</item>
     <item>@string/country_name_GH</item>
@@ -427,7 +427,7 @@
     <item>@string/country_name_MS</item>
     <item>@string/country_name_MT</item>
     <item>@string/country_name_MU</item>
-    <item>@string/country_name_MV</item>
+<!--     <item>@string/country_name_MV</item> -->
     <item>@string/country_name_MW</item>
     <item>@string/country_name_MX</item>
     <item>@string/country_name_MY</item>

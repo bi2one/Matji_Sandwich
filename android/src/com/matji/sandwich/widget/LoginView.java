@@ -30,8 +30,8 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     private View register;
 
     private CheckBox saveidCheckBox;
-    private View loginTwitter;
-    private View loginFacebook;
+//    private View loginTwitter;
+//    private View loginFacebook;
 
     private SessionPrivateUtil privateUtil;
 
@@ -55,18 +55,16 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         pwdField = (EditText) findViewById(R.id.login_password);
         saveidCheckBox = (CheckBox) findViewById(R.id.login_save_id);
         register = findViewById(R.id.login_register);
-        loginTwitter = findViewById(R.id.login_twitter);
-        loginFacebook = findViewById(R.id.login_facebook);
+//        loginTwitter = findViewById(R.id.login_twitter);
+//        loginFacebook = findViewById(R.id.login_facebook);
 
         privateUtil = Session.getInstance(getContext()).getPrivateUtil();
         idField.setText(privateUtil.getSavedUserId());
         saveidCheckBox.setChecked(privateUtil.isCheckedSaveId());        
         saveidCheckBox.setOnCheckedChangeListener(this);
         register.setOnClickListener(this);
-        loginTwitter.setOnClickListener(this);
-        loginFacebook.setOnClickListener(this);
-        loginTwitter.setVisibility(GONE);
-        loginFacebook.setVisibility(GONE);
+//        loginTwitter.setOnClickListener(this);
+//        loginFacebook.setOnClickListener(this);
     }
 
     public void clearField() {
@@ -108,10 +106,10 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     public void onClick(View v) {
         if (v.getId() == register.getId()) {
             registerClicked(v);
-        } else if (v.getId() == loginTwitter.getId()) {
-            loginViaTiwtter(v);
-        } else if (v.getId() == loginFacebook.getId()) {
-            loginViaFacebook(v);
+//        } else if (v.getId() == loginTwitter.getId()) {
+//            loginViaTiwtter(v);
+//        } else if (v.getId() == loginFacebook.getId()) {
+//            loginViaFacebook(v);
         }
     }
 
