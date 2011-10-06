@@ -153,7 +153,6 @@
     <item>@string/country_code_KW</item>
     <item>@string/country_code_KY</item>
     <item>@string/country_code_KZ</item>
-    <item>@string/country_code_LA</item>
     <item>@string/country_code_LB</item>
     <item>@string/country_code_LC</item>
     <item>@string/country_code_LI</item>
@@ -401,7 +400,6 @@
     <item>@string/country_name_KW</item>
     <item>@string/country_name_KY</item>
     <item>@string/country_name_KZ</item>
-    <item>@string/country_name_LA</item>
     <item>@string/country_name_LB</item>
     <item>@string/country_name_LC</item>
     <item>@string/country_name_LI</item>

@@ -20,6 +20,7 @@
   <string name="client_secret">331d96e8ac924cab59b314d134645b</string>
   
   <!-- MatjiException -->
+  <string name="exception_InternalServerMatjiException">서버 오류입니다. 관리자에게 문의하세요.</string>
   <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
   <string name="exception_GpsEnabledMatjiException">GPS 서비스를 사용할 수 있습니다</string>
   <string name="exception_GpsOutOfServiceMatjiException">GPS 서비스 지역에서 벗어났습니다</string>
@@ -171,7 +172,7 @@
   
   <!-- Cell -->
   <string name="cell_user_point">포인트</string>
-  <string name="cell_user_area">활동지역</string>
+  <string name="cell_user_area">활동국가</string>
   <string name="cell_user_follow">Follow</string>
   <string name="cell_user_unfollow">Unfollow</string>
   <string name="cell_store_not_exist_tel">전화번호 미등록</string>
@@ -407,9 +408,10 @@
   <string name="post_sub_header_txt_one">%1$s님이 좋아합니다.</string>
   <string name="post_sub_header_txt_other">%1$s님 외 %2$d명이 좋아합니다.</string>
   
-  <!-- StoreTagActivity.java -->
+  <!-- TagCloud -->
   <string name="number_of_tag">%1$d개의 태그</string>
-  
+  <string name="all_tag">전체 태그</string>
+  <string name="top_tag">상위 태그</string>
   
   <!-- WriteMessageActivity.java -->
   <string name="write_message_writing_content">내용 입력</string>
@@ -523,6 +525,7 @@
   <!-- edit guide -->
   <string name="edit_website_guide">친구들에게 보여질\n블로그, 혹은 개인 홈페이지\n주소를 입력하세요.</string>
   <string name="edit_nick_guide">친구들에게 보여질\n닉네임을 입력하세요.</string>
+  <string name="edit_password_guide">변경할 비밀번호를 입력하세요.</string>
   
   <!-- activity_register.xml -->
   <string name="register_write_email">이메일을 입력해 주세요.</string>
@@ -563,6 +566,7 @@
   <string name="title_received_user">받는 사람</string>
   <string name="title_find_store">발견 맛집</string>
   <string name="title_bookmark_store">북마크 맛집</string>
+  <string name="title_area">활동국가</string>
   
   <!-- UserPasswordEditActivity.java -->
   <string name="user_password_edit_password_changed">비밀번호가 성공적으로 변경되었습니다.</string>
@@ -825,8 +829,6 @@
   <string name="country_name_KY">Cayman Islands</string>
   <string name="country_code_KZ">KZ</string>
   <string name="country_name_KZ">Қазақстан</string>
-  <string name="country_code_LA">LA</string>
-  <string name="country_name_LA">ນລາວ</string>
   <string name="country_code_LB">LB</string>
   <string name="country_name_LB">لبنان</string>
   <string name="country_code_LC">LC</string>

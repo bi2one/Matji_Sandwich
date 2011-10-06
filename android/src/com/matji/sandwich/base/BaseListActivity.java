@@ -93,7 +93,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
     @Override
     public void setContentView(int layoutResID) {
         if (this.getParent() == null){
-            requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
             setTheme(R.style.Theme_RemoveOverlay);
         }
         super.setContentView(layoutResID);

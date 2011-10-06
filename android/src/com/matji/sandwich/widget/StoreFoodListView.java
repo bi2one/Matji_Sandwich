@@ -58,6 +58,7 @@ public class StoreFoodListView extends RequestableMListView {
         Food dummyFood = new Food();
         dummyFood.setName(StoreFoodAdapter.ADD_STORE_FOOD);
         dummy.setFood(dummyFood);
+        dummy.setAccuracy(true);
         data.add(dummy);
         super.requestCallBack(tag, data);
     }

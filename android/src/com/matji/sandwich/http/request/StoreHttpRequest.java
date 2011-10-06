@@ -18,7 +18,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.clear();
     	getHashtable.put("q",keyword);
     	getHashtable.put("page", page + "");
-    	getHashtable.put("limit", limit + ""); 
+    	getHashtable.put("limit", limit + "");
     	getHashtable.put("include", "attach_file,user,tags,foods");
     }
     
@@ -123,7 +123,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("lat_ne", lat_ne + "");
     	getHashtable.put("lng_sw", lng_sw + "");
     	getHashtable.put("lng_ne", lng_ne + "");
-    	getHashtable.put("order", "like_count DESC,reg_user_id ASC");
+    	getHashtable.put("order", "like_count DESC");
     	getHashtable.put("page", page + "");
     	getHashtable.put("limit", limit + ""); 
     	getHashtable.put("include", "attach_file,user,tags,foods");
@@ -168,7 +168,7 @@ public class StoreHttpRequest extends HttpRequest {
     	getHashtable.put("lat_ne", lat_ne + "");
     	getHashtable.put("lng_sw", lng_sw + "");
     	getHashtable.put("lng_ne", lng_ne + "");
-    	getHashtable.put("order", "like_count DESC,reg_user_id ASC");
+    	getHashtable.put("order", "like_count DESC");
     	getHashtable.put("page", page + "");
     	// getHashtable.put("limit", limit + ""); 
     	getHashtable.put("include", "attach_file,user,tags,foods");

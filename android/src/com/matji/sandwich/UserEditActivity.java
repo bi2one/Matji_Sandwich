@@ -43,6 +43,7 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     private View vArea;
     private TextView tvArea;
     private TextView tvEditPassword;
+    private User user;
     
     public int setMainViewId() {
         return R.id.activity_user_edit;
@@ -83,6 +84,7 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     }
 
     public void setUser(User user) {
+	this.user = user;
         userEditCell.setUser(user);
         String intro = user.getIntro();
         if (intro.equals("")) {
@@ -95,7 +97,8 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
             website = MatjiConstants.string(R.string.default_string_not_exist_website);
         }
         tvWebsite.setText(website);
-        tvArea.setText("한국인가?");
+        String country = MatjiConstants.countryName(user.getCountryCode());
+        if (country != null) tvArea.setText(country);
     }
 
     @Override
@@ -129,7 +132,8 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     }
 
     public void onAreaWrapperClicked(View v) {
-
+        Intent intent = new Intent(this, UserAreaEditActivity.class);
+        startActivity(intent);
     }
     
     public void onEditPasswordClicked(View v) {
@@ -195,6 +199,8 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 	switch(tag) {
 	case REQUEST_CHANGE_IMAGE:
+	    imageLoader.clear(ImageLoader.UrlType.USER, user.getId());
+	    userEditCell.reloadProfile();
 	    break;
 	}
     }

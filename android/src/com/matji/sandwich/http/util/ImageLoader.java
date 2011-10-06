@@ -114,10 +114,18 @@ public class ImageLoader {
         return HttpUtility.getUrlStringWithQuery(type.toString(), params);
     }
 
-    public boolean remove(UrlType type, ImageSize size, int id) {
+    public void clear(UrlType type, int id) {
+	clear(type, ImageSize.SSMALL, id);
+	clear(type, ImageSize.SMALL, id);
+	clear(type, ImageSize.MEDIUM, id);
+	clear(type, ImageSize.LARGE, id);
+	clear(type, ImageSize.XLARGE, id);
+    }
+
+    public void clear(UrlType type, ImageSize size, int id) {
 	String url = createUrl(type, size, id);
 	memoryCache.remove(url);
-	return fileCache.remove(url);
+	fileCache.remove(url);
     }
 
     public void DisplayImage(Activity activity, UrlType type, ImageSize size, ImageView imageView, int id) {

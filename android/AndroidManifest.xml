@@ -118,6 +118,9 @@
         <activity android:name="UserNickEditActivity"
                   android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait"></activity>
+        <activity android:name="UserAreaEditActivity"
+                  android:windowSoftInputMode="adjustResize"
+                  android:screenOrientation="portrait"></activity>
         <activity android:name="UserPasswordEditActivity"
                   android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait"></activity>
@@ -144,11 +147,11 @@
                   android:screenOrientation="portrait"></activity>
         <activity android:name="UserTagPostListActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name="UserTagCloudActivity"
+		<activity android:name="UserTagListActivity"
                   android:screenOrientation="portrait"></activity>
         <activity android:name="StoreTagPostListActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name="StoreTagCloudActivity"
+		<activity android:name="StoreTagListActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="FollowingActivity"
                   android:screenOrientation="portrait"></activity>

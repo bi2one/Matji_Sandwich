@@ -37,17 +37,16 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
         tag = getIntent().getParcelableExtra(TAG);
         
         title = (UserTitle) findViewById(R.id.Titlebar);
-        userCell = new UserCell(this, UserMainActivity.user);
+        userCell = new UserCell(this, UserProfileTabActivity.user);
         listView = (TagPostListView) findViewById(R.id.user_tag_post_list_view);
         
         title.setIdentifiable(this);
-        title.setUser(UserMainActivity.user);
+        title.setUser(UserProfileTabActivity.user);
         title.setFollowable(userCell);
 
         userCell.setIdentifiable(this);
         userCell.addRefreshable(this);
         userCell.addRefreshable(title);
-        userCell.showLine();
 
         listView.addHeaderView(userCell);
         listView.setTag(tag);
@@ -75,8 +74,8 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
             break;
         case USER_PROFILE_TAB_ACTIVITY:
             if (resultCode == RESULT_OK) {
-                UserMainActivity.user = (User) data.getParcelableExtra(UserMainActivity.USER);
-                userCell.setUser(UserMainActivity.user);
+                UserProfileTabActivity.user = (User) data.getParcelableExtra(UserProfileTabActivity.USER);
+                userCell.setUser(UserProfileTabActivity.user);
                 userCell.refresh();
             }
             break;
@@ -102,7 +101,7 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof User){
-            UserMainActivity.user = (User) data;
+            UserProfileTabActivity.user = (User) data;
             refresh();
         }
     }

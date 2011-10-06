@@ -52,6 +52,12 @@
 			android:layout_toRightOf="@id/row_message_nick"
 			android:layout_below="@id/row_message_subject_list"
 			android:drawablePadding="@dimen/default_drawable_padding" />
+		<RelativeLayout
+			android:id="@+id/SpinnerContainer"
+			style="@style/DefaultWrap"
+			android:layout_toRightOf="@id/row_message_created_at_list"
+			android:layout_below="@id/row_message_subject_list"
+			android:layout_marginLeft="@dimen/default_drawable_padding" />
 	</RelativeLayout>
 
 	<LinearLayout
@@ -78,7 +84,7 @@
 				android:textColor="@color/matji_gray"
 				android:layout_below="@id/row_message_shadow" />
 			<LinearLayout
-            android:id="@+id/row_message_created_at_wrapper"
+				android:id="@+id/row_message_created_at_wrapper"
 				style="@style/DefaultWidthFill"
 				android:gravity="center_vertical"
 				android:layout_below="@id/row_message_subject"

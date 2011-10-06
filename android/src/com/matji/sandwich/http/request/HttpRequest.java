@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.exception.InternalServerMatjiException;
 import com.matji.sandwich.exception.HttpConnectMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.parser.MatjiParser;
@@ -47,6 +48,24 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 	getHashtable = new Hashtable<String, String>();
     }
 
+    private boolean confirmStatusCode(int code) {
+	switch(code) {
+	case HttpUtility.HTTP_STATUS_OK:
+	    return true;
+	default:
+	    return false;
+	}
+    }
+
+    private boolean secondaryConfirmStatusCode(int code) {
+	switch(code) {
+	case HttpUtility.HTTP_STATUS_NOT_ACCEPTABLE:
+	    return true;
+	default:
+	    return false;
+	}
+    }
+    
     public ArrayList<MatjiData> request() throws MatjiException {
 	SimpleHttpResponse response = (httpMethod == HttpMethod.HTTP_POST) ?
 	    requestHttpResponsePost(null, postHashtable):requestHttpResponseGet(null, getHashtable);
@@ -57,7 +76,16 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 	Log.d("request", getClass() + " resultBody:" + resultBody);
 	Log.d("request", getClass() + " resultCode: " + resultCode);
 
-	ArrayList<MatjiData> result = parser.parseToMatjiDataList(resultBody);
+	ArrayList<MatjiData> result = null;
+	
+	if (confirmStatusCode(Integer.parseInt(resultCode))) {
+	    result = parser.parseToMatjiDataList(resultBody);
+	} else if (secondaryConfirmStatusCode(Integer.parseInt(resultCode))) {
+	    result = null;
+	} else {
+	    throw new InternalServerMatjiException();
+	}
+	
 	if (progressListener != null) {
 	    progressListener.onUnitWritten(progressTag, getRequestCount(), 1);
 	}
@@ -101,9 +129,6 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 	   (netInfo_wifi.getState() == NetworkInfo.State.CONNECTED)) {
 	    Map<String,String> baseHeader = new HashMap<String,String>();
 
-	    baseHeader.put("Agent", "MATJI_ANDROID");
-	    baseHeader.put("Content-Type", "text/xml");
-
 	    if(header != null) {
 		baseHeader.putAll(header);
 	    }
@@ -118,7 +143,6 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 		    getParam.put("access_token", "" + session.getToken());
 		getParam.put("format", "json");
 	    }
-
 
 	    if(method == HttpUtility.ASYNC_METHOD_POST) {
 		HttpUtility utility = HttpUtility.getInstance();

@@ -17,9 +17,10 @@ import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.tag.UserTagCloudView;
+import com.matji.sandwich.widget.tag.UserTagListView;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserTagCloudActivity extends BaseActivity implements Refreshable, LoginListener {
+public class UserTagListActivity extends BaseActivity implements Refreshable, LoginListener {
 
 	private Session session;
     private boolean isMainTabActivity;
@@ -27,22 +28,21 @@ public class UserTagCloudActivity extends BaseActivity implements Refreshable, L
     private UserCell userCell;
     private SubtitleHeader tagCount;
     private UserTagCloudView tagCloudView;
+    private UserTagListView tagListView;
+    private Button toggleButton;
     
-    private View cloudWrapper;
-    private View listWrapper;
-    private Button tagListButton;
-    private Button tagCloudButton;
+    private boolean isVisibleCloudView;
 
     public static final String IS_MAIN_TAB_ACTIVITY = "UserTagActivity.is_main_tab_activity";
 
     public int setMainViewId() {
-        return R.id.activity_user_tag_cloud;
+        return R.id.activity_user_tag_list;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_tag_cloud);
+        setContentView(R.layout.activity_user_tag_list);
         
         session = Session.getInstance(this);
         session.addLoginListener(this);
@@ -52,11 +52,9 @@ public class UserTagCloudActivity extends BaseActivity implements Refreshable, L
         userCell = (UserCell) findViewById(R.id.UserCell);
         tagCount = (SubtitleHeader) findViewById(R.id.user_tag_count);
         tagCloudView = (UserTagCloudView) findViewById(R.id.user_tag_cloud);
-        listWrapper = findViewById(R.id.user_tag_all_wrapper);
-        cloudWrapper = findViewById(R.id.user_tag_cloud_wrapper);
-        tagListButton = (Button) findViewById(R.id.user_tag_all_btn);
-        tagCloudButton = (Button) findViewById(R.id.user_tag_cloud_btn);
-
+        tagListView = (UserTagListView) findViewById(R.id.user_tag_all);
+        toggleButton = (Button) findViewById(R.id.user_tag_toggle_btn);
+            
         if (!isMainTabActivity) {
             title.setIdentifiable(this);
             title.setUser(UserProfileTabActivity.user);
@@ -70,27 +68,46 @@ public class UserTagCloudActivity extends BaseActivity implements Refreshable, L
         if (!isMainTabActivity) userCell.addRefreshable(title);
         else dismissTitle();
         userCell.addRefreshable(tagCloudView);
+        userCell.addRefreshable(tagListView);
 
         tagCloudView.setSpinnerContainer(getMainView());
+        tagListView.setSpinnerContainer(getMainView());
         
-        tagListButton.setOnClickListener(new OnClickListener() {
+        toggleButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				listWrapper.setVisibility(View.VISIBLE);
-				cloudWrapper.setVisibility(View.GONE);
+				toggleTagView();
 			}
 		});
-        tagCloudButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				listWrapper.setVisibility(View.GONE);
-				cloudWrapper.setVisibility(View.VISIBLE);
-			}
-		});
+
+        visibleCloudView();
+    }
+    
+    public void toggleTagView() {
+        if (isVisibleCloudView) {
+            visibleListView();
+        } else {
+            visibleCloudView();
+        }
     }
 
+    public void visibleCloudView() {
+        toggleButton.setText(R.string.all_tag);
+        tagListView.setVisibility(View.GONE);
+        tagCloudView.setVisibility(View.VISIBLE);
+
+        isVisibleCloudView = true;
+    }
+    
+    public void visibleListView() {
+        toggleButton.setText(R.string.top_tag);
+        tagListView.setVisibility(View.VISIBLE);
+        tagCloudView.setVisibility(View.GONE);
+        
+        isVisibleCloudView = false;
+    }
+    
     public void showTitle() {
         title.setVisibility(View.VISIBLE);
     }

@@ -59,17 +59,20 @@ public class FlowLayout extends ViewGroup {
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
-                final FlowLayout.LayoutParams lp = (FlowLayout.LayoutParams) child.getLayoutParams();
-                child.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST), childHeightMeasureSpec);
-                final int childw = child.getMeasuredWidth();
-                line_height = Math.max(line_height, child.getMeasuredHeight() + lp.vertical_spacing);
+                //TODO
+                if (checkLayoutParams(child.getLayoutParams())) {
+                    final FlowLayout.LayoutParams lp = (FlowLayout.LayoutParams) child.getLayoutParams();
+                    child.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST), childHeightMeasureSpec);
+                    final int childw = child.getMeasuredWidth();
+                    line_height = Math.max(line_height, child.getMeasuredHeight() + lp.vertical_spacing);
 
-                if (xpos + childw > width) {
-                    xpos = getPaddingLeft();
-                    ypos += line_height;
-                }
+                    if (xpos + childw > width) {
+                        xpos = getPaddingLeft();
+                        ypos += line_height;
+                    }
 
-                xpos += childw + lp.horizontal_spacing;
+                    xpos += childw + lp.horizontal_spacing;
+                }                    
             }
         }
         this.line_height = line_height;
@@ -110,13 +113,16 @@ public class FlowLayout extends ViewGroup {
             if (child.getVisibility() != GONE) {
                 final int childw = child.getMeasuredWidth();
                 final int childh = child.getMeasuredHeight();
-                final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-                if (xpos + childw > width) {
-                    xpos = getPaddingLeft();
-                    ypos += line_height;
+                //TODO
+                if (checkLayoutParams(child.getLayoutParams())) {
+                    final LayoutParams lp = (LayoutParams) child.getLayoutParams();
+                    if (xpos + childw > width) {
+                        xpos = getPaddingLeft();
+                        ypos += line_height;
+                    }
+                    child.layout(xpos, ypos, xpos + childw, ypos + childh);
+                    xpos += childw + lp.horizontal_spacing;
                 }
-                child.layout(xpos, ypos, xpos + childw, ypos + childh);
-                xpos += childw + lp.horizontal_spacing;
             }
         }
     }

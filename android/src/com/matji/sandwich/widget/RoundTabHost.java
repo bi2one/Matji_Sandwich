@@ -6,10 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 
+import com.matji.sandwich.util.AnimationUtil;
 import com.matji.sandwich.widget.indicator.Indicator;
 import com.matji.sandwich.widget.indicator.RoundCenterCheckIndicator;
 import com.matji.sandwich.widget.indicator.RoundCenterIndicator;
@@ -17,7 +17,6 @@ import com.matji.sandwich.widget.indicator.RoundLeftCheckIndicator;
 import com.matji.sandwich.widget.indicator.RoundLeftIndicator;
 import com.matji.sandwich.widget.indicator.RoundRightCheckIndicator;
 import com.matji.sandwich.widget.indicator.RoundRightIndicator;
-import com.matji.sandwich.util.AnimationUtil;
 
 public class RoundTabHost extends TabHost implements OnTabChangeListener {
     private static final long ANIMATION_DURATION = 300;

@@ -27,6 +27,7 @@ public class Store extends MatjiData implements Serializable {
     private int like_count;
     private int bookmark_count;
     private int url_count;
+    private boolean hasLock;
     private AttachFile file;
     private User reg_user;
     private ArrayList<SimpleTag> tags;
@@ -71,6 +72,7 @@ public class Store extends MatjiData implements Serializable {
 	dest.writeInt(like_count);
 	dest.writeInt(bookmark_count);
 	dest.writeInt(url_count);
+	dest.writeInt(hasLock ? 1 : 0);
 	dest.writeValue(file);
 	dest.writeValue(reg_user);
 	dest.writeTypedList(tags);
@@ -96,6 +98,7 @@ public class Store extends MatjiData implements Serializable {
 	like_count = in.readInt();
 	bookmark_count = in.readInt();
 	url_count= in.readInt();
+	hasLock = in.readInt() != 0;
 	file = AttachFile.class.cast(in.readValue(AttachFile.class.getClassLoader()));
 	reg_user = User.class.cast(in.readValue(User.class.getClassLoader()));
 	tags = new ArrayList<SimpleTag>();
@@ -219,6 +222,14 @@ public class Store extends MatjiData implements Serializable {
     public User getRegUser() {
 	return reg_user;
     }
+    public void setHasLock(boolean hasLock) {
+        this.hasLock = hasLock;
+    }
+
+    public boolean hasLocked() {
+        return hasLock;
+    }
+
     public void setFile(AttachFile file) {
 	this.file = file;
     }
@@ -246,10 +257,6 @@ public class Store extends MatjiData implements Serializable {
 
     public ArrayList<Food> getFoods() {
 	return foods;
-    }
-
-    public boolean isLocked() {
-	return reg_user_id == 0;
     }
 
     public String getTagString() {

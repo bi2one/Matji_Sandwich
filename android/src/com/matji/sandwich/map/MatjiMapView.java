@@ -15,6 +15,13 @@ import android.view.View.OnTouchListener;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.GeoPointUtil;
 
+/**
+ * 맵의 중심 좌표를 {@link MatjiMapCenterListener}를 통해 callback받을
+ * 수 있는 기능을 제공하는 MapView.
+ *
+ * @author bizone
+ * 
+ */
 public class MatjiMapView extends MapView implements MatjiMapViewInterface {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
     private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
@@ -22,7 +29,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
     private MapAsyncTask asyncTask;
     private GeoPoint mapCenter;
     private GeoPoint newMapCenter;
-    private GeoPoint tempMapCenter;
+    // private GeoPoint tempMapCenter;
     private SessionMapUtil sessionUtil;
     private MapController mapController;
 	
@@ -32,37 +39,45 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	mapController = getController();
     }
 
-    public void startMapCenterThread() {
+    /**
+     * 맵 중심을 체크하는 Thread를 동작시킨다.
+     */
+    public synchronized void startMapCenterThread() {
+	startMapCenterThread(getMapCenter());
+    }
+
+    /**
+     * 맵 중심을 체크하는 Thread를 동작시킨다.
+     * 
+     * @param startPoint 맵 중심잡기 Thread를 수행할 때, 기본 위치
+     * 
+     */
+    public synchronized void startMapCenterThread(GeoPoint startPoint) {
+	mapCenter = startPoint;
+	if (listener != null) {
+	    listener.onMapCenterChanged(mapCenter);
+	}
+
 	if (asyncTask == null) {
 	    asyncTask = new MapAsyncTask();
 	    asyncTask.start();
 	}
     }
 
-    public GeoPoint getMapCenter() {
-	if (tempMapCenter == null)
-	    return super.getMapCenter();
-	else {
-	    GeoPoint result = tempMapCenter;
-	    tempMapCenter = null;
-	    return result;
-	}
-    }
-
-    public void stopMapCenterThread() {
+    public synchronized void stopMapCenterThread() {
 	if (asyncTask != null) {
 	    asyncTask.interrupt();
 	    asyncTask = null;
 	}
-	tempMapCenter = null;
     }
 
+    /**
+     * 맵 중심좌표를 callback으로 받는 {@link MatjiMapCenterListener}를 등록한다.
+     *
+     * @param listener 등록할 listener
+     */
     public void setMapCenterListener(MatjiMapCenterListener listener) {
 	this.listener = listener;
-    }
-
-    public void requestMapCenterChanged(GeoPoint point) {
-	this.tempMapCenter = tempMapCenter;
     }
 
     private class MapAsyncTask extends Thread {
@@ -82,12 +97,6 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	    	    threadSleep(MAP_CENTER_UPDATE_TICK);
 	    	    newMapCenter = getMapCenter();
 
-	    	    if (tempMapCenter != null) {
-	    		mapCenter = tempMapCenter;
-	    		listener.onMapCenterChanged(mapCenter);
-	    		tempMapCenter = null;
-	    	    }
-		    
 	    	    if (GeoPointUtil.geoPointEquals(mapCenter, newMapCenter))
 	    	    	continue;
 		    

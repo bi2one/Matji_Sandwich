@@ -9,18 +9,18 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.matji.sandwich.Refreshable;
-import com.matji.sandwich.UserTagPostListActivity;
+import com.matji.sandwich.StoreTagPostListActivity;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Tag;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
 
-public class UserTagListView extends TagListView implements Refreshable {
+public class StoreTagListView extends TagListView implements Refreshable {
 
     private HttpRequest request;
 
-    private User user;
+    private Store store;
 
     /**
      * 기본 생성자 (XML)
@@ -28,13 +28,13 @@ public class UserTagListView extends TagListView implements Refreshable {
      * @param context
      * @param attr
      */
-    public UserTagListView(Context context, AttributeSet attr) {
+    public StoreTagListView(Context context, AttributeSet attr) {
         super(context, attr);
     }
 
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setStore(Store store) {
+        this.store = store;
         requestReload();
     }
     
@@ -43,7 +43,7 @@ public class UserTagListView extends TagListView implements Refreshable {
             request = new TagHttpRequest(getContext());
         }
 
-        ((TagHttpRequest) request).actionUserTagList(user.getId(), getPage(), getLimit());
+        ((TagHttpRequest) request).actionStoreTagList(store.getId(), getPage(), getLimit());
 
         return request;
     }
@@ -54,8 +54,8 @@ public class UserTagListView extends TagListView implements Refreshable {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), UserTagPostListActivity.class);
-                intent.putExtra(UserTagPostListActivity.TAG, (Parcelable) tag);
+                Intent intent = new Intent(getContext(), StoreTagPostListActivity.class);
+                intent.putExtra(StoreTagPostListActivity.TAG, (Parcelable) tag);
                 getContext().startActivity(intent);
             }
         };
@@ -68,8 +68,8 @@ public class UserTagListView extends TagListView implements Refreshable {
 
     @Override
     public void refresh(MatjiData data) {
-        if (data instanceof User) {
-            this.user = (User) data;
+        if (data instanceof Store) {
+            this.store = (Store) data;
             refresh();
         }        
     }

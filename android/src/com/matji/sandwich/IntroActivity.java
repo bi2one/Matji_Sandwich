@@ -24,7 +24,7 @@ import com.matji.sandwich.widget.dialog.SimpleDialog;
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener, 
 														SimpleAsyncTask.ProgressListener {
 	private static final long LOADING_MIN_TIME = 1000;
-	private static final long DIALOG_MIN_TIME = 1500;
+	private static final long DIALOG_MIN_TIME = 2000;
 	private ProgressDialog dialog;
 	private TimeAsyncTask timeAsyncTask;
 	private SimpleAsyncTask simpleAsyncTask;
@@ -60,7 +60,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 		
 	}
 
-	public void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
+	public synchronized void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
 		lastElapsedTime = elapsedTime;
 		if (elapsedTime > DIALOG_MIN_TIME) {
 			dialog.show();
@@ -134,7 +134,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 		}
 	}
 
-	public class UpdateMessage extends Thread implements Runnable {
+	public class UpdateMessage implements Runnable {
 		public void run() {
 			updateDialog.show();
 		}
@@ -151,6 +151,10 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
     
 
 	private Boolean compare(String current_ver, String update_ver) {
+	    if (current_ver == null || update_ver == null) {
+	        return false;
+	    }
+	    
 		String cv = current_ver.replaceAll("\\.","");
 		String uv = update_ver.replaceAll("\\.","");
 		while (cv.length() != uv.length()){

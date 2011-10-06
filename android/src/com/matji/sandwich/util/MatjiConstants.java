@@ -64,4 +64,24 @@ public class MatjiConstants {
     public static final String language() {
         return mResources.getConfiguration().locale.getLanguage();
     }
+    
+    public static final String countryName(String code) {
+        String[] names = MatjiConstants.stringArray(R.array.country_names);
+        String[] codes = MatjiConstants.stringArray(R.array.country_codes);
+        for (int i = 0; i < codes.length; i++) {
+            if (code.equals(codes[i])) return names[i];
+        }
+        
+        return null;
+    }   
+    
+    public static final String countryCode(String name) {
+        String[] names = MatjiConstants.stringArray(R.array.country_names);
+        String[] codes = MatjiConstants.stringArray(R.array.country_codes);
+        for (int i = 0; i < codes.length; i++) {
+            if (name.equals(names[i])) return codes[i];
+        }
+        
+        return null;
+    }
 }

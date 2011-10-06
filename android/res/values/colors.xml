@@ -136,4 +136,7 @@
 
 	<!-- matji dialog -->
 	<color name="matji_dialog_gray">#947e4c</color>
+	
+	<!-- TagCloud -->
+	<color name="tag_toggle_btn_txt">#735b22</color>
 </resources>

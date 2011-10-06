@@ -40,13 +40,7 @@ public class TagHttpRequest extends HttpRequest {
     }
 
     public void actionStoreTagListForCloud(int store_id) {
-        action = "store_tag_list";
-        parser = new StoreTagParser(context);
-
-        getHashtable.clear();
-        getHashtable.put("store_id", store_id+ "");       
-        getHashtable.put("page", "1");
-        getHashtable.put("limit", "50");
+        actionStoreTagList(store_id, 1, 50);
         getHashtable.put("order", "count desc");
     }
 
@@ -58,16 +52,11 @@ public class TagHttpRequest extends HttpRequest {
         getHashtable.put("user_id", user_id+ "");		
         getHashtable.put("page", page+ "");
         getHashtable.put("limit", limit+ "");
+        getHashtable.put("order", "count DESC");
     }
 
     public void actionUserTagListForCloud(int user_id) {
-        action = "user_tag_list";
-        parser = new UserTagParser(context);
-
-        getHashtable.clear();
-        getHashtable.put("user_id", user_id+ "");		
-        getHashtable.put("page", "1");
-        getHashtable.put("limit", "50");
+        actionUserTagList(user_id, 1, 50);
         getHashtable.put("order", "count desc");
     }
 

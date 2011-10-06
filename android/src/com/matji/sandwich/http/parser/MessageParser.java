@@ -38,7 +38,7 @@ public class MessageParser extends MatjiDataParser {
 		message.setCreatedAt(getString(object, "created_at"));
 		message.setUpdatedAt(getString(object, "updated_at"));
 		message.setAgo(getLong(object, "ago"));
-		message.setMsgRead(getInt(object, "msg_read") != 0);
+		message.setMsgRead(getBoolean(object, "msg_read"));
 		
 		if (message.getMessage().startsWith(SYSTEM_MESSAGE_SPEC)) {
 		    message.setMessage(parseSystemMessage(message.getMessage()));

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_user_tag_list"
+	style="@style/DefaultFill"
+	android:background="@drawable/bg_01">
+	<com.matji.sandwich.widget.title.UserTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWidthFill" />
+	<com.matji.sandwich.widget.MatjiScrollView
+		android:background="@color/matji_transparent"
+		style="@style/DefaultFill"
+		android:layout_below="@id/Titlebar">
+		<RelativeLayout
+			style="@style/DefaultLinearFill">
+			<com.matji.sandwich.widget.cell.UserCell
+				android:id="@id/UserCell"
+				style="@style/DefaultWidthFill" />
+			<com.matji.sandwich.widget.SubtitleHeader
+				android:id="@+id/user_tag_count"
+				style="@style/DefaultWrap"
+				android:layout_below="@id/UserCell" />
+			<Button
+				android:id="@+id/user_tag_toggle_btn"
+				style="@style/DefaultWrap"
+				android:background="@drawable/btn_lemon"
+				android:textColor="@color/tag_toggle_btn_txt"
+				android:textSize="@dimen/tag_toggle_btn_txt_size"
+				android:shadowColor="@color/matji_white"
+				android:shadowDy="1.3"
+				android:shadowRadius="1"
+				android:paddingLeft="@dimen/default_distance"
+				android:paddingRight="@dimen/default_distance"
+				android:layout_marginRight="@dimen/default_distance"
+				android:layout_marginTop="@dimen/tag_toggle_btn_margin"
+				android:layout_alignParentRight="true"
+				android:layout_above="@+id/user_tag_list_wrapper"
+				android:layout_below="@id/UserCell" />
+			<RelativeLayout
+				android:id="@id/user_tag_list_wrapper"
+				style="@style/DefaultWrap"
+				android:layout_margin="@dimen/default_distance"
+				android:layout_below="@id/user_tag_count">
+				<com.matji.sandwich.widget.tag.UserTagCloudView
+					android:id="@id/user_tag_cloud"
+					style="@style/DefaultFill" />
+				<com.matji.sandwich.widget.tag.UserTagListView
+					android:id="@+id/user_tag_all"
+					style="@style/DefaultFill"
+					android:visibility="gone" />
+			</RelativeLayout>
+		</RelativeLayout>
+	</com.matji.sandwich.widget.MatjiScrollView>
+</RelativeLayout>

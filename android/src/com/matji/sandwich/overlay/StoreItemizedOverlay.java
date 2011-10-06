@@ -65,7 +65,7 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
 
         UNLOCK_BITMAP_OFFSET_X = mMarkerUnLocked.getWidth()/2;
         UNLOCK_BITMAP_OFFSET_Y = mMarkerUnLocked.getHeight();
-        LOCK_BITMAP_OFFSET_X = mMarkerLocked.getWidth()/2;
+        LOCK_BITMAP_OFFSET_X = mMarkerLocked.getWidth()/2-2;
         LOCK_BITMAP_OFFSET_Y = mMarkerLocked.getHeight();
 
         //this.mBitmap100 = BitmapFactory.decodeResource(context.getResources(), R.drawable);
@@ -152,7 +152,7 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
         Store popupStore = lastPopupItem.getStore();
 	int yOffset = 0;
 	
-	if (popupStore.isLocked()) {
+	if (popupStore.hasLocked()) {
 	    yOffset = -(POPUP_OVERLAY_OFFSET_Y + LOCK_BITMAP_OFFSET_Y);
 	} else {
 	    yOffset = -(POPUP_OVERLAY_OFFSET_Y + UNLOCK_BITMAP_OFFSET_Y);
@@ -216,7 +216,7 @@ public class StoreItemizedOverlay extends ItemizedOverlay {
             int jjim_count = ((StoreOverlayItem)getItem(i)).getCount();
             Store store = ((StoreOverlayItem)getItem(i)).getStore();
 
-            if(store.isLocked()) {
+            if(store.hasLocked()) {
                 canvas.drawBitmap(mMarkerLocked,
                         pt.x - LOCK_BITMAP_OFFSET_X,
                         pt.y - LOCK_BITMAP_OFFSET_Y,

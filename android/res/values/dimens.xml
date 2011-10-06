@@ -258,4 +258,11 @@
     <dimen name="store_default_info_name_size">14dp</dimen>
     <dimen name="store_default_info_cover_size">12dp</dimen>
     <dimen name="store_default_info_content_size">16dp</dimen>
+    
+    <!-- TagCloud -->
+    <dimen name="tag_toggle_btn_margin">6.67dp</dimen>
+    <dimen name="tag_toggle_btn_txt_size">12dp</dimen>
+    
+    <!-- activity_user_password_edit.xml -->
+    <dimen name="edit_text_margin_bottom">6.67dp</dimen>
 </resources>
