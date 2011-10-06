@@ -193,7 +193,9 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     }
 
     public void startMapCenterThread() {
-	mapView.startMapCenterThread();
+	if (!gpsManager.isRunning()) {
+	    mapView.startMapCenterThread();
+	}
     }
 
     public void stopMapCenterThread() {

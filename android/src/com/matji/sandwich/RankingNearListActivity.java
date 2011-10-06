@@ -59,7 +59,7 @@ ActivityStartable {
         setContentView(R.layout.activity_ranking_near_list);
 
         context = getApplicationContext();
-        gpsManager = new GpsManager(context, this);
+        gpsManager = new GpsManager(this, this);
         sessionUtil = new SessionMapUtil(context);
         sessionLocationUtil = new SessionRecentLocationUtil(context);
         requestManager = HttpRequestManager.getInstance();
