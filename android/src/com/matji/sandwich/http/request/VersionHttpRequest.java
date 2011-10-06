@@ -13,7 +13,7 @@ public class VersionHttpRequest extends HttpRequest {
 	
 	public void actionAppVersion(String target, String version) {
 		action = "app_version";
-		parser = new AppVersionParser(context);
+		parser = new AppVersionParser(getContext());
 		
 		getHashtable.clear();
 		getHashtable.put("target", target);

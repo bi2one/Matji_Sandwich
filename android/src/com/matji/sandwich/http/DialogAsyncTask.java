@@ -13,11 +13,11 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.R;
 
 import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 
 public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
     private ProgressDialog dialog;
-    private Context context;
-    private Requestable requestable;
+    private WeakReference<Requestable> requestableRef;
     private ViewGroup spinnerContainer;
     private RequestCommand request;
     private int tag;
@@ -29,8 +29,7 @@ public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
     }
 
     public DialogAsyncTask(Context context, Requestable requestable, ViewGroup spinnerContainer, RequestCommand request, int tag) {
-        this.context = context;
-        this.requestable = requestable;
+        this.requestableRef = new WeakReference(requestable);
         this.spinnerContainer = spinnerContainer;
 	this.request = request;
 	this.tag = tag;
@@ -71,9 +70,9 @@ public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
         dialog.dismiss();
         
         if (isSuccess) {
-	    requestable.requestCallBack(tag, data);
+	    requestableRef.get().requestCallBack(tag, data);
         } else {
-	    requestable.requestExceptionCallBack(tag, exception);
+	    requestableRef.get().requestExceptionCallBack(tag, exception);
         }
     }
 

@@ -33,6 +33,7 @@ import com.matji.sandwich.location.MatjiLocationListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.ref.WeakReference;
 
 public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapViewInterface,
 								      MatjiMapCenterListener,
@@ -42,12 +43,11 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 								      View.OnClickListener {
     private static final int GPS_START_TAG = 0;
     private static final int REQUEST_REVERSE_GEOCODING = 0;
-    private Context context;
-    private Activity activity;
+    private WeakReference<Activity> activityRef;
     private MatjiMapView mapView;
     private MapController mapController;
     private SimpleSubmitLocationBar locationBar;
-    private OnClickListener clickListener;
+    private WeakReference<OnClickListener> clickListenerRef;
     private GeocodeRunnable geocodeRunnable;
     private HttpRequestManager requestManager;
     private SessionMapUtil sessionMapUtil;
@@ -63,7 +63,6 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     
     public WriteStoreMatjiMapView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	this.context = context;
 	
 	LayoutInflater.from(context).inflate(R.layout.write_store_matji_mapview, this, true);
 	
@@ -94,6 +93,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     public void onLocationChanged(int startedFromTag, Location location) {
 	if (prevLocation != null) {
 	    if (prevLocation.getAccuracy() >= location.getAccuracy()) {
+		mapView.startMapCenterThread(new LocationToGeoPointAdapter(location));
 		gpsManager.stop();
 	    }
 	}
@@ -103,7 +103,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     }
 
     public void onLocationExceptionDelivered(int startedFromTag, MatjiException e) {
-	e.performExceptionHandling(context);
+	e.performExceptionHandling(getContext());
     }
 
     public String getStoreName() {
@@ -131,7 +131,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     }
 
     public void init(Activity activity) {
-	this.activity = activity;
+	this.activityRef = new WeakReference(activity);
     }
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
@@ -143,38 +143,39 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
-	e.performExceptionHandling(context);
+	e.performExceptionHandling(getContext());
     }
 
     public void onMapCenterChanged(GeoPoint point) {
+	Log.d("=====", "changed");
 	geocodeRunnable.setCenter(point);
-	activity.runOnUiThread(geocodeRunnable);
+	activityRef.get().runOnUiThread(geocodeRunnable);
     }
 
     public void onMapTouchUp(View v) {
-	if (clickListener == null) {
+	if (clickListenerRef == null) {
 	    return ;
 	} else {
-	    clickListener.onMapTouchUp(v);
+	    clickListenerRef.get().onMapTouchUp(v);
 	}
     }
 
     public void onMapTouchDown(View v) {
-	if (clickListener == null) {
+	if (clickListenerRef == null) {
 	    return ;
 	} else {
-	    clickListener.onMapTouchDown(v);
+	    clickListenerRef.get().onMapTouchDown(v);
 	}
     }
 
     public void onClick(View v) {
-	if (clickListener == null) {
+	if (clickListenerRef == null) {
 	    return ;
 	}
 	
 	int vId = v.getId();
 	if (vId == downButton.getId()) {
-	    clickListener.onShowMapClick(v);
+	    clickListenerRef.get().onShowMapClick(v);
 	}
     }
 
@@ -188,7 +189,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     }
 
     public void setOnClickListener(OnClickListener clickListener) {
-	this.clickListener = clickListener;
+	this.clickListenerRef = new WeakReference(clickListener);
     }
 
     public void startMapCenterThread() {
@@ -220,14 +221,14 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     }
 
     private class GeocodeRunnable implements Runnable {
-	private Context context;
-	private Requestable requestable;
+	private WeakReference<Context> contextRef;
+	private WeakReference<Requestable> requestableRef;
 	private GeoPoint center;
 	private RelativeLayout spinnerContainer;
 	
 	public GeocodeRunnable(RelativeLayout spinnerContainer, Context context, Requestable requestable) {
-	    this.context = context;
-	    this.requestable = requestable;
+	    this.contextRef = new WeakReference(context);
+	    this.requestableRef = new WeakReference(requestable);
 	    this.spinnerContainer = spinnerContainer;
 	}
 
@@ -236,9 +237,9 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 	}
 
 	public void run() {
-    	    GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
+    	    GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(contextRef.get());
     	    geocodeRequest.actionReverseGeocodingByGeoPoint(center, sessionMapUtil.getCurrentCountry());
-    	    requestManager.request(context, spinnerContainer, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestable);
+    	    requestManager.request(contextRef.get(), spinnerContainer, SpinnerFactory.SpinnerType.SMALL, geocodeRequest, REQUEST_REVERSE_GEOCODING, requestableRef.get());
 	}
     }
 

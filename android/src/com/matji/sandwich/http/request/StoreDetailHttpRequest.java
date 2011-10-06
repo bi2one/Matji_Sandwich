@@ -14,7 +14,7 @@ public class StoreDetailHttpRequest extends HttpRequest {
 	public void actionList(int store_id, int page, int limit){
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
-		parser = new StoreDetailInfoParser(context);
+		parser = new StoreDetailInfoParser(getContext());
 
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
@@ -26,7 +26,7 @@ public class StoreDetailHttpRequest extends HttpRequest {
 	public void actionNew(int store_id, String note){
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
-		parser = new StoreParser(context);
+		parser = new StoreParser(getContext());
 
 		postHashtable.clear();
 		postHashtable.put("store_id", store_id);

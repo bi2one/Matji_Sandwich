@@ -2,6 +2,7 @@ package com.matji.sandwich.session;
 
 import java.io.NotSerializableException;
 import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -37,7 +38,7 @@ public class Session implements Requestable {
     private PreferenceProvider mPrefs;
     private ConcretePreferenceProvider mConcretePrefs;
     private SessionPrivateUtil mPrivateUtil;
-    private Context mContext;
+    private WeakReference<Context> mContextRef;
     private HttpRequestManager mManager;
     private Loginable mLoginable;
 
@@ -65,10 +66,10 @@ public class Session implements Requestable {
     private Session(){}
 
     private Session(Context context){
-        this.mContext = context;
+        this.mContextRef = new WeakReference(context);
         this.mPrefs = new PreferenceProvider(context);
         this.mConcretePrefs = new ConcretePreferenceProvider(context);        
-        this.mPrivateUtil = new SessionPrivateUtil(context, this);
+        this.mPrivateUtil = new SessionPrivateUtil(this);
         this.mLoginListeners = new ArrayList<Session.LoginListener>();
         this.mLogoutListeners = new ArrayList<Session.LogoutListener>();
     }
@@ -90,15 +91,15 @@ public class Session implements Requestable {
         preLogin();
         this.mLoginable = loginable;
         mManager = HttpRequestManager.getInstance();
-        MeHttpRequest request = new MeHttpRequest(mContext);
+        MeHttpRequest request = new MeHttpRequest(mContextRef.get());
         request.actionMe();
-        mManager.request(mContext, layout, request, HttpRequestManager.AUTHORIZE, this);
+        mManager.request(mContextRef.get(), layout, request, HttpRequestManager.AUTHORIZE, this);
         notificationValidate();
     }
 
     public void unsyncSessionValidate() {
         mManager = HttpRequestManager.getInstance();
-        MeHttpRequest request = new MeHttpRequest(mContext);
+        MeHttpRequest request = new MeHttpRequest(mContextRef.get());
         request.actionMe();
         ArrayList<MatjiData> data = null;
         try {
@@ -118,7 +119,7 @@ public class Session implements Requestable {
 
     public boolean login(String userid, String password) {
         mManager = HttpRequestManager.getInstance();
-        MeHttpRequest request = new MeHttpRequest(mContext);
+        MeHttpRequest request = new MeHttpRequest(mContextRef.get());
         request.actionAuthorize(userid, password);
         try {
             ArrayList<MatjiData> data = request.request();
@@ -145,7 +146,7 @@ public class Session implements Requestable {
 
 
     private void removePrivateDataFromDatabase(){
-        DBProvider dbProvider = DBProvider.getInstance(mContext);
+        DBProvider dbProvider = DBProvider.getInstance(mContextRef.get());
 
         dbProvider.deleteBookmarks();
         dbProvider.deleteLikes();
@@ -170,7 +171,7 @@ public class Session implements Requestable {
 
         removePrivateDataFromDatabase();
 
-        DBProvider dbProvider = DBProvider.getInstance(mContext);               
+        DBProvider dbProvider = DBProvider.getInstance(mContextRef.get());               
         SQLiteDatabase db = dbProvider.getDatabase();
         try{
             db.beginTransaction();
@@ -255,7 +256,7 @@ public class Session implements Requestable {
     }
 
     public void notificationValidate() {
-        NoticeHttpRequest request = new NoticeHttpRequest(mContext);
+        NoticeHttpRequest request = new NoticeHttpRequest(mContextRef.get());
         request.actionBadge(mPrivateUtil.getLastReadNoticeId());
         ArrayList<MatjiData> data = null;
         try {
@@ -274,14 +275,14 @@ public class Session implements Requestable {
     public static class LoginAsyncTask extends AsyncTask<Object, Integer, Boolean> {
         private ProgressDialog dialog;
 
-        private Context context;
+        private WeakReference<Context> contextRef;
         private Loginable loginable;
         private String userid;
         private String password;
         private boolean hasLogin;
 
         public LoginAsyncTask(Context context, Loginable loginable, String userid, String password) {
-            this.context = context;
+            this.contextRef = new WeakReference(context);
             this.loginable = loginable;
             this.userid = userid;
             this.password = password;
@@ -292,9 +293,9 @@ public class Session implements Requestable {
             // TODO Auto-generated method stub
             super.onPreExecute();
 
-            Session.getInstance(context).preLogin();
+            Session.getInstance(contextRef.get()).preLogin();
 
-            dialog = new ProgressDialog(context);
+            dialog = new ProgressDialog(contextRef.get());
             dialog.setMessage(MatjiConstants.string(R.string.progress_login));
             dialog.setIndeterminate(true);
             dialog.setCancelable(false);
@@ -305,7 +306,7 @@ public class Session implements Requestable {
         protected Boolean doInBackground(Object... arg0) {
             // TODO Auto-generated method stub
 
-            Session session = Session.getInstance(context);
+            Session session = Session.getInstance(contextRef.get());
             hasLogin = session.login(userid, password);
             session.notificationValidate();
 
@@ -320,7 +321,7 @@ public class Session implements Requestable {
 
             if (hasLogin) {
                 loginable.loginCompleted();
-                Session.getInstance(context).postLogin();
+                Session.getInstance(contextRef.get()).postLogin();
             } else {
                 loginable.loginFailed();
             }

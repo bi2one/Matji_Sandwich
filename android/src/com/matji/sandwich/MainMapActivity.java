@@ -92,7 +92,6 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
 	}
 
 	if (!isFirst) {
-	    // mapView.startMapCenterThread(mapView.getMapCenter());
 	    mapView.reload();
 	}
 	
@@ -116,6 +115,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     }
 
     public void onCurrentPositionClicked(View v) {
+	mapView.stopMapCenterThread();
         if (currentViewIsMap) {
             mapView.moveToGpsCenter();
         } else {

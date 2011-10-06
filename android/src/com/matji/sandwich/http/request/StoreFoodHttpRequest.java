@@ -13,7 +13,7 @@ public class StoreFoodHttpRequest extends HttpRequest {
 	public void actionNew(int store_id, String food_name) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
-		parser = new StoreFoodParser(context);
+		parser = new StoreFoodParser(getContext());
 		
 		postHashtable.clear();
 		postHashtable.put("store_id", store_id);
@@ -23,7 +23,7 @@ public class StoreFoodHttpRequest extends HttpRequest {
 	public void actionDelete(int store_food_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "delete";
-		parser = new StoreFoodParser(context);
+		parser = new StoreFoodParser(getContext());
 		
 		postHashtable.clear();
 		postHashtable.put("store_food_id", store_food_id);
@@ -32,7 +32,7 @@ public class StoreFoodHttpRequest extends HttpRequest {
 	public void actionList(int store_id, int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
-		parser = new StoreFoodParser(context); 
+		parser = new StoreFoodParser(getContext()); 
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
@@ -43,7 +43,7 @@ public class StoreFoodHttpRequest extends HttpRequest {
     public void actionAccuracyUp(int store_food_id) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "accuracy_up";
-        parser = new StoreFoodParser(context);
+        parser = new StoreFoodParser(getContext());
         
         getHashtable.clear();
         getHashtable.put("store_food_id", store_food_id+"");
@@ -52,7 +52,7 @@ public class StoreFoodHttpRequest extends HttpRequest {
     public void actionAccuracyDown(int store_food_id) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "accuracy_down";
-        parser = new StoreFoodParser(context);
+        parser = new StoreFoodParser(getContext());
         
         getHashtable.clear();
         getHashtable.put("store_food_id", store_food_id+"");

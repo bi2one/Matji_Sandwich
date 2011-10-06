@@ -5,7 +5,6 @@ import android.content.Context;
 import com.matji.sandwich.data.provider.ConcretePreferenceProvider;
 
 public class SessionPrivateUtil {
-
     public static final String BASIC_ID = "";
     public static final int BASIC_LAST_READ_NOTICE_ID = 0;
     public static final boolean BASIC_IS_CHECKED = false;
@@ -13,7 +12,7 @@ public class SessionPrivateUtil {
     private ConcretePreferenceProvider mConcretePrefs;
 //    private Session session;
 
-    public SessionPrivateUtil(Context context, Session session) {
+    public SessionPrivateUtil(Session session) {
 //        this.session = session;
         mConcretePrefs = session.getConcretePreferenceProvider();
     }

@@ -15,6 +15,8 @@ import android.view.View.OnTouchListener;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.GeoPointUtil;
 
+import java.lang.ref.WeakReference;
+
 /**
  * 맵의 중심 좌표를 {@link MatjiMapCenterListener}를 통해 callback받을
  * 수 있는 기능을 제공하는 MapView.
@@ -25,7 +27,7 @@ import com.matji.sandwich.util.GeoPointUtil;
 public class MatjiMapView extends MapView implements MatjiMapViewInterface {
     private static final int MAP_CENTER_UPDATE_TICK = 200;
     private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
-    private MatjiMapCenterListener listener;
+    private WeakReference<MatjiMapCenterListener> listenerRef;
     private MapAsyncTask asyncTask;
     private GeoPoint mapCenter;
     private GeoPoint newMapCenter;
@@ -54,8 +56,8 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
      */
     public synchronized void startMapCenterThread(GeoPoint startPoint) {
 	mapCenter = startPoint;
-	if (listener != null) {
-	    listener.onMapCenterChanged(mapCenter);
+	if (listenerRef != null) {
+	    listenerRef.get().onMapCenterChanged(mapCenter);
 	}
 
 	if (asyncTask == null) {
@@ -77,7 +79,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
      * @param listener 등록할 listener
      */
     public void setMapCenterListener(MatjiMapCenterListener listener) {
-	this.listener = listener;
+	this.listenerRef = new WeakReference(listener);
     }
 
     private class MapAsyncTask extends Thread {
@@ -93,7 +95,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	
 	public void run() {
 	    while(!stopFlag) {
-	    	if (listener != null) {
+	    	if (listenerRef != null) {
 	    	    threadSleep(MAP_CENTER_UPDATE_TICK);
 	    	    newMapCenter = getMapCenter();
 
@@ -106,7 +108,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	    	    	newMapCenter = getMapCenter();
 	    	    }
 	    	    mapCenter = newMapCenter;
-	    	    listener.onMapCenterChanged(mapCenter);
+	    	    listenerRef.get().onMapCenterChanged(mapCenter);
 	    	}
 	    }
 	}

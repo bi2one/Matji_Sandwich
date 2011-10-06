@@ -35,7 +35,7 @@
 		<activity android:name="LikeUserListActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="MainMapActivity"
-                  android:screenOrientation="portrait"></activity>
+			  android:screenOrientation="portrait"></activity>
 		<activity android:name="MainTabActivity"
 				  android:launchMode="singleTask"
 				  android:screenOrientation="portrait"></activity>

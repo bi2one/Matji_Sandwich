@@ -16,12 +16,14 @@ import com.matji.sandwich.exception.GpsEnabledMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.UseNetworkGpsMatjiException;
 
+import java.lang.ref.WeakReference;
+
 public class GpsManager implements LocationListener {
     private final static long NET_PROVIDER_MIN_NOTIFICATION_INTERVAL = 100; /* 1000 * 60 * 5; */
     private final static long GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL = 50;      /* 1000 * 5; */
     
-    private Context context;
-    private MatjiLocationListener matjiListener;
+    private WeakReference<Context> contextRef;
+    private WeakReference<MatjiLocationListener> matjiListenerRef;
     private LocationManager locationManager;
     private String majorProvider;
     private boolean gpsPerformed;
@@ -30,8 +32,8 @@ public class GpsManager implements LocationListener {
     private final static int minDistanceForNotifyInMeters = 0;
     
     public GpsManager(Context context, MatjiLocationListener matjiListener) {
-	this.context = context;
-	this.matjiListener = matjiListener;
+	this.contextRef = new WeakReference(context);
+	this.matjiListenerRef = new WeakReference(matjiListener);
 	locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
 	gpsPerformed = false;
 	runningFlag = false;
@@ -55,7 +57,7 @@ public class GpsManager implements LocationListener {
 		startLocationSettingsActivity();
 	    }
 	} catch(MatjiException e) {
-	    matjiListener.onLocationExceptionDelivered(startFromTag, e);
+	    matjiListenerRef.get().onLocationExceptionDelivered(startFromTag, e);
 	}
     }
 
@@ -93,19 +95,19 @@ public class GpsManager implements LocationListener {
 
     private void requestLocationUpdatesNetwork() throws MatjiException {
 	majorProvider = LocationManager.NETWORK_PROVIDER;
-	matjiListener.onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
+	matjiListenerRef.get().onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
 	locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
 					       NET_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
     }
 
     private void notifyLocationChanged(Location loc) {
 	if (loc != null) {
-	    matjiListener.onLocationChanged(startFromTag, loc);
+	    matjiListenerRef.get().onLocationChanged(startFromTag, loc);
 	} else {
 	    Location seoulLocation = new Location("");
 	    seoulLocation.setLatitude(37.541);
 	    seoulLocation.setLongitude(126.986);
-	    matjiListener.onLocationChanged(startFromTag, seoulLocation);
+	    matjiListenerRef.get().onLocationChanged(startFromTag, seoulLocation);
 	    // exception !!
 	}
     }
@@ -126,20 +128,20 @@ public class GpsManager implements LocationListener {
 
     public void onProviderEnabled(String provider) {
 	if (provider.equals(majorProvider))
-	    matjiListener.onLocationExceptionDelivered(startFromTag, new GpsEnabledMatjiException());
+	    matjiListenerRef.get().onLocationExceptionDelivered(startFromTag, new GpsEnabledMatjiException());
     }
     
     public void onStatusChanged(String provider, int status, Bundle extras) {
 	if (provider.equals(majorProvider)) {
 	    switch(status) {
 	    case LocationProvider.OUT_OF_SERVICE:
-		matjiListener.onLocationExceptionDelivered(startFromTag, new GpsOutOfServiceMatjiException());
+		matjiListenerRef.get().onLocationExceptionDelivered(startFromTag, new GpsOutOfServiceMatjiException());
 		break;
 	    case LocationProvider.TEMPORARILY_UNAVAILABLE:
-		matjiListener.onLocationExceptionDelivered(startFromTag, new GpsTemporarilyUnavailableMatjiException());
+		matjiListenerRef.get().onLocationExceptionDelivered(startFromTag, new GpsTemporarilyUnavailableMatjiException());
 		break;
 	    case LocationProvider.AVAILABLE:
-		matjiListener.onLocationExceptionDelivered(startFromTag, new GpsAvailableMatjiException());
+		matjiListenerRef.get().onLocationExceptionDelivered(startFromTag, new GpsAvailableMatjiException());
 		break;
 	    }
 	}
@@ -155,7 +157,7 @@ public class GpsManager implements LocationListener {
 						   GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
 	} else if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER)) {
 	    // Log.d("LOCATION_CHANGED", "network_provider");
-	    matjiListener.onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
+	    matjiListenerRef.get().onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
 	}
 	// Log.d("LOCATION_CHANGED", "final");
 	notifyLocationChanged(location);
@@ -165,6 +167,6 @@ public class GpsManager implements LocationListener {
 	Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	intent.addCategory(Intent.CATEGORY_DEFAULT);
-	context.startActivity(intent);
+	contextRef.get().startActivity(intent);
     }
 }
