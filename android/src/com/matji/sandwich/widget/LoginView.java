@@ -144,7 +144,8 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub
 		Me me = (Me)data.get(0);
-        session.saveMe(me);		
+        session.saveMe(me);
+
 	}
 
 	@Override

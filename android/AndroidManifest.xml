@@ -202,6 +202,8 @@
 		<activity android:name="BookmarkListActivity" 
 		          android:theme="@style/Theme.Transparent"
                   android:screenOrientation="portrait"></activity>
+		<activity android:name="StoreModifyActivity"
+				  android:screenOrientation="portrait"></activity>                 
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

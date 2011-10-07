@@ -127,6 +127,7 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     }
 
     public void onReportClicked(View v) {
-
+    	Intent intent = new Intent(this, StoreModifyActivity.class);
+    	startActivity(intent);
     }
 }
