@@ -40,7 +40,7 @@ public class Session implements Requestable {
     private SessionPrivateUtil mPrivateUtil;
     private WeakReference<Context> mContextRef;
     private HttpRequestManager mManager;
-    private Loginable mLoginable;
+    private WeakReference<Loginable> mLoginableRef;
 
     private ArrayList<LoginListener> mLoginListeners; 
     private ArrayList<LogoutListener> mLogoutListeners;
@@ -89,7 +89,7 @@ public class Session implements Requestable {
 
     public void sessionValidate(Loginable loginable, ViewGroup layout){
         preLogin();
-        this.mLoginable = loginable;
+        this.mLoginableRef = new WeakReference(loginable);
         mManager = HttpRequestManager.getInstance();
         MeHttpRequest request = new MeHttpRequest(mContextRef.get());
         request.actionMe();
@@ -191,8 +191,8 @@ public class Session implements Requestable {
             Me me = (Me)data.get(0);
             saveMe(me);
 
-            if (mLoginable != null) 
-                mLoginable.loginCompleted();
+            if (mLoginableRef != null && mLoginableRef.get() != null)
+                mLoginableRef.get().loginCompleted();
 
             postLogin();
             break;
@@ -201,8 +201,8 @@ public class Session implements Requestable {
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
         if (tag == HttpRequestManager.AUTHORIZE){
-            if (mLoginable != null)
-                mLoginable.loginFailed();
+            if (mLoginableRef != null && mLoginableRef.get() != null) 
+                mLoginableRef.get().loginFailed();
         }
     }
 

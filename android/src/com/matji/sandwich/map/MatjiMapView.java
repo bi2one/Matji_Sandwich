@@ -46,6 +46,10 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	startMapCenterThread(getMapCenter());
     }
 
+    public synchronized void startMapCenterThreadNotFirstLoading() {
+	MapAsyncTask.getInstance(this, listenerRef.get()).startMapCenterThreadNotFirstLoading();
+    }
+
     /**
      * 맵 중심을 체크하는 Thread를 동작시킨다.
      * 
@@ -53,11 +57,11 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
      * 
      */
     public synchronized void startMapCenterThread(GeoPoint startPoint) {
-	MapAsyncTask.getInstance(this).startMapCenterThread(startPoint);
+	MapAsyncTask.getInstance(this, listenerRef.get()).startMapCenterThread(startPoint);
     }
 
     public synchronized void stopMapCenterThread() {
-	MapAsyncTask.getInstance(this).stopMapCenterThread();
+	MapAsyncTask.getInstance(this, listenerRef.get()).stopMapCenterThread();
     }
 
     /**
@@ -67,7 +71,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
      */
     public void setMapCenterListener(MatjiMapCenterListener listener) {
 	this.listenerRef = new WeakReference(listener);
-	MapAsyncTask.getInstance(this).setMapCenterListener(listener);
+	MapAsyncTask.getInstance(this, listenerRef.get()).setMapCenterListener(listener);
     }
 
     public GeoPoint getBound(BoundType type) {

@@ -14,12 +14,12 @@ public class AttachFileHttpRequest extends HttpRequest {
     
     public AttachFileHttpRequest(Context context) {
     	super(context);
-    	parser = new AttachFileParser(context);
+    	parser = new AttachFileParser();
     	controller = "attach_files";
     }
 
     public void actionProfileUpload(File imageFile) {
-        parser = new AttachFileParser(getContext());
+        parser = new AttachFileParser();
         httpMethod = HttpMethod.HTTP_POST;
         action = "profile_upload";
         
@@ -28,7 +28,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionUpload(File imageFile, int postId){
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "upload.json";
     	
@@ -39,7 +39,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionImage(){
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "image";
     	
@@ -47,7 +47,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionList(){
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	
@@ -55,7 +55,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionStoreList(int store_id, int page, int limit){
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
     	
@@ -66,7 +66,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionPostList(int post_id, int page, int limit){
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "post_list";
     	
@@ -77,7 +77,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     }
     
     public void actionUserList(int user_id, int page, int limit) {
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "user_list";
     	

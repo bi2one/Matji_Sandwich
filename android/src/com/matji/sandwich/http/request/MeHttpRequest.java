@@ -21,13 +21,11 @@ public class MeHttpRequest extends HttpRequest {
 	
     public MeHttpRequest(Context context) {
 	super(context);
-	parser = new MeParser(context);
+	parser = new MeParser();
     }
 	
     public void actionMe() {
     	action = "me";
-    	Session session = Session.getInstance(getContext());
-    	
     	if (session != null && session.isLogin())
 	    getHashtable.put("access_token", "" + session.getToken());   
     }

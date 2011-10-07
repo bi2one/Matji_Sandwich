@@ -11,21 +11,20 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.MapView;
 
 public class BottomCenterOverlay extends Overlay {
-    private Context context;
     private GeoPoint point;
     private int drawableId;
+    private Bitmap markerImage;
     
     public BottomCenterOverlay(Context context, GeoPoint point, int drawableId) {
-	this.context = context;
 	this.point = point;
 	this.drawableId = drawableId;
+	markerImage = BitmapFactory.decodeResource(context.getResources(), drawableId);
     }
 
     public boolean draw(Canvas canvas, MapView mapView, boolean shadow, long when) {
 	Point screenPoint = new Point();
 	mapView.getProjection().toPixels(point, screenPoint);
 
-	Bitmap markerImage = BitmapFactory.decodeResource(context.getResources(), drawableId);
 	canvas.drawBitmap(markerImage,
 			  screenPoint.x - markerImage.getWidth() / 2,
 			  screenPoint.y - markerImage.getHeight(), null);

@@ -8,10 +8,6 @@ import com.matji.sandwich.data.StoreDetailInfo;
 import com.matji.sandwich.exception.MatjiException;
 
 public class StoreDetailInfoParser extends MatjiDataParser {
-	public StoreDetailInfoParser(Context context) {
-		super(context);
-	}
-
 	public StoreDetailInfo getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -25,11 +21,11 @@ public class StoreDetailInfoParser extends MatjiDataParser {
 		info.setAgo(getLong(object, "ago"));
 		
 		/* Set Store */
-		StoreParser storeParser = new StoreParser(context);
+		StoreParser storeParser = new StoreParser();
 		info.setStore(storeParser.getMatjiData(getObject(object, "store")));
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		info.setUser(userParser.getMatjiData(getObject(object, "user")));
 
 		Log.d("Parser", "StoreDetailInfoParser:: called getMatjiData");

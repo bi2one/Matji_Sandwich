@@ -25,7 +25,7 @@ public class AlarmButton extends TitleImageButton {
     @Override
     protected void init() {
         super.init();
-        setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_activity));
+        setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_activity));
     }
 
     /**
@@ -34,6 +34,6 @@ public class AlarmButton extends TitleImageButton {
     @Override
     public void onTitleItemClicked() {
         Log.d("Matji", "AlarmButtonClicked");
-        context.startActivity(new Intent(context, AlarmActivity.class));
+        getContext().startActivity(new Intent(getContext(), AlarmActivity.class));
     }
 }

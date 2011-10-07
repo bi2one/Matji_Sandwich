@@ -4,6 +4,8 @@ import com.google.android.maps.GeoPoint;
 
 import java.lang.ref.WeakReference;
 
+import android.util.Log;
+
 import com.matji.sandwich.util.GeoPointUtil;
 
 public class MapAsyncTask extends Thread {
@@ -22,7 +24,7 @@ public class MapAsyncTask extends Thread {
 	this.mapView = mapView;
     }
     
-    public static MapAsyncTask getInstance(MatjiMapView mapView) {
+    public static MapAsyncTask getInstance(MatjiMapView mapView, MatjiMapCenterListener listener) {
 	if (mapAsyncTask == null) {
 	    synchronized(MapAsyncTask.class) {
 		if (mapAsyncTask == null) {
@@ -30,26 +32,51 @@ public class MapAsyncTask extends Thread {
 		}
 	    }
 	}
-	mapAsyncTask.setMapView(mapView);
-
+	mapAsyncTask.init(mapView, listener);
+	
 	return mapAsyncTask;
     }
 
+    private void init(MatjiMapView mapView, MatjiMapCenterListener listener) {
+	setMapView(mapView);
+	setMapCenterListener(listener);
+    }
+
     public synchronized void startMapCenterThread(GeoPoint startPoint) {
+	setMapCenter(startPoint);
+	if (listenerRef != null && listenerRef.get() != null) {
+	    listenerRef.get().onMapCenterChanged(mapCenter);
+	}
+	
 	if (!isAlive()) {
-	    setMapCenter(startPoint);
-	    if (listenerRef != null) {
-		listenerRef.get().onMapCenterChanged(mapCenter);
-	    }
+	    start();
+	}
+    }
+
+    public synchronized void startMapCenterThreadNotFirstLoading() {
+	setMapCenter(mapView.getMapCenter());
+	
+	if (!isAlive()) {
 	    start();
 	}
     }
 
     public synchronized void stopMapCenterThread() {
-	if (isAlive())
-	    interrupt();
+	// Log.d("=====", "stop");
+	if (isAlive()) {
+	    stopFlag = true;
+	    // interrupt();
+	}
     }
-	
+
+    private synchronized boolean isStopped() {
+	return stopFlag;
+    }
+
+    private synchronized void setStopFlag(boolean stopFlag) {
+	this.stopFlag = stopFlag;
+    }
+
     private void threadSleep(int time) {
 	try {
 	    Thread.sleep(time);
@@ -68,7 +95,7 @@ public class MapAsyncTask extends Thread {
 	
     public void run() {
 	while(!stopFlag) {
-	    if (listenerRef != null) {
+	    if (listenerRef != null && listenerRef.get() != null) {
 		threadSleep(MAP_CENTER_UPDATE_TICK);
 		newMapCenter = mapView.getMapCenter();
 
@@ -84,6 +111,6 @@ public class MapAsyncTask extends Thread {
 		listenerRef.get().onMapCenterChanged(mapCenter);
 	    }
 	}
+	mapAsyncTask = null;
     }
 }
-

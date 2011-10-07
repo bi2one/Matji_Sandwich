@@ -8,10 +8,6 @@ import com.matji.sandwich.data.Following;
 import com.matji.sandwich.exception.MatjiException;
 
 public class FollowingParser extends MatjiDataParser {
-	public FollowingParser(Context context) {
-		super(context);
-	}
-
 	public Following getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -32,7 +28,7 @@ public class FollowingParser extends MatjiDataParser {
 		following.setStoreCount(getInt(object, "store_count"));
 		
 		/* Set Follow User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		following.setFollowingUser(userParser.getMatjiData(getObject(object, "following_user")));
 		following.setFollowedUser(userParser.getMatjiData(getObject(object, "followed_user")));
 

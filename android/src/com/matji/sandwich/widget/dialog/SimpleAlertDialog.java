@@ -35,7 +35,7 @@ public class SimpleAlertDialog implements SimpleDialog, DialogInterface.OnClickL
 
     public void onClick(DialogInterface dialog, int id) {
         cancel();
-	if (listenerRef != null) {
+	if (listenerRef != null && listenerRef.get() != null) {
 	    listenerRef.get().onConfirmClick(this);
 	}
     }

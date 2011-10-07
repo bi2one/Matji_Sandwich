@@ -2,7 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
@@ -11,12 +10,9 @@ import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.util.MatjiConstants;
 
 public class UserParser extends MatjiDataParser {
-    public UserParser(Context context) {
-        super(context);
-    }
-
     public User getMatjiData(JsonObject object) throws MatjiException {
         if (object == null) return null;
 
@@ -30,9 +26,7 @@ public class UserParser extends MatjiDataParser {
         String tmp = getString(object, "title");
         if (tmp == null) {
             user.setTitle(
-                    String.format(
-                            context.getString(R.string.default_string_title),
-                            user.getNick()));
+			  String.format(MatjiConstants.string(R.string.default_string_title), user.getNick()));
         } else {
             user.setTitle(tmp);
         }
@@ -65,19 +59,19 @@ public class UserParser extends MatjiDataParser {
         user.setFollowed(getBoolean(object, "followed"));
 
         /* Set User External Account */
-        UserExternalAccountParser ueaParser = new UserExternalAccountParser(context);
+        UserExternalAccountParser ueaParser = new UserExternalAccountParser();
         user.setExternalAccount(ueaParser.getMatjiData(getObject(object, "external_account")));
 
         /* Set User Mileage */
-        UserMileageParser umParser = new UserMileageParser(context);
+        UserMileageParser umParser = new UserMileageParser();
         user.setMileage(umParser.getMatjiData(getObject(object, "user_mileage")));
 
         /* Set Post */
-        PostParser postParser = new PostParser(context);
+        PostParser postParser = new PostParser();
         user.setPost(postParser.getMatjiData(getObject(object, "post")));
 
         /* Set Attach Files */
-        AttachFileParser afParser = new AttachFileParser(context);
+        AttachFileParser afParser = new AttachFileParser();
         ArrayList<MatjiData> dataList = afParser.getMatjiDataList(getArray(object, "attach_files"));
         ArrayList<AttachFile> attach_files = new ArrayList<AttachFile>(); 
         if (dataList != null) {

@@ -35,7 +35,7 @@ public class PageUpButton extends TitleImageButton {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_previous));
+		setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_previous));
 	}
 	
 	/**

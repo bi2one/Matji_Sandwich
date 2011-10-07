@@ -11,12 +11,12 @@ import com.matji.sandwich.http.parser.MessageParser;
 public class MessageHttpRequest extends HttpRequest {
     public MessageHttpRequest(Context context) {
     	super(context);
-    	parser = new MessageParser(context);
+    	parser = new MessageParser();
     	controller = "messages";
     }
     
     public void actionNew(int received_user_id, String message){
-        parser = new MessageParser(getContext());
+        parser = new MessageParser();
         httpMethod = HttpMethod.HTTP_POST;
         action = "new";
         
@@ -26,7 +26,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionNew(int[] received_user_ids, String message){
-        parser = new MessageParser(getContext());
+        parser = new MessageParser();
         httpMethod = HttpMethod.HTTP_POST;
         action = "new";
         
@@ -42,7 +42,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionDelete(int message_id){
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "delete";
     	
@@ -51,7 +51,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionDeleteThread(int thread_id){
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "delete_thread";
     	
@@ -60,7 +60,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionShow(int message_id){
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "show";
     	
@@ -69,7 +69,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionThreadList(int page, int limit){
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "thread_list";
     	
@@ -79,7 +79,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionChat(int thread_id, int page, int limit){
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "chat";
     	
@@ -90,7 +90,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionList(int page, int limit){
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
 
@@ -100,7 +100,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionReceivedList(int page, int limit){
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "received_list";
     	
@@ -110,7 +110,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
 
     public void actionSentList(int page, int limit){
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "sent_list";
     	
@@ -120,7 +120,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionRead(ArrayList<MatjiData> messages) {
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "read";
     	
@@ -133,7 +133,7 @@ public class MessageHttpRequest extends HttpRequest {
     }
     
     public void actionRead(int message_id) {
-    	parser = new MessageParser(getContext());
+    	parser = new MessageParser();
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "read";
     	

@@ -9,12 +9,12 @@ import android.util.Log;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.PhoneCallUtil;
-import com.matji.sandwich.map.MatjiMapView;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.widget.HighlightHeader;
 import com.matji.sandwich.widget.title.StoreLocationTitle;
 import com.matji.sandwich.overlay.StoreLocationOverlay;
 
+import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.MapController;
 
@@ -24,7 +24,7 @@ public class StoreLocationMapActivity extends BaseMapActivity {
     public static String INTENT_STORE = "StoreLocationMapActivity.store";
     private HighlightHeader header;
     private StoreLocationTitle titleBar;
-    private MatjiMapView mapView;
+    private MapView mapView;
     private MapController mapController;
     private TextView addressView;
     private TextView phoneView;
@@ -42,7 +42,7 @@ public class StoreLocationMapActivity extends BaseMapActivity {
 
 	titleBar = (StoreLocationTitle)findViewById(R.id.activity_store_location_title);
 	header = (HighlightHeader)findViewById(R.id.activity_store_location_header);
-	mapView = (MatjiMapView)findViewById(R.id.map_view);
+	mapView = (MapView)findViewById(R.id.map_view);
 	mapController = mapView.getController();
 	addressView = (TextView)findViewById(R.id.activity_store_location_address);
 	phoneView = (TextView)findViewById(R.id.activity_store_location_phone);

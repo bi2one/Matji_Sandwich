@@ -91,6 +91,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	Runnable runnable = new MapRunnable(this);
 	activityRef.get().runOnUiThread(runnable);
 	setCenter(sessionUtil.getCenter());
+	startMapCenterThreadNotFirstLoading();
     }
 
     public void moveToGpsCenter() {

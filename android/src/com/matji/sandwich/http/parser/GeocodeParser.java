@@ -2,7 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
@@ -26,13 +25,10 @@ import com.matji.sandwich.exception.GeocodeSearchInvalidMatjiException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class GeocodeParser implements MatjiParser {
-    private Context context;
     private JsonParser parser;
     
-    public GeocodeParser(Context context) {
-	this.context = context;
+    public GeocodeParser() {
 	this.parser = new JsonParser();
     }
 

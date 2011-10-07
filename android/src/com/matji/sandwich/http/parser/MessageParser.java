@@ -14,11 +14,6 @@ import com.matji.sandwich.util.MatjiConstants;
 public class MessageParser extends MatjiDataParser {
     
     public static final String SYSTEM_MESSAGE_SPEC = "!@#$%^&*()";
-    
-	public MessageParser(Context context) {
-		super(context);
-	}
-
 	public Message getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -30,7 +25,7 @@ public class MessageParser extends MatjiDataParser {
 		message.setMessage(getString(object, "message"));
 		
 		/* Set Sent User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		message.setSentUser(userParser.getMatjiData(getObject(object, "sent_user")));
 		
 		/* Set Received User*/

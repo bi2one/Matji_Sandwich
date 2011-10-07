@@ -32,7 +32,7 @@ public class StorePostWriteButton extends TitleImageButton {
 	setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_memowrite));
 	writeDialog = new WritePostStoreMatjiDialog(getContext());
 	setFocusable(false);
-	session = Session.getInstance(context);
+	session = Session.getInstance(getContext());
     }
 
     public void setData(Store store, String tags) {
@@ -46,8 +46,8 @@ public class StorePostWriteButton extends TitleImageButton {
 	if (session.isLogin()) {
 	    writeDialog.show();
 	} else {
-	    Intent intent = new Intent(context, LoginActivity.class);
-	    context.startActivity(intent);
+	    Intent intent = new Intent(getContext(), LoginActivity.class);
+	    getContext().startActivity(intent);
 	}
 	// Log.d("=====", "MapWriteButtonClicked");
     }

@@ -24,11 +24,6 @@ import org.json.JSONObject;
 
 public abstract class MatjiDataParser implements MatjiParser {
     public abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
-    public Context context;
-
-    public MatjiDataParser(Context context) {
-        this.context = context;
-    }
 
     public ArrayList<MatjiData> getMatjiDataList(JsonElement jsonElement) throws MatjiException {
         if (!isArray(jsonElement)) {

@@ -8,11 +8,6 @@ import com.matji.sandwich.data.AlarmSetting;
 import com.matji.sandwich.exception.MatjiException;
 
 public class AlarmSettingParser extends MatjiDataParser {
-    
-	public AlarmSettingParser(Context context) {
-		super(context);
-	}
-
 	public AlarmSetting getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
