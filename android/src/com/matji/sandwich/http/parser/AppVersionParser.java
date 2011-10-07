@@ -10,10 +10,6 @@ import com.matji.sandwich.exception.MatjiException;
 
 public class AppVersionParser extends MatjiDataParser {
 
-	public AppVersionParser(Context context) {
-		super(context);
-	}
-
 	@Override
 	public MatjiData getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;

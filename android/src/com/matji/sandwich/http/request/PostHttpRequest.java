@@ -27,14 +27,14 @@ public class PostHttpRequest extends HttpRequest {
 
     public PostHttpRequest(Context context) {
         super(context);
-        parser = new PostParser(context);
+        parser = new PostParser();
         controller = "posts";
     }
 
     public void actionShow(int post_id){
         httpMethod = HttpMethod.HTTP_GET;
         action = "show";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
 	getHashtable.clear();
         getHashtable.put("post_id", post_id + "");
@@ -44,7 +44,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionNew(String post, String tags, Device from_where, double lat, double lng) {
         httpMethod = HttpMethod.HTTP_POST;
         action = "new";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
         postHashtable.clear();
         postHashtable.put("post", post);
@@ -57,7 +57,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionNew(String post, String tags, Device from_where, int store_id) {
         httpMethod = HttpMethod.HTTP_POST;
         action = "new";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
         postHashtable.clear();
         postHashtable.put("post", post);
@@ -77,7 +77,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionCountryList(int page, int limit, String countryCode) {
     	httpMethod = HttpMethod.HTTP_GET;	
     	action = "country_list";
-    	parser = new PostParser(getContext());
+    	parser = new PostParser();
     	
     	getHashtable.clear();
     	getHashtable.put("page", "" + page);
@@ -89,7 +89,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionList(int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;	
     	action = "list";
-    	parser = new PostParser(getContext());
+    	parser = new PostParser();
     	
     	getHashtable.clear();
     	getHashtable.put("page", "" + page);
@@ -100,7 +100,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionFriendList(int page, int limit) {
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "friend_list";
-    	parser = new PostParser(getContext());
+    	parser = new PostParser();
     	
     	getHashtable.clear();
     	getHashtable.put("page", "" + page);
@@ -111,7 +111,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionUserTagByList(int user_tag_id, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;   
         action = "usertagby_list";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
         getHashtable.clear();
         getHashtable.put("page", "" + page);
@@ -123,7 +123,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionStoreTagByList(int store_tag_id, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;   
         action = "storetagby_list";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
         getHashtable.clear();
         getHashtable.put("page", "" + page);
@@ -146,7 +146,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionStoreList(int store_id, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "store_list";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
         getHashtable.clear();
         getHashtable.put("store_id",store_id + "");
@@ -158,7 +158,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionUserList(int user_id, int page, int limit){
         httpMethod = HttpMethod.HTTP_GET;
         action = "user_list";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
         getHashtable.clear();
         getHashtable.put("user_id", user_id + "");
@@ -170,7 +170,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionMyList(int page , int limit){
         httpMethod = HttpMethod.HTTP_GET;
         action = "my_list";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
         getHashtable.clear();
         getHashtable.put("page", page+"");
@@ -181,7 +181,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionNearbyList(double lat_ne, double lat_sw, double lng_sw, double lng_ne, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "nearby_list";
-        parser = new PostParser(getContext());
+        parser = new PostParser();
 
         getHashtable.clear();
         getHashtable.put("lat_ne", lat_ne + "");
@@ -196,7 +196,7 @@ public class PostHttpRequest extends HttpRequest {
     public void actionSearch(String keyword, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "search";
-        parser = new SearchResultParser(new PostParser(getContext()));
+        parser = new SearchResultParser(new PostParser());
 
         getHashtable.clear();
         getHashtable.put("q", keyword);

@@ -26,7 +26,7 @@ public class HomeButton extends TitleImageButton {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_home));
+		setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_home));
 	}
 	
 	/**
@@ -36,6 +36,6 @@ public class HomeButton extends TitleImageButton {
 	public void onTitleItemClicked() {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "HomeButtonClicked");
-		context.startActivity(new Intent(context, MainTabActivity.class));
+		getContext().startActivity(new Intent(getContext(), MainTabActivity.class));
 	}
 }

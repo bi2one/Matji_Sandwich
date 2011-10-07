@@ -8,10 +8,6 @@ import com.matji.sandwich.data.PostTag;
 import com.matji.sandwich.exception.MatjiException;
 
 public class PostTagParser extends MatjiDataParser {
-	public PostTagParser(Context context) {
-		super(context);
-	}
-
 	public PostTag getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -23,11 +19,11 @@ public class PostTagParser extends MatjiDataParser {
 		postTag.setUpdatedAt(getString(object, "updated_at"));
 		
 		/* Set Tag */
-		TagParser tagParser = new TagParser(context);
+		TagParser tagParser = new TagParser();
 		postTag.setTag(tagParser.getMatjiData(getObject(object, "tag")));
 		
 		/* Set Post */
-		PostParser postParser = new PostParser(context);
+		PostParser postParser = new PostParser();
 		postTag.setPost(postParser.getMatjiData(getObject(object, "post")));
 
 		Log.d("Parser", "PostTagParser:: called getMatjiData");

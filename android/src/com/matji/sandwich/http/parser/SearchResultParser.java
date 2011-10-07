@@ -18,7 +18,6 @@ public class SearchResultParser extends MatjiDataParser {
     private int totalCount;
 
     public SearchResultParser(MatjiDataParser parser) {
-        super(parser.context);
         this.parser = parser;
     }
 

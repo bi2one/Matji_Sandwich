@@ -16,7 +16,7 @@ public class TagHttpRequest extends HttpRequest {
 
     public void actionShow(int tag_id) {
         action = "show";
-        parser = new TagParser(getContext());
+        parser = new TagParser();
 
         getHashtable.clear();
         getHashtable.put("tag_id", tag_id + "");
@@ -24,14 +24,14 @@ public class TagHttpRequest extends HttpRequest {
 
     public void actionList() {
         action = "list";
-        parser = new TagParser(getContext());
+        parser = new TagParser();
 
         getHashtable.clear();
     }
 
     public void actionStoreTagList(int store_id, int page, int limit) {
         action = "store_tag_list";
-        parser = new StoreTagParser(getContext());
+        parser = new StoreTagParser();
 
         getHashtable.clear();
         getHashtable.put("store_id", store_id + "");
@@ -46,7 +46,7 @@ public class TagHttpRequest extends HttpRequest {
 
     public void actionUserTagList(int user_id, int page, int limit) {
         action = "user_tag_list";
-        parser = new UserTagParser(getContext());
+        parser = new UserTagParser();
 
         getHashtable.clear();
         getHashtable.put("user_id", user_id+ "");		
@@ -62,7 +62,7 @@ public class TagHttpRequest extends HttpRequest {
 
     public void actionPostTagList(int post_id) {
         action = "post_tag_list";
-        parser = new TagParser(getContext());
+        parser = new TagParser();
 
         getHashtable.clear();
         getHashtable.put("post_id", post_id + "");

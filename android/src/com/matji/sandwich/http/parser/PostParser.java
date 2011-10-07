@@ -13,10 +13,6 @@ import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.exception.MatjiException;
 
 public class PostParser extends MatjiDataParser {
-	public PostParser(Context context) {
-		super(context);
-	}
-	
 	public Post getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -38,19 +34,19 @@ public class PostParser extends MatjiDataParser {
 		post.setAgo(getLong(object, "ago"));
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		post.setUser(userParser.getMatjiData(getObject(object, "user")));
 		
 		/* Set Store */
-		StoreParser storeParser = new StoreParser(context);
+		StoreParser storeParser = new StoreParser();
 		post.setStore(storeParser.getMatjiData(getObject(object, "store")));
 
 		/* Set Activity */
-		ActivityParser activityParser = new ActivityParser(context);
+		ActivityParser activityParser = new ActivityParser();
 		post.setActivity(activityParser.getMatjiData(getObject(object, "activity")));		
 
 		/* Set Tags */
-		TagParser tagParser = new TagParser(context);
+		TagParser tagParser = new TagParser();
 		ArrayList<MatjiData> dataList = tagParser.getMatjiDataList(getArray(object, "tags"));
 		ArrayList<SimpleTag> tags = new ArrayList<SimpleTag>(); 
 		if (dataList != null) {
@@ -60,7 +56,7 @@ public class PostParser extends MatjiDataParser {
 		post.setTags(tags);
 		
 		/* Set AttachFiles */
-		AttachFileParser attachFileParser = new AttachFileParser(context);
+		AttachFileParser attachFileParser = new AttachFileParser();
 		dataList = attachFileParser.getMatjiDataList(getArray(object, "attach_files"));
 		ArrayList<AttachFile> attach_files = new ArrayList<AttachFile>(); 
 		if (dataList != null) {

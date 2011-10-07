@@ -33,7 +33,7 @@ public class PostWriteButton extends TitleImageButton {
 	super.init();
 	setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_memowrite));
 	setFocusable(false);
-	session = Session.getInstance(context);
+	session = Session.getInstance(getContext());
     }
 
     public void setData(Store store, String tags) {
@@ -51,10 +51,10 @@ public class PostWriteButton extends TitleImageButton {
 		writePostIntent.putExtra(WritePostActivity.INTENT_STORE, (Parcelable)store);
 	    if (tags != null)
 		writePostIntent.putExtra(WritePostActivity.INTENT_STORE, tags);
-	    context.startActivity(writePostIntent);
+	    getContext().startActivity(writePostIntent);
 	} else {
-	    Intent intent = new Intent(context, LoginActivity.class);
-	    context.startActivity(intent);
+	    Intent intent = new Intent(getContext(), LoginActivity.class);
+	    getContext().startActivity(intent);
 	}
 	// Log.d("=====", "MapWriteButtonClicked");
     }

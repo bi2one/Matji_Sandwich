@@ -28,7 +28,7 @@ public class UrlHttpRequest extends HttpRequest {
 	
 	public void actionStoreUrlList(int store_id, int page, int limit) {
 		action = "store_url_list";
-		parser = new UrlParser(getContext());
+		parser = new UrlParser();
 		
 		getHashtable.clear();
 		getHashtable.put("store_id", store_id + "");
@@ -38,7 +38,7 @@ public class UrlHttpRequest extends HttpRequest {
 	
 	public void actionUserUrlList(int user_id, int page, int limit) {
 		action = "user_url_list";
-		parser = new UrlParser(getContext());
+		parser = new UrlParser();
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");

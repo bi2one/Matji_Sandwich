@@ -8,11 +8,6 @@ import com.matji.sandwich.data.Badge;
 import com.matji.sandwich.exception.MatjiException;
 
 public class BadgeParser extends MatjiDataParser {
-	public BadgeParser(Context context) {
-		super(context);
-		this.context = context;
-	}
-
 	public Badge getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 

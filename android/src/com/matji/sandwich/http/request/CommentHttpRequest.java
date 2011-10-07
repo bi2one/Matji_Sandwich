@@ -7,13 +7,13 @@ import android.content.Context;
 public class CommentHttpRequest extends HttpRequest {
 	public CommentHttpRequest(Context context) {
 		super(context);
-		parser = new CommentParser(context);
+		parser = new CommentParser();
 		controller = "comments";
 	}
 	
 	public void actionNew(int post_id, String comment, String from_where) {
 
-	    parser = new CommentParser(getContext());
+	    parser = new CommentParser();
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
 				
@@ -33,7 +33,7 @@ public class CommentHttpRequest extends HttpRequest {
 	}
 	
 	public void actionList(int post_id, int page, int limit) {
-	    parser = new CommentParser(getContext());
+	    parser = new CommentParser();
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
 
@@ -46,7 +46,7 @@ public class CommentHttpRequest extends HttpRequest {
 	
 
 	public void actionShow(int comment_id) {
-	    parser = new CommentParser(getContext());
+	    parser = new CommentParser();
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "show";
 		

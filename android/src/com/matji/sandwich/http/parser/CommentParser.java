@@ -8,10 +8,6 @@ import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.exception.MatjiException;
 
 public class CommentParser extends MatjiDataParser {
-	public CommentParser(Context context) {
-		super(context);
-	}
-
 	public Comment getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -25,11 +21,11 @@ public class CommentParser extends MatjiDataParser {
 		comment.setAgo(getLong(object, "ago"));
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		comment.setUser(userParser.getMatjiData(getObject(object, "user")));
 		
 		/* Set Post */
-		PostParser postParser = new PostParser(context);
+		PostParser postParser = new PostParser();
 		comment.setPost(postParser.getMatjiData(getObject(object, "post")));
 		comment.setFromWhere(getString(object, "from_where"));
 		

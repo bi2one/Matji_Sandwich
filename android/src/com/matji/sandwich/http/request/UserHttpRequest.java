@@ -15,7 +15,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionList(int page, int limit){
         httpMethod = HttpMethod.HTTP_GET;
         action = "list";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
         getHashtable.put("page", page+"");
@@ -26,7 +26,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionShow(int user_id){
         httpMethod = HttpMethod.HTTP_GET;
         action = "show";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
         getHashtable.put("user_id", user_id + "");
@@ -36,7 +36,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionRankingList(int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "list";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
         getHashtable.put("page", page + "");
@@ -49,7 +49,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionNearByRankingList(double lat_sw, double lat_ne, double lng_sw, double lng_ne, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "nearby_ranking_list";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
         getHashtable.put("lat_ne", lat_ne + "");
@@ -64,7 +64,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionStoreLikeList(int store_id, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "like_list";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();		
         getHashtable.put("store_id", store_id+"");
@@ -76,7 +76,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionSearch(String keyword, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "search";
-        parser = new SearchResultParser(new UserParser(getContext()));
+        parser = new SearchResultParser(new UserParser());
 
         getHashtable.clear();
         getHashtable.put("q",keyword);
@@ -88,7 +88,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionStoreFoodLikeList(int store_food_id, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "like_list";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();		
         getHashtable.put("store_food_id", store_food_id+"");
@@ -100,7 +100,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionPostLikeList(int post_id, int page, int limit) {
         httpMethod = HttpMethod.HTTP_GET;
         action = "like_list";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
         getHashtable.put("post_id", post_id+"");
@@ -120,7 +120,7 @@ public class UserHttpRequest extends HttpRequest {
     public void actionCreate(String email, String nick, String password, String password_confirmation) {
         httpMethod = HttpMethod.HTTP_POST;
         action = "create";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
         
         postHashtable.clear();
         postHashtable.put("user[email]", email);
@@ -136,10 +136,9 @@ public class UserHttpRequest extends HttpRequest {
     public void actionUpdateCountry(String country_code) {
         httpMethod = HttpMethod.HTTP_GET;
         action="update";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
-        Session session = Session.getInstance(getContext());
 
         if (session != null && session.isLogin())
             getHashtable.put("access_token", "" + session.getToken());
@@ -149,10 +148,9 @@ public class UserHttpRequest extends HttpRequest {
     public void actionUpdateNick(String nick) {
         httpMethod = HttpMethod.HTTP_GET;
         action="update";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
-        Session session = Session.getInstance(getContext());
 
         if (session != null && session.isLogin())
             getHashtable.put("access_token", "" + session.getToken());
@@ -162,10 +160,9 @@ public class UserHttpRequest extends HttpRequest {
     public void actionChangePassword(String password, String new_password, String new_password_confirmation) {
         httpMethod = HttpMethod.HTTP_GET;
         action="change_password";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
-        Session session = Session.getInstance(getContext());
 
         if (session != null && session.isLogin())
             getHashtable.put("access_token", "" + session.getToken());
@@ -177,10 +174,9 @@ public class UserHttpRequest extends HttpRequest {
     public void actionUpdateIntro(String intro) {
         httpMethod = HttpMethod.HTTP_GET;
         action="update";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
-        Session session = Session.getInstance(getContext());
 
         if (session != null && session.isLogin())
             getHashtable.put("access_token", "" + session.getToken());
@@ -190,10 +186,9 @@ public class UserHttpRequest extends HttpRequest {
     public void actionUpdateWebsite(String website) {
         httpMethod = HttpMethod.HTTP_GET;
         action="update";
-        parser = new UserParser(getContext());
+        parser = new UserParser();
 
         getHashtable.clear();
-        Session session = Session.getInstance(getContext());
 
         if (session != null && session.isLogin())
             getHashtable.put("access_token", "" + session.getToken());

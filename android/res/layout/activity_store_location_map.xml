@@ -10,7 +10,16 @@
       android:id="@+id/activity_store_location_header"
       android:layout_below="@id/activity_store_location_title"
       style="@style/DefaultWidthFill" />
-  <com.matji.sandwich.map.MatjiMapView
+  <!-- <com.matji.sandwich.map.MatjiMapView -->
+  <!--     android:id="@+id/map_view" -->
+  <!--     android:layout_below="@id/activity_store_location_header" -->
+  <!--     android:layout_above="@+id/activity_store_location_footer" -->
+  <!--     style="@style/DefaultFill" -->
+  <!--     android:enabled="true" -->
+  <!--     android:clickable="true" -->
+  <!--     android:focusable="true" -->
+  <!--     android:apiKey="@string/map_api_key" /> -->
+  <com.google.android.maps.MapView
       android:id="@+id/map_view"
       android:layout_below="@id/activity_store_location_header"
       android:layout_above="@+id/activity_store_location_footer"

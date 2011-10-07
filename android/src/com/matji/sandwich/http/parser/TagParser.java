@@ -8,10 +8,6 @@ import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.exception.MatjiException;
 
 public class TagParser extends MatjiDataParser {
-	public TagParser(Context context) {
-		super(context);
-	}
-
 	public SimpleTag getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		

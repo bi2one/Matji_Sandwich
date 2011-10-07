@@ -2,7 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
@@ -16,10 +15,6 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class StoreParser extends MatjiDataParser {
-	public StoreParser(Context context) {
-		super(context);
-	}
-
 	public Store getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 
@@ -44,17 +39,17 @@ public class StoreParser extends MatjiDataParser {
 		store.setHasLock(getString(object, "state").equals("LOCK"));
 
 		/* Set AttachFile */
-		AttachFileParser afParser = new AttachFileParser(context);
+		AttachFileParser afParser = new AttachFileParser();
 		AttachFile file = (AttachFile)afParser.getMatjiData(getObject(object, "attach_file"));
 		store.setFile(file);
 
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		User user = (User)userParser.getMatjiData(getObject(object, "user"));
 		store.setRegUser(user);
 
 		/* Set Tags */
-		TagParser tagParser = new TagParser(context);
+		TagParser tagParser = new TagParser();
 		ArrayList<MatjiData> dataList = tagParser.getMatjiDataList(getArray(object, "tags"));
 		ArrayList<SimpleTag> tags = new ArrayList<SimpleTag>(); 
 		if (dataList != null) {
@@ -64,7 +59,7 @@ public class StoreParser extends MatjiDataParser {
 		store.setTags(tags);
 
 		/* Set Store Foods */
-		StoreFoodParser storeFoodParser = new StoreFoodParser(context);
+		StoreFoodParser storeFoodParser = new StoreFoodParser();
 		dataList = storeFoodParser.getMatjiDataList(getArray(object, "store_foods"));
 		ArrayList<StoreFood> storeFoods = new ArrayList<StoreFood>();
 		if (dataList != null) {
@@ -73,7 +68,7 @@ public class StoreParser extends MatjiDataParser {
 		}
 		store.setStoreFoods(storeFoods);
 
-		FoodParser foodParser = new FoodParser(context);
+		FoodParser foodParser = new FoodParser();
 		dataList = foodParser.getMatjiDataList(getArray(object, "foods"));
 		ArrayList<Food> foods = new ArrayList<Food>();
 		if (dataList != null){

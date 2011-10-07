@@ -8,10 +8,6 @@ import com.matji.sandwich.data.Activity;
 import com.matji.sandwich.exception.MatjiException;
 
 public class ActivityParser extends MatjiDataParser {
-	public ActivityParser(Context context) {
-		super(context);
-	}
-
 	public Activity getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
