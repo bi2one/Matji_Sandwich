@@ -14,7 +14,7 @@ public class StoreModifyHttpRequest extends HttpRequest {
 	public void actionModify(String name, String address, double lat, double lng, int store_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "modify";
-		parser = new StoreParser(getContext());
+		parser = new StoreParser();
 		
 		getHashtable.clear();
 		getHashtable.put("name", name);
