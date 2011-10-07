@@ -8,27 +8,37 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.StoreModifyHttpRequest;
+import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
 import com.matji.sandwich.widget.title.StoreTitle;
 
 public class StoreModifyActivity extends BaseActivity implements Completable, Requestable {
 	private CompletableTitle titleBar;
+	private SimpleAlertDialog successDialog;
 	
     public int setMainViewId() {
 	return R.id.activity_main;
     }
     
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void init() {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
+		super.init();
+		
 		setContentView(R.layout.activity_store_modify);
+		
+		createDialogs();
+
 		
 		titleBar = (CompletableTitle) findViewById(R.id.activity_store_modify_title);
 		titleBar.setTitle(R.string.store_modify_activity_title);
 		titleBar.setCompletable(this);
         
+	}
+
+	private void createDialogs() {
+		successDialog = new SimpleAlertDialog(this, R.string.register_success);
 	}
 
 	@Override
@@ -42,7 +52,7 @@ public class StoreModifyActivity extends BaseActivity implements Completable, Re
 
 	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-
+		successDialog.show();
 		
 	}
 
