@@ -17,42 +17,49 @@ import android.widget.LinearLayout;
  *
  */
 public class CommentInputBar extends InputBar {
-	private ImageButton likeButton;
+    private ImageButton likeButton;
 
-	public CommentInputBar(Context context, AttributeSet attr) {
-		super(context, attr);
-	}
+    public CommentInputBar(Context context, AttributeSet attr) {
+        super(context, attr);
+    }
 
-	@Override
-	protected void init() {
-		super.init();
-		likeButton = new ImageButton(getContext());
-		likeButton.setImageDrawable(MatjiConstants.drawable(R.drawable.icon_tabbtn_likehand_selector));
-		likeButton.setBackgroundResource(R.drawable.btn_likehand_bg);
-		LinearLayout.LayoutParams params = 
-		    new LinearLayout.LayoutParams(
-		            (int) MatjiConstants.dimen(R.dimen.likehand_btn_width),
-		            (int) MatjiConstants.dimen(R.dimen.input_bar_item_height));
-		params.setMargins((int) MatjiConstants.dimen(R.dimen.default_distance), 0, 0, 0);
-		params.gravity = Gravity.CENTER_VERTICAL;
-		likeButton.setLayoutParams(params);
-		
-		addView(likeButton, 0);
+    @Override
+    protected void init() {
+        super.init();
+        likeButton = new ImageButton(getContext());
+        likeButton.setBackgroundResource(R.drawable.btn_likehand_bg);
+        LinearLayout.LayoutParams params = 
+            new LinearLayout.LayoutParams(
+                    (int) MatjiConstants.dimen(R.dimen.likehand_btn_width),
+                    (int) MatjiConstants.dimen(R.dimen.input_bar_item_height));
+        params.setMargins((int) MatjiConstants.dimen(R.dimen.default_distance), 0, 0, 0);
+        params.gravity = Gravity.CENTER_VERTICAL;
+        likeButton.setLayoutParams(params);
+
+        addView(likeButton, 0);
         setBackgroundResource(R.drawable.reply_bg);
-	}
+    }
 
-	@Override
-	protected void setTextFieldAttribute() {
-		textField.setHint(MatjiConstants.string(R.string.hint_write_comment));
-		textField.setMaxLines(3);
-	}
+    @Override
+    protected void setTextFieldAttribute() {
+        textField.setHint(MatjiConstants.string(R.string.hint_write_comment));
+        textField.setMaxLines(3);
+    }
 
-	@Override
-	protected void setConfirmButtonAttribute() {
-		confirmButton.setText(MatjiConstants.string(R.string.default_string_confirm));
-	}
+    @Override
+    protected void setConfirmButtonAttribute() {
+        confirmButton.setText(MatjiConstants.string(R.string.default_string_confirm));
+    }
 
-	public void setLikeListener(OnClickListener listener) {
-		likeButton.setOnClickListener(listener);
-	}
+    public void onLikehand() {
+        likeButton.setImageResource(R.drawable.icon_tabbtn_likehand_touch);
+    }
+
+    public void offLikehand() {
+        likeButton.setImageResource(R.drawable.icon_tabbtn_likehand);
+    }
+
+    public void setLikeListener(OnClickListener listener) {
+        likeButton.setOnClickListener(listener);
+    }
 }

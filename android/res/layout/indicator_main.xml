@@ -22,11 +22,12 @@
 		android:id="@+id/indicator_main_count"
 		style="@style/DefaultWrap"
 		android:background="@drawable/new_bg"
+        android:gravity="center"
+        android:visibility="gone"
 		android:textSize="@dimen/tabbar_text_size"
 		android:textColor="@color/matji_white"
-		android:layout_alignParentRight="true"
-		android:gravity="center"
-		android:visibility="gone" />
+		android:layout_marginRight="@dimen/default_drawable_padding"
+		android:layout_alignParentRight="true" />
 </RelativeLayout>
 
 

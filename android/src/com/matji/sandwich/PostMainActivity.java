@@ -49,12 +49,15 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
     public static final String POSTS = "PostMainActivity.posts";
     public static final String POSITION = "PostMainActivity.position";
     public static final String POST_ID = "PostMainActivity.post_id";
+    public static final String IS_DELETED = "PostMainActivity.is_deleted";    
+    public static final String DELETED_POST_ID = "PostMainActivity.deleted_post_id";
     private static final int NOT_INITIALIZED = -1;
     private int post_id = -1;
-
+    private boolean isDeleted = false; // for alarm list view
+    private int lastDeletedPostId= -1;      // for alarm list view
 
     public int setMainViewId() {
-	return R.id.activity_post;
+        return R.id.activity_post;
     }
 
     @Override
@@ -66,6 +69,8 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
     public void finish() {
         Intent intent = new Intent();
         intent.putParcelableArrayListExtra(POSTS, posts);
+        intent.putExtra(IS_DELETED, isDeleted);
+        intent.putExtra(DELETED_POST_ID, lastDeletedPostId);
         setResult(RESULT_OK, intent);
         super.finish();
     }
@@ -83,13 +88,13 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         if (position == NOT_INITIALIZED) {
             // TODO finish activity
         }
-        
+
         if (post_id == NOT_INITIALIZED) {
             posts = getIntent().getParcelableArrayListExtra(POSTS);
             currentPost = (Post) posts.get(position);                           // 전달받은 position에 있는 Post 객체를 가져와 currentPost에 저장
         } else {
             request = new PostHttpRequest(this);
-            
+
             try {
                 currentPost = (Post) request.request().get(0);
             } catch (MatjiException e) {
@@ -98,7 +103,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             posts = new ArrayList<MatjiData>();
             posts.add(currentPost);
         }
-        
+
         showKeyboard = getIntent().getBooleanExtra(SHOW_KEYBOARD, false);
 
         pageableTitle = (PageableTitle) findViewById(R.id.Titlebar);
@@ -124,6 +129,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                 currentPost.setLikeCount(currentPost.getLikeCount() - 1);
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();
+                commentInputBar.offLikehand();
             }
 
             @Override
@@ -132,6 +138,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                 currentPost.setLikeCount(currentPost.getLikeCount() + 1);
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();
+                commentInputBar.onLikehand();
             }
         });
     }
@@ -205,10 +212,12 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
 
     @Override
     public void postDelete() {
+        isDeleted = true;
+        lastDeletedPostId = ((Post) posts.get(position)).getId();        
         posts.remove(position);
         finish();
     }
-    
+
     @Override
     public void postEdit() {
 

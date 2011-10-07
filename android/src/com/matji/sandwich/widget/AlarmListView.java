@@ -6,9 +6,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.AlarmAdapter;
+import com.matji.sandwich.data.Alarm;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.AlarmHttpRequest;
@@ -73,6 +75,16 @@ public class AlarmListView extends RequestableMListView {
 		return request;
 	}
 
+	public void deletedPost(int postId) {
+	    for (MatjiData data : getAdapterData()) {
+	        
+	        if (((Alarm) data).getPost() != null && ((Alarm) data).getPost().getId() == postId) {
+	            ((Alarm) data).setPost(null);
+	        }
+	    }
+	    getMBaseAdapter().notifyDataSetChanged();
+	}
+	
     @Override
     public void onListItemClick(int position) {}
 }

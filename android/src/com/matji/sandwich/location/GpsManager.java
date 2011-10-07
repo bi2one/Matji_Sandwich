@@ -9,16 +9,19 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.exception.GpsOutOfServiceMatjiException;
 import com.matji.sandwich.exception.GpsTemporarilyUnavailableMatjiException;
 import com.matji.sandwich.exception.GpsAvailableMatjiException;
 import com.matji.sandwich.exception.GpsEnabledMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.exception.UseNetworkGpsMatjiException;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
+import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
 
 import java.lang.ref.WeakReference;
 
-public class GpsManager implements LocationListener {
+public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClickListener {
     private final static long NET_PROVIDER_MIN_NOTIFICATION_INTERVAL = 100; /* 1000 * 60 * 5; */
     private final static long GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL = 50;      /* 1000 * 5; */
     
@@ -164,9 +167,17 @@ public class GpsManager implements LocationListener {
     }
 
     private void startLocationSettingsActivity() {
+	SimpleConfirmDialog dialog = new SimpleConfirmDialog(contextRef.get(), R.string.gps_request_turn_on);
+	dialog.setOnClickListener(this);
+	dialog.show();
+    }
+
+    public void onConfirmClick(SimpleDialog dialog) {
 	Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	intent.addCategory(Intent.CATEGORY_DEFAULT);
 	contextRef.get().startActivity(intent);
     }
+
+    public void onCancelClick(SimpleDialog dialog) { }
 }

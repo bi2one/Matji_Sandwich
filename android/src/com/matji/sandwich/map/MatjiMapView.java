@@ -25,12 +25,10 @@ import java.lang.ref.WeakReference;
  * 
  */
 public class MatjiMapView extends MapView implements MatjiMapViewInterface {
-    private static final int MAP_CENTER_UPDATE_TICK = 200;
-    private static final int MAP_CENTER_UPDATE_ANIMATION_TICK = 400;
     private WeakReference<MatjiMapCenterListener> listenerRef;
     private MapAsyncTask asyncTask;
-    private GeoPoint mapCenter;
-    private GeoPoint newMapCenter;
+    // private GeoPoint mapCenter;
+    // private GeoPoint newMapCenter;
     // private GeoPoint tempMapCenter;
     private SessionMapUtil sessionUtil;
     private MapController mapController;
@@ -55,22 +53,11 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
      * 
      */
     public synchronized void startMapCenterThread(GeoPoint startPoint) {
-	mapCenter = startPoint;
-	if (listenerRef != null) {
-	    listenerRef.get().onMapCenterChanged(mapCenter);
-	}
-
-	if (asyncTask == null) {
-	    asyncTask = new MapAsyncTask();
-	    asyncTask.start();
-	}
+	MapAsyncTask.getInstance(this).startMapCenterThread(startPoint);
     }
 
     public synchronized void stopMapCenterThread() {
-	if (asyncTask != null) {
-	    asyncTask.interrupt();
-	    asyncTask = null;
-	}
+	MapAsyncTask.getInstance(this).stopMapCenterThread();
     }
 
     /**
@@ -80,38 +67,7 @@ public class MatjiMapView extends MapView implements MatjiMapViewInterface {
      */
     public void setMapCenterListener(MatjiMapCenterListener listener) {
 	this.listenerRef = new WeakReference(listener);
-    }
-
-    private class MapAsyncTask extends Thread {
-	private boolean stopFlag = false;
-
-	private void threadSleep(int time) {
-	    try {
-		Thread.sleep(time);
-	    } catch(InterruptedException e) {
-		e.printStackTrace();
-	    }
-	}
-	
-	public void run() {
-	    while(!stopFlag) {
-	    	if (listenerRef != null) {
-	    	    threadSleep(MAP_CENTER_UPDATE_TICK);
-	    	    newMapCenter = getMapCenter();
-
-	    	    if (GeoPointUtil.geoPointEquals(mapCenter, newMapCenter))
-	    	    	continue;
-		    
-	    	    while (!GeoPointUtil.geoPointEquals(mapCenter, newMapCenter)) {
-	    	    	mapCenter = newMapCenter;
-	    	    	threadSleep(MAP_CENTER_UPDATE_ANIMATION_TICK);
-	    	    	newMapCenter = getMapCenter();
-	    	    }
-	    	    mapCenter = newMapCenter;
-	    	    listenerRef.get().onMapCenterChanged(mapCenter);
-	    	}
-	    }
-	}
+	MapAsyncTask.getInstance(this).setMapCenterListener(listener);
     }
 
     public GeoPoint getBound(BoundType type) {

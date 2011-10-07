@@ -12,7 +12,7 @@
   <!-- <string name="map_api_key">0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg</string> -->
   <!-- development!!!! -->
   <string name="map_api_key">
-    0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg
+    0V-9BEi6Ez83wqYM3MUqXHOykTWMHyF_UZhhKbw
   </string>
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
   <string name="server_domain">http://api.yummystory.com/</string>
@@ -146,7 +146,9 @@
   <string name="default_string_register">회원가입</string>
   <string name="default_string_webreview">웹리뷰</string>
   
-  
+
+  <!-- GpsManager.java -->
+  <string name="gps_request_turn_on">GPS를 수신할 수 없습니다. 설정을 켜 주셔야 합니다</string>
   
   <!-- Writing content -->
   <string name="writing_content_post">메모를 입력하세요.</string>

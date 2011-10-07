@@ -354,9 +354,12 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
@@ -373,14 +376,18 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.http.util.ImageLoader;
+import com.matji.sandwich.listener.GotoPostMainAction;
+import com.matji.sandwich.listener.GotoStoreMainAction;
+import com.matji.sandwich.listener.GotoUserMainAction;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.HorizontalPager.OnScrollListener;
 import com.matji.sandwich.widget.SwipeView;
 
-public class ImageSliderActivity extends BaseActivity implements OnScrollListener, Requestable {
+public class ImageSliderActivity extends BaseActivity implements OnScrollListener, Requestable, OnClickListener {
     private AttachFile[] attachFiles;
     private int currentPage;
+    private boolean isShowingPost = true;
     private SwipeView swipeView;
 
     private HttpRequest request;
@@ -389,7 +396,8 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
     private TextView count;
 
-    private View postWrapper;
+    private ViewGroup contentWrapper;
+    private View postContentWrapper;
     private View moresign;
     private TextView nick;
     private TextView at;
@@ -430,7 +438,8 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
         count = (TextView) findViewById(R.id.image_slider_count);
         swipeView = (SwipeView) findViewById(R.id.SwipeView);
-        postWrapper= findViewById(R.id.image_slider_post_wrapper);
+        contentWrapper = (ViewGroup) findViewById(R.id.image_slider_content_wrapper);
+        postContentWrapper = (ViewGroup) findViewById(R.id.image_slider_post_wrapper);
         moresign = findViewById(R.id.image_slider_moresign);
         nick = (TextView) findViewById(R.id.image_slider_nick);
         at = (TextView) findViewById(R.id.image_slider_at);
@@ -446,7 +455,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         swipeView.setCurrentPage(currentPage);
         setPage(currentPage);
         setImage(currentPage);
-        dismissPost();
+        preLoading();
         postRequest(attachFiles[currentPage].getPostId());
         super.init();
     }
@@ -462,6 +471,7 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
             ImageView image = new ImageView(this);
             image.setLayoutParams(params);
             image.setScaleType(ScaleType.FIT_CENTER);
+            image.setOnClickListener(this);
 
             rl.addView(image);
 
@@ -473,31 +483,35 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
 
     public void postRequest(int postId) {
         if (!(postId == prevPostId)) {
-            dismissPost();
+            preLoading();
 
             if (request == null || !(request instanceof PostHttpRequest)) {
                 request = new PostHttpRequest(this);
             }
 
             ((PostHttpRequest) request).actionShow(postId);
-            manager.request(this, getMainView(), SpinnerType.SMALL, request, HttpRequestManager.POST_SHOW_REQUEST, this);
+            manager.request(this, contentWrapper, SpinnerType.SMALL, request, HttpRequestManager.POST_SHOW_REQUEST, this);
             prevPostId = postId;
         }
     }
 
     public void setPost(Post post) {
-        nick.setText(post.getUser().getNick());
+        nick.setText(post.getUser().getNick()+ " ");
+        nick.setOnClickListener(new GotoUserMainAction(this, post.getUser()));
         if (post.getStore() != null) {
             at.setVisibility(View.VISIBLE);
-            storeName.setText(post.getStore().getName());
+            storeName.setText(" " + post.getStore().getName());
+            storeName.setOnClickListener(new GotoStoreMainAction(this, post.getStore()));
         } else {
             at.setVisibility(View.GONE);
             storeName.setText("");
+            storeName.setOnClickListener(null);
         }
         this.post.setText(post.getPost());
         ago.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
         commentCount.setText(post.getCommentCount()+"");
         likeCount.setText(post.getLikeCount()+"");
+        contentWrapper.setOnClickListener(new GotoPostMainAction(this, post));
     }
 
     public void setPage(int currentPage) {
@@ -557,14 +571,17 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         }
     }
 
-    public void showPost() {    
-        postWrapper.setVisibility(View.VISIBLE);
-        moresign.setVisibility(View.VISIBLE);
+
+    public void showPost() {
+        count.setVisibility(View.VISIBLE);
+        contentWrapper.setVisibility(View.VISIBLE);
+        isShowingPost = true;
     }
 
     public void dismissPost() {
-        postWrapper.setVisibility(View.GONE);
-        moresign.setVisibility(View.GONE);
+        count.setVisibility(View.GONE);
+        contentWrapper.setVisibility(View.GONE);
+        isShowingPost = false;
     }
 
     @Override
@@ -573,11 +590,21 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
         case HttpRequestManager.POST_SHOW_REQUEST:
             if (data != null && !data.isEmpty()) {
                 setPost((Post) data.get(0));
-                showPost();
+                postLoading();
             } else {
                 // TODO error message
             }
         }
+    }
+
+    public void preLoading() {
+        postContentWrapper.setVisibility(View.GONE);
+        moresign.setVisibility(View.GONE);
+    }
+
+    public void postLoading() {
+        postContentWrapper.setVisibility(View.VISIBLE);
+        moresign.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -589,5 +616,26 @@ public class ImageSliderActivity extends BaseActivity implements OnScrollListene
     public void finish() {
         setResult(RESULT_OK);
         super.finish();
-    }    
+    }
+
+  @Override
+  public void onClick(View v) {
+      if (isShowingPost) {
+          dismissPost();
+      } else {
+          showPost();
+      }     
+  }
+    
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      super.onActivityResult(requestCode, resultCode, data);
+      switch (requestCode) {
+      case POST_MAIN_ACTIVITY:
+          if (resultCode == RESULT_OK) {
+              setPost((Post) data.getParcelableArrayListExtra(PostMainActivity.POSTS).get(0));
+          }
+          break;
+      }
+  }
 }

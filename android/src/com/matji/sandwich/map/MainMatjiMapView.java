@@ -80,7 +80,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	gpsManager = new GpsManager(context, this);
 
 	mapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
-	gpsManager.start(GPS_START_TAG);
+	moveToGpsCenter();
     }
 
     public void setOverlayClickListener(OverlayClickListener listener) {
@@ -94,6 +94,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
     }
 
     public void moveToGpsCenter() {
+	stopMapCenterThread();
 	gpsManager.start(GPS_START_TAG);
     }
 
@@ -173,6 +174,7 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	case MotionEvent.ACTION_DOWN:
 	    gpsManager.stop();
 	    requestManager.turnOff();
+	    startMapCenterThread();
 	    break;
 	case MotionEvent.ACTION_UP:
 	    requestManager.turnOn();
