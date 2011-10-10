@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     private EditText pwdField;
     
     private View register;
+    private WeakReference<Loginable> loginableRef;
 
     private CheckBox saveidCheckBox;
 //    private View loginTwitter;
@@ -84,8 +86,9 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     }
 
     public void login(Loginable loginable) {
+	this.loginableRef = new WeakReference(loginable);
         if (idField.getText().toString().trim().equals("")
-                || pwdField.getText().toString().trim().equals("")) {
+	    || pwdField.getText().toString().trim().equals("")) {
             toast.show();
         } else {
             if (saveidCheckBox.isChecked()) {
@@ -100,7 +103,6 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
             dialogTask.execute();
         }
     }
-
 
     public void loginViaTiwtter(View v){
         Log.d("Matji", "login via twitter");
@@ -144,13 +146,18 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		// TODO Auto-generated method stub
 		Me me = (Me)data.get(0);
-        session.saveMe(me);
-
+		session.saveMe(me);
+		if (loginableRef != null && loginableRef.get() != null) {
+		    loginableRef.get().loginCompleted();
+		}
 	}
 
 	@Override
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(getContext());
+		if (loginableRef != null && loginableRef.get() != null) {
+		    loginableRef.get().loginFailed();
+		}
 		// TODO Auto-generated method stub
 	}    
 

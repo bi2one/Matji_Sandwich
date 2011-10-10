@@ -137,11 +137,11 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	Location centerLocation = new GeoPointToLocationAdapter(sessionMapUtil.getCenter());
 	String post = postText.getText();
 	ArrayList<File> imageFiles = albumView.getFiles();
-
+	
 	if (!isValidPost(post)) {
 	    return ;
 	}
-
+	
 	if (tags == null) {
 	    tags = "";
 	}
@@ -314,8 +314,10 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 
     public void onConfirmClick(SimpleDialog dialog) {
 	if (dialog == successDialog) {
-	    Intent result = new Intent();
-	    setResult(RESULT_OK, result);
+	    Intent intent = new Intent(context, MainTabActivity.class);
+	    intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
+	    intent.putExtra(MainTabActivity.IF_SUB_INDEX, 0);
+	    startActivity(intent);
 	    finish();
 	} else if (dialog == postEmptyDialog) {
 	    showKeyboardPostDelay();

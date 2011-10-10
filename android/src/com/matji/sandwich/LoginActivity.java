@@ -33,6 +33,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
 
     /* Loginable Interface methods */
     public void loginCompleted() {
+	Log.d("=====", "abcd");
         this.setResult(RESULT_OK);
         finish();
     }

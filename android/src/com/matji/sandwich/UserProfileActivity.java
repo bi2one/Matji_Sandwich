@@ -55,7 +55,7 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
         if (!isMainTabActivity) userCell.addRefreshable(title);
         else dismissTitle();
     }
-
+    
     public void showTitle() {
         title.setVisibility(View.VISIBLE);
     }
