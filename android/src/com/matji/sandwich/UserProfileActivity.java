@@ -12,11 +12,10 @@ import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserProfileActivity extends BaseActivity implements LoginListener {
-
     private boolean isMainTabActivity;
 
     private UserTitle title;
-    private UserCell userCell;    
+    private UserCell userCell;
     private UserProfileView userProfileView;
     
     private Session session;

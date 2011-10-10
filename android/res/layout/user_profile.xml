@@ -8,9 +8,8 @@
 
     <!-- User Cell -->
     <com.matji.sandwich.widget.cell.UserCell
-	android:id="@id/UserCell"
-	style="@style/DefaultWrap" />
-
+    	android:id="@id/UserCell"
+    	style="@style/DefaultWrap" />
     <!-- User Profile Wrapper -->
     <RelativeLayout
 	style="@style/DefaultFill"

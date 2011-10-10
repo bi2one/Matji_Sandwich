@@ -90,6 +90,8 @@ public class UserCell extends Cell implements Followable {
         refreshables = new ArrayList<Refreshable>();
 
         profile = ((CellProfileImageView) findViewById(R.id.profile));
+        profile.showInsetBackground();
+	
         nick = ((TextView) findViewById(R.id.cell_user_nick));
         point = ((TextView) findViewById(R.id.cell_user_point));
         area = ((TextView) findViewById(R.id.cell_user_area));
@@ -129,14 +131,12 @@ public class UserCell extends Cell implements Followable {
     public void setUser(User user) {
         this.user = user;
         profile.setUserId(user.getId());
-        profile.showInsetBackground();
         nick.setText(user.getNick());
-        if (user.getMileage() != null) 
+        if (user.getMileage() != null)
             point.setText(user.getMileage().getTotalPoint()+"");
-        else 
+        else
             point.setText("0");
         area.setText(MatjiConstants.countryName(user.getCountryCode()));
-        likeList.setText(user.getLikeStoreCount()+"");
         likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
         followingListener.setUser(user);
     }
