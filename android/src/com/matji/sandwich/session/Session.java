@@ -66,7 +66,6 @@ public class Session implements Requestable {
     private Session(){}
 
     private Session(Context context){
-        this.mContextRef = new WeakReference(context);
         this.mPrefs = new PreferenceProvider(context);
         this.mConcretePrefs = new ConcretePreferenceProvider(context);        
         this.mPrivateUtil = new SessionPrivateUtil(this);
@@ -74,6 +73,9 @@ public class Session implements Requestable {
         this.mLogoutListeners = new ArrayList<Session.LogoutListener>();
     }
 
+    public void setContext(Context context) {
+        this.mContextRef = new WeakReference(context);
+    }
 
     public static Session getInstance(Context context) {
         if(session == null) {
@@ -83,6 +85,7 @@ public class Session implements Requestable {
                 }
             }
         }
+	session.setContext(context);
 
         return session;
     }

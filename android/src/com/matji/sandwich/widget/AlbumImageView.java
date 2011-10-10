@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.PhotoUtil;
+import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.util.MatjiConstants;
 
 import java.io.FileNotFoundException;
@@ -71,7 +72,7 @@ public class AlbumImageView extends RelativeLayout {
     }
 
     public void setImage(File file) {
-	setImage(file, decodeFile(file));
+	setImage(file, ImageUtil.decodeFile(file, true));
     }
 
     public void removeImage() {
@@ -82,32 +83,5 @@ public class AlbumImageView extends RelativeLayout {
     
     public boolean isFileEquals(File file) {
 	return this.file.getAbsolutePath().equals(file.getAbsolutePath());
-    }
-
-    private Bitmap decodeFile(File f){
-	try {
-	    //Decode image size
-	    BitmapFactory.Options o = new BitmapFactory.Options();
-	    o.inJustDecodeBounds = true;
-	    BitmapFactory.decodeStream(new FileInputStream(f),null,o);
-
-	    //Find the correct scale value. It should be the power of 2.
-	    int width_tmp=o.outWidth, height_tmp=o.outHeight;
-	    int scale=1;
-
-	    while(true){
-		if(width_tmp/2<THUMBNAIL_WIDTH || height_tmp/2<THUMBNAIL_HEIGHT)
-		    break;
-		width_tmp/=2;
-		height_tmp/=2;
-		scale*=2;
-	    }
-
-	    //Decode with inSampleSize
-	    BitmapFactory.Options o2 = new BitmapFactory.Options();
-	    o2.inSampleSize=scale;
-	    return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-	} catch (FileNotFoundException e) {}
-	return null;
     }
 }

@@ -1,177 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="@drawable/bg_01"
-	style="@style/DefaultFill">
-	<LinearLayout
-		style="@style/DefaultLinearFill">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg_01"
+    style="@style/DefaultFill">
+  <LinearLayout
+      style="@style/DefaultLinearFill">
 
-		<!-- User Cell -->
-		<com.matji.sandwich.widget.cell.UserCell
-			android:id="@id/UserCell"
-			style="@style/DefaultWrap" />
+    <!-- User Cell -->
+    <com.matji.sandwich.widget.cell.UserCell
+	android:id="@id/UserCell"
+	style="@style/DefaultWrap" />
 
-		<!-- User Profile Wrapper -->
-		<RelativeLayout
-			style="@style/DefaultFill"
-			android:padding="@dimen/default_distance">
-			<!-- Basic Info -->
-			<TextView
-				android:id="@+id/user_profile_basic_info"
-				style="@style/user_profile_BasicInfo" />
-			<LinearLayout
-				android:id="@+id/user_profile_basic_info_wrapper"
-				style="@style/user_profile_Wrapper"
-				android:orientation="vertical"
-				android:layout_below="@id/user_profile_basic_info">
-				<TextView
-					android:id="@+id/user_profile_intro"
-					style="@style/DefaultWidthFill"
-					android:textSize="@dimen/user_profile_subtitle_size"
-					android:textColor="@color/matji_gray"
-					android:padding="@dimen/default_distance_long" />
-				<View
-					style="@style/HorizontalLine" />
+    <!-- User Profile Wrapper -->
+    <RelativeLayout
+	style="@style/DefaultFill"
+	android:padding="@dimen/default_distance">
+      <!-- Basic Info -->
+      <TextView
+	  android:id="@+id/user_profile_basic_info"
+	  style="@style/user_profile_BasicInfo" />
+      <LinearLayout
+	  android:id="@+id/user_profile_basic_info_wrapper"
+	  style="@style/user_profile_Wrapper"
+	  android:orientation="vertical"
+	  android:layout_below="@id/user_profile_basic_info">
+	<TextView
+	    android:id="@+id/user_profile_intro"
+	    style="@style/DefaultWidthFill"
+	    android:textSize="@dimen/user_profile_subtitle_size"
+	    android:textColor="@color/matji_gray"
+	    android:padding="@dimen/default_distance_long" />
+	<View
+	    style="@style/HorizontalLine" />
 
-				<TextView
-					android:id="@+id/user_profile_blog"
-					style="@style/DefaultWidthFill"
-					android:layout_below="@id/user_profile_intro"
-					android:singleLine="true"
-					android:textSize="@dimen/user_profile_url_size"
-					android:textColor="@color/matji_gray"
-					android:drawableLeft="@drawable/icon_web"
-					android:drawableRight="@drawable/icon_flow"
-					android:drawablePadding="@dimen/default_drawable_padding_long"
-					android:padding="@dimen/default_distance_long" />
-			</LinearLayout>
-			<!-- Friend Info -->
-			<TextView
-				android:id="@+id/user_profile_friend_info"
-				style="@style/user_profile_FriendInfo"
-				android:layout_below="@id/user_profile_basic_info_wrapper" />
+	<TextView
+	    android:id="@+id/user_profile_blog"
+	    style="@style/DefaultWidthFill"
+	    android:layout_below="@id/user_profile_intro"
+	    android:singleLine="true"
+	    android:textSize="@dimen/user_profile_url_size"
+	    android:textColor="@color/matji_gray"
+	    android:drawableLeft="@drawable/icon_web"
+	    android:drawableRight="@drawable/icon_flow"
+	    android:drawablePadding="@dimen/default_drawable_padding_long"
+	    android:padding="@dimen/default_distance_long" />
+      </LinearLayout>
+      <!-- Friend Info -->
+      <TextView
+	  android:id="@+id/user_profile_friend_info"
+	  style="@style/user_profile_FriendInfo"
+	  android:layout_below="@id/user_profile_basic_info_wrapper" />
 
-			<LinearLayout
-				android:id="@+id/user_profile_friend_info_wrapper"
-				style="@style/user_profile_Wrapper"
-				android:layout_below="@id/user_profile_friend_info">
-				<!-- Following -->
-				<RelativeLayout
-					android:id="@+id/user_profile_following"
-					style="@style/DefaultWidthFill"
-					android:layout_weight="1"
-					android:layout_centerVertical="true"
-					android:layout_margin="@dimen/default_distance_long">
-					<TextView
-						android:id="@+id/user_profile_following_title"
-						style="@style/user_profile_Following"
-						android:layout_alignParentLeft="true"
-						android:layout_toLeftOf="@+id/user_profile_following_moresign" />
-					<com.matji.sandwich.widget.PalatinoiFontTextView
-						android:id="@+id/user_profile_following_count"
-						style="@style/user_profile_Count"
-						android:layout_alignParentLeft="true"
-						android:layout_below="@id/user_profile_following_title"
-						android:layout_toLeftOf="@id/user_profile_following_moresign" />
-					<ImageView
-						android:id="@id/user_profile_following_moresign"
-						style="@style/user_profile_Moresign" />
-				</RelativeLayout>
+      <LinearLayout
+	  android:id="@+id/user_profile_friend_info_wrapper"
+	  style="@style/user_profile_Wrapper"
+	  android:layout_below="@id/user_profile_friend_info">
+	<!-- Following -->
+	<RelativeLayout
+	    android:id="@+id/user_profile_following"
+	    style="@style/DefaultWidthFill"
+	    android:layout_weight="1"
+	    android:layout_centerVertical="true"
+	    android:layout_margin="@dimen/default_distance_long">
+	  <TextView
+	      android:id="@+id/user_profile_following_title"
+	      style="@style/user_profile_Following"
+	      android:layout_alignParentLeft="true"
+	      android:layout_toLeftOf="@+id/user_profile_following_moresign" />
+	  <com.matji.sandwich.widget.PalatinoiFontTextView
+	      android:id="@+id/user_profile_following_count"
+	      style="@style/user_profile_Count"
+	      android:layout_alignParentLeft="true"
+	      android:layout_below="@id/user_profile_following_title"
+	      android:layout_toLeftOf="@id/user_profile_following_moresign" />
+	  <ImageView
+	      android:id="@id/user_profile_following_moresign"
+	      style="@style/user_profile_Moresign" />
+	</RelativeLayout>
 
-				<View
-					android:id="@+id/user_profile_friend_info_line"
-					android:layout_centerHorizontal="true"
-					style="@style/VerticalLine" />
+	<View
+	    android:id="@+id/user_profile_friend_info_line"
+	    android:layout_centerHorizontal="true"
+	    style="@style/VerticalLine" />
 
-				<!-- Follower -->
-				<RelativeLayout
-					android:id="@+id/user_profile_follower"
-					style="@style/DefaultWidthFill"
-					android:layout_weight="1"
-					android:layout_toRightOf="@id/user_profile_friend_info_line"
-					android:layout_centerVertical="true"
-					android:layout_margin="@dimen/default_distance_long">
-					<TextView
-						android:id="@+id/user_profile_follower_title"
-						style="@style/user_profile_Follower"
-						android:layout_alignParentLeft="true"
-						android:layout_toLeftOf="@+id/user_profile_follower_moresign" />
-					<com.matji.sandwich.widget.PalatinoiFontTextView
-						android:id="@+id/user_profile_follower_count"
-						style="@style/user_profile_Count"
-						android:layout_alignParentLeft="true"
-						android:layout_below="@id/user_profile_follower_title"
-						android:layout_toLeftOf="@id/user_profile_follower_moresign" />
-					<ImageView
-						android:id="@id/user_profile_follower_moresign"
-						style="@style/user_profile_Moresign" />
-				</RelativeLayout>
-			</LinearLayout>
+	<!-- Follower -->
+	<RelativeLayout
+	    android:id="@+id/user_profile_follower"
+	    style="@style/DefaultWidthFill"
+	    android:layout_weight="1"
+	    android:layout_toRightOf="@id/user_profile_friend_info_line"
+	    android:layout_centerVertical="true"
+	    android:layout_margin="@dimen/default_distance_long">
+	  <TextView
+	      android:id="@+id/user_profile_follower_title"
+	      style="@style/user_profile_Follower"
+	      android:layout_alignParentLeft="true"
+	      android:layout_toLeftOf="@+id/user_profile_follower_moresign" />
+	  <com.matji.sandwich.widget.PalatinoiFontTextView
+	      android:id="@+id/user_profile_follower_count"
+	      style="@style/user_profile_Count"
+	      android:layout_alignParentLeft="true"
+	      android:layout_below="@id/user_profile_follower_title"
+	      android:layout_toLeftOf="@id/user_profile_follower_moresign" />
+	  <ImageView
+	      android:id="@id/user_profile_follower_moresign"
+	      style="@style/user_profile_Moresign" />
+	</RelativeLayout>
+      </LinearLayout>
 
-			<!-- Store Info -->
-			<TextView
-				android:id="@+id/user_profile_store_info"
-				style="@style/user_profile_StoreInfo"
-				android:layout_below="@id/user_profile_friend_info_wrapper" />
-			<LinearLayout
-				android:id="@+id/user_profile_store_info_wrapper"
-				style="@style/user_profile_Wrapper"
-				android:layout_below="@id/user_profile_store_info">
-				<!-- Find Store -->
-				<RelativeLayout
-					android:id="@+id/user_profile_find_store"
-					style="@style/DefaultWidthFill"
-					android:layout_weight="1"
-					android:layout_centerVertical="true"
-					android:layout_margin="@dimen/default_distance_long">
-					<TextView
-						android:id="@+id/user_profile_find_store_title"
-						style="@style/user_profile_FindStore"
-						android:layout_alignParentLeft="true"
-						android:layout_toLeftOf="@+id/user_profile_find_store_moresign" />
-					<com.matji.sandwich.widget.PalatinoiFontTextView
-						android:id="@+id/user_profile_find_store_count"
-						style="@style/user_profile_Count"
-						android:layout_alignParentLeft="true"
-						android:layout_below="@id/user_profile_find_store_title"
-						android:layout_toLeftOf="@id/user_profile_find_store_moresign" />
-					<ImageView
-						android:id="@id/user_profile_find_store_moresign"
-						style="@style/user_profile_Moresign" />
-				</RelativeLayout>
+      <!-- Store Info -->
+      <TextView
+	  android:id="@+id/user_profile_store_info"
+	  style="@style/user_profile_StoreInfo"
+	  android:layout_below="@id/user_profile_friend_info_wrapper" />
+      <LinearLayout
+	  android:id="@+id/user_profile_store_info_wrapper"
+	  style="@style/user_profile_Wrapper"
+	  android:layout_below="@id/user_profile_store_info">
+	<!-- Find Store -->
+	<RelativeLayout
+	    android:id="@+id/user_profile_find_store"
+	    style="@style/DefaultWidthFill"
+	    android:layout_weight="1"
+	    android:layout_centerVertical="true"
+	    android:layout_margin="@dimen/default_distance_long">
+	  <TextView
+	      android:id="@+id/user_profile_find_store_title"
+	      style="@style/user_profile_FindStore"
+	      android:layout_alignParentLeft="true"
+	      android:layout_toLeftOf="@+id/user_profile_find_store_moresign" />
+	  <com.matji.sandwich.widget.PalatinoiFontTextView
+	      android:id="@+id/user_profile_find_store_count"
+	      style="@style/user_profile_Count"
+	      android:layout_alignParentLeft="true"
+	      android:layout_below="@id/user_profile_find_store_title"
+	      android:layout_toLeftOf="@id/user_profile_find_store_moresign" />
+	  <ImageView
+	      android:id="@id/user_profile_find_store_moresign"
+	      style="@style/user_profile_Moresign" />
+	</RelativeLayout>
 
-				<View
-					android:id="@+id/user_profile_store_info_line"
-					android:layout_centerHorizontal="true"
-					android:visibility="gone"
-					style="@style/VerticalLine" />
+	<View
+	    android:id="@+id/user_profile_store_info_line"
+	    android:layout_centerHorizontal="true"
+	    android:visibility="gone"
+	    style="@style/VerticalLine" />
 
-				<!-- Bookmark Store -->
-				<RelativeLayout
-					android:id="@+id/user_profile_bookmark"
-					style="@style/DefaultWidthFill"
-					android:layout_toRightOf="@id/user_profile_store_info_line"
-					android:layout_weight="1"
-					android:layout_centerVertical="true"
-					android:layout_margin="@dimen/default_distance_long"
-					android:visibility="gone">
-					<TextView
-						android:id="@+id/user_profile_bookmark_store_title"
-						style="@style/user_profile_BookmarkStore"
-						android:layout_alignParentLeft="true"
-						android:layout_toLeftOf="@+id/user_profile_bookmark_store_moresign" />
-					<com.matji.sandwich.widget.PalatinoiFontTextView
-						android:id="@+id/user_profile_bookmark_store_count"
-						style="@style/user_profile_Count"
-						android:layout_alignParentLeft="true"
-						android:layout_below="@id/user_profile_bookmark_store_title"
-						android:layout_toLeftOf="@id/user_profile_bookmark_store_moresign" />
-					<ImageView
-						android:id="@id/user_profile_bookmark_store_moresign"
-						style="@style/user_profile_Moresign" />
-				</RelativeLayout>
-
-			</LinearLayout>
-		</RelativeLayout>
-	</LinearLayout>
+	<!-- Bookmark Store -->
+	<RelativeLayout
+	    android:id="@+id/user_profile_bookmark"
+	    style="@style/DefaultWidthFill"
+	    android:layout_toRightOf="@id/user_profile_store_info_line"
+	    android:layout_weight="1"
+	    android:layout_centerVertical="true"
+	    android:layout_margin="@dimen/default_distance_long"
+	    android:visibility="gone">
+	  <TextView
+	      android:id="@+id/user_profile_bookmark_store_title"
+	      style="@style/user_profile_BookmarkStore"
+	      android:layout_alignParentLeft="true"
+	      android:layout_toLeftOf="@+id/user_profile_bookmark_store_moresign" />
+	  <com.matji.sandwich.widget.PalatinoiFontTextView
+	      android:id="@+id/user_profile_bookmark_store_count"
+	      style="@style/user_profile_Count"
+	      android:layout_alignParentLeft="true"
+	      android:layout_below="@id/user_profile_bookmark_store_title"
+	      android:layout_toLeftOf="@id/user_profile_bookmark_store_moresign" />
+	  <ImageView
+	      android:id="@id/user_profile_bookmark_store_moresign"
+	      style="@style/user_profile_Moresign" />
+	</RelativeLayout>
+      </LinearLayout>
+    </RelativeLayout>
+  </LinearLayout>
 </ScrollView>

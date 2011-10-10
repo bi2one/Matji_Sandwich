@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import com.matji.sandwich.R;
 import com.matji.sandwich.http.request.HttpUtility;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.util.ImageUtil;
 
 public class ImageLoader {
     public static enum UrlType {
@@ -195,11 +196,11 @@ public class ImageLoader {
 
     private Bitmap getBitmap(String url) 
     {
-        File f=fileCache.getFile(url);
+        File f = fileCache.getFile(url);
         Bitmap b = null;
         if (isCacheEnable) {
             //from SD cache
-            b = decodeFile(f);
+            b = ImageUtil.decodeFile(f, true);
         }
 
         if(b!=null) {
@@ -226,7 +227,7 @@ public class ImageLoader {
     }
 
     private Bitmap applyConvert(File f) {
-        Bitmap bitmap = decodeFile(f);
+        Bitmap bitmap = ImageUtil.decodeFile(f, true);
         if (convertable != null) {
             bitmap = convertable.convert(bitmap);
             try {
@@ -239,35 +240,35 @@ public class ImageLoader {
     }
 
     //decodes image and scales it to reduce memory consumption
-    private Bitmap decodeFile(File f){
-        try {
-            //decode image size
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(new FileInputStream(f),null,o);
+    // private Bitmap decodeFile(File f){
+    //     try {
+    //         //decode image size
+    //         BitmapFactory.Options o = new BitmapFactory.Options();
+    //         o.inJustDecodeBounds = true;
+    //         BitmapFactory.decodeStream(new FileInputStream(f),null,o);
 
-            //Find the correct scale value. It should be the power of 2.
-            final int REQUIRED_SIZE=70;
-            int width_tmp=o.outWidth, height_tmp=o.outHeight;
-            int scale=1;
-            if (isScaleFile) {
-                while(true){
-                    if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
-                        break;
-                    width_tmp/=2;
-                    height_tmp/=2;
-                    scale*=2;
-                }
-            }
+    //         //Find the correct scale value. It should be the power of 2.
+    //         final int REQUIRED_SIZE=70;
+    //         int width_tmp=o.outWidth, height_tmp=o.outHeight;
+    //         int scale=1;
+    //         if (isScaleFile) {
+    //             while(true){
+    //                 if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
+    //                     break;
+    //                 width_tmp/=2;
+    //                 height_tmp/=2;
+    //                 scale*=2;
+    //             }
+    //         }
 
-            //decode with inSampleSize
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize=scale;
-            Bitmap result = BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-            return result;
-        } catch (FileNotFoundException e) {}
-        return null;
-    }
+    //         //decode with inSampleSize
+    //         BitmapFactory.Options o2 = new BitmapFactory.Options();
+    //         o2.inSampleSize=scale;
+    //         Bitmap result = BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+    //         return result;
+    //     } catch (FileNotFoundException e) {}
+    //     return null;
+    // }
 
     //Task for the queue
     private class PhotoToLoad
