@@ -24,12 +24,12 @@ import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.DialogAsyncTask;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.NoticeHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
 
-public class Session implements Requestable {
-
+public class Session implements Requestable, DialogAsyncTask.ProgressListener {
     private volatile static Session session = null;
 
     private static final String keyForCurrentUser = "CurrentUser";
@@ -120,6 +120,32 @@ public class Session implements Requestable {
         }
     }
 
+    public void loginWithDialog(Context context, String userid, String password, Loginable loginable) {
+	mLoginableRef = new WeakReference(loginable);
+	MeHttpRequest request = new MeHttpRequest(context);
+	request.actionAuthorize(userid, password);
+	DialogAsyncTask loginAsyncTask = new DialogAsyncTask(context, this, request, HttpRequestManager.AUTHORIZE);
+	loginAsyncTask.setProgressListener(this);
+	loginAsyncTask.execute();
+    }
+
+    public void onPreExecute(int tag) {
+	switch(tag) {
+	case HttpRequestManager.AUTHORIZE:
+	    preLogin();
+	    break;
+	}
+    }
+    public void onStartBackground(int tag) { }
+    public void onEndBackground(int tag) {
+	switch(tag) {
+	case HttpRequestManager.AUTHORIZE:
+	    notificationValidate();
+	    break;
+	}
+    }
+    public void onPostExecute(int tag) { }
+
     public boolean login(String userid, String password) {
         mManager = HttpRequestManager.getInstance();
         MeHttpRequest request = new MeHttpRequest(mContextRef.get());
@@ -194,8 +220,9 @@ public class Session implements Requestable {
             Me me = (Me)data.get(0);
             saveMe(me);
 
-            if (mLoginableRef != null && mLoginableRef.get() != null)
+            if (mLoginableRef != null && mLoginableRef.get() != null) {
                 mLoginableRef.get().loginCompleted();
+	    }
 
             postLogin();
             break;
@@ -204,6 +231,7 @@ public class Session implements Requestable {
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
         if (tag == HttpRequestManager.AUTHORIZE){
+	    e.performExceptionHandling(mContextRef.get());
             if (mLoginableRef != null && mLoginableRef.get() != null) 
                 mLoginableRef.get().loginFailed();
         }

@@ -23,6 +23,7 @@ public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
     private int tag;
     private ArrayList<MatjiData> data;
     private MatjiException exception;
+    private WeakReference<ProgressListener> listenerRef;
 
     public DialogAsyncTask(Context context, Requestable requestable, RequestCommand request, int tag) {
 	this(context, requestable, null, request, tag);
@@ -47,26 +48,47 @@ public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
 	dialog.setMessage(MatjiConstants.string(resId));
     }
 
+    public void setProgressListener(ProgressListener listener) {
+	listenerRef = new WeakReference(listener);
+    }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+	if (listenerRef != null && listenerRef.get() != null) {
+	    listenerRef.get().onPreExecute(tag);
+	}
         dialog.show();
     }
 
     @Override
     protected Boolean doInBackground(Object... arg0) {
+	boolean result = true;
+	if (listenerRef != null && listenerRef.get() != null) {
+	    listenerRef.get().onStartBackground(tag);
+	}
+	
 	try {
 	    data = request.request();
-	    return true;
+	    result = true;
 	} catch(MatjiException e) {
 	    exception = e;
-	    return false;
+	    result = false;
 	}
+	
+	if (listenerRef != null && listenerRef.get() != null) {
+	    listenerRef.get().onEndBackground(tag);
+	}
+	return result;
     }
 
     @Override
     protected void onPostExecute(Boolean isSuccess) {
         super.onPostExecute(isSuccess);
+	if (listenerRef != null && listenerRef.get() != null) {
+	    listenerRef.get().onPostExecute(tag);
+	}
+	
         dialog.dismiss();
         
         if (isSuccess) {
@@ -76,8 +98,10 @@ public class DialogAsyncTask extends AsyncTask<Object, Integer, Boolean> {
         }
     }
 
-    // @Override
-    // protected void onProgressUpdate(Integer... values) {
-    //     super.onProgressUpdate(values);
-    // }
+    public interface ProgressListener {
+	public void onPreExecute(int tag);
+	public void onStartBackground(int tag);
+	public void onEndBackground(int tag);
+	public void onPostExecute(int tag);
+    }
 }

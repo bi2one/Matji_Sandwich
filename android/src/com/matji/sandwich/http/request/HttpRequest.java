@@ -48,7 +48,7 @@ public abstract class HttpRequest implements ProgressRequestCommand {
     public HttpRequest(Context context) {
 	// this.contextRef = new WeakReference(context);
 	cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-	Session session = Session.getInstance(context);
+	session = Session.getInstance(context);
 	postHashtable = new Hashtable<String, Object>(); 
 	getHashtable = new Hashtable<String, String>();
     }
@@ -139,15 +139,12 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 	    }
 
 	    if (postParam != null) {
-		if (session != null && session.isLogin())
+		if (session.isLogin())
 		    postParam.put("access_token", "" + session.getToken());
 		postParam.put("format", "json");
 	    }else if (getParam != null) {
-		Log.d("=====", "request");
-		if (session != null && session.isLogin()) {
-		    Log.d("=====", "access_token: " + session.getToken());
+		if (session.isLogin())
 		    getParam.put("access_token", "" + session.getToken());
-		}
 		getParam.put("format", "json");
 	    }
 

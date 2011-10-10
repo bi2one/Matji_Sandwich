@@ -137,7 +137,8 @@ public class UserCell extends Cell implements Followable {
         else
             point.setText("0");
         area.setText(MatjiConstants.countryName(user.getCountryCode()));
-        likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
+	likeList.setText(user.getLikeStoreCount()+"");
+	likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
         followingListener.setUser(user);
     }
 
