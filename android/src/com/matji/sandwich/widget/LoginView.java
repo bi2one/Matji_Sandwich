@@ -28,6 +28,7 @@ import com.matji.sandwich.http.DialogAsyncTask;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionPrivateUtil;
+import com.matji.sandwich.util.KeyboardUtil;
 
 public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener, Requestable {
 	private static final int REQUEST_LOGIN = 0;
@@ -99,7 +100,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
             request.actionAuthorize(idField.getText().toString(), pwdField.getText().toString());
 
             DialogAsyncTask dialogTask = new DialogAsyncTask(getContext(), this, request, REQUEST_LOGIN);
-            //new LoginAsyncTask(getContext(), loginable, idField.getText().toString(), pwdField.getText().toString()).execute(new Object());
+//            new LoginAsyncTask(getContext(), loginable, idField.getText().toString(), pwdField.getText().toString()).execute(new Object());
             dialogTask.execute();
         }
     }
@@ -119,7 +120,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 
     public void registerClicked(View v) {
         Intent intent = new Intent(getContext(), RegisterActivity.class);
-        getContext().startActivity(intent);        
+        getContext().startActivity(intent);
     }
     
     @Override
@@ -144,7 +145,6 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 
 	@Override
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		// TODO Auto-generated method stub
 		Me me = (Me)data.get(0);
 		session.saveMe(me);
 		if (loginableRef != null && loginableRef.get() != null) {
@@ -158,7 +158,6 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 		if (loginableRef != null && loginableRef.get() != null) {
 		    loginableRef.get().loginFailed();
 		}
-		// TODO Auto-generated method stub
 	}    
 
     //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
