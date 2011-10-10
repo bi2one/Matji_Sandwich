@@ -5,6 +5,7 @@ import android.view.View;
 import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.title.HomeTitle;
 

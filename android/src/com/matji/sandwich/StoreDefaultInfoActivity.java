@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.PhoneCallUtil;
 import com.matji.sandwich.widget.cell.StoreCell;
@@ -61,6 +63,7 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
         storeCell.addRefreshable(title);
 
         phoneCallUtil = new PhoneCallUtil(this);
+        
     }
 
     @Override
@@ -127,7 +130,14 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     }
 
     public void onReportClicked(View v) {
-    	Intent intent = new Intent(this, StoreModifyActivity.class);
-    	startActivity(intent);
+    	Session session = Session.getInstance(this);
+        if (!session.isLogin()) {
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
+        	Intent intent = new Intent(this, StoreModifyActivity.class);
+        	intent.putExtra(StoreModifyActivity.STORE, (Parcelable) StoreDetailInfoTabActivity.store);
+        	startActivity(intent);
+    	}
     }
+    
 }

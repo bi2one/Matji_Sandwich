@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +17,7 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.UserHttpRequest;
+import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
@@ -47,7 +49,6 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         return R.id.activity_register;
     }
 
-    @Override
     protected void init() {
         super.init();
 
