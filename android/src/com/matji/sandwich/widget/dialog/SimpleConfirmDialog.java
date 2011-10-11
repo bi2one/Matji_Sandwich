@@ -34,7 +34,6 @@ public class SimpleConfirmDialog implements SimpleDialog, DialogInterface.OnClic
     }
 
     public void onClick(DialogInterface dialog, int id) {
-        cancel();
         switch(id) {
         case DialogInterface.BUTTON_POSITIVE:
             listener.onConfirmClick(this);
@@ -43,6 +42,7 @@ public class SimpleConfirmDialog implements SimpleDialog, DialogInterface.OnClic
             listener.onCancelClick(this);
             break;
         }
+        cancel();
     }
 
     public void show() {

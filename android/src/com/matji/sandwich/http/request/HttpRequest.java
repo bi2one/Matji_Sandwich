@@ -65,6 +65,7 @@ public abstract class HttpRequest implements ProgressRequestCommand {
     private boolean secondaryConfirmStatusCode(int code) {
 	switch(code) {
 	case HttpUtility.HTTP_STATUS_NOT_ACCEPTABLE:
+	case HttpUtility.HTTP_STATUS_FOUND:
 	    return true;
 	default:
 	    return false;

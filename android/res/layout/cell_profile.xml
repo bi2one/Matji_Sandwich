@@ -2,10 +2,10 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/CellProfileWrapper">
-	<com.matji.sandwich.widget.cell.CellProfileImageView
-		android:id="@+id/profile"
-		style="@style/CellProfile" />
-	<ImageView
-		android:id="@+id/profile_border"
-		style="@style/DefaultFill" />
+  <com.matji.sandwich.widget.cell.CellProfileImageView
+      android:id="@+id/profile"
+      style="@style/CellProfile" />
+  <ImageView
+      android:id="@+id/profile_border"
+      style="@style/DefaultFill" />
 </RelativeLayout>

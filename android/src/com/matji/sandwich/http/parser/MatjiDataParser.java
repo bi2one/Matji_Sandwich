@@ -50,7 +50,7 @@ public abstract class MatjiDataParser implements MatjiParser {
             int code = json.getInt("code");
             if (code == ExceptionFactory.STATUS_OK) {
                 return json.getString("result");
-            } else {
+	    } else {
             	MatjiException codeException = ExceptionFactory.create(code);
             	if (codeException != null)
 		    throw codeException;
@@ -111,7 +111,7 @@ public abstract class MatjiDataParser implements MatjiParser {
     public MatjiData parseToMatjiData(String data) throws MatjiException{
         if (data == null) return null;
         String validData = validateData(data);
-        return getRawObject(validData);		
+        return getRawObject(validData);
     }
 
     protected boolean isNull(JsonElement element) {
