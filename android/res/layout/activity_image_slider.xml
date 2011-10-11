@@ -5,40 +5,43 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-   <com.matji.sandwich.widget.SwipeView
-       style="@style/DefaultFill"
-       android:id="@+id/SwipeView" />
-<!-- 	<com.matji.sandwich.widget.SwipeView -->
-<!-- 		style="@style/DefaultFill" -->
-<!-- 		android:id="@+id/SwipeView"> -->
-<!-- 		<RelativeLayout -->
-<!-- 			style="@style/DefaultFill" -->
-<!-- 			android:id="@+id/image_slider_left_layout"> -->
-<!-- 			<ImageView -->
-<!-- 				style="@style/DefaultWrap" -->
-<!-- 				android:layout_centerInParent="true" -->
-<!-- 				android:scaleType="fitCenter" -->
-<!-- 				android:id="@+id/image_slider_left_image" /> -->
-<!-- 		</RelativeLayout> -->
-<!-- 		<RelativeLayout -->
-<!-- 			style="@style/DefaultFill" -->
-<!-- 			android:id="@+id/image_slider_center_layout"> -->
-<!-- 			<ImageView -->
-<!-- 				style="@style/DefaultWrap" -->
-<!-- 				android:layout_centerInParent="true" -->
-<!-- 				android:scaleType="fitCenter" -->
-<!-- 				android:id="@+id/image_slider_center_image" /> -->
-<!-- 		</RelativeLayout> -->
-<!-- 		<RelativeLayout -->
-<!-- 			style="@style/DefaultFill" -->
-<!-- 			android:id="@+id/image_slider_right_layout"> -->
-<!-- 			<ImageView -->
-<!-- 				style="@style/DefaultWrap" -->
-<!-- 				android:layout_centerInParent="true" -->
-<!-- 				android:scaleType="fitCenter" -->
-<!-- 				android:id="@+id/image_slider_right_image" /> -->
-<!-- 		</RelativeLayout> -->
-<!-- 	</com.matji.sandwich.widget.SwipeView> -->
+	<com.matji.sandwich.widget.PhotoSliderView
+		android:id="@+id/image_slider"
+		style="@style/DefaultFill" />
+	<!-- <com.matji.sandwich.widget.SwipeView -->
+	<!-- style="@style/DefaultFill" -->
+	<!-- android:id="@+id/SwipeView" /> -->
+	<!-- <com.matji.sandwich.widget.SwipeView -->
+	<!-- style="@style/DefaultFill" -->
+	<!-- android:id="@+id/SwipeView"> -->
+	<!-- <RelativeLayout -->
+	<!-- style="@style/DefaultFill" -->
+	<!-- android:id="@+id/image_slider_left_layout"> -->
+	<!-- <ImageView -->
+	<!-- style="@style/DefaultWrap" -->
+	<!-- android:layout_centerInParent="true" -->
+	<!-- android:scaleType="fitCenter" -->
+	<!-- android:id="@+id/image_slider_left_image" /> -->
+	<!-- </RelativeLayout> -->
+	<!-- <RelativeLayout -->
+	<!-- style="@style/DefaultFill" -->
+	<!-- android:id="@+id/image_slider_center_layout"> -->
+	<!-- <ImageView -->
+	<!-- style="@style/DefaultWrap" -->
+	<!-- android:layout_centerInParent="true" -->
+	<!-- android:scaleType="fitCenter" -->
+	<!-- android:id="@+id/image_slider_center_image" /> -->
+	<!-- </RelativeLayout> -->
+	<!-- <RelativeLayout -->
+	<!-- style="@style/DefaultFill" -->
+	<!-- android:id="@+id/image_slider_right_layout"> -->
+	<!-- <ImageView -->
+	<!-- style="@style/DefaultWrap" -->
+	<!-- android:layout_centerInParent="true" -->
+	<!-- android:scaleType="fitCenter" -->
+	<!-- android:id="@+id/image_slider_right_image" /> -->
+	<!-- </RelativeLayout> -->
+	<!-- </com.matji.sandwich.widget.SwipeView> -->
 
 	<TextView
 		android:id="@+id/image_slider_count"

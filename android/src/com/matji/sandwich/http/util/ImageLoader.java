@@ -114,9 +114,10 @@ public class ImageLoader {
     }
 
     public void cancel(ImageView imageView) {
-        photosQueue.Clean(imageView);
+        if (!photosQueue.photosToLoad.isEmpty())
+            photosQueue.Clean(imageView);
     }
-    
+
     public void clear(UrlType type, int id) {
         clear(type, ImageSize.SSMALL, id);
         clear(type, ImageSize.SMALL, id);
@@ -359,7 +360,7 @@ public class ImageLoader {
             }
         }
     }
-    
+
     public static void clearCache(Context context) {
         memoryCache.clear();
         if (fileCache == null) {

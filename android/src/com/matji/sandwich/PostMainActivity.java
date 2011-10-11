@@ -18,6 +18,7 @@ import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.listener.LikeListener;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.CommentInputBar;
@@ -40,6 +41,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
     private PageableTitle pageableTitle;
     private CommentListView commentListView;
     private CommentInputBar commentInputBar;
+    private LikeListener likeLisetner;
 
     private Toast toast;
 
@@ -121,8 +123,8 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         if (showKeyboard) {
             commentInputBar.requestFocusToTextField();                      // showKeyboard 값에 따라 키보드를 보여주거나 보여주지 않음
         }
-        commentInputBar.setLikeListener(new LikeListener(this, this, currentPost, getMainView()) { // LikeListener를 등록. 리스너의 Post 객체는 currentPost
-
+        
+        likeLisetner = new LikeListener(this, this, currentPost, getMainView()) {
             @Override
             public void postUnlikeRequest() {
                 // like 요청 후 post의 likeCount를 줄여준다.
@@ -140,7 +142,9 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                 commentListView.dataRefresh();
                 commentInputBar.onLikehand();
             }
-        });
+        };
+        
+        refreshCommentInputBar();
     }
 
     public void onConfirmButtonClicked(View v) {
@@ -191,6 +195,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                 commentListView.clearAdapter();
                 commentListView.setPost(currentPost);
                 commentListView.requestReload();
+                refreshCommentInputBar();
             }
         }
     }
@@ -206,10 +211,23 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                 commentListView.setPost(currentPost);
                 commentListView.clearAdapter();
                 commentListView.requestReload();
+                refreshCommentInputBar();
             }
         }
     }
 
+    public void refreshCommentInputBar() {
+        CommentInputBar.Type type = 
+            (Session.getInstance(this).getCurrentUser().getId() == currentPost.getUserId()) ?
+                    CommentInputBar.Type.PRIVATE : CommentInputBar.Type.PUBLIC; 
+        likeLisetner.setData(currentPost);
+        commentInputBar.setType(type);
+        if (type == CommentInputBar.Type.PUBLIC) {
+            commentInputBar.setLikeListener(likeLisetner);
+            commentInputBar.refreshLikehand(currentPost.getId());
+        }
+    }
+    
     @Override
     public void postDelete() {
         isDeleted = true;

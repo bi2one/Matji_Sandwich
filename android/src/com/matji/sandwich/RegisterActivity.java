@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,13 +20,14 @@ import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.UserHttpRequest;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
 
-public class RegisterActivity extends BaseActivity implements Completable, Requestable {
-
+public class RegisterActivity extends BaseActivity implements Completable, Requestable, Loginable {
+    private Session session;
     private CompletableTitle title;
     private EditText etEmail;
     private EditText etNickname;
@@ -34,6 +36,11 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     private TextView tvAccept;
     private CheckBox cbAccept;
     private Button bRegister;
+
+    private String email;
+    private String nickname;
+    private String password;
+    private String passwordConfirm;
 
     private SimpleAlertDialog emailIsNullDialog;
     private SimpleAlertDialog emailIsIncorrectDialog;
@@ -59,6 +66,8 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
 
         title.setTitle(R.string.default_string_register);
         title.setCompletable(this);
+
+	session = Session.getInstance(this);
     }
 
     private void findViews() {
@@ -82,7 +91,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         });
         
         bRegister.setOnClickListener(new OnClickListener() {
-            
+		
             @Override
             public void onClick(View arg0) {
                 complete();
@@ -90,10 +99,9 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         });
         
         successDialog.setOnClickListener(new SimpleAlertDialog.OnClickListener() {
-            
             @Override
             public void onConfirmClick(SimpleDialog dialog) {
-                finish();
+		session.loginWithDialog(RegisterActivity.this, email, password, RegisterActivity.this);
             }
         });
     }
@@ -112,11 +120,10 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
 
     @Override
     public void complete() {
-        
-        String email = etEmail.getText().toString();
-        String nickname = etNickname.getText().toString();
-        String password = etPassword.getText().toString();
-        String passwordConfirm = etPasswordConfirm.getText().toString();
+        email = etEmail.getText().toString();
+        nickname = etNickname.getText().toString();
+        password = etPassword.getText().toString();
+        passwordConfirm = etPasswordConfirm.getText().toString();
         
         if (email.equals("")) {
             emailIsNullDialog.show();
@@ -176,4 +183,13 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         title.unlockCompletableButton();
         e.performExceptionHandling(this);
     }
+
+    public void loginCompleted() {
+	Intent intent = new Intent(this, MainTabActivity.class);
+	intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_CONFIG);
+	startActivity(intent);
+	finish();
+    }
+
+    public void loginFailed() { }
 }

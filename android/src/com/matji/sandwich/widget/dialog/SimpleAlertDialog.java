@@ -7,20 +7,18 @@ import android.content.DialogInterface;
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.MatjiConstants;
 
-import java.lang.ref.WeakReference;
-
 public class SimpleAlertDialog implements SimpleDialog, DialogInterface.OnClickListener {
     AlertDialog dialog;
-    WeakReference<OnClickListener> listenerRef;
+    OnClickListener listener;
 
     public SimpleAlertDialog(Context context, int msgId) {
         this(context, MatjiConstants.string(msgId));
     }
 
     public SimpleAlertDialog(Context context, String message) {
-        listenerRef = new WeakReference(new OnClickListener() {
+        listener = new OnClickListener() {
 		public void onConfirmClick(SimpleDialog dialog) { }
-	    });
+	    };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message)
@@ -30,14 +28,14 @@ public class SimpleAlertDialog implements SimpleDialog, DialogInterface.OnClickL
     }
 
     public void setOnClickListener(OnClickListener listener) {
-        this.listenerRef = new WeakReference(listener);
+        this.listener = listener;
     }
 
     public void onClick(DialogInterface dialog, int id) {
-        cancel();
-	if (listenerRef != null && listenerRef.get() != null) {
-	    listenerRef.get().onConfirmClick(this);
+	if (listener != null) {
+	    listener.onConfirmClick(this);
 	}
+        cancel();
     }
 
     public void show() {

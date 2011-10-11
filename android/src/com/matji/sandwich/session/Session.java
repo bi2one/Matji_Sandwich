@@ -125,6 +125,7 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
 	MeHttpRequest request = new MeHttpRequest(context);
 	request.actionAuthorize(userid, password);
 	DialogAsyncTask loginAsyncTask = new DialogAsyncTask(context, this, request, HttpRequestManager.AUTHORIZE);
+	loginAsyncTask.setDialogString(R.string.session_onlogin);
 	loginAsyncTask.setProgressListener(this);
 	loginAsyncTask.execute();
     }

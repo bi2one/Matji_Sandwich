@@ -27,6 +27,7 @@ public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClick
     
     private WeakReference<Context> contextRef;
     private WeakReference<MatjiLocationListener> matjiListenerRef;
+    private WeakReference<StartConfigListener> startConfigListenerRef;
     private LocationManager locationManager;
     private String majorProvider;
     private boolean gpsPerformed;
@@ -40,6 +41,10 @@ public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClick
 	locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
 	gpsPerformed = false;
 	runningFlag = false;
+    }
+
+    public void setStartConfigListener(StartConfigListener startConfigListener) {
+	this.startConfigListenerRef = new WeakReference(startConfigListener);
     }
 
     public void start(int startFromTag) {
@@ -173,11 +178,19 @@ public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClick
     }
 
     public void onConfirmClick(SimpleDialog dialog) {
+	if (startConfigListenerRef != null && startConfigListenerRef.get() != null) {
+	    startConfigListenerRef.get().onStartConfig(this);
+	}
+	
 	Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	intent.addCategory(Intent.CATEGORY_DEFAULT);
 	contextRef.get().startActivity(intent);
     }
-
+    
     public void onCancelClick(SimpleDialog dialog) { }
+    
+    public interface StartConfigListener {
+	public void onStartConfig(GpsManager manager);
+    }
 }

@@ -18,62 +18,62 @@
   <string name="server_domain">http://api.yummystory.com/</string>
   <string name="client_id">fcdfa51a14</string>
   <string name="client_secret">331d96e8ac924cab59b314d134645b</string>
-  
+
   <!-- MatjiException -->
   <string name="exception_InternalServerMatjiException">서버 오류입니다. 관리자에게 문의하세요.</string>
-  <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다</string>
-  <string name="exception_GpsEnabledMatjiException">GPS 서비스를 사용할 수 있습니다</string>
-  <string name="exception_GpsOutOfServiceMatjiException">GPS 서비스 지역에서 벗어났습니다</string>
+  <string name="exception_GpsAvailableMatjiException">GPS가 정상작동 합니다.</string>
+  <string name="exception_GpsEnabledMatjiException">GPS 서비스를 사용할 수 있습니다.</string>
+  <string name="exception_GpsOutOfServiceMatjiException">GPS 서비스 지역에서 벗어났습니다.</string>
   <string name="exception_GpsServiceNotPossibleMatjiException">
-    GPS 사용이 불가능합니다. 하늘을 볼 수 있거나, 네트워크가 안정적인 곳에서 다시 로딩해 주세요
+    GPS 사용이 불가능합니다. 하늘을 볼 수 있거나, 네트워크가 안정적인 곳에서 다시 로딩해 주세요.
   </string>
   <string name="exception_GpsTemporarilyUnavailableMatjiException">
-    내부 문제로, GPS를 일시적으로 중지합니다. 잠시만 기다려주세요
+    내부 문제로, GPS를 일시적으로 중지합니다. 잠시만 기다려주세요.
   </string>
   <string name="exception_HttpConnectMatjiException">
-    접속 상태가 불량합니다. 접속상태를 확인하세요
+    접속 상태가 불량합니다. 접속상태를 확인하세요.
   </string>
   <string name="exception_InterruptedMatjiException">
-    Interrupted Exception: 연산을 중지합니다
+    Interrupted Exception: 연산을 중지합니다.
   </string>
   <string name="exception_NotPossibleMatjiException">
-    일어날 수 없는 행동입니다
+    일어날 수 없는 행동입니다.
   </string>
   <string name="exception_JSONCodeMatjiException">
-    JSON리턴 결과가 올바르지 않습니다
+    JSON리턴 결과가 올바르지 않습니다.
   </string>
   <string name="exception_JSONMatjiException">
     JSON Parsing Error
   </string>
   <string name="exception_NotSupportedMatjiException">
-    지원하지 않는 기능입니다
+    지원하지 않는 기능입니다.
   </string>
   <string name="exception_UseNetworkGpsMatjiException">
-    GPS수신이 불안정합니다. 네트워크로 현재 위치를 추정합니다
+    GPS수신이 불안정합니다. 네트워크로 현재 위치를 추정합니다.
   </string>
   <string name="exception_GeocodeLocationInvalidMatjiException">
-    해당 위치는 주소를 받아올 수 없는 지역입니다
+    해당 위치는 주소를 받아올 수 없는 지역입니다.
   </string>
   <string name="exception_GeocodeSearchInvalidMatjiException">
-    주소 검색이 올바르지 않습니다
+    주소 검색이 올바르지 않습니다.
   </string>
   <string name="exception_GeocodeZeroResultMatjiException">
-    검색 결과가 없습니다
+    검색 결과가 없습니다.
   </string>
   <string name="exception_RegistStoreNameInvalidMatjiException">
-    맛집 이름을 입력해주셔야 합니다
+    맛집 이름을 입력해 주세요.
   </string>
   <string name="exception_store_address_is_null">
-    기본 주소가 잘못되었습니다. 
+    주소 입력이가 잘못되었습니다. 
   </string>
   <string name="exception_WritePostMatjiException">
-    내부 오류로 인해 이야기가 제대로 등록되지 않았습니다
+    내부 오류로 인해 이야기가 제대로 등록되지 않았습니다.
   </string>
   <string name="exception_BitmapCompressMatjiException">
-    내부 문제로 이미지가 압축되지 않습니다
+    내부 문제로 이미지가 압축되지 않습니다.
   </string>
   <string name="exception_BitmapCompressIOMatjiException">
-    이미지 압축 대상 파일을 생성할 수 없습니다
+    이미지 압축 대상 파일을 생성할 수 없습니다.
   </string>
   <string name="exception_InvalidPasswordMatjiException">
     아이디 혹은 비밀번호를 확인해주세요.
@@ -81,8 +81,11 @@
 
   <!-- server exception -->
   <string name="exception_failed_to_save_region">
-    북마크를 이미 한 지역입니다.
+    이미 북마크 한 지역입니다.
   </string>
+
+  <!-- Session.java -->
+  <string name="session_onlogin">로그인 중입니다...</string>
 
   <!-- pull_to_refresh -->
   <string name="pull_to_refresh_pull_label">당겨서 새로고침</string>
@@ -101,7 +104,7 @@
   <string name="default_string_not_exist_website">웹사이트가 없습니다.</string>
   <string name="default_string_not_exist_cover">커버가 없습니다.</string>
   <string name="default_string_not_exist_tel">전화번호가 없습니다.</string>
-  <string name="default_string_basic_info">기본정보</string>
+  <string name="default_string_basic_info">소개</string>
   <string name="default_string_more_info">부가정보</string>
   <string name="default_string_info">정보</string>
   <string name="default_string_popular_food">인기메뉴</string>
@@ -144,13 +147,13 @@
   <string name="default_string_message">쪽지</string>
   <string name="default_string_login">로그인</string>
   <string name="default_string_register">회원가입</string>
-  <string name="default_string_webreview">웹리뷰</string>
+  <string name="default_string_webreview">관련글</string>
   
   <!-- GpsManager.java -->
   <string name="gps_request_turn_on">GPS를 수신할 수 없습니다. 설정을 켜 주셔야 합니다</string>
   
   <!-- Writing content -->
-  <string name="writing_content_post">메모를 입력하세요.</string>
+  <string name="writing_content_post">이야기를 입력하세요.</string>
   <string name="writing_content_comment">댓글을 입력하세요.</string>
   <string name="writing_content_message">메세지를 입력하세요.</string>
   <string name="writing_content_received_user">받는 사람을 추가하세요.</string>
@@ -174,7 +177,7 @@
   
   <!-- Cell -->
   <string name="cell_user_point">포인트</string>
-  <string name="cell_user_area">활동국가</string>
+  <string name="cell_user_area">사는 나라</string>
   <string name="cell_user_follow">Follow</string>
   <string name="cell_user_unfollow">Unfollow</string>
   <string name="cell_store_not_exist_tel">전화번호 미등록</string>
@@ -182,7 +185,7 @@
   <string name="cell_store_not_exist_tag"> </string>
   <string name="cell_store_not_exist_menu"> </string>
   <string name="cell_user_edit_nickname">닉네임 변경</string>
-  <string name="cell_user_edit_userid">계정</string>
+  <string name="cell_user_edit_userid">계정(이메일)</string>
   <string name="cell_user_edit_usermail">이메일</string>
   <string name="cell_user_edit_img">사진 선택</string>
     
@@ -239,7 +242,7 @@
   <string name="at">in</string>
   
   <!-- map_title_bar.xml -->
-  <string name="change_location">위치변경</string>
+  <string name="change_location">지역 변경</string>
   
   
   <!-- TimeUtil -->
@@ -263,14 +266,14 @@
 
   <!-- User Profile -->
   <string name="user_profile_edit_profile">정보 변경</string>
-  <string name="user_profile_friend_information">친구정보</string>
+  <string name="user_profile_friend_information">친구</string>
   <string name="user_profile_following">Following</string>
   <string name="user_profile_follower">Follower</string>
-  <string name="user_profile_store_information">맛집정보</string>
+  <string name="user_profile_store_information">맛집</string>
   <string name="user_profile_find_store">발견한 맛집</string>
   <string name="user_profile_my_find_store">발견한 맛집</string>
   <string name="user_profile_my_bookmark_store">북마크 맛집</string>
-  <string name="user_profile_recent_store">최근맛집</string>
+  <string name="user_profile_recent_store">최근 맛집</string>
   
   <!-- ANDROID -->
   <string name="target">ANDROID</string>
@@ -279,14 +282,14 @@
   <string name="hint_current_password">현재 비밀번호</string>
   <string name="hint_search_stor_tag_menu">맛집명, 태그, 메뉴 검색</string>
   <string name="hint_search_post">이야기 검색</string>
-  <string name="hint_search_user">사람 검색</string>
+  <string name="hint_search_user">회원 검색</string>
   <string name="hint_write_comment">댓글 입력</string>
   <string name="hint_write_usermail">이메일 입력</string>
   <string name="hint_write_password">비밀번호 입력</string>
   <string name="hint_write_nick">닉네임 입력 (최소 2자 ~ 최대 12자)</string>
   <string name="hint_write_intro">소개글 입력</string>
-  <string name="hint_write_website">블로그, 웹사이트 주소 입력</string>
-  <string name="hint_write_store_food">메뉴명 입력</string>
+  <string name="hint_write_website">블로그/웹사이트 주소 입력</string>
+  <string name="hint_write_store_food">메뉴 입력</string>
   <string name="hint_email">이메일</string>
   <string name="hint_nickname">닉네임</string>
   <string name="hint_password">비밀번호</string>
@@ -296,7 +299,7 @@
   <string name="activity_change_location_hint">지명이나 지역 입력</string>
 
   <!-- ChangeLocationActivity.java -->
-  <string name="change_location_activity_title">위치변경</string>
+  <string name="change_location_activity_title">지역 변경</string>
   <string name="change_location_activity_input_empty_string">주소를 입력해 주세요.</string>
 
   <!-- recent_changed_location.xml -->
@@ -307,7 +310,7 @@
   <string name="ranking_tab_friend">친구</string>
   <string name="ranking_tab_near">지역</string>
   <string name="ranking_tab_country">전국</string>
-  <string name="ranking_tab_all">전체</string>
+  <string name="ranking_tab_all">세계</string>
 
   <!-- row_simple_user.xml -->
   <string name="row_simple_user_point_hint">P</string>
@@ -318,20 +321,20 @@
   <string name="row_alarm_follow">%1$s님이 ##나를 Follow 합니다.##</string>
   <string name="row_alarm_message">%1$s님으로부터 ##쪽지가 도착했습니다.##</string>
 
-  <!-- Highlight Header -->
+  <!-- highlight Header -->
   <string name="highlight_search_result">검색결과</string>
-  <string name="highlight_store_like_users">\'%1$s\' 맛집을 좋아한 사람들</string>
-  <string name="highlight_post_like_users">이 이야기를 좋아한 사람들</string>
-  <string name="highlight_store_food_like_users">메뉴를 좋아한 사람들</string>
-  <string name="highlight_like_stores">\'%1$s\'님이 좋아한 맛집</string>
-  <string name="highlight_like_stores_me">내가 좋아한 맛집</string>
-  <string name="highlight_bookmark_stores">내가 북마크한 맛집</string>
+  <string name="highlight_store_like_users">\'%1$s\' 맛집을 좋아하는 사람들</string>
+  <string name="highlight_post_like_users">이 이야기를 좋아하는 사람들</string>
+  <string name="highlight_store_food_like_users">메뉴를 좋아하는 사람들</string>
+  <string name="highlight_like_stores">\'%1$s\'님이 좋아하는 맛집</string>
+  <string name="highlight_like_stores_me">좋아하는 맛집</string>
+  <string name="highlight_bookmark_stores">북마크 맛집</string>
   <string name="highlight_find_stores">\'%1$s\'님이 발견한 맛집</string>
-  <string name="highlight_find_stores_me">내가 발견한 맛집</string>
+  <string name="highlight_find_stores_me">발견한 맛집</string>
   <string name="highlight_followings">\'%1$s\'님의 Following</string>
   <string name="highlight_followers">\'%1$s\'님의 Follower</string>
-  <string name="highlight_followings_me">나의 Following</string>
-  <string name="highlight_followers_me">나의 Follower</string>
+  <string name="highlight_followings_me">Following</string>
+  <string name="highlight_followers_me">Follower</string>
   
 
   <!-- adapter_ranking.xml -->
@@ -390,9 +393,9 @@
   
   <!-- PostListView Subtitle -->
   <string name="subtitle_friend_post">친구들 이야기</string>
-  <string name="subtitle_nearby_post">주변 이야기</string>
-  <string name="subtitle_all_post">모든 이야기</string>
-  <string name="subtitle_domestic_post">전국 이야기</string>
+  <string name="subtitle_nearby_post">주변 맛집 이야기</string>
+  <string name="subtitle_all_post">세계 맛집 이야기</string>
+  <string name="subtitle_domestic_post">전국 맛집 이야기</string>
   <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
   <string name="subtitle_user_post">%1$d개의 %2$s 이야기</string>
   <string name="subtitle_tag_post">\'%1$s\'태그 이야기</string>
@@ -416,15 +419,15 @@
   
   <!-- TagCloud -->
   <string name="number_of_tag">%1$d개의 태그</string>
-  <string name="all_tag">전체 태그</string>
-  <string name="top_tag">상위 태그</string>
+  <string name="all_tag">자주 쓰는 태그</string>
+  <string name="top_tag">태그 클라우드</string>
   
   <!-- WriteMessageActivity.java -->
   <string name="write_message_writing_content">내용 입력</string>
   <string name="write_message_received_user">받는 사람:&#160;</string>
   <string name="write_message">쪽지 쓰기</string>
-  <string name="overflow_received_user">최대 %1$d명까지 추가가 가능합니다.</string>
-  <string name="write_message_select_user">받는 사람을 추가해주세요.</string>
+  <string name="overflow_received_user">최대 %1$d명까지 추가 가능합니다.</string>
+  <string name="write_message_select_user">받는 사람을 추가해 주세요.</string>
   
   <!-- MessageListActivity.java -->
   <string name="received_message_list">받은 쪽지함</string>
@@ -434,10 +437,10 @@
   <string name="progress_login">로그인 중입니다.</string>
 
   <!-- FileUploadAsyncTask.java -->
-  <string name="progress_upload">잠시만 기다려주세요...</string>
+  <string name="progress_upload">잠시만 기다려주세요.</string>
 
   <!-- ProgressDialogAsyncTask.java -->
-  <string name="progress_dialog">잠시만 기다려주세요...</string>
+  <string name="progress_dialog">잠시만 기다려주세요.</string>
   <string name="progress_dialog_counter">(%1$d / %2$d)</string>
 
   <!-- WriteStoreActivity.java -->
@@ -446,7 +449,7 @@
   <string name="write_store_success">맛집 정보 등록에 성공하였습니다.</string>
 
   <!-- write_store_matji_mapview.xml -->
-  <string name="write_store_matji_mapview_store_name">맛집명 입력</string>
+  <string name="write_store_matji_mapview_store_name">맛집이름 입력</string>
   <string name="write_store_matji_mapview_add_address">상세주소</string>
   <string name="write_store_matji_mapview_phone_number">전화번호 입력</string>
 
@@ -465,11 +468,11 @@
   <string name="select_tag_hint">태그 입력</string>
 
   <!-- StoreDiscoverListActivity.java -->
-  <string name="store_discover_list">발견 맛집</string>
+  <string name="store_discover_list">발견한 맛집</string>
 
   <!-- PrivateTabActivity.java -->
-  <string name="private_tab_my_info">내 정보</string>
-  <string name="private_tab_my_tag">내 태그</string>
+  <string name="private_tab_my_info">정보</string>
+  <string name="private_tab_my_tag">태그</string>
   
   <!-- activity_settings.xml -->
   <string name="settings_account_manages">계정 관리</string>
@@ -495,7 +498,7 @@
   <string name="settings_service_guide">서비스 안내</string>
   <string name="settings_service_report">버그신고 및 기능제안</string>
   <string name="settings_service_version_name">1.2.3</string>
-  <string name="settings_service_version_update">업데이트</string>
+  <string name="settings_service_version_update">새버젼 받기</string>
   
   <string name="setting_alarm_permit">permit</string>
   <string name="setting_alarm_spinner">view</string>
@@ -529,13 +532,13 @@
   <string name="login_writing_id_password">아이디 혹은 비밀번호를 입력해주세요.</string>
 
   <!-- edit guide -->
-  <string name="edit_website_guide">친구들에게 보여질\n블로그, 혹은 개인 홈페이지\n주소를 입력하세요.</string>
-  <string name="edit_nick_guide">친구들에게 보여질\n닉네임을 입력하세요.</string>
+  <string name="edit_website_guide">블로그나 홈페이지\n주소를 입력하세요.</string>
+  <string name="edit_nick_guide">닉네임을 입력하세요.</string>
   <string name="edit_password_guide">변경할 비밀번호를 입력하세요.</string>
   
   <!-- activity_register.xml -->
   <string name="register_write_email">이메일을 입력해 주세요.</string>
-  <string name="register_write_nickname">닉네임을 입력해 주세요. 12자까지 가능합니다.</string>
+  <string name="register_write_nickname">닉네임을 입력해 주세요. \n12자까지 가능합니다.</string>
   <string name="register_write_password">비밀번호를 입력해 주세요.</string>
   <string name="register_acceptance_of_terms">약관동의</string>
   <string name="register_view_acceptance_of_terms">(약관보기)</string>
@@ -551,7 +554,7 @@
   <string name="screen_shot_button_success">화면을 저장하였습니다.\n\'갤러리\'에서 확인해 보세요.</string>
 
   <!-- PhoneCallUtil.java -->
-  <string name="phone_call_confirm">이곳에 전화를 거시겠습니까?</string>
+  <string name="phone_call_confirm">전화를 거시겠습니까?</string>
   
   <!-- RegisterActivity.java -->
   <string name="register_email_is_null">이메일을 입력해 주세요.</string>
@@ -569,14 +572,14 @@
   <string name="store_food_add_guide">\'%1$s\'에\n추가할 메뉴명을 입력하세요.</string>
   
   <!-- Title -->
-  <string name="title_store_food_add">메뉴추가</string>
+  <string name="title_store_food_add">메뉴 추가</string>
   <string name="title_received_user">받는 사람</string>
-  <string name="title_find_store">발견 맛집</string>
+  <string name="title_find_store">발견한 맛집</string>
   <string name="title_bookmark_store">북마크 맛집</string>
-  <string name="title_area">활동국가</string>
+  <string name="title_area">사는나라</string>
   
   <!-- UserPasswordEditActivity.java -->
-  <string name="user_password_edit_password_changed">비밀번호가 성공적으로 변경되었습니다.</string>
+  <string name="user_password_edit_password_changed">비밀번호가 변경되었습니다.</string>
   
   <!-- activity_store_default_info.xml -->
   <string name="store_default_info_report">정보 등록/수정 요청</string>
