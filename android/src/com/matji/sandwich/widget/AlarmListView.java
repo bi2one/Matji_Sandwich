@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.AlarmAdapter;

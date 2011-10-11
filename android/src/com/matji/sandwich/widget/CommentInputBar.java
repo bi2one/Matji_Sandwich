@@ -1,14 +1,16 @@
 package com.matji.sandwich.widget;
 
-import com.matji.sandwich.PostMainActivity;
-import com.matji.sandwich.R;
-import com.matji.sandwich.util.MatjiConstants;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import com.matji.sandwich.PostMainActivity;
+import com.matji.sandwich.R;
+import com.matji.sandwich.data.provider.DBProvider;
+import com.matji.sandwich.util.MatjiConstants;
 
 /**
  * {@link PostMainActivity}에서 사용하는 InputBar.
@@ -18,6 +20,10 @@ import android.widget.LinearLayout;
  */
 public class CommentInputBar extends InputBar {
     private ImageButton likeButton;
+
+    public enum Type {
+        PRIVATE, PUBLIC
+    }
 
     public CommentInputBar(Context context, AttributeSet attr) {
         super(context, attr);
@@ -37,6 +43,7 @@ public class CommentInputBar extends InputBar {
         likeButton.setLayoutParams(params);
 
         addView(likeButton, 0);
+
         setBackgroundResource(R.drawable.reply_bg);
     }
 
@@ -55,8 +62,25 @@ public class CommentInputBar extends InputBar {
         likeButton.setImageResource(R.drawable.icon_tabbtn_likehand_touch);
     }
 
+    public void refreshLikehand(int post_id) {
+        DBProvider dbProvider = DBProvider.getInstance(getContext());
+        if (dbProvider.isExistLike(post_id, DBProvider.POST)) {
+            onLikehand();
+        } else {
+            offLikehand();
+        }
+    }
+
     public void offLikehand() {
         likeButton.setImageResource(R.drawable.icon_tabbtn_likehand);
+    }
+
+    public void setType(Type type) {
+        if (type == Type.PRIVATE) {
+            likeButton.setVisibility(View.GONE);
+        } else if (type == Type.PUBLIC) {
+            likeButton.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setLikeListener(OnClickListener listener) {
