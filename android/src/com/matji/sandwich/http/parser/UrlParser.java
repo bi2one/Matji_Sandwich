@@ -8,10 +8,6 @@ import com.matji.sandwich.data.Url;
 import com.matji.sandwich.exception.MatjiException;
 
 public class UrlParser extends MatjiDataParser {
-	public UrlParser(Context context) {
-		super(context);
-	}
-	
 	public Url getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		

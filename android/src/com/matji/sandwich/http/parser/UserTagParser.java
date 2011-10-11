@@ -8,10 +8,6 @@ import com.matji.sandwich.data.UserTag;
 import com.matji.sandwich.exception.MatjiException;
 
 public class UserTagParser extends MatjiDataParser {
-	public UserTagParser(Context context) {
-		super(context);
-	}
-	
 	public UserTag getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -24,11 +20,11 @@ public class UserTagParser extends MatjiDataParser {
 		userTag.setUpdatedAt(getString(object, "updated_at"));
 		
 		/* Set Tag */
-		TagParser tagParser = new TagParser(context);
+		TagParser tagParser = new TagParser();
 		userTag.setTag(tagParser.getMatjiData(getObject(object, "tag")));
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		userTag.setUser(userParser.getMatjiData(getObject(object, "user")));
 
 		Log.d("Parser", "UserTagParser:: called getMatjiData");

@@ -8,9 +8,6 @@ import com.matji.sandwich.data.StoreFood;
 import com.matji.sandwich.exception.MatjiException;
 
 public class StoreFoodParser extends MatjiDataParser {
-	public StoreFoodParser(Context context) {
-		super(context);	}
-
 	public StoreFood getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 
@@ -23,15 +20,15 @@ public class StoreFoodParser extends MatjiDataParser {
 		storeFood.setAccuracy(getBoolean(object, "accuracy"));
 
 		/* Set Store */
-		StoreParser storeParser = new StoreParser(context);
+		StoreParser storeParser = new StoreParser();
 		storeFood.setStore(storeParser.getMatjiData(getObject(object, "store")));
 
 		/* Set Food */
-		FoodParser foodParser = new FoodParser(context);
+		FoodParser foodParser = new FoodParser();
 		storeFood.setFood(foodParser.getMatjiData(getObject(object, "food")));
 
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		storeFood.setUser(userParser.getMatjiData(getObject(object, "user")));
 
 		Log.d("Parser", "StoreFoodParser:: called getMatjiData");

@@ -158,7 +158,6 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
         mainTabWrapper.addView(title, 0);
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();

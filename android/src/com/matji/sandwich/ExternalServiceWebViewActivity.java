@@ -66,7 +66,7 @@ public class ExternalServiceWebViewActivity extends Activity {//implements IUser
 	    if (jsonString != null && jsonString.length() > 0){
 		try{
 		    // write to local database
-		    MeParser parser = new MeParser(context);
+		    MeParser parser = new MeParser();
 		    ArrayList<MatjiData> md = parser.parseToMatjiDataList(jsonString);
 		    Me me = (Me)md.get(0);
 		    Session.getInstance(context).saveMe(me);

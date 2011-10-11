@@ -14,7 +14,7 @@ public class FollowingHttpRequest extends HttpRequest {
 	public void actionNew(int followed_user_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
-		parser = new FollowingParser(getContext());
+		parser = new FollowingParser();
 		
 		postHashtable.clear();
 		postHashtable.put("followed_user_id", followed_user_id);
@@ -23,7 +23,7 @@ public class FollowingHttpRequest extends HttpRequest {
 	public void actionList(int user_id, int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
-		parser = new UserParser(getContext());
+		parser = new UserParser();
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id+"");
@@ -35,7 +35,7 @@ public class FollowingHttpRequest extends HttpRequest {
 	public void actionDelete(int followed_user_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "delete";
-		parser = new FollowingParser(getContext());
+		parser = new FollowingParser();
 		
 				
 		postHashtable.clear();
@@ -45,7 +45,7 @@ public class FollowingHttpRequest extends HttpRequest {
 	public void actionFollowingList(int user_id, int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "following_list";
-		parser = new UserParser(getContext());
+		parser = new UserParser();
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");
@@ -57,7 +57,7 @@ public class FollowingHttpRequest extends HttpRequest {
     public void actionFollowingRankingList(int user_id, int page, int limit) {
 	httpMethod = HttpMethod.HTTP_GET;
 	action = "following_list";
-	parser = new UserParser(getContext());
+	parser = new UserParser();
 
 	getHashtable.clear();
 	getHashtable.put("user_id", user_id + "");
@@ -70,7 +70,7 @@ public class FollowingHttpRequest extends HttpRequest {
 	public void actionFollowerList(int user_id, int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "follower_list";
-		parser = new UserParser(getContext());
+		parser = new UserParser();
 		
 		getHashtable.clear();
 		getHashtable.put("user_id", user_id + "");

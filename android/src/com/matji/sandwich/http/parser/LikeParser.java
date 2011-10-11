@@ -8,10 +8,7 @@ import com.matji.sandwich.data.Like;
 import com.matji.sandwich.exception.MatjiException;
 
 public class LikeParser extends MatjiDataParser {
-	public LikeParser(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
-	}
+
 
 	public Like getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
@@ -23,11 +20,11 @@ public class LikeParser extends MatjiDataParser {
 		like.setObject(getString(object, "object"));
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		like.setUser(userParser.getMatjiData(getObject(object, "user")));
 		
 		/* Set Store */
-		StoreParser storeParser = new StoreParser(context);
+		StoreParser storeParser = new StoreParser();
 		like.setStore(storeParser.getMatjiData(getObject(object, "store")));
 
 		like.setCreatedAt(getString(object, "created_at"));

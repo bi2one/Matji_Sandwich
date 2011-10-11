@@ -87,10 +87,15 @@ public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterList
 	storeItemizedOverlay.setOverlayClickListener(listener);
     }
 
+    public void setStartConfigListener(GpsManager.StartConfigListener listener) {
+	gpsManager.setStartConfigListener(listener);
+    }
+
     public void reload() {
 	Runnable runnable = new MapRunnable(this);
 	activityRef.get().runOnUiThread(runnable);
 	setCenter(sessionUtil.getCenter());
+	startMapCenterThreadNotFirstLoading();
     }
 
     public void moveToGpsCenter() {

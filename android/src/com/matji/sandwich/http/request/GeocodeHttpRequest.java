@@ -40,7 +40,7 @@ public class GeocodeHttpRequest extends HttpRequest {
 	getHashtable.put("address", address);
 	getHashtable.put("sensor", sensor);
 	getHashtable.put("language", locale.getLanguage());
-	parser = new GeocodeParser(getContext());
+	parser = new GeocodeParser();
     }
 
     /**
@@ -70,6 +70,6 @@ public class GeocodeHttpRequest extends HttpRequest {
 	getHashtable.put("latlng", lat + "," + lng);
 	getHashtable.put("sensor", sensor);
 	getHashtable.put("language", locale.getLanguage());
-	parser = new GeocodeParser(getContext());
+	parser = new GeocodeParser();
     }
 }

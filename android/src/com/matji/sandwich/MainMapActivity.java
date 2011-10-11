@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
+
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -22,8 +23,10 @@ import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.widget.StoreMapNearListView;
 import com.matji.sandwich.overlay.OverlayClickListener;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.location.GpsManager;
 
-public class MainMapActivity extends BaseMapActivity implements OverlayClickListener {
+public class MainMapActivity extends BaseMapActivity implements OverlayClickListener,
+								GpsManager.StartConfigListener {
     private static final int REQUEST_CODE_LOCATION = 1;
     private static final int REQUEST_CODE_STORE = 2;
     private static final int BASIC_SEARCH_LOC_LAT = 0;
@@ -36,6 +39,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     private View flipButton;
     private boolean currentViewIsMap;
     private boolean isFirst;
+    private boolean isStartConfig;
     // private SessionRecentLocationUtil sessionLocationUtil;
     private Session session;
     private SessionMapUtil sessionMapUtil;
@@ -65,8 +69,10 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         mapView = (MainMatjiMapView)findViewById(R.id.map_view);
         mapView.init(addressWrapper, addressView, this, getMainView());
 	mapView.setOverlayClickListener(this);
+	mapView.setStartConfigListener(this);
         storeListView = (StoreMapNearListView)findViewById(R.id.main_map_store_list);
         storeListView.init(addressWrapper, addressView, this);
+	storeListView.setStartConfigListener(this);
 
         flipButton = findViewById(R.id.map_title_bar_flip_button);
         currentViewIsMap = true;
@@ -75,6 +81,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         flipNearStoreImage = getResources().getDrawable(R.drawable.icon_location_list_selector);
         // mapView.startMapCenterThread();
 	isFirst = true;
+	isStartConfig = false;
     }
 
     protected void onNotFlowResume() {
@@ -99,6 +106,10 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     }
 
     protected void onResume() {
+	if (isStartConfig) {
+	    onCurrentPositionClicked(null);
+	    isStartConfig = false;
+	}
 	super.onResume();
     }
 
@@ -190,5 +201,9 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
 	Intent intent = new Intent(this, StoreMainActivity.class);
 	intent.putExtra(StoreMainActivity.STORE, (Parcelable) data);
 	startActivityForResult(intent, REQUEST_CODE_STORE);
+    }
+
+    public void onStartConfig(GpsManager gpsManager) {
+	isStartConfig = true;
     }
 }

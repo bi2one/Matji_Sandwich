@@ -24,11 +24,6 @@ import org.json.JSONObject;
 
 public abstract class MatjiDataParser implements MatjiParser {
     public abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;
-    public Context context;
-
-    public MatjiDataParser(Context context) {
-        this.context = context;
-    }
 
     public ArrayList<MatjiData> getMatjiDataList(JsonElement jsonElement) throws MatjiException {
         if (!isArray(jsonElement)) {
@@ -55,13 +50,13 @@ public abstract class MatjiDataParser implements MatjiParser {
             int code = json.getInt("code");
             if (code == ExceptionFactory.STATUS_OK) {
                 return json.getString("result");
-            } else {
+	    } else {
             	MatjiException codeException = ExceptionFactory.create(code);
             	if (codeException != null)
-            		throw codeException;
+		    throw codeException;
             	else {
-            		String message = json.getString("description");
-                	throw new JSONCodeMatjiException(message);
+		    String message = json.getString("description");
+		    throw new JSONCodeMatjiException(message);
             	}
             }
         } catch (JSONException e) {
@@ -116,7 +111,7 @@ public abstract class MatjiDataParser implements MatjiParser {
     public MatjiData parseToMatjiData(String data) throws MatjiException{
         if (data == null) return null;
         String validData = validateData(data);
-        return getRawObject(validData);		
+        return getRawObject(validData);
     }
 
     protected boolean isNull(JsonElement element) {

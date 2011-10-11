@@ -39,16 +39,16 @@ public class ScreenShotButton extends TitleImageButton {
      */
     public void init() {
 	super.init();
-	setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_phonesave));
+	setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_phonesave));
 
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
             cacheDir=new File(Environment.getExternalStorageDirectory(), "YummyStoryScreenShots");
         else
-            cacheDir=context.getCacheDir();
+            cacheDir = getContext().getCacheDir();
         if(!cacheDir.exists())
             cacheDir.mkdirs();
 
-	successDialog = new SimpleAlertDialog(context, R.string.screen_shot_button_success);
+	successDialog = new SimpleAlertDialog(getContext(), R.string.screen_shot_button_success);
     }
     
     public void setView(View mainView) {
@@ -80,7 +80,7 @@ public class ScreenShotButton extends TitleImageButton {
 	    e.printStackTrace();
 	}
 
-	SaveToGalleryUtil.save(context,
+	SaveToGalleryUtil.save(getContext(),
 			       imageFile,
 			       imageFile.toString(),
 			       imageFile.toString(),

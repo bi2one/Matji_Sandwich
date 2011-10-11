@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 
 import com.matji.sandwich.base.BaseTabActivity;
@@ -42,7 +43,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         super.init();
         session = Session.getInstance(this);
         isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
-
+        
         setContentView(R.layout.activity_user_profile_tab);
 
         tabHost = (RoundTabHost) getTabHost();

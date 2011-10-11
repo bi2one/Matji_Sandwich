@@ -8,10 +8,6 @@ import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.exception.MatjiException;
 
 public class BookmarkParser extends MatjiDataParser {
-	public BookmarkParser(Context context) {
-		super(context);
-	}
-
 	public Bookmark getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -22,15 +18,15 @@ public class BookmarkParser extends MatjiDataParser {
 		bookmark.setObject(getString(object, "object"));
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		bookmark.setUser(userParser.getMatjiData(getObject(object, "user")));
 		
 		/* Set Store */
-		StoreParser storeParser = new StoreParser(context);
+		StoreParser storeParser = new StoreParser();
 		bookmark.setStore(storeParser.getMatjiData(getObject(object, "store")));
 		
 		/* Set Region */
-		RegionParser regionParser = new RegionParser(context);
+		RegionParser regionParser = new RegionParser();
 		bookmark.setRegion(regionParser.getMatjiData(getObject(object, "region")));
 
 		Log.d("Parser", "BookmarkParser:: called getMatjiData");

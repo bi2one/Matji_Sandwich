@@ -25,7 +25,7 @@ import com.matji.sandwich.util.MatjiConstants;
 enum HttpMethod { HTTP_POST, HTTP_GET, HTTP_GET_VIA_WEB_BROWSER }
 
 public abstract class HttpRequest implements ProgressRequestCommand {
-    protected WeakReference<Context> contextRef = null;
+    // protected WeakReference<Context> contextRef = null;
     // protected String serverDomain = "http://api.matji.com/v2/";
     protected String serverDomain = MatjiConstants.string(R.string.server_domain);
 
@@ -33,24 +33,24 @@ public abstract class HttpRequest implements ProgressRequestCommand {
     protected Hashtable<String, String> getHashtable;
     protected HttpMethod httpMethod;
     protected MatjiParser parser;
+    protected Session session;
 
     protected String action;
     protected String controller;
 
     private ProgressListener progressListener;
     private int progressTag;
+    private ConnectivityManager cm;
 
     @SuppressWarnings("unused")
 	private HttpRequest(){}
 
     public HttpRequest(Context context) {
-	this.contextRef = new WeakReference(context);
-	postHashtable = new Hashtable<String, Object>();
+	// this.contextRef = new WeakReference(context);
+	cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	session = Session.getInstance(context);
+	postHashtable = new Hashtable<String, Object>(); 
 	getHashtable = new Hashtable<String, String>();
-    }
-
-    public Context getContext() {
-	return contextRef.get();
     }
 
     private boolean confirmStatusCode(int code) {
@@ -65,6 +65,7 @@ public abstract class HttpRequest implements ProgressRequestCommand {
     private boolean secondaryConfirmStatusCode(int code) {
 	switch(code) {
 	case HttpUtility.HTTP_STATUS_NOT_ACCEPTABLE:
+	case HttpUtility.HTTP_STATUS_FOUND:
 	    return true;
 	default:
 	    return false;
@@ -123,7 +124,7 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 						   Map<String, String> getMap,
 						   int method) throws HttpConnectMatjiException {
 	SimpleHttpResponse httpResponse = null;
-	ConnectivityManager cm = (ConnectivityManager)contextRef.get().getSystemService(Context.CONNECTIVITY_SERVICE);
+	// ConnectivityManager cm = (ConnectivityManager)contextRef.get().getSystemService(Context.CONNECTIVITY_SERVICE);
 	NetworkInfo netInfo_mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 	NetworkInfo netInfo_wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
@@ -138,13 +139,12 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 		baseHeader.putAll(header);
 	    }
 
-	    Session session = Session.getInstance(contextRef.get());
 	    if (postParam != null) {
-		if (session != null && session.isLogin())
+		if (session.isLogin())
 		    postParam.put("access_token", "" + session.getToken());
 		postParam.put("format", "json");
 	    }else if (getParam != null) {
-		if (session != null && session.isLogin())
+		if (session.isLogin())
 		    getParam.put("access_token", "" + session.getToken());
 		getParam.put("format", "json");
 	    }

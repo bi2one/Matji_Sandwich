@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import android.os.Bundle;
 import android.view.View;
+import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.session.Session;
@@ -11,11 +12,10 @@ import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserProfileActivity extends BaseActivity implements LoginListener {
-
-	private boolean isMainTabActivity;
+    private boolean isMainTabActivity;
 
     private UserTitle title;
-    private UserCell userCell;    
+    private UserCell userCell;
     private UserProfileView userProfileView;
     
     private Session session;
@@ -54,7 +54,7 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
         if (!isMainTabActivity) userCell.addRefreshable(title);
         else dismissTitle();
     }
-
+    
     public void showTitle() {
         title.setVisibility(View.VISIBLE);
     }

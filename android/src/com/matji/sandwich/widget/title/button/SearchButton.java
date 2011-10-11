@@ -34,7 +34,7 @@ public class SearchButton extends TitleImageButton {
 	public void init() {
 		// TODO Auto-generated method stub
 		super.init();
-		setImageDrawable(context.getResources().getDrawable(R.drawable.icon_navi_search));
+		setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_search));
 	}
 	
 	/**
@@ -45,8 +45,8 @@ public class SearchButton extends TitleImageButton {
 		// TODO Auto-generated method stub
 		Log.d("Matji", "SearchButtonClicked");
 		
-		Intent intent = new Intent(context, SearchActivity.class);
+		Intent intent = new Intent(getContext(), SearchActivity.class);
 		intent.putExtra(SearchActivity.PAGE, page);
-		context.startActivity(intent);
+		getContext().startActivity(intent);
 	}
 }

@@ -5,17 +5,19 @@ import android.content.Intent;
 import android.util.Log;
 import android.net.Uri;
 
+import java.lang.ref.WeakReference;
+
 import com.matji.sandwich.R;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
 
 public class PhoneCallUtil implements SimpleConfirmDialog.OnClickListener {
-    Context context;
+    WeakReference<Context> contextRef;
     SimpleConfirmDialog confirmDialog;
     String number;
     
     public PhoneCallUtil(Context context) {
-    	this.context = context;
+    	this.contextRef = new WeakReference(context);
     	confirmDialog = new SimpleConfirmDialog(context, R.string.phone_call_confirm);
 	confirmDialog.setOnClickListener(this);
     }
@@ -28,7 +30,7 @@ public class PhoneCallUtil implements SimpleConfirmDialog.OnClickListener {
     public void onConfirmClick(SimpleDialog dialog) {
 	Intent intent = new Intent(Intent.ACTION_CALL);
 	intent.setData(Uri.parse("tel:" + number));
-	context.startActivity(intent);
+	contextRef.get().startActivity(intent);
     }
 
     public void onCancelClick(SimpleDialog dialog) { }

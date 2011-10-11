@@ -11,7 +11,7 @@ public class InvalidPasswordMatjiException extends MatjiException {
 	}
 	
 	public void performExceptionHandling(Context context) {
-		SimpleAlertDialog dialog = new SimpleAlertDialog(context, getMsgString());
+		SimpleAlertDialog dialog = new SimpleAlertDialog(context, getMsg());
 		dialog.show();
 	}
 } 

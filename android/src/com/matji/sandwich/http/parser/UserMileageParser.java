@@ -8,10 +8,6 @@ import com.matji.sandwich.data.UserMileage;
 import com.matji.sandwich.exception.MatjiException;
 
 public class UserMileageParser extends MatjiDataParser {
-	public UserMileageParser(Context context) {
-		super(context);
-	}
-
 	public UserMileage getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -22,7 +18,7 @@ public class UserMileageParser extends MatjiDataParser {
 		mileage.setGrade(getString(object, "grade"));
 		
 		/* Set User */
-		UserParser userPaser = new UserParser(context);
+		UserParser userPaser = new UserParser();
 		mileage.setUser(userPaser.getMatjiData(getObject(object, "user")));
 
 		Log.d("Parser", "UserMileageParser:: called getMatjiData");

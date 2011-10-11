@@ -15,7 +15,7 @@ public class NoticeHttpRequest extends HttpRequest {
 	public void actionShow(int notice_id) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "show";
-		parser = new NoticeParser(getContext());
+		parser = new NoticeParser();
 		
 		getHashtable.clear();
 		getHashtable.put("notice_id", notice_id + "");
@@ -24,7 +24,7 @@ public class NoticeHttpRequest extends HttpRequest {
 	public void actionList(int page, int limit) {
 		httpMethod = HttpMethod.HTTP_GET;
 		action = "list";
-		parser = new NoticeParser(getContext());
+		parser = new NoticeParser();
 
 		getHashtable.clear();
 		getHashtable.put("page", page+"");
@@ -36,7 +36,7 @@ public class NoticeHttpRequest extends HttpRequest {
 	public void actionBadge(int last_notice_id) {
 	    httpMethod = HttpMethod.HTTP_GET;
 	    action = "badge";
-	    parser = new BadgeParser(getContext());
+	    parser = new BadgeParser();
 
 	    getHashtable.clear();
 	    getHashtable.put("last_notice_id", last_notice_id+"");

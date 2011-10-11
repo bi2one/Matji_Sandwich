@@ -3,58 +3,69 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@id/UserCell"
     style="@style/DefaultWrap">
-  <LinearLayout
-      android:id="@+id/cell_user_Wrapper"
-      style="@style/cell_user_Wrapper">
+  <RelativeLayout style="@style/cell_user_Wrapper">
+    <!-- profile -->
     <include
 	android:id="@+id/cell_user_profile"
+	android:layout_alignParentLeft="true"
+	android:layout_alignParentTop="true"
 	layout="@layout/cell_profile" />
-    <RelativeLayout
-	android:id="@+id/cell_user_InfoWrapper"
-	style="@style/cell_user_InfoWrapper"
-	android:layout_toRightOf="@id/cell_user_profile">
-      <LinearLayout
-	  android:layout_toRightOf="@+id/profile"
-	  style="@style/DefaultVerticalWrap"
-	  android:layout_alignParentLeft="true"
-	  android:layout_toLeftOf="@+id/cell_user_btn_wrapper"
-	  android:layout_marginRight="@dimen/default_distance">
-	<TextView
-	    android:id="@+id/cell_user_nick"
-	    style="@style/cell_user_Nickname" />
-	<LinearLayout
-	    style="@style/DefaultWrap">
-	  <TextView
-	      style="@style/cell_user_PointLabel" />
-	  <TextView
-	      android:id="@+id/cell_user_point"
-	      style="@style/cell_user_LabelValue" />
-	</LinearLayout>
-	<LinearLayout
-	    style="@style/DefaultWrap">
-	  <TextView
-	      style="@style/cell_user_AreaLabel" />
-	  <TextView
-	      android:id="@+id/cell_user_area"
-	      style="@style/cell_user_LabelValue" />
-	</LinearLayout>
-      </LinearLayout>
-      <LinearLayout
-	  android:id="@id/cell_user_btn_wrapper"
-	  android:layout_alignParentRight="true"
-	  style="@style/DefaultVerticalWrap">
-	<Button
-	    android:id="@+id/cell_user_like_list"
-	    style="@style/cell_user_LikeListButton" />
-	<Button
-	    android:id="@+id/cell_user_follow"
-	    style="@style/cell_user_FollowButton" />
-	<Button
-	    android:id="@+id/cell_user_message_list"
-	    style="@style/cell_user_MessageListButton" />
-      </LinearLayout>
-    </RelativeLayout>
-  </LinearLayout>
+
+    <!-- buttons -->
+    <Button
+	android:id="@+id/cell_user_like_list"
+	android:layout_alignParentRight="true"
+	android:layout_alignParentTop="true"
+	style="@style/cell_user_LikeListButton" />
+    <Button
+	android:id="@+id/cell_user_follow"
+	android:layout_below="@+id/cell_user_like_list"
+	android:layout_alignParentRight="true"
+	style="@style/cell_user_FollowButton" />
+    <Button
+	android:id="@+id/cell_user_message_list"
+	android:layout_below="@+id/cell_user_like_list"
+	android:layout_alignParentRight="true"
+	style="@style/cell_user_MessageListButton" />
+
+    <!-- nickname -->
+    <TextView
+	android:id="@+id/cell_user_nick"
+	android:layout_toRightOf="@id/cell_user_profile"
+	android:layout_toLeftOf="@+id/cell_user_like_list"
+	android:layout_alignParentTop="true"
+	style="@style/cell_user_Nickname" />
+
+    <!-- point -->
+    <TextView
+	android:id="@+id/cell_user_point_label"
+	android:layout_toRightOf="@id/cell_user_profile"
+	android:layout_below="@id/cell_user_nick"
+	style="@style/cell_user_PointLabel" />
+    
+    <TextView
+	android:id="@+id/cell_user_point"
+	android:layout_toRightOf="@id/cell_user_point_label"
+	android:layout_alignBottom="@id/cell_user_point_label"
+	android:layout_toLeftOf="@+id/cell_user_like_list"
+	style="@style/cell_user_LabelValue" />
+
+    <!-- country -->
+    <TextView
+	android:id="@+id/cell_user_area_label"
+	android:layout_toRightOf="@id/cell_user_profile"
+	android:layout_below="@id/cell_user_point_label"
+	style="@style/cell_user_AreaLabel" />
+    
+    <TextView
+	android:id="@+id/cell_user_area"
+	android:layout_toRightOf="@id/cell_user_area_label"
+	android:layout_alignBottom="@id/cell_user_area_label"
+	android:layout_toLeftOf="@+id/cell_user_like_list"
+	style="@style/cell_user_LabelValue" />
+  </RelativeLayout>
+  
+  <!-- division bars -->  
   <ImageView
       android:id="@+id/cell_user_line"
       android:background="@color/listview_divider1_gray"

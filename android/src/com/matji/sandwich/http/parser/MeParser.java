@@ -2,7 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
@@ -15,10 +14,6 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
 public class MeParser extends MatjiDataParser {
-	public MeParser(Context context) {
-		super(context);
-	}
-
 	public Me getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -29,13 +24,13 @@ public class MeParser extends MatjiDataParser {
 		
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		matjiData = userParser.getMatjiData(getObject(object, "user"));
 		if (matjiData != null)
 			me.setUser((User)matjiData);
 		
 		/* Set Bookmarks */
-		BookmarkParser bookmarkParser = new BookmarkParser(context);
+		BookmarkParser bookmarkParser = new BookmarkParser();
 		matjiDataList = bookmarkParser.getMatjiDataList(getArray(object, "bookmarks"));
 		if (matjiDataList != null){
 			ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
@@ -46,7 +41,7 @@ public class MeParser extends MatjiDataParser {
 		}
 
 		/* Set Likes */
-		LikeParser likeParser = new LikeParser(context);
+		LikeParser likeParser = new LikeParser();
 		matjiDataList = likeParser.getMatjiDataList(getArray(object, "likes"));
 		if (matjiDataList != null){
 			ArrayList<Like> likes = new ArrayList<Like>();
@@ -72,7 +67,7 @@ public class MeParser extends MatjiDataParser {
 			me.setToken(token);
 
 		/* Set Alarm Setting */
-		AlarmSettingParser alarmSettingParser = new AlarmSettingParser(context);
+		AlarmSettingParser alarmSettingParser = new AlarmSettingParser();
 		matjiData = alarmSettingParser.getMatjiData(getObject(object, "user_alarm_setting"));
         if (matjiData != null)
             me.getUser().setAlarmSetting((AlarmSetting) matjiData);

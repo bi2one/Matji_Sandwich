@@ -194,28 +194,30 @@
   
   <!-- Cell -->  
   <style name="Cell" parent="DefaultWidthFill">
-  	<item name="android:padding">@dimen/default_distance</item>
+    <item name="android:padding">@dimen/default_distance</item>
   </style>
   
   <style name="cell_user_Wrapper" parent="Cell">
-  	<item name="android:layout_height">@dimen/user_cell_height</item>
-  	<item name="android:background">@drawable/btn_white_to_lightpink</item>
+    <item name="android:layout_height">@dimen/user_cell_height</item>
+    <item name="android:background">@drawable/btn_white_to_lightpink</item>
   </style>
   
   <style name="cell_user_InfoWrapper" parent="DefaultWrap">
   	<item name="android:layout_marginLeft">@dimen/user_cell_margin_left</item>
   </style>
   
-  <style name="cell_user_Nickname" parent="DefaultWrap">
+  <style name="cell_user_Nickname" parent="DefaultWidthFill">
   	<item name="android:textColor">@color/matji_gray</item>
   	<item name="android:textSize">@dimen/user_cell_nick_size</item>
   	<item name="android:singleLine">true</item>
+  	<item name="android:layout_marginLeft">@dimen/user_cell_margin_left</item>
   </style>
   
   <style name="cell_user_Label" parent="DefaultWrap">
   	<item name="android:layout_marginRight">@dimen/default_distance_half</item>
   	<item name="android:textColor">@color/matji_red</item>
 	<item name="android:textSize">@dimen/user_cell_content_size</item>
+  	<item name="android:layout_marginLeft">@dimen/user_cell_margin_left</item>
   </style>
 
   <style name="cell_user_PointLabel" parent="cell_user_Label">
@@ -233,7 +235,7 @@
   </style>
   
   <style name="cell_user_WhiteButton" parent="WhiteButtonNumber">
-  	<item name="android:layout_width">@dimen/user_cell_btn_width</item>
+      <item name="android:layout_width">@dimen/user_cell_btn_width</item>
   </style>  
   
   <style name="cell_user_RedButton" parent="RedButton">

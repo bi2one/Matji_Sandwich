@@ -14,12 +14,12 @@ public class AlarmHttpRequest extends HttpRequest {
     
     public AlarmHttpRequest(Context context) {
     	super(context);
-    	parser = new AlarmParser(context);
+    	parser = new AlarmParser();
     	controller = "alarms";
     }
 
     public void actionList(int page, int limit) {
-    	parser = new AlarmParser(getContext());
+    	parser = new AlarmParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "list";
     	
@@ -29,7 +29,7 @@ public class AlarmHttpRequest extends HttpRequest {
     }
     
     public void actionUpdateAlarmPermit(AlarmSettingType type, boolean bool) {
-        parser = new AlarmSettingParser(getContext());
+        parser = new AlarmSettingParser();
         httpMethod = HttpMethod.HTTP_GET;
         action = "update_alarm_permit";
 
@@ -54,7 +54,7 @@ public class AlarmHttpRequest extends HttpRequest {
     }
     
     public void actionRead(ArrayList<MatjiData> alarms) {
-    	parser = new AlarmParser(getContext());
+    	parser = new AlarmParser();
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "read";
     	

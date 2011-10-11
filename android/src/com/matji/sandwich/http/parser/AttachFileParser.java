@@ -8,10 +8,6 @@ import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.exception.MatjiException;
 
 public class AttachFileParser extends MatjiDataParser {
-	public AttachFileParser(Context context) {
-		super(context);
-	}
-
 	public AttachFile getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -24,15 +20,15 @@ public class AttachFileParser extends MatjiDataParser {
 		attachFile.setFullpath(getString(object, "fullpath"));
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		attachFile.setUser(userParser.getMatjiData(getObject(object, "user")));
 		
 		/* Set Attach File */
-		StoreParser storeParser = new StoreParser(context);
+		StoreParser storeParser = new StoreParser();
 		attachFile.setStore(storeParser.getMatjiData(getObject(object, "store")));
 		
 		/* Set Post */
-		PostParser postParser = new PostParser(context);
+		PostParser postParser = new PostParser();
 		attachFile.setPost(postParser.getMatjiData(getObject(object, "post")));
 		
 		attachFile.setCreatedAt(getString(object, "created_at"));

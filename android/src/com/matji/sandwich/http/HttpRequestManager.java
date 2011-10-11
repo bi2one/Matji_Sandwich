@@ -16,6 +16,7 @@ public class HttpRequestManager {
     // request tag
     public static final int AUTHORIZE = 0;
     public static final int BADGE = 1;
+    public static final int LOGIN_DIALOG = 2;
     public static final int LIKE_REQUEST = 10;
     public static final int UN_LIKE_REQUEST = 11;
     public static final int FOLLOW_REQUEST = 20;

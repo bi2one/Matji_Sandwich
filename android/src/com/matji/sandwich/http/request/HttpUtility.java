@@ -400,7 +400,7 @@ final public class HttpUtility
 							
 						// File send
 						File file = (File)value;
-						File compressedFile = ImageUtil.compressFile(file);
+						File compressedFile = ImageUtil.decodeFileToFile(file, 80, false);
 						if (compressedFile != null) {
 						    file = compressedFile;
 						}

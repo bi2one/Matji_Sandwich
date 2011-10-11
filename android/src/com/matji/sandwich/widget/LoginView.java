@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,8 +28,9 @@ import com.matji.sandwich.http.DialogAsyncTask;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionPrivateUtil;
+import com.matji.sandwich.util.KeyboardUtil;
 
-public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener, Requestable {
+public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener {
 	private static final int REQUEST_LOGIN = 0;
     private Toast toast;
 
@@ -36,6 +38,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     private EditText pwdField;
     
     private View register;
+    private WeakReference<Loginable> loginableRef;
 
     private CheckBox saveidCheckBox;
 //    private View loginTwitter;
@@ -84,23 +87,24 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     }
 
     public void login(Loginable loginable) {
+	this.loginableRef = new WeakReference(loginable);
         if (idField.getText().toString().trim().equals("")
-                || pwdField.getText().toString().trim().equals("")) {
+	    || pwdField.getText().toString().trim().equals("")) {
             toast.show();
         } else {
             if (saveidCheckBox.isChecked()) {
                 privateUtil.setSavedUserId(idField.getText().toString());
             }
-            
-            MeHttpRequest request = new MeHttpRequest(getContext());
-            request.actionAuthorize(idField.getText().toString(), pwdField.getText().toString());
 
-            DialogAsyncTask dialogTask = new DialogAsyncTask(getContext(), this, request, REQUEST_LOGIN);
-            //new LoginAsyncTask(getContext(), loginable, idField.getText().toString(), pwdField.getText().toString()).execute(new Object());
-            dialogTask.execute();
+	    session.loginWithDialog(getContext(), idField.getText().toString(), pwdField.getText().toString(), loginable);
+            // MeHttpRequest request = new MeHttpRequest(getContext());
+            // request.actionAuthorize(idField.getText().toString(), pwdField.getText().toString());
+
+            // DialogAsyncTask dialogTask = new DialogAsyncTask(getContext(), this, request, REQUEST_LOGIN);
+//            new LoginAsyncTask(getContext(), loginable, idField.getText().toString(), pwdField.getText().toString()).execute(new Object());
+            // dialogTask.execute();
         }
     }
-
 
     public void loginViaTiwtter(View v){
         Log.d("Matji", "login via twitter");
@@ -117,7 +121,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 
     public void registerClicked(View v) {
         Intent intent = new Intent(getContext(), RegisterActivity.class);
-        getContext().startActivity(intent);        
+        getContext().startActivity(intent);
     }
     
     @Override
@@ -140,18 +144,22 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 
     }
 
-	@Override
-	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		// TODO Auto-generated method stub
-		Me me = (Me)data.get(0);
-        session.saveMe(me);		
-	}
+	// @Override
+	// public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+	// 	Me me = (Me)data.get(0);
+	// 	session.saveMe(me);
+	// 	if (loginableRef != null && loginableRef.get() != null) {
+	// 	    loginableRef.get().loginCompleted();
+	// 	}
+	// }
 
-	@Override
-	public void requestExceptionCallBack(int tag, MatjiException e) {
-		e.performExceptionHandling(getContext());
-		// TODO Auto-generated method stub
-	}    
+	// @Override
+	// public void requestExceptionCallBack(int tag, MatjiException e) {
+	// 	e.performExceptionHandling(getContext());
+	// 	if (loginableRef != null && loginableRef.get() != null) {
+	// 	    loginableRef.get().loginFailed();
+	// 	}
+	// }    
 
     //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     //         TODO Auto-generated method stub

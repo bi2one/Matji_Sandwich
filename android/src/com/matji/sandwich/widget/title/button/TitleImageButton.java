@@ -14,13 +14,11 @@ import com.matji.sandwich.util.MatjiConstants;
  *
  */
 public abstract class TitleImageButton extends ImageButton implements TitleItem {
-	protected Context context;
 	private int width;
 	private int height;
 	
 	public TitleImageButton(Context context) {
 		super(context);
-		this.context = context;
 		width = MatjiConstants.dimenInt(R.dimen.title_container_btn_min_width);
 		height = MatjiConstants.dimenInt(R.dimen.title_container_height);
 		

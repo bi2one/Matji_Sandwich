@@ -7,14 +7,14 @@ import android.content.Context;
 public class RegionHttpRequest extends HttpRequest {
     public RegionHttpRequest(Context context) {
     	super(context);
-    	parser = new RegionParser(context);
+    	parser = new RegionParser();
     	controller = "regions";
     }
 
     public void actionBookmark(double lat_sw, double lat_ne, double lng_sw, double lng_ne, String description){
     	httpMethod = HttpMethod.HTTP_POST;
     	action = "bookmark";
-    	parser = new RegionParser(getContext());
+    	parser = new RegionParser();
 
     	postHashtable.clear();
     	postHashtable.put("lat_sw",lat_sw);
@@ -35,7 +35,7 @@ public class RegionHttpRequest extends HttpRequest {
     public void actionBookmarkedList(int page, int limit){
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "bookmarked_list";
-      	parser = new RegionParser(getContext());
+      	parser = new RegionParser();
       	
     	getHashtable.clear();
     	getHashtable.put("page", page + "");

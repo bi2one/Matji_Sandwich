@@ -25,12 +25,12 @@ public class AttachFilesHttpRequest extends HttpRequest {
     public AttachFilesHttpRequest(Context context, int capacity) {
     	super(context);
     	this.capacity = capacity;
-    	parser = new AttachFileParser(context);
+    	parser = new AttachFileParser();
     	controller = "attach_files";
     }
 
     public void actionStoreList(int store_id, int page, int limit) {
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "store_list";
     	
@@ -41,7 +41,7 @@ public class AttachFilesHttpRequest extends HttpRequest {
     }
     
     public void actionPostList(int store_id, int page, int limit) {
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "post_id";
     	
@@ -52,7 +52,7 @@ public class AttachFilesHttpRequest extends HttpRequest {
     }
     
     public void actionUserList(int store_id, int page, int limit) {
-    	parser = new AttachFileParser(getContext());
+    	parser = new AttachFileParser();
     	httpMethod = HttpMethod.HTTP_GET;
     	action = "user_list";
     	

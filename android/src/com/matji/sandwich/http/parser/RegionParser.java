@@ -8,10 +8,6 @@ import com.matji.sandwich.data.Region;
 import com.matji.sandwich.exception.MatjiException;
 
 public class RegionParser extends MatjiDataParser {
-	public RegionParser(Context context) {
-		super(context);
-	}
-
 	public Region getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
@@ -25,7 +21,7 @@ public class RegionParser extends MatjiDataParser {
 		region.setDescription(getString(object, "description"));
 		
 		/* Set User */
-		UserParser userParser = new UserParser(context);
+		UserParser userParser = new UserParser();
 		region.setUser(userParser.getMatjiData(getObject(object, "user")));
 
 		Log.d("Parser", "RegionParser:: called getMatjiData");

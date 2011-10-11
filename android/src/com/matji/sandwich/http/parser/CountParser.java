@@ -8,10 +8,6 @@ import com.matji.sandwich.data.Count;
 import com.matji.sandwich.exception.MatjiException;
 
 public class CountParser extends MatjiDataParser {
-	public CountParser(Context context) {
-		super(context);
-	}
-
 	public Count getMatjiData(JsonObject object) throws MatjiException {
 		if (object == null) return null;
 		
