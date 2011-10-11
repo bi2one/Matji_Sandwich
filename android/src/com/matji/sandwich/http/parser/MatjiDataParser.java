@@ -53,10 +53,10 @@ public abstract class MatjiDataParser implements MatjiParser {
             } else {
             	MatjiException codeException = ExceptionFactory.create(code);
             	if (codeException != null)
-            		throw codeException;
+		    throw codeException;
             	else {
-            		String message = json.getString("description");
-                	throw new JSONCodeMatjiException(message);
+		    String message = json.getString("description");
+		    throw new JSONCodeMatjiException(message);
             	}
             }
         } catch (JSONException e) {

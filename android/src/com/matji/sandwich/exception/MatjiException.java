@@ -6,26 +6,26 @@ import android.widget.Toast;
 import com.matji.sandwich.util.MatjiConstants;
 
 public class MatjiException extends Exception {
-    private int msgRef;
+    private String message;
     private ToastPool toastPool;
 
     public MatjiException(int msgRef) {
-	setMsg(msgRef);
+	this(MatjiConstants.string(msgRef));
+    }
+
+    public MatjiException(String msg) {
+	setMsg(msg);
 	toastPool = ToastPool.getInstance();
     }
 
-    protected void setMsg(int msgRef) {
-	this.msgRef = msgRef;
-    }
-
-    public int getMsg() {
-	return msgRef;
+    protected void setMsg(String msg) {
+	this.message = msg;
     }
     
-    public String getMsgString() {
-    	return MatjiConstants.string(getMsg());
+    public String getMsg() {
+	return message;
     }
-
+    
     public void showToastMsg(Context context) {
 	Toast toast = toastPool.getToast(context, getMsg(), Toast.LENGTH_SHORT);
 	toast.show();

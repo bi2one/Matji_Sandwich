@@ -100,6 +100,10 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
         prevLocation = location;
     }
 
+    public void setStartConfigListener(GpsManager.StartConfigListener listener) {
+	gpsManager.setStartConfigListener(listener);
+    }
+
     public void onLocationExceptionDelivered(int startedFromTag, MatjiException e) {
         e.performExceptionHandling(context);
     }
