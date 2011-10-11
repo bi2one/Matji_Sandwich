@@ -2,77 +2,139 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
+import android.view.View;
 
-import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.DialogAsyncTask;
 import com.matji.sandwich.http.request.StoreModifyHttpRequest;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.KeyboardUtil;
+import com.matji.sandwich.util.adapter.GeoPointToLocationAdapter;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
-import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreModifyActivity extends BaseActivity implements Completable, Requestable {
-	private CompletableTitle titleBar;
-	private SimpleAlertDialog successDialog;
-	
-	private Store store;
-	
+import com.matji.sandwich.map.StoreModifyMatjiMapView;
+
+public class StoreModifyActivity extends BaseMapActivity implements Completable, Requestable, StoreModifyMatjiMapView.OnClickListener, SimpleAlertDialog.OnClickListener {
 	public static final String STORE = "StoreModifyActivity.store";
-		
+	private static final int TAG_STORE_MODIFY = 1;
+	private CompletableTitle titleBar;
+	private StoreModifyMatjiMapView mapView;
+	private SimpleAlertDialog storeAlertDialog;
+	private SimpleAlertDialog successDialog;
+	private Store store;
+	private Session session;
+	
 	public int setMainViewId() {
-	return R.id.activity_main;
-    }
-    
-	@Override
-	protected void init() {
+		return R.id.activity_store_modify;
+	}
+
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_modify);
 
 		store = (Store) getIntent().getParcelableExtra(STORE);
 		
-		createDialogs();
-		setLiteners();
+		session = Session.getInstance(this);
+
 		titleBar = (CompletableTitle) findViewById(R.id.activity_store_modify_title);
+		mapView = (StoreModifyMatjiMapView) findViewById(R.id.activity_store_modify_mapview);
+
 		titleBar.setTitle(R.string.store_modify_activity_title);
 		titleBar.setCompletable(this);
-        
+
+		mapView.init(this);
+		mapView.setOnClickListener(this);
+
+		mapView.setStoreName(store.getName().trim());
+		if (store.getAddAddress() != null)
+			mapView.setStoreAddAddress(store.getAddAddress().trim());
+		mapView.setStorePhoneNumber(store.getTel().trim());
+		
+		storeAlertDialog = new SimpleAlertDialog(this, R.string.write_store_invalidate_store);
+		successDialog = new SimpleAlertDialog(this, R.string.store_modify_success);
+
+		successDialog.setOnClickListener(this);
 	}
 
-	private void setLiteners() {
-		successDialog.setOnClickListener(new SimpleAlertDialog.OnClickListener() {
-			
-			@Override
-			public void onConfirmClick(SimpleDialog dialog) {
-				finish();
-			}
-		});
-	}
-
-	private void createDialogs() {
-		successDialog = new SimpleAlertDialog(this, R.string.register_success);
-	}
-
-	@Override
 	public void complete() {
-		HttpRequestManager manager = HttpRequestManager.getInstance();
-		StoreModifyHttpRequest request = new StoreModifyHttpRequest(StoreModifyActivity.this);
-		request.actionModify("test","test",1.1,1.1,1);
-		manager.request(getApplicationContext(), getMainView(), request, 0, this);
+		Location centerPoint = new GeoPointToLocationAdapter(mapView.getMapCenter());
+		String storeName = mapView.getStoreName();
+		String address = mapView.getAddress();
+		String addAddress = mapView.getAddAddress();
+		String phoneNumber = mapView.getPhoneNumber();
+		double centerLat = centerPoint.getLatitude();
+		double centerLng = centerPoint.getLongitude();
+
+		if (isValid(storeName, address, addAddress, phoneNumber, centerLat, centerLng)) {
+			StoreModifyHttpRequest request = new StoreModifyHttpRequest(StoreModifyActivity.this);
+			request.actionModify(storeName, address, centerLat, centerLng, store.getId());
+			DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, TAG_STORE_MODIFY);
+			requestTask.execute();
+			titleBar.setCompletable(null);
+		}
 	}
 
-	@Override
+	private boolean isValid(String storeName, String address, String addAddress, String phoneNumber, double centerLat, double centerLng) {
+		if (storeName.trim().equals("")) {
+			storeAlertDialog.show();
+			return false;
+		}
+		return true;
+	}
+
+
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-		successDialog.show();
+		switch(tag) {
+		case TAG_STORE_MODIFY:
+				successDialog.show();
+			break;
+		}
 	}
 
-	@Override
+	
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(this);
+		titleBar.setCompletable(this);
+	}
+
+	
+	public void onConfirmClick(SimpleDialog dialog) {
+        if (dialog == successDialog) {
+            setResult(RESULT_OK);
+            finish();
+        }
+	}
+
+	
+	public void onShowMapClick(View v) {
+		KeyboardUtil.hideKeyboard(this);
+		mapView.requestFocus();
+	}
+
+	
+	public void onMapTouchUp(View v) {}
+
+	
+	public void onMapTouchDown(View v) {
+		KeyboardUtil.hideKeyboard(this);
+		mapView.requestFocus();
+	}
+
+	public void finish() {
+		mapView.stopMapCenterThread();
+		super.finish();
 	}
 
 }

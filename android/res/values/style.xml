@@ -1283,7 +1283,7 @@
     <item name="android:textColor">@color/BLACK</item>
   </style>
 
-  <style name="write_store_matji_mapview_store_name" parent="write_store_matji_mapview_edittext">
+  <style name="store_matji_mapview_store_name" parent="write_store_matji_mapview_edittext">
     <item name="android:layout_marginBottom">6.67dp</item>
   </style>
 

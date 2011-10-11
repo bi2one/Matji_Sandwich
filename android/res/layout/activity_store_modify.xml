@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/activity_store_modify"
+		style="@style/DefaultFill">
   <com.matji.sandwich.widget.title.CompletableTitle
       android:layout_alignParentTop="true"
       android:id="@+id/activity_store_modify_title"
       style="@style/DefaultWidthFill" />
-    
-</LinearLayout>
+  <com.matji.sandwich.map.StoreModifyMatjiMapView
+      android:id="@+id/activity_store_modify_mapview"
+      android:layout_below="@id/activity_store_modify_title"
+      android:apiKey="@string/map_api_key"
+      android:clickable="true"
+      style="@style/DefaultFill" />
+</RelativeLayout>

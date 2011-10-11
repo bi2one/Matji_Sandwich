@@ -12,7 +12,7 @@
     <!-- store name -->
     <EditText
 	android:id="@+id/write_store_matji_mapview_store_name"
-	style="@style/write_store_matji_mapview_store_name"
+	style="@style/store_matji_mapview_store_name"
 	android:hint="@string/write_store_matji_mapview_store_name" />
 
     <!-- address -->

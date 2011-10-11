@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" 
+	style="@style/DefaultFill"
+	android:background="@color/write_store_bg">
+	<LinearLayout 
+		android:id="@+id/store_modify_text"
+		android:orientation="vertical" 
+		style="@style/write_store_matji_mapview_text">
+		<EditText 
+			android:id="@+id/store_modify_store_name" 
+			style="@style/store_matji_mapview_store_name"
+			android:hint="@string/write_store_matji_mapview_store_name" />
+		<RelativeLayout 
+			style="@style/write_store_matji_mapview_address">
+			<TextView 
+				android:id="@+id/store_modify_address"
+				style="@style/write_store_matji_mapview_edittext_empty"
+				android:layout_alignParentLeft="true" 
+				android:layout_alignParentTop="true"
+				android:layout_toLeftOf="@+id/store_modify_mapview_button" />
+			<ImageView 
+				android:id="@+id/store_modify_divider"
+				style="@style/write_store_matji_mapview_divider"
+				android:layout_below="@id/store_modify_address"
+				android:layout_centerVertical="true" 
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@+id/store_modify_mapview_button" />
+			<EditText 
+				android:id="@+id/store_modify_add_address"
+				style="@style/write_store_matji_mapview_edittext_empty"
+				android:hint="@string/write_store_matji_mapview_add_address"
+				android:layout_alignParentLeft="true"
+				android:layout_below="@id/store_modify_divider"
+				android:layout_toLeftOf="@id/store_modify_mapview_button" />
+			<RelativeLayout 
+				android:id="@id/store_modify_mapview_button"
+				style="@style/write_store_matji_mapview_button"
+				android:clickable="true" 
+				android:layout_centerVertical="true"
+				android:layout_alignParentRight="true">
+				<ImageView 
+					style="@style/write_store_matji_mapview_btn_image"
+					android:layout_centerVertical="true"
+					android:layout_alignParentLeft="true" />
+				<ImageView 
+					style="@style/write_store_matji_mapview_btn_arrow"
+					android:layout_centerVertical="true"
+					android:layout_alignParentRight="true" />
+			</RelativeLayout>
+
+			<!-- address spinner wrapper -->
+			<RelativeLayout 
+				android:id="@+id/store_modify_mapview_spinner_wrapper"
+				style="@style/DefaultWidthFill"
+				android:layout_alignParentTop="true"
+				android:layout_alignRight="@id/store_modify_address"
+				android:layout_alignLeft="@id/store_modify_address"
+				android:layout_marginTop="-8dp" />
+		</RelativeLayout>
+
+		<!-- phone number -->
+		<EditText 
+			android:id="@+id/store_modify_phone_number"
+			style="@style/write_store_matji_mapview_phone_number"
+			android:hint="@string/write_store_matji_mapview_phone_number"
+			android:inputType="phone" />
+	</LinearLayout>
+
+	<!-- mapview -->
+	<RelativeLayout 
+		style="@style/DefaultFill">
+		<com.matji.sandwich.map.MatjiMapView
+			android:id="@+id/store_modify_mapview_map" 
+			style="@style/DefaultFill"
+			android:layout_alignParentTop="true" 
+			android:enabled="true"
+			android:clickable="true" 
+			android:focusable="true" 
+			android:apiKey="@string/map_api_key" />
+		<ImageView 
+			style="@style/write_store_matji_mapview_overlay"
+			android:layout_centerInParent="true" />
+	</RelativeLayout>
+</LinearLayout>

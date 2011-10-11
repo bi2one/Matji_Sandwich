@@ -16,12 +16,12 @@ public class StoreModifyHttpRequest extends HttpRequest {
 		action = "modify";
 		parser = new StoreParser();
 		
-		getHashtable.clear();
-		getHashtable.put("name", name);
-		getHashtable.put("address", name);
-		getHashtable.put("lat", lat + "");
-		getHashtable.put("lng", lng + "");
-		getHashtable.put("store_id", store_id + "");
+		postHashtable.clear();
+		postHashtable.put("name", name);
+		postHashtable.put("address", address);
+		postHashtable.put("lat", lat + "");
+		postHashtable.put("lng", lng + "");
+		postHashtable.put("store_id", store_id + "");
 		
 	}
 	

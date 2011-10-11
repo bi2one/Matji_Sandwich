@@ -146,7 +146,6 @@
   <string name="default_string_register">회원가입</string>
   <string name="default_string_webreview">웹리뷰</string>
   
-
   <!-- GpsManager.java -->
   <string name="gps_request_turn_on">GPS를 수신할 수 없습니다. 설정을 켜 주셔야 합니다</string>
   
@@ -375,7 +374,7 @@
 
   <!-- StoreModifyactivity.java -->
   <string name="store_modify_activity_title">정보 수정 요청</string>
-
+  <string name="store_modify_success">수정 요청이 전송되었습니다.</string>
   <!-- post_edit_text.xml -->
   <string name="post_edit_text_empty">이야기를 입력해주세요.</string>
 

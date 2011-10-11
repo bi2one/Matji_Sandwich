@@ -125,7 +125,7 @@ public class Store extends MatjiData implements Serializable {
 	this.add_address = add_address;
     }
     public String getAddAddress() {
-	return add_address.trim();
+	return add_address;
     }
     public void setWebsite(String website) {
 	this.website = website;
