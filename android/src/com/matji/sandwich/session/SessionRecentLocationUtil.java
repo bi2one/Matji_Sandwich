@@ -1,6 +1,7 @@
 package com.matji.sandwich.session;
 
 import java.io.NotSerializableException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -14,8 +15,10 @@ public class SessionRecentLocationUtil {
     private static final int CAPACITY = 7;
     private Session session;
     private PreferenceProvider preferenceProvider;
+    private WeakReference<Context> contextRef;
     
     public SessionRecentLocationUtil(Context context) {
+	contextRef = new WeakReference<Context>(context);
 	session = Session.getInstance(context);
 	preferenceProvider = session.getPreferenceProvider();
     }
@@ -62,7 +65,7 @@ public class SessionRecentLocationUtil {
     private void saveRecentQueue(LinkedList<LocationSearchToken> queue) {
 	try {
 	    preferenceProvider.setObject(SessionIndex.RECENT_CHANGED_LOCATION, queue);
-	    preferenceProvider.commit();
+	    preferenceProvider.commit(contextRef.get());
 	} catch(NotSerializableException e) {
 	    Log.d("Matji", "SessionRecentLocationUtil: not serializable exception");
 	    e.printStackTrace();

@@ -187,7 +187,7 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
 
         postLogout();
 
-        return mPrefs.commit();
+        return mPrefs.commit(mContextRef.get());
     }
 
 
@@ -213,7 +213,7 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
         }
 
         mPrefs.setString(keyForAccessToken, me.getToken());
-        mPrefs.commit();
+        mPrefs.commit(mContextRef.get());
 
         removePrivateDataFromDatabase();
 

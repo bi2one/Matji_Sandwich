@@ -1,0 +1,28 @@
+#+TAGS: urgent(u) next(n) unimportant(i)
+
+* 남은 할 일
+** TODO 댓글 삭제 버튼은 x로 -> 개발 처리후 디자인 점검		     :urgent:
+** TODO 비번 찾기 기능(로그인 화면에서)				     :urgent:
+** TODO 약관 보기 없음						     :urgent:
+** TODO 맛집 홈페이지 없을때 클릭하면 죽음			     :urgent:
+** TODO 이야기 추천 버튼이 초기에 보이지 않음(추천 했다가 취소하면 다시 보임) :urgent:
+** TODO 맛집 정보중 URL미 등록시 해당 란을 노출하지 않음.	     :urgent:
+** TODO 'http://' 를 입력하는것 안드로이드 식 처리를 대표님에게 말해줄 것. :urgent:
+** TODO 활동 지수 아이콘 적용					     :urgent:
+** TODO 개인 페이지에서, 소개글이 없을때, 닉네임님의 개인페이지입니다. 노출 :urgent:
+** TODO 맛집 전화번호 미등록시 글자를 흐리게 처리		:unimportant:
+** TODO 맛집 정보 수정 버튼 클릭시 메뉴에서 정보수정이 폐업 신청보다 위에 오도록 할 것. :unimportant:
+** TODO 버튼 영역 클릭 범위를 넓게 할 것			:unimportant:
+** TODO 개인설정탭 속도 문제					:unimportant:
+** TODO 맛집 > 주소 > 지도에서 내위치 표시			       :next:
+** TODO 서비스 띄워놓기(전체 정보 업데이트 하는거. 로컬 서비스로...)   :next:
+* 새로 할 일
+** DONE String.xml 파일 씌우기					     :urgent:
+   CLOSED: [2011-10-12 Wed 15:30]
+** DONE post tag list 만들기					     :urgent:
+   CLOSED: [2011-10-12 Wed 16:02]
+** DONE 이미지 슬라이더에서 이미지가 작게 나오는 현상		     :urgent:
+   CLOSED: [2011-10-12 Wed 16:15]
+** DONE 프로그램 종료 후, 로그인 유지가 안됨			     :urgent:
+   CLOSED: [2011-10-12 Wed 16:23]
+** TODO string.xml 안쓰는 것들 정제하기				:unimportant:
