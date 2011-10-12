@@ -136,11 +136,11 @@ public class PreferenceProvider {
 	}
     }
 	
-    public boolean commit(){
+    public boolean commit(Context context){
 	// Log.d("=====", "commit!!");
 	boolean success = false;
 	try{
-            FileOutputStream fos = contextRef.get().openFileOutput(getFileName(), contextRef.get().MODE_WORLD_WRITEABLE);
+            FileOutputStream fos = context.openFileOutput(getFileName(), context.MODE_WORLD_WRITEABLE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(sharedObjects);
             oos.flush();

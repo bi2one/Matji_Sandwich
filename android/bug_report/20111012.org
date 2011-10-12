@@ -21,5 +21,8 @@
    CLOSED: [2011-10-12 Wed 15:30]
 ** DONE post tag list 만들기					     :urgent:
    CLOSED: [2011-10-12 Wed 16:02]
-** TODO 이미지 슬라이더에서 이미지가 작게 나오는 현상		     :urgent:
+** DONE 이미지 슬라이더에서 이미지가 작게 나오는 현상		     :urgent:
+   CLOSED: [2011-10-12 Wed 16:15]
+** DONE 프로그램 종료 후, 로그인 유지가 안됨			     :urgent:
+   CLOSED: [2011-10-12 Wed 16:23]
 ** TODO string.xml 안쓰는 것들 정제하기				:unimportant:

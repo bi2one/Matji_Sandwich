@@ -228,7 +228,7 @@ public class ImageLoader {
     }
 
     private Bitmap applyConvert(File f) {
-        Bitmap bitmap = ImageUtil.decodeFile(f, true);
+        Bitmap bitmap = ImageUtil.decodeFile(f, false);
         if (convertable != null) {
             bitmap = convertable.convert(bitmap);
             try {
