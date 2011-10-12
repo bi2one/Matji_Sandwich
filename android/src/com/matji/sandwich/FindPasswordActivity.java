@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import android.os.Bundle;
 import android.widget.EditText;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -30,9 +31,8 @@ public class FindPasswordActivity extends BaseActivity implements Completable, R
 		return R.id.activity_find_password;
 	}
 
-	public void init() {
-		super.init();
-		
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_password);
 		
 		title = (CompletableTitle) findViewById(R.id.Titlebar);
@@ -94,4 +94,5 @@ public class FindPasswordActivity extends BaseActivity implements Completable, R
 			finish();
 		}
 	}
+	
 }
