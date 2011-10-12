@@ -3,7 +3,6 @@ package com.matji.sandwich;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;

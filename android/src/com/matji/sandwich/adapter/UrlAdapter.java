@@ -9,7 +9,7 @@ public class UrlAdapter extends SimpleAdapter {
 
 	public UrlAdapter(Context context) {
 		super(context);
-		alignText(Gravity.CENTER);
+		alignText(Gravity.CENTER_VERTICAL);
 	}
 
 	@Override

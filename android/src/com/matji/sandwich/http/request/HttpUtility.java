@@ -22,8 +22,8 @@ import org.apache.http.util.ByteArrayBuffer;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.listener.ProgressListener;
+import com.matji.sandwich.util.ImageUtil;
 
 /**
  * @author meinside@skcomms.co.kr
@@ -265,11 +265,11 @@ final public class HttpUtility
     		// Log.d("=====", "5-1");
     		// BufferedReader dis = new BufferedReader(new
     		// InputStreamReader(conn.getInputStream()));
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
     		InputStream is = new BufferedInputStream(connection.getInputStream());
     		// Log.d("=====", "5-2");
     		byte[] responseBody = readBytesFromInputStream(is);
-		long timeGap = System.currentTimeMillis() - start;
+//		long timeGap = System.currentTimeMillis() - start;
 		// Log.d("=====", "get   : " + timeGap);
 		
     		// Log.d("=====", "5-3");

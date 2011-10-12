@@ -1,39 +1,28 @@
 package com.matji.sandwich.http.request;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.location.Location;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.util.ImageUtil;
-import com.matji.sandwich.exception.WritePostMatjiException;
-// import com.matji.sandwich.exception.BitmapCompressMatjiException;
-// import com.matji.sandwich.exception.BitmapCompressIOMatjiException;
-import com.matji.sandwich.listener.ProgressListener;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.Post;
-
-import java.util.ArrayList;
-import java.io.File;
-// import java.io.FileInputStream;
-// import java.io.FileOutputStream;
-// import java.io.IOException;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.exception.WritePostMatjiException;
+import com.matji.sandwich.listener.ProgressListener;
 
 public class WritePostHttpRequest implements ProgressRequestCommand {
-    private Context context;
     private AttachFileHttpRequest fileRequest;
     private PostHttpRequest postRequest;
     private ArrayList<File> images;
     private int tag;
     private ProgressListener listener;
     private int readCount;
-    private int totalCount;
+    //    private int totalCount;
 
     public WritePostHttpRequest(Context context) {
-        this.context = context;
         fileRequest = new AttachFileHttpRequest(context);
         postRequest = new PostHttpRequest(context);
     }
@@ -57,19 +46,19 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
     }
 
     public void setProgressListener(int tag, ProgressListener listener) {
-	fileRequest.setProgressListener(tag, listener);
-	this.tag = tag;
-	this.listener = listener;
+        fileRequest.setProgressListener(tag, listener);
+        this.tag = tag;
+        this.listener = listener;
     }
 
     public int getRequestCount() {
-	return images.size();
+        return images.size();
     }
 
     private void writeUnit(int totalCount, int readCount) {
-	if (listener != null) {
-	    listener.onUnitWritten(tag, totalCount, readCount);
-	}
+        if (listener != null) {
+            listener.onUnitWritten(tag, totalCount, readCount);
+        }
     }
 
     public ArrayList<MatjiData> request() throws MatjiException {
@@ -101,7 +90,7 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
                 // File compressedFile = ImageUtil.compressFile(file);
                 fileRequest.actionUpload(file, postId);
                 confirmValidFileRequest(fileRequest.request());
-		writeUnit(getRequestCount(), ++readCount);
+                writeUnit(getRequestCount(), ++readCount);
             }
         }
     }

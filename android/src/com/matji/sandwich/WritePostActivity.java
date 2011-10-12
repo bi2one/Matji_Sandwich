@@ -1,39 +1,38 @@
 package com.matji.sandwich;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-import android.location.Location;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.ProgressDialogAsyncTask;
+import com.matji.sandwich.http.request.WritePostHttpRequest;
+import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.PhotoUtil;
 import com.matji.sandwich.util.PhotoUtil.IntentType;
 import com.matji.sandwich.util.adapter.GeoPointToLocationAdapter;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.widget.PostEditText;
 import com.matji.sandwich.widget.AlbumView;
 import com.matji.sandwich.widget.GetPictureLayout;
+import com.matji.sandwich.widget.PostEditText;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
-import com.matji.sandwich.widget.title.CompletableTitle;
-import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
-import com.matji.sandwich.http.HttpRequestManager;
-import com.matji.sandwich.http.DialogAsyncTask;
-import com.matji.sandwich.http.ProgressDialogAsyncTask;
-import com.matji.sandwich.http.request.WritePostHttpRequest;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.session.SessionMapUtil;
-
-import java.io.File;
-import java.util.ArrayList;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
+import com.matji.sandwich.widget.title.CompletableTitle;
 
 public class WritePostActivity extends BaseActivity implements CompletableTitle.Completable,
 							       RelativeLayoutThatDetectsSoftKeyboard.Listener,
@@ -48,7 +47,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
     private static final int INTENT_SELECT_TAG = 1;
     private static final int INTENT_CAMERA = 2;
     private static final int INTENT_ALBUM = 3;
-    private static final int BASIC_STORE_ID = -1;
+//    private static final int BASIC_STORE_ID = -1;
     private Context context;
     private PhotoUtil photoUtil;
     private PostEditText postText;

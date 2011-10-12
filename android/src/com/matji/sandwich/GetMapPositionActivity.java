@@ -1,17 +1,14 @@
 package com.matji.sandwich;
 
-import android.os.Bundle;
-import android.content.Intent;
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.map.RadiusMatjiMapView;
 import com.matji.sandwich.widget.title.CompletableTitle;
-import com.matji.sandwich.widget.title.TitleContainer;
-
-import com.google.android.maps.GeoPoint;
 
 public class GetMapPositionActivity extends BaseMapActivity implements CompletableTitle.Completable,
 								       RadiusMatjiMapView.OnClickListener {

@@ -2,28 +2,22 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
-
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.data.AddressComponent;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.JSONMatjiException;
+import com.matji.sandwich.data.GeocodeAddress;
+import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.GeocodeLocationInvalidMatjiException;
-import com.matji.sandwich.exception.GeocodeZeroResultMatjiException;
 import com.matji.sandwich.exception.GeocodeSearchInvalidMatjiException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.matji.sandwich.exception.GeocodeZeroResultMatjiException;
+import com.matji.sandwich.exception.JSONMatjiException;
+import com.matji.sandwich.exception.MatjiException;
 
 public class GeocodeParser implements MatjiParser {
     private JsonParser parser;

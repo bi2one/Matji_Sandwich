@@ -1,8 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Alarm;
 import com.matji.sandwich.exception.MatjiException;
@@ -31,8 +28,6 @@ public class AlarmParser extends MatjiDataParser {
 		PostParser postParser = new PostParser();
 		alarm.setPost(postParser.getMatjiData(getObject(object, "post")));
 		alarm.setAlarmRead(getBoolean(object, "alarm_read"));
-		
-		Log.d("Parser", "AlarmParser:: called getMatjiData");
 		
 		return alarm;
 	}

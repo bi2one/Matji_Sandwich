@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.matji.sandwich.http.parser.SearchResultParser;
 import com.matji.sandwich.http.parser.UserParser;
-import com.matji.sandwich.session.Session;
 
 public class UserHttpRequest extends HttpRequest {
     public UserHttpRequest(Context context) {

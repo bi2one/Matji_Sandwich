@@ -1,13 +1,11 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
+import java.util.ArrayList;
 
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Simple;
 import com.matji.sandwich.exception.MatjiException;
-
-import java.util.ArrayList;
 
 public class SimpleParser extends MatjiDataParser {
 	public ArrayList<MatjiData> getRawData(String data) throws MatjiException {

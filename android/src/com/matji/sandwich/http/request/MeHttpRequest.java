@@ -6,10 +6,8 @@ import android.content.Intent;
 
 import com.matji.sandwich.ExternalServiceWebViewActivity;
 import com.matji.sandwich.R;
-import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.parser.MeParser;
-import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 
 public class MeHttpRequest extends HttpRequest {

@@ -1,7 +1,5 @@
 package com.matji.sandwich.session;
 
-import android.content.Context;
-
 import com.matji.sandwich.data.provider.ConcretePreferenceProvider;
 
 public class SessionPrivateUtil {
@@ -19,6 +17,11 @@ public class SessionPrivateUtil {
 
     public void clear() {
         
+    }
+    
+    public void notificationClear() {
+        setNewAlarmCount(0);
+        setNewNoticeCount(0);
     }
 
     public void setLastReadNoticeId(int lastReadNoticeId) {

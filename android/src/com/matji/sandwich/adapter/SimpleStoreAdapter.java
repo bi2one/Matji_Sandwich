@@ -31,7 +31,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
     public void setOnClickListener(OnClickListener listener) {
         this.listener = listener;
     }
-    
+
     public View getView(int position, View convertView, ViewGroup parent) {
         StoreElement storeElement;
         Store store = (Store) data.get(position);
@@ -52,7 +52,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
             storeElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_store_like_count);
             storeElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_store_post_count);
             storeElement.bookmarkToggle = (BookmarkStarToggleView) convertView.findViewById(R.id.row_simple_store_bookmark);
-	    storeElement.spinnerWrapper = (RelativeLayout) convertView.findViewById(R.id.row_simple_store_spinner_wrapper);
+            storeElement.spinnerWrapper = (RelativeLayout) convertView.findViewById(R.id.row_simple_store_spinner_wrapper);
             storeElement.listener = new StoreClickListener(context);
             convertView.setTag(storeElement);
         } else {
@@ -67,7 +67,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         storeElement.likeCount.setText("" + store.getLikeCount());
         storeElement.postCount.setText("" + store.getPostCount());
         if (isVisibleStar) {
-	    storeElement.bookmarkToggle.init(store, storeElement.spinnerWrapper);
+            storeElement.bookmarkToggle.init(store, storeElement.spinnerWrapper);
             //        storeElement.bookmarkToggle.init(this, bookmarkedList, store);
             storeElement.bookmarkToggle.setVisibility(View.VISIBLE);
         } else {
@@ -90,7 +90,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         TextView address;
         TextView likeCount;
         TextView postCount;
-	RelativeLayout spinnerWrapper;
+        RelativeLayout spinnerWrapper;
         BookmarkStarToggleView bookmarkToggle;
         StoreClickListener listener;
         Store store;

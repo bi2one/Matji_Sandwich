@@ -1,14 +1,12 @@
 package com.matji.sandwich.session;
 
 import java.io.NotSerializableException;
-import java.util.ArrayList;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.view.ViewGroup;
 
@@ -23,11 +21,11 @@ import com.matji.sandwich.data.provider.ConcretePreferenceProvider;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.DialogAsyncTask;
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.NoticeHttpRequest;
-import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.http.request.RequestCommand;
 
 public class Session implements Requestable, DialogAsyncTask.ProgressListener {
     private volatile static Session session = null;
@@ -74,7 +72,7 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
     }
 
     public void setContext(Context context) {
-        this.mContextRef = new WeakReference(context);
+        this.mContextRef = new WeakReference<Context>(context);
     }
 
     public static Session getInstance(Context context) {
@@ -85,14 +83,14 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
                 }
             }
         }
-	session.setContext(context);
+        session.setContext(context);
 
         return session;
     }
 
     public void sessionValidate(Loginable loginable, ViewGroup layout){
         preLogin();
-        this.mLoginableRef = new WeakReference(loginable);
+        this.mLoginableRef = new WeakReference<Loginable>(loginable);
         mManager = HttpRequestManager.getInstance();
         MeHttpRequest request = new MeHttpRequest(mContextRef.get());
         request.actionMe();
@@ -111,7 +109,7 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } 
-        
+
         if (data != null && !data.isEmpty() && data.size() > 0) {
             Me me = (Me) data.get(0);
             saveMe(me);
@@ -120,52 +118,71 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
         }
     }
 
-    public void loginWithDialog(Context context, String userid, String password, Loginable loginable) {
-	mLoginableRef = new WeakReference(loginable);
-	MeHttpRequest request = new MeHttpRequest(context);
-	request.actionAuthorize(userid, password);
-	DialogAsyncTask loginAsyncTask = new DialogAsyncTask(context, this, request, HttpRequestManager.AUTHORIZE);
-	loginAsyncTask.setDialogString(R.string.session_onlogin);
-	loginAsyncTask.setProgressListener(this);
-	loginAsyncTask.execute();
+    public void loginWithDialog(final Context context, final String userid, final String password, Loginable loginable) {
+        mLoginableRef = new WeakReference<Loginable>(loginable);
+        RequestCommand loginRequest = new RequestCommand() {
+
+            private MeHttpRequest request; 
+
+            @Override
+            public ArrayList<MatjiData> request() throws MatjiException {
+                request = new MeHttpRequest(context);
+                request.actionAuthorize(userid, password);
+                ArrayList<MatjiData> data = null;
+                try {
+                    data = request.request();
+                    Me me = (Me)data.get(0);
+                    saveMe(me);
+                } catch (MatjiException e){
+                    e.printStackTrace();
+                }
+
+                notificationValidate();
+                return data;
+            }
+
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        DialogAsyncTask loginAsyncTask = new DialogAsyncTask(context, this, loginRequest, HttpRequestManager.AUTHORIZE);
+        loginAsyncTask.setDialogString(R.string.session_onlogin);
+        loginAsyncTask.setProgressListener(this);
+        loginAsyncTask.execute();
     }
 
     public void onPreExecute(int tag) {
-	switch(tag) {
-	case HttpRequestManager.AUTHORIZE:
-	    preLogin();
-	    break;
-	}
+        switch(tag) {
+        case HttpRequestManager.AUTHORIZE:
+            preLogin();
+            break;
+        }
     }
     public void onStartBackground(int tag) { }
-    public void onEndBackground(int tag) {
-	switch(tag) {
-	case HttpRequestManager.AUTHORIZE:
-	    notificationValidate();
-	    break;
-	}
-    }
+    public void onEndBackground(int tag) { }
     public void onPostExecute(int tag) { }
 
-    public boolean login(String userid, String password) {
-        mManager = HttpRequestManager.getInstance();
-        MeHttpRequest request = new MeHttpRequest(mContextRef.get());
-        request.actionAuthorize(userid, password);
-        try {
-            ArrayList<MatjiData> data = request.request();
-            Me me = (Me)data.get(0);
-            saveMe(me);
-            return true;
-        } catch (MatjiException e) {
-            return false;
-        }
-        //        mManager.request(spinnerContainer, request, AUTHORIZE, this);
-    }
-    
+    //    public boolean login(String userid, String password) {
+    //        mManager = HttpRequestManager.getInstance();
+    //        MeHttpRequest request = new MeHttpRequest(mContextRef.get());
+    //        request.actionAuthorize(userid, password);
+    //        try {
+    //            ArrayList<MatjiData> data = request.request();
+    //            Me me = (Me)data.get(0);
+    //            saveMe(me);
+    //            return true;
+    //        } catch (MatjiException e) {
+    //            return false;
+    //        }
+    //        //        mManager.request(spinnerContainer, request, AUTHORIZE, this);
+    //    }
+
     public boolean logout(){
         preLogout();
 
         mPrefs.clear();
+        mPrivateUtil.notificationClear();
         removePrivateDataFromDatabase();
 
         postLogout();
@@ -218,12 +235,18 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch (tag) {
         case HttpRequestManager.AUTHORIZE:
+            if (data == null || data.isEmpty()) {
+                if (mLoginableRef != null && mLoginableRef.get() != null) {
+                    mLoginableRef.get().loginFailed();
+                }                
+                return;
+            }
             Me me = (Me)data.get(0);
             saveMe(me);
 
             if (mLoginableRef != null && mLoginableRef.get() != null) {
                 mLoginableRef.get().loginCompleted();
-	    }
+            }
 
             postLogin();
             break;
@@ -232,7 +255,7 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
         if (tag == HttpRequestManager.AUTHORIZE){
-	    e.performExceptionHandling(mContextRef.get());
+            e.performExceptionHandling(mContextRef.get());
             if (mLoginableRef != null && mLoginableRef.get() != null) 
                 mLoginableRef.get().loginFailed();
         }
@@ -261,7 +284,7 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
     public SessionPrivateUtil getPrivateUtil() {
         return mPrivateUtil;
     }
-    
+
     public boolean isCurrentUser(User user) {
         return isLogin() && (getCurrentUser().getId() == user.getId());
     }

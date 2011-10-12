@@ -1,7 +1,6 @@
 package com.matji.sandwich.widget.pullstate;
 
 import com.matji.sandwich.widget.PullToRefreshListView;
-import android.util.Log;
 
 public class StartPullState implements PullState {
     private PullToRefreshListView view;

@@ -55,13 +55,15 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
             try {
                 float deltaX = e1.getX() - e2.getX();
                 if (Math.abs(deltaX) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_MIN_VALOCITY) {
-                    if (deltaX > 0) {
-                        moveToRight();
+                    if (deltaX < 0) {
+                        if (isExistLeftImage()) moveToLeft();
                         return true;
-                    } else if (deltaX < 0) {
-                        moveToLeft();
+                    } else if (deltaX > 0) {
+                        if (isExistRightImage()) moveToRight();
                         return true;
-                    }
+                    } 
+                    
+
                 }
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
@@ -210,6 +212,7 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
     }
 
     public boolean isExistRightImage() {
+        Log.d(TAG, currItemPos+1+","+photoCount);
         return currItemPos+1 < photoCount;
     }
 
@@ -246,14 +249,12 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
         if (nextPageX - (float)pageWidth * SNAP_DISTANCE_WEIGHT >= l) {
 
             // left page changed
-            if (currItemPos != 0 && currItemPos < photoCount)
-                moveToLeft();
+            if (isExistLeftImage()) moveToLeft();
 
         } else if (nextPageX + (float)pageWidth * SNAP_DISTANCE_WEIGHT <= l) {
 
             // right page changed
-            if (currItemPos < photoCount - 1)
-                moveToRight();
+            if (isExistRightImage()) moveToRight();
         } else {
             smoothScrollToPosition(currItemPos);
         }
@@ -262,7 +263,7 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
 
     private float downX;
     private float downY;
-    private static final float CLICK_MIN_DISTANCE = 3.0f;
+    private static final float CLICK_MIN_DISTANCE = 5.0f;
     private static final int CLICK_MIN_TIME = 300;
 
     @Override

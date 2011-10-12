@@ -2,11 +2,8 @@ package com.matji.sandwich.widget;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
-
 import android.widget.RelativeLayout;
 
 /*

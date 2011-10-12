@@ -1,7 +1,6 @@
 package com.matji.sandwich.http.util;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.ImageUtil;

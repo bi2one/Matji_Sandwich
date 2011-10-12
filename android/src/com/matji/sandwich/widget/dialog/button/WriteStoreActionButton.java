@@ -1,13 +1,11 @@
 package com.matji.sandwich.widget.dialog.button;
 
-import android.view.View;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.View;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.widget.dialog.MatjiDialog;
 import com.matji.sandwich.WriteStoreActivity;
 
 public class WriteStoreActionButton extends ActionButton {

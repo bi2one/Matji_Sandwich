@@ -1,15 +1,14 @@
 package com.matji.sandwich.widget;
 
-import android.widget.RelativeLayout;
-import android.widget.LinearLayout;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.EditText;
-import android.util.AttributeSet;
 import android.content.Context;
-import android.view.View;
-import android.view.LayoutInflater;
 import android.graphics.Rect;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.matji.sandwich.R;
 
@@ -23,7 +22,6 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
     }
 
     private static final boolean isToggleable = false;
-    private Context context;
     private EditText postText;
     private ImageButton storeButton;
     private ImageButton tagButton;
@@ -36,7 +34,6 @@ public class PostEditText extends RelativeLayout implements View.OnClickListener
     public PostEditText(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	
-	this.context = context;
 	LayoutInflater.from(context).inflate(R.layout.post_edit_text, this, true);
 	listener = new NullListener();
 

@@ -1,35 +1,12 @@
 package com.matji.sandwich.adapter;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.matji.sandwich.ImageSliderActivity;
-import com.matji.sandwich.R;
-import com.matji.sandwich.data.AttachFile;
-import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.SimpleTag;
-import com.matji.sandwich.data.User;
-import com.matji.sandwich.util.DisplayUtil;
-import com.matji.sandwich.util.TimeUtil;
-import com.matji.sandwich.widget.PostListView;
-import com.matji.sandwich.widget.ProfileImageView;
-
 import android.content.Context;
-import android.content.Intent;
-import android.database.DataSetObserver;
-
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Button;
-import android.widget.LinearLayout.LayoutParams;
 
 /**
  * Adapter for sections.
@@ -48,7 +25,6 @@ public abstract class SectionedAdapter extends MBaseAdapter {
     private final Map<Integer, Integer> itemPositions = new LinkedHashMap<Integer, Integer>();
     private final Map<View, String> currentViewSections = new HashMap<View, String>();
 
-    private static final int TYPE_POST = 0;
     private static final int TYPE_SECTION = 1;
     private static final int VIEW_TYPE_COUNT = TYPE_SECTION + 1;
 
@@ -58,18 +34,15 @@ public abstract class SectionedAdapter extends MBaseAdapter {
 
     public void notifyDataSetChanged() {
         int currentPosition = 0;
-        String currentSection = "";
         String prevSectionName = "";
         sectionPositions.clear();
         itemPositions.clear();
 
         for (int i = 0; i < data.size(); i++) {
-            Object dataObject = data.get(i);
             String sectionName = putSectionName(i);
             if (sectionName != null && !sectionName.equals(prevSectionName)) {
                 prevSectionName = sectionName;
                 sectionPositions.put(currentPosition, sectionName);
-                currentSection = sectionName;
                 currentPosition++;
             }
             itemPositions.put(currentPosition, i);

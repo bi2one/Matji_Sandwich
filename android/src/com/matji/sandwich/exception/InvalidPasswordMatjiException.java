@@ -6,7 +6,12 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 
 public class InvalidPasswordMatjiException extends MatjiException {
-	public InvalidPasswordMatjiException() {
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 8413791156725169579L;
+
+    public InvalidPasswordMatjiException() {
 		super(R.string.exception_InvalidPasswordMatjiException);
 	}
 	

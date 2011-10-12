@@ -14,7 +14,7 @@ public class SimpleUserListView extends RequestableMListView {
 	private HttpRequest request;
 	
 	public SimpleUserListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new SimpleUserAdapter(context), 10);
+		super(context, attrs, new SimpleUserAdapter(context), 15);
 		init();
 	}
 	

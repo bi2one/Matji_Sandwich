@@ -1,8 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.exception.MatjiException;
@@ -28,9 +25,7 @@ public class CommentParser extends MatjiDataParser {
 		PostParser postParser = new PostParser();
 		comment.setPost(postParser.getMatjiData(getObject(object, "post")));
 		comment.setFromWhere(getString(object, "from_where"));
-		
-		Log.d("Parser", "CommentParser:: called getMatjiData");
-		
+
 		return comment;
 	}
 }

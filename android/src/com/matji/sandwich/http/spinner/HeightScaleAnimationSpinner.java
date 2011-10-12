@@ -1,24 +1,17 @@
 package com.matji.sandwich.http.spinner;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 
-import com.matji.sandwich.R;
 import com.matji.sandwich.util.AnimationUtil;
 
 public class HeightScaleAnimationSpinner implements Spinnable, Animation.AnimationListener {
-    private Context context;
     private Spinnable innerSpinner;
     private ViewGroup layout;
     private SpinListener listener;
     
     public HeightScaleAnimationSpinner(Context context, ViewGroup layout, Spinnable innerSpinner) {
-	this.context = context;
 	this.innerSpinner = innerSpinner;
 	this.layout = layout;
     }

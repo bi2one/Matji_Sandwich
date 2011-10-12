@@ -1,12 +1,11 @@
 package com.matji.sandwich.widget;
 
-import android.widget.LinearLayout;
-import android.widget.Button;
-import android.util.AttributeSet;
 import android.content.Context;
-import android.view.View;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 public abstract class ButtonView extends LinearLayout {
     protected abstract int setButtonId();

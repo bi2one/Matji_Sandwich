@@ -3,7 +3,6 @@ package com.matji.sandwich.http;
 import java.util.ArrayList;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.data.MatjiData;

@@ -6,12 +6,11 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.TextView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.MainMapActivity;
@@ -158,5 +157,9 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
         // sIntent intent = new Intent(getActivity(), StoreMainActivity.class);
         // intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
         // getActivity().startActivity(intent);
+    }
+    
+    public void dataRefresh() {
+        getMBaseAdapter().notifyDataSetChanged();
     }
 }

@@ -1,6 +1,10 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.util.Log;
 
 import com.google.gson.JsonArray;
@@ -12,15 +16,9 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.ExceptionFactory;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.exception.JSONMatjiException;
 import com.matji.sandwich.exception.JSONCodeMatjiException;
-import com.matji.sandwich.http.request.HttpUtility;
-
-import java.util.ArrayList;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.matji.sandwich.exception.JSONMatjiException;
+import com.matji.sandwich.exception.MatjiException;
 
 public abstract class MatjiDataParser implements MatjiParser {
     public abstract MatjiData getMatjiData(JsonObject object) throws MatjiException;

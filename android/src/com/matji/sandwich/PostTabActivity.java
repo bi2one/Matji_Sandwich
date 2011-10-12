@@ -3,7 +3,6 @@ package com.matji.sandwich;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.session.Session;
@@ -16,7 +15,6 @@ public class PostTabActivity extends BaseTabActivity {
     private Session session;
     private SessionTabHostUtil sessionUtil;
     private int lastTab = 0;
-    private ActivityStartable lastStartedChild;
     private boolean lastLoginState;
     private boolean isNotFirst;
 
