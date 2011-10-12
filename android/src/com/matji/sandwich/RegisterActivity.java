@@ -107,8 +107,8 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     }
     
     private void createDialogs() {
-        emailIsNullDialog = new SimpleAlertDialog(this, R.string.register_email_is_null);
-        emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_email_is_incorrect);
+    	emailIsNullDialog = new SimpleAlertDialog(this, R.string.register_email_is_null);
+    	emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_email_is_incorrect);
         nicknameIsNullDialog = new SimpleAlertDialog(this, R.string.register_nickname_is_null);
         nicknameLengthErrorDialog = new SimpleAlertDialog(this, R.string.register_nickname_too_short_or_too_long);
         passwordIsNullDialog = new SimpleAlertDialog(this, R.string.register_password_is_null);

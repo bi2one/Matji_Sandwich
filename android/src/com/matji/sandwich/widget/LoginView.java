@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.matji.sandwich.FindPasswordActivity;
 import com.matji.sandwich.Loginable;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.R;
@@ -37,6 +38,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     private EditText idField;
     private EditText pwdField;
     
+    private View findPassword;
     private View register;
     private WeakReference<Loginable> loginableRef;
 
@@ -66,6 +68,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         idField = (EditText) findViewById(R.id.login_username);
         pwdField = (EditText) findViewById(R.id.login_password);
         saveidCheckBox = (CheckBox) findViewById(R.id.login_save_id);
+        findPassword = findViewById(R.id.login_find_password);
         register = findViewById(R.id.login_register);
 //        loginTwitter = findViewById(R.id.login_twitter);
 //        loginFacebook = findViewById(R.id.login_facebook);
@@ -74,6 +77,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         idField.setText(privateUtil.getSavedUserId());
         saveidCheckBox.setChecked(privateUtil.isCheckedSaveId());        
         saveidCheckBox.setOnCheckedChangeListener(this);
+        findPassword.setOnClickListener(this);
         register.setOnClickListener(this);
 //        loginTwitter.setOnClickListener(this);
 //        loginFacebook.setOnClickListener(this);
@@ -119,6 +123,11 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         //        request.authorizeViaExternalService(this, Service.FACEBOOK);        
     }
 
+    public void findPasswordClicekd(View v) {
+    	Intent intent = new Intent(getContext(), FindPasswordActivity.class);
+    	getContext().startActivity(intent);
+    }
+    
     public void registerClicked(View v) {
         Intent intent = new Intent(getContext(), RegisterActivity.class);
         getContext().startActivity(intent);
@@ -128,6 +137,8 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     public void onClick(View v) {
         if (v.getId() == register.getId()) {
             registerClicked(v);
+        } else if (v.getId() == findPassword.getId()) {
+        	findPasswordClicekd(v);
 //        } else if (v.getId() == loginTwitter.getId()) {
 //            loginViaTiwtter(v);
 //        } else if (v.getId() == loginFacebook.getId()) {

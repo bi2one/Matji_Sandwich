@@ -77,6 +77,7 @@
 						android:id="@+id/store_default_info_website"
 						style="@style/settings_Row"
 						android:background="@drawable/txtbox_c_selector"
+						android:visibility="gone"
 						android:clickable="true"
 						android:onClick="onWebsiteClicked"
 						android:textSize="@dimen/store_default_info_content_size"
