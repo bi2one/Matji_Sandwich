@@ -38,23 +38,17 @@ public class FindPasswordActivity extends BaseActivity implements Completable, R
 		title = (CompletableTitle) findViewById(R.id.Titlebar);
 		etEmail = (EditText) findViewById(R.id.find_password_email_field);
 		
-		createDialogs();
-		
-		title.setTitle(R.string.login_find_password);
-		title.setCompletable(this);
-		
-		successDialog.setOnClickListener(this);
-	}
-	
-	private void createDialogs() {
 		emailIsNullDialog = new SimpleAlertDialog(this, R.string.register_email_is_null);
 		emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_email_is_incorrect);
 		successDialog = new SimpleAlertDialog(this, R.string.find_password_success);
+		successDialog.setOnClickListener(this);
+		
+		title.setTitle(R.string.login_find_password);
+		title.setCompletable(this);
 	}
 	
 	public void complete() {
-		String email = etEmail.getText().toString(); 
-		
+		String email = etEmail.getText().toString();
 		if (email.equals("")) {
 			emailIsNullDialog.show();
 		} else if (!isCorrectEmail(email)) {
@@ -77,9 +71,7 @@ public class FindPasswordActivity extends BaseActivity implements Completable, R
      */
     public boolean isCorrectEmail(String email) {
         if (email == null) return false;
-        boolean isCorrect = Pattern.matches(
-                "[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+", 
-                email);
+        boolean isCorrect = Pattern.matches("[\\w\\~\\-\\.]+@[\\w\\~\\-]+(\\.[\\w\\~\\-]+)+", email);
         return isCorrect;
     }
 
@@ -102,9 +94,4 @@ public class FindPasswordActivity extends BaseActivity implements Completable, R
 			finish();
 		}
 	}
-	
-	public void finish() {
-		super.finish();
-	}
-
 }
