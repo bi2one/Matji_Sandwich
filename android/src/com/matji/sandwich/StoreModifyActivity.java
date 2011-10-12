@@ -2,11 +2,8 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 
 import com.matji.sandwich.base.BaseMapActivity;
@@ -15,15 +12,13 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.DialogAsyncTask;
 import com.matji.sandwich.http.request.StoreModifyHttpRequest;
-import com.matji.sandwich.session.Session;
+import com.matji.sandwich.map.StoreModifyMatjiMapView;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.adapter.GeoPointToLocationAdapter;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
-
-import com.matji.sandwich.map.StoreModifyMatjiMapView;
 
 public class StoreModifyActivity extends BaseMapActivity implements Completable, Requestable, StoreModifyMatjiMapView.OnClickListener, SimpleAlertDialog.OnClickListener {
 	public static final String STORE = "StoreModifyActivity.store";
@@ -33,7 +28,6 @@ public class StoreModifyActivity extends BaseMapActivity implements Completable,
 	private SimpleAlertDialog storeAlertDialog;
 	private SimpleAlertDialog successDialog;
 	private Store store;
-	private Session session;
 	
 	public int setMainViewId() {
 		return R.id.activity_store_modify;
@@ -46,8 +40,6 @@ public class StoreModifyActivity extends BaseMapActivity implements Completable,
 
 		store = (Store) getIntent().getParcelableExtra(STORE);
 		
-		session = Session.getInstance(this);
-
 		titleBar = (CompletableTitle) findViewById(R.id.activity_store_modify_title);
 		mapView = (StoreModifyMatjiMapView) findViewById(R.id.activity_store_modify_mapview);
 

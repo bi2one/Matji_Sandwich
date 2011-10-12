@@ -23,7 +23,6 @@ import com.matji.sandwich.http.spinner.SpinnerFactory;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.location.MatjiLocationListener;
 import com.matji.sandwich.session.SessionMapUtil;
-import com.matji.sandwich.session.SessionRecentLocationUtil;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 import com.matji.sandwich.widget.RankingListView;
@@ -43,7 +42,6 @@ ActivityStartable {
     private GpsManager gpsManager;
     private HttpRequestManager requestManager;
     private SessionMapUtil sessionUtil;
-    private SessionRecentLocationUtil sessionLocationUtil;
     private RelativeLayout addressWrapper;
     private TextView addressView;
     private GeocodeHttpRequest geocodeRequest;
@@ -61,7 +59,6 @@ ActivityStartable {
         context = getApplicationContext();
         gpsManager = new GpsManager(this, this);
         sessionUtil = new SessionMapUtil(context);
-        sessionLocationUtil = new SessionRecentLocationUtil(context);
         requestManager = HttpRequestManager.getInstance();
         geocodeRequest = new GeocodeHttpRequest(context);
 

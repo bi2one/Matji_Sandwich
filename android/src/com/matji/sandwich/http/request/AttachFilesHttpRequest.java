@@ -1,17 +1,16 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.http.parser.AttachFileParser;
-import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
-import com.matji.sandwich.adapter.ImageAdapter;
-import com.matji.sandwich.data.AttachFile;
-import com.matji.sandwich.data.AttachFiles;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.MatjiException;
-
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.matji.sandwich.data.AttachFile;
+import com.matji.sandwich.data.AttachFiles;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.parser.AttachFileParser;
+import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
 
 /**
  * AttachFile을 capacity만큼씩 묶어서 저장한다.

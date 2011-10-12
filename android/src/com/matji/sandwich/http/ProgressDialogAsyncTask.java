@@ -1,21 +1,18 @@
 package com.matji.sandwich.http;
 
+import java.util.ArrayList;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.view.ViewGroup;
-import android.util.Log;
 
-import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.http.request.ProgressRequestCommand;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.http.request.ProgressRequestCommand;
 import com.matji.sandwich.listener.ProgressListener;
-import com.matji.sandwich.R;
-
-import java.util.ArrayList;
+import com.matji.sandwich.util.MatjiConstants;
 
 public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean> implements ProgressListener {
     private static final int UPDATE_BYTES = 0;
@@ -23,7 +20,6 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
     private static final int TITLE_ID = R.string.progress_dialog;
     private static final int COUNTER_ID = R.string.progress_dialog_counter;
     private ProgressDialog progressDialog;
-    private Context context;
     private Requestable requestable;
     private ProgressRequestCommand request;
     private int tag;
@@ -31,7 +27,6 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
     private MatjiException exception;
 
     public ProgressDialogAsyncTask(Context context, Requestable requestable, ProgressRequestCommand request, int tag) {
-	this.context = context;
 	this.requestable = requestable;
 	this.request = request;
 	this.tag = tag;
@@ -96,7 +91,7 @@ public class ProgressDialogAsyncTask extends AsyncTask<Object, Integer, Boolean>
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
 	int which = values[0];
-	int tag = values[1];
+//	int tag = values[1];
 	int total = values[2];
 	int read = values[3];
 

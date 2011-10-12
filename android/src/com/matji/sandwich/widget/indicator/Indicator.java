@@ -1,9 +1,8 @@
 package com.matji.sandwich.widget.indicator;
 
 import android.content.Context;
-import android.widget.LinearLayout;
 import android.view.LayoutInflater;
-import android.view.View;
+import android.widget.LinearLayout;
 
 public class Indicator extends LinearLayout {
     public Indicator(Context context, int layoutRef) {

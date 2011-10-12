@@ -10,6 +10,7 @@ import android.widget.TabHost.OnTabChangeListener;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.Session.LoginListener;
+import com.matji.sandwich.session.Session.LogoutListener;
 import com.matji.sandwich.session.SessionTabHostUtil;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.MainTabHost;
@@ -21,7 +22,7 @@ import com.matji.sandwich.widget.title.PrivateTitle;
 import com.matji.sandwich.widget.title.SettingTitle;
 import com.matji.sandwich.widget.title.TitleContainer;
 
-public class MainTabActivity extends BaseTabActivity implements OnTabChangeListener, LoginListener {
+public class MainTabActivity extends BaseTabActivity implements OnTabChangeListener, LoginListener, LogoutListener {
     private MainTabHost tabHost;
     private Session session;
     private SessionTabHostUtil sessionUtil;
@@ -189,7 +190,18 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
 
     @Override
     public void postLogin() {
+        notificationValidate();
         syncTitle();
+        loginTabSync();
+    }
+
+    @Override
+    public void preLogout() {
+        tabHost.setAlarmCount(0);
+    }
+
+    @Override
+    public void postLogout() {
     }
     
     protected void notificationValidate() {

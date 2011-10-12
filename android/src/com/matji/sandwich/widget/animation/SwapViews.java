@@ -1,9 +1,8 @@
 package com.matji.sandwich.widget.animation;
 
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
-import android.util.Log;
 
 public final class SwapViews implements Runnable {
     private boolean mIsFirstView;

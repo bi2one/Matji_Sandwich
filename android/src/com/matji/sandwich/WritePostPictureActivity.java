@@ -1,13 +1,11 @@
 package com.matji.sandwich;
 
-import android.os.Bundle;
 import android.content.Context;
-import android.util.Log;
+import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.util.KeyboardUtil;
-import com.matji.sandwich.widget.AlbumView;
 import com.matji.sandwich.session.SessionWritePostUtil;
+import com.matji.sandwich.widget.AlbumView;
 
 public class WritePostPictureActivity extends BaseActivity {
     private Context context;

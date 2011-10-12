@@ -1,10 +1,5 @@
 package com.matji.sandwich.exception;
 
-import android.content.Context;
-import android.util.Log;
-
-import com.matji.sandwich.R;
-import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 
 public class ExceptionFactory {
     public static final int STATUS_OK = 200;

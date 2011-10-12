@@ -1,9 +1,5 @@
 package com.matji.sandwich.http;
 
-import android.util.Log;
-import android.content.Context;
-
-import java.util.HashMap;
 import java.util.ArrayList;
 
 public class TaskPoolManager implements TaskElement.ProgressListener {

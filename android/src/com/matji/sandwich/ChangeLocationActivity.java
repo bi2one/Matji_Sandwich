@@ -1,26 +1,20 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.view.View;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.widget.RecentChangedLocationView;
-import com.matji.sandwich.widget.SearchResultView;
-import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
-import com.matji.sandwich.widget.title.TitleContainer;
 import com.matji.sandwich.util.KeyboardUtil;
-
-import java.util.ArrayList;
+import com.matji.sandwich.widget.RecentChangedLocationView;
+import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
+import com.matji.sandwich.widget.SearchResultView;
+import com.matji.sandwich.widget.title.TitleContainer;
 
 public class ChangeLocationActivity extends BaseActivity implements TextView.OnEditorActionListener,
 								    RelativeLayoutThatDetectsSoftKeyboard.Listener {
@@ -29,14 +23,12 @@ public class ChangeLocationActivity extends BaseActivity implements TextView.OnE
     public static final String INTENT_KEY_LOCATION_NAME = "ChangeLocationActivity.intent_key_location_name";
     public static final int BASIC_SEARCH_LOC_LAT = 0;
     public static final int BASIC_SEARCH_LOC_LNG = 0;
-    private Context context;
     private TitleContainer titleBar;
     private EditText locationInput;
     private ImageView hideHolder;
     private SearchResultView resultView;
     private RecentChangedLocationView locationView;
     private RelativeLayoutThatDetectsSoftKeyboard mainView;
-    private RelativeLayout contentsWrapper;
 
     public int setMainViewId() {
 	return R.id.activity_change_location;
@@ -45,12 +37,9 @@ public class ChangeLocationActivity extends BaseActivity implements TextView.OnE
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_change_location);
-	context = getApplicationContext();
 
 	mainView = (RelativeLayoutThatDetectsSoftKeyboard)getMainView();
 	mainView.setListener(this);
-
-	contentsWrapper = (RelativeLayout)findViewById(R.id.activity_change_location_contents);
 
 	titleBar = (TitleContainer)findViewById(R.id.activity_change_location_title);
 	titleBar.setTitle(R.string.change_location_activity_title);

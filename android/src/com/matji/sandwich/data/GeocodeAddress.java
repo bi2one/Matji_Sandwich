@@ -17,142 +17,148 @@ public class GeocodeAddress extends MatjiData {
     private int viewportSWLat;
     private int viewportSWLng;
     private ArrayList<String> types;
-    
+
     public void setAddressComponents(ArrayList<AddressComponent> addressComponents) {
-	this.addressComponents = addressComponents;
+        this.addressComponents = addressComponents;
     }
 
     public void setFormattedAddress(String formattedAddress) {
-	this.formattedAddress = formattedAddress;
+        this.formattedAddress = formattedAddress;
     }
 
     public void setBoundNELat(double boundNELat) {
-	this.boundNELat = (int)(boundNELat * 1E6);
+        this.boundNELat = (int)(boundNELat * 1E6);
     }
 
     public void setBoundNELng(double boundNELng) {
-	this.boundNELng = (int)(boundNELng * 1E6);
+        this.boundNELng = (int)(boundNELng * 1E6);
     }
 
     public void setBoundSWLat(double boundSWLat) {
-	this.boundSWLat = (int)(boundSWLat * 1E6);
+        this.boundSWLat = (int)(boundSWLat * 1E6);
     }
 
     public void setBoundSWLng(double boundSWLng) {
-	this.boundSWLng = (int)(boundSWLng * 1E6);
+        this.boundSWLng = (int)(boundSWLng * 1E6);
     }
 
     public void setLocationLat(double locationLat) {
-	this.locationLat = (int)(locationLat * 1E6);
+        this.locationLat = (int)(locationLat * 1E6);
     }
 
     public void setLocationLng(double locationLng) {
-	this.locationLng = (int)(locationLng * 1E6);
+        this.locationLng = (int)(locationLng * 1E6);
     }
 
     public void setLocationType(String locationType) {
-	this.locationType = locationType;
+        this.locationType = locationType;
     }
 
     public void setViewportNELat(double viewportNELat) {
-	this.viewportNELat = (int)(viewportNELat * 1E6);
+        this.viewportNELat = (int)(viewportNELat * 1E6);
     }
 
     public void setViewportNELng(double viewportNELng) {
-	this.viewportNELng = (int)(viewportNELng * 1E6);
+        this.viewportNELng = (int)(viewportNELng * 1E6);
     }
 
     public void setViewportSWLat(double viewportSWLat) {
-	this.viewportSWLat = (int)(viewportSWLat * 1E6);
+        this.viewportSWLat = (int)(viewportSWLat * 1E6);
     }
 
     public void setViewportSWLng(double viewportSWLng) {
-	this.viewportSWLng = (int)(viewportSWLng * 1E6);
+        this.viewportSWLng = (int)(viewportSWLng * 1E6);
     }
 
     public void setTypes(ArrayList<String> types) {
-	this.types = types;
+        this.types = types;
     }
 
     public ArrayList<AddressComponent> getAddressComponents() {
-	return addressComponents;
+        return addressComponents;
     }
 
     public String getFormattedAddress() {
-	return formattedAddress;
+        return formattedAddress;
     }
 
     public int getBoundNELat() {
-	return boundNELat;
+        return boundNELat;
     }
 
     public int getBoundNELng() {
-	return boundNELng;
+        return boundNELng;
     }
 
     public int getBoundSWLat() {
-	return boundSWLat;
+        return boundSWLat;
     }
 
     public int getBoundSWLng() {
-	return boundSWLng;
+        return boundSWLng;
     }
-    
+
     public int getLocationLat() {
-	return locationLat;
+        return locationLat;
     }
 
     public int getLocationLng() {
-	return locationLng;
+        return locationLng;
     }
 
     public String getLocationType() {
-	return locationType;
+        return locationType;
     }
 
     public int getViewportNELat() {
-	return viewportNELat;
+        return viewportNELat;
     }
 
     public int getViewportNELng() {
-	return viewportNELng;
+        return viewportNELng;
     }
 
     public int getViewportSWLng() {
-	return viewportSWLng;
+        return viewportSWLng;
     }
 
+    public int getViewportSWLat() {
+        return viewportSWLat;
+    }
     public ArrayList<String> getTypes() {
-	return types;
+        return types;
     }
 
     public String getShortenFormattedAddress() {
-	String country = getCountryLongName().trim();
-	if (country.equals(formattedAddress.trim())) {
-	    return country;
-	} else if (country != null) {
-	    formattedAddress = formattedAddress.replace(country, "");
-	    formattedAddress = formattedAddress.replace("  ", " ");
-	    return formattedAddress.trim();
-	} else {
-	    return formattedAddress;
-	}
+        String country = getCountryLongName().trim();
+
+        if (country != null) {
+            if (country.equals(formattedAddress.trim())) {
+                return country;
+            } else {
+                formattedAddress = formattedAddress.replace(country, "");
+                formattedAddress = formattedAddress.replace("  ", " ");
+                return formattedAddress.trim();
+            }
+        } else {
+            return formattedAddress;
+        }
     }
 
     public String getCountrySplitedAddress() {
-	String country = getCountryLongName().trim();
-	return formattedAddress.replace(country, "").replace("  ", " ").trim();
+        String country = getCountryLongName().trim();
+        return formattedAddress.replace(country, "").replace("  ", " ").trim();
     }
 
     private String getCountryLongName() {
-	for (AddressComponent addressComponent : addressComponents) {
-	    ArrayList<String> types = addressComponent.getTypes();
-	    for (String type : types) {
-		if (type.equals("country")) {
-		    return addressComponent.getLongName();
-		}
-	    }
-	}
-	return null;
+        for (AddressComponent addressComponent : addressComponents) {
+            ArrayList<String> types = addressComponent.getTypes();
+            for (String type : types) {
+                if (type.equals("country")) {
+                    return addressComponent.getLongName();
+                }
+            }
+        }
+        return null;
     }
 }

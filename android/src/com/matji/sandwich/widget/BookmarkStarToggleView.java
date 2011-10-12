@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -28,13 +27,12 @@ import com.matji.sandwich.session.Session;
 
 public class BookmarkStarToggleView extends LinearLayout implements OnClickListener,
 Requestable {
-    private Context context;
     private boolean isUnchecked;
     private ImageView uncheckedView;
     private ImageView checkedView;
     private Store store;
     private ArrayList<MatjiData> bookmarkedList;
-    private BaseAdapter adapter;
+//    private BaseAdapter adapter;
     private Session session;
     private HttpRequestManager requestManager;
     private BookmarkHttpRequest bookmarkRequest;
@@ -43,7 +41,6 @@ Requestable {
 
     public BookmarkStarToggleView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
         LayoutInflater.from(context).inflate(R.layout.bookmark_star_toggle, this, true);
         setOnClickListener(this);
         isUnchecked = true;
@@ -81,14 +78,14 @@ Requestable {
     //     }
     // }
 
-    private boolean isBookmarked(ArrayList<MatjiData> bookmarkedList, Store store) {
-        for (MatjiData bookmarkedStore : bookmarkedList) {
-            if (store.equals((Store) bookmarkedStore)) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    private boolean isBookmarked(ArrayList<MatjiData> bookmarkedList, Store store) {
+//        for (MatjiData bookmarkedStore : bookmarkedList) {
+//            if (store.equals((Store) bookmarkedStore)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     private void removeBookmarkedList(Store store) {
         // Log.d("=====", "remove!!");
@@ -185,7 +182,7 @@ Requestable {
 
     public void confirmLogin() {
         if (!session.isLogin()) {
-            context.startActivity(new Intent(context, LoginActivity.class));
+            getContext().startActivity(new Intent(getContext(), LoginActivity.class));
         }
     }
 
@@ -201,6 +198,6 @@ Requestable {
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
         setClickable(true);
-        e.performExceptionHandling(context);
+        e.performExceptionHandling(getContext());
     }
 }

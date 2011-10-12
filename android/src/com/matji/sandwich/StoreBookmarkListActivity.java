@@ -22,7 +22,7 @@ public class StoreBookmarkListActivity extends BaseActivity {
         listView.addHeaderView(new HighlightHeader(this, MatjiConstants.string(R.string.highlight_bookmark_stores)));
         listView.setActivity(this);
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();

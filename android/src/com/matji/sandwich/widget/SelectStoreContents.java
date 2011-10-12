@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.R;
-import com.matji.sandwich.adapter.SimpleStoreAdapter;
 import com.matji.sandwich.adapter.SimpleStoreAdapter.StoreElement;
 import com.matji.sandwich.data.Store;
 

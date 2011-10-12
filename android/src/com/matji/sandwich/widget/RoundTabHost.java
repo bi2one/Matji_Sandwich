@@ -19,7 +19,7 @@ import com.matji.sandwich.widget.indicator.RoundRightCheckIndicator;
 import com.matji.sandwich.widget.indicator.RoundRightIndicator;
 
 public class RoundTabHost extends TabHost implements OnTabChangeListener {
-    private static final long ANIMATION_DURATION = 300;
+//    private static final long ANIMATION_DURATION = 300;
     private Context context;
     private String prevTabId;
     private View prevTabView;

@@ -1,8 +1,6 @@
 package com.matji.sandwich.widget.indicator;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.ImageView;
 
 import com.matji.sandwich.R;

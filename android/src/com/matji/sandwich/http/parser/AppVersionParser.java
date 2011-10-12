@@ -1,8 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AppVersion;
 import com.matji.sandwich.data.MatjiData;
@@ -18,8 +15,6 @@ public class AppVersionParser extends MatjiDataParser {
 		app_version.setTarget(getString(object, "target"));
 		app_version.setUrgent(getBoolean(object, "urgent"));
 		app_version.setVersion(getString(object, "version"));
-		
-		Log.d("Parser", "AppVersionParser:: called getMatjiData");
 		
 		return app_version;
 	}

@@ -1,32 +1,26 @@
 package com.matji.sandwich;
 
-import android.os.Bundle;
-import android.content.Context;
 import android.content.Intent;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.util.Log;
-import android.view.View;
-import android.view.MotionEvent;
-import android.graphics.drawable.ColorDrawable;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
+import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.util.KeyboardUtil;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.title.CompletableTitle;
-import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.util.KeyboardUtil;
-import com.matji.sandwich.util.adapter.ArrayListPrintAdapter;
-
-import java.util.ArrayList;
 
 public class SelectTagActivity extends BaseActivity implements OnItemClickListener,
 							       RelativeLayoutThatDetectsSoftKeyboard.Listener,
 							       CompletableTitle.Completable {
     public static final String DATA_TAGS = "SelectTagActivity.tags";
-    private Context context;
     private RelativeLayoutThatDetectsSoftKeyboard mainView;
     private View listViewWrapper;
     private ListView listView;
@@ -43,7 +37,6 @@ public class SelectTagActivity extends BaseActivity implements OnItemClickListen
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_select_tag);
 	
-	context = getApplicationContext();
 	tagList = MatjiConstants.stringArray(R.array.select_tags);
 
 	mainView = (RelativeLayoutThatDetectsSoftKeyboard)getMainView();

@@ -3,18 +3,19 @@ package com.matji.sandwich;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.Session.LoginListener;
+import com.matji.sandwich.session.Session.LogoutListener;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.RoundTabHost;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserProfileTabActivity extends BaseTabActivity implements Loginable {
+public class UserProfileTabActivity extends BaseTabActivity implements Loginable, LoginListener, LogoutListener {
 
     public static User user;
     private RoundTabHost tabHost;
@@ -42,6 +43,8 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     protected void init() {
         super.init();
         session = Session.getInstance(this);
+        session.addLoginListener(this);
+        session.addLogoutListener(this);
         isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
         
         setContentView(R.layout.activity_user_profile_tab);
@@ -53,8 +56,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         setUser(user);
     }
 
-    public void setUser(User user) {    // user가 저장되면 탭도 같이 바뀌어야 함.
-    	
+    public void setUser(User user) {    // user가 저장되면 탭도 같이 바뀌어야 함.    	
     	UserProfileTabActivity.user = user;
         profileIntent = new Intent(this, UserProfileActivity.class);
         profileIntent.putExtra(UserProfileActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
@@ -68,9 +70,7 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         if ((user == null || !session.isLogin()) && isMainTabActivity) {
             loginTypeInit();        // 메인 탭 내의 프로필 액티비티이고, 로그인이 필요할 경우
         } else {    
-            isMyPage = 
-                session.isLogin()
-                && session.getCurrentUser().getId() == user.getId();
+            isMyPage = session.isCurrentUser(user);
             if (isMyPage) {
                 privateTypeInit();  // 자기 자신의 프로필 액티비티일 경우
             } else {
@@ -158,5 +158,28 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
 
     public void loginFailed() {
         // show toast -> id, pw 확인해라
+    }
+
+    @Override
+    public void preLogout() { }
+
+    @Override
+    public void postLogout() {
+        // TODO Auto-generated method stub
+        if (isMainTabActivity) {
+            loginTypeInit();
+        }
+    }
+
+    @Override
+    public void preLogin() { }
+
+    @Override
+    public void postLogin() {
+        // TODO Auto-generated method stub
+        if (isMainTabActivity) {
+            setUser(session.getCurrentUser());
+            privateTypeInit();
+        }
     }    
 }

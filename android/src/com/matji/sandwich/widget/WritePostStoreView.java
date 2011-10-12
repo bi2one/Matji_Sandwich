@@ -1,24 +1,22 @@
 package com.matji.sandwich.widget;
 
 import android.app.Activity;
-import android.widget.RelativeLayout;
-import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.ImageButton;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
-
 import com.matji.sandwich.R;
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.adapter.WritePostStoreAdapter.StoreElement;
+import com.matji.sandwich.data.Store;
 
 public class WritePostStoreView extends RelativeLayout implements AdapterView.OnItemClickListener,
 								  View.OnClickListener {
-    private Context context;
     private WritePostStoreListView listView;
     private TextView selectText;
     private Store selectedStore;
@@ -29,7 +27,6 @@ public class WritePostStoreView extends RelativeLayout implements AdapterView.On
     
     public WritePostStoreView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	this.context = context;
 	LayoutInflater.from(context).inflate(R.layout.write_post_store_view, this, true);
 	
 	listView = (WritePostStoreListView)findViewById(R.id.write_post_store_view_listview);

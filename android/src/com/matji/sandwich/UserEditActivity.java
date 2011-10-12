@@ -12,7 +12,6 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.ProgressDialogAsyncTask;
 import com.matji.sandwich.http.request.AttachFileHttpRequest;
 import com.matji.sandwich.http.util.ImageLoader;
@@ -32,7 +31,6 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     private UserEditCell userEditCell;
     private Session session;
     private PhotoUtil photoUtil;
-    private HttpRequestManager manager;
     private AttachFileHttpRequest fileRequest;
 
     private HomeTitle title;
@@ -56,7 +54,6 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
         setContentView(R.layout.activity_user_edit);
         session = Session.getInstance(this);
         photoUtil = new PhotoUtil(this);
-        manager = HttpRequestManager.getInstance();
         fileRequest = new AttachFileHttpRequest(this);
 
         title = (HomeTitle) findViewById(R.id.Titlebar);

@@ -6,6 +6,10 @@ import android.widget.Toast;
 import com.matji.sandwich.util.MatjiConstants;
 
 public class MatjiException extends Exception {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6360118377426147797L;
     private String message;
     private ToastPool toastPool;
 

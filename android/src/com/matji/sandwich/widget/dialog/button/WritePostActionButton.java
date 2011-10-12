@@ -1,17 +1,14 @@
 package com.matji.sandwich.widget.dialog.button;
 
-import android.os.Parcelable;
-import android.app.Activity;
-import android.view.View;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.View;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.WritePostActivity;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.base.BaseActivity;
 
 public class WritePostActionButton extends ActionButton {
     private static final int STRING_REFERENCE = R.string.dialog_action_button_write_post;

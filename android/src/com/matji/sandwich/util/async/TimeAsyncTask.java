@@ -1,7 +1,6 @@
 package com.matji.sandwich.util.async;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class TimeAsyncTask extends AsyncTask<Object, Long, Long> implements Threadable {
     public long startTime;
@@ -50,6 +49,6 @@ public class TimeAsyncTask extends AsyncTask<Object, Long, Long> implements Thre
     }
 
     public interface TimeListener {
-	public void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime);
+	public void onElapsedTime(@SuppressWarnings("rawtypes") AsyncTask task, long startTime, long currentTime, long elapsedTime);
     }
 }

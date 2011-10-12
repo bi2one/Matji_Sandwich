@@ -19,7 +19,6 @@ import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.MatjiConstants;
 
 public class SelectStoreListView extends RequestableMListView implements View.OnClickListener {
-    private Context context;
     private StoreHttpRequest request;
     private SessionMapUtil sessionUtil;
     private ArrayList<MatjiData> adapterData;
@@ -30,7 +29,6 @@ public class SelectStoreListView extends RequestableMListView implements View.On
     public SelectStoreListView(Context context, AttributeSet attrs) {
 	super(context, attrs, new SimpleStoreAdapter(context), 10);
 	// super(context, attrs, new WritePostStoreAdapter(context), 10);
-	this.context = context;
 
 	request = new StoreHttpRequest(context);
 	sessionUtil = new SessionMapUtil(context);

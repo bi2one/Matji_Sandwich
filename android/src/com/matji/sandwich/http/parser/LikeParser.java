@@ -1,8 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.exception.MatjiException;
@@ -30,8 +27,6 @@ public class LikeParser extends MatjiDataParser {
 		like.setCreatedAt(getString(object, "created_at"));
 		like.setUpdatedAt(getString(object, "updated_at"));
 
-		Log.d("Parser", "LikeParser:: called getMatjiData");
-		
 		return like;
 	}
 }

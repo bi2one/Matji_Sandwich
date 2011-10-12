@@ -1,15 +1,11 @@
 package com.matji.sandwich.session;
 
+import java.util.Locale;
+
 import android.content.Context;
-import android.util.Log;
-import android.location.Location;
 
 import com.google.android.maps.GeoPoint;
-
-import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 import com.matji.sandwich.data.provider.PreferenceProvider;
-
-import java.util.Locale;
 
 public class SessionMapUtil {
     private static final int LAT_NEAR_BASIC_SPAN = 3000;

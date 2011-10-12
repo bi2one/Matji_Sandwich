@@ -60,7 +60,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 		
 	}
 
-	public synchronized void onElapsedTime(AsyncTask task, long startTime, long currentTime, long elapsedTime) {
+	public synchronized void onElapsedTime(@SuppressWarnings("rawtypes") AsyncTask task, long startTime, long currentTime, long elapsedTime) {
 		lastElapsedTime = elapsedTime;
 		if (elapsedTime > DIALOG_MIN_TIME) {
 			dialog.show();

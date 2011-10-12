@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.session.Session;

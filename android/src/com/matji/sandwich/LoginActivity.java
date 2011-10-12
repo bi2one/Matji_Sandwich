@@ -1,11 +1,10 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.view.View;
 import android.util.Log;
+import android.view.View;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.title.HomeTitle;
 

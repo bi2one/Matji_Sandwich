@@ -1,35 +1,28 @@
 package com.matji.sandwich.widget;
 
-import android.widget.RelativeLayout;
-import android.widget.ImageView;
+import java.io.File;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.net.Uri;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.util.PhotoUtil;
 import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.util.MatjiConstants;
 
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
-import java.io.File;
-
 public class AlbumImageView extends RelativeLayout {
     private static final int LAYOUT_REFERENCE = R.layout.album_image_view;
-    private static final int THUMBNAIL_WIDTH_REF = R.dimen.album_view_contents_width;
-    private static final int THUMBNAIL_HEIGHT_REF = R.dimen.album_view_contents_height;
-    private static final int THUMBNAIL_WIDTH = (int)MatjiConstants.dimen(THUMBNAIL_WIDTH_REF);
-    private static final int THUMBNAIL_HEIGHT = (int)MatjiConstants.dimen(THUMBNAIL_HEIGHT_REF);
+//    private static final int THUMBNAIL_WIDTH_REF = R.dimen.album_view_contents_width;
+//    private static final int THUMBNAIL_HEIGHT_REF = R.dimen.album_view_contents_height;
+//    private static final int THUMBNAIL_WIDTH = (int)MatjiConstants.dimen(THUMBNAIL_WIDTH_REF);
+//    private static final int THUMBNAIL_HEIGHT = (int)MatjiConstants.dimen(THUMBNAIL_HEIGHT_REF);
     private static final Drawable emptyDrawable = (Drawable)MatjiConstants.drawable(R.drawable.box_restaurant_plus);
     private ImageView imageView;
     private Bitmap thumbnail;
-    private Context context;
     private File file;
     
     public AlbumImageView(Context context) {
@@ -43,7 +36,6 @@ public class AlbumImageView extends RelativeLayout {
     }
 
     private void init(Context context) {
-	this.context = context;
 	LayoutInflater.from(context).inflate(LAYOUT_REFERENCE, this, true);
 	imageView = (ImageView)findViewById(R.id.album_image_view_contents);
     }

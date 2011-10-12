@@ -1,7 +1,5 @@
 package com.matji.sandwich.http;
 
-import android.util.Log;
-
 import java.util.Stack;
 
 public class TaskStackManager implements TaskElement.ProgressListener {

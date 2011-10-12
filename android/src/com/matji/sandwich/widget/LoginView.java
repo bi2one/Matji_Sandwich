@@ -1,6 +1,5 @@
 package com.matji.sandwich.widget;
 
-import java.util.ArrayList;
 import java.lang.ref.WeakReference;
 
 import android.content.Context;
@@ -18,20 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.matji.sandwich.Loginable;
-import com.matji.sandwich.Requestable;
 import com.matji.sandwich.R;
 import com.matji.sandwich.RegisterActivity;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.Me;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.http.DialogAsyncTask;
-import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionPrivateUtil;
-import com.matji.sandwich.util.KeyboardUtil;
 
 public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener {
-	private static final int REQUEST_LOGIN = 0;
     private Toast toast;
 
     private EditText idField;
@@ -82,12 +73,12 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
     }
 
     public void clearField() {
-        idField.setText("");
+        idField.setText(privateUtil.getSavedUserId());
         pwdField.setText("");
     }
 
     public void login(Loginable loginable) {
-	this.loginableRef = new WeakReference(loginable);
+	this.loginableRef = new WeakReference<Loginable>(loginable);
         if (idField.getText().toString().trim().equals("")
 	    || pwdField.getText().toString().trim().equals("")) {
             toast.show();
@@ -96,7 +87,7 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
                 privateUtil.setSavedUserId(idField.getText().toString());
             }
 
-	    session.loginWithDialog(getContext(), idField.getText().toString(), pwdField.getText().toString(), loginable);
+	    session.loginWithDialog(getContext(), idField.getText().toString(), pwdField.getText().toString(), loginableRef.get());
             // MeHttpRequest request = new MeHttpRequest(getContext());
             // request.actionAuthorize(idField.getText().toString(), pwdField.getText().toString());
 

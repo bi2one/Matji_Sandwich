@@ -1,16 +1,14 @@
 package com.matji.sandwich.http.request;
 
-import com.matji.sandwich.util.ImageUtil;
-import com.matji.sandwich.http.parser.AttachFileParser;
-import com.matji.sandwich.listener.ProgressListener;
-
 import java.io.File;
 
 import android.content.Context;
 
+import com.matji.sandwich.http.parser.AttachFileParser;
+
 public class AttachFileHttpRequest extends HttpRequest {
-    private ProgressListener listener;
-    private int progressTag;
+//    private ProgressListener listener;
+//    private int progressTag;
     
     public AttachFileHttpRequest(Context context) {
     	super(context);

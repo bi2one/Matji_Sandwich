@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
-import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -13,8 +12,8 @@ import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.exception.InternalServerMatjiException;
 import com.matji.sandwich.exception.HttpConnectMatjiException;
+import com.matji.sandwich.exception.InternalServerMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.parser.MatjiParser;
 import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
@@ -26,7 +25,6 @@ enum HttpMethod { HTTP_POST, HTTP_GET, HTTP_GET_VIA_WEB_BROWSER }
 
 public abstract class HttpRequest implements ProgressRequestCommand {
     // protected WeakReference<Context> contextRef = null;
-    // protected String serverDomain = "http://api.matji.com/v2/";
     protected String serverDomain = MatjiConstants.string(R.string.server_domain);
 
     protected Hashtable<String, Object> postHashtable;
@@ -128,8 +126,8 @@ public abstract class HttpRequest implements ProgressRequestCommand {
 	NetworkInfo netInfo_mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 	NetworkInfo netInfo_wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-	Map<String, String> getParam = (getMap == null)?null:(new Hashtable(getMap));
-	Map<String, Object> postParam = (postMap == null)?null:(new Hashtable(postMap));
+	Map<String, String> getParam = (getMap == null)?null:(new Hashtable<String, String>(getMap));
+	Map<String, Object> postParam = (postMap == null)?null:(new Hashtable<String, Object>(postMap));
 
 	if((netInfo_mobile.getState() == NetworkInfo.State.CONNECTED) ||
 	   (netInfo_wifi.getState() == NetworkInfo.State.CONNECTED)) {

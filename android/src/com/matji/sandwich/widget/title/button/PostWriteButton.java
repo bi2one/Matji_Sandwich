@@ -1,12 +1,11 @@
 package com.matji.sandwich.widget.title.button;
 
-import android.os.Parcelable;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 
-import com.matji.sandwich.R;
 import com.matji.sandwich.LoginActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.WritePostActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.session.Session;

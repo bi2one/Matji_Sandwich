@@ -8,25 +8,21 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.RelativeLayout;
-import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
-
 import com.matji.sandwich.base.BaseMapActivity;
-import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.map.MainMatjiMapView;
+import com.matji.sandwich.overlay.OverlayClickListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.widget.StoreMapNearListView;
-import com.matji.sandwich.overlay.OverlayClickListener;
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.location.GpsManager;
 
 public class MainMapActivity extends BaseMapActivity implements OverlayClickListener,
-								GpsManager.StartConfigListener {
+GpsManager.StartConfigListener {
     private static final int REQUEST_CODE_LOCATION = 1;
     private static final int REQUEST_CODE_STORE = 2;
     private static final int BASIC_SEARCH_LOC_LAT = 0;
@@ -43,7 +39,6 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     // private SessionRecentLocationUtil sessionLocationUtil;
     private Session session;
     private SessionMapUtil sessionMapUtil;
-    private HttpRequestManager requestManager;
     private GeoPoint lastNeBound;
     private GeoPoint lastSwBound;
     // private GeoPoint lastCenter;
@@ -60,19 +55,18 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         setContentView(R.layout.activity_main_map);
 
         context = getApplicationContext();
-        requestManager = HttpRequestManager.getInstance();
         // sessionLocationUtil = new SessionRecentLocationUtil(context);
-	session = Session.getInstance(this);
+        session = Session.getInstance(this);
         sessionMapUtil = new SessionMapUtil(context);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
-	addressWrapper = (RelativeLayout)findViewById(R.id.map_title_bar_address_wrapper);
+        addressWrapper = (RelativeLayout)findViewById(R.id.map_title_bar_address_wrapper);
         mapView = (MainMatjiMapView)findViewById(R.id.map_view);
         mapView.init(addressWrapper, addressView, this, getMainView());
-	mapView.setOverlayClickListener(this);
-	mapView.setStartConfigListener(this);
+        mapView.setOverlayClickListener(this);
+        mapView.setStartConfigListener(this);
         storeListView = (StoreMapNearListView)findViewById(R.id.main_map_store_list);
         storeListView.init(addressWrapper, addressView, this);
-	storeListView.setStartConfigListener(this);
+        storeListView.setStartConfigListener(this);
 
         flipButton = findViewById(R.id.map_title_bar_flip_button);
         currentViewIsMap = true;
@@ -80,44 +74,46 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
         flipMapViewImage = getResources().getDrawable(R.drawable.icon_location_map_selector);
         flipNearStoreImage = getResources().getDrawable(R.drawable.icon_location_list_selector);
         // mapView.startMapCenterThread();
-	isFirst = true;
-	isStartConfig = false;
+        isFirst = true;
+        isStartConfig = false;
     }
 
     protected void onNotFlowResume() {
         if (!currentViewIsMap) {
             storeListView.requestReload();
         }
-	
+
         // sessionMapUtil.setCenter(lastCenter);
         // mapView.setCenterNotAnimate(lastCenter);
         // mapView.requestMapCenterChanged(lastCenter);
-	if (lastNeBound != null && lastSwBound != null) {
-	    sessionMapUtil.setBound(lastNeBound, lastSwBound);
-	    lastNeBound = null;
-	    lastSwBound = null;
-	}
+        if (lastNeBound != null && lastSwBound != null) {
+            sessionMapUtil.setBound(lastNeBound, lastSwBound);
+            lastNeBound = null;
+            lastSwBound = null;
+        }
 
-	if (!isFirst) {
-	    mapView.reload();
-	}
-	
-	isFirst = false;
+        if (!isFirst) {
+            mapView.reload();
+        }
+
+        isFirst = false;
     }
 
     protected void onResume() {
-	if (isStartConfig) {
-	    onCurrentPositionClicked(null);
-	    isStartConfig = false;
-	}
-	super.onResume();
+        storeListView.dataRefresh();
+
+        if (isStartConfig) {
+            onCurrentPositionClicked(null);
+            isStartConfig = false;
+        }
+        super.onResume();
     }
 
     protected void onPause() {
-	super.onPause();
-	lastNeBound = sessionMapUtil.getNEBound();
-	lastSwBound = sessionMapUtil.getSWBound();
-	
+        super.onPause();
+        lastNeBound = sessionMapUtil.getNEBound();
+        lastSwBound = sessionMapUtil.getSWBound();
+
         // lastCenter = mapView.getMapCenter();
         // mapView.stopMapCenterThread();
 
@@ -126,7 +122,7 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     }
 
     public void onCurrentPositionClicked(View v) {
-	mapView.stopMapCenterThread();
+        mapView.stopMapCenterThread();
         if (currentViewIsMap) {
             mapView.moveToGpsCenter();
         } else {
@@ -148,14 +144,14 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
     }
 
     public void onMoveToNearPostClicked(View v) {
-	sessionMapUtil.setCenter(mapView.getMapCenter());
+        sessionMapUtil.setCenter(mapView.getMapCenter());
         Intent intent = new Intent(context, MainTabActivity.class);
         intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
-	
-	int subIndex = (session.isLogin())? 1 : 0;
+
+        int subIndex = (session.isLogin())? 1 : 0;
         intent.putExtra(MainTabActivity.IF_SUB_INDEX, subIndex);
         startActivity(intent);
-	setIsFlow(false);
+        setIsFlow(false);
     }
 
     private void showMapView() {
@@ -187,23 +183,23 @@ public class MainMapActivity extends BaseMapActivity implements OverlayClickList
                     storeListView.forceReload();
                 }
             }
-	    break;
-	case REQUEST_CODE_STORE:
-	    if (resultCode == Activity.RESULT_OK) {
-		Store store = (Store)data.getParcelableExtra(StoreMainActivity.DATA_STORE);
-		mapView.updatePopupOverlay(store);
-	    }
-	    break;
-	}
+            break;
+        case REQUEST_CODE_STORE:
+            if (resultCode == Activity.RESULT_OK) {
+                Store store = (Store)data.getParcelableExtra(StoreMainActivity.STORE);
+                mapView.updatePopupOverlay(store);
+            }
+            break;
+        }
     }
 
     public void onOverlayClick(View v, Object data) {
-	Intent intent = new Intent(this, StoreMainActivity.class);
-	intent.putExtra(StoreMainActivity.STORE, (Parcelable) data);
-	startActivityForResult(intent, REQUEST_CODE_STORE);
+        Intent intent = new Intent(this, StoreMainActivity.class);
+        intent.putExtra(StoreMainActivity.STORE, (Parcelable) data);
+        startActivityForResult(intent, REQUEST_CODE_STORE);
     }
 
     public void onStartConfig(GpsManager gpsManager) {
-	isStartConfig = true;
+        isStartConfig = true;
     }
 }

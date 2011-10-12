@@ -1,7 +1,6 @@
 package com.matji.sandwich.widget;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.TextView;
 

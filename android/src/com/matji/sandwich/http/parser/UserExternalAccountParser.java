@@ -1,8 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.UserExternalAccount;
 import com.matji.sandwich.exception.MatjiException;
@@ -20,8 +17,6 @@ public class UserExternalAccountParser extends MatjiDataParser {
 		/* Set User */
 		UserParser userParser = new UserParser();
 		externalAccount.setUser(userParser.getMatjiData(getObject(object, "user")));
-
-		Log.d("Parser", "UserExternalAccountParser:: called getMatjiData");		
 		
 		return externalAccount;
 	}

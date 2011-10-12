@@ -1,6 +1,5 @@
 package com.matji.sandwich.util.async;
 
-import android.util.Log;
 
 public class SimpleAsyncTask extends Thread implements Threadable {
     private Runnable runnable;

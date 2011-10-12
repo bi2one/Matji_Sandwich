@@ -1,11 +1,7 @@
 package com.matji.sandwich.http;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 import android.content.Context;
 import android.view.ViewGroup;
-import android.util.Log;
 
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.http.request.RequestCommand;
@@ -42,14 +38,14 @@ public class HttpRequestManager {
     private Context context;
     private TaskPoolManager taskPoolManager;
     // private TaskQueueManager queueManager;
-    private SpinnerFactory spinnerFactory;
+//    private SpinnerFactory spinnerFactory;
     private boolean isTurnOff;
 
     private HttpRequestManager() {
 	setContext(context);
 	taskPoolManager = TaskPoolManager.getInstance();
 	// queueManager = TaskQueueManager.getInstance();
-	spinnerFactory = new SpinnerFactory();
+//	spinnerFactory = new SpinnerFactory();
 	isTurnOff = false;
     }
 

@@ -108,7 +108,7 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
     
     public void refreshReceivedUserListText() {
         String receivedUserList = "";
-        if (receivedUsers.size() > 0) {
+        if (!receivedUsers.isEmpty()) {
             receivedUserList += receivedUsers.get(0).getNick();
             for (int i = 1; i < receivedUsers.size(); i++) 
                 receivedUserList += ", " + receivedUsers.get(i).getNick();

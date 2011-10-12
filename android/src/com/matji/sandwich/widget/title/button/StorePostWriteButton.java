@@ -1,11 +1,10 @@
 package com.matji.sandwich.widget.title.button;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 
-import com.matji.sandwich.R;
 import com.matji.sandwich.LoginActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.WritePostStoreMatjiDialog;
