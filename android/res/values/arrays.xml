@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string-array name="write_post_tags">
-    <item>@string/array_write_post_tags_date</item>
-    <item>@string/array_write_post_tags_together</item>
-    <item>@string/array_write_post_tags_sbs</item>
-    <item>@string/array_write_post_tags_tv</item>
-    <item>@string/array_write_post_tags_time</item>
-    
-    <item>@string/array_write_post_tags_date</item>
-    <item>@string/array_write_post_tags_together</item>
-    <item>@string/array_write_post_tags_sbs</item>
-    <item>@string/array_write_post_tags_tv</item>
-    <item>@string/array_write_post_tags_time</item>
-  </string-array>
-
   <string-array name="select_tags">
-    <item>@string/array_select_tags_date</item>
-    <item>@string/array_select_tags_together</item>
-    <item>@string/array_select_tags_sbs</item>
-    <item>@string/array_select_tags_tv</item>
-    <item>@string/array_select_tags_time</item>
-    
-    <item>@string/array_select_tags_date</item>
-    <item>@string/array_select_tags_together</item>
-    <item>@string/array_select_tags_sbs</item>
-    <item>@string/array_select_tags_tv</item>
-    <item>@string/array_select_tags_time</item>
+    <item>@string/array_write_post_tags_1</item>
+    <item>@string/array_write_post_tags_2</item>
+    <item>@string/array_write_post_tags_3</item>
+    <item>@string/array_write_post_tags_4</item>
+    <item>@string/array_write_post_tags_5</item>
+    <item>@string/array_write_post_tags_7</item>
+    <item>@string/array_write_post_tags_8</item>
+    <item>@string/array_write_post_tags_9</item>
+    <item>@string/array_write_post_tags_10</item>
+    <item>@string/array_write_post_tags_11</item>
+    <item>@string/array_write_post_tags_12</item>
+    <item>@string/array_write_post_tags_13</item>
+    <item>@string/array_write_post_tags_14</item>
+    <item>@string/array_write_post_tags_15</item>
+    <item>@string/array_write_post_tags_16</item>
+    <item>@string/array_write_post_tags_17</item>
+    <item>@string/array_write_post_tags_18</item>
+    <item>@string/array_write_post_tags_19</item>
+    <item>@string/array_write_post_tags_20</item>
   </string-array>
 
   <string-array name="country_codes">
