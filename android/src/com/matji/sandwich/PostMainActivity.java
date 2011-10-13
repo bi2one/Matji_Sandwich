@@ -218,7 +218,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
 
     public void refreshCommentInputBar() {
         CommentInputBar.Type type = 
-            (Session.getInstance(this).getCurrentUser().getId() == currentPost.getUserId()) ?
+            (Session.getInstance(this).isCurrentUser(currentPost.getUser())) ?
                     CommentInputBar.Type.PRIVATE : CommentInputBar.Type.PUBLIC; 
         likeLisetner.setData(currentPost);
         commentInputBar.setType(type);

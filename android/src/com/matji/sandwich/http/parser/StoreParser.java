@@ -2,15 +2,13 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
-import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 
@@ -77,8 +75,6 @@ public class StoreParser extends MatjiDataParser {
 			}
 		}
 		store.setFoods(foods);
-
-		Log.d("Parser", "StoreParser:: called getMatjiData");
 
 		return store;
 	}

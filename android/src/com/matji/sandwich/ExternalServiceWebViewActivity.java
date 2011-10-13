@@ -4,19 +4,18 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Me;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.parser.MeParser;
 import com.matji.sandwich.session.Session;
-
-import android.os.Bundle;
-import android.app.Activity;
-
-import android.content.Context;
-import android.util.Log;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 
  
@@ -25,7 +24,7 @@ public class ExternalServiceWebViewActivity extends Activity {//implements IUser
     private JavaScriptInterface jsInterface;
     private WebView wv;
     private Context context;
-    private boolean requestFlag = false;
+//    private boolean requestFlag = false;
     //private String service;
 	
     @Override

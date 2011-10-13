@@ -1,8 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Bookmark;
 import com.matji.sandwich.exception.MatjiException;
@@ -29,8 +26,6 @@ public class BookmarkParser extends MatjiDataParser {
 		RegionParser regionParser = new RegionParser();
 		bookmark.setRegion(regionParser.getMatjiData(getObject(object, "region")));
 
-		Log.d("Parser", "BookmarkParser:: called getMatjiData");
-		
 		return bookmark;
 	}
 }

@@ -3,10 +3,8 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;

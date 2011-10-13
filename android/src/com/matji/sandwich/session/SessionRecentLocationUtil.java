@@ -1,17 +1,15 @@
 package com.matji.sandwich.session;
 
+import java.io.NotSerializableException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 import android.content.Context;
 import android.util.Log;
 
-import com.google.android.maps.GeoPoint;
-
 import com.matji.sandwich.data.LocationSearchToken;
 import com.matji.sandwich.data.provider.PreferenceProvider;
-
-import java.util.LinkedList;
-import java.util.ArrayList;
-import java.io.NotSerializableException;
-import java.lang.ref.WeakReference;
 
 public class SessionRecentLocationUtil {
     private static final int CAPACITY = 7;
@@ -20,7 +18,7 @@ public class SessionRecentLocationUtil {
     private WeakReference<Context> contextRef;
     
     public SessionRecentLocationUtil(Context context) {
-	contextRef = new WeakReference(context);
+	contextRef = new WeakReference<Context>(context);
 	session = Session.getInstance(context);
 	preferenceProvider = session.getPreferenceProvider();
     }
@@ -54,7 +52,8 @@ public class SessionRecentLocationUtil {
     }
 
     private LinkedList<LocationSearchToken> getRecentQueue() {
-	LinkedList<LocationSearchToken> queue = (LinkedList<LocationSearchToken>)preferenceProvider.getObject(SessionIndex.RECENT_CHANGED_LOCATION);
+	@SuppressWarnings("unchecked")
+    LinkedList<LocationSearchToken> queue = (LinkedList<LocationSearchToken>) preferenceProvider.getObject(SessionIndex.RECENT_CHANGED_LOCATION);
 	
 	if (queue == null) {
 	    return new LinkedList<LocationSearchToken>();

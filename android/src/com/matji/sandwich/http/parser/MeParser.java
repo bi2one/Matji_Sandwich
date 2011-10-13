@@ -2,8 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AlarmSetting;
 import com.matji.sandwich.data.Bookmark;
@@ -71,8 +69,6 @@ public class MeParser extends MatjiDataParser {
 		matjiData = alarmSettingParser.getMatjiData(getObject(object, "user_alarm_setting"));
         if (matjiData != null)
             me.getUser().setAlarmSetting((AlarmSetting) matjiData);
-		
-		Log.d("Parser", "MeParser:: called getMatjiData");
 		
 		return me;
 	}

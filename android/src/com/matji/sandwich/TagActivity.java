@@ -1,29 +1,26 @@
 package com.matji.sandwich;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.RelativeLayout;
-import android.view.View;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
 import android.content.Context;
 import android.content.Intent;
-import android.content.DialogInterface;
-import android.util.Log;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.GeocodeAddress;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
-import com.matji.sandwich.widget.RecentChangedLocationView;
-import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.session.SessionMapUtil;
-
-import java.util.ArrayList;
+import com.matji.sandwich.widget.RecentChangedLocationView;
 
 public class TagActivity extends BaseActivity implements Requestable, TextView.OnEditorActionListener {
     public static final String INTENT_KEY_LATITUDE = "ChangeLocationActivity.intent_key_latitude";

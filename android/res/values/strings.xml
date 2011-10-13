@@ -552,6 +552,10 @@
   <string name="edit_nick_guide">닉네임을 입력하세요.</string>
   <string name="edit_password_guide">변경할 비밀번호를 입력하세요.</string>
   
+  <!-- activity_find_password.xml -->
+  <string name="find_password_email">가입 시 사용된 이메일을 입력해주세요.</string>
+  <string name="find_password_success">해당 이메일로 비밀번호 로기화 링크가 전송되었습니다.</string>
+
   <!-- activity_register.xml -->
   <string name="register_write_email">이메일을 입력해 주세요.</string>
   <string name="register_write_nickname">닉네임을 입력해 주세요. \n12자까지 가능합니다.</string>

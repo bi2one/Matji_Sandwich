@@ -1,36 +1,33 @@
 package com.matji.sandwich.widget;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
-import android.view.LayoutInflater;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.matji.sandwich.ChangeLocationActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.ChangeLocationActivity;
+import com.matji.sandwich.data.GeocodeAddress;
+import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
-import com.matji.sandwich.data.LocationSearchToken;
-import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.GeocodeAddress;
-import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.session.SessionRecentLocationUtil;
 import com.matji.sandwich.session.SessionMapUtil;
+import com.matji.sandwich.session.SessionRecentLocationUtil;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
-
-import java.util.ArrayList;
 
 public class SearchResultView extends RelativeLayout implements MultiRoundButtonView.OnItemClickListener,
 								Requestable {
     private static final int REQUEST_GEOCODING = 1;
     private static final int RESULT_COUNT = 5;
     private Activity activity;
-    private Context context;
     private MultiRoundButtonView locationButtons;
     private TextView filledTextView;
     private TextView emptyTextView;
@@ -42,7 +39,6 @@ public class SearchResultView extends RelativeLayout implements MultiRoundButton
 
     public SearchResultView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	this.context = context;
 	LayoutInflater.from(context).inflate(R.layout.search_result, this, true);
 	locationButtons = (MultiRoundButtonView) findViewById(R.id.search_result_locations);
 	locationButtons.init(this);
@@ -99,7 +95,7 @@ public class SearchResultView extends RelativeLayout implements MultiRoundButton
     }
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
-	e.performExceptionHandling(context);
+	e.performExceptionHandling(getContext());
     }
 
     public void init(Activity activity) {

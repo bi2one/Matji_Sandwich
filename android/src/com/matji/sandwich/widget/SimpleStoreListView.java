@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import com.matji.sandwich.R;
 import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.adapter.SimpleStoreAdapter;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
@@ -34,6 +35,8 @@ public class SimpleStoreListView extends RequestableMListView {
 		setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
 		setCacheColorHint(Color.TRANSPARENT);
 		setSelector(android.R.color.transparent);
+		
+		((SimpleStoreAdapter) getMBaseAdapter()).visibleBookmarkView();
 	}
 	
 	
@@ -47,6 +50,7 @@ public class SimpleStoreListView extends RequestableMListView {
 		Store store = (Store) getAdapterData().get(position);
 		Intent intent = new Intent(getActivity(), StoreMainActivity.class);
 		intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-		getActivity().startActivity(intent);
+		intent.putExtra(StoreMainActivity.POSITION, position);
+		getActivity().startActivityForResult(intent, BaseActivity.STORE_MAIN_ACTIVITY);		
 	}
 }

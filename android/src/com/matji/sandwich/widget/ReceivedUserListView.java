@@ -1,16 +1,12 @@
 package com.matji.sandwich.widget;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.SimpleUserAdapter;
-import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
@@ -20,7 +16,7 @@ public class ReceivedUserListView extends RequestableMListView {
 	private HttpRequest request;
 	
 	public ReceivedUserListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new SimpleUserAdapter(context), 10);
+		super(context, attrs, new SimpleUserAdapter(context), 15);
 		
 		init();
 	}
@@ -51,11 +47,5 @@ public class ReceivedUserListView extends RequestableMListView {
 	}
 	
 	@Override
-	public void onListItemClick(int position) {
-		User user = (User) getAdapterData().get(position);
-		Intent intent = new Intent();
-		intent.putExtra("user", (Parcelable) user);
-		getActivity().setResult(Activity.RESULT_OK, intent);
-		getActivity().finish();
-	}
+	public void onListItemClick(int position) {}
 }

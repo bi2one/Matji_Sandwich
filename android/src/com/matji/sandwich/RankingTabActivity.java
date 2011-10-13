@@ -6,13 +6,11 @@ import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.session.SessionTabHostUtil;
 import com.matji.sandwich.widget.RoundTabHost;
 
 public class RankingTabActivity extends BaseTabActivity {
     private RoundTabHost tabHost;
     private Context context;
-    private SessionTabHostUtil sessionUtil;
     private Session session;
     private int lastTab;
 
@@ -36,7 +34,6 @@ public class RankingTabActivity extends BaseTabActivity {
         setContentView(R.layout.activity_post_tab);
         tabHost = (RoundTabHost)getTabHost();
         context = getApplicationContext();
-        sessionUtil = new SessionTabHostUtil(context);
         session = Session.getInstance(context);
     }
     

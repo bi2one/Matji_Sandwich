@@ -41,7 +41,8 @@ public class Me extends MatjiData{
 		dest.writeValue(followings);
 	}
 
-	public void readFromParcel(Parcel in) {
+	@SuppressWarnings("unchecked")
+    public void readFromParcel(Parcel in) {
 		user = User.class.cast(in.readValue(User.class.getClassLoader()));
 		likes = ArrayList.class.cast(in.readValue(ArrayList.class.getClassLoader()));
 		bookmarks = ArrayList.class.cast(in.readValue(ArrayList.class.getClassLoader()));

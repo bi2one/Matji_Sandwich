@@ -2,8 +2,6 @@ package com.matji.sandwich.http.parser;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.AttachFile;
@@ -80,8 +78,6 @@ public class UserParser extends MatjiDataParser {
         }
         user.setAttchFiles(attach_files);
         user.setCountryCode(getString(object, "country_code"));
-
-        Log.d("Parser", "UserParser:: called getMatjiData");
 
         return user;
     }

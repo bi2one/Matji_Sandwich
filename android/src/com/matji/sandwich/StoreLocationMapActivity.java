@@ -1,24 +1,22 @@
 package com.matji.sandwich;
 
-import android.os.Bundle;
-import android.widget.TextView;
+import java.util.List;
+
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-import android.util.Log;
+import android.widget.TextView;
 
-import com.matji.sandwich.data.Store;
-import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.util.PhoneCallUtil;
-import com.matji.sandwich.base.BaseMapActivity;
-import com.matji.sandwich.widget.HighlightHeader;
-import com.matji.sandwich.widget.title.StoreLocationTitle;
-import com.matji.sandwich.overlay.StoreLocationOverlay;
-
+import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.MapController;
-
-import java.util.List;
+import com.matji.sandwich.base.BaseMapActivity;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.overlay.StoreLocationOverlay;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.util.PhoneCallUtil;
+import com.matji.sandwich.widget.HighlightHeader;
+import com.matji.sandwich.widget.title.StoreLocationTitle;
 
 public class StoreLocationMapActivity extends BaseMapActivity {
     public static String INTENT_STORE = "StoreLocationMapActivity.store";

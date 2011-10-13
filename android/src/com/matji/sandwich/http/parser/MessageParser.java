@@ -3,9 +3,6 @@ package com.matji.sandwich.http.parser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.Message;
 import com.matji.sandwich.exception.MatjiException;
@@ -38,8 +35,6 @@ public class MessageParser extends MatjiDataParser {
 		if (message.getMessage().startsWith(SYSTEM_MESSAGE_SPEC)) {
 		    message.setMessage(parseSystemMessage(message.getMessage()));
 		}
-
-		Log.d("Parser", "MessageParser:: called getMatjiData");
 		
 		return message;
 	}

@@ -1,23 +1,18 @@
 package com.matji.sandwich.widget;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.util.MatjiConstants;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.io.File;
 
 public class AlbumView extends LinearLayout implements View.OnClickListener {
     private static final int BACKGROUND_REFERENCE = R.color.album_view_bg;
@@ -27,7 +22,6 @@ public class AlbumView extends LinearLayout implements View.OnClickListener {
     private static final int FRAME_MARGIN_RIGHT_REFERENCE = R.dimen.album_view_frame_marginRight;
     private static final int BASIC_ROW = 2;
     private static final int BASIC_COLUMN = 4;
-    private Context context;
     private LayoutParams rowParam;
     private LayoutParams frameParam;
     private LayoutParams frameParamLast;
@@ -49,7 +43,6 @@ public class AlbumView extends LinearLayout implements View.OnClickListener {
     }
 
     private void init(Context context) {
-	this.context = context;
 	albumImages = new ArrayList<ArrayList<AlbumImageView>>();
 	thumbnailPool = new HashMap<File, Bitmap>();
 	setPadding(0, (int)MatjiConstants.dimen(PADDING_REFERENCE), 0, 0);
@@ -71,7 +64,6 @@ public class AlbumView extends LinearLayout implements View.OnClickListener {
     public void setSize(int row, int column) {
 	rowSize = row;
 	colSize = column;
-	this.context = context;
 	detachAllViewsFromParent();
 	albumImages.clear();
 	
@@ -79,7 +71,7 @@ public class AlbumView extends LinearLayout implements View.OnClickListener {
 	setBackgroundColor(MatjiConstants.color(BACKGROUND_REFERENCE));
 	
 	for (int i = 0; i < row; i++) {
-	    LinearLayout rowView = new LinearLayout(context);
+	    LinearLayout rowView = new LinearLayout(getContext());
 	    ArrayList<AlbumImageView> rowImages = new ArrayList<AlbumImageView>();
 	    rowView.setPadding((int)MatjiConstants.dimen(PADDING_REFERENCE), 0,
 			       (int)MatjiConstants.dimen(PADDING_REFERENCE),
@@ -87,7 +79,7 @@ public class AlbumView extends LinearLayout implements View.OnClickListener {
 	    rowView.setGravity(Gravity.CENTER_HORIZONTAL);
 	    addView(rowView, rowParam);
 	    for (int j = 0; j < column; j++) {
-		AlbumImageView frame = new AlbumImageView(context);
+		AlbumImageView frame = new AlbumImageView(getContext());
 		frame.setOnClickListener(this);
 		frame.setTag(new IndexTuple(i, j));
 		

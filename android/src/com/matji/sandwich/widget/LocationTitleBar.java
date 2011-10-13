@@ -1,15 +1,5 @@
 package com.matji.sandwich.widget;
 
-import android.app.Activity;
-import android.content.Context;
-import android.view.View;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.util.AttributeSet;
-
-import com.matji.sandwich.R;
 
 public class LocationTitleBar {
     // private Context context;

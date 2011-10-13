@@ -3,9 +3,8 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -18,9 +17,8 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.UserHttpRequest;
-import com.matji.sandwich.util.KeyboardUtil;
-import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.CompletableTitle;
@@ -107,8 +105,8 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     }
     
     private void createDialogs() {
-        emailIsNullDialog = new SimpleAlertDialog(this, R.string.register_email_is_null);
-        emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_email_is_incorrect);
+    	emailIsNullDialog = new SimpleAlertDialog(this, R.string.register_email_is_null);
+    	emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_email_is_incorrect);
         nicknameIsNullDialog = new SimpleAlertDialog(this, R.string.register_nickname_is_null);
         nicknameLengthErrorDialog = new SimpleAlertDialog(this, R.string.register_nickname_too_short_or_too_long);
         passwordIsNullDialog = new SimpleAlertDialog(this, R.string.register_password_is_null);

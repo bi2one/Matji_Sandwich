@@ -1,35 +1,28 @@
 package com.matji.sandwich.widget;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
-import android.widget.LinearLayout;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
-import android.view.LayoutInflater;
-// import android.view.View;
-// import android.view.View.OnClickListener;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 
-import com.matji.sandwich.R;
-// import com.matji.sandwich.LoginActivity;
-import com.matji.sandwich.Requestable;
 import com.matji.sandwich.ChangeLocationActivity;
+import com.matji.sandwich.R;
 import com.matji.sandwich.data.LocationSearchToken;
 import com.matji.sandwich.session.SessionRecentLocationUtil;
 
-import java.util.ArrayList;
-
 public class RecentChangedLocationView extends LinearLayout implements MultiRoundButtonView.OnItemClickListener {
     private Activity activity;
-    private Context context;
     private MultiRoundButtonView locationButtons;
     private SessionRecentLocationUtil sessionUtil;
     private ArrayList<LocationSearchToken> recentSearchedList;
 
     public RecentChangedLocationView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	this.context = context;
 	LayoutInflater.from(context).inflate(R.layout.recent_changed_location, this, true);
 	locationButtons = (MultiRoundButtonView) findViewById(R.id.recent_changed_location_locations);
 	locationButtons.init(this);

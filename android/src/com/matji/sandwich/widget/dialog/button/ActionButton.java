@@ -9,11 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.widget.dialog.MatjiDialog;
 
 public abstract class ActionButton extends RelativeLayout implements OnClickListener {
     private static final int LAYOUT_REFERENCE = R.layout.dialog_action_button;
-    private Context context;
     private TextView title;
     private OnClickListener listener;
 
@@ -35,7 +33,6 @@ public abstract class ActionButton extends RelativeLayout implements OnClickList
     }
 
     private void init(Context context) {
-        this.context = context;
         LayoutInflater.from(context).inflate(LAYOUT_REFERENCE, this, true);
         setOnClickListener(this);
         title = (TextView)findViewById(R.id.dialog_action_button_title);

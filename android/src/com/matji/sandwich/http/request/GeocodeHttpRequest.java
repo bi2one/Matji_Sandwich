@@ -1,22 +1,12 @@
 package com.matji.sandwich.http.request;
 
-import com.google.android.maps.GeoPoint;
+import java.util.Locale;
 
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.Locale;
 
 import com.google.android.maps.GeoPoint;
-
-import com.matji.sandwich.data.MatjiData;
-// import com.matji.sandwich.data.GeocodeMatjiData;
 import com.matji.sandwich.http.parser.GeocodeParser;
-import com.matji.sandwich.exception.GeocodeLocationInvalidMatjiException;
-import com.matji.sandwich.exception.GeocodeSearchInvalidMatjiException;
-import com.matji.sandwich.exception.MatjiException;
 
 public class GeocodeHttpRequest extends HttpRequest {
     private static final String REQUEST_URL = "http://maps.googleapis.com/maps/api/geocode/json";

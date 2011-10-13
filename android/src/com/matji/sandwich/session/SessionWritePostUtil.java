@@ -1,15 +1,13 @@
 package com.matji.sandwich.session;
 
+import java.io.File;
+import java.io.NotSerializableException;
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.util.Log;
 
 import com.matji.sandwich.data.provider.PreferenceProvider;
-
-import com.google.android.maps.GeoPoint;
-
-import java.io.File;
-import java.io.NotSerializableException;
-import java.util.ArrayList;
 
 public class SessionWritePostUtil {
     public static final int BASIC_STORE_ID = -1;
@@ -62,6 +60,7 @@ public class SessionWritePostUtil {
 	}
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<File> getPictureFiles() {
 	return (ArrayList<File>)preferenceProvider.getObject(SessionIndex.WRITE_POST_IMAGES);
     }

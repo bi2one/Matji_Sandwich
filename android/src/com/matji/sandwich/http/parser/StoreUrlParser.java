@@ -1,8 +1,5 @@
 package com.matji.sandwich.http.parser;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.StoreUrl;
 import com.matji.sandwich.exception.MatjiException;
@@ -25,8 +22,6 @@ public class StoreUrlParser extends MatjiDataParser {
 		UserParser userParser = new UserParser();
 		storeUrl.setUser(userParser.getMatjiData(getObject(object, "user")));
 
-		Log.d("Parser", "StoreUrlParser:: called getMatjiData");
-		
 		return storeUrl;
 	}
 }

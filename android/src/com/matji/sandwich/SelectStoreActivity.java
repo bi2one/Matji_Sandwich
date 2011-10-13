@@ -1,17 +1,16 @@
 package com.matji.sandwich;
 
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.widget.SelectStoreContents;
 import com.matji.sandwich.widget.title.CompletableTitle;
-import com.matji.sandwich.session.SessionMapUtil;
 
 public class SelectStoreActivity extends BaseActivity implements CompletableTitle.Completable,
 								 SelectStoreContents.OnClickListener {

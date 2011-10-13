@@ -76,7 +76,6 @@ public class ImageSliderActivity extends BaseActivity implements Requestable, On
 
         manager = HttpRequestManager.getInstance();
         imageLoader = new ImageLoader(this);
-        imageLoader.setScalable(false);
 
         findViews();
         slider.setPhotoCount(attachFiles.length);
@@ -233,14 +232,15 @@ public class ImageSliderActivity extends BaseActivity implements Requestable, On
 
 
     public void refreshRightImageView() {
-        if (slider.isExistRightImage())
+        if (slider.isExistRightImage()) {
             imageLoader.cancel(slider.getRightImageView());
-        slider.getRightImageView().setImageDrawable(null);
-        imageLoader.DisplayImage(this,
-                ImageLoader.UrlType.ATTACH_FILE,
-                ImageLoader.ImageSize.XLARGE,
-                slider.getRightImageView(),
-                attachFiles[slider.getCurrentItemPosition()+1].getId());
+            slider.getRightImageView().setImageDrawable(null);
+            imageLoader.DisplayImage(this,
+                    ImageLoader.UrlType.ATTACH_FILE,
+                    ImageLoader.ImageSize.XLARGE,
+                    slider.getRightImageView(),
+                    attachFiles[slider.getCurrentItemPosition()+1].getId());
+        }
     }
 
 

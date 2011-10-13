@@ -9,11 +9,11 @@ import com.matji.sandwich.data.Store;
 import com.matji.sandwich.widget.RoundTabHost;
 
 public class StoreMainActivity extends BaseTabActivity {
-    public final static String DATA_STORE = "StoreMainActivity.store";
+    public static final String STORE = "StoreMainActivity.store";
+    public static final String POSITION = "StoreMainActivity.position";
+    
     private RoundTabHost tabHost;
     public static Store store;
-
-    public final static String STORE = "store";
 
     public int setMainViewId() {
         return R.id.activity_store_main;
@@ -55,7 +55,8 @@ public class StoreMainActivity extends BaseTabActivity {
     
     public void finish() {
         Intent result = new Intent();
-        result.putExtra(DATA_STORE, (Parcelable)store);
+        result.putExtra(STORE, (Parcelable)store);
+        result.putExtra(POSITION, getIntent().getIntExtra(POSITION, -1));
         setResult(RESULT_OK, result);
         super.finish();
     }

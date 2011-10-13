@@ -1,33 +1,21 @@
 package com.matji.sandwich.widget;
 
-import android.app.Activity;
-import android.widget.LinearLayout;
-import android.widget.Button;
-import android.content.Context;
-import android.content.Intent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
-import android.util.AttributeSet;
-import android.util.Log;
-
-import com.matji.sandwich.R;
-import com.matji.sandwich.Requestable;
-
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.LinearLayout;
+
 public class MultiRoundButtonView extends LinearLayout implements View.OnClickListener {
-    private Context context;
     private ArrayList<IntentTitlePair> buttons;
-    private LayoutInflater inflater;
     private OnItemClickListener listener;
 
     public MultiRoundButtonView(Context context, AttributeSet attrs) {
 	super(context, attrs);
-	this.context = context;
 	setOrientation(VERTICAL);
 	buttons = new ArrayList<IntentTitlePair>();
-	inflater = LayoutInflater.from(context);
     }
 
     public void init(OnItemClickListener listener) {
@@ -51,17 +39,17 @@ public class MultiRoundButtonView extends LinearLayout implements View.OnClickLi
 	int buttonSize = buttons.size();
 	if (buttonSize == 1) {
 	    IntentTitlePair firstPair = buttons.get(0);
-	    addButtonView(new AllRoundButtonView(context), firstPair.getTitle(), firstPair.getIntent());
+	    addButtonView(new AllRoundButtonView(getContext()), firstPair.getTitle(), firstPair.getIntent());
 	} else if (buttonSize > 1) {
 	    IntentTitlePair firstPair = buttons.get(0);
 	    IntentTitlePair lastPair = buttons.get(buttonSize - 1);
 	    for (IntentTitlePair pair : buttons) {
 		if (pair == firstPair) {
-		    addButtonView(new TopRoundButtonView(context), pair.getTitle(), pair.getIntent());
+		    addButtonView(new TopRoundButtonView(getContext()), pair.getTitle(), pair.getIntent());
 		} else if (pair == lastPair) {
-		    addButtonView(new BottomRoundButtonView(context), pair.getTitle(), pair.getIntent());
+		    addButtonView(new BottomRoundButtonView(getContext()), pair.getTitle(), pair.getIntent());
 		} else {
-		    addButtonView(new MiddleRoundButtonView(context), pair.getTitle(), pair.getIntent());
+		    addButtonView(new MiddleRoundButtonView(getContext()), pair.getTitle(), pair.getIntent());
 		}
 	    }
 	} else if (buttonSize == 0) {
@@ -114,7 +102,7 @@ public class MultiRoundButtonView extends LinearLayout implements View.OnClickLi
 
 	public String getTitle() {
 	    if (title == null)
-		return context.getString(titleRef);
+		return getContext().getString(titleRef);
 	    else
 		return title;
 	}

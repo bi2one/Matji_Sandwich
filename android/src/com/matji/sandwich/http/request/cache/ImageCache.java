@@ -1,15 +1,14 @@
 package com.matji.sandwich.http.request.cache;
 
-import android.content.Context;
-import android.util.Log;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import java.util.HashMap;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 
 public class ImageCache {
     private static String EXTENSION = ".png";
