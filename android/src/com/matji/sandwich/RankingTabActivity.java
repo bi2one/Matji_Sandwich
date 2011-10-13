@@ -13,6 +13,8 @@ public class RankingTabActivity extends BaseTabActivity {
     private Context context;
     private Session session;
     private int lastTab;
+    private boolean lastLoginState;
+    private boolean isFirst;
 
     public int setMainViewId() {
         return R.id.activity_ranking_tab;
@@ -25,6 +27,7 @@ public class RankingTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isFirst = true;
     }
 
     @Override
@@ -38,11 +41,20 @@ public class RankingTabActivity extends BaseTabActivity {
     }
     
     @Override
-    protected void onNotFlowResume() {
-        // TODO Auto-generated method stub
-        super.onNotFlowResume();
+    protected void onResume() {
+        super.onResume();
+        if (!isFirst && lastLoginState != session.isLogin()) {
+            reload();
+        }
+        
+        lastLoginState = session.isLogin();
+        isFirst = false;
+    }
+    
+    public void reload() {
         tabHost.setCurrentTab(0);
         tabHost.clearAllTabs();
+        
         if (session.isLogin()) {
             tabHost.addLeftTab("tab1",
                     R.string.ranking_tab_friend,
@@ -67,6 +79,13 @@ public class RankingTabActivity extends BaseTabActivity {
             lastTab = getTabWidget().getTabCount()-1;
         }
         tabHost.setCurrentTab(lastTab);
+    }
+    
+    @Override
+    protected void onNotFlowResume() {
+        // TODO Auto-generated method stub
+        super.onNotFlowResume();
+        reload();
     }
 
     protected void onPause() {

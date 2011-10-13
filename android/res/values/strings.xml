@@ -78,7 +78,12 @@
   <string name="exception_InvalidPasswordMatjiException">
     아이디 혹은 비밀번호를 확인해주세요.
   </string>
-
+  <string name="exception_DuplicatedStoreFoodMatjiException">
+    이미 등록된 메뉴입니다.
+  </string>
+  <string name="exception_DuplicatedNicknameMatjiException">중복되는 닉네임입니다.</string>  
+  <string name="exception_DuplicatedEmailMatjiException">중복되는 이메일입니다.</string>
+  <string name="exception_NotVerifiedEmailMatjiException">이메일이 올바르지 않습니다.</string>
   <!-- server exception -->
   <string name="exception_failed_to_save_region">
     이미 북마크 한 지역입니다.
@@ -147,7 +152,8 @@
   <string name="default_string_message">쪽지</string>
   <string name="default_string_login">로그인</string>
   <string name="default_string_register">회원가입</string>
-  <string name="default_string_webreview">관련글</string>
+  <string name="default_string_webreview_user">링크</string>
+  <string name="default_string_webreview_store">관련글</string>
 
   <!-- GpsManager.java -->
   <string name="gps_request_turn_on">GPS를 수신할 수 없습니다. 설정을 켜 주셔야 합니다</string>
@@ -498,6 +504,8 @@
   <string name="settings_account_logout">로그아웃</string>
   <string name="settings_account_link_twitter">Twitter 계정 연동</string>
   <string name="settings_account_link_facebook">Facebook 계정 연동</string>
+  <string name="settings_account_unlink_twitter">Twitter 계정 연동됨</string>
+  <string name="settings_account_unlink_facebook">Facebook 계정 연동됨</string>
   <string name="settings_account_edit_profile">정보 변경</string>
   <string name="settings_account_find_friends">친구 찾기</string>
   <string name="settings_location_setting">위치 설정</string>

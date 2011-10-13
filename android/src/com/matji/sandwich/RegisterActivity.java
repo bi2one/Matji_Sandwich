@@ -49,7 +49,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     private SimpleAlertDialog passwordIsNotEqualsDialog;
     private SimpleAlertDialog plzAcceptDialog;
     private SimpleAlertDialog successDialog;
-    
+
     public int setMainViewId() {
         return R.id.activity_register;
     }
@@ -65,7 +65,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         title.setTitle(R.string.default_string_register);
         title.setCompletable(this);
 
-	session = Session.getInstance(this);
+        session = Session.getInstance(this);
     }
 
     private void findViews() {
@@ -87,26 +87,26 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
                 // move to clause activity
             }
         });
-        
+
         bRegister.setOnClickListener(new OnClickListener() {
-		
+
             @Override
             public void onClick(View arg0) {
                 complete();
             }
         });
-        
+
         successDialog.setOnClickListener(new SimpleAlertDialog.OnClickListener() {
             @Override
             public void onConfirmClick(SimpleDialog dialog) {
-		session.loginWithDialog(RegisterActivity.this, email, password, RegisterActivity.this);
+                session.loginWithDialog(RegisterActivity.this, email, password, RegisterActivity.this);
             }
         });
     }
-    
+
     private void createDialogs() {
-    	emailIsNullDialog = new SimpleAlertDialog(this, R.string.register_email_is_null);
-    	emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_email_is_incorrect);
+        emailIsNullDialog = new SimpleAlertDialog(this, R.string.register_email_is_null);
+        emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_email_is_incorrect);
         nicknameIsNullDialog = new SimpleAlertDialog(this, R.string.register_nickname_is_null);
         nicknameLengthErrorDialog = new SimpleAlertDialog(this, R.string.register_nickname_too_short_or_too_long);
         passwordIsNullDialog = new SimpleAlertDialog(this, R.string.register_password_is_null);
@@ -122,7 +122,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         nickname = etNickname.getText().toString();
         password = etPassword.getText().toString();
         passwordConfirm = etPasswordConfirm.getText().toString();
-        
+
         if (email.equals("")) {
             emailIsNullDialog.show();
         } else if (!isCorrectEmail(email)) {
@@ -156,7 +156,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         request.actionCreate(email, nick, password, password_confirmation);
         manager.request(getApplicationContext(), getMainView(), request, 0, this);
     }
-    
+
     /**
      * 전달받은 문자열이 올바른 이메일의 형태인지 확인한다.
      * 
@@ -183,10 +183,10 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     }
 
     public void loginCompleted() {
-	Intent intent = new Intent(this, MainTabActivity.class);
-	intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_CONFIG);
-	startActivity(intent);
-	finish();
+        Intent intent = new Intent(this, MainTabActivity.class);
+        intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_CONFIG);
+        startActivity(intent);
+        finish();
     }
 
     public void loginFailed() { }

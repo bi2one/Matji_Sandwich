@@ -129,13 +129,9 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
                 request = new MeHttpRequest(context);
                 request.actionAuthorize(userid, password);
                 ArrayList<MatjiData> data = null;
-                try {
-                    data = request.request();
-                    Me me = (Me)data.get(0);
-                    saveMe(me);
-                } catch (MatjiException e){
-                    e.printStackTrace();
-                }
+                data = request.request();
+                Me me = (Me)data.get(0);
+                saveMe(me);
 
                 notificationValidate();
                 return data;

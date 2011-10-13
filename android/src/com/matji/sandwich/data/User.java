@@ -26,7 +26,7 @@ public class User extends MatjiData implements Serializable {
 	private int image_count;
 	private boolean following;
 	private boolean followed;
-	private UserExternalAccount external_account;
+	private ExternalAccount external_account;
 	private UserMileage mileage;
 	private Post post;
 	private ArrayList<AttachFile> attach_files;
@@ -101,7 +101,7 @@ public class User extends MatjiData implements Serializable {
 		received_message_count = in.readInt();
 		following = in.readInt() != 0;
 		followed = in.readInt() != 0;
-		external_account = UserExternalAccount.class.cast(in.readValue(UserExternalAccount.class.getClassLoader()));
+		external_account = ExternalAccount.class.cast(in.readValue(ExternalAccount.class.getClassLoader()));
 		mileage = UserMileage.class.cast(in.readValue(UserMileage.class.getClassLoader()));
 		post = Post.class.cast(in.readValue(Post.class.getClassLoader()));
 		attach_files = new ArrayList<AttachFile>();
@@ -256,11 +256,11 @@ public class User extends MatjiData implements Serializable {
 		return followed;
 	}
 
-	public void setExternalAccount(UserExternalAccount external_account) {
+	public void setExternalAccount(ExternalAccount external_account) {
 		this.external_account = external_account;
 	}
 
-	public UserExternalAccount getExternalAccount() {
+	public ExternalAccount getExternalAccount() {
 		return external_account;
 	}
 

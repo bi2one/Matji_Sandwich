@@ -53,7 +53,7 @@ public class UserMainActivity extends BaseTabActivity {
                 R.string.default_string_picture,
                 userImageListIntent);
         tabHost.addRightTab("tab3",
-                R.string.default_string_webreview,
+                R.string.default_string_webreview_user,
                 userUrlListIntent);
         
         LinearLayout wrapper = (LinearLayout) findViewById(R.id.user_talk_wrapper);

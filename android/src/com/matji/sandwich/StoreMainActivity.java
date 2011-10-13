@@ -44,7 +44,7 @@ public class StoreMainActivity extends BaseTabActivity {
                 R.string.default_string_picture,
                 storeImageListIntent);
         tabHost.addRightTab("tab3",
-                R.string.default_string_webreview,
+                R.string.default_string_webreview_store,
                 storeUrlListIntent);
         refresh();
     }

@@ -16,7 +16,7 @@ public class PostTabActivity extends BaseTabActivity {
     private SessionTabHostUtil sessionUtil;
     private int lastTab = 0;
     private boolean lastLoginState;
-    private boolean isNotFirst;
+    private boolean isFirst;
 
     public int setMainViewId() {
         return R.id.activity_post_tab;
@@ -29,7 +29,7 @@ public class PostTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isNotFirst = false;
+        isFirst = false;
     }
 
     @Override
@@ -45,12 +45,12 @@ public class PostTabActivity extends BaseTabActivity {
 
     protected void onResume() {
         super.onResume();
-        if (isNotFirst && lastLoginState != session.isLogin()) {
+        if (isFirst && lastLoginState != session.isLogin()) {
             reload();
         }
 
         lastLoginState = session.isLogin();
-        isNotFirst = true;
+        isFirst = false;
     }
 
     protected void onAfterResume() {

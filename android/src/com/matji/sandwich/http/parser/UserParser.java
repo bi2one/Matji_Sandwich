@@ -56,10 +56,6 @@ public class UserParser extends MatjiDataParser {
         user.setFollowing(getBoolean(object, "following"));
         user.setFollowed(getBoolean(object, "followed"));
 
-        /* Set User External Account */
-        UserExternalAccountParser ueaParser = new UserExternalAccountParser();
-        user.setExternalAccount(ueaParser.getMatjiData(getObject(object, "external_account")));
-
         /* Set User Mileage */
         UserMileageParser umParser = new UserMileageParser();
         user.setMileage(umParser.getMatjiData(getObject(object, "user_mileage")));

@@ -30,6 +30,8 @@ public class HttpRequestManager {
     public static final int MESSAGE_READ_REQUEST = 71;
     public static final int ALARM_READ_REQUEST = 81;
     public static final int UPDATE_ALARM_PERMIT_REQUEST = 82;
+    public static final int TWITTER_EXTERNAL_ACCOUNT_DELETE_REQUEST = 102;
+    public static final int FACEBOOK_EXTERNAL_ACCOUNT_DELETE_REQUEST = 103;
     
     public static final int REQUEST_RELOAD = 100;
     public static final int REQUEST_NEXT = 101;

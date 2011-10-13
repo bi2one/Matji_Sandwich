@@ -42,11 +42,17 @@
 			android:layout_toLeftOf="@+id/row_simple_user_point_hint"
 			android:layout_centerVertical="true"
 			style="@style/row_simple_user_point" />
-		<TextView
+		<!-- <TextView -->
+		<!-- android:id="@id/row_simple_user_point_hint" -->
+		<!-- android:layout_alignParentRight="true" -->
+		<!-- android:layout_centerVertical="true" -->
+		<!-- android:text="@string/row_simple_user_point_hint" -->
+		<!-- style="@style/row_simple_user_point_hint" /> -->
+		<ImageView
 			android:id="@id/row_simple_user_point_hint"
 			android:layout_alignParentRight="true"
 			android:layout_centerVertical="true"
-			android:text="@string/row_simple_user_point_hint"
+			android:src="@drawable/icon_p_a"
 			style="@style/row_simple_user_point_hint" />
 	</RelativeLayout>
 </RelativeLayout>

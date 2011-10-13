@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gson.JsonObject;
 import com.matji.sandwich.data.AlarmSetting;
 import com.matji.sandwich.data.Bookmark;
+import com.matji.sandwich.data.ExternalAccount;
 import com.matji.sandwich.data.Like;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Me;
@@ -69,7 +70,13 @@ public class MeParser extends MatjiDataParser {
 		matjiData = alarmSettingParser.getMatjiData(getObject(object, "user_alarm_setting"));
         if (matjiData != null)
             me.getUser().setAlarmSetting((AlarmSetting) matjiData);
-		
+
+        /* Set User External Account */
+        ExternalAccountParser ueaParser = new ExternalAccountParser();
+        matjiData =  ueaParser.getMatjiData(getObject(object, "external_account"));
+        if (matjiData != null)
+            me.getUser().setExternalAccount((ExternalAccount) matjiData);
+        
 		return me;
 	}
 }

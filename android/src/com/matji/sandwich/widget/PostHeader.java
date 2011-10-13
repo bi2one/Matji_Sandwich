@@ -28,6 +28,7 @@ import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.listener.GotoImageSliderAction;
 import com.matji.sandwich.listener.GotoStoreMainAction;
 import com.matji.sandwich.listener.GotoUserMainAction;
+import com.matji.sandwich.listener.LikeUserListListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
@@ -103,7 +104,7 @@ public class PostHeader extends ViewContainer {
 		holder.preview = new ImageView[previewWrapperIds.length];
 
 		for (int i = 0; i < previewWrapperIds.length; i++) {
-			holder.preview[i] = new ImageView(getRootView().getContext());
+			holder.preview[i] = new ImageView(getContext());
 			holder.previewWrapper[i] = (RelativeLayout) getRootView().findViewById(previewWrapperIds[i]);
 			holder.previewWrapper[i].addView(holder.preview[i]);
 		}
@@ -127,14 +128,19 @@ public class PostHeader extends ViewContainer {
 		setViewData();
 	}
 
+	public Context getContext() {
+	    return getRootView().getContext();
+	}
+	
 	private void setOnClickListener() {
-		GotoUserMainAction action1 = new GotoUserMainAction(getRootView().getContext(), post.getUser());
-		GotoStoreMainAction action2 = new GotoStoreMainAction(getRootView().getContext(), post.getStore());
-		GotoImageSliderAction action3 = new GotoImageSliderAction(getRootView().getContext(), post.getAttachFiles());
+		GotoUserMainAction action1 = new GotoUserMainAction(getContext(), post.getUser());
+		GotoStoreMainAction action2 = new GotoStoreMainAction(getContext(), post.getStore());
+		GotoImageSliderAction action3 = new GotoImageSliderAction(getContext(), post.getAttachFiles());
 
 		holder.profile.setOnClickListener(action1);
 		holder.nickText.setOnClickListener(action1);
 		holder.storeNameText.setOnClickListener(action2);
+		holder.likeCountText.setOnClickListener(new LikeUserListListener(getContext(), post));
 		holder.menu.setOnClickListener(new PostHeaderQuickActionDialog());
 		holder.menu.setTag(holder.menu);
 

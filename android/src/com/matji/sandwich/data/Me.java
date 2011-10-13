@@ -105,6 +105,5 @@ public class Me extends MatjiData{
 
 	public String getToken() {
 		return token;
-	}
-
+	}	
 }

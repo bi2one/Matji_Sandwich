@@ -863,9 +863,12 @@
     <item name="android:textColor">@color/matji_light_gray</item>
   </style>
 
+<!--   <style name="row_simple_user_point_hint" parent="DefaultWrap"> -->
+<!--     <item name="android:textSize">14.67dp</item> -->
+<!--     <item name="android:textColor">@color/matji_red</item> -->
+<!--     <item name="android:layout_marginLeft">3dp</item> -->
+<!--   </style> -->
   <style name="row_simple_user_point_hint" parent="DefaultWrap">
-    <item name="android:textSize">14.67dp</item>
-    <item name="android:textColor">@color/matji_red</item>
     <item name="android:layout_marginLeft">3dp</item>
   </style>
 

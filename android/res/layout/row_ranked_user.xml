@@ -47,10 +47,10 @@
 		android:layout_toLeftOf="@+id/row_ranked_user_point_hint"
 		android:layout_centerVertical="true"
 		style="@style/row_simple_user_point" />
-	<TextView
+	<ImageView
 		android:id="@id/row_ranked_user_point_hint"
 		android:layout_alignParentRight="true"
 		android:layout_centerVertical="true"
-		android:text="@string/row_simple_user_point_hint"
+		android:src="@drawable/icon_p_a"
 		style="@style/row_simple_user_point_hint" />
 </RelativeLayout>

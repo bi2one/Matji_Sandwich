@@ -211,7 +211,7 @@
     <dimen name="image_slider_count_height">36.67dp</dimen>
     <dimen name="image_slider_post_height">108dp</dimen>
     <dimen name="image_slider_padding">13.33dp</dimen>
-    <dimen name="image_slider_post_margin">20dp</dimen>
+    <dimen name="image_slider_post_margin">10dp</dimen>
 
     <!-- activity_edit.xml -->    
     <dimen name="edit_content_size">13.33dp</dimen>

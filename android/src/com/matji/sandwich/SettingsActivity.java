@@ -18,48 +18,48 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.AlarmSetting;
 import com.matji.sandwich.data.AlarmSetting.AlarmSettingType;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.AlarmHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.MeHttpRequest;
+import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.title.HomeTitle;
 
-public class SettingsActivity extends BaseActivity implements OnCheckedChangeListener, Requestable {
+public class SettingsActivity extends BaseActivity implements OnCheckedChangeListener, Requestable, OnClickListener {
 
     private Session session;
 
     private HomeTitle title;
     private Drawable iconNew;
-    private View logoffStateWrapper;
-    private View logonStateWrapper;
-    private TextView loginText;
-    private TextView registerText;
-    private TextView forgetText;
-    private TextView nickText;
-    private Button logoutButton;
+    private TextView tvAccountManage;
+    private View accountManageWrapper;
+    private TextView tvNick;
+    private Button btnLogout;
     private View editProfileWrapper;
-    //    private CheckBox availableCheck;
-    //    private TextView countryText;
+    private TextView tvLinkTwitter;
+    private TextView tvLinkFacebook;
     private View alarmTitle;
     private View alarmWrapper;
-    private CheckBox commentAlarmCheck;
+    private CheckBox cbCommentAlarm;
     private ViewGroup commentAlarmSpinner;
-    private CheckBox likeAlarmCheck;
+    private CheckBox cbLikeAlarm;
     private ViewGroup likeAlarmSpinner;
-    private CheckBox followAlarmCheck;
+    private CheckBox cbFollowAlarm;
     private ViewGroup followAlarmSpinner;
-    private CheckBox messageAlarmCheck;
+    private CheckBox cbMessageAlarm;
     private ViewGroup messageAlarmSpinner;
     private View noticeWrapper;
-    private TextView noticeText;
-    private TextView guideText;
-    private TextView reportText;
-    private TextView versionText;
+    private TextView tvNotice;
+    private TextView tvGuide;
+    private TextView tvReport;
+    private TextView tvVersion;
     private Button updateButton;
-    
+
     private boolean isForceChecked = false;
 
     public HttpRequest request;
@@ -76,106 +76,129 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         super.init();
         setContentView(R.layout.activity_settings);
 
+        session = Session.getInstance(this);
         manager = HttpRequestManager.getInstance();
 
         iconNew = MatjiConstants.drawable(R.drawable.icon_new);
         iconNew.setBounds(0, 0, iconNew.getIntrinsicWidth(), iconNew.getIntrinsicHeight());
-        title = (HomeTitle) findViewById(R.id.Titlebar);
-        logoffStateWrapper = findViewById(R.id.settings_account_manages_wrapper);
-        logonStateWrapper = findViewById(R.id.settings_account_manages_wrapper_atho);
-        loginText = (TextView) findViewById(R.id.settings_account_login);
-        nickText = (TextView) findViewById(R.id.settings_account_nick);
-        logoutButton = (Button) findViewById(R.id.settings_account_logout_btn);
-        registerText = (TextView) findViewById(R.id.settings_account_register);
-        editProfileWrapper = findViewById(R.id.settings_account_edit_profile);
-        noticeWrapper = findViewById(R.id.settings_service_notice_wrapper);
-        noticeText = (TextView) findViewById(R.id.settings_service_notice);
-        versionText = (TextView) findViewById(R.id.settings_service_version_name);
-        versionText.setText("Ver " + this.getResources().getString(R.string.settings_service_version_name));
-        updateButton = (Button) findViewById(R.id.settings_service_update_btn);
-        //        availableCheck = (CheckBox) findViewById(R.id.settings_location_information_available_check);
 
-        alarmTitle = findViewById(R.id.settings_alarm_settings);
-        alarmWrapper = findViewById(R.id.settings_alarm_settings_wrapper);
-        commentAlarmCheck = (CheckBox) findViewById(R.id.settings_alarm_new_comment_alarm_check);
-        commentAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_comment_alarm_spinner);
-        likeAlarmCheck = (CheckBox) findViewById(R.id.settings_alarm_new_like_alarm_check);
-        likeAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_like_alarm_spinner);
-        followAlarmCheck = (CheckBox) findViewById(R.id.settings_alarm_new_follow_alarm_check);
-        followAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_follow_alarm_spinner);
-        messageAlarmCheck = (CheckBox) findViewById(R.id.settings_alarm_new_message_alarm_check);
-        messageAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_message_alarm_spinner);
+        findViews();
 
         title.setTitle(R.string.default_string_settings);
-        commentAlarmCheck.setOnCheckedChangeListener(this);
-        commentAlarmCheck.setTag(R.string.setting_alarm_permit, AlarmSettingType.COMMENT);
-        commentAlarmCheck.setTag(R.string.setting_alarm_spinner, commentAlarmSpinner);
-        likeAlarmCheck.setOnCheckedChangeListener(this);
-        likeAlarmCheck.setTag(R.string.setting_alarm_permit, AlarmSettingType.LIKEPOST);
-        likeAlarmCheck.setTag(R.string.setting_alarm_spinner, likeAlarmSpinner);
-        followAlarmCheck.setOnCheckedChangeListener(this);
-        followAlarmCheck.setTag(R.string.setting_alarm_permit, AlarmSettingType.FOLLOWING);
-        followAlarmCheck.setTag(R.string.setting_alarm_spinner, followAlarmSpinner);
-        messageAlarmCheck.setOnCheckedChangeListener(this);
-        messageAlarmCheck.setTag(R.string.setting_alarm_permit, AlarmSettingType.MESSAGE);
-        messageAlarmCheck.setTag(R.string.setting_alarm_spinner, messageAlarmSpinner);
+        tvVersion.setText("Ver " + this.getResources().getString(R.string.settings_service_version_name));
 
-        session = Session.getInstance(this);
-
-        editProfileWrapper.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, UserEditActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        loginText.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        logoutButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Session.getInstance(SettingsActivity.this).logout();
-                refresh();
-            }
-        });
-
-        noticeWrapper.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, NoticeActivity.class);
-                startActivity(intent);
-            }
-        });
-        
-        registerText.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(SettingsActivity.this, RegisterActivity.class);
-                startActivity(intent);                
-            }
-        });
-        
-        updateButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=맛있는지도"));
-                startActivity(intent);
-			}
-		});
+        setTags();
+        setListeners();
     }
+
+    private void findViews() {
+        title = (HomeTitle) findViewById(R.id.Titlebar);
+        tvAccountManage = (TextView) findViewById(R.id.settings_account_manages);
+        accountManageWrapper = findViewById(R.id.settings_account_manages_wrapper_atho);
+        tvNick = (TextView) findViewById(R.id.settings_account_nick);
+        btnLogout = (Button) findViewById(R.id.settings_account_logout_btn);
+        tvLinkTwitter = (TextView) findViewById(R.id.settings_account_link_twitter);
+        tvLinkFacebook = (TextView) findViewById(R.id.settings_account_link_facebook);
+        editProfileWrapper = findViewById(R.id.settings_account_edit_profile);
+        noticeWrapper = findViewById(R.id.settings_service_notice_wrapper);
+        tvNotice = (TextView) findViewById(R.id.settings_service_notice);
+        tvVersion = (TextView) findViewById(R.id.settings_service_version_name);
+        updateButton = (Button) findViewById(R.id.settings_service_update_btn);
+        alarmTitle = findViewById(R.id.settings_alarm_settings);
+        alarmWrapper = findViewById(R.id.settings_alarm_settings_wrapper);
+        cbCommentAlarm = (CheckBox) findViewById(R.id.settings_alarm_new_comment_alarm_check);
+        commentAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_comment_alarm_spinner);
+        cbLikeAlarm = (CheckBox) findViewById(R.id.settings_alarm_new_like_alarm_check);
+        likeAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_like_alarm_spinner);
+        cbFollowAlarm = (CheckBox) findViewById(R.id.settings_alarm_new_follow_alarm_check);
+        followAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_follow_alarm_spinner);
+        cbMessageAlarm = (CheckBox) findViewById(R.id.settings_alarm_new_message_alarm_check);
+        messageAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_message_alarm_spinner);
+
+    }
+
+    private void setTags() {
+        cbCommentAlarm.setTag(R.string.setting_alarm_permit, AlarmSettingType.COMMENT);
+        cbCommentAlarm.setTag(R.string.setting_alarm_spinner, commentAlarmSpinner);
+        cbLikeAlarm.setTag(R.string.setting_alarm_permit, AlarmSettingType.LIKEPOST);
+        cbLikeAlarm.setTag(R.string.setting_alarm_spinner, likeAlarmSpinner);
+        cbFollowAlarm.setTag(R.string.setting_alarm_permit, AlarmSettingType.FOLLOWING);
+        cbFollowAlarm.setTag(R.string.setting_alarm_spinner, followAlarmSpinner);
+        cbMessageAlarm.setTag(R.string.setting_alarm_permit, AlarmSettingType.MESSAGE);
+        cbMessageAlarm.setTag(R.string.setting_alarm_spinner, messageAlarmSpinner);
+    }
+
+    private void setListeners() {
+        cbCommentAlarm.setOnCheckedChangeListener(this);
+        cbLikeAlarm.setOnCheckedChangeListener(this);
+        cbFollowAlarm.setOnCheckedChangeListener(this);
+        cbMessageAlarm.setOnCheckedChangeListener(this);
+        editProfileWrapper.setOnClickListener(this);
+        btnLogout.setOnClickListener(this);
+        tvLinkTwitter.setOnClickListener(this);
+        tvLinkFacebook.setOnClickListener(this);
+        noticeWrapper.setOnClickListener(this);        
+        updateButton.setOnClickListener(this);
+    }
+
+    public void editProfileClicked() {
+        Intent intent = new Intent(SettingsActivity.this, UserEditActivity.class);
+        startActivity(intent);
+    }
+
+    public void logoutClicked() {                
+        Session.getInstance(SettingsActivity.this).logout();
+        refresh();
+    }
+
+    public void linkTwitterClicked() {
+        if (session.isLogin()) {
+            MeHttpRequest request = new MeHttpRequest(this);
+            if (session.getCurrentUser().getExternalAccount().isLinkedTwitter()) {
+                request.deleteExternalAccount(this, Service.TWITTER);
+                manager.request(
+                        this,
+                        (ViewGroup) findViewById(R.id.settings_account_link_twitter_wrapper),
+                        SpinnerType.SSMALL,
+                        request,
+                        HttpRequestManager.TWITTER_EXTERNAL_ACCOUNT_DELETE_REQUEST,
+                        this);
+            } else {
+                request.newExternalAccount(this, Service.TWITTER);
+            }
+        }
+    }
+
+    public void linkFacebookClicked() {
+        if (session.isLogin()) {
+            MeHttpRequest request = new MeHttpRequest(this);
+            if (session.getCurrentUser().getExternalAccount().isLinkedFacebook()) {
+                request.deleteExternalAccount(this, Service.FACEBOOK);
+                manager.request(
+                        this,
+                        (ViewGroup) findViewById(R.id.settings_account_link_facebook_wrapper),
+                        SpinnerType.SSMALL,
+                        request,
+                        HttpRequestManager.FACEBOOK_EXTERNAL_ACCOUNT_DELETE_REQUEST,
+                        this);
+            } else {
+                request.newExternalAccount(this, Service.FACEBOOK);
+            }
+        }
+    }
+
+    public void noticeClicked() {                
+        Intent intent = new Intent(SettingsActivity.this, NoticeActivity.class);
+        startActivity(intent);
+    }
+
+    public void updateClicked() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=맛있는지도"));
+        startActivity(intent);
+    }
+
+
+
 
     @Override
     protected void onResume() {
@@ -186,15 +209,16 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
 
     public void refresh() {
         if (session.isLogin()) {
-            logonStateWrapper.setVisibility(View.VISIBLE);
-            logoffStateWrapper.setVisibility(View.GONE);
-            nickText.setText(session.getCurrentUser().getNick());
+            tvAccountManage.setVisibility(View.VISIBLE);
+            accountManageWrapper.setVisibility(View.VISIBLE);
+            tvNick.setText(session.getCurrentUser().getNick());
             alarmTitle.setVisibility(View.VISIBLE);
             alarmWrapper.setVisibility(View.VISIBLE);
+            refreshExternalAccount();
             checkBoxRefresh();
         } else {
-            logonStateWrapper.setVisibility(View.GONE);
-            logoffStateWrapper.setVisibility(View.VISIBLE);
+            tvAccountManage.setVisibility(View.GONE);
+            accountManageWrapper.setVisibility(View.GONE);
             alarmTitle.setVisibility(View.GONE);
             alarmWrapper.setVisibility(View.GONE);
         }
@@ -202,11 +226,26 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         refreshIconNew();
     }
 
+    public void refreshExternalAccount() {
+        if (session.isLogin()) {
+            User user = session.getCurrentUser();
+            tvLinkTwitter.setText(
+                    user.getExternalAccount().isLinkedTwitter() ?
+                            R.string.settings_account_unlink_twitter
+                            : R.string.settings_account_link_twitter);
+
+            tvLinkFacebook.setText(
+                    user.getExternalAccount().isLinkedFacebook() ?
+                            R.string.settings_account_unlink_facebook
+                            : R.string.settings_account_link_facebook);
+        }
+    }
+
     public void refreshIconNew() {
         if (session.getPrivateUtil().getNewNoticeCount() > 0) {
-            noticeText.setCompoundDrawables(null, null, iconNew, null);
+            tvNotice.setCompoundDrawables(null, null, iconNew, null);
         } else {
-            noticeText.setCompoundDrawables(null, null, null, null);
+            tvNotice.setCompoundDrawables(null, null, null, null);
         }
     }
 
@@ -215,14 +254,14 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
             AlarmSetting alarmSetting = session.getCurrentUser().getAlarmSetting();
 
             isForceChecked = true;
-            commentAlarmCheck.setChecked(alarmSetting.getComment());
-            likeAlarmCheck.setChecked(alarmSetting.getLikepost());
-            followAlarmCheck.setChecked(alarmSetting.getFollowing());
-            messageAlarmCheck.setChecked(alarmSetting.getMessage());
+            cbCommentAlarm.setChecked(alarmSetting.getComment());
+            cbLikeAlarm.setChecked(alarmSetting.getLikepost());
+            cbFollowAlarm.setChecked(alarmSetting.getFollowing());
+            cbMessageAlarm.setChecked(alarmSetting.getMessage());
             isForceChecked = false;
         }
     }
-    
+
     @Override
     public void onCheckedChanged(CompoundButton cb, boolean isChecked) {
         if (!isForceChecked) {
@@ -248,6 +287,14 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
             session.getCurrentUser().setAlarmSetting((AlarmSetting) data.get(0));
             checkBoxRefresh();
             break;
+        case HttpRequestManager.TWITTER_EXTERNAL_ACCOUNT_DELETE_REQUEST:
+            session.getCurrentUser().getExternalAccount().setLinkedTwitter(false);
+            refreshExternalAccount();
+            break;
+        case HttpRequestManager.FACEBOOK_EXTERNAL_ACCOUNT_DELETE_REQUEST:
+            session.getCurrentUser().getExternalAccount().setLinkedFacebook(false);
+            refreshExternalAccount();
+            break;
         }
 
     }
@@ -255,5 +302,23 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     @Override
     public void requestExceptionCallBack(int tag, MatjiException e) {
         e.performExceptionHandling(this);        
+    }
+
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
+        if (viewId == editProfileWrapper.getId() ) {
+            editProfileClicked();
+        } else if (viewId == btnLogout.getId()) {
+            logoutClicked();
+        } else if (viewId == tvLinkTwitter.getId()) {
+            linkTwitterClicked();
+        } else if (viewId == tvLinkFacebook.getId()) {
+            linkFacebookClicked();
+        } else if (viewId == noticeWrapper.getId()) {
+            noticeClicked();
+        } else if (viewId == updateButton.getId()) {
+            updateClicked();
+        }
     }
 }

@@ -7,22 +7,22 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.matji.sandwich.LikeUserListActivity;
-import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.MatjiData;
 
 public class LikeUserListListener implements OnClickListener {
 
     private Context context;
-    private Store store;
+    private MatjiData data;
 
-    public LikeUserListListener(Context context, Store store) {
+    public LikeUserListListener(Context context, MatjiData data) {
         this.context = context;
-        this.store = store;
+        this.data = data;
     }
 
     @Override
     public void onClick(View arg0) {
         Intent intent = new Intent(context, LikeUserListActivity.class);
-        intent.putExtra(LikeUserListActivity.DATA , (Parcelable) store);
+        intent.putExtra(LikeUserListActivity.DATA , (Parcelable) data);
         context.startActivity(intent);
     }
 }

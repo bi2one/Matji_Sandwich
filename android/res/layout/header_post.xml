@@ -84,7 +84,7 @@
 		<com.matji.sandwich.widget.BoldStyleTextView
 			android:id="@+id/header_post_like_count"
 			style="@style/row_post_Count"
-			android:drawableLeft="@drawable/icon_hand01"
+			android:drawableLeft="@drawable/icon_hand02"
 			android:drawablePadding="@dimen/default_drawable_padding"
 			android:layout_below="@id/header_post_previews"
 			android:layout_toRightOf="@id/header_post_divider2" />

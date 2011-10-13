@@ -17,7 +17,8 @@ import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.MatjiConstants;
 
 public abstract class BaseActivity extends Activity implements ActivityEnterForeGroundListener, Identifiable {
-    public static final int REQUEST_EXTERNAL_SERVICE_LOGIN = 22;
+    public static final int EXTERNAL_SERVICE_LOGIN_REQUEST = 22;
+    public static final int EXTERNAL_SERVICE_LINK_REQUEST= 23;
     public static final int LOGIN_ACTIVITY = 100;
     public static final int POST_MAIN_ACTIVITY = 101;
     public static final int WRITE_POST_ACTIVITY = 102;
