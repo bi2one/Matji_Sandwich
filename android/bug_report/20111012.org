@@ -13,7 +13,7 @@
 ** TODO 맛집 전화번호 미등록시 글자를 흐리게 처리		:unimportant:
 ** TODO 맛집 정보 수정 버튼 클릭시 메뉴에서 정보수정이 폐업 신청보다 위에 오도록 할 것. :unimportant:
 ** TODO 버튼 영역 클릭 범위를 넓게 할 것			:unimportant:
-** TODO 개인설정탭 속도 문제					:unimportant:
+** TODO 개인설정탭 속도 문제 					:unimportant:
 ** TODO 맛집 > 주소 > 지도에서 내위치 표시			       :next:
 ** TODO 서비스 띄워놓기(전체 정보 업데이트 하는거. 로컬 서비스로...)   :next:
 * 새로 할 일
