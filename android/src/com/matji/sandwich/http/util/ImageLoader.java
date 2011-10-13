@@ -230,7 +230,7 @@ public class ImageLoader {
             bitmap = convertable.convert(bitmap);
             try {
                 FileOutputStream out = new FileOutputStream(f);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
                 out.close();
             } catch(IOException e) { }
         }
