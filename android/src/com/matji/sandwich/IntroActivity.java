@@ -170,4 +170,6 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 			return false;
 		}
 	}
+	
+	public void onBackPressed() {};
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.matji.sandwich.PostEditActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
+import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
@@ -49,7 +53,6 @@ public class PostHeader extends ViewContainer {
 	private Post post;
 	private Activity activity;
 	private PostDeleteListener deleteListener;
-	private PostEditListener editListener;
 	private PostElement holder;
 	private Session session;
 	private ImageLoader imageLoader;
@@ -110,14 +113,10 @@ public class PostHeader extends ViewContainer {
 		}
 	}
 
-	public void setPostDeleteListener(PostDeleteListener deleteListener) {
-		this.deleteListener = deleteListener;
-	}
-
-	public void setPostEditListener(PostEditListener editListener) {
-		this.editListener = editListener;
-	}
-
+    public void setPostDeleteListener(PostDeleteListener deleteListener) {
+        this.deleteListener = deleteListener;
+    }
+    
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
@@ -127,7 +126,7 @@ public class PostHeader extends ViewContainer {
 		setOnClickListener();
 		setViewData();
 	}
-
+	
 	public Context getContext() {
 	    return getRootView().getContext();
 	}
@@ -189,7 +188,7 @@ public class PostHeader extends ViewContainer {
 		holder.commentCountText.setText(post.getCommentCount() + "");
 		holder.likeCountText.setText(post.getLikeCount() + "");
 
-		if (session.isLogin() && post.getUser().getId() == session.getCurrentUser().getId()) {
+		if (session.isLogin() && session.isCurrentUser(post.getUser())) {
 			holder.menu.setVisibility(View.VISIBLE);
 		} else {
 			holder.menu.setVisibility(View.GONE);
@@ -269,6 +268,7 @@ public class PostHeader extends ViewContainer {
 					if (((Identifiable) context).loginRequired()) {
 						if (pos == 0) {
 							Log.d("Matji", "edit button click");
+							editPost();
 						} else if (pos == 1) {
 							Log.d("Matji", "delete button click");
 							deletePost();
@@ -278,6 +278,12 @@ public class PostHeader extends ViewContainer {
 			});
 		}
 
+		public void editPost() {
+		    Intent intent = new Intent(activity, PostEditActivity.class);
+		    intent.putExtra(PostEditActivity.POST, (Parcelable) post);
+		    activity.startActivityForResult(intent, BaseActivity.POST_EDIT_ACTIVITY);
+		}		
+		
 		/**
 		 * 이야기 삭제 버튼을 클릭했을 때,
 		 * 현재 이 이야기를 삭제할 것인지를 묻는 Alert 윈도우를 띄우고,
@@ -360,11 +366,7 @@ public class PostHeader extends ViewContainer {
 		}
 	}
 
-	public interface PostDeleteListener {
-		public void postDelete();
-	}
-
-	public interface PostEditListener {
-		public void postEdit();
-	}
+    public interface PostDeleteListener {
+        public void postDelete();
+    }
 }

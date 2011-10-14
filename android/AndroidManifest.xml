@@ -10,7 +10,6 @@
 		<uses-library android:name="com.google.android.maps" />
 		<activity
 				  android:name="IntroActivity"
-				  android:launchMode="singleTask"
 				  android:configChanges="orientation"
 				  android:screenOrientation="portrait">
 			<intent-filter>
@@ -49,8 +48,10 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="PostListActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name="PostMainActivity" 
-				  android:screenOrientation="portrait"></activity>
+        <activity android:name="PostMainActivity" 
+                  android:screenOrientation="portrait"></activity>
+        <activity android:name="PostEditActivity" 
+                  android:screenOrientation="portrait"></activity>
 		<activity android:name="PostSliderActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="PostListActivity"

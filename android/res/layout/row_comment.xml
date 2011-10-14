@@ -12,7 +12,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/default_distance_half"
 		android:orientation="vertical">
-		<LinearLayout
+		<RelativeLayout
 			style="@style/DefaultWrap">
 			<TextView
 				android:id="@+id/row_comment_nick"
@@ -23,8 +23,21 @@
 				style="@style/DefaultWrap"
 				android:layout_marginLeft="@dimen/default_distance_half"
 				android:textSize="@dimen/row_post_text_size"
-				android:textColor="@color/matji_chocolate" />
-		</LinearLayout>
+				android:textColor="@color/matji_chocolate"
+				android:layout_toRightOf="@id/row_comment_nick"
+				android:layout_toLeftOf="@+id/row_comment_delete_spinner" />
+			<RelativeLayout
+				android:id="@id/row_comment_delete_spinner"
+				style="@style/DefaultWrap"
+				android:layout_marginRight="@dimen/default_drawable_padding"
+				android:layout_toLeftOf="@+id/row_comment_delete_btn" />
+			<ImageButton
+				android:id="@id/row_comment_delete_btn"
+				style="@style/DefaultWrap"
+				android:layout_alignParentRight="true"
+				android:background="@null"
+				android:src="@drawable/icon_menu" />
+		</RelativeLayout>
 		<TextView
 			android:id="@+id/row_comment_comment"
 			style="@style/TalkContent" />

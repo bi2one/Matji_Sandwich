@@ -205,6 +205,9 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     }
     
     protected void notificationValidate() {
+        if (!session.isLogin()) {
+            preLogout();
+        }
         for (MainTabTitle title : titles) {
             title.notificationValidate();
         }

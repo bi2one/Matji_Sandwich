@@ -24,11 +24,10 @@ import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.CommentInputBar;
 import com.matji.sandwich.widget.CommentListView;
 import com.matji.sandwich.widget.PostHeader.PostDeleteListener;
-import com.matji.sandwich.widget.PostHeader.PostEditListener;
 import com.matji.sandwich.widget.title.PageableTitle;
 import com.matji.sandwich.widget.title.PageableTitle.Pageable;
 
-public class PostMainActivity extends BaseActivity implements Requestable, Pageable, PostDeleteListener, PostEditListener {
+public class PostMainActivity extends BaseActivity implements Requestable, Pageable, PostDeleteListener {
     private ArrayList<MatjiData> posts;
     private int position;
     private Post currentPost;
@@ -116,7 +115,6 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         pageableTitle.setTitle(R.string.default_string_post);               // 타이틀 설정
         commentListView.setPost(currentPost);                               // currentPost를 commentListView의 post로 저장
         commentListView.setPostDeleteListener(this);
-        commentListView.setPostEditListener(this);
         commentListView.setActivity(this);
         commentListView.requestReload();
 
@@ -215,6 +213,11 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             }
         }
     }
+    
+    public void refreshCommentListView() {
+        commentListView.setPost(currentPost);
+        commentListView.dataRefresh();
+    }
 
     public void refreshCommentInputBar() {
         CommentInputBar.Type type = 
@@ -227,7 +230,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
             commentInputBar.refreshLikehand(currentPost.getId());
         }
     }
-    
+
     @Override
     public void postDelete() {
         isDeleted = true;
@@ -235,9 +238,25 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         posts.remove(position);
         finish();
     }
-
+    
     @Override
-    public void postEdit() {
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+        case POST_EDIT_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                Post post = (Post) data.getParcelableExtra(PostEditActivity.POST);
+                commentListView.setPost(post);
+                posts.remove(position);
+                posts.add(position, post);
+            }
+            break;
+        }
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshCommentInputBar();
+        refreshCommentListView();
     }
 }

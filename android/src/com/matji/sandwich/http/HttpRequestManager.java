@@ -21,6 +21,7 @@ public class HttpRequestManager {
     public static final int UN_BOOKMARK_REQUEST = 31;
     public static final int POST_SHOW_REQUEST = 41;
     public static final int POST_DELETE_REQUEST = 43;
+    public static final int POST_MODIFY_REQUEST = 44;
     public static final int STORE_TAG_LIST_REQUEST = 52;
     public static final int STORE_FOOD_ACCURACY_REQUEST = 55;
     public static final int USER_TAG_LIST_REQUEST = 62;
@@ -30,6 +31,7 @@ public class HttpRequestManager {
     public static final int MESSAGE_READ_REQUEST = 71;
     public static final int ALARM_READ_REQUEST = 81;
     public static final int UPDATE_ALARM_PERMIT_REQUEST = 82;
+    public static final int COMMENT_DELETE_REQUEST = 93;
     public static final int TWITTER_EXTERNAL_ACCOUNT_DELETE_REQUEST = 102;
     public static final int FACEBOOK_EXTERNAL_ACCOUNT_DELETE_REQUEST = 103;
     

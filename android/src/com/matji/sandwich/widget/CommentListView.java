@@ -19,7 +19,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.widget.PostHeader.PostDeleteListener;
-import com.matji.sandwich.widget.PostHeader.PostEditListener;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 
@@ -60,11 +59,7 @@ public class CommentListView extends RequestableMListView {
     public void setPostDeleteListener(PostDeleteListener listener) {
         header.setPostDeleteListener(listener);
     }
-
-    public void setPostEditListener(PostEditListener listener) {
-        header.setPostEditListener(listener);
-    }
-
+    
     @Override
     public void setActivity(Activity activity) {
         deleteDialog = new SimpleAlertDialog(activity, R.string.default_string_check_delete);

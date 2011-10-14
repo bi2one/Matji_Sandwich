@@ -154,6 +154,7 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
 
     @Override
     public void requestExceptionCallBack(int tag, MatjiException e) {
+        title.unlock();
         e.performExceptionHandling(this);
     }
 

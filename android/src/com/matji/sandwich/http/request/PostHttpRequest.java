@@ -204,4 +204,14 @@ public class PostHttpRequest extends HttpRequest {
         getHashtable.put("limit", limit+"");
         getHashtable.put("include", "user,store,tags");
     }
+    
+    public void actionModify(int post_id, String post) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action = "modify";
+        parser = new PostParser();
+        
+        getHashtable.clear();
+        getHashtable.put("post_id", post_id+"");
+        getHashtable.put("post", post);
+    }
 }

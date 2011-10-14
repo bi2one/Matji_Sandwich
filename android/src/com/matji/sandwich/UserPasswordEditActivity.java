@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -66,8 +65,6 @@ public class UserPasswordEditActivity extends BaseActivity implements Completabl
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                Log.d("Matji", newPwdField.getText().length()+", "+ MatjiConstants.MIN_PASSWORD_LENGTH);
-                Log.d("Matji", newPwdConfirmField.getText().length()+", "+ MatjiConstants.MIN_PASSWORD_LENGTH);
                 if (newPwdField.getText().length() < MatjiConstants.MIN_PASSWORD_LENGTH
                         || newPwdConfirmField.getText().length() < MatjiConstants.MIN_PASSWORD_LENGTH) {
                     title.lockCompletableButton();
