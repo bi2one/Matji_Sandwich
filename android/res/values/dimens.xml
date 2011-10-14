@@ -158,6 +158,9 @@
 	<dimen name="row_simple_store_name_size">16dp</dimen>
 	<dimen name="row_simple_store_text_size">12dp</dimen>
 	
+    <!-- row_simple.xml -->
+    <dimen name="row_simple_txt_size">20dp</dimen>
+    
 	<!-- row_alarm -->
 	<dimen name="row_alarm_height">53.33dp</dimen>
 	<dimen name="row_alarm_content_size">14dp</dimen>
@@ -218,9 +221,6 @@
     
     <!-- cell_edit_profile.xml -->
     <dimen name="cell_edit_profile_txt_size">11.33dp</dimen>
-    
-    <!-- row_simple.xml -->
-    <dimen name="row_simple_txt_size">20dp</dimen>
     
     <!-- row_store_food.xml -->
     <dimen name="row_store_food_name_size">16dp</dimen>

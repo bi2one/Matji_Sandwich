@@ -21,7 +21,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.listener.GotoUserMainAction;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.session.Session.LoginListener;
 import com.matji.sandwich.util.TimeUtil;
 import com.matji.sandwich.widget.ProfileImageView;
 import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;

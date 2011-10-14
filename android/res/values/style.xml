@@ -732,6 +732,12 @@
     <item name="android:textColor">@color/matji_gray</item>
   </style>
   
+  <style name="row_simple_box_Item" parent="DefaultWrap">
+    <item name="android:textSize">@dimen/settings_content_size</item>
+    <item name="android:textColor">@color/matji_gray</item>
+    <item name="android:singleLine">true</item>
+  </style>
+  
   <!-- search_result.xml -->
   <style name="search_result" parent="recent_changed_location"></style>
   <style name="search_result_header" parent="recent_changed_location_header"></style>

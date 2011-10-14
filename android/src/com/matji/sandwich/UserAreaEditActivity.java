@@ -6,7 +6,6 @@ import java.util.Arrays;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ListView;
 
@@ -55,7 +54,6 @@ public class UserAreaEditActivity extends BaseListActivity implements Requestabl
                 return names[position];
             }
         };
-        adapter.alignText(Gravity.CENTER_VERTICAL);
         adapter.setData(new ArrayList<String>(Arrays.asList(names)));
         listView = getListView();
         listView.setAdapter(adapter);

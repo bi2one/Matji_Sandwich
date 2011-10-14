@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWidthFill">
+
+	<RelativeLayout
+		style="@style/DefaultWidthFill"
+		android:id="@+id/row_simple_box_wrapper"
+		android:background="@drawable/txtbox_selector"
+		android:minHeight="@dimen/settings_row_height"
+		android:padding="@dimen/settings_row_padding">
+		<TextView
+			android:id="@+id/row_simple_box_text"
+			style="@style/row_simple_box_Item"
+			android:layout_marginLeft="@dimen/default_distance"
+			android:layout_centerVertical="true" />
+	</RelativeLayout>
+	<View
+		android:id="@+id/row_simple_box_horizontal_line"
+		style="@style/HorizontalLine"
+        android:layout_marginLeft="@dimen/default_distance"
+        android:layout_marginRight="@dimen/default_distance"
+		android:layout_alignParentBottom="true" />
+</RelativeLayout>

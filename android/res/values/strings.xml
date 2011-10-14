@@ -413,6 +413,7 @@
   <string name="subtitle_domestic_post">전국 맛집 이야기</string>
   <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
   <string name="subtitle_user_post">%1$d개의 이야기</string>
+  <string name="subtitle_user_url">%1$d개의 링크</string>
   <string name="subtitle_tag_post">\'%1$s\'태그 이야기</string>
   
   <!-- ImageListView Subtitle -->
@@ -625,7 +626,7 @@
   <string name="service_guide_sns_function">SNS 관련 기능</string>
   
   <!-- ServiceGuideActivity.java -->
-  <string name="service_guide_domain_url">http://www.yummystory.com/manuals</string>
+  <string name="service_guide_domain_url">http://yummystory.com/manuals</string>
   <string name="service_guide_find_store_url">/find_store</string>
   <string name="service_guide_write_story_url">/write_story</string>
   <string name="service_guide_manage_store_url">/manage_store</string>

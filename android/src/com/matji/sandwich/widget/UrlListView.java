@@ -3,7 +3,6 @@ package com.matji.sandwich.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 
@@ -29,9 +28,8 @@ public class UrlListView extends RequestableMListView {
 	protected void init() {
         request = new UrlHttpRequest(getContext());
         setPage(1);
-        setBackgroundColor(MatjiConstants.color(R.color.matji_white));
-        setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
-        setDividerHeight(MatjiConstants.dimenInt(R.dimen.default_divider_size));
+        setBackgroundResource(R.drawable.bg_01);
+        setDivider(null);
         setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
         setCacheColorHint(Color.TRANSPARENT);
         setSelector(android.R.color.transparent);

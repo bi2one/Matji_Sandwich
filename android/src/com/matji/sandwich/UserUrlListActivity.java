@@ -11,6 +11,8 @@ import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.UrlHttpRequest.UrlType;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.UrlListView;
 import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.title.UserTitle;
@@ -47,8 +49,14 @@ public class UserUrlListActivity extends BaseActivity implements Refreshable {
         listView.setUrlType(UrlType.USER);
         listView.setId(UserMainActivity.user.getId());
         listView.addHeaderView(userCell);
+        listView.addHeaderView(
+                new SubtitleHeader(
+                        this, 
+                        String.format(
+                                MatjiConstants.string(R.string.subtitle_user_url),
+                                UserMainActivity.user.getUrlCount())));
         listView.setActivity(this);
-        listView.requestReload();
+        listView.requestReload();    
     }
 
     @Override

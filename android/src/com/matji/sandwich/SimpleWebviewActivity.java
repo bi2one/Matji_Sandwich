@@ -23,7 +23,7 @@ public class SimpleWebviewActivity extends BaseActivity {
         HomeTitle title = (HomeTitle) findViewById(R.id.Titlebar);
         title.setTitle(getIntent().getStringExtra(TITLE));
         WebView wb = (WebView) findViewById(R.id.simple_webview);
-//        wb.setWebViewClient(new SimpleWebviewClient());
+        wb.setWebViewClient(new SimpleWebviewClient());
         wb.loadUrl(getIntent().getStringExtra(URL));
         wb.getSettings().setJavaScriptEnabled(true);
     }
