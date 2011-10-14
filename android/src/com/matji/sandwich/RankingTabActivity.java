@@ -27,13 +27,11 @@ public class RankingTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isFirst = true;
+        init();
     }
 
-    @Override
-    protected void init() {
-        // TODO Auto-generated method stub
-        super.init();
+    private void init() {
+        isFirst = true;
         setContentView(R.layout.activity_post_tab);
         tabHost = (RoundTabHost)getTabHost();
         context = getApplicationContext();

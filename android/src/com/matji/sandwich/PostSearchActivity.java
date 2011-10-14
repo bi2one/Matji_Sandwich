@@ -16,11 +16,10 @@ public class PostSearchActivity extends BaseActivity implements Searchable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		init();
 	}
 	
-	@Override
-	protected void init() {
-		super.init();
+	private void init() {
 		setContentView(R.layout.activity_post_search);
 
 		searchView = (PostSearchListView) findViewById(R.id.PostSearchListView);

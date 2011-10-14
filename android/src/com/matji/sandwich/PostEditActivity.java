@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -42,9 +43,12 @@ public class PostEditActivity extends BaseActivity implements Completable, Reque
     }
 
     @Override
-    protected void init() {
-        // TODO Auto-generated method stub
-        super.init();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }    
+    
+    private void init() {
         setContentView(R.layout.activity_post_edit);
 
         manager = HttpRequestManager.getInstance();

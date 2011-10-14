@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ListView;
@@ -35,9 +36,12 @@ public class UserAreaEditActivity extends BaseListActivity implements Requestabl
     private String[] codes = MatjiConstants.stringArray(R.array.country_codes);
 
     @Override
-    protected void init() {
-        super.init();
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init() {
         setContentView(R.layout.activity_user_area_edit);
         
         manager = HttpRequestManager.getInstance();

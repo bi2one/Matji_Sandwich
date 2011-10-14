@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,6 +48,13 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -62,10 +70,7 @@ public class WriteMessageActivity extends BaseActivity implements Completable, R
         }, 100);
     }
 
-    @Override
-    protected void init() {
-        // TODO Auto-generated method stub
-        super.init();
+    private void init() {
         setContentView(R.layout.activity_write_message);
 
         manager = HttpRequestManager.getInstance();

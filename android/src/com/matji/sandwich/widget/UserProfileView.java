@@ -136,7 +136,7 @@ public class UserProfileView extends RelativeLayout implements Refreshable {
     public void setUser(User user) {
         this.user = UserTitle.title_user;
     }
-
+    
     @Override
     public void refresh() {
         String intro = user.getIntro();

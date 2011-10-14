@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -30,8 +31,12 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
         return R.id.activity_user_nick_edit;
     }
 
-    @Override
-    protected void init() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init() {
         setContentView(R.layout.activity_user_nick_edit);
 
         session = Session.getInstance(this);

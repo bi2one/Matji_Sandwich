@@ -1,0 +1,90 @@
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_service_guide"
+	android:background="@drawable/bg_01"
+	style="@style/DefaultFill">
+	<com.matji.sandwich.widget.title.HomeTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWidthFill" />
+	<ScrollView
+		style="@style/DefaultFill"
+		android:layout_below="@id/Titlebar">
+		<!-- Service Guide Wrapper -->
+		<RelativeLayout
+			android:id="@+id/service_guide_wrapper"
+			style="@style/settings_Wrapper"
+			android:padding="@dimen/default_distance">
+			<!-- Service Guide -->
+			<TextView
+				android:id="@+id/service_guide_find_store"
+				style="@style/settings_Row"
+				android:gravity="center_vertical"
+				android:background="@drawable/txtbox_t_selector"
+				android:text="@string/service_guide_find_store"
+				android:textSize="@dimen/settings_content_size"
+				android:textColor="@color/matji_gray"
+				android:drawableRight="@drawable/icon_flow"
+				android:drawablePadding="@dimen/default_drawable_padding_long" />
+			<!-- Report -->
+			<TextView
+				android:id="@+id/service_guide_manage_store"
+				style="@style/settings_Row"
+				android:gravity="center_vertical"
+				android:background="@drawable/txtbox_c_selector"
+				android:text="@string/service_guide_manage_store"
+				android:textSize="@dimen/settings_content_size"
+				android:textColor="@color/matji_gray"
+				android:drawableRight="@drawable/icon_flow"
+				android:drawablePadding="@dimen/default_drawable_padding_long"
+				android:layout_below="@id/service_guide_find_store" />
+			<!-- Version -->
+			<TextView
+				android:id="@+id/service_guide_write_story"
+				style="@style/settings_Row"
+				android:gravity="center_vertical"
+				android:background="@drawable/txtbox_c_selector"
+				android:text="@string/service_guide_write_story"
+				android:textSize="@dimen/settings_content_size"
+				android:textColor="@color/matji_gray"
+				android:drawableRight="@drawable/icon_flow"
+				android:drawablePadding="@dimen/default_drawable_padding_long"
+				android:layout_below="@id/service_guide_manage_store" />
+			<!-- Version -->
+			<TextView
+				android:id="@+id/service_guide_menu_n_tag"
+				style="@style/settings_Row"
+				android:gravity="center_vertical"
+				android:background="@drawable/txtbox_c_selector"
+				android:text="@string/service_guide_menu_n_tag"
+				android:textSize="@dimen/settings_content_size"
+				android:textColor="@color/matji_gray"
+				android:drawableRight="@drawable/icon_flow"
+				android:drawablePadding="@dimen/default_drawable_padding_long"
+				android:layout_below="@id/service_guide_write_story" />
+			<!-- Version -->
+			<TextView
+				android:id="@+id/service_guide_sns_function"
+				style="@style/settings_Row"
+				android:gravity="center_vertical"
+				android:background="@drawable/txtbox_u_selector"
+				android:text="@string/service_guide_sns_function"
+				android:textSize="@dimen/settings_content_size"
+				android:textColor="@color/matji_gray"
+				android:drawableRight="@drawable/icon_flow"
+				android:drawablePadding="@dimen/default_drawable_padding_long"
+				android:layout_below="@id/service_guide_menu_n_tag" />
+			<View
+				style="@style/HorizontalLine"
+				android:layout_below="@id/service_guide_find_store" />
+			<View
+				style="@style/HorizontalLine"
+				android:layout_below="@id/service_guide_manage_store" />
+			<View
+				style="@style/HorizontalLine"
+				android:layout_below="@id/service_guide_write_story" />
+			<View
+				style="@style/HorizontalLine"
+				android:layout_below="@id/service_guide_menu_n_tag" />
+		</RelativeLayout>
+	</ScrollView>
+</RelativeLayout>

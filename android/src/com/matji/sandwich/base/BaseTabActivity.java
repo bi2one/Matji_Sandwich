@@ -32,7 +32,7 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
         return mainViewGroup;
     }
 
-    protected void init() {
+    private void init() {
         setIsFlow(false);
     }
 

@@ -22,11 +22,10 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		init();
 	}
 	
-	@Override
-	protected void init() {
-		super.init();
+	private void init() {
 		setContentView(R.layout.activity_store_detail_tab);
 		
 		store = (Store) getIntent().getParcelableExtra(STORE);

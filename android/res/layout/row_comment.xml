@@ -29,14 +29,16 @@
 			<RelativeLayout
 				android:id="@id/row_comment_delete_spinner"
 				style="@style/DefaultWrap"
-				android:layout_marginRight="@dimen/default_drawable_padding"
+				android:layout_marginRight="@dimen/default_distance_half"
 				android:layout_toLeftOf="@+id/row_comment_delete_btn" />
 			<ImageButton
 				android:id="@id/row_comment_delete_btn"
 				style="@style/DefaultWrap"
 				android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/row_comment_created_at"
+                android:layout_alignBottom="@id/row_comment_created_at"
 				android:background="@null"
-				android:src="@drawable/icon_menu" />
+				android:src="@drawable/icon_reply_del" />
 		</RelativeLayout>
 		<TextView
 			android:id="@+id/row_comment_comment"

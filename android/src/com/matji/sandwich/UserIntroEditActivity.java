@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -29,7 +30,13 @@ public class UserIntroEditActivity extends BaseActivity implements Completable, 
     }
 
     @Override
-    protected void init() {
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        init();
+    }    
+    
+    private void init() {
         setContentView(R.layout.activity_user_intro_edit);
 
         session = Session.getInstance(this);

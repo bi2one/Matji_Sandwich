@@ -2,6 +2,7 @@ package com.matji.sandwich;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -33,9 +34,15 @@ public class StoreFoodAddActivity extends BaseActivity implements Completable, R
     public int setMainViewId() {
         return R.id.activity_store_food_add;
     }
-
+    
     @Override
-    protected void init() {
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        init();
+    }
+
+    private void init() {
         setContentView(R.layout.activity_store_food_add);
 
         store = (Store) getIntent().getParcelableExtra(STORE);

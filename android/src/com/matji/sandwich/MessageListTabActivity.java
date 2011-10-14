@@ -22,12 +22,10 @@ public class MessageListTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
-    @Override
-    protected void init() {
-        // TODO Auto-generated method stub
-        super.init();
+    private void init() {
         setContentView(R.layout.activity_message_list);
         
         title = (MessageTitle) findViewById(R.id.Titlebar);

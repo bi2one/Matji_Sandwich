@@ -16,11 +16,10 @@ public class UserSearchActivity extends BaseActivity implements Searchable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		init();
 	}
 	
-	@Override
-	protected void init() {
-		super.init();
+	private void init() {
 		setContentView(R.layout.activity_user_search);
 		
 		searchView = (UserSearchListView) findViewById(R.id.UserSearchListView);

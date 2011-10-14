@@ -64,6 +64,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
     @Override
@@ -76,8 +77,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         super.finish();
     }
 
-    protected void init() {
-        super.init();
+    private void init() {
         setContentView(R.layout.activity_post);
 
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
@@ -245,7 +245,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         case POST_EDIT_ACTIVITY:
             if (resultCode == RESULT_OK) {
                 Post post = (Post) data.getParcelableExtra(PostEditActivity.POST);
-                commentListView.setPost(post);
+                currentPost = post;
                 posts.remove(position);
                 posts.add(position, post);
             }

@@ -1,0 +1,12 @@
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_simple_webview"
+	style="@style/DefaultFill">
+	<com.matji.sandwich.widget.title.HomeTitle
+		android:id="@id/Titlebar"
+		style="@style/DefaultWidthFill" />
+	<WebView
+		android:id="@+id/simple_webview"
+		style="@style/DefaultFill"
+		android:layout_below="@id/Titlebar" />
+</RelativeLayout>

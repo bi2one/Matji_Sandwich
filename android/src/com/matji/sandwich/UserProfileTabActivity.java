@@ -26,10 +26,10 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     private LoginView loginView;
     private Intent profileIntent;
     private Intent tagIntent;
-    
+
     public static final String USER = "UserProfileTabActivity.user";
     public static final String IS_MAIN_TAB_ACTIVITY = "UserProfileTabActivity.is_main_tab_activity";
-    
+
     public int setMainViewId() {
         return R.id.activity_user_profile_tab;
     }
@@ -37,34 +37,33 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
-    @Override
-    protected void init() {
-        super.init();
+    private void init() {
         session = Session.getInstance(this);
         session.addLoginListener(this);
         session.addLogoutListener(this);
         isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
-        
+
         setContentView(R.layout.activity_user_profile_tab);
 
         tabHost = (RoundTabHost) getTabHost();
         loginView = (LoginView) findViewById(R.id.login_view);
-        
+
         user = (isMainTabActivity) ? session.getCurrentUser() : UserTitle.title_user;
         setUser(user);
     }
 
     public void setUser(User user) {    // user가 저장되면 탭도 같이 바뀌어야 함.    	
-    	UserProfileTabActivity.user = user;
+        UserProfileTabActivity.user = user;
         profileIntent = new Intent(this, UserProfileActivity.class);
         profileIntent.putExtra(UserProfileActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
 
         tagIntent = new Intent(this, UserTagListActivity.class);
         tagIntent.putExtra(UserTagListActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
     }
-    
+
     private void syncTab() {        // 로그인 화면을 위해 어쩔수 없이 이렇게... ㅠㅠ
         KeyboardUtil.hideKeyboard(this);
         if ((user == null || !session.isLogin()) && isMainTabActivity) {
@@ -78,15 +77,15 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
             }
         }
     }
-    
-    
+
+
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
         syncTab();
     }
-    
+
     @Override
     protected void onNotFlowResume() {
         // TODO Auto-generated method stub
@@ -95,13 +94,13 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     }
 
     protected void loginTypeInit() {
-    	tabHost.setCurrentTab(0);
+        tabHost.setCurrentTab(0);
         tabHost.clearAllTabs();
         getTabWidget().setVisibility(View.GONE);
         loginView.setVisibility(View.VISIBLE);
     }
 
-    
+
     protected void publicTypeInit() {
         getTabWidget().setVisibility(View.VISIBLE);
         loginView.setVisibility(View.GONE);
@@ -127,14 +126,14 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
                 "tab1",
                 R.string.private_tab_my_info,
                 profileIntent);
-         tabHost.addRightTab(
-                 "tab2",
-                 R.string.private_tab_my_tag,
-                 tagIntent);
+        tabHost.addRightTab(
+                "tab2",
+                R.string.private_tab_my_tag,
+                tagIntent);
     }
 
     public void refresh() {
-    	
+
     }
 
     @Override

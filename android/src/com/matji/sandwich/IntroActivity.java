@@ -37,11 +37,10 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		init();
 	}
 
-	@Override
-	protected void init() {
-		super.init();
+	private void init() {
 		MatjiConstants.setContext(getApplicationContext());
 		setContentView(R.layout.activity_intro);
 		updateDialog = new SimpleAlertDialog(IntroActivity.this, "최신 버전으로 업데이트 하세요.");

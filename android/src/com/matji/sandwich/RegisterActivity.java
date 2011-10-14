@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,9 +55,13 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
         return R.id.activity_register;
     }
 
-    protected void init() {
-        super.init();
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init() {
         setContentView(R.layout.activity_register);
         findViews();
         createDialogs();

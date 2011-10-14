@@ -46,7 +46,7 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
         return mainViewGroup;
     }
 
-    protected void init() {
+    private void init() {
         setIsFlow(false);
     }
 

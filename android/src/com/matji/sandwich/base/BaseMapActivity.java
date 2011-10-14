@@ -27,7 +27,7 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 	return mainViewGroup;
     }
 
-    protected void init() {
+    private void init() {
 	setIsFlow(false);
     }
 

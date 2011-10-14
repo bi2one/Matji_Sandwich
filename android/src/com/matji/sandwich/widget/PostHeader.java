@@ -184,6 +184,7 @@ public class PostHeader extends ViewContainer {
 		holder.profile.setUserId(user.getId());
 		holder.nickText.setText(user.getNick()+" ");
 		holder.postText.setText(post.getPost().trim());
+		Log.d("Matji", post.getPost().trim());
 		holder.dateAgoText.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
 		holder.commentCountText.setText(post.getCommentCount() + "");
 		holder.likeCountText.setText(post.getLikeCount() + "");

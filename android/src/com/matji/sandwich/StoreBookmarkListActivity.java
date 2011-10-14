@@ -1,5 +1,7 @@
 package com.matji.sandwich;
 
+import android.os.Bundle;
+
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.HighlightHeader;
@@ -11,8 +13,12 @@ public class StoreBookmarkListActivity extends BaseActivity {
     private StoreBookmarkListView listView;
     
     @Override
-    protected void init() {
-        super.init();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init() {
         setContentView(R.layout.activity_store_bookmark_list);
         
         title = (HomeTitle) findViewById(R.id.Titlebar);

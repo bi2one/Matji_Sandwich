@@ -28,6 +28,7 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
     protected void init() {

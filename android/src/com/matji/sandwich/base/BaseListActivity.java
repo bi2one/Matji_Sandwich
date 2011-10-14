@@ -31,7 +31,7 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
         this.isFlow = isFlow;
     }
 
-    protected void init() {
+    private void init() {
         setIsFlow(false);
     }
 

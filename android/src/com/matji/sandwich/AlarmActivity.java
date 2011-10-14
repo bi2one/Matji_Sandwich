@@ -1,6 +1,7 @@
 package com.matji.sandwich;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.AlarmListView;
@@ -15,9 +16,12 @@ public class AlarmActivity extends BaseActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init() {
         setContentView(R.layout.activity_alarm);
 
         HomeTitle title = (HomeTitle) findViewById(R.id.Titlebar);

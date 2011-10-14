@@ -29,13 +29,11 @@ public class PostTabActivity extends BaseTabActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isFirst = false;
+        init();
     }
-
-    @Override
-    protected void init() {
-        // TODO Auto-generated method stub
-        super.init();
+    
+    private void init() {
+        isFirst = false;
         setContentView(R.layout.activity_post_tab);
         tabHost = (RoundTabHost)getTabHost();
         context = getApplicationContext();

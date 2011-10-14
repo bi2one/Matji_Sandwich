@@ -36,11 +36,10 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
-    @Override
-    protected void init() {
-        super.init();
+    private void init() {
         setContentView(R.layout.activity_store_default_info);
         title = (StoreTitle) findViewById(R.id.Titlebar);
         storeCell = (StoreCell) findViewById(R.id.StoreCell);

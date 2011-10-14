@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -48,9 +49,12 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
     }
 
     @Override
-    protected void init() {
-        super.init();
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init() {
         setContentView(R.layout.activity_user_edit);
         session = Session.getInstance(this);
         photoUtil = new PhotoUtil(this);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -71,9 +72,12 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     }
 
     @Override
-    protected void init() {
-        // TODO 일단 연결이 어느정도 되면 코드 정리.
-        super.init();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init() {
         setContentView(R.layout.activity_settings);
 
         session = Session.getInstance(this);
@@ -102,6 +106,8 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         editProfileWrapper = findViewById(R.id.settings_account_edit_profile);
         noticeWrapper = findViewById(R.id.settings_service_notice_wrapper);
         tvNotice = (TextView) findViewById(R.id.settings_service_notice);
+        tvGuide = (TextView) findViewById(R.id.settings_service_guide);
+        tvReport = (TextView) findViewById(R.id.settings_service_report);
         tvVersion = (TextView) findViewById(R.id.settings_service_version_name);
         updateButton = (Button) findViewById(R.id.settings_service_update_btn);
         alarmTitle = findViewById(R.id.settings_alarm_settings);
@@ -114,7 +120,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         followAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_follow_alarm_spinner);
         cbMessageAlarm = (CheckBox) findViewById(R.id.settings_alarm_new_message_alarm_check);
         messageAlarmSpinner = (ViewGroup) findViewById(R.id.settings_alarm_new_message_alarm_spinner);
-
     }
 
     private void setTags() {
@@ -138,16 +143,18 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         tvLinkTwitter.setOnClickListener(this);
         tvLinkFacebook.setOnClickListener(this);
         noticeWrapper.setOnClickListener(this);        
+        tvGuide.setOnClickListener(this);
+        tvReport.setOnClickListener(this);
         updateButton.setOnClickListener(this);
     }
 
     public void editProfileClicked() {
-        Intent intent = new Intent(SettingsActivity.this, UserEditActivity.class);
+        Intent intent = new Intent(this, UserEditActivity.class);
         startActivity(intent);
     }
 
     public void logoutClicked() {                
-        Session.getInstance(SettingsActivity.this).logout();
+        Session.getInstance(this).logout();
         refresh();
     }
 
@@ -188,10 +195,17 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     }
 
     public void noticeClicked() {                
-        Intent intent = new Intent(SettingsActivity.this, NoticeActivity.class);
+        Intent intent = new Intent(this, NoticeActivity.class);
         startActivity(intent);
     }
 
+    public void guideClicked() {
+        Intent intent = new Intent(this, ServiceGuideActivity.class);
+        startActivity(intent);
+    }
+    
+    public void reportClicked() {}
+    
     public void updateClicked() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=맛있는지도"));
         startActivity(intent);
@@ -317,6 +331,10 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
             linkFacebookClicked();
         } else if (viewId == noticeWrapper.getId()) {
             noticeClicked();
+        } else if (viewId == tvGuide.getId()) {
+            guideClicked();
+        } else if (viewId == tvReport.getId()) {
+            reportClicked();
         } else if (viewId == updateButton.getId()) {
             updateClicked();
         }

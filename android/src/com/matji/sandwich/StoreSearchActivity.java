@@ -16,11 +16,10 @@ public class StoreSearchActivity extends BaseActivity implements Searchable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		init();
 	}
 	
-	@Override
-	protected void init() {
-		super.init();
+	private void init() {
 		setContentView(R.layout.activity_store_search);
 		
 		searchView = (StoreSearchListView) findViewById(R.id.StoreSearchListView);

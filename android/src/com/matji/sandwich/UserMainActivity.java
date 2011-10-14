@@ -24,6 +24,7 @@ public class UserMainActivity extends BaseTabActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
     @Override
@@ -33,9 +34,7 @@ public class UserMainActivity extends BaseTabActivity {
         refresh();
     }
 
-    protected void init() {
-        super.init();
-
+    private void init() {
         setContentView(R.layout.activity_user_main);
 
         user = getIntent().getParcelableExtra(USER);

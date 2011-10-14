@@ -36,14 +36,11 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        init();
     }
 
-    @Override
-    protected void init() {
-        super.init();
-
+    private void init() {
         setContentView(R.layout.activity_search);
 
         title = (HomeTitle) findViewById(R.id.Titlebar);

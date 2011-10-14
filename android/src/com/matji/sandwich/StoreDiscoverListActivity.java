@@ -1,5 +1,7 @@
 package com.matji.sandwich;
 
+import android.os.Bundle;
+
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
@@ -17,8 +19,12 @@ public class StoreDiscoverListActivity extends BaseActivity {
     public static final String USER = "StoreDiscoverListActivity.user";
 
     @Override
-    protected void init() {
-        super.init();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init() {
         setContentView(R.layout.activity_store_discover_list);
 
         user = (User) getIntent().getParcelableExtra(USER);

@@ -42,7 +42,11 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="ReceivedMessageListActivity"
                   android:screenOrientation="portrait"></activity>
-		<activity android:name="SentMessageListActivity"
+        <activity android:name="SentMessageListActivity"
+                  android:screenOrientation="portrait"></activity>
+        <activity android:name="ServiceGuideActivity"
+                  android:screenOrientation="portrait"></activity>
+        <activity android:name="SimpleWebviewActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="NoticeActivity"
                   android:screenOrientation="portrait"></activity>

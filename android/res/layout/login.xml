@@ -2,7 +2,13 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/DefaultFill"
-	android:background="@drawable/login_bg">
+	android:background="@drawable/login_bg_color">
+	<ImageView
+		style="@style/DefaultWrap"
+		android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+		android:layout_marginBottom="@dimen/login_bg_logo_margin"
+		android:src="@drawable/login_bg_logo" />
 	<RelativeLayout
 		android:id="@+id/login_box"
 		style="@style/DefaultWrap"
@@ -105,47 +111,47 @@
 					android:layout_weight="1" />
 			</LinearLayout>
 		</RelativeLayout>
-<!-- 		<View -->
-<!-- 			android:layout_width="fill_parent" -->
-<!-- 			android:layout_height="@dimen/login_horizontal_line" -->
-<!-- 			android:background="@drawable/login_line_width" -->
-<!-- 			android:layout_below="@id/login_box_inner" /> -->
-<!-- 		<TextView -->
-<!-- 			android:id="@+id/login_twitter" -->
-<!-- 			android:layout_width="fill_parent" -->
-<!-- 			android:layout_height="@dimen/login_via_height" -->
-<!-- 			android:text="@string/login_twitter" -->
-<!-- 			android:textColor="@color/login_via_txt" -->
-<!-- 			android:textSize="@dimen/login_via_txt_size" -->
-<!-- 			android:shadowColor="@color/matji_white" -->
-<!-- 			android:shadowDy="1.3" -->
-<!-- 			android:shadowRadius="1.5" -->
-<!-- 			android:drawableLeft="@drawable/icon_login_twitter" -->
-<!-- 			android:drawableRight="@drawable/icon_login_flow" -->
-<!-- 			android:drawablePadding="@dimen/default_drawable_padding_long" -->
-<!-- 			android:gravity="center_vertical" -->
-<!-- 			android:padding="@dimen/default_distance" -->
-<!-- 			android:layout_below="@id/login_box_inner" /> -->
-<!-- 		<View -->
-<!-- 			android:layout_width="fill_parent" -->
-<!-- 			android:layout_height="@dimen/login_horizontal_line" -->
-<!-- 			android:background="@drawable/login_line_width" -->
-<!-- 			android:layout_below="@id/login_twitter" /> -->
-<!-- 		<TextView -->
-<!-- 			android:id="@+id/login_facebook" -->
-<!-- 			android:layout_width="fill_parent" -->
-<!-- 			android:layout_height="@dimen/login_via_height" -->
-<!-- 			android:text="@string/login_facebook" -->
-<!-- 			android:textColor="@color/login_via_txt" -->
-<!-- 			android:textSize="@dimen/login_via_txt_size" -->
-<!-- 			android:shadowColor="@color/matji_white" -->
-<!-- 			android:shadowDy="1.3" -->
-<!-- 			android:shadowRadius="1.5" -->
-<!-- 			android:drawableLeft="@drawable/icon_login_facebook" -->
-<!-- 			android:drawableRight="@drawable/icon_login_flow" -->
-<!-- 			android:drawablePadding="@dimen/default_drawable_padding_long" -->
-<!-- 			android:gravity="center_vertical" -->
-<!-- 			android:padding="@dimen/default_distance" -->
-<!-- 			android:layout_below="@id/login_twitter" /> -->
+		<!-- <View -->
+		<!-- android:layout_width="fill_parent" -->
+		<!-- android:layout_height="@dimen/login_horizontal_line" -->
+		<!-- android:background="@drawable/login_line_width" -->
+		<!-- android:layout_below="@id/login_box_inner" /> -->
+		<!-- <TextView -->
+		<!-- android:id="@+id/login_twitter" -->
+		<!-- android:layout_width="fill_parent" -->
+		<!-- android:layout_height="@dimen/login_via_height" -->
+		<!-- android:text="@string/login_twitter" -->
+		<!-- android:textColor="@color/login_via_txt" -->
+		<!-- android:textSize="@dimen/login_via_txt_size" -->
+		<!-- android:shadowColor="@color/matji_white" -->
+		<!-- android:shadowDy="1.3" -->
+		<!-- android:shadowRadius="1.5" -->
+		<!-- android:drawableLeft="@drawable/icon_login_twitter" -->
+		<!-- android:drawableRight="@drawable/icon_login_flow" -->
+		<!-- android:drawablePadding="@dimen/default_drawable_padding_long" -->
+		<!-- android:gravity="center_vertical" -->
+		<!-- android:padding="@dimen/default_distance" -->
+		<!-- android:layout_below="@id/login_box_inner" /> -->
+		<!-- <View -->
+		<!-- android:layout_width="fill_parent" -->
+		<!-- android:layout_height="@dimen/login_horizontal_line" -->
+		<!-- android:background="@drawable/login_line_width" -->
+		<!-- android:layout_below="@id/login_twitter" /> -->
+		<!-- <TextView -->
+		<!-- android:id="@+id/login_facebook" -->
+		<!-- android:layout_width="fill_parent" -->
+		<!-- android:layout_height="@dimen/login_via_height" -->
+		<!-- android:text="@string/login_facebook" -->
+		<!-- android:textColor="@color/login_via_txt" -->
+		<!-- android:textSize="@dimen/login_via_txt_size" -->
+		<!-- android:shadowColor="@color/matji_white" -->
+		<!-- android:shadowDy="1.3" -->
+		<!-- android:shadowRadius="1.5" -->
+		<!-- android:drawableLeft="@drawable/icon_login_facebook" -->
+		<!-- android:drawableRight="@drawable/icon_login_flow" -->
+		<!-- android:drawablePadding="@dimen/default_drawable_padding_long" -->
+		<!-- android:gravity="center_vertical" -->
+		<!-- android:padding="@dimen/default_distance" -->
+		<!-- android:layout_below="@id/login_twitter" /> -->
 	</RelativeLayout>
 </RelativeLayout>
