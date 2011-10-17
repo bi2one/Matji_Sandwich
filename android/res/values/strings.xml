@@ -52,48 +52,50 @@
     GPS수신이 불안정합니다. 네트워크로 현재 위치를 추정합니다.
   </string>
   <string name="exception_GeocodeLocationInvalidMatjiException">
-    해당 위치는 주소를 받아올 수 없는 지역입니다.
+        해당 위치는 주소를 받아올 수 없는 지역입니다.
   </string>
   <string name="exception_GeocodeSearchInvalidMatjiException">
-    주소 검색이 올바르지 않습니다.
+        주소 검색이 올바르지 않습니다.
   </string>
   <string name="exception_GeocodeZeroResultMatjiException">
-    검색 결과가 없습니다.
+        검색 결과가 없습니다.
   </string>
   <string name="exception_RegistStoreNameInvalidMatjiException">
-    맛집 이름을 입력해 주세요.
+        맛집 이름을 입력해 주세요.
   </string>
   <string name="exception_store_address_is_null">
-    주소 입력이 잘못되었습니다. 
+        주소 입력이 잘못되었습니다. 
   </string>
   <string name="exception_WritePostMatjiException">
-    내부 오류로 인해 이야기가 제대로 등록되지 않았습니다.
+        내부 오류로 인해 이야기가 제대로 등록되지 않았습니다.
   </string>
   <string name="exception_BitmapCompressMatjiException">
-    내부 문제로 이미지가 압축되지 않습니다.
+        내부 문제로 이미지가 압축되지 않습니다.
   </string>
   <string name="exception_BitmapCompressIOMatjiException">
-    이미지 압축 대상 파일을 생성할 수 없습니다.
+        이미지 압축 대상 파일을 생성할 수 없습니다.
   </string>
   <string name="exception_InvalidPasswordMatjiException">
-    아이디 혹은 비밀번호를 확인해주세요.
+        아이디 혹은 비밀번호를 확인해주세요.
   </string>
   <string name="exception_DuplicatedStoreFoodMatjiException">
-    이미 등록된 메뉴입니다.
+        이미 등록된 메뉴입니다.
   </string>
   <string name="exception_DuplicatedNicknameMatjiException">
-  중복되는 닉네임입니다.
+        중복되는 닉네임입니다.
   </string>  
   <string name="exception_DuplicatedEmailMatjiException">
-  중복되는 이메일입니다.
+        중복되는 이메일입니다.
   </string>
   <string name="exception_NotVerifiedEmailMatjiException">
-  이메일이 올바르지 않습니다.
+        검증되지 않은 이메일입니다.
   </string>
-
+  <string name="exception_InvalidEmailFormMatjiException">
+        이메일이 올바르지 않습니다.
+  </string>
   <!-- server exception -->
   <string name="exception_failed_to_save_region">
-    이미 북마크 한 지역입니다.
+            이미 북마크 한 지역입니다.
   </string>
 
   <!-- Session.java -->
@@ -109,6 +111,8 @@
   <string name="default_string_nickname">닉네임</string>
   <string name="default_string_website">웹사이트</string>
   <string name="default_string_check_delete">삭제할까요?</string>
+  <string name="default_string_do_not_show_again">이 창을 다시 보지 않기</string>
+  <string name="default_string_close">닫기</string>
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">%1$s의 맛집기행</string>
   <string name="default_string_intro">소개글</string>
@@ -204,6 +208,7 @@
   <string name="main_tab_talk">이야기</string>
   <string name="main_tab_ranking">식도락가</string>
   <string name="main_tab_config">설정</string>
+  <string name="main_tab_check_finish">야미스토리를 종료하시겠습니까?</string>
 
   <!-- StoreDetailInfoTabActivity  -->
   <string name="store_detail_info_default">맛집 기본 정보</string>
@@ -400,11 +405,6 @@
   <string name="simple_submit_location_bar_submit">지역찾기</string>
   
   <!-- Matji -->
-  <string name="main_tab_title_matmap">맛집</string>
-  <string name="main_tab_title_mattalk">이야기</string>
-  <string name="main_tab_title_matist">식도락가</string>
-  <string name="main_tab_title_mypage">설정</string>
-  <string name="main_tab_title_login">로그인</string>
   
   <!-- PostListView Subtitle -->
   <string name="subtitle_friend_post">친구들 이야기</string>
@@ -413,7 +413,7 @@
   <string name="subtitle_domestic_post">전국 맛집 이야기</string>
   <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
   <string name="subtitle_user_post">%1$d개의 이야기</string>
-  <string name="subtitle_user_url">%1$d개의 링크</string>
+  <string name="subtitle_url">%1$d개의 링크</string>
   <string name="subtitle_tag_post">\'%1$s\'태그 이야기</string>
   
   <!-- ImageListView Subtitle -->
@@ -601,6 +601,22 @@
   <string name="title_area">사는 나라</string>
   <string name="title_post_edit">이야기 수정</string>
   <string name="title_service_guide">서비스 안내</string>
+  <string name="title_matmap">맛집</string>
+  <string name="title_mattalk">이야기</string>
+  <string name="title_matist">식도락가</string>
+  <string name="title_mypage">설정</string>
+  <string name="title_login">로그인</string>
+  <string name="title_store_post">이야기</string>
+  <string name="title_store_image">사진</string>
+  <string name="title_store_url">관련글</string>
+  <string name="title_store_info">정보</string>
+  <string name="title_store_food">메뉴</string>
+  <string name="title_store_tag">태그</string>
+  <string name="title_user_post">이야기</string>
+  <string name="title_user_image">사진</string>
+  <string name="title_user_url">링크</string>
+  <string name="title_user_info">정보</string>
+  <string name="title_user_tag">태그</string>
   
   <!-- UserPasswordEditActivity.java -->
   <string name="user_password_edit_password_changed">비밀번호가 변경되었습니다.</string>
@@ -632,6 +648,20 @@
   <string name="service_guide_manage_store_url">/manage_store</string>
   <string name="service_guide_menu_n_tag_url">/menu_n_tag</string>
   <string name="service_guide_sns_function_url">/sns_function</string>
+  
+  <!-- dialog_loading_popup.xml -->
+  <string name="branding_title">\'맛있는 지도\' 서비스명 변경 안내</string>
+  <string name="branding_enforce1">맛있는 지도가 2.0 버전을 출시하면서 서비스명을 야미스토리(YummyStory)로 변경하였습니다.</string>
+  <string name="branding_content1">서비스명을 바꾼다는 결정이 쉽지는 않았지만 ‘맛있는 지도’를 글로벌 서비스로 확장하기 위해서 한번은 겪어야 하는 일이라는 판단에 부득이하게 서비스명을 변경하게 되었습니다. 또한 서비스의 기능 및 사용성 개선을 위해 많은 부분이 수정되었음을 알려드립니다. 물론 메모, 찜, 태그 등 그 동안 맛있는 지도에 올려주신 사용자 데이터들은 그대로 보존됩니다.  대표적인 변경사항은 다음과 같습니다.</string>
+  <string name="branding_update1">Email로 로그인 (로그인 체계 간소화)</string>
+  <string name="branding_update2">닉네임 폐지 (기존의 아이디가 닉네임을 대신하며 아이디 변경 가능)</string>
+  <string name="branding_update3">찜을 ‘좋아요’와 ‘북마크’로 분리</string>
+  <string name="branding_update4">맛집 메뉴 등록 및 메뉴 평가 기능 도입</string>
+  <string name="branding_update5">이야기(메모)에 댓글 및 이야기 평가 기능 도입</string>
+  <string name="branding_update6">친구 기능을 ‘Follwer’와 ‘Follow’로 변경</string>
+  <string name="branding_update7">사용자 활동성에 따른 활동순위 노출</string>
+  <string name="branding_content2">그외 UI 전면 개편 등 여러가지 면에서 많은 변화가 있습니다. 기존 맛있는 지도 앱과 달라 처음 사용하실 때 다소 불편하실 수도 있지만 이전보다 더 나아졌다는 점을 느끼실 겁니다.\n아울러 트위터, 페이스북 로그인 기능 그리고 트위터, 페이스북 등 외부 서비스의 친구찾기 기능도 업데이트될 예정입니다. 또한 영어, 일본어 언어팩 추가를 시작으로 서비스 언어를 하나씩 늘려나가면서 본격적으로 글로벌 서비스를 시작하려고 합니다.\n그 동안 맛있는 지도를 사랑해주신 여러분들의 변함없는 사랑을 부탁드립니다. 더욱 좋은 서비스로 보답하겠습니다.</string>
+  <string name="branding_from">바나나위키 임직원 일동</string>
   
   <!-- country codes -->
   <string name="country_code_AD">AD</string>

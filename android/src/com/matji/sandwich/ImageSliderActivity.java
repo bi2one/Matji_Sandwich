@@ -62,6 +62,7 @@ public class ImageSliderActivity extends BaseActivity implements Requestable, On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
     }
 
 

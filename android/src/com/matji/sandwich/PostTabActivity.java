@@ -33,7 +33,7 @@ public class PostTabActivity extends BaseTabActivity {
     }
     
     private void init() {
-        isFirst = false;
+        isFirst = true;
         setContentView(R.layout.activity_post_tab);
         tabHost = (RoundTabHost)getTabHost();
         context = getApplicationContext();
@@ -43,7 +43,7 @@ public class PostTabActivity extends BaseTabActivity {
 
     protected void onResume() {
         super.onResume();
-        if (isFirst && lastLoginState != session.isLogin()) {
+        if (!isFirst && lastLoginState != session.isLogin()) {
             reload();
         }
 

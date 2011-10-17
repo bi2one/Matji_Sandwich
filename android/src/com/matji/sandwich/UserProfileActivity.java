@@ -46,6 +46,7 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
             title.setIdentifiable(this);
             title.setUser(UserProfileTabActivity.user);
             title.setFollowable(userCell);
+            title.setTitle(R.string.title_user_info);
         }
 
         userCell.setUser(UserProfileTabActivity.user);

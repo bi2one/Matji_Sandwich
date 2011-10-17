@@ -139,4 +139,11 @@
 	
 	<!-- TagCloud -->
 	<color name="tag_toggle_btn_txt">#735b22</color>
+	
+	<!-- dialog_branding.xml -->
+	<color name="branding_title_color">#543100</color>
+	<color name="branding_enforce_color">#ff4200</color>
+	<color name="branding_content_color">#847458</color>
+	<color name="branding_close_color">#4d391f</color>
+	<color name="branding_close_shadow_color">#ffd893</color>	
 </resources>

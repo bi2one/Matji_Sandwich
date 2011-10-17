@@ -34,6 +34,7 @@ public class UserImageListActivity extends BaseActivity implements Refreshable {
         title.setIdentifiable(this);
         title.setUser(UserMainActivity.user);
         title.setFollowable(userCell);
+        title.setTitle(R.string.title_user_image);
 
         userCell.setIdentifiable(this);
         userCell.addRefreshable(title);

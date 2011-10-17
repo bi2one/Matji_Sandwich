@@ -30,35 +30,34 @@
 					style="@style/DefaultWrap"
 					android:layout_below="@id/store_default_info">
 					<!-- cover -->
-					<RelativeLayout
-						android:id="@+id/store_default_info_cover_wrapper"
-						style="@style/settings_Row"
-						android:background="@drawable/txtbox_t_selector">
-						<TextView
-							android:id="@+id/store_default_info_name"
-							style="@style/DefaultWrap"
-							android:textColor="@color/matji_red"
-							android:textSize="@dimen/store_default_info_name_size" />
-						<TextView
-							android:id="@+id/store_default_info_cover"
-							style="@style/DefaultWrap"
-							android:textColor="@color/matji_gray"
-							android:textSize="@dimen/store_default_info_cover_size"
-							android:layout_below="@id/store_default_info_name" />
-					</RelativeLayout>
+<!-- 					<RelativeLayout -->
+<!-- 						android:id="@+id/store_default_info_cover_wrapper" -->
+<!-- 						style="@style/settings_Row" -->
+<!-- 						android:background="@drawable/txtbox_t_selector"> -->
+<!-- 						<TextView -->
+<!-- 							android:id="@+id/store_default_info_name" -->
+<!-- 							style="@style/DefaultWrap" -->
+<!-- 							android:textColor="@color/matji_red" -->
+<!-- 							android:textSize="@dimen/store_default_info_name_size" /> -->
+<!-- 						<TextView -->
+<!-- 							android:id="@+id/store_default_info_cover" -->
+<!-- 							style="@style/DefaultWrap" -->
+<!-- 							android:textColor="@color/matji_gray" -->
+<!-- 							android:textSize="@dimen/store_default_info_cover_size" -->
+<!-- 							android:layout_below="@id/store_default_info_name" /> -->
+<!-- 					</RelativeLayout> -->
 					<!-- Tel. -->
 					<TextView
 						android:id="@+id/store_default_info_tel"
 						style="@style/settings_Row"
-						android:background="@drawable/txtbox_c_selector"
+						android:background="@drawable/txtbox_t_selector"
 						android:clickable="true"
 						android:onClick="onTelClicked"
 						android:textSize="@dimen/store_default_info_content_size"
 						android:textColor="@color/matji_gray"
 						android:drawableLeft="@drawable/icon_tel"
 						android:drawableRight="@drawable/icon_flow"
-						android:drawablePadding="@dimen/default_drawable_padding_long"
-						android:layout_below="@id/store_default_info_cover_wrapper" />
+						android:drawablePadding="@dimen/default_drawable_padding_long" />
 					<!-- Address -->
 					<TextView
 						android:id="@+id/store_default_info_address"
@@ -99,9 +98,9 @@
 						android:drawableRight="@drawable/icon_flow"
 						android:drawablePadding="@dimen/default_drawable_padding_long"
 						android:layout_below="@id/store_default_info_website" />
-					<View
-						style="@style/HorizontalLine"
-						android:layout_below="@id/store_default_info_cover_wrapper" />
+<!-- 					<View -->
+<!-- 						style="@style/HorizontalLine" -->
+<!-- 						android:layout_below="@id/store_default_info_cover_wrapper" /> -->
 					<View
 						style="@style/HorizontalLine"
 						android:layout_below="@id/store_default_info_tel" />

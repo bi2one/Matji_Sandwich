@@ -39,6 +39,7 @@ public class StoreImageListActivity extends BaseActivity implements Refreshable 
         title.setIdentifiable(this);
         title.setStore(StoreMainActivity.store);
         title.setLikeable(storeCell);
+        title.setTitle(R.string.title_store_image);
 
         storeCell.setIdentifiable(this);
         storeCell.setStore(StoreMainActivity.store);

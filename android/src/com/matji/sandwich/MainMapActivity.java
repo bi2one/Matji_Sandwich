@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.overlay.OverlayClickListener;
@@ -119,6 +120,8 @@ GpsManager.StartConfigListener {
 
         // Log.d("=====", "mainmap activity pause");
         mapView.stopMapCenterThread();
+        
+        HttpRequestManager.getInstance().cancelAllTask();
     }
 
     public void onCurrentPositionClicked(View v) {

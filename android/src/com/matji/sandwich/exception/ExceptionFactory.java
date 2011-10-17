@@ -30,6 +30,7 @@ public class ExceptionFactory {
     public static final int CANNOT_FOLLOW_YOURSELF = 23;
     public static final int ALREADY_FOLLOWING = 24;
     public static final int NEVER_FOLLOWING = 25;
+    public static final int INVALID_EMAIL_FORM = 26;
 
     public static MatjiException create(int code) {
 	MatjiException result = null;
@@ -48,9 +49,13 @@ public class ExceptionFactory {
         result = new DuplicatedNicknameMatjiException();
         break;
     case DUPLICATED_EMAIL:
-        result = new DuplicatedNicknameMatjiException();
+        result = new DuplicatedEmailMatjiException();
+        break;
     case NOT_VERIFIED_EMAIL:
         result = new NotVerifiedEmailMatjiException();
+        break;
+    case INVALID_EMAIL_FORM:
+        result = new InvalidEmailFormMatjiException();
 	}
 		
 	return result;

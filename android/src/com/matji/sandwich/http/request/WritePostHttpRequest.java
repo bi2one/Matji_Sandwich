@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.location.Location;
 
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
@@ -27,19 +26,19 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
         postRequest = new PostHttpRequest(context);
     }
 
-    public void actionNew(String post, String tags, Store store, Location location, ArrayList<File> images) {
+    public void actionNew(String post, String tags, Store store, ArrayList<File> images) {
         if (store == null) {
-            actionNew(post, tags, -1, location, images);
+            actionNew(post, tags, -1, images);
         } else {
-            actionNew(post, tags, store.getId(), location, images);
+            actionNew(post, tags, store.getId(), images);
         }
     }
 
-    public void actionNew(String post, String tags, int storeId, Location location, ArrayList<File> images) {
+    public void actionNew(String post, String tags, int storeId, ArrayList<File> images) {
         this.images = images;
 
         if (storeId <= 0) {
-            postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID, location.getLatitude(), location.getLongitude());
+            postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID);
         } else {
             postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID, storeId);
         }

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/dialog_branding"
+	style="@style/DefaultFill"
+
+	android:paddingLeft="@dimen/branding_margin"
+	android:paddingRight="@dimen/branding_margin"
+	android:paddingTop="@dimen/branding_margin"
+	android:paddingBottom="@dimen/branding_margin_bottom">
+	<RelativeLayout
+		style="@style/DefaultFill"
+		android:background="@drawable/login_box_bg">
+		<ScrollView
+			style="@style/DefaultFill"
+			android:layout_above="@+id/dialog_branding_check_wrapper"
+			android:padding="@dimen/default_distance"
+			android:scrollbars="none">
+			<LinearLayout
+				style="@style/DefaultLinearFill"
+				android:layout_marginRight="@dimen/branding_content_side_margin"
+				android:layout_marginLeft="@dimen/branding_content_side_margin">
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_title"
+					android:textSize="@dimen/branding_title_size"
+					android:textColor="@color/branding_title_color"
+					android:layout_marginBottom="@dimen/branding_p_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_enforce1"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_p_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_content1"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_content_color"
+					android:layout_marginBottom="@dimen/branding_p_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_update1"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_update_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_update2"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_update_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_update3"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_update_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_update4"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_update_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_update5"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_update_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_update6"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_update_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_update7"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_p_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_content2"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_content_color"
+					android:layout_marginBottom="@dimen/branding_p_margin" />
+				<TextView
+					style="@style/DefaultWrap"
+					android:text="@string/branding_from"
+					android:textSize="@dimen/branding_content_size"
+					android:textColor="@color/branding_enforce_color"
+					android:layout_marginBottom="@dimen/branding_p_margin" />
+			</LinearLayout>
+		</ScrollView>
+		<RelativeLayout
+			android:id="@+id/dialog_branding_check_wrapper"
+			style="@style/DefaultWidthFill"
+			android:paddingTop="@dimen/default_distance"
+			android:paddingBottom="@dimen/default_distance"
+			android:paddingLeft="@dimen/branding_content_side_margin"
+			android:paddingRight="@dimen/branding_content_side_margin"
+			android:layout_alignParentBottom="true">
+			<CheckBox
+				android:id="@+id/dialog_branding_checkbox"
+				style="@style/DefaultWrap"
+				android:gravity="center"
+				android:layout_centerVertical="true"
+				android:text="@string/default_string_do_not_show_again"
+				android:textSize="@dimen/branding_close_size"
+				android:textColor="@color/branding_title_color"
+				android:button="@drawable/icon_guide_check_selelctor"
+				android:background="@drawable/btn_check_label_background"
+				android:layout_marginRight="@dimen/default_distance" />
+			<Button
+				android:id="@+id/dialog_branding_close_btn"
+				style="@style/DefaultWrap"
+				android:background="@drawable/tabbtn_touch"
+				android:gravity="center"
+				android:text="@string/default_string_close"
+				android:textSize="@dimen/branding_close_size"
+				android:textColor="@color/branding_close_color"
+				android:shadowColor="@color/branding_close_shadow_color"
+				android:shadowDy="1.3"
+				android:shadowRadius="1"
+				android:layout_alignParentRight="true" />
+		</RelativeLayout>
+		<View
+			android:layout_width="fill_parent"
+			android:layout_height="@dimen/login_horizontal_line"
+			android:background="@drawable/login_line_width"
+			android:layout_above="@id/dialog_branding_check_wrapper" />
+	</RelativeLayout>
+</RelativeLayout>

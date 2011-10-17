@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -21,11 +20,9 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.ProgressDialogAsyncTask;
 import com.matji.sandwich.http.request.WritePostHttpRequest;
-import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.util.PhotoUtil;
 import com.matji.sandwich.util.PhotoUtil.IntentType;
-import com.matji.sandwich.util.adapter.GeoPointToLocationAdapter;
 import com.matji.sandwich.widget.AlbumView;
 import com.matji.sandwich.widget.GetPictureLayout;
 import com.matji.sandwich.widget.PostEditText;
@@ -53,7 +50,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
     private PostEditText postText;
     private RelativeLayoutThatDetectsSoftKeyboard mainView;
     private HttpRequestManager requestManager;
-    private SessionMapUtil sessionMapUtil;
+//    private SessionMapUtil sessionMapUtil;
     private CompletableTitle titleBar;
     private RelativeLayout imageKeyboard;
     private AlbumView albumView;
@@ -84,7 +81,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	
 	photoUtil = new PhotoUtil(this);
 	requestManager = HttpRequestManager.getInstance();
-	sessionMapUtil = new SessionMapUtil(context);
+//	sessionMapUtil = new SessionMapUtil(context);
 	mainView = (RelativeLayoutThatDetectsSoftKeyboard)getMainView();
 	mainView.setListener(this);
 
@@ -133,7 +130,6 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 
     public void complete() {
 	WritePostHttpRequest postRequest = new WritePostHttpRequest(context);
-	Location centerLocation = new GeoPointToLocationAdapter(sessionMapUtil.getCenter());
 	String post = postText.getText();
 	ArrayList<File> imageFiles = albumView.getFiles();
 	
@@ -145,7 +141,7 @@ public class WritePostActivity extends BaseActivity implements CompletableTitle.
 	    tags = "";
 	}
 	
-	postRequest.actionNew(post, tags, store, centerLocation, imageFiles);
+	postRequest.actionNew(post, tags, store, imageFiles);
 	// DialogAsyncTask requestTask = new DialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
 	ProgressDialogAsyncTask requestTask = new ProgressDialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
 	requestTask.execute();

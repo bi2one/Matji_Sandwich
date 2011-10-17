@@ -14,6 +14,8 @@ import com.matji.sandwich.session.Session.LogoutListener;
 import com.matji.sandwich.session.SessionTabHostUtil;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.MainTabHost;
+import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.MainTabTitle;
 import com.matji.sandwich.widget.title.MainTitle;
 import com.matji.sandwich.widget.title.MatistTitle;
@@ -29,6 +31,8 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
 
     private LinearLayout mainTabWrapper;
     private String curSpecLabel;
+
+    private SimpleConfirmDialog finishDialog;
 
     public static final String IF_INDEX = "MainTabActivity.index";
     public static final String IF_SUB_INDEX = "MainTabActivity.sub_index";
@@ -61,7 +65,18 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tab);
-        
+
+        finishDialog = new SimpleConfirmDialog(this, R.string.main_tab_check_finish);
+        finishDialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
+
+            @Override
+            public void onConfirmClick(SimpleDialog dialog) {
+                System.exit(0);
+            }
+
+            @Override
+            public void onCancelClick(SimpleDialog dialog) {}
+        });
         session = Session.getInstance(this);
         session.addLoginListener(this);
         sessionUtil = new SessionTabHostUtil(this);
@@ -83,7 +98,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
                 R.drawable.icon_tapbar_matist_selector,
                 R.string.main_tab_ranking,
                 new Intent(this, RankingTabActivity.class));
-        
+
 
         Intent userTabIntent = new Intent(this, UserProfileTabActivity.class);
         userTabIntent.putExtra(UserProfileTabActivity.IS_MAIN_TAB_ACTIVITY, true);
@@ -94,28 +109,23 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
 
         tabHost.setOnTabChangedListener(this);
 
-        
+
         titles = new ArrayList<MainTabTitle>();
         mainTitle = new MainTitle(this);
         mainTitle.setLogo();
         titles.add(mainTitle);
         matstoryTitle = new MatstoryTitle(this);
-        matstoryTitle.setTitle(R.string.main_tab_title_mattalk);
+        matstoryTitle.setTitle(R.string.title_mattalk);
         titles.add(matstoryTitle);
         matistTitle = new MatistTitle(this);
-        matistTitle.setTitle(R.string.main_tab_title_matist);
+        matistTitle.setTitle(R.string.title_matist);
         titles.add(matistTitle);
         privateTitle = new PrivateTitle(this);
-        privateTitle.setTitle(R.string.main_tab_title_mypage);
+        privateTitle.setTitle(R.string.title_mypage);
         titles.add(privateTitle);
         settingTitle = new SettingTitle(this);
-        settingTitle.setTitle(R.string.main_tab_title_login);
+        settingTitle.setTitle(R.string.title_login);
         titles.add(settingTitle);
-        // AsyncTaskTest tasktest = new AsyncTaskTest();
-        // tasktest.execute("1st request");
-        // tasktest.execute("2nd request");
-        // tasktest.execute("3rd request");
-        // tasktest.execute("4th request");
     }
 
     /**
@@ -153,7 +163,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
             }
         }
     }
-    
+
     public void switchTitle(TitleContainer title) {
         mainTabWrapper.removeViewAt(0);
         mainTabWrapper.addView(title, 0);
@@ -180,11 +190,11 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
         if (curTabPos == IV_INDEX_CONFIG && !session.isLogin()) {
             curTabPos = IV_INDEX_LOGIN;
         }
-        
+
         switchTitle((TitleContainer) titles.get(curTabPos));
         titles.get(curTabPos).notificationValidate();
     }
-    
+
     @Override
     public void preLogin() {}
 
@@ -203,7 +213,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     @Override
     public void postLogout() {
     }
-    
+
     protected void notificationValidate() {
         if (!session.isLogin()) {
             preLogout();
@@ -211,12 +221,12 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
         for (MainTabTitle title : titles) {
             title.notificationValidate();
         }
-        
+
         int alarmCount = session.getPrivateUtil().getNewNoticeCount() + session.getPrivateUtil().getNewAlarmCount();
         tabHost.setAlarmCount(alarmCount);
     }
 
     public void finish() {
-	System.exit(0);
+        finishDialog.show();
     }
 }

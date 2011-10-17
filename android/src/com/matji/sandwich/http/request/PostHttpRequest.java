@@ -41,7 +41,7 @@ public class PostHttpRequest extends HttpRequest {
         getHashtable.put("include", "user,store,tags");
     }
 
-    public void actionNew(String post, String tags, Device from_where, double lat, double lng) {
+    public void actionNew(String post, String tags, Device from_where) {
         httpMethod = HttpMethod.HTTP_POST;
         action = "new";
         parser = new PostParser();
@@ -50,8 +50,6 @@ public class PostHttpRequest extends HttpRequest {
         postHashtable.put("post", post);
         postHashtable.put("tags", tags);
         postHashtable.put("from_where", from_where);
-        postHashtable.put("lat", lat + "");
-        postHashtable.put("lng", lng + "");
     }
 
     public void actionNew(String post, String tags, Device from_where, int store_id) {

@@ -59,6 +59,7 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
             title.setIdentifiable(this);
             title.setUser(UserProfileTabActivity.user);
             title.setFollowable(userCell);
+            title.setTitle(R.string.title_user_tag);
         }
 
         userCell.setUser(UserProfileTabActivity.user);

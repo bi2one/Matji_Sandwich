@@ -74,6 +74,8 @@ public abstract class HttpRequest implements ProgressRequestCommand {
         SimpleHttpResponse response = (httpMethod == HttpMethod.HTTP_POST) ?
                 requestHttpResponsePost(null, postHashtable):requestHttpResponseGet(null, getHashtable);
 
+                
+                // TODO HttpUtility  response 수정
                 String resultBody = response.getHttpResponseBodyAsString();
                 String resultCode = response.getHttpStatusCode() + "";
 

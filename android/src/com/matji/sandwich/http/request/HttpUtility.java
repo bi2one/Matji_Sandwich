@@ -803,7 +803,7 @@ final public class HttpUtility
          */
         public String getHttpResponseBodyAsString()
         {
-            return new String(httpResponseBody);
+                return new String(httpResponseBody);
         }
 
         /**

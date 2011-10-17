@@ -1,81 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/UserCell"
-    style="@style/DefaultWrap">
-  <RelativeLayout style="@style/cell_user_Wrapper">
-    <!-- profile -->
-    <include
-	android:id="@+id/cell_user_profile"
-	android:layout_alignParentLeft="true"
-	android:layout_alignParentTop="true"
-	layout="@layout/cell_profile" />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@id/UserCell"
+	style="@style/DefaultWrap">
+	<RelativeLayout
+		style="@style/cell_user_Wrapper">
+		<!-- profile -->
+		<include
+			android:id="@+id/cell_user_profile"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentTop="true"
+			layout="@layout/cell_profile" />
 
-    <!-- buttons -->
-    <Button
-	android:id="@+id/cell_user_like_list"
-	android:layout_alignParentRight="true"
-	android:layout_alignParentTop="true"
-	style="@style/cell_user_LikeListButton" />
-    <Button
-	android:id="@+id/cell_user_follow"
-	android:layout_below="@+id/cell_user_like_list"
-	android:layout_alignParentRight="true"
-	style="@style/cell_user_FollowButton" />
-    <Button
-	android:id="@+id/cell_user_message_list"
-	android:layout_below="@+id/cell_user_like_list"
-	android:layout_alignParentRight="true"
-	style="@style/cell_user_MessageListButton" />
+		<!-- buttons -->
+		<Button
+			android:id="@+id/cell_user_like_list"
+			android:gravity="center"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentTop="true"
+			style="@style/cell_user_LikeListButton" />
+		<Button
+			android:id="@+id/cell_user_follow"
+            android:gravity="center"
+			android:layout_below="@+id/cell_user_like_list"
+			android:layout_alignParentRight="true"
+			style="@style/cell_user_FollowButton" />
+		<Button
+			android:id="@+id/cell_user_message_list"
+            android:gravity="center"
+			android:layout_below="@+id/cell_user_like_list"
+			android:layout_alignParentRight="true"
+			style="@style/cell_user_MessageListButton" />
 
-    <!-- nickname -->
-    <TextView
-	android:id="@+id/cell_user_nick"
-	android:layout_toRightOf="@id/cell_user_profile"
-	android:layout_toLeftOf="@+id/cell_user_like_list"
-	android:layout_alignParentTop="true"
-	style="@style/cell_user_Nickname" />
+		<!-- nickname -->
+		<TextView
+			android:id="@+id/cell_user_nick"
+			android:layout_toRightOf="@id/cell_user_profile"
+			android:layout_toLeftOf="@+id/cell_user_like_list"
+			android:layout_alignParentTop="true"
+			style="@style/cell_user_Nickname" />
 
-    <!-- point -->
-    <TextView
-	android:id="@+id/cell_user_point_label"
-	android:layout_toRightOf="@id/cell_user_profile"
-	android:layout_below="@id/cell_user_nick"
-	style="@style/cell_user_PointLabel" />
-    
-    <TextView
-	android:id="@+id/cell_user_point"
-	android:layout_toRightOf="@id/cell_user_point_label"
-	android:layout_alignBottom="@id/cell_user_point_label"
-	android:layout_toLeftOf="@+id/cell_user_like_list"
-	style="@style/cell_user_LabelValue" />
+		<!-- point -->
 
-    <!-- country -->
-    <TextView
-	android:id="@+id/cell_user_area_label"
-	android:layout_toRightOf="@id/cell_user_profile"
-	android:layout_below="@id/cell_user_point_label"
-	style="@style/cell_user_AreaLabel" />
-    
-    <TextView
-	android:id="@+id/cell_user_area"
-	android:layout_toRightOf="@id/cell_user_area_label"
-	android:layout_alignBottom="@id/cell_user_area_label"
-	android:layout_toLeftOf="@+id/cell_user_like_list"
-	style="@style/cell_user_LabelValue" />
-  </RelativeLayout>
-  
-  <!-- division bars -->  
-  <ImageView
-      android:id="@+id/cell_user_line"
-      android:background="@color/listview_divider1_gray"
-      android:layout_width="fill_parent"
-      android:layout_height="@dimen/default_divider_size"
-      android:visibility="gone"
-      android:layout_alignParentBottom="true" />
-  <ImageView
-      android:id="@+id/cell_user_shadow"
-      android:src="@drawable/img_shadow"
-      style="@style/DefaultWidthFill"
-      android:layout_alignParentBottom="true" />
+		<TextView
+			android:id="@+id/cell_user_point"
+			android:layout_alignLeft="@id/cell_user_nick"
+			android:layout_toLeftOf="@+id/cell_user_like_list"
+			android:layout_toRightOf="@id/cell_user_profile"
+			android:layout_below="@id/cell_user_nick"
+			android:drawableLeft="@drawable/icon_p_a"
+			android:drawablePadding="@dimen/default_drawable_padding"
+			style="@style/cell_user_LabelValue" />
+
+		<!-- country -->
+		<TextView
+			android:id="@+id/cell_user_area_label"
+			android:layout_toLeftOf="@+id/cell_user_like_list"
+			android:layout_toRightOf="@id/cell_user_profile"
+			android:layout_below="@id/cell_user_point"
+			style="@style/cell_user_AreaLabel" />
+
+		<TextView
+			android:id="@+id/cell_user_area"
+			android:layout_toRightOf="@id/cell_user_area_label"
+			android:layout_alignBottom="@id/cell_user_area_label"
+			android:layout_toLeftOf="@+id/cell_user_like_list"
+			style="@style/cell_user_LabelValue" />
+	</RelativeLayout>
+
+	<!-- division bars -->
+	<ImageView
+		android:id="@+id/cell_user_line"
+		android:background="@color/listview_divider1_gray"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/default_divider_size"
+		android:visibility="gone"
+		android:layout_alignParentBottom="true" />
+	<ImageView
+		android:id="@+id/cell_user_shadow"
+		android:src="@drawable/img_shadow"
+		style="@style/DefaultWidthFill"
+		android:layout_alignParentBottom="true" />
 </RelativeLayout>

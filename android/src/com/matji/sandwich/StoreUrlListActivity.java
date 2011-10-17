@@ -10,6 +10,8 @@ import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.http.request.UrlHttpRequest.UrlType;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.UrlListView;
 import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.title.StoreTitle;
@@ -39,6 +41,7 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
         title.setIdentifiable(this);
         title.setStore(StoreMainActivity.store);
         title.setLikeable(storeCell);
+        title.setTitle(R.string.title_store_url);
 
         storeCell.setIdentifiable(this);
         storeCell.addRefreshable(this);
@@ -48,6 +51,12 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
         listView.setUrlType(UrlType.STORE);
         listView.setId(StoreMainActivity.store.getId());
         listView.addHeaderView(storeCell);
+        listView.addHeaderView(
+                new SubtitleHeader(
+                        this,
+                        String.format(
+                                MatjiConstants.string(R.string.subtitle_url),
+                                StoreMainActivity.store.getUrlCount())));
         listView.setActivity(this);
         listView.requestReload();
     }

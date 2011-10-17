@@ -122,6 +122,10 @@ public abstract class BaseActivity extends Activity implements ActivityEnterFore
         }
         super.setContentView(layoutResID);
         mainViewGroup = (ViewGroup)findViewById(setMainViewId());
+        if (mainViewGroup.getBackground() == null) {
+            mainViewGroup.setBackgroundResource(R.drawable.bg_01);
+        }
+        
     }
 
     @Override

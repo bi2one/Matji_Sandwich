@@ -38,7 +38,8 @@ public abstract class SimpleBoxAdapter extends MBaseAdapter {
             params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(margin, margin, margin, margin);
             defaultElement.wrapper.setLayoutParams(params);
-		    defaultElement.wrapper.setBackgroundResource(R.drawable.txtbox_selector);
+            defaultElement.line.setVisibility(View.GONE);
+            defaultElement.wrapper.setBackgroundResource(R.drawable.txtbox_selector);
 		} else if (position == 0) {
             params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(margin, margin, margin, 0);

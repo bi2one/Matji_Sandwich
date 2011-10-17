@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -188,6 +189,7 @@ Requestable {
 
     private void requestBookmark(Store store) {
         bookmarkRequest.actionBookmark(store.getId());
+        Log.d("Matji", store.getId()+"");
         requestManager.request(getContext(), spinnerContainer, SpinnerType.SMALL, bookmarkRequest, HttpRequestManager.BOOKMAR_REQUEST, this);
     }
 

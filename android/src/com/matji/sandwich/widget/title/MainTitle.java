@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.button.SearchButton;
 import com.matji.sandwich.widget.title.button.SettingButton;
-import com.matji.sandwich.widget.title.button.PostWriteButton;
+import com.matji.sandwich.widget.title.button.WritePostButton;
 import com.matji.sandwich.widget.title.button.TitleImageButton;
 
 public class MainTitle extends TitleContainerTypeRRR implements MainTabTitle {
@@ -27,7 +27,7 @@ public class MainTitle extends TitleContainerTypeRRR implements MainTabTitle {
     @Override
     protected TitleImageButton getRightButton2() {
         // TODO Auto-generated method stub
-        return new PostWriteButton(getContext());
+        return new WritePostButton(getContext());
     }
 
     @Override

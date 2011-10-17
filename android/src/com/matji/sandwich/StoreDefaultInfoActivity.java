@@ -22,8 +22,8 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     private StoreTitle title;
     private StoreCell storeCell;
 
-    private TextView tvName;
-    private TextView tvCover;
+//    private TextView tvName;
+//    private TextView tvCover;
     private TextView tvTel;
     private TextView tvAddress;
     private TextView tvWebsite;
@@ -45,14 +45,15 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
         storeCell = (StoreCell) findViewById(R.id.StoreCell);
         storeCell.setClickable(false);
 
-        tvName = (TextView) findViewById(R.id.store_default_info_name);
-        tvCover = (TextView) findViewById(R.id.store_default_info_cover);
+//        tvName = (TextView) findViewById(R.id.store_default_info_name);
+//        tvCover = (TextView) findViewById(R.id.store_default_info_cover);
         tvTel = (TextView) findViewById(R.id.store_default_info_tel);
         tvAddress = (TextView) findViewById(R.id.store_default_info_address);
         tvWebsite = (TextView) findViewById(R.id.store_default_info_website);
 
         title.setIdentifiable(this);
         title.setStore(StoreDetailInfoTabActivity.store);
+        title.setTitle(R.string.title_store_info);
         title.setLikeable(storeCell);
 
         storeCell.setStore(StoreDetailInfoTabActivity.store);
@@ -74,18 +75,18 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     @Override
     public void refresh() {
         Store store = StoreDetailInfoTabActivity.store;
-        String name = store.getName();
+//        String name = store.getName();
         String address = store.getAddress();
-        String cover = store.getCover();
+//        String cover = store.getCover();
         String tel = store.getTel();
         String website = store.getWebsite();
 
-        tvName.setText(name);
-        tvCover.setText(
-                (cover == null || cover.equals("")) ?
-                        MatjiConstants.string(R.string.default_string_not_exist_cover)
-                        :cover);
-
+//        tvName.setText(name);
+//        tvCover.setText(
+//                (cover == null || cover.equals("")) ?
+//                        MatjiConstants.string(R.string.default_string_not_exist_cover)
+//                        :cover);
+//
         tvTel.setText(
                 (tel == null || tel.equals("")) ?
                         MatjiConstants.string(R.string.default_string_not_exist_tel)

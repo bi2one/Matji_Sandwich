@@ -1,10 +1,16 @@
 package com.matji.sandwich.data;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ExternalAccount extends MatjiData{
-	private boolean likedTwitter;
+public class ExternalAccount extends MatjiData implements Serializable {
+	/**
+     * 
+     */
+    private static final long serialVersionUID = -5682979669197341032L;
+    private boolean likedTwitter;
 	private boolean likedFacebook;
 	
 	public ExternalAccount() {}

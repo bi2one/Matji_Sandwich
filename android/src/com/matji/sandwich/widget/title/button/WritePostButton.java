@@ -16,12 +16,12 @@ import com.matji.sandwich.session.Session;
  * @author excgate
  *
  */
-public class PostWriteButton extends TitleImageButton {
+public class WritePostButton extends TitleImageButton {
     Session session;
     private Store store;
     private String tags;
     
-    public PostWriteButton(Context context) {
+    public WritePostButton(Context context) {
 	super(context);
     }
 

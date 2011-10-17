@@ -42,9 +42,8 @@ public class UserTitle extends TitleContainerTypeLRR implements Refreshable {
 	
 	public void setUser(User user) {
         title_user = user;
-		setTitle(title_user.getNick());
         ((WriteMessageButton) rightButton2).setUser(title_user);
-
+        setTitle(user.getNick());
         Session session = Session.getInstance(getContext());
         if (session.isLogin()) 
             if (session.getCurrentUser().getId() == title_user.getId()) {

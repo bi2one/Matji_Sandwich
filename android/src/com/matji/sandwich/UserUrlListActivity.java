@@ -40,6 +40,7 @@ public class UserUrlListActivity extends BaseActivity implements Refreshable {
         title.setIdentifiable(this);
         title.setUser(UserMainActivity.user);
         title.setFollowable(userCell);
+        title.setTitle(R.string.title_user_url);
 
         userCell.setIdentifiable(this);
         userCell.addRefreshable(this);
@@ -53,7 +54,7 @@ public class UserUrlListActivity extends BaseActivity implements Refreshable {
                 new SubtitleHeader(
                         this, 
                         String.format(
-                                MatjiConstants.string(R.string.subtitle_user_url),
+                                MatjiConstants.string(R.string.subtitle_url),
                                 UserMainActivity.user.getUrlCount())));
         listView.setActivity(this);
         listView.requestReload();    

@@ -3,20 +3,19 @@ package com.matji.sandwich.widget.title.button;
 import android.content.Context;
 import android.util.Log;
 
-import com.matji.sandwich.LikeStoreListActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.widget.title.Switchable;
 
 /**
- * {@link LikeStoreListActivity}로 이동하게 하는 버튼
+ * Follow 버튼
  * 
  * @author mozziluv
  *
  */
 public class FollowButton extends TitleImageButton implements Switchable {
 
-    private static final int ALPHA_FOLLOW_STATE = 0x1E;     // opacity 30%
+    private static final int ALPHA_FOLLOW_STATE = 0x46;     // opacity 70%
     private static final int ALPHA_UNFOLLOW_STATE = 0xff;   // opacity 100%
     
     private Followable followable;

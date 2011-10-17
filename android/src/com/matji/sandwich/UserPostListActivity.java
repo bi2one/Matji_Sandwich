@@ -38,6 +38,7 @@ public class UserPostListActivity extends BaseActivity implements Refreshable {
         title.setIdentifiable(this);
         title.setUser(UserMainActivity.user);
         title.setFollowable(userCell);
+        title.setTitle(R.string.title_user_post);
 
         userCell.setIdentifiable(this);
         userCell.addRefreshable(this);

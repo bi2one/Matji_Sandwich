@@ -40,6 +40,7 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
         title.setIdentifiable(this);
         title.setStore(StoreMainActivity.store);
         title.setLikeable(storeCell);
+        title.setTitle(R.string.title_store_post);
 
         storeCell.setIdentifiable(this);
         storeCell.addRefreshable(this);

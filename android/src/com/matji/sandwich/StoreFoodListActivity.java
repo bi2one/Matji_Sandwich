@@ -34,6 +34,7 @@ public class StoreFoodListActivity extends BaseActivity implements Refreshable {
         title.setIdentifiable(this);
         title.setStore(StoreDetailInfoTabActivity.store);
         title.setLikeable(storeCell);
+        title.setTitle(R.string.title_store_food);
 
         storeCell.setStore(StoreDetailInfoTabActivity.store);
         storeCell.setIdentifiable(this);

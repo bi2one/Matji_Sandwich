@@ -45,6 +45,7 @@ public class StoreTagListActivity extends BaseActivity implements Refreshable {
         title.setIdentifiable(this);
         title.setStore(StoreDetailInfoTabActivity.store);
         title.setLikeable(storeCell);
+        title.setTitle(R.string.title_store_tag);
 
         storeCell.setStore(StoreDetailInfoTabActivity.store);
         storeCell.setClickable(false);
