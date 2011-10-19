@@ -4,6 +4,7 @@ package com.matji.sandwich.exception;
 
 public class ExceptionFactory {
     public static final int STATUS_OK = 200;
+    public static final int UNKNOWN_CLIENT_ERROR = -1;
     public static final int UNKNOWN_ERROR = 0;;
     public static final int ID_NOT_EXIST= 1;
     public static final int PASSWORD_INCORRECT= 2;
@@ -36,6 +37,9 @@ public class ExceptionFactory {
 	MatjiException result = null;
 
 	switch(code) {
+	case UNKNOWN_CLIENT_ERROR:
+	    result = new UnknownClientErrorMatjiException();
+	    break;
     case ID_NOT_EXIST:
         result = new InvalidPasswordMatjiException();
         break;

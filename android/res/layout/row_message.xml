@@ -80,6 +80,7 @@
 				android:id="@+id/row_message_subject"
 				style="@style/DefaultWrap"
 				android:singleLine="true"
+                android:visibility="gone"
 				android:textSize="@dimen/row_message_subject_size"
 				android:textColor="@color/matji_gray"
 				android:layout_below="@id/row_message_shadow" />
@@ -93,7 +94,6 @@
 				<TextView
 					android:id="@+id/row_message_sent_user_nick"
 					style="@style/DefaultWrap"
-					android:text="보낸사람"
 					android:maxWidth="@dimen/default_nick_max_width"
 					android:singleLine="true"
 					android:textSize="@dimen/row_message_nick_size"
@@ -108,7 +108,6 @@
 					style="@style/DefaultWrap"
 					android:maxWidth="@dimen/default_nick_max_width"
 					android:singleLine="true"
-					android:text="받는사람"
 					android:textSize="@dimen/row_message_nick_size"
 					android:textColor="@color/matji_red" />
 				<TextView

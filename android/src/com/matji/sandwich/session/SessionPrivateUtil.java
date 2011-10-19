@@ -1,5 +1,7 @@
 package com.matji.sandwich.session;
 
+import android.util.Log;
+
 import com.matji.sandwich.data.provider.ConcretePreferenceProvider;
 
 public class SessionPrivateUtil {
@@ -62,5 +64,15 @@ public class SessionPrivateUtil {
     
     public boolean isCheckedSaveId() {
         return mConcretePrefs.getBoolean(SessionIndex.PRIVATE_IS_CHECKED_SAVE_USER_ID, BASIC_IS_CHECKED);
+    }
+    
+    public void setIsCheckedBrandingNotShown(boolean isChecked) {
+        Log.d("Matji", isChecked+"");
+        mConcretePrefs.setBoolean(SessionIndex.PRIVATE_IS_CHECKED_BRANDING_NOT_SHOWN, isChecked);
+    }
+    
+    public boolean isCheckedBrandingNotShown() {
+        Log.d("Matji", mConcretePrefs.getBoolean(SessionIndex.PRIVATE_IS_CHECKED_BRANDING_NOT_SHOWN, BASIC_IS_CHECKED)+"");
+        return mConcretePrefs.getBoolean(SessionIndex.PRIVATE_IS_CHECKED_BRANDING_NOT_SHOWN, BASIC_IS_CHECKED);
     }
 }

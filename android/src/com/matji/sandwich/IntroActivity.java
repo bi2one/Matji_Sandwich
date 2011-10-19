@@ -92,7 +92,11 @@ BrandingDialogListener {
 
     protected void onResume() {
         super.onResume();
-        brandingDialog.show();
+        if (Session.getInstance(this).getPrivateUtil().isCheckedBrandingNotShown()) {
+            taskStart();
+        } else {
+            brandingDialog.show();
+        }
     }
 
     public void onStop() {
@@ -182,6 +186,10 @@ BrandingDialogListener {
 
     @Override
     public void dismissed() {
+        taskStart();
+    }
+    
+    public void taskStart() {
         timeAsyncTask.execute();
         simpleAsyncTask.execute();
     }

@@ -5,9 +5,10 @@
 	style="@style/row_simple_post_PostRowWrapper">
 	<include
 		layout="@layout/profile" />
-		
+
 	<!-- Post Wrapper -->
 	<LinearLayout
+		android:layout_marginLeft="@dimen/default_distance"
 		style="@style/DefaultVerticalWrap">
 		<!-- Name Line -->
 		<LinearLayout

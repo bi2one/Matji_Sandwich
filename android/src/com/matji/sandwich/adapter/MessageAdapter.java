@@ -117,8 +117,11 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 		messageElement.nick.setText(user.getNick());
 		messageElement.nick.setOnClickListener(new GotoUserMainAction(context, user));
 		messageElement.subject.setText(message.getMessage());
-		messageElement.sentUserNick.setText(message.getSentUser().getNick());
-		messageElement.sentUserNick.setOnClickListener(new GotoUserMainAction(context, message.getSentUser()));
+		
+		if (type == MessageType.RECEIVED) {
+		    messageElement.sentUserNick.setText(message.getSentUser().getNick());
+		    messageElement.sentUserNick.setOnClickListener(new GotoUserMainAction(context, message.getSentUser()));
+		}
 		messageElement.receivedUserNick.setText(message.getReceivedUser().getNick());
 		messageElement.receivedUserNick.setOnClickListener(new GotoUserMainAction(context, message.getReceivedUser()));
 		String createdAt = TimeUtil.parseString(

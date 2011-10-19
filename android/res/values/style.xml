@@ -741,6 +741,7 @@
   <style name="row_simple_Item">
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">@dimen/row_simple_user_height</item>
+    <item name="android:singleLine">true</item>
     <item name="android:textSize">@dimen/row_simple_txt_size</item>
     <item name="android:textColor">@color/matji_gray</item>
   </style>

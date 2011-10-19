@@ -8,5 +8,6 @@
 	<WebView
 		android:id="@+id/simple_webview"
 		style="@style/DefaultFill"
+		android:scrollbars="none"
 		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

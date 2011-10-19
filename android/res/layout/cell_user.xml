@@ -55,13 +55,13 @@
 		<!-- country -->
 		<TextView
 			android:id="@+id/cell_user_area_label"
-			android:layout_toLeftOf="@+id/cell_user_like_list"
 			android:layout_toRightOf="@id/cell_user_profile"
 			android:layout_below="@id/cell_user_point"
 			style="@style/cell_user_AreaLabel" />
 
 		<TextView
 			android:id="@+id/cell_user_area"
+			android:text="가나다라"
 			android:layout_toRightOf="@id/cell_user_area_label"
 			android:layout_alignBottom="@id/cell_user_area_label"
 			android:layout_toLeftOf="@+id/cell_user_like_list"

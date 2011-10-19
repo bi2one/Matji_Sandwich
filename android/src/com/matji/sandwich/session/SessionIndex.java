@@ -33,4 +33,5 @@ public class SessionIndex {
     public static final String PRIVATE_NEW_NOTICE_COUNT = "NewIcon.new_notice_count";
     public static final String PRIVATE_SAVED_USER_ID = "SessionPrivateUtil.user_id";
     public static final String PRIVATE_IS_CHECKED_SAVE_USER_ID = "SessionPrivateUtil.is_checked_save_user_id";
+    public static final String PRIVATE_IS_CHECKED_BRANDING_NOT_SHOWN = "SessionPrivateUtil.is_checked_branding_not_shown";
 }

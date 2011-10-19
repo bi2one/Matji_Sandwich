@@ -184,7 +184,7 @@
 	<!-- Write Message Activity -->
 	<dimen name="write_message_underbar_height">46.67dp</dimen>
 	<dimen name="write_message_underbar_btn_width">47.33dp</dimen>
-	<dimen name="write_message_underbar_text_size">12dp</dimen>
+	<dimen name="write_message_underbar_text_size">13.33dp</dimen>
 	
 	<!-- Subtitle -->
 	<dimen name="subtitle_size">14dp</dimen>
@@ -273,7 +273,7 @@
     <dimen name="branding_margin">3.33dp</dimen>
     <dimen name="branding_margin_bottom">33.33dp</dimen>
     <dimen name="branding_title_size">17.33dp</dimen>
-    <dimen name="branding_content_size">10dp</dimen>
+    <dimen name="branding_content_size">12dp</dimen>
     <dimen name="branding_p_margin">13.33dp</dimen>
     <dimen name="branding_update_margin">3.33dp</dimen>
     <dimen name="branding_content_side_margin">13.33dp</dimen>

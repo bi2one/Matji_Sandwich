@@ -176,6 +176,7 @@
   <string name="writing_content_received_user">받는 사람을 추가하세요.</string>
   <string name="writing_content_menu">메뉴를 입력하세요.</string>
   <string name="writing_content_search">검색할 단어를 입력하세요.</string>
+  <string name="writing_content_intro">소개를 입력하세요.</string>
   
   <!-- PostActivity -->
   <string name="post_does_not_exist">이야기가 존재하지 않습니다!</string>

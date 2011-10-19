@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/row_simple">
+	<TextView
+		android:id="@+id/row_country_name"
+		style="@style/row_simple_Item"
+		android:gravity="center_vertical"
+		android:layout_toLeftOf="@+id/row_country_radio" />
+	<RadioButton
+		android:id="@id/row_country_radio"
+		style="@style/DefaultWrap"
+		android:button="@drawable/icon_radio_selector"
+		android:clickable="false"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true" />
+</RelativeLayout>

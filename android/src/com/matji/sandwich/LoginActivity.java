@@ -1,7 +1,6 @@
 package com.matji.sandwich;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.matji.sandwich.base.BaseActivity;
@@ -33,12 +32,10 @@ public class LoginActivity extends BaseActivity implements Loginable {
 
     /* Loginable Interface methods */
     public void loginCompleted() {
-	Log.d("=====", "abcd");
         this.setResult(RESULT_OK);
         finish();
     }
 
     public void loginFailed() {
-        // show toast -> id, pw 확인해라
     }
 }

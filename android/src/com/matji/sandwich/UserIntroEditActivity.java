@@ -55,7 +55,8 @@ public class UserIntroEditActivity extends BaseActivity implements Completable, 
             public void onTextChanged(CharSequence s, int start, int count, int after) {
                 if (count == 0 
                         && field.getText().toString().trim().equals(
-                                session.getCurrentUser().getIntro())) {
+                                session.getCurrentUser().getIntro())
+                        || field.getText().length() == 0) {
                     title.lockCompletableButton();
                 } else {
                     title.unlockCompletableButton();

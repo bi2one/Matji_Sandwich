@@ -5,8 +5,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.session.Session;
+import com.matji.sandwich.session.SessionPrivateUtil;
 
 public class BrandingDialog extends Dialog {
 
@@ -14,11 +18,16 @@ public class BrandingDialog extends Dialog {
     
     public BrandingDialog(Context context, int theme) {
         super(context, theme);
+        init();
     }
 
     public BrandingDialog(Context context) {
         super(context);
+        init();
     }
+    
+    private void init() {
+    }    
 
     public static class Builder {
 
@@ -45,26 +54,34 @@ public class BrandingDialog extends Dialog {
                 }
             });
             
+            ((CheckBox) dialog.findViewById(R.id.dialog_branding_checkbox)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                private SessionPrivateUtil privateUtil = Session.getInstance(context).getPrivateUtil();
+                
+                @Override
+                public void onCheckedChanged(CompoundButton cb, boolean isChecked) {
+                    privateUtil.setIsCheckedBrandingNotShown(isChecked);
+                }
+            });
+            
             return dialog;
         }
     }
-    
+     
     public void setBrandingPopupListener(BrandingDialogListener listener) {
         this.listener = listener;
     }
     
     @Override
     public void show() {
-        // TODO Auto-generated method stub
         super.show();
         listener.shown();        
     }
     
     @Override
     public void dismiss() {
-        // TODO Auto-generated method stub
         super.dismiss();
         listener.dismissed();
+        Session.getInstance(getContext()).getConcretePreferenceProvider().commit(getContext());
     }
     
     public interface BrandingDialogListener {
