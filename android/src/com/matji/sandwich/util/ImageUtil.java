@@ -61,16 +61,19 @@ public class ImageUtil {
 	return (Drawable) (new BitmapDrawable(bitmap));
     }
 
-    public static File decodeFileToFile(File file, int compressRatio, boolean isScalable) {
-	Bitmap bitmap = decodeFile(file, isScalable);
+    public static File compressFile(File f, int compressRatio) {
+	Bitmap bitmap = null;
         File result = null;
         FileOutputStream resultStream = null;
+	
+	try {
+	    bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+	} catch(IOException e) {
+	    Log.d("Matji", e.toString());
+	    return null;
+	}
 
-    	if (bitmap == null) {
-    	    return null;
-    	}
-
-        try {
+	try {
             result = File.createTempFile("matji_", "_compressed.jpg");
             resultStream = new FileOutputStream(result);
         } catch(IOException e) {
@@ -112,13 +115,11 @@ public class ImageUtil {
 
             //decode with inSampleSize
             BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize=scale;
-            Bitmap result = BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+            o2.inSampleSize = scale;
 	    int rotateAngle = getRotateAngle(f);
-	    if (rotateAngle != 0) {
-		result = rotate(result, rotateAngle);
-	    }
-            return result;
+
+	    return rotate(BitmapFactory.decodeStream(new FileInputStream(f), null, o2),
+			  rotateAngle);
         } catch (FileNotFoundException e) {}
         return null;
     }
@@ -146,6 +147,10 @@ public class ImageUtil {
     }
 
     public static Bitmap rotate(Bitmap bitmap, int angle) {
+	if (angle == 0) {
+	    return bitmap;
+	}
+	
 	Matrix matrix = new Matrix();
 	matrix.postRotate(angle);
 	return Bitmap.createBitmap(bitmap,
