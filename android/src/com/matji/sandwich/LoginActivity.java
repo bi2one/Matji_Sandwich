@@ -24,6 +24,7 @@ public class LoginActivity extends BaseActivity implements Loginable {
         title = ((HomeTitle) findViewById(R.id.Titlebar));
         title.setTitle(R.string.default_string_login);
         loginView = (LoginView) findViewById(R.id.login_view);
+        loginView.notificationShow();
     }
     
     public void loginButtonClicked(View v) {

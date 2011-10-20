@@ -22,7 +22,7 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.StoreMapNearListView;
-import com.matji.sandwich.widget.dialog.SimpleNotificationDialog;
+import com.matji.sandwich.widget.dialog.SimpleNotificationPopup;
 
 public class MainMapActivity extends BaseMapActivity implements OverlayClickListener,
 GpsManager.StartConfigListener {
@@ -85,7 +85,7 @@ GpsManager.StartConfigListener {
                 new ImageGetter(),
                 null);
 
-        new SimpleNotificationDialog(this, getClass().toString(), cs).show();
+        new SimpleNotificationPopup(this, getClass().toString(), cs).show();
     }
     
     private class ImageGetter implements Html.ImageGetter {

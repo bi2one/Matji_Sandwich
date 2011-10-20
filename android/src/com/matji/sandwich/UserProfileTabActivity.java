@@ -51,6 +51,9 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         tabHost = (RoundTabHost) getTabHost();
         loginView = (LoginView) findViewById(R.id.login_view);
 
+        if (!session.isLogin() && isMainTabActivity) {
+            loginView.notificationShow();
+        }
         user = (isMainTabActivity) ? session.getCurrentUser() : UserTitle.title_user;
         setUser(user);
     }
