@@ -6,20 +6,29 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.exception.MatjiException;
+import com.matji.sandwich.http.DialogAsyncTask;
+import com.matji.sandwich.http.request.StoreCloseHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.PhoneCallUtil;
 import com.matji.sandwich.widget.cell.StoreCell;
+import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
+import com.matji.sandwich.widget.dialog.SimpleListDialog;
 import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreDefaultInfoActivity extends BaseActivity implements Refreshable {
-    private StoreTitle title;
+public class StoreDefaultInfoActivity extends BaseActivity implements Refreshable, Requestable, SimpleListDialog.OnClickListener, SimpleAlertDialog.OnClickListener {
+	private static final int TAG_STORE_CLOSE = 1;
+	
+	private StoreTitle title;
     private StoreCell storeCell;
 
 //    private TextView tvName;
@@ -28,6 +37,9 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     private TextView tvAddress;
     private TextView tvWebsite;
     private PhoneCallUtil phoneCallUtil;
+    
+    private SimpleListDialog listDialog;
+    private SimpleAlertDialog successDialog;
 
     public int setMainViewId() {
         return R.id.activity_store_default_info;
@@ -136,10 +148,49 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
         if (!session.isLogin()) {
             startActivity(new Intent(this, LoginActivity.class));
         } else {
+        	String a[] = { MatjiConstants.string(R.string.default_string_store_modify_request), 
+        					MatjiConstants.string(R.string.default_string_store_close)};
+        	listDialog = new SimpleListDialog(this, null, a);
+        	successDialog = new SimpleAlertDialog(this, R.string.store_close_success);
+
+        	listDialog.setOnClickListener(this);
+        	successDialog.setOnClickListener(this);
+        	listDialog.show();
+    	}
+    }
+
+	public void onItemClick(SimpleDialog dialog, int position) {
+		switch (position) {
+		case 0:
         	Intent intent = new Intent(this, StoreModifyActivity.class);
         	intent.putExtra(StoreModifyActivity.STORE, (Parcelable) StoreDetailInfoTabActivity.store);
         	startActivity(intent);
-    	}
-    }
-    
+			break;
+		case 1:
+			StoreCloseHttpRequest request = new StoreCloseHttpRequest(StoreDefaultInfoActivity.this);
+			request.actionClose(StoreDetailInfoTabActivity.store.getId());
+			DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, TAG_STORE_CLOSE);
+			requestTask.execute();
+			break;
+		}
+	}
+
+	public void onConfirmClick(SimpleDialog dialog) {
+		if (dialog == successDialog) {
+			setResult(RESULT_OK);
+			finish();
+		}
+	}
+
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		switch (tag) {
+		case TAG_STORE_CLOSE:
+			successDialog.show();
+			break;
+		}
+	}
+
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.performExceptionHandling(this);
+	}
 }

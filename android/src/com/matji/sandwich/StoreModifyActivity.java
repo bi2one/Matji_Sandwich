@@ -43,7 +43,7 @@ public class StoreModifyActivity extends BaseMapActivity implements Completable,
 		titleBar = (CompletableTitle) findViewById(R.id.activity_store_modify_title);
 		mapView = (StoreModifyMatjiMapView) findViewById(R.id.activity_store_modify_mapview);
 
-		titleBar.setTitle(R.string.store_modify_activity_title);
+		titleBar.setTitle(R.string.default_string_store_modify_request);
 		titleBar.setCompletable(this);
 
 		mapView.init(this);
