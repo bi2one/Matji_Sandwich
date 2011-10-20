@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/DefaultFill">
+	style="@style/DefaultFill"
+    android:paddingLeft="@dimen/dialog_simple_popup_side_padding"
+    android:paddingRight="@dimen/dialog_simple_popup_side_padding">
 	<TextView
-		android:id="@+id/dialog_matji_guide_title"
+		android:id="@+id/dialog_simple_popup_title"
+        android:textSize="@dimen/dialog_simple_popup_content_size"
 		android:textColor="@color/matji_white"
 		android:gravity="center"
 		android:background="@drawable/guide_title_bg"
@@ -12,10 +15,14 @@
 	<RelativeLayout
 		style="@style/DefaultWrap"
 		android:background="@drawable/guide_bg"
-		android:layout_below="@id/dialog_matji_guide_title">
+        android:paddingLeft="@dimen/dialog_simple_popup_text_side_padding"
+        android:paddingRight="@dimen/dialog_simple_popup_text_side_padding"
+		android:layout_below="@id/dialog_simple_popup_title">
 		<TextView
-			android:id="@+id/dialog_matji_guide_content"
+			android:id="@+id/dialog_simple_popup_content"
 			android:padding="@dimen/default_distance"
+            android:lineSpacingExtra="@dimen/dialog_simple_popup_line_spacing"
+            android:textSize="@dimen/dialog_simple_popup_content_size"
 			android:textColor="@color/matji_gray"
 			android:gravity="center"
 			style="@style/DefaultWidthFill" />
@@ -23,12 +30,13 @@
 			android:padding="@dimen/default_distance"
 			style="@style/DefaultWidthFill"
 			android:gravity="center"
-			android:layout_below="@id/dialog_matji_guide_content">
+			android:layout_below="@id/dialog_simple_popup_content">
 			<CheckBox
-				android:id="@+id/dialog_matji_guide_checkbox"
+				android:id="@+id/PopupCheckBox"
 				style="@style/DefaultWrap"
 				android:gravity="center"
-                android:text="@string/default_string_do_not_show_again"
+				android:text="@string/default_string_do_not_show_again"
+                android:textSize="@dimen/dialog_simple_popup_content_size"
 				android:textColor="@color/matji_light_gray"
 				android:button="@drawable/icon_guide_check_selelctor"
 				android:background="@drawable/btn_check_label_background"
@@ -36,6 +44,6 @@
 		</RelativeLayout>
 		<View
 			style="@style/HorizontalLine"
-			android:layout_below="@id/dialog_matji_guide_content" />
+			android:layout_below="@id/dialog_simple_popup_content" />
 	</RelativeLayout>
 </RelativeLayout>

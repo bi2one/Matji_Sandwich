@@ -1,11 +1,11 @@
 package com.matji.sandwich;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -20,7 +20,9 @@ import com.matji.sandwich.map.MainMatjiMapView;
 import com.matji.sandwich.overlay.OverlayClickListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionMapUtil;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.StoreMapNearListView;
+import com.matji.sandwich.widget.dialog.SimpleNotificationDialog;
 
 public class MainMapActivity extends BaseMapActivity implements OverlayClickListener,
 GpsManager.StartConfigListener {
@@ -28,7 +30,6 @@ GpsManager.StartConfigListener {
     private static final int REQUEST_CODE_STORE = 2;
     private static final int BASIC_SEARCH_LOC_LAT = 0;
     private static final int BASIC_SEARCH_LOC_LNG = 0;
-    private Context context;
     private MainMatjiMapView mapView;
     private StoreMapNearListView storeListView;
     private TextView addressView;
@@ -55,10 +56,9 @@ GpsManager.StartConfigListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_map);
 
-        context = getApplicationContext();
         // sessionLocationUtil = new SessionRecentLocationUtil(context);
         session = Session.getInstance(this);
-        sessionMapUtil = new SessionMapUtil(context);
+        sessionMapUtil = new SessionMapUtil(this);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
         addressWrapper = (RelativeLayout)findViewById(R.id.map_title_bar_address_wrapper);
         mapView = (MainMatjiMapView)findViewById(R.id.map_view);
@@ -77,7 +77,30 @@ GpsManager.StartConfigListener {
         // mapView.startMapCenterThread();
         isFirst = true;
         isStartConfig = false;
+
+
+
+        CharSequence cs = Html.fromHtml(
+                MatjiConstants.string(R.string.popup_main_map),
+                new ImageGetter(),
+                null);
+
+        new SimpleNotificationDialog(this, getClass().toString(), cs).show();
     }
+    
+    private class ImageGetter implements Html.ImageGetter {
+        public Drawable getDrawable(String source) {
+            source = source.replaceAll(".png", "");
+            int id = getResources().getIdentifier(source, "drawable", getPackageName());
+            
+            Drawable d = getResources().getDrawable(id);
+            int width = d.getIntrinsicWidth();
+            int height = d.getIntrinsicHeight();
+            d.setBounds(0, 0, width, height); //이미지 크기 설정
+            
+            return d;
+        }
+    };
 
     protected void onNotFlowResume() {
         if (!currentViewIsMap) {
@@ -120,7 +143,7 @@ GpsManager.StartConfigListener {
 
         // Log.d("=====", "mainmap activity pause");
         mapView.stopMapCenterThread();
-        
+
         HttpRequestManager.getInstance().cancelAllTask();
     }
 
@@ -143,12 +166,12 @@ GpsManager.StartConfigListener {
     }
 
     public void onChangeLocationClicked(View v) {
-        startActivityForResult(new Intent(context, ChangeLocationActivity.class), REQUEST_CODE_LOCATION);
+        startActivityForResult(new Intent(this, ChangeLocationActivity.class), REQUEST_CODE_LOCATION);
     }
 
     public void onMoveToNearPostClicked(View v) {
         sessionMapUtil.setCenter(mapView.getMapCenter());
-        Intent intent = new Intent(context, MainTabActivity.class);
+        Intent intent = new Intent(this, MainTabActivity.class);
         intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
 
         int subIndex = (session.isLogin())? 1 : 0;

@@ -19,13 +19,13 @@ import com.matji.sandwich.util.async.SimpleAsyncTask;
 import com.matji.sandwich.util.async.Threadable;
 import com.matji.sandwich.util.async.TimeAsyncTask;
 import com.matji.sandwich.widget.dialog.BrandingDialog;
-import com.matji.sandwich.widget.dialog.BrandingDialog.BrandingDialogListener;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
+import com.matji.sandwich.widget.dialog.PopupDialog.PopupListener;
 
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener, 
 SimpleAsyncTask.ProgressListener,
-BrandingDialogListener {
+PopupListener {
     private static final long LOADING_MIN_TIME = 1000;
     private static final long DIALOG_MIN_TIME = 2000;
     private ProgressDialog dialog;
@@ -47,8 +47,8 @@ BrandingDialogListener {
     private void init() {
         MatjiConstants.setContext(getApplicationContext());
         setContentView(R.layout.activity_intro);
-        brandingDialog = new BrandingDialog.Builder(this).create();
-        brandingDialog.setBrandingPopupListener(this);
+        brandingDialog = new BrandingDialog(this, getClass().toString());
+        brandingDialog.setPopupListener(this);
 
         updateDialog = new SimpleAlertDialog(IntroActivity.this, "최신 버전으로 업데이트 하세요.");
         dialog = new ProgressDialog(this);
@@ -92,11 +92,7 @@ BrandingDialogListener {
 
     protected void onResume() {
         super.onResume();
-        if (Session.getInstance(this).getPrivateUtil().isCheckedBrandingNotShown()) {
-            taskStart();
-        } else {
-            brandingDialog.show();
-        }
+        brandingDialog.show();
     }
 
     public void onStop() {
@@ -188,7 +184,7 @@ BrandingDialogListener {
     public void dismissed() {
         taskStart();
     }
-    
+
     public void taskStart() {
         timeAsyncTask.execute();
         simpleAsyncTask.execute();
