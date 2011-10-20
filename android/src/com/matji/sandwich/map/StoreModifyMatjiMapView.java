@@ -110,6 +110,10 @@ public class StoreModifyMatjiMapView extends RelativeLayout implements MatjiMapV
 		return storeNameText.getText().toString();
 	}
 
+	public void setAddress(String storeAddress) {
+		addressText.setText(storeAddress);
+	}
+
 	public String getAddress() {
 		return addressText.getText().toString();
 	}
