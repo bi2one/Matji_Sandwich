@@ -58,51 +58,51 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param attrs
      */
     public PullToRefreshListView(Context context, AttributeSet attrs) {
-	super(context, attrs);
+        super(context, attrs);
 
-	flipAnimation = new RotateAnimation(0, -180,
-					    RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-					    RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-	flipAnimation.setInterpolator(new LinearInterpolator());
-	flipAnimation.setDuration(FLIP_ANIMATION_DURATION);
-	flipAnimation.setFillAfter(true);
+        flipAnimation = new RotateAnimation(0, -180,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+        flipAnimation.setInterpolator(new LinearInterpolator());
+        flipAnimation.setDuration(FLIP_ANIMATION_DURATION);
+        flipAnimation.setFillAfter(true);
 
-	reverseFlipAnimation = new RotateAnimation(-180, 0,
-						   RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-						   RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-	reverseFlipAnimation.setInterpolator(new LinearInterpolator());
-	reverseFlipAnimation.setDuration(FLIP_ANIMATION_DURATION);
-	reverseFlipAnimation.setFillAfter(true);
+        reverseFlipAnimation = new RotateAnimation(-180, 0,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+        reverseFlipAnimation.setInterpolator(new LinearInterpolator());
+        reverseFlipAnimation.setDuration(FLIP_ANIMATION_DURATION);
+        reverseFlipAnimation.setFillAfter(true);
 
-	inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	refreshView = inflater.inflate(R.layout.pull_to_refresh_header, null);
-	refreshText = (TextView)refreshView.findViewById(R.id.pull_to_refresh_text);
-	refreshImage = (ImageView)refreshView.findViewById(R.id.pull_to_refresh_image);
-	refreshProgress = (ProgressBar)refreshView.findViewById(R.id.pull_to_refresh_progress);
-	refreshLastUpdated = (TextView)refreshView.findViewById(R.id.pull_to_refresh_updated_at);
-	measureView(refreshView);
-	refreshViewHeight = refreshView.getMeasuredHeight();
-	baseTopPadding = refreshView.getPaddingTop();
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        refreshView = inflater.inflate(R.layout.pull_to_refresh_header, null);
+        refreshText = (TextView)refreshView.findViewById(R.id.pull_to_refresh_text);
+        refreshImage = (ImageView)refreshView.findViewById(R.id.pull_to_refresh_image);
+        refreshProgress = (ProgressBar)refreshView.findViewById(R.id.pull_to_refresh_progress);
+        refreshLastUpdated = (TextView)refreshView.findViewById(R.id.pull_to_refresh_updated_at);
+        measureView(refreshView);
+        refreshViewHeight = refreshView.getMeasuredHeight();
+        baseTopPadding = refreshView.getPaddingTop();
 
-	if (IS_ON)
-	    super.addHeaderView(refreshView);
+        if (IS_ON)
+            super.addHeaderView(refreshView);
 
-	stateFactory = new PullStateFactory(this);
-	defaultState = stateFactory.getState(PullStateFactory.State.DEFAULT);
-	startState = stateFactory.getState(PullStateFactory.State.START);
-	pullToRefreshState = stateFactory.getState(PullStateFactory.State.PULL_TO_REFRESH);
-	releaseToRefreshState = stateFactory.getState(PullStateFactory.State.RELEASE_TO_REFRESH);
-	reloadingState = stateFactory.getState(PullStateFactory.State.RELOADING);
-	state = defaultState;
+        stateFactory = new PullStateFactory(this);
+        defaultState = stateFactory.getState(PullStateFactory.State.DEFAULT);
+        startState = stateFactory.getState(PullStateFactory.State.START);
+        pullToRefreshState = stateFactory.getState(PullStateFactory.State.PULL_TO_REFRESH);
+        releaseToRefreshState = stateFactory.getState(PullStateFactory.State.RELEASE_TO_REFRESH);
+        reloadingState = stateFactory.getState(PullStateFactory.State.RELOADING);
+        state = defaultState;
 
-	setOnScrollListener(this);
+        setOnScrollListener(this);
     }
 
     /**
      * 윈도우에 이 뷰가 올라갈때 실행하는 메소드, 초기 리스트 위치를 정해준다.
      */
     protected void onAttachedToWindow() {
-	resetSelection();
+        resetSelection();
     }
 
     /**
@@ -111,8 +111,8 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param adapter 연결할 ListAdapter
      */
     public void setAdapter(ListAdapter adapter) {
-	super.setAdapter(adapter);
-	resetSelection();
+        super.setAdapter(adapter);
+        resetSelection();
     }
 
     /**
@@ -121,7 +121,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param onRefreshListener 실제 refresh를 수행하는 listener
      */
     public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
-	this.onRefreshListener = onRefreshListener;
+        this.onRefreshListener = onRefreshListener;
     }
 
     /**
@@ -131,23 +131,23 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param l 아래쪽 스크롤로 등록할 OnScrollListener
      */
     public void setPullDownScrollListener(OnScrollListener l) {
-	pullDownListener = l;
+        pullDownListener = l;
     }
 
     /**
      * 뷰의 refresh를 담당하는 부분
      */
     public void refresh() {
-	resetHeaderPadding();
+        resetHeaderPadding();
 
-	refreshImage.setVisibility(View.GONE);
-	refreshImage.setImageDrawable(null);
-	refreshProgress.setVisibility(View.VISIBLE);
+        refreshImage.setVisibility(View.GONE);
+        refreshImage.setImageDrawable(null);
+        refreshProgress.setVisibility(View.VISIBLE);
 
-	refreshText.setText(R.string.pull_to_refresh_refreshing_label);
+        refreshText.setText(R.string.pull_to_refresh_refreshing_label);
 
-	onRefresh();
-	onRefreshListener.onRefresh();
+        onRefresh();
+        onRefreshListener.onRefresh();
     }
 
     public void onRefresh() { };
@@ -158,31 +158,31 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param topPadding 위쪽 padding값
      */
     public void applyHeaderPadding(int topPadding) {
-	refreshView.setPadding(refreshView.getPaddingLeft(),
-			       topPadding,
-			       refreshView.getPaddingRight(),
-			       refreshView.getPaddingBottom());
+        refreshView.setPadding(refreshView.getPaddingLeft(),
+                topPadding,
+                refreshView.getPaddingRight(),
+                refreshView.getPaddingBottom());
     }
 
     /**
      * refreshView의 padding을 원위치 시킨다.
      */
     public void resetHeaderPadding() {
-	applyHeaderPadding(baseTopPadding);
+        applyHeaderPadding(baseTopPadding);
     }
 
     /**
      * refreshView를 초기화하고 원위치 시킨다.
      */
     public void resetHeader() {
-	resetHeaderPadding();
-	pullStartedY = -1;
-	movedY = 0;
-	refreshText.setText(R.string.pull_to_refresh_pull_label);
-	refreshImage.setImageResource(R.drawable.ic_pulltorefresh_arrow);
-	refreshImage.clearAnimation();
-	refreshProgress.setVisibility(View.GONE);
-	refreshImage.setVisibility(View.VISIBLE);
+        resetHeaderPadding();
+        pullStartedY = -1;
+        movedY = 0;
+        refreshText.setText(R.string.pull_to_refresh_pull_label);
+        refreshImage.setImageResource(R.drawable.ic_pulltorefresh_arrow);
+        refreshImage.clearAnimation();
+        refreshProgress.setVisibility(View.GONE);
+        refreshImage.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -191,23 +191,23 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param child 측정 준비할 View
      */
     private void measureView(View child) {
-	ViewGroup.LayoutParams p = child.getLayoutParams();
-	if (p == null) {
-	    p = new ViewGroup.LayoutParams(
-					   ViewGroup.LayoutParams.FILL_PARENT,
-					   ViewGroup.LayoutParams.WRAP_CONTENT);
-	}
+        ViewGroup.LayoutParams p = child.getLayoutParams();
+        if (p == null) {
+            p = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.FILL_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
 
-	int childWidthSpec = ViewGroup.getChildMeasureSpec(0,
-							   0 + 0, p.width);
-	int lpHeight = p.height;
-	int childHeightSpec;
-	if (lpHeight > 0) {
-	    childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight, MeasureSpec.EXACTLY);
-	} else {
-	    childHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
-	}
-	child.measure(childWidthSpec, childHeightSpec);
+        int childWidthSpec = ViewGroup.getChildMeasureSpec(0,
+                0 + 0, p.width);
+        int lpHeight = p.height;
+        int childHeightSpec;
+        if (lpHeight > 0) {
+            childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight, MeasureSpec.EXACTLY);
+        } else {
+            childHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+        }
+        child.measure(childWidthSpec, childHeightSpec);
     }
 
     /**
@@ -218,36 +218,36 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @return 다른 하위 이벤트 감시 함수들을 추가로 허용할지 여부
      */
     public boolean onTouchEvent(MotionEvent event) {
-	if(IS_ON) {
-	    currentY = (int) event.getY();
-	    if (pullStartedY != -1)
-		movedY = currentY - pullStartedY;
+        if(IS_ON) {
+            currentY = (int) event.getY();
+            if (pullStartedY != -1)
+                movedY = currentY - pullStartedY;
 
-	    switch(event.getAction()) {
-	    case MotionEvent.ACTION_UP:
-		state.onActionUp();
-		break;
-	    case MotionEvent.ACTION_MOVE:
-		state.onActionMove();
-		if (movedY <= HEADER_REFRESH_LIMIT) {
-		    state.onYCordinateLessThanLimit();
-		} else {
-		    state.onYCordinateLargerThanLimit();
-		}
+            switch(event.getAction()) {
+            case MotionEvent.ACTION_UP:
+                state.onActionUp();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                state.onActionMove();
+                if (movedY <= HEADER_REFRESH_LIMIT) {
+                    state.onYCordinateLessThanLimit();
+                } else {
+                    state.onYCordinateLargerThanLimit();
+                }
 
-		if (movedY < 0) {
-		    state.onYCordinateMoveBelow();
-		} else if (movedY <= HEADER_REFRESH_LIMIT) {
-		    state.onYCordinateMoveAboveLessThanLimit();
-		} else {
-		    state.onYCordinateMoveAboveLargerThanLimit();
-		}
+                if (movedY < 0) {
+                    state.onYCordinateMoveBelow();
+                } else if (movedY <= HEADER_REFRESH_LIMIT) {
+                    state.onYCordinateMoveAboveLessThanLimit();
+                } else {
+                    state.onYCordinateMoveAboveLargerThanLimit();
+                }
 
-		break;
-	    }
-	}
+                break;
+            }
+        }
 
-	return super.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
     /**
@@ -259,23 +259,23 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param totalItemCount
      */
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-	if (IS_ON) {
-	    if (firstVisibleItem == 0) {
-		state.onFirstElement();
-	    } else if (firstVisibleItem != 0) {
-		state.onNotFirstElement();
-	    }
-	}
+        if (IS_ON) {
+            if (firstVisibleItem == 0) {
+                state.onFirstElement();
+            } else if (firstVisibleItem != 0) {
+                state.onNotFirstElement();
+            }
+        }
 
-	if (pullDownListener != null)
-	    pullDownListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+        if (pullDownListener != null)
+            pullDownListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-	switch(scrollState) {
-	case OnScrollListener.SCROLL_STATE_IDLE:
-	    state.onScrollIdle();
-	}
+        switch(scrollState) {
+        case OnScrollListener.SCROLL_STATE_IDLE:
+            state.onScrollIdle();
+        }
     }
 
     /**
@@ -284,75 +284,75 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * @param state 새로 설정할 state
      */
     public void setState(PullState state) {
-	this.state = state;
+        this.state = state;
     }
 
     /**
      * Resets the list to a normal state after a refresh.
      */
     public void onRefreshComplete() {
-	if (IS_ON) {
-	    resetHeader();
-	    state.onRefreshOk();
-	    showRefreshView();
-	}
+        if (IS_ON) {
+            resetHeader();
+            state.onRefreshOk();
+            showRefreshView();
+        }
 
-	// If refresh view is visible when loading completes, scroll down to
-	// the next item.
+        // If refresh view is visible when loading completes, scroll down to
+        // the next item.
 
-	// if (refreshView.getBottom() > 0) {
-	//     invalidateViews();
-	//     resetSelection();
-	// }
-	// resetSelection();
+        // if (refreshView.getBottom() > 0) {
+        //     invalidateViews();
+        //     resetSelection();
+        // }
+        // resetSelection();
     }
 
     public void resetSelection() {
-	setSelection(LIST_BASE_INDEX);
+        setSelection(LIST_BASE_INDEX);
     }
 
     public PullState getDefaultState() {
-	return defaultState;
+        return defaultState;
     }
 
     public PullState getStartState() {
-	return startState;
+        return startState;
     }
 
     public PullState getPullToRefreshState() {
-	return pullToRefreshState;
+        return pullToRefreshState;
     }
 
     public PullState getReleaseToRefreshState() {
-	return releaseToRefreshState;
+        return releaseToRefreshState;
     }
 
     public PullState getReloadingState() {
-	return reloadingState;
+        return reloadingState;
     }
 
     public int getCurrentY() {
-	return currentY;
+        return currentY;
     }
 
     public void setPullStartedY(int y) {
-	pullStartedY = y;
+        pullStartedY = y;
     }
 
     public int getMovedY() {
-	return movedY;
+        return movedY;
     }
 
     public void startReleaseToRefreshAnimation() {
-	refreshText.setText(R.string.pull_to_refresh_release_label);
-	refreshImage.clearAnimation();
-	refreshImage.startAnimation(flipAnimation);
+        refreshText.setText(R.string.pull_to_refresh_release_label);
+        refreshImage.clearAnimation();
+        refreshImage.startAnimation(flipAnimation);
     }
 
     public void startPullToRefreshAnimation() {
-	refreshText.setText(R.string.pull_to_refresh_pull_label);
-	refreshImage.clearAnimation();
-	refreshImage.startAnimation(reverseFlipAnimation);
+        refreshText.setText(R.string.pull_to_refresh_pull_label);
+        refreshImage.clearAnimation();
+        refreshImage.startAnimation(reverseFlipAnimation);
     }
 
     /**
@@ -360,20 +360,20 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * refreshed.
      */
     public interface OnRefreshListener {
-	/**
-	 * Called when the list should be refreshed.
-	 * <p>
-	 * A call to {@link PullToRefreshListView #onRefreshComplete()} is
-	 * expected to indicate that the refresh has completed.
-	 */
-	public void onRefresh();
+        /**
+         * Called when the list should be refreshed.
+         * <p>
+         * A call to {@link PullToRefreshListView #onRefreshComplete()} is
+         * expected to indicate that the refresh has completed.
+         */
+        public void onRefresh();
     }
 
     public void hideRefreshView() {
-	refreshView.setVisibility(View.GONE);
+        refreshView.setVisibility(View.GONE);
     }
 
     public void showRefreshView() {
-	refreshView.setVisibility(View.VISIBLE);
+        refreshView.setVisibility(View.VISIBLE);
     }
 }

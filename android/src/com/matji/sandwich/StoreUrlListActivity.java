@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.http.request.UrlHttpRequest.UrlType;
@@ -79,7 +80,6 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
             listView.setId(StoreMainActivity.store.getId());
             refresh();
         }
-
     }
 
     @Override
@@ -95,6 +95,12 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
                 storeCell.setStore(StoreMainActivity.store);
                 storeCell.refresh();
                 setIsFlow(true);
+            }
+            break;
+        case WRITE_POST_ACTIVITY:
+            Activity parent = getParent();
+            if (parent instanceof BaseTabActivity) {
+                ((BaseTabActivity) parent).getTabHost().setCurrentTab(0);
             }
             break;
         }        

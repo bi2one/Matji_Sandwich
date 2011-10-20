@@ -51,7 +51,7 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
         listView.addHeaderView(storeInfoCell);
         listView.setStore(StoreMainActivity.store);
         listView.setActivity(this);
-        listView.requestReload();
+        listView.refresh();
     }
 
     @Override
@@ -112,7 +112,7 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
 
     @Override
     public void refresh() {
-        storeCell.refresh();
+        listView.refresh();
     }
 
     @Override
@@ -120,9 +120,10 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
         if (data instanceof Store) {
             StoreMainActivity.store = (Store) data;
             listView.setStore(StoreMainActivity.store);
+            refresh();
         }
     }
 
     @Override
-    public void refresh(ArrayList<MatjiData> data) {}
+    public void refresh(ArrayList<MatjiData> data) {}    
 }

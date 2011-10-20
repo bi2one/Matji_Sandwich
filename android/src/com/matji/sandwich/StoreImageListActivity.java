@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.util.MatjiConstants;
@@ -56,7 +57,7 @@ public class StoreImageListActivity extends BaseActivity implements Refreshable 
         listView.setActivity(this);
         listView.requestReload();
     }
-
+    
     @Override
     protected void onNotFlowResume() {
         // TODO Auto-generated method stub
@@ -89,6 +90,13 @@ public class StoreImageListActivity extends BaseActivity implements Refreshable 
             if (resultCode == Activity.RESULT_OK) {
                 StoreMainActivity.store = (Store) data.getParcelableExtra(StoreMainActivity.STORE);
                 setIsFlow(true);
+            }
+            break;
+            
+        case WRITE_POST_ACTIVITY:
+            Activity parent = getParent();
+            if (parent instanceof BaseTabActivity) {
+                ((BaseTabActivity) parent).getTabHost().setCurrentTab(0);
             }
             break;
         }

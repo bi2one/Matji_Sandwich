@@ -155,5 +155,5 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         lastStartedChild.activityResultDelivered(requestCode, resultCode, data);
-    }    
+    }
 }

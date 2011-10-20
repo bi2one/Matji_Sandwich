@@ -49,4 +49,8 @@ public class SimpleAlertDialog implements SimpleDialog, DialogInterface.OnClickL
     public interface OnClickListener {
         public void onConfirmClick(SimpleDialog dialog);
     }
+    
+    public void setCancelable(boolean cancelable) {
+        dialog.setCancelable(cancelable);
+    }
 }
