@@ -47,7 +47,7 @@ public class UserIntroCell extends Cell {
         
         String intro = user.getIntro();
         if (intro.equals("")) {
-            intro = MatjiConstants.string(R.string.default_string_not_exist_intro);
+            intro = MatjiConstants.string(R.string.not_exist_intro);
         }
         ((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(intro);
     }

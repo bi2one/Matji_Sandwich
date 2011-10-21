@@ -32,7 +32,7 @@ public class UserEditCell extends Cell implements OnClickListener {
     private CellEditProfileImageView profile;
     private TextView nickText;
     private TextView useridText;
-    private TextView usermailText;
+//    private TextView usermailText;
     private Button editNickButton;
 
     private ArrayList<Refreshable> refreshables;
@@ -88,7 +88,7 @@ public class UserEditCell extends Cell implements OnClickListener {
         profile = (CellEditProfileImageView) findViewById(R.id.edit_profile);
         nickText = (TextView) findViewById(R.id.cell_user_edit_nick);
         useridText = (TextView) findViewById(R.id.cell_user_edit_userid);
-        usermailText = (TextView) findViewById(R.id.cell_user_edit_usermail);
+//        usermailText = (TextView) findViewById(R.id.cell_user_edit_usermail);
         editNickButton = (Button) findViewById(R.id.cell_user_edit_nick_btn);
 
         
@@ -131,7 +131,7 @@ public class UserEditCell extends Cell implements OnClickListener {
         profile.showInsetBackground();
         nickText.setText(user.getNick());
         useridText.setText(user.getUserid());
-        usermailText.setText(user.getEmail());
+//        usermailText.setText(user.getEmail());
     }
 
     public void reloadProfile() {

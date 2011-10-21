@@ -76,7 +76,7 @@
 			<TextView
 				style="@style/DefaultFill"
 				android:layout_marginTop="@dimen/default_distance"
-				android:text="@string/edit_password_guide"
+				android:text="@string/export_to_guide"
 				android:textSize="@dimen/edit_guide_size"
 				android:textColor="@color/matji_orange"
 				android:gravity="center"

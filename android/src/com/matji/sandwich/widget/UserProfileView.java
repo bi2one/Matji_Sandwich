@@ -141,13 +141,13 @@ public class UserProfileView extends RelativeLayout implements Refreshable {
     public void refresh() {
         String intro = user.getIntro();
         if (intro.equals("")) {
-            intro = MatjiConstants.string(R.string.default_string_not_exist_intro);
+            intro = MatjiConstants.string(R.string.not_exist_intro);
         }
         introText.setText(intro);
 
         String website = user.getWebsite();
         if (website.equals("")) {
-            website = MatjiConstants.string(R.string.default_string_not_exist_website);
+            website = MatjiConstants.string(R.string.not_exist_website);
         }
         websiteText.setText(website);
         followingCount.setText(user.getFollowingCount() + "");

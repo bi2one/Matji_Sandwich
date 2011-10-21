@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.AlarmSetting;
@@ -37,33 +38,36 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
 
     private Session session;
 
+    private Toast notExistEmailAppToast;
+    
     private HomeTitle title;
-    private Drawable iconNew;
+    
     private TextView tvAccountManage;
-    private View accountManageWrapper;
     private TextView tvNick;
-    private Button btnLogout;
-    private View editProfileWrapper;
     private TextView tvLinkTwitter;
     private TextView tvLinkFacebook;
-    private View alarmTitle;
-    private View alarmWrapper;
-    private CheckBox cbCommentAlarm;
-    private ViewGroup commentAlarmSpinner;
-    private CheckBox cbLikeAlarm;
-    private ViewGroup likeAlarmSpinner;
-    private CheckBox cbFollowAlarm;
-    private ViewGroup followAlarmSpinner;
-    private CheckBox cbMessageAlarm;
-    private ViewGroup messageAlarmSpinner;
-    private View noticeWrapper;
     private TextView tvNotice;
     private TextView tvGuide;
     private TextView tvReport;
     private TextView tvVersion;
+    private View accountManageWrapper;
+    private View editProfileWrapper;
+    private View alarmTitle;
+    private View alarmWrapper;
+    private ViewGroup commentAlarmSpinner;
+    private ViewGroup likeAlarmSpinner;
+    private ViewGroup followAlarmSpinner;
+    private ViewGroup messageAlarmSpinner;
+    private CheckBox cbCommentAlarm;
+    private CheckBox cbLikeAlarm;
+    private CheckBox cbFollowAlarm;
+    private CheckBox cbMessageAlarm;
+    private Button btnLogout;
     private Button updateButton;
     private String update_ver;
-    
+    private Drawable iconNew;
+    private View noticeWrapper;
+
     private boolean isForceChecked = false;
 
     public HttpRequest request;
@@ -83,6 +87,8 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     private void init() {
         setContentView(R.layout.activity_settings);
 
+        notExistEmailAppToast = Toast.makeText(this, MatjiConstants.string(R.string.not_exist_email_client_app), Toast.LENGTH_SHORT);
+        
         session = Session.getInstance(this);
         manager = HttpRequestManager.getInstance();
 
@@ -231,10 +237,32 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         startActivity(intent);
     }
     
-    public void reportClicked() {}
+    public void reportClicked() {
+        
+        String[] matjiEmail = {MatjiConstants.string(R.string.default_string_matji_email)};
+        String title = (session.isLogin()) ?
+                String.format(
+                        MatjiConstants.string(R.string.settings_service_report_title),
+                        session.getCurrentUser().getNick())
+                :MatjiConstants.string(R.string.settings_service_report_title_guest);
+        String content = MatjiConstants.string(R.string.settings_service_report_content);
+        
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("plain/text");
+        i.putExtra(Intent.EXTRA_EMAIL, matjiEmail);
+        i.putExtra(Intent.EXTRA_SUBJECT, title);
+        i.putExtra(Intent.EXTRA_TEXT, content);
+        try{
+            startActivity(Intent.createChooser(i, MatjiConstants.string(R.string.settings_service_report)));
+        }catch(android.content.ActivityNotFoundException ex){
+            notExistEmailAppToast.show();
+        }
+        
+    }
     
     public void updateClicked() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=맛있는지도"));
+        String marketAddr = MatjiConstants.string(R.string.default_string_market_address);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(marketAddr));
         startActivity(intent);
     }
 

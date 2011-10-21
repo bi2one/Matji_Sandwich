@@ -100,7 +100,7 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 //
         tvTel.setText(
                 (tel == null || tel.equals("")) ?
-                        MatjiConstants.string(R.string.default_string_not_exist_tel)
+                        MatjiConstants.string(R.string.not_exist_tel)
                         : tel);
         tvAddress.setText(address);
 
