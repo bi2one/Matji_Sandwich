@@ -89,13 +89,13 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
         userEditCell.setUser(user);
         String intro = user.getIntro();
         if (intro.equals("")) {
-            intro = MatjiConstants.string(R.string.default_string_not_exist_intro);
+            intro = MatjiConstants.string(R.string.not_exist_intro);
         }
         tvIntro.setText(intro);
 
         String website = user.getWebsite();
         if (website.equals("")) {
-            website = MatjiConstants.string(R.string.default_string_not_exist_website);
+            website = MatjiConstants.string(R.string.not_exist_website);
         }
         tvWebsite.setText(website);
         String country = MatjiConstants.countryName(user.getCountryCode());

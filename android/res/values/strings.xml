@@ -108,6 +108,9 @@
   <string name="pull_to_refresh_tap_label">눌러서 새로고침</string>
 
   <!-- default String... -->
+  <string name="default_string_market_address">market://search?q=맛있는지도</string>
+  <string name="default_string_matji_email">matji@yummystory.com</string>
+  <string name="default_string_guest">비회원</string>
   <string name="default_string_nickname">닉네임</string>
   <string name="default_string_website">웹사이트</string>
   <string name="default_string_check_delete">삭제할까요?</string>
@@ -116,10 +119,6 @@
   <string name="default_string_tag">태그</string>
   <string name="default_string_title">%1$s의 맛집기행</string>
   <string name="default_string_intro">소개글</string>
-  <string name="default_string_not_exist_intro">소개글이 없습니다.</string>
-  <string name="default_string_not_exist_website">홈페이지를 등록해 주세요..</string>
-  <string name="default_string_not_exist_cover">소개글이 없습니다.</string>
-  <string name="default_string_not_exist_tel">전화번호를 등록해 주세요.</string>
   <string name="default_string_basic_info">소개</string>
   <string name="default_string_more_info">부가정보</string>
   <string name="default_string_info">정보</string>
@@ -168,6 +167,13 @@
   <string name="default_string_webreview_store">관련글</string>
   <string name="default_string_store_modify_request">정보 수정 요청</string>
   <string name="default_string_store_close">폐업 신고</string>	
+  
+  <!-- Not Exist -->  
+  <string name="not_exist_intro">소개글이 없습니다.</string>
+  <string name="not_exist_website">홈페이지를 등록해 주세요..</string>
+  <string name="not_exist_cover">소개글이 없습니다.</string>
+  <string name="not_exist_tel">전화번호를 등록해 주세요.</string>
+  <string name="not_exist_email_client_app">이메일 전송 어플리케이션이 존재하지 않습니다.</string>
   
   <!-- GpsManager.java -->
   <string name="gps_request_turn_on">GPS를 수신할 수 없습니다. 설정을 켜 주셔야 합니다</string>
@@ -401,7 +407,8 @@
   <!-- ExternalServiceActivity.java -->
   <string name="export_to_where">공유 설정</string>
   <string name="export_to_twitter">트위터로 내보내기</string>
-  <string name="export_to_facebook">페이스북로 내보내기</string>
+  <string name="export_to_facebook">페이스북으로 내보내기</string>
+  <string name="export_to_guide">페이스북, 트위터 보내기를 선택하시면 \n이야기가 동시에 등록됩니다.</string>
   
   
   <!-- StoreModifyActivity.java -->
@@ -527,8 +534,11 @@
   <string name="settings_service_notice">공지사항</string>
   <string name="settings_service_guide">서비스 안내</string>
   <string name="settings_service_report">버그신고 및 기능제안</string>
-  <string name="settings_service_version_name">1.3.5</string>
+  <string name="settings_service_version_name">1.5</string>
   <string name="settings_service_version_update">새버젼 받기</string>
+  <string name="settings_service_report_title">버그 및 기능 개선 [%1$s]</string>
+  <string name="settings_service_report_title_guest">버그 및 기능 개선</string>
+  <string name="settings_service_report_content">야미스토리 안에 있는 오류나 기능개선 사항을 알려주세요. \n빠른 시간 내에 반영해서 더 좋은 서비스가 되도록 노력하겠습니다.\n감사합니다.</string>
   
   <string name="setting_alarm_permit">permit</string>
   <string name="setting_alarm_spinner">view</string>
