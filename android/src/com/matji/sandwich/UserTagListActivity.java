@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
@@ -116,11 +117,11 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
     public void dismissTitle() {
         title.setVisibility(View.GONE);
     }
-
+    
     @Override
-    protected void onResume() {
+    protected void onNotFlowResume() {
         // TODO Auto-generated method stub
-        super.onResume();
+        super.onNotFlowResume();
         userCell.refresh();
     }
 
@@ -168,6 +169,15 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
                 userCell.refresh();
             }
             break;
+	    }
+	}
+	
+	@Override
+	public void setIsFlow(boolean isFlow) {
+	    super.setIsFlow(isFlow);
+	    
+	    if (getParent() instanceof BaseTabActivity) {
+	        ((BaseTabActivity) getParent()).setIsFlow(true);
 	    }
 	}
 }

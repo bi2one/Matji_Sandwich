@@ -32,7 +32,7 @@ public class SimpleStoreListView extends RequestableMListView {
 		setBackgroundResource(R.color.matji_white);
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
         setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_size));
-		setFadingEdgeLength((int) MatjiConstants.dimen(R.dimen.fade_edge_length));
+		setFadingEdgeLength(0);
 		setCacheColorHint(Color.TRANSPARENT);
 		setSelector(android.R.color.transparent);
 		

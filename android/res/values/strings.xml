@@ -138,6 +138,7 @@
   <string name="default_string_map">지도</string>
   <string name="default_string_store">맛집</string>
   <string name="default_string_alarm">알림</string>
+  <string name="default_string_notification">알림</string>
   <string name="default_string_search">검색</string>
   <string name="default_string_write_note">영업시간, 예약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
   <string name="default_string_recent_post">등록된 이야기가 없습니다.</string>
@@ -526,7 +527,7 @@
   <string name="settings_service_notice">공지사항</string>
   <string name="settings_service_guide">서비스 안내</string>
   <string name="settings_service_report">버그신고 및 기능제안</string>
-  <string name="settings_service_version_name">1.2.3</string>
+  <string name="settings_service_version_name">1.3.5</string>
   <string name="settings_service_version_update">새버젼 받기</string>
   
   <string name="setting_alarm_permit">permit</string>
@@ -674,6 +675,10 @@
   <string name="branding_update7">사용자 활동성에 따른 활동순위 노출</string>
   <string name="branding_content2">그외 UI 전면 개편 등 여러가지 면에서 많은 변화가 있습니다. 기존 맛있는 지도 앱과 달라 처음 사용하실 때 다소 불편하실 수도 있지만 이전보다 더 나아졌다는 점을 느끼실 겁니다.\n아울러 트위터, 페이스북 로그인 기능 그리고 트위터, 페이스북 등 외부 서비스의 친구찾기 기능도 업데이트될 예정입니다. 또한 영어, 일본어 언어팩 추가를 시작으로 서비스 언어를 하나씩 늘려나가면서 본격적으로 글로벌 서비스를 시작하려고 합니다.\n그 동안 맛있는 지도를 사랑해주신 여러분들의 변함없는 사랑을 부탁드립니다. 더욱 좋은 서비스로 보답하겠습니다.</string>
   <string name="branding_from">바나나위키 임직원 일동</string>
+  
+  <!-- Popup -->
+  <string name="popup_main_map">맛집을 찾으시려면 지도 안에 숫자를 확인하세요. 지도안의 숫자는 사용자들이  &lt;img src=\'icon_navi_like_touch.png\'/> \'좋아요\'버튼으로 추천한 횟수입니다.</string>
+  <string name="popup_login">맛있는 지도 브랜드를 변경하면서 회원정보를 더 간소화 하기 위해 이메일로 로그인하도록 하였습니다. 트위터/페이스북 계정으로도 사용이 가능합니다.</string>
   
   <!-- country codes -->
   <string name="country_code_AD">AD</string>

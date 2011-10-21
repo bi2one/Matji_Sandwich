@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.Session.LoginListener;
 import com.matji.sandwich.widget.UserProfileView;
@@ -78,6 +79,15 @@ public class UserProfileActivity extends BaseActivity implements LoginListener {
         if (isMainTabActivity) {
             userCell.setUser(session.getCurrentUser());
             userCell.refresh();
+        }
+    }
+
+    @Override
+    public void setIsFlow(boolean isFlow) {
+        super.setIsFlow(isFlow);
+        
+        if (getParent() instanceof BaseTabActivity) {
+            ((BaseTabActivity) getParent()).setIsFlow(true);
         }
     }
 }

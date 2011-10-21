@@ -66,13 +66,11 @@ public class SessionPrivateUtil {
         return mConcretePrefs.getBoolean(SessionIndex.PRIVATE_IS_CHECKED_SAVE_USER_ID, BASIC_IS_CHECKED);
     }
     
-    public void setIsCheckedBrandingNotShown(boolean isChecked) {
-        Log.d("Matji", isChecked+"");
-        mConcretePrefs.setBoolean(SessionIndex.PRIVATE_IS_CHECKED_BRANDING_NOT_SHOWN, isChecked);
+    public void setIsCheckedPopupNotShown(String tag, boolean isChecked) {
+        mConcretePrefs.setBoolean(tag, isChecked);
     }
     
-    public boolean isCheckedBrandingNotShown() {
-        Log.d("Matji", mConcretePrefs.getBoolean(SessionIndex.PRIVATE_IS_CHECKED_BRANDING_NOT_SHOWN, BASIC_IS_CHECKED)+"");
-        return mConcretePrefs.getBoolean(SessionIndex.PRIVATE_IS_CHECKED_BRANDING_NOT_SHOWN, BASIC_IS_CHECKED);
+    public boolean isCheckedPopupNotShown(String tag) {
+        return mConcretePrefs.getBoolean(tag, BASIC_IS_CHECKED);
     }
 }

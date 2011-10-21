@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultFill"
+	android:paddingLeft="@dimen/dialog_simple_popup_side_padding"
+	android:paddingRight="@dimen/dialog_simple_popup_side_padding">
+	<TextView
+		android:id="@+id/dialog_simple_popup_title"
+		android:textSize="@dimen/dialog_simple_popup_content_size"
+		android:textColor="@color/matji_white"
+		android:shadowColor="@color/dialog_simple_popup_title_shadow_color"
+        android:shadowDy="1.3"
+        android:shadowRadius="1"
+		android:gravity="center"
+		android:background="@drawable/guide_title_bg"
+		android:padding="@dimen/default_drawable_padding_long"
+		style="@style/DefaultWidthFill" />
+	<RelativeLayout
+		style="@style/DefaultWrap"
+		android:background="@drawable/guide_bg"
+		android:layout_below="@id/dialog_simple_popup_title">
+		<TextView
+			android:id="@+id/dialog_simple_popup_content"
+            android:paddingLeft="@dimen/dialog_simple_popup_text_side_padding"
+            android:paddingTop="@dimen/default_distance"
+            android:paddingRight="@dimen/dialog_simple_popup_text_side_padding"
+            android:paddingBottom="@dimen/default_distance"
+			android:lineSpacingExtra="@dimen/dialog_simple_popup_line_spacing"
+			android:textSize="@dimen/dialog_simple_popup_content_size"
+			android:textColor="@color/matji_gray"
+			android:gravity="center"
+			style="@style/DefaultWidthFill" />
+		<RelativeLayout
+			android:padding="@dimen/default_distance"
+			style="@style/DefaultWidthFill"
+			android:gravity="center"
+			android:layout_below="@id/dialog_simple_popup_content">
+			<CheckBox
+				android:id="@+id/PopupCheckBox"
+				style="@style/DefaultWrap"
+				android:gravity="center"
+				android:text="@string/default_string_do_not_show_again"
+				android:textSize="@dimen/dialog_simple_popup_content_size"
+				android:textColor="@color/matji_light_gray"
+				android:button="@drawable/icon_guide_check_selelctor"
+				android:background="@drawable/btn_check_label_background"
+				android:layout_marginRight="@dimen/default_distance" />
+		</RelativeLayout>
+		<View
+			style="@style/HorizontalLine"
+			android:layout_below="@id/dialog_simple_popup_content" />
+	</RelativeLayout>
+</RelativeLayout>

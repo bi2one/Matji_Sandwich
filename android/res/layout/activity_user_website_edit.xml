@@ -17,6 +17,7 @@
 			style="@style/DefaultWidthFill"
 			android:hint="@string/hint_write_website"
 			android:singleLine="true"
+			android:inputType="textWebEditText"
 			android:textSize="@dimen/default_edit_text_size"
 			android:background="@drawable/input_box_square" />
 		<TextView

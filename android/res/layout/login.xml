@@ -23,6 +23,7 @@
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:hint="@string/hint_write_usermail"
+				android:inputType="textEmailAddress"
 				android:textSize="@dimen/default_edit_text_size"
 				android:text="test2"
 				android:singleLine="true"

@@ -3,6 +3,7 @@ package com.matji.sandwich.widget;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 
@@ -28,9 +29,12 @@ public class SimplePostListView extends RequestableMListView {
     }
     
     protected void init() {
+        setBackgroundResource(R.color.matji_white);
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
-        setDividerHeight(1);
-        setBackgroundDrawable(null);
+        setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_size));
+        setFadingEdgeLength(0);
+        setCacheColorHint(Color.TRANSPARENT);
+        setSelector(android.R.color.transparent);
     }
 
     public HttpRequest request() {

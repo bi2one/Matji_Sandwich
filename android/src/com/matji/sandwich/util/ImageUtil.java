@@ -28,67 +28,67 @@ import java.io.FileNotFoundException;
 
 public class ImageUtil {
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float pixels, int inset) {
-	Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
-	Canvas canvas = new Canvas(output);
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
 
-	final int color = 0xff424242;
-	final Paint paint = new Paint();
-	final Rect rect = new Rect(inset, inset, bitmap.getWidth()-inset, bitmap.getHeight()-inset);
-	final RectF rectF = new RectF(rect);
-	final float roundPx = pixels;
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(inset, inset, bitmap.getWidth()-inset, bitmap.getHeight()-inset);
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
 
         paint.setAntiAlias(true);
-	canvas.drawARGB(0, 0, 0, 0);
-	paint.setColor(color);
-	canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
 
-	paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-	canvas.drawBitmap(bitmap, rect, rect, paint);
+        paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
 
-	return output;
+        return output;
     }
-	
+
     public static Bitmap getBitmap(Drawable drawable) {
-	Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Config.ARGB_8888);
-	Canvas canvas = new Canvas(bitmap);
-	drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-	drawable.draw(canvas);
-		
-	return bitmap;
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
-	
+
     public static Drawable getDrawable(Bitmap bitmap) {
-	return (Drawable) (new BitmapDrawable(bitmap));
+        return (Drawable) (new BitmapDrawable(bitmap));
     }
 
     public static File compressFile(File f, int compressRatio) {
-	Bitmap bitmap = null;
+        Bitmap bitmap = null;
         File result = null;
         FileOutputStream resultStream = null;
-	
-	try {
-	    bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
-	} catch(IOException e) {
-	    Log.d("Matji", e.toString());
-	    return null;
-	}
 
-	try {
+        try {
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+        } catch(IOException e) {
+            Log.d("Matji", e.toString());
+            return null;
+        }
+
+        try {
             result = File.createTempFile("matji_", "_compressed.jpg");
             resultStream = new FileOutputStream(result);
         } catch(IOException e) {
-    	    Log.d("Matji", e.toString());
-    	    return null;
+            Log.d("Matji", e.toString());
+            return null;
         }
-	
+
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, compressRatio, resultStream);
             resultStream.flush();
             resultStream.close();
             return result;
         } catch(IOException e) {
-    	    Log.d("Matji", e.toString());
-    	    return null;
+            Log.d("Matji", e.toString());
+            return null;
         }
     }
 
@@ -116,49 +116,50 @@ public class ImageUtil {
             //decode with inSampleSize
             BitmapFactory.Options o2 = new BitmapFactory.Options();
             o2.inSampleSize = scale;
-	    int rotateAngle = getRotateAngle(f);
+            int rotateAngle = getRotateAngle(f);
 
-	    return rotate(BitmapFactory.decodeStream(new FileInputStream(f), null, o2),
-			  rotateAngle);
+          return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+//            return rotate(BitmapFactory.decodeStream(new FileInputStream(f), null, o2),
+//                    rotateAngle);
         } catch (FileNotFoundException e) {}
         return null;
     }
 
     private static int getRotateAngle(File file) {
-	ExifInterface exif = null;
-	try {
-	    exif = new ExifInterface(file.getAbsolutePath());
-	} catch(IOException e) {
-	    Log.d("Matji", e.toString());
-	    return 0;
-	}
-	
-	int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-					       ExifInterface.ORIENTATION_NORMAL);
-	switch(orientation) {
-	case ExifInterface.ORIENTATION_ROTATE_90:
-	    return 90;
-	case ExifInterface.ORIENTATION_ROTATE_180:
-	    return 180;
-	case ExifInterface.ORIENTATION_ROTATE_270:
-	    return 270;
-	}
-	return 0;
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(file.getAbsolutePath());
+        } catch(IOException e) {
+            Log.d("Matji", e.toString());
+            return 0;
+        }
+
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL);
+        switch(orientation) {
+        case ExifInterface.ORIENTATION_ROTATE_90:
+            return 90;
+        case ExifInterface.ORIENTATION_ROTATE_180:
+            return 180;
+        case ExifInterface.ORIENTATION_ROTATE_270:
+            return 270;
+        }
+        return 0;
     }
 
     public static Bitmap rotate(Bitmap bitmap, int angle) {
-	if (angle == 0) {
-	    return bitmap;
-	}
-	
-	Matrix matrix = new Matrix();
-	matrix.postRotate(angle);
-	return Bitmap.createBitmap(bitmap,
-				   0,
-				   0,
-				   bitmap.getWidth(),
-				   bitmap.getHeight(),
-				   matrix,
-				   true);
+        if (angle == 0) {
+            return bitmap;
+        }
+
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(bitmap,
+                0,
+                0,
+                bitmap.getWidth(),
+                bitmap.getHeight(),
+                matrix,
+                true);
     }
 }

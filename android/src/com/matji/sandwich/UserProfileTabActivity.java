@@ -29,11 +29,11 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
 
     public static final String USER = "UserProfileTabActivity.user";
     public static final String IS_MAIN_TAB_ACTIVITY = "UserProfileTabActivity.is_main_tab_activity";
-
+    
     public int setMainViewId() {
         return R.id.activity_user_profile_tab;
     }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,10 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         tabHost = (RoundTabHost) getTabHost();
         loginView = (LoginView) findViewById(R.id.login_view);
 
+        if (!session.isLogin() && isMainTabActivity) {
+            loginView.notificationShow();
+        }
+        
         user = (isMainTabActivity) ? session.getCurrentUser() : UserTitle.title_user;
         setUser(user);
     }
@@ -78,19 +82,11 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         }
     }
 
-
-    @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-        syncTab();
-    }
-
     @Override
     protected void onNotFlowResume() {
         // TODO Auto-generated method stub
         super.onNotFlowResume();
-        refresh();
+        syncTab();
     }
 
     protected void loginTypeInit() {
@@ -114,7 +110,6 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
                 "tab2",
                 R.string.default_string_tag,
                 tagIntent);
-
     }
 
     protected void privateTypeInit() {

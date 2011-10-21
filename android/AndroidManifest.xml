@@ -118,8 +118,8 @@
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="StoreUrlListActivity" 
 				  android:screenOrientation="portrait"></activity>		
-        <activity android:name="UserMainActivity"
-                  android:screenOrientation="portrait"></activity>
+        <activity android:name="UserMainActivity"></activity>
+<!--                   android:screenOrientation="portrait"></activity> -->
         <activity android:name="UserNickEditActivity"
                   android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait"></activity>

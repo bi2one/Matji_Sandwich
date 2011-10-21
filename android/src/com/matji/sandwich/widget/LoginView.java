@@ -22,8 +22,12 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.RegisterActivity;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionPrivateUtil;
+import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.dialog.SimpleNotificationPopup;
 
 public class LoginView extends RelativeLayout implements OnClickListener, OnCheckedChangeListener {
+    
+    private SimpleNotificationPopup notification;
     private Toast toast;
 
     private EditText idField;
@@ -54,6 +58,8 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.login, this);
 
+        notification = new SimpleNotificationPopup(getContext(), getClass().toString(), MatjiConstants.string(R.string.popup_login));
+        
         toast = Toast.makeText(getContext(), R.string.login_writing_id_password, Toast.LENGTH_SHORT);
 
         idField = (EditText) findViewById(R.id.login_username);
@@ -146,6 +152,10 @@ public class LoginView extends RelativeLayout implements OnClickListener, OnChec
 
     }
 
+    public void notificationShow() {
+        notification.show();
+    }
+    
 	// @Override
 	// public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 	// 	Me me = (Me)data.get(0);

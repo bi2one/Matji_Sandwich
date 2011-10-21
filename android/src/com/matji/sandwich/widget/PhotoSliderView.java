@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -56,10 +57,10 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
                 float deltaX = e1.getX() - e2.getX();
                 if (Math.abs(deltaX) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_MIN_VALOCITY) {
                     if (deltaX < 0) {
-                        if (isExistLeftImage()) moveToLeft();
+                        if (existLeftImage()) moveToLeft();
                         return true;
                     } else if (deltaX > 0) {
-                        if (isExistRightImage()) moveToRight();
+                        if (existRightImage()) moveToRight();
                         return true;
                     } 
                     
@@ -93,11 +94,13 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
         photoCount = 0;
 
         wrapper = new RelativeLayout(getContext());
-        wrapper.setMinimumWidth(pageWidth * photoCount);
 
         left = createPage();
-        center = createPage();        
+        left.setBackgroundColor(Color.RED);
+        center = createPage();
+        center.setBackgroundColor(Color.GREEN);
         right = createPage();
+        right.setBackgroundColor(Color.BLUE);
 
         wrapper.addView(left);
         wrapper.addView(center);
@@ -201,21 +204,24 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
 
     public void setPhotoCount(int photoCount) {
         this.photoCount = photoCount;
+        if (photoCount == 1) {
+            wrapper.removeView(left);
+            wrapper.removeView(right);
+        }
     }
 
     public int getPhotoCount() {
         return photoCount;
     }
 
-    public boolean isExistLeftImage() {
+    public boolean existLeftImage() {
         return currItemPos-1 >= 0;
     }
 
-    public boolean isExistRightImage() {
-        Log.d(TAG, currItemPos+1+","+photoCount);
+    public boolean existRightImage() {
         return currItemPos+1 < photoCount;
     }
-
+    
     public void moveToRight() {
         currItemPos++;
         scrollToX = currItemPos * pageWidth;
@@ -247,14 +253,11 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
 
         int nextPageX = currItemPos * pageWidth;
         if (nextPageX - (float)pageWidth * SNAP_DISTANCE_WEIGHT >= l) {
-
             // left page changed
-            if (isExistLeftImage()) moveToLeft();
-
+            if (existLeftImage()) moveToLeft();
         } else if (nextPageX + (float)pageWidth * SNAP_DISTANCE_WEIGHT <= l) {
-
             // right page changed
-            if (isExistRightImage()) moveToRight();
+            if (existRightImage()) moveToRight();
         } else {
             smoothScrollToPosition(currItemPos);
         }

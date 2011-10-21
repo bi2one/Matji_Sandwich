@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/contentWrapper"
-	android:background="@color/matji_white"
+	android:id="@+id/activity_search"
 	style="@style/DefaultFill">
 	<LinearLayout
 		style="@style/DefaultVerticalFill">

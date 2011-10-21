@@ -103,7 +103,7 @@
 			android:paddingRight="@dimen/branding_content_side_margin"
 			android:layout_alignParentBottom="true">
 			<CheckBox
-				android:id="@+id/dialog_branding_checkbox"
+				android:id="@+id/PopupCheckBox"
 				style="@style/DefaultWrap"
 				android:gravity="center"
 				android:layout_centerVertical="true"

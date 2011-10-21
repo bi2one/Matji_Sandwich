@@ -209,14 +209,14 @@ public class ImageSliderActivity extends BaseActivity implements Requestable, On
     }
 
     public void refreshLeftImageView() {
-        if (slider.isExistLeftImage()) {
+        if (slider.existLeftImage()) {
             imageLoader.cancel(slider.getLeftImageView());
             slider.getLeftImageView().setImageDrawable(null);
             imageLoader.DisplayImage(this,
                     ImageLoader.UrlType.ATTACH_FILE,
                     ImageLoader.ImageSize.XLARGE,
                     slider.getLeftImageView(),
-                    attachFiles[slider.getCurrentItemPosition()-1].getId());
+                    attachFiles[slider.getCurrentItemPosition()-1].getId(), false);
         }
     }
 
@@ -228,25 +228,25 @@ public class ImageSliderActivity extends BaseActivity implements Requestable, On
                 ImageLoader.UrlType.ATTACH_FILE,
                 ImageLoader.ImageSize.XLARGE,
                 slider.getCenterImageView(),
-                attachFiles[slider.getCurrentItemPosition()].getId());
+                attachFiles[slider.getCurrentItemPosition()].getId(), false);
     }
 
 
     public void refreshRightImageView() {
-        if (slider.isExistRightImage()) {
+        if (slider.existRightImage()) {
             imageLoader.cancel(slider.getRightImageView());
             slider.getRightImageView().setImageDrawable(null);
             imageLoader.DisplayImage(this,
                     ImageLoader.UrlType.ATTACH_FILE,
                     ImageLoader.ImageSize.XLARGE,
                     slider.getRightImageView(),
-                    attachFiles[slider.getCurrentItemPosition()+1].getId());
+                    attachFiles[slider.getCurrentItemPosition()+1].getId(), false);
         }
     }
 
 
     public void changedPage() {
-        manager.cancelTask();
+//        manager.cancelTask();
         count.setText(
                 MatjiConstants.string(R.string.default_string_image) 
                 + " " + (slider.getCurrentItemPosition()+1) + "/" + attachFiles.length);

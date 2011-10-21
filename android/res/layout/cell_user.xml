@@ -78,7 +78,7 @@
 		android:layout_alignParentBottom="true" />
 	<ImageView
 		android:id="@+id/cell_user_shadow"
-		android:src="@drawable/img_shadow"
+		android:background="@drawable/img_shadow"
 		style="@style/DefaultWidthFill"
 		android:layout_alignParentBottom="true" />
 </RelativeLayout>
