@@ -36,7 +36,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
 
     public static final String IF_INDEX = "MainTabActivity.index";
     public static final String IF_SUB_INDEX = "MainTabActivity.sub_index";
-    public static final int IV_INDEX_MAP = 0;
+     static final int IV_INDEX_MAP = 0;
     public static final int IV_INDEX_POST = 1;
     public static final int IV_INDEX_RANKING = 2;
     public static final int IV_INDEX_CONFIG = 3;

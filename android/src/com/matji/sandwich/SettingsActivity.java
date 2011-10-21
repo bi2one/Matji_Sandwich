@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.AlarmSetting;
 import com.matji.sandwich.data.AlarmSetting.AlarmSettingType;
+import com.matji.sandwich.data.AppVersion;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
@@ -26,6 +27,7 @@ import com.matji.sandwich.http.request.AlarmHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
+import com.matji.sandwich.http.request.VersionHttpRequest;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
@@ -60,7 +62,8 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     private TextView tvReport;
     private TextView tvVersion;
     private Button updateButton;
-
+    private String update_ver;
+    
     private boolean isForceChecked = false;
 
     public HttpRequest request;
@@ -93,9 +96,11 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
 
         setTags();
         setListeners();
+        
+        updateRequest();
     }
 
-    private void findViews() {
+	private void findViews() {
         title = (HomeTitle) findViewById(R.id.Titlebar);
         tvAccountManage = (TextView) findViewById(R.id.settings_account_manages);
         accountManageWrapper = findViewById(R.id.settings_account_manages_wrapper_atho);
@@ -147,6 +152,28 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         tvReport.setOnClickListener(this);
         updateButton.setOnClickListener(this);
     }
+
+    private void updateRequest() {
+    	String current_ver = MatjiConstants.string(R.string.settings_service_version_name);
+    	VersionHttpRequest request = new VersionHttpRequest(SettingsActivity.this);
+    	request.actionAppVersion("ANDROID", current_ver);
+
+    	try {
+			ArrayList<MatjiData> data = request.request();
+			if (data != null && data.size() > 0) {
+				AppVersion app_version = (AppVersion) data.get(0);
+				update_ver = app_version.getVersion();
+			} else {
+				update_ver = current_ver;
+			}
+		} catch (MatjiException e) {
+			e.performExceptionHandling(SettingsActivity.this);
+		}
+
+    	if (update_ver == current_ver) {
+    		updateButton.setVisibility(View.GONE);
+    	}
+	}
 
     public void editProfileClicked() {
         Intent intent = new Intent(this, UserEditActivity.class);

@@ -34,6 +34,7 @@ PopupListener {
     private long lastElapsedTime;
     private String current_ver;
     private String update_ver;
+    private Boolean isUrgent;
     private BrandingDialog brandingDialog;
     private SimpleAlertDialog updateDialog;
 
@@ -119,6 +120,7 @@ PopupListener {
                 if (data != null && data.size() > 0) {
                     AppVersion app_version = (AppVersion) data.get(0);
                     update_ver = app_version.getVersion();
+                    isUrgent = app_version.isUrgent();
                 } else {
                     update_ver = current_ver;
                 }
@@ -131,9 +133,13 @@ PopupListener {
             }
 
             if (needUpdate(current_ver, update_ver)) { 
-                runOnUiThread(new UpdateMessage());
+            	if (isUrgent) {
+                	runOnUiThread(new UpdateMessage());
+            	} else {
+                	startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
+            	}
             } else {
-                startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
+            	startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
             }
         }
     }
