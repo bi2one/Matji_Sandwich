@@ -41,7 +41,7 @@ public class PostHttpRequest extends HttpRequest {
         getHashtable.put("include", "user,store,tags");
     }
 
-    public void actionNew(String post, String tags, Device from_where) {
+    public void actionNew(String post, String tags, Device from_where, Boolean twitter, Boolean facebook) {
         httpMethod = HttpMethod.HTTP_POST;
         action = "new";
         parser = new PostParser();
@@ -50,9 +50,11 @@ public class PostHttpRequest extends HttpRequest {
         postHashtable.put("post", post);
         postHashtable.put("tags", tags);
         postHashtable.put("from_where", from_where);
+        postHashtable.put("twitter", twitter);
+        postHashtable.put("facebook", facebook);
     }
 
-    public void actionNew(String post, String tags, Device from_where, int store_id) {
+    public void actionNew(String post, String tags, Device from_where, int store_id, Boolean twitter, Boolean facebook) {
         httpMethod = HttpMethod.HTTP_POST;
         action = "new";
         parser = new PostParser();
@@ -62,6 +64,8 @@ public class PostHttpRequest extends HttpRequest {
         postHashtable.put("tags", tags);
         postHashtable.put("from_where", from_where.toString());
         postHashtable.put("store_id", store_id + "");
+        postHashtable.put("twitter", twitter);
+        postHashtable.put("facebook", facebook);
     }
 
     public void actionDelete(int post_id){

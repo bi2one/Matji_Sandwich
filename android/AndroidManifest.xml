@@ -211,6 +211,8 @@
 				  android:screenOrientation="portrait"></activity>
 		<activity android:name="FindPasswordActivity"
 				  android:screenOrientation="portrait"></activity>                 
+		<activity android:name="ExternalServiceActivity"
+				  android:screenOrientation="portrait"></activity>                 
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

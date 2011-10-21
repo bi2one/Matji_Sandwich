@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -44,6 +43,7 @@ SimpleAlertDialog.OnClickListener {
     private static final int TAG_WRITE_POST = 0;
     private static final int INTENT_SELECT_STORE = 0;
     private static final int INTENT_SELECT_TAG = 1;
+    private static final int INTENT_EXTERNAL_SERVICE = 4;
     private static final int INTENT_CAMERA = 2;
     private static final int INTENT_ALBUM = 3;
     //    private static final int BASIC_STORE_ID = -1;
@@ -66,6 +66,8 @@ SimpleAlertDialog.OnClickListener {
     private boolean isFlowIsCamera = false;
     private Store store;
     private String tags = "";
+    private Boolean isTwitter = false;
+    private Boolean isFacebook = false;
     private SimpleAlertDialog postEmptyDialog;
     private SimpleAlertDialog successDialog;
     private SimpleAlertDialog albumFullDialog;
@@ -144,7 +146,7 @@ SimpleAlertDialog.OnClickListener {
             tags = "";
         }
 
-        postRequest.actionNew(post, tags, store, imageFiles);
+        postRequest.actionNew(post, tags, store, imageFiles, isTwitter, isFacebook);
         // DialogAsyncTask requestTask = new DialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
         ProgressDialogAsyncTask requestTask = new ProgressDialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
         requestTask.execute();
@@ -184,8 +186,10 @@ SimpleAlertDialog.OnClickListener {
     }
 
     public void onServiceClicked(View v) {
-        // TODO
-        Log.d("Matji", "service click");
+    	Intent intent = new Intent(this, ExternalServiceActivity.class);
+    	intent.putExtra(ExternalServiceActivity.DATA_TWITTER, isTwitter);
+    	intent.putExtra(ExternalServiceActivity.DATA_FACEBOOK, isFacebook);
+    	startActivityForResult(intent, INTENT_EXTERNAL_SERVICE);
     }
 
     public void onPictureClicked(View v) {
@@ -210,6 +214,11 @@ SimpleAlertDialog.OnClickListener {
             tags = data.getStringExtra(SelectTagActivity.DATA_TAGS);
             checkTags(tags);
             break;
+        case INTENT_EXTERNAL_SERVICE:
+        	isTwitter = (Boolean)data.getBooleanExtra(ExternalServiceActivity.DATA_TWITTER, isTwitter);
+        	isFacebook= (Boolean)data.getBooleanExtra(ExternalServiceActivity.DATA_FACEBOOK, isFacebook);
+        	checkServices(isTwitter, isFacebook);
+        	break;
         case INTENT_CAMERA:
             albumView.pushImage(photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_CAMERA, data));
             break;
@@ -219,7 +228,8 @@ SimpleAlertDialog.OnClickListener {
         }
     }
 
-    private void checkStore(Store store) {
+
+	private void checkStore(Store store) {
         if (store != null) {
             postText.checkButton(PostEditText.ButtonIndex.STORE);
         } else {
@@ -234,6 +244,15 @@ SimpleAlertDialog.OnClickListener {
             postText.unCheckButton(PostEditText.ButtonIndex.TAG);
         }
     }
+
+    private void checkServices(Boolean isT, Boolean isF) {
+    	if (isT == true || isF == true) {
+    		postText.checkButton(PostEditText.ButtonIndex.SERVICE);
+    	} else {
+    		postText.unCheckButton(PostEditText.ButtonIndex.SERVICE);
+    	}
+		
+	}
 
     public void onSoftKeyboardShown(boolean isShowing) {
         if (isShowing) {

@@ -13,6 +13,9 @@ public class BadgeParser extends MatjiDataParser {
 		badge.setNewNoticeCount(getInt(object, "new_notice_count"));
 		badge.setNewAlarmCount(getInt(object, "new_alarm_count"));
 
+		AppVersionParser avp = new AppVersionParser();
+		
+		badge.setNewVersion(avp.getMatjiData(getObject(object, "version")));
 		return badge;
 	}
 }

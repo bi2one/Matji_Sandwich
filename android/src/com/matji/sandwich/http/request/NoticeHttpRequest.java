@@ -2,6 +2,7 @@ package com.matji.sandwich.http.request;
 
 import android.content.Context;
 
+import com.matji.sandwich.http.parser.AppVersionParser;
 import com.matji.sandwich.http.parser.BadgeParser;
 import com.matji.sandwich.http.parser.NoticeParser;
 import com.matji.sandwich.util.MatjiConstants;
@@ -43,4 +44,17 @@ public class NoticeHttpRequest extends HttpRequest {
 	    getHashtable.put("target", MatjiConstants.target());
 	    getHashtable.put("language", MatjiConstants.language());
 	}
+
+	public void actionBadge(int last_notice_id, String version) {
+	    httpMethod = HttpMethod.HTTP_GET;
+	    action = "badge";
+	    parser = new BadgeParser();
+
+	    getHashtable.clear();
+	    getHashtable.put("last_notice_id", last_notice_id+"");
+	    getHashtable.put("target", MatjiConstants.target());
+	    getHashtable.put("language", MatjiConstants.language());
+	    getHashtable.put("version", version);
+	}
+
 }

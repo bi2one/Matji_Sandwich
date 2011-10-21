@@ -6,7 +6,8 @@ import android.os.Parcelable;
 public class Badge extends MatjiData{
     private int new_notice_count;
 	private int new_alarm_count;
-
+	private AppVersion new_version;
+	
 	public Badge() {}
 
 	public Badge(Parcel in) {
@@ -52,4 +53,8 @@ public class Badge extends MatjiData{
     public int getNewAlarmCount() {
         return new_alarm_count;
     }
+
+	public void setNewVersion(AppVersion version) {
+		this.new_version = version;
+	}
 }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_external_service"	
+	style="@style/DefaultFill"
+	android:orientation="vertical"
+	android:background="@drawable/bg_01"> 
+
+	<com.matji.sandwich.widget.title.CompletableTitle
+    	android:layout_alignParentTop="true"
+      	android:id="@+id/activity_external_service_title"
+      	style="@style/DefaultWidthFill" />
+	<LinearLayout 
+		style="@style/DefaultFill"
+		android:orientation="vertical"
+		android:padding="@dimen/default_distance">
+		<TextView 
+			android:id="@+id/external_service" 
+			style="@style/settings_Title"
+			android:text="@string/export_to_where" />
+			<RelativeLayout
+				android:id="@+id/external_service_wrapper"
+				style="@style/settings_Wrapper">
+
+				<RelativeLayout
+					android:id="@+id/twitter_service"
+					style="@style/settings_Row"
+					android:background="@drawable/txtbox_t_selector">
+					<TextView
+						style="@style/DefaultWrap"
+						android:text="@string/export_to_twitter"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:layout_centerVertical="true"
+						android:layout_alignParentLeft="true"
+						android:layout_toLeftOf="@+id/twitter_check" 
+						android:drawableLeft="@drawable/icon_twitter"
+						android:drawablePadding="@dimen/default_drawable_padding_long" />
+					<CheckBox
+						android:id="@id/twitter_check"
+						style="@style/DefaultWrap"
+						android:background="@drawable/btn_check_label_background"
+						android:button="@drawable/icon_check_selector"
+						android:layout_centerVertical="true"
+						android:layout_alignParentRight="true" />
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/facebook_service"
+					style="@style/settings_Row"
+					android:background="@drawable/txtbox_u_selector"
+					android:layout_below="@id/twitter_service">
+					<TextView
+						style="@style/DefaultWrap"
+						android:text="@string/export_to_facebook"
+						android:textSize="@dimen/settings_content_size"
+						android:textColor="@color/matji_gray"
+						android:layout_alignParentLeft="true"
+						android:layout_toLeftOf="@+id/facebook_check"
+						android:layout_centerVertical="true"
+						android:drawableLeft="@drawable/icon_facebook"
+						android:drawablePadding="@dimen/default_drawable_padding_long" />
+					<CheckBox
+						android:id="@id/facebook_check"
+						style="@style/DefaultWrap"
+						android:background="@drawable/btn_check_label_background"
+						android:button="@drawable/icon_check_selector"
+						android:layout_centerVertical="true"
+						android:layout_alignParentRight="true" />
+				</RelativeLayout>
+				<View
+					style="@style/HorizontalLine"
+					android:layout_below="@id/twitter_service" />
+			</RelativeLayout>
+	</LinearLayout>
+</LinearLayout>

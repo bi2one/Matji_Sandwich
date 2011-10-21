@@ -26,21 +26,21 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
         postRequest = new PostHttpRequest(context);
     }
 
-    public void actionNew(String post, String tags, Store store, ArrayList<File> images) {
+    public void actionNew(String post, String tags, Store store, ArrayList<File> images, Boolean twitter, Boolean facebook) {
         if (store == null) {
-            actionNew(post, tags, -1, images);
+            actionNew(post, tags, -1, images, twitter, facebook);
         } else {
-            actionNew(post, tags, store.getId(), images);
+            actionNew(post, tags, store.getId(), images, twitter, facebook);
         }
     }
 
-    public void actionNew(String post, String tags, int storeId, ArrayList<File> images) {
+    public void actionNew(String post, String tags, int storeId, ArrayList<File> images, Boolean twitter, Boolean facebook) {
         this.images = images;
 
         if (storeId <= 0) {
-            postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID);
+            postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID, twitter, facebook);
         } else {
-            postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID, storeId);
+            postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID, storeId, twitter, facebook);
         }
     }
 
