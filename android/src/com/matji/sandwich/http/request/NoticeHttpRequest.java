@@ -2,7 +2,6 @@ package com.matji.sandwich.http.request;
 
 import android.content.Context;
 
-import com.matji.sandwich.http.parser.AppVersionParser;
 import com.matji.sandwich.http.parser.BadgeParser;
 import com.matji.sandwich.http.parser.NoticeParser;
 import com.matji.sandwich.util.MatjiConstants;
