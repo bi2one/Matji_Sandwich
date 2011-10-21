@@ -67,7 +67,7 @@
 		<ImageView
 			android:id="@+id/row_message_shadow"
 			style="@style/DefaultWidthFill"
-			android:src="@drawable/img_shadow" />
+			android:background="@drawable/img_shadow" />
 
 		<RelativeLayout
 			style="@style/DefaultWidthFill"
@@ -80,7 +80,7 @@
 				android:id="@+id/row_message_subject"
 				style="@style/DefaultWrap"
 				android:singleLine="true"
-                android:visibility="gone"
+				android:visibility="gone"
 				android:textSize="@dimen/row_message_subject_size"
 				android:textColor="@color/matji_gray"
 				android:layout_below="@id/row_message_shadow" />

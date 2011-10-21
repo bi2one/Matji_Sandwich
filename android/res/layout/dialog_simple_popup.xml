@@ -2,12 +2,15 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	style="@style/DefaultFill"
-    android:paddingLeft="@dimen/dialog_simple_popup_side_padding"
-    android:paddingRight="@dimen/dialog_simple_popup_side_padding">
+	android:paddingLeft="@dimen/dialog_simple_popup_side_padding"
+	android:paddingRight="@dimen/dialog_simple_popup_side_padding">
 	<TextView
 		android:id="@+id/dialog_simple_popup_title"
-        android:textSize="@dimen/dialog_simple_popup_content_size"
+		android:textSize="@dimen/dialog_simple_popup_content_size"
 		android:textColor="@color/matji_white"
+		android:shadowColor="@color/dialog_simple_popup_title_shadow_color"
+        android:shadowDy="1.3"
+        android:shadowRadius="1"
 		android:gravity="center"
 		android:background="@drawable/guide_title_bg"
 		android:padding="@dimen/default_drawable_padding_long"
@@ -15,14 +18,15 @@
 	<RelativeLayout
 		style="@style/DefaultWrap"
 		android:background="@drawable/guide_bg"
-        android:paddingLeft="@dimen/dialog_simple_popup_text_side_padding"
-        android:paddingRight="@dimen/dialog_simple_popup_text_side_padding"
 		android:layout_below="@id/dialog_simple_popup_title">
 		<TextView
 			android:id="@+id/dialog_simple_popup_content"
-			android:padding="@dimen/default_distance"
-            android:lineSpacingExtra="@dimen/dialog_simple_popup_line_spacing"
-            android:textSize="@dimen/dialog_simple_popup_content_size"
+            android:paddingLeft="@dimen/dialog_simple_popup_text_side_padding"
+            android:paddingTop="@dimen/default_distance"
+            android:paddingRight="@dimen/dialog_simple_popup_text_side_padding"
+            android:paddingBottom="@dimen/default_distance"
+			android:lineSpacingExtra="@dimen/dialog_simple_popup_line_spacing"
+			android:textSize="@dimen/dialog_simple_popup_content_size"
 			android:textColor="@color/matji_gray"
 			android:gravity="center"
 			style="@style/DefaultWidthFill" />
@@ -36,7 +40,7 @@
 				style="@style/DefaultWrap"
 				android:gravity="center"
 				android:text="@string/default_string_do_not_show_again"
-                android:textSize="@dimen/dialog_simple_popup_content_size"
+				android:textSize="@dimen/dialog_simple_popup_content_size"
 				android:textColor="@color/matji_light_gray"
 				android:button="@drawable/icon_guide_check_selelctor"
 				android:background="@drawable/btn_check_label_background"

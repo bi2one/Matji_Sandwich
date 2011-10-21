@@ -281,7 +281,7 @@
     
     <!-- dialog_simple_popup.xml -->
     <dimen name="dialog_simple_popup_side_padding">25.33dp</dimen>
-    <dimen name="dialog_simple_popup_text_side_padding">13.33dp</dimen>
+    <dimen name="dialog_simple_popup_text_side_padding">20dp</dimen>
     <dimen name="dialog_simple_popup_content_size">12dp</dimen>
     <dimen name="dialog_simple_popup_line_spacing">5dp</dimen>
 </resources>

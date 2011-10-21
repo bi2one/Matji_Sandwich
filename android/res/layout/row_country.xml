@@ -6,6 +6,7 @@
 		android:id="@+id/row_country_name"
 		style="@style/row_simple_Item"
 		android:gravity="center_vertical"
+		android:layout_marginRight="@dimen/default_distance"
 		android:layout_toLeftOf="@+id/row_country_radio" />
 	<RadioButton
 		android:id="@id/row_country_radio"

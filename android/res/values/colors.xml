@@ -146,4 +146,7 @@
 	<color name="branding_content_color">#847458</color>
 	<color name="branding_close_color">#4d391f</color>
 	<color name="branding_close_shadow_color">#ffd893</color>	
+	
+	<!-- Dialog -->
+	<color name="dialog_simple_popup_title_shadow_color">#f34526</color>
 </resources>

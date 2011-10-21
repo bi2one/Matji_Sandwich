@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.TabHost.OnTabChangeListener;
 
 import com.matji.sandwich.base.BaseTabActivity;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.MainSearchInputBar;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.RoundTabHost;
@@ -31,7 +32,7 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
     public static final int USER = 2;
 
     public int setMainViewId() {
-	return R.id.contentWrapper;
+	return R.id.activity_search;
     }
 
     @Override
@@ -82,7 +83,8 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
                 R.string.default_string_user,
                 userSearchIntent);
 
-        contentWrapper = (RelativeLayoutThatDetectsSoftKeyboard) findViewById(R.id.contentWrapper);
+        contentWrapper = (RelativeLayoutThatDetectsSoftKeyboard) findViewById(R.id.activity_search);
+        contentWrapper.setBackgroundColor(MatjiConstants.color(R.color.matji_white));
         contentWrapper.setListener(this);
         searchInputBar.setSearchView((FrameLayout) findViewById(R.id.search_wrapper));
         tabHost.setCurrentTab(getIntent().getIntExtra(PAGE, STORE));

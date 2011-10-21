@@ -21,7 +21,7 @@
 	</LinearLayout>
 
 	<ImageView
-		android:src="@drawable/img_shadow"
+		android:background="@drawable/img_shadow"
 		style="@style/DefaultWidthFill"
 		android:layout_alignParentBottom="true" />
 </RelativeLayout>

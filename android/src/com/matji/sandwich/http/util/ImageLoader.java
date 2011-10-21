@@ -75,7 +75,7 @@ public class ImageLoader {
     private Map<String, String> params = Collections.synchronizedMap(new HashMap<String, String>());
     private int stub_id = -1;
     private ImageConvertable convertable;
-//    private boolean isScaleFile = true;
+    //    private boolean isScaleFile = true;
     private boolean isCacheEnable = true;
 
     public ImageLoader(Context context) {
@@ -90,9 +90,9 @@ public class ImageLoader {
         this.stub_id = stub_id;
     }
 
-//    public void setScalable(boolean isScaleFile) {
-//        this.isScaleFile = isScaleFile;
-//    }
+    //    public void setScalable(boolean isScaleFile) {
+    //        this.isScaleFile = isScaleFile;
+    //    }
 
     public void setCacheEnable(boolean isCacheEnable) {
         this.isCacheEnable = isCacheEnable;
@@ -133,7 +133,16 @@ public class ImageLoader {
         DisplayImage(createUrl(type, size, id), activity, imageView);
     }
 
+    public void DisplayImage(Activity activity, UrlType type, ImageSize size, ImageView imageView, int id, boolean scalable) {
+        DisplayImage(createUrl(type, size, id), activity, imageView, scalable);
+    }
+
     public void DisplayImage(String url, Activity activity, ImageView imageView)
+    {
+        DisplayImage(url, activity, imageView, true);
+    }
+
+    public void DisplayImage(String url, Activity activity, ImageView imageView, boolean scalable)
     {
         imageViews.put(imageView, url);
         Bitmap bitmap = null;
@@ -145,18 +154,18 @@ public class ImageLoader {
             imageView.setImageBitmap(bitmap);
         else
         {
-            queuePhoto(url, activity, imageView);
+            queuePhoto(url, activity, imageView, scalable);
             if (stub_id != -1) {
                 imageView.setImageResource(stub_id);
             }
         }    
     }
 
-    private void queuePhoto(String url, Activity activity, ImageView imageView)
+    private void queuePhoto(String url, Activity activity, ImageView imageView, boolean scalable)
     {
         //This ImageView may be used for other images before. So there may be some old tasks in the queue. We need to discard them. 
         photosQueue.Clean(imageView);
-        PhotoToLoad p=new PhotoToLoad(url, imageView);
+        PhotoToLoad p = new PhotoToLoad(url, imageView, scalable);
         synchronized(photosQueue.photosToLoad){
             photosQueue.photosToLoad.push(p);
             photosQueue.photosToLoad.notifyAll();
@@ -192,13 +201,17 @@ public class ImageLoader {
         }
     }
 
-    private Bitmap getBitmap(String url) 
+//    private Bitmap getBitmap(String url) {
+//        return getBitmap(url, true);
+//    }
+    
+    private Bitmap getBitmap(String url, boolean scalable) 
     {
         File f = fileCache.getFile(url);
         Bitmap b = null;
         if (isCacheEnable) {
             //from SD cache
-            b = ImageUtil.decodeFile(f, true);
+            b = ImageUtil.decodeFile(f, scalable);
         }
 
         if(b!=null) {
@@ -273,9 +286,12 @@ public class ImageLoader {
     {
         public String url;
         public ImageView imageView;
-        public PhotoToLoad(String u, ImageView i){
+        public boolean scalable;
+
+        public PhotoToLoad(String u, ImageView i, boolean scalable){
             url=u; 
             imageView=i;
+            this.scalable = scalable;
         }
     }
 
@@ -295,7 +311,7 @@ public class ImageLoader {
         public void Clean(ImageView image)
         {
             for(int j=0 ;j<photosToLoad.size();){
-                if(photosToLoad.get(j).imageView==image)
+                if(photosToLoad.get(j).imageView == image)
                     photosToLoad.remove(j);
                 else
                     ++j;
@@ -304,6 +320,7 @@ public class ImageLoader {
     }
 
     class PhotosLoader extends Thread {
+
         public void run() {
             try {
                 while(true)
@@ -319,7 +336,7 @@ public class ImageLoader {
                         synchronized(photosQueue.photosToLoad){
                             photoToLoad=photosQueue.photosToLoad.pop();
                         }
-                        Bitmap bmp=getBitmap(photoToLoad.url);
+                        Bitmap bmp=getBitmap(photoToLoad.url, photoToLoad.scalable);
                         memoryCache.put(photoToLoad.url, bmp);
                         String tag=imageViews.get(photoToLoad.imageView);
                         if(tag!=null && tag.equals(photoToLoad.url)){
