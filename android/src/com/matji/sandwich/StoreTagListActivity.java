@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -10,9 +11,12 @@ import android.widget.Button;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.cell.StoreCell;
+import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.tag.StoreTagCloudView;
 import com.matji.sandwich.widget.tag.StoreTagListView;
 import com.matji.sandwich.widget.title.StoreTitle;
@@ -121,4 +125,6 @@ public class StoreTagListActivity extends BaseActivity implements Refreshable {
 
     @Override
     public void refresh(ArrayList<MatjiData> data) {}
+    
+
 }

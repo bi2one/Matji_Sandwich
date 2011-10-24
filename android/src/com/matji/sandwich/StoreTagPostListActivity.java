@@ -14,6 +14,8 @@ import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.http.request.PostHttpRequest.TagByType;
 import com.matji.sandwich.widget.TagPostListView;
 import com.matji.sandwich.widget.cell.StoreCell;
+import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.StoreTitle;
 
 public class StoreTagPostListActivity extends BaseActivity implements Refreshable {
@@ -52,6 +54,13 @@ public class StoreTagPostListActivity extends BaseActivity implements Refreshabl
         listView.setType(TagByType.STORE);
         listView.setActivity(this);
         listView.requestReload();
+        
+        listView.tagDialog.setOnClickListener(new SimpleAlertDialog.OnClickListener() {
+			@Override
+			public void onConfirmClick(SimpleDialog dialog) {
+				finish();
+			}
+		});
     }
     
     @Override

@@ -425,6 +425,9 @@
   
   <!-- Matji -->
   
+  <!-- TagPostListView.java -->
+  <string name="store_tag_unlink_post">이 태그는 연결된 이야기가 \n없는 태그입니다.</string>
+  
   <!-- PostListView Subtitle -->
   <string name="subtitle_friend_post">친구들 이야기</string>
   <string name="subtitle_nearby_post">주변 맛집 이야기</string>
