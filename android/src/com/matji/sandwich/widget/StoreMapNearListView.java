@@ -19,6 +19,7 @@ import com.matji.sandwich.Requestable;
 import com.matji.sandwich.adapter.SimpleStoreAdapter;
 import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.data.MatjiData;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;
@@ -34,8 +35,9 @@ import com.matji.sandwich.util.adapter.GeoPointToLocationAdapter;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 
 public class StoreMapNearListView extends RequestableMListView implements MatjiLocationListener,
-									  OnTouchListener,
-									  Requestable {
+OnTouchListener,
+Requestable {
+    private int limit;
     private static final int LAT_HALVE_SPAN = (int)(0.005 * 1E6) / 2;
     private static final int LNG_HALVE_SPAN = (int)(0.005 * 1E6) / 2;
     private static final int GPS_START_TAG = 1;
@@ -51,23 +53,23 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
     private StoreHttpRequest storeRequest;
 
     public StoreMapNearListView(Context context, AttributeSet attrs) {
-	super(context, attrs, new SimpleStoreAdapter(context), 10);
-	this.context = context;
-	sessionUtil = new SessionMapUtil(context);
+        super(context, attrs, new SimpleStoreAdapter(context), 10);
+        this.context = context;
+        sessionUtil = new SessionMapUtil(context);
         storeRequest = new StoreHttpRequest(context);
-	gpsManager = new GpsManager(context, this);
-	requestManager = HttpRequestManager.getInstance();
-	setOnTouchListener(this);
-	setSelector(R.color.transparent);
-	setPage(1);
-	// adapter.init(storeRequest, getLoadingFooterView());
+        gpsManager = new GpsManager(context, this);
+        requestManager = HttpRequestManager.getInstance();
+        setOnTouchListener(this);
+        setSelector(R.color.transparent);
+        setPage(1);
+        // adapter.init(storeRequest, getLoadingFooterView());
     }
 
     public void init(RelativeLayout addressWrapper, TextView addressView, MainMapActivity activity) {
         setActivity(activity);
         this.addressView = addressView;
         this.activity = activity;
-	this.addressWrapper = addressWrapper;
+        this.addressWrapper = addressWrapper;
         setDivider(new ColorDrawable(MatjiConstants.color(R.color.listview_divider1_gray)));
         setDividerHeight((int) MatjiConstants.dimen(R.dimen.default_divider_size));
         addHeaderView(new HighlightHeader(activity, MatjiConstants.string(R.string.default_string_store)));
@@ -83,6 +85,9 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
         return false;
     }
 
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
     public void moveToGpsCenter() {
         gpsManager.start(GPS_START_TAG);
     }
@@ -100,7 +105,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
     }
 
     public void setStartConfigListener(GpsManager.StartConfigListener listener) {
-	gpsManager.setStartConfigListener(listener);
+        gpsManager.setStartConfigListener(listener);
     }
 
     public void onLocationExceptionDelivered(int startedFromTag, MatjiException e) {
@@ -116,7 +121,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
                 (double) swBound.getLongitudeE6() / 1E6,
                 (double) neBound.getLongitudeE6() / 1E6,
                 getPage(),
-                getLimit());
+                limit);
         return storeRequest;
     }
 
@@ -141,16 +146,23 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
     }
 
     public void setCenter(Location location) {
-	GeoPoint locationPoint = new LocationToGeoPointAdapter(location);
-	GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
-	
-	sessionUtil.setCenter(locationPoint);
-	sessionUtil.setNearBound(locationPoint);
-	geocodeRequest.actionReverseGeocodingByGeoPoint(locationPoint, sessionUtil.getCurrentCountry());
-	requestManager.cancelTask();
-	requestManager.request(getContext(), addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, this);
+        GeoPoint locationPoint = new LocationToGeoPointAdapter(location);
+        GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
+
+        sessionUtil.setCenter(locationPoint);
+        sessionUtil.setNearBound(locationPoint);
+        geocodeRequest.actionReverseGeocodingByGeoPoint(locationPoint, sessionUtil.getCurrentCountry());
+        requestManager.cancelTask();
+        requestManager.request(getContext(), addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, this);
     }
 
+    public void setStores(ArrayList<MatjiData> stores) {
+        getAdapterData().removeAll(getAdapterData());
+        getAdapterData().addAll(stores);
+        
+        setPage((stores.size() / limit) + 1);
+    }
+    
     public void onListItemClick(int position) {
         // activity.setIsFlow(true);
         // Store store = (Store) getAdapterData().get(position);
@@ -158,7 +170,7 @@ public class StoreMapNearListView extends RequestableMListView implements MatjiL
         // intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
         // getActivity().startActivity(intent);
     }
-    
+
     public void dataRefresh() {
         getMBaseAdapter().notifyDataSetChanged();
     }

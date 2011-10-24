@@ -517,6 +517,8 @@
   <string name="settings_account_link_facebook">Facebook 연동</string>
   <string name="settings_account_unlink_twitter">Twitter 연동됨</string>
   <string name="settings_account_unlink_facebook">Facebook 연동됨</string>
+  <string name="settings_account_unlink_twitter_ask">정말로 트위터 연동을 \n해제하시겠습니까?</string>
+  <string name="settings_account_unlink_facebook_ask">정말로 페이스북 연동을 \n해제하시겠습니까?</string>
   <string name="settings_account_edit_profile">정보 변경</string>
   <string name="settings_account_find_friends">친구 찾기</string>
   <string name="settings_location_setting">위치 설정</string>
@@ -537,7 +539,7 @@
   <string name="settings_service_report_title">버그 및 기능 개선 [%1$s]</string>
   <string name="settings_service_report_title_guest">버그 및 기능 개선</string>
   <string name="settings_service_report_content">야미스토리 안에 있는 오류나 기능개선 사항을 알려주세요. \n빠른 시간 내에 반영해서 더 좋은 서비스가 되도록 노력하겠습니다.\n감사합니다.</string>
-    
+
   <string name="setting_alarm_permit">permit</string>
   <string name="setting_alarm_spinner">view</string>
   

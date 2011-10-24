@@ -34,6 +34,7 @@ import com.matji.sandwich.overlay.StoreItemizedOverlay;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
+import com.matji.sandwich.widget.StoreMapNearListView;
 
 public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterListener,
 MatjiLocationListener,
@@ -41,7 +42,6 @@ Requestable,
 OnTouchListener {
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
-    private static final int MAX_STORE_COUNT = 60;
     private static final int GPS_START_TAG = 1;
     private static final int NEARBY_STORE = 1;
     private static final int GEOCODE = 2;
@@ -57,12 +57,19 @@ OnTouchListener {
     private GpsManager gpsManager;
     private Location prevLocation;
     private ViewGroup spinnerLayout;
+    private int limit;
+    
+    private StoreMapNearListView listView;
 
     public MainMatjiMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         setMapCenterListener(this);
         setOnTouchListener(this);
+    }
+    
+    public void setListView(StoreMapNearListView listView) {
+        this.listView = listView;
     }
 
     public void init(RelativeLayout addressWrapper, TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
@@ -80,6 +87,10 @@ OnTouchListener {
 
         mapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
         moveToGpsCenter();
+    }
+    
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 
     public void setOverlayClickListener(OverlayClickListener listener) {
@@ -135,6 +146,7 @@ OnTouchListener {
         switch (tag) {
         case NEARBY_STORE:
             stores = data;
+            listView.setStores(stores);
             Collections.reverse(stores);
             drawOverlays();
             break;
@@ -232,7 +244,7 @@ OnTouchListener {
             double lat_ne = (double)(nePoint.getLatitudeE6()) / (double)1E6;
             double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
 
-            request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, MAX_STORE_COUNT);
+            request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, limit);
             geocodeRequest.actionReverseGeocodingByGeoPoint(sessionUtil.getCenter(), sessionUtil.getCurrentCountry());
             requestManager.request(getContext(), addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
             requestManager.request(getContext(), spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
