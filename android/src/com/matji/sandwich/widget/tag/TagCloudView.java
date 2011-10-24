@@ -89,6 +89,17 @@ public class TagCloudView extends FlowLayout {
         }
 
         /**
+         * 태그가 존재하지 않을 때, 메세지를 출력하도록 한다.
+         * 
+         * @param context
+         * @param str
+         */
+        public TagView(Context context, int strRes) {
+            super(context);
+            init(MatjiConstants.string(strRes));
+        }
+
+        /**
          * 초기화 메소드.
          * 기본 크기 지정 및 콘텐츠의 정렬을 실행한다.
          * 
@@ -199,7 +210,7 @@ public class TagCloudView extends FlowLayout {
                 addView(tagView);
             }
         } else {
-            addView(new TagView(getContext(), "태그가 존재하지 않습니다."));
+            addView(new TagView(getContext(), R.string.not_exist_tag));
         }
     }
     

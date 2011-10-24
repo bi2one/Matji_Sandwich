@@ -10,6 +10,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.UserProfileTabActivity;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 
 /**
@@ -44,10 +45,15 @@ public class UserIntroCell extends Cell {
 
     public void setUser(User user) {
         this.user = user;
-        
+
         String intro = user.getIntro();
+
         if (intro.equals("")) {
-            intro = MatjiConstants.string(R.string.not_exist_intro);
+            if (Session.getInstance(getContext()).isCurrentUser(user)) {
+                intro = MatjiConstants.string(R.string.not_exist_intro);
+            } else {
+                intro = String.format(MatjiConstants.string(R.string.default_string_intro_other), user.getNick());
+            }
         }
         ((TextView) getRootView().findViewById(R.id.cell_user_intro)).setText(intro);
     }

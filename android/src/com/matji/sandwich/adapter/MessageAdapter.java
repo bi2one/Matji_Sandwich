@@ -309,7 +309,11 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 		
 		private void postDelete() {
 			hasFoldedMap.remove(position);
-			data.remove(position);			
+			data.remove(position);
+			if (type == MessageType.RECEIVED) {
+			    session.getCurrentUser().setReceivedMessageCount(session.getCurrentUser().getReceivedMessageCount()-1);
+			}
+			
 			notifyDataSetChanged();
 		}	}
 }

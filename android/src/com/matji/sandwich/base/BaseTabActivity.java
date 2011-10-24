@@ -146,6 +146,9 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
         setTheme(R.style.Theme_RemoveOverlay);
         super.setContentView(layoutResID);
         mainViewGroup = (RelativeLayout)findViewById(setMainViewId());
+        if (mainViewGroup != null && mainViewGroup.getBackground() == null) {
+            mainViewGroup.setBackgroundResource(R.drawable.bg_01);
+        }
     }
 
     public void tabStartActivityForResult(Intent intent, int requestCode, ActivityStartable activityStartable) {

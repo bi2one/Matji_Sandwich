@@ -11,6 +11,7 @@ import com.matji.sandwich.adapter.PostAdapter;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 
 /**
@@ -66,9 +67,15 @@ public class PostListView extends RequestableMListView {
             ((PostHttpRequest) request).actionFriendList(getPage(), getLimit());
             break;
         case DOMESTIC:
-            ((PostHttpRequest) request).actionCountryList(getPage(),
-                    getLimit(),
-                    getContext().getResources().getConfiguration().locale.getCountry());
+            if (Session.getInstance(getContext()).isLogin()) {
+                ((PostHttpRequest) request).actionCountryList(getPage(),
+                        getLimit(),
+                        Session.getInstance(getContext()).getCurrentUser().getCountryCode());
+            } else {
+                ((PostHttpRequest) request).actionCountryList(getPage(),
+                        getLimit(),
+                        getContext().getResources().getConfiguration().locale.getCountry());
+            }
             break;
         default:
             ((PostHttpRequest) request).actionList(getPage(), getLimit());

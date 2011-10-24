@@ -46,10 +46,13 @@ public class StoreModifyActivity extends BaseMapActivity implements Completable,
 		titleBar.setTitle(R.string.default_string_store_modify_request);
 		titleBar.setCompletable(this);
 
-		mapView.init(this);
+        mapView.init(this);
+        mapView.startMapCenterThread();
+        mapView.setStartCenter(store.getLat(), store.getLng());
 		mapView.setOnClickListener(this);
 
 		mapView.setStoreName(store.getName().trim());
+		mapView.setAddress(store.getAddress());
 		if (store.getAddAddress() != null)
 			mapView.setStoreAddAddress(store.getAddAddress().trim());
 		mapView.setStorePhoneNumber(store.getTel().trim());

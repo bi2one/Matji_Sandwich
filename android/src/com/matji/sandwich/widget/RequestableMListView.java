@@ -183,9 +183,12 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {		
         if (tag == REQUEST_RELOAD || tag == REQUEST_NEXT) {
+            if (data == null) return;
+            
             if (tag == REQUEST_RELOAD) {
                 clearAdapter();
             }
+            
             if (data.size() == 0 || data.size() < limit){
                 scrollListener.requestSetOff();
             }else{

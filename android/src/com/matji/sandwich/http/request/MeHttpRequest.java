@@ -10,6 +10,7 @@ import com.matji.sandwich.ExternalServiceWebViewActivity.ExternalService;
 import com.matji.sandwich.R;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.http.parser.MeParser;
+import com.matji.sandwich.http.util.HttpUtility;
 import com.matji.sandwich.util.MatjiConstants;
 
 public class MeHttpRequest extends HttpRequest {

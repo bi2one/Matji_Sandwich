@@ -20,6 +20,7 @@ import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.PhoneCallUtil;
 import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
+import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleListDialog;
 import com.matji.sandwich.widget.title.StoreTitle;
@@ -39,7 +40,8 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     
     private SimpleListDialog listDialog;
     private SimpleAlertDialog successDialog;
-
+    private SimpleConfirmDialog reportDialog;
+    
     public int setMainViewId() {
         return R.id.activity_store_default_info;
     }
@@ -74,6 +76,24 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 
         phoneCallUtil = new PhoneCallUtil(this);
         
+
+        reportDialog = new SimpleConfirmDialog(this, R.string.request_check);
+        reportDialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
+            
+            @Override
+            public void onConfirmClick(SimpleDialog dialog) {
+                StoreCloseHttpRequest request = new StoreCloseHttpRequest(StoreDefaultInfoActivity.this);
+                request.actionClose(StoreDetailInfoTabActivity.store.getId());
+                DialogAsyncTask requestTask = new DialogAsyncTask(StoreDefaultInfoActivity.this, StoreDefaultInfoActivity.this, getMainView(), request, TAG_STORE_CLOSE);
+                requestTask.execute();     
+            }
+            
+            @Override
+            public void onCancelClick(SimpleDialog dialog) {
+                // TODO Auto-generated method stub
+                
+            }
+        });
     }
 
     @Override
@@ -88,6 +108,7 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
         Store store = StoreDetailInfoTabActivity.store;
 //        String name = store.getName();
         String address = store.getAddress();
+        String addAdress = store.getAddAddress();
 //        String cover = store.getCover();
         String tel = store.getTel();
         String website = store.getWebsite();
@@ -98,11 +119,18 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 //                        MatjiConstants.string(R.string.default_string_not_exist_cover)
 //                        :cover);
 //
-        tvTel.setText(
-                (tel == null || tel.equals("")) ?
-                        MatjiConstants.string(R.string.not_exist_tel)
-                        : tel);
-        tvAddress.setText(address);
+        if (tel == null || tel.equals("")) {
+            tvTel.setText(MatjiConstants.string(R.string.not_exist_tel));
+            tvTel.setTextColor(MatjiConstants.color(R.color.matji_light_gray));
+        } else {
+            tvTel.setText(tel);
+            tvTel.setTextColor(MatjiConstants.color(R.color.matji_black));
+        }
+        
+        tvAddress.setText(
+                (addAdress == null || addAdress.equals("")) ?
+                        address
+                        : address + " " + addAdress);
 
         if (website == null || website.trim().equals("")) {
         } else {
@@ -129,7 +157,13 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
     }
 
     public void onTelClicked(View v) {
-        phoneCallUtil.call(StoreDetailInfoTabActivity.store.getTelNotDashed());
+        if (StoreDetailInfoTabActivity.store.getTelNotDashed().equals("")) {
+            Intent intent = new Intent(this, StoreModifyActivity.class);
+            intent.putExtra(StoreModifyActivity.STORE, (Parcelable) StoreDetailInfoTabActivity.store);
+            startActivity(intent);
+        } else {
+            phoneCallUtil.call(StoreDetailInfoTabActivity.store.getTelNotDashed());
+        }
     }
 
     public void onWebsiteClicked(View v) {
@@ -166,10 +200,7 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
         	startActivity(intent);
 			break;
 		case 1:
-			StoreCloseHttpRequest request = new StoreCloseHttpRequest(StoreDefaultInfoActivity.this);
-			request.actionClose(StoreDetailInfoTabActivity.store.getId());
-			DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, TAG_STORE_CLOSE);
-			requestTask.execute();
+		    reportDialog.show();
 			break;
 		}
 	}

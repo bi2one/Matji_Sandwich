@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="gson-1.7.1-javadoc.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="D:/Eclipse/eclipse/plugins/org.apache.commons.discovery_0.2.0.v201004190315/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse/eclipse/plugins/org.apache.commons.logging_1.0.4.v201005080501.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

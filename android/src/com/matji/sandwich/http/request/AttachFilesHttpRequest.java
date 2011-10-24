@@ -10,7 +10,7 @@ import com.matji.sandwich.data.AttachFiles;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.parser.AttachFileParser;
-import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
+import com.matji.sandwich.http.util.HttpUtility.SimpleHttpResponse;
 
 /**
  * AttachFile을 capacity만큼씩 묶어서 저장한다.

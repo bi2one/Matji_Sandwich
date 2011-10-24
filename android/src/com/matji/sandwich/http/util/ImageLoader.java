@@ -20,7 +20,6 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.http.request.HttpUtility;
 import com.matji.sandwich.util.ImageUtil;
 import com.matji.sandwich.util.MatjiConstants;
 

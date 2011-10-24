@@ -13,8 +13,8 @@ public class GeocodeHttpRequest extends HttpRequest {
     private String sensor = "true";
 
     public GeocodeHttpRequest(Context context) {
-	super(context);
-	serverDomain = REQUEST_URL;
+        super(context);
+        serverDomain = REQUEST_URL;
     }
 
     /**
@@ -24,13 +24,13 @@ public class GeocodeHttpRequest extends HttpRequest {
      * @param country geocoding결과 언어의 국가
      */
     public void actionGeocoding(String address, Locale locale) {
-	httpMethod = HttpMethod.HTTP_GET;
+        httpMethod = HttpMethod.HTTP_GET;
 
-	getHashtable.clear();
-	getHashtable.put("address", address);
-	getHashtable.put("sensor", sensor);
-	getHashtable.put("language", locale.getLanguage());
-	parser = new GeocodeParser();
+        getHashtable.clear();
+        getHashtable.put("address", address);
+        getHashtable.put("sensor", sensor);
+        getHashtable.put("language", locale.getLanguage());
+        parser = new GeocodeParser();
     }
 
     /**
@@ -40,9 +40,9 @@ public class GeocodeHttpRequest extends HttpRequest {
      * @param country geocoding결과 언어의 국가
      */
     public void actionReverseGeocodingByLocation(Location location, Locale locale) {
-	actionReverseGeocodingByGeoPoint(new GeoPoint((int)(location.getLatitude() * 1E6),
-						      (int)(location.getLongitude() * 1E6)),
-					 locale);
+        actionReverseGeocodingByGeoPoint(new GeoPoint((int)(location.getLatitude() * 1E6),
+                (int)(location.getLongitude() * 1E6)),
+                locale);
     }
 
     /**
@@ -52,14 +52,14 @@ public class GeocodeHttpRequest extends HttpRequest {
      * @param country geocoding결과 언어의 국가
      */
     public void actionReverseGeocodingByGeoPoint(GeoPoint point, Locale locale) {
-	Double lat = (double)point.getLatitudeE6() / 1E6;
-	Double lng = (double)point.getLongitudeE6() / 1E6;
-	httpMethod = HttpMethod.HTTP_GET;
-	
-	getHashtable.clear();
-	getHashtable.put("latlng", lat + "," + lng);
-	getHashtable.put("sensor", sensor);
-	getHashtable.put("language", locale.getLanguage());
-	parser = new GeocodeParser();
+        Double lat = (double)point.getLatitudeE6() / 1E6;
+        Double lng = (double)point.getLongitudeE6() / 1E6;
+        httpMethod = HttpMethod.HTTP_GET;
+
+        getHashtable.clear();
+        getHashtable.put("latlng", lat + "," + lng);
+        getHashtable.put("sensor", sensor);
+        getHashtable.put("language", locale.getLanguage());
+        parser = new GeocodeParser();
     }
 }

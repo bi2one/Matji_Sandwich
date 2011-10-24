@@ -98,6 +98,10 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
         }
         super.setContentView(layoutResID);
         mainViewGroup = (ViewGroup)findViewById(setMainViewId());
+
+        if (mainViewGroup != null && mainViewGroup.getBackground() == null) {
+            mainViewGroup.setBackgroundResource(R.drawable.bg_01);
+        }
     }
 
     @Override

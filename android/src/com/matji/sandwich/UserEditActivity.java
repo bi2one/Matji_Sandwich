@@ -89,7 +89,11 @@ public class UserEditActivity extends BaseActivity implements OnClickListener,
         userEditCell.setUser(user);
         String intro = user.getIntro();
         if (intro.equals("")) {
-            intro = MatjiConstants.string(R.string.not_exist_intro);
+            if (session.isCurrentUser(user)) {
+                intro = MatjiConstants.string(R.string.not_exist_intro);
+            } else {
+                intro = String.format(MatjiConstants.string(R.string.default_string_intro_other), user.getNick());
+            }
         }
         tvIntro.setText(intro);
 

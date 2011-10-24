@@ -17,6 +17,7 @@ public class GeocodeAddress extends MatjiData {
     private int viewportSWLat;
     private int viewportSWLng;
     private ArrayList<String> types;
+    private String countryCode;
 
     public void setAddressComponents(ArrayList<AddressComponent> addressComponents) {
         this.addressComponents = addressComponents;
@@ -160,5 +161,13 @@ public class GeocodeAddress extends MatjiData {
             }
         }
         return null;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
     }
 }
