@@ -1,4 +1,4 @@
-package com.matji.sandwich.http.request;
+package com.matji.sandwich.http.util;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -29,6 +29,7 @@ import org.apache.http.util.ByteArrayBuffer;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.listener.ProgressListener;
 import com.matji.sandwich.util.ImageUtil;
 
@@ -803,9 +804,8 @@ final public class HttpUtility
          */
         public String getHttpResponseBodyAsString()
         {
-            // TODO httpRespnseBody null pointer exception....
             if (httpResponseBody == null) {
-                return new String("result:{\"code\":200,\"description\":\"OK\"}");
+                return "";
             } else {
                 return new String(httpResponseBody);
             }

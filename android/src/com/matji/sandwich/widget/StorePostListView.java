@@ -36,4 +36,10 @@ public class StorePostListView extends PostListView {
         ((PostHttpRequest) request).actionStoreList(store.getId(), getPage(), getLimit());
         return request;
     }
+    
+    @Override
+    public void refresh() {
+        if (store.getPostCount() > 0)
+            super.refresh();
+    }
 }

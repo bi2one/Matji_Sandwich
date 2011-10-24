@@ -42,7 +42,7 @@
 				android:text="@string/default_string_do_not_show_again"
 				android:textSize="@dimen/dialog_simple_popup_content_size"
 				android:textColor="@color/matji_light_gray"
-				android:button="@drawable/icon_guide_check_selelctor"
+				android:button="@drawable/icon_popup_check_selector"
 				android:background="@drawable/btn_check_label_background"
 				android:layout_marginRight="@dimen/default_distance" />
 		</RelativeLayout>

@@ -97,6 +97,10 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
         }
         super.setContentView(layoutResID);
         mainViewGroup = (ViewGroup)findViewById(setMainViewId());
+
+        if (mainViewGroup != null && mainViewGroup.getBackground() == null) {
+            mainViewGroup.setBackgroundResource(R.drawable.bg_01);
+        }
     }
 
     @Override

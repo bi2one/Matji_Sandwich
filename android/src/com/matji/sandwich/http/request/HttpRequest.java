@@ -16,7 +16,8 @@ import com.matji.sandwich.exception.HttpConnectMatjiException;
 import com.matji.sandwich.exception.InternalServerMatjiException;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.parser.MatjiParser;
-import com.matji.sandwich.http.request.HttpUtility.SimpleHttpResponse;
+import com.matji.sandwich.http.util.HttpUtility;
+import com.matji.sandwich.http.util.HttpUtility.SimpleHttpResponse;
 import com.matji.sandwich.listener.ProgressListener;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
@@ -74,9 +75,9 @@ public abstract class HttpRequest implements ProgressRequestCommand {
         SimpleHttpResponse response = (httpMethod == HttpMethod.HTTP_POST) ?
                 requestHttpResponsePost(null, postHashtable):requestHttpResponseGet(null, getHashtable);
 
+                if (response.getHttpStatusCode() == -1) return null;                
                 
-                // TODO HttpUtility  response 수정
-                String resultBody = response.getHttpResponseBodyAsString();
+                String resultBody = response.getHttpResponseBodyAsString();                
                 String resultCode = response.getHttpStatusCode() + "";
 
                 Log.d("request", getClass() + " resultBody:" + resultBody);

@@ -76,7 +76,7 @@
         이미지 압축 대상 파일을 생성할 수 없습니다.
   </string>
   <string name="exception_InvalidPasswordMatjiException">
-        아이디 혹은 비밀번호를 확인해주세요.
+        아이디 또는 비밀번호를 확인해주세요.
   </string>
   <string name="exception_DuplicatedStoreFoodMatjiException">
         이미 등록된 메뉴입니다.
@@ -117,13 +117,12 @@
   <string name="default_string_do_not_show_again">이 창을 다시 보지 않기</string>
   <string name="default_string_close">닫기</string>
   <string name="default_string_tag">태그</string>
-  <string name="default_string_title">%1$s의 맛집기행</string>
+  <string name="default_string_intro_other">%1$s의 맛집기행</string>
   <string name="default_string_intro">소개글</string>
   <string name="default_string_basic_info">소개</string>
   <string name="default_string_more_info">부가정보</string>
   <string name="default_string_info">정보</string>
   <string name="default_string_popular_food">인기메뉴</string>
-  <string name="default_string_not_exist_reg_user">미발굴 맛집</string>
   <string name="default_string_notice">공지사항</string>
   <string name="default_string_reg_user">발굴자</string>
   <string name="default_string_owner_user">주인장</string>
@@ -131,8 +130,8 @@
   <string name="default_string_memo">이야기</string>
   <string name="default_string_menu">메뉴</string>
   <string name="default_string_comment">댓글</string>
-  <string name="default_string_like">좋아요</string>
-  <string name="default_string_unlike">좋아요 취소</string>
+  <string name="default_string_like">좋아요!</string>
+  <string name="default_string_unlike">좋아요! 취소</string>
   <string name="default_string_image">이미지</string>
   <string name="default_string_map">지도</string>
   <string name="default_string_store">맛집</string>
@@ -166,14 +165,15 @@
   <string name="default_string_webreview_user">링크</string>
   <string name="default_string_webreview_store">관련글</string>
   <string name="default_string_store_modify_request">정보 수정 요청</string>
-  <string name="default_string_store_close">폐업 신고</string>	
+  <string name="default_string_store_close">폐업 신고</string>  
   
   <!-- Not Exist -->  
-  <string name="not_exist_intro">소개글이 없습니다.</string>
+  <string name="not_exist_intro">소개문을 입력해주세요.</string>
   <string name="not_exist_website">홈페이지를 등록해 주세요..</string>
   <string name="not_exist_cover">소개글이 없습니다.</string>
   <string name="not_exist_tel">전화번호를 등록해 주세요.</string>
   <string name="not_exist_email_client_app">이메일 전송 어플리케이션이 존재하지 않습니다.</string>
+  <string name="not_exist_tag">태그가 존재하지 않습니다.</string>  
   
   <!-- GpsManager.java -->
   <string name="gps_request_turn_on">GPS를 수신할 수 없습니다. 설정을 켜 주셔야 합니다</string>
@@ -204,7 +204,7 @@
   <string name="cell_user_area">사는 나라</string>
   <string name="cell_user_follow">Follow</string>
   <string name="cell_user_unfollow">Unfollow</string>
-  <string name="cell_store_not_exist_tel">전화번호 미등록</string>
+  <string name="cell_store_not_exist_tel"> </string>
   <string name="cell_store_not_exist_addr">주소 미등록</string>
   <string name="cell_store_not_exist_tag"> </string>
   <string name="cell_store_not_exist_menu"> </string>
@@ -224,6 +224,7 @@
   <string name="store_detail_info_default">맛집 기본 정보</string>
   <string name="store_detail_info_note">맛집 노트</string>
   <string name="request">맛집 정보 수정 및 폐업 요청</string>
+  <string name="request_check">정말로 폐업되었나요? 페업신고 처리는 관리자 확인 후 반영됩니다.</string>
   <string name="registered_menu">메뉴</string>
   <string name="uncertain_menu">불확실한 메뉴</string>
   <string name="register_new_menu">등록된 메뉴</string>
@@ -254,7 +255,7 @@
   <!-- PostTabActivity -->
   <string name="post_tab_friend">친구</string>
   <string name="post_tab_near">주변</string>
-  <string name="post_tab_country">전국</string>
+  <string name="post_tab_country">국가</string>
   <string name="post_tab_all">세계</string>
   
   <!-- section list view test -->
@@ -330,7 +331,7 @@
   <!-- RankingTabActivity.java -->
   <string name="ranking_tab_friend">친구</string>
   <string name="ranking_tab_near">주변</string>
-  <string name="ranking_tab_country">전국</string>
+  <string name="ranking_tab_country">국가</string>
   <string name="ranking_tab_all">세계</string>
 
   <!-- row_simple_user.xml -->
@@ -343,12 +344,12 @@
   <string name="row_alarm_message">%1$s님으로부터 ##쪽지가 도착했습니다.##</string>
 
   <!-- Highlight Header -->
-  <string name="highlight_search_result">검색결과</string>
+  <string name="highlight_search_result">검색 결과</string>
   <string name="highlight_store_like_users">\'%1$s\'을(를) 좋아하는 사람들</string>
   <string name="highlight_post_like_users">이 이야기를 좋아하는 사람들</string>
   <string name="highlight_store_food_like_users">메뉴를 좋아하는 사람들</string>
   <string name="highlight_like_stores">\'%1$s\'님이 좋아하는 맛집</string>
-  <string name="highlight_like_stores_me">좋아하는 맛집</string>
+  <string name="highlight_like_stores_me">좋아요! 맛집</string>
   <string name="highlight_bookmark_stores">북마크 맛집</string>
   <string name="highlight_find_stores">\'%1$s\'님이 발견한 맛집</string>
   <string name="highlight_find_stores_me">발견한 맛집</string>
@@ -369,26 +370,26 @@
   <string name="write_post_store_view_select">맛집을 선택해 주세요.</string>
   
   <!-- arrays.xml.write_post_tags -->
-  <string name="array_write_post_tags_1">점심먹기 좋은곳</string>
-  <string name="array_write_post_tags_2">회식하기 좋은곳</string>
-  <string name="array_write_post_tags_3">데이트하기 좋은곳</string>
-  <string name="array_write_post_tags_4">푸짐한 식사</string>
-  <string name="array_write_post_tags_5">착한 가격</string>
-  <string name="array_write_post_tags_6">한잔하기 좋은 곳</string>
-  <string name="array_write_post_tags_7">해장하기 좋은곳</string>
-  <string name="array_write_post_tags_8">외식하기 좋은곳</string>
-  <string name="array_write_post_tags_9">야식먹기 좋은곳</string>
-  <string name="array_write_post_tags_10">TV맛집</string>
-  <string name="array_write_post_tags_11">단체모임하기 좋은곳</string>
-  <string name="array_write_post_tags_12">프로포즈하기 좋은곳</string>
-  <string name="array_write_post_tags_13">수다떨기 좋은곳</string>
-  <string name="array_write_post_tags_14">몸보신하기 좋은곳</string>
-  <string name="array_write_post_tags_15">혼자놀기 좋은곳</string>
-  <string name="array_write_post_tags_16">와이파이 제공</string>
-  <string name="array_write_post_tags_17">채식전문</string>
-  <string name="array_write_post_tags_18">친환경</string>
-  <string name="array_write_post_tags_19">잔치하기 좋은곳</string>
-  <string name="array_write_post_tags_20">음악듣기 좋은곳</string>
+  <string name="array_write_post_tags_1">점심식사</string>
+  <string name="array_write_post_tags_2">회식</string>
+  <string name="array_write_post_tags_3">푸짐한집</string>
+  <string name="array_write_post_tags_4">착한가격</string>
+  <string name="array_write_post_tags_5">술한잔</string>
+  <string name="array_write_post_tags_6">해장하기</string>
+  <string name="array_write_post_tags_7">외식</string>
+  <string name="array_write_post_tags_8">야식</string>
+  <string name="array_write_post_tags_9">채식</string>
+  <string name="array_write_post_tags_10">몸보신</string>
+  <string name="array_write_post_tags_11">친환경</string>
+  <string name="array_write_post_tags_12">와이파이</string>
+  <string name="array_write_post_tags_13">데이트</string>
+  <string name="array_write_post_tags_14">프로포즈</string>
+  <string name="array_write_post_tags_15">단체모임</string>
+  <string name="array_write_post_tags_16">집안잔치</string>
+  <string name="array_write_post_tags_17">20년맛집</string>
+  <string name="array_write_post_tags_18">30년맛집</string>
+  <string name="array_write_post_tags_19">40년맛집</string>
+  <string name="array_write_post_tags_20">TV맛집</string>
   
   <!-- activity_write_post_tag.xml -->
   <string name="activity_write_post_tag_hint">태그 입력</string>
@@ -399,31 +400,28 @@
   <!-- WritePostActivity.java -->
   <string name="write_post_activity_title">이야기 쓰기</string>
   <string name="write_post_success">이야기 쓰기에 성공하였습니다.</string>
-  <string name="write_post_album_full">사진을 더 첨부할 수 없습니다.</string>
+  <string name="write_post_album_full">사진은 최대 8개까지 첨부가 가능합니다.</string>
 
   <!-- SelectStoreActivity.java -->
   <string name="select_store_activity_title">맛집 선택</string>
-
+  
   <!-- ExternalServiceActivity.java -->
   <string name="export_to_where">공유 설정</string>
   <string name="export_to_twitter">트위터로 내보내기</string>
   <string name="export_to_facebook">페이스북으로 내보내기</string>
   <string name="export_to_guide">페이스북, 트위터 보내기를 선택하시면 \n이야기가 동시에 등록됩니다.</string>
-  
-  
+
   <!-- StoreModifyActivity.java -->
-  <string name="store_modify_success">수정 요청이 전송되었습니다.</string>
+  <string name="store_modify_success">맛집 정보 수정요청이 완료되었습니다. 수정사항은 운영자 확인 후 서비스에 반영됩니다. 감사합니다.</string>
 
   <!-- StoreCloseActivity -->
-  <string name="store_close_success">폐업 신고가 접수되었습니다.</string>
+  <string name="store_close_success">폐업 신고를 완료했습니다. 맛집 폐업 처리는 관리자 확인 후 반영됩니다. 감사합니다.</string>
 
   <!-- post_edit_text.xml -->
   <string name="post_edit_text_empty">이야기를 입력해 주세요.</string>
 
   <!-- simple_submit_location_bar.xml -->
-  <string name="simple_submit_location_bar_submit">지역찾기</string>
-  
-  <!-- Matji -->
+  <string name="simple_submit_location_bar_submit">지역 변경</string>
   
   <!-- TagPostListView.java -->
   <string name="store_tag_unlink_post">이 태그는 연결된 이야기가 \n없는 태그입니다.</string>
@@ -431,8 +429,8 @@
   <!-- PostListView Subtitle -->
   <string name="subtitle_friend_post">친구들 이야기</string>
   <string name="subtitle_nearby_post">주변 맛집 이야기</string>
+  <string name="subtitle_domestic_post">국가 맛집 이야기</string>
   <string name="subtitle_all_post">세계 맛집 이야기</string>
-  <string name="subtitle_domestic_post">전국 맛집 이야기</string>
   <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
   <string name="subtitle_user_post">%1$d개의 이야기</string>
   <string name="subtitle_url">%1$d개의 링크</string>
@@ -488,7 +486,7 @@
 
   <!-- write_store_matji_mapview.xml -->
   <string name="write_store_matji_mapview_store_name">맛집이름 입력</string>
-  <string name="write_store_matji_mapview_add_address">상세주소</string>
+  <string name="write_store_matji_mapview_add_address">상세주소(건물, 층수 등)</string>
   <string name="write_store_matji_mapview_phone_number">전화번호 입력</string>
 
   <!-- com.matji.sandwich.http.DialogAsyncTask -->
@@ -518,17 +516,17 @@
   <string name="settings_account_register">회원가입</string>
   <string name="settings_account_forget">아이디/비밀번호 찾기</string>
   <string name="settings_account_logout">로그아웃</string>
-  <string name="settings_account_link_twitter">Twitter 계정 연동</string>
-  <string name="settings_account_link_facebook">Facebook 계정 연동</string>
-  <string name="settings_account_unlink_twitter">Twitter 계정 연동됨</string>
-  <string name="settings_account_unlink_facebook">Facebook 계정 연동됨</string>
+  <string name="settings_account_link_twitter">Twitter 연동</string>
+  <string name="settings_account_link_facebook">Facebook 연동</string>
+  <string name="settings_account_unlink_twitter">Twitter 연동됨</string>
+  <string name="settings_account_unlink_facebook">Facebook 연동됨</string>
   <string name="settings_account_unlink_twitter_ask">정말로 트위터 연동을 \n해제하시겠습니까?</string>
   <string name="settings_account_unlink_facebook_ask">정말로 페이스북 연동을 \n해제하시겠습니까?</string>
   <string name="settings_account_edit_profile">정보 변경</string>
   <string name="settings_account_find_friends">친구 찾기</string>
   <string name="settings_location_setting">위치 설정</string>
   <string name="settings_location_information_available">위치정보 사용</string>
-  <string name="settings_location_country">국가 설정</string>
+  <string name="settings_location_country">사는 나라</string>
   <string name="settings_alarm_setting">알림 설정</string>
   <string name="settings_alarm_new_post">새글 알림</string>
   <string name="settings_alarm_new_comment">댓글 알림</string>
@@ -608,7 +606,7 @@
   <!-- RegisterActivity.java -->
   <string name="register_email_is_null">이메일을 입력해 주세요.</string>
   <string name="register_email_is_incorrect">이메일이 올바르지 않습니다.</string>
-  <string name="register_nickname_is_null">닉네임을 입력해 주세요.</string>
+  <string name="register_nickname_is_null">닉네임을 입력해 주세요(최대 12자)</string>
   <string name="register_nickname_too_short_or_too_long">닉네임의 길이를 확인해 주세요.\n최소 2자 ~ 최대 12자</string>
   <string name="register_password_is_null">비밀번호를 입력해 주세요.</string>
   <string name="register_password_too_short_or_too_long">비밀번호의 길이를 확인해 주세요.\n최소 6자 ~ 최대 20자</string>
@@ -657,7 +655,7 @@
   <string name="search_result_empty">검색 결과가 없습니다.</string>
   
   <!-- TagListView.java -->
-  <string name="tag_list_more">More</string>
+  <string name="tag_list_more">더 보기</string>
   
   <!-- PostEditActivity.java -->
   <string name="post_edit_confirm">이야기 수정이 완료되었습니다.</string>
@@ -682,8 +680,8 @@
   <string name="branding_enforce1">맛있는 지도가 2.0 버전을 출시하면서 서비스명을 야미스토리(YummyStory)로 변경하였습니다.</string>
   <string name="branding_content1">서비스명을 바꾼다는 결정이 쉽지는 않았지만 ‘맛있는 지도’를 글로벌 서비스로 확장하기 위해서 한번은 겪어야 하는 일이라는 판단에 부득이하게 서비스명을 변경하게 되었습니다. 또한 서비스의 기능 및 사용성 개선을 위해 많은 부분이 수정되었음을 알려드립니다. 물론 메모, 찜, 태그 등 그 동안 맛있는 지도에 올려주신 사용자 데이터들은 그대로 보존됩니다.  대표적인 변경사항은 다음과 같습니다.</string>
   <string name="branding_update1">Email로 로그인 (로그인 체계 간소화)</string>
-  <string name="branding_update2">닉네임 폐지 (기존의 아이디가 닉네임을 대신하며 아이디 변경 가능)</string>
-  <string name="branding_update3">찜을 ‘좋아요’와 ‘북마크’로 분리</string>
+  <string name="branding_update2">닉네임 폐지 (기존의 닉네임을 삭제하고 아이디를 닉네임으로 사용하며 변경 가능)</string>
+  <string name="branding_update3">맛집관리를 찜을 ‘좋아요’와 ‘북마크’로 분리</string>
   <string name="branding_update4">맛집 메뉴 등록 및 메뉴 평가 기능 도입</string>
   <string name="branding_update5">이야기(메모)에 댓글 및 이야기 평가 기능 도입</string>
   <string name="branding_update6">친구 기능을 ‘Follwer’와 ‘Follow’로 변경</string>
@@ -692,7 +690,7 @@
   <string name="branding_from">바나나위키 임직원 일동</string>
   
   <!-- Popup -->
-  <string name="popup_main_map">맛집을 찾으시려면 지도 안에 숫자를 확인하세요. 지도안의 숫자는 사용자들이  &lt;img src=\'icon_navi_like_touch.png\'/> \'좋아요\'버튼으로 추천한 횟수입니다.</string>
+  <string name="popup_main_map">맛집을 찾으시려면 지도 안에 숫자를 확인하세요. 지도안의 숫자는 사용자들이 &lt;img src=\'icon_navi_like_touch.png\'/> \'좋아요\'버튼으로 추천한 횟수입니다.</string>
   <string name="popup_login">맛있는 지도 브랜드를 변경하면서 회원정보를 더 간소화 하기 위해 이메일로 로그인하도록 하였습니다. 트위터/페이스북 계정으로도 사용이 가능합니다.</string>
   
   <!-- country codes -->
@@ -708,8 +706,8 @@
   <string name="country_name_AI">Anguilla</string>
   <string name="country_code_AL">AL</string>
   <string name="country_name_AL">Shqipëria</string>
-<!--   <string name="country_code_AM">AM</string> -->
-<!--   <string name="country_name_AM">Հայաստան</string> -->
+  <string name="country_code_AM">AM</string> 
+  <string name="country_name_AM">Armenia</string> 
   <string name="country_code_AN">AN</string>
   <string name="country_name_AN">Netherlands Antilles</string>
   <string name="country_code_AO">AO</string>
@@ -850,8 +848,8 @@
   <string name="country_name_GB">United Kingdom</string>
   <string name="country_code_GD">GD</string>
   <string name="country_name_GD">Grenada</string>
-<!--   <string name="country_code_GE">GE</string> -->
-<!--   <string name="country_name_GE">საქართველო</string> -->
+  <string name="country_code_GE">GE</string> 
+  <string name="country_name_GE">Georgia</string> 
   <string name="country_code_GF">GF</string>
   <string name="country_name_GF">French Guiana</string>
   <string name="country_code_GG">GG</string>
@@ -937,7 +935,7 @@
   <string name="country_code_KP">KP</string>
   <string name="country_name_KP">조선</string>
   <string name="country_code_KR">KR</string>
-  <string name="country_name_KR">Korea</string>
+  <string name="country_name_KR">대한민국</string>
   <string name="country_code_KW">KW</string>
   <string name="country_name_KW">الكويت</string>
   <string name="country_code_KY">KY</string>
@@ -998,8 +996,8 @@
   <string name="country_name_MT">Malta</string>
   <string name="country_code_MU">MU</string>
   <string name="country_name_MU">Mauritius</string>
-<!--   <string name="country_code_MV">MV</string> -->
-<!--   <string name="country_name_MV">ގުޖޭއްރާ ޔާއްރިހޫމްޖ</string> -->
+  <string name="country_code_MV">MV</string> 
+  <string name="country_name_MV">Maldives</string> 
   <string name="country_code_MW">MW</string>
   <string name="country_name_MW">Malawi</string>
   <string name="country_code_MX">MX</string>

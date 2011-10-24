@@ -30,6 +30,7 @@ GpsManager.StartConfigListener {
     private static final int REQUEST_CODE_STORE = 2;
     private static final int BASIC_SEARCH_LOC_LAT = 0;
     private static final int BASIC_SEARCH_LOC_LNG = 0;
+    private static final int MAX_STORE_COUNT = 60;
     private MainMatjiMapView mapView;
     private StoreMapNearListView storeListView;
     private TextView addressView;
@@ -65,9 +66,12 @@ GpsManager.StartConfigListener {
         mapView.init(addressWrapper, addressView, this, getMainView());
         mapView.setOverlayClickListener(this);
         mapView.setStartConfigListener(this);
+        mapView.setLimit(MAX_STORE_COUNT);
         storeListView = (StoreMapNearListView)findViewById(R.id.main_map_store_list);
         storeListView.init(addressWrapper, addressView, this);
+        storeListView.setLimit(MAX_STORE_COUNT);
         storeListView.setStartConfigListener(this);
+        mapView.setListView(storeListView);
 
         flipButton = findViewById(R.id.map_title_bar_flip_button);
         currentViewIsMap = true;
@@ -189,7 +193,7 @@ GpsManager.StartConfigListener {
 
     private void showStoreListView() {
         ((ImageButton) flipButton).setImageDrawable(flipMapViewImage);
-        storeListView.forceReload();
+//        storeListView.forceReload();
         mapView.setVisibility(View.GONE);
         storeListView.setVisibility(View.VISIBLE);
     }
@@ -205,8 +209,8 @@ GpsManager.StartConfigListener {
                 if (currentViewIsMap)
                     mapView.setCenter(new GeoPoint(searchedLat, searchedLng));
                 else {
-                    storeListView.setCenter(new GeoPoint(searchedLat, searchedLng));
-                    storeListView.forceReload();
+//                    storeListView.setCenter(new GeoPoint(searchedLat, searchedLng));
+//                    storeListView.forceReload();
                 }
             }
             break;

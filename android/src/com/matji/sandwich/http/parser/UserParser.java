@@ -3,12 +3,10 @@ package com.matji.sandwich.http.parser;
 import java.util.ArrayList;
 
 import com.google.gson.JsonObject;
-import com.matji.sandwich.R;
 import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.exception.MatjiException;
-import com.matji.sandwich.util.MatjiConstants;
 
 public class UserParser extends MatjiDataParser {
     public User getMatjiData(JsonObject object) throws MatjiException {
@@ -23,8 +21,7 @@ public class UserParser extends MatjiDataParser {
         /* Set Title */
         String tmp = getString(object, "title");
         if (tmp == null) {
-            user.setTitle(
-			  String.format(MatjiConstants.string(R.string.default_string_title), user.getNick()));
+            user.setTitle("");
         } else {
             user.setTitle(tmp);
         }

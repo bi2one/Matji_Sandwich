@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -96,11 +95,8 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
         wrapper = new RelativeLayout(getContext());
 
         left = createPage();
-        left.setBackgroundColor(Color.RED);
         center = createPage();
-        center.setBackgroundColor(Color.GREEN);
         right = createPage();
-        right.setBackgroundColor(Color.BLUE);
 
         wrapper.addView(left);
         wrapper.addView(center);
@@ -196,6 +192,12 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
     public void setCurrentItemPosition(int currItemPos) {
         this.currItemPos = currItemPos;
         setPageMargin();
+        if (existLeftImage()) {
+            moveToLeft();moveToRight();
+        }
+        if (existRightImage()) {
+            moveToRight();moveToLeft();
+        }
     }
 
     public int getCurrentItemPosition() {

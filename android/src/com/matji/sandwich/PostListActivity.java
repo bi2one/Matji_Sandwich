@@ -24,7 +24,7 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
     public static final String TYPE_ALL = "PostListActivity.type_all";
     public static final String TYPE_FRIEND = "PostListActivity.type_friend";
     public static final String TYPE_DOMESTIC = "PostListActivity.type_domestic";
-    
+
     private PostListView listView;
     private String type;
 
@@ -40,19 +40,19 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
 
         listView = (PostListView) findViewById(R.id.post_list_view);
         listView.setActivity(this);
-	Intent intent = getIntent();
-	type = intent.getStringExtra(TYPE);
-	if (type == null) type = TYPE_ALL;
+        Intent intent = getIntent();
+        type = intent.getStringExtra(TYPE);
+        if (type == null) type = TYPE_ALL;
 
-	if (type.equals(TYPE_ALL)) {
-	    listView.setType(PostListView.Type.ALL);
-	} else if (type.equals(TYPE_FRIEND)) {
-	    listView.setType(PostListView.Type.FRIEND);
-	} else if (type.equals(TYPE_DOMESTIC)) {
-	    listView.setType(PostListView.Type.DOMESTIC);
-	} else {
-	    listView.setType(PostListView.Type.ALL);
-	}
+        if (type.equals(TYPE_ALL)) {
+            listView.setType(PostListView.Type.ALL);
+        } else if (type.equals(TYPE_FRIEND)) {
+            listView.setType(PostListView.Type.FRIEND);
+        } else if (type.equals(TYPE_DOMESTIC)) {
+            listView.setType(PostListView.Type.DOMESTIC);
+        } else {
+            listView.setType(PostListView.Type.ALL);
+        }
     }
 
     @Override
@@ -74,9 +74,7 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
             if (resultCode == RESULT_OK) {
                 ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostMainActivity.POSTS);
                 listView.setPosts(posts);
-                if (getParent() instanceof BaseTabActivity) {
-                    ((BaseTabActivity) getParent()).setIsFlow(true);
-                }
+                setIsFlow(true);
             }
             break;
         case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:

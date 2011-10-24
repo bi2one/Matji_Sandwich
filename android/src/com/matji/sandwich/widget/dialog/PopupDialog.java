@@ -3,6 +3,7 @@ package com.matji.sandwich.widget.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
@@ -54,14 +55,14 @@ public class PopupDialog extends Dialog {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(layoutRes, null);
         setCanceledOnTouchOutside(canceledOnTouchOutside);
-//        layout.setOnTouchListener(new View.OnTouchListener() {
-//            
-//            @Override
-//            public boolean onTouch(View v, MotionEvent evt) {
-//                if (canceledOnTouchOutside) dismiss();
-//                return false;
-//            }
-//        });
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            
+            @Override
+            public boolean onTouch(View v, MotionEvent evt) {
+                if (canceledOnTouchOutside) dismiss();
+                return false;
+            }
+        });
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(layout);
 

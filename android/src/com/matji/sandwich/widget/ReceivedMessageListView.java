@@ -32,14 +32,4 @@ public class ReceivedMessageListView extends MessageListView {
 	protected MessageType getMessageType() {
 		return MessageType.RECEIVED;
 	}
-
-	//    public void setLastReadMessageId(int lastReadMessageId) {
-	//        ((MessageAdapter) getMBaseAdapter()).setLastReadMessageId(lastReadMessageId);
-	//    }
-
-	//    public int getFirstIndexMessageId() {
-	//        if (!getAdapterData().isEmpty())
-	//            return ((Message) getAdapterData().get(0)).getId();
-	//        else return 0;
-	//    }
 }
