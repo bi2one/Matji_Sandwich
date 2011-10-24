@@ -29,9 +29,12 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.http.request.VersionHttpRequest;
+import com.matji.sandwich.http.spinner.Spinnable;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
+import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.HomeTitle;
 
 public class SettingsActivity extends BaseActivity implements OnCheckedChangeListener, Requestable, OnClickListener {
@@ -73,6 +76,9 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     public HttpRequest request;
     public HttpRequestManager manager;
 
+    private MeHttpRequest tRequest;
+    private MeHttpRequest fRequest;
+
     @Override
     public int setMainViewId() {
         return R.id.activity_settings;
@@ -100,6 +106,9 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         title.setTitle(R.string.default_string_settings);
         tvVersion.setText("Ver " + this.getResources().getString(R.string.settings_service_version_name));
 
+        tRequest = new MeHttpRequest(this);
+        fRequest = new MeHttpRequest(this);
+        
         setTags();
         setListeners();
         
@@ -193,18 +202,28 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
 
     public void linkTwitterClicked() {
         if (session.isLogin()) {
-            MeHttpRequest request = new MeHttpRequest(this);
             if (session.getCurrentUser().getExternalAccount().isLinkedTwitter()) {
-                request.deleteExternalAccount(this, Service.TWITTER);
-                manager.request(
-                        this,
-                        (ViewGroup) findViewById(R.id.settings_account_link_twitter_wrapper),
-                        SpinnerType.SSMALL,
-                        request,
-                        HttpRequestManager.TWITTER_EXTERNAL_ACCOUNT_DELETE_REQUEST,
-                        this);
+            	SimpleConfirmDialog tDialog = new SimpleConfirmDialog(this, R.string.settings_account_unlink_twitter_ask);
+            	tDialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
+					
+					@Override
+					public void onConfirmClick(SimpleDialog dialog) {
+		            	tRequest.deleteExternalAccount(SettingsActivity.this, Service.TWITTER);
+		                manager.request(
+		                        SettingsActivity.this,
+		                        (ViewGroup) findViewById(R.id.settings_account_link_twitter_wrapper),
+		                        SpinnerType.SSMALL,
+		                        tRequest,
+		                        HttpRequestManager.TWITTER_EXTERNAL_ACCOUNT_DELETE_REQUEST,
+		                        SettingsActivity.this);
+					}
+					
+					@Override
+					public void onCancelClick(SimpleDialog dialog) {}
+				});
+            	tDialog.show();
             } else {
-                request.newExternalAccount(this, Service.TWITTER);
+                tRequest.newExternalAccount(this, Service.TWITTER);
             }
         }
     }
@@ -213,14 +232,25 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
         if (session.isLogin()) {
             MeHttpRequest request = new MeHttpRequest(this);
             if (session.getCurrentUser().getExternalAccount().isLinkedFacebook()) {
-                request.deleteExternalAccount(this, Service.FACEBOOK);
-                manager.request(
-                        this,
-                        (ViewGroup) findViewById(R.id.settings_account_link_facebook_wrapper),
-                        SpinnerType.SSMALL,
-                        request,
-                        HttpRequestManager.FACEBOOK_EXTERNAL_ACCOUNT_DELETE_REQUEST,
-                        this);
+            	SimpleConfirmDialog fDialog = new SimpleConfirmDialog(this, R.string.settings_account_unlink_facebook_ask);
+            	fDialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
+					
+					@Override
+					public void onConfirmClick(SimpleDialog dialog) {
+		            	fRequest.deleteExternalAccount(SettingsActivity.this, Service.FACEBOOK);
+		                manager.request(
+		                        SettingsActivity.this,
+		                        (ViewGroup) findViewById(R.id.settings_account_link_facebook_wrapper),
+		                        SpinnerType.SSMALL,
+		                        fRequest,
+		                        HttpRequestManager.FACEBOOK_EXTERNAL_ACCOUNT_DELETE_REQUEST,
+		                        SettingsActivity.this);
+					}
+					
+					@Override
+					public void onCancelClick(SimpleDialog dialog) {}
+				});
+            	fDialog.show();
             } else {
                 request.newExternalAccount(this, Service.FACEBOOK);
             }

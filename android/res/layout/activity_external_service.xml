@@ -27,6 +27,7 @@
 				style="@style/settings_Row"
 				android:background="@drawable/txtbox_t_selector">
 				<TextView
+					android:id="@+id/export_to_twitter_text"
 					style="@style/DefaultWrap"
 					android:text="@string/export_to_twitter"
 					android:textSize="@dimen/settings_content_size"
@@ -52,6 +53,7 @@
 				android:background="@drawable/txtbox_u_selector"
 				android:layout_below="@id/twitter_service">
 				<TextView
+					android:id="@+id/export_to_facebook_text"
 					style="@style/DefaultWrap"
 					android:text="@string/export_to_facebook"
 					android:textSize="@dimen/settings_content_size"

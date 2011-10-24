@@ -39,6 +39,7 @@ SimpleAlertDialog.OnClickListener {
     public static final String FROM_MAIN = "WritePostActivity.from_main";
     public static final String INTENT_STORE = "WritePostActivity.store";
     public static final String INTENT_TAGS = "WritePostActivity.tags";
+    public static final String INTENT_USER = "WritePostActivity.user";
     
     private static final int TAG_WRITE_POST = 0;
     private static final int INTENT_SELECT_STORE = 0;

@@ -177,7 +177,6 @@ public class StoreDefaultInfoActivity extends BaseActivity implements Refreshabl
 	public void onConfirmClick(SimpleDialog dialog) {
 		if (dialog == successDialog) {
 			setResult(RESULT_OK);
-			finish();
 		}
 	}
 
