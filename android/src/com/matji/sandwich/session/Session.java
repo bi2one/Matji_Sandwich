@@ -13,10 +13,16 @@ import android.view.ViewGroup;
 import com.matji.sandwich.Loginable;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
+import com.matji.sandwich.data.AlarmSetting;
+import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.Badge;
+import com.matji.sandwich.data.ExternalAccount;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Me;
+import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
+import com.matji.sandwich.data.UserMileage;
 import com.matji.sandwich.data.provider.ConcretePreferenceProvider;
 import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.data.provider.PreferenceProvider;
@@ -270,8 +276,32 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
     }
 
     public void setCurrentUser(User user) {
+        User currentUser = getCurrentUser();
+        if (currentUser != null) {
+            currentUser.setNick(user.getNick());
+            currentUser.setEmail(user.getEmail());
+            currentUser.setTitle(user.getTitle());
+            currentUser.setIntro(user.getIntro());
+            currentUser.setWebsite(user.getWebsite());
+            currentUser.setPostCount(user.getPostCount());
+            currentUser.setTagCount(user.getTagCount());
+            currentUser.setUrlCount(user.getUrlCount());
+            currentUser.setLikeStoreCount(user.getLikeStoreCount());
+            currentUser.setDiscoverStoreCount(user.getDiscoverStoreCount());
+            currentUser.setBookmarkStoreCount(user.getBookmarkStoreCount());
+            currentUser.setFollowingCount(user.getFollowingCount());
+            currentUser.setFollowerCount(user.getFollowerCount());
+            currentUser.setReceivedMessageCount(user.getReceivedMessageCount());
+            currentUser.setImageCount(user.getImageCount());
+            currentUser.setMileage(user.getMileage());
+            currentUser.setAttchFiles(user.getAttachFiles());
+            currentUser.setStores(user.getStores());
+            currentUser.setCountryCode(user.getCountryCode());
+        } else {
+            currentUser = user;
+        }
         try {
-            mPrefs.setObject(keyForCurrentUser, user);
+            mPrefs.setObject(keyForCurrentUser, currentUser);
         } catch (NotSerializableException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

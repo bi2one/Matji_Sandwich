@@ -166,14 +166,23 @@
 	<dimen name="row_alarm_content_size">14dp</dimen>
 	<dimen name="row_alarm_created_at_size">12dp</dimen>
 	
-	<!-- row_message -->
-	<dimen name="row_message_height">53.33dp</dimen>
-	<dimen name="row_message_flow_width">39.33dp</dimen>
-	<dimen name="row_message_flow_line_width">1.33dp</dimen>
-	<dimen name="row_message_subject_list_size">16dp</dimen>
-	<dimen name="row_message_nick_size">12dp</dimen>
-	<dimen name="row_message_subject_size">14dp</dimen>
-	<dimen name="row_message_content_padding_bottom">13.33dp</dimen>
+    <!-- row_message -->
+    <dimen name="row_message_height">53.33dp</dimen>
+    <dimen name="row_message_flow_width">39.33dp</dimen>
+    <dimen name="row_message_flow_line_width">1.33dp</dimen>
+    <dimen name="row_message_subject_list_size">16dp</dimen>
+    <dimen name="row_message_nick_size">12dp</dimen>
+    <dimen name="row_message_subject_size">14dp</dimen>
+    <dimen name="row_message_content_padding_bottom">13.33dp</dimen>
+    
+    <!-- row_message -->
+    <dimen name="row_notice_height">53.33dp</dimen>
+    <dimen name="row_notice_flow_width">39.33dp</dimen>
+    <dimen name="row_notice_flow_line_width">1.33dp</dimen>
+    <dimen name="row_notice_subject_list_size">16dp</dimen>
+    <dimen name="row_notice_nick_size">12dp</dimen>
+    <dimen name="row_notice_subject_size">14dp</dimen>
+    <dimen name="row_notice_content_padding_bottom">13.33dp</dimen>
 	
 	<!-- row_image -->
 	<dimen name="row_image_width">69.33dp</dimen>

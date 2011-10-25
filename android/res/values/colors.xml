@@ -96,10 +96,15 @@
 	<!-- Comment List View -->
 	<color name="comment_list_view_bg">#fff3b3</color>
 	
-	<!-- row message -->
-	<color name="row_message_flow_bg">#fffcec</color>
-	<color name="row_message_flow_line">#e3d9cc</color>
-	<color name="row_message_bg">#fff9d9</color>
+    <!-- row message -->
+    <color name="row_message_flow_bg">#fffcec</color>
+    <color name="row_message_flow_line">#e3d9cc</color>
+    <color name="row_message_bg">#fff9d9</color>
+    
+    <!-- row notice -->
+    <color name="row_notice_flow_bg">#fffcec</color>
+    <color name="row_notice_flow_line">#e3d9cc</color>
+    <color name="row_notice_bg">#fff9d9</color>
 
 	<!-- write store -->
 	<color name="write_store_bg">#fff9a3</color>

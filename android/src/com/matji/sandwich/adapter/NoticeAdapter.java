@@ -40,17 +40,16 @@ public class NoticeAdapter extends MBaseAdapter {
 
         if (convertView == null) {
             noticeElement = new NoticeElement();
-            convertView = getLayoutInflater().inflate(R.layout.row_message, null);
+            convertView = getLayoutInflater().inflate(R.layout.row_notice, null);
 
-            noticeElement.subjectList = (TextView) convertView.findViewById(R.id.row_message_subject_list);
-            noticeElement.nick = (TextView) convertView.findViewById(R.id.row_message_nick);
-            noticeElement.createdAtList = (TextView) convertView.findViewById(R.id.row_message_created_at_list);
-            noticeElement.subject = (TextView) convertView.findViewById(R.id.row_message_subject);
-            noticeElement.createdAt = (TextView) convertView.findViewById(R.id.row_message_created_at);
-            noticeElement.message = (TextView) convertView.findViewById(R.id.row_message_message);
-            noticeElement.subjectWrapper = (View) convertView.findViewById(R.id.row_message_subject_wrapper).getParent();
-            noticeElement.flow = (ImageView) noticeElement.subjectWrapper.findViewById(R.id.row_message_flow); 
-            noticeElement.messageWrapper = noticeElement.subjectWrapper.findViewById(R.id.row_message_message_wrapper);
+            noticeElement.subjectList = (TextView) convertView.findViewById(R.id.row_notice_subject_list);
+            noticeElement.createdAtList = (TextView) convertView.findViewById(R.id.row_notice_created_at_list);
+            noticeElement.subject = (TextView) convertView.findViewById(R.id.row_notice_subject);
+            noticeElement.createdAt = (TextView) convertView.findViewById(R.id.row_notice_created_at);
+            noticeElement.notice = (TextView) convertView.findViewById(R.id.row_notice_notice);
+            noticeElement.subjectWrapper = (View) convertView.findViewById(R.id.row_notice_subject_wrapper).getParent();
+            noticeElement.flow = (ImageView) noticeElement.subjectWrapper.findViewById(R.id.row_notice_flow); 
+            noticeElement.noticeWrapper = noticeElement.subjectWrapper.findViewById(R.id.row_notice_notice_wrapper);
 
             convertView.setTag(noticeElement);
 
@@ -65,7 +64,6 @@ public class NoticeAdapter extends MBaseAdapter {
         });
 
         noticeElement.subjectList.setText(notice.getSubject());
-        noticeElement.nick.setVisibility(View.GONE);
 
         String createdAt = TimeUtil.parseString(
                 "yyyy-MM-dd hh:mm", 
@@ -78,8 +76,9 @@ public class NoticeAdapter extends MBaseAdapter {
             noticeElement.createdAtList.setCompoundDrawables(null, null, null, null);
         }
         noticeElement.subject.setText(notice.getSubject());
-        noticeElement.createdAt.setText(createdAt);
-        noticeElement.message.setText(notice.getContent());
+        noticeElement.
+        createdAt.setText(createdAt);
+        noticeElement.notice.setText(notice.getContent());
         if (hasFolded(position)) {
             fold(noticeElement);
         } else {
@@ -124,7 +123,7 @@ public class NoticeAdapter extends MBaseAdapter {
 
     public void unfold(NoticeElement holder) {
         holder.flow.setImageResource(R.drawable.icon_flow_bottom);
-        holder.messageWrapper.setVisibility(View.VISIBLE);
+        holder.noticeWrapper.setVisibility(View.VISIBLE);
     }
 
     public void fold(int position, NoticeElement holder) {
@@ -134,18 +133,17 @@ public class NoticeAdapter extends MBaseAdapter {
 
     public void fold(NoticeElement holder) {
         holder.flow.setImageResource(R.drawable.icon_flow);
-        holder.messageWrapper.setVisibility(View.GONE);
+        holder.noticeWrapper.setVisibility(View.GONE);
     }
 
     private class NoticeElement {
         TextView subjectList;
-        TextView nick;
         TextView createdAtList;
         TextView subject;
         TextView createdAt;
-        TextView message;
+        TextView notice;
         ImageView flow;
-        View messageWrapper;
+        View noticeWrapper;
         View subjectWrapper;
     }
 }

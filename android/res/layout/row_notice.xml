@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWidthFill"
+	android:orientation="vertical">
+	<RelativeLayout
+		android:id="@+id/row_notice_subject_wrapper"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/row_notice_height"
+		android:background="@color/matji_white">
+		<RelativeLayout
+			android:id="@+id/row_notice_flow_wrapper"
+			android:layout_width="@dimen/row_notice_flow_width"
+			android:layout_height="@dimen/row_notice_height"
+			android:background="@color/row_notice_flow_bg">
+			<ImageView
+				android:id="@+id/row_notice_flow"
+				style="@style/DefaultWrap"
+				android:src="@drawable/icon_flow"
+				android:layout_centerInParent="true" />
+		</RelativeLayout>
+		<ImageView
+			android:id="@+id/row_notice_flow_line"
+			android:background="@color/row_notice_flow_line"
+			android:layout_width="@dimen/row_notice_flow_line_width"
+			android:layout_height="@dimen/row_notice_height"
+			android:layout_toRightOf="@id/row_notice_flow_wrapper"
+			android:layout_marginRight="@dimen/default_distance_long" />
+		<TextView
+			android:id="@+id/row_notice_subject_list"
+			style="@style/DefaultWrap"
+			android:textSize="@dimen/row_notice_subject_list_size"
+			android:textColor="@color/matji_gray"
+			android:singleLine="true"
+			android:layout_toRightOf="@id/row_notice_flow_line"
+			android:layout_marginTop="@dimen/default_distance_half" />
+		<TextView
+			android:id="@+id/row_notice_created_at_list"
+			style="@style/DefaultWrap"
+			android:textSize="@dimen/row_notice_nick_size"
+			android:textColor="@color/matji_light_gray"
+			android:layout_toRightOf="@id/row_notice_flow_line"
+			android:layout_below="@id/row_notice_subject_list"
+			android:drawablePadding="@dimen/default_drawable_padding" />
+		<RelativeLayout
+			android:id="@+id/SpinnerContainer"
+			style="@style/DefaultWrap"
+			android:layout_toRightOf="@id/row_notice_created_at_list"
+			android:layout_below="@id/row_notice_subject_list"
+			android:layout_marginLeft="@dimen/default_drawable_padding" />
+	</RelativeLayout>
+
+	<LinearLayout
+		android:id="@+id/row_notice_notice_wrapper"
+		style="@style/DefaultWrap"
+		android:orientation="vertical">
+		<ImageView
+			android:id="@+id/row_notice_shadow"
+			style="@style/DefaultWidthFill"
+			android:background="@drawable/img_shadow" />
+
+		<RelativeLayout
+			style="@style/DefaultWidthFill"
+			android:paddingRight="@dimen/default_distance"
+			android:paddingLeft="@dimen/default_distance"
+			android:paddingTop="@dimen/default_distance_long"
+			android:paddingBottom="@dimen/default_distance_long"
+			android:background="@color/row_notice_bg">
+			<TextView
+				android:id="@+id/row_notice_subject"
+				style="@style/DefaultWrap"
+				android:textSize="@dimen/row_notice_subject_size"
+				android:textColor="@color/matji_gray"
+				android:layout_below="@id/row_notice_shadow" />
+			<LinearLayout
+				android:id="@+id/row_notice_created_at_wrapper"
+				style="@style/DefaultWidthFill"
+				android:gravity="center_vertical"
+				android:layout_below="@id/row_notice_subject"
+				android:paddingBottom="@dimen/row_notice_content_padding_bottom">
+				<TextView
+					android:id="@+id/row_notice_created_at"
+					style="@style/DefaultWrap"
+					android:textSize="@dimen/row_notice_nick_size"
+					android:textColor="@color/matji_chocolate" />
+			</LinearLayout>
+			<TextView
+				android:id="@+id/row_notice_notice"
+				style="@style/DefaultWrap"
+				android:textSize="@dimen/row_notice_nick_size"
+				android:textColor="@color/matji_gray"
+				android:layout_below="@id/row_notice_created_at_wrapper" />
+		</RelativeLayout>
+	</LinearLayout>
+</LinearLayout>
