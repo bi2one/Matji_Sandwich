@@ -269,6 +269,15 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
         return mConcretePrefs;
     }
 
+    public void setCurrentUser(User user) {
+        try {
+            mPrefs.setObject(keyForCurrentUser, user);
+        } catch (NotSerializableException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
     public User getCurrentUser(){
         Object obj = mPrefs.getObject(keyForCurrentUser);
         if (obj == null)

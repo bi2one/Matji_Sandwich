@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:id="@+id/menu_reload"
 	android:title="@string/default_string_reload" 
-	android:icon="@drawable/icon"
+	android:icon="@drawable/img_refresh"
 	android:alphabeticShortcut="a"/>
 </menu>
 

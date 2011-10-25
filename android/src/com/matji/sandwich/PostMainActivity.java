@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -258,5 +260,21 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
         super.onResume();
         refreshCommentInputBar();
         refreshCommentListView();
+    }   
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            commentListView.refresh();
+            return true;
+        }
+        return false;
     }
 }

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -91,7 +92,7 @@ public class UserCell extends Cell implements Followable {
 
         profile = ((CellProfileImageView) findViewById(R.id.profile));
         profile.showInsetBackground();
-	
+
         nick = ((TextView) findViewById(R.id.cell_user_nick));
         point = ((TextView) findViewById(R.id.cell_user_point));
         area = ((TextView) findViewById(R.id.cell_user_area));
@@ -102,8 +103,8 @@ public class UserCell extends Cell implements Followable {
 
             @Override
             public void postUnfollowRequest() {
-            	UserTitle.title_user.setFollowerCount(UserTitle.title_user.getFollowerCount() - 1);
-            	refresh();
+                UserTitle.title_user.setFollowerCount(UserTitle.title_user.getFollowerCount() - 1);
+                refresh();
             }
 
             @Override
@@ -130,6 +131,7 @@ public class UserCell extends Cell implements Followable {
      */
     public void setUser(User user) {
         this.user = user;
+        Log.d("Matji", user.getReceivedMessageCount()+"*************");
         profile.setUserId(user.getId());
         nick.setText(user.getNick());
         if (user.getMileage() != null)
@@ -137,8 +139,8 @@ public class UserCell extends Cell implements Followable {
         else
             point.setText("0");
         area.setText(MatjiConstants.countryName(user.getCountryCode()));
-	likeList.setText(user.getLikeStoreCount()+"");
-	likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
+        likeList.setText(user.getLikeStoreCount()+"");
+        likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
         followingListener.setUser(user);
     }
 

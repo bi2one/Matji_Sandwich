@@ -52,7 +52,6 @@ public class StoreDetailInfoTabActivity extends BaseTabActivity {
 	public void finish() {
 	    Intent intent = new Intent();
 	    intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-	    Log.d("Matji", store.getLikeCount()+"*");
 	    setResult(RESULT_OK, intent);
 	    super.finish();
 	}

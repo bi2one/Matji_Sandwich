@@ -3,6 +3,7 @@ package com.matji.sandwich.map;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import android.content.Context;
 import android.location.Location;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MyLocationOverlay;
+import com.google.android.maps.Overlay;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.BaseMapActivity;
@@ -206,7 +208,12 @@ OnTouchListener {
     }
 
     private void drawOverlays() {
-        getOverlays().clear();
+        List<Overlay> overlays = getOverlays();
+        for (int i = 0; i < overlays.size(); i++) {
+            Overlay overlay = overlays.get(i);
+            if (!(overlay instanceof MyLocationOverlay)) overlays.remove(i); 
+        }
+        
         storeItemizedOverlay.getOverlayItems().clear();
 
         for (MatjiData storeData : stores) {
@@ -266,8 +273,9 @@ OnTouchListener {
     }
     
     public void setMyLocationOverlay() {
-        MyLocationOverlay myLocationOverlay = new MyLocationOverlay(getContext(), this);
-        myLocationOverlay.enableMyLocation();
-        this.getOverlays().add(myLocationOverlay);
+//        MyLocationOverlay myLocationOverlay = new MyLocationOverlay(getContext(), this);
+//        myLocationOverlay.enableMyLocation();
+//        this.getOverlays().add(myLocationOverlay);
     }
+    
 }

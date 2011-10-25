@@ -3,6 +3,8 @@ package com.matji.sandwich;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
@@ -50,5 +52,21 @@ public class RankingAllListActivity extends BaseActivity implements ActivityStar
     
     protected void onNotFlowResume() {
         listView.refresh();
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            listView.refresh();
+            return true;
+        }
+        return false;
     }
 }

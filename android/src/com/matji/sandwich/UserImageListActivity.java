@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -18,7 +20,8 @@ public class UserImageListActivity extends BaseActivity implements Refreshable {
 
     private UserTitle title;
     private UserCell userCell;
-
+    private UserImageListView listView;
+    
     public int setMainViewId() {
         return R.id.activity_user_image_list;
     }
@@ -40,7 +43,7 @@ public class UserImageListActivity extends BaseActivity implements Refreshable {
         userCell.addRefreshable(title);
         userCell.addRefreshable(this);
 
-        UserImageListView listView = (UserImageListView) findViewById(R.id.user_image_list_view);
+        listView = (UserImageListView) findViewById(R.id.user_image_list_view);
         listView.addHeaderView(userCell);
         listView.addHeaderView(new SubtitleHeader(
                 this,
@@ -85,5 +88,21 @@ public class UserImageListActivity extends BaseActivity implements Refreshable {
             }
             break;
         }
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            listView.refresh();
+            return true;
+        }
+        return false;
     }
 }

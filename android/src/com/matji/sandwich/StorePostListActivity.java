@@ -53,7 +53,7 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
         listView.addHeaderView(storeInfoCell);
         listView.setStore(StoreMainActivity.store);
         listView.setActivity(this);
-        listView.refresh();
+        storeCell.refresh();
     }
 
     @Override
@@ -64,8 +64,8 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onFlowResume() {
+        super.onFlowResume();
         listView.dataRefresh();
     }
 
@@ -135,7 +135,6 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
         return true;
     }
     
-    /* Handles item selections */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

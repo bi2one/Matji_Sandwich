@@ -88,8 +88,11 @@ public class BrandingDialog extends PopupDialog {
     }
     
     private void init() {
+        View checkBox = findViewById(R.id.PopupCheckBox);
+        checkBox.setMinimumWidth(checkBox.getMeasuredWidth()+20);
+        
         findViewById(R.id.dialog_branding_close_btn).setOnClickListener(new View.OnClickListener() {
-          
+            
           @Override
           public void onClick(View v) {
               dismiss();
