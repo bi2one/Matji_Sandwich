@@ -560,6 +560,7 @@
   
   <!-- StoreFoodAdapter.java -->
   <string name="store_food_add">신규 메뉴 등록</string>
+  <string name="store_food_not_delicious">맛있어요 취소</string>
   <string name="store_food_delicious">맛있어요!</string>
   <string name="store_food_not_accuracy">잘못된 메뉴입니다.</string>
   <string name="store_food_accuracy">이 메뉴 있어요.</string>

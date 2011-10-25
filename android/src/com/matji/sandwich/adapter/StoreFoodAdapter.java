@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -17,12 +18,14 @@ import com.matji.sandwich.base.Identifiable;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.StoreFood;
+import com.matji.sandwich.data.provider.DBProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreFoodHttpRequest;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.listener.LikeListener;
+import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleListDialog;
@@ -31,17 +34,20 @@ public class StoreFoodAdapter extends MBaseAdapter {
 
     private HttpRequestManager manager;
     private HttpRequest request;
-    
+
     private Store store;
     private Identifiable identifiable;
-
+    
+    private DBProvider dbProvider;
+    
     public static final String ADD_STORE_FOOD = "StoreFoodAdapter.add_store_food";
     private SimpleListDialog dialog;
-
+;
     public StoreFoodAdapter(Context context) {
         super(context);
         this.context = context;
         manager = HttpRequestManager.getInstance();
+        dbProvider = DBProvider.getInstance(context);
     }
 
     public void setStore(Store store) {
@@ -108,11 +114,17 @@ public class StoreFoodAdapter extends MBaseAdapter {
             foodElement.line.setVisibility(View.VISIBLE);
             foodElement.wrapper.setOnClickListener(new OnClickListener() {
 
-                @Override
+            	@Override
                 public void onClick(View v) {
-
+            		String deliciousText = "";
+            		if (identifiable.loginRequired()) {
+            			if (dbProvider.isExistLike(storeFood.getId(), "StoreFood")) 
+            				deliciousText = MatjiConstants.string(R.string.store_food_not_delicious);
+            			else
+            				deliciousText = MatjiConstants.string(R.string.store_food_delicious);
+            		}
                     CharSequence[] items = {
-                        MatjiConstants.string(R.string.store_food_delicious), 
+                    		deliciousText,
                         (storeFood.isAccuracy()) ?
                                 MatjiConstants.string(R.string.store_food_not_accuracy)
                                 : MatjiConstants.string(R.string.store_food_accuracy), 
@@ -137,7 +149,7 @@ public class StoreFoodAdapter extends MBaseAdapter {
     }
 
     public HttpRequest accuracyUpRequest(int store_food_id) {
-        if (request == null || !(request instanceof StoreFoodHttpRequest)) { 
+    	if (request == null || !(request instanceof StoreFoodHttpRequest)) { 
             request = new StoreFoodHttpRequest(context);
         }
         
@@ -147,7 +159,7 @@ public class StoreFoodAdapter extends MBaseAdapter {
     }
     
     public HttpRequest accuracyDownRequest(int store_food_id) {
-        if (request == null || !(request instanceof StoreFoodHttpRequest)) { 
+    	if (request == null || !(request instanceof StoreFoodHttpRequest)) { 
             request = new StoreFoodHttpRequest(context);
         }
         
@@ -170,7 +182,7 @@ public class StoreFoodAdapter extends MBaseAdapter {
         public void onItemClick(SimpleDialog dialog, int position) {
             switch (position) {
             case 0: // delicious
-                LikeListener listener = new LikeListener((Identifiable) context, context, (StoreFood) data.get(itemPos), spinnerContainer) {
+            	LikeListener listener = new LikeListener((Identifiable) context, context, (StoreFood) data.get(itemPos), spinnerContainer) {
                     
                     @Override
                     public void postUnlikeRequest() {
@@ -190,9 +202,9 @@ public class StoreFoodAdapter extends MBaseAdapter {
             case 1: // report
                 StoreFood storeFood = (StoreFood) data.get(itemPos);
                 if (storeFood.isAccuracy()) {
-                    accuracyDownRequest(storeFood.getId());
+                	accuracyDownRequest(storeFood.getId());
                 } else {
-                    accuracyUpRequest(storeFood.getId());
+                	accuracyUpRequest(storeFood.getId());
                 }
                 
                 manager.request(context, spinnerContainer, SpinnerType.SMALL, request, HttpRequestManager.STORE_FOOD_ACCURACY_REQUEST, this);

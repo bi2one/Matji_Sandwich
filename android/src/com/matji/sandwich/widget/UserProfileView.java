@@ -18,6 +18,7 @@ import com.matji.sandwich.R;
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreBookmarkListActivity;
 import com.matji.sandwich.StoreDiscoverListActivity;
+import com.matji.sandwich.UserWebsiteEditActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.util.Utils;
@@ -87,7 +88,12 @@ public class UserProfileView extends RelativeLayout implements Refreshable {
 
             @Override
             public void onClick(View arg0) {
-                if (!user.getWebsite().equals("")) {
+                if (user.getWebsite().equals("")) {
+                	if (user == session.getCurrentUser()) {
+                        Intent intent = new Intent(getContext(), UserWebsiteEditActivity.class);
+                        getContext().startActivity(intent);
+                	}
+                } else {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     Uri uri = Uri.parse(Utils.getCorrectUrl(user.getWebsite()));
                     intent.setData(uri);
