@@ -91,17 +91,17 @@ GpsManager.StartConfigListener {
 
         new SimpleNotificationPopup(this, getClass().toString(), cs).show();
     }
-    
+
     private class ImageGetter implements Html.ImageGetter {
         public Drawable getDrawable(String source) {
             source = source.replaceAll(".png", "");
             int id = getResources().getIdentifier(source, "drawable", getPackageName());
-            
+
             Drawable d = getResources().getDrawable(id);
             int width = d.getIntrinsicWidth();
             int height = d.getIntrinsicHeight();
             d.setBounds(0, 0, width, height); //이미지 크기 설정
-            
+
             return d;
         }
     };
@@ -193,7 +193,7 @@ GpsManager.StartConfigListener {
 
     private void showStoreListView() {
         ((ImageButton) flipButton).setImageDrawable(flipMapViewImage);
-//        storeListView.forceReload();
+        //        storeListView.forceReload();
         mapView.setVisibility(View.GONE);
         storeListView.setVisibility(View.VISIBLE);
     }
@@ -209,8 +209,8 @@ GpsManager.StartConfigListener {
                 if (currentViewIsMap)
                     mapView.setCenter(new GeoPoint(searchedLat, searchedLng));
                 else {
-//                    storeListView.setCenter(new GeoPoint(searchedLat, searchedLng));
-//                    storeListView.forceReload();
+                    //                    storeListView.setCenter(new GeoPoint(searchedLat, searchedLng));
+                    //                    storeListView.forceReload();
                 }
             }
             break;
