@@ -29,7 +29,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest.Service;
 import com.matji.sandwich.http.request.VersionHttpRequest;
-import com.matji.sandwich.http.spinner.Spinnable;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
@@ -268,7 +267,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     }
     
     public void reportClicked() {
-        
         String[] matjiEmail = {MatjiConstants.string(R.string.default_string_matji_email)};
         String title = (session.isLogin()) ?
                 String.format(
@@ -301,7 +299,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
 
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
         refresh();
     }

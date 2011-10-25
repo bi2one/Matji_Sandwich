@@ -5,6 +5,8 @@ import com.matji.sandwich.widget.search.StoreSearchListView;
 import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class StoreSearchActivity extends BaseActivity implements Searchable {
 	private StoreSearchListView searchView;
@@ -30,4 +32,20 @@ public class StoreSearchActivity extends BaseActivity implements Searchable {
 	public void search(String keyword) { 
 		searchView.search(keyword);
 	}
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            searchView.refresh();
+            return true;
+        }
+        return false;
+    }
 }

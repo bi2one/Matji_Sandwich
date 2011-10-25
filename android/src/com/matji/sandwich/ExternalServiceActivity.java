@@ -6,8 +6,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.matji.sandwich.base.BaseActivity;
-import com.matji.sandwich.data.User;
-import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.title.CompletableTitle;
 
