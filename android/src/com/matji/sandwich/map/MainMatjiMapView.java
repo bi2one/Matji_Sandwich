@@ -13,9 +13,12 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
+import com.google.android.maps.MyLocationOverlay;
+import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.CoordinateRegion;
@@ -110,7 +113,10 @@ OnTouchListener {
 
     public void moveToGpsCenter() {
         stopMapCenterThread();
+        setMyLocationOverlay();
         gpsManager.start(GPS_START_TAG);
+        
+        Toast.makeText(getContext(), R.string.main_map_find_center, Toast.LENGTH_LONG).show();
     }
 
     public void setCenter(Location location) {
@@ -257,5 +263,11 @@ OnTouchListener {
             // 	e.performExceptionHandling(context);
             // }
         }
+    }
+    
+    public void setMyLocationOverlay() {
+        MyLocationOverlay myLocationOverlay = new MyLocationOverlay(getContext(), this);
+        myLocationOverlay.enableMyLocation();
+        this.getOverlays().add(myLocationOverlay);
     }
 }

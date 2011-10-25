@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.AbsListView;
 
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.widget.ListScrollRequestable;
 
 public class ListRequestScrollListener implements AbsListView.OnScrollListener, OnTouchListener {
@@ -34,6 +35,7 @@ public class ListRequestScrollListener implements AbsListView.OnScrollListener, 
 
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (isSet &&
+                !HttpRequestManager.getInstance().isRunning() &&
                 (firstVisibleItem + visibleItemCount) == totalItemCount &&
                 totalItemCount > 0 &&
                 firstVisibleItem != curFirstVisibleItem) {

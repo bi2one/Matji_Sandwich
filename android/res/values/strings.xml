@@ -165,7 +165,8 @@
   <string name="default_string_webreview_user">링크</string>
   <string name="default_string_webreview_store">관련글</string>
   <string name="default_string_store_modify_request">정보 수정 요청</string>
-  <string name="default_string_store_close">폐업 신고</string>  
+  <string name="default_string_store_close">폐업 신고</string>
+  <string name="default_string_reload">새로고침</string>
   
   <!-- Not Exist -->  
   <string name="not_exist_intro">소개문을 입력해주세요.</string>
@@ -246,6 +247,7 @@
 
   <!-- MainMapActivity -->
   <string name="main_map_search_map">Search Map</string>
+  <string name="main_map_find_center">현재 위치를 찾는 중입니다...</string>
 
   <!-- BookmarkListActivity -->
   <string name="bookmark_list_register">이곳을 북마크하기</string>

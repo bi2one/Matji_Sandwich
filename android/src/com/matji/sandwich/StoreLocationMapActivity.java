@@ -84,7 +84,6 @@ public class StoreLocationMapActivity extends BaseMapActivity {
         phoneCallUtil.call(store.getTelNotDashed());
     }
 
-
     public void setMyLocationOverlay() {
         MyLocationOverlay myLocationOverlay = new MyLocationOverlay(this, mapView);
         myLocationOverlay.enableMyLocation();

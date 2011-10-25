@@ -2,6 +2,7 @@ package com.matji.sandwich.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -138,8 +139,8 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
      * 뷰의 refresh를 담당하는 부분
      */
     public void refresh() {
-        resetHeaderPadding();
-
+//        resetHeaderPadding();
+        setSelection(0);
         refreshImage.setVisibility(View.GONE);
         refreshImage.setImageDrawable(null);
         refreshProgress.setVisibility(View.VISIBLE);
@@ -148,6 +149,7 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 
         onRefresh();
         onRefreshListener.onRefresh();
+        setSelection(0);
     }
 
     public void onRefresh() { };

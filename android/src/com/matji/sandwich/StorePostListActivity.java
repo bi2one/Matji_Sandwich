@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.base.BaseTabActivity;
@@ -125,5 +127,22 @@ public class StorePostListActivity extends BaseActivity implements Refreshable {
     }
 
     @Override
-    public void refresh(ArrayList<MatjiData> data) {}    
+    public void refresh(ArrayList<MatjiData> data) {}
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    /* Handles item selections */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            listView.refresh();
+            return true;
+        }
+        return false;
+    }
 }
