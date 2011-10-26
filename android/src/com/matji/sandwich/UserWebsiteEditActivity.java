@@ -71,6 +71,7 @@ public class UserWebsiteEditActivity extends BaseActivity implements Completable
         };
         field.addTextChangedListener(tw);
         field.setText(session.getCurrentUser().getWebsite());
+        field.setSelection(field.length());
     }
 
     @Override
