@@ -131,7 +131,11 @@ public class GeocodeAddress extends MatjiData {
     }
 
     public String getShortenFormattedAddress() {
-        String country = getCountryLongName().trim();
+        
+        String country = null;
+        if (getCountryLongName() != null) {
+            country = getCountryLongName().trim();
+        }
 
         if (country != null) {
             if (country.equals(formattedAddress.trim())) {

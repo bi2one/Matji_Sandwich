@@ -1,58 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/row_simple_user_wrapper"
 	style="@style/row_simple_user">
+	<!-- ranking position -->
+	<com.matji.sandwich.widget.PalatinoiFontTextView
+		android:id="@+id/row_simple_user_rank"
+		android:layout_marginRight="@dimen/default_distance"
+		android:visibility="gone"
+		style="@style/row_simple_user_Rank" />
+	<!-- profile image -->
 	<RelativeLayout
-		android:id="@+id/row_simple_user_wrapper"
-		style="@style/DefaultFill">
-
-		<!-- profile image -->
+		android:id="@+id/row_simple_user_profile"
+		style="@style/DefaultWrap"
+		android:layout_marginRight="@dimen/default_distance"
+		android:layout_toRightOf="@id/row_simple_user_rank"
+		android:layout_centerVertical="true">
 		<include
-			android:id="@+id/row_simple_user_profile"
 			layout="@layout/profile"
-			style="@style/ProfileWrapper"
-			android:layout_alignParentLeft="true"
-			android:layout_centerVertical="true" />
-		<!-- nickname -->
+			style="@style/ProfileWrapper" />
+	</RelativeLayout>
+	<!-- nickname -->
+	<RelativeLayout
+		style="@style/DefaultWrap"
+		android:layout_marginTop="@dimen/row_simple_user_margin"
+		android:layout_marginBottom="@dimen/row_simple_user_margin"
+		android:layout_centerVertical="true"
+		android:layout_toRightOf="@id/row_simple_user_profile">
 		<TextView
 			android:id="@+id/row_simple_user_nickname"
-			android:layout_marginTop="@dimen/default_distance_half"
-			android:layout_marginLeft="@dimen/default_distance"
-			android:layout_toRightOf="@id/row_simple_user_profile"
-			android:layout_toLeftOf="@+id/row_simple_user_point"
-			android:layout_alignParentTop="true"
 			style="@style/row_simple_user_nickname" />
-
 		<!-- heart and balloon -->
 		<TextView
 			android:id="@+id/row_simple_user_like_count"
-			android:layout_alignLeft="@id/row_simple_user_nickname"
-			android:layout_below="@id/row_simple_user_nickname"
-			style="@style/row_simple_user_like_count" />
+			style="@style/row_simple_user_like_count"
+			android:layout_below="@id/row_simple_user_nickname" />
 		<TextView
 			android:id="@+id/row_simple_user_post_count"
+			style="@style/row_simple_user_post_count"
 			android:layout_marginLeft="@dimen/default_distance"
-			android:layout_toRightOf="@id/row_simple_user_like_count"
-			android:layout_alignBaseline="@id/row_simple_user_like_count"
-			style="@style/row_simple_user_post_count" />
-
-		<!-- point -->
-		<com.matji.sandwich.widget.BoldStyleTextView
-			android:id="@+id/row_simple_user_point"
-			android:layout_toLeftOf="@+id/row_simple_user_point_hint"
-			android:layout_centerVertical="true"
-			style="@style/row_simple_user_point" />
-		<!-- <TextView -->
-		<!-- android:id="@id/row_simple_user_point_hint" -->
-		<!-- android:layout_alignParentRight="true" -->
-		<!-- android:layout_centerVertical="true" -->
-		<!-- android:text="@string/row_simple_user_point_hint" -->
-		<!-- style="@style/row_simple_user_point_hint" /> -->
-		<ImageView
-			android:id="@id/row_simple_user_point_hint"
-			android:layout_alignParentRight="true"
-			android:layout_centerVertical="true"
-			android:src="@drawable/icon_p_a"
-			style="@style/row_simple_user_point_hint" />
+			android:layout_below="@id/row_simple_user_nickname"
+			android:layout_toRightOf="@id/row_simple_user_like_count" />
 	</RelativeLayout>
+	<!-- point -->
+	<com.matji.sandwich.widget.BoldStyleTextView
+		android:id="@+id/row_simple_user_point"
+		style="@style/DefaultWrap"
+		android:drawableRight="@drawable/icon_p_a"
+		android:drawablePadding="@dimen/default_drawable_padding"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true" />
 </RelativeLayout>

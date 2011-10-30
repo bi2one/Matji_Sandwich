@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/DefaultWidthFill">
-  <Button android:id="@+id/middle_rounded_button"
-	  android:drawableRight="@drawable/icon_flow"
-	  style="@style/middle_rounded_button" />
-  <ImageView style="@style/HorizontalLine"
-	     android:layout_marginLeft="0.8dp"
-	     android:layout_marginRight="0.8dp"
-	     android:layout_alignBottom="@id/middle_rounded_button"
-	     android:layout_alignLeft="@id/middle_rounded_button"
-	     android:layout_alignRight="@id/middle_rounded_button" />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/DefaultWidthFill">
+	<Button
+		android:id="@+id/middle_rounded_button"
+		android:drawableRight="@drawable/icon_flow"
+		style="@style/middle_rounded_button" />
+	<ImageView
+		style="@style/HorizontalLine"
+		android:layout_marginLeft="0.8dp"
+		android:layout_marginRight="0.8dp"
+		android:layout_alignBottom="@id/middle_rounded_button"
+		android:layout_alignLeft="@id/middle_rounded_button"
+		android:layout_alignRight="@id/middle_rounded_button" />
 </RelativeLayout>

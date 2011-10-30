@@ -56,7 +56,6 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
         loadingHeaderView.setClickable(false);
         loadingHeaderView.setLongClickable(false);
 
-        addFooterView(loadingFooterView);
         super.addHeaderView(loadingHeaderView);
 
 	reloadSpinner = SpinnerFactory.createSpinner(context, SpinnerFactory.SpinnerType.NORMAL, loadingHeaderView);
@@ -121,6 +120,7 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
         if (prevPage < page) {
             Log.d("refresh" , "requestNext()");
             Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
+            addFooterView(loadingFooterView);
             manager.request(getContext(), loadingFooterView, SpinnerFactory.SpinnerType.SMALL, request(), REQUEST_NEXT, this);
             nextValue();
         } else if (prevPage == page) {
@@ -207,11 +207,14 @@ public abstract class RequestableMListView extends PullToRefreshListView impleme
             onRefreshComplete();
             // }
         }
+        
+        removeFooterView(loadingFooterView);
     }
 
 
     public void requestExceptionCallBack(int tag, MatjiException e) {
         e.performExceptionHandling(getContext());
+        removeFooterView(loadingFooterView);
     }
 
     public void onRefresh() {

@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MyLocationOverlay;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.Store;
 import com.matji.sandwich.http.HttpRequestManager;
@@ -49,7 +50,9 @@ GpsManager.StartConfigListener {
     // private GeoPoint lastCenter;
 
     private Drawable flipMapViewImage;
-    private Drawable flipNearStoreImage;
+    private Drawable flipNearStoreImage;    
+
+    private MyLocationOverlay myLocationOverlay;
 
     public int setMainViewId() {
         return R.id.activity_main_map;
@@ -84,6 +87,8 @@ GpsManager.StartConfigListener {
         isFirst = true;
         isStartConfig = false;
 
+        myLocationOverlay = new MyLocationOverlay(this, mapView);
+        mapView.getOverlays().add(myLocationOverlay);
 
 
         CharSequence cs = Html.fromHtml(
@@ -137,6 +142,13 @@ GpsManager.StartConfigListener {
             isStartConfig = false;
         }
         super.onResume();
+        myLocationOverlay.enableMyLocation();
+    }
+
+    @Override
+    protected void onStop() {
+        myLocationOverlay.disableMyLocation();
+        super.onStop();
     }
 
     protected void onPause() {

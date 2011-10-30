@@ -30,7 +30,8 @@ public class StoreLocationMapActivity extends BaseMapActivity {
     private Intent arguments;
     private Store store;
     private PhoneCallUtil phoneCallUtil;
-
+    private MyLocationOverlay myLocationOverlay;
+    
     public int setMainViewId() {
         return R.id.activity_store_location_map;
     }
@@ -53,7 +54,8 @@ public class StoreLocationMapActivity extends BaseMapActivity {
         setStore(store);
 
         phoneCallUtil = new PhoneCallUtil(this);
-        setMyLocationOverlay();
+        myLocationOverlay = new MyLocationOverlay(this, mapView);
+        mapView.getOverlays().add(myLocationOverlay);
     }
 
     private void setStore(Store store) {
@@ -84,9 +86,16 @@ public class StoreLocationMapActivity extends BaseMapActivity {
         phoneCallUtil.call(store.getTelNotDashed());
     }
 
-    public void setMyLocationOverlay() {
-        MyLocationOverlay myLocationOverlay = new MyLocationOverlay(this, mapView);
+    
+    @Override
+    protected void onStop() {
+        myLocationOverlay.disableMyLocation();
+        super.onStop();
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
         myLocationOverlay.enableMyLocation();
-        mapView.getOverlays().add(myLocationOverlay);
     }
 }

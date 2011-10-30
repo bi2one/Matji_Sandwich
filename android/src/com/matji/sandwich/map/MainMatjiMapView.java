@@ -115,7 +115,6 @@ OnTouchListener {
 
     public void moveToGpsCenter() {
         stopMapCenterThread();
-        setMyLocationOverlay();
         gpsManager.start(GPS_START_TAG);
         
         Toast.makeText(getContext(), R.string.main_map_find_center, Toast.LENGTH_LONG).show();
@@ -271,11 +270,4 @@ OnTouchListener {
             // }
         }
     }
-    
-    public void setMyLocationOverlay() {
-//        MyLocationOverlay myLocationOverlay = new MyLocationOverlay(getContext(), this);
-//        myLocationOverlay.enableMyLocation();
-//        this.getOverlays().add(myLocationOverlay);
-    }
-    
 }

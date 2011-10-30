@@ -22,17 +22,18 @@ public class UserRankingAdapter extends MBaseAdapter {
 
         if (convertView == null) {
             userElement = new RankingElement();
-            convertView = getLayoutInflater().inflate(R.layout.row_ranked_user, null);
+            convertView = getLayoutInflater().inflate(R.layout.row_simple_user, null);
 
-            userElement.wrapper = convertView.findViewById(R.id.row_ranked_user_wrapper);
-            userElement.position = (TextView) convertView.findViewById(R.id.row_ranked_user_rank);
+            userElement.wrapper = convertView.findViewById(R.id.row_simple_user_wrapper);
+            userElement.position = (TextView) convertView.findViewById(R.id.row_simple_user_rank);
             userElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
-            userElement.nickname = (TextView) convertView.findViewById(R.id.row_ranked_user_nickname);
-            userElement.likeCount = (TextView) convertView.findViewById(R.id.row_ranked_user_like_count);
-            userElement.postCount = (TextView) convertView.findViewById(R.id.row_ranked_user_post_count);
-            userElement.point = (TextView) convertView.findViewById(R.id.row_ranked_user_point);
-
+            userElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
+            userElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
+            userElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_user_post_count);
+            userElement.point = (TextView) convertView.findViewById(R.id.row_simple_user_point);
+            
             userElement.profile.showInsetBackground();
+            userElement.position.setVisibility(View.VISIBLE);
 
             convertView.setTag(userElement);
         } else {
@@ -46,6 +47,7 @@ public class UserRankingAdapter extends MBaseAdapter {
         } else {
             userElement.position.setBackgroundResource(R.drawable.ranking_bg_yellow);
         }
+        
         userElement.profile.setUserId(user.getId());
         userElement.nickname.setText(user.getNick());
         userElement.likeCount.setText("" + user.getLikeStoreCount());

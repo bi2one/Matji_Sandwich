@@ -77,7 +77,7 @@ public class UserProfileActivity extends BaseActivity implements LoginListener, 
     @Override
     protected void onResume() {
         super.onResume();
-        if (isMainTabActivity) reload();
+        if (isMainTabActivity && session.isLogin()) reload();
         userCell.refresh();
     }
 

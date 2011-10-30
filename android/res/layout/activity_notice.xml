@@ -3,7 +3,8 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_notice"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_height="fill_parent"
+	android:background="@color/matji_white">
 	<com.matji.sandwich.widget.title.HomeTitle
 		android:id="@id/Titlebar"
 		style="@style/DefaultWidthFill" />

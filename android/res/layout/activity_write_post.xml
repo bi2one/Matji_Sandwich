@@ -2,6 +2,7 @@
 <com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_write_post"
+    android:background="@color/album_view_bg"
     style="@style/DefaultFill" >
   <com.matji.sandwich.widget.title.CompletableTitle
       android:layout_alignParentTop="true"

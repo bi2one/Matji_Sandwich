@@ -84,17 +84,7 @@
   	<item name="android:textColor">@color/matji_chocolate</item>
   	<item name="android:textSize">@dimen/subtitle_size</item>
   </style>
-  <style name="BottomBarListView">
-  	<item name="android:layout_width">fill_parent</item>
-  	<item name="android:layout_height">0dp</item>
-  	<item name="android:layout_weight">1</item>
-  </style>
   
-  <style name="BottomBar" parent="DefaultWidthFill">
-  	<item name="android:layout_weight">0</item>
-  	<item name="android:gravity">bottom</item>
-  </style>
-
   <style name="InputBarWrapper">
   	<item name="android:layout_width">fill_parent</item>
   	<item name="android:layout_height">wrap_content</item>
@@ -688,12 +678,14 @@
 
   <!-- rounded_button common attributes -->
   <style name="rounded_button" parent="DefaultWidthFill">
-    <item name="android:layout_height">44.67dp</item>
+    <item name="android:minHeight">@dimen/settings_row_height</item>
+    <item name="android:paddingLeft">@dimen/settings_row_padding</item>
+    <item name="android:paddingRight">@dimen/settings_row_padding</item>
+    <item name="android:paddingTop">@dimen/settings_row_padding</item>
+    <item name="android:paddingBottom">@dimen/settings_row_padding</item>
     <item name="android:textSize">16dp</item>
     <item name="android:textColor">@color/BLACK</item>
     <item name="android:gravity">center_vertical</item>
-    <item name="android:paddingLeft">14.67dp</item>
-    <item name="android:paddingRight">14.67dp</item>
   </style>
   
   <!-- top_rounded_button.xml -->
@@ -756,15 +748,15 @@
   <style name="search_result_header" parent="recent_changed_location_header"></style>
 
   <!-- row_simple_user.xml -->
-  <style name="row_simple_user">
-    <item name="android:layout_width">fill_parent</item>
-    <item name="android:layout_height">@dimen/row_simple_user_height</item>
+  <style name="row_simple_user" parent="DefaultWidthFill">
+<!--     <item name="android:layout_width">fill_parent</item> -->
+<!--     <item name="android:layout_height">@dimen/row_simple_user_height</item> -->
     <item name="android:background">@drawable/btn_white_to_lightpink</item>
     <item name="android:paddingRight">@dimen/default_distance</item>
     <item name="android:paddingLeft">@dimen/default_distance</item>
   </style>
   
-  <style name="row_ranked_user_Rank" parent="DefaultWrap">
+  <style name="row_simple_user_Rank" parent="DefaultWrap">
     <item name="android:textSize">@dimen/rank_size</item>
     <item name="android:textColor">@color/matji_white</item>
     <item name="android:shadowDy">-1.3</item>
@@ -811,9 +803,6 @@
 <!--     <item name="android:textColor">@color/matji_red</item> -->
 <!--     <item name="android:layout_marginLeft">3dp</item> -->
 <!--   </style> -->
-  <style name="row_simple_user_point_hint" parent="DefaultWrap">
-    <item name="android:layout_marginLeft">3dp</item>
-  </style>
 
   <style name="row_simple_user_divider" parent="DefaultWidthFill">
     <item name="android:layout_height">1dp</item>

@@ -148,6 +148,7 @@
 	<!-- row_simple_user -->
 	<dimen name="row_simple_user_height">53.33dp</dimen>
 	<dimen name="row_simple_user_nickname_size">16dp</dimen>
+	<dimen name="row_simple_user_margin">8.67dp</dimen>
 	
 	<!-- row_ranked_user -->
 	<dimen name="rank_size">20dp</dimen>
@@ -280,12 +281,14 @@
     
     <!-- dialog_loading_popup.xml -->
     <dimen name="branding_margin">3.33dp</dimen>
+    <dimen name="branding_margin_right">2dp</dimen>
     <dimen name="branding_margin_bottom">33.33dp</dimen>
     <dimen name="branding_title_size">17.33dp</dimen>
     <dimen name="branding_content_size">12dp</dimen>
     <dimen name="branding_p_margin">13.33dp</dimen>
     <dimen name="branding_update_margin">3.33dp</dimen>
     <dimen name="branding_content_side_margin">13.33dp</dimen>
+    <dimen name="branding_content_side_marginRight">12.33dp</dimen>
     <dimen name="branding_close_size">12dp</dimen>
     
     <!-- dialog_simple_popup.xml -->

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreFoodHttpRequest;
 import com.matji.sandwich.http.spinner.SpinnerFactory.SpinnerType;
 import com.matji.sandwich.listener.LikeListener;
-import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleListDialog;
@@ -116,10 +114,10 @@ public class StoreFoodAdapter extends MBaseAdapter {
 
             	@Override
                 public void onClick(View v) {
-            		String deliciousText = "";
+            		String deliciousText = MatjiConstants.string(R.string.store_food_delicious);
             		if (identifiable.loginRequired()) {
             			if (dbProvider.isExistLike(storeFood.getId(), "StoreFood")) 
-            				deliciousText = MatjiConstants.string(R.string.store_food_not_delicious);
+                            deliciousText = MatjiConstants.string(R.string.store_food_not_delicious);
             			else
             				deliciousText = MatjiConstants.string(R.string.store_food_delicious);
             		}
