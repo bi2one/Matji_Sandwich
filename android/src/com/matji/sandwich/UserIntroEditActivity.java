@@ -71,6 +71,7 @@ public class UserIntroEditActivity extends BaseActivity implements Completable, 
         };
         field.addTextChangedListener(tw);
         field.setText(session.getCurrentUser().getIntro());
+        field.setSelection(field.length());
     }
 
     @Override

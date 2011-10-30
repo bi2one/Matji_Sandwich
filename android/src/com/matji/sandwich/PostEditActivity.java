@@ -80,6 +80,7 @@ public class PostEditActivity extends BaseActivity implements Completable, Reque
             public void afterTextChanged(Editable s) {}
         };
         postField.addTextChangedListener(tw);
+        postField.setSelection(postField.length());
         
         dialog = new SimpleAlertDialog(this, R.string.post_edit_confirm);
         dialog.setOnClickListener(new OnClickListener() {

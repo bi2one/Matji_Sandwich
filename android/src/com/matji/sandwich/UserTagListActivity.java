@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -159,7 +161,6 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    // TODO Auto-generated method stub
 	    super.onActivityResult(requestCode, resultCode, data);
 	    switch (requestCode) {
         case USER_PROFILE_TAB_ACTIVITY:
@@ -180,4 +181,22 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
 	        ((BaseTabActivity) getParent()).setIsFlow(true);
 	    }
 	}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            tagCloudView.refresh();
+            return true;
+        }
+        return false;
+    }
+	
+	
 }

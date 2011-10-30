@@ -3,6 +3,8 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -51,7 +53,6 @@ public class StoreFoodListActivity extends BaseActivity implements Refreshable {
 
     @Override
     protected void onNotFlowResume() {
-        // TODO Auto-generated method stub
         super.onNotFlowResume();
         storeCell.refresh();
     }
@@ -77,4 +78,20 @@ public class StoreFoodListActivity extends BaseActivity implements Refreshable {
 
     @Override
     public void refresh(ArrayList<MatjiData> data) {}
+    
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            listView.refresh();
+            return true;
+        }
+        return false;
+    }
 }

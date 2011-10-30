@@ -71,6 +71,7 @@ public class UserNickEditActivity extends BaseActivity implements Completable, R
         });
         field.addTextChangedListener(tw);
         field.setText(session.getCurrentUser().getNick());
+        field.setSelection(field.length());
     }
 
     @Override

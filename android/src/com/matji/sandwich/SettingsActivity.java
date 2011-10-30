@@ -267,7 +267,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     }
     
     public void reportClicked() {
-        
         String[] matjiEmail = {MatjiConstants.string(R.string.default_string_matji_email)};
         String title = (session.isLogin()) ?
                 String.format(
@@ -300,7 +299,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
 
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
         refresh();
     }
