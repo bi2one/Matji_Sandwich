@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.Requestable;
+import com.matji.sandwich.UserMainActivity;
+import com.matji.sandwich.UserProfileMainTabActivity;
 import com.matji.sandwich.UserTagPostListActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Tag;
@@ -82,6 +84,9 @@ public class UserTagCloudView extends TagCloudView implements Requestable, Refre
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), UserTagPostListActivity.class);
                 intent.putExtra(UserTagPostListActivity.TAG, (Parcelable) tag);
+                boolean isMainTabActivity = false;
+                if (getContext() instanceof UserProfileMainTabActivity) isMainTabActivity = true; 
+                intent.putExtra(UserTagPostListActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
                 getContext().startActivity(intent);
             }
         };

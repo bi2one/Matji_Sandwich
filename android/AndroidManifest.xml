@@ -148,6 +148,8 @@
                   android:screenOrientation="portrait"></activity>
         <activity android:name="UserProfileTabActivity" 
                   android:screenOrientation="portrait"></activity>
+        <activity android:name="UserProfileMainTabActivity" 
+                  android:screenOrientation="portrait"></activity>
 		<activity android:name="UserProfileActivity"
                   android:screenOrientation="portrait"></activity>
         <activity android:name="UserTagPostListActivity"

@@ -131,6 +131,8 @@
   	<item name="android:background">@drawable/btn_white</item>
   	<item name="android:textColor">@color/matji_red</item>
   	<item name="android:singleLine">true</item>
+  	<item name="android:paddingLeft">@dimen/default_drawable_padding_long</item>
+  	<item name="android:paddingRight">@dimen/default_drawable_padding_long</item>
   </style>
   
   <style name="WhiteButtonNumber" parent="WhiteButton">
@@ -146,7 +148,7 @@
   	<item name="android:layout_height">@dimen/red_btn_height</item>
   	<item name="android:background">@drawable/btn_red</item>
   	<item name="android:textColor">@color/matji_white</item>
-	<item name="android:singleLine">true</item>		
+	<item name="android:singleLine">true</item>
 	<item name="android:shadowColor">@color/red_btn_shadow</item>
 	<item name="android:shadowDy">-1.3</item>
 	<item name="android:shadowRadius">1</item>
@@ -220,6 +222,7 @@
   </style>
   
   <style name="cell_user_FollowButton" parent="RedButton">
+    <item name="android:textSize">@dimen/user_cell_follow_txt_size</item>
   	<item name="android:layout_width">@dimen/user_cell_btn_width</item>
   </style>
   

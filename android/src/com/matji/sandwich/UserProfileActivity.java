@@ -29,7 +29,6 @@ public class UserProfileActivity extends BaseActivity implements LoginListener, 
 
     private Session session;
 
-    public static final String USER = "UserProfileActivity.user";
     public static final String IS_MAIN_TAB_ACTIVITY = "UserProfileActivity.is_main_tab_activity";
 
     public int setMainViewId() {
@@ -54,12 +53,12 @@ public class UserProfileActivity extends BaseActivity implements LoginListener, 
 
         if (!isMainTabActivity) {
             title.setIdentifiable(this);
-            title.setUser(UserProfileTabActivity.user);
+            title.setUser(getUser());
             title.setFollowable(userCell);
             title.setTitle(R.string.title_user_info);
         }
 
-        userCell.setUser(UserProfileTabActivity.user);
+        userCell.setUser(getUser());
         userCell.setIdentifiable(this);
         userCell.addRefreshable(userProfileView);
         if (!isMainTabActivity) userCell.addRefreshable(title);
@@ -137,5 +136,10 @@ public class UserProfileActivity extends BaseActivity implements LoginListener, 
             return true;
         }
         return false;
+    }
+    
+    
+    public User getUser() {
+        return isMainTabActivity ? UserProfileMainTabActivity.user : UserProfileTabActivity.user;
     }
 }

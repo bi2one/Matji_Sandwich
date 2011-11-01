@@ -8,19 +8,16 @@ import android.view.View;
 import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.session.Session;
-import com.matji.sandwich.session.Session.LoginListener;
-import com.matji.sandwich.session.Session.LogoutListener;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.RoundTabHost;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserProfileTabActivity extends BaseTabActivity implements Loginable, LoginListener, LogoutListener {
+public class UserProfileTabActivity extends BaseTabActivity {
 
     public static User user;
     private RoundTabHost tabHost;
     private Session session;
-    private boolean isMainTabActivity;
     private boolean isMyPage;
 
     private LoginView loginView;
@@ -28,12 +25,11 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
     private Intent tagIntent;
 
     public static final String USER = "UserProfileTabActivity.user";
-    public static final String IS_MAIN_TAB_ACTIVITY = "UserProfileTabActivity.is_main_tab_activity";
-    
+
     public int setMainViewId() {
         return R.id.activity_user_profile_tab;
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,43 +38,28 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
 
     private void init() {
         session = Session.getInstance(this);
-        session.addLoginListener(this);
-        session.addLogoutListener(this);
-        isMainTabActivity = getIntent().getBooleanExtra(IS_MAIN_TAB_ACTIVITY, false);
-
         setContentView(R.layout.activity_user_profile_tab);
 
         tabHost = (RoundTabHost) getTabHost();
         loginView = (LoginView) findViewById(R.id.login_view);
 
-        if (!session.isLogin() && isMainTabActivity) {
-            loginView.notificationShow();
-        }
-        
-        user = (isMainTabActivity) ? session.getCurrentUser() : UserTitle.title_user;
+        user = UserTitle.title_user;
         setUser(user);
     }
 
     public void setUser(User user) {    // user가 저장되면 탭도 같이 바뀌어야 함.    	
         UserProfileTabActivity.user = user;
         profileIntent = new Intent(this, UserProfileActivity.class);
-        profileIntent.putExtra(UserProfileActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
-
         tagIntent = new Intent(this, UserTagListActivity.class);
-        tagIntent.putExtra(UserTagListActivity.IS_MAIN_TAB_ACTIVITY, isMainTabActivity);
     }
 
     private void syncTab() {        // 로그인 화면을 위해 어쩔수 없이 이렇게... ㅠㅠ
         KeyboardUtil.hideKeyboard(this);
-        if ((user == null || !session.isLogin()) && isMainTabActivity) {
-            loginTypeInit();        // 메인 탭 내의 프로필 액티비티이고, 로그인이 필요할 경우
-        } else {    
-            isMyPage = session.isCurrentUser(user);
-            if (isMyPage) {
-                privateTypeInit();  // 자기 자신의 프로필 액티비티일 경우
-            } else {
-                publicTypeInit();   // 이외의 유저의 프로필 액티비티일 경우
-            }
+        isMyPage = session.isCurrentUser(user);
+        if (isMyPage) {
+            privateTypeInit();  // 자기 자신의 프로필 액티비티일 경우
+        } else {
+            publicTypeInit();   // 이외의 유저의 프로필 액티비티일 경우
         }
     }
 
@@ -138,42 +119,4 @@ public class UserProfileTabActivity extends BaseTabActivity implements Loginable
         setResult(RESULT_OK, intent);
         super.finish();
     }
-
-    public void loginButtonClicked(View v) {        
-        loginView.login(this);
-    }
-
-    /* Loginable Interface methods */
-    public void loginCompleted() {
-        setUser(session.getCurrentUser());
-        loginView.clearField();
-        syncTab();
-    }
-
-    public void loginFailed() {
-        // show toast -> id, pw 확인해라
-    }
-
-    @Override
-    public void preLogout() { }
-
-    @Override
-    public void postLogout() {
-        // TODO Auto-generated method stub
-        if (isMainTabActivity) {
-            loginTypeInit();
-        }
-    }
-
-    @Override
-    public void preLogin() { }
-
-    @Override
-    public void postLogin() {
-        // TODO Auto-generated method stub
-        if (isMainTabActivity) {
-            setUser(session.getCurrentUser());
-            privateTypeInit();
-        }
-    }    
 }

@@ -46,6 +46,8 @@ public class ExceptionFactory {
     case PASSWORD_INCORRECT:
         result = new InvalidPasswordMatjiException();
         break;
+    case EMAIL_NOT_EXIST:
+        result = new EmailNotExistMatjiException();
     case DUPLICATED_STORE_FOOD:
         result = new DuplicatedStoreFoodMatjiException();
         break;

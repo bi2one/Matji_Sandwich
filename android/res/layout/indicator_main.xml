@@ -18,7 +18,7 @@
 			style="@style/IndicatorMainText"
 			android:layout_centerHorizontal="true" />
 	</RelativeLayout>
-	<TextView
+	<com.matji.sandwich.widget.BoldStyleTextView
 		android:id="@+id/indicator_main_count"
 		style="@style/DefaultWrap"
 		android:background="@drawable/new_bg"

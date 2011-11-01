@@ -1,6 +1,7 @@
 package com.matji.sandwich.widget;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -31,5 +32,9 @@ public class BoldStyleTextView extends TextView {
     
     protected void init() {
 //      setPaintFlags(getPaintFlags()|Paint.FAKE_BOLD_TEXT_FLAG);
+    }
+    
+    public void bolding() {
+        setPaintFlags(getPaintFlags()|Paint.FAKE_BOLD_TEXT_FLAG);
     }
 }

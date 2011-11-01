@@ -6,19 +6,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matji.sandwich.R;
+import com.matji.sandwich.widget.BoldStyleTextView;
 
 public class MainIndicator extends Indicator {
     public static final int LAYOUT_REFERENCE = R.layout.indicator_main;
     private ImageView iconView;
     private TextView labelView;
-    private TextView countView;
+    private BoldStyleTextView countView;
 
     public MainIndicator(Context context, int drawableRef, int textRef) {
         super(context, LAYOUT_REFERENCE);
 
         iconView = (ImageView)findViewById(R.id.indicator_main_icon);
         labelView = (TextView)findViewById(R.id.indicator_main_label);
-        countView = (TextView) findViewById(R.id.indicator_main_count);
+        countView = (BoldStyleTextView) findViewById(R.id.indicator_main_count);
+        countView.bolding();
 
         iconView.setImageResource(drawableRef);
         labelView.setText(textRef);

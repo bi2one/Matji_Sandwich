@@ -60,12 +60,12 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
             
         if (!isMainTabActivity) {
             title.setIdentifiable(this);
-            title.setUser(UserProfileTabActivity.user);
+            title.setUser(getUser());
             title.setFollowable(userCell);
             title.setTitle(R.string.title_user_tag);
         }
 
-        userCell.setUser(UserProfileTabActivity.user);
+        userCell.setUser(getUser());
         userCell.setClickable(false);
         userCell.setIdentifiable(this);
         userCell.addRefreshable(this);
@@ -131,7 +131,7 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
     public void refresh() {
         String numTag = String.format(
                 MatjiConstants.string(R.string.number_of_tag),
-                UserProfileTabActivity.user.getTagCount());
+                getUser().getTagCount());
 
         tagCount.setTitle(numTag);
     }
@@ -139,7 +139,7 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof User) {
-            UserProfileTabActivity.user = (User) data;
+            setUser((User) data);
             refresh();
         }
     }
@@ -165,8 +165,8 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
 	    switch (requestCode) {
         case USER_PROFILE_TAB_ACTIVITY:
             if (resultCode == RESULT_OK) {
-                UserMainActivity.user = (User) data.getParcelableExtra(UserMainActivity.USER);
-                userCell.setUser(UserMainActivity.user);
+                setUser((User) data.getParcelableExtra(UserMainActivity.USER));
+                userCell.setUser(getUser());
                 userCell.refresh();
             }
             break;
@@ -198,5 +198,16 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
         return false;
     }
 	
-	
+
+    public User getUser() {
+        return isMainTabActivity ? UserProfileMainTabActivity.user : UserProfileTabActivity.user;
+    }
+    
+    public void setUser(User user) {
+        if (isMainTabActivity) {
+            UserProfileMainTabActivity.user = user; 
+        } else {
+            UserProfileTabActivity.user = user;
+        }
+    }
 }

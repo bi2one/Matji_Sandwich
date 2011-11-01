@@ -2,8 +2,10 @@ package com.matji.sandwich.widget;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.Toast;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
@@ -14,7 +16,6 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.http.request.PostHttpRequest.TagByType;
 import com.matji.sandwich.util.MatjiConstants;
-import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 
 public class TagPostListView extends PostListView implements Requestable {
 
@@ -22,7 +23,7 @@ public class TagPostListView extends PostListView implements Requestable {
     private Tag tag;
     private TagByType type;
     
-    public SimpleAlertDialog tagDialog;
+    private Toast notLinkedTagToast;
     
     public TagPostListView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -30,7 +31,7 @@ public class TagPostListView extends PostListView implements Requestable {
 
     protected void init() {
         request = new PostHttpRequest(getContext());
-        tagDialog = new SimpleAlertDialog(getContext(), R.string.store_tag_unlink_post);
+        notLinkedTagToast = Toast.makeText(getContext(), R.string.store_tag_unlink_post, Toast.LENGTH_SHORT);
         setPage(1);
     }
 
@@ -57,7 +58,8 @@ public class TagPostListView extends PostListView implements Requestable {
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		
 		if (data == null || data.size() == 0) {
-			tagDialog.show();
+			notLinkedTagToast.show();
+			((Activity) getContext()).finish();
 		} else {
 			super.requestCallBack(tag, data);
 		}

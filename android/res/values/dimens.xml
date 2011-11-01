@@ -43,6 +43,7 @@
 	<dimen name="user_cell_content_size">12dp</dimen>
 	<dimen name="user_cell_btn_margin">1.33dp</dimen>
 	<dimen name="user_cell_margin_left">13.33dp</dimen>
+    <dimen name="user_cell_follow_txt_size">12dp</dimen>
     <dimen name="user_edit_cell_btn_width">100dp</dimen>
     
 	<!-- Inputbar -->	

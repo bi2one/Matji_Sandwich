@@ -100,8 +100,7 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
                 new Intent(this, RankingTabActivity.class));
 
 
-        Intent userTabIntent = new Intent(this, UserProfileTabActivity.class);
-        userTabIntent.putExtra(UserProfileTabActivity.IS_MAIN_TAB_ACTIVITY, true);
+        Intent userTabIntent = new Intent(this, UserProfileMainTabActivity.class);
         tabHost.addTab(MainTabHost.LOGIN_TAB,
                 R.drawable.icon_tapbar_login_selector,
                 R.string.main_tab_config,

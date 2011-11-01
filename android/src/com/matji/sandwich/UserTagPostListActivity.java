@@ -16,8 +16,6 @@ import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.PostHttpRequest.TagByType;
 import com.matji.sandwich.widget.TagPostListView;
 import com.matji.sandwich.widget.cell.UserCell;
-import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
-import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.UserTitle;
 
 public class UserTagPostListActivity extends BaseActivity implements Refreshable {
@@ -26,7 +24,10 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
     private TagPostListView listView;
     private UserCell userCell;
     private Tag tag;
+    private boolean isMainTabActivity;
+    
     public static final String TAG = "UserTagPostListActivity.tag";
+    public static final String IS_MAIN_TAB_ACTIVITY = "UserTagPostLIstActivity.is_main_tab_activity";
 
     public int setMainViewId() {
         return R.id.activity_user_tag_post;
@@ -41,11 +42,11 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
         tag = getIntent().getParcelableExtra(TAG);
         
         title = (UserTitle) findViewById(R.id.Titlebar);
-        userCell = new UserCell(this, UserProfileTabActivity.user);
+        userCell = new UserCell(this, getUser());
         listView = (TagPostListView) findViewById(R.id.user_tag_post_list_view);
         
         title.setIdentifiable(this);
-        title.setUser(UserProfileTabActivity.user);
+        title.setUser(getUser());
         title.setFollowable(userCell);
 
         userCell.setIdentifiable(this);
@@ -57,13 +58,6 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
         listView.setType(TagByType.USER);
         listView.setActivity(this);
         listView.requestReload();
-        
-        listView.tagDialog.setOnClickListener(new SimpleAlertDialog.OnClickListener() {
-			@Override
-			public void onConfirmClick(SimpleDialog dialog) {
-				finish();
-			}
-		});
     }
     
     @Override
@@ -85,8 +79,8 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
             break;
         case USER_PROFILE_TAB_ACTIVITY:
             if (resultCode == RESULT_OK) {
-                UserProfileTabActivity.user = (User) data.getParcelableExtra(UserProfileTabActivity.USER);
-                userCell.setUser(UserProfileTabActivity.user);
+                setUser((User) data.getParcelableExtra(UserProfileTabActivity.USER));
+                userCell.setUser(getUser());
                 userCell.refresh();
             }
             break;
@@ -112,7 +106,7 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof User){
-            UserProfileTabActivity.user = (User) data;
+            setUser((User) data);
             refresh();
         }
     }
@@ -134,5 +128,17 @@ public class UserTagPostListActivity extends BaseActivity implements Refreshable
             return true;
         }
         return false;
+    }
+    
+    public User getUser() {
+        return (isMainTabActivity) ? UserProfileTabActivity.user : UserProfileMainTabActivity.user;
+    }
+    
+    public void setUser(User user) {
+        if (isMainTabActivity) {
+            UserProfileMainTabActivity.user = user; 
+        } else {
+            UserProfileTabActivity.user = user;
+        }
     }
 }

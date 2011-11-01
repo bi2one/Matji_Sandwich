@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -131,17 +130,18 @@ public class UserCell extends Cell implements Followable {
      */
     public void setUser(User user) {
         this.user = user;
-        Log.d("Matji", user.getReceivedMessageCount()+"*************");
-        profile.setUserId(user.getId());
-        nick.setText(user.getNick());
-        if (user.getMileage() != null)
-            point.setText(user.getMileage().getTotalPoint()+"");
-        else
-            point.setText("0");
-        area.setText(MatjiConstants.countryName(user.getCountryCode()));
-        likeList.setText(user.getLikeStoreCount()+"");
-        likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
-        followingListener.setUser(user);
+        if (user != null) {
+            profile.setUserId(user.getId());
+            nick.setText(user.getNick());
+            if (user.getMileage() != null)
+                point.setText(user.getMileage().getTotalPoint()+"");
+            else
+                point.setText("0");
+            area.setText(MatjiConstants.countryName(user.getCountryCode()));
+            likeList.setText(user.getLikeStoreCount()+"");
+            likeList.setOnClickListener(new LikeStoreListListener(getContext(), user));
+            followingListener.setUser(user);
+        }
     }
 
     public void setIdentifiable(Identifiable identifiable) {
@@ -155,20 +155,22 @@ public class UserCell extends Cell implements Followable {
      * @param user
      */
     public void refresh() {
-        if (session.isLogin() && session.getCurrentUser().getId() == user.getId()) {
-            setUser(session.getCurrentUser());
-            follow.setVisibility(View.GONE);
-            messageList.setVisibility(View.VISIBLE);
-            messageList.setText(user.getReceivedMessageCount()+"");
-        } else {
-            follow.setText(
-                    (followingListener.isExistFollowing()) ? 
-                            R.string.cell_user_unfollow
-                            : R.string.cell_user_follow);
-        }
+        if (user != null) {
+            if (session.isLogin() && session.getCurrentUser().getId() == user.getId()) {
+                setUser(session.getCurrentUser());
+                follow.setVisibility(View.GONE);
+                messageList.setVisibility(View.VISIBLE);
+                messageList.setText(user.getReceivedMessageCount()+"");
+            } else {
+                follow.setText(
+                        (followingListener.isExistFollowing()) ? 
+                                R.string.cell_user_unfollow
+                                : R.string.cell_user_follow);
+            }
 
-        for (Refreshable refreshable : refreshables) {
-            refreshable.refresh(user);
+            for (Refreshable refreshable : refreshables) {
+                refreshable.refresh(user);
+            }
         }
     }
 
