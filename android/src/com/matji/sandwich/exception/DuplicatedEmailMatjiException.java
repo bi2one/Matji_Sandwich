@@ -2,7 +2,7 @@ package com.matji.sandwich.exception;
 
 import com.matji.sandwich.R;
 
-public class DuplicatedEmailMatjiException extends MatjiException {
+public class DuplicatedEmailMatjiException extends SimpleDialogShowingMatjiException {
     /**
      * 
      */

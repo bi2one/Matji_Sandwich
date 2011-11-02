@@ -11,26 +11,28 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.data.Email;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.DialogAsyncTask;
+import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.FindPasswordHttpRequest;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.HomeTitle;
 
 public class FindPasswordActivity extends BaseActivity implements Requestable, SimpleAlertDialog.OnClickListener {
-    private static final int TAG_FIND_PASSWORD = 1;
-
     private HomeTitle title; 
 
     private EditText etEmail;
     private EditText etUserid;
 
     private SimpleAlertDialog emailIsNullDialog;
+    private SimpleAlertDialog useridIsNullDialog;
     private SimpleAlertDialog emailIsIncorrectDialog;
     private SimpleAlertDialog successDialog;
-    private SimpleAlertDialog useridDialog;
+    private SimpleAlertDialog emailDialog;
 
     public int setMainViewId() {
         return R.id.activity_find_password;
@@ -44,8 +46,9 @@ public class FindPasswordActivity extends BaseActivity implements Requestable, S
         etEmail = (EditText) findViewById(R.id.find_password_email_field);
         etUserid = (EditText) findViewById(R.id.find_email_userid_field);
 
-        emailIsNullDialog = new SimpleAlertDialog(this, R.string.register_email_is_null);
-        emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.register_email_is_incorrect);
+        emailIsNullDialog = new SimpleAlertDialog(this, R.string.find_password_email_is_null);
+        useridIsNullDialog = new SimpleAlertDialog(this, R.string.find_email_userid_is_null);
+        emailIsIncorrectDialog = new SimpleAlertDialog(this, R.string.find_password_email_is_incorrect);
         successDialog = new SimpleAlertDialog(this, R.string.find_password_success);
         successDialog.setOnClickListener(this);
 
@@ -58,11 +61,11 @@ public class FindPasswordActivity extends BaseActivity implements Requestable, S
                 if ((actionId == EditorInfo.IME_ACTION_DONE) ||
                         (e != null && e.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                     findPassword();
-                }   
+                }
                 return false;
             }
         });
-
+        
         etUserid.setOnEditorActionListener(new OnEditorActionListener() {
 
             @Override
@@ -85,13 +88,21 @@ public class FindPasswordActivity extends BaseActivity implements Requestable, S
         } else {
             FindPasswordHttpRequest request = new FindPasswordHttpRequest(FindPasswordActivity.this);
             request.actionForgotPassword(email);
-            DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, TAG_FIND_PASSWORD);
+            DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, HttpRequestManager.USER_FIND_PASSWORD_REQUEST);
             requestTask.execute();
         }
     }
 
     public void findEmail() {
-
+        String userid = etUserid.getText().toString();
+        if (userid.equals("")) {
+            useridIsNullDialog.show();
+        } else {
+            FindPasswordHttpRequest request = new FindPasswordHttpRequest(FindPasswordActivity.this);
+            request.actionFindEmail(userid);
+            DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, HttpRequestManager.USER_FIND_EMAIL_REQUEST);
+            requestTask.execute();
+        }
     }
 
     /**
@@ -108,8 +119,12 @@ public class FindPasswordActivity extends BaseActivity implements Requestable, S
 
     public void requestCallBack(int tag, ArrayList<MatjiData> data) {
         switch(tag) {
-        case TAG_FIND_PASSWORD:
+        case HttpRequestManager.USER_FIND_PASSWORD_REQUEST:
             successDialog.show();
+            break;
+        case HttpRequestManager.USER_FIND_EMAIL_REQUEST:
+            emailDialog = new SimpleAlertDialog(this, String.format(MatjiConstants.string(R.string.find_email_success), (Email) data.get(0)));
+            emailDialog.show();
             break;
         }
     }
@@ -124,5 +139,4 @@ public class FindPasswordActivity extends BaseActivity implements Requestable, S
             finish();
         }
     }
-
 }

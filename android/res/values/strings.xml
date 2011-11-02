@@ -95,6 +95,9 @@
   <string name="exception_InvalidEmailFormMatjiException">
         이메일이 올바르지 않습니다.
   </string>
+  <string name="exception_UseridNotExistMatjiException">
+        존재하지 않는 아이디입니다.
+  </string>
   <!-- server exception -->
   <string name="exception_failed_to_save_region">
             이미 북마크 한 지역입니다.
@@ -584,10 +587,14 @@
   
   <!-- activity_find_password.xml -->
   <string name="find_password">비밀번호 찾기</string>
+  <string name="find_password_email_is_null">이메일을 입력해 주세요.</string>
+  <string name="find_password_email_is_incorrect">이메일이 올바르지 않습니다.</string>
   <string name="find_password_email">가입 시 사용된 이메일을 입력해주세요.</string>
   <string name="find_password_success">해당 이메일로 비밀번호를 변경할 수 있는 주소가 전송되었습니다.</string>
   <string name="find_email">이메일 찾기</string>
+  <string name="find_email_userid_is_null">아이디를 입력해 주세요.</string>
   <string name="find_email_userid">가입시 사용된 아이디를 입력해주세요. </string>
+  <string name="find_email_success">이메일: %1$s </string>
 
   <!-- activity_register.xml -->
   <string name="register_write_email">이메일을 입력해 주세요.</string>

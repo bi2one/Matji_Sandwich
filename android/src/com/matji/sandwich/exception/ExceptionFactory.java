@@ -32,6 +32,7 @@ public class ExceptionFactory {
     public static final int ALREADY_FOLLOWING = 24;
     public static final int NEVER_FOLLOWING = 25;
     public static final int INVALID_EMAIL_FORM = 26;
+    public static final int USERID_NOT_EXIST = 27;
 
     public static MatjiException create(int code) {
 	MatjiException result = null;
@@ -48,6 +49,7 @@ public class ExceptionFactory {
         break;
     case EMAIL_NOT_EXIST:
         result = new EmailNotExistMatjiException();
+        break;
     case DUPLICATED_STORE_FOOD:
         result = new DuplicatedStoreFoodMatjiException();
         break;
@@ -62,6 +64,10 @@ public class ExceptionFactory {
         break;
     case INVALID_EMAIL_FORM:
         result = new InvalidEmailFormMatjiException();
+        break;
+    case USERID_NOT_EXIST:
+        result = new UseridNotExistMatjiException();
+        break;        
 	}
 		
 	return result;

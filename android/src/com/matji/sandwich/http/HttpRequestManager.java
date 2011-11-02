@@ -28,6 +28,8 @@ public class HttpRequestManager {
     public static final int USER_TAG_LIST_REQUEST = 62;
     public static final int USER_UPDATE_REQUEST = 63;
     public static final int USER_CHANGE_PASSWORD_REQUEST = 64;
+    public static final int USER_FIND_PASSWORD_REQUEST = 65;
+    public static final int USER_FIND_EMAIL_REQUEST = 66;
     public static final int MESSAGE_NEW_REQUEST = 70;
     public static final int MESSAGE_READ_REQUEST = 71;
     public static final int ALARM_READ_REQUEST = 81;
