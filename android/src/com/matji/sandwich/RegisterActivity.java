@@ -89,7 +89,7 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
 
             @Override
             public void onClick(View v) {
-                // move to clause activity
+                startActivityForResult(new Intent(RegisterActivity.this, TermsActivity.class), TERMS_ACTIVITY);                
             }
         });
 
@@ -195,4 +195,16 @@ public class RegisterActivity extends BaseActivity implements Completable, Reque
     }
 
     public void loginFailed() { }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+        case TERMS_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                cbAccept.setChecked(true);
+            }
+            break;
+        }
+    }
 }

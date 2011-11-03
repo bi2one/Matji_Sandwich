@@ -26,7 +26,6 @@ public class CompleteButton extends TitleButton {
 	 */
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		super.init();
 		setText(MatjiConstants.string(R.string.default_string_complete));
 		enlarge();
@@ -45,10 +44,17 @@ public class CompleteButton extends TitleButton {
 	 */
 	@Override
 	public void onTitleItemClicked() {
-		// TODO Auto-generated method stub
 		Log.d("Matji", "CompleteClicked");
 		if (completable != null) {
 		    completable.complete();
 		}
 	}
+
+    public void setLabel(int resid) {
+        setText(resid);
+    }
+    
+    public void setLabel(String text) {
+        setText(text);
+    }
 }

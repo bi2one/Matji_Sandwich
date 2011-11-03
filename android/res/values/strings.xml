@@ -172,6 +172,8 @@
   <string name="default_string_store_modify_request">정보 수정 요청</string>
   <string name="default_string_store_close">폐업 신고</string>
   <string name="default_string_reload">새로고침</string>
+  <string name="default_string_terms">약관</string>
+  <string name="default_string_agree">동의</string>
   
   <!-- Not Exist -->  
   <string name="not_exist_intro">소개문을 입력해주세요.</string>
@@ -319,7 +321,7 @@
   <string name="hint_write_intro">소개글 입력</string>
   <string name="hint_write_website">블로그/웹사이트 주소 입력</string>
   <string name="hint_write_store_food">메뉴 입력</string>
-  <string name="hint_userid">아이디</string>
+  <string name="hint_matji_userid">맛있는지도 아이디</string>
   <string name="hint_email">이메일</string>
   <string name="hint_nickname">닉네임</string>
   <string name="hint_password">비밀번호</string>
@@ -604,6 +606,9 @@
   <string name="register_view_acceptance_of_terms">(약관보기)</string>
   <string name="register_complete">가입완료</string>
 
+  <!-- activity_terms.xml -->
+  <string name="terms">약관내용.</string>
+    
   <!-- StoreLocationMapActivity.java -->
   <string name="store_location_header">\'%1$s\'의 지도</string>
 

@@ -4,15 +4,21 @@ import java.io.NotSerializableException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.matji.sandwich.ActivityStartable;
 import com.matji.sandwich.Loginable;
 import com.matji.sandwich.R;
 import com.matji.sandwich.Requestable;
+import com.matji.sandwich.TermsActivity;
+import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.Badge;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Me;
@@ -23,6 +29,7 @@ import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.DialogAsyncTask;
 import com.matji.sandwich.http.HttpRequestManager;
+import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.MeHttpRequest;
 import com.matji.sandwich.http.request.NoticeHttpRequest;
 import com.matji.sandwich.http.request.RequestCommand;
@@ -122,18 +129,30 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
         mLoginableRef = new WeakReference<Loginable>(loginable);
         RequestCommand loginRequest = new RequestCommand() {
 
-            private MeHttpRequest request; 
+            private HttpRequest request; 
 
             @Override
             public ArrayList<MatjiData> request() throws MatjiException {
                 request = new MeHttpRequest(context);
-                request.actionAuthorize(userid, password);
+                ((MeHttpRequest) request).actionAuthorize(userid, password);
                 ArrayList<MatjiData> data = null;
                 data = request.request();
                 Me me = (Me)data.get(0);
-                saveMe(me);
 
+                saveMe(me);
                 notificationValidate();
+                if (!me.isAgreeTerm()) {
+                    
+                    Intent intent = new Intent(context, TermsActivity.class);
+                    intent.putExtra(TermsActivity.FROM_REGISTER_ACTIVITY, false);
+                    
+                    if (context instanceof ActivityStartable) {
+                        ((BaseTabActivity) ((Activity) context).getParent()).tabStartActivityForResult(intent, BaseActivity.TERMS_ACTIVITY, (ActivityStartable) context);
+                    } else {
+                        ((Activity) context).startActivityForResult(intent, BaseActivity.TERMS_ACTIVITY);
+                    }
+                }
+
                 return data;
             }
 
@@ -301,7 +320,7 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
             e.printStackTrace();
         }
     }
-    
+
     public User getCurrentUser(){
         Object obj = mPrefs.getObject(keyForCurrentUser);
         if (obj == null)

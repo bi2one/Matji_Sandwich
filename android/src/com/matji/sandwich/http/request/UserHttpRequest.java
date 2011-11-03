@@ -120,7 +120,7 @@ public class UserHttpRequest extends HttpRequest {
         httpMethod = HttpMethod.HTTP_POST;
         action = "create";
         parser = new UserParser();
-        
+
         postHashtable.clear();
         postHashtable.put("user[email]", email);
         postHashtable.put("user[nick]", nick);
@@ -143,7 +143,7 @@ public class UserHttpRequest extends HttpRequest {
             getHashtable.put("access_token", "" + session.getToken());
         getHashtable.put("country_code", country_code);
     }
-    
+
     public void actionUpdateNick(String nick) {
         httpMethod = HttpMethod.HTTP_GET;
         action="update";
@@ -192,5 +192,14 @@ public class UserHttpRequest extends HttpRequest {
         if (session != null && session.isLogin())
             getHashtable.put("access_token", "" + session.getToken());
         getHashtable.put("website", website);        
+    }
+
+    public void actionAgreeTerm(String token) {
+        httpMethod = HttpMethod.HTTP_GET;
+        action="agree_term";
+        parser = new UserParser();
+
+        getHashtable.clear();
+        getHashtable.put("access_token", "" + token);
     }
 }

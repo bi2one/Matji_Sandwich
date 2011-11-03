@@ -133,5 +133,19 @@ public abstract class BaseListActivity extends ListActivity implements ActivityE
     public void startActivityForResult(Intent intent, int requestCode) {
         setIsFlow(true);
         super.startActivityForResult(intent, requestCode);
-    }    
+    }
+    
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        
+        switch (requestCode) {
+        case BaseActivity.TERMS_ACTIVITY:
+            if (resultCode != RESULT_OK) {
+                Session.getInstance(this).logout();
+            }
+            break;
+        }
+    }
 }
