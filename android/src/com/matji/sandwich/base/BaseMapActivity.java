@@ -138,4 +138,18 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
         // TODO Auto-generated method stub
         return false;
     }
+    
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        
+        switch (requestCode) {
+        case BaseActivity.TERMS_ACTIVITY:
+            if (resultCode != RESULT_OK) {
+                Session.getInstance(this).logout();
+            }
+            break;
+        }
+    }
 }

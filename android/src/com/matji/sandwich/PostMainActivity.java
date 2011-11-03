@@ -243,6 +243,7 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
         case POST_EDIT_ACTIVITY:
             if (resultCode == RESULT_OK) {

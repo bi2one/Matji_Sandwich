@@ -12,6 +12,7 @@ public class Me extends MatjiData{
 	private String[] followings;
 	private String[] followers;
 	private String token;
+	private boolean agree_term;
 	
 	public Me() {}
 	
@@ -105,5 +106,13 @@ public class Me extends MatjiData{
 
 	public String getToken() {
 		return token;
-	}	
+	}
+
+    public void setAgreeTerm(boolean agree_term) {
+        this.agree_term = agree_term;
+    }
+
+    public boolean isAgreeTerm() {
+        return agree_term;
+    }	
 }

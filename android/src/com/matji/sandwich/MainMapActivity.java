@@ -213,6 +213,7 @@ GpsManager.StartConfigListener {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode) {
         case REQUEST_CODE_LOCATION:
             if (resultCode == Activity.RESULT_OK) {

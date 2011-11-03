@@ -27,6 +27,25 @@ public class CompletableTitle extends TitleContainerTypeLRt {
     public void setCompletable(Completable completable) {
         ((CompleteButton) rightButton1).setCompletable(completable);
     }
+
+    /**
+     * 버튼의 문자열을 변경한다.
+     * 
+     * @param resid 변경할 문자열의 리소스 아이디
+     */
+    public void setButtonLabel(int resid) {
+        ((CompleteButton) rightButton1).setLabel(resid);
+    }
+    
+    
+    /**
+     * 버튼의 문자열을 변경한다.
+     * 
+     * @param text 변경할 문자열
+     */
+    public void setButtonLabel(String text) {
+        ((CompleteButton) rightButton1).setLabel(text);        
+    }
     
     @Override
     protected TitleImageButton getLeftButton1() {

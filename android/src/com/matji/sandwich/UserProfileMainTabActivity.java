@@ -195,7 +195,7 @@ import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.LoginView;
 import com.matji.sandwich.widget.RoundTabHost;
 
-public class UserProfileMainTabActivity extends BaseTabActivity implements Loginable, LoginListener, LogoutListener {
+public class UserProfileMainTabActivity extends BaseTabActivity implements Loginable, LoginListener, LogoutListener, ActivityStartable {
 
     public static User user;
     private RoundTabHost tabHost;
@@ -347,5 +347,8 @@ public class UserProfileMainTabActivity extends BaseTabActivity implements Login
         // TODO Auto-generated method stub
         setUser(session.getCurrentUser());
         privateTypeInit();
-    }    
+    }
+
+    @Override
+    public void activityResultDelivered(int requestCode, int resultCode, Intent data) {}
 }

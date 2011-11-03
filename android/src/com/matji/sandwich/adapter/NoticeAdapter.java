@@ -19,7 +19,7 @@ public class NoticeAdapter extends MBaseAdapter {
 
     private HashMap<Integer, Boolean> hasFoldedMap;
 
-    private int lastReadNoticeId;
+    private int lastReadNoticeId = 0;
     private Drawable iconNew;
 
     public NoticeAdapter(Context context) {
@@ -70,11 +70,18 @@ public class NoticeAdapter extends MBaseAdapter {
                 TimeUtil.getDateFromCreatedAt(notice.getCreatedAt()));
 
         noticeElement.createdAtList.setText(createdAt);
-        if (lastReadNoticeId < notice.getId()) {
-            noticeElement.createdAtList.setCompoundDrawables(null, null, iconNew, null);
+
+        if (lastReadNoticeId == 0) {
+            if (position == 0) showNew(noticeElement.createdAtList);
+            else dismissNew(noticeElement.createdAtList);
         } else {
-            noticeElement.createdAtList.setCompoundDrawables(null, null, null, null);
+            if (lastReadNoticeId < notice.getId()) {
+                showNew(noticeElement.createdAtList);
+            } else {
+                dismissNew(noticeElement.createdAtList);
+            }
         }
+
         noticeElement.subject.setText(notice.getSubject());
         noticeElement.
         createdAt.setText(createdAt);
@@ -136,6 +143,14 @@ public class NoticeAdapter extends MBaseAdapter {
         holder.noticeWrapper.setVisibility(View.GONE);
     }
 
+    private void showNew(TextView v) {
+         v.setCompoundDrawables(null, null, iconNew, null);
+    }
+ 
+    private void dismissNew(TextView v) {
+         v.setCompoundDrawables(null, null, null, null);
+    }
+    
     private class NoticeElement {
         TextView subjectList;
         TextView createdAtList;

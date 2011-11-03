@@ -65,6 +65,7 @@ public class StoreTagPostListActivity extends BaseActivity implements Refreshabl
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
         case POST_MAIN_ACTIVITY:
             if (resultCode == RESULT_OK) {

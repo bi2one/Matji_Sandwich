@@ -157,6 +157,14 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+        case BaseActivity.TERMS_ACTIVITY:
+            if (resultCode != RESULT_OK) {
+                Session.getInstance(this).logout();
+            }
+            break;
+        }
         lastStartedChild.activityResultDelivered(requestCode, resultCode, data);
     }
 }

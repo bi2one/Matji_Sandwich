@@ -77,6 +77,8 @@ public class MeParser extends MatjiDataParser {
         if (matjiData != null)
             me.getUser().setExternalAccount((ExternalAccount) matjiData);
         
+        me.setAgreeTerm(getBoolean(object, "agree_term"));
+        
 		return me;
 	}
 }
