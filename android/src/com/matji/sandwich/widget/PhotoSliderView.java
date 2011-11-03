@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -25,13 +26,19 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
     private RelativeLayout center;
     private RelativeLayout right;
 
-    private int pageWidth;
+    private int currentModeWidth;
+    private int verticalModeWidth;
+    private int horizontalModeWidth;
 
-    private int currItemPos;
+    private int currentItemPos;
     private int photoCount;
 
     private boolean isScrolling;
     private int scrollToX;
+
+    private Drawable leftDrawableCache;
+    private Drawable centerDrawableCache;
+    private Drawable rightDrawableCache;
 
     private enum TouchState {
         TOUCH_UP, TOUCH_DOWN,
@@ -62,7 +69,7 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
                         if (existRightImage()) moveToRight();
                         return true;
                     } 
-                    
+
 
                 }
             } catch (Exception e) {
@@ -88,10 +95,22 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
     }
 
     private void init() {
-        pageWidth = getResources().getDisplayMetrics().widthPixels;
-        currItemPos = 0;
+        currentModeWidth = verticalModeWidth = getResources().getDisplayMetrics().widthPixels;
+        horizontalModeWidth = getResources().getDisplayMetrics().heightPixels;
+
+
+        currentItemPos = 0;
         photoCount = 0;
 
+        initViews();
+
+        gestureDetector = new GestureDetector(new GestureDetectorForSwipe());
+        setHorizontalScrollBarEnabled(false);
+        setFadingEdgeLength(0);
+        setOnTouchListener(this);
+    }
+
+    private void initViews() {
         wrapper = new RelativeLayout(getContext());
 
         left = createPage();
@@ -102,13 +121,9 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
         wrapper.addView(center);
         wrapper.addView(right);
 
-        setPageMargin();        
+        setPageMargin();
+        removeAllViews();
         addView(wrapper);
-
-        gestureDetector = new GestureDetector(new GestureDetectorForSwipe());
-        setHorizontalScrollBarEnabled(false);
-        setFadingEdgeLength(0);
-        setOnTouchListener(this);
     }
 
     private RelativeLayout createPage() {
@@ -119,15 +134,19 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
     }
 
     private ImageView createImageView() {
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(pageWidth, LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.CENTER_IN_PARENT);
-
         ImageView iv = new ImageView(getContext());
         iv.setAdjustViewBounds(true);
-        iv.setLayoutParams(params);
+        iv.setLayoutParams(getImageViewLayoutParams());
         iv.setScaleType(ScaleType.FIT_CENTER);
 
         return iv;
+    }
+
+    private RelativeLayout.LayoutParams getImageViewLayoutParams() {
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(currentModeWidth, LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+        return params;
     }
 
     private void setPageMargin() {
@@ -138,70 +157,76 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
 
     private void setLeftPageMargin() {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-        params.leftMargin = pageWidth * (currItemPos - 1);
+        params.leftMargin = currentModeWidth * (currentItemPos - 1);
         left.setLayoutParams(params);
-        invalidate();
     }
 
     private void setCenterPageMargin() {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-        params.leftMargin = pageWidth * (currItemPos);
+        params.leftMargin = currentModeWidth * (currentItemPos);
         center.setLayoutParams(params);
     }
 
     private void setRightPageMargin() {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-        params.leftMargin = pageWidth * (currItemPos + 1);
+        params.leftMargin = currentModeWidth * (currentItemPos + 1);
         right.setLayoutParams(params);
     }
 
     public void scrollToPosition(int position) {
         isScrolling = true;
-        scrollTo(position * pageWidth, 0);        
+        scrollTo(position * currentModeWidth, 0);        
     }
 
     public void smoothScrollToPosition(int position){
         isScrolling = true;
-        smoothScrollTo(position * pageWidth, 0);
+        smoothScrollTo(position * currentModeWidth, 0);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (!hasStarted) {
-            scrollToPosition(currItemPos);
+            scrollToPosition(currentItemPos);
             hasStarted = true;
         }
     }
 
-    public void moveToLeft() {
-        currItemPos--;
-        scrollToX = currItemPos * pageWidth; 
-        smoothScrollToPosition(currItemPos);
+    public void moveToLeft(boolean cast) {
+        currentItemPos--;
+        scrollToX = currentItemPos * currentModeWidth; 
+        smoothScrollToPosition(currentItemPos);
         RelativeLayout tmp = center;
         center = left;
         left = right;
         right = tmp; 
 
         setLeftPageMargin();
-        for (OnPageChangedListener listener : pageChangedListeners) {
-            listener.changeToLeft();
+        
+        if (cast) {
+            for (OnPageChangedListener listener : pageChangedListeners) {
+                listener.changeToLeft();
+            }
         }
     }
 
+    public void moveToLeft() {
+        moveToLeft(true);
+    }
+
     public void setCurrentItemPosition(int currItemPos) {
-        this.currItemPos = currItemPos;
+        this.currentItemPos = currItemPos;
         setPageMargin();
         if (existLeftImage()) {
-            moveToLeft();moveToRight();
+            moveToLeft(false);moveToRight(false);
         }
         if (existRightImage()) {
-            moveToRight();moveToLeft();
+            moveToRight(false);moveToLeft(false);
         }
     }
 
     public int getCurrentItemPosition() {
-        return currItemPos;
+        return currentItemPos;
     }
 
     public void setPhotoCount(int photoCount) {
@@ -217,30 +242,35 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
     }
 
     public boolean existLeftImage() {
-        return currItemPos-1 >= 0;
+        return currentItemPos-1 >= 0;
     }
 
     public boolean existRightImage() {
-        return currItemPos+1 < photoCount;
+        return currentItemPos+1 < photoCount;
     }
-    
-    public void moveToRight() {
-        currItemPos++;
-        scrollToX = currItemPos * pageWidth;
-        smoothScrollToPosition(currItemPos);
+
+    public void moveToRight(boolean cast) {
+        currentItemPos++;
+        scrollToX = currentItemPos * currentModeWidth;
+        smoothScrollToPosition(currentItemPos);
         RelativeLayout tmp = center;
         center = right;
         right = left;
         left = tmp;
 
-        if (currItemPos != photoCount-1)
+        if (currentItemPos != photoCount-1)
             setRightPageMargin();
 
-        for (OnPageChangedListener listener : pageChangedListeners) {
-            listener.changeToRight();            
+        if (cast) {
+            for (OnPageChangedListener listener : pageChangedListeners) {
+                listener.changeToRight();            
+            }
         }
     }
 
+    public void moveToRight() {
+        moveToRight(true);
+    }
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
@@ -253,15 +283,15 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
 
         if (touchState == TouchState.TOUCH_DOWN) return;
 
-        int nextPageX = currItemPos * pageWidth;
-        if (nextPageX - (float)pageWidth * SNAP_DISTANCE_WEIGHT >= l) {
+        int nextPageX = currentItemPos * currentModeWidth;
+        if (nextPageX - (float)currentModeWidth * SNAP_DISTANCE_WEIGHT >= l) {
             // left page changed
             if (existLeftImage()) moveToLeft();
-        } else if (nextPageX + (float)pageWidth * SNAP_DISTANCE_WEIGHT <= l) {
+        } else if (nextPageX + (float)currentModeWidth * SNAP_DISTANCE_WEIGHT <= l) {
             // right page changed
             if (existRightImage()) moveToRight();
         } else {
-            smoothScrollToPosition(currItemPos);
+            smoothScrollToPosition(currentItemPos);
         }
     }
 
@@ -344,5 +374,31 @@ public class PhotoSliderView extends HorizontalScrollView implements OnTouchList
     public static interface OnPageChangedListener {
         void changeToLeft();
         void changeToRight();
+    }
+
+    public void horizontalMode() {
+        currentModeWidth = horizontalModeWidth;
+        changedMode();
+    }
+
+    public void verticalMode() {
+        currentModeWidth = verticalModeWidth;
+        changedMode();
+    }
+
+    private void changedMode() {
+        leftDrawableCache = getLeftImageView().getDrawable();
+        centerDrawableCache = getCenterImageView().getDrawable();
+        rightDrawableCache = getRightImageView().getDrawable();
+        initViews();
+        getLeftImageView().setImageDrawable(leftDrawableCache);
+        getCenterImageView().setImageDrawable(centerDrawableCache);
+        getRightImageView().setImageDrawable(rightDrawableCache);
+        post(new Runnable() {
+            @Override
+            public void run() {
+                setCurrentItemPosition(currentItemPos);
+            } 
+        });
     }
 }

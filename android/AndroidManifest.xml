@@ -198,6 +198,7 @@
 		<activity android:name="GridGalleryActivity"
                   android:screenOrientation="portrait"></activity>
 		<activity android:name="ImageSliderActivity"
+		          android:configChanges="orientation|keyboardHidden"
 				  android:screenOrientation="unspecified"></activity>
 		<activity android:name="GetMapPositionActivity"
                   android:screenOrientation="portrait"></activity>

@@ -3,6 +3,7 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -246,7 +247,7 @@ public class ImageSliderActivity extends BaseActivity implements Requestable, On
 
 
     public void changedPage() {
-//        manager.cancelTask();
+        //        manager.cancelTask();
         count.setText(
                 MatjiConstants.string(R.string.default_string_image) 
                 + " " + (slider.getCurrentItemPosition()+1) + "/" + attachFiles.length);
@@ -263,5 +264,15 @@ public class ImageSliderActivity extends BaseActivity implements Requestable, On
     public void changeToRight() {
         changedPage();
         refreshRightImageView();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            slider.horizontalMode();
+        } else {
+            slider.verticalMode();
+        }
     }
 }

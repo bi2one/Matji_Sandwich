@@ -15,7 +15,6 @@ import com.matji.sandwich.data.AttachFile;
 import com.matji.sandwich.data.AttachFiles;
 import com.matji.sandwich.http.util.ImageLoader;
 import com.matji.sandwich.listener.GotoImageSliderAction;
-import com.matji.sandwich.util.MatjiConstants;
 
 public class ImageAdapter extends MBaseAdapter {
     private ImageLoader imageLoader;

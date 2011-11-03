@@ -338,22 +338,22 @@ public class Session implements Requestable, DialogAsyncTask.ProgressListener {
     }
 
     public void preLogin() {
-        Log.d("Matji", "pre login");
+        Log.d("Matji","pre login at " + mContextRef.get().getClass());
         for (LoginListener listener : mLoginListeners) listener.preLogin();
     }
 
     public void postLogin() {
-        Log.d("Matji", "post login");
+        Log.d("Matji","post login at " + mContextRef.get().getClass());
         for (LoginListener listener : mLoginListeners) listener.postLogin();
     }
 
     public void preLogout() {
-        Log.d("Matji", "pre logout");
+        Log.d("Matji", "pre logout at " + mContextRef.get().getClass());
         for (LogoutListener listener : mLogoutListeners) listener.preLogout();
     }
 
     public void postLogout() {
-        Log.d("Matji", "post logout");
+        Log.d("Matji", "post logout at " + mContextRef.get().getClass());
         for (LogoutListener listener : mLogoutListeners) listener.postLogout();
     }
 
