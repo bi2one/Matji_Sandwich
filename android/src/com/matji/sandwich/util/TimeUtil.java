@@ -12,7 +12,7 @@ import com.matji.sandwich.R;
 public class TimeUtil {
     final static String timezone = "UTC";	
     static int timeOffset = 0;
-    
+
     public static boolean isToday(String form, String time) {
         Date date = new Date(System.currentTimeMillis());
         return parseString(form, date).equals(time);		
@@ -23,7 +23,7 @@ public class TimeUtil {
         created_at = created_at.replaceAll("Z", "");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        TimeZone zone = TimeZone.getTimeZone(timezone);
+        //        TimeZone zone = TimeZone.getTimeZone(timezone);
         TimeZone zone = TimeZone.getDefault();
         format.setTimeZone(zone);
 
@@ -50,67 +50,23 @@ public class TimeUtil {
     public static String getAgoFromSecond(long second) {
         long x = 0;		
         String timestampText;
-        // year 랑 year 의 차이는????????
-        String year = MatjiConstants.string(R.string.year_ago);
-        String years = MatjiConstants.string(R.string.years_ago);
-        String month = MatjiConstants.string(R.string.month_ago);
-        String months = MatjiConstants.string(R.string.months_ago);
-        String week = MatjiConstants.string(R.string.week_ago);
-        String weeks = MatjiConstants.string(R.string.weeks_ago);
-        String day = MatjiConstants.string(R.string.day_ago);
-        String days = MatjiConstants.string(R.string.days_ago);
-        String hour = MatjiConstants.string(R.string.hour_ago);
-        String hours = MatjiConstants.string(R.string.hours_ago);
-        String min = MatjiConstants.string(R.string.min_ago);
-        String sec = MatjiConstants.string(R.string.sec_ago);
-        String about = MatjiConstants.string(R.string.about);
 
         if ((x = second / 31104000) > 0) { // year
-            if (x == 1) {
-                timestampText = x + " " + year; // singular
-            } else {
-                timestampText = about + " " + x + " " + years;	// plural
-            }
-        } else {
-            if ((x = second / 2592000) > 0) { // month
-                if (x == 1) {
-                    timestampText = x+ " " + month; // singular
-                } else {
-                    timestampText = about + " " + x+ " " + months; // plural
-                }
-            } else {
-                if ((x = second / 604800) > 0) { // week
-                    if (x == 1) {
-                        timestampText = x+ " " + week; // singular
-                    } else {
-                        timestampText = about + " " + x+ " " + weeks; // plural
-                    }
-                } else {
-                    if ((x = second / 86400) > 0) { // day
-                        if (x == 1) {
-                            timestampText = x+ " " + day; // singular
-                        } else {
-                            timestampText = about + " " + x+ " " + days; // plural
-                        }
-                    } else {
-                        if ((x = second / 3600) > 0) { // hour
-                            if (x == 1) {
-                                timestampText = x+ " " + hour; // singular
-                            } else {
-                                timestampText = about + " " + x+ " " + hours; // plural
-                            }
-                        } else {
-                            if ((x = second / 60) > 0) { // min
-                                timestampText = x+ " " + min;
-                            } else { // sec
-                                timestampText = second+ " " + sec;
-                            }
-                        }
-                    }
-                }
-            }
+            timestampText = MatjiConstants.plurals(R.plurals.years_ago, (int) x);
+        } else if ((x = second / 2592000) > 0) { // month
+            timestampText = MatjiConstants.plurals(R.plurals.months_ago, (int) x);
+        } else if ((x = second / 604800) > 0) { // week
+            timestampText = MatjiConstants.plurals(R.plurals.weeks_ago, (int) x);
+        } else if ((x = second / 86400) > 0) { // day
+            timestampText = MatjiConstants.plurals(R.plurals.days_ago, (int) x);
+        } else if ((x = second / 3600) > 0) { // hour
+            timestampText = MatjiConstants.plurals(R.plurals.hours_ago, (int) x);
+        } else if ((x = second / 60) > 0) { // min
+            timestampText = String.format(MatjiConstants.string(R.string.min_ago), x);
+        } else { // sec
+            timestampText = String.format(MatjiConstants.string(R.string.sec_ago), x);
         }
-
+        
         return timestampText;
     }
 
@@ -130,7 +86,7 @@ public class TimeUtil {
 
         return cal.getTime();
     }
-    
+
     public static String parseString(String form, Date date) {
         return (String) android.text.format.DateFormat.format(form, date);
     }

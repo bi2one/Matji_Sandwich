@@ -1,13 +1,12 @@
 package com.matji.sandwich.util;
 
-import java.util.Locale;
 import java.lang.ref.WeakReference;
-
-import com.matji.sandwich.R;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+
+import com.matji.sandwich.R;
 
 /**
  * string, dimen 등에서 정의된 상수를 가져올 때 사용하는 클래스.
@@ -27,7 +26,7 @@ public class MatjiConstants {
     public static final int MAX_FOOD_NAME_LENGTH = 12;
 
     public static void setContext(Context context) {
-        mResourcesRef = new WeakReference(context.getResources());
+        mResourcesRef = new WeakReference<Resources>(context.getResources());
     }
 
     public static final String[] stringArray(int id) {

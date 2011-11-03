@@ -129,8 +129,6 @@
   <string name="default_string_info">정보</string>
   <string name="default_string_popular_food">인기메뉴</string>
   <string name="default_string_notice">공지사항</string>
-  <string name="default_string_reg_user">발굴자</string>
-  <string name="default_string_owner_user">주인장</string>
   <string name="default_string_url">관련 URL</string>
   <string name="default_string_memo">이야기</string>
   <string name="default_string_menu">메뉴</string>
@@ -143,14 +141,7 @@
   <string name="default_string_alarm">알림</string>
   <string name="default_string_notification">알림</string>
   <string name="default_string_search">검색</string>
-  <string name="default_string_write_note">영업시간, 예약 여부 등 이 맛집의 상세 정보를 등록해주세요.</string>
-  <string name="default_string_recent_post">등록된 이야기가 없습니다.</string>
-  <string name="default_string_bookmark">Bookmark</string>
-  <string name="default_string_ranking">Ranking</string>
   <string name="default_string_post">이야기</string>
-  <string name="default_string_store_register">Register</string>
-  <string name="default_string_current_position">GPS</string>
-  <string name="default_string_near_store">Store</string>
   <string name="default_string_settings">설정</string>
   <string name="default_string_address">주소</string>
   <string name="default_string_change">변경</string>
@@ -174,6 +165,7 @@
   <string name="default_string_reload">새로고침</string>
   <string name="default_string_terms">약관</string>
   <string name="default_string_agree">동의</string>
+  <string name="at">in</string>
   
   <!-- Not Exist -->  
   <string name="not_exist_intro">소개문을 입력해주세요.</string>
@@ -213,7 +205,7 @@
   <string name="cell_user_follow">Follow</string>
   <string name="cell_user_unfollow">Unfollow</string>
   <string name="cell_store_not_exist_tel"> </string>
-  <string name="cell_store_not_exist_addr">주소 미등록</string>
+  <string name="cell_store_not_exist_addr"> </string>
   <string name="cell_store_not_exist_tag"> </string>
   <string name="cell_store_not_exist_menu"> </string>
   <string name="cell_user_edit_nickname">닉네임 변경</string>
@@ -229,8 +221,6 @@
   <string name="main_tab_check_finish">야미스토리를 종료하시겠습니까?</string>
 
   <!-- StoreDetailInfoTabActivity  -->
-  <string name="store_detail_info_default">맛집 기본 정보</string>
-  <string name="store_detail_info_note">맛집 노트</string>
   <string name="request">맛집 정보 수정 및 폐업 요청</string>
   <string name="request_check">정말로 폐업되었나요? 페업신고 처리는 관리자 확인 후 반영됩니다.</string>
   <string name="registered_menu">메뉴</string>
@@ -239,11 +229,7 @@
   
   <!-- GetMapPositionActivity -->
   <string name="get_map_position_title">지역 변경</string>
-
-  <!-- StoreRegisterListActivity -->
-  <string name="register_store_list_is_not_exist">맛집이 목록에 없다면?</string>
-  <string name="register_store_list_register_new_store">새 맛집 등록</string>
-
+  
   <!-- StoreRegisterActivity -->
   <string name="store_register_add_address">상세주소</string>
   <string name="store_register_name">맛집이름</string>
@@ -253,13 +239,7 @@
   <string name="store_register_ok">맛집 정보 등록에 성공하였습니다</string>
 
   <!-- MainMapActivity -->
-  <string name="main_map_search_map">Search Map</string>
   <string name="main_map_find_center">현재 위치를 찾는 중입니다...</string>
-
-  <!-- BookmarkListActivity -->
-  <string name="bookmark_list_register">이곳을 북마크하기</string>
-  <string name="bookmark_list_register_hint">북마크 이름을 입력하세요.</string>
-  <string name="bookmark_list_register_alert">북마크 이름은 빈칸이 올 수 없습니다.</string>
 
   <!-- PostTabActivity -->
   <string name="post_tab_friend">친구</string>
@@ -270,26 +250,34 @@
   <!-- section list view test -->
   <string name="standard_list">standard_list</string>
   <string name="empty_list">empty_list</string>
-  <string name="at">in</string>
   
   <!-- map_title_bar.xml -->
-  <string name="change_location">지역 변경</string>
-  
+  <string name="change_location">지역 변경</string>  
   
   <!-- TimeUtil -->
-  <string name="about">약</string>
-  <string name="year_ago">년 전</string>
-  <string name="years_ago">년 전</string>
-  <string name="month_ago">달 전</string>
-  <string name="months_ago">달 전</string>
-  <string name="week_ago">주 전</string>
-  <string name="weeks_ago">주 전</string>
-  <string name="day_ago">일 전</string>
-  <string name="days_ago">일 전</string>
-  <string name="hour_ago">시간 전</string>
-  <string name="hours_ago">시간 전</string>
-  <string name="min_ago">분 전</string>
-  <string name="sec_ago">초 전</string>
+  <plurals name="years_ago">
+    <item quantity="one">1년 전</item>
+    <item quantity="other">%d년 전</item>
+  </plurals>
+  <plurals name="months_ago">
+    <item quantity="one">1달 전</item>
+    <item quantity="other">%d달 전</item>
+  </plurals>
+  <plurals name="weeks_ago">
+    <item quantity="one">1주 전</item>
+    <item quantity="other">%d주 전</item>
+  </plurals>
+  <plurals name="days_ago">
+    <item quantity="one">1일 전</item>
+    <item quantity="other">%d일 전</item>
+  </plurals>
+  
+  <plurals name="hours_ago">
+    <item quantity="one">1시간 전</item>
+    <item quantity="other">%d시간 전</item>
+  </plurals>
+  <string name="min_ago">%d분 전</string>
+  <string name="sec_ago">%d초 전</string>
 
   <!-- MapStoreSectionedAdapter.java -->
   <string name="map_store_sectioned_adapter_bookmarked_store">관심맛집</string>
@@ -317,7 +305,7 @@
   <string name="hint_write_comment">댓글 입력</string>
   <string name="hint_write_usermail">이메일 입력</string>
   <string name="hint_write_password">비밀번호 입력</string>
-  <string name="hint_write_nick">닉네임 입력 (최소 2자 ~ 최대 12자)</string>
+  <string name="hint_write_nick">닉네임 입력 (최대 12자)</string>
   <string name="hint_write_intro">소개글 입력</string>
   <string name="hint_write_website">블로그/웹사이트 주소 입력</string>
   <string name="hint_write_store_food">메뉴 입력</string>
@@ -530,10 +518,7 @@
   <string name="settings_account_unlink_twitter_ask">정말로 트위터 연동을 \n해제하시겠습니까?</string>
   <string name="settings_account_unlink_facebook_ask">정말로 페이스북 연동을 \n해제하시겠습니까?</string>
   <string name="settings_account_edit_profile">정보 변경</string>
-  <string name="settings_account_find_friends">친구 찾기</string>
   <string name="settings_location_setting">위치 설정</string>
-  <string name="settings_location_information_available">위치정보 사용</string>
-  <string name="settings_location_country">사는 나라</string>
   <string name="settings_alarm_setting">알림 설정</string>
   <string name="settings_alarm_new_post">새글 알림</string>
   <string name="settings_alarm_new_comment">댓글 알림</string>

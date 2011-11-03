@@ -10,5 +10,6 @@
 		android:id="@+id/terms_content"
 		style="@style/DefaultFill"
 		android:text="@string/terms"
+		android:textColor="@color/matji_black"
 		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

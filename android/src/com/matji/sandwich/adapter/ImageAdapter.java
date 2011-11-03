@@ -32,7 +32,7 @@ public class ImageAdapter extends MBaseAdapter {
     public ImageAdapter(Context context) {
         super(context);
         this.context = context;
-        imageLoader = new ImageLoader(context, R.drawable.box_restaurant);
+        imageLoader = new ImageLoader(context, R.drawable.img_restaurant);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -51,7 +51,6 @@ public class ImageAdapter extends MBaseAdapter {
                 imageElement.image[i] = new ImageView(context);
                 imageElement.image[i].setScaleType(ScaleType.CENTER_CROP);
                 imageElement.image[i].setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-                imageElement.image[i].setBackgroundColor(MatjiConstants.color(R.color.row_image_bg));
                 imageElement.imageWrapper[i] = (ViewGroup) convertView.findViewById(imageWrapperIds[i]);
                 imageElement.imageWrapper[i].addView(imageElement.image[i]);
             }
