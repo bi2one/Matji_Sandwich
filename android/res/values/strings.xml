@@ -682,11 +682,11 @@
   
   <!-- ServiceGuideActivity.java -->
   <string name="service_guide_domain_url">http://yummystory.com/manuals</string>
-  <string name="service_guide_find_store_url">/find_store</string>
-  <string name="service_guide_write_story_url">/write_story</string>
-  <string name="service_guide_manage_store_url">/manage_store</string>
-  <string name="service_guide_menu_n_tag_url">/menu_n_tag</string>
-  <string name="service_guide_sns_function_url">/sns_function</string>
+  <string name="service_guide_find_store_url">/find_store?target=ANDROID</string>
+  <string name="service_guide_write_story_url">/write_story?target=ANDROID</string>
+  <string name="service_guide_manage_store_url">/manage_store?target=ANDROID</string>
+  <string name="service_guide_menu_n_tag_url">/menu_n_tag?target=ANDROID</string>
+  <string name="service_guide_sns_function_url">/sns_function?target=ANDROID</string>
   
   <!-- dialog_loading_popup.xml -->
   <string name="branding_title">\'맛있는 지도\' 서비스명 변경 안내</string>
