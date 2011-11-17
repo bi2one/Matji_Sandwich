@@ -130,7 +130,7 @@ public class StoreModifyMatjiMapView extends RelativeLayout implements MatjiMapV
     }
 
     public void moveToGpsCenter() {
-        gpsManager.start(GPS_START_TAG);
+        gpsManager.start(GPS_START_TAG, activityRef.get());
     }
 
     public void init(Activity activity) {

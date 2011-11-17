@@ -24,15 +24,13 @@
 				android:layout_marginLeft="@dimen/default_distance_half"
 				android:textSize="@dimen/row_post_text_size"
 				android:textColor="@color/matji_chocolate"
-				android:layout_toRightOf="@id/row_comment_nick"
-				android:layout_toLeftOf="@+id/row_comment_delete_spinner" />
+				android:layout_toRightOf="@id/row_comment_nick" />
 			<RelativeLayout
-				android:id="@id/row_comment_delete_spinner"
+				android:id="@+id/row_comment_delete_spinner"
 				style="@style/DefaultWrap"
-				android:layout_marginRight="@dimen/default_distance_half"
-				android:layout_toLeftOf="@+id/row_comment_delete_btn" />
+				android:layout_marginRight="@dimen/default_distance_half" />
 			<ImageButton
-				android:id="@id/row_comment_delete_btn"
+				android:id="@+id/row_comment_delete_btn"
 				style="@style/DefaultWrap"
 				android:layout_alignParentRight="true"
                 android:layout_alignTop="@id/row_comment_created_at"

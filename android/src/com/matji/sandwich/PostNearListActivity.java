@@ -144,7 +144,7 @@ ActivityStartable {
     }
 
     public void onCurrentPositionClicked(View v) {
-        gpsManager.start(GPS_START_TAG);
+        gpsManager.start(GPS_START_TAG, getParent());
     }
 
     public void onChangeLocationClicked(View v) {

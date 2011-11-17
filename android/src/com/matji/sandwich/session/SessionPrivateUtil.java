@@ -1,7 +1,5 @@
 package com.matji.sandwich.session;
 
-import android.util.Log;
-
 import com.matji.sandwich.data.provider.ConcretePreferenceProvider;
 
 public class SessionPrivateUtil {
@@ -73,4 +71,5 @@ public class SessionPrivateUtil {
     public boolean isCheckedPopupNotShown(String tag) {
         return mConcretePrefs.getBoolean(tag, BASIC_IS_CHECKED);
     }
+    
 }

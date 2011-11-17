@@ -7,17 +7,19 @@ import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.SimpleUserAdapter;
+import com.matji.sandwich.data.User;
 import com.matji.sandwich.http.request.FollowingHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.MatjiConstants;
 
-public class ReceivedUserListView extends RequestableMListView {
+public class ReceivedUserListView extends SimpleUserListView {
 	private HttpRequest request;
+	private User user;
 	
 	public ReceivedUserListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new SimpleUserAdapter(context), 15);
-		
+		super(context, attrs);
+	    user = Session.getInstance(context).getCurrentUser();
 		init();
 	}
 
@@ -41,7 +43,7 @@ public class ReceivedUserListView extends RequestableMListView {
 			request = new FollowingHttpRequest(getContext());
 		}
 		
-		((FollowingHttpRequest) request).actionFollowingList(Session.getInstance(getContext()).getCurrentUser().getId(), getPage(), getLimit());
+		((FollowingHttpRequest) request).actionFollowingList(user.getId(), getPage(), getLimit());
 		
 		return request;
 	}

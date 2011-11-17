@@ -38,7 +38,7 @@ public class MatjiConstants {
     }
 
     public static final String plurals(int id, int quantity) {
-        return mResourcesRef.get().getQuantityString(id, quantity);
+        return mResourcesRef.get().getQuantityString(id, quantity, quantity);
     }
 
     public static final float dimen(int id) {

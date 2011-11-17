@@ -3,6 +3,7 @@ package com.matji.sandwich.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -114,17 +115,17 @@ public class CommentAdapter extends MBaseAdapter implements Requestable {
 		holder.nick.setTag(position+"");
 	}
 
-	private void setViewData(CommentElement holder, int position) {
+	private void setViewData(final CommentElement holder, int position) {
 		Comment comment = (Comment) data.get(position);
 		User user = comment.getUser();
 		holder.profile.setUserId(user.getId());
 		holder.nick.setText(user.getNick());
 		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(comment.getAgo()));
 		holder.comment.setText(comment.getComment());
-        if (session.isLogin() && session.isCurrentUser(comment.getUser())) {
-            holder.delete.setVisibility(View.VISIBLE);
+		if (session.isLogin() && session.isCurrentUser(comment.getUser())) {
+			holder.delete.setVisibility(View.VISIBLE);
         } else {
-            holder.delete.setVisibility(View.GONE);
+        	holder.delete.setVisibility(View.GONE);
         }
 	}
 	

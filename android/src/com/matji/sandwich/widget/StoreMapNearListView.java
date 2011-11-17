@@ -89,7 +89,7 @@ Requestable {
         this.limit = limit;
     }
     public void moveToGpsCenter() {
-        gpsManager.start(GPS_START_TAG);
+        gpsManager.start(GPS_START_TAG, null);
     }
 
     public void onLocationChanged(int startedFromTag, Location location) {

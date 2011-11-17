@@ -94,8 +94,8 @@ public class StoreInfoCell extends Cell {
             ((TextView) findViewById(R.id.cell_store_tag)).setText(MatjiConstants.string(R.string.cell_store_not_exist_tag));
         } else {
             String tags = simpleTags.get(0).getTag();
-            for (SimpleTag tag : simpleTags) 
-                tags += ", " + tag.getTag();
+            for (int i = 1 ; i < simpleTags.size() ; i++) 
+                tags += ", " + simpleTags.get(i).getTag();
             
             ((TextView) findViewById(R.id.cell_store_tag)).setText(tags);
         }

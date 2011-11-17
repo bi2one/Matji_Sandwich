@@ -3,14 +3,19 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TabHost.OnTabChangeListener;
 
 import com.matji.sandwich.base.BaseTabActivity;
+import com.matji.sandwich.data.provider.PreferenceProvider;
+import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.Session.LoginListener;
 import com.matji.sandwich.session.Session.LogoutListener;
+import com.matji.sandwich.session.SessionPrivateUtil;
 import com.matji.sandwich.session.SessionTabHostUtil;
 import com.matji.sandwich.util.KeyboardUtil;
 import com.matji.sandwich.widget.MainTabHost;
@@ -53,6 +58,8 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
     private PrivateTitle privateTitle;
     private SettingTitle settingTitle;    
 
+    private LocationManager locationManager;
+    
     public int setMainViewId() {
         return R.id.main_tab_wrapper;
     }
@@ -77,10 +84,15 @@ public class MainTabActivity extends BaseTabActivity implements OnTabChangeListe
             @Override
             public void onCancelClick(SimpleDialog dialog) {}
         });
+       
         session = Session.getInstance(this);
         session.addLoginListener(this);
         sessionUtil = new SessionTabHostUtil(this);
-
+        
+//    	locationManager = (LocationManager)this.getSystemService(LOCATION_SERVICE);
+//        if (!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+        
+        
         mainTabWrapper = (LinearLayout)findViewById(R.id.activity_main_tab_title_wrapper);
         mainTabWrapper.addView(new MainTitle(this), 0);
 

@@ -66,12 +66,12 @@ public class RankingTabActivity extends BaseTabActivity {
                     new Intent(this, RankingNearListActivity.class));
         }
 
-        tabHost.addCenterTab("tab3",
+        tabHost.addRightTab("tab3",
                 R.string.ranking_tab_country,
                 new Intent(this, RankingAllListActivity.class));
-        tabHost.addRightTab("tab4",
-                R.string.ranking_tab_all,
-                new Intent(this, RankingAllListActivity.class));
+//        tabHost.addRightTab("tab4",
+//                R.string.ranking_tab_all,
+//                new Intent(this, RankingAllListActivity.class));
 
         if (!session.isLogin() && lastTab > getTabWidget().getTabCount()-1) {
             lastTab = getTabWidget().getTabCount()-1;

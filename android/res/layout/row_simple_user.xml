@@ -3,6 +3,9 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/row_simple_user_wrapper"
 	style="@style/row_simple_user">
+	<RelativeLayout
+		android:id="@+id/row_simple_user"
+		style="@style/DefaultFill">
 	<!-- ranking position -->
 	<com.matji.sandwich.widget.PalatinoiFontTextView
 		android:id="@+id/row_simple_user_rank"
@@ -50,4 +53,5 @@
 		android:drawablePadding="@dimen/default_drawable_padding"
 		android:layout_alignParentRight="true"
 		android:layout_centerVertical="true" />
+	</RelativeLayout>
 </RelativeLayout>

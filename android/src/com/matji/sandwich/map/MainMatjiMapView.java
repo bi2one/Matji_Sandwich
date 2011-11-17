@@ -115,7 +115,7 @@ OnTouchListener {
 
     public void moveToGpsCenter() {
         stopMapCenterThread();
-        gpsManager.start(GPS_START_TAG);
+        gpsManager.start(GPS_START_TAG, activityRef.get());
         
         Toast.makeText(getContext(), R.string.main_map_find_center, Toast.LENGTH_LONG).show();
     }

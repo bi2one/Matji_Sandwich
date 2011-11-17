@@ -5,7 +5,6 @@
 	style="@style/DefaultFill"
 	android:orientation="vertical"
 	android:background="@drawable/bg_01">
-
 	<com.matji.sandwich.widget.title.CompletableTitle
 		android:layout_alignParentTop="true"
 		android:id="@+id/activity_external_service_title"

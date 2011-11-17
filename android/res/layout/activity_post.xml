@@ -15,7 +15,7 @@
 		<com.matji.sandwich.widget.CommentListView
 			android:id="@+id/comment_list"
 			style="@style/DefaultFill"
-        android:background="@color/comment_list_view_bg"
+			android:background="@color/comment_list_view_bg"
 			android:layout_below="@id/Titlebar"
 			android:layout_above="@+id/comment_input_bar" />
 		<com.matji.sandwich.widget.CommentInputBar

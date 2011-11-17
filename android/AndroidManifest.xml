@@ -1,7 +1,7 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.matji.sandwich"
-	android:versionCode="1"
+	android:versionCode="2"
 	android:versionName="@string/settings_service_version_name">
 	<application
 		android:label="@string/app_name"

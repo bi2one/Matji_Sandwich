@@ -67,7 +67,7 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
 	locationBar.setOnClickListener(this);
 	setMapCenterListener(this);
 
-	gpsManager.start(GPS_START_TAG);
+	gpsManager.start(GPS_START_TAG, null);
     }
 
     public void init(Activity activity) {
@@ -156,7 +156,7 @@ public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewIn
     }
 
     public void onLocationClick() {
-	gpsManager.start(GPS_START_TAG);
+	gpsManager.start(GPS_START_TAG, null);
     }
 
     private class GeocodeRunnable implements Runnable {

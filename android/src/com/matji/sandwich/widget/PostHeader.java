@@ -151,7 +151,6 @@ public class PostHeader extends ViewContainer {
 
 	private void setViewData() {
 		setPreviews(holder, post);
-
 		Store store = post.getStore();
 		User user = post.getUser();
 

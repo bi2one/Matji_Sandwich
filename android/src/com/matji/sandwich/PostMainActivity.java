@@ -47,7 +47,8 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
     private Toast toast;
 
     private static final int COMMENT_WRITE_REQUEST = 10;
-
+	private static final int COMMENT_DELETE_REQUEST = 11;
+    
     public static final String SHOW_KEYBOARD = "PostMainActivity.show_keyboard"; 
     public static final String POSTS = "PostMainActivity.posts";
     public static final String POSITION = "PostMainActivity.position";
@@ -173,9 +174,12 @@ public class PostMainActivity extends BaseActivity implements Requestable, Pagea
                 currentPost.setCommentCount(currentPost.getCommentCount()+1);
                 commentListView.setPost(currentPost);
                 commentListView.dataRefresh();
+                commentListView.setSelection(currentPost.getCommentCount()-1);
             } else {
-                Log.d("Matji", "not exist data ...");
+            	Log.d("Matji", "not exist data ...");
             }
+        case COMMENT_DELETE_REQUEST:
+        	currentPost.setCommentCount(currentPost.getCommentCount()-1);
         }
     }
 

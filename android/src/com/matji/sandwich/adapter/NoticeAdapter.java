@@ -83,8 +83,7 @@ public class NoticeAdapter extends MBaseAdapter {
         }
 
         noticeElement.subject.setText(notice.getSubject());
-        noticeElement.
-        createdAt.setText(createdAt);
+        noticeElement.createdAt.setText(createdAt);
         noticeElement.notice.setText(notice.getContent());
         if (hasFolded(position)) {
             fold(noticeElement);

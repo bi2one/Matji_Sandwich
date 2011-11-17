@@ -10,7 +10,9 @@
   <!-- release 0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg -->
 
   <!-- release!!!! -->
-  <string name="map_api_key">0pX3qXUw7p4qWb5gpJODRX-M1P6XWkmmJ6BNjQg</string>
+  <string name="map_api_key">02uzvUOqz9sA2y2wopzuFC5NVSeLz2qy0CYRTnA</string>
+  <!-- release!!!! (for KT)-->
+  <!-- <string name="map_api_key">0yJrdJ35OSlcwuol23Zrp4zkUpMWv0ItC-LuCEg</string> -->
   <!-- development!!!! -->
   <!-- <string name="map_api_key">02uzvUOqz9sC59IFS76TqggEbRMGLaSZCQ4lCpg</string> -->
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
@@ -113,8 +115,8 @@
   <string name="pull_to_refresh_tap_label">눌러서 새로고침</string>
 
   <!-- default String... -->
-  <string name="default_string_market_address">market://search?q=맛있는지도</string>
-  <string name="default_string_matji_email">matji@yummystory.com</string>
+  <string name="default_string_market_address">market://search?q=야미스토리</string>
+  <string name="default_string_matji_email">support@yummystory.com</string>
   <string name="default_string_guest">비회원</string>
   <string name="default_string_nickname">닉네임</string>
   <string name="default_string_website">웹사이트</string>
@@ -240,7 +242,8 @@
 
   <!-- MainMapActivity -->
   <string name="main_map_find_center">현재 위치를 찾는 중입니다...</string>
-
+  <string name="location_info_agreement">현재 위치 정보를 사용하는데 동의하시겠습니까?</string>
+	
   <!-- PostTabActivity -->
   <string name="post_tab_friend">친구</string>
   <string name="post_tab_near">주변</string>
@@ -276,8 +279,8 @@
     <item quantity="one">1시간 전</item>
     <item quantity="other">%d시간 전</item>
   </plurals>
-  <string name="min_ago">%d분 전</string>
-  <string name="sec_ago">%d초 전</string>
+  <string name="min_ago">%1$d분 전</string>
+  <string name="sec_ago">%1$d초 전</string>
 
   <!-- MapStoreSectionedAdapter.java -->
   <string name="map_store_sectioned_adapter_bookmarked_store">관심맛집</string>
@@ -338,6 +341,7 @@
   <!-- row_alarm.xml -->
   <string name="row_alarm_like_post">%1$s님이 ##내 이야기를 추천했습니다.##</string>
   <string name="row_alarm_reply">%1$s님이 ##내 이야기에 댓글을 달았습니다.##</string>
+  <string name="row_alarm_replyreply">%1$s님이 ##내가 댓글 단 글에 댓글을 달았습니다.##</string>
   <string name="row_alarm_follow">%1$s님이 ##나를 Follow 합니다.##</string>
   <string name="row_alarm_message">%1$s님으로부터 ##쪽지가 도착했습니다.##</string>
 
@@ -529,7 +533,7 @@
   <string name="settings_service_notice">공지사항</string>
   <string name="settings_service_guide">서비스 안내</string>
   <string name="settings_service_report">버그신고 및 기능제안</string>
-  <string name="settings_service_version_name">1.5</string>
+  <string name="settings_service_version_name">1.1.1</string>
   <string name="settings_service_version_update">새버젼 받기</string>
   <string name="settings_service_report_title">버그 및 기능 개선 [%1$s]</string>
   <string name="settings_service_report_title_guest">버그 및 기능 개선</string>
@@ -592,7 +596,7 @@
   <string name="register_complete">가입완료</string>
 
   <!-- activity_terms.xml -->
-  <string name="terms">약관내용.</string>
+  <string name="terms_url">https://yummystory.com/manuals/term</string>
     
   <!-- StoreLocationMapActivity.java -->
   <string name="store_location_header">\'%1$s\'의 지도</string>

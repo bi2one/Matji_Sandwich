@@ -19,7 +19,7 @@ public class AttachFileHttpRequest extends HttpRequest {
     public void actionProfileUpload(File imageFile) {
         parser = new AttachFileParser();
         httpMethod = HttpMethod.HTTP_POST;
-        action = "profile_upload";
+        action = "profile_upload.json";
         
         postHashtable.clear();
         postHashtable.put("upload_file", imageFile);

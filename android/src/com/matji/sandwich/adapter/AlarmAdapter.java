@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.matji.sandwich.MessageListTabActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Alarm;
 import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.GotoPostMainAction;
 import com.matji.sandwich.listener.GotoUserMainAction;
@@ -29,7 +31,8 @@ public class AlarmAdapter extends MBaseAdapter {
         Following,
         Message,
         LikePost,
-        Comment,        
+        Comment,     
+        CommentByComment
     }
 
     private Toast toast;
@@ -64,7 +67,7 @@ public class AlarmAdapter extends MBaseAdapter {
         User sentUser = alarm.getSentUser();
         String type = alarm.getAlarmType();
         Post post = alarm.getPost();
-
+         
         switch (AlarmType.valueOf(type)) {
         case Following:
             alarmElement.noticon.setImageResource(R.drawable.icon_notic_follow);
@@ -74,6 +77,24 @@ public class AlarmAdapter extends MBaseAdapter {
                             sentUser.getNick()));
             convertView.setOnClickListener(new GotoUserMainAction(context, sentUser));
             break;
+        case CommentByComment:
+            alarmElement.noticon.setImageResource(R.drawable.icon_notic_reply);
+            alarmElement.content.setText(
+                    getContent(
+                            R.string.row_alarm_replyreply, 
+                            sentUser.getNick()));
+            if (post == null) {
+                convertView.setOnClickListener(new OnClickListener() {
+                    
+                    @Override
+                    public void onClick(View v) {
+                        toast.show();                        
+                    }
+                });
+            } else {
+                convertView.setOnClickListener(new GotoPostMainAction(context, post));
+            }
+        	break;
         case Comment:
             alarmElement.noticon.setImageResource(R.drawable.icon_notic_reply);
             alarmElement.content.setText(
@@ -91,7 +112,6 @@ public class AlarmAdapter extends MBaseAdapter {
             } else {
                 convertView.setOnClickListener(new GotoPostMainAction(context, post));
             }
-            
             break;
         case LikePost:
             alarmElement.noticon.setImageResource(R.drawable.icon_notic_love);

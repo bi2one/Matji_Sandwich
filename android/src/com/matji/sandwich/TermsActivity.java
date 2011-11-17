@@ -3,6 +3,8 @@ package com.matji.sandwich;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -10,6 +12,7 @@ import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.UserHttpRequest;
 import com.matji.sandwich.session.Session;
+import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.title.CompletableTitle;
 import com.matji.sandwich.widget.title.CompletableTitle.Completable;
 
@@ -37,6 +40,10 @@ public class TermsActivity extends BaseActivity implements Completable, Requesta
         title.setCompletable(this);
         title.setTitle(R.string.default_string_terms);
         title.setButtonLabel(R.string.default_string_agree);
+        WebView wb = (WebView) findViewById(R.id.terms_content);
+        wb.setWebViewClient(new TermsWebviewClient());
+        wb.loadUrl(MatjiConstants.string(R.string.terms_url));
+        wb.getSettings().setJavaScriptEnabled(true);
     }
 
     @Override
@@ -64,5 +71,13 @@ public class TermsActivity extends BaseActivity implements Completable, Requesta
     @Override
     public void requestExceptionCallBack(int tag, MatjiException e) {
         e.performExceptionHandling(this);
-    }        
+    }
+
+    class TermsWebviewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }   
+    }
 }

@@ -14,8 +14,11 @@ import com.matji.sandwich.adapter.CommentAdapter;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
+import com.matji.sandwich.data.Store;
+import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
+import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.widget.PostHeader.PostDeleteListener;
@@ -23,7 +26,8 @@ import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 
 public class CommentListView extends RequestableMListView {
-    private HttpRequest request;
+	private HttpRequest request;
+
     private Session session;
 
     private int curDeletePos;
@@ -54,6 +58,7 @@ public class CommentListView extends RequestableMListView {
 
         header = new PostHeader(getContext());
         addHeaderView(header);
+    
     }
 
     public void setPostDeleteListener(PostDeleteListener listener) {
@@ -77,11 +82,11 @@ public class CommentListView extends RequestableMListView {
 
     public void setPost(Post post) {
         this.post = post;
-        header.setPost(post);
+        header.setPost(postRequest());
     }
 
     public void addComment(Comment comment) {
-        getAdapterData().add(0, comment);
+    	getAdapterData().add(getAdapterData().size(), comment);
         ((CommentAdapter) getMBaseAdapter()).notifyDataSetChanged();
         setSelection(0);
     }
@@ -91,6 +96,21 @@ public class CommentListView extends RequestableMListView {
         return request;
     }
 
+    public Post postRequest() {
+        Post posts = null;
+    	PostHttpRequest postRequest = new PostHttpRequest(getContext());
+        postRequest.actionShow(post.getId());
+        try {
+			ArrayList<MatjiData> data = postRequest.request();
+			if (data != null && data.size() > 0) {
+				posts = (Post) data.get(0);
+			}
+		} catch (MatjiException e) {
+			e.performExceptionHandling(getContext());
+		};
+		return posts;
+    }
+    
     public HttpRequest deleteRequest(int comment_id) {
         ((CommentHttpRequest) request).actionDelete(comment_id);
         return request;
@@ -117,7 +137,6 @@ public class CommentListView extends RequestableMListView {
             getAdapterData().remove(curDeletePos);
             getMBaseAdapter().notifyDataSetChanged();
         }
-
         super.requestCallBack(tag, data);
     }
 }

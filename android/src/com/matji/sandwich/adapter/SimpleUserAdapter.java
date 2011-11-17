@@ -25,34 +25,30 @@ public class SimpleUserAdapter extends MBaseAdapter {
     }
     
     public View getView(int position, View convertView, ViewGroup parent) {
-        UserElement userElement;
-        User user = (User) data.get(position);
+        UserElement userElement = null;
+        User user = (User) this.getItem(position);	
 
         if (convertView == null) {
             userElement = new UserElement();
             convertView = getLayoutInflater().inflate(R.layout.row_simple_user, null);
-            
-            userElement.wrapper = convertView.findViewById(R.id.row_simple_user_wrapper);
+
+            userElement.wrapper = convertView.findViewById(R.id.row_simple_user);
             userElement.profile = (ProfileImageView) convertView.findViewById(R.id.profile);
             userElement.nickname = (TextView) convertView.findViewById(R.id.row_simple_user_nickname);
             userElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_user_like_count);
             userElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_user_post_count);
             userElement.point = (TextView) convertView.findViewById(R.id.row_simple_user_point);
-
             userElement.profile.showInsetBackground();
-
             convertView.setTag(userElement);
         } else {
             userElement = (UserElement) convertView.getTag();
         }
 
-//        userElement.wrapper.setOnClickListener(new GotoUserMainAction(context, user));
         userElement.profile.setUserId(user.getId());
         userElement.nickname.setText(user.getNick());
         userElement.likeCount.setText("" + user.getLikeStoreCount());
         userElement.postCount.setText("" + user.getPostCount());
         userElement.point.setText("" + user.getMileage().getTotalPoint());
-
 
         if (listener == null) {
             userElement.wrapper.setOnClickListener(new GotoUserMainAction(context, user));

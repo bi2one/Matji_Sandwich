@@ -87,7 +87,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 	List<Overlay> overlays = mapView.getOverlays();
 	overlays.add(listenerOverlay);
 	
-	gpsManager.start(GPS_START_TAG);
+	gpsManager.start(GPS_START_TAG, null);
     }
 
     public void onLocationChanged(int startedFromTag, Location location) {
@@ -127,7 +127,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     }
 
     public void moveToGpsCenter() {
-	gpsManager.start(GPS_START_TAG);
+	gpsManager.start(GPS_START_TAG, activityRef.get());
     }
 
     public void init(Activity activity) {

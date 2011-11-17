@@ -17,6 +17,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MyLocationOverlay;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.map.MainMatjiMapView;
@@ -25,6 +26,8 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.StoreMapNearListView;
+import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
+import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleNotificationPopup;
 
 public class MainMapActivity extends BaseMapActivity implements OverlayClickListener,
@@ -97,6 +100,8 @@ GpsManager.StartConfigListener {
                 null);
 
         new SimpleNotificationPopup(this, getClass().toString(), cs).show();
+
+
     }
 
     private class ImageGetter implements Html.ImageGetter {

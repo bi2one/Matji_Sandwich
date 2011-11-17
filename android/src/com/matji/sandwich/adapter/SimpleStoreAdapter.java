@@ -76,11 +76,10 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         storeElement.listener.setStore(store);
         storeElement.setStore(store);
 
-        if (listener == null) {
+        if (listener == null)
             convertView.setOnClickListener(storeElement.listener);
-        } else {
+        else
             convertView.setOnClickListener(listener);
-        }
 
         return convertView;
     }

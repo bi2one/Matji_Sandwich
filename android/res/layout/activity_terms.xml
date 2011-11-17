@@ -6,10 +6,9 @@
 	<com.matji.sandwich.widget.title.CompletableTitle
 		android:id="@+id/Titlebar"
 		style="@style/DefaultWidthFill" />
-	<TextView
+	<WebView
 		android:id="@+id/terms_content"
 		style="@style/DefaultFill"
-		android:text="@string/terms"
-		android:textColor="@color/matji_black"
+		android:scrollbars="none"
 		android:layout_below="@id/Titlebar" />
 </RelativeLayout>

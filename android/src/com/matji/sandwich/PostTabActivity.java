@@ -89,13 +89,13 @@ public class PostTabActivity extends BaseTabActivity {
 
         Intent domesticIntent = new Intent(this, PostListActivity.class);
         domesticIntent.putExtra(PostListActivity.TYPE, PostListActivity.TYPE_DOMESTIC);
-        tabHost.addCenterTab("tab3",
+        tabHost.addRightTab("tab3",
                 R.string.post_tab_country,
                 domesticIntent);
 
-        tabHost.addRightTab("tab4",
-                R.string.post_tab_all,
-                new Intent(this, PostListActivity.class));
+//        tabHost.addRightTab("tab4",
+//                R.string.post_tab_all,
+//                new Intent(this, PostListActivity.class));
 
         if (!session.isLogin() && lastTab > getTabWidget().getTabCount()-1) {
             lastTab = getTabWidget().getTabCount()-1;
