@@ -39,10 +39,10 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
 
         title = (StoreTitle) findViewById(R.id.Titlebar);
         //        store = (Store) getIntent().getParcelableExtra(STORE);
-        storeCell = new StoreCell(this, StoreMainActivity.store);
+        storeCell = new StoreCell(this, StoreDetailInfoTabActivity.store);
 
         title.setIdentifiable(this);
-        title.setStore(StoreMainActivity.store);
+        title.setStore(StoreDetailInfoTabActivity.store);
         title.setLikeable(storeCell);
         title.setTitle(R.string.title_store_url);
 
@@ -52,14 +52,14 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
 
         listView = (UrlListView) findViewById(R.id.store_url_list);
         listView.setUrlType(UrlType.STORE);
-        listView.setId(StoreMainActivity.store.getId());
+        listView.setId(StoreDetailInfoTabActivity.store.getId());
         listView.addHeaderView(storeCell);
         listView.addHeaderView(
                 new SubtitleHeader(
                         this,
                         String.format(
                                 MatjiConstants.string(R.string.subtitle_url),
-                                StoreMainActivity.store.getUrlCount())));
+                                StoreDetailInfoTabActivity.store.getUrlCount())));
         listView.setActivity(this);
         listView.requestReload();
     }
@@ -78,8 +78,8 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
-            StoreMainActivity.store = (Store) data;
-            listView.setId(StoreMainActivity.store.getId());
+            StoreDetailInfoTabActivity.store = (Store) data;
+            listView.setId(StoreDetailInfoTabActivity.store.getId());
             refresh();
         }
     }
@@ -93,8 +93,8 @@ public class StoreUrlListActivity extends BaseActivity implements Refreshable {
         switch (requestCode) {
         case STORE_DETAIL_INFO_TAB_ACTIVITY:
             if (resultCode == Activity.RESULT_OK) {
-                StoreMainActivity.store = (Store) data.getParcelableExtra(StoreMainActivity.STORE);
-                storeCell.setStore(StoreMainActivity.store);
+                StoreDetailInfoTabActivity.store = (Store) data.getParcelableExtra(StoreDetailInfoTabActivity.STORE);
+                storeCell.setStore(StoreDetailInfoTabActivity.store);
                 storeCell.refresh();
                 setIsFlow(true);
             }

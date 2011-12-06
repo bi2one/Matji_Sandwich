@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -345,5 +347,14 @@ SimpleAlertDialog.OnClickListener {
         } else if (dialog == postEmptyDialog) {
             showKeyboardPostDelay();
         }
+    }
+    
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+            // 다시 setOrientation()을 호출한다.
+            WindowManager wm = getWindowManager();
+            if (wm == null) return;
+            setRequestedOrientation(wm.getDefaultDisplay().getOrientation());
     }
 }

@@ -30,15 +30,15 @@ public class StoreFoodListActivity extends BaseActivity implements Refreshable {
         setContentView(R.layout.activity_store_food);
 
         title = (StoreTitle) findViewById(R.id.Titlebar);
-        storeCell = new StoreCell(this, StoreDetailInfoTabActivity.store);
+        storeCell = new StoreCell(this, StoreMainActivity.store);
         storeCell.setClickable(false);
 
         title.setIdentifiable(this);
-        title.setStore(StoreDetailInfoTabActivity.store);
+        title.setStore(StoreMainActivity.store);
         title.setLikeable(storeCell);
         title.setTitle(R.string.title_store_food);
 
-        storeCell.setStore(StoreDetailInfoTabActivity.store);
+        storeCell.setStore(StoreMainActivity.store);
         storeCell.setIdentifiable(this);
         storeCell.addRefreshable(this);
         storeCell.addRefreshable(title);
@@ -47,7 +47,7 @@ public class StoreFoodListActivity extends BaseActivity implements Refreshable {
         listView.setIdentifiable(this);
         listView.addHeaderView(storeCell);
         listView.addHeaderView(new SubtitleHeader(this, R.string.store_food_list_menu).paddingBottom());
-        listView.setStore(StoreDetailInfoTabActivity.store);
+        listView.setStore(StoreMainActivity.store);
         listView.setActivity(this);
     }
 
@@ -71,7 +71,7 @@ public class StoreFoodListActivity extends BaseActivity implements Refreshable {
     @Override
     public void refresh(MatjiData data) {
         if (data instanceof Store) {
-            StoreDetailInfoTabActivity.store = (Store) data;
+            StoreMainActivity.store = (Store) data;
             refresh();
         }
     }

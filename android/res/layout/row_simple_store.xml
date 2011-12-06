@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/row_simple_store">
-  <TextView
-      android:id="@+id/row_simple_store_name"
-      style="@style/row_simple_store_Name"
-      android:layout_alignParentLeft="true"
-      android:layout_toLeftOf="@+id/row_simple_store_bookmark" />
-  <TextView
-      android:id="@+id/row_simple_store_address"
-      style="@style/row_simple_store_Address"
-      android:layout_below="@id/row_simple_store_name"
-      android:layout_toLeftOf="@+id/row_simple_store_bookmark"
-      android:layout_alignParentLeft="true" />
-  <LinearLayout
-      android:id="@+id/row_simple_store_desc"
-      style="@style/row_simple_store_Counts"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentBottom="true"
-      android:layout_below="@id/row_simple_store_address"
-      android:layout_toLeftOf="@+id/row_simple_store_bookmark">
-    <com.matji.sandwich.widget.BoldStyleTextView
-	style="@style/row_simple_store_PostCount"
-	android:id="@+id/row_simple_store_like_count" />
-    <com.matji.sandwich.widget.BoldStyleTextView
-	style="@style/row_simple_store_LikeCount"
-	android:id="@+id/row_simple_store_post_count" />
-  </LinearLayout>
-  <com.matji.sandwich.widget.BookmarkStarToggleView
-      android:id="@+id/row_simple_store_bookmark"
-      style="@style/row_simple_store_Bookmark"
-      android:layout_alignParentRight="true"
-      android:layout_centerVertical="true" />
-
-  <RelativeLayout
-      android:id="@+id/row_simple_store_spinner_wrapper"
-      style="@style/DefaultWrap"
-      android:layout_toLeftOf="@id/row_simple_store_bookmark"
-      android:layout_centerVertical="true" />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/row_simple_store">
+	<TextView
+		android:id="@+id/row_simple_store_name"
+		style="@style/row_simple_store_Name"
+		android:layout_alignParentLeft="true"
+		android:layout_toLeftOf="@+id/row_simple_store_bookmark" />
+	<TextView
+		android:id="@+id/row_simple_store_address"
+		style="@style/row_simple_store_Address"
+		android:layout_below="@id/row_simple_store_name"
+		android:layout_toLeftOf="@+id/row_simple_store_bookmark"
+		android:layout_alignParentLeft="true" />
+	<LinearLayout
+		android:id="@+id/row_simple_store_desc"
+		style="@style/row_simple_store_Counts"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"
+		android:layout_below="@id/row_simple_store_address"
+		android:layout_toLeftOf="@+id/row_simple_store_bookmark">
+		<com.matji.sandwich.widget.BoldStyleTextView
+			android:id="@+id/row_simple_store_like_count" 
+			style="@style/row_simple_store_PostCount"/>
+		<com.matji.sandwich.widget.BoldStyleTextView
+			android:id="@+id/row_simple_store_post_count"			
+			style="@style/row_simple_store_LikeCount" />
+		<TextView
+			android:id="@+id/row_simple_store_foodList"
+			style="@style/row_simple_store_foodList"
+			/>
+	</LinearLayout>
+	<com.matji.sandwich.widget.BookmarkStarToggleView
+		android:id="@+id/row_simple_store_bookmark"
+		style="@style/row_simple_store_Bookmark"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true" />
+	<RelativeLayout
+		android:id="@+id/row_simple_store_spinner_wrapper"
+		style="@style/DefaultWrap"
+		android:layout_toLeftOf="@id/row_simple_store_bookmark"
+		android:layout_centerVertical="true" />
 </RelativeLayout>

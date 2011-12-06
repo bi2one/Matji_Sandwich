@@ -3,7 +3,6 @@ package com.matji.sandwich.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 
 public class CommentAdapter extends MBaseAdapter implements Requestable {
-
     private Session session;
     private SimpleConfirmDialog checkDeleteDialog;
     private HttpRequestManager manager;

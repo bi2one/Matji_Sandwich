@@ -19,8 +19,6 @@ import com.matji.sandwich.widget.PostListView;
  * @author mozziluv
  *
  */
-
-
 public class PostListActivity extends BaseActivity implements ActivityStartable {
     public static final String TYPE = "PostListActivity.type";
     public static final String TYPE_ALL = "PostListActivity.type_all";
@@ -36,7 +34,6 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_list);
 
@@ -80,18 +77,16 @@ public class PostListActivity extends BaseActivity implements ActivityStartable 
             }
             break;
         case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:
-            if (resultCode == Activity.RESULT_OK) {
+            if (resultCode == Activity.RESULT_OK)
                 setIsFlow(true);
-            }
             break;
         }
     }
 
     @Override
     public void setIsFlow(boolean isFlow) {
-        if (getParent() instanceof BaseTabActivity) {
+        if (getParent() instanceof BaseTabActivity)
             ((BaseTabActivity) getParent()).setIsFlow(true);
-        }
         super.setIsFlow(isFlow);
     }
     

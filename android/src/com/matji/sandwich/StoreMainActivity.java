@@ -33,7 +33,7 @@ public class StoreMainActivity extends BaseTabActivity {
 
         Intent storePostListIntent = new Intent(this, StorePostListActivity.class);
         Intent storeImageListIntent = new Intent(this, StoreImageListActivity.class);
-        Intent storeUrlListIntent = new Intent(this, StoreUrlListActivity.class);
+		Intent storeFoodIntent = new Intent(this, StoreFoodListActivity.class);
 
         tabHost.addLeftTab("tab1",
                 R.string.default_string_post,
@@ -42,8 +42,8 @@ public class StoreMainActivity extends BaseTabActivity {
                 R.string.default_string_picture,
                 storeImageListIntent);
         tabHost.addRightTab("tab3",
-                R.string.default_string_webreview_store,
-                storeUrlListIntent);
+                R.string.default_string_menu,
+                storeFoodIntent);
         refresh();
     }
     

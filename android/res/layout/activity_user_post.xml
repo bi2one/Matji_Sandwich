@@ -5,7 +5,7 @@
 	style="@style/DefaultFill">
 	<!-- Main Title -->
 	<com.matji.sandwich.widget.title.UserTitle
-		android:id="@id/Titlebar"
+		android:id="@+id/Titlebar"
 		style="@style/DefaultWrap" />
 	<com.matji.sandwich.widget.UserPostListView
 		style="@style/DefaultFill"

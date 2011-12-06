@@ -165,6 +165,8 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
             }
             break;
         }
-        lastStartedChild.activityResultDelivered(requestCode, resultCode, data);
+        if (data != null) {
+            lastStartedChild.activityResultDelivered(requestCode, resultCode, data);        	
+        }
     }
 }

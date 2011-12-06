@@ -1,7 +1,7 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.matji.sandwich"
-	android:versionCode="2"
+	android:versionCode="3"
 	android:versionName="@string/settings_service_version_name">
 	<application
 		android:label="@string/app_name"
@@ -166,7 +166,7 @@
                   android:screenOrientation="portrait"></activity>
         <activity android:name="TermsActivity"></activity>
 		<activity android:name="WritePostActivity"
-				  android:screenOrientation="portrait"
+				  android:screenOrientation="unspecified"
                   android:windowSoftInputMode="adjustResize"></activity>
 		<activity android:name="WriteStoreActivity"
                   android:screenOrientation="portrait"></activity>

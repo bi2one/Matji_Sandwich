@@ -247,7 +247,7 @@
   <!-- PostTabActivity -->
   <string name="post_tab_friend">친구</string>
   <string name="post_tab_near">주변</string>
-  <string name="post_tab_country">국가</string>
+  <string name="post_tab_country">전국</string>
   <string name="post_tab_all">세계</string>
   
   <!-- section list view test -->
@@ -332,7 +332,7 @@
   <!-- RankingTabActivity.java -->
   <string name="ranking_tab_friend">친구</string>
   <string name="ranking_tab_near">주변</string>
-  <string name="ranking_tab_country">국가</string>
+  <string name="ranking_tab_country">전국</string>
   <string name="ranking_tab_all">세계</string>
 
   <!-- row_simple_user.xml -->
@@ -431,7 +431,7 @@
   <!-- PostListView Subtitle -->
   <string name="subtitle_friend_post">친구들 이야기</string>
   <string name="subtitle_nearby_post">주변 맛집 이야기</string>
-  <string name="subtitle_domestic_post">국가 맛집 이야기</string>
+  <string name="subtitle_domestic_post">전국 맛집 이야기</string>
   <string name="subtitle_all_post">세계 맛집 이야기</string>
   <string name="subtitle_store_post">%1$d개의 맛집 이야기</string>
   <string name="subtitle_user_post">%1$d개의 이야기</string>

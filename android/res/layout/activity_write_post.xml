@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_write_post"
-    android:background="@color/album_view_bg"
-    style="@style/DefaultFill" >
-  <com.matji.sandwich.widget.title.CompletableTitle
-      android:layout_alignParentTop="true"
-      android:id="@+id/activity_write_post_title"
-      style="@style/DefaultWidthFill" />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/activity_write_post"
+	android:background="@color/album_view_bg"
+	style="@style/DefaultFill">
+	<com.matji.sandwich.widget.title.CompletableTitle
+		android:layout_alignParentTop="true"
+		android:id="@+id/activity_write_post_title"
+		style="@style/DefaultWidthFill" />
 
-  <com.matji.sandwich.widget.PostEditText
-      android:id="@+id/activity_write_post_text"
-      android:layout_below="@id/activity_write_post_title"
-      android:layout_above="@+id/activity_write_post_image_keyboard"
-      style="@style/DefaultFill" />
+	<com.matji.sandwich.widget.PostEditText
+		android:id="@+id/activity_write_post_text"
+		android:layout_below="@id/activity_write_post_title"
+		android:layout_above="@+id/activity_write_post_image_keyboard"
+		style="@style/DefaultWidthFill" />
 
-    <RelativeLayout
-	android:id="@id/activity_write_post_image_keyboard"
-	android:layout_alignParentBottom="true"
-	android:visibility="gone"
-	style="@style/DefaultWidthFill">
-      <com.matji.sandwich.widget.GetPictureLayout
-	  android:id="@+id/activity_write_post_image_btns"
-	  android:layout_alignParentTop="true"
-	  style="@style/DefaultWidthFill" />
-      <ScrollView style="@style/DefaultFill"
-		  android:fadingEdgeLength="2dp"
-		  android:layout_below="@id/activity_write_post_image_btns" >
-	<com.matji.sandwich.widget.AlbumView
-	    android:id="@+id/activity_write_post_albumview"
-	    style="@style/DefaultFill" />
-      </ScrollView>
-    </RelativeLayout>
-      
+	<RelativeLayout
+		android:id="@id/activity_write_post_image_keyboard"
+		android:layout_alignParentBottom="true"
+		android:visibility="gone"
+		style="@style/DefaultWidthFill">
+		<com.matji.sandwich.widget.GetPictureLayout
+			android:id="@+id/activity_write_post_image_btns"
+			android:layout_alignParentTop="true"
+			style="@style/DefaultWidthFill" />
+		<ScrollView
+			style="@style/DefaultFill"
+			android:fadingEdgeLength="2dp"
+			android:layout_below="@id/activity_write_post_image_btns">
+			<com.matji.sandwich.widget.AlbumView
+				android:id="@+id/activity_write_post_albumview"
+				style="@style/DefaultFill" />
+		</ScrollView>
+	</RelativeLayout>
 </com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard>

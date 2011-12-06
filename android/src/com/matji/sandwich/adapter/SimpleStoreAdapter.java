@@ -9,7 +9,10 @@ import android.widget.RelativeLayout;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.listener.StoreClickListener;
+import com.matji.sandwich.data.Food;
+import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.Store;
+import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
 
 public class SimpleStoreAdapter extends MBaseAdapter {
@@ -51,6 +54,7 @@ public class SimpleStoreAdapter extends MBaseAdapter {
             storeElement.address = (TextView) convertView.findViewById(R.id.row_simple_store_address);
             storeElement.likeCount = (TextView) convertView.findViewById(R.id.row_simple_store_like_count);
             storeElement.postCount = (TextView) convertView.findViewById(R.id.row_simple_store_post_count);
+            storeElement.foodList = (TextView) convertView.findViewById(R.id.row_simple_store_foodList);
             storeElement.bookmarkToggle = (BookmarkStarToggleView) convertView.findViewById(R.id.row_simple_store_bookmark);
             storeElement.spinnerWrapper = (RelativeLayout) convertView.findViewById(R.id.row_simple_store_spinner_wrapper);
             storeElement.listener = new StoreClickListener(context);
@@ -66,6 +70,19 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         storeElement.address.setText(store.getAddress());
         storeElement.likeCount.setText("" + store.getLikeCount());
         storeElement.postCount.setText("" + store.getPostCount());
+        String foodText = "";
+        String tagText = "";
+        for (Food food : store.getFoods()) {
+        	foodText += food.getName() + ", ";
+        }
+        for (SimpleTag tag : store.getTags()) {
+        	tagText += tag.getTag() + ", ";
+        }
+        String mergeText = foodText + tagText;
+        if (mergeText.length() > 1)
+        	mergeText = mergeText.substring(0, mergeText.length()-2);
+        storeElement.foodList.setText("" + mergeText); 
+        
         if (isVisibleStar) {
             storeElement.bookmarkToggle.init(store, storeElement.spinnerWrapper);
             //        storeElement.bookmarkToggle.init(this, bookmarkedList, store);
@@ -89,10 +106,12 @@ public class SimpleStoreAdapter extends MBaseAdapter {
         TextView address;
         TextView likeCount;
         TextView postCount;
+        TextView foodList;
         RelativeLayout spinnerWrapper;
         BookmarkStarToggleView bookmarkToggle;
         StoreClickListener listener;
         Store store;
+        
 
         public void setStore(Store store) {
             this.store = store;

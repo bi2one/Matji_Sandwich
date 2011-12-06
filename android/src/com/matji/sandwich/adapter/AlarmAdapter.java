@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.matji.sandwich.MessageListTabActivity;
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.Alarm;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.data.User;
 import com.matji.sandwich.listener.GotoPostMainAction;
 import com.matji.sandwich.listener.GotoUserMainAction;
@@ -26,7 +24,6 @@ import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.util.TimeUtil;
 
 public class AlarmAdapter extends MBaseAdapter {
-
     public enum AlarmType {
         Following,
         Message,
@@ -34,7 +31,6 @@ public class AlarmAdapter extends MBaseAdapter {
         Comment,     
         CommentByComment
     }
-
     private Toast toast;
     private Drawable iconNew;
 
@@ -54,7 +50,6 @@ public class AlarmAdapter extends MBaseAdapter {
             convertView = getLayoutInflater().inflate(R.layout.row_alarm, null);
 
             alarmElement.noticon = (ImageView) convertView.findViewById(R.id.row_alarm_notic_icon);
-            //            alarmElement.sentUser = (TextView) convertView.findViewById(R.id.row_alarm_sent_user);
             alarmElement.content = (TextView) convertView.findViewById(R.id.row_alarm_content);
             alarmElement.createdAt = (TextView) convertView.findViewById(R.id.row_alarm_created_at);
 
@@ -181,7 +176,6 @@ public class AlarmAdapter extends MBaseAdapter {
 
     private class AlarmElement {
         ImageView noticon;
-        //        TextView sentUser;
         TextView content;
         TextView createdAt;
     }

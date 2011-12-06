@@ -638,6 +638,13 @@
 	<item name="android:drawablePadding">@dimen/default_drawable_padding</item>
 	<item name="android:layout_marginLeft">@dimen/default_distance</item>
   </style>
+  
+  <style name="row_simple_store_foodList" parent="DefaultWrap">
+  	<item name="android:singleLine">true</item>
+    <item name="android:textSize">@dimen/row_simple_store_text_size</item>
+  	<item name="android:layout_marginLeft">@dimen/default_distance</item>
+    <item name="android:textColor">@color/matji_light_gray</item>
+  </style>
 
   <style name="row_simple_store_Bookmark" parent="DefaultWrap">
   </style>

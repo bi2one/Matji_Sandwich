@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		style="@style/select_store_contents" >
-  <RelativeLayout style="@style/DefaultMinorTitleBar"
-		  android:layout_alignParentTop="true"
-		  android:id="@+id/select_store_contents_title_bar" >
-    <TextView android:id="@+id/select_store_contents_selected"
-	      android:layout_toLeftOf="@+id/select_store_contents_divider1"
-	      android:layout_alignParentLeft="true"
-	      android:layout_centerVertical="true"
-	      android:text="@string/write_post_store_view_select"
-	      style="@style/select_store_contents_selected" />
-    <ImageView
-	android:id="@id/select_store_contents_divider1"
-	android:layout_toLeftOf="@+id/select_store_contents_search"
-	style="@style/DefaultMinorTitleBarDivider" />
-    <ImageButton
-	android:id="@+id/select_store_contents_search"
-	android:layout_toLeftOf="@+id/select_store_contents_divider2"
-	android:onClick="onChangeLocationClick"
-	style="@style/select_store_contents_search" />
-    <ImageView
-	android:id="@id/select_store_contents_divider2"
-	android:layout_toLeftOf="@+id/select_store_contents_add"
-	style="@style/DefaultMinorTitleBarDivider" />
-    <ImageButton
-	android:id="@id/select_store_contents_add"
-	android:layout_alignParentRight="true"
-	android:onClick="onNewStoreClick"
-	style="@style/select_store_contents_add" />
-  </RelativeLayout>
-  
-  <com.matji.sandwich.widget.SelectStoreListView
-      android:id="@+id/select_store_contents_listview"
-      android:layout_below="@id/select_store_contents_title_bar"
-      style="@style/DefaultFill" />
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/select_store_contents">
+	<RelativeLayout
+		style="@style/DefaultMinorTitleBar"
+		android:layout_alignParentTop="true"
+		android:id="@+id/select_store_contents_title_bar">
+		<TextView
+			android:id="@+id/select_store_contents_selected"
+			android:layout_toLeftOf="@+id/select_store_contents_divider1"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+			android:text="@string/write_post_store_view_select"
+			style="@style/select_store_contents_selected" />
+		<ImageView
+			android:id="@+id/select_store_contents_divider1"
+			android:layout_toLeftOf="@+id/select_store_contents_search"
+			style="@style/DefaultMinorTitleBarDivider" />
+		<ImageButton
+			android:id="@+id/select_store_contents_search"
+			android:layout_toLeftOf="@+id/select_store_contents_divider2"
+			android:onClick="onChangeLocationClick"
+			style="@style/select_store_contents_search" />
+		<ImageView
+			android:id="@+id/select_store_contents_divider2"
+			android:layout_toLeftOf="@+id/select_store_contents_add"
+			style="@style/DefaultMinorTitleBarDivider" />
+		<ImageButton
+			android:id="@+id/select_store_contents_add"
+			android:layout_alignParentRight="true"
+			android:onClick="onNewStoreClick"
+			style="@style/select_store_contents_add" />
+	</RelativeLayout>
+
+	<com.matji.sandwich.widget.SelectStoreListView
+		android:id="@+id/select_store_contents_listview"
+		android:layout_below="@id/select_store_contents_title_bar"
+		style="@style/DefaultFill" />
 </RelativeLayout>

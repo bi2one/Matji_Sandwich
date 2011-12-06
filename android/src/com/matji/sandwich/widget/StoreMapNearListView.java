@@ -19,7 +19,6 @@ import com.matji.sandwich.Requestable;
 import com.matji.sandwich.adapter.SimpleStoreAdapter;
 import com.matji.sandwich.data.GeocodeAddress;
 import com.matji.sandwich.data.MatjiData;
-import com.matji.sandwich.data.Store;
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.http.request.GeocodeHttpRequest;

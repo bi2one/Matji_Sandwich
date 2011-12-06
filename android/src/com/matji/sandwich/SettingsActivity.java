@@ -338,7 +338,7 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     }
 
     public void refreshIconNew() {
-        if (session.getPrivateUtil().getNewNoticeCount() > 1) {
+        if (session.getPrivateUtil().getNewNoticeCount() > 0) {
             tvNotice.setCompoundDrawables(null, null, iconNew, null);
         } else {
             tvNotice.setCompoundDrawables(null, null, null, null);

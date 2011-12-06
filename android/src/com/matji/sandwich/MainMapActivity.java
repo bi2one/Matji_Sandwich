@@ -17,7 +17,6 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MyLocationOverlay;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.http.HttpRequestManager;
 import com.matji.sandwich.location.GpsManager;
 import com.matji.sandwich.map.MainMatjiMapView;
@@ -26,12 +25,9 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionMapUtil;
 import com.matji.sandwich.util.MatjiConstants;
 import com.matji.sandwich.widget.StoreMapNearListView;
-import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
-import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleNotificationPopup;
 
-public class MainMapActivity extends BaseMapActivity implements OverlayClickListener,
-GpsManager.StartConfigListener {
+public class MainMapActivity extends BaseMapActivity implements OverlayClickListener,GpsManager.StartConfigListener {
     private static final int REQUEST_CODE_LOCATION = 1;
     private static final int REQUEST_CODE_STORE = 2;
     private static final int BASIC_SEARCH_LOC_LAT = 0;
@@ -65,7 +61,6 @@ GpsManager.StartConfigListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_map);
 
-        // sessionLocationUtil = new SessionRecentLocationUtil(context);
         session = Session.getInstance(this);
         sessionMapUtil = new SessionMapUtil(this);
         addressView = (TextView)findViewById(R.id.map_title_bar_address);
@@ -86,13 +81,11 @@ GpsManager.StartConfigListener {
 
         flipMapViewImage = getResources().getDrawable(R.drawable.icon_location_map_selector);
         flipNearStoreImage = getResources().getDrawable(R.drawable.icon_location_list_selector);
-        // mapView.startMapCenterThread();
         isFirst = true;
         isStartConfig = false;
 
         myLocationOverlay = new MyLocationOverlay(this, mapView);
         mapView.getOverlays().add(myLocationOverlay);
-
 
         CharSequence cs = Html.fromHtml(
                 MatjiConstants.string(R.string.popup_main_map),
@@ -100,8 +93,6 @@ GpsManager.StartConfigListener {
                 null);
 
         new SimpleNotificationPopup(this, getClass().toString(), cs).show();
-
-
     }
 
     private class ImageGetter implements Html.ImageGetter {
@@ -119,10 +110,8 @@ GpsManager.StartConfigListener {
     };
 
     protected void onNotFlowResume() {
-        if (!currentViewIsMap) {
+        if (!currentViewIsMap)
             storeListView.requestReload();
-        }
-
         // sessionMapUtil.setCenter(lastCenter);
         // mapView.setCenterNotAnimate(lastCenter);
         // mapView.requestMapCenterChanged(lastCenter);
@@ -131,11 +120,8 @@ GpsManager.StartConfigListener {
             lastNeBound = null;
             lastSwBound = null;
         }
-
-        if (!isFirst) {
+        if (!isFirst)
             mapView.reload();
-        }
-
         isFirst = false;
     }
 

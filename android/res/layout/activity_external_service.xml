@@ -38,7 +38,7 @@
 					android:drawableLeft="@drawable/icon_twitter"
 					android:drawablePadding="@dimen/default_drawable_padding_long" />
 				<CheckBox
-					android:id="@id/twitter_check"
+					android:id="@+id/twitter_check"
 					style="@style/DefaultWrap"
 					android:background="@drawable/btn_check_label_background"
 					android:button="@drawable/icon_check_selector"
@@ -64,7 +64,7 @@
 					android:drawableLeft="@drawable/icon_facebook"
 					android:drawablePadding="@dimen/default_drawable_padding_long" />
 				<CheckBox
-					android:id="@id/facebook_check"
+					android:id="@+id/facebook_check"
 					style="@style/DefaultWrap"
 					android:background="@drawable/btn_check_label_background"
 					android:button="@drawable/icon_check_selector"

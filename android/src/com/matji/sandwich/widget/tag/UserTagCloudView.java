@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.Requestable;
-import com.matji.sandwich.UserMainActivity;
 import com.matji.sandwich.UserProfileMainTabActivity;
 import com.matji.sandwich.UserTagPostListActivity;
 import com.matji.sandwich.data.MatjiData;
@@ -23,12 +22,9 @@ import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.TagHttpRequest;
 
 public class UserTagCloudView extends TagCloudView implements Requestable, Refreshable {
-    
     private HttpRequest request;
     private HttpRequestManager manager;
-
     private User user;
-
     private ViewGroup spinnerContainer;
     
     /**

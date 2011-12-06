@@ -118,7 +118,7 @@
 					android:layout_marginLeft="@dimen/default_distance" />
 			</LinearLayout>
 			<ImageButton
-				android:id="@id/row_message_menu_btn"
+				android:id="@+id/row_message_menu_btn"
 				style="@style/DefaultWrap"
 				android:src="@drawable/icon_menu"
 				android:background="@null"

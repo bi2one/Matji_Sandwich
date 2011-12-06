@@ -25,7 +25,7 @@
 			android:layout_toLeftOf="@+id/row_store_food_moresign"
 			android:layout_centerVertical="true" />
 		<ImageView
-			android:id="@id/row_store_food_moresign"
+			android:id="@+id/row_store_food_moresign"
 			android:src="@drawable/icon_flow"
 			style="@style/DefaultWrap"
 			android:layout_alignParentRight="true"

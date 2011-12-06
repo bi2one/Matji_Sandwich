@@ -14,7 +14,7 @@ import com.matji.sandwich.adapter.CommentAdapter;
 import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
-import com.matji.sandwich.data.Store;
+
 import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
@@ -27,18 +27,14 @@ import com.matji.sandwich.widget.dialog.SimpleDialog;
 
 public class CommentListView extends RequestableMListView {
 	private HttpRequest request;
-
     private Session session;
-
-    private int curDeletePos;
-
     private Post post;
-
     private PostHeader header;
-
-    private static final int COMMENT_DELETE_REQUEST = 11;
     private SimpleAlertDialog deleteDialog;
 
+    private int curDeletePos;
+    private static final int COMMENT_DELETE_REQUEST = 11;
+    
     public CommentListView(Context context, AttributeSet attrs) {
         super(context, attrs, new CommentAdapter(context), 10);
         init();
@@ -58,7 +54,6 @@ public class CommentListView extends RequestableMListView {
 
         header = new PostHeader(getContext());
         addHeaderView(header);
-    
     }
 
     public void setPostDeleteListener(PostDeleteListener listener) {
@@ -69,7 +64,6 @@ public class CommentListView extends RequestableMListView {
     public void setActivity(Activity activity) {
         deleteDialog = new SimpleAlertDialog(activity, R.string.default_string_check_delete);
         deleteDialog.setOnClickListener(new SimpleAlertDialog.OnClickListener() {
-
             @Override
             public void onConfirmClick(SimpleDialog dialog) {
                 int comment_id= ((Comment) getAdapterData().get(curDeletePos)).getId();
@@ -121,7 +115,6 @@ public class CommentListView extends RequestableMListView {
     public void onDeleteButtonClicked(View v) {
         if (session.isLogin() && !getHttpRequestManager().isRunning()) {
             curDeletePos = Integer.parseInt((String) v.getTag());
-
             deleteDialog.show();
         }
     }

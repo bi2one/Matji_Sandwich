@@ -41,10 +41,7 @@ import com.matji.sandwich.util.GeocodeUtil;
 import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 import com.matji.sandwich.widget.StoreMapNearListView;
 
-public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterListener,
-MatjiLocationListener,
-Requestable,
-OnTouchListener {
+public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterListener, MatjiLocationListener, Requestable, OnTouchListener {
     private static final int LAT_SPAN = (int)(0.005 * 1E6);
     private static final int LNG_SPAN = (int)(0.005 * 1E6);
     private static final int GPS_START_TAG = 1;
