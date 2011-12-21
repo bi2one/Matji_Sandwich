@@ -16,7 +16,7 @@ public class AlarmSetting extends MatjiData implements Serializable {
         COMMENT,
         FOLLOWING,
         LIKEPOST,
-        MESSAGE
+        MESSAGE, 
     }
     
     private int id;

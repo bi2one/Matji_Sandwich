@@ -341,7 +341,7 @@
   <!-- row_alarm.xml -->
   <string name="row_alarm_like_post">%1$s님이 ##내 이야기를 추천했습니다.##</string>
   <string name="row_alarm_reply">%1$s님이 ##내 이야기에 댓글을 달았습니다.##</string>
-  <string name="row_alarm_replyreply">%1$s님이 ##내가 댓글 단 글에 댓글을 달았습니다.##</string>
+  <string name="row_alarm_replyreply">%1$s님이 ##내가 댓글을 단 글에 댓글을 달았습니다.##</string>
   <string name="row_alarm_follow">%1$s님이 ##나를 Follow 합니다.##</string>
   <string name="row_alarm_message">%1$s님으로부터 ##쪽지가 도착했습니다.##</string>
 
