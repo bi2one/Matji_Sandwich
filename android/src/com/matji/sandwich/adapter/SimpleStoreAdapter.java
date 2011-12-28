@@ -12,7 +12,6 @@ import com.matji.sandwich.adapter.listener.StoreClickListener;
 import com.matji.sandwich.data.Food;
 import com.matji.sandwich.data.SimpleTag;
 import com.matji.sandwich.data.Store;
-import com.matji.sandwich.data.Tag;
 import com.matji.sandwich.widget.BookmarkStarToggleView;
 
 public class SimpleStoreAdapter extends MBaseAdapter {
@@ -97,7 +96,6 @@ public class SimpleStoreAdapter extends MBaseAdapter {
             convertView.setOnClickListener(storeElement.listener);
         else
             convertView.setOnClickListener(listener);
-
         return convertView;
     }
 

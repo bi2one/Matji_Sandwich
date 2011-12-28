@@ -49,8 +49,8 @@ public class SearchInputBar extends InputBar {
 			}
 		});
 		transparentView = createTransparentView();
-		showKeyboard();
-		setKeyboardState(true);
+		//showKeyboard();
+		setKeyboardState(false);
 	}
 	
 	@Override
@@ -145,7 +145,7 @@ public class SearchInputBar extends InputBar {
 	 * 키보드를 보여주는 메소드.
 	 * (제대로 동작하지 않아 Handler를 이용)
 	 */
-	private void showKeyboard() {
+	public void showKeyboard() {
 		Handler mHandler = new Handler();
 		mHandler.postDelayed(new Runnable() {
 			public void run() {

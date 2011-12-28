@@ -3,7 +3,11 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_post_search"
 	style="@style/DefaultFill">
-	<com.matji.sandwich.widget.search.PostSearchListView
+    <com.matji.sandwich.widget.search.RecentSearchListView
+        android:id="@+id/RecentSearchListView"
+        style="@style/DefaultWidthFill" />
+   	<com.matji.sandwich.widget.search.PostSearchListView
 		style="@style/DefaultFill"
+		android:layout_below="@id/RecentSearchListView"
 		android:id="@+id/PostSearchListView" />
 </RelativeLayout>

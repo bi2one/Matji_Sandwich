@@ -5,21 +5,18 @@
 	<TextView
 		android:id="@+id/row_simple_store_name"
 		style="@style/row_simple_store_Name"
-		android:layout_alignParentLeft="true"
-		android:layout_toLeftOf="@+id/row_simple_store_bookmark" />
+		android:layout_alignParentLeft="true" />
 	<TextView
 		android:id="@+id/row_simple_store_address"
 		style="@style/row_simple_store_Address"
 		android:layout_below="@id/row_simple_store_name"
-		android:layout_toLeftOf="@+id/row_simple_store_bookmark"
 		android:layout_alignParentLeft="true" />
 	<LinearLayout
 		android:id="@+id/row_simple_store_desc"
 		style="@style/row_simple_store_Counts"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentBottom="true"
-		android:layout_below="@id/row_simple_store_address"
-		android:layout_toLeftOf="@+id/row_simple_store_bookmark">
+		android:layout_below="@id/row_simple_store_address">
 		<com.matji.sandwich.widget.BoldStyleTextView
 			android:id="@+id/row_simple_store_like_count" 
 			style="@style/row_simple_store_PostCount"/>

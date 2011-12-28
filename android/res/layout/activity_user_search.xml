@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_user_search"
-    style="@style/DefaultFill">
-  <com.matji.sandwich.widget.search.UserSearchListView
-      style="@style/DefaultFill"
-      android:id="@+id/UserSearchListView" />
+    style="@style/DefaultFill" >
+    <com.matji.sandwich.widget.search.RecentSearchListView
+        android:id="@+id/RecentSearchListView"
+        style="@style/DefaultWidthFill" />
+    <com.matji.sandwich.widget.search.UserSearchListView
+        android:id="@+id/UserSearchListView"
+        android:layout_below="@id/RecentSearchListView"
+        style="@style/DefaultFill" />
 </RelativeLayout>

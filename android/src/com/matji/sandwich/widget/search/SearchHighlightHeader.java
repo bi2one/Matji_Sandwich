@@ -15,11 +15,11 @@ import com.matji.sandwich.widget.HighlightHeader;
 public class SearchHighlightHeader extends HighlightHeader {
 
     public SearchHighlightHeader(Context context) {
-        super(context, MatjiConstants.string(R.string.highlight_search_result));
+    	super(context, MatjiConstants.string(R.string.highlight_search_result));
         ((TextView) findViewById(R.id.row_highlight_count)).setVisibility(View.VISIBLE);
     }
-
-    public void search(String keyword) {
+    
+	public void search(String keyword) {
         setTitle("'" + keyword + "' " + MatjiConstants.string(R.string.highlight_search_result));
     }
 

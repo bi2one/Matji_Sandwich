@@ -747,6 +747,11 @@
     <item name="android:textColor">@color/matji_gray</item>
   </style>
   
+  <style name="row_simple_recent_search_Item" parent="row_simple_Item">
+    <item name="android:layout_height">@dimen/row_simple_recent_search</item>
+    <item name="android:textSize">@dimen/row_simple_recent_search_name_size</item>
+	<item name="android:gravity">center_vertical</item>
+  </style>
   <style name="row_simple_box_Item" parent="DefaultWrap">
     <item name="android:textSize">@dimen/settings_content_size</item>
     <item name="android:textColor">@color/matji_gray</item>

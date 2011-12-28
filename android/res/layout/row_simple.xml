@@ -4,5 +4,6 @@
 	style="@style/row_simple">
 	<TextView
 		android:id="@+id/row_simple_text"
-		style="@style/row_simple_Item" />
+		style="@style/row_simple_recent_search_Item" 
+		android:layout_alignParentLeft="true"/>
 </RelativeLayout>

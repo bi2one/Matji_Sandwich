@@ -3,7 +3,11 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/activity_store_search"
 	style="@style/DefaultFill">
+	<com.matji.sandwich.widget.search.RecentSearchListView
+		style="@style/DefaultWidthFill"
+		android:id="@+id/RecentSearchListView" />
 	<com.matji.sandwich.widget.search.StoreSearchListView
-		style="@style/DefaultFill"
+		style="@style/DefaultWidthFill"
+		android:layout_below="@id/RecentSearchListView"
 		android:id="@+id/StoreSearchListView" />
 </RelativeLayout>

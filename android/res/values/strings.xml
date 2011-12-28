@@ -346,6 +346,7 @@
   <string name="row_alarm_message">%1$s님으로부터 ##쪽지가 도착했습니다.##</string>
 
   <!-- Highlight Header -->
+  <string name="highlight_recent_search">최근 검색</string>
   <string name="highlight_search_result">검색 결과</string>
   <string name="highlight_store_like_users">\'%1$s\'을(를) 좋아하는 사람들</string>
   <string name="highlight_post_like_users">이 이야기를 좋아하는 사람들</string>

@@ -22,6 +22,7 @@ public class MainSearchInputBar extends SearchInputBar {
 	public MainSearchInputBar(Context context, AttributeSet attr) {
 		super(context, attr);
 		setBackgroundResource(R.drawable.tabbtn_bg);
+		textField.setText("");
 	}
 
 	/**

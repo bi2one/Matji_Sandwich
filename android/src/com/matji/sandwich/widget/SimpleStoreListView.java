@@ -21,7 +21,6 @@ public class SimpleStoreListView extends RequestableMListView {
 
 	public SimpleStoreListView(Context context, AttributeSet attrs) {
         super(context, attrs, new SimpleStoreAdapter(context), 10);
-
         init();
     }
 	
@@ -38,7 +37,6 @@ public class SimpleStoreListView extends RequestableMListView {
 		
 		((SimpleStoreAdapter) getMBaseAdapter()).visibleBookmarkView();
 	}
-	
 	
 
 	public HttpRequest request() {

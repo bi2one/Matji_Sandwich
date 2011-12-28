@@ -159,6 +159,10 @@
 	<dimen name="row_simple_store_height">69.33dp</dimen>
 	<dimen name="row_simple_store_name_size">16dp</dimen>
 	<dimen name="row_simple_store_text_size">12dp</dimen>
+
+	<!-- row_simple_recent_search -->
+	<dimen name="row_simple_recent_search">33.33dp</dimen>
+	<dimen name="row_simple_recent_search_name_size">15dp</dimen>
 	
     <!-- row_simple.xml -->
     <dimen name="row_simple_txt_size">20dp</dimen>

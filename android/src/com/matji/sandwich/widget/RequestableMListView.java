@@ -141,7 +141,7 @@ PullToRefreshListView.OnRefreshListener{
 			setSelection(1);
 			Log.d("refresh", "requestReload()");
 			initValue();
-			manager.request(reloadSpinner, request(), REQUEST_RELOAD, this);
+			manager.request(getContext(), request(), REQUEST_RELOAD, this);
 			nextValue();
 		}
 	}
@@ -191,7 +191,7 @@ PullToRefreshListView.OnRefreshListener{
 				scrollListener.requestSetOff();
 			else
 				scrollListener.requestSetOn();
-
+			
 			adapter.addAll(data);
 			adapter.notifyDataSetChanged();
 

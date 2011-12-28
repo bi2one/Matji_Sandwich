@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.SearchResult;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.UserHttpRequest;
+import com.matji.sandwich.session.SessionRecentSearchUtil;
 import com.matji.sandwich.widget.SimpleUserListView;
 import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 
@@ -17,9 +17,11 @@ public class UserSearchListView extends SimpleUserListView implements Searchable
 	private UserHttpRequest userRequest;
 	private String keyword = "";
     private SearchHighlightHeader indexbar;
+	private SessionRecentSearchUtil sessionUtil;
 	
 	public UserSearchListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		sessionUtil = new SessionRecentSearchUtil(context);
 	}
 	
 	@Override
@@ -37,10 +39,10 @@ public class UserSearchListView extends SimpleUserListView implements Searchable
 
 	
 	public void search(String keyword) {
-		Log.d("refresh", "Search: " + keyword);
 		this.keyword = keyword;
 		requestReload();
         indexbar.search(keyword);
+        sessionUtil.push(keyword);
 	}
     
     @Override

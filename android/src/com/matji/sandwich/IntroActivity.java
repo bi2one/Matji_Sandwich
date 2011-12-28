@@ -25,7 +25,7 @@ import com.matji.sandwich.widget.dialog.PopupDialog.PopupListener;
 
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener, SimpleAsyncTask.ProgressListener, PopupListener {
 	private static final long LOADING_MIN_TIME = 1000;
-	private static final long DIALOG_MIN_TIME = 2000;
+	private static final long DIALOG_MIN_TIME =  1500;
 	private ProgressDialog dialog;
 	private TimeAsyncTask timeAsyncTask;
 	private SimpleAsyncTask simpleAsyncTask;
@@ -159,7 +159,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 			return false;
 		String cv = current_ver.replaceAll("\\.","");
 		String uv = update_ver.replaceAll("\\.","");
-		while (cv.length() != uv.length()){
+		while (cv.length() != uv.length()) {
 			if (cv.length() > uv.length())
 				uv += "0";
 			else
