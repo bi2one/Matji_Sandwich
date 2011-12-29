@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class StoreSearchActivity extends BaseActivity implements Searchable {
-	public static final int STORE = 0;
 	private StoreSearchListView searchView;
 	private RecentSearchListView recentView;
 

@@ -31,7 +31,7 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
 	public static final int STORE = 0;
 	public static final int POST = 1;
 	public static final int USER = 2;
-	public int now;
+	
 	public int setMainViewId() {
 		return R.id.activity_search;
 	}
@@ -49,10 +49,9 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
 		title.setTitle(R.string.default_string_search);
 
 		searchInputBar = (MainSearchInputBar) findViewById(R.id.main_search_input_bar);
-		String i = getIntent().getStringExtra(KEYWORD);
-		if (i != null) {
-			searchInputBar.setText(i);
-			searchInputBar.setKeyboardState(true);
+		String keyword = getIntent().getStringExtra(KEYWORD);
+		if (keyword != null) {
+			searchInputBar.setText(keyword);
 			searchInputBar.showKeyboard();
 		}
 
@@ -62,7 +61,6 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
 			@Override
 			public void onTabChanged(String str) {
 				int index = getTabHost().getCurrentTab();
-				now = index;
 				Searchable searchable = (Searchable)getCurrentActivity();
 
 				if (index == STORE) {
@@ -104,7 +102,6 @@ public class SearchActivity extends BaseTabActivity implements RelativeLayoutTha
 		if (isShowing) {
 			title.setVisibility(View.GONE);
 			tabHost.getTabWidget().setVisibility(View.VISIBLE);
-			//TODO transparent background.
 		} else {
 			title.setVisibility(View.VISIBLE);
 			tabHost.getTabWidget().setVisibility(View.GONE);

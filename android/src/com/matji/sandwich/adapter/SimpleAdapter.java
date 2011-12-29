@@ -1,7 +1,7 @@
 package com.matji.sandwich.adapter;
 
 import com.matji.sandwich.R;
-import com.matji.sandwich.data.SearchToken;
+import com.matji.sandwich.data.RecentSearchToken;
 
 import android.content.Context;
 import android.view.View;
@@ -16,7 +16,7 @@ public class SimpleAdapter extends MBaseAdapter {
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		DefaultElement defaultElement;
-		SearchToken store = (SearchToken) data.get(position); 
+		RecentSearchToken store = (RecentSearchToken) data.get(position); 
 		if (convertView == null) {
 			defaultElement = new DefaultElement();
 			convertView = getLayoutInflater().inflate(R.layout.row_simple, null);

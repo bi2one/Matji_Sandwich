@@ -12,7 +12,7 @@ import android.view.View;
 import com.matji.sandwich.R;
 import com.matji.sandwich.SearchActivity;
 import com.matji.sandwich.adapter.SimpleAdapter;
-import com.matji.sandwich.data.SearchToken;
+import com.matji.sandwich.data.RecentSearchToken;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
@@ -22,7 +22,7 @@ import com.matji.sandwich.session.SessionRecentSearchUtil;
 public class RecentSearchListView extends RequestableMListView {
 	private SessionRecentSearchUtil sessionUtil;
 	private RecentSearchHighlightHeader recentbar;
-	private ArrayList<SearchToken> recentSearchedList;
+	private ArrayList<RecentSearchToken> recentSearchedList;
 	protected StoreHttpRequest storeRequest;
 	private SimpleAdapter adapter;
 	private String keyword = "";
@@ -57,7 +57,7 @@ public class RecentSearchListView extends RequestableMListView {
 
 	@Override
 	public void onListItemClick(int position) {
-		SearchToken data = (SearchToken) getAdapter().getItem(position+1);
+		RecentSearchToken data = (RecentSearchToken) getAdapter().getItem(position+1);
 		this.keyword = data.getSeed();
 		Intent intent = new Intent(getActivity(), SearchActivity.class);
 		intent.putExtra(SearchActivity.KEYWORD, keyword);

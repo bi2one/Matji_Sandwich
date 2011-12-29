@@ -37,7 +37,6 @@ public class UserSearchListView extends SimpleUserListView implements Searchable
 		return userRequest;
 	}
 
-	
 	public void search(String keyword) {
 		this.keyword = keyword;
 		requestReload();

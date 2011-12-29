@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import com.matji.sandwich.data.provider.PreferenceProvider;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.session.SessionIndex;
-import com.matji.sandwich.data.SearchToken;
+import com.matji.sandwich.data.RecentSearchToken;
 
 import android.content.Context;
 import android.util.Log;
@@ -25,22 +25,22 @@ public class SessionRecentSearchUtil {
 		preferenceProvider = session.getPreferenceProvider();
 	}
 	
-	public ArrayList<SearchToken> getRecentList() {
-		return new ArrayList<SearchToken>(getRecentQueue());
+	public ArrayList<RecentSearchToken> getRecentList() {
+		return new ArrayList<RecentSearchToken>(getRecentQueue());
 	}
 	
-	public ArrayList<SearchToken> push(String seed) {
-		return push(new SearchToken(seed));
+	public ArrayList<RecentSearchToken> push(String seed) {
+		return push(new RecentSearchToken(seed));
 	}
 
-	public ArrayList<SearchToken> push(SearchToken searchToken) {
-		LinkedList<SearchToken> queue = getRecentQueue();
+	public ArrayList<RecentSearchToken> push(RecentSearchToken searchToken) {
+		LinkedList<RecentSearchToken> queue = getRecentQueue();
 		
-		for (SearchToken token : queue) {
+		for (RecentSearchToken token : queue) {
 			if (token.equals(searchToken)) {
 				queue.remove(token);
 				queue.addFirst(searchToken);
-				return new ArrayList<SearchToken>(queue);
+				return new ArrayList<RecentSearchToken>(queue);
 			}
 		}
 		queue.addFirst(searchToken);
@@ -49,10 +49,10 @@ public class SessionRecentSearchUtil {
 			queue.removeLast();
 		
 		saveRecentQueue(queue);
-		return new ArrayList<SearchToken>(queue);
+		return new ArrayList<RecentSearchToken>(queue);
 	}
 	
-	private void saveRecentQueue(LinkedList<SearchToken> queue) {
+	private void saveRecentQueue(LinkedList<RecentSearchToken> queue) {
 		try {
 			preferenceProvider.setObject(SessionIndex.RECENT_STORE_SEARCH, queue);
 			preferenceProvider.commit(contextRef.get());
@@ -62,18 +62,18 @@ public class SessionRecentSearchUtil {
 		}
 	}
 
-	private LinkedList<SearchToken> getRecentQueue() {
+	private LinkedList<RecentSearchToken> getRecentQueue() {
 		@SuppressWarnings("unchecked")
-		LinkedList<SearchToken> queue = (LinkedList<SearchToken>) preferenceProvider.getObject(SessionIndex.RECENT_STORE_SEARCH);
+		LinkedList<RecentSearchToken> queue = (LinkedList<RecentSearchToken>) preferenceProvider.getObject(SessionIndex.RECENT_STORE_SEARCH);
 		
 		if (queue == null) {
-			return new LinkedList<SearchToken>();
+			return new LinkedList<RecentSearchToken>();
 		} else {
 			return queue;
 		}
 	}
 
-	private boolean isOverCapacity(LinkedList<SearchToken> recentQueue) {
+	private boolean isOverCapacity(LinkedList<RecentSearchToken> recentQueue) {
 		return recentQueue.size() > CAPACITY;
 	}
 	

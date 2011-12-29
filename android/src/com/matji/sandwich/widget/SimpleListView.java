@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.adapter.SimpleAdapter;
-import com.matji.sandwich.data.SearchToken;
+import com.matji.sandwich.data.RecentSearchToken;
 import com.matji.sandwich.http.request.HttpRequest;
 import com.matji.sandwich.http.request.StoreHttpRequest;
 import com.matji.sandwich.util.MatjiConstants;
@@ -36,7 +36,7 @@ public class SimpleListView extends RequestableMListView implements Searchable {
 
 	@Override
 	public void onListItemClick(int position) {
-		SearchToken data = (SearchToken) getAdapter().getItem(position+1);
+		RecentSearchToken data = (RecentSearchToken) getAdapter().getItem(position+1);
 		this.keyword = data.getSeed();
 		search(keyword);
 	}
