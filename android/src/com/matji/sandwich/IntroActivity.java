@@ -25,7 +25,7 @@ import com.matji.sandwich.widget.dialog.PopupDialog.PopupListener;
 
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener, SimpleAsyncTask.ProgressListener, PopupListener {
 	private static final long LOADING_MIN_TIME = 1000;
-	private static final long DIALOG_MIN_TIME =  1500;
+	private static final long DIALOG_MIN_TIME =  2000;
 	private ProgressDialog dialog;
 	private TimeAsyncTask timeAsyncTask;
 	private SimpleAsyncTask simpleAsyncTask;
