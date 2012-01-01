@@ -41,4 +41,12 @@ public class ToastPool {
         toast.setDuration(duration);
         return toast;
     }
+
+    public Toast getToast(Context context, int messageRef, int duration) {
+	return getToast(context, context.getString(messageRef), duration);
+    }
+
+    public Toast getToast(Context context, int messageRef) {
+	return getToast(context, context.getString(messageRef), Toast.LENGTH_LONG);
+    }
 }

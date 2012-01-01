@@ -46,7 +46,7 @@ public abstract class MBaseAdapter extends BaseAdapter {
 	}
 	
 	@SuppressWarnings("unchecked")
-    public void addAll(ArrayList<MatjiData> items) {
+	public void addAll(ArrayList<MatjiData> items) {
 		data.addAll(items);
 	}
 	

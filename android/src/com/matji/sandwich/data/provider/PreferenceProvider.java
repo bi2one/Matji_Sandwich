@@ -135,7 +135,7 @@ public class PreferenceProvider {
         sharedObjects.remove(key);
     }
 
-    public void setObject(String key, Object obj) throws NotSerializableException{
+    public void setObject(String key, Object obj) throws NotSerializableException {
         if (obj instanceof Serializable){
             sharedObjects.put(key, obj);
         }else{

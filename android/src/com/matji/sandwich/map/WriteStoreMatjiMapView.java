@@ -96,7 +96,7 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
 		gpsManager.stop();
 	    }
 	}
-
+	
 	prevLocation = location;
 	setCenter(new LocationToGeoPointAdapter(location));
     }
@@ -192,9 +192,9 @@ public class WriteStoreMatjiMapView extends RelativeLayout implements MatjiMapVi
     }
 
     public void startMapCenterThread() {
-	if (!gpsManager.isRunning()) {
+	// if (!gpsManager.isRunning()) {
 	    mapView.startMapCenterThread();
-	}
+	// }
     }
 
     public void stopMapCenterThread() {

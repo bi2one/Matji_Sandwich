@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.matji.sandwich.R;
 import com.matji.sandwich.data.provider.PreferenceProvider;
+import com.matji.sandwich.exception.ToastPool;
 import com.matji.sandwich.exception.GpsOutOfServiceMatjiException;
 import com.matji.sandwich.exception.GpsTemporarilyUnavailableMatjiException;
 import com.matji.sandwich.exception.GpsAvailableMatjiException;
@@ -22,11 +23,15 @@ import com.matji.sandwich.session.Session;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.lang.ref.WeakReference;
 
 public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClickListener {
 	private final static long NET_PROVIDER_MIN_NOTIFICATION_INTERVAL = 100; /* 1000 * 60 * 5; */
 	private final static long GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL = 50;      /* 1000 * 5; */
+    private final static long GPS_TIMEOUT = 5000;
 
 	private WeakReference<Context> contextRef;
 	private WeakReference<MatjiLocationListener> matjiListenerRef;
@@ -37,10 +42,12 @@ public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClick
 	private boolean runningFlag;
 	private int startFromTag;
 	private final static int minDistanceForNotifyInMeters = 0;
+    private Timer timeOutTimer;
+    private TimerTask timeOutTask;
 
 	private PreferenceProvider preferenceProvider;
 
-	public GpsManager(Context context, MatjiLocationListener matjiListener) {
+	public GpsManager(final Context context, MatjiLocationListener matjiListener) {
 		this.contextRef = new WeakReference(context);
 		this.matjiListenerRef = new WeakReference(matjiListener);
 		locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
@@ -48,6 +55,17 @@ public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClick
 		
 		gpsPerformed = false;
 		runningFlag = false;
+		timeOutTask = new TimerTask() {
+			public void run() {
+			    Activity activity = (Activity)context;
+			    activity.runOnUiThread(new Runnable() {
+				    public void run() {
+					ToastPool.getInstance().getToast(context, R.string.exception_GpsServiceNotPossibleMatjiException).show();
+					GpsManager.this.stop();
+				    }
+				});
+			};
+		    };
 	}
 
 	public void setStartConfigListener(StartConfigListener startConfigListener) {
@@ -120,7 +138,17 @@ public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClick
 		}
 	}
 
+    private void runTimeOutTimer() {
+	if (timeOutTimer != null) {
+	    timeOutTimer.cancel();
+	} else {
+	    timeOutTimer = new Timer();
+	}
+	timeOutTimer.schedule(timeOutTask, GPS_TIMEOUT);
+    }
+
 	private void requestLocationUpdatesGps() throws MatjiException {
+	    runTimeOutTimer();
 		majorProvider = LocationManager.GPS_PROVIDER;
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 				GPS_PROVIDER_MIN_NOTIFICATION_INTERVAL, minDistanceForNotifyInMeters, this);
@@ -129,6 +157,7 @@ public class GpsManager implements LocationListener, SimpleConfirmDialog.OnClick
 	}
 
 	private void requestLocationUpdatesNetwork() throws MatjiException {
+	    runTimeOutTimer();
 		majorProvider = LocationManager.NETWORK_PROVIDER;
 		matjiListenerRef.get().onLocationExceptionDelivered(startFromTag, new UseNetworkGpsMatjiException());
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,

@@ -44,7 +44,6 @@ public class WriteStoreActivity extends BaseMapActivity implements CompletableTi
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-	Log.d("=====", "oncreate");
         setContentView(R.layout.activity_write_store);
 
         context = getApplicationContext();
@@ -63,6 +62,7 @@ public class WriteStoreActivity extends BaseMapActivity implements CompletableTi
         successDialog.setOnClickListener(this);
 	
         session = Session.getInstance(this);
+	mapView.startMapCenterThread();
     }
 
     public void finish() {
