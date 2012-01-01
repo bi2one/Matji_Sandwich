@@ -132,19 +132,21 @@ public class PostHeader extends ViewContainer {
 	}
 	
 	private void setOnClickListener() {
-		GotoUserMainAction action1 = new GotoUserMainAction(getContext(), post.getUser());
-		GotoStoreMainAction action2 = new GotoStoreMainAction(getContext(), post.getStore());
-		GotoImageSliderAction action3 = new GotoImageSliderAction(getContext(), post.getAttachFiles());
+		if (post != null) {
+			GotoUserMainAction action1 = new GotoUserMainAction(getContext(), post.getUser());
+			GotoStoreMainAction action2 = new GotoStoreMainAction(getContext(), post.getStore());
+			GotoImageSliderAction action3 = new GotoImageSliderAction(getContext(), post.getAttachFiles());
 
-		holder.profile.setOnClickListener(action1);
-		holder.nickText.setOnClickListener(action1);
-		holder.storeNameText.setOnClickListener(action2);
-		holder.likeCountText.setOnClickListener(new LikeUserListListener(getContext(), post));
-		holder.menu.setOnClickListener(new PostHeaderQuickActionDialog());
-		holder.menu.setTag(holder.menu);
+			holder.profile.setOnClickListener(action1);
+			holder.nickText.setOnClickListener(action1);
+			holder.storeNameText.setOnClickListener(action2);
+			holder.likeCountText.setOnClickListener(new LikeUserListListener(getContext(), post));
+			holder.menu.setOnClickListener(new PostHeaderQuickActionDialog());
+			holder.menu.setTag(holder.menu);
 
-		for (int i = 0; i < previewWrapperIds.length; i++) {
-			holder.preview[i].setOnClickListener(action3);
+			for (int i = 0; i < previewWrapperIds.length; i++) {
+				holder.preview[i].setOnClickListener(action3);
+			}
 		}
 	}
 

@@ -15,10 +15,8 @@ import com.matji.sandwich.data.Comment;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Post;
 
-import com.matji.sandwich.exception.MatjiException;
 import com.matji.sandwich.http.request.CommentHttpRequest;
 import com.matji.sandwich.http.request.HttpRequest;
-import com.matji.sandwich.http.request.PostHttpRequest;
 import com.matji.sandwich.session.Session;
 import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.widget.PostHeader.PostDeleteListener;
@@ -76,7 +74,7 @@ public class CommentListView extends RequestableMListView {
 
     public void setPost(Post post) {
         this.post = post;
-        header.setPost(postRequest());
+        header.setPost(post);
     }
 
     public void addComment(Comment comment) {
@@ -90,21 +88,6 @@ public class CommentListView extends RequestableMListView {
         return request;
     }
 
-    public Post postRequest() {
-        Post posts = null;
-    	PostHttpRequest postRequest = new PostHttpRequest(getContext());
-        postRequest.actionShow(post.getId());
-        try {
-			ArrayList<MatjiData> data = postRequest.request();
-			if (data != null && data.size() > 0) {
-				posts = (Post) data.get(0);
-			}
-		} catch (MatjiException e) {
-			e.performExceptionHandling(getContext());
-		};
-		return posts;
-    }
-    
     public HttpRequest deleteRequest(int comment_id) {
         ((CommentHttpRequest) request).actionDelete(comment_id);
         return request;

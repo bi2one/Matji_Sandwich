@@ -10,9 +10,9 @@
   <!-- release 0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg -->
 
   <!-- release!!!! -->
-  <string name="map_api_key">02uzvUOqz9sA2y2wopzuFC5NVSeLz2qy0CYRTnA</string>
+  <!-- <string name="map_api_key">02uzvUOqz9sA2y2wopzuFC5NVSeLz2qy0CYRTnA</string> -->
   <!-- release!!!! (for KT)-->
-  <!-- <string name="map_api_key">0yJrdJ35OSlcwuol23Zrp4zkUpMWv0ItC-LuCEg</string> -->
+  <string name="map_api_key">0yJrdJ35OSlcwuol23Zrp4zkUpMWv0ItC-LuCEg</string>
   <!-- development!!!! -->
   <!-- <string name="map_api_key">02uzvUOqz9sC59IFS76TqggEbRMGLaSZCQ4lCpg</string> -->
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
@@ -534,7 +534,7 @@
   <string name="settings_service_notice">공지사항</string>
   <string name="settings_service_guide">서비스 안내</string>
   <string name="settings_service_report">버그신고 및 기능제안</string>
-  <string name="settings_service_version_name">1.1.1</string>
+  <string name="settings_service_version_name">1.1.2</string>
   <string name="settings_service_version_update">새버젼 받기</string>
   <string name="settings_service_report_title">버그 및 기능 개선 [%1$s]</string>
   <string name="settings_service_report_title_guest">버그 및 기능 개선</string>

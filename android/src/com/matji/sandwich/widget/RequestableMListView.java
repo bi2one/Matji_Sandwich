@@ -24,7 +24,7 @@ PullToRefreshListView.OnRefreshListener{
 	private MBaseAdapter adapter;
 	protected HttpRequestManager manager;
 	private boolean canRepeat = false;
-	private int prevPage = 0;
+//	private int prevPage = 0;
 	private int page = 1;
 	private int limit = 10;
 	private RelativeLayout loadingFooterView;
@@ -96,13 +96,15 @@ PullToRefreshListView.OnRefreshListener{
 	}
 
 	public void nextValue() {			
-		prevPage = page;
+//		prevPage = page;
 		page++;
 	}
 
-	private void syncValue() {
-		page = (adapterData.size() / limit) + 1;
-	}
+//	private void syncValue() {
+//		Log.d("Matji", "prev page :" + page);
+//		page = (adapterData.size() / limit) + 1;
+//		Log.d("Matji", "next page :" + page);
+//	}
 
 	protected void requestSetOn() {
 		scrollListener.requestSetOn();
@@ -113,21 +115,21 @@ PullToRefreshListView.OnRefreshListener{
 	}
 
 	public void requestNext() {
-		if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
-			syncValue();
-		}
+//		if ((adapterData.size() % limit == 0) && (adapterData.size() < limit * page)) {
+//			syncValue();
+//		}
 
-		if (prevPage < page) {
-			syncValue();
+//		if (prevPage < page) {
+//			syncValue();
 			Log.d("refresh" , "requestNext()");
 			Log.d("refresh", (getActivity() == null) ? "activity is null" : "antivity is ok");
 			addFooterView(loadingFooterView);
 			manager.request(getContext(), loadingFooterView, SpinnerFactory.SpinnerType.SMALL, request(), REQUEST_NEXT, this);
-			nextValue();
-		} else if (prevPage == page) {
-			syncValue();
-			prevPage = page - 1;
-		}
+//			nextValue();
+//		} else if (prevPage == page) {
+//			syncValue();
+//			prevPage = page - 1;
+//		}
 	}
 
 	public void setCanRepeat(boolean canRepeat) {
@@ -142,7 +144,7 @@ PullToRefreshListView.OnRefreshListener{
 			Log.d("refresh", "requestReload()");
 			initValue();
 			manager.request(reloadSpinner, request(), REQUEST_RELOAD, this);
-			nextValue();
+//			nextValue();
 		}
 	}
 
@@ -152,7 +154,7 @@ PullToRefreshListView.OnRefreshListener{
 		initValue();
 		manager.request(reloadSpinner, request(), REQUEST_RELOAD, this);
 		loadingHeaderView.requestFocus();
-		nextValue();
+//		nextValue();
 		setCanRepeat(true);
 	}
 
@@ -185,9 +187,12 @@ PullToRefreshListView.OnRefreshListener{
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {		
 		if (tag == REQUEST_RELOAD || tag == REQUEST_NEXT) {
+			
 			if (data == null) return;
+			
 			if (tag == REQUEST_RELOAD) clearAdapter();
-			if (data.size() == 0 || data.size() < limit)
+			
+			if (data.size() < limit)
 				scrollListener.requestSetOff();
 			else
 				scrollListener.requestSetOn();
@@ -197,7 +202,8 @@ PullToRefreshListView.OnRefreshListener{
 
 			if (tag == REQUEST_RELOAD) setSelection(0);
 
-			onRefreshComplete();
+			nextValue();
+			onRefreshComplete();			
 		}
 		removeFooterView(loadingFooterView);
 	}

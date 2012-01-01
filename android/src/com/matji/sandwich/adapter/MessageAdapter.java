@@ -105,21 +105,27 @@ public class MessageAdapter extends MBaseAdapter implements Requestable {
 			user = message.getSentUser();
 			break;
 		}
+		
+		String nick;
+		if (user == null) {
+			nick = "";
+		} else {
+			nick = user.getNick();
+		}
 
 		messageElement.subjectWrapper.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				folding(position, messageElement);
 			}
 		});
-
 		messageElement.message = message;
 		messageElement.subjectList.setText(message.getMessage());
-		messageElement.nick.setText(user.getNick());
+		messageElement.nick.setText(nick);
 		messageElement.nick.setOnClickListener(new GotoUserMainAction(context, user));
 		messageElement.subject.setText(message.getMessage());
 		
 		if (type == MessageType.RECEIVED) {
-		    messageElement.sentUserNick.setText(message.getSentUser().getNick());
+			messageElement.sentUserNick.setText(nick);
 		    messageElement.sentUserNick.setOnClickListener(new GotoUserMainAction(context, message.getSentUser()));
 		}
 		messageElement.receivedUserNick.setText(message.getReceivedUser().getNick());
