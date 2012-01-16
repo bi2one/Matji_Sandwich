@@ -25,10 +25,9 @@ public class StoreModifyActivity extends BaseMapActivity implements Completable,
 	private static final int TAG_STORE_MODIFY = 1;
 	private CompletableTitle titleBar;
 	private StoreModifyMatjiMapView mapView;
-	private SimpleAlertDialog storeAlertDialog;
-	private SimpleAlertDialog successDialog;
+	private SimpleAlertDialog successDialog;	
 	private Store store;
-	
+
 	public int setMainViewId() {
 		return R.id.activity_store_modify;
 	}
@@ -39,25 +38,25 @@ public class StoreModifyActivity extends BaseMapActivity implements Completable,
 		setContentView(R.layout.activity_store_modify);
 
 		store = (Store) getIntent().getParcelableExtra(STORE);
-		
+
 		titleBar = (CompletableTitle) findViewById(R.id.activity_store_modify_title);
 		mapView = (StoreModifyMatjiMapView) findViewById(R.id.activity_store_modify_mapview);
 
 		titleBar.setTitle(R.string.default_string_store_modify_request);
 		titleBar.setCompletable(this);
 
-        mapView.init(this);
-        mapView.startMapCenterThread();
-        mapView.setStartCenter(store.getLat(), store.getLng());
+		mapView.init(this);
+		mapView.startMapCenterThread();
+		mapView.setStartCenter(store.getLat(), store.getLng());
 		mapView.setOnClickListener(this);
-
 		mapView.setStoreName(store.getName().trim());
 		mapView.setAddress(store.getAddress());
+		mapView.setStorePhoneNumber(store.getTel().trim());
 		if (store.getAddAddress() != null)
 			mapView.setStoreAddAddress(store.getAddAddress().trim());
-		mapView.setStorePhoneNumber(store.getTel().trim());
-		
-		storeAlertDialog = new SimpleAlertDialog(this, R.string.write_store_invalidate_store);
+		else
+			mapView.setStoreAddAddress("");
+
 		successDialog = new SimpleAlertDialog(this, R.string.store_modify_success);
 
 		successDialog.setOnClickListener(this);
@@ -74,7 +73,7 @@ public class StoreModifyActivity extends BaseMapActivity implements Completable,
 
 		if (isValid(storeName, address, addAddress, phoneNumber, centerLat, centerLng)) {
 			StoreModifyHttpRequest request = new StoreModifyHttpRequest(StoreModifyActivity.this);
-			request.actionModify(storeName, address, centerLat, centerLng, store.getId());
+			request.actionModify(storeName, address, addAddress, centerLat, centerLng, store.getId());
 			DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, TAG_STORE_MODIFY);
 			requestTask.execute();
 			titleBar.setCompletable(null);
@@ -83,45 +82,51 @@ public class StoreModifyActivity extends BaseMapActivity implements Completable,
 
 	private boolean isValid(String storeName, String address, String addAddress, String phoneNumber, double centerLat, double centerLng) {
 		if (storeName.trim().equals("")) {
+			SimpleAlertDialog storeAlertDialog = new SimpleAlertDialog(this, R.string.write_store_invalidate_store);
 			storeAlertDialog.show();
+ 			return false;
+		} else if (store.getName().equals(storeName) && store.getAddress().equals(address)) {
+			SimpleAlertDialog modifyAlertDialog = new SimpleAlertDialog(this, R.string.write_store_is_not_modified);
+			modifyAlertDialog.show();
 			return false;
+		} else {
+			return true;
 		}
-		return true;
 	}
 
 
 	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
 		switch(tag) {
 		case TAG_STORE_MODIFY:
-				successDialog.show();
+			successDialog.show();
 			break;
 		}
 	}
 
-	
+
 	public void requestExceptionCallBack(int tag, MatjiException e) {
 		e.performExceptionHandling(this);
 		titleBar.setCompletable(this);
 	}
 
-	
+
 	public void onConfirmClick(SimpleDialog dialog) {
-        if (dialog == successDialog) {
-            setResult(RESULT_OK);
-            finish();
-        }
+		if (dialog == successDialog) {
+			setResult(RESULT_OK);
+			finish();
+		}
 	}
 
-	
+
 	public void onShowMapClick(View v) {
 		KeyboardUtil.hideKeyboard(this);
 		mapView.requestFocus();
 	}
 
-	
+
 	public void onMapTouchUp(View v) {}
 
-	
+
 	public void onMapTouchDown(View v) {
 		KeyboardUtil.hideKeyboard(this);
 		mapView.requestFocus();

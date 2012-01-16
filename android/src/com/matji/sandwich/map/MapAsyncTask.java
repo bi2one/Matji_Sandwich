@@ -42,29 +42,21 @@ public class MapAsyncTask extends Thread {
 
 	public synchronized void startMapCenterThread(GeoPoint startPoint) {
 		setMapCenter(startPoint);
-		if (listenerRef != null && listenerRef.get() != null) {
+		if (listenerRef != null && listenerRef.get() != null)
 			listenerRef.get().onMapCenterChanged(mapCenter);
-		}
-
-		if (!isAlive()) {
+		if (!isAlive())
 			start();
-		}
 	}
 
 	public synchronized void startMapCenterThreadNotFirstLoading() {
 		setMapCenter(mapView.getMapCenter());
-
-		if (!isAlive()) {
+		if (!isAlive())
 			start();
-		}
 	}
 
 	public synchronized void stopMapCenterThread() {
-		// Log.d("=====", "stop");
-		if (isAlive()) {
+		if (isAlive())
 			stopFlag = true;
-			// interrupt();
-		}
 	}
 
 	private synchronized boolean isStopped() {

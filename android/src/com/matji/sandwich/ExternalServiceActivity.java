@@ -13,16 +13,19 @@ public class ExternalServiceActivity extends BaseActivity implements Completable
 	public static final String DATA_TWITTER = "ExternalServiceActivity.isTwitter";
 	public static final String DATA_FACEBOOK = "ExternalServiceActivity.isFacebook";
 	public static final String DATA_USER = "ExtenalServiceActivity.user";
+
+	private boolean passedT;
+	private boolean passedF;
+	
+	private Session session;
+	private Intent passedIntent;
+
 	private CompletableTitle titleBar;
-	private TextView twitterText;
 	private TextView facebookText;
+	private TextView twitterText;
 	private CheckBox tCheckBox;
 	private CheckBox fCheckBox;
-	private Intent passedIntent;
-	private Boolean passedT;
-	private Boolean passedF;
-	private Session session;
-
+		
 	public int setMainViewId() {
 		return R.id.activity_external_service;
 	}

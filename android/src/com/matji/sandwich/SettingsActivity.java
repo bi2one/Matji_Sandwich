@@ -37,13 +37,21 @@ import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.HomeTitle;
 
 public class SettingsActivity extends BaseActivity implements OnCheckedChangeListener, Requestable, OnClickListener {
+    public HttpRequestManager manager;
+    public HttpRequest request;
 
-    private Session session;
-
+    private boolean isForceChecked = false;
+    private ViewGroup messageAlarmSpinner;
+    private ViewGroup commentAlarmSpinner;
+    private ViewGroup followAlarmSpinner;
+    private ViewGroup likeAlarmSpinner;
     private Toast notExistEmailAppToast;
-    
+    private View accountManageWrapper;
+    private View editProfileWrapper;
+    private View alarmWrapper;
+    private View alarmTitle;
+    private Session session;
     private HomeTitle title;
-    
     private TextView tvAccountManage;
     private TextView tvNick;
     private TextView tvLinkTwitter;
@@ -52,14 +60,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     private TextView tvGuide;
     private TextView tvReport;
     private TextView tvVersion;
-    private View accountManageWrapper;
-    private View editProfileWrapper;
-    private View alarmTitle;
-    private View alarmWrapper;
-    private ViewGroup commentAlarmSpinner;
-    private ViewGroup likeAlarmSpinner;
-    private ViewGroup followAlarmSpinner;
-    private ViewGroup messageAlarmSpinner;
     private CheckBox cbCommentAlarm;
     private CheckBox cbLikeAlarm;
     private CheckBox cbFollowAlarm;
@@ -69,12 +69,6 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     private String update_ver;
     private Drawable iconNew;
     private View noticeWrapper;
-
-    private boolean isForceChecked = false;
-
-    public HttpRequest request;
-    public HttpRequestManager manager;
-
     private MeHttpRequest tRequest;
     private MeHttpRequest fRequest;
 
@@ -195,7 +189,7 @@ public class SettingsActivity extends BaseActivity implements OnCheckedChangeLis
     }
 
     public void logoutClicked() {                
-        Session.getInstance(this).logout();
+        session.logout();
         refresh();
     }
 

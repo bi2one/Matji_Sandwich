@@ -2,6 +2,7 @@ package com.matji.sandwich.util.async;
 
 import android.os.AsyncTask;
 
+
 public class TimeAsyncTask extends AsyncTask<Object, Long, Long> implements Threadable {
     public long startTime;
     public long currentTime;
@@ -10,9 +11,11 @@ public class TimeAsyncTask extends AsyncTask<Object, Long, Long> implements Thre
 
     public void execute() {
 	startTime = System.currentTimeMillis();
+
 	execute(new Object());
     }
 
+        
     public void setTimeListener(TimeListener listener) {
 	this.listener = listener;
     }

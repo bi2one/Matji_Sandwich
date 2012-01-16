@@ -60,6 +60,7 @@ public class NoticeAdapter extends MBaseAdapter {
         noticeElement.subjectWrapper.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 folding(position, noticeElement);
+                dismissNew(noticeElement.createdAtList);
             }
         });
 
@@ -78,7 +79,7 @@ public class NoticeAdapter extends MBaseAdapter {
             if (lastReadNoticeId < notice.getId()) {
                 showNew(noticeElement.createdAtList);
             } else {
-                dismissNew(noticeElement.createdAtList);
+            	dismissNew(noticeElement.createdAtList);
             }
         }
 

@@ -5,12 +5,14 @@ import com.matji.sandwich.widget.search.RecentSearchListView;
 import com.matji.sandwich.widget.search.UserSearchListView;
 import com.matji.sandwich.widget.search.SearchInputBar.Searchable;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class UserSearchActivity extends BaseActivity implements Searchable {
+public class UserSearchActivity extends BaseActivity implements Searchable, ActivityStartable {
 	private UserSearchListView searchView;
 	private RecentSearchListView recentView;
 	
@@ -31,12 +33,14 @@ public class UserSearchActivity extends BaseActivity implements Searchable {
 		recentView.setActivity(this);
 		searchView = (UserSearchListView) findViewById(R.id.UserSearchListView);
 		searchView.setActivity(this);
+		searchView.setVisibility(View.GONE);
 	}
 	
 	@Override
 	public void search(String keyword) { 
 		recentView.setVisibility(View.GONE);
 		searchView.search(keyword);
+		searchView.setVisibility(View.VISIBLE);
 	}
 	
 	@Override
@@ -54,4 +58,14 @@ public class UserSearchActivity extends BaseActivity implements Searchable {
         }
         return false;
     }
+
+	@Override
+	public void activityResultDelivered(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+        case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:
+            if (resultCode == Activity.RESULT_OK)
+                setIsFlow(true);
+            break;
+        }
+	}
 }

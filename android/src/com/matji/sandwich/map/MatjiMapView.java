@@ -2,12 +2,9 @@ package com.matji.sandwich.map;
 
 import com.google.android.maps.MapView;
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapController;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
-import com.matji.sandwich.session.SessionMapUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -20,16 +17,9 @@ import java.lang.ref.WeakReference;
  */
 public class MatjiMapView extends MapView implements MatjiMapViewInterface {
 	private WeakReference<MatjiMapCenterListener> listenerRef;
-	// private GeoPoint mapCenter;
-	// private GeoPoint newMapCenter;
-	// private GeoPoint tempMapCenter;
-	private SessionMapUtil sessionUtil;
-	private MapController mapController;
 
 	public MatjiMapView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		sessionUtil = new SessionMapUtil(context);
-		mapController = getController();
 	}
 
 	/**

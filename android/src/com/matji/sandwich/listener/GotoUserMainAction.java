@@ -52,7 +52,7 @@ public class GotoUserMainAction implements OnClickListener {
         Intent intent = new Intent(context, UserMainActivity.class);
         intent.putExtra(UserMainActivity.USER, (Parcelable) user);
         if (((Activity) context).getParent() != null 
-                && ((Activity) context).getParent().getParent() instanceof BaseTabActivity) {
+                && ((Activity) context).getParent() instanceof BaseTabActivity) {
             BaseTabActivity parent = (BaseTabActivity) ((Activity) context).getParent();
             parent.tabStartActivityForResult(intent, BaseActivity.USER_MAIN_ACTIVITY, (ActivityStartable) context);
         } else {

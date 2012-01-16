@@ -28,7 +28,7 @@ public class RecentSearchListView extends RequestableMListView {
 	private String keyword = "";
 	
 	public RecentSearchListView(Context context, AttributeSet attrs) {
-		super(context, attrs, new SimpleAdapter(context), 5);
+		super(context, attrs, new SimpleAdapter(context), 15);
 		sessionUtil = new SessionRecentSearchUtil(context);
 		recentSearchedList = sessionUtil.getRecentList();
 		adapter = new SimpleAdapter(context);

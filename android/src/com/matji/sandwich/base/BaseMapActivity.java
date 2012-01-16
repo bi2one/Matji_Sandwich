@@ -17,9 +17,9 @@ import com.matji.sandwich.util.DisplayUtil;
 import com.matji.sandwich.util.MatjiConstants;
 
 public abstract class BaseMapActivity extends MapActivity implements ActivityEnterForeGroundListener, Identifiable {
-	private boolean isFlow;
-	private ViewGroup mainViewGroup;
 	private HttpRequestManager requestManager = HttpRequestManager.getInstance();
+	private ViewGroup mainViewGroup;
+	private boolean isFlow;
 
 	public abstract int setMainViewId();
 
@@ -81,7 +81,6 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
 		super.onStop();
 		Log.d("LifeCycle", "onStop at " + this.getClass());
 		ActivityEnterForeGroundDetector.getInstance().setState(ActivityEnterForeGroundDetector.ActivityState.ONSTOP, this);
@@ -134,10 +133,8 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -145,9 +142,8 @@ public abstract class BaseMapActivity extends MapActivity implements ActivityEnt
 
 		switch (requestCode) {
 		case BaseActivity.TERMS_ACTIVITY:
-			if (resultCode != RESULT_OK) {
+			if (resultCode != RESULT_OK)
 				Session.getInstance(this).logout();
-			}
 			break;
 		}
 	}

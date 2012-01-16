@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_select_map_position"
+    style="@style/DefaultFill" >
+    <com.matji.sandwich.widget.title.CompletableTitle
+        android:id="@+id/activity_select_map_position_title"
+        style="@style/DefaultWidthFill"
+        android:layout_alignParentTop="true" />
+    <com.matji.sandwich.map.LocationMatjiMapView
+        android:id="@+id/activity_select_map_position_mapview"
+        style="@style/DefaultFill"
+		android:layout_above="@+id/activity_select_map_position_footer"
+		android:layout_below="@id/activity_select_map_position_title"
+        android:apiKey="@string/map_api_key"
+        android:clickable="true" />
+    <RelativeLayout
+        android:id="@id/activity_select_map_position_footer"
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/mapview_footer_text_height"
+		android:background="@color/matji_black"
+		android:layout_alignParentBottom="true">
+		<TextView
+		    android:id="@+id/activity_select_map_position_footer_text"
+		    style="@style/DefaultFill"
+			android:gravity="center_vertical|center_horizontal"
+		    android:textSize="@dimen/mapview_footer_text_size"
+		    android:textColor="@color/matji_light_gray"
+    	/>
+    </RelativeLayout>
+</RelativeLayout>

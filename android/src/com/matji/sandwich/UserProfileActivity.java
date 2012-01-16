@@ -39,6 +39,17 @@ public class UserProfileActivity extends BaseActivity implements LoginListener, 
         super.onCreate(savedInstanceState);
         init();
     }
+    
+    
+    @Override
+    protected void onDestroy() {
+    	// TODO Auto-generated method stub
+    	super.onDestroy();
+    	
+    	Session.getInstance(this).removeLoginListener(this);
+    }
+
+    
 
     protected void init() {
         setContentView(R.layout.activity_user_profile);

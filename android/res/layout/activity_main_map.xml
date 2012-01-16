@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main_map"
     style="@style/DefaultLinearFill" >
-  <include layout="@layout/map_title_bar"
-	   android:id="@+id/activity_main_map_title_bar"
-	   android:layout_alignParentTop="true" />
-  <FrameLayout style="@style/DefaultFill"
-	       android:layout_below="@id/activity_main_map_title_bar">
-    <com.matji.sandwich.map.MainMatjiMapView
-	android:id="@+id/map_view"
-	style="@style/DefaultFill"
-	android:enabled="true"
-	android:clickable="true"
-	android:focusable="true"
-	android:apiKey="@string/map_api_key" />
-    <com.matji.sandwich.widget.StoreMapNearListView
-	style="@style/main_map_listView"
-	android:id="@+id/main_map_store_list"
-	android:visibility="gone" />
-  </FrameLayout>
+    <include
+        android:id="@+id/activity_main_map_title_bar"
+        android:layout_alignParentTop="true"
+        layout="@layout/map_title_bar" />
+    <FrameLayout
+        style="@style/DefaultFill"
+        android:layout_below="@id/activity_main_map_title_bar" >
+        <com.matji.sandwich.map.MainMatjiMapView
+            android:id="@+id/map_view"
+            style="@style/DefaultFill"
+            android:apiKey="@string/map_api_key"
+            android:clickable="true"
+            android:enabled="true"
+            android:focusable="true" />
+        <com.matji.sandwich.widget.StoreMapNearListView
+            android:id="@+id/main_map_store_list"
+            style="@style/main_map_listView"
+            android:visibility="gone" />
+    </FrameLayout>
 </RelativeLayout>

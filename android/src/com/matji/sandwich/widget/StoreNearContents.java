@@ -11,34 +11,27 @@ import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.R;
-import com.matji.sandwich.adapter.SimpleStoreAdapter.StoreElement;
 import com.matji.sandwich.data.Store;
 
-
-public class SelectStoreContents extends RelativeLayout implements View.OnClickListener,
-SelectStoreListView.OnItemClickListener {
-	public ImageButton searchLocationButton;
-	public TextView selectText;
-
-	private Context context;
-	private SelectStoreListView listView;
+public class StoreNearContents extends RelativeLayout implements View.OnClickListener {
 	private Store selectedStore;
-	private StoreSelectListener selectListener;
+	private Context context;
+	private TextView selectText;
+	private SelectStoreListView listView;
 	private OnClickListener clickListener;
 	private ImageButton writeStoreButton;
 
-	public SelectStoreContents(Context context, AttributeSet attrs) {
+	public StoreNearContents(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
-		LayoutInflater.from(context).inflate(R.layout.select_store_contents, this, true);
+		LayoutInflater.from(context).inflate(R.layout.store_near_contents, this, true);
 
-		listView = (SelectStoreListView)findViewById(R.id.select_store_contents_listview);
-		listView.setOnItemClickListener(this);
+		listView = (SelectStoreListView)findViewById(R.id.store_near_contents_listview);
 
-		selectText = (TextView)findViewById(R.id.select_store_contents_selected);
-		searchLocationButton = (ImageButton)findViewById(R.id.select_store_contents_search);
-		writeStoreButton = (ImageButton)findViewById(R.id.select_store_contents_add);
-		searchLocationButton.setOnClickListener(this);
+		selectText = (TextView)findViewById(R.id.store_near_contents_selected);
+		selectText.setText(R.string.find_near_store_view_select);
+		
+		writeStoreButton = (ImageButton)findViewById(R.id.store_near_contents_add);
 		writeStoreButton.setOnClickListener(this);
 	}
 
@@ -66,10 +59,6 @@ SelectStoreListView.OnItemClickListener {
 		refresh(new GeoPoint(neLat, neLng), new GeoPoint(swLat, swLng));
 	}
 
-	public void setStoreSelectListener(StoreSelectListener selectListener) {
-		this.selectListener = selectListener;
-	}
-
 	public void setOnClickListener(OnClickListener clickListener) {
 		this.clickListener = clickListener;
 	}
@@ -77,32 +66,15 @@ SelectStoreListView.OnItemClickListener {
 	public Store getStore() {
 		return selectedStore;
 	}
-
-	public void onItemClick(View v) {
-		StoreElement element = (StoreElement)v.getTag();
-		Store store = element.getStore();
-
-		setStore(store);
-		if (selectListener != null)
-			selectListener.onStoreSelect(store);
-	}
-
 	public void onClick(View v) {
 		if (clickListener == null)
 			return ;
 		int viewId = v.getId();
-		if (viewId == searchLocationButton.getId())
-			clickListener.onSearchLocationClick(v);
-		else if (viewId == writeStoreButton.getId())
+		if (viewId == writeStoreButton.getId())
 			clickListener.onWriteStoreClick(v);
 	}
 
-	public interface StoreSelectListener {
-		public void onStoreSelect(Store store);
-	}
-
 	public interface OnClickListener {
-		public void onSearchLocationClick(View v);
 		public void onWriteStoreClick(View v);
 	}
 }

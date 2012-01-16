@@ -1,14 +1,18 @@
 package com.matji.sandwich.listener;
 
 import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.matji.sandwich.ActivityStartable;
 import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.Store;
 
 /**
@@ -49,6 +53,17 @@ public class GotoStoreMainAction implements OnClickListener {
 	public void onClick(View v) {
 		Intent intent = new Intent(context, StoreMainActivity.class);
 		intent.putExtra(StoreMainActivity.STORE, (Parcelable) store);
-		((Activity) context).startActivityForResult(intent, BaseActivity.STORE_MAIN_ACTIVITY);
+		
+        if (((Activity) context).getParent() != null 
+                && ((Activity) context).getParent() instanceof BaseTabActivity) {
+        	Log.d("Matji", "===" + ((Activity) context).getParent().toString());
+        	BaseTabActivity tabActivity = (BaseTabActivity)(((Activity) context).getParent());
+        	tabActivity.tabStartActivityForResult(intent, BaseActivity.STORE_MAIN_ACTIVITY, (ActivityStartable) context);
+        }
+        else
+        {
+        	((Activity) context).startActivityForResult(intent, BaseActivity.STORE_MAIN_ACTIVITY);    	
+        }
+
 	}
 }

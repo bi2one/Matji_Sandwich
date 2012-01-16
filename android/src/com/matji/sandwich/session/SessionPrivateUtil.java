@@ -3,9 +3,10 @@ package com.matji.sandwich.session;
 import com.matji.sandwich.data.provider.ConcretePreferenceProvider;
 
 public class SessionPrivateUtil {
-    public static final String BASIC_ID = "";
-    public static final int BASIC_LAST_READ_NOTICE_ID = 0;
     public static final boolean BASIC_IS_CHECKED = false;
+    public static final boolean BASIC_IS_AGREED = false;
+    public static final int BASIC_LAST_READ_NOTICE_ID = 0;
+    public static final String BASIC_ID = "";
 
     private ConcretePreferenceProvider mConcretePrefs;
 //    private Session session;
@@ -71,5 +72,13 @@ public class SessionPrivateUtil {
     public boolean isCheckedPopupNotShown(String tag) {
         return mConcretePrefs.getBoolean(tag, BASIC_IS_CHECKED);
     }
+
+	public boolean getUserAgree() {
+		return mConcretePrefs.getBoolean(SessionIndex.PRIVATE_IS_AGREED_USING_LOCATION_INFO, BASIC_IS_AGREED);
+	}
+	
+	public void setUserAgree(boolean isAgreed) {
+		mConcretePrefs.setBoolean(SessionIndex.PRIVATE_IS_AGREED_USING_LOCATION_INFO, isAgreed);
+	}
     
 }

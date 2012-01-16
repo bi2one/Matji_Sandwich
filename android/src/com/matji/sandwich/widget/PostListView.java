@@ -50,7 +50,6 @@ public class PostListView extends RequestableMListView {
     }
 
     public void setSubtitle(String subtitle) {
-        //        ((PostAdapter) getMBaseAdapter()).setSpinnerContainer(getLoadingFooterView());
         ((PostAdapter) getMBaseAdapter()).setSubtitle(subtitle);
     }
 

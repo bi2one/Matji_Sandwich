@@ -8,10 +8,9 @@ import com.matji.sandwich.session.SessionWritePostUtil;
 import com.matji.sandwich.widget.AlbumView;
 
 public class WritePostPictureActivity extends BaseActivity {
-    private Context context;
-    private AlbumView albumView;
-    // private WritePostTabActivity parentActivity;
     private SessionWritePostUtil sessionUtil;
+    private AlbumView albumView;
+    private Context context;
 
     public int setMainViewId() {
 	return R.id.activity_write_post_picture;
@@ -22,13 +21,11 @@ public class WritePostPictureActivity extends BaseActivity {
 	context = getApplicationContext();
 	setContentView(R.layout.activity_write_post_picture);
 	albumView = (AlbumView)findViewById(R.id.activity_write_post_picture_albumview);
-	// parentActivity = (WritePostTabActivity)getParent();
 	sessionUtil = new SessionWritePostUtil(context);
     }
 
     protected void onPause() {
 	super.onPause();
-	// Log.d("=====", "albumView files: " + albumView.getFiles().toString());
 	sessionUtil.setPictureFiles(albumView.getFiles());
     }
 }

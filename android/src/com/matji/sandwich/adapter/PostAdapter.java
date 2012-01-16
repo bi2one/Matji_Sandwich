@@ -251,9 +251,18 @@ public class PostAdapter extends SectionedAdapter {
 		} else {
 			holder.tag.setVisibility(View.GONE);
 		}
-
-		holder.profile.setUserId(user.getId());
-		holder.nick.setText(user.getNick()+" ");
+		
+		if (user != null)
+		{
+			holder.profile.setUserId(user.getId());
+			holder.nick.setText(user.getNick()+" ");
+		}
+		else
+		{
+			holder.profile.setUserId(0);
+			holder.nick.setText(null);			
+		}
+			
 		holder.post.setText(post.getPost().trim());
 		holder.dateAgo.setText(TimeUtil.getAgoFromSecond(post.getAgo()));
 		holder.commentCount.setText(post.getCommentCount() + "");

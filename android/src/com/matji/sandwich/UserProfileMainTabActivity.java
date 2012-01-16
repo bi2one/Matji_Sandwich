@@ -217,6 +217,14 @@ public class UserProfileMainTabActivity extends BaseTabActivity implements Login
         super.onCreate(savedInstanceState);
         init();
     }
+    
+    
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+    	Session.getInstance(this).removeLoginListener(this);
+    }
+
 
     private void init() {
         session = Session.getInstance(this);
@@ -261,7 +269,6 @@ public class UserProfileMainTabActivity extends BaseTabActivity implements Login
 
     @Override
     protected void onNotFlowResume() {
-        // TODO Auto-generated method stub
         super.onNotFlowResume();
         syncTab();
     }

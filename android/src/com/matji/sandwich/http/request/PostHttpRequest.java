@@ -6,21 +6,6 @@ import com.matji.sandwich.http.parser.PostParser;
 import com.matji.sandwich.http.parser.SearchResultParser;
 
 public class PostHttpRequest extends HttpRequest {
-	public static enum Device {
-		IPHONE, ANDROID;
-
-		public String toString() {
-			switch(this) {
-			case IPHONE:
-				return "IPHONE";
-			case ANDROID:
-				return "ANDROID";
-			default:
-				return null;
-			}
-		}
-	}
-
 	public static enum TagByType {
 		STORE, USER,
 	}
@@ -41,7 +26,7 @@ public class PostHttpRequest extends HttpRequest {
 		getHashtable.put("include", "user,store,tags");
 	}
 
-	public void actionNew(String post, String tags, Device from_where, Boolean twitter, Boolean facebook) {
+	public void actionNew(String post, String tags, Boolean twitter, Boolean facebook) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
 		parser = new PostParser();
@@ -49,12 +34,12 @@ public class PostHttpRequest extends HttpRequest {
 		postHashtable.clear();
 		postHashtable.put("post", post);
 		postHashtable.put("tags", tags);
-		postHashtable.put("from_where", from_where);
+		postHashtable.put("from_where", "ANDROID");
 		postHashtable.put("twitter", twitter);
 		postHashtable.put("facebook", facebook);
 	}
 
-	public void actionNew(String post, String tags, Device from_where, int store_id, Boolean twitter, Boolean facebook) {
+	public void actionNew(String post, String tags, int store_id, Boolean twitter, Boolean facebook) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "new";
 		parser = new PostParser();
@@ -62,7 +47,7 @@ public class PostHttpRequest extends HttpRequest {
 		postHashtable.clear();
 		postHashtable.put("post", post);
 		postHashtable.put("tags", tags);
-		postHashtable.put("from_where", from_where.toString());
+		postHashtable.put("from_where", "ANDROID");
 		postHashtable.put("store_id", store_id + "");
 		postHashtable.put("twitter", twitter);
 		postHashtable.put("facebook", facebook);

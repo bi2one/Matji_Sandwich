@@ -13,10 +13,10 @@ import android.widget.ListView;
 import com.matji.sandwich.util.DisplayUtil;
 
 public abstract class MListView extends ListView implements OnItemClickListener {
-	private Activity activity;
-	private LinearLayout header;
-	public abstract void onListItemClick(int position);
 	public static final int FADING_EDGE_LENGTH = DisplayUtil.PixelFromDP(10);
+	public abstract void onListItemClick(int position);
+	private LinearLayout header;
+	private Activity activity;
 
 	public MListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -54,8 +54,7 @@ public abstract class MListView extends ListView implements OnItemClickListener 
 	}
 
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		if ((position - 1) >= 0) {
+		if ((position - 1) >= 0)
 			onListItemClick(position - 1);
-		}
 	}
 }

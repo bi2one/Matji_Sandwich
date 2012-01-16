@@ -26,15 +26,15 @@ import com.matji.sandwich.widget.dialog.PopupDialog.PopupListener;
 public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeListener, SimpleAsyncTask.ProgressListener, PopupListener {
 	private static final long LOADING_MIN_TIME = 1000;
 	private static final long DIALOG_MIN_TIME =  2000;
-	private ProgressDialog dialog;
-	private TimeAsyncTask timeAsyncTask;
-	private SimpleAsyncTask simpleAsyncTask;
 	private long lastElapsedTime;
+	private boolean isUrgent;
+	private SimpleAsyncTask simpleAsyncTask;
+	private TimeAsyncTask timeAsyncTask;
+	private SimpleAlertDialog updateDialog;
+	private BrandingDialog brandingDialog;
+	private ProgressDialog dialog;
 	private String current_ver;
 	private String update_ver;
-	private Boolean isUrgent;
-	private BrandingDialog brandingDialog;
-	private SimpleAlertDialog updateDialog;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,19 +47,11 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 		setContentView(R.layout.activity_intro);
 		brandingDialog = new BrandingDialog(this, getClass().toString());
 		brandingDialog.setPopupListener(this);
-
-		updateDialog = new SimpleAlertDialog(IntroActivity.this, "최신 버전으로 업데이트 하세요.");
+		updateDialog = new SimpleAlertDialog(IntroActivity.this, MatjiConstants.string(R.string.dialog_intro_update));
 		dialog = new ProgressDialog(this);
 		dialog.setMessage(MatjiConstants.string(R.string.dialog_intro_loading));
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
-
-		timeAsyncTask = new TimeAsyncTask();
-		timeAsyncTask.setTimeListener(this);
-
-		simpleAsyncTask = new SimpleAsyncTask(new SessionRunnable());
-		simpleAsyncTask.setProgressListener(this);
-
 		current_ver = MatjiConstants.string(R.string.settings_service_version_name);
 	}
 
@@ -72,6 +64,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 	public void onStart(Threadable task) { }
 	public void onFinish(Threadable task) {
 		timeAsyncTask.setTimeListener(null);
+		
 		if (lastElapsedTime < LOADING_MIN_TIME) {
 			try {
 				Thread.sleep(LOADING_MIN_TIME - lastElapsedTime);
@@ -88,7 +81,18 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 
 	protected void onResume() {
 		super.onResume();
+		timeAsyncTask = new TimeAsyncTask();
+		timeAsyncTask.setTimeListener(this);
+		simpleAsyncTask = new SimpleAsyncTask(new SessionRunnable());
+		simpleAsyncTask.setProgressListener(this);
 		brandingDialog.show();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		timeAsyncTask.cancel(true);
+		simpleAsyncTask.stop();
 	}
 
 	public void onStop() {
@@ -128,11 +132,10 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 			}
 
 			if (needUpdate(current_ver, update_ver)) { 
-				if (isUrgent) {
+				if (isUrgent)
 					runOnUiThread(new UpdateMessage());
-				} else {
+				else
 					startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
-				}
 			} else {
 				startActivity(new Intent(IntroActivity.this, MainTabActivity.class));
 			}
@@ -154,7 +157,7 @@ public class IntroActivity extends BaseActivity implements TimeAsyncTask.TimeLis
 		});
 	}
 
-	private Boolean needUpdate(String current_ver, String update_ver) {
+	private boolean needUpdate(String current_ver, String update_ver) {
 		if (current_ver == null || update_ver == null)
 			return false;
 		String cv = current_ver.replaceAll("\\.","");

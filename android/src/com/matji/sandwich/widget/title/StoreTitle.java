@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.matji.sandwich.R;
 import com.matji.sandwich.Refreshable;
 import com.matji.sandwich.StoreMainActivity;
 import com.matji.sandwich.base.Identifiable;
@@ -39,6 +40,7 @@ public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
 
     public void setStore(Store store) {
         ((WritePostButton)rightButton2).setData(store, null);
+        ((WritePostButton)rightButton2).setImageDrawable(getContext().getResources().getDrawable(R.drawable.icon_navi_memowrite));        
         setTitle(store.getName());
     }
 
@@ -52,19 +54,16 @@ public class StoreTitle extends TitleContainerTypeLRR implements Refreshable {
 
     @Override
     protected TitleImageButton getLeftButton1() {
-        // TODO Auto-generated method stub
         return new HomeButton(getContext());
     }
 
     @Override
     protected TitleImageButton getRightButton1() {
-        // TODO Auto-generated method stub
         return new LikeButton(getContext());
     }
 
     @Override
     protected TitleImageButton getRightButton2() {
-        // TODO Auto-generated method stub
         return new WritePostButton(getContext());
     }
 

@@ -1072,6 +1072,13 @@
     <item name="android:src">@drawable/map_center_circle</item>
   </style>
 
+  <!-- location_matji_mapview.xml -->
+  <style name="location_matji_mapview_center" parent="DefaultWrap">
+    <item name="android:layout_width">@dimen/location_matji_mapview_center_width</item>
+    <item name="android:layout_height">@dimen/location_matji_mapview_center_height</item>
+    <item name="android:src">@drawable/marker_03</item>
+  </style>
+  
   <!-- write_post_store_view.xml -->
   <style name="write_post_store_view" parent="DefaultFill">
     <item name="android:background">@color/WHITE</item>

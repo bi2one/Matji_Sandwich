@@ -25,182 +25,161 @@ import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.dialog.SimpleListDialog;
 import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreDefaultInfoActivity extends BaseActivity implements Refreshable, Requestable, SimpleListDialog.OnClickListener, SimpleAlertDialog.OnClickListener {
+public class StoreDefaultInfoActivity extends BaseActivity implements Refreshable, Requestable, 
+SimpleListDialog.OnClickListener, SimpleAlertDialog.OnClickListener {
+	private static final int TAG_STORE_MODIFY = 0;
 	private static final int TAG_STORE_CLOSE = 1;
-	
+	private SimpleConfirmDialog reportDialog;
+	private SimpleAlertDialog successDialog;
+	private PhoneCallUtil phoneCallUtil;
+	private StoreCell storeCell;
 	private StoreTitle title;
-    private StoreCell storeCell;
+	private TextView tvAddress;
+	private TextView tvWebsite;
+	private TextView tvTel;
 
-//    private TextView tvName;
-//    private TextView tvCover;
-    private TextView tvTel;
-    private TextView tvAddress;
-    private TextView tvWebsite;
-    private PhoneCallUtil phoneCallUtil;
-    
-    private SimpleListDialog listDialog;
-    private SimpleAlertDialog successDialog;
-    private SimpleConfirmDialog reportDialog;
-    
-    public int setMainViewId() {
-        return R.id.activity_store_default_info;
-    }
+	public int setMainViewId() {
+		return R.id.activity_store_default_info;
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        init();
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		init();
+	}
 
-    private void init() {
-        setContentView(R.layout.activity_store_default_info);
-        title = (StoreTitle) findViewById(R.id.Titlebar);
-        storeCell = (StoreCell) findViewById(R.id.StoreCell);
-        storeCell.setClickable(false);
+	private void init() {
+		setContentView(R.layout.activity_store_default_info);
+		title = (StoreTitle) findViewById(R.id.Titlebar);
+		storeCell = (StoreCell) findViewById(R.id.StoreCell);
+		storeCell.setClickable(false);
 
-//        tvName = (TextView) findViewById(R.id.store_default_info_name);
-//        tvCover = (TextView) findViewById(R.id.store_default_info_cover);
-        tvTel = (TextView) findViewById(R.id.store_default_info_tel);
-        tvAddress = (TextView) findViewById(R.id.store_default_info_address);
-        tvWebsite = (TextView) findViewById(R.id.store_default_info_website);
+		tvTel = (TextView) findViewById(R.id.store_default_info_tel);
+		tvAddress = (TextView) findViewById(R.id.store_default_info_address);
+		tvWebsite = (TextView) findViewById(R.id.store_default_info_website);
 
-        title.setIdentifiable(this);
-        title.setStore(StoreDetailInfoTabActivity.store);
-        title.setTitle(R.string.title_store_info);
-        title.setLikeable(storeCell);
+		title.setIdentifiable(this);
+		title.setStore(StoreDetailInfoTabActivity.store);
+		title.setTitle(R.string.title_store_info);
+		title.setLikeable(storeCell);
 
-        storeCell.setStore(StoreDetailInfoTabActivity.store);
-        storeCell.setIdentifiable(this);
-        storeCell.addRefreshable(this);
-        storeCell.addRefreshable(title);
+		storeCell.setStore(StoreDetailInfoTabActivity.store);
+		storeCell.setIdentifiable(this);
+		storeCell.addRefreshable(this);
+		storeCell.addRefreshable(title);
 
-        phoneCallUtil = new PhoneCallUtil(this);
-        
+		phoneCallUtil = new PhoneCallUtil(this);
+		successDialog = new SimpleAlertDialog(this, R.string.store_close_success);
+		reportDialog = new SimpleConfirmDialog(this, R.string.request_check);
+		reportDialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
+			@Override
+			public void onConfirmClick(SimpleDialog dialog) {
+				StoreCloseHttpRequest request = new StoreCloseHttpRequest(StoreDefaultInfoActivity.this);
+				request.actionClose(StoreDetailInfoTabActivity.store.getId());
+				DialogAsyncTask requestTask = new DialogAsyncTask(StoreDefaultInfoActivity.this, StoreDefaultInfoActivity.this, getMainView(), request, TAG_STORE_CLOSE);
+				requestTask.execute();     
+			}
+			@Override
+			public void onCancelClick(SimpleDialog dialog) {}
+		});
+	}
 
-        reportDialog = new SimpleConfirmDialog(this, R.string.request_check);
-        reportDialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
-            
-            @Override
-            public void onConfirmClick(SimpleDialog dialog) {
-                StoreCloseHttpRequest request = new StoreCloseHttpRequest(StoreDefaultInfoActivity.this);
-                request.actionClose(StoreDetailInfoTabActivity.store.getId());
-                DialogAsyncTask requestTask = new DialogAsyncTask(StoreDefaultInfoActivity.this, StoreDefaultInfoActivity.this, getMainView(), request, TAG_STORE_CLOSE);
-                requestTask.execute();     
-            }
-            
-            @Override
-            public void onCancelClick(SimpleDialog dialog) {
-                // TODO Auto-generated method stub
-                
-            }
-        });
-    }
+	@Override
+	protected void onNotFlowResume() {
+		super.onNotFlowResume();
+		storeCell.refresh();
+	}
 
-    @Override
-    protected void onNotFlowResume() {
-        // TODO Auto-generated method stub
-        super.onNotFlowResume();
-        storeCell.refresh();
-    }
+	@Override
+	public void refresh() {
+		Store store = StoreDetailInfoTabActivity.store;
+		//        String name = store.getName();
+		String address = store.getAddress();
+		String addAdress = store.getAddAddress();
+		//        String cover = store.getCover();
+		String tel = store.getTel();
+		String website = store.getWebsite();
 
-    @Override
-    public void refresh() {
-        Store store = StoreDetailInfoTabActivity.store;
-//        String name = store.getName();
-        String address = store.getAddress();
-        String addAdress = store.getAddAddress();
-//        String cover = store.getCover();
-        String tel = store.getTel();
-        String website = store.getWebsite();
+		if (tel == null || tel.equals("")) {
+			tvTel.setText(MatjiConstants.string(R.string.not_exist_tel));
+			tvTel.setTextColor(MatjiConstants.color(R.color.matji_light_gray));
+		} else {
+			tvTel.setText(tel);
+			tvTel.setTextColor(MatjiConstants.color(R.color.matji_black));
+		}
 
-//        tvName.setText(name);
-//        tvCover.setText(
-//                (cover == null || cover.equals("")) ?
-//                        MatjiConstants.string(R.string.default_string_not_exist_cover)
-//                        :cover);
-//
-        if (tel == null || tel.equals("")) {
-            tvTel.setText(MatjiConstants.string(R.string.not_exist_tel));
-            tvTel.setTextColor(MatjiConstants.color(R.color.matji_light_gray));
-        } else {
-            tvTel.setText(tel);
-            tvTel.setTextColor(MatjiConstants.color(R.color.matji_black));
-        }
-        
-        tvAddress.setText(
-                (addAdress == null || addAdress.equals("")) ?
-                        address
-                        : address + " " + addAdress);
+		tvAddress.setText(
+				(addAdress == null || addAdress.equals("")) ?
+						address
+						: address + " " + addAdress);
 
-        if (website == null || website.trim().equals("")) {
-        } else {
-        	tvWebsite.setVisibility(1);
-        	tvWebsite.setText(website);
-        }
-    }
+		if (website == null || website.trim().equals("")) {
+		} else {
+			tvWebsite.setVisibility(1);
+			tvWebsite.setText(website);
+		}
+	}
 
-    @Override
-    public void refresh(MatjiData data) {
-        if (data instanceof Store) {
-            StoreDetailInfoTabActivity.store = (Store) data;
-            refresh();
-        }        
-    }
+	@Override
+	public void refresh(MatjiData data) {
+		if (data instanceof Store) {
+			StoreDetailInfoTabActivity.store = (Store) data;
+			refresh();
+		}        
+	}
 
-    @Override
-    public void refresh(ArrayList<MatjiData> data) {}
+	@Override
+	public void refresh(ArrayList<MatjiData> data) {}
 
-    public void onAddressClicked(View v) {
-        Intent intent = new Intent(this, StoreLocationMapActivity.class);
-        intent.putExtra(StoreLocationMapActivity.INTENT_STORE, (Parcelable)StoreDetailInfoTabActivity.store);
-        startActivity(intent);
-    }
+	public void onAddressClicked(View v) {
+		Intent intent = new Intent(this, StoreLocationMapActivity.class);
+		intent.putExtra(StoreLocationMapActivity.INTENT_STORE, (Parcelable)StoreDetailInfoTabActivity.store);
+		startActivity(intent);
+	}
 
-    public void onTelClicked(View v) {
-        if (StoreDetailInfoTabActivity.store.getTelNotDashed().equals("")) {
-            Intent intent = new Intent(this, StoreModifyActivity.class);
-            intent.putExtra(StoreModifyActivity.STORE, (Parcelable) StoreDetailInfoTabActivity.store);
-            startActivity(intent);
-        } else {
-            phoneCallUtil.call(StoreDetailInfoTabActivity.store.getTelNotDashed());
-        }
-    }
+	public void onTelClicked(View v) {
+		if (StoreDetailInfoTabActivity.store.getTelNotDashed().equals("")) {
+			Intent intent = new Intent(this, StoreModifyActivity.class);
+			intent.putExtra(StoreModifyActivity.STORE, (Parcelable) StoreDetailInfoTabActivity.store);
+			startActivity(intent);
+		} else {
+			phoneCallUtil.call(StoreDetailInfoTabActivity.store.getTelNotDashed());
+		}
+	}
 
-    public void onWebsiteClicked(View v) {
-        String website = StoreDetailInfoTabActivity.store.getWebsite();
-        if (!website.equals("")) {
-            Uri uri = Uri.parse(website);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(uri);
-            startActivity(intent);
-        }
-    }
+	public void onWebsiteClicked(View v) {
+		String website = StoreDetailInfoTabActivity.store.getWebsite();
+		if (!website.equals("")) {
+			Uri uri = Uri.parse(website);
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(uri);
+			startActivity(intent);
+		}
+	}
 
-    public void onReportClicked(View v) {
-    	Session session = Session.getInstance(this);
-        if (!session.isLogin()) {
-            startActivity(new Intent(this, LoginActivity.class));
-        } else {
-        	String a[] = { MatjiConstants.string(R.string.default_string_store_modify_request), 
-        					MatjiConstants.string(R.string.default_string_store_close)};
-        	listDialog = new SimpleListDialog(this, null, a);
-        	successDialog = new SimpleAlertDialog(this, R.string.store_close_success);
-
-        	listDialog.setOnClickListener(this);
-        	successDialog.setOnClickListener(this);
-        	listDialog.show();
-    	}
-    }
+	// Store info modify or report close
+	public void onReportClicked(View v) {
+		Session session = Session.getInstance(this);
+		if (session.isLogin()) {
+			String a[] = { MatjiConstants.string(R.string.default_string_store_modify_request), 
+					MatjiConstants.string(R.string.default_string_store_close)};
+			SimpleListDialog listDialog = new SimpleListDialog(this, null, a);
+			listDialog.setOnClickListener(this);
+			listDialog.show();
+		} else {
+			startActivity(new Intent(this, LoginActivity.class));
+		}
+	}
 
 	public void onItemClick(SimpleDialog dialog, int position) {
 		switch (position) {
-		case 0:
-        	Intent intent = new Intent(this, StoreModifyActivity.class);
-        	intent.putExtra(StoreModifyActivity.STORE, (Parcelable) StoreDetailInfoTabActivity.store);
-        	startActivity(intent);
+		case TAG_STORE_MODIFY:
+			Intent intent = new Intent(this, StoreModifyActivity.class);
+			intent.putExtra(StoreModifyActivity.STORE, (Parcelable) StoreDetailInfoTabActivity.store);
+			startActivity(intent);
 			break;
-		case 1:
-		    reportDialog.show();
+		case TAG_STORE_CLOSE:
+			reportDialog.show();
 			break;
 		}
 	}

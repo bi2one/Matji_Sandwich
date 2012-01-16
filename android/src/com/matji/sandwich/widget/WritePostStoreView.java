@@ -74,13 +74,11 @@ View.OnClickListener {
 	public void onClick(View v) {
 		if (clickListener == null)
 			return ;
-
 		int viewId = v.getId();
-		if (viewId == searchLocationButton.getId()) {
+		if (viewId == searchLocationButton.getId())
 			clickListener.onSearchLocationClick(v);
-		} else if (viewId == writeStoreButton.getId()) {
+		else if (viewId == writeStoreButton.getId())
 			clickListener.onWriteStoreClick(v);
-		}
 	}
 
 	public interface StoreSelectListener {

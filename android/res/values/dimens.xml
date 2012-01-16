@@ -139,7 +139,11 @@
 	<!-- Popup menu -->
 	<dimen name="popupmenu_width">48.67dp</dimen>
 	<dimen name="popupmenu_height">47.33dp</dimen>
-
+	
+	<!-- location_matji_mapview.xml -->
+	<dimen name="location_matji_mapview_center_width">17dp</dimen>
+	<dimen name="location_matji_mapview_center_height">23dp</dimen>
+	
 	<!-- radius_matji_mapview.xml -->
 	<dimen name="radius_matji_mapview_ring_width">280dp</dimen>
 	<dimen name="radius_matji_mapview_ring_height">280dp</dimen>
@@ -231,6 +235,11 @@
     <dimen name="image_slider_padding">13.33dp</dimen>
     <dimen name="image_slider_post_margin">10dp</dimen>
 
+    <!-- location_matji_mapview.xml -->
+    <dimen name="mapview_footer_text_height">50dp</dimen>
+    <dimen name="mapview_footer_text_size">12dp</dimen>
+    <dimen name="mapview_footer_side_padding">20dp</dimen>
+    
     <!-- activity_edit.xml -->    
     <dimen name="edit_content_size">13.33dp</dimen>
     

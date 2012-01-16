@@ -38,9 +38,9 @@ public class WritePostHttpRequest implements ProgressRequestCommand {
         this.images = images;
 
         if (storeId <= 0) {
-            postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID, twitter, facebook);
+            postRequest.actionNew(post, tags, twitter, facebook);
         } else {
-            postRequest.actionNew(post, tags, PostHttpRequest.Device.ANDROID, storeId, twitter, facebook);
+            postRequest.actionNew(post, tags, storeId, twitter, facebook);
         }
     }
 

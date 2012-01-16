@@ -11,7 +11,7 @@ public class StoreModifyHttpRequest extends HttpRequest {
 		controller = "stores";
 	}
 	
-	public void actionModify(String name, String address, double lat, double lng, int store_id) {
+	public void actionModify(String name, String address, String add_address, double lat, double lng, int store_id) {
 		httpMethod = HttpMethod.HTTP_POST;
 		action = "modify";
 		parser = new StoreParser();
@@ -19,6 +19,7 @@ public class StoreModifyHttpRequest extends HttpRequest {
 		postHashtable.clear();
 		postHashtable.put("name", name);
 		postHashtable.put("address", address);
+		postHashtable.put("add_address", add_address);
 		postHashtable.put("lat", lat + "");
 		postHashtable.put("lng", lng + "");
 		postHashtable.put("store_id", store_id + "");

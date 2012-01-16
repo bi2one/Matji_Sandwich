@@ -18,7 +18,7 @@ import com.matji.sandwich.widget.SubtitleHeader;
 import com.matji.sandwich.widget.cell.StoreCell;
 import com.matji.sandwich.widget.title.StoreTitle;
 
-public class StoreImageListActivity extends BaseActivity implements Refreshable {
+public class StoreImageListActivity extends BaseActivity implements Refreshable, ActivityStartable {
 
     //    public static final String STORE = "store";
     private StoreTitle title;
@@ -119,4 +119,16 @@ public class StoreImageListActivity extends BaseActivity implements Refreshable 
         }
         return false;
     }
+
+	@Override
+	public void activityResultDelivered(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+        case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:
+            if (resultCode == Activity.RESULT_OK)
+                setIsFlow(true);
+            break;
+        }
+	}
+
+
 }

@@ -14,7 +14,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class SessionRecentSearchUtil {
-	private static final int CAPACITY = 5;
+	private static final int CAPACITY = 15;
 	private Session session;
 	private PreferenceProvider preferenceProvider;
 	private WeakReference<Context> contextRef;

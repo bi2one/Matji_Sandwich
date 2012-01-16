@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:id="@+id/activity_get_map_position"
-		style="@style/DefaultFill" >
-  <com.matji.sandwich.widget.title.CompletableTitle
-      android:id="@+id/activity_get_map_position_title"
-      android:layout_alignParentTop="true"
-      style="@style/DefaultWidthFill" />
-  
-  <com.matji.sandwich.map.RadiusMatjiMapView
-      android:id="@+id/activity_get_map_position_mapview"
-      style="@style/DefaultFill"
-      android:layout_below="@id/activity_get_map_position_title"
-      android:apiKey="@string/map_api_key"
-      android:clickable="true"/>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_get_map_position"
+    style="@style/DefaultFill" >
+    <com.matji.sandwich.widget.title.CompletableTitle
+        android:id="@+id/activity_get_map_position_title"
+        style="@style/DefaultWidthFill"
+        android:layout_alignParentTop="true" />
+    <com.matji.sandwich.map.RadiusMatjiMapView
+        android:id="@+id/activity_get_map_position_mapview"
+        style="@style/DefaultFill"
+        android:layout_below="@id/activity_get_map_position_title"
+        android:apiKey="@string/map_api_key"
+        android:clickable="true"/> 
 </RelativeLayout>

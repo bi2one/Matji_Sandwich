@@ -42,229 +42,218 @@ import com.matji.sandwich.util.adapter.LocationToGeoPointAdapter;
 import com.matji.sandwich.widget.StoreMapNearListView;
 
 public class MainMatjiMapView extends MatjiMapView implements MatjiMapCenterListener, MatjiLocationListener, Requestable, OnTouchListener {
-    private static final int LAT_SPAN = (int)(0.005 * 1E6);
-    private static final int LNG_SPAN = (int)(0.005 * 1E6);
-    private static final int GPS_START_TAG = 1;
-    private static final int NEARBY_STORE = 1;
-    private static final int GEOCODE = 2;
-    private MapController mapController;
-    private Context context;
-    private TextView addressView;
-    private RelativeLayout addressWrapper;
-    private WeakReference<BaseMapActivity> activityRef;
-    private HttpRequestManager requestManager;
-    private StoreItemizedOverlay storeItemizedOverlay;
-    private SessionMapUtil sessionUtil;
-    private ArrayList<MatjiData> stores;
-    private GpsManager gpsManager;
-    private Location prevLocation;
-    private ViewGroup spinnerLayout;
-    private int limit;
-    
-    private StoreMapNearListView listView;
+	private static final int LAT_SPAN = (int)(0.005 * 1E6);
+	private static final int LNG_SPAN = (int)(0.005 * 1E6);
+	private static final int GPS_START_TAG = 1;
+	private static final int NEARBY_STORE = 1;
+	private static final int GEOCODE = 2;
+	private WeakReference<BaseMapActivity> activityRef;
+	private StoreItemizedOverlay storeItemizedOverlay;
+	private HttpRequestManager requestManager;
+	private RelativeLayout addressWrapper;
+	private StoreMapNearListView listView;
+	private MapController mapController;
+	private ArrayList<MatjiData> stores;
+	private SessionMapUtil sessionUtil;
+	private ViewGroup spinnerLayout;
+	private GpsManager gpsManager;
+	private Location prevLocation;
+	private TextView addressView;
+	private Context context;
+	private int limit;
 
-    public MainMatjiMapView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.context = context;
-        setMapCenterListener(this);
-        setOnTouchListener(this);
-    }
-    
-    public void setListView(StoreMapNearListView listView) {
-        this.listView = listView;
-    }
+	public MainMatjiMapView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		this.context = context;
+		setMapCenterListener(this);
+		setOnTouchListener(this);
+	}
 
-    public void init(RelativeLayout addressWrapper, TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
-        setAddressView(addressView);
-        setBaseMapActivity(activity);
+	public void setListView(StoreMapNearListView listView) {
+		this.listView = listView;
+	}
 
-        this.spinnerLayout = spinnerLayout;
-        this.addressWrapper = addressWrapper;
-        storeItemizedOverlay = new StoreItemizedOverlay(context, this);
-        mapController = getController();
-        // requestManager = HttpRequestManager.getInstance(context);
-        requestManager = HttpRequestManager.getInstance();
-        sessionUtil = new SessionMapUtil(context);
-        gpsManager = new GpsManager(context, this);
+	public void init(RelativeLayout addressWrapper, TextView addressView, BaseMapActivity activity, ViewGroup spinnerLayout) {
+		setAddressView(addressView);
+		setBaseMapActivity(activity);
+		this.spinnerLayout = spinnerLayout;
+		this.addressWrapper = addressWrapper;
+		storeItemizedOverlay = new StoreItemizedOverlay(context, this);
+		mapController = getController();
+		requestManager = HttpRequestManager.getInstance();
+		sessionUtil = new SessionMapUtil(context);
+		gpsManager = new GpsManager(context, this);
+		mapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
+	}
 
-        mapController.zoomToSpan(LAT_SPAN, LNG_SPAN);
-        moveToGpsCenter();
-    }
-    
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
 
-    public void setOverlayClickListener(OverlayClickListener listener) {
-        storeItemizedOverlay.setOverlayClickListener(listener);
-    }
+	public void setOverlayClickListener(OverlayClickListener listener) {
+		storeItemizedOverlay.setOverlayClickListener(listener);
+	}
 
-    public void setStartConfigListener(GpsManager.StartConfigListener listener) {
-        gpsManager.setStartConfigListener(listener);
-    }
+	public void setStartConfigListener(GpsManager.StartConfigListener listener) {
+		gpsManager.setStartConfigListener(listener);
+	}
 
-    public void reload() {
-        Runnable runnable = new MapRunnable(this);
-        activityRef.get().runOnUiThread(runnable);
-        setCenter(sessionUtil.getCenter());
-        startMapCenterThreadNotFirstLoading();
-    }
+	public void reload() {
+		Runnable runnable = new MapRunnable(this);
+		activityRef.get().runOnUiThread(runnable);
+		setCenter(sessionUtil.getCenter());
+		startMapCenterThreadNotFirstLoading();
+	}
 
-    public void moveToGpsCenter() {
-        stopMapCenterThread();
-        gpsManager.start(GPS_START_TAG, activityRef.get());
-        
-        Toast.makeText(getContext(), R.string.main_map_find_center, Toast.LENGTH_LONG).show();
-    }
+	public void moveToGpsCenter() {
+		stopMapCenterThread();
+		gpsManager.start(GPS_START_TAG, activityRef.get());
+		Toast.makeText(getContext(), R.string.main_map_find_center, Toast.LENGTH_LONG).show();
+	}
 
-    public void setCenter(Location location) {
-        setCenter(new LocationToGeoPointAdapter(location));
-    }
+	public void setCenter(Location location) {
+		setCenter(new LocationToGeoPointAdapter(location));
+	}
 
-    public void setCenter(GeoPoint point) {
-        mapController.animateTo(point);
-    }
+	public void setCenter(GeoPoint point) {
+		mapController.animateTo(point);
+	}
 
-    public void setCenterNotAnimate(GeoPoint point) {
-        mapController.setCenter(point);
-    }
+	public void setCenterNotAnimate(GeoPoint point) {
+		mapController.setCenter(point);
+	}
 
-    public void setCenterNotAnimate(Location location) {
-        setCenterNotAnimate(new LocationToGeoPointAdapter(location));
-    }
+	public void setCenterNotAnimate(Location location) {
+		setCenterNotAnimate(new LocationToGeoPointAdapter(location));
+	}
 
-    public void onMapCenterChanged(GeoPoint point) {
-        sessionUtil.setBound(getBound(BoundType.MAP_BOUND_NE),
-                getBound(BoundType.MAP_BOUND_SW));
-        sessionUtil.setCenter(point);
+	public void onMapCenterChanged(GeoPoint point) {
+		sessionUtil.setBound(getBound(BoundType.MAP_BOUND_NE),
+				getBound(BoundType.MAP_BOUND_SW));
+		sessionUtil.setCenter(point);
 
-        Runnable runnable = new MapRunnable(this);
-        activityRef.get().runOnUiThread(runnable);
-    }
+		Runnable runnable = new MapRunnable(this);
+		activityRef.get().runOnUiThread(runnable);
+	}
 
-    public void updatePopupOverlay(Store store) {
-        storeItemizedOverlay.updateLastPopupOverlay(store);
-    }
+	public void updatePopupOverlay(Store store) {
+		storeItemizedOverlay.updateLastPopupOverlay(store);
+	}
 
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-        switch (tag) {
-        case NEARBY_STORE:
-            stores = data;
-            listView.setStores(stores);
-            Collections.reverse(stores);
-            drawOverlays();
-            break;
-        case GEOCODE:
-            GeocodeAddress geocodeAddress = GeocodeUtil.approximateAddress(data,
-                    sessionUtil.getNEBound(),
-                    sessionUtil.getSWBound());
-            addressView.setText(geocodeAddress.getShortenFormattedAddress());
-        }
-    }
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		switch (tag) {
+		case NEARBY_STORE:
+			stores = data;
+			listView.setStores(stores);
+			Collections.reverse(stores);
+			drawOverlays();
+			break;
+		case GEOCODE:
+			GeocodeAddress geocodeAddress = GeocodeUtil.approximateAddress(data,
+					sessionUtil.getNEBound(),
+					sessionUtil.getSWBound());
+			addressView.setText(geocodeAddress.getShortenFormattedAddress());
+		}
+	}
 
-    public void onLocationChanged(int startedFromTag, Location location) {
-        if (prevLocation != null) {
-            if (prevLocation.getAccuracy() >= location.getAccuracy()) {
-                startMapCenterThread(new LocationToGeoPointAdapter(location));
-                gpsManager.stop();
-            }
-        }
+	public void onLocationChanged(int startedFromTag, Location location) {
+		if (prevLocation != null) {
+			if (prevLocation.getAccuracy() >= location.getAccuracy()) {
+				startMapCenterThread(new LocationToGeoPointAdapter(location));
+				gpsManager.stop();
+			}
+		}
+		sessionUtil.setNearBound(new LocationToGeoPointAdapter(location));
+		mapController.zoomToSpan(sessionUtil.getBasicLatSpan(), sessionUtil.getBasicLngSpan());
 
-        sessionUtil.setNearBound(new LocationToGeoPointAdapter(location));
-        mapController.zoomToSpan(sessionUtil.getBasicLatSpan(), sessionUtil.getBasicLngSpan());
+		if (prevLocation == null)
+			setCenterNotAnimate(location);
+		else
+			setCenter(location);
+		prevLocation = location;
+//		if (listView != null)
+//			listView.refresh();
+	}
 
-        if (prevLocation == null) {
-            setCenterNotAnimate(location);
-        } else {
-            setCenter(location);
-        }
-        
-        prevLocation = location;
-    }
+	public void onLocationExceptionDelivered(int startedFromTag, MatjiException e) {
+		e.performExceptionHandling(context);
+	}
 
-    public void onLocationExceptionDelivered(int startedFromTag, MatjiException e) {
-        e.performExceptionHandling(context);
-    }
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.performExceptionHandling(context);
+	}
 
-    public void requestExceptionCallBack(int tag, MatjiException e) {
-        e.performExceptionHandling(context);
-    }
+	public boolean onTouch(View v, MotionEvent e) {
+		switch(e.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			gpsManager.stop();
+			requestManager.turnOff();
+			startMapCenterThread();
+			break;
+		case MotionEvent.ACTION_UP:
+			requestManager.turnOn();
+		}
+		return false;
+	}
 
-    public boolean onTouch(View v, MotionEvent e) {
-        switch(e.getAction()) {
-        case MotionEvent.ACTION_DOWN:
-            gpsManager.stop();
-            requestManager.turnOff();
-            startMapCenterThread();
-            break;
-        case MotionEvent.ACTION_UP:
-            requestManager.turnOn();
-        }
-        return false;
-    }
+	private void drawOverlays() {
+		List<Overlay> overlays = getOverlays();
+		for (int i = 0; i < overlays.size(); i++) {
+			Overlay overlay = overlays.get(i);
+			if (!(overlay instanceof MyLocationOverlay)) overlays.remove(i); 
+		}
 
-    private void drawOverlays() {
-        List<Overlay> overlays = getOverlays();
-        for (int i = 0; i < overlays.size(); i++) {
-            Overlay overlay = overlays.get(i);
-            if (!(overlay instanceof MyLocationOverlay)) overlays.remove(i); 
-        }
-        
-        storeItemizedOverlay.getOverlayItems().clear();
+		storeItemizedOverlay.getOverlayItems().clear();
 
-        for (MatjiData storeData : stores) {
-            Store store = (Store)storeData;
+		for (MatjiData storeData : stores) {
+			Store store = (Store)storeData;
 
-            storeItemizedOverlay.addOverlay(store);
-        }
-        storeItemizedOverlay.mPopulate();
-        postInvalidate();
-    }
+			storeItemizedOverlay.addOverlay(store);
+		}
+		storeItemizedOverlay.mPopulate();
+		postInvalidate();
+	}
 
-    private void setAddressView(TextView addressView) {
-        this.addressView = addressView;
-    }
+	private void setAddressView(TextView addressView) {
+		this.addressView = addressView;
+	}
 
-    private void setBaseMapActivity(BaseMapActivity activity) {
-        this.activityRef = new WeakReference<BaseMapActivity>(activity);
-    }
+	private void setBaseMapActivity(BaseMapActivity activity) {
+		this.activityRef = new WeakReference<BaseMapActivity>(activity);
+	}
 
-    public class MapRunnable implements Runnable{
-        private Requestable requestable;
+	public void stop() {
+		gpsManager.stop();	
+	}
 
-        public MapRunnable(Requestable requestable) {
-            this.requestable = requestable;
-        }
+	public class MapRunnable implements Runnable{
+		private Requestable requestable;
 
-        public void run() {
-            loadStoresOnMap();
-        }
+		public MapRunnable(Requestable requestable) {
+			this.requestable = requestable;
+		}
 
-        private void loadStoresOnMap(){
-            StoreHttpRequest request = new StoreHttpRequest(context);
-            GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
+		public void run() {
+			loadStoresOnMap();
+		}
 
-            CoordinateRegion cr = new CoordinateRegion(getMapCenter(), getLatitudeSpan(), getLongitudeSpan());
-            GeoPoint swPoint = cr.getSWGeoPoint();
-            GeoPoint nePoint = cr.getNEGeoPoint();
+		private void loadStoresOnMap(){
+			CoordinateRegion cr = new CoordinateRegion(getMapCenter(), getLatitudeSpan(), getLongitudeSpan());
+			GeoPoint swPoint = cr.getSWGeoPoint();
+			GeoPoint nePoint = cr.getNEGeoPoint();
 
-            double lat_sw = (double)(swPoint.getLatitudeE6()) / (double)1E6;
-            double lng_sw = (double)(swPoint.getLongitudeE6()) / (double)1E6;
-            double lat_ne = (double)(nePoint.getLatitudeE6()) / (double)1E6;
-            double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
+			double lat_sw = (double)(swPoint.getLatitudeE6()) / (double)1E6;
+			double lng_sw = (double)(swPoint.getLongitudeE6()) / (double)1E6;
+			double lat_ne = (double)(nePoint.getLatitudeE6()) / (double)1E6;
+			double lng_ne = (double)(nePoint.getLongitudeE6()) / (double)1E6;
 
-            request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, limit);
-            geocodeRequest.actionReverseGeocodingByGeoPoint(sessionUtil.getCenter(), sessionUtil.getCurrentCountry());
-            requestManager.request(getContext(), addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
-            requestManager.request(getContext(), spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
-            // try {
-            // 	Log.d("=====", "request start");
-            // 	requestCallBack(GEOCODE, geocodeRequest.request());
-            // 	requestCallBack(NEARBY_STORE, request.request());
-            // 	Log.d("=====", "request end");
-            // } catch(MatjiException e) {
-            // 	e.performExceptionHandling(context);
-            // }
-        }
-    }
+			StoreHttpRequest request = new StoreHttpRequest(context);
+			request.actionNearbyList(lat_sw, lat_ne, lng_sw, lng_ne, 1, limit);
+			GeocodeHttpRequest geocodeRequest = new GeocodeHttpRequest(context);
+			geocodeRequest.actionReverseGeocodingByGeoPoint(sessionUtil.getCenter(), sessionUtil.getCurrentCountry());
+
+			requestManager.request(getContext(), spinnerLayout, SpinnerType.NORMAL, request, NEARBY_STORE, requestable);
+			requestManager.request(getContext(), addressWrapper, SpinnerType.SMALL, geocodeRequest, GEOCODE, requestable);
+		}
+	}
 }

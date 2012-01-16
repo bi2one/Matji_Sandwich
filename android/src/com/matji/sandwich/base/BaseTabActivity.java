@@ -80,6 +80,9 @@ public abstract class BaseTabActivity extends TabActivity implements ActivityEnt
         }
     }
 
+
+    
+    
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub

@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.matji.sandwich.ActivityStartable;
 import com.matji.sandwich.ImageSliderActivity;
 import com.matji.sandwich.base.BaseActivity;
+import com.matji.sandwich.base.BaseTabActivity;
 import com.matji.sandwich.data.AttachFile;
 
 /**
@@ -64,6 +66,17 @@ public class GotoImageSliderAction implements OnClickListener {
 		Intent viewerIntent = new Intent(context, ImageSliderActivity.class);
 		viewerIntent.putExtra(ImageSliderActivity.ATTACH_FILES, attachFiles);
 		viewerIntent.putExtra(ImageSliderActivity.POSITION, position);
-		((Activity) context).startActivityForResult(viewerIntent, BaseActivity.IMAGE_SLIDER_ACTIVITY);
+		
+        if (((Activity) context).getParent() != null 
+                && ((Activity) context).getParent() instanceof BaseTabActivity) {
+        	BaseTabActivity tabActivity = (BaseTabActivity)(((Activity) context).getParent());
+        	tabActivity.tabStartActivityForResult(viewerIntent, BaseActivity.IMAGE_SLIDER_ACTIVITY, (ActivityStartable) context);
+        }
+        else
+        {
+    		((Activity) context).startActivityForResult(viewerIntent, BaseActivity.IMAGE_SLIDER_ACTIVITY);		
+		
+        }		
+
 	}
 }

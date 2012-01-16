@@ -17,7 +17,7 @@ import com.matji.sandwich.widget.cell.UserCell;
 import com.matji.sandwich.widget.cell.UserIntroCell;
 import com.matji.sandwich.widget.title.UserTitle;
 
-public class UserPostListActivity extends BaseActivity implements Refreshable {
+public class UserPostListActivity extends BaseActivity implements Refreshable, ActivityStartable {
     private UserTitle title;
     private UserPostListView listView;
     private UserCell userCell;
@@ -124,4 +124,22 @@ public class UserPostListActivity extends BaseActivity implements Refreshable {
         }
         return false;
     }
+
+	@Override
+	public void activityResultDelivered(int requestCode, int resultCode,
+			Intent data) {
+        switch (requestCode) {
+        case POST_MAIN_ACTIVITY:
+            if (resultCode == RESULT_OK) {
+                ArrayList<MatjiData> posts = data.getParcelableArrayListExtra(PostMainActivity.POSTS);
+                listView.setPosts(posts);
+                setIsFlow(true);
+            }
+            break;
+        case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:
+            if (resultCode == Activity.RESULT_OK)
+                setIsFlow(true);
+            break;
+        }
+	}
 }

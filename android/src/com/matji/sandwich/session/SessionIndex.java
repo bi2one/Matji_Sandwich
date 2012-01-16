@@ -33,6 +33,7 @@ public class SessionIndex {
     public static final String PRIVATE_NEW_NOTICE_COUNT = "NewIcon.new_notice_count";
     public static final String PRIVATE_SAVED_USER_ID = "SessionPrivateUtil.user_id";
     public static final String PRIVATE_IS_CHECKED_SAVE_USER_ID = "SessionPrivateUtil.is_checked_save_user_id";
+    public static final String PRIVATE_IS_AGREED_USING_LOCATION_INFO = "SessionPrivateUtil.is_agreed_using_location_info";
     
     public static final String RECENT_STORE_SEARCH = "StoreSearchActivity.recent_store_search";
 }

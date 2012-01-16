@@ -33,10 +33,9 @@ public class LoginActivity extends BaseActivity implements Loginable {
 
     /* Loginable Interface methods */
     public void loginCompleted() {
-        this.setResult(RESULT_OK);
+        setResult(RESULT_OK);
         finish();
     }
 
-    public void loginFailed() {
-    }
+    public void loginFailed() {}
 }

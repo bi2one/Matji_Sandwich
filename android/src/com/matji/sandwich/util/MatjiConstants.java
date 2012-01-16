@@ -17,7 +17,6 @@ import com.matji.sandwich.R;
  */
 public class MatjiConstants {
     private static WeakReference<Resources> mResourcesRef;
-
     public static final int MIN_NICK_LENGTH = 2;
     public static final int MAX_NICK_LENGTH = 12;
     public static final int MIN_PASSWORD_LENGTH = 6;
@@ -70,7 +69,6 @@ public class MatjiConstants {
         for (int i = 0; i < codes.length; i++) {
             if (code.equals(codes[i])) return names[i];
         }
-        
         return null;
     }   
     
@@ -80,7 +78,6 @@ public class MatjiConstants {
         for (int i = 0; i < codes.length; i++) {
             if (name.equals(names[i])) return codes[i];
         }
-        
         return null;
     }
 }

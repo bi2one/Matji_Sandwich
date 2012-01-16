@@ -21,17 +21,17 @@ import com.matji.sandwich.widget.title.StoreLocationTitle;
 
 public class StoreLocationMapActivity extends BaseMapActivity {
     public static String INTENT_STORE = "StoreLocationMapActivity.store";
-    private HighlightHeader header;
-    private StoreLocationTitle titleBar;
-    private MapView mapView;
+    private MyLocationOverlay myLocationOverlay;
+    private PhoneCallUtil phoneCallUtil;
     private MapController mapController;
+    private StoreLocationTitle titleBar;
+    private HighlightHeader header;
     private TextView addressView;
     private TextView phoneView;
     private Intent arguments;
+    private MapView mapView;
     private Store store;
-    private PhoneCallUtil phoneCallUtil;
-    private MyLocationOverlay myLocationOverlay;
-    
+
     public int setMainViewId() {
         return R.id.activity_store_location_map;
     }
@@ -57,17 +57,26 @@ public class StoreLocationMapActivity extends BaseMapActivity {
         myLocationOverlay = new MyLocationOverlay(this, mapView);
         mapView.getOverlays().add(myLocationOverlay);
     }
-
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myLocationOverlay.enableMyLocation();
+    }
+    
+    @Override
+    protected void onStop() {
+        myLocationOverlay.disableMyLocation();
+        super.onStop();
+    }
+    
     private void setStore(Store store) {
         header.setTitle(String.format(MatjiConstants.string(R.string.store_location_header), store.getName()));
         addressView.setText(store.getAddress());
-
-        if (store.getTel() != null && store.getTel().trim().equals("")) {
+        if (store.getTel() != null && store.getTel().trim().equals(""))
             phoneView.setVisibility(View.GONE);
-        } else {
+        else
             phoneView.setText(store.getTel());
-        }
-
         setOverlay(store);
     }
 
@@ -84,18 +93,5 @@ public class StoreLocationMapActivity extends BaseMapActivity {
 
     public void onPhoneClick(View v) {
         phoneCallUtil.call(store.getTelNotDashed());
-    }
-
-    
-    @Override
-    protected void onStop() {
-        myLocationOverlay.disableMyLocation();
-        super.onStop();
-    }
-    
-    @Override
-    protected void onResume() {
-        super.onResume();
-        myLocationOverlay.enableMyLocation();
     }
 }

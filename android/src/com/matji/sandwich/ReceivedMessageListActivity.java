@@ -1,5 +1,7 @@
 package com.matji.sandwich;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -7,8 +9,7 @@ import android.view.MenuItem;
 import com.matji.sandwich.base.BaseActivity;
 import com.matji.sandwich.widget.ReceivedMessageListView;
 
-public class ReceivedMessageListActivity extends BaseActivity {
-
+public class ReceivedMessageListActivity extends BaseActivity implements ActivityStartable {
     private ReceivedMessageListView listView;
     
     public int setMainViewId() {
@@ -17,7 +18,6 @@ public class ReceivedMessageListActivity extends BaseActivity {
 
     @Override
     protected void onNotFlowResume() {
-        // TODO Auto-generated method stub
         super.onFlowResume();
         listView.requestReload();
     }
@@ -26,7 +26,6 @@ public class ReceivedMessageListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_received_message_list);
-        
         listView = (ReceivedMessageListView) findViewById(R.id.received_message_list_view);
         listView.setActivity(this);
     }
@@ -46,4 +45,14 @@ public class ReceivedMessageListActivity extends BaseActivity {
         }
         return false;
     }
+
+	@Override
+	public void activityResultDelivered(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+        case STORE_MAIN_ACTIVITY: case USER_MAIN_ACTIVITY: case IMAGE_SLIDER_ACTIVITY:
+            if (resultCode == Activity.RESULT_OK)
+                setIsFlow(true);
+            break;
+        }		
+	}
 }

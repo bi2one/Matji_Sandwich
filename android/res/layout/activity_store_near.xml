@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/activity_store_near"
+		style="@style/DefaultFill" >
+  <com.matji.sandwich.widget.title.HomeTitle
+      android:id="@+id/activity_store_near_title"
+      android:layout_alignParentTop="true"
+      style="@style/DefaultWidthFill" />
+  <com.matji.sandwich.widget.StoreNearContents
+      android:id="@+id/activity_store_near_contents"
+      android:layout_below="@id/activity_store_near_title"
+      style="@style/DefaultFill" />
+</RelativeLayout>

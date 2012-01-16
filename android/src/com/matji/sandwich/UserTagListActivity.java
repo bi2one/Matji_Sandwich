@@ -88,6 +88,17 @@ public class UserTagListActivity extends BaseActivity implements Refreshable, Lo
         visibleCloudView();
     }
     
+    
+    @Override
+    protected void onDestroy() {
+    	// TODO Auto-generated method stub
+    	super.onDestroy();
+    	
+    	Session.getInstance(this).removeLoginListener(this);
+    }
+
+    
+    
     public void toggleTagView() {
         if (isVisibleCloudView) {
             visibleListView();

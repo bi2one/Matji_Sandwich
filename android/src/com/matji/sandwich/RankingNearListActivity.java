@@ -114,7 +114,6 @@ ActivityStartable {
 				gpsManager.stop();
 			}
 		}
-
 		prevLocation = location;
 	}
 

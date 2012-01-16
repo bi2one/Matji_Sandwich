@@ -29,7 +29,7 @@ import com.matji.sandwich.location.MatjiLocationListener;
 
 import java.util.ArrayList;
 
-public class RadiusMatjiMapView extends RelativeLayout implements MatjiMapViewInterface,
+public class LocationMatjiMapView extends RelativeLayout implements MatjiMapViewInterface,
 SimpleSubmitLocationBar.OnClickListener,
 MatjiMapCenterListener,
 Requestable,
@@ -50,13 +50,13 @@ MatjiLocationListener {
 	private SessionMapUtil sessionMapUtil;
 	private GpsManager gpsManager;
 
-	public RadiusMatjiMapView(Context context, AttributeSet attrs) {
+	public LocationMatjiMapView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
 
-		LayoutInflater.from(context).inflate(R.layout.radius_matji_mapview, this, true);
-		mapView = (MatjiMapView)findViewById(R.id.radius_matji_mapview_map);
-		locationBar = (SimpleSubmitLocationBar)findViewById(R.id.radius_matji_mapview_location_bar);
+		LayoutInflater.from(context).inflate(R.layout.location_matji_mapview, this, true);
+		mapView = (MatjiMapView)findViewById(R.id.location_matji_mapview_map);
+		locationBar = (SimpleSubmitLocationBar)findViewById(R.id.location_matji_mapview_location_bar);
 		geocodeRunnable = new GeocodeRunnable(locationBar.getSpinnerContainer(), context, this);
 		requestManager = HttpRequestManager.getInstance();
 		sessionMapUtil = new SessionMapUtil(context);
@@ -87,7 +87,6 @@ MatjiLocationListener {
 				gpsManager.stop();
 			}
 		}
-
 		prevLocation = location;
 		setCenter(new LocationToGeoPointAdapter(location));
 	}
@@ -149,13 +148,16 @@ MatjiLocationListener {
 	}
 
 	public void onSubmitClick() {
-		if (clickListener != null) {
+		if (clickListener != null)
 			clickListener.onSubmitClick(this, lastNEBound, lastSWBound);
-		}
 	}
 
 	public void onLocationClick() {
 		gpsManager.start(GPS_START_TAG, null);
+	}
+	
+	public void stop() {
+		gpsManager.stop();
 	}
 
 	private class GeocodeRunnable implements Runnable {

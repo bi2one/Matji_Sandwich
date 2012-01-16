@@ -124,7 +124,6 @@ public abstract class HttpRequest implements ProgressRequestCommand {
             Map<String, Object> postMap,
             Map<String, String> getMap,
             int method) throws HttpConnectMatjiException {
-    	Log.d("Matji","request do it?");
         SimpleHttpResponse httpResponse = null;
         // ConnectivityManager cm = (ConnectivityManager)contextRef.get().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo_mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);

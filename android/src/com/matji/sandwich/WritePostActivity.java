@@ -29,6 +29,7 @@ import com.matji.sandwich.widget.GetPictureLayout;
 import com.matji.sandwich.widget.PostEditText;
 import com.matji.sandwich.widget.RelativeLayoutThatDetectsSoftKeyboard;
 import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
+import com.matji.sandwich.widget.dialog.SimpleConfirmDialog;
 import com.matji.sandwich.widget.dialog.SimpleDialog;
 import com.matji.sandwich.widget.title.CompletableTitle;
 
@@ -38,323 +39,324 @@ PostEditText.OnClickListener,
 GetPictureLayout.OnClickListener,
 Requestable,
 SimpleAlertDialog.OnClickListener {
-    public static final String FROM_MAIN = "WritePostActivity.from_main";
-    public static final String INTENT_STORE = "WritePostActivity.store";
-    public static final String INTENT_TAGS = "WritePostActivity.tags";
-    public static final String INTENT_USER = "WritePostActivity.user";
-    
-    private static final int TAG_WRITE_POST = 0;
-    private static final int INTENT_SELECT_STORE = 0;
-    private static final int INTENT_SELECT_TAG = 1;
-    private static final int INTENT_EXTERNAL_SERVICE = 4;
-    private static final int INTENT_CAMERA = 2;
-    private static final int INTENT_ALBUM = 3;
-    //    private static final int BASIC_STORE_ID = -1;
-    private Context context;
-    private PhotoUtil photoUtil;
-    private PostEditText postText;
-    private RelativeLayoutThatDetectsSoftKeyboard mainView;
-    private HttpRequestManager requestManager;
-    //    private SessionMapUtil sessionMapUtil;
-    private CompletableTitle titleBar;
-    private RelativeLayout imageKeyboard;
-    private AlbumView albumView;
-    private GetPictureLayout pictureButtons;
-    private int contentHeightWithoutKeyboard;
-    private int contentHeightWithKeyboard;
-    private int keyboardHeight;
-    private LayoutParams keyboardLayoutParams;
-    private boolean isShowImageKeyboardAfterHide;
-    private boolean isShowNormalKeyboardAfterHide;
-    private boolean isFlowIsCamera = false;
-    private Store store;
-    private String tags = "";
-    private Boolean isTwitter = false;
-    private Boolean isFacebook = false;
-    private SimpleAlertDialog postEmptyDialog;
-    private SimpleAlertDialog successDialog;
-    private SimpleAlertDialog albumFullDialog;
-    private Intent inputIntent;
+	public static final String FROM_MAIN = "WritePostActivity.from_main";
+	public static final String INTENT_STORE = "WritePostActivity.store";
+	public static final String INTENT_TAGS = "WritePostActivity.tags";
+	public static final String INTENT_USER = "WritePostActivity.user";
 
-    public int setMainViewId() {
-        return R.id.activity_write_post;
-    }
+	private static final int TAG_WRITE_POST = 0;
+	private static final int INTENT_SELECT_STORE = 0;
+	private static final int INTENT_SELECT_TAG = 1;
+	private static final int INTENT_EXTERNAL_SERVICE = 4;
+	private static final int INTENT_CAMERA = 2;
+	private static final int INTENT_ALBUM = 3;
+	private boolean isShowImageKeyboardAfterHide;
+	private boolean isShowNormalKeyboardAfterHide;
+	private boolean isFlowIsCamera = false;
+	private boolean isTwitter = false;
+	private boolean isFacebook = false;
+	private int contentHeightWithoutKeyboard;
+	private int contentHeightWithKeyboard;
+	private int keyboardHeight;
+	private String tags = "";
+	private Store store;
+	private Context context;
+	private PhotoUtil photoUtil;
+	private PostEditText postText;
+	private RelativeLayoutThatDetectsSoftKeyboard mainView;
+	private HttpRequestManager requestManager;
+	private CompletableTitle titleBar;
+	private RelativeLayout imageKeyboard;
+	private AlbumView albumView;
+	private GetPictureLayout pictureButtons;
+	private LayoutParams keyboardLayoutParams;
+	private SimpleAlertDialog postEmptyDialog;
+	private SimpleAlertDialog successDialog;
+	private SimpleAlertDialog albumFullDialog;
+	private Intent inputIntent;
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write_post);
+	public int setMainViewId() {
+		return R.id.activity_write_post;
+	}
 
-        context = getApplicationContext();
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_write_post);
 
-        photoUtil = new PhotoUtil(this);
-        requestManager = HttpRequestManager.getInstance();
-        //	sessionMapUtil = new SessionMapUtil(context);
-        mainView = (RelativeLayoutThatDetectsSoftKeyboard)getMainView();
-        mainView.setListener(this);
+		context = getApplicationContext();
 
-        imageKeyboard = (RelativeLayout)findViewById(R.id.activity_write_post_image_keyboard);
-        pictureButtons = (GetPictureLayout)findViewById(R.id.activity_write_post_image_btns);
-        albumView = (AlbumView)findViewById(R.id.activity_write_post_albumview);
-        postText = (PostEditText)findViewById(R.id.activity_write_post_text);
-        titleBar = (CompletableTitle)findViewById(R.id.activity_write_post_title);
-        titleBar.setTitle(R.string.write_post_activity_title);
-        titleBar.setCompletable(this);
-        postText.setOnClickListener(this);
-        pictureButtons.setOnClickListener(this);
-        postEmptyDialog = new SimpleAlertDialog(this, R.string.post_edit_text_empty);
-        successDialog = new SimpleAlertDialog(this, R.string.write_post_success);
-        successDialog.setCancelable(false);
-        albumFullDialog = new SimpleAlertDialog(this, R.string.write_post_album_full);
-        successDialog.setOnClickListener(this);
-        postEmptyDialog.setOnClickListener(this);
+		photoUtil = new PhotoUtil(this);
+		requestManager = HttpRequestManager.getInstance();
+		mainView = (RelativeLayoutThatDetectsSoftKeyboard)getMainView();
+		mainView.setListener(this);
 
-        inputIntent = getIntent();
-        store = (Store)inputIntent.getParcelableExtra(INTENT_STORE);
-        tags = inputIntent.getStringExtra(INTENT_TAGS);
+		imageKeyboard = (RelativeLayout)findViewById(R.id.activity_write_post_image_keyboard);
+		pictureButtons = (GetPictureLayout)findViewById(R.id.activity_write_post_image_btns);
+		albumView = (AlbumView)findViewById(R.id.activity_write_post_albumview);
+		postText = (PostEditText)findViewById(R.id.activity_write_post_text);
+		titleBar = (CompletableTitle)findViewById(R.id.activity_write_post_title);
+		titleBar.setTitle(R.string.write_post_activity_title);
+		titleBar.setCompletable(this);
+		postText.setOnClickListener(this);
+		pictureButtons.setOnClickListener(this);
+		postEmptyDialog = new SimpleAlertDialog(this, R.string.post_edit_text_empty);
+		successDialog = new SimpleAlertDialog(this, R.string.write_post_success);
+		successDialog.setCancelable(false);
+		albumFullDialog = new SimpleAlertDialog(this, R.string.write_post_album_full);
+		successDialog.setOnClickListener(this);
+		postEmptyDialog.setOnClickListener(this);
 
-        checkStore(store);
-        checkTags(tags);
-    }
+		inputIntent = getIntent();
+		store = (Store)inputIntent.getParcelableExtra(INTENT_STORE);
+		tags = inputIntent.getStringExtra(INTENT_TAGS);
 
-    protected void onResume() {
-        super.onResume();
-        requestManager.turnOn();
-        if (isFlowIsCamera) {
-            isFlowIsCamera = false;
-        } else {
-            showKeyboardPostDelay();
-        }
-    }
+		checkStore(store);
+		checkTags(tags);
+	}
 
-    private void showKeyboardPostDelay() {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                postText.getEditText().requestFocus();
-                KeyboardUtil.showKeyboard(WritePostActivity.this, postText.getEditText());
-            }
-        }, 100);
-    }
+	protected void onResume() {
+		super.onResume();
+		requestManager.turnOn();
+		if (isFlowIsCamera) {
+			isFlowIsCamera = false;
+		} else {
+			showKeyboardPostDelay();
+		}
+	}
 
-    public void complete() {
-        WritePostHttpRequest postRequest = new WritePostHttpRequest(context);
-        String post = postText.getText();
-        ArrayList<File> imageFiles = albumView.getFiles();
+	private void showKeyboardPostDelay() {
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			public void run() {
+				postText.getEditText().requestFocus();
+				KeyboardUtil.showKeyboard(WritePostActivity.this, postText.getEditText());
+			}
+		}, 100);
+	}
 
-        if (!isValidPost(post)) {
-            return ;
-        }
+	public void complete() {
+		WritePostHttpRequest postRequest = new WritePostHttpRequest(context);
+		String post = postText.getText();
+		ArrayList<File> imageFiles = albumView.getFiles();
 
-        if (tags == null) {
-            tags = "";
-        }
+		if (!isValidPost(post))
+			return ;
+		if (tags == null)
+			tags = "";
 
-        postRequest.actionNew(post, tags, store, imageFiles, isTwitter, isFacebook);
-        // DialogAsyncTask requestTask = new DialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
-        ProgressDialogAsyncTask requestTask = new ProgressDialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
-        requestTask.execute();
-        // requestManager.request(getMainView(), postRequest, TAG_WRITE_POST, this);
-    }
+		postRequest.actionNew(post, tags, store, imageFiles, isTwitter, isFacebook);
+		// DialogAsyncTask requestTask = new DialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
+		ProgressDialogAsyncTask requestTask = new ProgressDialogAsyncTask(this, this, postRequest, TAG_WRITE_POST);
+		requestTask.execute();
+		// requestManager.request(getMainView(), postRequest, TAG_WRITE_POST, this);
+	}
 
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-        switch(tag) {
-        case TAG_WRITE_POST:
-            successDialog.show();
-            break;
-        }
-    }
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		switch(tag) {
+		case TAG_WRITE_POST:
+			successDialog.show();
+			break;
+		}
+	}
 
-    public void requestExceptionCallBack(int tag, MatjiException e) {
-        e.performExceptionHandling(context);
-    }
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.performExceptionHandling(context);
+	}
 
-    private boolean isValidPost(String post) {
-        if (post.trim().equals("")) {
-            postEmptyDialog.show();
-            return false;
-        }
-        return true;
-    }
+	private boolean isValidPost(String post) {
+		if (post.trim().equals("")) {
+			postEmptyDialog.show();
+			return false;
+		}
+		return true;
+	}
 
-    public void onStoreClicked(View v) {
-        Intent intent = new Intent(this, SelectStoreActivity.class);
-        intent.putExtra(SelectStoreActivity.DATA_STORE, (Parcelable)store);
-        startActivityForResult(intent, INTENT_SELECT_STORE);
-    }
+	public void onStoreClicked(View v) {
+		Intent intent = new Intent(this, SelectStoreActivity.class);
+		intent.putExtra(SelectStoreActivity.DATA_STORE, (Parcelable)store);
+		startActivityForResult(intent, INTENT_SELECT_STORE);
+	}
 
-    public void onTagClicked(View v) {
-        Intent intent = new Intent(this, SelectTagActivity.class);
-        intent.putExtra(SelectTagActivity.DATA_TAGS, tags);
-        startActivityForResult(intent, INTENT_SELECT_TAG);
-    }
+	public void onTagClicked(View v) {
+		Intent intent = new Intent(this, SelectTagActivity.class);
+		intent.putExtra(SelectTagActivity.DATA_TAGS, tags);
+		startActivityForResult(intent, INTENT_SELECT_TAG);
+	}
 
-    public void onServiceClicked(View v) {
-    	Intent intent = new Intent(this, ExternalServiceActivity.class);
-    	intent.putExtra(ExternalServiceActivity.DATA_TWITTER, isTwitter);
-    	intent.putExtra(ExternalServiceActivity.DATA_FACEBOOK, isFacebook);
-    	startActivityForResult(intent, INTENT_EXTERNAL_SERVICE);
-    }
+	public void onServiceClicked(View v) {
+		Intent intent = new Intent(this, ExternalServiceActivity.class);
+		intent.putExtra(ExternalServiceActivity.DATA_TWITTER, isTwitter);
+		intent.putExtra(ExternalServiceActivity.DATA_FACEBOOK, isFacebook);
+		startActivityForResult(intent, INTENT_EXTERNAL_SERVICE);
+	}
 
-    public void onPictureClicked(View v) {
-        showImageKeyboardAfterHide();
-    }
+	public void onPictureClicked(View v) {
+		showImageKeyboardAfterHide();
+	}
 
-    public void onKeyboardClicked(View v) {
-        showNormalKeyboardAfterHide();
-    }
+	public void onKeyboardClicked(View v) {
+		showNormalKeyboardAfterHide();
+	}
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK)
-            return ;
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode != RESULT_OK)
+			return ;
 
-        switch(requestCode) {
-        case INTENT_SELECT_STORE:
-            store = (Store)data.getParcelableExtra(SelectStoreActivity.DATA_STORE);
-            checkStore(store);
-            break;
-        case INTENT_SELECT_TAG:
-            tags = data.getStringExtra(SelectTagActivity.DATA_TAGS);
-            checkTags(tags);
-            break;
-        case INTENT_EXTERNAL_SERVICE:
-        	isTwitter = (Boolean)data.getBooleanExtra(ExternalServiceActivity.DATA_TWITTER, isTwitter);
-        	isFacebook= (Boolean)data.getBooleanExtra(ExternalServiceActivity.DATA_FACEBOOK, isFacebook);
-        	checkServices(isTwitter, isFacebook);
-        	break;
-        case INTENT_CAMERA:
-            albumView.pushImage(photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_CAMERA, data));
-            break;
-        case INTENT_ALBUM:
-            albumView.pushImage(photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_ALBUM, data));
-            break;
-        }
-    }
+		switch(requestCode) {
+		case INTENT_SELECT_STORE:
+			store = (Store)data.getParcelableExtra(SelectStoreActivity.DATA_STORE);
+			checkStore(store);
+			break;
+		case INTENT_SELECT_TAG:
+			tags = data.getStringExtra(SelectTagActivity.DATA_TAGS);
+			checkTags(tags);
+			break;
+		case INTENT_EXTERNAL_SERVICE:
+			isTwitter = (Boolean)data.getBooleanExtra(ExternalServiceActivity.DATA_TWITTER, isTwitter);
+			isFacebook= (Boolean)data.getBooleanExtra(ExternalServiceActivity.DATA_FACEBOOK, isFacebook);
+			checkServices(isTwitter, isFacebook);
+			break;
+		case INTENT_CAMERA:
+			albumView.pushImage(photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_CAMERA, data));
+			break;
+		case INTENT_ALBUM:
+			albumView.pushImage(photoUtil.getFileFromIntent(PhotoUtil.IntentType.FROM_ALBUM, data));
+			break;
+		}
+	}
 
 
 	private void checkStore(Store store) {
-        if (store != null) {
-            postText.checkButton(PostEditText.ButtonIndex.STORE);
-        } else {
-            postText.unCheckButton(PostEditText.ButtonIndex.STORE);
-        }
-    }
-
-    private void checkTags(String tags) {
-        if (tags != null && !tags.trim().equals("")) {
-            postText.checkButton(PostEditText.ButtonIndex.TAG);
-        } else {
-            postText.unCheckButton(PostEditText.ButtonIndex.TAG);
-        }
-    }
-
-    private void checkServices(Boolean isT, Boolean isF) {
-    	if (isT == true || isF == true) {
-    		postText.checkButton(PostEditText.ButtonIndex.SERVICE);
-    	} else {
-    		postText.unCheckButton(PostEditText.ButtonIndex.SERVICE);
-    	}
-		
+		if (store != null) {
+			postText.checkButton(PostEditText.ButtonIndex.STORE);
+		} else {
+			postText.unCheckButton(PostEditText.ButtonIndex.STORE);
+		}
 	}
 
-    public void onSoftKeyboardShown(boolean isShowing) {
-        if (isShowing) {
-            contentHeightWithoutKeyboard = mainView.getHeight();
-            imageKeyboard.setVisibility(View.GONE);
-            postText.toggleTo(PostEditText.ToggleIndex.IMAGE);
-        } else {
-            contentHeightWithKeyboard = mainView.getHeight();
-        }
+	private void checkTags(String tags) {
+		if (tags != null && !tags.trim().equals("")) {
+			postText.checkButton(PostEditText.ButtonIndex.TAG);
+		} else {
+			postText.unCheckButton(PostEditText.ButtonIndex.TAG);
+		}
+	}
 
-        if (keyboardHeight <= 0 && contentHeightWithoutKeyboard > 0 && contentHeightWithKeyboard > 0) {
-            keyboardHeight = contentHeightWithoutKeyboard - contentHeightWithKeyboard;
-            keyboardLayoutParams = new LayoutParams(LayoutParams.FILL_PARENT, keyboardHeight);
-            keyboardLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        }
+	private void checkServices(boolean isT, boolean isF) {
+		if (isT == true || isF == true) {
+			postText.checkButton(PostEditText.ButtonIndex.SERVICE);
+		} else {
+			postText.unCheckButton(PostEditText.ButtonIndex.SERVICE);
+		}
 
-        if (!isShowing && isShowImageKeyboardAfterHide) {
-            initKeyboardConstant();
-            showImageKeyboard();
-        }
+	}
 
-        if (isShowing && isShowNormalKeyboardAfterHide) {
-            initKeyboardConstant();
-            showNormalKeyboard();
-        }
-    }
+	public void onSoftKeyboardShown(boolean isShowing) {
+		if (isShowing) {
+			contentHeightWithoutKeyboard = mainView.getHeight();
+			imageKeyboard.setVisibility(View.GONE);
+			postText.toggleTo(PostEditText.ToggleIndex.IMAGE);
+		} else {
+			contentHeightWithKeyboard = mainView.getHeight();
+		}
 
-    private void initKeyboardConstant() {
-        isShowImageKeyboardAfterHide = false;
-        isShowNormalKeyboardAfterHide = false;
-    }
+		if (keyboardHeight <= 0 && contentHeightWithoutKeyboard > 0 && contentHeightWithKeyboard > 0) {
+			keyboardHeight = contentHeightWithoutKeyboard - contentHeightWithKeyboard;
+			keyboardLayoutParams = new LayoutParams(LayoutParams.FILL_PARENT, keyboardHeight);
+			keyboardLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		}
 
-    public void showImageKeyboardAfterHide() {
-        KeyboardUtil.hideKeyboard(this);
-        isShowImageKeyboardAfterHide = true;
-    }
+		if (!isShowing && isShowImageKeyboardAfterHide) {
+			initKeyboardConstant();
+			showImageKeyboard();
+		}
 
-    public void showNormalKeyboardAfterHide() {
-        KeyboardUtil.showKeyboard(this, postText.getEditText());
-        isShowNormalKeyboardAfterHide = true;
-    }
+		if (isShowing && isShowNormalKeyboardAfterHide) {
+			initKeyboardConstant();
+			showNormalKeyboard();
+		}
+	}
 
-    public void showImageKeyboard() {
-        imageKeyboard.setVisibility(View.VISIBLE);
+	private void initKeyboardConstant() {
+		isShowImageKeyboardAfterHide = false;
+		isShowNormalKeyboardAfterHide = false;
+	}
 
-        if (keyboardLayoutParams != null)
-            imageKeyboard.setLayoutParams(keyboardLayoutParams);
-    }
+	public void showImageKeyboardAfterHide() {
+		KeyboardUtil.hideKeyboard(this);
+		isShowImageKeyboardAfterHide = true;
+	}
 
-    public void showNormalKeyboard() {
-        imageKeyboard.setVisibility(View.GONE);
-    }
+	public void showNormalKeyboardAfterHide() {
+		KeyboardUtil.showKeyboard(this, postText.getEditText());
+		isShowNormalKeyboardAfterHide = true;
+	}
 
-    public void onCameraClick() {
-        if (albumView.isFull()) {
-            albumFullDialog.show();
-            return ;
-        }
+	public void showImageKeyboard() {
+		imageKeyboard.setVisibility(View.VISIBLE);
 
-        isFlowIsCamera = true;
-        Intent cameraIntent = photoUtil.getIntent(IntentType.FROM_CAMERA);
-        requestManager.turnOff();
-        startActivityForResult(cameraIntent, INTENT_CAMERA);
-    }
+		if (keyboardLayoutParams != null)
+			imageKeyboard.setLayoutParams(keyboardLayoutParams);
+	}
 
-    public void onAlbumClick() {
-        if (albumView.isFull()) {
-            albumFullDialog.show();
-            return ;
-        }
+	public void showNormalKeyboard() {
+		imageKeyboard.setVisibility(View.GONE);
+	}
 
-        isFlowIsCamera = true;
-        Intent albumIntent = photoUtil.getIntent(IntentType.FROM_ALBUM);
-        requestManager.turnOff();
-        startActivityForResult(albumIntent, INTENT_ALBUM);
-    }
+	public void onCameraClick() {
+		if (albumView.isFull()) {
+			albumFullDialog.show();
+			return ;
+		}
+		isFlowIsCamera = true;
+		requestManager.turnOff();
+		SimpleConfirmDialog alertDialog = new SimpleConfirmDialog(this, R.string.write_post_camera_message);
+		alertDialog.show();
+		alertDialog.setOnClickListener(new SimpleConfirmDialog.OnClickListener() {
+			@Override
+			public void onConfirmClick(SimpleDialog dialog) {
+				startActivityForResult(photoUtil.getIntent(IntentType.FROM_CAMERA), INTENT_CAMERA);
+			}
+			@Override
+			public void onCancelClick(SimpleDialog dialog) {}
+		});
+	}
 
-    public void onConfirmClick(SimpleDialog dialog) {
-        if (dialog == successDialog) {
-            if (getIntent().getBooleanExtra(FROM_MAIN, false)) {
-                Intent intent = new Intent(context, MainTabActivity.class);
-                intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
-                intent.putExtra(MainTabActivity.IF_SUB_INDEX, 0);
-                startActivity(intent);
-            } else {
-                setResult(RESULT_OK);
-                finish();
-            }
-        } else if (dialog == postEmptyDialog) {
-            showKeyboardPostDelay();
-        }
-    }
-    
-    public void onConfigurationChanged(Configuration newConfig)
-    {
-        super.onConfigurationChanged(newConfig);
-            // 다시 setOrientation()을 호출한다.
-            WindowManager wm = getWindowManager();
-            if (wm == null) return;
-            setRequestedOrientation(wm.getDefaultDisplay().getOrientation());
-    }
+	public void onAlbumClick() {
+		if (albumView.isFull()) {
+			albumFullDialog.show();
+			return ;
+		}
+
+		isFlowIsCamera = true;
+		Intent albumIntent = photoUtil.getIntent(IntentType.FROM_ALBUM);
+		requestManager.turnOff();
+		startActivityForResult(albumIntent, INTENT_ALBUM);
+	}
+
+	public void onConfirmClick(SimpleDialog dialog) {
+		if (dialog == successDialog) {
+			if (getIntent().getBooleanExtra(FROM_MAIN, false)) {
+				Intent intent = new Intent(context, MainTabActivity.class);
+				intent.putExtra(MainTabActivity.IF_INDEX, MainTabActivity.IV_INDEX_POST);
+				intent.putExtra(MainTabActivity.IF_SUB_INDEX, 0);
+				startActivity(intent);
+			} else {
+				setResult(RESULT_OK);
+				finish();
+			}
+		} else if (dialog == postEmptyDialog) {
+			showKeyboardPostDelay();
+		}
+	}
+
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		super.onConfigurationChanged(newConfig);
+		// 다시 setOrientation()을 호출한다.
+		WindowManager wm = getWindowManager();
+		if (wm == null) return;
+		setRequestedOrientation(wm.getDefaultDisplay().getOrientation());
+	}
 }

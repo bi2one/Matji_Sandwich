@@ -8,8 +8,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
-import android.util.Log;
 
+import com.google.android.maps.GeoPoint;
 import com.matji.sandwich.base.BaseMapActivity;
 import com.matji.sandwich.data.MatjiData;
 import com.matji.sandwich.data.Store;
@@ -25,110 +25,119 @@ import com.matji.sandwich.widget.dialog.SimpleAlertDialog;
 import com.matji.sandwich.widget.title.CompletableTitle;
 
 public class WriteStoreActivity extends BaseMapActivity implements CompletableTitle.Completable,
-								   WriteStoreMatjiMapView.OnClickListener,
-								   Requestable,
-								   SimpleAlertDialog.OnClickListener {
-    public static final String DATA_STORE = "WriteStoreActivity.store";
-    private static final int TAG_WRITE_STORE = 0;
-    private Context context;
-    private CompletableTitle titleBar;
-    private WriteStoreMatjiMapView mapView;
-    private SimpleAlertDialog storeAlertDialog;
-    private SimpleAlertDialog successDialog;
-    private Store storeData;
-    private Session session;
+WriteStoreMatjiMapView.OnClickListener,
+Requestable,
+SimpleAlertDialog.OnClickListener {
+	public static final String DATA_STORE = "WriteStoreActivity.store";
+	private static final int TAG_WRITE_STORE = 0;
+	private Context context;
+	private CompletableTitle titleBar;
+	private WriteStoreMatjiMapView mapView;
+	private SimpleAlertDialog storeAlertDialog;
+	private SimpleAlertDialog successDialog;
+	private Store storeData;
+	private Session session;
 
-    public int setMainViewId() {
-        return R.id.activity_write_store;
-    }
+	public int setMainViewId() {
+		return R.id.activity_write_store;
+	}
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write_store);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_write_store);
 
-        context = getApplicationContext();
-        titleBar = (CompletableTitle)findViewById(R.id.activity_write_store_title);
-        mapView = (WriteStoreMatjiMapView)findViewById(R.id.activity_write_store_mapview);
+		context = getApplicationContext();
+		titleBar = (CompletableTitle)findViewById(R.id.activity_write_store_title);
+		mapView = (WriteStoreMatjiMapView)findViewById(R.id.activity_write_store_mapview);
 
-        titleBar.setTitle(R.string.write_store_title);
-        titleBar.setCompletable(this);
+		titleBar.setTitle(R.string.write_store_title);
+		titleBar.setCompletable(this);
 
-        mapView.init(this);
-        mapView.setOnClickListener(this);
+		mapView.init(this);
+		mapView.setOnClickListener(this);
 
-        storeAlertDialog = new SimpleAlertDialog(this, R.string.write_store_invalidate_store);
-        successDialog = new SimpleAlertDialog(this, R.string.write_store_success);
+		storeAlertDialog = new SimpleAlertDialog(this, R.string.write_store_invalidate_store);
+		successDialog = new SimpleAlertDialog(this, R.string.write_store_success);
 
-        successDialog.setOnClickListener(this);
-	
-        session = Session.getInstance(this);
-	mapView.startMapCenterThread();
-    }
+		successDialog.setOnClickListener(this);
 
-    public void finish() {
-	mapView.stopMapCenterThread();
-	super.finish();
-    }
+		session = Session.getInstance(this);
+		
+		Intent intent = getIntent();
+		int lat = intent.getIntExtra(StoreNearActivity.LAT, StoreNearActivity.BASIC_LAT);
+		int lng = intent.getIntExtra(StoreNearActivity.LNG, StoreNearActivity.BASIC_LNG);
+		
+		if (lat != 0 && lng != 0) {
+			mapView.setLatLng(lat, lng);
+		} else {
+			mapView.startMapCenterThread();
+		}
+	}
 
-    public void complete() {
-        Location centerPoint = new GeoPointToLocationAdapter(mapView.getMapCenter());
-        String storeName = mapView.getStoreName();
-        String address = mapView.getAddress();
-        String addAddress = mapView.getAddAddress();
-        String phoneNumber = mapView.getPhoneNumber();
-        double centerLat = centerPoint.getLatitude();
-        double centerLng = centerPoint.getLongitude();
+	public void finish() {
+		mapView.stopMapCenterThread();
+		super.finish();
+	}
 
-        if (isValid(storeName, address, addAddress, phoneNumber, centerLat, centerLng)) {
-            StoreHttpRequest request = new StoreHttpRequest(context);
-            request.actionNew(storeName, address, centerLat, centerLng, addAddress, phoneNumber);
-            DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, TAG_WRITE_STORE);
-            requestTask.execute();
-            titleBar.setCompletable(null);
-        }
-    }
+	public void complete() {
+		Location centerPoint = new GeoPointToLocationAdapter(mapView.getMapCenter());
+		String storeName = mapView.getStoreName();
+		String address = mapView.getAddress();
+		String addAddress = mapView.getAddAddress();
+		String phoneNumber = mapView.getPhoneNumber();
+		double centerLat = centerPoint.getLatitude();
+		double centerLng = centerPoint.getLongitude();
 
-    private boolean isValid(String storeName, String address, String addAddress, String phoneNumber, double centerLat, double centerLng) {
-        if (storeName.trim().equals("")) {
-            storeAlertDialog.show();
-            return false;
-        }
-        return true;
-    }
+		if (isValid(storeName, address, addAddress, phoneNumber, centerLat, centerLng)) {
+			StoreHttpRequest request = new StoreHttpRequest(context);
+			request.actionNew(storeName, address, centerLat, centerLng, addAddress, phoneNumber);
+			DialogAsyncTask requestTask = new DialogAsyncTask(this, this, getMainView(), request, TAG_WRITE_STORE);
+			requestTask.execute();
+			titleBar.setCompletable(null);
+		}
+	}
 
-    public void onShowMapClick(View v) {
-        KeyboardUtil.hideKeyboard(this);
-        mapView.requestFocus();
-    }
+	private boolean isValid(String storeName, String address, String addAddress, String phoneNumber, double centerLat, double centerLng) {
+		if (storeName.trim().equals("")) {
+			storeAlertDialog.show();
+			return false;
+		}
+		return true;
+	}
 
-    public void onMapTouchDown(View v) {
-        KeyboardUtil.hideKeyboard(this);
-        mapView.requestFocus();
-    }
+	public void onShowMapClick(View v) {
+		KeyboardUtil.hideKeyboard(this);
+		mapView.requestFocus();
+	}
 
-    public void onMapTouchUp(View v) { }
+	public void onMapTouchDown(View v) {
+		KeyboardUtil.hideKeyboard(this);
+		mapView.requestFocus();
+	}
 
-    public void requestCallBack(int tag, ArrayList<MatjiData> data) {
-        switch(tag) {
-        case TAG_WRITE_STORE:
-            storeData = (Store)data.get(0);
-            successDialog.show();
-            break;
-        }
-    }
+	public void onMapTouchUp(View v) { }
 
-    public void requestExceptionCallBack(int tag, MatjiException e) {
-        e.performExceptionHandling(context);
-        titleBar.setCompletable(this);
-    }
+	public void requestCallBack(int tag, ArrayList<MatjiData> data) {
+		switch(tag) {
+		case TAG_WRITE_STORE:
+			storeData = (Store)data.get(0);
+			successDialog.show();
+			break;
+		}
+	}
 
-    public void onConfirmClick(SimpleDialog dialog) {
-        if (dialog == successDialog) {
-            session.getCurrentUser().setDiscoverStoreCount(session.getCurrentUser().getDiscoverStoreCount() + 1);
-            Intent result = new Intent();
-            result.putExtra(DATA_STORE, (Parcelable)storeData);
-            setResult(RESULT_OK, result);
-            finish();
-        }
-    }
+	public void requestExceptionCallBack(int tag, MatjiException e) {
+		e.performExceptionHandling(context);
+		titleBar.setCompletable(this);
+	}
+
+	public void onConfirmClick(SimpleDialog dialog) {
+		if (dialog == successDialog) {
+			session.getCurrentUser().setDiscoverStoreCount(session.getCurrentUser().getDiscoverStoreCount() + 1);
+			Intent result = new Intent();
+			result.putExtra(DATA_STORE, (Parcelable)storeData);
+			setResult(RESULT_OK, result);
+			finish();
+		}
+	}
 }

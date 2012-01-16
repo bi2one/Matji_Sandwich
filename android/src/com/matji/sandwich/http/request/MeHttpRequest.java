@@ -45,14 +45,17 @@ public class MeHttpRequest extends HttpRequest {
 
     }
 
-
-    public void authorizeViaExternalService(Activity activity, Service service){
+    /* 
+     * 트위터, 페이스북 아이디로 로그인 
+     * 로그인 후에 야미스토리 유저 생성
+     */
+    public void authorizeViaExternalService(Context context, Service service){
         action = "authorize";
         getHashtable.clear();
 
         if (service == Service.TWITTER){
             getHashtable.put("response_type", "twitter");
-        }else if (service == Service.FACEBOOK){
+        } else if (service == Service.FACEBOOK){
             getHashtable.put("response_type", "facebook");
         }
 
@@ -60,14 +63,15 @@ public class MeHttpRequest extends HttpRequest {
         getHashtable.put("client_secret", appSecret);
         getHashtable.put("redirect_uri", redirectURI);
 
-
         String url = HttpUtility.getUrlStringWithQuery(serverDomain + action, getHashtable);
-        Intent intent = new Intent(activity, ExternalServiceWebViewActivity.class);
-        intent.putExtra("url", url);
-        activity.startActivityForResult(intent, BaseActivity.EXTERNAL_SERVICE_LOGIN_REQUEST);
+        Intent intent = new Intent(context, ExternalServiceWebViewActivity.class);
+        intent.putExtra(ExternalServiceWebViewActivity.EXTERNAL_SERVICE, ExternalService.LOGIN);
+        intent.putExtra(ExternalServiceWebViewActivity.URL, url);
+        ((Activity) context).startActivityForResult(intent, BaseActivity.EXTERNAL_SERVICE_LOGIN_REQUEST);
 
     }
 
+    /* 트위터, 페이스북 연동 */
     public void newExternalAccount(Activity activity, Service service){
         controller = "external_accounts";
         action = "new";
@@ -85,7 +89,6 @@ public class MeHttpRequest extends HttpRequest {
         }
 
         String url = HttpUtility.getUrlStringWithQuery(serverDomain + controller + "/" + action + "." + format, getHashtable);
-        Log.d("Matji", url);
         Intent intent = new Intent(activity, ExternalServiceWebViewActivity.class);
         intent.putExtra(ExternalServiceWebViewActivity.EXTERNAL_SERVICE, ExternalService.LINK);
         intent.putExtra(ExternalServiceWebViewActivity.URL, url);
@@ -93,6 +96,7 @@ public class MeHttpRequest extends HttpRequest {
         activity.startActivityForResult(intent, BaseActivity.EXTERNAL_SERVICE_LINK_REQUEST);
     }    
     
+    /* 트위터, 페이스북 연동 해제 */
     public void deleteExternalAccount(Activity activity, Service service){
         controller = "external_accounts";
         action = "delete";

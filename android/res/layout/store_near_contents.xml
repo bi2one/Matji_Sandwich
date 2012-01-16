@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/select_store_contents">
+	<RelativeLayout
+		android:id="@+id/store_near_contents_title_bar"
+		android:layout_alignParentTop="true"
+		style="@style/DefaultMinorTitleBar">
+		<TextView
+			android:id="@+id/store_near_contents_selected"
+			android:layout_toLeftOf="@+id/store_near_contents_divider1"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+			android:text="@string/write_post_store_view_select"
+			style="@style/select_store_contents_selected" />
+		<ImageView
+			android:id="@+id/store_near_contents_divider1"
+			android:layout_toLeftOf="@+id/store_near_contents_add"
+			style="@style/DefaultMinorTitleBarDivider" />
+		<ImageButton
+			android:id="@+id/store_near_contents_add"
+			android:layout_alignParentRight="true"
+			android:onClick="onNewStoreClick"
+			style="@style/select_store_contents_add" />
+	</RelativeLayout>
+
+	<com.matji.sandwich.widget.SelectStoreListView
+		android:id="@+id/store_near_contents_listview"
+		android:layout_below="@id/store_near_contents_title_bar"
+		style="@style/DefaultFill" />
+</RelativeLayout>

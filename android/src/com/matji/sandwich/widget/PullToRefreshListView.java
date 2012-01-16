@@ -26,31 +26,29 @@ public abstract class PullToRefreshListView extends MListView implements OnScrol
 	private static final int HEADER_REFRESH_LIMIT = 70;
 	private static final int LIST_BASE_INDEX = 0;
 	private static final boolean IS_ON = false;
-	private OnScrollListener pullDownListener;
-	private OnRefreshListener onRefreshListener;
-	private RotateAnimation flipAnimation;
-	private RotateAnimation reverseFlipAnimation;
-	private LayoutInflater inflater;
-	private int baseTopPadding;
 	private int refreshViewHeight;
+	private int firstVisibleItem;
 	private int pullStartedY = -1;
+	private int baseTopPadding;
 	private int currentY;
 	private int movedY;
-	private int firstVisibleItem;
-	private PullStateFactory stateFactory;
-	private PullState state;
+	private OnRefreshListener onRefreshListener;
+	private OnScrollListener pullDownListener;
+	private PullState releaseToRefreshState;
+	private PullState pullToRefreshState;
+	private PullState reloadingState;
 	private PullState defaultState;
 	private PullState startState;
-	private PullState pullToRefreshState;
-	private PullState releaseToRefreshState;
-	private PullState reloadingState;
-
-	// view
-	private View refreshView;
-	private TextView refreshText;
-	private ImageView refreshImage;
-	private ProgressBar refreshProgress;
+	private PullState state;
+	private RotateAnimation reverseFlipAnimation;
+	private RotateAnimation flipAnimation;
+	private PullStateFactory stateFactory;
 	private TextView refreshLastUpdated;
+	private ProgressBar refreshProgress;
+	private LayoutInflater inflater;
+	private ImageView refreshImage;
+	private TextView refreshText;
+	private View refreshView;
 
 	/**
 	 * View의 기본 생성자, 각종 정보를 초기화합니다.

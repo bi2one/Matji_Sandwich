@@ -10,9 +10,9 @@
   <!-- release 0V-9BEi6Ez82fYUCe9MMRCCKG8F7bF3cuA2Fgcg -->
 
   <!-- release!!!! -->
-  <!-- <string name="map_api_key">02uzvUOqz9sA2y2wopzuFC5NVSeLz2qy0CYRTnA</string> -->
+  <string name="map_api_key">02uzvUOqz9sA2y2wopzuFC5NVSeLz2qy0CYRTnA</string>
   <!-- release!!!! (for KT)-->
-  <string name="map_api_key">0yJrdJ35OSlcwuol23Zrp4zkUpMWv0ItC-LuCEg</string>
+  <!-- <string name="map_api_key">0yJrdJ35OSlcwuol23Zrp4zkUpMWv0ItC-LuCEg</string> -->
   <!-- development!!!! -->
   <!-- <string name="map_api_key">02uzvUOqz9sC59IFS76TqggEbRMGLaSZCQ4lCpg</string> -->
   <!-- <string name="server_domain">http://222.122.205.229/v2/</string> -->
@@ -371,6 +371,7 @@
 
   <!-- write_post_store_view.xml -->
   <string name="write_post_store_view_select">맛집을 선택해 주세요.</string>
+  <string name="find_near_store_view_select">맛집이 목록에 없으면 등록해주세요.</string>
   
   <!-- arrays.xml.write_post_tags -->
   <string name="array_write_post_tags_1">점심식사</string>
@@ -404,10 +405,16 @@
   <string name="write_post_activity_title">이야기 쓰기</string>
   <string name="write_post_success">이야기 쓰기에 성공하였습니다.</string>
   <string name="write_post_album_full">사진은 최대 8개까지 첨부가 가능합니다.</string>
-
+  <string name="write_post_camera_message">프로요 이하 버전에서는 카메라 촬영을 지원할 수 없습니다. 스마트폰의 카메라 어플로 촬영 후 앨범에서 불러오세요.</string>	
+  
   <!-- SelectStoreActivity.java -->
   <string name="select_store_activity_title">맛집 선택</string>
+  <string name="select_store_activity_near_title">100M 이내 맛집</string>
   
+  <!-- SelectMapPositionActivity.java -->
+  <string name="select_map_position_activity_title">맛집 위치 선택</string>
+  <string name="select_map_position_activity_footer_text">지도를 움직여 맛집 위치를 설정하세요. 주소 변경을\n누르면 지역 바로이동, 주소 직접 입력이 가능합니다.</string>
+    
   <!-- ExternalServiceActivity.java -->
   <string name="export_to_where">공유 설정</string>
   <string name="export_to_twitter">트위터로 내보내기</string>
@@ -485,6 +492,7 @@
   <!-- WriteStoreActivity.java -->
   <string name="write_store_title">맛집 추가</string>
   <string name="write_store_invalidate_store">맛집 이름을 입력해 주세요.</string>
+  <string name="write_store_is_not_modified">올바른 수정 정보를 입력해 주세요.</string>
   <string name="write_store_success">맛집 정보가 등록되었습니다.</string>
 
   <!-- write_store_matji_mapview.xml -->
@@ -496,6 +504,7 @@
   <string name="dialog_async_task">요청중입니다...</string>
 
   <!-- IntroActivity.java -->
+  <string name="dialog_intro_update">최신 버전으로 업데이트 하세요.</string>
   <string name="dialog_intro_loading">잠시만 기다려주세요...</string>
 
   <!-- TitleContainer.java -->

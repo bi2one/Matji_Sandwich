@@ -1,55 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/activity_store_location_map"
-	style="@style/DefaultFill">
-  <com.matji.sandwich.widget.title.StoreLocationTitle
-      android:id="@+id/activity_store_location_title"
-      style="@style/DefaultWidthFill" />
-  <com.matji.sandwich.widget.HighlightHeader
-      android:id="@+id/activity_store_location_header"
-      android:layout_below="@id/activity_store_location_title"
-      style="@style/DefaultWidthFill" />
-  <!-- <com.matji.sandwich.map.MatjiMapView -->
-  <!--     android:id="@+id/map_view" -->
-  <!--     android:layout_below="@id/activity_store_location_header" -->
-  <!--     android:layout_above="@+id/activity_store_location_footer" -->
-  <!--     style="@style/DefaultFill" -->
-  <!--     android:enabled="true" -->
-  <!--     android:clickable="true" -->
-  <!--     android:focusable="true" -->
-  <!--     android:apiKey="@string/map_api_key" /> -->
-  <com.google.android.maps.MapView
-      android:id="@+id/map_view"
-      android:layout_below="@id/activity_store_location_header"
-      android:layout_above="@+id/activity_store_location_footer"
-      style="@style/DefaultFill"
-      android:enabled="true"
-      android:clickable="true"
-      android:focusable="true"
-      android:apiKey="@string/map_api_key" />
-  <RelativeLayout
-      android:id="@id/activity_store_location_footer"
-      android:layout_alignParentBottom="true"
-      style="@style/activity_store_location_footer">
-    <TextView
-	android:id="@+id/activity_store_location_address"
-	android:layout_alignParentLeft="true"
-	android:layout_centerVertical="true"
-	android:layout_toLeftOf="@+id/activity_store_location_phone"
-	android:drawableLeft="@drawable/icon_location_m"
-	android:clickable="true"
-	android:onClick="onAddressClick"
-	style="@style/activity_store_location_text"
-	android:gravity="center_vertical" />
-    <TextView
-	android:id="@id/activity_store_location_phone"
-	android:layout_alignParentRight="true"
-	android:layout_centerVertical="true"
-	android:drawableLeft="@drawable/icon_tel_m"
-	android:clickable="true"
-	android:onClick="onPhoneClick"
-	style="@style/activity_store_location_phone"
-	android:gravity="center_vertical" />
-  </RelativeLayout>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_store_location_map"
+    style="@style/DefaultFill" >
+    <com.matji.sandwich.widget.title.StoreLocationTitle
+        android:id="@+id/activity_store_location_title"
+        style="@style/DefaultWidthFill" />
+    <com.matji.sandwich.widget.HighlightHeader
+        android:id="@+id/activity_store_location_header"
+        style="@style/DefaultWidthFill"
+        android:layout_below="@id/activity_store_location_title" />
+    <com.google.android.maps.MapView
+        android:id="@+id/map_view"
+        style="@style/DefaultFill"
+        android:layout_above="@+id/activity_store_location_footer"
+        android:layout_below="@id/activity_store_location_header"
+        android:apiKey="@string/map_api_key"
+        android:clickable="true"
+        android:enabled="true"
+        android:focusable="true" />
+    <RelativeLayout
+        android:id="@id/activity_store_location_footer"
+        style="@style/activity_store_location_footer"
+        android:layout_alignParentBottom="true" >
+        <TextView
+            android:id="@+id/activity_store_location_address"
+            style="@style/activity_store_location_text"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/activity_store_location_phone"
+            android:clickable="true"
+            android:drawableLeft="@drawable/icon_location_m"
+            android:gravity="center_vertical"
+            android:onClick="onAddressClick" />
+        <TextView
+            android:id="@id/activity_store_location_phone"
+            style="@style/activity_store_location_phone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:drawableLeft="@drawable/icon_tel_m"
+            android:gravity="center_vertical"
+            android:onClick="onPhoneClick" />
+    </RelativeLayout>
 </RelativeLayout>

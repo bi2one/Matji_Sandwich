@@ -95,7 +95,6 @@ public class ReceivedUserActivity extends BaseActivity implements Completable {
                 return true;
             }
         }
-        
         return false;
     }
     
